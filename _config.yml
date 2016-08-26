@@ -1,1 +1,67 @@
-baseurl: /redant
+# Site settings
+title: Redant Blog
+SEOTitle: 林佩勤的博客 | Redant Blog
+header-img: img/home-bg.jpg
+email: 1093564571@qq.com
+description: "关于技术与思想 | 林佩勤，Software Engineer | 这里是林佩勤的个人博客，与你一起发现更大的世界。"
+keyword: "林佩勤"
+url: "https://lpq29743.github.io/redant/"              # your host, for absolute URL
+baseurl: /redant                             # for example, '/blog' if your blog hosted on 'host/blog'
+
+
+
+# SNS settings
+RSS: false
+# weibo_username:     huxpro
+zhihu_username:     lpq29743
+github_username:    lpq29743
+# twitter_username:  huxpro
+# facebook_username:  huxpro
+# linkedin_username:  firstname-lastname-idxxxx
+
+
+
+# Build settings
+# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
+highlighter: rouge
+permalink: pretty
+paginate: 10
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+
+
+
+# Gems
+# from PR#40, to support local preview for Jekyll 3.0
+gems: [jekyll-paginate]
+
+
+
+# Markdown settings
+# replace redcarpet to kramdown,
+# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
+# document: http://jekyllrb.com/docs/configuration/#kramdown
+markdown: kramdown
+kramdown:
+  input: GFM                            # use Github Flavored Markdown !important
+
+
+
+# Disqus settings
+#disqus_username: _your_disqus_short_name_
+
+# Duoshuo settings
+duoshuo_username: redantblog
+# Share component is depend on Comment so we can NOT use share only.
+duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "所以你跑啊、跑啊，想要赶上正在落下的太阳，可它转个圈，又出现在你后面"
+sidebar-avatar: /img/avatar-redant.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+
+
+
+# Featured Tags
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
