@@ -103,7 +103,7 @@ layout: default
                     <hr><h5><a href="{{'/about/' | prepend: site.baseurl }}">ABOUT ME</a></h5>
                     <div class="short-about">
                         {% if site.sidebar-avatar %}
-                            <img src="{{site.sidebar-avatar}}" />
+                            <img src="{{ site.baseurl }}/{% if page.sidebar-avatar %}{{ page.sidebar-avatar }}{% else %}{{ site.sidebar-avatar }}{% endif %}" />
                         {% endif %}
                         {% if site.sidebar-about-description %}
                             <p>{{site.sidebar-about-description}}</p>
