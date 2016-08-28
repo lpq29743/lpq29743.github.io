@@ -12,7 +12,6 @@ baseurl: /redant                             # for example, '/blog' if your blog
 
 # SNS settings
 RSS: false
-# weibo_username:     huxpro
 zhihu_username:     lpq29743
 github_username:    lpq29743
 # twitter_username:  huxpro
