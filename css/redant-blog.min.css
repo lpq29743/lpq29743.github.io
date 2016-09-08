@@ -40,7 +40,6 @@ a img: hover, a img: focus {
 }
 article {
     overflow - x: hidden
-	overflow - y: hidden
 }
 blockquote {
     color: gray;font - style: italic;font - size: .95e m;margin: 20 px 0 20 px
