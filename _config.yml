@@ -59,8 +59,6 @@ sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "所以你跑啊、跑啊，想要赶上正在落下的太阳，可它转个圈，又出现在你后面"
 sidebar-avatar: img/avatar-redant.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
-
-
 # Featured Tags
 featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value

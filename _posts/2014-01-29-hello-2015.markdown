@@ -1,13 +1,13 @@
 ---
 layout:     post
-title:      "Hello 2015"
-subtitle:   " \"Hello World, Hello Blog\""
-date:       2015-01-29 12:00:00
-author:     "Hux"
-header-img: "img/post-bg-2015.jpg"
+title:      "Android常用软件总结"
+subtitle:   "记录和分享那些让自己受益的app"
+date:       2016-09-08 15:00:00
+author:     "林佩勤"
+header-img: "img/post/android_app_recommended.jpg"
 catalog: true
 tags:
-    - 生活
+    - Android
 ---
 
 > “Yeah It's on. ”
