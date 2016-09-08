@@ -5,7 +5,6 @@ subtitle:   "记录和分享那些让自己受益的app"
 date:       2016-09-08 15:00:00
 author:     "林佩勤"
 header-img: "img/post-bg.jpg"
-catalog: true
 tags:
     - Android
 ---
@@ -14,7 +13,7 @@ tags:
 
 
 ## 前言
-
+cat
 Hux 的 Blog 就这么开通了。
 
 [跳过废话，直接看技术实现 ](#build) 
