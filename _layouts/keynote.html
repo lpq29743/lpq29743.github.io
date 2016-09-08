@@ -59,25 +59,6 @@ layout: default
 
                 <hr>
 
-                {% if site.duoshuo_share && site.duoshuo_username %}
-                <!-- 多说 Share start -->
-                </style>
-                <div class="ds-share"
-                    style="text-align: right"
-                    data-thread-key="{{page.id}}" data-title="{{page.title}}"
-                    data-images="{{ site.url }}{{site.baseurl}}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}"
-                    data-content="{{ content | strip_html | truncate:80 }} | redant Blog，@redant黄玄 的个人博客"
-                    data-url="{{site.url}}{{site.baseurl}}{{page.url}}">
-                    <div class="ds-share-inline">
-                      <div class="ds-share-icons-more">
-                      </div>
-                    </div>
-                <hr>
-                </div>
-                <!-- 多少 Share end-->
-                {% endif %}
-
-
                 <ul class="pager">
                     {% if page.previous.url %}
                     <li class="previous">
@@ -96,19 +77,6 @@ layout: default
                     </li>
                     {% endif %}
                 </ul>
-
-
-                {% if site.duoshuo_username %}
-                <!-- 多说评论框 start -->
-                <div class="comment">
-                    <div class="ds-thread"
-                        data-thread-key="{{page.id}}"
-                        data-title="{{page.title}}"
-                        data-url="{{site.url}}{{site.baseurl}}{{page.url}}" >
-                    </div>
-                </div>
-                <!-- 多说评论框 end -->
-                {% endif %}
 
                 {% if site.disqus_username %}
                 <!-- disqus 评论框 start -->
