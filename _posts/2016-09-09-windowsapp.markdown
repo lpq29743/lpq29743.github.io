@@ -49,12 +49,15 @@ tags:
 - 搜狗输入法（电脑上搜狗还是不讲道理的优秀）
 - 迅雷（不解释）
 - WPS（也可以去贴吧下载破解版office，不过个人觉得WPS已经足够方便）
+- 福昕阅读器（内存占用小的PDF阅读器）
 - 360云盘（对于视频，需要用客户端才可以观看）
 - XMind（导师安利，不错的思维导图软件，一般用来制定计划，当然有些人觉得MindManager界面更漂亮）
 - 分区助手专业版（用于分区）
 - EasyBCD（多系统引导工具）
 - UltraISO（虚拟光驱软件）
+- MarkdownPad（此文就是通过这一编辑器写的）
 - 猎豹免费Wifi（功能众多，猎豹的产品还是蛮不错的）
+- PS（强大的图像处理软件）
 
 ***社交软件***
 
@@ -63,10 +66,12 @@ tags:
 
 ***编程工具***
 
+- git（最佳的版本控制工具，必不可少）
 - Android Studio（Android开发首选）
 - MySQL+MySQLWorkbench（免费数据库）
 - Oracle（大型数据库软件）
 - Notepad++（个人用过的最好编辑器）
+- JDK（Java编程环境）
 - Eclipse（主要用于Java编程）
 - Tomcat（小型服务器）
 - Apache&Nginx（中大型服务器选择）
