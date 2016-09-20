@@ -8,6 +8,7 @@ header-img: "img/post-bg.jpg"
 tags:
     - Windows
     - 软件
+    - 推荐
 ---
 
 > “为新装好的Windows穿上衣服”

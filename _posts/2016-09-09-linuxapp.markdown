@@ -9,6 +9,7 @@ tags:
     - Linux
     - Ubuntu
     - 软件
+    - 推荐
 ---
 
 > 如何玩好程序员最爱的Linux~~
