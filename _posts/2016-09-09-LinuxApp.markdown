@@ -1,0 +1,62 @@
+---
+layout:     post
+title:      "Linux常用软件总结"
+subtitle:   "谈一谈最爱的Linux下的软件"
+date:       2016-09-09 22:00:00
+author:     "林佩勤"
+header-img: "img/post-bg.jpg"
+tags:
+    - Linux
+    - Ubuntu
+    - 软件
+    - 推荐
+---
+
+> 如何玩好程序员最爱的Linux~~
+
+
+## 前言
+
+讲完Windows后，我们再来聊一聊Linux，目前笔者接触过的Linux系统也只有Ubuntu，所以本文以Ubuntu为例来进行介绍。
+
+Ubuntu相对于Windows安装软件更为方便，它只需要执行几句命令行就可以直接安装软件，这也是我非常喜欢他的地方。话不多说，接下来就开始介绍。
+
+---
+
+## 正文
+
+本文主要参考[Ubuntu社区软件推荐](http://wiki.ubuntu.org.cn/Qref/Apps)这一篇文章以及本人使用过程中的一些经验进行推荐。这个网站也是蛮不错的一个学习Ubuntu的网站，官网的东西就是最佳的东西，所以对Ubuntu感兴趣的朋友也可以去这个网站逛逛。
+
+***视频软件***
+
+- VLC（蛮好用的视频播放器）
+
+***工具软件***
+
+- Fcitx（个人觉得最好的输入法框架，当然ibus也不错）
+- DownThemAll（在无法使用迅雷的情况下，这款火狐插件是不错的替代品）
+- WPS（Ubuntu下查看文档的最佳选择）
+- Cmd Markdown（不错的Markdown编辑器）
+- XMind（此软件也有Linux版，省了我找替代软件的麻烦）
+- Mentohust（用过校园网和Linux的人都知道）
+- GParted（图形化分区工具）
+
+***编程工具***
+
+- Git（最佳的版本控制工具，必不可少）
+- Android Studio（Android开发首选）
+- MySQL+MySQLWorkbench（免费数据库）
+- Oracle（大型数据库软件）
+- Bluefish（这里我用Bluefish代替了Windows下的Notepad++）
+- JDK（Java编程环境）
+- Eclipse（主要用于Java编程）
+- Tomcat（小型服务器）
+- Apache&Nginx（中大型服务器选择）
+- Codeblocks（用于写C语言）
+- Python3（如此神语言岂可不用）
+
+## 后记
+
+Ubuntu自带的软件，包括终端软件，火狐浏览器等等，都是很不错的，所以这些东西在本文也就没有提及。另外，Ubuntu下有些工作学习的需求我是直接在网页上满足的，因此本篇文章推荐的软件并不多。
+
+如果对计算机有兴趣或者本身就是计算机学生，那我建议你一定要尝试一下使用Ubuntu，或者CentOS等Linux系统。Linux的学习确实可以带来很大的帮助。当然建议一开始就用桌面版的，最好是单系统，不然你很可能就会选择经常进行Windows而不是Linux，当初笔者就是这样开始学习的。不过有一点温馨提示，Linux下装Windows可比Windows下装Linux要麻烦的多。
