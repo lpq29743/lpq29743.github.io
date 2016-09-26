@@ -24,11 +24,15 @@ EventBus是一个Android事件发布/订阅框架，通过解耦发布者和订�
 
 ## 正文
 
-本文所介绍的版本是EventBus3.0。EventBus源码：https://github.com/greenrobot/EventBus](https://github.com/greenrobot/EventBus)
+本文所介绍的版本是EventBus3.0。EventBus源码：[https://github.com/greenrobot/EventBus](https://github.com/greenrobot/EventBus)
 
 ### 概念###
 
-
+|      名词       |                    解释                    |
+| :-----------: | :--------------------------------------: |
+|    事件Event    | 可成为消息，其实就是一个对象，可以是网络请求返回的字符串，也可以是某个开关状态等等。事件类型EventType是指事件所属的Class。事件分为一般事件和Sticky事件，相对于一般事件，Sticky事件不同之处在于，当事件发布后，再有订阅者开始订阅该类型事件，依然能收到该类型事件的最近一个Sticky事件 |
+| 订阅者Subscriber | 订阅某种事件类型的对象，当有发布者发布这类事件后，EventBus会执行订阅者的onEvent函数，这个函数叫事件响应函数。订阅者通过register接口订阅某个事件类型，unregister接口退订。订阅者存在优先级，优先级高的订阅者可以取消事件继续向优先级低的订阅者分发，默认所有订阅者优先级都为0。 |
+| 发布者Publisher  |          发布某事件的对象，通过post接口发布事件           |
 
 ### 配置###
 
@@ -40,150 +44,48 @@ compile 'de.greenrobot:eventbus:3.0.0-beta1'
 
 ### 使用###
 
-1. @BindView 来消除 findViewById
+***步骤一：注册***
 
-   使用前：
+举个例子，你需要在一个activity中注册eventbus事件，然后定义接收方法，这和Android的广播机制很像，你需要首先注册广播，然后需要编写内部类，实现接收广播，然后操作UI,在EventBus中，你同样需要这么做。
 
-   ```java
-   mTextView = (TextView) findViewById(R.id.text);
-   ```
+```
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
 
-   使用后：
+    EventBus.getDefault().register(this);
 
-   ```java
-   /**单个View控件的绑定*/
-   @BindView(R.id.btn_login)
-   /**多个控件的绑定可以写在List或者Array中*/
-   @BindViews({ R.id.first_name, R.id.middle_name, R.id.last_name })
-   List<EditText> nameViews;
-   ```
+}
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    EventBus.getDefault().unregister(this);
+}
+```
 
-   再具体点：
+***步骤二：订阅者***
 
-   ```java
-   class ExampleActivity extends Activity {
-     // 声明注解
-     @BindView(R.id.title) TextView title;
-     @BindView(R.id.subtitle) TextView subtitle;
-     @BindView(R.id.footer) TextView footer;
+### 订阅者
 
-     @Override public void onCreate(Bundle savedInstanceState) {
-       super.onCreate(savedInstanceState);
-       setContentView(R.layout.simple_activity);
-       // 进行绑定
-       ButterKnife.bind(this);
-       // TODO Use fields...
-     }
-   }
-   ```
+```
+@Subscribe(threadMode = ThreadMode.MainThread)
+public void helloEventBus(String message){
+    mText.setText(message);
+}
 
-   在Fragment中有所区别，但不是很大：
+```
 
-   ```java
-   @BindView(R.id.me_about_us) LinearLayout meAboutUs;
+该操作很简单，定义了一个hello方法，需要传入String参数，在其中进行UI操作，注意：我们添加了注解@Subscribe，其含义为订阅者，在其内传入了threadMode，我们定义为ThreadMode.MainThread，其含义为该方法在UI线程完成，这样就不用担心抛出异常啦！
 
-   @Override
-   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-   	View view = inflater.inflate(R.layout.nav_me,container, false);
-   	ButterKnife.bind(this, view);
-   	return view;
-   }
+***步骤三：发布者***
 
-   // onDestroyView()中解绑
-   private Unbinder unbinder = ButterKnife.bind(this, view);
+既然你在某个地方订阅了内容，当然就会在某个地方发布消息。举个例子，你的这个activity需要http请求，而http请求你肯定是在异步线程中操作，其返回结果后，你可以这么写：
 
-   @Override
-   public void onDestroyView() {
-   	unbinder.unbind();
-   	super.onDestroyView();
-   }
-   ```
-
-   而在ViewHolder中是这样的：
-
-   ```java
-   @Override
-   public View getView(int position, View convertView, ViewGroup parent) {
-   	ViewHolder viewHolder = null;
-   	if (convertView == null) {
-   		convertView = LayoutInflater.from(mContext).inflate(R.layout.common_laguage_child_item, null);
-   		viewHolder = new ViewHolder(convertView);
-   		convertView.setTag(viewHolder);
-   	} else {
-   		viewHolder=(ViewHolder)convertView.getTag();
-   	}
-   	JSONObject child =getItem(position);
-   	viewHolder.tvChildCommon.setText(child.optString("content",""));
-   	return convertView;
-   }
-
-   class ViewHolder {
-   	@BindView(R.id.tv_child_common)
-   	TextView tvChildCommon;
-   	ViewHolder(View view) {
-   		ButterKnife.bind(this, view);
-   	}
-   }
-   ```
-
-2. @OnClick消除setOnClickListener
-
-   使用前：
-
-   ```java
-   button.setOnClickListener(this);
-   ```
-
-   使用后：
-
-   ```java
-   @OnClick({R.id.bt_1, R.id.bt_2, R.id.bt_3})
-   public void buttonClick(View v) {
-       Toast.makeText(this, "view:" + v, Toast.LENGTH_SHORT).show();
-   }
-   ```
-
-   监听器的参数是可选的：
-
-   ```
-   @OnClick(R.id.submit)
-   public void sayHi(Button button) { 
-       button.setText("Hello!");
-   }
-   ```
-
-3. 资源绑定
-
-   ```java
-   @BindString(R.string.title) String title; 
-   @BindDrawable(R.drawable.graphic) Drawable graphic; 
-   @BindColor(R.color.red) int red; // int or ColorStateList field 
-   @BindDimen(R.dimen.spacer) Float spacer; // int (for pixel size) or float (for exact value) field
-   ```
-
-4. action功能，批量操作view
-
-   ```java
-   @BindViews({R.id.bt_1, R.id.bt_2, R.id.bt_3})
-   List<Button> buttons;
-
-   static final ButterKnife.Action<Button> disable=new ButterKnife.Action<Button>() {
-       @Override
-       public void apply(@NonNull Button view, int index) {
-           view.setEnabled(false);
-       }
-   };
-   static final ButterKnife.Action<Button> enable=new ButterKnife.Action<Button>() {
-       @Override
-       public void apply(@NonNull Button view, int index) {
-           view.setEnabled(true);
-       }
-   };
-
-   // 使用
-   ButterKnife.apply(buttons,disable);
-   // ButterKnife.apply(buttons,enable);
-   ```
+```
+String json="";
+EventBus.getDefault().post(json);
+```
 
 ### 注意###
 
