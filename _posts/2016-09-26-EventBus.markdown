@@ -24,38 +24,19 @@ EventBus是一个Android事件发布/订阅框架，通过解耦发布者和订�
 
 ## 正文
 
-本文所介绍的版本是ButterKnife8.0.1（2016/04/29更新的版本），ButterKnife项目由Jake Wharton编写，项目源地址为：[https://github.com/JakeWharton/butterknife](https://github.com/JakeWharton/butterknife)，相关博客文章地址为：[http://jakewharton.github.io/butterknife/](http://jakewharton.github.io/butterknife/)。ButterKnife的原理只是把我们原先写的代码封装起来，所以在性能方面不会受到任何影响。
+本文所介绍的版本是EventBus3.0。EventBus源码：https://github.com/greenrobot/EventBus](https://github.com/greenrobot/EventBus)
+
+### 概念###
+
+
 
 ### 配置###
 
-***步骤一***
-
-Project 的 build.gradle 添加：
+添加依赖库：
 
 ```java
-dependencies {
-  classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-}
+compile 'de.greenrobot:eventbus:3.0.0-beta1'
 ```
-
-***步骤二***
-
-App 的 build.gradle 添加：
-
-```java
-apply plugin: 'com.neenbedankt.android-apt'
-
-dependencies {
-  compile 'com.jakewharton:butterknife:8.0.1'
-  apt 'com.jakewharton:butterknife-compiler:8.0.1'
-}
-```
-
-（这里要加入apt插件的原因是：apt是用于编译时扫描和解析 Java 注解的工具，通过它我们可以自己定义注解，并定义解析器来处理它们。它的原理是读入 Java 源代码，解析注解，然后生成新的 Java 代码，新生成的代码最后被编译成 Java 字节码。）
-
-***步骤三***
-
-安装Android Butterknife Zelezny（一般步骤一二执行完后会添加，没添加的话File-->Settings-->Plugins-->Browse repositories添加），这个插件可以让你在添加Butterkinfe注解时偷偷懒，直接点击几下鼠标既可以完成注解的增加，同时还是图形化的操作。
 
 ### 使用###
 
@@ -212,4 +193,4 @@ dependencies {
 
 ## 后记
 
-EventBus相对于ButterKnife知名度较低，但在Android编码中用到的程度却不低。熟悉这一框架的使用，能给编码带来很大的方便。
+EventBus与ButterKnife一样，在Android项目中的使用频率很大。熟悉这一框架的使用，能给编码带来很大的方便。
