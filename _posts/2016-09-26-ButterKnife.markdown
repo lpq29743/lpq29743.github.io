@@ -24,7 +24,7 @@ tags:
 
 本文所介绍的版本是ButterKnife8.0.1（2016/04/29更新的版本），ButterKnife项目由Jake Wharton编写，项目源地址为：[https://github.com/JakeWharton/butterknife](https://github.com/JakeWharton/butterknife)，相关博客文章地址为：[http://jakewharton.github.io/butterknife/](http://jakewharton.github.io/butterknife/)。ButterKnife的原理只是把我们原先写的代码封装起来，所以在性能方面不会受到任何影响。
 
-###配置###
+### 配置###
 
 ***步骤一***
 
