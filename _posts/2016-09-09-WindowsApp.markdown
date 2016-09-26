@@ -58,7 +58,7 @@ tags:
 - EasyBCD（多系统引导工具）
 - Ext2Fsd（用于挂载ext2、ext3系统）
 - UltraISO（虚拟光驱软件）
-- MarkdownPad（此文就是通过这一编辑器写的）
+- Typora（比MarkDownPad之类的好多了）
 - 猎豹免费Wifi（功能众多，猎豹的产品还是蛮不错的）
 - PS（强大的图像处理软件）
 
