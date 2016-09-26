@@ -1,0 +1,215 @@
+---
+layout:     post
+title:      "Android事件发布/订阅框架EventBus"
+subtitle:   "消息总线EventBus"
+date:       2016-09-26 20:00:00
+author:     "林佩勤"
+header-img: "img/post-bg.jpg"
+tags:
+    - Android
+    - 开源框架
+---
+
+> “活跃于四大组件之间的邮差”
+>
+
+
+## 前言
+
+EventBus是一个Android事件发布/订阅框架，通过解耦发布者和订阅者简化Android事件传递，这里的事件可以理解为消息。事件传递既可以用于Android四大组件间通讯，也可以用于异步线程和主线程间通讯等。
+
+传统的事件传递方式包括：Handler、BroadcastReceiver、Interface回调，相比之下EventBus的有点是代码简洁，使用简单，并将事件发布和订阅充分解耦。
+
+---
+
+## 正文
+
+本文所介绍的版本是ButterKnife8.0.1（2016/04/29更新的版本），ButterKnife项目由Jake Wharton编写，项目源地址为：[https://github.com/JakeWharton/butterknife](https://github.com/JakeWharton/butterknife)，相关博客文章地址为：[http://jakewharton.github.io/butterknife/](http://jakewharton.github.io/butterknife/)。ButterKnife的原理只是把我们原先写的代码封装起来，所以在性能方面不会受到任何影响。
+
+### 配置###
+
+***步骤一***
+
+Project 的 build.gradle 添加：
+
+```java
+dependencies {
+  classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+}
+```
+
+***步骤二***
+
+App 的 build.gradle 添加：
+
+```java
+apply plugin: 'com.neenbedankt.android-apt'
+
+dependencies {
+  compile 'com.jakewharton:butterknife:8.0.1'
+  apt 'com.jakewharton:butterknife-compiler:8.0.1'
+}
+```
+
+（这里要加入apt插件的原因是：apt是用于编译时扫描和解析 Java 注解的工具，通过它我们可以自己定义注解，并定义解析器来处理它们。它的原理是读入 Java 源代码，解析注解，然后生成新的 Java 代码，新生成的代码最后被编译成 Java 字节码。）
+
+***步骤三***
+
+安装Android Butterknife Zelezny（一般步骤一二执行完后会添加，没添加的话File-->Settings-->Plugins-->Browse repositories添加），这个插件可以让你在添加Butterkinfe注解时偷偷懒，直接点击几下鼠标既可以完成注解的增加，同时还是图形化的操作。
+
+### 使用###
+
+1. @BindView 来消除 findViewById
+
+   使用前：
+
+   ```java
+   mTextView = (TextView) findViewById(R.id.text);
+   ```
+
+   使用后：
+
+   ```java
+   /**单个View控件的绑定*/
+   @BindView(R.id.btn_login)
+   /**多个控件的绑定可以写在List或者Array中*/
+   @BindViews({ R.id.first_name, R.id.middle_name, R.id.last_name })
+   List<EditText> nameViews;
+   ```
+
+   再具体点：
+
+   ```java
+   class ExampleActivity extends Activity {
+     // 声明注解
+     @BindView(R.id.title) TextView title;
+     @BindView(R.id.subtitle) TextView subtitle;
+     @BindView(R.id.footer) TextView footer;
+
+     @Override public void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.simple_activity);
+       // 进行绑定
+       ButterKnife.bind(this);
+       // TODO Use fields...
+     }
+   }
+   ```
+
+   在Fragment中有所区别，但不是很大：
+
+   ```java
+   @BindView(R.id.me_about_us) LinearLayout meAboutUs;
+
+   @Override
+   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+   	View view = inflater.inflate(R.layout.nav_me,container, false);
+   	ButterKnife.bind(this, view);
+   	return view;
+   }
+
+   // onDestroyView()中解绑
+   private Unbinder unbinder = ButterKnife.bind(this, view);
+
+   @Override
+   public void onDestroyView() {
+   	unbinder.unbind();
+   	super.onDestroyView();
+   }
+   ```
+
+   而在ViewHolder中是这样的：
+
+   ```java
+   @Override
+   public View getView(int position, View convertView, ViewGroup parent) {
+   	ViewHolder viewHolder = null;
+   	if (convertView == null) {
+   		convertView = LayoutInflater.from(mContext).inflate(R.layout.common_laguage_child_item, null);
+   		viewHolder = new ViewHolder(convertView);
+   		convertView.setTag(viewHolder);
+   	} else {
+   		viewHolder=(ViewHolder)convertView.getTag();
+   	}
+   	JSONObject child =getItem(position);
+   	viewHolder.tvChildCommon.setText(child.optString("content",""));
+   	return convertView;
+   }
+
+   class ViewHolder {
+   	@BindView(R.id.tv_child_common)
+   	TextView tvChildCommon;
+   	ViewHolder(View view) {
+   		ButterKnife.bind(this, view);
+   	}
+   }
+   ```
+
+2. @OnClick消除setOnClickListener
+
+   使用前：
+
+   ```java
+   button.setOnClickListener(this);
+   ```
+
+   使用后：
+
+   ```java
+   @OnClick({R.id.bt_1, R.id.bt_2, R.id.bt_3})
+   public void buttonClick(View v) {
+       Toast.makeText(this, "view:" + v, Toast.LENGTH_SHORT).show();
+   }
+   ```
+
+   监听器的参数是可选的：
+
+   ```
+   @OnClick(R.id.submit)
+   public void sayHi(Button button) { 
+       button.setText("Hello!");
+   }
+   ```
+
+3. 资源绑定
+
+   ```java
+   @BindString(R.string.title) String title; 
+   @BindDrawable(R.drawable.graphic) Drawable graphic; 
+   @BindColor(R.color.red) int red; // int or ColorStateList field 
+   @BindDimen(R.dimen.spacer) Float spacer; // int (for pixel size) or float (for exact value) field
+   ```
+
+4. action功能，批量操作view
+
+   ```java
+   @BindViews({R.id.bt_1, R.id.bt_2, R.id.bt_3})
+   List<Button> buttons;
+
+   static final ButterKnife.Action<Button> disable=new ButterKnife.Action<Button>() {
+       @Override
+       public void apply(@NonNull Button view, int index) {
+           view.setEnabled(false);
+       }
+   };
+   static final ButterKnife.Action<Button> enable=new ButterKnife.Action<Button>() {
+       @Override
+       public void apply(@NonNull Button view, int index) {
+           view.setEnabled(true);
+       }
+   };
+
+   // 使用
+   ButterKnife.apply(buttons,disable);
+   // ButterKnife.apply(buttons,enable);
+   ```
+
+### 注意###
+
+1. Activity ButterKnife.bind(this);必须在setContentView();之后，且父类bind绑定后，子类不需要再bind
+2. ButterKnife不能再你的library module中使用哦!!这是因为你的library中的R字段的id值不是final类型的，但是你自己的应用module中确是final类型的。
+
+
+## 后记
+
+EventBus相对于ButterKnife知名度较低，但在Android编码中用到的程度却不低。熟悉这一框架的使用，能给编码带来很大的方便。
