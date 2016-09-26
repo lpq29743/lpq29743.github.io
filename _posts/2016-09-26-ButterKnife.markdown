@@ -22,7 +22,7 @@ tags:
 
 ## 正文
 
-本文所介绍的版本是ButterKnife8.0.1（2016/04/29更新版本），项目源地址：[https://github.com/JakeWharton/butterknife](https://github.com/JakeWharton/butterknife)，该作者关于ButterKnife的博客文章地址为：[http://jakewharton.github.io/butterknife/](http://jakewharton.github.io/butterknife/)。ButterKnife的原理只是把我们原先写的代码封装起来，所以在性能方面不会受到任何影响。
+本文所介绍的版本是ButterKnife8.0.1（2016/04/29更新的版本），ButterKnife项目由Jake Wharton编写，项目源地址为：[https://github.com/JakeWharton/butterknife](https://github.com/JakeWharton/butterknife)，相关博客文章地址为：[http://jakewharton.github.io/butterknife/](http://jakewharton.github.io/butterknife/)。ButterKnife的原理只是把我们原先写的代码封装起来，所以在性能方面不会受到任何影响。
 
 ###配置###
 
@@ -48,6 +48,8 @@ dependencies {
   apt 'com.jakewharton:butterknife-compiler:8.0.1'
 }
 ```
+
+（这里要加入apt插件的原因是：apt是用于编译时扫描和解析 Java 注解的工具，通过它我们可以自己定义注解，并定义解析器来处理它们。它的原理是读入 Java 源代码，解析注解，然后生成新的 Java 代码，新生成的代码最后被编译成 Java 字节码。）
 
 ***步骤三***
 
@@ -141,13 +143,70 @@ dependencies {
    }
    ```
 
-   ​
+2. @OnClick消除setOnClickListener
 
-2. ​
+   使用前：
 
-3. ​
+   ```java
+   button.setOnClickListener(this);
+   ```
 
-4. ​
+   使用后：
+
+   ```java
+   @OnClick({R.id.bt_1, R.id.bt_2, R.id.bt_3})
+   public void buttonClick(View v) {
+       Toast.makeText(this, "view:" + v, Toast.LENGTH_SHORT).show();
+   }
+   ```
+
+   监听器的参数是可选的：
+
+   ```
+   @OnClick(R.id.submit)
+   public void sayHi(Button button) { 
+       button.setText("Hello!");
+   }
+   ```
+
+3. 资源绑定
+
+   ```java
+   @BindString(R.string.title) String title; 
+   @BindDrawable(R.drawable.graphic) Drawable graphic; 
+   @BindColor(R.color.red) int red; // int or ColorStateList field 
+   @BindDimen(R.dimen.spacer) Float spacer; // int (for pixel size) or float (for exact value) field
+   ```
+
+4. action功能，批量操作view
+
+   ```java
+   @BindViews({R.id.bt_1, R.id.bt_2, R.id.bt_3})
+   List<Button> buttons;
+
+   static final ButterKnife.Action<Button> disable=new ButterKnife.Action<Button>() {
+       @Override
+       public void apply(@NonNull Button view, int index) {
+           view.setEnabled(false);
+       }
+   };
+   static final ButterKnife.Action<Button> enable=new ButterKnife.Action<Button>() {
+       @Override
+       public void apply(@NonNull Button view, int index) {
+           view.setEnabled(true);
+       }
+   };
+
+   // 使用
+   ButterKnife.apply(buttons,disable);
+   // ButterKnife.apply(buttons,enable);
+   ```
+
+### 注意###
+
+1. Activity ButterKnife.bind(this);必须在setContentView();之后，且父类bind绑定后，子类不需要再bind
+2. ButterKnife不能再你的library module中使用哦!!这是因为你的library中的R字段的id值不是final类型的，但是你自己的应用module中确是final类型的。
+
 
 ## 后记
 
