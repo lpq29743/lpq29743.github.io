@@ -28,7 +28,7 @@ ORMLite这个框架是在ORM中被采用的比较多的一个。文档，实例�
 
 添加依赖库：
 
-```java
+```
 compile 'com.j256.ormlite:ormlite-android:5.0'
 compile 'com.j256.ormlite:ormlite-core:5.0'
 ```
@@ -37,7 +37,7 @@ compile 'com.j256.ormlite:ormlite-core:5.0'
 
 ***步骤一：***创建类DatabaseHelper继承OrmLiteSqliteOpenHelper
 
-```
+```java
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -161,7 +161,7 @@ public  class DatabaseHelper extends OrmLiteSqliteOpenHelper
 
 ***步骤二：***创建相应的Bean的Dao
 
-```
+```java
 import java.sql.SQLException;
 
 import android.content.Context;
@@ -210,7 +210,7 @@ public class UserDao
 
 ***步骤三：***定义实体类Bean，代表一张表
 
-```
+```java
 import com.j256.ormlite.field.DatabaseField;  
 import com.j256.ormlite.table.DatabaseTable;  
   

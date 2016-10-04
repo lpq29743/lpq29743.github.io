@@ -48,7 +48,7 @@ RxJava 作为一个工具库，使用的就是通用形式的观察者模式。�
 
 添加依赖库：
 
-```java
+```
 compile 'io.reactivex:rxjava:1.2.0'
 compile 'io.reactivex:rxandroid:1.2.1'
 ```
@@ -57,7 +57,7 @@ compile 'io.reactivex:rxandroid:1.2.1'
 
 ***步骤一：***创建Observer
 
-```
+```java
 Observer<String> observer = new Observer<String>() {
     @Override
     public void onNext(String s) {
@@ -106,7 +106,7 @@ Subscriber<String> subscriber = new Subscriber<String>() {
 
 Observable 即被观察者，它决定什么时候触发事件以及触发怎样的事件。 RxJava 使用 `create()` 方法来创建一个 Observable ，并为它定义事件触发规则：
 
-```
+```java
 Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
     @Override
     public void call(Subscriber<? super String> subscriber) {
@@ -126,7 +126,7 @@ Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
 
 - `just(T...)`: 将传入的参数依次发送出来。
 
-```
+```java
 Observable observable = Observable.just("Hello", "Hi", "Aloha");
 // 将会依次调用：
 // onNext("Hello");
@@ -137,7 +137,7 @@ Observable observable = Observable.just("Hello", "Hi", "Aloha");
 
 - `from(T[])` / `from(Iterable)` : 将传入的数组或 `Iterable` 拆分成具体对象后，依次发送出来。
 
-```
+```java
 String[] words = {"Hello", "Hi", "Aloha"};
 Observable observable = Observable.from(words);
 // 将会依次调用：
@@ -153,7 +153,7 @@ Observable observable = Observable.from(words);
 
 创建了 `Observable` 和 `Observer` 之后，再用 `subscribe()` 方法将它们联结起来，整条链子就可以工作了。代码形式很简单：
 
-```
+```java
 observable.subscribe(observer);
 // 或者：
 observable.subscribe(subscriber);
@@ -163,7 +163,7 @@ observable.subscribe(subscriber);
 
 `Observable.subscribe(Subscriber)` 的内部实现是这样的（仅核心代码）：
 
-```
+```java
 // 注意：这不是 subscribe() 的源码，而是将源码中与性能、兼容性、扩展性有关的代码剔除后的核心代码。
 // 如果需要看源码，可以去 RxJava 的 GitHub 仓库下载。
 public Subscription subscribe(Subscriber subscriber) {
@@ -181,7 +181,7 @@ public Subscription subscribe(Subscriber subscriber) {
 
 除了 `subscribe(Observer)` 和 `subscribe(Subscriber)` ，`subscribe()` 还支持不完整定义的回调，RxJava 会自动根据定义创建出`Subscriber` 。形式如下：
 
-```
+```java
 Action1<String> onNextAction = new Action1<String>() {
     // onNext()
     @Override
