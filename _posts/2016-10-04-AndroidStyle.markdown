@@ -22,7 +22,7 @@ style在Android开发中经常会使用到，今天这篇博客的主题便是st
 
 ***通过style定义Theme***
 
-```java
+```xml
 <style name="simple_dialog" parent="@android:style/Theme.Dialog">
 	<item name="android:windowFrame">@null</item><!-- Dialog的WindowFrame框为无 -->
 	<item name="android:windowNoTitle">true</item>
@@ -44,7 +44,7 @@ style在Android开发中经常会使用到，今天这篇博客的主题便是st
 
 ***通过style减少代码书写***
 
-```java
+```xml
 <style name="CodeFont" parent="@android:style/TextAppearance.Medium">
 	<item name="android:layout_width">fill_parent</item>
 	<item name="android:layout_height">wrap_content</item>

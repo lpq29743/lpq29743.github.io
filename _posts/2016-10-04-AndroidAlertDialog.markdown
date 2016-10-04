@@ -84,7 +84,7 @@ new AlertDialog.Builder(DialogDemo.this)
 
 其中arrays.xml如下
 
-```java
+```xml
 <?xml version="1.0" encoding="utf-8"?>  
 <resources>  
     <string-array name="dialog_arrays">  
