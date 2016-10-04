@@ -1,0 +1,39 @@
+---
+layout:     post
+title:      "Docker再入门"
+subtitle:   "走进Docker的世界"
+date:       2016-10-05 02:00:00
+author:     "林佩勤"
+header-img: "img/post-bg.jpg"
+tags:
+    - Docker
+    - 云计算
+---
+
+> “Knockin' On Docker's Door”
+
+
+## 前言
+
+
+
+---
+
+## 正文
+
+
+可以通过执行 docker login 命令来输入用户名、密码和邮箱来完成注册和登录。用户无需登录即可通过 docker search 命令来查找官方仓库中的镜像,并利用 docker pull 命令来将它下载到本地。
+
+Dockerfile使用Dockerfile 中每一条指令都创建镜像的一层,例如:
+
+// 提交镜像修改sudo docker commit -m "Added json gem"// 推送项目sudo docker push ouruser/sinatra
+
+# This is a comment
+
+FROM ubuntu:14.04MAINTAINER Docker Newbee [newbee@docker.com](mailto:newbee@docker.com)RUN apt-get -qq updateRUN apt-get -qqy install ruby ruby-devRUN gem install sinatraDockerfile 基本的语法是 * 使用 # 来注释 * FROM 指令告诉 Docker 使用哪个镜像作为基础 * 接着是维护者的信息 * RUN 开头的指令会在创建中运行,比如安装一个软件包,在这里使用 apt-get 来安装了一些软件编写完成 Dockerfile 后可以使用 docker build 来生成镜像。$ sudo docker build -t="ouruser/sinatra:v2"
+
+## 后记
+
+这一次的后记就闲聊一下前言提到的考研吧，算是首尾呼应吧！考研是这个暑假实习期间下的决心，本来一开始上大学的时候，是不打算继续深造的，一来觉得必要性不大，二来是自己对学习这东西有点爱恨交加。不过随着对这个专业的深入了解，最终做了考研的打算（其实在实习前还是犹豫不决）。
+
+决定了考研，却什么都还没准备，便趁着国庆期间上网查查建议。期间有人吐槽国内计算机考研环境不好，也让自己动摇了决定。最后还是听从一些人的建议，实际上应该是听从自己的内心，决定静下心来，好好备考，无论最好是考不上还是改变主意，也都会有所收获。
