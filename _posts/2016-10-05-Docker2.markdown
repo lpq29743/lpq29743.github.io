@@ -32,6 +32,8 @@ Dockerfile使用Dockerfile 中每一条指令都创建镜像的一层,例如:
 
 FROM ubuntu:14.04MAINTAINER Docker Newbee [newbee@docker.com](mailto:newbee@docker.com)RUN apt-get -qq updateRUN apt-get -qqy install ruby ruby-devRUN gem install sinatraDockerfile 基本的语法是 * 使用 # 来注释 * FROM 指令告诉 Docker 使用哪个镜像作为基础 * 接着是维护者的信息 * RUN 开头的指令会在创建中运行,比如安装一个软件包,在这里使用 apt-get 来安装了一些软件编写完成 Dockerfile 后可以使用 docker build 来生成镜像。$ sudo docker build -t="ouruser/sinatra:v2"
 
+https://segmentfault.com/a/1190000002567459
+
 ## 后记
 
 这一次的后记就闲聊一下前言提到的考研吧，算是首尾呼应吧！考研是这个暑假实习期间下的决心，本来一开始上大学的时候，是不打算继续深造的，一来觉得必要性不大，二来是自己对学习这东西有点爱恨交加。不过随着对这个专业的深入了解，最终做了考研的打算（其实在实习前还是犹豫不决）。
