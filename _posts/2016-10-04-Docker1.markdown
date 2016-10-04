@@ -55,78 +55,78 @@ Ubuntu和CentOS上都可以支持docker，具体的安装一句命令就可以�
 
 ***docker基本命令***
 
-```java
-// 开启Docker服务
+```shell
+# 开启Docker服务
 sudo service docker start
-// 查看docker信息
+# 查看docker信息
 sudo docker info
-// 查看docker帮助
+# 查看docker帮助
 sudo docker help
 ```
 
 ***镜像简单操作***
 
-```java
-// 查找镜像
+```shell
+# 查找镜像
 sudo docker search puppet
-// 获取镜像
+# 获取镜像
 sudo docker pull ubuntu:12.04
-// 使用下载的镜像启动容器（当启动的镜像不存在，则会在公有仓库中下载）
+# 使用下载的镜像启动容器（当启动的镜像不存在，则会在公有仓库中下载）
 sudo docker run -t -i ubuntu:12.04 /bin/bash
 sudo docker run ubuntu:14.04 /bin/echo 'Hello world'
-// 查看当前镜像列表
+# 查看当前镜像列表
 sudo docker images
-// 导出镜像到本地文件
+# 导出镜像到本地文件
 sudo docker save -o ubuntu_14.04.tar ubuntu:14.04
-// 本地文件中导入到本地镜像库
+# 本地文件中导入到本地镜像库
 sudo docker load --input ubuntu_14.04.tar
 sudo docker load < ubuntu_14.04.tar
-// 移除本地的镜像
+# 移除本地的镜像
 sudo docker rmi ubuntu:14.04
 ```
 
 ***容器简单操作***
 
-```java
-// 容器重命名
+```shell
+# 容器重命名
 sudo docker run --name 名字 -i -t ubuntu /bin/bash
-// 查看正在运行的容器列表
+# 查看正在运行的容器列表
 sudo docker ps (-a)
-// 直接将一个已经终止的容器启动运行
+# 直接将一个已经终止的容器启动运行
 sudo docker start ao_ct
 sudo docker start b1ec5fb7f499
-// 终止运行容器
+# 终止运行容器
 sudo docker stop ao_ct
-// 快速杀死容器
+# 快速杀死容器
 sudo docker kill aofo
-// 重启运行容器
+# 重启运行容器
 sudo docker restart ao_ct
-// 附到容器上
+# 附到容器上
 sudo docker attach aoct
 sudo docker attach 614122c0aabb
-// 通过添加-d参数创建一个叫aofo的守护式容器
+# 通过添加-d参数创建一个叫aofo的守护式容器
 sudo docker run --name aofo -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sleep 1; done"
-// 打印容器日志
+# 打印容器日志
 sudo docker logs aofo
-// 查看容器内进程
+# 查看容器内进程
 sudo docker top aofo
-// 获取更多容器信息
+# 获取更多容器信息
 sudo docker inspect aofo
-// 查看容器运行状态
+# 查看容器运行状态
 sudo docker inspect --format='{{ .State.Running }}' aofo
 sudo docker inspect --format='{{ .State.Running }}' aofo aoct
-// 查看容器IP地址（没有设置则为空）
+# 查看容器IP地址（没有设置则为空）
 sudo docker inspect --format='{{ .NetworkSettings.IPAddress }}' aofo
-// 在容器内部运行进程
+# 在容器内部运行进程
 sudo docker exec -d daemon aofo touch /etc/new_config_file
 sudo docker exec -t -i aofo /bin/bash
-// 删除容器
+# 删除容器
 sudo docker rm 容器ID
-// 一次性删除所有容器
+# 一次性删除所有容器
 sudo docker rm `docker ps -a -q`
-// 导出容器
+# 导出容器
 sudo docker export aofo
-// 导入容器
+# 导入容器
 sudo docker import aofo
 sudo docker import http://example.com/exampleimage.tgz example/imagerepo
 ```
