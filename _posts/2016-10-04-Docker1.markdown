@@ -1,0 +1,121 @@
+---
+layout:     post
+title:      "Docker入门"
+subtitle:   "走进Docker的世界"
+date:       2016-10-04 22:00:00
+author:     "林佩勤"
+header-img: "img/post-bg.jpg"
+tags:
+    - Docker
+    - 云计算
+---
+
+> “Knockin' On Docker's Door”
+
+
+## 前言
+
+趁着晚上从图书馆回来，状态良好，玩了一盘NBA2K16（最近对这个游戏有点着迷，迷茫感也是从此而来。。。）。当然，也简单地学习了一下docker。
+
+学习Docker的目的主要是探寻考研中云计算这个方向。当然，无论什么目的，知识这东西都是有用的。
+
+说实话，之前也学了一次docker，但那次不注重做笔记，有点囫囵吞枣，所以效果极差。这一次，希望通过笔记和实践的形式来提高自己的学习效率。
+
+---
+
+## 正文
+
+首先，先抛出几个比较有意义的链接：
+[Docker有什么优势](https://www.zhihu.com/question/22871084/answer/88293837)
+[Docker开发文档](https://docs.docker.com/)
+目前比较知名的docker公开仓库：
+[国外Docker Hub](https://hub.docker.com)
+[国内Docker Pool](http://www.dockerpool.com)
+几个国内Docker服务平台（这几个云平台都有免费使用服务，在这几个云平台上摸索摸索，能学到很多东西）：
+[精灵云](https://www.ghostcloud.cn/home/home.html)
+[数人云](https://www.shurenyun.com/)
+[好雨云](https://www.goodrain.com/)
+[时速云](https://www.tenxcloud.com/)
+[灵雀云](http://www.alauda.cn/)
+[道客云](https://www.daocloud.io/)
+另附两篇数人云部署应用的文章：
+[玩转数人云：两步发布2048游戏应用](http://www.jingyuyun.com/article/2157.html)
+[玩转数人云：10分钟建立wordpress集群网站](http://blog.dataman-inc.com/20151119-shurenyun-wordpress/)
+
+把干货摆的差不多了，接下来就进入整体。
+关于Docker，如果你像我一样一窍不通的话，打开上面这几个链接肯定是一脸懵逼。其实这些东西你应该看完这篇文章之后想要实验实验在去看的。。。
+Ubutnu和CentOS上都可以支持docker，具体的安装一句命令就可以搞定。至于Windows，听说只有Win10能支持，不过笔者没有试验过。本文的实验环境也是在CentOS下。
+安装完docker后开启服务：
+sudo service docker start
+sudo chkconfig docker on
+// 查看docker信息
+sudo docker info
+// 查看docker帮助
+sudo docker help
+
+
+接下来就可以大展身手了！
+镜像简单操作：
+// 获取镜像
+sudo docker pull ubuntu:12.04
+// 使用下载的镜像启动容器（当启动的镜像不存在，则会在公有仓库中下载）
+sudo docker run -t -i ubuntu:12.04 /bin/bash
+// 查看当前镜像列表
+sudo docker images
+// 提交镜像修改
+/* 其中,-m来指定提交的说明信息,跟我们使用的版本控制工具一样;-a可以指定更新的用户信息;之后是
+用来创建镜像的容器的ID;最后指定目标镜像的仓库名和tag信息。创建成功后会返回这个镜像的ID信息。 */
+$ sudo docker commit -m "Added json gem" -a "Docker Newbee" 0b2616b0e5a8 ouruser/sinatra:v2
+推送项目
+sudo docker push ouruser/sinatra
+
+Dockerfile使用
+Dockerfile 中每一条指令都创建镜像的一层,例如:
+# This is a comment
+FROM ubuntu:14.04
+MAINTAINER Docker Newbee <newbee@docker.com>
+RUN apt-get -qq update
+RUN apt-get -qqy install ruby ruby-dev
+RUN gem install sinatra
+Dockerfile 基本的语法是 * 使用 # 来注释 * FROM 指令告诉 Docker 使用哪个镜像作为基础 * 接着是维护者
+的信息 * RUN 开头的指令会在创建中运行,比如安装一个软件包,在这里使用 apt-get 来安装了一些软件
+编写完成 Dockerfile 后可以使用 docker build 来生成镜像。
+$ sudo docker build -t="ouruser/sinatra:v2"
+如果要导出镜像到本地文件,可以使用 docker save 命令
+sudo docker save -o ubuntu_14.04.tar ubuntu:14.04
+可以使用 docker load 从导出的本地文件中再导入到本地镜像库,例如
+sudo docker load --input ubuntu_14.04.tar
+sudo docker load < ubuntu_14.04.tar
+
+如果要移除本地的镜像,可以使用 docker rmi 命令。注意 docker rm 命令是移除容器。
+注意:在删除镜像之前要先用 docker rm 删掉依赖于这个镜像的所有容器。
+下面的命令输出一个 “Hello World”,之后终止容器。
+sudo docker run ubuntu:14.04 /bin/echo 'Hello world'
+
+当利用 docker run 来创建容器时,Docker 在后台运行的标准操作包括:
+• 检查本地是否存在指定的镜像,不存在就从公有仓库下载
+• 利用镜像创建并启动一个容器
+• 分配一个文件系统,并在只读的镜像层外面挂载一层可读写层
+• 从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去
+• 从地址池配置一个 ip 地址给容器
+• 执行用户指定的应用程序
+• 执行完毕后容器被终止
+
+可以利用 docker start 命令,直接将一个已经终止的容器启动运行。
+可以使用 docker stop 来终止一个运行中的容器。
+此外, docker restart 命令会将一个运行态的容器终止,然后再重新启动它。
+如果要导出本地某个容器,可以使用 docker export 命令。
+可以使用 docker import 从容器快照文件中再导入为镜像
+此外,也可以通过指定 URL 或者某个目录来导入,例如
+$sudo docker import http://example.com/exampleimage.tgz example/imagerepo
+可以使用 docker rm 来删除一个处于终止状态的容器。
+
+
+可以通过执行 docker login 命令来输入用户名、密码和邮箱来完成注册和登录。
+用户无需登录即可通过 docker search 命令来查找官方仓库中的镜像,并利用 docker pull 命令来将它下载到本地。
+
+## 后记
+
+这一次的后记就闲聊一下前言提到的考研吧，算是首尾呼应吧！考研是这个暑假实习期间下的决心，本来一开始上大学的时候，是不打算继续深造的，一来觉得必要性不大，二来是自己对学习这东西有点爱恨交加。不过随着对这个专业的深入了解，最终做了考研的打算（其实在实习前还是犹豫不决）。
+
+决定了考研，却什么都还没准备，便趁着国庆期间上网查查建议。期间有人吐槽国内计算机考研环境不好，也让自己动摇了决定。最后还是听从一些人的建议，实际上应该是听从自己的内心，决定静下心来，好好备考，无论最好是考不上还是改变主意，也都会有所收获。
