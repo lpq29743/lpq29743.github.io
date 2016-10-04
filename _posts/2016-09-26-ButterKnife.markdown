@@ -30,7 +30,7 @@ tags:
 
 Project 的 build.gradle 添加：
 
-```java
+```
 dependencies {
   classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 }
@@ -40,7 +40,7 @@ dependencies {
 
 App 的 build.gradle 添加：
 
-```java
+```
 apply plugin: 'com.neenbedankt.android-apt'
 
 dependencies {
