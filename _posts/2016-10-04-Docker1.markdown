@@ -66,7 +66,7 @@ sudo docker help
 
 ***镜像简单操作***
 
-```
+```java
 // 查找镜像
 sudo docker search puppet
 // 获取镜像
@@ -87,7 +87,7 @@ sudo docker rmi ubuntu:14.04
 
 ***容器简单操作***
 
-```
+```java
 // 容器重命名
 sudo docker run --name 名字 -i -t ubuntu /bin/bash
 // 查看正在运行的容器列表
