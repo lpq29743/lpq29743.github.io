@@ -55,7 +55,7 @@ Ubuntu和CentOS上都可以支持docker，具体的安装一句命令就可以�
 
 ***docker基本命令***
 
-```
+```java
 // 开启Docker服务
 sudo service docker start
 // 查看docker信息
