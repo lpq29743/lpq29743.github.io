@@ -21,7 +21,9 @@ tags:
 
 ## 正文
 
-**国外篇**
+**注：为了方便整理，华人归为国内篇。。。**
+
+***国外篇***
 
 [艾伦·麦席森·图灵](https://zh.wikipedia.org/wiki/%E8%89%BE%E4%BC%A6%C2%B7%E5%9B%BE%E7%81%B5)（计算机科学之父、人工智能之父）
 
@@ -29,7 +31,9 @@ tags:
 
 [Linus Torvalds](https://zh.wikipedia.org/wiki/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%89%98%E7%93%A6%E5%85%B9)（linus之父、Git发起者）
 
-**国内篇**
+***国内篇***
+
+[姚期智](https://zh.wikipedia.org/wiki/%E5%A7%9A%E6%9C%9F%E6%99%BA)（2000年图灵奖得主，是目前唯一一位获得此奖项的华人）
 
 [阮一峰](http://baike.baidu.com/view/2564858.htm)（知名博主，[个人博客地址](http://www.ruanyifeng.com/home.html)）
 
