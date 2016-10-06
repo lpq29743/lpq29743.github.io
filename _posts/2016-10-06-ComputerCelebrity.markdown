@@ -29,6 +29,8 @@ tags:
 
 [冯·诺依曼](https://zh.wikipedia.org/zh-cn/%E7%BA%A6%E7%BF%B0%C2%B7%E5%86%AF%C2%B7%E8%AF%BA%E4%BC%8A%E6%9B%BC)（计算机之父”和“博弈论之父”）
 
+[James Gosling](https://zh.wikipedia.org/wiki/%E8%A9%B9%E5%A7%86%E6%96%AF%C2%B7%E9%AB%98%E6%96%AF%E6%9E%97)（Java之父）
+
 [Linus Torvalds](https://zh.wikipedia.org/wiki/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%89%98%E7%93%A6%E5%85%B9)（linus之父、Git发起者）
 
 ***国内篇***
