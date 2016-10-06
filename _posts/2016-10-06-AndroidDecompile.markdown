@@ -29,7 +29,7 @@ tags:
 
 那么有了工具之后我们改怎么使用呢？
 
-####apktool的使用
+#### apktool的使用
 
 如果只是为了一些图片资源，直接把apk修改为zip，然后解压。我们可以用android的调试工具monitor获取view的id，然后在解压后的zip中全局搜索id即可。
 
@@ -57,7 +57,7 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore 签名文件名
 zipalign 4 New_Demo.apk New_Demo_aligned.apk
 ```
 
-####dex2jar的使用
+#### dex2jar的使用
 
 首先要将apk后缀名改为.rar或.zip，解压得到其中的classes.dex文件（它就是java文件编译再通过dx工具打包而成的）
 
