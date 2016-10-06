@@ -28,6 +28,15 @@ git版本工具如今在工作编码的过程中使用非常频繁。对于一�
 - **git commit -m "modified"**：提交git更改（引号内为此版本描述信息，可更改)
 - **git push origin master**：将本地改动添加到远程库分支（origin为远程库连接别名，master为远程库分支）
 
+### 几种特殊情况
+
+***强制pull***
+
+```shell
+git fetch --all
+git reset --hard origin/master 
+```
+
 ## 后记
 
 一开始用git的时候，还很怀疑它的用途，真正用起来才感受到它的强大。所以，当大家了解到某样技术很流行但自己却没有感觉的到的话，最好的方法就是使用它。
