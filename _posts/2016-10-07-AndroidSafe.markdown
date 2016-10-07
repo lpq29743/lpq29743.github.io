@@ -46,7 +46,19 @@ buildTypes {
 }
 ```
 
-**第二步：根据ProGuard语法修改proguard-rules.pro文件**
+**第二步：混淆注意事项**
+
+一般情况，我们只需要修改proguard-rules.pro文件，把不需要混淆的部分在该文件中声明。不需混淆的部分如下：
+
+- 在AndroidManifest中配置的类，比如四大组件
+- JNI调用的方法
+- 反射用到的类，如Gson，Fastjson时，Bean类不需要混淆
+- WebView中JavaScript调用的方法
+- Layout文件引用到的自定义View
+- 一些引入的第三方库，如百度地图等
+- 枚举不需混淆
+
+**第三步：根据ProGuard语法修改proguard-rules.pro文件**
 
 ***保留***
 
@@ -98,78 +110,229 @@ buildTypes {
 
 > 更详细的语法请戳:[http://proguard.sourceforge.net/manual/usage.html#classspecification](http://proguard.sourceforge.net/manual/usage.html#classspecification)
 
+**第四步：根据例子进行修改proguard-rules.pro文件**
+
+ 查看语法可能会让基础不好的朋友一头雾水，接下来给出例子，大家可根据例子进行修改：
+
+```shell
+################common###############
+-keep class com.jph.android.entity.** { *; } #实体类不参与混淆
+-keep class com.jph.android.view.** { *; } #自定义控件不参与混淆
+
+################baidu map###############
+-libraryjars libs/baidumapapi_v3_2_0.jar
+-libraryjars libs/locSDK_5.0.jar
+-keep class com.baidu.** { *; }
+-keep class vi.com.gdi.bgl.android.**{*;}
+-dontwarn com.baidu.**
 
 
- 
+################afinal##################
+#-libraryjars libs/afinal_0.5_bin.jar
+#-keep class net.tsz.afinal.** { *; } 
+#-keep public class * extends net.tsz.afinal.**  
+#-keep public interface net.tsz.afinal.** {*;}
+#-dontwarn net.tsz.afinal.**
+
+################xutils##################
+-libraryjars libs/xUtils-2.6.14.jar
+-keep class com.lidroid.xutils.** { *; } 
+-keep public class * extends com.lidroid.xutils.**  
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep public interface com.lidroid.xutils.** {*;}
+-dontwarn com.lidroid.xutils.**
+-keepclasseswithmembers class com.jph.android.entity.** {
+	<fields>;
+	<methods>;
+}
+
+################支付宝##################
+-libraryjars libs/alipaysecsdk.jar
+-libraryjars libs/alipayutdid.jar
+-libraryjars libs/alipaysdk.jar
+-keep class com.alipay.android.app.IAliPay{*;}
+-keep class com.alipay.android.app.IAlixPay{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback{*;}
+-keep class com.alipay.android.app.lib.ResourceMap{*;}
+
+################gson##################
+-libraryjars libs/gson-2.2.4.jar
+-keep class com.google.gson.** {*;}
+#-keep class com.google.**{*;}
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.stream.** { *; }
+-keep class com.google.gson.examples.android.model.** { *; } 
+-keep class com.google.** {
+    <fields>;
+    <methods>;
+}
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+-dontwarn com.google.gson.**
 
 
 
-一般情况，我们只需要修改proguard-rules.pro文件，把不需要混淆的部分在该文件中声明，因为有些类已经混淆过，。比如使用百度地图安卓sdk需要在proguard-rules.pro中加入下面代码：
+################httpmime/httpcore##########
+-libraryjars libs/httpcore-4.3.2.jar
+-libraryjars libs/httpmime-4.3.5.jar
+-keep class org.apache.http.** {*;}
+-dontwarn org.apache.http.**
 
-| 123  | -keep class com.baidu.** {*;}-keep class vi.com.** {*;}-dontwarn com.baidu.** |
-| ---- | ---------------------------------------- |
-|      |                                          |
+####################jpush##################
+-libraryjars libs/jpush-sdk-release1.7.1.jar
+-keep class cn.jpush.** { *; }
+-keep public class com.umeng.fb.ui.ThreadView { } #双向反馈功能代码不混淆
+-dontwarn cn.jpush.**
+-keepclassmembers class * {
+    public <init>(org.json.JSONObject);
+}
+ #不混淆R类
+-keep public class com.jph.android.R$*{ 
+    public static final int *;
+}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
 
- 
+####################umeng##################
+-libraryjars libs/umeng-analytics-v5.2.4.jar
+-keep class com.umeng.analytics.** {*;}
+-dontwarn com.umeng.analytics.**
 
- 
+#-keep public class * extends com.umeng.**  
+#-keep public class * extends com.umeng.analytics.**  
+#-keep public class * extends com.umeng.common.**  
+#-keep public class * extends com.umeng.newxp.** 
+-keep class com.umeng.** { *; }  
+-keep class com.umeng.analytics.** { *; }  
+-keep class com.umeng.common.** { *; }  
+-keep class com.umeng.newxp.** { *; } 
 
-使用gson，fastjsoon时，bean类不需要混淆，否则会出错，为此还特意请教了大神，哈哈。
-因为他们利用发射来解析json，混淆后找不到对应的变量导致空指针。
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+-keep class com.umeng.**
 
- 
+-keep public class com.idea.fifaalarmclock.app.R$*{
+    public static final int *;
+}
 
- 
+-keep public class com.umeng.fb.ui.ThreadView {
+}
 
-在android Manifest文件中的activity，service，provider， receiver，等都不能进行混淆。一些在xml中配置的view也不能进行混淆，当然，这些在sdk里默认配置文件proguard-android.txt中都有，就不用我们配置咯。
+-dontwarn com.umeng.**
 
- 
+-dontwarn org.apache.commons.**
 
-1 混淆之后，会给我们输出一些文件，android studio 在目录app/build/outputs/mapping下有以下文件：
+-keep public class * extends com.umeng.**
 
-dump.txt 描述apk文件中所有类文件间的内部结构。
+-keep class com.umeng.** {*; }
 
-mapping.txt 列出了原始的类，方法，和字段名与混淆后代码之间的映射，常用。
+####################universal-image-loader########
+-libraryjars libs/universal-image-loader-1.9.3.jar
+-keep class com.nostra13.universalimageloader.** {*;}
+-dontwarn com.nostra13.universalimageloader.**
 
-seeds.txt 列出了未被混淆的类和成员
 
-usage.txt 列出了从apk中删除的代码
+####################zxing#####################
+-libraryjars libs/zxing.jar
+-libraryjars libs/zxing_apply.jar
+-keep class com.google.zxing.** {*;}
+-dontwarn com.google.zxing.**
+
+####################BASE64Decoder##################
+-libraryjars libs/sun.misc.BASE64Decoder.jar
+
+####################support.v4#####################
+-libraryjars libs/android-support-v4.jar
+-keep class android.support.v4.** { *; }
+-dontwarn android.support.v4.**
+
+###################other####################
+# slidingmenu 的混淆
+-dontwarn com.jeremyfeinstein.slidingmenu.lib.**
+-keep class com.jeremyfeinstein.slidingmenu.lib.** { *; }
+# ActionBarSherlock混淆
+-dontwarn com.actionbarsherlock.**
+-keep class com.actionbarsherlock.** { *; }
+-keep interface com.actionbarsherlock.** { *; }
+-keep class * extends java.lang.annotation.Annotation { *; }
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keep class com.jph.android.entity.** {
+    <fields>;
+    <methods>;
+}
+
+-dontwarn android.support.**
+-dontwarn com.slidingmenu.lib.app.SlidingMapActivity
+-keep class android.support.** { *; }
+-keep class com.actionbarsherlock.** { *; }
+-keep interface com.actionbarsherlock.** { *; }
+-keep class com.slidingmenu.** { *; }
+-keep interface com.slidingmenu.** { *; }
+```
+
+**第五步：输出文件说明**
+
+混淆之后，会给我们输出一些文件，android studio 在目录/build/proguard/下有以下文件：
+
+- dump.txt 描述apk文件中所有类文件间的内部结构
+
+- mapping.txt 列出了原始的类，方法，和字段名与混淆后代码之间的映射
+
+- seeds.txt 列出了未被混淆的类和成员
+
+- usage.txt 列出了从apk中删除的代码
+
 
 当我们发布的release版本的程序出现bug时，可以通过以上文件（特别是mapping.txt）找到错误原始的位置，进行bug修改。同时，可能一开始的proguard配置有错误，也可以通过错误日志，根据这些文件，找到哪些文件不应该混淆，从而修改proguard的配置。
-注意：重新release编译后，这些文件会被覆盖，所以每发布一次程序，最好都保存一份配置文件。
 
-2 通过mapping.txt,通过映射关系找到对应的类，方法，字段来修复bug。
-这里需要利用sdk给我们提供的retrace脚本，可以将一个被混淆过的堆栈跟踪信息还原成一个可读的信息，window下时retrace.bat，linux和mac是retrace.sh，该脚本的位置在*/sdk/tools/proguard/bin/下。语法为：
+sdk\tools\proguard\bin 目录下有个retrace工具可以将混淆后的报错堆栈解码成正常的类名window下为retrace.bat，linux和mac为retrace.sh，使用方法如下：
 
-| 1    | retrace.bat\|retrace.sh [-verbose] mapping.txt [<stacktrace_file>] |
-| ---- | ---------------------------------------- |
-|      |                                          |
+1. 将crash log保存为yourfilename.txt
+2. 拿到版本发布时生成的mapping.txt
+3. 执行命令retrace.bat -verbose mapping.txt yourfilename.txt
 
-例如：
+值得注意的是，重新release编译后，这些文件会被覆盖，所以每发布一次程序，都要保存一份配置文件。不过，可以通过配置gradle进行自动保存，具体方法如下：
 
-| 1    | ./retrace.sh -verbose mapping.txt a.txt |
-| ---- | --------------------------------------- |
-|      |                                         |
+```shell
+android {
+applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            if (variant.getBuildType().isMinifyEnabled()) {
+                variant.assemble.doLast{
+                        copy {
+                            from variant.mappingFile
+                            into "${projectDir}/mappings"
+                            rename { String fileName ->
+                                "mapping-${variant.name}.txt"
+                            }
+                        }
+                }
+            }
+        }
+        ......
+    }
+}
+```
 
-其中的a.txt文件可以新建，然后把logcat的错误信息复制后粘贴到a.txt即可。
+#### 签名比对技术
 
-如果你没有指定，retrace工具会从标准输入(一般是键盘)读取。
+#### NDK  .so 动态库技术
 
-这里有个小技巧：不用mapping也可以显示行号，避免Unknown Source
-
-很简单，在混淆里加这么一句就可以：
-
-| 1    | -keepattributes SourceFile,LineNumberTable |
-| ---- | ---------------------------------------- |
-|      |                                          |
-
-这样，apk包会增大一些，我5.8M的包增加254K大小，还是可以接受的。
-
- 
-
-它主要保留了继承自Activity、Application、Service、BroadcastReceiver、ContentProvider、BackupAgentHelper、Preference和ILicensingService的子类。因为这些子类，都是可能被外部调用的。
-另外，它还保留了含有native方法的类、构造函数从xml构造的类（一般为View的子类）、枚举类型中的values和valueOf静态方法、继承Parcelable的跨进程数据类。
+#### 动态加载技术
 
 ## 后记
 
-安全是计算机领域一个重要的版块，也希望通过这篇文章，让大家的开发安全意思有所提高。
+安全是计算机领域一个重要的版块，也希望通过这篇文章，让大家的开发安全意识有所提高。
