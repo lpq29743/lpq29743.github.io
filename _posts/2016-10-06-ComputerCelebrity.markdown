@@ -41,13 +41,19 @@ tags:
 
 [Bill Gates 比尔·盖茨](https://zh.wikipedia.org/wiki/%E6%AF%94%E5%B0%94%C2%B7%E7%9B%96%E8%8C%A8)（美国微软公司联合创始人）
 
+[Elon Musk 伊隆·马斯克](https://zh.wikipedia.org/wiki/%E4%BC%8A%E9%9A%86%C2%B7%E9%A9%AC%E6%96%AF%E5%85%8B)（SpaceX创办人，特斯拉汽车和PayPal的联合创办人）
+
 **华人篇**
 
 [姚期智](https://zh.wikipedia.org/wiki/%E5%A7%9A%E6%9C%9F%E6%99%BA)（2000年图灵奖得主，是目前唯一一位获得此奖项的华人）
 
 [马云](https://zh.wikipedia.org/wiki/%E9%A9%AC%E4%BA%91)（阿里巴巴集团创始人）
 
+[李彦宏](https://zh.wikipedia.org/wiki/%E6%9D%8E%E5%BD%A6%E5%AE%8F)（百度公司创始人）
+
 [马化腾](https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%8C%96%E8%85%BE)（QQ之父，腾讯创始人）
+
+[雷军](https://zh.wikipedia.org/wiki/%E9%9B%B7%E5%86%9B)（小米创始人）
 
 [刘强东](https://zh.wikipedia.org/wiki/%E5%8A%89%E5%BC%B7%E6%9D%B1)（京东创始人）
 
