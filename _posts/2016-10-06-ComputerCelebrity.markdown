@@ -43,6 +43,8 @@ tags:
 
 [姚期智](https://zh.wikipedia.org/wiki/%E5%A7%9A%E6%9C%9F%E6%99%BA)（2000年图灵奖得主，是目前唯一一位获得此奖项的华人）
 
+[马云](https://zh.wikipedia.org/wiki/%E9%A9%AC%E4%BA%91)（阿里巴巴集团创始人）
+
 [楼天城](http://baike.baidu.com/view/2226659.htm)（[姚期智](https://zh.wikipedia.org/wiki/%E5%A7%9A%E6%9C%9F%E6%99%BA)学生，ACM/ICPC全球总决赛第二名，Google编程挑战第一名）
 
 [阮一峰](http://baike.baidu.com/view/2564858.htm)（知名博主，[个人博客地址](http://www.ruanyifeng.com/home.html)）

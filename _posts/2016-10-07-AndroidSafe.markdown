@@ -126,7 +126,6 @@ buildTypes {
 -keep class vi.com.gdi.bgl.android.**{*;}
 -dontwarn com.baidu.**
 
-
 ################afinal##################
 #-libraryjars libs/afinal_0.5_bin.jar
 #-keep class net.tsz.afinal.** { *; } 
@@ -176,8 +175,6 @@ buildTypes {
     java.lang.Object readResolve();
 }
 -dontwarn com.google.gson.**
-
-
 
 ################httpmime/httpcore##########
 -libraryjars libs/httpcore-4.3.2.jar
@@ -240,7 +237,6 @@ buildTypes {
 -libraryjars libs/universal-image-loader-1.9.3.jar
 -keep class com.nostra13.universalimageloader.** {*;}
 -dontwarn com.nostra13.universalimageloader.**
-
 
 ####################zxing#####################
 -libraryjars libs/zxing.jar

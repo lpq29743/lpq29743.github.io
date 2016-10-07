@@ -107,6 +107,7 @@ dependencies {
    }
 
    // onDestroyView()中解绑
+   // Calling unbind() in onDestroyView() is not required, but recommended.
    private Unbinder unbinder = ButterKnife.bind(this, view);
 
    @Override
