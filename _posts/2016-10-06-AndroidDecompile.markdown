@@ -6,8 +6,7 @@ date:       2016-10-06 22:00:00
 author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
-    - Docker
-    - 云计算
+    - Android
 ---
 
 > App：如果你一层一层地剥开我的心~~

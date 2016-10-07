@@ -37,6 +37,8 @@ tags:
 
 [Linus Torvalds 林纳斯·托瓦兹](https://zh.wikipedia.org/wiki/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%89%98%E7%93%A6%E5%85%B9)（Linux之父，Git发起者）
 
+[Steve Jobs 史蒂夫·乔布斯](https://zh.wikipedia.org/wiki/%E5%8F%B2%E8%92%82%E5%A4%AB%C2%B7%E4%B9%94%E5%B8%83%E6%96%AF)（美国苹果公司联合创始人）
+
 **华人篇**
 
 [姚期智](https://zh.wikipedia.org/wiki/%E5%A7%9A%E6%9C%9F%E6%99%BA)（2000年图灵奖得主，是目前唯一一位获得此奖项的华人）
