@@ -39,11 +39,15 @@ tags:
 
 [Steve Jobs 史蒂夫·乔布斯](https://zh.wikipedia.org/wiki/%E5%8F%B2%E8%92%82%E5%A4%AB%C2%B7%E4%B9%94%E5%B8%83%E6%96%AF)（美国苹果公司联合创始人）
 
+[Bill Gates 比尔·盖茨](https://zh.wikipedia.org/wiki/%E6%AF%94%E5%B0%94%C2%B7%E7%9B%96%E8%8C%A8)（美国微软公司联合创始人）
+
 **华人篇**
 
 [姚期智](https://zh.wikipedia.org/wiki/%E5%A7%9A%E6%9C%9F%E6%99%BA)（2000年图灵奖得主，是目前唯一一位获得此奖项的华人）
 
 [马云](https://zh.wikipedia.org/wiki/%E9%A9%AC%E4%BA%91)（阿里巴巴集团创始人）
+
+[马化腾](https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%8C%96%E8%85%BE)（QQ之父，腾讯创始人）
 
 [楼天城](http://baike.baidu.com/view/2226659.htm)（[姚期智](https://zh.wikipedia.org/wiki/%E5%A7%9A%E6%9C%9F%E6%99%BA)学生，ACM/ICPC全球总决赛第二名，Google编程挑战第一名）
 
