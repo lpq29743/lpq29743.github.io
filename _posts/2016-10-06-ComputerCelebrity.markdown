@@ -49,6 +49,8 @@ tags:
 
 [马化腾](https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%8C%96%E8%85%BE)（QQ之父，腾讯创始人）
 
+[刘强东](https://zh.wikipedia.org/wiki/%E5%8A%89%E5%BC%B7%E6%9D%B1)（京东创始人）
+
 [楼天城](http://baike.baidu.com/view/2226659.htm)（[姚期智](https://zh.wikipedia.org/wiki/%E5%A7%9A%E6%9C%9F%E6%99%BA)学生，ACM/ICPC全球总决赛第二名，Google编程挑战第一名）
 
 [阮一峰](http://baike.baidu.com/view/2564858.htm)（知名博主，[个人博客地址](http://www.ruanyifeng.com/home.html)）
