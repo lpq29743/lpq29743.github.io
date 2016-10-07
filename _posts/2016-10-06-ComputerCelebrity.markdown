@@ -41,6 +41,12 @@ tags:
 
 [Bill Gates 比尔·盖茨](https://zh.wikipedia.org/wiki/%E6%AF%94%E5%B0%94%C2%B7%E7%9B%96%E8%8C%A8)（美国微软公司联合创始人）
 
+[Lawrence Page 拉里·佩奇](https://zh.wikipedia.org/wiki/%E6%8B%89%E9%87%8C%C2%B7%E4%BD%A9%E5%A5%87)（Google创始人之一）
+
+[Sergey Brin 谢尔盖·布林](https://zh.wikipedia.org/wiki/%E8%B0%A2%E5%B0%94%E7%9B%96%C2%B7%E5%B8%83%E6%9E%97)（Google创始人之一）
+
+[Mark Zuckerberg 马克·扎克伯格](https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%85%8B%C2%B7%E6%89%8E%E5%85%8B%E4%BC%AF%E6%A0%BC)（Facebook创始人）
+
 [Elon Musk 伊隆·马斯克](https://zh.wikipedia.org/wiki/%E4%BC%8A%E9%9A%86%C2%B7%E9%A9%AC%E6%96%AF%E5%85%8B)（SpaceX创办人，特斯拉汽车和PayPal的联合创办人）
 
 **华人篇**
@@ -53,9 +59,13 @@ tags:
 
 [马化腾](https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%8C%96%E8%85%BE)（QQ之父，腾讯创始人）
 
+[任正非](https://zh.wikipedia.org/wiki/%E4%BB%BB%E6%AD%A3%E9%9D%9E)（华为创始人）
+
 [雷军](https://zh.wikipedia.org/wiki/%E9%9B%B7%E5%86%9B)（小米创始人）
 
 [刘强东](https://zh.wikipedia.org/wiki/%E5%8A%89%E5%BC%B7%E6%9D%B1)（京东创始人）
+
+[史玉柱](https://zh.wikipedia.org/wiki/%E5%8F%B2%E7%8E%89%E6%9F%B1)（巨人网络集团董事长）
 
 [楼天城](http://baike.baidu.com/view/2226659.htm)（[姚期智](https://zh.wikipedia.org/wiki/%E5%A7%9A%E6%9C%9F%E6%99%BA)学生，ACM/ICPC全球总决赛第二名，Google编程挑战第一名）
 
