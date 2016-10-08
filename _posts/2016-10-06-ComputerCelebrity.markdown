@@ -37,9 +37,23 @@ tags:
 
 [Linus Torvalds 林纳斯·托瓦兹](https://zh.wikipedia.org/wiki/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%89%98%E7%93%A6%E5%85%B9)（Linux之父，Git发起者）
 
+[Andrew S. Tanenbaum 安德鲁·斯图尔特·塔能鲍姆](https://zh.wikipedia.org/wiki/%E5%AE%89%E5%BE%B7%E9%B2%81%C2%B7%E6%96%AF%E5%9B%BE%E5%B0%94%E7%89%B9%C2%B7%E5%A1%94%E8%83%BD%E9%B2%8D%E5%A7%86)（Minix作者，《现代操作系统》作者）
+
+[Richard Stallman 理查德·斯托曼](https://zh.wikipedia.org/zh-cn/%E7%90%86%E6%9F%A5%E5%BE%B7%C2%B7%E6%96%AF%E6%89%98%E6%9B%BC)（自由软件运动的精神领袖，GNU、FSF创立者，Emacs、GCC、GDB作者）
+
+[Tim Berners-Lee 伯纳斯·李](https://zh.wikipedia.org/wiki/%E8%92%82%E5%A7%86%C2%B7%E4%BC%AF%E7%BA%B3%E6%96%AF-%E6%9D%8E)（互联网之父）
+
 [Steve Jobs 史蒂夫·乔布斯](https://zh.wikipedia.org/wiki/%E5%8F%B2%E8%92%82%E5%A4%AB%C2%B7%E4%B9%94%E5%B8%83%E6%96%AF)（美国苹果公司联合创始人）
 
+[Stephen Wozniak 斯蒂夫·沃兹尼亚克](https://zh.wikipedia.org/wiki/%E6%96%AF%E8%92%82%E5%A4%AB%C2%B7%E6%B2%83%E5%85%B9%E5%B0%BC%E4%BA%9A%E5%85%8B)（创立苹果电脑公司，制造苹果一、二代电脑）
+
+[Tim Cook 蒂姆·库克](https://zh.wikipedia.org/wiki/%E6%8F%90%E5%A7%86%C2%B7%E5%BA%AB%E5%85%8B)（2011年接替乔布斯担任苹果公司CEO）
+
+[Scott Forstall 斯科特·福斯特尔](https://zh.wikipedia.org/wiki/%E6%96%AF%E7%A7%91%E7%89%B9%C2%B7%E7%A6%8F%E6%96%AF%E7%89%B9%E5%B0%94)（开发了IOS）
+
 [Bill Gates 比尔·盖茨](https://zh.wikipedia.org/wiki/%E6%AF%94%E5%B0%94%C2%B7%E7%9B%96%E8%8C%A8)（美国微软公司联合创始人）
+
+[Bob Mansfield 鲍勃·曼斯菲尔德](http://baike.baidu.com/view/3493689.htm)（苹果公司硬件工程高级副总裁，被誉为硬件天才）
 
 [Lawrence Page 拉里·佩奇](https://zh.wikipedia.org/wiki/%E6%8B%89%E9%87%8C%C2%B7%E4%BD%A9%E5%A5%87)（Google创始人之一）
 
@@ -47,7 +61,19 @@ tags:
 
 [Mark Zuckerberg 马克·扎克伯格](https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%85%8B%C2%B7%E6%89%8E%E5%85%8B%E4%BC%AF%E6%A0%BC)（Facebook创始人）
 
+[Larry Ellision 拉里·埃里森](https://zh.wikipedia.org/wiki/%E6%8B%89%E9%87%8C%C2%B7%E5%9F%83%E9%87%8C%E6%A3%AE)（Oracle创始人）
+
 [Elon Musk 伊隆·马斯克](https://zh.wikipedia.org/wiki/%E4%BC%8A%E9%9A%86%C2%B7%E9%A9%AC%E6%96%AF%E5%85%8B)（SpaceX创办人，特斯拉汽车和PayPal的联合创办人）
+
+[Guido van Rossum 吉多·范罗苏姆](https://zh.wikipedia.org/wiki/%E5%90%89%E5%A4%9A%C2%B7%E8%8C%83%E7%BD%97%E8%8B%8F%E5%A7%86)（python作者）
+
+[Kevin Mitnick 凯文·米特尼克](https://zh.wikipedia.org/wiki/%E5%87%AF%E6%96%87%C2%B7%E7%B1%B3%E7%89%B9%E5%B0%BC%E5%85%8B)（头号电脑黑客）
+
+[Aaron Swartz 亚伦·斯沃茨](https://zh.wikipedia.org/wiki/%E4%BA%9A%E4%BC%A6%C2%B7%E6%96%AF%E6%B2%83%E8%8C%A8)（Reddit联合创始人，web.py的设计者，年仅26岁）
+
+[John Gruber 约翰·格鲁伯](https://zh.wikipedia.org/wiki/%E7%B4%84%E7%BF%B0%C2%B7%E6%A0%BC%E9%AD%AF%E4%BC%AF)（Markdown作者）
+
+[George Hotz 乔治·霍兹](https://zh.wikipedia.org/wiki/%E4%B9%94%E6%B2%BB%C2%B7%E9%9C%8D%E5%85%B9)（解锁iPhone）
 
 **华人篇**
 
@@ -59,13 +85,21 @@ tags:
 
 [马化腾](https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%8C%96%E8%85%BE)（QQ之父，腾讯创始人）
 
+[张小龙](http://baike.baidu.com/subview/134451/7071650.htm)（腾讯副总裁、FoxMail创始人、微信创始人）
+
 [任正非](https://zh.wikipedia.org/wiki/%E4%BB%BB%E6%AD%A3%E9%9D%9E)（华为创始人）
 
+[丁磊](https://zh.wikipedia.org/wiki/%E4%B8%81%E7%A3%8A)（网易创始人）
+
 [雷军](https://zh.wikipedia.org/wiki/%E9%9B%B7%E5%86%9B)（小米创始人）
+
+[张朝阳](https://zh.wikipedia.org/zh-cn/%E5%BC%A0%E6%9C%9D%E9%98%B3)（搜狐创始人）
 
 [刘强东](https://zh.wikipedia.org/wiki/%E5%8A%89%E5%BC%B7%E6%9D%B1)（京东创始人）
 
 [史玉柱](https://zh.wikipedia.org/wiki/%E5%8F%B2%E7%8E%89%E6%9F%B1)（巨人网络集团董事长）
+
+[周鸿祎](https://zh.wikipedia.org/wiki/%E5%91%A8%E9%B8%BF%E7%A5%8E)（奇虎360创始人）
 
 [楼天城](http://baike.baidu.com/view/2226659.htm)（[姚期智](https://zh.wikipedia.org/wiki/%E5%A7%9A%E6%9C%9F%E6%99%BA)学生，ACM/ICPC全球总决赛第二名，Google编程挑战第一名）
 
