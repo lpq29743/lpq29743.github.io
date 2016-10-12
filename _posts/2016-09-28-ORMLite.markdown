@@ -208,6 +208,56 @@ public class UserDao
 }
 ```
 
+更多的操作如下：
+
+```java
+// 增操作
+// 在表中添加一条记录
+public int create(T data) throws SQLException;
+// 在表中添加一条记录，如果表不存在这条数据,根据设置的主键来判断是否存在
+public T createIfNotExists(T data) throws SQLException;
+// 在表中添加一条记录，如果存在则更新主键对应的一条记录，
+public CreateOrUpdateStatus createOrUpdate(T data) throws SQLException;
+
+// 删操作
+根据传入实体删除
+public int delete(T data) throws SQLException;
+// 根据ID删除
+public int deleteById(ID id) throws SQLException;
+// 根据集合删除
+public int delete(Collection<T> datas) throws SQLException;
+// 根据id集合删除
+public int deleteIds(Collection<ID> ids) throws SQLException;
+
+// 改操作
+// 根据传入的实体更新数据，ID为唯一标志
+public int update(T data) throws SQLException;
+// 更新ID,其他值不变
+public int updateId(T data, ID newId) throws SQLException;
+
+// 查操作
+// 根据唯一标志id检索一条记录，如果id为
+public T queryForId(ID id) throws SQLException;
+// 查询匹配到的所有行中的第一个
+public T queryForFirst(PreparedQuery<T> preparedQuery) throws SQLException;
+// 返回表中所有条目，可导致大量数据导入内存，应该使用iterator方法来代替此方法
+public List<T> queryForAll() throws SQLException;
+// 查询指定字段value等于查询值的行： where fieldName ＝ value
+public List<T> queryForEq(String fieldName, Object value) throws SQLException;
+// 匹配传入实体（字段不能为默认值，null，false，0，0.0等）的每个字段的值，每个条件进行and操作，返回的结果，可能导致SQL quote escaping
+public List<T> queryForMatching(T matchObj) throws SQLException;
+// 同上述方法，不会导致SQL quote escaping
+public List<T> queryForMatchingArgs(T matchObj) throws SQLException;
+// 根据传入的字段与value值的map匹配查询
+public List<T> queryForFieldValues(Map<String, Object> fieldValues) throws SQLException;
+// 根据传入的字段与value值的map匹配查询
+public List<T> queryForFieldValuesArgs(Map<String, Object> fieldValues) throws SQLException;
+// 查询与传入实体id相等的数据行
+public T queryForSameId(T data) throws SQLException;
+```
+
+
+
 ***步骤三：***定义实体类Bean，代表一张表
 
 ```java
