@@ -254,6 +254,8 @@ public List<T> queryForFieldValues(Map<String, Object> fieldValues) throws SQLEx
 public List<T> queryForFieldValuesArgs(Map<String, Object> fieldValues) throws SQLException;
 // 查询与传入实体id相等的数据行
 public T queryForSameId(T data) throws SQLException;
+// 更高级的查询可以使用queryBuilder
+dao.queryBuilder().orderBy("id", true).query();
 ```
 
 
