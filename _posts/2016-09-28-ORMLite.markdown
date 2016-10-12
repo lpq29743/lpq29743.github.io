@@ -55,13 +55,13 @@ import com.zhy.zhy_ormlite.bean.User;
 
 public  class DatabaseHelper extends OrmLiteSqliteOpenHelper
 {
-	private static final String TABLE_NAME = "sqlite-test.db";
+	private static final String DB_NAME = "sqlite-test.db";
 
 	private Map<String, Dao> daos = new HashMap<String, Dao>();
 
 	private DatabaseHelper(Context context)
 	{
-		super(context, TABLE_NAME, null, 4);
+		super(context, DB_NAME, null, 4);
 	}
 
 	@Override
@@ -105,6 +105,8 @@ public  class DatabaseHelper extends OrmLiteSqliteOpenHelper
 	 */
 	public static synchronized DatabaseHelper getHelper(Context context)
 	{
+    	// 如果是自定义Application，应采用以下语句
+    	// context = MyApplication.getContext();
 		context = context.getApplicationContext();
 		if (instance == null)
 		{
@@ -151,7 +153,6 @@ public  class DatabaseHelper extends OrmLiteSqliteOpenHelper
 	}
 
 }
-
 ```
 
 注：
