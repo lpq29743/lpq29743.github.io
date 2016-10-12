@@ -220,7 +220,7 @@ public T createIfNotExists(T data) throws SQLException;
 public CreateOrUpdateStatus createOrUpdate(T data) throws SQLException;
 
 // 删操作
-根据传入实体删除
+// 根据传入实体删除
 public int delete(T data) throws SQLException;
 // 根据ID删除
 public int deleteById(ID id) throws SQLException;
