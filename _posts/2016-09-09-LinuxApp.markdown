@@ -40,6 +40,7 @@ Ubuntu相对于Windows安装软件更为方便，它只需要执行几句命令�
 - XMind（此软件也有Linux版，省了我找替代软件的麻烦）
 - Mentohust（用过校园网和Linux的人都知道）
 - GParted（图形化分区工具）
+- Haroopad（Markdown编辑器）
 
 ***编程工具***
 
