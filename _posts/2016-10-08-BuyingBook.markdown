@@ -6,7 +6,7 @@ date:       2016-10-08 15:15:00
 author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
-    - 算法
+    - 数据结构与算法
     - 编程之美
     - 贪心算法
     - 动态规划
