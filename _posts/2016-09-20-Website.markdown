@@ -56,21 +56,28 @@ tags:
 - [实验楼](https://www.shiyanlou.com/courses/) [慕课网](http://www.imooc.com/) [极客学院](http://www.jikexueyuan.com/?hmsr=baidu_sem_pinpai_index) [麦子学院](http://www.maiziedu.com/) [Python廖雪峰教程](http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000) [w3cschool](http://www.w3school.com.cn/) [devstore](http://www.devstore.cn/) [coursera](https://www.coursera.org/)（都是不错的教程网站）
 - [牛客](http://www.nowcoder.com/354069)（面试刷题网站）
 - [Android开源项目](http://www.cnblogs.com/SharkBin/p/3529016.html)（Android程序员的福利）
+- [segmentfault](https://segmentfault.com/)（国内问答网站）
+- [math stackexchange](http://math.stackexchange.com/)（数学问答网站，MathJax具体语句可以参照[这里](http://colobu.com/2014/08/17/MathJax-quick-reference/)）
 
 ***资源网站***
 
 - [iconfont](http://www.iconfont.cn/)（图标字体资源网站）
 - [LOL电影天堂](http://www.loldytt.com/)（电影资源很丰富的网站）
-- [6v电影网](http://www.6vhao.com/)（电影下载网址）
-- [360云盘搜索](http://www.pantb.com/)（除了搜电影还可以搜其他资源）
+- [妮子电影](http://www.nizidy.com/)（同为电影资源网站）
+- [Engiy](http://engiy.com/)（bt资源网站，你懂得）
 - [千图网](http://www.58pic.com/)（图片资源网站一）
 - [花瓣网](http://huaban.com/)（图片资源网站二）
+- [wallheaven](https://alpha.wallhaven.cc/)（桌面壁纸资源网站）
+- [稻壳儿](http://www.docer.com/) [逼格PPT](http://www.tretars.com/) [扑奔网](http://www.pooban.com/)（都是很不错的PPT资源网站）
 
 ***体育网站***
 
 - [直播吧](http://www.zhibo8.cc/)（没事刷刷体育新闻）
 - [5chajian](http://www.yczbb.com/baike/site/5chajian.html)（直播地址一）
 - [360直播](http://www.yczbb.com/)（直播地址二）
+- [jrs直播](http://nba.tmiaoo.com/nba.html)（直播地址三）
+- [stat-nba](http://stat-nba.com/)（NBA数据查看网站一）
+- [basketball-reference](http://www.basketball-reference.com/)（NBA数据查看网站二）
 
 ***发展充实自己的网站***
 

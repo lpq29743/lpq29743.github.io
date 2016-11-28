@@ -52,6 +52,12 @@ tags:
 
 通过这次经验，我建议大家遇到手机这些小问题，能自己换还是自己换吧。当然换屏比尾插多几个步骤，不过也不是太复杂。
 
+**问题六：怎么搭建自己的个人博客？**
+
+CSDN、知乎专栏、新浪微博等等方式能够让你去发表个人的博文，但是你是否想过搭建一个属于自己的个人博客网站呢？如果你的答案是肯定的话，那你就要继续往下读了！
+
+最常用的搭建个人技术博客的方式是Github Pages+Jekyll的方法，具体教程查看：[搭建一个免费的，无限流量的Blog----github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)，如果你搭建完之后想要迅速让自己的博客网站界面变得美观，那么采用模板是一个不错的选择，本人借鉴的是[黄玄的博客](http://huangxuan.me/)，其项目地址请点击[这里](https://github.com/Huxpro/huxpro.github.io)。如果你不做任何设置的话，可能会出现无法显示表格的情况，具体解决方法查看[这里](http://wiki.11ten.net/Jekyll/jekyll-%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%A1%A8%E6%A0%BC.html)，不过现在github pages支持的markdown引擎为kmarkdown了，所以方法会有点区别，具体看[这里](http://mazhuang.org/2016/02/04/switch-to-kramdown-from-redcarpet/)。
+
 ## 后记
 
 随着时代的发展，计算机知识已经成为每个现代人工作的必需品，所以掌握一定的计算机知识对自己的学习工作还是有很大帮助的！
