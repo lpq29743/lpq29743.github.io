@@ -27,7 +27,7 @@ tags:
 // 基于邻接表（无向图）的深度遍历算法和广度遍历算法
 
 /*
-myarray[10][2]
+myarray[10][2]:{0, 1},{0, 2}, {0, 3}, {0, 4}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {3, 4}, {5, 6}
 dfs:a b d e c f g
 bfs:a b c d e f g
 */
@@ -43,7 +43,7 @@ struct node {
 int n, num;
 int *visited, *res, *queue;
 int data_input = 1;
-int myarray[10][2]={ {0, 1},{0, 2}, {0, 3}, {0, 4}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {3, 4}, {5, 6} };
+int myarray[10][2] = { {0, 1}, {0, 2}, {0, 3}, {0, 4}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {3, 4}, {5, 6} };
 struct node **graph;
 
 void create() {
@@ -60,25 +60,50 @@ void create() {
     visited = (int *)malloc(sizeof(int *) * n);
     res = (int *)malloc(sizeof(int *) * n);
     queue = (int *)malloc(sizeof(int *) * n);
-    for(i = 0; i < 10; i++) {
-        v1 = myarray[i][0];
-        v2 = myarray[i][1];
-        p = graph[v1];
-        while(p->next != NULL) {
-            p = p->next;
+    if(data_input == 0) {
+        for(i = 0; i < 10; i++) {
+            v1 = myarray[i][0];
+            v2 = myarray[i][1];
+            p = graph[v1];
+            while(p->next != NULL) {
+                p = p->next;
+            }
+            q = (struct node *)malloc(sizeof(struct node));
+            q->adjvex = v2;
+            q->next = NULL;
+            p->next = q;
+            p = graph[v2];
+            while(p->next != NULL) {
+                p = p->next;
+            }
+            q = (struct node *)malloc(sizeof(struct node));
+            q->adjvex = v1;
+            q->next = NULL;
+            p->next = q;
         }
-        q = (struct node *)malloc(sizeof(struct node));
-        q->adjvex = v2;
-        q->next = NULL;
-        p->next = q;
-        p = graph[v2];
-        while(p->next != NULL) {
-            p = p->next;
+    } else {
+        printf("\nplease input the v1,v2(input \"-1 -1\" if you want to quit):\n");
+        while(scanf("%d", &v1) && scanf("%d", &v2)) {
+            if(v1 == -1 || v2 == -1) {
+                break;
+            }
+            p = graph[v1];
+            while(p->next != NULL) {
+                p = p->next;
+            }
+            q = (struct node *)malloc(sizeof(struct node));
+            q->adjvex = v2;
+            q->next = NULL;
+            p->next = q;
+            p = graph[v2];
+            while(p->next != NULL) {
+                p = p->next;
+            }
+            q = (struct node *)malloc(sizeof(struct node));
+            q->adjvex = v1;
+            q->next = NULL;
+            p->next = q;
         }
-        q = (struct node *)malloc(sizeof(struct node));
-        q->adjvex = v1;
-        q->next = NULL;
-        p->next = q;
     }
     printf("\nthe result of table:\n");
     for(i = 0; i < n; i++) {
