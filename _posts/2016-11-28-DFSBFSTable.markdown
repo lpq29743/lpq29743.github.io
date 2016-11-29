@@ -48,8 +48,9 @@ struct node {
 
 int n, num;
 int *visited, *res, *queue;
-int data_input = 0;
-int myarray[10][2] = {{0, 1}, {0, 2}, {0, 3}, {0, 4}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {3, 4}, {5, 6}};
+int data_input = 1;
+// 由于在Jekyll下会被解析错误，所以大家手动输入
+/*int myarray[10][2] = {{0, 1}, {0, 2}, {0, 3}, {0, 4}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {3, 4}, {5, 6}};*/
 struct node **graph;
 
 void create() {
