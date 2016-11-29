@@ -78,9 +78,8 @@ bfs:a b c d e f g
 int n, num;
 int **graph;
 int *visited, *res, *queue;
-int data_input = 1;
 // 由于在Jekyll下会被解析错误，所以大家手动输入
-/*int myarray[7][7] = {{0, 1, 1, 1, 1, 0, 0}, {1, 0, 0, 1, 1, 0, 0}, {1, 0, 0, 0, 0, 1, 1}, {1, 1, 0, 0, 1, 0, 0}, {1, 1, 0, 1, 0, 0, 0}, {0, 0, 1, 0, 0, 0, 1}, {0, 0, 1, 0, 0, 1, 0}};*/
+int data_input = 1;
 
 void create() {
     int i, j;
