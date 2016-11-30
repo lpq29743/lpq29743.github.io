@@ -205,18 +205,13 @@ img.shadow {
     background: white;
   }
 }
-.table th,
-.table td {
-  border: 1px solid #eee !important;
-}
 hr.small {
   max-width: 100px;
   margin: 15px auto;
   border-width: 4px;
   border-color: white;
 }
-pre,
-.table-responsive {
+pre {
   -webkit-overflow-scrolling: touch;
 }
 pre code {
