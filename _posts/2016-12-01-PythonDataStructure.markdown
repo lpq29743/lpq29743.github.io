@@ -1,16 +1,15 @@
 ---
 layout:     post
 title:      "Python之数据结构"
-subtitle:   "(list ,dict ,tuples ,sets ,strings)"
+subtitle:   "带你认识list、dict、tuples、sets和strings"
 date:       2016-12-01 19:00:00
 author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
-    - 数据结构与算法
-    - 排序
+    - Python
 ---
 
-> 走进排序的世界
+> 拉开Python世界的序幕
 
 
 ## 前言
