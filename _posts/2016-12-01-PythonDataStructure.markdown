@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Python之数据结构"
-subtitle:   "list&dict&tuples&sets&strings"
+subtitle:   "(list ,dict ,tuples ,sets ,strings)"
 date:       2016-12-01 19:00:00
 author:     "林佩勤"
 header-img: "img/post-bg.jpg"
