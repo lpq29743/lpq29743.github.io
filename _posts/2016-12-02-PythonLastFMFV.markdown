@@ -96,6 +96,7 @@ import urllib
 import urllib.request
 import re
 import xlsxwriter
+import time
 
 class LastFM:
 
@@ -103,8 +104,10 @@ class LastFM:
     def __init__(self):
         self.num = 0
         self.pagenum = 50
+        #获取时间
+        date = time.strftime("%Y-%m-%d", time.localtime())
         #建立Excel
-        self.workbook = xlsxwriter.Workbook("lastfm_femalesinger.xlsx")
+        self.workbook = xlsxwriter.Workbook("lastfm_femalesinger-" + date + ".xlsx")
         self.sheet = self.workbook.add_worksheet('lastfm_femalesinger')
         self.item = ['歌手名','收听人数']
         for i in range(2):
@@ -136,6 +139,7 @@ class LastFM:
 
 spider = LastFM()
 spider.getItem()
+
 ```
 
 ## 后记
