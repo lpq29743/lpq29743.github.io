@@ -43,6 +43,8 @@ tags:
 
 [Tim Berners-Lee 伯纳斯·李](https://zh.wikipedia.org/wiki/%E8%92%82%E5%A7%86%C2%B7%E4%BC%AF%E7%BA%B3%E6%96%AF-%E6%9D%8E)（互联网之父）
 
+[John McCarthy 约翰·麦卡锡](https://zh.wikipedia.org/wiki/%E7%BA%A6%E7%BF%B0%C2%B7%E9%BA%A6%E5%8D%A1%E9%94%A1)（发明Lisp语言，人工智能之父）
+
 [Steve Jobs 史蒂夫·乔布斯](https://zh.wikipedia.org/wiki/%E5%8F%B2%E8%92%82%E5%A4%AB%C2%B7%E4%B9%94%E5%B8%83%E6%96%AF)（美国苹果公司联合创始人）
 
 [Stephen Wozniak 斯蒂夫·沃兹尼亚克](https://zh.wikipedia.org/wiki/%E6%96%AF%E8%92%82%E5%A4%AB%C2%B7%E6%B2%83%E5%85%B9%E5%B0%BC%E4%BA%9A%E5%85%8B)（创立苹果电脑公司，制造苹果一、二代电脑）
