@@ -1,0 +1,84 @@
+---
+layout:     post
+title:      "计算机网络实验之网络地址转换"
+subtitle:   "网络地址转换（NAT）配置"
+date:       2016-12-20 21:30:00
+author:     "林佩勤"
+header-img: "img/post-bg.jpg"
+tags:
+    - 计算机网络
+---
+
+> 变身~~~
+
+
+## 前言
+
+NAT的诞生节约了全局地址，增强了网络的安全性，如果要对某个公司或者学校的网络进行配置，那么NAT这个技术点是绝对不能跳过的。
+
+---
+
+## 正文
+
+NAT具有以下三种类型：
+
+- 静态NAT：内部网络中的每个主机都被永久映射成外部网络中的某个合法地址。
+- 动态NAT：在外部网络中定义了一系列的合法地址，采用动态分配的方法映射到内部网络。
+- 重载（PAT）：把内部地址映射到外部网络的一个IP地址的不同端口上。
+
+它们的配置方法如下：
+
+**静态NAT配置**
+
+```shell
+#指定转换的本地地址与全局地址
+router(config)#ip nat inside source static local-ip  global-ip
+#例：
+router(config)#ip nat inside source static 10.1.1.2 166.1.1.1 
+
+#指定连接内部网络端口，如：
+router(config)# interface ethernet 0
+router(config-if)# ip address ip-address netmask
+router(config-if)# ip nat inside
+
+#指定连接外部网络端口，如：
+router(config)# interface serial0
+router(config-if)# ip address ip-address mask //与要转换的内部全局地址可以是同一个，也可以不是，可以是在同一网段，也可以不是
+router(config-if)# ip nat outside 
+```
+
+**动态NAT配置**
+
+```shell
+#定义全局地址池
+router(config-if)#ip nat pool 地址池名称 起始全局IP地址 结束全局IP地址 netmask 子网掩码
+#全局地址池：申请到的合法IP地址的范围，若只有一个地址，则既为起始地址又为结束地址。
+#地址池名称可任取
+#例：
+router(config-if)#ip nat pool aa 202.128.62.34 202.128.62.50 netmask 255.255.255.0 
+
+#配置标准访问列表，指定哪些局部地址被允许进行转换 
+router(config-if)#access-list 列表号 permit 源IP地址 通配符掩码
+#其中列表号取值1～99
+#例：
+router(config-if)#access-list 1 permit 192.168.1.0 0.0.0.255 
+
+#在本地地址与全局地址之间建立动态地址转换
+router(config-if)#ip nat inside source list 列表号 pool 地址池名称
+#例：
+router(config-if)#ip nat inside source list 1 pool ss    //表示把access-list 1 允许的内部地址映射成地址池ss定义的全局地址 
+
+```
+
+**PAT配置**
+
+```shell
+#在本地地址与全局地址之间建立端口-地址转换：
+router(config-if)#ip nat inside source list 列表号 pool 地址池名称 overload  
+#或： 
+router(config-if)#ip nat inside source list 列表号 interface interface overload
+```
+
+## 后记
+
+这是最后一篇关于计算机网络实验基础知识的博客了，这一系列总体写的质量并不是很高。在后面的实验中，博主也会结合自己的实验情况，回头修改完善这几篇博文。

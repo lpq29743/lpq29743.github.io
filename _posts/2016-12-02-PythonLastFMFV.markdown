@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Python历险记第一章"
+title:      "Python历险记第一站"
 subtitle:   "爬取last.fm热门女歌手"
 date:       2016-12-02 10:00:00
 author:     "林佩勤"

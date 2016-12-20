@@ -1,0 +1,89 @@
+---
+layout:     post
+title:      "计算机网络实验之CLI命令入门"
+subtitle:   "Cisco网际操作系统命令入门"
+date:       2016-12-15 12:00:00
+author:     "林佩勤"
+header-img: "img/post-bg.jpg"
+tags:
+    - 计算机网络
+---
+
+> 敲开Cisco网际操作系统之门
+
+
+## 前言
+
+上一篇文章主要是在物理层的角度对局域网组建，而一个局域网的组建往往操作的都是数据链路层、网络层等的知识，而学好这些配置，必须熟悉掌握CLI命令。
+
+---
+
+## 正文
+
+从本文开始的实验基本都在Packet Tracer下进行，所以请读者先自行配置好环境。配置好环境后，我们就可以进行命令的学习了。
+
+CLI指的是CIsco网际操作系统的命令行界面，主要有以下几种模式：
+
+- 用户模式：启动后直接进入该模式，提示符是 >，不能进行配置操作。
+
+- 特权模式：用户模式键入命令enable到特权模式，提示符是 #，可查看交换机/路由器的全部运行状态和统计信息，并可进行文件管理和系统管理。该模式是进入其它模式的关口。该模式可由密码保护。
+
+- 全局配置模式：在特权模式下执行config terminal命令，即可进入全局配置模式。全局配置模式的提示符 (config)#。该模式下的配置命令对整个交换机/路由器起作用。可配置交换机/路由器的全局参数，如主机名、密码、路由协议等。具体可以看以下代码：
+
+  ```shell
+  #假设要设置交换机的名称为student，则可使用hostname命令来设置：
+  switch #config terminal
+  switch (config)#hostname student
+  student(config)#
+  #假设要设置或修改进入特权模式的密码为ccc，则配置命令为 ：
+  switch (config)#enable secret ccc
+  #或：
+  switch (config)#enable password ccc
+  #注1：enable secret命令设置的密码在配置文件中是加密保存的，而enable password命令设置的密码是采用明文保存的。  
+  #注2：这两种密码区分大、小写。 
+  ```
+
+- 端口配置模式：在全局配置模式下，执行interface interface-type命令，即进入端口配置模式。interface-type为具体的端口名称，如：e0/1 、f0/1、g0/3。
+
+- 虚拟局域网参数配置模式（交换机）：在全局配置模式下执行vlan database命令，进入虚拟局域网参数配置模式。database为具体的数字。该模式的提示符是 (config-vlan)#，在该模式下，可实现对VLAN（虚拟局域网）的创建、修改或删除等配置操作。
+
+- 进程配置模式 ：在全局配置模式下，执行line vty或line console命令，将进入Line配置模式。该模式主要用于对虚拟终端（vty）和控制台端口进行配置，其配置主要是设置虚拟终端和控制台的用户级登录密码。代码如下：
+
+  ```shell
+  #为控制端口（console）的登录设置密码ppp，设置方法为： 
+  switch#config terminal
+  switch (config)#line console 0
+  switch (config-line)#password ppp   //设置密码 
+  switch (config-line)#login   //允许登录
+  switch (config-line)#end
+  switch#copy running-config startup-config	//将配置保存到NVRAM
+  #假设对0~4条虚拟终端线路设置登录密码ppp，其配置命令为：
+  switch (config)#line vty 0 4
+  switch (config-line)#password ppp
+  switch (config-line)#login
+  switch (config-line)#end
+  switch# copy running-config startup-config
+  ```
+
+使用CLI命令应注意以下几点问题：
+
+- IOS命令不区分大小写。
+- 可随时使用？来获得命令行帮助。如：在普通模式下，直接输入？并回车，可获得在该模式下允许执行的命令帮助。
+- 在不引起混淆的情况下，支持命令简写。如：enable可简写为en；configure terminal可简写为config t或conf t
+
+了解基本命令模式之后我们就可以进行更多复杂的操作了，我们就以一个ip地址配置的例子作为本文的结尾：
+
+```shell
+#为某端口设置IP地址，首先进入接口配置模式：
+router（config）# interface type slot/number
+#为端口配置IP地址
+router(config-if)# ip address ip-address mask
+#例如：
+Router(config)# interface f0/0
+router(config-if)# ip address 192.168.1.1 255.255.255.0
+router(config-if)# no shutdown
+```
+
+## 后记
+
+这一节虽然简单，但却为后面打下了良好的基础，所以必须得很好的掌握。
