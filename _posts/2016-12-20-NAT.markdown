@@ -79,6 +79,28 @@ router(config-if)#ip nat inside source list 列表号 pool 地址池名称 overl
 router(config-if)#ip nat inside source list 列表号 interface interface overload
 ```
 
+在这篇文章的结尾，我们顺便提一下DHCP协议的配置：
+
+```shell
+#DHCP服务器配置
+Switch(config)# service dhcp   //开启DHCP服务，该服务默认是关闭的　　
+Switch(config)# ip dhcp pool aa  //创建DHCP地址池，名称为可以是任意字符 
+Switch(config-dhcp)# network 192.168.1.0 255.255.255.0   //指定可分配的网段 
+Switch(config-dhcp)# default-router 192.168.1.1   //指定分配的网关地址 
+Switch(config-dhcp)#dns-server 202.96.134.133   //配置DNS服务器
+Switch(config-dhcp)# lease infinite    //租期为永久
+Switch(config-dhcp)# end 
+Switch(config)# ip dhcp excluded-address 192.168.1.1     //排除的地址
+Switch(config)#int vlan 10
+Switch(config-if)#ip add 192.168.1.1 255.255.255.0
+
+#DHCP中继代理配置
+Switch(config)#interface f0/0
+Switch(config-if)#ip address 172.16.1.100 255.255.255.0
+Switch(config-if)#ip helper-address 172.16.2.1
+Switch(config-if)#ip helper-address 172.16.2.2
+```
+
 ## 后记
 
 这是最后一篇关于计算机网络实验基础知识的博客了，这一系列总体写的质量并不是很高。在后面的实验中，博主也会结合自己的实验情况，回头修改完善这几篇博文。

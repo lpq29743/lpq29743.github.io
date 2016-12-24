@@ -48,6 +48,34 @@ switch(config-if)#switchport port-security violation {protect|restrict|shutdown}
 #Portect（保护）：端口仍然处于活跃状态，对于违规的数据将会被丢弃，但不发送警报。 
 ```
 
+除了以上两个知识点，我们顺便讲一下PPP配置：
+
+```shell
+#Router1的配置：
+router(config)#hostname r1   //给路由器命名
+r1(config)# username r2 password AA  //验证对方路由器的名称和密码
+r1(config-if)# encapsulation ppp    //启用 PPP 封装
+r1(config-if)# ppp authentication chap  //激活 CHAP 验证
+r1(config-if)# exit
+r1(config)# router rip
+r1(config-router) # version 2
+r1(config-router) # network 192.1.1.0
+r1(config-router) # network 192.168.0.0
+r1(config-router) # exit
+
+#Router2的配置：
+router(config)#hostname r2    //给路由器命名
+r2(config)# username r1 password AA  //验证对方路由器的名称和密码
+r2(config-if)# encapsulation ppp    //启用 PPP 封装
+r2(config-if)# ppp authentication chap  //激活 CHAP 验证
+r2(config-if)# exit
+r2(config)# router rip
+r2(config-router) # version 2
+r2(config-router) # network 192.1.1.0
+r2(config-router) # network 192.168.1.0
+r2(config-router) # exit
+```
+
 ## 后记
 
 由于本节比较简单，所以主要是给出命令，具体的还是需要实验，才有不错的效果。
