@@ -24,27 +24,27 @@ tags:
 
 ```shell
 #降低网桥优先级,手动设置根桥.
-Switch(config)#spanning-tree vlan vlan-id priority value
+Switch(config)# spanning-tree vlan vlan-id priority value
 
 #在配置STP时，建议给根桥指定的根优先级值是4096。例：
-Switch(config)#spanning-tree vlan 1 priority 4096
+Switch(config)# spanning-tree vlan 1 priority 4096
 ```
 
 **STP的启动和验证**
 
 ```shell
 #启动STP
-Switch(config)#spanning-tree vlan vlan-id
+Switch(config)# spanning-tree vlan vlan-id
 
 #验证STP
-Switch#show spanning-tree vlan vlan-id
+Switch# show spanning-tree vlan vlan-id
 ```
 
 PortFast启用
 
 ```shell
 #接口下启用PortFast
-Switch(config-if)#spanning-tree portfast
+Switch(config-if)# spanning-tree portfast
 ```
 
 ## 后记

@@ -32,13 +32,13 @@ CLI指的是CIsco网际操作系统的命令行界面，主要有以下几种模
 
   ```shell
   #假设要设置交换机的名称为student，则可使用hostname命令来设置：
-  switch #config terminal
-  switch (config)#hostname student
+  switch# config terminal
+  switch(config)# hostname student
   student(config)#
   #假设要设置或修改进入特权模式的密码为ccc，则配置命令为 ：
-  switch (config)#enable secret ccc
+  switch(config)# enable secret ccc
   #或：
-  switch (config)#enable password ccc
+  switch(config)# enable password ccc
   #注1：enable secret命令设置的密码在配置文件中是加密保存的，而enable password命令设置的密码是采用明文保存的。  
   #注2：这两种密码区分大、小写。 
   ```
@@ -51,17 +51,17 @@ CLI指的是CIsco网际操作系统的命令行界面，主要有以下几种模
 
   ```shell
   #为控制端口（console）的登录设置密码ppp，设置方法为： 
-  switch#config terminal
-  switch (config)#line console 0
-  switch (config-line)#password ppp   //设置密码 
-  switch (config-line)#login   //允许登录
-  switch (config-line)#end
-  switch#copy running-config startup-config	//将配置保存到NVRAM
+  switch# config terminal
+  switch(config)# line console 0
+  switch(config-line)# password ppp   //设置密码 
+  switch(config-line)# login   //允许登录
+  switch(config-line)# end
+  switch# copy running-config startup-config	//将配置保存到NVRAM
   #假设对0~4条虚拟终端线路设置登录密码ppp，其配置命令为：
-  switch (config)#line vty 0 4
-  switch (config-line)#password ppp
-  switch (config-line)#login
-  switch (config-line)#end
+  switch(config)# line vty 0 4
+  switch(config-line)# password ppp
+  switch(config-line)# login
+  switch(config-line)# end
   switch# copy running-config startup-config
   ```
 
@@ -75,7 +75,7 @@ CLI指的是CIsco网际操作系统的命令行界面，主要有以下几种模
 
 ```shell
 #为某端口设置IP地址，首先进入接口配置模式：
-router（config）# interface type slot/number
+router(config)# interface type slot/number
 #为端口配置IP地址
 router(config-if)# ip address ip-address mask
 #例如：

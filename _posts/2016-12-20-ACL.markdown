@@ -25,28 +25,28 @@ tags:
 ```shell
 #Step 1：设置访问列表测试语句的参数
 #所有主机: 0.0.0.0 255.255.255.255可以用 any 简写
-Router(config)#access-list access-list-number { permit | deny } { test conditions }
+Router(config)# access-list access-list-number { permit | deny } { test conditions }
 
 #Step 2：在端口上应用访问列表
 #指明是进方向还是出方向缺省 = 出方向
 #“no ip access-group access-list-number” 命令在端口上删除访问列表。
 #这里的protocol常为ip、tcp、udp、icmp、igrp等
-Router(config-if)#{ protocol } access-group access-list-number {in | out} 
+Router(config-if)# { protocol } access-group access-list-number {in | out} 
 ```
 
 **扩展IP访问列表配置**
 
 ```shell
 #设置访问列表的参数
-Router(config)#access-list access-list-number  { permit | deny } protocol source source-wildcard [ operator port ] destination destination-wildcard [ operator port ]  [ other parameters ]
+Router(config)# access-list access-list-number  { permit | deny } protocol source source-wildcard [ operator port ] destination destination-wildcard [ operator port ]  [ other parameters ]
 #在端口上应用访问列表
-Router(config-if)#ip access-group access-list-number  { in | out }
+Router(config-if)# ip access-group access-list-number  { in | out }
 #举例：拒绝子网172.16.4.0 的数据使用路由器E0口ftp到子网172.16.3.0，允许其它数据
-Router(config)#access-list 101 deny tcp 172.16.4.0 0.0.0.255 172.16.3.0 0.0.0.255 eq 21
-Router(config)#access-list 101 deny tcp 172.16.4.0 0.0.0.255 172.16.3.0 0.0.0.255 eq 20
-Router(config)#access-list 101 permit ip any any
-Router(config)#interface ethernet 0
-Router(config-if)#ip access-group 101 out
+Router(config)# access-list 101 deny tcp 172.16.4.0 0.0.0.255 172.16.3.0 0.0.0.255 eq 21
+Router(config)# access-list 101 deny tcp 172.16.4.0 0.0.0.255 172.16.3.0 0.0.0.255 eq 20
+Router(config)# access-list 101 permit ip any any
+Router(config)# interface ethernet 0
+Router(config-if)# ip access-group 101 out
 #查看访问列表
 Router#show ip int e0
 #查看访问列表的语句

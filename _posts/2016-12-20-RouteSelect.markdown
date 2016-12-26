@@ -31,15 +31,15 @@ tags:
 
 ```shell
 #静态路由的添加
-Router(config)#ip route network  mask {address | interface}
+Router(config)# ip route network  mask {address | interface}
 #举例
-Router(config)#ip route 172.16.1.0 255.255.255.0 172.16.2.1
+Router(config)# ip route 172.16.1.0 255.255.255.0 172.16.2.1
 #静态路由的删除
-Router(config)#no ip route 172.16.1.0 255.255.255.0 172.16.2.1
+Router(config)# no ip route 172.16.1.0 255.255.255.0 172.16.2.1
 #默认静态路由的配置
-Router(config)#ip route 0.0.0.0 0.0.0.0 s0
+Router(config)# ip route 0.0.0.0 0.0.0.0 s0
 #举例
-Router(config)#ip route 0.0.0.0 0.0.0.0 172.16.2.2
+Router(config)# ip route 0.0.0.0 0.0.0.0 172.16.2.2
 ```
 
 而动态路由中常用到的两种配置分别是距离矢量协议RIP以及链路状态协议OSPF，它们的具体配置如下：
@@ -53,13 +53,13 @@ Router(config)# router rip
 #选择需要激活的接口所在的主类网络
 Router(config-router)# network network-number
 #举例
-Router(config)#router rip
-Router(config-router)#network 172.16.0.0
-Router(config-router)#network 10.0.0.0
+Router(config)# router rip
+Router(config-router)# network 172.16.0.0
+Router(config-router)# network 10.0.0.0
 #查看RIP信息
-Router#show ip protocols
+Router# show ip protocols
 #查看路由表
-Router#show ip route
+Router# show ip route
 
 #RIPv2配置
 #激活RIP协议（默认为版本1）
@@ -71,24 +71,24 @@ Router(config-router)# network network-number
 
 #EIGRP配置
 #启动EIGRP
-Router(config)#router eigrp {as-number}
+Router(config)# router eigrp {as-number}
 #宣告直连主类网络号
-Router(config-router)#network {network-number} [wildcard-mask]
+Router(config-router)# network {network-number} [wildcard-mask]
 #EIGRP 配置的验证
 #Displays the neighbors discovered by IP EIGRP
-Router#show ip eigrp neighbors
+Router# show ip eigrp neighbors
 #Displays the IP EIGRP topology table
-Router#show ip eigrp topology
+Router# show ip eigrp topology
 #Displays current EIGRP entries in the routing table
-Router#show ip route eigrp
+Router# show ip route eigrp
 #Displays the parameters and current state of the active routing protocol process
-Router#show ip protocols
+Router# show ip protocols
 #Displays the number of IP EIGRP packets sent and received
-Router#show ip eigrp traffic 
+Router# show ip eigrp traffic 
 #关闭EIGRP路由的自动汇总特性:
-Router(config-router)#no auto-summary
+Router(config-router)# no auto-summary
 #基于接口的进行EIGRP手动的路由汇总,默认EIGRP汇总路由的管理距离为5:
-Router(config-if)#ip summary-address eigrp {AS-number} {ip-address} {mask} [distance]
+Router(config-if)# ip summary-address eigrp {AS-number} {ip-address} {mask} [distance]
 ```
 
 **OSPF配置**
@@ -97,15 +97,15 @@ Router(config-if)#ip summary-address eigrp {AS-number} {ip-address} {mask} [dist
 #启用 OSPF
 Router(config)# router ospf process-id
 #将网段指派到指定的区域中
-Router(config-router)#network address wildcard-mask area area-id
+Router(config-router)# network address wildcard-mask area area-id
 #查看启用的路由协议
-Router # show ip protocols
+Router# show ip protocols
 #查看路由表
-Router # show ip route
+Router# show ip route
 #查看特定区域中的接口
-Router # show ip ospf interface
+Router# show ip ospf interface
 #查看在每一个接口上的邻居信息
-Router # show ip ospf neighbor
+Router# show ip ospf neighbor
 ```
 
 ## 后记

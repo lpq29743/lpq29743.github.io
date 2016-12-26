@@ -32,9 +32,9 @@ NAT具有以下三种类型：
 
 ```shell
 #指定转换的本地地址与全局地址
-router(config)#ip nat inside source static local-ip  global-ip
+router(config)# ip nat inside source static local-ip  global-ip
 #例：
-router(config)#ip nat inside source static 10.1.1.2 166.1.1.1 
+router(config)# ip nat inside source static 10.1.1.2 166.1.1.1 
 
 #指定连接内部网络端口，如：
 router(config)# interface ethernet 0
@@ -51,32 +51,31 @@ router(config-if)# ip nat outside
 
 ```shell
 #定义全局地址池
-router(config-if)#ip nat pool 地址池名称 起始全局IP地址 结束全局IP地址 netmask 子网掩码
+router(config-if)# ip nat pool 地址池名称 起始全局IP地址 结束全局IP地址 netmask 子网掩码
 #全局地址池：申请到的合法IP地址的范围，若只有一个地址，则既为起始地址又为结束地址。
 #地址池名称可任取
 #例：
-router(config-if)#ip nat pool aa 202.128.62.34 202.128.62.50 netmask 255.255.255.0 
+router(config-if)# ip nat pool aa 202.128.62.34 202.128.62.50 netmask 255.255.255.0 
 
 #配置标准访问列表，指定哪些局部地址被允许进行转换 
-router(config-if)#access-list 列表号 permit 源IP地址 通配符掩码
+router(config-if)# access-list 列表号 permit 源IP地址 通配符掩码
 #其中列表号取值1～99
 #例：
-router(config-if)#access-list 1 permit 192.168.1.0 0.0.0.255 
+router(config-if)# access-list 1 permit 192.168.1.0 0.0.0.255 
 
 #在本地地址与全局地址之间建立动态地址转换
-router(config-if)#ip nat inside source list 列表号 pool 地址池名称
+router(config-if)# ip nat inside source list 列表号 pool 地址池名称
 #例：
-router(config-if)#ip nat inside source list 1 pool ss    //表示把access-list 1 允许的内部地址映射成地址池ss定义的全局地址 
-
+router(config-if)# ip nat inside source list 1 pool ss    //表示把access-list 1 允许的内部地址映射成地址池ss定义的全局地址 
 ```
 
 **PAT配置**
 
 ```shell
 #在本地地址与全局地址之间建立端口-地址转换：
-router(config-if)#ip nat inside source list 列表号 pool 地址池名称 overload  
+router(config-if)# ip nat inside source list 列表号 pool 地址池名称 overload  
 #或： 
-router(config-if)#ip nat inside source list 列表号 interface interface overload
+router(config-if)# ip nat inside source list 列表号 interface interface overload
 ```
 
 在这篇文章的结尾，我们顺便提一下DHCP协议的配置：
@@ -87,18 +86,18 @@ Switch(config)# service dhcp   //开启DHCP服务，该服务默认是关闭的�
 Switch(config)# ip dhcp pool aa  //创建DHCP地址池，名称为可以是任意字符 
 Switch(config-dhcp)# network 192.168.1.0 255.255.255.0   //指定可分配的网段 
 Switch(config-dhcp)# default-router 192.168.1.1   //指定分配的网关地址 
-Switch(config-dhcp)#dns-server 202.96.134.133   //配置DNS服务器
+Switch(config-dhcp)# dns-server 202.96.134.133   //配置DNS服务器
 Switch(config-dhcp)# lease infinite    //租期为永久
 Switch(config-dhcp)# end 
 Switch(config)# ip dhcp excluded-address 192.168.1.1     //排除的地址
-Switch(config)#int vlan 10
-Switch(config-if)#ip add 192.168.1.1 255.255.255.0
+Switch(config)# int vlan 10
+Switch(config-if)# ip add 192.168.1.1 255.255.255.0
 
 #DHCP中继代理配置
-Switch(config)#interface f0/0
-Switch(config-if)#ip address 172.16.1.100 255.255.255.0
-Switch(config-if)#ip helper-address 172.16.2.1
-Switch(config-if)#ip helper-address 172.16.2.2
+Switch(config)# interface f0/0
+Switch(config-if)# ip address 172.16.1.100 255.255.255.0
+Switch(config-if)# ip helper-address 172.16.2.1
+Switch(config-if)# ip helper-address 172.16.2.2
 ```
 
 ## 后记

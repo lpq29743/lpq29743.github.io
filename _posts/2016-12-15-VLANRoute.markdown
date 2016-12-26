@@ -30,7 +30,7 @@ VLAN间路由的实现也是计算机网络中很重要的一部分，本文我�
 
 ```shell
 #单臂路由器的ISL配置
-Router(config)#interface f0/0.1
+Router(config)# interface f0/0.1
 Router(config-if)# encapsulation ISL 1
 Router(config-if)# ip address 10.1.1.1 255.255.255.0
 Router(config-if)# interface f0/0.2
@@ -38,13 +38,13 @@ Router(config-if)# encapsulation ISL 2
 Router(config-if)# ip address 10.2.2.1 255.255.255.0
 
 #单臂路由器的802.1Q配置
-Router(config)#interface f0/0
+Router(config)# interface f0/0
 Router(config-if)# ip address 10.1.1.1 255.255.255.0
 Router(config-if)# interface f0/0.2
 Router(config-if)# encapsulation dot1Q 2
 Router(config-if)# ip address 10.2.2.1 255.255.255.0
 #或：
-Router(config)#interface f0/0.1
+Router(config)# interface f0/0.1
 Router(config-if)# encapsulation dot1Q  1 native
 Router(config-if)# ip address 10.1.1.1 255.255.255.0
 Router(config-if)# interface f0/0.2
@@ -54,4 +54,4 @@ Router(config-if)# ip address 10.2.2.1 255.255.255.0
 
 ## 后记
 
-除了单臂路由器，还可以使用三层路由器的路由端口和SVI接口实现VLAN间的路由，读者可以尝试实现。
+除了单臂路由器，还可以使用三层交换机的路由端口和SVI接口实现VLAN间的路由，读者可以尝试实现。
