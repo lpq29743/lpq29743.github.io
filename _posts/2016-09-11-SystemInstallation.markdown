@@ -8,8 +8,6 @@ header-img: "img/post-bg.jpg"
 tags:
     - Windows
     - Linux
-    - Ubuntu
-    - CentOS
     - 操作系统
 ---
 
