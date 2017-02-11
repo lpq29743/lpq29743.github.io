@@ -63,6 +63,8 @@ tags:
 - 猎豹免费Wifi（功能众多，猎豹的产品还是蛮不错的）
 - PS（强大的图像处理软件）
 - UnLocker（要删除的文件夹被程序占用，无法删除怎么办？这个软件可以帮你解决）
+- putty（远程操作服务器）
+- WinSCP（远程传输和操作文件）
 
 ***社交软件***
 
@@ -73,7 +75,7 @@ tags:
 
 - git（最佳的版本控制工具，必不可少）
 - Android Studio（Android开发首选）
-- MySQL+MySQLWorkbench（免费数据库）
+- MySQL+MySQLWorkbench（免费开源数据库）
 - Oracle（大型数据库软件）
 - Notepad++（个人用过的最好编辑器）
 - JDK（Java编程环境）
@@ -82,6 +84,7 @@ tags:
 - Apache&Nginx（中大型服务器选择）
 - Codeblocks（用于写C语言）
 - Python3（如此神语言岂可不用）
+- PhpStudy（集成了MySql+PHP+Apache，方便了Windows下PHP环境配置）
 
 ## 后记
 
