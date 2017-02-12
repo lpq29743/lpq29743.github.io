@@ -20,6 +20,30 @@ tags:
 
 ## 正文
 
+**锁定Activity屏幕方向**
+
+有时应用程序仅能在横屏或竖屏时运行，此时我们需要锁定该Activity运行时的屏幕方向，示例代码如下：
+
+```xml
+<activity android:name=".EX01"
+	android:label="@string/app_name" 
+	android:screenOrientation="portrait">// 竖屏 , 值为 landscape 时为横屏
+	…………
+</activity>
+```
+
+**Activity全屏**
+
+要使Activity全屏，可以在其`onCreate()`方法中添加如下代码实现：
+
+```java
+// 设置全屏模式
+getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+WindowManager.LayoutParams.FLAG_FULLSCREEN); 
+// 去除标题栏
+requestWindowFeature(Window.FEATURE_NO_TITLE);
+```
+
 **EditView软键盘弹出**
 
 对于跳转新界面就要弹出软键盘的情况，可能会出现由于界面未加载完全而无法弹出软键盘的情况。此时应该适当的延迟弹出软键盘（保证界面的数据加载完成）。实例代码如下：

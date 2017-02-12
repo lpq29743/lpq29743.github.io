@@ -45,6 +45,7 @@ tags:
 - [谷歌翻译](http://translate.google.cn/#en/zh-CN/destruct)（翻译在线工具）
 - [w3cschool在线html编辑器](http://www.w3school.com.cn/tiy/t.asp?f=html_intro)（用过的都说好）
 - [色彩笔](http://www.secaibi.com/tools/)（是否因图片太大无法上传，在线图片压缩工具可以帮你解决大部分问题）
+- [Smallpdf](https://smallpdf.com/cn)（轻松玩转PDF）
 - [开源中国在线工具](http://tool.oschina.net/)（更多在线工具请看这） 
 
 ***计算机学习网站***
@@ -55,8 +56,9 @@ tags:
 - [stackoverflow](http://stackoverflow.com/)（同为神站，程序员问问题必备网站）
 - [实验楼](https://www.shiyanlou.com/courses/) [慕课网](http://www.imooc.com/) [极客学院](http://www.jikexueyuan.com/?hmsr=baidu_sem_pinpai_index) [麦子学院](http://www.maiziedu.com/) [Python廖雪峰教程](http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000) [w3cschool](http://www.w3school.com.cn/) [devstore](http://www.devstore.cn/) [coursera](https://www.coursera.org/)（都是不错的教程网站）
 - [牛客](http://www.nowcoder.com/354069)（面试刷题网站）
-- [Android开源项目](http://www.cnblogs.com/SharkBin/p/3529016.html)（Android程序员的福利）
+- [Android开源项目](http://www.cnblogs.com/SharkBin/p/3529016.html) [Github热门项目](https://github.com/trending) [Github优秀项目](https://github.com/sindresorhus/awesome) [Github优秀API](https://github.com/marktony/Awesome_API#%E4%B8%AD%E6%96%87%E7%89%88)（程序员的福利区）
 - [segmentfault](https://segmentfault.com/)（国内问答网站）
+- [掘金](https://gold.xitu.io/)（技术文章站点）
 - [math stackexchange](http://math.stackexchange.com/)（数学问答网站，MathJax具体语句可以参照[这里](http://colobu.com/2014/08/17/MathJax-quick-reference/)）
 
 ***资源网站***
