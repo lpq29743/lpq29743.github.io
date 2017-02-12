@@ -236,7 +236,7 @@ public class MainActivity extends Activity {
 
 通过以上的实验，我们也可以做一个简短的总结
 
-> 在Activity创建的时候，会执行onCreate->onStart->onResume；
+> 在Activity创建的时候，会执行onCreate->onStart->onResume
 >
 > 在我们进入Activity之后按返回键，会执行onPause->onStop->onDestory
 >
@@ -246,7 +246,7 @@ public class MainActivity extends Activity {
 >
 > 当从A1界面跳到A2界面，生命周期变化为：onCreate(A1)->onStart(A1)->onResume(A1)->onPause(A1)->onCreate(A2)->onStart(A2)->onResume(A2)->onStop(A1)
 >
-> 此时如果在A2界面按下返回键，生命周期会的变化如下：onPause(A2)->onRestart(A1)->onStart(A1)->onResume(A1)->onStop(A2)->onDestory(A2)；
+> 此时如果在A2界面按下返回键，生命周期会的变化如下：onPause(A2)->onRestart(A1)->onStart(A1)->onResume(A1)->onStop(A2)->onDestory(A2)
 >
 > 注：如果A2界面是一个透明主题（如之前提到的Dialog，如果要自己创建一个透明主题的Activity，参考[这里](http://stackoverflow.com/questions/2176922/how-to-create-transparent-activity-in-android)）的话，那么A1不会调用onStop方法
 
@@ -257,8 +257,6 @@ public class MainActivity extends Activity {
 当用户在Home界面上点击了一个应用，这个应用的任务就会被转移到前台。如果这个应用目前没有任何一个任务的话，系统就创建新的任务，并且将该应用的主Activity放到返回栈当中。当一个Activity启动了另外一个Activity时，新的Activity就会被放置到栈顶并将获得焦点。前一个Activity仍然保留在返回栈当中，但会处于停止状态。当用户按下Back键的时候，栈中最顶端的Activity会被移除掉，然后前一个Activity则会得重新回到最顶端的位置。如果用户一直地按Back键，这样返回栈中的Activity会一个个地被移除，直到最终返回到主屏幕。当返回栈中所有的Activity都被移除掉的时候，对应的任务也就不存在了。
 
 任务除了可以被转移到前台，也是可以被转移到后台的。当用户开启了新的任务，或者点击Home键回到主屏幕时，之前任务就会被转移到后台了。举个例子，当前任务A的栈中有三个Activity，现在用户按下Home键，然后启动另外一个应用程序。当系统回到桌面的时候，其实任务A就已经进入后台了，然后当另外一个应用程序启动的时候，系统会为这个程序开启一个新的任务(任务B)。当用户再次按下Home键回到桌面，这时任务B也进入了后台。然后用户重新打开第一次使用的程序，这个时候任务A又会回到前台，A任务栈中的三个Activity仍然会保留着刚才的顺序，最顶端的Activity将重新变为运行状态。这就是Android中多任务切换的例子。
-
-![img](http://img.blog.csdn.net/20141225121645399?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ3VvbGluX2Jsb2c=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
 这个时候，用户还可以将任意后台的任务切换到前台，这样用户应该就会看到之前离开这个任务时处于最顶端的那个Activity。举个例子来说，当前任务A的栈中有三个Activity，现在用户按下Home键，然后点击桌面上的图标启动了另外一个应用程序。当系统回到桌面的时候，其实任务A就已经进入后台了，然后当另外一个应用程序启动的时候，系统会为这个程序开启一个新的任务(任务B)。当用户使用完这个程序之后，再次按下Home键回到桌面，这个时候任务B也进入了后台。然后用户又重新打开了第一次使用的程序，这个时候任务A又会回到前台，A任务栈中的三个Activity仍然会保留着刚才的顺序，最顶端的Activity将重新变为运行状态。之后用户仍然可以通过Home键或者多任务键来切换回任务B，或者启动更多的任务，这就是Android中多任务切换的例子。
 
@@ -304,6 +302,22 @@ affinity指定Activity依附于哪个任务，同一应用程序中所有Activit
 - clearTaskOnLaunch：如果将最底层的Activity的这个属性设置为true，那么只要用户离开了当前任务，再次返回时就会将最底层Activity上的其它Activity全清除掉。
 - finishOnTaskLaunch：如果Activity这个属性为true，那么用户一旦离开当前任务，再次返回时此Activity就会被清除。
 
+#### Fragment生命周期
+
+Fragment常用于平板开发和Tab切换，掌握它的生命周期也是相当重要的，首先我们先看两个图（前者是Fragment生命周期图，后者是Fragment与Activity生命周期对比图）：
+
+![img](http://img.my.csdn.net/uploads/201211/29/1354170699_6619.png)
+
+![img](http://img.my.csdn.net/uploads/201211/29/1354170682_3824.png)
+
+这里我们就不继续做实验了，从上面两个图我们可以得到：
+
+- fragment创建时，会执行onAttach()->onCreate()->onCreateView()->onActivityCreated()
+- fragment对用户可见时，会执行onStart()->onResume()
+- fragment进入“后台模式”时，会执行onPause()->onStop()
+- fragment被销毁，会执行onPause()->onStop()->onDestroyView()->onDestroy()->onDetach()
+- fragment与activity相比，有一些新的状态：onAttached()（当fragment加入到activity时调用，在这个方法中可获得所在的activity）、onCreateView() （当activity要得到fragment的layout时，调用此方法，fragment在其中创建自己的layout）、onActivityCreated()（当activity的onCreated()方法返回后调用此方法）、onDestroyView() （当fragment中的视图被移除时，调用这个方法）和onDetach() （当fragment和activity分离的时候，调用这个方法）
+
 ## 后记
 
-
+虽然用了较大的篇幅来介绍Activity，但是还是会有一些知识点没有涉及到，后面也会一步一步把这篇文章变得更加完善。
