@@ -1,7 +1,7 @@
-language: node_js
+language: html
 os:
 - linux
-node_js:
+html:
 - 6
 install:
 - npm install -g sails bower cnpm
