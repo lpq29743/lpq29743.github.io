@@ -1,0 +1,17 @@
+{
+	"name": "Redant",
+	"version": "0.0.1",
+	"author": "林佩勤",
+	"description": "林佩勤的博客",
+	"keywords":["blog"],
+	"repository": {
+		"type": "git",
+		"url": "https://path/to/url"
+	},
+	"license":"MIT",
+	"scripts": {
+		"test": "./node_modules/.bin/mocha test/setup.js test/test*.js",
+		"cover": "./node_modules/.bin/istanbul cover _mocha"
+		"coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+	}
+}
