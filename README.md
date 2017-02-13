@@ -1,6 +1,7 @@
 # redant
 
 [![Build Status](https://travis-ci.org/linxiaowu66/douMiBlogPlatform.svg?branch=master)](https://travis-ci.org/linxiaowu66/douMiBlogPlatform)
+[![Coverage Status](https://coveralls.io/repos/github/linxiaowu66/douMiBlogPlatform/badge.svg?branch=master)](https://coveralls.io/github/linxiaowu66/douMiBlogPlatform?branch=master)
 [![Analytics](https://ga-beacon.appspot.com/UA-85522412-2/welcome-page)](https://github.com/igrigorik/ga-beacon)
 [![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)
 
