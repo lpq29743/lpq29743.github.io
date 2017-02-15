@@ -14,11 +14,47 @@ tags:
 
 ## 前言
 
-本人在大一学年开始接触到Android开发，主要是因为做项目的需要，由于投入了较多的时间和精力，所以对这项开发技术多多少少存在一些情感。虽然现在小程序、WebApp等的出现给Android开发市场带来了不小的挑战，但出于兴趣，本人还是会坚持Android学习，尽管将来很大程度上不以Android为就业方向，但相信在这个学习、研究和实践的过程中，一定能够收获到很多东西。Android这门开发语言设计到的大框架、大技术值得每一位想要深入Android开发的朋友进行学习熟悉，但一些小的细节，一些常用到的东西也同样需要引起我们的关注。如果博主把这些小的知识点放在一起的话，未免显得有些奇怪，所以博主希望通过这篇文章，不定期的记录一些Android的小知识点。
+本人在大一学年开始接触到Android开发，主要是因为做项目的需要，由于投入了较多的时间和精力，所以对这项开发技术多多少少存在一些情感。虽然现在小程序、WebApp等的出现给Android开发市场带来了不小的挑战，但出于兴趣，本人还是会坚持Android学习，尽管将来很大程度上不以Android为就业方向，但相信在这个学习、研究和实践的过程中，一定能够收获到很多东西。Android这门开发语言设计到的大框架、大技术值得每一位想要深入Android开发的朋友进行学习熟悉，但一些小的细节，一些常用到的东西也同样需要引起我们的关注。如果博主把这些小的知识点放在一起的话，未免显得有些奇怪，所以博主希望通过这篇文章，不定期的记录一些Android（包括Java）的小知识点。
 
 ---
 
 ## 正文
+
+**获取网络时间**
+
+由于Android获取网络时间需要访问网络，所以要进行异步操作，具体如下：
+
+```java
+private class MyTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected void doInBackground(Void... params) {
+            String timeUrl = "http://www.beijing-time.org";
+            try {
+                URL url = new URL(timeUrl);// 取得资源对象
+                URLConnection uc = url.openConnection();// 生成连接对象
+                uc.connect();// 发出连接
+                long ld = uc.getDate();// 读取网站日期时间
+                Date date = new Date(ld);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss EEEE", Locale.CHINA);// 输出北京时间
+                Log.e("Time", sdf.format(date));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+        }
+}
+```
 
 **锁定Activity屏幕方向**
 
