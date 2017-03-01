@@ -34,7 +34,7 @@ tags:
 ***步骤一：创建Product***
 
 ```java
-package factorymethod;
+package com.factorymethod;
 
 public interface Shape {
 
@@ -48,7 +48,7 @@ public interface Shape {
 Circle类：
 
 ```java
-package factorymethod;
+package com.factorymethod;
 
 public class Circle implements Shape {
 
@@ -63,7 +63,7 @@ public class Circle implements Shape {
 Square类：
 
 ```java
-package factorymethod;
+package com.factorymethod;
 
 public class Square implements Shape {
 
@@ -78,7 +78,7 @@ public class Square implements Shape {
 ***步骤三：创建Factory***
 
 ```java
-package factorymethod;
+package com.factorymethod;
 
 public abstract class Factory {
 
@@ -92,7 +92,7 @@ public abstract class Factory {
 CircleFactory类：
 
 ```java
-package factorymethod;
+package com.factorymethod;
 
 public class CircleFactory extends Factory {
 	
@@ -106,7 +106,7 @@ public class CircleFactory extends Factory {
 SquareFactory类：
 
 ```java
-package factorymethod;
+package com.factorymethod;
 
 public class SquareFactory extends Factory {
 	
@@ -120,7 +120,7 @@ public class SquareFactory extends Factory {
 ***步骤五：创建Client***
 
 ```java
-package factorymethod;
+package com.factorymethod;
 
 public class Client {
 
