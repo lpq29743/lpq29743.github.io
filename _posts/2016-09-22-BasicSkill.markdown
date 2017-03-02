@@ -58,6 +58,13 @@ CSDN、知乎专栏、新浪微博等等方式能够让你去发表个人的博�
 
 最常用的搭建个人技术博客的方式是Github Pages+Jekyll的方法，具体教程查看：[搭建一个免费的，无限流量的Blog----github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)，如果你搭建完之后想要迅速让自己的博客网站界面变得美观，那么采用模板是一个不错的选择，本人借鉴的是[黄玄的博客](http://huangxuan.me/)，其项目地址请点击[这里](https://github.com/Huxpro/huxpro.github.io)。
 
+**问题七：怎么找到电影资源**
+
+- [LOL电影天堂](http://www.loldytt.com/)（大部分电影都有）
+- [硕鼠](http://download.flvcd.com/)（可下载网页上的电影，速度快）
+- 影视大全（有较新电影，但资源较少，常用Android客户端）
+- [图解电影](http://www.graphmovies.com/home/2/)（图文看电影，想要速度看完一部电影可以采取这种方式）
+
 ## 后记
 
 随着时代的发展，计算机知识已经成为每个现代人工作的必需品，所以掌握一定的计算机知识对自己的学习工作还是有很大帮助的！
