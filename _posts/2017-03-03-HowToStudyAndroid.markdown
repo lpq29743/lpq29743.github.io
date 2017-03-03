@@ -37,6 +37,10 @@ tags:
 - Retrofit：网络框架，封装了OkHttp，也是相当优秀的框架，项目中可以考虑Retrofit+OkHttp的方案
 - EventBus：事件总线框架，具体学习可以参考[这里](https://lpq29743.github.io/redant/2016/09/26/EventBus/)
 - Glide：Picasso、Glide和Fresco这三大图片加载框架都很不错，前两者适合普通应用，后者适合图片型应用
+- greenDao：数据库操作框架，还算蛮不错的
+- RxJava+RxAndroid：响应式编程框架，具体学习可以查看[这篇文章](https://lpq29743.github.io/redant/2016/09/29/RxJava/)
+- logger：日志输出框架，相当好用
+- bugly：腾讯的崩溃统计平台，地址请点击[这里](https://bugly.qq.com/v2/)
 
 ## 后记
 
