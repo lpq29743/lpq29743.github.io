@@ -55,6 +55,8 @@ tags:
 
 - iosched：Google每年I/O大会都会出一款范例App，这是2016年的App，项目地址在[这里](https://github.com/google/iosched)
 - u2020：Jake Wharton（ButterKnife等的开发者）的示例项目，项目地址在[这里](https://github.com/JakeWharton/u2020)
+- android-architecture：Android官方MVP架构示例项目，项目地址在[这里](https://github.com/googlesamples/android-architecture)
+- Philm：Chris Bannes的开源项目，实现了MVP，项目地址在[这里](https://github.com/chrisbanes/philm)
 
 ## 后记
 
