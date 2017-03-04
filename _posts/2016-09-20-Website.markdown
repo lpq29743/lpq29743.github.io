@@ -45,6 +45,7 @@ tags:
 - [jsbeautifier](http://jsbeautifier.org/)（在线html/css/js排版）
 - [RGB颜色对照表](http://tool.oschina.net/commons?type=3) [RGB颜色值和十六进制颜色值对换工具](http://www.sioe.cn/yingyong/yanse-rgb-16/)（两者搭配使用效果极佳）
 - [开源中国在线工具](http://tool.oschina.net/)（更多在线工具请看这） 
+- [站长工具](http://tool.chinaz.com/)（具有获取IP、查看网站信息等功能的工具）
 
 ***计算机学习网站***
 
