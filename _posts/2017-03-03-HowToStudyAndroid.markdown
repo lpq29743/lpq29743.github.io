@@ -23,6 +23,7 @@ tags:
 **开发工具**
 
 - Android Studio：如果你现在还是在使用Eclipse，还在怀疑迁移AS带来的影响，那我可以很负责任地告诉你，可以换环境了。AS是官方推荐的开发环境，很多方面的体验都要优于Eclipse
+- Git：版本控制工具，有必要的话还可以把代码传到github上
 
 **编程语言**
 
@@ -41,7 +42,20 @@ tags:
 - RxJava+RxAndroid：响应式编程框架，具体学习可以查看[这篇文章](https://lpq29743.github.io/redant/2016/09/29/RxJava/)
 - logger：日志输出框架，相当好用
 - bugly：腾讯的崩溃统计平台，地址请点击[这里](https://bugly.qq.com/v2/)
+- MVVM：Android架构设计方法，使代码更加清晰，实现高内聚低耦合
+- Material Design：Android5.0新特性，使界面更加友好和美观
+- FastJson：阿里开发的Json解析工具，在国内十分流行
+
+**相关小技巧**
+
+- XML Tools：具体使用方法可以查看本人[这篇文章](https://lpq29743.github.io/redant/2016/10/04/AndroidXmlTools/)
+- 小知识点总结：本人根据自己的开发经验，不定期总结一些小知识点，发布在[这篇文章](https://lpq29743.github.io/redant/2017/01/23/AndroidDetail/)
+
+**优秀项目**
+
+- iosched：Google每年I/O大会都会出一款范例App，这是2016年的App，项目地址在[这里](https://github.com/google/iosched)
+- u2020：Jake Wharton（ButterKnife等的开发者）的示例项目，项目地址在[这里](https://github.com/JakeWharton/u2020)
 
 ## 后记
 
-
+关于Android开发的总结就先到这里了。随着技术的不断发展和本人技术的提高，这篇文章也会被不断的改善。
