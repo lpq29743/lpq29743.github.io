@@ -82,6 +82,16 @@ WindowManager.LayoutParams.FLAG_FULLSCREEN);
 requestWindowFeature(Window.FEATURE_NO_TITLE);
 ```
 
+**EditView设置单行**
+
+`android:singleLine="true"`可以设置单行，但已经过时了，现在的设置方法为：
+
+```java
+// 必须加上这一行，否则设置无效
+android:inputType="text"
+android:maxLines="1"
+```
+
 **EditView软键盘弹出**
 
 对于跳转新界面就要弹出软键盘的情况，可能会出现由于界面未加载完全而无法弹出软键盘的情况。此时应该适当的延迟弹出软键盘（保证界面的数据加载完成）。实例代码如下：
