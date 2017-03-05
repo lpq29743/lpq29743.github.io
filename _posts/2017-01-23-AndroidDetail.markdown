@@ -42,6 +42,8 @@ private class MyTask extends AsyncTask<Void, Void, Void> {
                 Date date = new Date(ld);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss EEEE", Locale.CHINA);// 输出北京时间
                 Log.e("Time", sdf.format(date));
+              	SimpleDateFormat sdf1 = new SimpleDateFormat("EEEE", Locale.CHINA);
+              	Log.e("Weekday", sdf1.format(date));// 输出星期几，其中Sunday是星期日，不是星期天
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
