@@ -76,6 +76,8 @@ tags:
 - [花瓣网](http://huaban.com/)（图片资源网站二）
 - [wallheaven](https://alpha.wallhaven.cc/)（桌面壁纸资源网站）
 - [稻壳儿](http://www.docer.com/) [逼格PPT](http://www.tretars.com/) [扑奔网](http://www.pooban.com/)（都是很不错的PPT资源网站）
+- [胖次搜索](http://www.panc.cc/)（速度快、搜索广而且界面也很友好的网盘搜索网站）
+- [书香门第](http://bbs.txtnovel.net/search.php) [来奇网](http://www.laiqi.net/)（txt下载网站，前者资源较多，但需注册，后者恰好相反）
 
 ***体育网站***
 
