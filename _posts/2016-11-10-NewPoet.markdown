@@ -7,7 +7,6 @@ author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
     - 文学
-    - 句子
 ---
 
 > 新诗——典雅迷人的现代美女

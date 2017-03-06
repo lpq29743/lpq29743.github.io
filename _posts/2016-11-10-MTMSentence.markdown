@@ -7,7 +7,6 @@ author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
     - 文学
-    - 句子
 ---
 
 > 藏匿在电影、电视剧、动画以及音乐中的那些迷人句子

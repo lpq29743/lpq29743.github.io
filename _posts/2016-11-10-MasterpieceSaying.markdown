@@ -7,7 +7,6 @@ author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
     - 文学
-    - 句子
 ---
 
 > 名著里拾宝珠！
