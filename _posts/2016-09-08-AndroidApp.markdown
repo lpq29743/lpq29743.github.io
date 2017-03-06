@@ -6,8 +6,6 @@ date:       2016-09-08 15:00:00
 author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
-    - Android
-    - 软件
     - 推荐
 ---
 

@@ -7,7 +7,6 @@ author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
     - Linux
-    - 软件
     - 推荐
 ---
 

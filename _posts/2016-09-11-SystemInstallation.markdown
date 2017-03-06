@@ -6,9 +6,8 @@ date:       2016-09-11 16:00:00
 author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
-    - Windows
+    - 漫谈
     - Linux
-    - 操作系统
 ---
 
 > 操作系统——计算机领域的魔法师
