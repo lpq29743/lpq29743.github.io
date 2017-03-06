@@ -7,8 +7,6 @@ author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
     - 数据结构与算法
-    - 动态规划
-    - 算法导论
 ---
 
 > 动态规划，从门外到门内

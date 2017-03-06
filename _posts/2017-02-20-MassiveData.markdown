@@ -6,7 +6,7 @@ date:       2017-02-20 13:00:00
 author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
-    - 算法与数据结构
+    - 数据结构与算法
 ---
 
 > 逃不过的一道面试题

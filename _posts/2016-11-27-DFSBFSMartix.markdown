@@ -7,7 +7,6 @@ author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
     - 数据结构与算法
-    - 图
 ---
 
 > 图的搜索上篇~~~

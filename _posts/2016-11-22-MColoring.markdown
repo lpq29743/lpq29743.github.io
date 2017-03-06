@@ -7,8 +7,6 @@ author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
     - 数据结构与算法
-    - 图
-    - 贪心算法
 ---
 
 > 图论重要问题——着色问题

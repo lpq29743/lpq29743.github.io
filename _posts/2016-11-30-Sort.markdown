@@ -7,7 +7,6 @@ author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
     - 数据结构与算法
-    - 排序
 ---
 
 > 走进排序的世界
