@@ -6,7 +6,7 @@ date:       2016-09-24 22:00:00
 author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
-    - Git
+    - 工具
 ---
 
 > 简单的记录一下git命令

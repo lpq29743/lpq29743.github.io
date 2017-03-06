@@ -7,7 +7,6 @@ author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
     - 漫谈
-    - 名人
 ---
 
 > 膜拜前辈！

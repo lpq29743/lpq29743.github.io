@@ -6,7 +6,7 @@ date:       2016-11-14 19:30:00
 author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
-    - 计算机基础
+    - 漫谈
 ---
 
 > 软考复习必备资料~~
