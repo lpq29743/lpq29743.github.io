@@ -20,7 +20,9 @@ tags:
 
 ## 正文
 
-首先我们先尝试一下用本地文件来做实验。最近刚好两会召开，所以我们的第一个实验对象就是[习总书记的重大讲话](http://pan.baidu.com/share/link?uk=2265408988&shareid=787234409#list/path=%2F%E5%BC%A5%E6%94%BF%E5%8A%9E%E7%BD%91%E6%A0%A1%2F%E7%BD%91%E6%A0%A1%2F%E4%B8%A4%E5%AD%A6%E4%B8%80%E5%81%9A%2F%E4%B9%A0%E8%BF%91%E5%B9%B3%E6%80%BB%E4%B9%A6%E8%AE%B0%E7%B3%BB%E5%88%97%E9%87%8D%E8%A6%81%E8%AE%B2%E8%AF%9D&parentPath=%2F%E5%BC%A5%E6%94%BF%E5%8A%9E%E7%BD%91%E6%A0%A1%2F%E7%BD%91%E6%A0%A1%2F%E4%B8%A4%E5%AD%A6%E4%B8%80%E5%81%9A)。下载完相关的库和文件之后，我们便可以用以下代码作出我们的第一个词云了。
+我们首先先用本地文件做实验。最近两会召开，所以第一个实验对象就是[习总书记的重大讲话](http://pan.baidu.com/share/link?uk=2265408988&shareid=787234409#list/path=%2F%E5%BC%A5%E6%94%BF%E5%8A%9E%E7%BD%91%E6%A0%A1%2F%E7%BD%91%E6%A0%A1%2F%E4%B8%A4%E5%AD%A6%E4%B8%80%E5%81%9A%2F%E4%B9%A0%E8%BF%91%E5%B9%B3%E6%80%BB%E4%B9%A6%E8%AE%B0%E7%B3%BB%E5%88%97%E9%87%8D%E8%A6%81%E8%AE%B2%E8%AF%9D&parentPath=%2F%E5%BC%A5%E6%94%BF%E5%8A%9E%E7%BD%91%E6%A0%A1%2F%E7%BD%91%E6%A0%A1%2F%E4%B8%A4%E5%AD%A6%E4%B8%80%E5%81%9A)。
+
+下载完实验文件后，我们就要下载相应的库。第一个库就是wordcloud（[项目地址](https://github.com/amueller/word_cloud)），它是Python下一个用于制作词云的库；此外，我们还要下载python-docx读写docx，处理word文档的python库主要有：python-docx（只能读写docx）、win32com（只能用于Windows）和antiword（可用于Linux环境读写doc，但是对中文的支持不是特别好），为了尽量方便，我们决定使用第一个库，并把我们的实验文件改为docx形式。下载完相应的库后，我们就可以写出第一版的代码了：
 
 ## 后记
 
