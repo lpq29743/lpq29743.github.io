@@ -25,7 +25,13 @@ tags:
 ```shell
 # 这种方法适用于所有的Linux
 lsb_release -a
+# 针对Redhat、CentOS等系统
+cat /etc/redhat-release
 ```
+
+**Linux添加中文字体**
+
+Linux默认支持的中文字体不多，需要我们做一定的配置，具体配置可以参考[这篇文章](http://5iqiong.blog.51cto.com/2999926/1188961)，而Linux的字体目录为/usr/share/fonts/。使用命令`fc-list :lang=zh`可以查看当前系统中有哪些中文字体。
 
 **更改CentOS yum源**
 
