@@ -33,6 +33,27 @@ cat /etc/redhat-release
 
 Linux默认支持的中文字体不多，需要我们做一定的配置，具体配置可以参考[这篇文章](http://5iqiong.blog.51cto.com/2999926/1188961)，而Linux的字体目录为/usr/share/fonts/。使用命令`fc-list :lang=zh`可以查看当前系统中有哪些中文字体。
 
+**怎么给Linux下Eclipse、Pycharm等软件添加桌面快捷方式**
+
+要给这类软件加快捷方式，首先要创建相应文件：`vim /usr/share/applications/eclipse.desktop`，然后在文件中输入以下文本：
+
+```shell
+[Desktop Entry]
+Encoding=UTF-8
+Name=Eclipse
+Comment=Eclipse IDE
+# 软件启动位置
+Exec=/usr/local/Android/eclipse/eclipse
+# 软件显示图标
+Icon=/usr/local/android/eclipse/icon.xpm
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=Application;Development;
+```
+
+然后在`/usr/share/applications/`目录下就可以找到对应快捷方式了，右键copy到桌面即可。
+
 **更改CentOS yum源**
 
 更改CentOS yum源可以使yum的安装更新速度更快，具体细节可以参考[这篇文章](http://www.jianshu.com/p/d8573f9d1f96)。
