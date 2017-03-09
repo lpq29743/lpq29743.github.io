@@ -52,7 +52,7 @@ Ubuntu相对于Windows安装软件更为方便，它只需要执行几句命令�
 - Tomcat（小型服务器）
 - Apache&Nginx（中大型服务器选择）
 - Codeblocks（用于写C语言）
-- Python3（如此神语言岂可不用）
+- Python3+PyCharm（Python开发环境）
 
 ## 后记
 
