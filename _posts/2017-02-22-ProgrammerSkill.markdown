@@ -38,11 +38,11 @@ tags:
 
 **数据结构与算法**
 
-推荐书籍：《[算法导论（原书第2版）](https://book.douban.com/subject/1885170/)》、《[编程之美 : 微软技术面试心得](https://book.douban.com/subject/3004255/)》、《[算法（第4版）](https://book.douban.com/subject/19952400/)》
+推荐书籍：[《算法导论（原书第2版）》](https://book.douban.com/subject/1885170/)、[《编程之美 : 微软技术面试心得》](https://book.douban.com/subject/3004255/)、[《算法（第4版）》](https://book.douban.com/subject/19952400/)
 
 **操作系统**
 
-推荐书籍：《[现代操作系统（第3版）](https://book.douban.com/subject/3852290/)》
+推荐书籍：[《现代操作系统（第3版）》](https://book.douban.com/subject/3852290/)
 
 **计算机网络**
 
@@ -56,7 +56,7 @@ tags:
 
 **软件构造**
 
-推荐书籍：《[设计模式 : 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)》、《[代码大全（第2版）](https://book.douban.com/subject/1477390/)》、《[重构 : 改善既有代码的设计](https://book.douban.com/subject/1229923/)》、《[程序员修炼之道 : 从小工到专家](https://book.douban.com/subject/1152111/)》、《[高效程序员的45个习惯 : 敏捷开发修炼之道](https://book.douban.com/subject/4164024/)》
+推荐书籍：[《设计模式 : 可复用面向对象软件的基础》](https://book.douban.com/subject/1052241/)、[《代码大全（第2版）》](https://book.douban.com/subject/1477390/)、[《重构 : 改善既有代码的设计》](https://book.douban.com/subject/1229923/)、[《程序员修炼之道 : 从小工到专家》](https://book.douban.com/subject/1152111/)、[《高效程序员的45个习惯 : 敏捷开发修炼之道》](https://book.douban.com/subject/4164024/)
 
 **软件过程与管理**
 
@@ -64,11 +64,11 @@ tags:
 
 #### C语言
 
-推荐书籍：《[C程序设计语言 : 第 2 版·新版](https://book.douban.com/subject/1139336/)》、《[C专家编程](https://book.douban.com/subject/2377310/)》、《[C Primer Plus : （第五版）](https://book.douban.com/subject/1240002/)》、《[C和指针](https://book.douban.com/subject/3012360/)》
+推荐书籍：[《C程序设计语言 : 第 2 版·新版》](https://book.douban.com/subject/1139336/)、[《C专家编程》](https://book.douban.com/subject/2377310/)、[《C Primer Plus : （第五版）》](https://book.douban.com/subject/1240002/)、[《C和指针》](https://book.douban.com/subject/3012360/)
 
 #### Java
 
-推荐书籍：《[Java编程思想 （第4版）](https://book.douban.com/subject/2130190/)》、《[Effective java 中文版（第2版）](https://book.douban.com/subject/3360807/)》、《[单元测试之道Java版 : 使用Junit](https://book.douban.com/subject/1239651/)》
+推荐书籍：[《Java编程思想 （第4版）》](https://book.douban.com/subject/2130190/)、[《Effective java 中文版（第2版）》](https://book.douban.com/subject/3360807/)、[《单元测试之道Java版 : 使用Junit》](https://book.douban.com/subject/1239651/)
 
 #### Python
 
@@ -99,6 +99,8 @@ tags:
 #### 人工智能
 
 #### 自然语言
+
+推荐书籍：[《统计自然语言处理》](https://book.douban.com/subject/25746399/)
 
 ## 后记
 
