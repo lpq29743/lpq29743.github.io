@@ -60,6 +60,6 @@ Categories=Application;Development;
 
 ## 后记
 
-
+这篇文章会不定期地更新我使用Linux过程中遇到的问题，也欢迎大家提出自己遇到的问题。
 
 
