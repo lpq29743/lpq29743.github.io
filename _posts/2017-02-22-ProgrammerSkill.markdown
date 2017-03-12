@@ -90,6 +90,8 @@ tags:
 
 #### MySQL
 
+推荐书籍：[《高性能MySQL》](https://book.douban.com/subject/23008813/)
+
 #### Nginx
 
 #### Linux
