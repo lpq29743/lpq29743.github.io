@@ -76,6 +76,7 @@ git reset --hard origin/master
 - [用SSH key免去github提交时输入密码](http://blog.zfan.me/2015/09/01/%E7%94%A8SSH-key%E5%85%8D%E5%8E%BBgithub%E6%8F%90%E4%BA%A4%E6%97%B6%E8%BE%93%E5%85%A5%E5%AF%86%E7%A0%81/)
 - [大白话讲解如何给github上项目贡献代码](https://site.douban.com/196781/widget/notes/12161495/note/269163206/?)
 - [GitHub 上有哪些好的英文文章或书籍的翻译项目](https://www.zhihu.com/question/27410763)
+- [如何选择开源许可证](http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html)
 
 ## 后记
 

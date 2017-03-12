@@ -64,7 +64,21 @@ tags:
 
 #### C语言
 
-推荐书籍：[《C程序设计语言 : 第 2 版·新版》](https://book.douban.com/subject/1139336/)、[《C专家编程》](https://book.douban.com/subject/2377310/)、[《C Primer Plus : （第五版）》](https://book.douban.com/subject/1240002/)、[《C和指针》](https://book.douban.com/subject/3012360/)
+**阶段一**
+
+推荐书籍：[《C程序设计语言 : 第 2 版·新版》](https://book.douban.com/subject/1139336/)、[《C Primer Plus : （第五版）》](https://book.douban.com/subject/1240002/)
+
+**阶段二**
+
+推荐书籍：[《C专家编程》](https://book.douban.com/subject/2377310/)、[《C陷阱与缺陷》](https://book.douban.com/subject/2778632/)、[《C和指针》](https://book.douban.com/subject/3012360/)、[《C标准库》](https://book.douban.com/subject/3775842/)、[《UNIX环境高级编程》](https://book.douban.com/subject/1788421/)
+
+推荐源码：
+
+- xv6（类Unix操作系统，附上[项目地址](https://github.com/mit-pdos/xv6-public)、[英文文档](https://pdos.csail.mit.edu/6.828/2012/xv6/book-rev7.pdf)和[中文文档](https://th0ar.gitbooks.io/xv6-chinese/)）
+- Tinyhttpd（一个不到 500 行的超轻量型 Http Server，附上[项目地址](https://github.com/EZLippi/Tinyhttpd)）
+- nginx（现在主流的服务器，附上[项目地址](https://github.com/nginx/nginx)）
+- SQLite（轻型数据库，附上[源码下载地址](http://www.sqlite.org/download.html)）
+- lua（小巧的脚本语言，附上[项目地址](https://github.com/lua/lua)）
 
 #### Java
 
