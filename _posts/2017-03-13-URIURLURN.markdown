@@ -40,8 +40,16 @@ URL中不能直接添加空格等特殊字符，这也是很多人在编程中�
 
 这个问题源自stackoverflow，这里直接给出[问题链接](http://stackoverflow.com/questions/1547899/which-characters-make-a-url-invalid)。
 
+**URL中的 #! 号是什么意思**
+
+之前博主在做一个QQ音乐的爬虫实验也遇到过相应的问题，在URL中，#号是不影响访问网页内容的。这个问题也在知乎上被讨论过，具体可以查看[这里](https://www.zhihu.com/question/19946782)。
+
+**URL大小写敏感吗**
+
+这个问题其实蛮有趣的，在现实生活中我们可能很少注意到这个问题，但实际上，在知乎和stackoverflow上都有过相应的讨论，这里我们分别给出它们的相应链接： [网址链接是否区分大小写？](https://www.zhihu.com/question/19572705) 和 [Should URL be case sensitive?](http://stackoverflow.com/questions/7996919/should-url-be-case-sensitive) 。
+
 ## 后记
 
-
+URI、URL和URN与我们的生活息息相关，这些问题虽然小，但是有趣而且有用，我也随时根据自己的学习情况更新这篇文章。
 
 
