@@ -72,6 +72,8 @@ git branch gh-pages
 git checkout gh-pages
 # 创建分支并切换到该分支，相当于以上两句
 git checkout -b gh-pages
+# 删除分支
+git branch -d gh-pages
 ```
 
 **特殊情况**

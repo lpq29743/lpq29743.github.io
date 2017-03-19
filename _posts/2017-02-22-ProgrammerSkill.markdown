@@ -75,7 +75,8 @@ tags:
 推荐源码：
 
 - xv6（类Unix操作系统，附上[项目地址](https://github.com/mit-pdos/xv6-public)、[英文文档](https://pdos.csail.mit.edu/6.828/2012/xv6/book-rev7.pdf)和[中文文档](https://th0ar.gitbooks.io/xv6-chinese/)）
-- Tinyhttpd（一个不到 500 行的超轻量型 Http Server，附上[项目地址](https://github.com/EZLippi/Tinyhttpd)）
+- Tiny Web（《深入理解计算机系统》一书中11.6节内容，代码量为250行）
+- mongoose（Web服务器，学完Tiny Web可以尝试这个，附上[项目地址](https://github.com/cesanta/mongoose)）
 - nginx（现在主流的服务器，附上[项目地址](https://github.com/nginx/nginx)）
 - SQLite（轻型数据库，附上[源码下载地址](http://www.sqlite.org/download.html)）
 - lua（小巧的脚本语言，附上[项目地址](https://github.com/lua/lua)）
