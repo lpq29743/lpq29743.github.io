@@ -63,6 +63,17 @@ git remote add 主机名 网址
 git remote rm 主机名
 ```
 
+**分支操作**
+
+```shell
+# 创建分支
+git branch gh-pages
+# 切换分支
+git checkout gh-pages
+# 创建分支并切换到该分支，相当于以上两句
+git checkout -b gh-pages
+```
+
 **特殊情况**
 
 ```shell

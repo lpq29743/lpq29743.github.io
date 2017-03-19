@@ -38,7 +38,7 @@ Ubuntu相对于Windows安装软件更为方便，它只需要执行几句命令�
 - Mentohust（用过校园网和Linux的人都知道）
 - GParted（图形化分区工具）
 - Haroopad（不错的Markdown编辑器）
-- Shell+Vim（具体配置可以参照知乎上[这个回答](https://www.zhihu.com/question/19989337/answer/18304091)）
+- Shell+Vim（具体配置可以参照知乎上[这个回答](https://www.zhihu.com/question/19989337/answer/18304091)，可以配上tmux使用，效果极好）
 
 ***编程工具***
 
