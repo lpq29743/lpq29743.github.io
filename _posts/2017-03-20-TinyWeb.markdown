@@ -1,0 +1,142 @@
+---
+layout:     post
+title:      "Tiny Web服务器源码学习"
+subtitle:   "一个只有250行代码的Web服务器"
+date:       2017-03-20 20:30:00
+author:     "林佩勤"
+header-img: "img/post-bg.jpg"
+tags:
+    - C
+---
+
+> 从最简单的学起
+
+
+## 前言
+
+Tiny Web服务器是《深入理解计算机系统》一书中11.6节的内容，该节演示了一个只有250行代码的服务器，非常适合对C语言和网络编程感兴趣的朋友进行学习！话不多说，让我们开始正式的学习！
+
+---
+
+## 正文
+
+### 基本使用
+
+Tiny Web服务器的主要代码在原书上已经给出，如果要下载完整的代码，可以在官网上进行下载，具体地址请点击[这里](http://csapp.cs.cmu.edu/3e/tiny.rar)，除此之外，在Github上也可以搜到热心用户上传的代码。
+
+下载好代码之后，我们要进行编译才可以使用。如果是官网代码的话，直接使用`make`命令进行编译就可以了，如果不是的话（没有Makefile文件），则具体编译操作如下：
+
+```shell
+gcc tiny.c csapp.c -o tiny 
+cd cgi-bin
+gcc adder.c -o adder -I../
+cd ..
+```
+
+编译完成后，我们只要执行`./tiny 8888`，就可以开启Tiny Web服务器了！
+
+首先输入127.0.0.1:8888，可以对Tiny Web服务器的静态页面进行测试，然后输入127.0.0.1:8888/cgi-bin/adder?1&2，可以对服务器的动态页面进行测试。这里值得一提的是，Tiny Web服务器只支持GET请求，如果是POST请求的话，会返回错误信息。
+
+### 源码解读
+
+#### tiny.c的main函数
+
+**具体代码**
+
+```c
+int main(int argc, char **argv) 
+{
+    int listenfd, connfd;
+    char hostname[MAXLINE], port[MAXLINE];
+    socklen_t clientlen;
+    struct sockaddr_storage clientaddr;
+
+    /* Check command line args */
+    if (argc != 2) {
+	fprintf(stderr, "usage: %s <port>\n", argv[0]);
+	exit(1);
+    }
+
+    listenfd = Open_listenfd(argv[1]);
+    while (1) {
+	clientlen = sizeof(clientaddr);
+	connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen); //line:netp:tiny:accept
+        Getnameinfo((SA *) &clientaddr, clientlen, hostname, MAXLINE, 
+                    port, MAXLINE, 0);
+        printf("Accepted connection from (%s, %s)\n", hostname, port);
+	doit(connfd);                                             //line:netp:tiny:doit
+	Close(connfd);                                            //line:netp:tiny:close
+    }
+}
+```
+
+**详细解析**
+
+- main函数中的argc表示命令行参数的数目，argv表示参数列表。参数数目默认大于等于1，因为至少有一个参数，也就是argv[0]为程序名
+- main函数定义完变量之后会判断传入参数是不是为2个，如果不是则输出错误信息并退出。这里需要的两个参数分别为程序名tiny和端口号。这里的fprintf函数的作用是格式化输出到流或文件中，其中第一个参数是文件指针，这里用的是stderr（Linux内核启动时默认打开三个I/O设备文件：标准输入文件stdin，标准输出文件stdout和标准错误输出文件stderr），后面两个参数分别是输出内容和参数列表
+- 如果参数数目满足要求的话，就可以根据端口值创建监听描述符。这里的Open_listendfd（区分大小写）函数是属于csapp.c里面的函数，该函数封装了socket、bind和listen函数，具体内容我们后面再讲解
+- 打开监听套接字后，服务器将会执行典型的无限服务器循环，不断地接受连接请求，执行事务，并关闭连接它的那一端
+
+#### tiny.c的doit函数
+
+**具体代码**
+
+```c
+/*
+ * doit - handle one HTTP request/response transaction
+ */
+void doit(int fd) 
+{
+    int is_static;
+    struct stat sbuf;
+    char buf[MAXLINE], method[MAXLINE], uri[MAXLINE], version[MAXLINE];
+    char filename[MAXLINE], cgiargs[MAXLINE];
+    rio_t rio;
+
+    /* Read request line and headers */
+    Rio_readinitb(&rio, fd);
+    if (!Rio_readlineb(&rio, buf, MAXLINE))  //line:netp:doit:readrequest
+        return;
+    printf("%s", buf);
+    sscanf(buf, "%s %s %s", method, uri, version);       //line:netp:doit:parserequest
+    if (strcasecmp(method, "GET")) {                     //line:netp:doit:beginrequesterr
+        clienterror(fd, method, "501", "Not Implemented",
+                    "Tiny does not implement this method");
+        return;
+    }                                                    //line:netp:doit:endrequesterr
+    read_requesthdrs(&rio);                              //line:netp:doit:readrequesthdrs
+
+    /* Parse URI from GET request */
+    is_static = parse_uri(uri, filename, cgiargs);       //line:netp:doit:staticcheck
+    if (stat(filename, &sbuf) < 0) {                     //line:netp:doit:beginnotfound
+	clienterror(fd, filename, "404", "Not found",
+		    "Tiny couldn't find this file");
+	return;
+    }                                                    //line:netp:doit:endnotfound
+
+    if (is_static) { /* Serve static content */          
+	if (!(S_ISREG(sbuf.st_mode)) || !(S_IRUSR & sbuf.st_mode)) { //line:netp:doit:readable
+	    clienterror(fd, filename, "403", "Forbidden",
+			"Tiny couldn't read the file");
+	    return;
+	}
+	serve_static(fd, filename, sbuf.st_size);        //line:netp:doit:servestatic
+    }
+    else { /* Serve dynamic content */
+	if (!(S_ISREG(sbuf.st_mode)) || !(S_IXUSR & sbuf.st_mode)) { //line:netp:doit:executable
+	    clienterror(fd, filename, "403", "Forbidden",
+			"Tiny couldn't run the CGI program");
+	    return;
+	}
+	serve_dynamic(fd, filename, cgiargs);            //line:netp:doit:servedynamic
+    }
+}
+```
+
+**详细解析**
+
+- 
+
+## 后记
+
+
