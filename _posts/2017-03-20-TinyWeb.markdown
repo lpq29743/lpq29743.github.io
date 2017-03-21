@@ -39,11 +39,11 @@ cd ..
 
 ### 源码解读
 
-#### 套结字接口
+#### 套接字接口
 
-套结字接口（socket interface）是一组函数，它们和Unix I/O函数结合起来，用以创建网络应用。学习socket编程能够让我们加深对网络框架的理解，socket编程的函数可以通过下图体现：
+套接字接口（socket interface）是一组函数，它们和Unix I/O函数结合起来，用以创建网络应用。学习socket编程能够让我们加深对网络框架的理解，socket编程的函数可以通过下图体现：
 
-![套结字接口概述](http://images.cnitblog.com/blog/466768/201312/27113109-ad8f7a2ce6d64ae39706ef7db3aa07cd.png)
+![套接字接口概述](http://images.cnitblog.com/blog/466768/201312/27113109-ad8f7a2ce6d64ae39706ef7db3aa07cd.png)
 
 通过此图，我们可以大致了解socket包含哪些函数，接下来我们对几个重要的函数进行一一介绍：
 
@@ -71,32 +71,82 @@ bind函数为socket分配地址，其中socket是套接字描述符，address指
 
 **listen函数**
 
+listen函数将sockfd从一个主动套接字转化为一个监听套接字，该套接字可以接受来自客户端的连接请求，具体使用如下：
+
+```c
 #include <sys/socket.h>
 int listen(int socket, int backlog);
-当 socket 和一个地址绑定后，调用 listen() 函数开始监听连接请求。但是，这只能在有可靠数据流保证时使用，如 SOCK_STREAM, SOCK_SEQPACKET 。
-socket socket 的描述符
-backlog 一个决定监听队列大小的整数，当有一个连接请求到来，就会进入此监听队列，当队列满后，新的连接请求会返回错误。
-如果成功监听返回 0，否则返回 -1 。
+```
+
+其中backlog是一个决定监听队列大小的整数，当有连接请求到来，就会进入此监听队列，当队列满后，新的连接请求会返回错误。
 
 **accept函数**
 
+服务器通过调用accept函数来等待来自客户端的连接请求，具体使用如下：
+
+```c
 #include <sys/socket.h>
-int accept(int socket, struct sockaddr *restrict address,
-        socklen_t *restrict address_len);
-当应用程序监听来自其他主机的面对数据流的连接时，通过事件（比如Unix select()系统调用）通知它。必须用 accept()函数初始化连接。 Accept() 为每个连接创立新的套接字并从监听队列中移除这个连接。它使用如下参数：
-socket 监听的 socket 描述符
-address 指向sockaddr 结构体的指针，客户机地址信息。
-address_len 指向 socklen_t的指针，确定客户机地址结构体的大小 。
-返回新的套接字描述符，出错返回-1。进一步的通信必须通过这个套接字。
-Datagram 套接字不要求用accept()处理，因为接收方可能用监听套接字立即处理这个请求。
+int accept(int socket, struct sockaddr *restrict address, socklen_t *restrict address_len);
+```
+
+其中socket是监听的socket描述符，address是指向sockaddr结构体的指针，address_len是客户机地址结构体的大小。
 
 **connect函数**
 
+客户端通过调用connect函数来建立与服务器的连接，具体使用如下：
+
+```c
 #include <sys/socket.h>
-int connect(int socket, const struct sockaddr *address,
-        socklen_t address_len);
-connect() 系统调用为一个套接字设置连接，参数有文件描述符和主机地址。
-某些类型的套接字是无连接的，大多数是 UDP 协议。对于这些套接字，连接时这样的：默认发送和接收数据的主机由给定的地址确定，可以使用 send() 和 recv()。返回 -1 表示出错，0 表示成功。
+int connect(int socket, const struct sockaddr *address, socklen_t address_len);
+```
+
+#### csapp.c的open_clientfd函数
+
+**具体代码**
+
+```c
+/*
+ * open_clientfd - Open connection to server at <hostname, port> and
+ *     return a socket descriptor ready for reading and writing. This
+ *     function is reentrant and protocol-independent.
+ * 
+ *     On error, returns -1 and sets errno.
+ */
+int open_clientfd(char *hostname, char *port) {
+    int clientfd;
+    struct addrinfo hints, *listp, *p;
+
+    /* Get a list of potential server addresses */
+    memset(&hints, 0, sizeof(struct addrinfo));
+    hints.ai_socktype = SOCK_STREAM;  /* Open a connection */
+    hints.ai_flags = AI_NUMERICSERV;  /* ... using a numeric port arg. */
+    hints.ai_flags |= AI_ADDRCONFIG;  /* Recommended for connections */
+    Getaddrinfo(hostname, port, &hints, &listp);
+  
+    /* Walk the list for one that we can successfully connect to */
+    for (p = listp; p; p = p->ai_next) {
+
+        /* Create the socket descriptor */
+        if ((clientfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) < 0) 
+            continue; /* Socket failed, try the next */
+        if (connect(clientfd, p->ai_addr, p->ai_addrlen) != -1) 
+            break; /* Success */
+        Close(clientfd); /* Connect failed, try another */
+    } 
+
+    /* Clean up */
+    Freeaddrinfo(listp);
+    if (!p) /* All connects failed */
+        return -1;
+    else    /* The last connect succeeded */
+        return clientfd;
+}
+```
+
+**详细解析**
+
+- 将socket和connect函数包装成一个叫做open_clientfd的辅助函数是很方便的，客户端可以用它来和服务器建立连接
+- 
 
 #### tiny.c的main函数
 
