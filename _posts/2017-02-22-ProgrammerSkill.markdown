@@ -83,7 +83,13 @@ tags:
 
 #### Java
 
-推荐书籍：[《Java编程思想 （第4版）》](https://book.douban.com/subject/2130190/)、[《Effective java 中文版（第2版）》](https://book.douban.com/subject/3360807/)、[《单元测试之道Java版 : 使用Junit》](https://book.douban.com/subject/1239651/)
+**阶段一**
+
+推荐书籍：[《Java编程思想 （第4版）》](https://book.douban.com/subject/2130190/)、[Java核心技术 卷I：基础知识](https://book.douban.com/subject/26880667/)
+
+**阶段二**
+
+推荐书籍：[《Effective java 中文版（第2版）》](https://book.douban.com/subject/3360807/)、[《单元测试之道Java版 : 使用Junit》](https://book.douban.com/subject/1239651/)、[深入理解Java虚拟机（第2版）](https://book.douban.com/subject/24722612/)
 
 #### Python
 
@@ -115,7 +121,7 @@ tags:
 
 #### 自然语言
 
-推荐书籍：[《统计自然语言处理》](https://book.douban.com/subject/25746399/)
+推荐书籍：[《统计自然语言处理》](https://book.douban.com/subject/25746399/)、[数学之美](https://book.douban.com/subject/26163454/)
 
 ## 后记
 
