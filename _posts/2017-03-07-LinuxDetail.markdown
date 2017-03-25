@@ -58,6 +58,10 @@ Categories=Application;Development;
 
 更改CentOS yum源可以使yum的安装更新速度更快，具体细节可以参考[这篇文章](http://www.jianshu.com/p/d8573f9d1f96)。
 
+**yum install报错：Another app is currently holding the yum lock解决方法**
+
+顾名思义，这个报错信息的意思是有另外一个应用在使用yum，被占用锁定了，所以我们可以选择直接结束占用yum的进程来解决问题，也可以通过强制关掉yum进程：`rm -f /var/run/yum.pid`来解决。
+
 ## 后记
 
 这篇文章会不定期地更新我使用Linux过程中遇到的问题，也欢迎大家提出自己遇到的问题。
