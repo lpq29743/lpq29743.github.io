@@ -47,9 +47,33 @@ git add 文件名或目录名
 # 提交git更改（引号内为此版本描述信息，可更改)
 git commit -m "modified"
 # 将远程库文件提取下来（origin为远程库连接别名，master为远程库分支）
-git pull 主机名 分支名
+git pull origin master
 # 将本地改动添加到远程库分支（origin为远程库连接别名，master为远程库分支）
-git push 主机名 分支名
+git push origin master
+# 克隆仓库
+git clone git://github.com/xxx/xxx.git
+# 克隆具体分支
+git clone git://github.com/xxx/xxx.git -b master
+# 仅获取最新版和一个历史版本，即最后2个版本（--depth参数最小为1）
+git clone git://github.com/xxx/xxx.git --depth=1
+# 列出现有标签
+git tag
+# 列出特有标签
+git tag -l 'v1.4.2.*'
+# 查看具体标签
+git show v1.4
+# 创建一个轻量级标签
+git tag v1.4-lw
+# 创建一个含附注的标签
+git tag -a v1.4 -m 'my version 1.4'
+# 创建一个签署标签
+git tag -s v1.5 -m 'my signed 1.5 tag'
+# 验证标签
+git tag -v v1.4.2.1
+# 推送特定标签
+git push origin v1.5
+# 推送所有标签
+git push origin --tags
 ```
 
 **远程仓库**
