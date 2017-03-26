@@ -65,6 +65,10 @@ Categories=Application;Development;
 1. 执行命令`ifup eth0`
 2. 一劳永逸的做法。修改文件/etc/sysconfig/network-scripts/ifcfg-eth0，将ONBOOT设为yes，让网卡开机启动
 
+**CentOS下有什么合适的中文输入法**
+
+相对于小伙伴Ubuntu，CentOS支持的中文输入法相对较少，自带的输入法体验又相当糟糕，通过一番资料查询，我终于找到了一种不错的中文输入法————tong，它的具体安装及使用可以参考[这里](http://seisman.info/install-yong-chinese-input-method-under-centos-7.html)
+
 **更改CentOS yum源**
 
 更改CentOS yum源可以使yum的安装更新速度更快，具体细节可以参考[这篇文章](http://www.jianshu.com/p/d8573f9d1f96)。
