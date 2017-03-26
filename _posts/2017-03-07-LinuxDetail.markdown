@@ -20,6 +20,10 @@ tags:
 
 ## 正文
 
+**Linux主要有哪几类系统**
+
+CentOS、Ubuntu、Debian、OpenSUSE………，这些名词是不是让你一头雾水，那么Linux到底有几类系统呢？实际上，主要的Linux系统包括[Debian](https://zh.wikipedia.org/wiki/Debian)（及其派生版本Ubuntu、Linux Mint）、[Fedora](https://zh.wikipedia.org/wiki/Fedora)（及其相关版本Red Hat Enterprise Linux、CentOS）和[openSUSE](https://zh.wikipedia.org/wiki/OpenSUSE)等。这些类型的系统的在软件包管理等方面都存在较大差异，其中Debian系和Fedora系相对较多。
+
 **查看系统版本**
 
 ```shell
@@ -54,13 +58,33 @@ Categories=Application;Development;
 
 然后在`/usr/share/applications/`目录下就可以找到对应快捷方式了，右键copy到桌面即可。
 
+**Fedora如何启动网卡**
+
+装好虚拟机后，经常会遇到网络无法连接的情况，那么应该怎样解决呢？实际上，原因主要是网卡未启动。启动网卡（假设网卡名为eth0）主要有以下两种方法：
+
+1. 执行命令`ifup eth0`
+2. 一劳永逸的做法。修改文件/etc/sysconfig/network-scripts/ifcfg-eth0，将ONBOOT设为yes，让网卡开机启动
+
 **更改CentOS yum源**
 
 更改CentOS yum源可以使yum的安装更新速度更快，具体细节可以参考[这篇文章](http://www.jianshu.com/p/d8573f9d1f96)。
 
 **yum install报错：Another app is currently holding the yum lock解决方法**
 
-顾名思义，这个报错信息的意思是有另外一个应用在使用yum，被占用锁定了，所以我们可以选择直接结束占用yum的进程来解决问题，也可以通过强制关掉yum进程：`rm -f /var/run/yum.pid`来解决。
+顾名思义，这个报错信息的意思是有另外一个应用在使用yum，被占用锁定了，所以我们可以选择直接结束占用yum的进程来解决问题，也可以通过强制关掉yum进程：`sudo rm -f /var/run/yum.pid`来解决。
+
+**怎么找到yum安装的软件路径**
+
+查找yum安装的软件的具体路径，需要用到rpm命令，具体使用如下：
+
+```shell
+# 查询软件包
+rpm -qa|grep xxx
+# 查询软件包安装路径
+rpm -ql xxx
+```
+
+rpm命令是RPM软件包的管理工具，遵循GPL规则且功能强大方便，具体的使用可参考[这里](http://man.linuxde.net/rpm)。
 
 ## 后记
 
