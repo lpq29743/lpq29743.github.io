@@ -33,6 +33,14 @@ lsb_release -a
 cat /etc/redhat-release
 ```
 
+**who、who am i以及whoami有什么区别**
+
+实践出真知，关于这个问题大家可以自己实验一下，具体的结论如下：
+
+- who：查看当前有哪些用户登录到了本台机器
+- who am i：显示的是实际的用户名，即登录的用户ID。此命令相当于who -m
+- whoami：显示的是当前操作用户的用户名
+
 **Linux添加中文字体**
 
 Linux默认支持的中文字体不多，需要我们做一定的配置，具体配置可以参考[这篇文章](http://5iqiong.blog.51cto.com/2999926/1188961)，而Linux的字体目录为/usr/share/fonts/。使用命令`fc-list :lang=zh`可以查看当前系统中有哪些中文字体。
@@ -65,9 +73,16 @@ Categories=Application;Development;
 1. 执行命令`ifup eth0`
 2. 一劳永逸的做法。修改文件/etc/sysconfig/network-scripts/ifcfg-eth0，将ONBOOT设为yes，让网卡开机启动
 
+**Fedora下：xx is not in the sudoers file问题解决**
+
+1. 用命令`whereis sudoers`找出文件所在位置，默认是/etc/sudoers
+2. 以root登录，用`chmod u+w /etc/sudoers`添加写权限
+3. 编辑文件，在root ALL=(ALL)ALL行下添加XXX ALL=(ALL)ALL，XXX为用户名，保存退出
+4. 用`chmod u－w /etc/sudoers`回到文件原权限
+
 **CentOS下有什么合适的中文输入法**
 
-相对于小伙伴Ubuntu，CentOS支持的中文输入法相对较少，自带的输入法体验又相当糟糕，通过一番资料查询，我终于找到了一种不错的中文输入法————tong，它的具体安装及使用可以参考[这里](http://seisman.info/install-yong-chinese-input-method-under-centos-7.html)
+相对于小伙伴Ubuntu，CentOS支持的中文输入法相对较少，自带的输入法体验又相当糟糕，通过一番资料查询，我终于找到了一种不错的中文输入法———tong，它的具体安装及使用可以参考[这里](http://seisman.info/install-yong-chinese-input-method-under-centos-7.html)
 
 **更改CentOS yum源**
 
