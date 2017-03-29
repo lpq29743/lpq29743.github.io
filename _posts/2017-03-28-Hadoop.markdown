@@ -215,4 +215,4 @@ slave: starting nodemanager, logging to /usr/hadoop/logs/yarn-hadoop-nodemanager
 
 ## 后记
 
-这次的实验让我对hadoop有了一个粗略的理解，也在实验过程中学习到了很多东西，由于时间限制，所以没有尝试跑应用，等后面有时间在进行实验。
+这次的实验让我对hadoop有了一个粗略的理解，也在实验过程中学习到了很多东西，由于时间限制，所以没有尝试跑应用，等后面有时间再进行实验。
