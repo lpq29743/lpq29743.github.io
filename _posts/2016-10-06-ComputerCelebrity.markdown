@@ -26,6 +26,10 @@ tags:
 
 [John von Neumann 冯·诺依曼](https://zh.wikipedia.org/zh-cn/%E7%BA%A6%E7%BF%B0%C2%B7%E5%86%AF%C2%B7%E8%AF%BA%E4%BC%8A%E6%9B%BC)（计算机之父，博弈论之父）
 
+[Charles Babbage 查尔斯·巴贝奇](https://zh.wikipedia.org/wiki/%E6%9F%A5%E5%B0%94%E6%96%AF%C2%B7%E5%B7%B4%E8%B4%9D%E5%A5%87)（电脑先驱，提出了差分机和分析机的设计概念）
+
+[Augusta Ada Byron 奥古斯塔·埃达·拜伦](https://zh.wikipedia.org/wiki/%E6%84%9B%E9%81%94%C2%B7%E5%8B%92%E8%8A%99%E8%95%BE%E7%B5%B2)（英国诗人拜伦之女，首位程序员，建立了循环和子程序的概念）
+
 [Dennis Ritchie 丹尼斯·里奇](https://zh.wikipedia.org/wiki/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%89%98%E7%93%A6%E5%85%B9)（1983年图灵奖得主，C语言之父，UNIX之父）
 
 [Ken Thompson 肯·汤普森](https://zh.wikipedia.org/wiki/%E8%82%AF%C2%B7%E6%B1%A4%E6%99%AE%E9%80%8A)（1983年图灵奖得主，C语言前身B语言的作者，Unix的发明人之一）
