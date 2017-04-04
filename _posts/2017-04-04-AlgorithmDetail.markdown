@@ -92,6 +92,30 @@ for (int powerOfTwo = 1; powerOfTwo < n; powerOfTwo *= 2) {
 
 实际上，这道题的解决方法有好几个，我也是从stackoverflow上的问题得到了灵感，具体可以点击[问题地址](http://stackoverflow.com/questions/43007574/how-to-count-the-number-of-1-bits-set-in-0-1-2-n-in-on-time)查看。
 
+**如何求绝对众数**
+
+所谓绝对众数，就是出现次数为整个数组大小一半还多的数，因此，绝对众数是唯一的。删除数组中两个不同的数，绝对众数不变，所以我们可以用以下方法来求解绝对众数：
+
+```c
+int Mode(int* a, int size) {
+    int count = 0;
+    int m = a[0];
+    for (int i = 0; i < size; i++) {
+        if (count == 0) {
+            m = a[i];
+            count = 1;
+        } else if (m != a[i]) {
+            count--;
+        } else {
+            count++;
+        }
+    }
+    return m;
+}
+```
+
+对于这种方法，时间复杂度为O(n)，如果求一般众数，一般要用基于比较的排序方法，所以时间复杂度为O(nlogn)，如果已知数值范围，则可利用哈希法把复杂度降低至O(n)。
+
 ## 后记
 
 算法很容易被过于重视，也很容易被过于忽视，认识到自己需要的，才能更好的把握学习算法的时间投入。
