@@ -46,6 +46,8 @@ tags:
 
 [Tim Berners-Lee 伯纳斯·李](https://zh.wikipedia.org/wiki/%E8%92%82%E5%A7%86%C2%B7%E4%BC%AF%E7%BA%B3%E6%96%AF-%E6%9D%8E)（互联网之父）
 
+[Brendan Eich 布兰登·艾克](https://zh.wikipedia.org/wiki/布蘭登·艾克)（发明JavaScript，曾任Mozilla公司CTO）
+
 [John McCarthy 约翰·麦卡锡](https://zh.wikipedia.org/wiki/%E7%BA%A6%E7%BF%B0%C2%B7%E9%BA%A6%E5%8D%A1%E9%94%A1)（发明Lisp语言，人工智能之父）
 
 [Edsger Wybe Dijkstra 艾兹赫尔·韦伯·戴克斯特拉](https://zh.wikipedia.org/wiki/%E8%89%BE%E5%85%B9%E8%B5%AB%E5%B0%94%C2%B7%E6%88%B4%E5%85%8B%E6%96%AF%E7%89%B9%E6%8B%89)（荷兰计算机科学家，提出了Dijkstra算法和银行家算法）
