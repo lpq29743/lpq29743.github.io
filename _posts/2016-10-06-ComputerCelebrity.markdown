@@ -48,6 +48,8 @@ tags:
 
 [John McCarthy 约翰·麦卡锡](https://zh.wikipedia.org/wiki/%E7%BA%A6%E7%BF%B0%C2%B7%E9%BA%A6%E5%8D%A1%E9%94%A1)（发明Lisp语言，人工智能之父）
 
+[Edsger Wybe Dijkstra 艾兹赫尔·韦伯·戴克斯特拉](https://zh.wikipedia.org/wiki/%E8%89%BE%E5%85%B9%E8%B5%AB%E5%B0%94%C2%B7%E6%88%B4%E5%85%8B%E6%96%AF%E7%89%B9%E6%8B%89)（荷兰计算机科学家，提出了Dijkstra算法和银行家算法）
+
 [Steve Jobs 史蒂夫·乔布斯](https://zh.wikipedia.org/wiki/%E5%8F%B2%E8%92%82%E5%A4%AB%C2%B7%E4%B9%94%E5%B8%83%E6%96%AF)（美国苹果公司联合创始人）
 
 [Stephen Wozniak 斯蒂夫·沃兹尼亚克](https://zh.wikipedia.org/wiki/%E6%96%AF%E8%92%82%E5%A4%AB%C2%B7%E6%B2%83%E5%85%B9%E5%B0%BC%E4%BA%9A%E5%85%8B)（创立苹果电脑公司，制造苹果一、二代电脑）
