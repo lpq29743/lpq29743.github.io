@@ -112,6 +112,10 @@ tags:
 - [新视觉影院](http://www.yy6080.org/)（支持电影、电视剧在线观看）
 - [豆瓣电影250榜单](https://movie.douban.com/top250) [IMDB250电影榜单](http://www.imdb.com/chart/top?ref_=nv_wl_img_3)（不知道看什么电影的话，就去这里逛逛，豆瓣电影榜单中中国电影相对IMDB会偏多点，IMDB榜单中几乎没有中国电影）
 
+***趣味网站***
+
+- [fakeupdate](http://fakeupdate.net/)（可以用来假装系统更新失败，如果要尝试手机系统可以在原网址后面加上/mobile）
+
 ## 后记
 
 讲了这么久，却把最重要的网站忘记说了，大家要提醒十二分注意，那个你必须收藏的网址就是——[林佩勤的博客](https://lpq29743.github.io/redant/)。
