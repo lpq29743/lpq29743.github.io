@@ -68,11 +68,17 @@ tags:
 - [Cmd Markdown](https://www.zybuluo.com/mdeditor)（在线版完爆很多本地编辑软件）
 - [Processon](https://www.processon.com/)（画流程图等的绝佳在线工具）
 
+**电影网站**
+
+- [豆瓣电影](https://movie.douban.com/)（国内主流影评网站）
+- [时光网](http://www.mtime.com/)（同样是影评网站，每个电影条目下都要很多有趣的信息）
+- [电影FM](http://dianying.fm/)（影库大，提供观看链接和下载链接）
+- [LOL电影天堂](http://www.loldytt.com/)（电影资源很丰富的网站）
+- [妮子电影](http://www.nizidy.com/)（同为电影资源网站）
+
 ***资源网站***
 
 - [iconfont](http://www.iconfont.cn/)（图标字体资源网站）
-- [LOL电影天堂](http://www.loldytt.com/)（电影资源很丰富的网站）
-- [妮子电影](http://www.nizidy.com/)（同为电影资源网站）
 - [Engiy](http://engiy.com/)（bt资源网站，你懂得）
 - [千图网](http://www.58pic.com/)（图片资源网站一）
 - [花瓣网](http://huaban.com/)（图片资源网站二）
