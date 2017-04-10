@@ -30,6 +30,8 @@ tags:
 
 [Augusta Ada Byron 奥古斯塔·埃达·拜伦](https://zh.wikipedia.org/wiki/%E6%84%9B%E9%81%94%C2%B7%E5%8B%92%E8%8A%99%E8%95%BE%E7%B5%B2)（英国诗人拜伦之女，首位程序员，建立了循环和子程序的概念）
 
+[Donald Ervin Knuth 唐纳德·尔文·克努斯](https://zh.wikipedia.org/wiki/%E9%AB%98%E5%BE%B7%E7%BA%B3)（1974年图灵奖得主，《计算机程序设计艺术》作者，KMP算法设计者之一）
+
 [Dennis Ritchie 丹尼斯·里奇](https://zh.wikipedia.org/wiki/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%89%98%E7%93%A6%E5%85%B9)（1983年图灵奖得主，C语言之父，UNIX之父）
 
 [Ken Thompson 肯·汤普森](https://zh.wikipedia.org/wiki/%E8%82%AF%C2%B7%E6%B1%A4%E6%99%AE%E9%80%8A)（1983年图灵奖得主，C语言前身B语言的作者，Unix的发明人之一）
