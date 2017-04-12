@@ -39,6 +39,16 @@ a = b ^ a
 a, b = b, a
 ```
 
+**连接字符串**
+
+```python
+# 常规写法
+a += b
+
+# Pythonic写法
+a.join(b)
+```
+
 **迭代输出序号**
 
 ```python
