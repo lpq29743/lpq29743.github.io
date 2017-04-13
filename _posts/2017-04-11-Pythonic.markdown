@@ -20,7 +20,7 @@ Pythonic是一个经常被Python程序员提及的关键词，它用来形容符
 
 ## 正文
 
-本文开头，我们先介绍一个Python库——pep8，它可以用来检测我们的代码是否符合Pythonic风格，用pip可以直接安装，要看一个文件是否符合Pythonic，只要运行`pep8 --first MyPython.py`就可以了。通过这种方式，我们可以迅速地习惯Pythonic这种Python编程风格。接下来我们再看一些比较直观的例子：
+本文开头，我们先介绍一个Python库——pep8，它可以用来检测我们的代码是否符合Pythonic风格，用pip可以直接安装，要看一个文件是否符合Pythonic，只要运行`pep8 MyPython.py`就可以了。通过这种方式，我们可以迅速地习惯Pythonic这种Python编程风格。接下来我们再看一些比较直观的例子：
 
 **交换两个值**
 
@@ -120,6 +120,107 @@ string = 'My name is %s and I am %d years old' % (name, age)
 
 # Pythonic写法
 string = 'My name is {name} and I am {age} years old.'.format(name='xxx', age=21)
+```
+
+**装饰器**
+
+假设我们有一个类，要求这个类中的函数执行的时候都要顺带输出函数的名称，那么我们可以这样写：
+
+```python
+class Person(object):
+    def sleep(self):
+        print("{name}".format(name=func.__name__))
+        print("sleeping...")
+
+    def eat(self):
+        print("{name}".format(name=func.__name__))
+        print("eating...")
+
+person = Person()
+person.sleep()
+person.eat()
+```
+
+但是这样写的话，当函数变多的时候，我们就要对`print("{name}".format(name=__name__))`这行代码多次复制粘贴，针对这个问题，Python提供了装饰器，具体使用如下：
+
+```python
+def log(func):
+    def wrapper(*args, **kw):
+        print("{name}".format(name=func.__name__))
+        return func(*args, **kw)
+    return wrapper
+
+
+class Person(object):
+    @log
+    def sleep(self):
+        print("sleeping...")
+
+    @log
+    def eat(self):
+        print("eating...")
+
+person = Person()
+person.sleep()
+person.eat()
+```
+
+如果我们需要传参数给装饰器，则需要修改代码如下：
+
+```python
+def log(action):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print("{action}".format(action=action))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+
+class Person(object):
+    @log("sleep")
+    def sleep(self):
+        print("sleeping...")
+
+    @log("eat")
+    def eat(self):
+        print("eating...")
+
+person = Person()
+person.sleep()
+person.eat()
+```
+
+对于以上代码，`person.eat()`实际上等价于`eat = log("eat")(eat)`，也就是最后eat变成了wrapper（可以打印eat的函数名称查看），明显不符合我们的设计理念，对于这个问题，python提供了functools这个工具库帮我们解决，具体如下：
+
+```python
+import functools
+
+
+def log(action):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print("{action}".format(action=action))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+
+class Person(object):
+    @log("sleep")
+    def sleep(self):
+        print("sleeping...")
+
+    @log("eat")
+    def eat(self):
+        print("eating...")
+
+person = Person()
+person.sleep()
+person.eat()
+print(person.sleep.__name__)
+print(person.eat.__name__)
 ```
 
 ## 后记
