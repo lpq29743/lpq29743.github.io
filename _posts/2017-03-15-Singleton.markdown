@@ -71,6 +71,31 @@ public class LazySingleton {
 
 饿汉式单例和懒汉式单例由于构造方法是private的，所以都不可继承，但是很多单例模式是可继承的，如登记式单例。在Java中，饿汉式单例要优于懒汉式单例，而C++中一般使用懒汉式单例。
 
+在上面的代码中，加关键字`synchronized`是为了避免多个线程同时运行到`if (singleton == null)`，都判断为null，导致创建多个实例，这样子就不是单例了。但是这样写会导致除获得同步锁的线程外的其他所有线程等待，对软件的效率造成了很大影响，所以我们对代码做以下改进：
+
+```java
+package com.singleton;
+
+public class LazySingleton {
+	private static LazySingleton singleton;
+
+	private LazySingleton(){}
+
+	public static LazySingleton getInstance() {
+		if (singleton == null) {
+            synchronized(LazySingleton.class) {
+                if (singleton == null) {
+                    singleton = new LazySingleton();
+                }
+            }
+		}
+		return singleton;
+	}
+}
+```
+
+这种方法叫做双重检查，第一个if判断是为了解决上面的效率问题，只有instance为null的时候，才进入synchronized代码段，而第二个if判断是为了避免多个实例的产生。
+
 **单例模式有哪些优缺点**
 
 ***优点***
