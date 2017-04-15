@@ -30,7 +30,11 @@ tags:
 
 [Augusta Ada Byron 奥古斯塔·埃达·拜伦](https://zh.wikipedia.org/wiki/%E6%84%9B%E9%81%94%C2%B7%E5%8B%92%E8%8A%99%E8%95%BE%E7%B5%B2)（英国诗人拜伦之女，首位程序员，建立了循环和子程序的概念）
 
+[Gordon Earle Moore 高登·厄尔·摩尔](https://zh.wikipedia.org/wiki/%E9%AB%98%E7%99%BB%C2%B7%E6%91%A9%E7%88%BE)（Intel共同创办人，提出摩尔定律）
+
 [Donald Ervin Knuth 唐纳德·尔文·克努斯](https://zh.wikipedia.org/wiki/%E9%AB%98%E5%BE%B7%E7%BA%B3)（1974年图灵奖得主，《计算机程序设计艺术》作者，KMP算法设计者之一）
+
+[Tony Hoare 东尼·霍尔](https://zh.wikipedia.org/wiki/%E6%9D%B1%E5%B0%BC%C2%B7%E9%9C%8D%E7%88%BE)（1980年图灵奖得主，快排算法设计者，提出哲学家就餐问题）
 
 [Dennis Ritchie 丹尼斯·里奇](https://zh.wikipedia.org/wiki/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%89%98%E7%93%A6%E5%85%B9)（1983年图灵奖得主，C语言之父，UNIX之父）
 
@@ -44,9 +48,15 @@ tags:
 
 [Andrew S. Tanenbaum 安德鲁·斯图尔特·塔能鲍姆](https://zh.wikipedia.org/wiki/%E5%AE%89%E5%BE%B7%E9%B2%81%C2%B7%E6%96%AF%E5%9B%BE%E5%B0%94%E7%89%B9%C2%B7%E5%A1%94%E8%83%BD%E9%B2%8D%E5%A7%86)（Minix作者，《现代操作系统》作者）
 
+[William Nelson Joy 威廉·纳尔逊·乔伊](https://zh.wikipedia.org/wiki/%E6%AF%94%E5%B0%94%C2%B7%E4%B9%94%E4%BC%8A)（BSD操作系统主要设计者，vi、C Shell作者）
+
 [Richard Stallman 理查德·斯托曼](https://zh.wikipedia.org/zh-cn/%E7%90%86%E6%9F%A5%E5%BE%B7%C2%B7%E6%96%AF%E6%89%98%E6%9B%BC)（自由软件运动的精神领袖，GNU、FSF创立者，Emacs、GCC、GDB作者）
 
 [Tim Berners-Lee 伯纳斯·李](https://zh.wikipedia.org/wiki/%E8%92%82%E5%A7%86%C2%B7%E4%BC%AF%E7%BA%B3%E6%96%AF-%E6%9D%8E)（互联网之父）
+
+[Anders Hejlsberg 安德斯·海尔斯伯格](https://zh.wikipedia.org/wiki/%E5%AE%89%E5%BE%B7%E6%96%AF%C2%B7%E6%B5%B7%E5%B0%94%E6%96%AF%E4%BC%AF%E6%A0%BC)（Turbo Pascal编译器主要作者，Delphi和C#之父，也是.NET创立者）
+
+[Guido van Rossum 吉多·范罗苏姆](https://zh.wikipedia.org/wiki/%E5%90%89%E5%A4%9A%C2%B7%E8%8C%83%E7%BD%97%E8%8B%8F%E5%A7%86)（Python之父）
 
 [Brendan Eich 布兰登·艾克](https://zh.wikipedia.org/wiki/布蘭登·艾克)（发明JavaScript，曾任Mozilla公司CTO）
 
