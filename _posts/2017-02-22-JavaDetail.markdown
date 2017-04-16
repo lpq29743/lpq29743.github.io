@@ -66,6 +66,10 @@ for (String temp : a) {
 
 这个问题是在[stackoverflow](http://stackoverflow.com/questions/43156379/instanceof-operator-in-java)上看到的，它的输出并不是`a instanceof String:true`之类的，而是`true`，因为这句语句实际上等价于`System.out.println(("a instanceof String:" + a) instanceof String);`，如果我们要实现想要的效果，应改为`System.out.println("a instanceof String:" + (a instanceof String));`。涉及到的知识点是[操作符优先级](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html)。
 
+**transient关键字有什么作用**
+
+最近在阅读HashMap源码的时候看到了transient这个关键字，说来惭愧，这是我第一次看到这个关键字，于是上网查询了一下资料，得到了答案：当类实现了Serilizable接口，这个类的所有属性和方法都会自动序列化，但在实际开发过程中，我们常常会遇到这样的情况：类有些属性需要序列化，有些不需要，如用户的敏感信息不希望在网络操作中被传输，那么这些信息对应的变量就可以加上transient关键字，这样序列化对象的时候，这个属性就不会序列化到指定的目的地中。值得一提的是，transient关键字只能修饰变量，而不能修饰方法和类
+
 **调用System.gc()会发生什么**
 
 通知GC开始工作，但GC真正开始时间不确定。
