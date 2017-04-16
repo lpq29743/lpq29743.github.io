@@ -215,4 +215,4 @@ slave: starting nodemanager, logging to /usr/hadoop/logs/yarn-hadoop-nodemanager
 
 ## 后记
 
-这次的实验让我对hadoop有了一个粗略的理解，也在实验过程中学习到了很多东西，由于时间限制，所以没有尝试跑应用，等后面有时间再进行实验。
+实际上，运用Docker技术可以使我们不会每一次使用Hadoop都配置一次，网上也有很多关于基于Docker搭建的Hadoop集群，在此本人介绍一个在单机上搭建多节点Hadoop集群的项目，其项目地址可点击[这里](http://dockone.io/article/395)，如果想要了解更多，请自行百度或Google。
