@@ -115,15 +115,11 @@ tags:
 
 #### 大数据
 
-#### 数据挖掘
-
 #### 机器学习
-
-#### 人工智能
 
 #### 自然语言
 
-推荐书籍：[《统计自然语言处理》](https://book.douban.com/subject/25746399/)、[数学之美](https://book.douban.com/subject/26163454/)
+推荐书籍：[《统计自然语言处理》](https://book.douban.com/subject/25746399/)、[《数学之美》](https://book.douban.com/subject/26163454/)
 
 ## 后记
 
