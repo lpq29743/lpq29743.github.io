@@ -1,11 +1,12 @@
 ---
 layout:     post
-title:      "Python历险记第七站"
+title:      "机器学习游玩记第一站"
 subtitle:   "利用Python实现KNN算法"
 date:       2017-04-21 21:00:00
 author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
+    - 机器学习
     - Python
 ---
 
