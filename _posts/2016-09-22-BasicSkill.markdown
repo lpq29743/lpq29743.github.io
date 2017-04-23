@@ -62,7 +62,7 @@ CSDN、知乎专栏、新浪微博等等方式能够让你去发表个人的博�
 
 **问题七：怎么找到电影资源**
 
-- [LOL电影天堂](http://www.loldytt.com/)（大部分电影都有）
+- [LOL电影天堂](http://www.loldytt.com/) [全集网](http://www.quanji.la/)（大部分电影都有）
 - [硕鼠](http://download.flvcd.com/)（可下载网页上的电影，速度快）
 - 影视大全（有较新电影，但资源较少，常用Android客户端）
 - [图解电影](http://www.graphmovies.com/home/2/)（图文看电影，想要速度看完一部电影可以采取这种方式）
