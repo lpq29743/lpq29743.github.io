@@ -1,0 +1,143 @@
+---
+layout:     post
+title:      "设计模式之外观模式"
+subtitle:   "让一切变简单起来"
+date:       2017-04-26 21:00:00
+author:     "林佩勤"
+header-img: "img/post-bg.jpg"
+tags:
+    - 设计模式
+---
+
+> 一个操作搞定一切！
+>
+
+
+## 前言
+
+外观模式使用频率非常高，它简化了客户端与子系统之间的交互，为复杂的子系统调用提供一个统一的入口，今天就让我们一起来学习一下它。
+
+---
+
+## 正文
+
+**什么是外观模式**
+
+外观模式为子系统中的一组接口提供一个一致的界面，定义了一个高层接口，使得子系统更易使用。
+
+**怎么使用外观模式**
+
+例：现在有一辆汽车，我们要启动它，就要发动引擎，使四个车轮转动。但实际上我们只要踩下油门，汽车就可以被启动了。
+
+***步骤一：创建子系统***
+
+Wheel类：
+
+```java
+package com.decorator;
+
+public interface Shape {
+	
+	void draw();
+	
+}
+```
+
+Engine类：
+
+```java
+package com.facade;
+
+public class Engine {
+	public String EngineWork() {
+		return "BMW's Engine is Working";
+	}
+
+	public String EngineStop() {
+		return "BMW's Engine is stoped";
+	}
+}
+```
+
+Body类：
+
+```java
+package com.facade;
+
+public class Body {
+	public Wheel[] wheels = new Wheel[4];
+	public Engine engine = new Engine();
+
+	public Body() {
+		for (int i = 0; i < wheels.length; i++) {
+			wheels[i] = new Wheel();
+		}
+	}
+}
+```
+
+***步骤二：创建Facade类***
+
+```java
+package com.facade;
+
+public class CarFacade {
+	Body body = new Body();
+
+	public void Run() {
+		System.out.println(body.engine.EngineWork());
+		for (int i = 0; i < body.wheels.length; i++) {
+			System.out.println(body.wheels[i].WheelCircumrotate());
+		}
+	}
+
+	public void Stop() {
+		System.out.println(body.engine.EngineStop());
+		for (int i = 0; i < body.wheels.length; i++) {
+			System.out.println(body.wheels[i].WheelStop());
+		}
+	}
+}
+```
+
+***步骤五：创建Client***
+
+```java
+package com.facade;
+
+public class Client {
+
+	public static void main(String[] args) {
+		CarFacade car = new CarFacade();
+        car.Run();
+        car.Stop();
+	}
+
+}
+```
+
+**外观模式有哪些优缺点**
+
+***优点***
+
+- 对客户屏蔽子系统组件，减少了客户处理的对象数目并使子系统更加容易使用。通过引入外观模式，客户端代码变得很简单，与之关联的对象也很少
+- 实现了子系统与客户之间的松耦合关系，子系统的组件变化不会影响到调用它的客户类，只需调整外观类即可
+- 降低了大型软件系统中的编译依赖性，并简化了系统在不同平台之间的移植过程，因为编译一个子系统一般不需要编译所有其他的子系统。子系统的修改对其他子系统没有影响，子系统的内部变化也不会影响到外观对象
+- 只是提供了一个访问子系统的统一入口，不影响用户直接使用子系统类
+
+***缺点***
+
+- 不能很好地限制客户使用子系统类，如果对客户访问子系统类做太多的限制，则减少了可变性和灵活性
+- 在不引入抽象外观类的情况下，增加新的子系统可能需要修改外观类或客户端的源代码，违背了开闭原则
+
+
+**外观模式适用于什么环境**
+
+- 当要为一个复杂子系统提供一个简单接口时。该接口可以满足大多数用户的需求，而且用户也可以越过外观类直接访问子系统
+- 客户程序与多个子系统之间存在很大依赖性。引入外观类将子系统与客户及其他子系统解耦，提高子系统的独立性和可移植性
+- 在层次化结构中，可以使用外观模式定义系统中每层的入口，层与层之间不直接产生联系，而通过外观类建立联系，降低层之间的耦合度
+
+
+## 后记
+
+外观模式十分简单，使用也很频繁，值得我们好好学习。
