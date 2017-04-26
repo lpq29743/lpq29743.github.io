@@ -100,7 +100,7 @@ public class CarFacade {
 }
 ```
 
-***步骤五：创建Client***
+***步骤三：创建Client***
 
 ```java
 package com.facade;
