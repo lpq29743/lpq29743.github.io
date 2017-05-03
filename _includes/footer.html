@@ -4,6 +4,16 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 				<ul class="list-inline text-center">
+					{% if site.github_username %}
+                    <li>
+                        <a target="_blank" href="https://github.com/{{ site.github_username }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
                     {% if site.zhihu_username %}
                     <li>
                         <a target="_blank" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
@@ -14,12 +24,22 @@
                         </a>
                     </li>
                     {% endif %}
-                    {% if site.github_username %}
+					{% if site.music163_username %}
                     <li>
-                        <a target="_blank" href="https://github.com/{{ site.github_username }}">
+                        <a target="_blank" href="http://music.163.com/#/user/home?id={{ site.music163_username }}">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">网</i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+					{% if site.lastfm_username %}
+                    <li>
+                        <a target="_blank" href="https://www.last.fm/user/{{ site.lastfm_username }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-lastfm fa-stack-1x fa-inverse"></i>
                             </span>
                         </a>
                     </li>
@@ -28,12 +48,7 @@
                 <p class="copyright text-muted">
                     Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }}
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> |
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
-                    </iframe>
+                    Theme by <a href="http://huangxuan.me">Hux</a>
                 </p>
             </div>
         </div>
@@ -63,7 +78,6 @@
 
 <!-- jquery.tagcloud.js -->
 <script>
-    // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
         async('{{ "/js/jquery.tagcloud.js" | prepend: site.baseurl }}',function(){
             $.fn.tagcloud.defaults = {

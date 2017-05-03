@@ -12,12 +12,10 @@ baseurl: /redant                             # for example, '/blog' if your blog
 RSS: false
 zhihu_username:     lin-pei-qin-70
 github_username:    lpq29743
-# twitter_username:  huxpro
-# facebook_username:  huxpro
-# linkedin_username:  firstname-lastname-idxxxx
+music163_username:  110029642
+lastfm_username:    lpq29743
 
 # Build settings
-# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
 permalink: pretty
 paginate: 10
@@ -31,21 +29,10 @@ gems: [jekyll-paginate]
 
 
 # Markdown settings
-# replace redcarpet to kramdown,
-# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
-# document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
 kramdown:
   input: GFM                            # use Github Flavored Markdown !important
   use_coderay: true
-
-# Disqus settings
-#disqus_username: _your_disqus_short_name_
-
-# Duoshuo settings
-duoshuo_username: redantblog
-# Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
