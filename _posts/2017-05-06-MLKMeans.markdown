@@ -2,7 +2,7 @@
 layout:     post
 title:      "机器学习游玩记第九站"
 subtitle:   "利用K-均值聚类算法进行聚类"
-date:       2017-05-05 21:00:00
+date:       2017-05-06 16:00:00
 author:     "林佩勤"
 header-img: "img/post-bg.jpg"
 tags:
