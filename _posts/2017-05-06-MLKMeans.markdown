@@ -1,0 +1,133 @@
+---
+layout:     post
+title:      "机器学习游玩记第九站"
+subtitle:   "利用K-均值聚类算法进行聚类"
+date:       2017-05-05 21:00:00
+author:     "林佩勤"
+header-img: "img/post-bg.jpg"
+tags:
+    - 机器学习
+    - Python
+---
+
+> 驶向无监督学习的未知港湾！
+
+
+## 前言
+
+在这篇文章之前，我们所接触的机器学习算法都是监督学习，从这篇文章开始，我们将开始接触无监督学习，而迎面而来的第一个算法，就是K-均值聚类算法。
+
+---
+
+## 正文
+
+之前我们学过分类，而这篇文章的中心则是聚类，两者的主要区别是分类的目标事先已知，而聚类则未知。K-均值是发现给定数据集的k个簇的算法，k由用户给出，每个簇都由其质心，即簇中所有点的中心来描述。K-均值算法的流程如下：
+
+1. 随机确定k个初始点作为质心
+2. 将数据集中的每个点分配到一个簇中
+
+接下来我们用Python来实现一下K-均值算法，具体如下：
+
+```python
+from numpy import *
+
+
+def loadDataSet(fileName):
+    dataMat = []
+    fr = open(fileName)
+    for line in fr.readlines():
+        curLine = line.strip().split('\t')
+        fltLine = list(map(float, curLine))
+        dataMat.append(fltLine)
+    return dataMat
+
+
+def distEclud(vecA, vecB):
+    return sqrt(sum(power(vecA - vecB, 2)))
+
+
+def randCent(dataSet, k):
+    n = shape(dataSet)[1]
+    centroids = mat(zeros((k, n)))
+    for j in range(n):
+        minJ = min(dataSet[:, j])
+        rangeJ = float(max(dataSet[:, j]) - minJ)
+        centroids[:, j] = mat(minJ + rangeJ * random.rand(k, 1))
+    return centroids
+
+
+def kMeans(dataSet, k, distMeas=distEclud, createCent=randCent):
+    m = shape(dataSet)[0]
+    clusterAssment = mat(zeros((m, 2)))
+    centroids = createCent(dataSet, k)
+    clusterChanged = True
+    while clusterChanged:
+        clusterChanged = False
+        for i in range(m):
+            minDist = inf
+            minIndex = -1
+            for j in range(k):
+                distJI = distMeas(centroids[j, :], dataSet[i, :])
+                if distJI < minDist:
+                    minDist = distJI
+                    minIndex = j
+            if clusterAssment[i, 0] != minIndex:
+                clusterChanged = True
+            clusterAssment[i, :] = minIndex, minDist**2
+        print(centroids)
+        for cent in range(k):
+            ptsInClust = dataSet[nonzero(clusterAssment[:, 0].A == cent)[0]]
+            centroids[cent, :] = mean(ptsInClust, axis=0)
+    return centroids, clusterAssment
+
+if __name__ == '__main__':
+    datMat = mat(loadDataSet('testSet.txt'))
+    myCentroids, clustAssing = kMeans(datMat, 4)
+```
+
+loadDataSet函数负责加载数据；distEclud函数则是计算两个向量的欧氏距离，这是比较常见的距离函数之一；randCent函数负责构建一个包含k个随机质心的集合；而kMeans函数则实现具体的K-均值聚类算法。
+
+对于K-均值聚类算法，k的选择起到了关键性的作用，在实际使用中，我们也会发现它的聚类效果不佳，主要是因为K-均值算法收敛到了局部最小值，而非全局最小值。为了解决这个问题，我们将其改进为二分K-均值算法。该算法首先将所有点作为一个簇，然后将该簇一分为二，之后选择其中一个簇继续进行划分，选择哪一个簇划分取决于对其划分是否可以最大程度降低误差平方和，即SSE的值，不断重复这个操作，直到得到指定簇数目为止。另一种做法是可以选择SSE最大的簇进行划分，直到簇数目达到要求为止，它的具体实现代码如下：
+
+```python
+from numpy import *
+import kmeans1
+
+
+def biKmeans(dataSet, k, distMeas=kmeans1.distEclud):
+    m = shape(dataSet)[0]
+    clusterAssment = mat(zeros((m, 2)))
+    centroid0 = mean(dataSet, axis=0).tolist()[0]
+    centList = [centroid0]
+    for j in range(m):
+        clusterAssment[j, 1] = distMeas(mat(centroid0), dataSet[j, :])**2
+    while (len(centList) < k):
+        lowestSSE = inf
+        for i in range(len(centList)):
+            ptsInCurrCluster = dataSet[nonzero(clusterAssment[:, 0].A == i)[0], :]
+            centroidMat, splitClustAss = kmeans1.kMeans(ptsInCurrCluster, 2, distMeas)
+            sseSplit = sum(splitClustAss[:, 1])
+            sseNotSplit = sum(clusterAssment[nonzero(clusterAssment[:, 0].A != i)[0], 1])
+            print("sseSplit, and notSplit: ", sseSplit, sseNotSplit)
+            if (sseSplit + sseNotSplit) < lowestSSE:
+                bestCentToSplit = i
+                bestNewCents = centroidMat
+                bestClustAss = splitClustAss.copy()
+                lowestSSE = sseSplit + sseNotSplit
+        bestClustAss[nonzero(bestClustAss[:, 0].A == 1)[0], 0] = len(centList)
+        bestClustAss[nonzero(bestClustAss[:, 0].A == 0)[0], 0] = bestCentToSplit
+        print('the bestCentToSplit is: ', bestCentToSplit)
+        print('the len of bestClustAss is: ', len(bestClustAss))
+        centList[bestCentToSplit] = bestNewCents[0, :].tolist()[0]
+        centList.append(bestNewCents[1, :].tolist()[0])
+        clusterAssment[nonzero(clusterAssment[:, 0].A == bestCentToSplit)[0], :] = bestClustAss
+    return mat(centList), clusterAssment
+
+if __name__ == '__main__':
+    datMat = mat(kmeans1.loadDataSet('testSet2.txt'))
+    centList, myNewAssments = biKmeans(datMat, 3)
+```
+
+## 后记
+
+有没有想过在出去旅游的时候也把你想去的地点来一个聚类呢？实际上，在书中就有这个例子，感兴趣的话就去实现一下吧！
