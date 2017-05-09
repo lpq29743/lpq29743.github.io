@@ -80,6 +80,42 @@ int main() {
    char_ptr Bentley, Rolls_Royce;
    ```
 
+**函数能返回局部变量吗**
+
+这个问题实际上分为以下两种情况：
+
+1. 局部变量是基本类型，则可以返回局部变量，如下面代码输出a：
+
+   ```c
+   #include <stdio.h>
+
+   char* get() {
+       char i = 'a';
+       return i;
+   }
+
+   int main() {
+       printf("%c", get());
+   }
+   ```
+
+2. 函数要返回一个指向该函数局部自动变量的指针，则会失败，具体如下：
+
+   ```c
+   #include <stdio.h>
+
+   char* get() {
+       char arr[] = 'apple';
+       return arr;
+   }
+
+   int main() {
+       printf("%s", get());
+   }
+   ```
+
+   当进入此函数时，自动变量arr将在堆栈中分配，当函数结束后，变量不复存在，它所占用的堆栈控件被回收，指针失去了有效性，被称为悬垂指针。
+
 **C语言怎么获取随机数**
 
 C语言取随机数的具体方法如下：
