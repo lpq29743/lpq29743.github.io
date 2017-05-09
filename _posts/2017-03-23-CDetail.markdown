@@ -56,6 +56,30 @@ int main() {
 
 ![img](http://c.biancheng.net/cpp/uploads/allimg/150704/1-150F4151010F4.png)
 
+**typedef int x[10]和#define x int[10]有什么区别**
+
+表面看起来这两个表达式是等价的，其实不然，具体区别如下：
+
+1. 可以用其他类型说明符对宏类型名进行扩展，但对typedef所定义的类型名却不能这样做，如下代码：
+
+   ```c
+   #define peach int
+   unsigned peach i; // 没问题
+   typedef int banana;
+   unsigned banana i; // 错误，非法
+   ```
+
+2. 在连续几个变量的声明中，用typedef定义的类型能够保证声明中所有变量均为同一种类型，而用#define定义的类型则无法保证，如下代码：
+
+   ```c
+   #define int_ptr int *
+   // chalk为int*类型，cheese为int类型，下列语句相当于int * chalk, cheese;
+   int_ptr chalk, cheese;
+   typedef char * char_ptr;
+   // Bentley和Rolls_Royce都是char*类型
+   char_ptr Bentley, Rolls_Royce;
+   ```
+
 **C语言怎么获取随机数**
 
 C语言取随机数的具体方法如下：
