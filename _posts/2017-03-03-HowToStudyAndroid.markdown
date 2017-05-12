@@ -33,7 +33,7 @@ tags:
 
 **开发框架**
 
-- ButterKnife：依赖注入框架，提高代码可读性，具体可参考[这里](https://lpq29743.github.io/redant/2016/09/26/ButterKnife/)
+- ButterKnife：依赖注入框架，提高代码可读性，具体可参考[这里](https://lpq29743.github.io/redant/2016/09/26/ButterKnife/)，Kotlin下使用KotterKnife，使用教程可参考[这里](http://blog.csdn.net/jasoncol_521/article/details/49663097)
 - OkHttp：网络框架，相对成熟的解决方案
 - Retrofit：网络框架，封装了OkHttp，也是相当优秀的框架，项目中可以考虑Retrofit+OkHttp的方案
 - EventBus：事件总线框架，具体学习可以参考[这里](https://lpq29743.github.io/redant/2016/09/26/EventBus/)
@@ -57,6 +57,8 @@ tags:
 - u2020：Jake Wharton（ButterKnife等的开发者）的示例项目，项目地址在[这里](https://github.com/JakeWharton/u2020)
 - android-architecture：Android官方MVP架构示例项目，项目地址在[这里](https://github.com/googlesamples/android-architecture)
 - Philm：Chris Bannes的开源项目，实现了MVP，项目地址在[这里](https://github.com/chrisbanes/philm)
+- Meizhi：MVC框架，使用了Picasso+RxJava&Retrofit＋okhttp，项目地址在[这里](https://github.com/drakeet/Meizhi)
+- plain：谷歌工程师开发，代码量大，但结构清晰，项目地址在[这里](https://github.com/nickbutcher/plaid)
 
 ## 后记
 
