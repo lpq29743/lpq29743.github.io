@@ -59,7 +59,7 @@ tags:
 - Seer（让Windows拥有快速预览功能）
 - Ditto（剪切板软件，大大提高工作效率）
 - WizTree（电脑空间管理神器）
-- Green（注册个账号就可以免费挂VPN）
+- Lantern（PC版的Green一个邮箱号只能用一天，Lantern则可以无限免费使用，附上[下载地址](https://github.com/getlantern/lantern)）
 
 ***社交软件***
 

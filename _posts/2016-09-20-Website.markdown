@@ -34,6 +34,7 @@ tags:
 
 - [谷歌翻译](http://translate.google.cn/#en/zh-CN/destruct)（翻译在线工具）
 - [有道翻译](http://dict.youdao.com/)（没有谷歌那么干净，但在查询专业释义上有很大帮助）
+- [汉典](http://www.zdic.net/)（最好的在线汉语字典）
 - [Smallpdf](https://smallpdf.com/cn)（轻松玩转PDF）
 - [cutmp3](http://cutmp3.net/)（裁剪mp3工具）
 - [色彩笔](http://www.secaibi.com/tools/)（是否因图片太大无法上传，在线图片压缩工具可以帮你解决大部分问题）
@@ -46,6 +47,7 @@ tags:
 - [RGB颜色对照表](http://tool.oschina.net/commons?type=3) [RGB颜色值和十六进制颜色值对换工具](http://www.sioe.cn/yingyong/yanse-rgb-16/)（两者搭配使用效果极佳）
 - [开源中国在线工具](http://tool.oschina.net/)（更多在线工具请看这） 
 - [站长工具](http://tool.chinaz.com/)（具有获取IP、查看网站信息等功能的工具）
+- [IFTTT](https://ifttt.com/discover)（互联网自动化时代的杰出代表，让互联网自动帮你完成任务）
 
 ***计算机学习网站***
 
@@ -103,6 +105,7 @@ tags:
 - [知乎](http://www.zhihu.com/)（刷一刷长长见识）
 - [维基百科](https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5)（看一看了解世界）
 - [VOA](http://www.51voa.com/)（练练听力）
+- [沪江听力库](http://ting.hujiang.com/)（练习外语精听的地方）
 
 ***生活娱乐网站***
 
@@ -120,7 +123,9 @@ tags:
 
 ***趣味网站***
 
+- [Ubuntu在线体验](http://tour.ubuntu.com/zh-CN/#)（想要简单地体验Ubuntu，但又不想装虚拟机或系统时的方法）
 - [fakeupdate](http://fakeupdate.net/)（可以用来假装系统更新失败，如果要尝试手机系统可以在原网址后面加上/mobile）
+- [20Q](http://www.20q.net/)（20个问题猜你在想什么东西，蛮有趣的一个小游戏）
 
 ## 后记
 
