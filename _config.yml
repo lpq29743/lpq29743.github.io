@@ -6,7 +6,7 @@ email: 1093564571@qq.com
 description: "关于技术与思想 | 林佩勤，Software Engineer | 这里是林佩勤的个人博客，与你一起发现更大的世界。"
 keyword: "林佩勤"
 url: "https://lpq29743.github.io/redant/"              # your host, for absolute URL
-baseurl: /redant                             # for example, '/blog' if your blog hosted on 'host/blog'
+baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 # SNS settings
 RSS: false
