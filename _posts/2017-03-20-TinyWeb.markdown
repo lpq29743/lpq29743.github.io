@@ -43,7 +43,7 @@ cd ..
 
 套接字接口（socket interface）是一组函数，它们和Unix I/O函数结合起来，用以创建网络应用。学习socket编程能够让我们加深对网络框架的理解，socket编程的函数可以通过下图体现：
 
-![套接字接口概述](http://images.cnitblog.com/blog/466768/201312/27113109-ad8f7a2ce6d64ae39706ef7db3aa07cd.png)
+![套接字接口概述](https://images.cnitblog.com/blog/466768/201312/27113109-ad8f7a2ce6d64ae39706ef7db3aa07cd.png)
 
 通过此图，我们可以大致了解socket包含哪些函数，接下来我们对几个重要的函数进行一一介绍：
 
@@ -147,7 +147,7 @@ int open_clientfd(char *hostname, char *port) {
 
 - 将socket和connect函数包装成一个叫做open_clientfd的辅助函数是很方便的，客户端可以用它来和服务器建立连接
 - 函数中需要使用到结构体addrinfo，这是头文件netdb.h中带有的结构体，netdb.h提供了设置及获取域名的函数
-- 函数先为结构体addrinfo变量hints动态分配内存空间，然后设置结构体成员的值，这里的“|=”运算符是表示或运算
+- 函数先为结构体addrinfo变量hints动态分配内存空间，然后设置结构体成员的值，这里的“\|=”运算符是表示或运算
 - 配置好hints后，open_clientfd函数将调用Getaddrinfo函数（用于通过域名获取IP）返回一个指向addrinfo结构体链表的指针，这个指针也就是listp
 - 接下来函数将遍历listp。每次遍历都是先调用socket函数，如果获取套接字描述符失败，则会执行下一次遍历，如果成功，则会尝试连接。如果连接成功，则会跳出循环，如果失败，则继续尝试
 - 结束遍历后，函数会释放listp占有的内存，并且判断是否获取到能够连接的socket，如果获取到直接返回，反之则返回-1
