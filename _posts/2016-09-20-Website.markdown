@@ -41,10 +41,12 @@ tags:
 - [在线ico制作](http://www.ico.la/)（做网站图标必需）
 - [uupoop](http://www.uupoop.com/zp/)（在线美图）
 - [Sumo Paint](http://www.sumopaint.com/app/)（在线ps，当然功能肯定没ps那么强大）
+- [镜面效果](http://www.reflectionmaker.com/)（制作镜面效果图片的在线工具）
 - [长微博](http://www.changweibo.com/)（如果你喜欢写长微博的话，这是个不错的在线编辑工具）
 - [w3cschool在线html编辑器](http://www.w3school.com.cn/tiy/t.asp?f=html_intro)（用过的都说好）
 - [jsbeautifier](http://jsbeautifier.org/)（在线html/css/js排版）
 - [RGB颜色对照表](http://tool.oschina.net/commons?type=3) [RGB颜色值和十六进制颜色值对换工具](http://www.sioe.cn/yingyong/yanse-rgb-16/)（两者搭配使用效果极佳）
+- [Alexa](http://www.alexa.com/topsites) [Alexa中文版](http://www.123cha.com/alexa/)（查询网站流量排行的工具）
 - [开源中国在线工具](http://tool.oschina.net/)（更多在线工具请看这） 
 - [站长工具](http://tool.chinaz.com/)（具有获取IP、查看网站信息等功能的工具）
 - [IFTTT](https://ifttt.com/discover)（互联网自动化时代的杰出代表，让互联网自动帮你完成任务）
@@ -62,6 +64,7 @@ tags:
 - [segmentfault](https://segmentfault.com/)（国内问答网站）
 - [掘金](https://gold.xitu.io/)（技术文章站点）
 - [math stackexchange](http://math.stackexchange.com/)（数学问答网站，MathJax具体语句可以参照[这里](http://colobu.com/2014/08/17/MathJax-quick-reference/)）
+- [Tech Ideas](https://bwasti.com/techideas)（致力于让程序员不缺点子）
 
 ***工作网站***
 
@@ -123,9 +126,17 @@ tags:
 
 ***趣味网站***
 
+- [有趣网站之家](http://youquhome.com/)（收藏全球范围内有趣的网站）
+- [The Useless Web](http://www.theuselessweb.com/)（无聊时候可以打开的网站）
 - [Ubuntu在线体验](http://tour.ubuntu.com/zh-CN/#)（想要简单地体验Ubuntu，但又不想装虚拟机或系统时的方法）
+- [Windows93体验](http://windows93.net)（想体验93版的Windows是怎样的吗？那就点开这个网站吧）
 - [fakeupdate](http://fakeupdate.net/)（可以用来假装系统更新失败，如果要尝试手机系统可以在原网址后面加上/mobile）
+- [Hacker Typer](http://hackertyper.net/)（装逼神器）
+- [Flash Earth](https://zoom.earth)（综合了谷歌、微软、雅虎等多家地图数据的三维地图数据网站，试试看能不能找到你家的屋顶）
+- [GeoGuessr](https://geoguessr.com/)（非常有趣的游戏，进去后你将被随机扔在地球上的某一角落，需要通过身边的景物来判断自己到底是在哪里）
 - [20Q](http://www.20q.net/)（20个问题猜你在想什么东西，蛮有趣的一个小游戏）
+- [Akinator](http://en.akinator.com/)（与20Q相似，不过这个是猜明星的）
+- [Pichacks](http://www.pichacks.com/welcome.php)（在线搞笑图片对称处理）
 
 ## 后记
 
