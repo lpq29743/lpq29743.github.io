@@ -43,7 +43,7 @@ cd ..
 
 套接字接口（socket interface）是一组函数，它们和Unix I/O函数结合起来，用以创建网络应用。学习socket编程能够让我们加深对网络框架的理解，socket编程的函数可以通过下图体现：
 
-![套接字接口概述](https://images.cnitblog.com/blog/466768/201312/27113109-ad8f7a2ce6d64ae39706ef7db3aa07cd.png)
+![套接字接口概述](http://images.cnitblog.com/blog/466768/201312/27113109-ad8f7a2ce6d64ae39706ef7db3aa07cd.png)
 
 通过此图，我们可以大致了解socket包含哪些函数，接下来我们对几个重要的函数进行一一介绍：
 
