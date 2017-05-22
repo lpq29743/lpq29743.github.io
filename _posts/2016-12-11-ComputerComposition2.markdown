@@ -72,7 +72,7 @@ tags:
 
   > 1. 计算校验位数：设m=数据位数，k=校验位数位，n=总编码位数＝m+k，有Hamming不等式
   >
-  >    ![img](http://img.blog.csdn.net/20130903102558203?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYTc0N2x1bHU3NDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+  >    ![Hamming不等式](/redant/img/computercomposition-formula.jpg)
   >
   > 2. 确定校验码位置：校验码**必须**是在2n次方位置，如第1、2、4、8、16、32，……位（对应20、21、22、23、24、25，……，是从最左边的位数起的），这样一来就知道了信息码的分布位置，也就是非2n次方位置，如第3、5、6、7、9、10、11、12、13，……位（是从最左边的位数起的）。
   >

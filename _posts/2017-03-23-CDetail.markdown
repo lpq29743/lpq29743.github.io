@@ -54,7 +54,7 @@ int main() {
 
 那么究竟自动类型转换规则是怎样的呢？我们可以用下图说明一下：
 
-![img](http://c.biancheng.net/cpp/uploads/allimg/150704/1-150F4151010F4.png)
+![自动类型转换规则](/redant/img/c-autoconvert.png)
 
 **typedef int x[10]和#define x int[10]有什么区别**
 

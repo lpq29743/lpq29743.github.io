@@ -28,7 +28,7 @@ Java虚拟机开始于main()方法， main()方法是程序的起点，它被执
 
 Java虚拟机执行Java程序时把内存区域分为若干个数据区域，具体如下图：
 
-![img](http://upload-images.jianshu.io/upload_images/2614605-bad04f927eace715.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![Java虚拟机运行时数据区](/redant/img/javajvm-region.png)
 
 **程序计数器**
 
@@ -64,7 +64,7 @@ Java虚拟机规范对该区域规定了两种异常情况：如果线程请求�
 
 类从被加载到虚拟机内存中开始，到卸载出内存为止，它的整个生命周期包括：加载、验证、准备、解析、初始化、使用和卸载七个阶段，如下图所示：
 
-![img](http://wiki.jikexueyuan.com/project/java-vm/images/classonload.png)
+![虚拟机类加载机制](/redant/img/javajvm-classloader.png)
 
 加载、验证、准备和初始化这四个阶段的顺序是确定的，而解析阶段则不一定，它可在初始化后开始，这是为了支持 Java 的运行时绑定。对 Java 来说，绑定分为静态绑定和动态绑定：静态绑定即在程序执行前方法已经被绑定，只有 final，static，private 和构造方法是前期绑定的；动态绑定即在运行时根据具体对象的类型进行绑定。
 

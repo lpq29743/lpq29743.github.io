@@ -228,7 +228,7 @@ int main() {
 
 对于前面讲的几个算法，我们可以通过下图总结一下：
 
-![img](http://blog.chinaunix.net/attachment/201201/18/21457204_1326898064RUxx.jpg)
+![排序算法比较](/redant/img/sort-comparison.jpg)
 
 **附：关于稳定性**
 
