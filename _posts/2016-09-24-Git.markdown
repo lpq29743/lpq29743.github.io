@@ -120,6 +120,7 @@ git reset --hard commit_id
 - [Github是怎么检测项目语言的](http://stackoverflow.com/questions/5318580/how-does-github-figure-out-a-projects-language)
 - [怎么修改Github项目的语言](http://stackoverflow.com/questions/13597892/how-to-change-the-language-of-a-repository-on-github/27099628#27099628)
 - [大白话讲解如何给github上项目贡献代码](https://site.douban.com/196781/widget/notes/12161495/note/269163206/?)
+- [如何推广自己的GitHub项目](http://www.jianshu.com/p/f2483bd8da43)
 - [GitHub 上有哪些好的英文文章或书籍的翻译项目](https://www.zhihu.com/question/27410763)
 
 ## 后记
