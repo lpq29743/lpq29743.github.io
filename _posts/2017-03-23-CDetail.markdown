@@ -116,6 +116,38 @@ int main() {
 
    当进入此函数时，自动变量arr将在堆栈中分配，当函数结束后，变量不复存在，它所占用的堆栈控件被回收，指针失去了有效性，被称为悬垂指针。
 
+**C语言怎么计算程序运算时间**
+
+在Windows下，C语言计算程序运行时间需要用到time函数，下面是一个计算立方根迭代所需时间的例子：
+
+```c
+#include <stdio.h>
+#include <time.h>
+
+int main() {
+    int x, n;
+    scanf("%d %d", &x, &n);
+    
+    clock_t start, finish;
+    double duration;
+    start = clock();
+    
+    double y = x;
+    int count = 0;
+    while(count < n) {
+        y = y * 2 / 3 + x / (3 * y * y);
+        count++;
+    }
+    
+    finish = clock();
+    duration = (double)(finish - start) / CLOCKS_PER_SEC;
+    printf( "%f seconds\n", duration );
+    
+    printf("%.6lf", y);
+    return 0;
+}
+```
+
 **C语言怎么获取随机数**
 
 C语言取随机数的具体方法如下：
