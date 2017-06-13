@@ -43,7 +43,7 @@ tags:
 
 144.224957
 
-**程序代码***
+***程序代码***
 
 ```c
 #include <stdio.h>
@@ -63,6 +63,67 @@ int main() {
     return 0;
 }
 ```
+**素数**
+
+***题目描述***
+
+输入整数n(2<=n<=10000)，要求输出所有从1到这个整数之间(不包括1和这个整数)个位为1的素数，如果没有则输出-1
+
+***输入描述***
+输入有多组数据。每组一行，输入n
+
+***输出描述***
+
+输出所有从1到这个整数之间(不包括1和这个整数)个位为1的素数(素数之间用空格隔开，最后一个素数后面没有空格)，如果没有则输出-1
+
+***输入例子***
+
+100
+
+***输出例子***
+
+11 31 41 61 71
+
+***程序代码***
+
+```c
+#include <stdio.h>
+
+int isPrime(int i) {
+    for(int j = 2; j < i; j++) {
+        if(i % j == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int main() {
+    int n;
+    int hasFirst;
+    while(scanf("%d", &n) == 1) {
+        hasFirst = 0;
+        for(int i = 2; i < n; i++) {
+            if(isPrime(i) && i % 10 == 1) {
+                if(hasFirst) {
+                    printf(" ");
+                }
+                printf("%d", i);
+                if(!hasFirst) {
+                    hasFirst = 1;
+                }
+            }
+        }
+        if(!hasFirst) {
+            printf("-1\n");
+        } else {
+            printf("\n");
+        }
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 加油！梦会实现的！
