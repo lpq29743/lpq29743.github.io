@@ -236,6 +236,91 @@ int main() {
 }
 ```
 
+**数组排序**
+
+***题目描述***
+
+输入一个数组的值,求出各个值从小到大排序后的次序
+
+***输入描述***
+
+输入有多组数据。每组输入的第一个数为数组的长度n(1<=n<=10000)，后面的数为数组中的值，以空格分割
+
+***输出描述***
+
+各输入的值按从小到大排列的次序(最后一个数字后面没有空格)。
+
+***输入例子***
+
+4 -3 75 12 -3
+
+***输出例子***
+
+1 3 2 1
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+struct num {
+    int value;
+    int loc;
+    int rank;
+};
+
+int main() {
+    int n;
+    while(scanf("%d", &n) == 1) {
+        struct num *s;
+        s = (struct num *)malloc(sizeof(struct num) * n);
+        for(int i = 0; i < n; i++) {
+            scanf("%d", &s[i].value);
+            s[i].loc = i;
+            s[i].rank = 0;
+        }
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n - i - 1; j++) {
+                if(s[j].value > s[j + 1].value) {
+                    struct num temp = s[j];
+                    s[j] = s[j + 1];
+                    s[j + 1] = temp;
+                }
+            }
+        }
+        int rank = 0;
+        for(int i = 0; i < n; i++) {
+            if(i - 1 < 0 || s[i - 1].value != s[i].value) {
+                rank++;
+            }
+            s[i].rank = rank;
+        }
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n - i - 1; j++) {
+                if(s[j].loc > s[j + 1].loc) {
+                    struct num temp = s[j];
+                    s[j] = s[j + 1];
+                    s[j + 1] = temp;
+                }
+            }
+        }
+        int flag = 0;
+        for(int i = 0; i < n; i++) {
+            if(flag == 0) {
+                printf("%d", s[i].rank);
+            } else {
+                printf(" %d", s[i].rank);
+            }
+            if(i == 0) {
+                flag = 1;
+            }
+        }
+        printf("\n");
+    }
+}
+```
+
 ## 后记
 
 加油！梦会实现的！
