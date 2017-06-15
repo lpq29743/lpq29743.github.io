@@ -125,6 +125,117 @@ int main() {
 }
 ```
 
+**旋转矩阵**
+
+***题目描述***
+
+任意输入两个9阶以下矩阵，要求判断第二个是否是第一个的旋转矩阵，如果是，输出旋转角度（0、90、180、270），如果不是，输出-1。 要求先输入矩阵阶数，然后输入两个矩阵，每行两个数之间可以用任意个空格分隔。行之间用回车分隔，两个矩阵间用任意的回车分隔
+
+***输入描述***
+
+输入有多组数据。每组数据第一行输入n(1<=n<=9)，从第二行开始输入两个n阶矩阵
+
+***输出描述***
+
+判断第二个是否是第一个的旋转矩阵，如果是，输出旋转角度（0、90、180、270），如果不是，输出-1。如果旋转角度的结果有多个，则输出最小的那个
+
+***输入例子***
+
+31 2 34 5 67 8 97 4 18 5 29 6 3
+
+***输出例子***
+
+90
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+int isReverseBy0(int **s1, int **s2, int n) {
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            if(s1[i][j] != s2[i][j]) {
+                return 0;
+                break;
+            }
+        }
+    }
+    return 1;
+}
+
+int isReverseBy90(int **s1, int **s2, int n) {
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            if(s1[i][j] != s2[j][n - i - 1]) {
+                return 0;
+                break;
+            }
+        }
+    }
+    return 1;
+}
+
+int isReverseBy180(int **s1, int **s2, int n) {
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            if(s1[i][j] != s2[n - i - 1][n - j - 1]) {
+                return 0;
+                break;
+            }
+        }
+    }
+    return 1;
+}
+
+int isReverseBy270(int **s1, int **s2, int n) {
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            if(s1[i][j] != s2[n - j - 1][i]) {
+                return 0;
+                break;
+            }
+        }
+    }
+    return 1;
+}
+
+int main() {
+    int n;
+    while(scanf("%d", &n) == 1) {
+        int **s1, **s2;
+        s1 = (int **)malloc(sizeof(int*) * n);
+        s2 = (int **)malloc(sizeof(int*) * n);
+        for(int i = 0; i < n; i++) {
+            s1[i] = (int *)malloc(sizeof(int) * n);
+            s2[i] = (int *)malloc(sizeof(int) * n);
+        }
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                scanf("%d", &s1[i][j]);
+            }
+        }
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                scanf("%d", &s2[i][j]);
+            }
+        }
+        if(isReverseBy0(s1, s2, n)) {
+            printf("0\n");
+        } else if(isReverseBy90(s1, s2, n)) {
+            printf("90\n");
+        } else if(isReverseBy180(s1, s2, n)) {
+            printf("180\n");
+        } else if(isReverseBy270(s1, s2, n)) {
+            printf("270\n");
+        } else {
+            printf("-1\n");
+        }
+    }
+}
+```
+
 ## 后记
 
 加油！梦会实现的！
