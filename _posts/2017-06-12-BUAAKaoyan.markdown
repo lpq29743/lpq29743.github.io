@@ -37,11 +37,15 @@ tags:
 
 ***输入例子***
 
+```
 3000000 28
+```
 
 ***输出例子***
 
+```
 144.224957
+```
 
 ***程序代码***
 
@@ -79,11 +83,15 @@ int main() {
 
 ***输入例子***
 
+```
 100
+```
 
 ***输出例子***
 
+```
 11 31 41 61 71
+```
 
 ***程序代码***
 
@@ -141,11 +149,15 @@ int main() {
 
 ***输入例子***
 
+```
 31 2 34 5 67 8 97 4 18 5 29 6 3
+```
 
 ***输出例子***
 
+```
 90
+```
 
 ***程序代码***
 
@@ -252,11 +264,15 @@ int main() {
 
 ***输入例子***
 
+```
 4 -3 75 12 -3
+```
 
 ***输出例子***
 
+```
 1 3 2 1
+```
 
 ***程序代码***
 
@@ -320,6 +336,89 @@ int main() {
     }
 }
 ```
+
+**字符串的查找删除**
+
+***题目描述***
+
+给定一个短字符串（不含空格），再给定若干字符串，在这些字符串中删除所含有的短字符串
+
+***输入描述***
+
+输入只有1组数据。输入一个短字符串（不含空格），再输入若干字符串直到文件结束为止
+
+***输出描述***
+
+删除输入的短字符串(不区分大小写)并去掉空格，输出
+
+***输入例子***
+
+```
+in
+include
+int main()
+{
+printf(" Hi ");
+}
+```
+
+***输出例子***
+
+```
+#clude
+tma()
+{
+prtf("Hi");
+}
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define N 100
+
+char *deleteSubString(char *source, char *input, char *result) {
+    int isSubString;
+    int loc = 0;
+    if(strlen(source) > strlen(input)) {
+        return NULL;
+    } else {
+        for(int i = 0; i < strlen(input) - strlen(source) + 1; i++) {
+            isSubString = 1;
+            for(int j = 0; j < strlen(source); j++) {
+                if(source[j] != input[i + j] && source[j] - 32 != input[i + j] && source[j] + 32 != input[i + j] ) {
+                    isSubString = 0;
+                    break;
+                }
+            }
+            if(isSubString == 0 && input[i] != ' ') {
+                result[loc++] = input[i];
+            } else if(isSubString == 1) {
+                i += strlen(source) - 1;
+            }
+        }
+    }
+    if(isSubString == 0) {
+        for(int i = strlen(input) - strlen(source) + 1; i < strlen(input); i++) {
+            result[loc++] = input[i];
+        }
+    }
+    result[loc] = '\0';
+    return result;
+}
+
+int main() {
+    char source[N], input[N], result[N];
+    gets(source);
+    while(gets(input) != NULL) {
+        printf("%s\n", deleteSubString(source, input, result));
+    }
+}
+```
+
 
 ## 后记
 
