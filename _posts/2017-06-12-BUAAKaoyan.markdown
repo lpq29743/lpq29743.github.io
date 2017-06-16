@@ -419,6 +419,94 @@ int main() {
 }
 ```
 
+**字符串匹配**
+
+***题目描述***
+
+读入数据string[ ]，然后读入一个短字符串。要求查找string[ ]中和短字符串的所有匹配，输出行号、匹配字符串。匹配时不区分大小写，并且可以有一个用中括号表示的模式匹配。如“aa[123]bb”，就是说aa1bb、aa2bb、aa3bb都算匹配
+
+***输入描述***
+
+输入多组数据。每组数据第一行输入n(1<=n<=1000)，第二行开始输入n个字符串（不含空格），接下来输入匹配字符串
+
+***输出描述***
+
+输出匹配到的字符串的行号和该字符串（匹配时不区分大小写）
+
+***输入例子***
+
+```
+4
+Aab
+a2B
+ab
+ABB
+a[a2b]b
+```
+
+***输出例子***
+
+```
+1 Aab
+2 a2B
+4 ABB
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define N 100
+
+int isSubString(char *s, char *pattern) {
+    int loc = 0, isMatch;
+    for(int i = 0; i < strlen(pattern); i++) {
+        if(pattern[i] == '[') {
+            isMatch = 0;
+            while(pattern[++i] != ']') {
+                if(s[loc] - 32 == pattern[i] || s[loc] + 32 == pattern[i] || s[loc] == pattern[i]) {
+                    isMatch = 1;
+                }
+            }
+            if(isMatch == 0) {
+                return 0;
+                break;
+            } else {
+                loc++;
+            }
+        } else {
+            if(s[loc] - 32 != pattern[i] && s[loc] + 32 != pattern[i] && s[loc] != pattern[i]) {
+                return 0;
+                break;
+            } else {
+                loc++;
+            }
+        }
+    }
+    return 1;
+}
+
+int main() {
+    int n;
+    char **s, pattern[N];
+    while(scanf("%d", &n) == 1) {
+        getchar();
+        s = (char **)malloc(sizeof(char *) * n);
+        for(int i = 0; i < n; i++) {
+            s[i] = (char *)malloc(sizeof(char) * N);
+            gets(s[i]);
+        }
+        gets(pattern);
+        for(int i = 0; i < n; i++) {
+            if(isSubString(s[i], pattern)) {
+                printf("%d %s\n", i + 1, s[i]);
+            }
+        }
+    }
+}
+```
 
 ## 后记
 
