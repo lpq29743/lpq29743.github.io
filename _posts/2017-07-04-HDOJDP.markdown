@@ -1,0 +1,80 @@
+---
+layout:     post
+title:      "杭电OJ刷题记之动态规划"
+subtitle:   "算法中的常客"
+date:       2017-07-04 14:00:00
+author:     "林佩勤"
+header-img: "img/post-bg.jpg"
+tags:
+    - 数据结构与算法
+---
+
+> 学习算法逃不过去的一关
+>
+
+
+## 前言
+
+动态规划在算法中有着极其重要的地位，也经常在各种算法比赛中出现，我们就通过这篇文章来对其进行一个简单的学习。
+
+---
+
+## 正文
+
+**最大连续子序列和**
+
+***题目来源***
+
+[HDOJ 1003 Max Sum](http://acm.hdu.edu.cn/showproblem.php?pid=1003)
+
+***题目分析***
+
+这道题目算是动态规划题目里面比较简单的了。动态规划很重要的一步是找出动态转移方程，这里的动态转移方程是：`sum[i] = max{sum[i-1]+a[i],a[i]}`，根据这道方程，我们可以在O(n)的复杂度下求得各个节点的sum值，从而得到最大连续子序列和。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    for(int i = 0; i < t; i++) {
+        int n;
+        int *s, *sum, max;
+        int a, b, A, B;
+        scanf("%d", &n);
+        s = (int *)malloc(sizeof(int) * n);
+        sum = (int *)malloc(sizeof(int) * n);
+        for(int j = 0; j < n; j++) {
+            scanf("%d", &s[j]);
+            sum[j] = 0;
+        }
+        if(i != 0) {
+            printf("\n");
+        }
+        max = sum[0] = s[0];
+        A = B = a = b = 0;
+        for(int j = 1; j < n; j++) {
+            if(sum[j - 1] + s[j] >= s[j]) {
+                sum[j] = sum[j - 1] + s[j];
+                b++;
+            } else {
+                sum[j] = s[j];
+                a = b = j;
+            }
+            if(sum[j] > max) {
+                max = sum[j];
+                A = a;
+                B = b;
+            }
+        }
+        printf("Case %d:\n%d %d %d\n", i+1, max, A + 1, B + 1);
+    }
+    return 0;
+}
+```
+## 后记
+
+大数运算在实际编程中运用十分广泛，特别是对于没有大数处理功能的编程语言来说。学习好大数运算，对我们的编程工作有很大帮助。
