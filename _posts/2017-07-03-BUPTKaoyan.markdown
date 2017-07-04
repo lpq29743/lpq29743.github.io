@@ -274,6 +274,222 @@ int main() {
 }
 ```
 
+**矩阵幂**
+
+***题目描述***
+
+给定一个n*n的矩阵，求该矩阵的k次幂，即P^k
+
+***输入描述***
+
+输入包含多组测试数据。数据的第一行为一个整数T(0<T<=10)，表示要求矩阵的个数。接下来有T组测试数据，每组数据格式如下： 第一行：两个整数n（2<=n<=10）、k（1<=k<=5），两个数字之间用一个空格隔开，含义如上所示。接下来有n行，每行n个正整数，其中，第i行第j个整数表示矩阵中第i行第j列的矩阵元素Pij且（0<=Pij<=10）。另外，数据保证最后结果不会超过10^8
+
+***输出描述***
+
+对于每组测试数据，输出其结果。格式为：n行n列个整数，每行数之间用空格隔开，注意，每行最后一个数后面不应该有多余的空格
+
+***输入例子***
+
+```
+3
+2 2
+9 8
+9 3
+3 3
+4 8 4
+9 3 0
+3 5 7
+5 2
+4 0 3 0 1
+0 0 5 8 5
+8 9 8 5 3
+9 6 1 7 8
+7 2 5 7 3
+```
+
+***输出例子***
+
+```
+153 96
+108 81
+1216 1248 708
+1089 927 504
+1161 1151 739
+47 29 41 22 16
+147 103 73 116 94
+162 108 153 168 126
+163 67 112 158 122
+152 93 93 111 97
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    for(int i = 0; i < t; i++) {
+        int n, k;
+        int **s1, **s2, **s3;
+        scanf("%d %d", &n, &k);
+        s1 = (int **)malloc(sizeof(int *) * n);
+        s2 = (int **)malloc(sizeof(int *) * n);
+        s3 = (int **)malloc(sizeof(int *) * n);
+        for(int j = 0; j < n; j++) {
+            s1[j] = (int *)malloc(sizeof(int) * n);
+            s2[j] = (int *)malloc(sizeof(int) * n);
+            s3[j] = (int *)malloc(sizeof(int) * n);
+        }
+        for(int j1 = 0; j1 < n; j1++) {
+            for(int j2 = 0; j2 < n; j2++) {
+                scanf("%d", &s1[j1][j2]);
+                s2[j1][j2] = s1[j1][j2];
+                s3[j1][j2] = 0;
+            }
+        }
+        for(int j1 = 1; j1 < k; j1++) {
+            for(int j2 = 0; j2 < n; j2++) {
+                for(int j3 = 0; j3 < n; j3++) {
+                    int sum = 0;
+                    for(int j4 = 0; j4 < n; j4++) {
+                        sum += s1[j2][j4] * s2[j4][j3];
+                    }
+                    s3[j2][j3] = sum;
+                }
+            }
+            for(int j2 = 0; j2 < n; j2++) {
+                for(int j3 = 0; j3 < n; j3++) {
+                    s2[j2][j3] = s3[j2][j3];
+                }
+            }
+        }
+        for(int j1 = 0; j1 < n; j1++) {
+            for(int j2 = 0; j2 < n; j2++) {
+                if(j2 != 0) {
+                    printf(" ");
+                }
+                printf("%d", s2[j1][j2]);
+            }
+            printf("\n");
+        }
+    }
+    return 0;
+}
+```
+
+**C翻转**
+
+***题目描述***
+
+首先输入一个5 * 5的数组，然后输入一行，这一行有四个数，前两个代表操作类型，后两个数x y代表需操作数据为以x y为左上角的那几个数据。 操作类型有四种：  1 2 表示：90度，顺时针，翻转4个数  1 3 表示：90度，顺时针，翻转9个数  2 2 表示：90度，逆时针，翻转4个数  2 3 表示：90度，逆时针，翻转9个数 
+
+***输入描述***
+
+输入有多组数据。每组输入一个5 * 5的数组，然后输入一行，这一行有四个数，前两个代表操作类型，后两个数x y代表需操作数据为以x y为左上角的那几个数据
+
+***输出描述***
+
+输出翻转后的数组
+
+***输入例子***
+
+```
+1 2 3 4 5
+6 7 8 9 10
+11 12 13 14 15
+16 17 18 19 20
+21 22 23 24 25
+1 3 1 1
+```
+
+***输出例子***
+
+```
+11 6 1 4 5
+12 7 2 9 10
+13 8 3 14 15
+16 17 18 19 20
+21 22 23 24 25
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+
+int main() {
+    int matrix[5][5];
+    int a, b, x, y;
+    while(1) {
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 5; j++) {
+                if(scanf("%d", &matrix[i][j]) != 1) {
+                    break;
+                }
+            }
+        }
+        if(scanf("%d %d %d %d", &a, &b, &x, &y) != 4) {
+            break;
+        }
+        // 1 2 表示：90度，顺时针，翻转4个数
+        if(a == 1 && b == 2) {
+            int temp = matrix[x - 1][y - 1];
+            matrix[x - 1][y - 1] = matrix[x][y - 1];
+            matrix[x][y - 1] = matrix[x][y];
+            matrix[x][y] = matrix[x - 1][y];
+            matrix[x - 1][y] = temp;
+        }
+        // 1 3 表示：90度，顺时针，翻转9个数
+        if(a == 1 && b == 3) {
+            int temp = matrix[x - 1][y - 1];
+            matrix[x - 1][y - 1] = matrix[x + 1][y - 1];
+            matrix[x + 1][y - 1] = matrix[x + 1][y + 1];
+            matrix[x + 1][y + 1] = matrix[x - 1][y + 1];
+            matrix[x - 1][y + 1] = temp;
+            temp = matrix[x - 1][y];
+            matrix[x - 1][y] = matrix[x][y - 1];
+            matrix[x][y - 1] = matrix[x + 1][y];
+            matrix[x + 1][y] = matrix[x][y + 1];
+            matrix[x][y + 1] = temp;
+        }
+        // 2 2 表示：90度，逆时针，翻转4个数
+        if(a == 2 && b == 2) {
+            int temp = matrix[x - 1][y - 1];
+            matrix[x - 1][y - 1] = matrix[x - 1][y];
+            matrix[x - 1][y] = matrix[x][y];
+            matrix[x][y] = matrix[x][y - 1];
+            matrix[x][y - 1] = temp;
+        }
+        // 2 3 表示：90度，逆时针，翻转9个数
+        if(a == 2 && b == 3) {
+            int temp = matrix[x - 1][y - 1];
+            matrix[x - 1][y - 1] = matrix[x - 1][y + 1];
+            matrix[x - 1][y + 1] = matrix[x + 1][y + 1];
+            matrix[x + 1][y + 1] = matrix[x + 1][y - 1];
+            matrix[x + 1][y - 1] = temp;
+            temp = matrix[x - 1][y];
+            matrix[x - 1][y] = matrix[x][y + 1];
+            matrix[x][y + 1] = matrix[x + 1][y];
+            matrix[x + 1][y] = matrix[x][y - 1];
+            matrix[x][y - 1] = temp;
+        }
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 5; j++) {
+                if(j != 0) {
+                    printf(" ");
+                }
+                printf("%d", matrix[i][j]);
+            }
+            printf("\n");
+        }
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 继续前进，没有一滴汗水会白流。
