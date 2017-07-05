@@ -514,6 +514,76 @@ int main() {
 }
 ```
 
+**循环右移**
+
+***题目描述***
+
+用尽可能高的时间效率与空间效率将一个int类型的数组A[0..n-1]的所有元素依次循环右移k个位置
+
+***输入描述***
+
+输入多组数据。每组数据第一行输入数组长度n(1<=n<=1000)和右移距离k(1<=k<=1000)，第二行开始输入n个整数
+
+***输出描述***
+
+输出右移后的数组，数组元素以空格隔开，最后一个数后面没有空格
+
+***输入例子***
+
+```
+7 4
+1 2 3 4 5 6 7
+5 2
+1 2 3 4 5
+```
+
+***输出例子***
+
+```
+4 5 6 7 1 2 3
+4 5 1 2 3
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+void reverse(int *s, int a, int b) {
+    for(int i = a; i <= a + (b - a) / 2; i++) {
+        int temp = s[i];
+        s[i] = s[b + a - i];
+        s[b + a - i] = temp;
+    }
+}
+
+void rightmove(int *s, int n, int k) {
+    reverse(s, 0, n - k - 1);
+    reverse(s, n - k, n - 1);
+    reverse(s, 0, n - 1);
+}
+
+int main() {
+    int n, k;
+    while(scanf("%d %d", &n, &k) == 2) {
+        int *s = (int *)malloc(sizeof(int) * n);
+        for(int i = 0; i < n; i++) {
+            scanf("%d", &s[i]);
+        }
+        rightmove(s, n, k);
+        for(int i = 0; i < n; i++) {
+            if(i != 0) {
+                printf(" ");
+            }
+            printf("%d", s[i]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 加油！梦会实现的！
