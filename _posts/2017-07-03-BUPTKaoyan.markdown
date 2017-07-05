@@ -490,6 +490,301 @@ int main() {
 }
 ```
 
+**打牌**
+
+***题目描述***
+
+牌只有1到9，手里拿着已经排好序的牌a，对方出牌b，用程序判断手中牌是否能够压过对方出牌。  规则：出牌牌型有5种   [1]一张 如4 则5...9可压过 [2]两张 如44 则55，66，77，...，99可压过 [3]三张 如444 规则如[2][4]四张 如4444 规则如[2][5]五张 牌型只有12345 23456 34567 45678 56789五个，后面的比前面的均大
+
+***输入描述***
+
+输入有多组数据。每组输入两个字符串(字符串大小不超过100)a，b。a字符串代表手中牌，b字符串代表处的牌
+
+***输出描述***
+
+压过输出YES 否则NO
+
+***输入例子***
+
+```
+12233445566677
+33
+```
+
+***输出例子***
+
+```
+YES
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<string.h>
+
+int main() {
+    char a[100], b[6], c[5];
+    int num, isYes;
+    while(scanf("%s %s", &a, &b) == 2) {
+        num = b[0] - '0';
+        isYes = 0;
+        if(strlen(b) == 1 || strlen(b) == 2 || strlen(b) == 3 || strlen(b) == 4) {
+            for(int i = num + 1; i <= 9; i++) {
+                int j;
+                for(j = 0; j < strlen(b); j++) {
+                    c[j] = i + '0';
+                }
+                c[j] = '\0';
+                if(strstr(a, c) != NULL) {
+                    isYes = 1;
+                    break;
+                }
+            }
+        } else if(strlen(b) == 5) {
+            for(int i = num + 1; i <= 5; i++) {
+                int isAllFind = 1;
+                for(int j = i; j < i + 5; j++) {
+                    if(strchr(a, j + '0') == NULL) {
+                        isAllFind = 0;
+                        break;
+                    }
+                }
+                if(isAllFind == 1) {
+                    isYes = 1;
+                    break;
+                }
+            }
+        }
+        printf("%s\n", isYes == 1 ? "YES" : "NO");
+    }
+    return 0;
+}
+```
+
+**树查找**
+
+***题目描述***
+
+有一棵树，输出某一深度的所有节点，有则输出这些节点，无则输出EMPTY。该树是完全二叉树
+
+***输入描述***
+
+输入有多组数据。每组输入一个n(1<=n<=1000)，然后将树中的这n个节点依次输入，再输入一个d代表深度
+
+***输出描述***
+
+输出该树中第d层得所有节点，节点间用空格隔开，最后一个节点后没有空格
+
+***输入例子***
+
+```
+4
+1 2 3 4
+2
+```
+
+***输出例子***
+
+```
+2 3
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+int main() {
+    int n, d, *s;
+    while(scanf("%d", &n) == 1) {
+        s = (int *)malloc(sizeof(int) * n);
+        for(int i = 0; i < n; i++) {
+            scanf("%d", &s[i]);
+        }
+        scanf("%d", &d);
+        if((int)pow(2, d - 1) > n) {
+            printf("EMPTY\n");
+        } else {
+            for(int i = (int)pow(2, d - 1); i <= (int)pow(2, d) - 1 && i <= n; i++) {
+                if(i != (int)pow(2, d - 1)) {
+                    printf(" ");
+                }
+                printf("%d", s[i - 1]);
+            }
+            printf("\n");
+        }
+    }
+    return 0;
+}
+```
+
+**查找**
+
+***题目描述***
+
+读入一组字符串（待操作的），再读入一个记录n记下来有几条命令，总共有2种命令，翻转：从下标为i的字符到i+len-1之间的字符串倒序；替换：命中如果第一位为1，用命令的第四位开始到最后的字符串替换原读入的字符串下标 i 到 i+len-1的字符串。每次执行一条命令后新的字符串代替旧的字符串（即下一条命令在作用在得到的新字符串上）。命令格式：第一位0代表翻转，1代表替换；第二位代表待操作的字符串的起始下标int i；第三位表示需要操作的字符串长度int len
+
+***输入描述***
+
+输入有多组数据。每组输入一个字符串（不大于100）然后输入n，再输入n条指令（指令一定有效）
+
+***输出描述***
+
+根据指令对字符串操作后输出结果
+
+***输入例子***
+
+```
+bac
+2
+003
+112as
+```
+
+***输出例子***
+
+```
+cab
+cas
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define N 1000
+
+int main() {
+    int n;
+    int start, length;
+    char source[N], command[N];
+    while(scanf("%s %d", &source, &n) == 2) {
+        while(n-- > 0) {
+            scanf("%s", &command);
+            start = command[1] - '0';
+            length = command[2] - '0';
+            if(command[0] == '0') {
+                for(int j = start, k = start + length - 1; j < k; j++, k--) {
+                    char temp = source[j];
+                    source[j] = source[k];
+                    source[k] = temp;
+                }
+            } else {
+                char a[N], b[N], c[N];
+                strncpy(a, source, start);
+                a[start] = '\0';
+                strncpy(b, command + 3, strlen(command) - 3);
+                b[strlen(command) - 3] = '\0';
+                strncpy(c, source + start + length, strlen(source) - start - length);
+                c[strlen(source) - start - length] = '\0';
+                strcat(a, b);
+                strcat(a, c);
+                strcpy(source, a);
+            }
+            printf("%s\n", source);
+        }
+    }
+    return 0;
+}
+```
+
+**复数集合**
+
+***题目描述***
+
+一个复数（x+iy）集合，两种操作作用在集合上：Pop表示读出集合中模值最大的复数，如集合为空输出empty，不为空就输出最大的那个复数并且从集合中删除那个复数，再输出集合大小SIZE；Insert a+ib（a，b表示实部和虚部）将a+ib加入到集合中，输出集合的大小SIZE
+
+***输入描述***
+
+输入有多组数据。每组输入一个n(1<=n<=1000)，然后再输入n条指令
+
+***输出描述***
+
+根据指令输出结果。模相等的输出b较小的复数。a和b都是非负数
+
+***输入例子***
+
+```
+3
+Pop
+Insert 1+i2
+Pop
+```
+
+***输出例子***
+
+```
+empty
+SIZE = 1
+1+i2
+SIZE = 0
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+struct node {
+    int a;
+    int b;
+};
+
+int main() {
+    int n;
+    char command[10];
+    while(scanf("%d", &n) == 1) {
+        struct node s[1000];
+        int size = 0;
+        while(n-- > 0) {
+            scanf("%s", &command);
+            if(strcmp(command, "Pop") == 0) {
+                if(size == 0) {
+                    printf("empty\n");
+                } else {
+                    int loc = -1, max = -1, mod, ta, tb = -1;
+                    for(int i = 0; i < size; i++) {
+                        mod = s[i].a * s[i].a + s[i].b * s[i].b;
+                        if(mod > max || (mod == max && s[i].b < tb)) {
+                            loc = i;
+                            max = mod;
+                            ta = s[i].a;
+                            tb = s[i].b;
+                        }
+                    }
+                    for(int i = loc; i < size - 1; i++) {
+                        s[i] = s[i + 1];
+                    }
+                    size--;
+                    printf("%d+i%d\nSIZE = %d\n", ta, tb, size);
+                }
+            } else if(strcmp(command, "Insert") == 0) {
+                char obj[100];
+                scanf("%s", &obj);
+                char *temp = strchr(obj, '+');
+                char ta[100], tb[100];
+                strncpy(ta, obj, strlen(obj) - strlen(temp));
+                ta[strlen(obj) - strlen(temp)] = '\0';
+                strncpy(tb, temp + 2, strlen(temp));
+                tb[strlen(temp)] = '\0';
+                s[size].a = atoi(ta);
+                s[size].b = atoi(tb);
+                size++;
+                printf("SIZE = %d\n", size);
+            }
+        }
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 继续前进，没有一滴汗水会白流。
