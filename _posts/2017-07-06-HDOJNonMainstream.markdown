@@ -35,7 +35,7 @@ tags:
 
 如果对于上面的解释不太清楚的话，可以查看[这里](http://www.cnblogs.com/hxsyl/p/3230164.html)。对于这个问题，还有几个关键的地方，具体如下：
 
-1. 程序排序用到的是C++的库文件algorithm里面的qsort算法，原本尝试过ANSI C的stdlib.h头文件中的sort算法，但效果不佳，会出现TLE。所以这个程序需要在C++环境下运行
+1. 程序排序用到的是C++的库文件algorithm里面的sort算法，原本尝试过ANSI C的stdlib.h头文件中的qsort算法，但效果不佳，会出现TLE。所以这个程序需要在C++环境下运行
 2. 浮点数（float，double）是不存在完全相等的。我们可以用eps（一般为1e-6或1e-8），利用fabs（abs是整数取绝对值）判断范围是否小于eps，从而判断浮点数是否相等
 
 ***实现代码***
