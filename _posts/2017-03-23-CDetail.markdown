@@ -175,7 +175,7 @@ int main() {
 
 qsort函数传入的第四个参数是一个比较函数，决定了排序的规则，这里的规则是降序排列。
 
-以上的方法是cu
+以上的方法是纯C语言支持的，实际上，在C++的algorithm库中，有一个sort函数，比qsort函数要高效很多，具体的理由可以查看stackoverflow上的[讨论](https://stackoverflow.com/questions/4708105/performance-of-qsort-vs-stdsort)。
 
 **C语言怎么计算程序运算时间**
 
