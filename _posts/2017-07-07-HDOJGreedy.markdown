@@ -36,75 +36,44 @@ tags:
 ```c++
 #include<stdio.h>
 #include<stdlib.h>
-#include<math.h>
-#include<algorithm>
-using namespace std;
 
 typedef struct {
-    double x;
-    double y;
-} point;
+    int j;
+    int f;
+    double ratio;
+} room;
 
-int cmpxy (const point a, const point b) {
-    if(a.x != b.x) {
-        return a.x < b.x;
-    } else {
-        return a.y < b.y;
-    }
-}
-
-double dist(point *p, int i, int j) {
-    return sqrt((p[i].x - p[j].x) * (p[i].x - p[j].x) +
-                (p[i].y - p[j].y) * (p[i].y - p[j].y));
-}
-
-double getMin(point *p, int low, int high) {
-    if(low == high - 1) {
-        return dist(p, low, high);
-    } else if(low == high - 2) {
-        double dist1, dist2, dist3, temp;
-        dist1 = dist(p, low, low + 1);
-        dist2 = dist(p, low, high);
-        dist3 = dist(p, low + 1, high);
-        temp = dist1 > dist2 ? dist2 : dist1;
-        return temp > dist3 ? dist3 : temp;
-    } else {
-        double dist1, dist2;
-        int mid = low + (high - low) / 2;
-        dist1 = getMin(p, low, mid);
-        dist2 = getMin(p, mid + 1, high);
-        double mindist = dist1 > dist2 ? dist2 : dist1;
-        for(int i = mid + 1; i <= high; i++) {
-            if(p[i].x > (p[mid].x - mindist) && p[i].x < (p[mid].x + mindist)) {
-                if(dist(p, i, mid) < mindist) {
-                    mindist = dist(p, i, mid);
+int main() {
+    int m, n;
+    room *rooms;
+    while(scanf("%d %d", &m, &n) == 2 && m != -1 && n != -1) {
+        rooms = (room *)malloc(sizeof(room) * n);
+        for(int i = 0; i < n; i++) {
+            scanf("%d %d", &rooms[i].j, &rooms[i].f);
+            rooms[i].ratio = (double)rooms[i].j / rooms[i].f;
+        }
+        for(int i1 = 0; i1 < n - 1; i1++) {
+            for(int i2 = 0; i2 < n - i1 - 1; i2++) {
+                if(rooms[i2].ratio < rooms[i2 + 1].ratio) {
+                    room temp = rooms[i2];
+                    rooms[i2] = rooms[i2 + 1];
+                    rooms[i2 + 1] = temp;
                 }
             }
         }
-        return mindist;
-    }
-}
-
-int main() {
-    int n;
-    while(scanf("%d", &n) != 0 && n) {
-        point *p = (point *)malloc(sizeof(point) * n);
+        double sum = 0;
         for(int i = 0; i < n; i++) {
-            scanf("%lf %lf", &p[i].x, &p[i].y);
+            if(m <= 0) {
+                break;
+            } else if(m > rooms[i].f) {
+                m -= rooms[i].f;
+                sum += rooms[i].j;
+            } else {
+                sum += m * rooms[i].ratio;
+                break;
+            }
         }
-        sort(p, p + n, cmpxy);
-        int tag = 0;
-        double eps = 1e-8;
-        for(int i = 0; i < n - 1; i++) {
-            if(fabs(p[i].x - p[i + 1].x) < eps && fabs(p[i].y - p[i + 1].y) < eps)
-                tag = 1;
-        }
-        if(tag) {
-            printf("0.00\n");
-            continue;
-        } else {
-            printf("%.2lf\n", getMin(p, 0, n - 1) / 2);
-        }
+        printf("%.3lf\n", sum);
     }
     return 0;
 }
