@@ -75,6 +75,80 @@ int main() {
     return 0;
 }
 ```
+**星河战队**
+
+***题目来源***
+
+[HDOJ 1011 Starship Troopers](http://acm.hdu.edu.cn/showproblem.php?pid=1011)
+
+***题目分析***
+
+这道题比上一道题复杂了很多，它不仅是动态规划，而且是树形的动态规划，可以说是01背包问题的升级版。但只要我们围绕着动态规划的核心思想出发，就能够解决问题。首先，问题可以定义为在第u个点使用j个士兵能得到大脑的最大可能性，接着根据题意得到状态转移方程：`value[u][j] = max { value[v][j], value[v][j-k]+value[v][k]}`，`value[u][j]`表示的是第u个点使用j个士兵能得到大脑的最大可能性，v表示的是u的所有子节点，最后得到的`value[1][m]`就是所求的最大可能性。由于需要从子节点推出父节点的值，所以整体采用后序遍历的方式。另外，`m=0`是一种特殊的情况，需要特殊考虑。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#define N 101
+
+typedef struct {
+    int bugs;
+    int brains;
+} room;
+
+int n, m;
+room rooms[N];
+int matrix[N][N];
+int visited[N];
+int value[N][N];
+
+void dpTree(int u) {
+    int r;
+    visited[u] = 1;
+    r = (rooms[u].bugs + 19) / 20;
+    for(int i = m; i >= r; i--) {
+        value[u][i] = rooms[u].brains;
+    }
+    for(int v = 1; v <= n; v++) {
+        if(matrix[u][v] && !visited[v]) {
+            dpTree(v);
+            for(int j = m; j >= r; j--) {
+                for(int k = 1; k <= j - r; k++) {
+                    if(value[u][j - k] + value[v][k] > value[u][j]) {
+                        value[u][j] = value[u][j - k] + value[v][k];
+                    }
+                }
+            }
+        }
+    }
+}
+
+int main() {
+    while(scanf("%d %d", &n, &m) == 2 && n >= 0 && m >= 0) {
+        memset(rooms, 0, sizeof(rooms));
+        memset(matrix, 0, sizeof(matrix));
+        memset(visited, 0, sizeof(visited));
+        memset(value, 0, sizeof(value));
+        for(int i = 1; i <= n; i++) {
+            scanf("%d %d", &rooms[i].bugs, &rooms[i].brains);
+        }
+        for(int i = 1; i <= n - 1; i++) {
+            int x, y;
+            scanf("%d %d", &x, &y);
+            matrix[x][y] = matrix[y][x] = 1;
+        }
+        if(m == 0) {
+            printf("0\n");
+        } else {
+            dpTree(1);
+            printf("%d\n", value[1][m]);
+        }
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 大数运算在实际编程中运用十分广泛，特别是对于没有大数处理功能的编程语言来说。学习好大数运算，对我们的编程工作有很大帮助。
