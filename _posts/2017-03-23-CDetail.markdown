@@ -56,6 +56,36 @@ int main() {
 
 ![自动类型转换规则](/redant/img/c-autoconvert.png)
 
+**C语言中怎么实现int类型和char *类型的相互转换**
+
+int类型和char *类型的相互转换经常需要用到，特别是当我们用字符串来保存数值较大的数据时。
+
+1. int转char *
+
+   int转char *可以用到stdlib.h下的标准库函数itoa()，同理long转char *用到的是`ltoa()`等等。但实际上，itoa并不是一个标准C函数，它是Windows下特有的函数，与ANSI C不兼容，不利用程序的跨平台实现。所以，我们一般推荐使用的函数是`sprintf()`或`snprintf()`。
+
+   `sprintf()`的使用案例如下：
+
+   ```c
+   char* buffer = ... allocate a buffer ...
+   int value = 4564;
+   sprintf(buffer, "%d", value);
+   ```
+
+   `snprintf()`的使用案例如下：
+
+   ```c
+   char buffer[10];
+   int value = 234452;
+   snprintf(buffer, 10, "%d", value);
+   ```
+
+   两者最主要的区别是后者可以通过设置最大字符数，保证缓存区不溢出。
+
+2. char*转int
+
+   这个使用的方法相对比较简单，与上面相似，就是用stdlib.h头文件中的`atoi()`函数，其他数据的转换方法相似。
+
 **typedef int x[10]和#define x int[10]有什么区别**
 
 表面看起来这两个表达式是等价的，其实不然，具体区别如下：
