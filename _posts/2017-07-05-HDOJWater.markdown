@@ -75,6 +75,72 @@ int main() {
     return 0;
 }
 ```
+**数根**
+
+***题目来源***
+
+[HDOJ 1013 Digital Roots](http://acm.hdu.edu.cn/showproblem.php?pid=1013)
+
+***题目分析***
+
+这道题有两种做法：常规算法和九余数法。其中我在第一种做法上消耗了较长时间，主要是我分配的字符数组太小了。尽管早就知道不能直接用int变量接收输入的n，而要用字符串来表示，但我给出的长度为1000的数组还是满足不了题目的要求（在C++版本的程序中是可以的），最后数组的长度是10000。另一种方法则更为简洁和常用，在数根的[维基百科英文字条](https://en.wikipedia.org/wiki/Digital_root)中就有提及到，另外知乎上也有关于其证明的[讨论](https://www.zhihu.com/question/30972581)。九余数算法的核心公式就是`dr(n) = 1 + ((n - 1) mod 9)`，只要利用这个公式，我们就可以大大简化我们的程序。
+
+***实现代码***
+
+常规做法：
+
+```c
+#include<stdio.h>
+#include<string.h>
+
+int main() {
+    char str[10000];
+    int sum, i;
+    while(scanf("%s", str)) {
+        sum = 0;
+        if(str[0] == '0') {
+            break;
+        }
+        for(int i = 0; i < strlen(str); i++) {
+            sum += str[i] - '0';
+        }
+        while(sum >= 10) {
+            i = 0;
+            while(sum > 0) {
+                i += sum % 10;
+                sum /= 10;
+            }
+            sum = i;
+        }
+        printf("%d\n", sum);
+    }
+    return 0;
+}
+```
+
+九余数法：
+
+```c
+#include<stdio.h>
+#include<string.h>
+
+int main() {
+    char str[10000];
+    int sum;
+    while(scanf("%s", str)) {
+        sum = 0;
+        if(str[0] == '0') {
+            break;
+        }
+        for(int i = 0; i < strlen(str); i++) {
+            sum += str[i] - '0';
+        }
+        printf("%d\n", 1 + (sum - 1) % 9);
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 水题也有着极高的价值，千万不能忽视。
