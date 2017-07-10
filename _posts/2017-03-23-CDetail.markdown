@@ -207,6 +207,15 @@ qsort函数传入的第四个参数是一个比较函数，决定了排序的规
 
 以上的方法是纯C语言支持的，实际上，在C++的algorithm库中，有一个sort函数，比qsort函数要高效很多，具体的理由可以查看stackoverflow上的[讨论](https://stackoverflow.com/questions/4708105/performance-of-qsort-vs-stdsort)。
 
+**C语言怎么计算一个整数的整数次幂**
+
+这个问题主要有以下几种方法：
+
+1. 直接用乘号计算，如2的3次方，计算过程是 2\*2\*2 ，这种方法适用于幂值较小的情况
+2. 利用循环。如果幂值较大，则使用乘号工作量较大，所以可以使用循环实现连乘
+3. 使用pow函数。在C语言的math.h头文件中，有一个pow函数，用来计算幂值。可是这个函数主要针对的数据类型是double类型，如果用来计算int类型，可能会存在一定偏差，所以需要适当的改进，改进的方法是将pow函数返回值加0.5之后再转为int类型，即`(int) (pow(10, 2) + 0.5))`。
+4. 以上的方法都比较简单，如果需要更高的效率来进行求幂的话，可以参考[这里](https://stackoverflow.com/questions/101439/the-most-efficient-way-to-implement-an-integer-based-power-function-powint-int)。
+
 **C语言怎么计算程序运算时间**
 
 在Windows下，C语言计算程序运行时间需要用到time函数，下面是一个计算立方根迭代所需时间的例子：
