@@ -141,6 +141,48 @@ int main() {
 }
 ```
 
+**随机数生成器**
+
+***题目来源***
+
+[HDOJ 1014 Uniform Generator](http://acm.hdu.edu.cn/showproblem.php?pid=1014)
+
+***题目分析***
+
+关于这道题，我一开始是直接根据题意进行解决的，具体的思路便是获取 x 为 0 - mod-1 时 seed 的数值，每次获取的时候与之前与获取到的数值进行比较，如果出现重复的数，则说明是一个 Bad Choice ，并退出获取操作。这个思路表面是可行的，可惜耗时太长，被OJ判了TLE。那么我们应该怎么解决这个问题呢？方法就是验证 step 和 mod 的最大公约数是不是1，如果是，则是Good Choice，否则是Bad Choice。这个方法可行的原因如下：seed(0)为0，第一次计算后结果为step，第二次为 2 \* step ，第三次是 3 \* step ，一直到 (k \* step) % mod ，如果此时 k < mod ，则不合题意，所以要满足Good Choice，则 step 和 mod 的最大公约数只能为1。从这道题我们也可以看出，编码前进行一定的分析能够提高我们解决问题的效率。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+int gcd(int m, int n) {
+    int temp;
+    while(n != 0) {
+        temp = m % n;
+        m = n;
+        n = temp;
+    }
+    return m;
+}
+
+int main() {
+    int step, mod;
+    while(scanf("%d%d", &step, &mod) == 2) {
+        int result = gcd(step, mod);
+        printf("%10d%10d    ", step, mod);
+        if(result == 1) {
+            printf("Good Choice");
+        } else {
+            printf("Bad Choice");
+        }
+        printf("\n\n");
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 水题也有着极高的价值，千万不能忽视。
