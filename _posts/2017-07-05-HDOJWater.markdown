@@ -183,6 +183,87 @@ int main() {
 }
 ```
 
+**窃贼**
+
+***题目来源***
+
+[HDOJ 1015 Safecracker](http://acm.hdu.edu.cn/showproblem.php?pid=1015)
+
+***题目分析***
+
+这道题实质上考察的是深度优先搜索，为了满足题意要求，我们先对输入的字符串中的字符降序排列，这样子只要找到一个满足题意的字符串，我们就可以退出操作了。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+#include<algorithm>
+using namespace std;
+
+int target;
+char s[12];
+int temp[5];
+int visited[12];
+int flag;
+
+int cmp(char a, char b) {
+    return a > b;
+}
+
+int isMatch() {
+    int k = temp[0] - (int)(pow(temp[1], 2) + 0.5) + (int)(pow(temp[2], 3) + 0.5)
+    - (int)(pow(temp[3], 4) + 0.5) + (int)(pow(temp[4], 5) + 0.5);
+    return k == target;
+}
+
+void dfs(int step) {
+    if(step == 5) {
+        if(isMatch()) {
+            flag = 1;
+        }
+        return;
+    } else {
+        for(int i = 0; i < strlen(s); i++) {
+            if(flag) {
+                return;
+            }
+            if(visited[i]) {
+                continue;
+            }
+            temp[step] = s[i] - 'A' + 1;
+            visited[i] = 1;
+            dfs(step + 1);
+            visited[i] = 0;
+        }
+    }
+}
+
+int main() {
+    while(scanf("%d%s", &target, s) == 2) {
+        if(target == 0 && strcmp(s, "END") == 0) {
+            break;
+        }
+        memset(temp, 0, sizeof(temp));
+        memset(visited, 0, sizeof(visited));
+        sort(s, s + strlen(s), cmp);
+        flag = 0;
+        dfs(0);
+        if(flag) {
+            for(int i = 0; i < 5; i++) {
+                printf("%c", temp[i] - 1 + 'A');
+            }
+            printf("\n");
+        } else {
+            printf("no solution\n");
+        }
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 水题也有着极高的价值，千万不能忽视。
