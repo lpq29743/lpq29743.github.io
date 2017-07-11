@@ -112,6 +112,81 @@ int main() {
     return 0;
 }
 ```
+**素数环**
+
+***题目来源***
+
+[HDOJ 1016 Prime Ring Problem](http://acm.hdu.edu.cn/showproblem.php?pid=1016)
+
+***题目分析***
+
+这道题也是一道典型的深度优先搜索问题，使用到了回溯法。我一开始是参考了全排的算法来进行程序的编写的，可不知为什么，程序提交一直WA（如果后面后进展，我再提及）。所以我最终还是参考了图深度优先遍历的算法来进行实现。
+
+对于这道题，用以下的代码就可以AC了，可如果要再进行优化，可以通过以下几点进行考虑：
+
+1. 由于涉及到素数判断很少，最大的判断数也就是18+19=37而已，所以可以通过建立素数表，用查表的方式来加快素数判断
+2. 如果输入的n是奇数的话，那么1-n之间一共有n / 2个偶数，n / 2 + 1个奇数，也就是奇数比偶数多一个。那么把这n个数排成一个环，根据鸽巢原理，必然两个奇数相邻，而奇数之和是偶数，偶数不是素数，所以得出结论：如果n是奇数，则没有满足条件的排列。通过这一点，当n是奇数时，我们直接返回即可，这样可大大减少计算量
+
+
+***实现代码***
+
+```c++
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int n;
+int *s;
+int *visited;
+
+int isPrime(int num) {
+    int result = 1;
+    for(int i = 2; i < num; i++) {
+        if(num % i == 0) {
+            result = 0;
+            break;
+        }
+    }
+    return result;
+}
+
+void dfs(int step) {
+    if(step == n) {
+        if(isPrime(s[n - 1] + s[0])) {
+            for(int i = 0; i < n; i++) {
+                if(i != 0) {
+                    printf(" ");
+                }
+                printf("%d", s[i]);
+            }
+            printf("\n");
+        }
+    }
+    for(int i = 2; i <= n; i++) {
+        if(isPrime(s[step - 1] + i) && visited[i - 1] == 0) {
+            s[step] = i;
+            visited[i - 1] = 1;
+            dfs(step + 1);
+            visited[i - 1] = 0;
+        }
+    }
+}
+
+int main() {
+    int count = 0;
+    while(scanf("%d", &n) == 1) {
+        s = (int *)malloc(sizeof(int) * n);
+        visited = (int *)malloc(sizeof(int) * n);
+        memset(visited, 0, sizeof(int) * n);
+        s[0] = 1;
+        printf("Case %d:\n", ++count);
+        dfs(1);
+        printf("\n");
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 搜索经常涉及到递归、剪枝、回溯等等这些知识点，只要多加练习，我们才可以掌握好这类题目。
