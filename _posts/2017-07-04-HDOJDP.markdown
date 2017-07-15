@@ -149,7 +149,7 @@ int main() {
 }
 ```
 
-**星河战队**
+**最大连续子序列和升级版**
 
 ***题目来源***
 
@@ -198,6 +198,78 @@ int main() {
             }
         }
         printf("%d\n", max[n]);
+    }
+    return 0;
+}
+```
+
+**道路问题**
+
+***题目来源***
+
+[HDOJ 1025 Constructing Roads In JGShining's Kingdom](http://acm.hdu.edu.cn/showproblem.php?pid=1025)
+
+***题目分析***
+
+这道题稍微分析一下，就可以判断出它是属于LIS问题，即最长递增子串问题。对于LIS问题，主要的解决方法有时间复杂度为O(n\*n)的动态规划法和时间复杂度为为O(n\*logn)的LIS算法。
+
+由于本题数据量较大，所以第一种方法会出现TLE的情况，但我们也稍微提一下。所谓动态规划，最重要的是要找到状态转移方程。这道题的状态转移方程是：`s[i] = max{s[k]} + 1, 0 <= k < i, num[k] < num[i]`。这个状态转移方程比较好理解，代码也比较好些，但由于此题不可行，所以并不赘述。
+
+另一种方法是LIS算法，它的具体思路是增加一个数组s，s[i]表示长度为 i 的最长子序列的最后一个数最小可以是多少。然后对输入数组进行遍历，如果该数大于最后一个元素，则进行添加，否则替换数组中第一个大于该元素的元素。对于这个替换操作，我们可以用二分查找来降低时间复杂度。实际上，整个思路很接近于对栈的操作。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<algorithm>
+#define N 500001
+using namespace std;
+
+typedef struct {
+    int x;
+    int y;
+} road;
+
+int n, m;
+road roads[N];
+int s[N];
+
+int cmp(road r1, road r2) {
+    return r1.x < r2.x;
+}
+
+int main() {
+    int nCases = 1;
+    while(scanf("%d", &n) == 1) {
+        for(int i = 0; i < n; i++) {
+            scanf("%d%d", &roads[i].x, &roads[i].y);
+        }
+        sort(roads, roads + n, cmp);
+        s[0] = 0;
+        s[1] = roads[0].y;
+        m = 1;
+        for(int i = 1; i < n; i++) {
+            if(roads[i].y > s[m]) {
+                s[++m] = roads[i].y;
+            } else {
+                int low = 0, high = m;
+                int mid = low + (high - low) / 2;
+                while(low < high - 1) {
+                    if(roads[i].y > s[mid]) {
+                        low = mid;
+                    } else {
+                        high = mid;
+                    }
+                    mid = low + (high - low) / 2;
+                }
+                s[high] = roads[i].y;
+            }
+        }
+        printf("Case %d:\nMy king, at most %d road", nCases++, m);
+        if(m != 1) {
+            printf("s");
+        }
+        printf(" can be built.\n\n");
     }
     return 0;
 }
