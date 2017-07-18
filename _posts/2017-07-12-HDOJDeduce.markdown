@@ -93,6 +93,43 @@ int main() {
     return 0;
 }
 ```
+**三角波**
+
+***题目来源***
+
+[HDOJ 1030 Delta-wave](http://acm.hdu.edu.cn/showproblem.php?pid=1030)
+
+***题目分析***
+
+这是一道典型的规律题，找到的规律可以有很多种形式，这里提供两种：[简单易懂的](http://www.wutianqi.com/?p=2362)和[简洁晦涩的](http://blog.csdn.net/u014174811/article/details/41443177)。这里我们直接采用第二种的代码。
+
+***实现代码***
+
+```c++
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+int main() {
+    int a, b;
+    int aX, aY, bX, bY, aLayer, bLayer, step;
+    while(scanf("%d%d", &a, &b) != EOF) {
+        aLayer = ceil(sqrt((double)a)); //求出数a所在层
+        bLayer = ceil(sqrt((double)b)); //求出数b所在层
+        if(aLayer == bLayer) {
+            printf("%d\n", abs(a - b));
+        } else {
+            aX = (aLayer * aLayer - a) / 2; //计算a的X坐标
+            bX = (bLayer * bLayer - b) / 2; //计算b的X坐标
+            aY = (a - (aLayer * aLayer - 2 * aLayer + 2)) / 2; //计算a的Y坐标
+            bY = (b - (bLayer * bLayer - 2 * bLayer + 2)) / 2; //计算b的Y坐标
+            step = abs(aX - bX) + abs(aY - bY) + abs(aLayer - bLayer);
+            printf("%d\n", step); //求出最终步骤
+        }
+    }
+}
+```
+
 ## 后记
 
 无论是简单的刷题，还是生活中的处事，一定要切记不能一味求快，要先分析好问题，然后再行动。这也让我想起了今天看到的美国海豹突击队的标语：慢则稳，稳则快。
