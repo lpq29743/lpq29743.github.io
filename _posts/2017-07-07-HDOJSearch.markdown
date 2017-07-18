@@ -187,6 +187,125 @@ int main() {
 }
 ```
 
+**伊格和公主（一）**
+
+***题目来源***
+
+[HDOJ 1026 Ignatius and the Princess I](http://acm.hdu.edu.cn/showproblem.php?pid=1026)
+
+***题目分析***
+
+这道题我先是用深搜的算法做的，可是却无奈超时了。查了一下网上的资料才发现，对于这道题，用广搜来做更加适合，因为广搜相比深搜，能够更快地得到最短的路径。不过有点奇怪的是，我这里原先是用数组来实现队列的操作的，可是会出现超时的情况，而我把它改成C++下自带的队列后，却成功的AC了。
+
+***实现代码***
+
+```c++
+#include<stdio.h>
+#include<queue>
+#define N 101
+using namespace std;
+
+typedef struct {
+    int x;
+    int y;
+    int prex;
+    int prey;
+    int cost;
+} Node;
+
+int n, m;
+char s[N][N];
+Node node[N][N];
+int dir[4][2] = {{ -1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+int isOK(int x, int y) {
+    if(x >= 0 && x < n && y >= 0 && y < m && s[x][y] != 'X') {
+        return 1;
+    }
+    return 0;
+}
+
+void output() {
+    if(node[n - 1][m - 1].cost != -1) {
+        Node stack[N * N];
+        Node a, b;
+        int count = 1, tmp, top = -1;
+        printf("It takes %d seconds to reach the target position, let me show you the way.\n", node[n - 1][m - 1].cost);
+        a = node[n - 1][m - 1];
+        while(1) {
+            if(a.x == 0 && a.y == 0)
+                break;
+            stack[++top] = a;
+            a = node[a.prex][a.prey];
+        }
+        a = node[0][0];
+        while(top != -1) {
+            b = stack[top--];
+            printf("%ds:(%d,%d)->(%d,%d)\n", count++, a.x, a.y, b.x, b.y);
+            if(s[b.x][b.y] != '.') {
+                tmp = s[b.x][b.y] - '0';
+                while(tmp--) {
+                    printf("%ds:FIGHT AT (%d,%d)\n", count++, b.x, b.y);
+                }
+            }
+            a = b;
+        }
+    } else {
+        printf("God please help our poor hero.\n");
+    }
+    printf("FINISH\n");
+}
+
+void bfs() {
+    queue<Node> q;
+    Node a, b;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            node[i][j].cost = -1;
+        }
+    }
+    a.x = a.y = a.prex = a.prey = a.cost = 0;
+    if(s[0][0] != '.') {
+        a.cost += s[0][0] - '0';
+    }
+    node[0][0] = a;
+    q.push(a);
+    while(!q.empty()) {
+        a = q.front();
+        q.pop();
+        for(int i = 0; i < 4; i++) {
+            b.x = a.x + dir[i][0];
+            b.y = a.y + dir[i][1];
+            if(!isOK(b.x, b.y)) {
+                continue;
+            }
+            if(s[b.x][b.y] == '.') {
+                b.cost = a.cost + 1;
+            } else {
+                b.cost = a.cost + s[b.x][b.y] - '0' + 1;
+            }
+            if(b.cost < node[b.x][b.y].cost || node[b.x][b.y].cost == -1) {
+                b.prex = a.x;
+                b.prey = a.y;
+                node[b.x][b.y] = b;
+                q.push(b);
+            }
+        }
+    }
+    output();
+}
+
+int main() {
+    while(scanf("%d%d", &n, &m) == 2) {
+        for(int i = 0; i < n; i++) {
+            scanf("%s", s[i]);
+        }
+        bfs();
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 搜索经常涉及到递归、剪枝、回溯等等这些知识点，只要多加练习，我们才可以掌握好这类题目。
