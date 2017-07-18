@@ -216,7 +216,7 @@ typedef struct {
 int n, m;
 char s[N][N];
 Node node[N][N];
-int dir[4][2] = {{ -1, 0}, {1, 0}, {0, -1}, {0, 1}};
+int dir[4][2] = { { -1, 0}, {1, 0}, {0, -1}, {0, 1} };
 
 int isOK(int x, int y) {
     if(x >= 0 && x < n && y >= 0 && y < m && s[x][y] != 'X') {
