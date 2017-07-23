@@ -785,6 +785,230 @@ int main() {
 }
 ```
 
+**二叉排序树**
+
+***题目描述***
+
+输入一系列整数，建立二叉排序数，并进行前序，中序，后序遍历
+
+***输入描述***
+
+输入第一行包括一个整数n(1<=n<=100)。接下来的一行包括n个整数
+
+***输出描述***
+
+可能有多组测试数据，对于每组数据，将题目所给数据建立一个二叉排序树，并对二叉排序树进行前序、中序和后序遍历。每种遍历结果输出一行。每行最后一个数据之后有一个空格。输入中可能有重复元素，但是输出的二叉树遍历序列中重复元素不用输出
+
+***输入例子***
+
+```
+5
+1 6 5 9 8
+
+```
+
+***输出例子***
+
+```
+1 6 5 9 8 
+1 5 6 8 9 
+5 8 9 6 1 
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct node {
+    int val;
+    struct node *left;
+    struct node *right;
+} node;
+
+node* insert(int val, node *root) {
+    if(root == NULL) {
+        root = (node *)malloc(sizeof(node));
+        root->val = val;
+        root->left = NULL;
+        root->right = NULL;
+    } else {
+        if(root->val == val) {
+            return root;
+        } else if(root->val > val) {
+            root->left = insert(val, root->left);
+        } else {
+            root->right = insert(val, root->right);
+        }
+    }
+    return root;
+}
+
+void preOrder(node *root) {
+    if(root == NULL) {
+        return;
+    } else {
+        printf("%d ", root->val);
+        preOrder(root->left);
+        preOrder(root->right);
+    }
+}
+
+void inOrder(node *root) {
+    if(root == NULL) {
+        return;
+    } else {
+        inOrder(root->left);
+        printf("%d ", root->val);
+        inOrder(root->right);
+    }
+}
+
+void postOrder(node *root) {
+    if(root == NULL) {
+        return;
+    } else {
+        postOrder(root->left);
+        postOrder(root->right);
+        printf("%d ", root->val);
+    }
+}
+
+int main() {
+    int n;
+    while(scanf("%d", &n) == 1) {
+        node *root = NULL;
+        int tmp;
+        for(int i = 0; i < n; i++) {
+            scanf("%d", &tmp);
+            root = insert(tmp, root);
+        }
+        preOrder(root);
+        printf("\n");
+        inOrder(root);
+        printf("\n");
+        postOrder(root);
+        printf("\n");
+    }
+    return 0;
+}
+```
+
+**找最小数**
+
+***题目描述***
+
+第一行输入一个数n，1 <= n <= 1000，下面输入n行数据，每一行有两个数，分别是x y。输出一组x y，该组数据是所有数据中x最小，且在x相等的情况下y最小的
+
+***输入描述***
+
+输入有多组数据。每组输入n，然后输入n个整数对
+
+***输出描述***
+
+输出最小的整数对
+
+***输入例子***
+
+```
+5  
+3 3  
+2 2  
+5 5  
+2 1  
+3 6
+```
+
+***输出例子***
+
+```
+2 1
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+
+int main() {
+    int n;
+    while(scanf("%d", &n) == 1) {
+        int minx, miny;
+        scanf("%d%d", &minx, &miny);
+        while(--n) {
+            int x, y;
+            scanf("%d%d", &x, &y);
+            if(x < minx || (x == minx && y < miny)) {
+                minx = x;
+                miny = y;
+            }
+        }
+        printf("%d %d\n", minx, miny);
+    }
+    return 0;
+}
+```
+
+**查找**
+
+***题目描述***
+
+输入数组长度 n ，输入数组a[1...n]，输入查找个数m，输入查找数字b[1...m]。输出 YES or NO，查找有则YES，否则NO
+
+***输入描述***
+
+输入有多组数据。每组输入n，然后输入n个整数，再输入m，然后再输入m个整数（1<=m,n<=100）
+
+***输出描述***
+
+如果在n个数组中输出YES否则输出NO
+
+***输入例子***
+
+```
+5
+1 5 2 4 3
+3
+2 5 6
+```
+
+***输出例子***
+
+```
+YES
+YES
+NO
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+
+int main() {
+    int n, m, a[101];
+    while(scanf("%d", &n) == 1) {
+        for(int i = 0; i < n; i++) {
+            scanf("%d", &a[i]);
+        }
+        scanf("%d", &m);
+        while(m--) {
+            int isFind = 0, tmp;
+            scanf("%d", &tmp);
+            for(int i = 0; i < n; i++) {
+                if(tmp == a[i]) {
+                    isFind = 1;
+                    break;
+                }
+            }
+            printf("%s\n", isFind ? "YES" : "NO");
+        }
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 继续前进，没有一滴汗水会白流。
