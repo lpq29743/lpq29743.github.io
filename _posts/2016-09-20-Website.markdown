@@ -65,6 +65,7 @@ tags:
 - [掘金](https://gold.xitu.io/)（技术文章站点）
 - [math stackexchange](http://math.stackexchange.com/)（数学问答网站，MathJax具体语句可以参照[这里](http://colobu.com/2014/08/17/MathJax-quick-reference/)）
 - [Tech Ideas](https://bwasti.com/techideas)（致力于让程序员不缺点子）
+- [Kaggle](https://www.kaggle.com/competitions) [天池](https://tianchi.aliyun.com/competition/index.htm?pageIndex=1) [聚数力](http://dataju.cn/Dataju/web/home) [GroupLens](https://grouplens.org/) [知乎专栏-各领域公开数据集下载](https://zhuanlan.zhihu.com/p/25138563) [awesome-public-datasets](https://github.com/caesar0301/awesome-public-datasets)（提供大量的数据集）
 
 ***工作网站***
 
