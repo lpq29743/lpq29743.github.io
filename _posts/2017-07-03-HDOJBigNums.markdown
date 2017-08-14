@@ -107,6 +107,53 @@ int main() {
     return 0;
 }
 ```
+**N的阶乘**
+
+***题目来源***
+
+[HDOJ 1042 N!](http://acm.hdu.edu.cn/showproblem.php?pid=1042)
+
+***题目分析***
+
+这道题是典型的大数相乘问题，但与以往的题目不同。由于本题数据量太大，所以我们不再像以往一样，选择字符数组来存储大数，而是使用整型数组来存储，其中进制变成逢100000进1。由于进制改变了，所以在最后的输出上要特别注意格式的控制。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<string.h>
+#define N 10000
+
+int n;
+int s[N + 1];
+
+int main() {
+    while(scanf("%d", &n) == 1) {
+        memset(s, 0, sizeof(s));
+        s[0] = 1;
+        for(int i = 2; i <= n; i++) {
+            for(int j = N; j >= 0; j--) {
+                s[j] = s[j] * i;
+            }
+            for(int j = 0; j <= N; j++) {
+                s[j + 1] += s[j] / 100000;
+                s[j] %= 100000;
+            }
+        }
+        int k = N;
+        while(!s[k]) {
+            k--;
+        }
+        printf("%d", s[k--]);
+        while(k >= 0) {
+            printf("%05d", s[k--]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 大数运算在实际编程中运用十分广泛，特别是对于没有大数处理功能的编程语言来说。学习好大数运算，对我们的编程工作有很大帮助。
