@@ -321,6 +321,99 @@ int main() {
 }
 ```
 
+**悼念512汶川大地震遇难同胞——珍惜现在，感恩生活**
+
+***题目来源***
+
+[HDOJ 2191 悼念512汶川大地震遇难同胞——珍惜现在，感恩生活](http://acm.hdu.edu.cn/showproblem.php?pid=2191)
+
+***题目分析***
+
+表面上物品是多件的，但因为件数有限，所以我们可以用01背包的思路解决。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int C;
+int n, m;
+int *p, *h, *c;
+int *f;
+
+int main() {
+    scanf("%d", &C);
+    while(C--) {
+        scanf("%d%d", &n, &m);
+        p = (int *)malloc(sizeof(int) * (m + 1));
+        h = (int *)malloc(sizeof(int) * (m + 1));
+        c = (int *)malloc(sizeof(int) * (m + 1));
+        f = (int *)malloc(sizeof(int) * (n + 1));
+        memset(f, 0, (n + 1)*sizeof(int));
+        for(int i = 1; i <= m; i++) {
+            scanf("%d%d%d", &p[i], &h[i], &c[i]);
+        }
+        for(int i = 1; i <= m; i++) {
+            for(int j = 1; j <= c[i]; j++) {
+                for(int k = n; k >= p[i]; k--) {
+                    f[k] = f[k] > f[k - p[i]] + h[i] ? f[k] : f[k - p[i]] + h[i];
+                }
+            }
+        }
+        printf("%d\n", f[n]);
+    }
+    return 0;
+}
+```
+
+**拾骨者**
+
+***题目来源***
+
+[HDOJ 2602 Bone Collector](http://acm.hdu.edu.cn/showproblem.php?pid=2602)
+
+***题目分析***
+
+典型的01背包问题，直接解决即可。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int t, n, v;
+int *c, *w;
+int *f;
+
+int main() {
+    scanf("%d", &t);
+    while(t--) {
+        scanf("%d%d", &n, &v);
+        c = (int *)malloc(sizeof(int) * (n + 1));
+        w = (int *)malloc(sizeof(int) * (n + 1));
+        f = (int *)malloc(sizeof(int) * (v + 1));
+        memset(f, 0, (v + 1) * sizeof(int));
+        for(int i = 1; i <= n; i++) {
+            scanf("%d", &w[i]);
+        }
+        for(int i = 1; i <= n; i++) {
+            scanf("%d", &c[i]);
+        }
+        for(int i = 1; i <= n; i++) {
+            for(int j = v; j >= c[i]; j--) {
+                f[j] = f[j] > f[j - c[i]] + w[i] ? f[j] : f[j - c[i]] + w[i];
+            }
+        }
+        printf("%d\n", f[v]);
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 动态规划是我个人觉得算法中最有趣最有挑战性的题目，所以也建议大家要好好掌握。
