@@ -275,52 +275,6 @@ int main() {
 }
 ```
 
-**拾骨者**
-
-***题目来源***
-
-[HDOJ 2602 Bone Collector](http://acm.hdu.edu.cn/showproblem.php?pid=2602)
-
-***题目分析***
-
-典型的01背包问题，直接解决即可。
-
-***实现代码***
-
-```c
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-
-int t, n, v;
-int *c, *w;
-int *f;
-
-int main() {
-    scanf("%d", &t);
-    while(t--) {
-        scanf("%d%d", &n, &v);
-        c = (int *)malloc(sizeof(int) * (n + 1));
-        w = (int *)malloc(sizeof(int) * (n + 1));
-        f = (int *)malloc(sizeof(int) * (v + 1));
-        memset(f, 0, (v + 1) * sizeof(int));
-        for(int i = 1; i <= n; i++) {
-            scanf("%d", &w[i]);
-        }
-        for(int i = 1; i <= n; i++) {
-            scanf("%d", &c[i]);
-        }
-        for(int i = 1; i <= n; i++) {
-            for(int j = v; j >= c[i]; j--) {
-                f[j] = f[j] > f[j - c[i]] + w[i] ? f[j] : f[j - c[i]] + w[i];
-            }
-        }
-        printf("%d\n", f[v]);
-    }
-    return 0;
-}
-```
-
 **悼念512汶川大地震遇难同胞——珍惜现在，感恩生活**
 
 ***题目来源***
