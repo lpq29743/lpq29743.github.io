@@ -275,6 +275,60 @@ int main() {
 }
 ```
 
+**小猪银行**
+
+**题目来源**
+
+[HDOJ 1114 Piggy Bank](http://acm.hdu.edu.cn/showproblem.php?pid=1114)
+
+**题目分析**
+
+每种硬币可用多次，所以这是完全背包问题。另外这也是一个恰好装满的问题，所以在初始化的时候除了第0个元素，其他都必须初始化为INT_MAX，因为这里是求最小值。值得注意的是，在循环过程中，必须判断值是否为INT_MAX，避免溢出。
+
+**实现代码**
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<limits.h>
+
+int T;
+int E, F, N;
+int *p, *w, *f;
+
+int main() {
+    scanf("%d", &T);
+    while(T--) {
+        scanf("%d%d", &E, &F);
+        f = (int *)malloc(sizeof(int) * (F - E + 1));
+        f[0] = 0;
+        for(int i = 1; i <= F - E; i++) {
+            f[i] = INT_MAX;
+        }
+        scanf("%d", &N);
+        p = (int *)malloc(sizeof(int) * (N + 1));
+        w = (int *)malloc(sizeof(int) * (N + 1));
+        for(int i = 1; i <= N; i++) {
+            scanf("%d%d", &p[i], &w[i]);
+        }
+        for(int i = 1; i <= N; i++) {
+            for(int j = w[i]; j <= F - E; j++) {
+                if(f[j - w[i]] != INT_MAX) {
+                    f[j] = f[j] < f[j - w[i]] + p[i] ? f[j] : f[j - w[i]] + p[i];
+                }
+            }
+        }
+        if(f[F - E] == INT_MAX) {
+            printf("This is impossible.\n");
+        } else {
+            printf("The minimum amount of money in the piggy-bank is %d.\n", f[F - E]);
+        }
+    }
+    return 0;
+}
+```
+
 **我需要一个Offer**
 
 ***题目来源***
