@@ -369,6 +369,63 @@ int main() {
 }
 ```
 
+**饭卡**
+
+***题目来源***
+
+[HDOJ 2546 饭卡](http://acm.hdu.edu.cn/showproblem.php?pid=2546)
+
+***题目分析***
+
+“每种菜可购买一次”，而且还是求最值问题，很容易让我们联想到01背包问题。我们可以记录所有菜中最贵的一种，把它放在最后买，然后用01背包求（m-5）元钱可买的菜的最大金额，最后`m-最大金额-最贵菜价格`即为所求，状态转移方程是`f[v] = max(f[v], f[v - s[i]] + s[i])`。值得注意的是，`m < 5`的特殊情况需要特别考虑。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int n, m;
+int *s, *f;
+
+int main() {
+    while(scanf("%d", &n) == 1) {
+        if(n == 0) {
+            break;
+        }
+        s = (int *)malloc(sizeof(int) * (n + 1));
+        int max = -1, maxId = 0;
+        for(int i = 1; i <= n; i++) {
+            scanf("%d", &s[i]);
+            if(s[i] > max) {
+                max = s[i];
+                maxId = i;
+            }
+        }
+        scanf("%d", &m);
+        if(m < 5) {
+            printf("%d\n", m);
+        } else {
+            f = (int *)malloc(sizeof(int) * (m - 4));
+            for(int i = 0; i <= m - 5; i++) {
+                f[i] = 0;
+            }
+            for(int i = 1; i <= n; i++) {
+                for(int j = m - 5; j >= s[i]; j--) {
+                    if(i == maxId) {
+                        continue;
+                    }
+                    f[j] = f[j] > f[j - s[i]] + s[i] ? f[j] : f[j - s[i]] + s[i];
+                }
+            }
+            printf("%d\n", m - f[m - 5] - max);
+        }
+    }
+    return 0;
+}
+```
+
 **拾骨者**
 
 ***题目来源***
