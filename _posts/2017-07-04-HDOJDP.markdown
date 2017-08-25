@@ -376,6 +376,56 @@ int main() {
 }
 ```
 
+**ACboy需要你的帮助**
+
+**题目来源**
+
+[HDOJ 1712 ACboy needs your help](http://acm.hdu.edu.cn/showproblem.php?pid=1712)
+
+**题目分析**
+
+这实际上是一道分组背包的问题，其中每个课程内复习天数的价值为一组。只要用一个一维数组，三重循环就可以解决问题。
+
+**实现代码**
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int n, m;
+int **a;
+int *dp;
+
+int main() {
+    while(scanf("%d%d", &n, &m) == 2) {
+        if(m == 0 && n == 0) {
+            break;
+        }
+        a = (int **)malloc(sizeof(int *) * (n + 1));
+        for(int i = 0; i <= n; i++) {
+            a[i] = (int *)malloc(sizeof(int) * (m + 1));
+            memset(a[i], 0, sizeof(int) * (m + 1));
+        }
+        dp = (int *)malloc(sizeof(int) * (m + 1));
+        memset(dp, 0, sizeof(int) * (m + 1));
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= m; j++) {
+                scanf("%d", &a[i][j]);
+            }
+        }
+        for(int i = 1; i <= n; i++) {
+            for(int j = m; j >= 1; j--) {
+                for(int k = 1; k <= j; k++) {
+                    dp[j] = dp[j] > dp[j - k] + a[i][k] ? dp[j] : dp[j - k] + a[i][k];
+                }
+            }
+        }
+        printf("%d\n", dp[m]);
+    }
+}
+```
+
 **悼念512汶川大地震遇难同胞——珍惜现在，感恩生活**
 
 ***题目来源***
