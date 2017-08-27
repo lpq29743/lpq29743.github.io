@@ -142,6 +142,58 @@ spider.getItem()
 
 ```
 
+**20170927更新**
+
+由于网站的改版，原先的代码已经无效了，所以我根据网站改版后情况和现有能力修改代码如下：
+
+```python
+import requests
+from lxml import etree
+import re
+import sys
+import xlsxwriter
+import time
+
+class LastFM:
+
+    #初始化方法
+    def __init__(self):
+        self.num = 0
+        self.pagenum = 50
+        #获取时间
+        date = time.strftime("%Y-%m-%d", time.localtime())
+        #建立Excel
+        self.workbook = xlsxwriter.Workbook("lastfm_femalesinger-" + date + ".xlsx")
+        self.sheet = self.workbook.add_worksheet('lastfm_femalesinger')
+        self.item = ['歌手名','收听人数']
+        for i in range(2):
+            self.sheet.write(0, i, self.item[i])
+
+    #获取数据
+    def getItem(self):
+        for x in range(self.pagenum):
+            page = x+1
+            url = "http://www.last.fm/zh/tag/female+vocalists/artists?page="+str(page)
+            try:
+                response = requests.get(url)
+                root = etree.fromstring(response.content, etree.HTMLParser())
+                result = root.xpath('//div[contains(@class, "big-artist-list-item")]')
+                for i in result:
+                    name = i.xpath("./h3/a/text()")[0]
+                    fans_num = int(re.sub('\D', '', i.xpath("./p/text()")[0]))
+                    if fans_num > 1000000:
+                        self.num = self.num + 1
+                        self.sheet.write(self.num, 0, name)
+                        self.sheet.write(self.num, 1, fans_num)
+                print(self.num)
+            except:
+                print(sys.exc_info()[0])
+        self.workbook.close()
+
+spider = LastFM()
+spider.getItem()
+```
+
 ## 后记
 
 不实验不知道，原来爬虫入门并没有我们想象的那么复杂，我也从中收获不少乐趣，接下来会再接再厉，献上更好的作品。
