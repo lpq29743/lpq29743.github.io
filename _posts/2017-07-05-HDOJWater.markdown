@@ -264,6 +264,41 @@ int main() {
 }
 ```
 
+**格子土地**
+
+***题目来源***
+
+[HDOJ 1046 Gridland](http://acm.hdu.edu.cn/showproblem.php?pid=1046)
+
+***题目分析***
+
+此题很简单，只要找到规律即可，具体可以参考[这篇文章](http://blog.csdn.net/hurmishine/article/details/51992672)。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+  
+int main()  
+{  
+    int total;  
+    int m,n;  
+    int i;  
+    scanf("%d",&total);  
+    for(i=1; i <= total ; i++)  
+    {  
+        scanf("%d%d",&m,&n);  
+        printf("Scenario #%d:\n",i);  
+        if((m*n)%2 == 0)  
+            printf("%d.00\n",m*n);  
+        else  
+            printf("%d.41\n",m*n);  
+        printf("\n");  
+    }  
+    return 0;  
+}
+```
+
 ## 后记
 
 水题也有着极高的价值，千万不能忽视。
