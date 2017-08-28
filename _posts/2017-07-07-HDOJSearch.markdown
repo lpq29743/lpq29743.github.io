@@ -337,7 +337,7 @@ char maze[55][55];
 int sum, ans;
 int visited[55][55], visited2[12];
 int path[12][12];
-int dir[4][2] = {{ -1, 0}, {1, 0}, {0, 1}, {0, -1}};
+int dir[4][2] = { { -1, 0}, {1, 0}, {0, 1}, {0, -1} };
 
 void bfs(int x, int y, int from) {
     memset(visited, 0, sizeof(visited));
