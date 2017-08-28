@@ -306,6 +306,141 @@ int main() {
 }
 ```
 
+**收集珠宝**
+
+***题目来源***
+
+[HDOJ 1044 Collect More Jewels](http://acm.hdu.edu.cn/showproblem.php?pid=1044)
+
+***题目分析***
+
+本题我一开始是用DFS的思路做的，可是TLE了。分析了一下发现，深搜的时间复杂度达到2的L次方，耗时过长。查了一下资料，最终使用BFS+DFS的思路解决。具体做法是：用BFS得到起点、珠宝以及终点之间的最短路径（求无权图的最短路径一般使用BFS），然后再用DFS搜索最大获得价值。另外，我们可以用sum保存所有珍宝的价值和来方便深搜剪枝。有点奇怪的是，根据题目数据，我定义50 * 50的二维数组已经足以存储地图了，可实际上要AC，必须至少要51 * 51的容量。关于此题，网上还有一种BFS+状态压缩的方法，感兴趣的朋友可以去看下。
+
+***实现代码***
+
+```c++
+#include<stdio.h>
+#include<string.h>
+#include<queue>
+#define INF 1e8
+using namespace std;
+
+struct node {
+    int x, y;
+    int t;
+}s, u, v;
+
+int T;
+int W, H, L, M;
+int value[12];
+char maze[55][55];
+int sum, ans;
+int visited[55][55], visited2[12];
+int path[12][12];
+int dir[4][2] = {{ -1, 0}, {1, 0}, {0, 1}, {0, -1}};
+
+void bfs(int x, int y, int from) {
+    memset(visited, 0, sizeof(visited));
+    s.x = x;
+    s.y = y;
+    s.t = 0;
+    visited[s.x][s.y] = 1;
+    queue<node> q;
+    q.push(s);
+    while(!q.empty()) {
+        u = q.front();
+        q.pop();
+        for(int i = 0; i < 4; i++) {
+            v.x = u.x + dir[i][0];
+            v.y = u.y + dir[i][1];
+            if(v.x < 0 || v.x >= H || v.y < 0 || v.y >= W || maze[v.x][v.y] == '*' || visited[v.x][v.y]) {
+                continue;
+            }
+            visited[v.x][v.y] = 1;
+            v.t = u.t + 1;
+            if(maze[v.x][v.y] != '.') {
+                if(maze[v.x][v.y] == '@') {
+                    path[from][0] = v.t;
+                } else if(maze[v.x][v.y] == '<') {
+                    path[from][M + 1] = v.t;
+                } else {
+                    path[from][maze[v.x][v.y] - 'A' + 1] = v.t;
+                }
+            }
+            q.push(v);
+        }
+    }
+}
+
+void dfs(int cur, int s, int time) {
+    if(time > L || ans == sum) {
+        return;
+    }
+    if(cur == M + 1) {
+        if(ans < s) {
+            ans = s;
+        }
+        return;
+    }
+    for(int i = 1; i <= M + 1; i++) {
+        if(visited2[i]) {
+            continue;
+        }
+        visited2[i] = 1;
+        dfs(i, s + value[i - 1], time + path[cur][i]);
+        visited2[i] = 0;
+    }
+}
+
+int main() {
+    int c = 0;
+    scanf("%d", &T);
+    while(T--) {
+        sum = 0;
+        scanf("%d%d%d%d", &W, &H, &L, &M);
+        for(int i = 0; i < M; i++) {
+            scanf("%d", &value[i]);
+            sum += value[i];
+        }
+        value[M] = 0;
+        for(int i = 0; i < H; i++) {
+            scanf("%s", maze[i]);
+        }
+        for(int i = 0; i <= M + 1; i++) {
+            for(int j = 0; j <= M + 1; j++) {
+                path[i][j] = INF;
+            }
+        }
+        for(int i = 0; i < H; i++) {
+            for(int j = 0; j < W; j++) {
+                if(maze[i][j] == '.' || maze[i][j] == '*') {
+                    continue;
+                } else if(maze[i][j] == '@') {
+                    bfs(i, j, 0);
+                } else if(maze[i][j] == '<') {
+                    bfs(i, j, M + 1);
+                } else if(maze[i][j] <= 'J' && maze[i][j] >= 'A') {
+                    bfs(i, j, maze[i][j] - 'A' + 1);
+                }
+            }
+        }
+        ans = -1;
+        memset(visited2, 0, sizeof(visited2));
+        dfs(0, 0, 0);
+        printf("Case %d:\n", ++c);
+        if(ans == -1) {
+            printf("Impossible\n");
+        } else {
+            printf("The best score is %d.\n", ans);
+        }
+        if(T) {
+            printf("\n");
+        }
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 搜索经常涉及到递归、剪枝、回溯等等这些知识点，只要多加练习，我们才可以掌握好这类题目。
