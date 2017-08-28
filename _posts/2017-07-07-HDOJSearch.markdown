@@ -441,6 +441,78 @@ int main() {
 }
 ```
 
+**最大碉堡数**
+
+***题目来源***
+
+[HDOJ 1045 Fire Net](http://acm.hdu.edu.cn/showproblem.php?pid=1045)
+
+***题目分析***
+
+本题在HDOJ里面被分在图论和贪心算法两个板块中，但实际上，这道题用DFS解决更加方便，除了以下本人的DFS算法之外，网上还有另一种普遍的DFS算法思路，感兴趣的朋友可以上网查查。如果想要练练二分图或者贪心算法，则可以试一试，不过难度也会随之上升。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+
+int n, max;
+char map[5][5];
+
+void change(int i, int j, char c, char pre) {
+    int curx = i, cury = j;
+    map[i][j] = c;
+    while(--curx && curx >= 0 && map[curx][j] == pre) {
+        map[curx][j] = c;
+    }
+    while(--cury && cury >= 0 && map[i][cury] == pre) {
+        map[i][cury] = c;
+    }
+    curx = i;
+    cury = j;
+    while(++curx && curx < n && map[curx][j] == pre) {
+        map[curx][j] = c;
+    }
+    while(++cury && cury < n && map[i][cury] == pre) {
+        map[i][cury] = c;
+    }
+}
+
+void dfs(int x, int y, int count) {
+    int isFound = 0;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            if(i < x || (i == x && j < y)) {
+                continue;
+            }
+            if(map[i][j] == '.') {
+                isFound = 1;
+                change(i, j, count + '0', '.');
+                dfs(i, j, count + 1);
+                change(i, j, '.', count + '0');
+            }
+        }
+    }
+    if(!isFound) {
+        if(count > max) {
+            max = count;
+        }
+    }
+}
+
+int main() {
+    while(scanf("%d", &n) == 1 && n != 0) {
+        for(int i = 0; i < n; i++) {
+            scanf("%s", map[i]);
+        }
+        max = 0;
+        dfs(0, 0, 0);
+        printf("%d\n", max);
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 搜索经常涉及到递归、剪枝、回溯等等这些知识点，只要多加练习，我们才可以掌握好这类题目。
