@@ -127,6 +127,79 @@ int main() {
 }
 ```
 
+**木棍**
+
+***题目来源***
+
+[HDOJ 1051 Wooden Sticks](http://acm.hdu.edu.cn/showproblem.php?pid=1051)
+
+***题目分析***
+
+简单的贪心算法题，对结构体进行排序后求出LIS的个数。
+
+***实现代码***
+
+```c++
+#include<stdio.h>
+#include<algorithm>
+#define N 5000
+using namespace std;
+
+struct stick {
+    int l;
+    int w;
+    int flag;
+};
+
+int t, n;
+stick s[N];
+
+bool cmp(stick x, stick y) {
+    if(x.l == y.l)
+        return x.w < y.w;
+    else
+        return x.l < y.l;
+}
+
+int main() {
+    scanf("%d", &t);
+    while(t--) {
+        scanf("%d", &n);
+        for(int i = 0; i < n; i++) {
+            scanf("%d%d", &s[i].l, &s[i].w);
+            s[i].flag = 0;
+        }
+        sort(s, s + n, cmp);
+        int result = 0;
+        int isFound, pos;
+        while(1) {
+            isFound = 0;
+            for(int i = 0; i < n; i++) {
+                if(s[i].flag == 0) {
+                    isFound = 1;
+                    pos = i;
+                    result++;
+                    s[i].flag = 1;
+                    break;
+                }
+            }
+            if(isFound) {
+                for(int i = pos + 1; i < n; i++) {
+                    if(s[i].w >= s[pos].w && s[i].flag == 0) {
+                        pos = i;
+                        s[i].flag = 1;
+                    }
+                }
+            } else {
+                break;
+            }
+        }
+        printf("%d\n", result);
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 贪心算法与动态规划一样重要而且有趣，一定要很好的掌握。
