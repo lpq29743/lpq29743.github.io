@@ -154,6 +154,88 @@ int main() {
 }
 ```
 
+**整数探究**
+
+***题目来源***
+
+[HDOJ 1047 Integer Inquiry](http://acm.hdu.edu.cn/showproblem.php?pid=1047)
+
+***题目分析***
+
+典型的大数加法题目，比较简单，注意格式还有只有0的特殊情况就可以。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<string.h>
+
+char s[105][105];
+
+void plus(char *a, char *b) {
+    int l1, l2, l;
+    char c[105];
+    l1 = strlen(a);
+    l2 = strlen(b);
+    l = l1 < l2 ? l1 : l2;
+    memset(c, '0', sizeof(c));
+    for(int i = 0; i < l; i++) {
+        c[i] = a[l1 - i - 1] - '0' + b[l2 - i - 1] - '0' + c[i];
+        c[i + 1] = (c[i] - '0') / 10 + '0';
+        c[i] = (c[i] - '0') % 10 + '0';
+    }
+    for(int i = l; i < l1; i++) {
+        c[i] = c[i] + a[l1 - i - 1] - '0';
+        c[i + 1] = (c[i] - '0') / 10 + '0';
+        c[i] = (c[i] - '0') % 10 + '0';
+    }
+    for(int i = l; i < l2; i++) {
+        c[i] = c[i] + b[l2 - i - 1] - '0';
+        c[i + 1] = (c[i] - '0') / 10 + '0';
+        c[i] = (c[i] - '0') % 10 + '0';
+    }
+    int l3 = 104;
+    while(c[l3] == '0') {
+        l3--;
+    }
+    for(int i = 0; i <= l3/2; i++) {
+        char temp = c[i];
+        c[i] = c[l3 - i];
+        c[l3 - i] = temp;
+    }
+    c[l3 + 1] = '\0';
+    strcpy(b, c);
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while(t--) {
+        int num = 0;
+        while(1) {
+            scanf("%s", s[num]);
+            if(strcmp(s[num], "0") == 0) {
+                break;
+            } else {
+                num++;
+            }
+        }
+        for(int i = 0; i < num - 1; i++) {
+            plus(s[i], s[i + 1]);
+        }
+        if(num == 0) {
+            printf("0\n");
+        } else {
+            printf("%s\n", s[num - 1]);
+        }
+        if(t) {
+            printf("\n");
+        }
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 大数运算在实际编程中运用十分广泛，特别是对于没有大数处理功能的编程语言来说。学习好大数运算，对我们的编程工作有很大帮助。
