@@ -78,6 +78,55 @@ int main() {
     return 0;
 }
 ```
+**移动桌子**
+
+***题目来源***
+
+[HDOJ 1050 Moving Tables](http://acm.hdu.edu.cn/showproblem.php?pid=1050)
+
+***题目分析***
+
+这是很经典的贪心算法问题，我们可以设一个数组存储桌子从每个门口经过的次数，最后遍历数组，记录最大经过次数，即可得到最少时间。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<string.h>
+#define N 200
+
+int main() {
+    int t;
+    int s[N];
+    scanf("%d", &t);
+    while(t--) {
+        memset(s, 0, sizeof(s));
+        int n;
+        scanf("%d", &n);
+        while(n--) {
+            int a, b;
+            scanf("%d%d", &a, &b);
+            if(a > b) {
+                int t = a;
+                a = b;
+                b = t;
+            }
+            for(int i = (a - 1) / 2; i <= (b - 1) / 2; i++) {
+                s[i]++;
+            }
+        }
+        int max = 0;
+        for(int i = 0; i < N; i++) {
+            if(s[i] > max) {
+                max = s[i];
+            }
+        }
+        printf("%d\n", max * 10);
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 贪心算法与动态规划一样重要而且有趣，一定要很好的掌握。
