@@ -299,6 +299,60 @@ int main()
 }
 ```
 
+**田忌赛马**
+
+***题目来源***
+
+[HDOJ 1052 Tian Ji -- The Horse Racing](http://acm.hdu.edu.cn/showproblem.php?pid=1052)
+
+***题目分析***
+
+这道水题的解决思路是贪心，具体做法是：对田忌和齐王的马从小到大各自排序，然后从两边扫描，如果小的能赢，就赢，如果不能，就比最大的马，能赢则赢，如果也不能赢，就用最小的和齐王最大的比掉，不管是否平局都保证了最优选择。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+
+int main() {
+    int n;
+    int a[1000], b[1000];
+    while(scanf("%d", &n) == 1 && n) {
+        for(int i = 0; i < n; i++) {
+            scanf("%d", &a[i]);
+        }
+        for(int i = 0; i < n; i++) {
+            scanf("%d", &b[i]);
+        }
+        sort(a, a + n);
+        sort(b, b + n);
+        int begin1, begin2, end1, end2, result;
+        begin1 = begin2 = 0;
+        end1 = end2 = n - 1;
+        result = 0;
+        while(begin1 <= end1) {
+            if(a[begin1] > b[begin2]) {
+                result++;
+                begin1++;
+                begin2++;
+            } else if(a[end1] > b[end2]) {
+                result++;
+                end1--;
+                end2--;
+            } else {
+                result -= (a[begin1] != b[end2]);
+                begin1++;
+                end2--;
+            }
+        }
+        printf("%d\n", result * 200);
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 水题也有着极高的价值，千万不能忽视。
