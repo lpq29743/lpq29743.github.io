@@ -81,6 +81,7 @@ tags:
 - [电影FM](http://dianying.fm/)（影库大，提供观看链接和下载链接）
 - [LOL电影天堂](http://www.loldytt.com/)（电影资源很丰富的网站）
 - [妮子电影](http://www.nizidy.com/)（同为电影资源网站）
+- [GoMovies](https://gostream.is/)（在线看电影网站）
 
 ***资源网站***
 
