@@ -200,6 +200,68 @@ int main() {
 }
 ```
 
+**哈夫曼编码**
+
+***题目来源***
+
+[HDOJ 1053 Entropy](http://acm.hdu.edu.cn/showproblem.php?pid=1053)
+
+***题目分析***
+
+这是一道典型的哈夫曼编码问题，只要掌握哈夫曼编码的操作就可以解决了，但要特别注意编码字符串所含字符的种类只有1的情况。
+
+***实现代码***
+
+```c++
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+#define N 1005
+using namespace std;
+
+int main() {
+    char s[N];
+    int a[N];
+    while(scanf("%s", s) && strcmp(s, "END")) {
+        for(int i = 0; i < N; i++) {
+            a[i] = 1;
+        }
+        sort(s, s + strlen(s));
+        int id = 0;
+        char c = s[0];
+        for(unsigned int i = 1; i < strlen(s); i++) {
+            if(s[i] == c) {
+                a[id]++;
+            } else {
+                id++;
+                c = s[i];
+            }
+        }
+        int n = id + 1;
+        sort(a, a + n);
+        int sum;
+        if(n == 1) {
+            sum = a[0];
+        } else {
+            sum = 0;
+            for(int i = 0; i < n - 1; i++) {
+                sum += a[i] + a[i + 1];
+                a[i + 1] += a[i];
+                int j = i + 1;
+                while(j + 1 < n && a[j] > a[j + 1]) {
+                    int t = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = t;
+                    j++;
+                }
+            }
+        }
+        printf("%d %d %.1lf\n", strlen(s) * 8, sum, strlen(s) * 8 / (double)sum);
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 贪心算法与动态规划一样重要而且有趣，一定要很好的掌握。
