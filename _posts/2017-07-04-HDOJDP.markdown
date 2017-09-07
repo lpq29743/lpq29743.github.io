@@ -275,6 +275,80 @@ int main() {
 }
 ```
 
+**丑数**
+
+***题目来源***
+
+[HDOJ 1058 Humble Numbers](http://acm.hdu.edu.cn/showproblem.php?pid=1058)
+
+***题目分析***
+
+这道题的状态转移方程是：`ans[k] = min(ans[m] * 2, ans[n] * 3, ans[p] * 5, ans[q] * 7)`，其中m, n, p, q 的初始值为1，并且只有在被选中后才移动。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+
+int ans[5900];
+
+int min(int a, int b) {
+    if(a < b) {
+        return a;
+    }
+    return b;
+}
+
+void init() {
+    int m, n, p, q;
+    m = n = p = q = 1;
+    ans[1] = 1;
+    for(int i = 2; i <= 5842; i++) {
+        ans[i] = min(ans[m] * 2, min(ans[n] * 3, min(ans[p] * 5, ans[q] * 7)));
+        if(ans[i] == ans[m] * 2) {
+            m++;
+        }
+        if(ans[i] == ans[n] * 3) {
+            n++;
+        }
+        if(ans[i] == ans[p] * 5) {
+            p++;
+        }
+        if(ans[i] == ans[q] * 7) {
+            q++;
+        }
+    }
+}
+
+void output(int n) {
+    printf("The %d", n);
+    int last = n % 100;
+    if(last == 13 || last == 12 || last == 11) {
+        printf("th humble number is %d.\n", ans[n]);
+        return ;
+    }
+    last = n % 10;
+    if(last == 1)
+        printf("st");
+    else if(last == 2)
+        printf("nd");
+    else if(last == 3)
+        printf("rd");
+    else
+        printf("th");
+    printf(" humble number is %d.\n", ans[n]);
+}
+
+int main() {
+    int n;
+    init();
+    while(scanf("%d", &n) && n) {
+        output(n);
+    }
+    return 0;
+}
+```
+
 **小猪银行**
 
 **题目来源**
