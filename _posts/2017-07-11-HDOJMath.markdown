@@ -105,6 +105,41 @@ int main() {
 }
 ```
 
+**求N^N最高位**
+
+***题目来源***
+
+[HDOJ 1060 Leftmost Digit](http://acm.hdu.edu.cn/showproblem.php?pid=1060)
+
+***题目分析***
+
+这道题数据量这么大，所以绝对不可能直接模拟解决。实际上，这道题用数学方法一下子就可以解决了，具体如下：
+
+1. 令M = N^N^
+2. 两边取对数，log10M = N\*log10N，得到M = 10^N*log10N^
+3. 令N*log10N = a（整数部分） + b（小数部分），则M = 10^a+b^ = 10^a^ * 10^b^，由于10的整数次幂的最高位必定是1，所以M的最高位只需考虑10^b^
+4. 最后对10^b^取整，输出取整的这个数就行了（因为0<=b<1，所以1<=10^b^<=10。对其取整，得到的一定是个位数，也就是所求的数）
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<math.h>
+
+int main() {
+    int count, n;
+    scanf("%d", &count);
+    while(count--) {
+        scanf("%d", &n);
+        double d = n * log10(n);
+        d = d - (long long)d;
+        d = pow(10, d);
+        printf("%d\n", (int)d);
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 数学与计算机科学是相辅相成的。如果一个程序员过度轻视数学，那么他注定会被以后的编程生涯中吃到苦头。
