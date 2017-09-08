@@ -82,6 +82,8 @@ tags:
 - [LOL电影天堂](http://www.loldytt.com/)（电影资源很丰富的网站）
 - [妮子电影](http://www.nizidy.com/)（同为电影资源网站）
 - [GoMovies](https://gostream.is/)（在线看电影网站）
+- [新视觉影院](http://www.yy6080.org/)（支持电影、电视剧在线观看）
+- [豆瓣电影250榜单](https://movie.douban.com/top250) [IMDB250电影榜单](http://www.imdb.com/chart/top?ref_=nv_wl_img_3) [TSPDT1000](http://www.theyshootpictures.com/gf1000_all1000films_table.php)（不知道看什么电影的话，就去这里逛逛，豆瓣电影榜单中中国电影相对IMDB会偏多点，IMDB榜单中几乎没有中国电影）
 
 ***资源网站***
 
@@ -123,8 +125,6 @@ tags:
 - [懒人听书](http://www.lrts.me/)（听书网站选择一）
 - [喜马拉雅电台](http://www.ximalaya.com/explore/)（听书网站选择二）
 - [蜻蜓电台](http://www.qingting.fm/#/home)（听书网站选择三）
-- [新视觉影院](http://www.yy6080.org/)（支持电影、电视剧在线观看）
-- [豆瓣电影250榜单](https://movie.douban.com/top250) [IMDB250电影榜单](http://www.imdb.com/chart/top?ref_=nv_wl_img_3)（不知道看什么电影的话，就去这里逛逛，豆瓣电影榜单中中国电影相对IMDB会偏多点，IMDB榜单中几乎没有中国电影）
 
 ***趣味网站***
 
