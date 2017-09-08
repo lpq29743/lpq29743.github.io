@@ -349,6 +349,83 @@ int main() {
 }
 ```
 
+**划分物品**
+
+***题目来源***
+
+[HDOJ 1059 Dividing](http://acm.hdu.edu.cn/showproblem.php?pid=1059)
+
+***题目分析***
+
+这是一道多重背包问题，即判断能否装满容量为总价值一半的背包。但如果直接采用多重背包转01背包的做法，则会出现TLE，所以我们必须采用二进制优化。所谓二进制优化，即将物品容量按2的k次方进行分割。之所以可以这样做，是因为一个正整数 n 可以被分解成1, 2, 4, …, 2^(k-1)^, n-2^k+1^（k是满足n - 2^k+1^>0的最大整数）的形式，且1～n之内的所有整数均可以唯一表示成1, 2, 4, …, 2^(k-1)^, n-2^k+1^中某几个数的和的形式。假设转换后的新数组为value0，则状态转移方程为`f[k] = f[k] || f[k - value0[i]]`。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+int value[6], value0[100000];
+int sum, isAll;
+int *f;
+
+int main() {
+    int count = 0;
+    while(1) {
+        sum = 0;
+        isAll = 1;
+        count++;
+        for(int i = 0; i < 6; i++) {
+            scanf("%d", &value[i]);
+            if(value[i] != 0) {
+                isAll = 0;
+            }
+            sum += value[i] * (i + 1);
+        }
+        if(isAll) {
+            break;
+        }
+        if(sum % 2 == 1) {
+            printf("Collection #%d:\n", count);
+            printf("Can't be divided.\n\n");
+        } else {
+            f = (int *)malloc(sizeof(int) * (sum / 2 + 1));
+            f[0] = 1;
+            for(int i = 1; i <= sum / 2; i++) {
+                f[i] = 0;
+            }
+            int id = 0;
+            for(int i = 0; i < 6; i++) {
+                for(int j = 1; j <= value[i]; j *= 2) {
+                    value0[id++] = j * (i + 1);
+                    value[i] -= j;
+                }
+                if(value[i] > 0) {
+                    value0[id++] = value[i] * (i + 1);
+                }
+            }
+            for(int i = 0; i < id; i++) {
+                for(int k = sum / 2; k >= value0[i]; k--) {
+                    if(!f[k] && f[k - value0[i]]) {
+                        f[k] = 1;
+                    }
+                    if(f[sum / 2] == 1) {
+                        break;
+                    }
+                }
+            }
+            printf("Collection #%d:\n", count);
+            if(f[sum / 2]) {
+                printf("Can be divided.\n\n");
+            } else {
+                printf("Can't be divided.\n\n");
+            }
+        }
+    }
+    return 0;
+}
+```
+
 **小猪银行**
 
 **题目来源**
