@@ -140,6 +140,45 @@ int main() {
 }
 ```
 
+**阶乘最后非零位**
+
+***题目来源***
+
+[HDOJ 1066 Last non-zero Digit in N!](http://acm.hdu.edu.cn/showproblem.php?pid=1066)
+
+***题目分析***
+
+这道题实际上是ACM中典型的套模板的题目，主要是要找到规律，具体的规律分析可以查看[这里](http://blog.sina.com.cn/s/blog_59e67e2c0100a7yx.html)。主要掌握了规律，我们就可以直接套模板解决。由于这道题数据量较大，所以要采用到大数除法。
+
+***实现代码***
+
+```c
+#include<stdio.h>
+#include<string.h>
+
+int mod[20] = {1, 1, 2, 6, 4, 2, 2, 4, 2, 8, 4, 4, 8, 4, 6, 8, 8, 6, 8, 2};
+char n[1000];
+int a[1000];
+
+int main() {
+    int i, c, t, len;
+    while(scanf("%s", n) != EOF) {
+        t = 1;
+        len = strlen(n);
+        for(i = 0; i < len; i++)
+            a[i] = n[len - 1 - i] - '0';
+        while(len) {
+            len -= !a[len - 1];
+            t = t * mod[a[1] % 2 * 10 + a[0]] % 10;
+            for(c = 0, i = len - 1; i >= 0; i--)
+                c = c * 10 + a[i], a[i] = c / 5, c %= 5;
+        }
+        printf("%d\n", t);
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 数学与计算机科学是相辅相成的。如果一个程序员过度轻视数学，那么他注定会被以后的编程生涯中吃到苦头。
