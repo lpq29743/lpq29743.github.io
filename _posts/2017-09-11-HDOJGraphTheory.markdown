@@ -25,6 +25,77 @@ tags:
 
 ***题目来源***
 
+[HDOJ 1054 Strategic Game](http://acm.hdu.edu.cn/showproblem.php?pid=1054)
+
+***题目分析***
+
+这题考察的是二分图的最小覆盖点，即求最大匹配数，而且由于图是双向的，所以求得的结果还要除以2。对于这道题，如果直接套模板，会出现TLE的情况，这是因为模板存储边采用的是邻接矩阵，时间复杂度为O(n^3^)。因此我们要对模板进行改进，采用邻接表来存储边，这种情况下复杂度为O(m*n)，并不会超时。
+
+***实现代码***
+
+```c++
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<vector>
+#define N 1550
+using namespace std;
+
+int n;
+vector<int> edges[N];
+int linker[N];
+int used[N];
+
+int dfs(int u) {
+    for(unsigned int i = 0; i < edges[u].size(); i++) {
+        if(!used[edges[u][i]]) {
+            used[edges[u][i]] = 1;
+            if(linker[edges[u][i]] == -1 || dfs(linker[edges[u][i]])) {
+                linker[edges[u][i]] = u;
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+int hungary() {
+    int res = 0;
+    memset(linker, -1, sizeof(linker));
+    for(int u = 0; u < n; u++) {
+        memset(used, 0, sizeof(used));
+        if(dfs(u)) {
+            res++;
+        }
+    }
+    return res;
+}
+
+int main() {
+    int u, v, num;
+    while(scanf("%d", &n) == 1) {
+        for(int i = 0; i < n; i++) {
+            edges[i].clear();
+        }
+        for(int i = 0; i < n; i++) {
+            scanf("%d:(%d)", &u, &num);
+            for(int j = 0; j < num; j++) {
+                scanf("%d", &v);
+                edges[u].push_back(v);
+                edges[v].push_back(u);
+            }
+        }
+        int result = hungary();
+        printf("%d\n", result / 2);
+    }
+    return 0;
+}
+```
+
+**男孩和女孩**
+
+***题目来源***
+
 [HDOJ 1068 Girls and Boys](http://acm.hdu.edu.cn/showproblem.php?pid=1068)
 
 ***题目分析***
