@@ -241,6 +241,75 @@ int main() {
 }
 ```
 
+**完数**
+
+***题目描述***
+
+求1-n内的完数，所谓的完数是这样的数，它的所有因子相加等于它自身，比如6有3个因子1,2,3,1+2+3=6，那么6是完数。即完数是等于其所有因子相加和的数
+
+***输入描述***
+
+测试数据有多组，输入n，n数据范围不大
+
+***输出描述***
+
+对于每组输入,请输出1-n内所有的完数。如有案例输出有多个数字，用空格隔开，输出最后不要有多余的空格
+
+***输入例子***
+
+```
+6
+```
+
+***输出例子***
+
+```
+6
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+int isPerfectNum(int n) {
+    int sum = 0;
+    for(int i = 1; i <= sqrt(n); i++) {
+        if(n % i == 0) {
+            if(sqrt(n) == i) {
+                sum += i;
+            } else {
+                sum += i + n / i;
+            }
+        }
+    }
+    return sum == 2 * n;
+}
+
+int main() {
+    int n, *s, count;
+    while(scanf("%d", &n) == 1) {
+        s = (int *)malloc(sizeof(int) * n);
+        count = 0;
+        for(int i = 1; i <= n; i++) {
+            if(isPerfectNum(i)) {
+                s[count++] = i;
+            }
+        }
+        for(int i = 0; i < count; i++) {
+            if(i != 0) {
+                printf(" ");
+            }
+            printf("%d", s[i]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 这几天来，收到的消息喜忧参半，心情也比较复杂，希望能够收拾好行囊，继续朝实现梦想的道路前进。
