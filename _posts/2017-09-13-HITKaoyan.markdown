@@ -310,6 +310,115 @@ int main() {
 }
 ```
 
+**判断三角形类型**
+
+***题目描述***
+
+给定三角形的三条边，a,b,c。判断该三角形类型
+
+***输入描述***
+
+测试数据有多组，每组输入三角形的三条边
+
+***输出描述***
+
+对于每组输入，输出直角三角形、锐角三角形、或是钝角三角形
+
+***输入例子***
+
+```
+3 4 5
+```
+
+***输出例子***
+
+```
+直角三角形
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<math.h>
+#define square(n) (int)(pow(n, 2) + 0.5)
+
+void swap(int *x, int *y) {
+    if(*x > *y) {
+        int t = *x;
+        *x = *y;
+        *y = t;
+    }
+}
+
+int main() {
+    int a, b, c;
+    while(scanf("%d%d%d", &a, &b, &c) == 3) {
+        swap(&a, &b);
+        swap(&b, &c);
+        swap(&a, &c);
+        if(square(a) + square(b) == square(c)) {
+            printf("直角三角形\n");
+        } else if(square(a) + square(b) > square(c)) {
+            printf("锐角三角形\n");
+        } else {
+            printf("钝角三角形\n");
+        }
+    }
+    return 0;
+}
+```
+
+**字符串去特定字符**
+
+***题目描述***
+
+输入字符串s和字符c，要求去掉s中所有的c字符，并输出结果
+
+***输入描述***
+
+测试数据有多组，每组输入字符串s和字符c
+
+***输出描述***
+
+对于每组输入，输出去除c字符后的结果
+
+***输入例子***
+
+```
+heallo
+a
+```
+
+***输出例子***
+
+```
+hello
+```
+
+***程序代码***
+
+```c
+#include<stdio.h>
+#include<string.h>
+
+int main() {
+    char s[1000], c;
+    int count;
+    while(scanf("%s %c", s, &c) == 2) {
+        count = 0;
+        for(int i = 0; i < strlen(s); i++) {
+            if(s[i] != c) {
+                s[count++] = s[i];
+            }
+        }
+        s[count] = '\0';
+        printf("%s\n", s);
+    }
+    return 0;
+}
+```
+
 ## 后记
 
 这几天来，收到的消息喜忧参半，心情也比较复杂，希望能够收拾好行囊，继续朝实现梦想的道路前进。
