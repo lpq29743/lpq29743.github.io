@@ -100,6 +100,10 @@ int accept(int socket, struct sockaddr *restrict address, socklen_t *restrict ad
 int connect(int socket, const struct sockaddr *address, socklen_t address_len);
 ```
 
+**socket类型**
+
+socket类型主要有SOCK_STREAM、SOCK_DGRAM、SOCK_RAW三种，其中SOCK_RAW工作在网络层，可以处理ICMP、IGMP等网络报文以及特殊的IPv4报文，而SOCK_STREAM(TCP)、SOCK_DGRAM(UDP)工作在传输层。
+
 #### csapp.c的open_clientfd函数
 
 **具体代码**
