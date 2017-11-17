@@ -2,11 +2,11 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: http://mazhuang.org
+url: https://lpq29743.github.io/redant/
 date_format: "ordinal"
-title: 码志
+title: Redant Blog
 subtitle: "打码改变人生"
-description: "马壮的个人博客"
+description: "林佩勤的个人博客"
 keywords: 码志, Zhuang Ma, mzlogin, mazhuang
 timezone: Asia/Shanghai
 encoding: "utf-8"
