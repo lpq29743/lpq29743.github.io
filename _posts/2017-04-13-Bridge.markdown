@@ -1,0 +1,188 @@
+---
+layout:     post
+title:      "设计模式之桥接模式"
+subtitle:   "再遇结构型模式"
+date:       2017-04-13 17:00:00
+author:     "林佩勤"
+header-img: "img/post-bg.jpg"
+tags:
+    - 设计模式
+---
+
+> 减少多个维度的设计模式~~~
+>
+
+
+## 前言
+
+这篇文章接着上一篇，让我们一起来了解桥接模式。
+
+---
+
+## 正文
+
+**什么是桥接模式**
+
+桥接模式将抽象部分与实现部分分离，使它们独立变化。它是一种对象结构型模式。
+
+**怎么使用桥接模式**
+
+例：车从种类的角度可以分为火车和汽车，从用途的角度可分为客车和货车
+
+***步骤一：创建桥接实现接口***
+
+```java
+package com.bridge;
+
+public interface Transport {
+
+	public void transport(); 
+	
+}
+```
+
+***步骤二：创建实现桥接接口的类***
+
+Goods类：
+
+```java
+package com.bridge;
+
+public class Goods implements Transport{  
+	  
+    @Override  
+    public void transport() {
+        System.out.println("运货");  
+    }  
+  
+}
+```
+
+Guest类：
+
+```java
+package com.bridge;
+
+public class Guest implements Transport{  
+	  
+    @Override  
+    public void transport() {
+        System.out.println("运客");
+    }  
+  
+}
+```
+
+***步骤三：创建使用桥接接口的抽象类***
+
+```java
+package com.bridge;
+
+public abstract class Vehicle {  
+	  
+    private Transport implementor;  
+      
+    public void transport(){  
+        implementor.transport();  
+    }
+    
+    public Vehicle(Transport implementor) {
+		super();
+		this.implementor = implementor;
+	}
+
+}
+```
+
+***步骤四：创建继承抽象类的实体类***
+
+Car类：
+
+```java
+package com.bridge;
+
+public class Car extends Vehicle {  
+	  
+    public Car(Transport implementor) {
+		super(implementor);
+	}
+
+	@Override  
+    public void transport() {
+        System.out.print("汽车");  
+        super.transport();  
+    }
+  
+}
+```
+
+Train类：
+
+```java
+package com.bridge;
+
+public class Train extends Vehicle {
+
+	public Train(Transport implementor) {
+		super(implementor);
+	}
+
+	@Override
+	public void transport() {
+		System.out.print("火车");
+		super.transport();
+	}
+
+}
+```
+
+***步骤五：创建Client***
+
+```java
+package com.bridge;
+
+public class Client {  
+	  
+    public static void main(String[] args) {
+    	
+        Train train1 = new Train(new Goods());
+        train1.transport();
+        Train train2 = new Train(new Guest());
+        train2.transport();  
+          
+        Car car1 = new Car(new Goods());
+        car1.transport();
+        Car car2 = new Car(new Guest());
+        car2.transport();   
+  
+    }
+  
+}
+```
+
+**桥接模式有哪些优缺点**
+
+***优点***
+
+- 分离抽象接口及其实现部分
+- 桥接模式有时类似多继承，但多继承违背类的单一职责原则（即一个类只有一个变化），复用性较差，且类个数庞大，桥接模式比多继承更好
+- 桥接模式提高系统的可扩充性，在两个变化维度中任意扩展一个维度，都不需修改原有系统
+- 实现细节对客户透明，可对用户隐藏实现细节
+
+***缺点***
+
+- 桥接模式引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象设计与编程
+- 桥接模式要求正确识别出系统中两个独立变化的维度，因此使用范围具有一定局限性
+
+**桥接模式适用于什么环境**
+
+- 如果系统需要在构件的抽象化角色和具体化角色之间增加更多灵活性，避免在两个层次之间建立静态的继承联系，通过桥接模式可以使它们在抽象层建立一个关联关系
+- 抽象化角色和实现化角色可以以继承的方式独立扩展而互不影响，在程序运行时可以动态将一个抽象化子类的对象和一个实现化子类的对象进行组合，即系统需要对抽象化角色和实现化角色进行动态耦合
+- 一个类存在两个独立变化的维度，且这两个维度都需要扩展
+- 虽然系统中使用继承没有问题，但由于抽象化角色和具体化角色需要独立变化，设计要求需要独立管理这两者
+- 对于那些不希望使用继承或因为多继承导致系统类的个数急剧增加的系统，桥接模式尤为适用
+
+
+## 后记
+
+桥接模式可以有效地扩展两个独立变化的维度，是改善多继承的很好方法，值得我们去深入理解和运用。

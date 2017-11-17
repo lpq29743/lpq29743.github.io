@@ -9,7 +9,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en"
-title                    : "Site Title"
+title                    : "Redant Blog"
 title_separator          : "-"
 name                     : "Your Name"
 description              : "An amazing website."

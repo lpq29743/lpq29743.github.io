@@ -1,0 +1,57 @@
+---
+layout:     post
+title:      "Tmux终端复用"
+subtitle:   "Linux爱好者必备利器"
+date:       2017-03-19 16:00:00
+author:     "林佩勤"
+header-img: "img/post-bg.jpg"
+tags:
+    - Linux
+---
+
+> 优雅地使用命令行
+
+
+## 前言
+
+Tmux是一款强大的终端复用软件，它既能开启多个会话同时工作，又能保存会话和恢复会话，在学生工作中起到了很大的帮助，今天就让我们来一起学一下它！
+
+---
+
+## 正文
+
+**基本使用**
+
+```shell
+# 启动tmux
+tmux
+# 启动tmux的同时指定会话名
+tmux new -s myname
+# <prefix>是tmux的前缀键，所有tmux快捷键都要先按前缀键。默认是Ctrl+b
+# 通过<prefix>$重命名Session
+# <prefix>c创建新Window
+# <prefix>%水平分割窗口，形成两个Pane
+# <prefix>"垂直分割窗口
+# <prefix>d退出当前Session
+# 查看当前tmux中有哪些Session
+tmux ls
+# 根据Session名进行恢复
+tmux a -t myname
+```
+
+**基本配置**
+
+```shell
+# 如果要调整默认前缀键需在配置文件~/.tmux.conf（如果不存在则新建）中加入
+unbind ^b
+set -g prefix 'C-a'
+# 设置快捷键<prefix>r来重新载入配置，让Tmux动态载入配置而不是重启
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded"
+
+# 查看当前配置
+tmux show -g
+```
+
+## 后记
+
+由于目前对Tmux使用还不多，所以很多功能都还没有用到，也就没有进行整理，所以这篇文章就先写到这里，后面也会根据自己的使用情况进行更新！
