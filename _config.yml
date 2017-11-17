@@ -2,7 +2,6 @@
 #   Main Configs   #
 # ---------------- #
 url: https://lpq29743.github.io/redant
-baseurl: /redant/
 title: Redant Blog
 subtitle: "Software is like sex: it's better when it's free."
 description: "林佩勤的个人博客"
@@ -24,19 +23,19 @@ email: lpq29743@gmail.com
 # ---------------- #
 navs:
   -
-    href: /
+    href: redant/
     label: 首页
 
   -
-    href: /categories/
+    href: redant/categories/
     label: 分类
 
   -
-    href: /wiki/
+    href: redant/wiki/
     label: 维基
 
   -
-    href: /about/
+    href: redant/about/
     label: 关于
 
 # ---------------- #
