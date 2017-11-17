@@ -4,7 +4,7 @@
 url: https://lpq29743.github.io/redant
 baseurl: /redant/
 title: Redant Blog
-subtitle: "所以你跑啊、跑啊，想要赶上正在落下的太阳，可它转个圈，又出现在你后面"
+subtitle: "Software is like sex: it's better when it's free."
 description: "林佩勤的个人博客"
 keywords: 林佩勤, Peiqin Lin, redant, 哈哈大炮
 timezone: Asia/Shanghai
@@ -51,7 +51,7 @@ markdown: kramdown
 kramdown:
     input: GFM
 highlighter: rouge
-paginate: 8
+paginate: 10
 lsi: false
 quiet: false
 excerpt_separator: "\n\n"
