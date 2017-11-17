@@ -1,5 +1,5 @@
 ---
-layout:     archive
+layout:     single
 title:      "Android常用软件总结"
 subtitle:   "记录和分享那些让自己受益的app"
 date:       2016-09-08 15:00:00
