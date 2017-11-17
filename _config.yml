@@ -1,9 +1,8 @@
 # ---------------- #
 #   Main Configs   #
 # ---------------- #
-baseurl:
-url: https://lpq29743.github.io/redant/
-date_format: "ordinal"
+url: https://lpq29743.github.io/redant
+baseurl: /redant
 title: Redant Blog
 subtitle: "所以你跑啊、跑啊，想要赶上正在落下的太阳，可它转个圈，又出现在你后面"
 description: "林佩勤的个人博客"
@@ -35,10 +34,6 @@ navs:
   -
     href: /wiki/
     label: 维基
-
-  -
-    href: /links/
-    label: 链接
 
   -
     href: /about/
