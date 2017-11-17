@@ -5,9 +5,9 @@ baseurl:
 url: https://lpq29743.github.io/redant/
 date_format: "ordinal"
 title: Redant Blog
-subtitle: "打码改变人生"
+subtitle: "所以你跑啊、跑啊，想要赶上正在落下的太阳，可它转个圈，又出现在你后面"
 description: "林佩勤的个人博客"
-keywords: 码志, Zhuang Ma, mzlogin, mazhuang
+keywords: 林佩勤, Peiqin Lin, redant, 哈哈大炮
 timezone: Asia/Shanghai
 encoding: "utf-8"
 side_bar_repo_limit: 5
