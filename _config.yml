@@ -38,7 +38,7 @@ subscribe_rss: /feed.xml
 # Build Settings
 highlighter: rouge
 paginate: 10
-permalink: pretty
+permalink: /:year/:month/:day/:title/
 gems: [jekyll-paginate]
 collections:
     wiki:
