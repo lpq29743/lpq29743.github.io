@@ -1,10 +1,12 @@
 ---
 layout: post
 title: Android常用软件总结
-categories: 推荐
+categories: Recommendation
 description: Android软件推荐
 keywords: App推荐, Android软件推荐
 ---
+
+本人从功能角度划分，列出笔者认为对自己帮助非常大的应用。
 
 **应用市场软件**
 
