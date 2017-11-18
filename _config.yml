@@ -54,7 +54,7 @@ paginate: 10
 lsi: false
 quiet: false
 excerpt_separator: "\n\n"
-permalink: /:year/:month/:day/:title/
+permalink: /redant/:year/:month/:day/:title/
 gems:
     - jekyll-github-metadata
     - rouge
