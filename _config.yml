@@ -19,31 +19,31 @@ email: lpq29743@gmail.com
 # Navigation Settings
 navs:
   -
-    href: /redant
+    href: /
     label: 首页
   -
-    href: /redant/categories
+    href: /categories
     label: 分类
   -
-    href: /redant/wiki
+    href: /wiki
     label: 维基
   -
-    href: /redant/about
+    href: /about
     label: 关于
 
 # RSS Settings
 RSS: true
-subscribe_rss: /redant/feed.xml
+subscribe_rss: /feed.xml
 
 # Build Settings
 highlighter: rouge
 paginate: 10
-permalink: /redant/:year/:month/:day/:title/
+permalink: pretty
 gems: [jekyll-paginate]
 collections:
     wiki:
         output: true
-        permalink: /redant/wiki/:path/
+        permalink: /wiki/:path/
         
 # Markdown Settings
 markdown: kramdown
