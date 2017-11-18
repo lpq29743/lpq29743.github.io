@@ -42,7 +42,7 @@ keywords: IT技能
 
 CSDN、知乎专栏、新浪微博等等方式能够让你去发表个人的博文，但是你是否想过搭建一个属于自己的个人博客网站呢？如果你的答案是肯定的话，那你就要继续往下读了！
 
-最常用的搭建个人技术博客的方式是Github Pages+Jekyll的方法，具体教程查看：[搭建一个免费的，无限流量的Blog----github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)，如果你搭建完之后想要迅速让自己的博客网站界面变得美观，那么采用模板是一个不错的选择，本人借鉴的是[黄玄的博客](http://huangxuan.me/)，其项目地址请点击[这里](https://github.com/Huxpro/huxpro.github.io)。
+最常用的搭建个人技术博客的方式是Github Pages + Jekyll的方法，具体教程查看：[搭建一个免费的，无限流量的Blog----github Pages和Jekyll入门](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)，如果你搭建完之后想要迅速让自己的博客网站界面变得美观，那么采用模板是一个不错的选择，本人原先借鉴的是[黄玄的博客](http://huangxuan.me/)（[项目地址](https://github.com/Huxpro/huxpro.github.io)），现在借鉴的是 [Zhuang Ma 的博客](http://mazhuang.org/)。
 
 如果想让你的博客被谷歌搜索到，可以参考[这里](https://www.zhihu.com/question/22643724/answer/22106621)。如果是百度的话，参考[这里](https://www.zhihu.com/question/30898326)。
 
