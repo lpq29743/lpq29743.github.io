@@ -41,7 +41,7 @@ dependencies {
 
 安装Android Butterknife Zelezny（一般步骤一二执行完后会添加，没添加的话File-->Settings-->Plugins-->Browse repositories添加），这个插件可以让你在添加Butterkinfe注解时偷偷懒，直接点击几下鼠标既可以完成注解的增加，同时还是图形化的操作。
 
-###使用
+### 使用
 
 #### @BindView 来消除 findViewById
 
