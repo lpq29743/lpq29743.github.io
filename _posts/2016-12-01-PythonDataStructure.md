@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python之数据结构
+title: Python 之数据结构
 categories: Python
 description: Python之数据结构
 keywords: Python, Python数据结构
