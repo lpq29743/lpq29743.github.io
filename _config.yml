@@ -54,16 +54,14 @@ paginate: 10
 lsi: false
 quiet: false
 excerpt_separator: "\n\n"
-# permalink: /redant/:year/:month/:day/:title/
+permalink: /redant/:year/:month/:day/:title/
 gems:
     - jekyll-github-metadata
     - rouge
-#     - jekyll-html-pipeline
     - jekyll-paginate
     - jekyll-sitemap
     - jekyll-feed
     - jemoji
-#     - jekyll-mentions
 collections:
     wiki:
         output: true
