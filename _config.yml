@@ -33,27 +33,20 @@ navs:
 
 # RSS Settings
 RSS: true
-subscribe_rss: /feed.xml
+subscribe_rss: /redant/feed.xml
 
 # Build Settings
 highlighter: rouge
 paginate: 10
-permalink: /:year/:month/:day/:title/
+permalink: /redant/:year/:month/:day/:title/
 gems: [jekyll-paginate]
 collections:
     wiki:
         output: true
-        permalink: /wiki/:path/
+        permalink: /redant/wiki/:path/
         
 # Markdown Settings
 markdown: kramdown
 kramdown:
     input: GFM
 
-# Gitment Settings
-gitment:
-    owner: mzlogin
-    repo: blog-comments
-    oauth:
-        client_id: d2e1cbbd298958076462
-        client_secret: b42a4178e5fd4a7cf63189ef4b1453b05c375709
