@@ -1,6 +1,4 @@
-# ---------------- #
-#   Main Configs   #
-# ---------------- #
+# Site Settings
 url: https://lpq29743.github.io/redant/
 baseurl: /redant
 title: Redant Blog
@@ -10,6 +8,7 @@ keywords: 林佩勤, Peiqin Lin, redant, 哈哈大炮
 timezone: Asia/Shanghai
 encoding: "utf-8"
 side_bar_repo_limit: 5
+SEOTitle: 林佩勤的个人博客
 
 # ---------------- #
 #      Author      #
@@ -55,7 +54,7 @@ paginate: 10
 lsi: false
 quiet: false
 excerpt_separator: "\n\n"
-permalink: /redant/:year/:month/:day/:title/
+permalink: pretty
 gems:
     - jekyll-github-metadata
     - rouge
