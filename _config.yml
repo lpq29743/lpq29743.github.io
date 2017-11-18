@@ -7,8 +7,8 @@ description: "林佩勤的个人博客"
 keywords: 林佩勤, Peiqin Lin, redant, 哈哈大炮
 timezone: Asia/Shanghai
 encoding: "utf-8"
-side_bar_repo_limit: 5
 SEOTitle: 林佩勤的个人博客
+repository: lpq29743/redant
 
 # Author Settings
 author: Peiqin Lin
@@ -49,10 +49,8 @@ collections:
 markdown: kramdown
 kramdown:
     input: GFM
-    use_coderay: true
 
-repository: lpq29743/redant
-
+# Gitment Settings
 gitment:
     owner: mzlogin
     repo: blog-comments
