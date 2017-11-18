@@ -49,3 +49,11 @@ markdown: kramdown
 kramdown:
     input: GFM
 
+# Comments Settings
+comments_provider: gitment
+gitment:
+    owner: lpq29743
+    repo: blog-comments
+    oauth:
+        client_id: 5818ceff784afe05d31c
+        client_secret: dc7e8efc044c7194cf453740f82c646aa998f206
