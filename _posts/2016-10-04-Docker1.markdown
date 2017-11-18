@@ -1,0 +1,117 @@
+---
+layout: post
+title: Docker 入门
+categories: Tool
+description: Docker入门
+keywords: Docker, Docker入门, Docker初学者
+---
+
+学习Docker的目的主要是探寻考研中云计算这个方向。当然，无论什么目的，知识这东西都是有用的。
+
+说实话，之前也学了一次docker，但那次不注重做笔记，有点囫囵吞枣，所以效果极差。这一次，希望通过笔记和实践的形式来提高自己的学习效率。
+
+首先，先抛出几个比较有意义的链接：
+
+[Docker有什么优势](https://www.zhihu.com/question/22871084/answer/88293837)
+
+[Docker开发文档](https://docs.docker.com/)
+
+目前比较知名的docker公开仓库：
+
+[国外Docker Hub](https://hub.docker.com)
+
+[国内Docker Pool](http://www.dockerpool.com)
+
+几个国内Docker服务平台（这几个云平台都有免费使用服务，在这几个云平台上摸索摸索，能学到很多东西）：[精灵云](https://www.ghostcloud.cn/home/home.html)、[数人云](https://www.shurenyun.com/)、[好雨云](https://www.goodrain.com/)、[时速云](https://www.tenxcloud.com/)、[灵雀云](http://www.alauda.cn/)、[道客云](https://www.daocloud.io/)
+
+另附两篇数人云部署应用的文章：
+
+[玩转数人云：两步发布2048游戏应用](http://www.jingyuyun.com/article/2157.html)
+
+[玩转数人云：10分钟建立wordpress集群网站](http://blog.dataman-inc.com/20151119-shurenyun-wordpress/)
+
+把干货摆的差不多了，接下来就进入正题。
+
+关于Docker，如果你像我一样一窍不通的话，打开上面这几个链接肯定是一脸懵逼。其实这些东西你应该看完这篇文章之后想要实验实验在去看的。。。
+
+Ubuntu和CentOS上都可以支持docker，具体的安装一句命令就可以搞定。至于Windows，听说只有Win10能支持，不过笔者没有试验过。本文的实验环境也是在CentOS下。
+
+命令走起：
+
+**docker基本命令**
+
+```shell
+# 开启Docker服务
+sudo service docker start
+# 查看docker信息
+sudo docker info
+# 查看docker帮助
+sudo docker help
+```
+
+**镜像简单操作**
+
+```shell
+# 查找镜像
+sudo docker search puppet
+# 获取镜像
+sudo docker pull ubuntu:12.04
+# 使用下载的镜像启动容器（当启动的镜像不存在，则会在公有仓库中下载）
+sudo docker run -t -i ubuntu:12.04 /bin/bash
+sudo docker run ubuntu:14.04 /bin/echo 'Hello world'
+# 查看当前镜像列表
+sudo docker images
+# 导出镜像到本地文件
+sudo docker save -o ubuntu_14.04.tar ubuntu:14.04
+# 本地文件中导入到本地镜像库
+sudo docker load --input ubuntu_14.04.tar
+sudo docker load < ubuntu_14.04.tar
+# 移除本地的镜像
+sudo docker rmi ubuntu:14.04
+```
+
+**容器简单操作**
+
+```shell
+# 容器重命名
+sudo docker run --name 名字 -i -t ubuntu /bin/bash
+# 查看正在运行的容器列表
+sudo docker ps (-a)
+# 直接将一个已经终止的容器启动运行
+sudo docker start ao_ct
+sudo docker start b1ec5fb7f499
+# 终止运行容器
+sudo docker stop ao_ct
+# 快速杀死容器
+sudo docker kill aofo
+# 重启运行容器
+sudo docker restart ao_ct
+# 附到容器上
+sudo docker attach aoct
+sudo docker attach 614122c0aabb
+# 通过添加-d参数创建一个叫aofo的守护式容器
+sudo docker run --name aofo -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sleep 1; done"
+# 打印容器日志
+sudo docker logs aofo
+# 查看容器内进程
+sudo docker top aofo
+# 获取更多容器信息
+sudo docker inspect aofo
+# 查看容器运行状态
+sudo docker inspect --format='{{ .State.Running }}' aofo
+sudo docker inspect --format='{{ .State.Running }}' aofo aoct
+# 查看容器IP地址（没有设置则为空）
+sudo docker inspect --format='{{ .NetworkSettings.IPAddress }}' aofo
+# 在容器内部运行进程
+sudo docker exec -d daemon aofo touch /etc/new_config_file
+sudo docker exec -t -i aofo /bin/bash
+# 删除容器
+sudo docker rm 容器ID
+# 一次性删除所有容器
+sudo docker rm `docker ps -a -q`
+# 导出容器
+sudo docker export aofo
+# 导入容器
+sudo docker import aofo
+sudo docker import http://example.com/exampleimage.tgz example/imagerepo
+```
