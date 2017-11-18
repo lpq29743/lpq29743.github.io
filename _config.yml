@@ -1,61 +1,72 @@
-# Site Settings
-url: https://lpq29743.github.io/redant/
-baseurl: /redant
-title: Redant Blog
-subtitle: "Software is like sex: it's better when it's free."
-description: "林佩勤的个人博客"
-keywords: 林佩勤, Peiqin Lin, redant, 哈哈大炮
-timezone: Asia/Shanghai
-encoding: "utf-8"
-side_bar_repo_limit: 5
-SEOTitle: 林佩勤的个人博客
-
-# Author Settings
-author: Peiqin Lin
-github_username: lpq29743
-location: Guangdong, China
-email: lpq29743@gmail.com
-
-# Navigation Settings
-navs:
-  -
-    href: /redant/
-    label: 首页
-  -
-    href: /redant/categories/
-    label: 分类
-  -
-    href: /redant/wiki/
-    label: 维基
-  -
-    href: /redant/about/
-    label: 关于
-
-# RSS Settings
-RSS: true
-subscribe_rss: /feed.xml
-
-# Build Settings
-highlighter: rouge
-paginate: 10
-permalink: pretty
-gems: [jekyll-paginate]
+# Where things are
+source:          .
+destination:     ./_site
+collections_dir: .
+plugins_dir:     _plugins
+layouts_dir:     _layouts
+data_dir:        _data
+includes_dir:    _includes
 collections:
-    wiki:
-        output: true
-        permalink: /wiki/:path/
-        
-# Markdown Settings
-markdown: kramdown
+  posts:
+    output:   true
+
+# Handling Reading
+safe:                 false
+include:              [".htaccess"]
+exclude:              ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
+keep_files:           [".git", ".svn"]
+encoding:             "utf-8"
+markdown_ext:         "markdown,mkdown,mkdn,mkd,md"
+strict_front_matter: false
+
+# Filtering Content
+show_drafts: null
+limit_posts: 0
+future:      false
+unpublished: false
+
+# Plugins
+whitelist: []
+plugins:   []
+
+# Conversion
+markdown:    kramdown
+highlighter: rouge
+lsi:         false
+excerpt_separator: "\n\n"
+incremental: false
+
+# Serving
+detach:  false
+port:    4000
+host:    127.0.0.1
+baseurl: "" # does not include hostname
+show_dir_listing: false
+
+# Outputting
+permalink:     date
+paginate_path: /page:num
+timezone:      null
+
+quiet:    false
+verbose:  false
+defaults: []
+
+liquid:
+  error_mode: warn
+
+# Markdown Processors
+rdiscount:
+  extensions: []
+
+redcarpet:
+  extensions: []
+
 kramdown:
-    input: GFM
-    use_coderay: true
-
-repository: lpq29743/redant
-
-gitment:
-    owner: mzlogin
-    repo: blog-comments
-    oauth:
-        client_id: d2e1cbbd298958076462
-        client_secret: b42a4178e5fd4a7cf63189ef4b1453b05c375709
+  auto_ids:       true
+  entity_output:  as_char
+  toc_levels:     1..6
+  smart_quotes:   lsquo,rsquo,ldquo,rdquo
+  input:          GFM
+  hard_wrap:      false
+  footnote_nr:    1
