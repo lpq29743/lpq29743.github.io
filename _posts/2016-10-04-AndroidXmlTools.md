@@ -5,16 +5,6 @@ categories: Android
 description: Android xml tools使用详解
 keywords: Android, Android xml, Android xml tools
 ---
----
-layout:     post
-title:      "Android xml tools使用详解"
-subtitle:   "xml预览工具"
-date:       2016-10-04 15:00:00
-author:     "林佩勤"
-header-img: "img/post-bg.jpg"
-tags:
-    - Android
----
 
 在写Android布局文件时，经常会碰到要预览效果的问题。相信有一部分人跟笔者一样，一开始在做Android开发的时候，想要看TextView的效果，就设置个android.text="xxx"，然后等把效果改满意后，出于代码洁癖症，又把这一句删掉。这样一来，在xml设计中耗费的时间变多，开发者也很容易失去耐心。那么，怎么解决这个问题呢？当然是本文提到的tools。 
 
