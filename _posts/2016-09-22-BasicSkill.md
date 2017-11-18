@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 普通人必须掌握的基本IT技能
+title: 普通人必须掌握的基本 IT 技能
 categories: Blog
 description: 普通人必须掌握的基本IT技能
 keywords: IT技能

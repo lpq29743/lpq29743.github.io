@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Android常用软件总结
+title: Android 常用软件总结
 categories: Recommendation
 description: Android软件推荐
 keywords: App推荐, Android软件推荐

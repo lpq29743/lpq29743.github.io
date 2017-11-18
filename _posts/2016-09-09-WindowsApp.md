@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Windows常用软件总结
+title: Windows 常用软件总结
 categories: Recommendation
 description: Windows软件推荐
 keywords: Windows软件推荐
