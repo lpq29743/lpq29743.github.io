@@ -252,7 +252,7 @@ public class MainActivity extends Activity {
 
 Android系统管理任务和返回栈的方式，正如上面所描述的一样。如果想打破这种默认的行为，比如说当启动新的Activity时，希望它可以存在一个独立的任务当中。或者当启动一个Activity时，如果这个Activity已经存在于返回栈中，我们能把它直接移到栈顶，而不是创建新的实例。再比如清除掉返回栈中除了最底层的Activity之外的其它所有Activity。这些都是可以通过配置manifest文件中的activity元素的属性，或者是在启动Activity时配置Intent的flag来实现的。
 
-**定义启动模式**
+#### 定义启动模式
 
 启动模式定义如何将Activity实例和当前任务进行关联，可通过manifest文件和在Intent中加入flag两种方式来定义。也就是说，如果Activity A启动Activity B，Activity B可以定义自己如何与当前任务进行关联，而Activity A也可以要求Activity B该如何与当前任务进行关联。如果Activity B在manifest中已经定义了如何与任务进行关联，而Activity A同时也在Intent中要求了Activity B如何与当前任务进行关联，那么此时Intent中的定义将覆盖manifest中的定义。需要注意的是，有些启动模式在manifest中可以指定，但在Intent中不行，反之也一样。
 
@@ -275,14 +275,14 @@ Android系统管理任务和返回栈的方式，正如上面所描述的一样�
 
 FLAG_ACTIVITY_CLEAR_TOP和FLAG_ACTIVITY_NEW_TASK结合在一起使用也会有比较好的效果，比如可以将一个后台运行的任务切换到前台，并把目标Activity之上的其它Activity全部关闭掉。这个功能在某些情况下非常有用，比如说从通知栏启动Activity的时候。
 
-**处理affinity**
+#### 处理affinity
 
 affinity指定Activity依附于哪个任务，同一应用程序中所有Activity默认具有相同的affinity，但修改activity元素的taskAffinity属性可以改变Activity的affinity值。taskAffinity属性接收一个字符串参数，可以指定成任意的值（字符串中至少要包含一个.），但不能和应用程序包名相同，因为系统会使用包名来作为默认的affinity值。affinity主要应用于以下两种应用场景：
 
 - 如果在Intent中加入了FLAG_ACTIVITY_NEW_TASK flag（或声明启动模式是"singleTask"），系统就会尝试为启动Activity创建新的任务。但规则并不是这么简单，系统会检测这个Activity的affinity和当前任务的affinity是否相同，如果相同就会把它放入到现有任务，如果不同则会去创建新的任务。而同一个程序中所有Activity的affinity默认都是相同的，这也是为什么说，同一个应用程序中即使声明成"singleTask"，也不会为这个Activity再创建新的任务。
 - 当Activity的allowTaskReparenting属性为true时，Activity就有转移所在任务的能力。具体说就是一个Activity现在是处于某个任务当中的，但是它与另外一个任务具有相同的affinity值，当另外这个任务切换到前台时，该Activity就可以转移到现在的这个任务当中。比如有个天气预报程序，它有个Activity是用于显示天气信息的，这个Activity和天气预报程序的所有Activity有相同的affinity值，并且将allowTaskReparenting属性设置成true了。这时你的应用程序启动了这个Activity，那么这个Activity是和你的应用程序是在同一个任务中的。但当把天气预报程序切换到前台时，这个Activity又会被转移到天气预报程序的任务中并显示出来。
 
-**清空返回栈**
+#### 清空返回栈
 
 如果任务切换到后台太久，系统会将这个任务中除了最底层的Activity之外的其它Activity全清除掉。当用户重新回到任务时，最底层的Activity将恢复。这是系统默认的行为，但我们可以设置activity元素中的几种属性来改变这一默认行为：
 
