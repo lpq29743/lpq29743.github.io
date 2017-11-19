@@ -6,14 +6,26 @@
   name: Redant Blog
   url: https://lpq29743.github.io/redant
 
+- sitename: 知乎
+  name: 林佩勤
+  url: https://www.zhihu.com/people/lin-pei-qin-70
+  
 - sitename: 微博
   name: redant之王
   url: https://weibo.com/5072731629
 
-- sitename: 知乎
-  name: 林佩勤
-  url: https://www.zhihu.com/people/lin-pei-qin-70
-
+- sitename: 网易云音乐
+  name: 哈哈大炮
+  url: http://music.163.com/#/user/home?id=110029642
+  
+- sitename: Last.fm
+  name: lpq29743
+  url: https://www.last.fm/zh/user/lpq29743
+  
 - sitename: 豆瓣
-  name: 壮哥不胖
-  url: http://www.douban.com/people/freedim
+  name: 玉置
+  url: https://www.douban.com/people/63281739/
+  
+- sitename: Bilibili
+  name: 坏掉的大炮
+  url: https://space.bilibili.com/14540577/#!/
