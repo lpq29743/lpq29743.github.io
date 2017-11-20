@@ -1,7 +1,7 @@
 ---
 layout: wiki
-title: Database System
-categories: Database System
+title: Database Systems
+categories: Database Systems
 description: 数据库系统
 keywords: 数据库, 数据库系统
 ---
