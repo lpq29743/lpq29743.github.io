@@ -6,7 +6,7 @@ description: 数学领域的大神
 keywords: 数学大神, 数学大牛
 ---
 
-距离上一篇相关文章[《盘点IT领域的大神》](https://lpq29743.github.io/redant/2016/10/06/ComputerCelebrity/)已经过去一个多月了。今天就让我们来闲聊一下与计算机密不可分的数学领域里的大神！
+距离上一篇相关文章[《盘点IT领域的大神》](https://lpq29743.github.io/redant/blog/2016/10/06/ComputerCelebrity/)已经过去一个多月了。今天就让我们来闲聊一下与计算机密不可分的数学领域里的大神！
 
 **欧美篇**
 

@@ -20,7 +20,7 @@ keywords: IT技能
 
 **问题三：怎么装系统**
 
-这个之前已经讲过了，就直接抛本人的博客链接了：[装系统一定要知道的那些事](https://lpq29743.github.io/redant/2016/09/11/systemInstallation/)
+这个之前已经讲过了，就直接抛本人的博客链接了：[装系统一定要知道的那些事](https://lpq29743.github.io/redant/blog/2016/09/11/SystemInstallation/)
 
 **问题四：刷机与root是什么？怎么刷机？怎么root？**
 

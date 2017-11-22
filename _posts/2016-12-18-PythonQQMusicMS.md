@@ -6,7 +6,7 @@ description: Python爬取QQ音乐热门华语男歌手
 keywords: Python, Python爬虫, 爬虫
 ---
 
-距离上一篇Python主题文章[Python历险记第一站](https://lpq29743.github.io/redant/2016/12/02/PythonLastFMFV/)已经过去将近半个月的时间了，这一篇文章依旧以音乐为主题，我们将爬取的是QQ音乐的热门华语男歌手及其粉丝量。之所以选择QQ音乐，一方面是因为QQ音乐相对国内其他音乐软件，歌手信息比较集中，容易找到爬虫入口，另一方面是因为QQ音乐相比较Last.fm，数据更具有意义，并且难度会适当增大，有利于博主对Python爬虫的学习。
+距离上一篇Python主题文章[Python历险记第一站](https://lpq29743.github.io/redant/python/2016/12/02/PythonLastFMFV/)已经过去将近半个月的时间了，这一篇文章依旧以音乐为主题，我们将爬取的是QQ音乐的热门华语男歌手及其粉丝量。之所以选择QQ音乐，一方面是因为QQ音乐相对国内其他音乐软件，歌手信息比较集中，容易找到爬虫入口，另一方面是因为QQ音乐相比较Last.fm，数据更具有意义，并且难度会适当增大，有利于博主对Python爬虫的学习。
 
 第一步还是选择爬虫入口，博主选择的是[QQ音乐歌手列表](https://y.qq.com/portal/singerlist.html)，总共爬取10页，共1000个华语男歌手的关注信息，经过一个下午的时间，总算是把程序第一版写出来了：
 
