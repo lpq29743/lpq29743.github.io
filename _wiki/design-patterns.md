@@ -1778,7 +1778,7 @@ public class Client {
 - 需要动态地给对象增加功能，这些功能也可以动态撤销
 - 当不能采用继承扩充系统或继承不利于系统扩展维护时。不能采用继承的情况有两类：一是系统存在大量独立扩展，为支持每一种组合将产生大量子类，使得子类数目爆炸性增长；二是因为类定义不能继承（如final类）
 
-#### 第 10 章 外观模式
+#### 第 11 章 外观模式
 
 **什么是外观模式**
 
@@ -1895,7 +1895,7 @@ public class Client {
 - 客户程序与多个子系统之间存在很大依赖性。引入外观类将子系统与客户及其他子系统解耦，提高子系统的独立性和可移植性
 - 在层次化结构中，可以使用外观模式定义系统中每层的入口，层与层之间不直接产生联系，而通过外观类建立联系，降低层之间的耦合度
 
-#### 第 11 章 享元模式
+#### 第 12 章 享元模式
 
 **什么是享元模式**
 
@@ -2026,7 +2026,7 @@ public class Client {
 - 对象的大部分状态都可以外部化，可以将这些外部状态传入对象中
 - 使用享元模式需维护一个存储享元对象的享元池，而这要耗费资源，因此应当在多次使用享元对象时才使用享元模式
 
-#### 第 12 章 代理模式
+#### 第 13 章 代理模式
 
 **什么是代理模式**
 
@@ -2142,7 +2142,7 @@ public class Client {
 
 ### 第三部分 行为型模式
 
-#### 第 13 章 责任链模式
+#### 第 14 章 责任链模式
 
 **什么是责任链模式**
 
@@ -2295,7 +2295,7 @@ public class Client {
 - 在不明确指定接收者的情况下，向多个对象中的一个提交请求
 - 动态指定一组对象处理请求
 
-#### 第 14 章 命令模式
+#### 第 15 章 命令模式
 
 **什么是命令模式**
 
@@ -2411,7 +2411,7 @@ public class Client {
 - 系统需要支持命令的撤销(Undo)操作和恢复(Redo)操作
 - 系统需要将一组操作组合在一起，即支持宏命令
 
-#### 第 15 章 解释器模式
+#### 第 16 章 解释器模式
 
 **什么是解释器模式**
 
@@ -2555,7 +2555,7 @@ public class InterpreterPatternDemo {
 - 一些重复出现的问题可以用一种简单的语言来进行表达
 - 文法较为简单
 
-#### 第 16 章 迭代器模式
+#### 第 17 章 迭代器模式
 
 **什么是迭代器模式**
 
@@ -2717,7 +2717,7 @@ public class Client {
 - 需要为聚合对象提供多种遍历方式
 - 为遍历不同聚合结构提供统一接口
 
-#### 第 17 章 中介者模式
+#### 第 18 章 中介者模式
 
 **什么是中介者模式**
 
@@ -2875,16 +2875,764 @@ public class Client {
 - 系统中对象之间存在比较复杂的引用关系，导致他们之间的依赖关系结构混乱且难以复用该对象
 - 想通过一个中间类封装多个类中的行为，而又不想生成太多子类
 
-#### 第 18 章 责任链模式
+#### 第 19 章 备忘录模式
 
-#### 第 19 章 责任链模式
+**什么是备忘录模式**
 
-#### 第 20 章 责任链模式
+备忘录模式主要包括以下角色：
 
-#### 第 21 章 责任链模式
+- 发起人：记录当前时刻的内部状态，负责定义哪些属于备份范围的状态，负责创建和恢复备忘录数据
+- 备忘录：负责存储发起人对象的内部状态，在需要的时候提供发起人需要的内部状态
+- 管理角色：对备忘录进行管理，保存和提供备忘录
 
-#### 第 22 章 责任链模式
+**怎么使用备忘录模式**
 
-#### 第 23 章 责任链模式
+***步骤一：创建Originator***
 
-#### 第 24 章 责任链模式
+```java
+package com.memento;
+
+public class Originator {
+    private String state = "";
+
+    public String getState() {
+        return state;
+    }
+    public void setState(String state) {
+        this.state = state;
+    }
+
+	public Memento createMemento(){
+        return new Memento(this.state);
+    }
+    public void restoreMemento(Memento memento){
+        this.setState(memento.getState());
+    }
+}
+```
+
+***步骤二：创建Memento***
+
+```java
+package com.memento;
+
+public class Memento {
+	private String state = "";
+
+	public Memento(String state) {
+		this.state = state;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+}
+```
+
+***步骤三：创建Caretaker***
+
+```java
+package com.memento;
+
+public class Caretaker {
+	private Memento memento;
+
+	public Memento getMemento() {
+		return memento;
+	}
+
+	public void setMemento(Memento memento) {
+		this.memento = memento;
+	}
+}
+```
+
+***步骤四：创建Client***
+
+```java
+package com.memento;
+
+public class Client {
+	public static void main(String[] args) {
+		Originator originator = new Originator();
+		originator.setState("状态1");
+		System.out.println("初始状态:" + originator.getState());
+		Caretaker caretaker = new Caretaker();
+		caretaker.setMemento(originator.createMemento());
+		originator.setState("状态2");
+		System.out.println("改变后状态:" + originator.getState());
+		originator.restoreMemento(caretaker.getMemento());
+		System.out.println("恢复后状态:" + originator.getState());
+	}
+}
+```
+
+**备忘录模式有哪些优缺点**
+
+***优点***
+
+- 当发起人角色中的状态改变时，有可能这是个错误的改变，我们使用备忘录模式就可以把这个错误的改变还原
+- 备份的状态是保存在发起人角色之外的，这样，发起人角色就不需要对各个备份的状态进行管理
+
+***缺点***
+
+- 在实际应用中，备忘录模式都是多状态和多备份的，发起人的状态需要存储到备忘录对象中，对资源的消耗比较严重
+
+**备忘录模式适用于什么环境**
+
+- 需要保存一个对象在某一个时刻的状态或部分状态
+- 如果用一个接口来让其他对象得到这些状态，将会暴露对象的实现细节并破坏对象的封装性，一个对象不希望外界直接访问其内部状态，通过负责人可以间接访问其内部状态
+
+#### 第 20 章 观察者模式
+
+**什么是观察者模式**
+
+当对象间存在一对多关系时，则使用观察者模式。如当一个对象被修改时，则会自动通知它的依赖对象。它主要包括以下角色：
+
+- 被观察者：包含一个用来存放观察者对象的Vector容器（被观察者类的核心）和attach方法（向容器中添加观察者对象）、detach方法（从容器中移除观察者对象）、notify方法（依次调用观察者对象的对应方法）等三个方法
+- 观察者：一般是一个接口，只有一个update方法，在被观察者状态发生变化时，这个方法就会被触发调用
+- 具体的被观察者：定义具体的业务逻辑
+- 具体的观察者：观察者接口的具体实现，定义被观察者对象状态发生变化时所要处理的逻辑
+
+**怎么使用观察者模式**
+
+***步骤一：创建Subject***
+
+```java
+package com.observer;
+
+import java.util.Vector;
+
+public abstract class Subject {
+	private Vector<Observer> obs = new Vector<Observer>();
+
+	public void addObserver(Observer obs) {
+		this.obs.add(obs);
+	}
+
+	public void delObserver(Observer obs) {
+		this.obs.remove(obs);
+	}
+
+	protected void notifyObserver() {
+		for (Observer o : obs) {
+			o.update();
+		}
+	}
+
+	public abstract void doSomething();
+}
+```
+
+***步骤二：创建Observer***
+
+```java
+package com.observer;
+
+public interface Observer {
+	public void update();
+}
+```
+
+***步骤三：创建ConcreteSubject***
+
+```java
+package com.observer;
+
+public class ConcreteSubject extends Subject {
+    public void doSomething(){
+        System.out.println("被观察者事件发生");
+        this.notifyObserver();
+    }
+}
+```
+
+***步骤四：创建ConcreteObserver***
+
+ConcreteObserver1类：
+
+```java
+package com.observer;
+
+public class ConcreteObserver1 implements Observer {
+    public void update() {
+        System.out.println("观察者1收到信息，并进行处理。");
+    }
+}
+```
+
+ConcreteObserver2类：
+
+```java
+package com.observer;
+
+public class ConcreteObserver2 implements Observer {
+	public void update() {
+		System.out.println("观察者2收到信息，并进行处理。");
+	}
+}
+```
+
+***步骤五：创建Client***
+
+```java
+package com.observer;
+
+public class Client {
+	public static void main(String[] args) {
+		Subject sub = new ConcreteSubject();
+		sub.addObserver(new ConcreteObserver1());
+		sub.addObserver(new ConcreteObserver2());
+		sub.doSomething();
+	}
+}
+```
+
+**观察者模式有哪些优缺点**
+
+***优点***
+
+- 观察者和被观察者是抽象耦合的
+- 建立一套触发机制
+
+***缺点***
+
+- 如果一个被观察者对象有很多的直接和间接的观察者的话，将所有的观察者都通知到会花费很多时间
+- 如果在观察者和观察目标之间有循环依赖的话，观察目标会触发它们之间进行循环调用，可能导致系统崩溃
+- 观察者模式没有相应的机制让观察者知道所观察的目标对象是怎么发生变化的，而仅仅只是知道观察目标发生了变化
+
+**观察者模式适用于什么环境**
+
+- 有多个子类共有的方法，且逻辑相同
+- 重要的、复杂的方法，可以考虑作为模板方法
+
+#### 第 21 章 状态模式
+
+**什么是状态模式**
+
+状态模式用于解决系统中复杂对象的状态转换以及不同状态下行为的封装问题。当系统中某个对象存在多个状态，这些状态之间可以进行转换，而且对象在不同状态下行为不相同时可以使用状态模式。状态模式包含如下几个角色：
+
+- Context：环境类。维护一个抽象状态类实例，这个实例定义当前状态，在具体实现时，它是一个State子类的对象
+- State：抽象状态类。定义一个接口以封装与环境类的一个特定状态相关的行为
+- ConcreteState：具体状态类。抽象状态类的子类，实现一个与环境类的一个状态相关的行为
+
+**怎么使用状态模式**
+
+***步骤一：创建Context***
+
+```java
+package com.state;
+
+public class Context {
+	private State state;
+
+	public Context() {
+		state = null;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+
+	public State getState() {
+		return state;
+	}
+}
+```
+
+***步骤二：创建State***
+
+```java
+package com.state;
+
+public interface State {
+	public void doAction(Context context);
+}
+```
+
+***步骤三：创建ConcreteState***
+
+StartState类：
+
+```java
+package com.state;
+
+public class StartState implements State {
+
+	public void doAction(Context context) {
+		System.out.println("Player is in start state");
+		context.setState(this);
+	}
+
+	public String toString() {
+		return "Start State";
+	}
+}
+```
+
+StopState类：
+
+```java
+package com.state;
+
+public class StopState implements State {
+
+	public void doAction(Context context) {
+		System.out.println("Player is in stop state");
+		context.setState(this);
+	}
+
+	public String toString() {
+		return "Stop State";
+	}
+}
+```
+
+***步骤四：创建Client***
+
+```java
+package com.state;
+
+public class Client {
+	public static void main(String[] args) {
+		Context context = new Context();
+
+		StartState startState = new StartState();
+		startState.doAction(context);
+
+		System.out.println(context.getState().toString());
+
+		StopState stopState = new StopState();
+		stopState.doAction(context);
+
+		System.out.println(context.getState().toString());
+	}
+}
+```
+
+**状态模式有哪些优缺点**
+
+***优点***
+
+- 封装了转换规则
+- 枚举可能的状态，在枚举状态之前需要确定状态种类
+- 将所有与某个状态有关的行为放到一个类中，且可以方便地增加新的状态，只需要改变对象状态即可改变对象行为
+- 允许状态转换逻辑与状态对象合成一体，而不是某一个巨大的条件语句块
+- 可以让多个环境对象共享一个状态对象，从而减少系统中对象的个数
+
+***缺点***
+
+- 状态模式的使用必然会增加系统类和对象的个数
+- 状态模式的结构与实现都较为复杂，如果使用不当将导致程序结构和代码的混乱
+- 状态模式对"开闭原则"的支持并不太好，对于可以切换状态的状态模式，增加新的状态类需要修改那些负责状态转换的源代码，否则无法切换到新增状态，而且修改某个状态类的行为也需修改对应类的源代码
+
+**状态模式适用于什么环境**
+
+- 行为随状态改变而改变的场景
+- 条件、分支语句的代替者
+
+#### 第 22 章 策略模式
+
+**什么是策略模式**
+
+策略模式中，我们创建表示各种策略的对象和一个行为随着策略对象改变而改变的context对象。策略对象改变context对象的执行算法。策略模式包含如下几个角色：
+
+- Context：环境类。使用算法的角色，它在解决某个问题时可以采用多种策略。在环境类中维持一个对抽象策略类的引用实例，用于定义所采用的策略
+- Strategy：抽象策略类。环境类通过抽象策略类中声明的方法在运行时调用具体策略类中实现的算法
+- ConcreteStrategy：具体策略类。实现了在抽象策略类中声明的算法
+
+**怎么使用策略模式**
+
+***步骤一：创建Context***
+
+```java
+package com.stratedy;
+
+public class Context {
+	private Strategy strategy;
+
+	public Context(Strategy strategy) {
+		this.strategy = strategy;
+	}
+
+	public int executeStrategy(int num1, int num2) {
+		return strategy.doOperation(num1, num2);
+	}
+}
+```
+
+***步骤二：创建Strategy***
+
+```java
+package com.stratedy;
+
+public interface Strategy {
+	public int doOperation(int num1, int num2);
+}
+```
+
+***步骤三：创建ConcreteStrategy***
+
+OperationAdd类：
+
+```java
+package com.stratedy;
+
+public class OperationAdd implements Strategy {
+	@Override
+	public int doOperation(int num1, int num2) {
+		return num1 + num2;
+	}
+}
+```
+
+OperationSubstract类：
+
+```java
+package com.stratedy;
+
+public class OperationSubstract implements Strategy {
+	@Override
+	public int doOperation(int num1, int num2) {
+		return num1 - num2;
+	}
+}
+```
+
+OperationMultiply类：
+
+```java
+package com.stratedy;
+
+public class OperationMultiply implements Strategy {
+	@Override
+	public int doOperation(int num1, int num2) {
+		return num1 * num2;
+	}
+}
+```
+
+***步骤四：创建Client***
+
+```java
+package com.stratedy;
+
+public class Client {
+	public static void main(String[] args) {
+		Context context = new Context(new OperationAdd());
+		System.out.println("10 + 5 = " + context.executeStrategy(10, 5));
+
+		context = new Context(new OperationSubstract());
+		System.out.println("10 - 5 = " + context.executeStrategy(10, 5));
+
+		context = new Context(new OperationMultiply());
+		System.out.println("10 * 5 = " + context.executeStrategy(10, 5));
+	}
+}
+```
+
+**策略模式有哪些优缺点**
+
+***优点***
+
+- 算法可以自由切换
+- 避免使用多重条件判断
+- 扩展性良好
+
+***缺点***
+
+- 策略类会增多
+- 所有策略类都需要对外暴露
+
+**策略模式适用于什么环境**
+
+- 如果在一个系统里面有许多类，它们之间的区别仅在于它们的行为，那么使用策略模式可以动态地让一个对象在许多行为中选择一种行为
+- 一个系统需要动态地在几种算法中选择一种
+- 如果一个对象有很多的行为，如果不用恰当的模式，这些行为就只好使用多重的条件选择语句来实现
+
+#### 第 23 章 模板方法模式
+
+**什么是模板方法模式**
+
+在模板方法模式中，一个抽象类公开定义了执行它的方法的模板。它的子类可按需要重写方法实现，但调用将以抽象类中定义的方式进行。模板方法模式包含如下两个角色：
+
+- AbstractClass：抽象类。定义一系列基本操作并实现了一个模板方法
+- ConcreteClass：具体子类。实现父类中声明的抽象操作，也可以覆盖在父类中已实现的具体操作
+
+**怎么使用模板方法模式**
+
+***步骤一：创建AbstractClass***
+
+```java
+package com.templatemethod;
+
+public abstract class Game {
+	abstract void initialize();
+
+	abstract void startPlay();
+
+	abstract void endPlay();
+
+	public final void play() {
+		initialize();
+		startPlay();
+		endPlay();
+	}
+}
+```
+
+***步骤二：创建ConcreteClass***
+
+Cricket类：
+
+```java
+package com.templatemethod;
+
+public class Cricket extends Game {
+
+	@Override
+	void endPlay() {
+		System.out.println("Cricket Game Finished!");
+	}
+
+	@Override
+	void initialize() {
+		System.out.println("Cricket Game Initialized! Start playing.");
+	}
+
+	@Override
+	void startPlay() {
+		System.out.println("Cricket Game Started. Enjoy the game!");
+	}
+}
+```
+
+Football类：
+
+```java
+package com.templatemethod;
+
+public class Football extends Game {
+
+	@Override
+	void endPlay() {
+		System.out.println("Football Game Finished!");
+	}
+
+	@Override
+	void initialize() {
+		System.out.println("Football Game Initialized! Start playing.");
+	}
+
+	@Override
+	void startPlay() {
+		System.out.println("Football Game Started. Enjoy the game!");
+	}
+}
+```
+
+***步骤三：创建Client***
+
+```java
+package com.templatemethod;
+
+public class Client {
+	public static void main(String[] args) {
+		Game game = new Cricket();
+		game.play();
+		System.out.println();
+		game = new Football();
+		game.play();
+	}
+}
+```
+
+**模板方法模式有哪些优缺点**
+
+***优点***
+
+- 封装不变部分，扩展可变部分
+- 提取公共代码，便于维护
+- 行为由父类控制，子类实现
+
+***缺点***
+
+- 每一个不同的实现都需要一个子类来实现，导致类的个数增加，使得系统更加庞大
+
+**模板方法模式适用于什么环境**
+
+- 有多个子类共有的方法，且逻辑相同
+- 重要的、复杂的方法，可以考虑作为模板方法
+
+#### 第 24 章 访问者模式
+
+**什么是访问者模式**
+
+在访问者模式中，我们使用了一个访问者类，它改变了元素类的执行算法。通过这种方式，元素的执行算法可以随着访问者改变而改变。访问者模式包括以下角色：
+
+- Vistor：抽象访问者。为对象结构中每一个具体元素类声明一个访问操作，从这个操作的名称或参数类型可以清楚知道需要访问的具体元素的类型，具体访问者需要实现这些操作方法，定义对这些元素的访问操作
+- ConcreteVisitor：具体访问者。实现了每个由抽象访问者声明的操作，每个操作用于访问对象结构中一种类型的元素
+- Element：抽象元素。定义一个accept方法，该方法通常以一个抽象访问者作为参数
+- ConcreteElement：具体元素。实现了accept方法，在accept方法中调用访问者的访问方法以完成对一个元素的操作
+- ObjectStructure：对象结构、元素集合，用于存放元素对象，并提供遍历内部元素的方法
+
+**怎么使用访问者模式**
+
+***步骤一：创建Vistor***
+
+```java
+package com.visitor;
+
+public interface ComputerPartVisitor {
+	public void visit(Computer computer);
+
+	public void visit(Mouse mouse);
+
+	public void visit(Keyboard keyboard);
+
+	public void visit(Monitor monitor);
+}
+```
+
+***步骤二：创建ConcreteVisitor***
+
+```java
+package com.visitor;
+
+public class ComputerPartDisplayVisitor implements ComputerPartVisitor {
+
+	@Override
+	public void visit(Computer computer) {
+		System.out.println("Displaying Computer.");
+	}
+
+	@Override
+	public void visit(Mouse mouse) {
+		System.out.println("Displaying Mouse.");
+	}
+
+	@Override
+	public void visit(Keyboard keyboard) {
+		System.out.println("Displaying Keyboard.");
+	}
+
+	@Override
+	public void visit(Monitor monitor) {
+		System.out.println("Displaying Monitor.");
+	}
+}
+```
+
+***步骤三：创建Element***
+
+```java
+package com.visitor;
+
+public interface ComputerPart {
+	public void accept(ComputerPartVisitor computerPartVisitor);
+}
+```
+
+***步骤四：创建ConcreteElement***
+
+Keyboard类：
+
+```java
+package com.visitor;
+
+public class Keyboard implements ComputerPart {
+
+	@Override
+	public void accept(ComputerPartVisitor computerPartVisitor) {
+		computerPartVisitor.visit(this);
+	}
+}
+```
+
+Monitor类：
+
+```java
+package com.visitor;
+
+public class Monitor implements ComputerPart {
+
+	@Override
+	public void accept(ComputerPartVisitor computerPartVisitor) {
+		computerPartVisitor.visit(this);
+	}
+}
+```
+
+Mouse类：
+
+```java
+package com.visitor;
+
+public class Mouse implements ComputerPart {
+
+	@Override
+	public void accept(ComputerPartVisitor computerPartVisitor) {
+		computerPartVisitor.visit(this);
+	}
+}
+```
+
+***步骤五：创建ObjectStructure***
+
+```java
+package com.visitor;
+
+public class Computer implements ComputerPart {
+
+	ComputerPart[] parts;
+
+	public Computer() {
+		parts = new ComputerPart[] { new Mouse(), new Keyboard(), new Monitor() };
+	}
+
+	@Override
+	public void accept(ComputerPartVisitor computerPartVisitor) {
+		for (int i = 0; i < parts.length; i++) {
+			parts[i].accept(computerPartVisitor);
+		}
+		computerPartVisitor.visit(this);
+	}
+}
+```
+
+***步骤六：创建Client***
+
+```java
+package com.visitor;
+
+public class Client {
+	public static void main(String[] args) {
+
+		ComputerPart computer = new Computer();
+		computer.accept(new ComputerPartDisplayVisitor());
+	}
+}
+```
+
+**访问者模式有哪些优缺点**
+
+***优点***
+
+- 符合单一职责原则
+- 优秀的扩展性
+- 灵活性
+
+***缺点***
+
+- 具体元素对访问者公布细节，违反了迪米特原则
+- 具体元素变更比较困难
+- 违反了依赖倒置原则，依赖了具体类，没有依赖抽象
+
+**访问者模式适用于什么环境**
+
+- 对象结构中对象对应的类很少改变，但经常需要在此对象结构上定义新的操作
+- 需要对一个对象结构中的对象进行很多不同的并且不相关的操作，而需要避免让这些操作"污染"这些对象的类，也不希望在增加新操作时修改这些类
