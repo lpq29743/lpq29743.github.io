@@ -850,6 +850,7 @@ public class Client {
 	}
 }
 ```
+
 **建造者模式有哪些优缺点**
 
 ***优点***
@@ -1627,7 +1628,6 @@ public class Client {
 
 - 使设计更抽象，如果对象业务规则很复杂，则实现组合模式具有挑战性，且不是所有方法都与叶子对象子类有关联
 
-
 **桥接模式适用于什么环境**
 
 - 需要表示对象整体或部分层次，在具有整体和部分的层次结构中，希望忽略整体与部分的差异，可以一致对待
@@ -1772,11 +1772,1119 @@ public class Client {
 - 使用装饰模式进行系统设计时将产生很多小对象，这些对象的区别在于它们之间相互连接的方式不同，而不是它们的类或者属性值不同，同时还将产生很多具体装饰类。这些装饰类和小对象的产生将增加系统复杂度
 - 这种比继承更加灵活的特性，同时意味着更易出错，排错困难，对于多次装饰的对象，寻找错误要逐级排查
 
-
 **装饰模式适用于什么环境**
 
 - 在不影响其他对象的情况下，以动态透明的方式给单个对象添加职责
 - 需要动态地给对象增加功能，这些功能也可以动态撤销
 - 当不能采用继承扩充系统或继承不利于系统扩展维护时。不能采用继承的情况有两类：一是系统存在大量独立扩展，为支持每一种组合将产生大量子类，使得子类数目爆炸性增长；二是因为类定义不能继承（如final类）
 
+#### 第 10 章 外观模式
+
+**什么是外观模式**
+
+外观模式为子系统中的一组接口提供一个一致的界面，定义了一个高层接口，使得子系统更易使用。
+
+**怎么使用外观模式**
+
+例：现在有一辆汽车，我们要启动它，就要发动引擎，使四个车轮转动。但实际上我们只要踩下油门，汽车就可以被启动了。
+
+***步骤一：创建子系统***
+
+Wheel类：
+
+```java
+package com.decorator;
+
+public interface Shape {
+	
+	void draw();
+	
+}
+```
+
+Engine类：
+
+```java
+package com.facade;
+
+public class Engine {
+	public String EngineWork() {
+		return "BMW's Engine is Working";
+	}
+
+	public String EngineStop() {
+		return "BMW's Engine is stoped";
+	}
+}
+```
+
+Body类：
+
+```java
+package com.facade;
+
+public class Body {
+	public Wheel[] wheels = new Wheel[4];
+	public Engine engine = new Engine();
+
+	public Body() {
+		for (int i = 0; i < wheels.length; i++) {
+			wheels[i] = new Wheel();
+		}
+	}
+}
+```
+
+***步骤二：创建Facade类***
+
+```java
+package com.facade;
+
+public class CarFacade {
+	Body body = new Body();
+
+	public void Run() {
+		System.out.println(body.engine.EngineWork());
+		for (int i = 0; i < body.wheels.length; i++) {
+			System.out.println(body.wheels[i].WheelCircumrotate());
+		}
+	}
+
+	public void Stop() {
+		System.out.println(body.engine.EngineStop());
+		for (int i = 0; i < body.wheels.length; i++) {
+			System.out.println(body.wheels[i].WheelStop());
+		}
+	}
+}
+```
+
+***步骤三：创建Client***
+
+```java
+package com.facade;
+
+public class Client {
+
+	public static void main(String[] args) {
+		CarFacade car = new CarFacade();
+        car.Run();
+        car.Stop();
+	}
+
+}
+```
+
+**外观模式有哪些优缺点**
+
+***优点***
+
+- 对客户屏蔽子系统组件，减少了客户处理的对象数目并使子系统更加容易使用。通过引入外观模式，客户端代码变得很简单，与之关联的对象也很少
+- 实现了子系统与客户之间的松耦合关系，子系统的组件变化不会影响到调用它的客户类，只需调整外观类即可
+- 降低了大型软件系统中的编译依赖性，并简化了系统在不同平台之间的移植过程，因为编译一个子系统一般不需要编译所有其他的子系统。子系统的修改对其他子系统没有影响，子系统的内部变化也不会影响到外观对象
+- 只是提供了一个访问子系统的统一入口，不影响用户直接使用子系统类
+
+***缺点***
+
+- 不能很好地限制客户使用子系统类，如果对客户访问子系统类做太多的限制，则减少了可变性和灵活性
+- 在不引入抽象外观类的情况下，增加新的子系统可能需要修改外观类或客户端的源代码，违背了开闭原则
+
+**外观模式适用于什么环境**
+
+- 当要为一个复杂子系统提供一个简单接口时。该接口可以满足大多数用户的需求，而且用户也可以越过外观类直接访问子系统
+- 客户程序与多个子系统之间存在很大依赖性。引入外观类将子系统与客户及其他子系统解耦，提高子系统的独立性和可移植性
+- 在层次化结构中，可以使用外观模式定义系统中每层的入口，层与层之间不直接产生联系，而通过外观类建立联系，降低层之间的耦合度
+
+#### 第 11 章 享元模式
+
+**什么是享元模式**
+
+享元模式运用共享技术有效支持大量细粒度对象的复用，包含了以下角色：
+
+- Flyweight：抽象享元类
+- ConcreteFlyweight：具体享元类
+- UnsharedConcreteFlyweight：非共享具体享元类
+- FlyweightFactory：享元工厂类
+
+**怎么使用享元模式**
+
+***步骤一：创建Flyweight***
+
+```java
+package com.flyweight;
+
+public interface Shape {
+	void draw();
+}
+```
+
+***步骤二：创建ConcreteFlyweight***
+
+```java
+package com.flyweight;
+
+public class Circle implements Shape {
+	private String color;
+	private int x;
+	private int y;
+	private int radius;
+
+	public Circle(String color) {
+		this.color = color;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
+
+	@Override
+	public void draw() {
+		System.out.println("Circle: Draw() [Color : " + color + ", x : " + x + ", y :" + y + ", radius :" + radius);
+	}
+}
+```
+
+***步骤三：创建FlyweightFactory***
+
+```java
+package com.flyweight;
+
+import java.util.HashMap;
+
+public class ShapeFactory {
+	private static final HashMap<String, Shape> circleMap = new HashMap<String, Shape>();
+
+	public static Shape getCircle(String color) {
+		Circle circle = (Circle) circleMap.get(color);
+
+		if (circle == null) {
+			circle = new Circle(color);
+			circleMap.put(color, circle);
+			System.out.println("Creating circle of color : " + color);
+		}
+		return circle;
+	}
+}
+```
+
+***步骤四：创建Client***
+
+```java
+package com.flyweight;
+
+public class Client {
+	private static final String colors[] = { "Red", "Green", "Blue", "White", "Black" };
+
+	public static void main(String[] args) {
+
+		for (int i = 0; i < 20; ++i) {
+			Circle circle = (Circle) ShapeFactory.getCircle(getRandomColor());
+			circle.setX(getRandomX());
+			circle.setY(getRandomY());
+			circle.setRadius(100);
+			circle.draw();
+		}
+	}
+
+	private static String getRandomColor() {
+		return colors[(int) (Math.random() * colors.length)];
+	}
+
+	private static int getRandomX() {
+		return (int) (Math.random() * 100);
+	}
+
+	private static int getRandomY() {
+		return (int) (Math.random() * 100);
+	}
+}
+```
+
+**享元模式有哪些优缺点**
+
+***优点***
+
+- 极大减少内存中对象的数量，使得相同对象或相似对象在内存中只保存一份
+- 享元模式的外部状态相对独立，且不影响其内部状态，使得享元对象可以在不同环境中被共享
+
+***缺点***
+
+- 享元模式使系统更加复杂，需要分离出内部状态和外部状态，使得程序的逻辑复杂化
+- 为了使对象可以共享，享元模式需将享元对象的状态外部化，而读取外部状态使得运行时间变长
+
+**享元模式适用于什么环境**
+
+- 一个系统有大量相同或相似对象，由于这类对象的大量使用，造成内存大量耗费
+- 对象的大部分状态都可以外部化，可以将这些外部状态传入对象中
+- 使用享元模式需维护一个存储享元对象的享元池，而这要耗费资源，因此应当在多次使用享元对象时才使用享元模式
+
+#### 第 12 章 代理模式
+
+**什么是代理模式**
+
+当客户不想或不能直接引用一个对象时，可以通过代理实现间接引用，这就是代理模式，代理模式包括以下角色：
+
+- Subject：抽象主题角色
+- Proxy：代理主题角色
+- RealSubject：真实主题角色
+
+**怎么使用代理模式**
+
+***步骤一：创建Subject***
+
+```java
+package com.proxy;
+
+public interface Image {
+	void display();
+}
+```
+
+***步骤二：创建RealSubject***
+
+```java
+package com.proxy;
+
+public class RealImage implements Image {
+
+	private String fileName;
+
+	public RealImage(String fileName) {
+		this.fileName = fileName;
+		loadFromDisk(fileName);
+	}
+
+	@Override
+	public void display() {
+		System.out.println("Displaying " + fileName);
+	}
+
+	private void loadFromDisk(String fileName) {
+		System.out.println("Loading " + fileName);
+	}
+	
+}
+```
+
+***步骤三：创建Proxy***
+
+```java
+package com.proxy;
+
+public class ProxyImage implements Image {
+
+	private RealImage realImage;
+	private String fileName;
+
+	public ProxyImage(String fileName) {
+		this.fileName = fileName;
+	}
+
+	@Override
+	public void display() {
+		if (realImage == null) {
+			realImage = new RealImage(fileName);
+		}
+		realImage.display();
+	}
+	
+}
+```
+
+***步骤四：创建Client***
+
+```java
+package com.proxy;
+
+public class Client {
+
+	public static void main(String[] args) {
+		Image image = new ProxyImage("test.jpg");
+		image.display();
+		image.display();
+	}
+
+}
+```
+
+**代理模式有哪些优缺点**
+
+***优点***
+
+- 协调调用者和被调用者，一定程度降低了系统耦合度
+- 远程代理使得客户端可以访问远程机器上的对象，远程机器可能具有更好的计算性能与处理速度，可以快速响应并处理客户端请求
+- 虚拟代理通过使用一个小对象来代表一个大对象，可以减少系统资源消耗，对系统进行优化并提高运行速度
+- 保护代理可以控制对真实对象的使用权限
+
+***缺点***
+
+- 由于在客户端和真实主题之间增加了代理对象，因此有些类型的代理模式可能会造成请求的处理速度变慢
+- 实现代理模式需要额外的工作，有些代理模式的实现非常复杂
+
+**代理模式适用于什么环境**
+
+- 远程代理：为一个位于不同地址空间的对象提供一个本地代理对象
+- 虚拟代理：如果要创建一个资源消耗大的对象，先创建一个消耗较小的对象表示，真实对象只在需要时才被创建
+- Copy-on-Write代理：虚拟代理的一种，把复制操作延迟到客户端真正需要时。一般来说，对象的深克隆是开销较大，Copy-on-Write代理可以让操作延迟，只有对象被用到时才克隆
+- 保护代理：控制对对象的访问，可以给不同用户提供不同级别的使用权限
+- 缓冲代理：为某一目标操作的结果提供临时存储空间，以便多个客户端共享这些结果
+- 防火墙代理：保护目标不让恶意用户接近
+- 同步化代理：使几个用户能够同时使用一个对象而没有冲突
+- 智能引用代理：当对象被引用时，提供额外的操作，如将此对象被调用的次数记录下来等
+
 ### 第三部分 行为型模式
+
+#### 第 13 章 责任链模式
+
+**什么是责任链模式**
+
+责任链模式为请求创建了一个接收者对象的链，在这种模式中，通常每个接收者都包含对另一个接收者的引用。如果一个对象不能处理该请求，那么它会把相同的请求传给下一个接收者，依此类推。责任链模式包括以下角色：
+
+在这种模式中，通常每个接收者都包含对另一个接收者的引用。如果一个对象不能处理该请求，那么它会把相同的请求传给下一个接收者，依此类推。，代理模式包括以下角色：
+
+- 抽象处理者(Handler)角色：处理请求的接口。如果需要，接口可以定义一个方法以设定和返回对下家的引用
+- 具体处理者(ConcreteHandler)角色：具体处理者接到请求后，可以处理请求或传给下家。由于具体处理者持有对下家的引用，因此可以访问下家
+
+**怎么使用责任链模式**
+
+***步骤一：创建Handler***
+
+```java
+package com.chainofresponsibility;
+
+public abstract class AbstractLogger {
+	public static int INFO = 1;
+	public static int DEBUG = 2;
+	public static int ERROR = 3;
+
+	protected int level;
+
+	protected AbstractLogger nextLogger;
+
+	public void setNextLogger(AbstractLogger nextLogger) {
+		this.nextLogger = nextLogger;
+	}
+
+	public void logMessage(int level, String message) {
+		if (this.level <= level) {
+			write(message);
+		}
+		if (nextLogger != null) {
+			nextLogger.logMessage(level, message);
+		}
+	}
+
+	abstract protected void write(String message);
+
+}
+```
+
+***步骤二：创建ConcreteHandler***
+
+ConsoleLogger类
+
+```java
+package com.chainofresponsibility;
+
+public class ConsoleLogger extends AbstractLogger {
+
+	public ConsoleLogger(int level) {
+		this.level = level;
+	}
+
+	@Override
+	protected void write(String message) {
+		System.out.println("Standard Console::Logger: " + message);
+	}
+	
+}
+```
+
+ErrorLogger类：
+
+```java
+package com.chainofresponsibility;
+
+public class ErrorLogger extends AbstractLogger {
+
+	public ErrorLogger(int level) {
+		this.level = level;
+	}
+
+	@Override
+	protected void write(String message) {
+		System.out.println("Error Console::Logger: " + message);
+	}
+	
+}
+```
+
+FileLogger类：
+
+```java
+package com.chainofresponsibility;
+
+public class FileLogger extends AbstractLogger {
+
+	public FileLogger(int level) {
+		this.level = level;
+	}
+
+	@Override
+	protected void write(String message) {
+		System.out.println("File::Logger: " + message);
+	}
+
+}
+```
+
+***步骤三：创建Client***
+
+```java
+package com.chainofresponsibility;
+
+public class Client {
+
+	private static AbstractLogger getChainOfLoggers() {
+		AbstractLogger errorLogger = new ErrorLogger(AbstractLogger.ERROR);
+		AbstractLogger fileLogger = new FileLogger(AbstractLogger.DEBUG);
+		AbstractLogger consoleLogger = new ConsoleLogger(AbstractLogger.INFO);
+		
+		errorLogger.setNextLogger(fileLogger);
+		fileLogger.setNextLogger(consoleLogger);
+		
+		return errorLogger;
+	}
+
+	public static void main(String[] args) {
+		AbstractLogger loggerChain = getChainOfLoggers();
+		loggerChain.logMessage(AbstractLogger.INFO, "This is an information.");
+		loggerChain.logMessage(AbstractLogger.DEBUG, "This is an debug level information.");
+		loggerChain.logMessage(AbstractLogger.ERROR, "This is an error information.");
+	}
+
+}
+```
+
+**责任链模式有哪些优缺点**
+
+***优点***
+
+- 降低耦合度。将请求的发送者和接受者解耦
+- 简化对象。对象不需知道链的结构
+- 增强给对象指派职责的灵活性。通过改变链内的成员或者调动它们的次序，允许动态新增或删除责任
+- 增加新的请求处理类很方便
+
+***缺点***
+
+- 不能保证请求一定被接收
+- 系统性能将受到一定影响，且进行代码调试时不方便，可能会造成循环调用
+- 可能不容易观察运行时的特征，有碍于除错
+
+**责任链模式适用于什么环境**
+
+- 有多个对象可以处理同一个请求，具体哪个对象处理由运行时刻自动确定
+- 在不明确指定接收者的情况下，向多个对象中的一个提交请求
+- 动态指定一组对象处理请求
+
+#### 第 14 章 命令模式
+
+**什么是命令模式**
+
+命令模式将一个请求封装成一个对象，从而使你可用不同的请求对客户进行参数化，它对请求排队或记录请求日志，以及支持可撤销的操作。命令模式包括以下角色：
+
+- Command：抽象类，声明需要执行的命令，一般要对外公布一个execute方法用来执行命令
+- ConcreteCommand：Command类的实现类，对抽象类中声明的方法进行实现
+- Invoker：调用者，负责调用命令
+- Receiver：接收者，负责接收命令并执行命令
+- Client：最终的客户端调用类
+
+**怎么使用命令模式**
+
+***步骤一：创建Receiver***
+
+```java
+package com.command;
+
+public class Receiver {
+
+    public void action(){
+        System.out.println("执行操作");
+    }
+    
+}
+```
+
+***步骤二：创建Command***
+
+```java
+package com.command;
+
+public interface Command {
+	void execute();
+}
+```
+
+***步骤三：创建ConcreteCommand***
+
+```java
+package com.command;
+
+public class ConcreteCommand implements Command {
+
+	private Receiver receiver = null;
+
+	public ConcreteCommand(Receiver receiver) {
+		this.receiver = receiver;
+	}
+
+	@Override
+	public void execute() {
+		receiver.action();
+	}
+
+}
+```
+
+***步骤四：创建Invoker***
+
+```java
+package com.command;
+
+public class Invoker {
+
+	private Command command = null;
+
+	public Invoker(Command command) {
+		this.command = command;
+	}
+
+	public void action() {
+		command.execute();
+	}
+
+}
+```
+
+***步骤五：创建Client***
+
+```java
+package com.command;
+
+public class Client {
+
+	public static void main(String[] args) {
+		Receiver receiver = new Receiver();
+		Command command = new ConcreteCommand(receiver);
+		Invoker invoker = new Invoker(command);
+		invoker.action();
+	}
+
+}
+```
+
+**命令模式有哪些优缺点**
+
+***优点***
+
+- 降低系统耦合度
+- 新的命令可以很容易地加入到系统中
+- 可以比较容易地设计一个命令队列和宏命令（组合命令）
+- 可以方便地实现对请求的Undo和Redo
+
+***缺点***
+
+- 可能会导致某些系统有过多具体命令类。因为每个命令都需要一个具体命令类，因此系统可能需要大量具体命令类
+
+**命令模式适用于什么环境**
+
+- 系统需要将请求调用者和请求接收者解耦，使调用者和接收者不直接交互
+- 系统需要在不同时间指定请求、将请求排队和执行请求
+- 系统需要支持命令的撤销(Undo)操作和恢复(Redo)操作
+- 系统需要将一组操作组合在一起，即支持宏命令
+
+#### 第 15 章 解释器模式
+
+**什么是解释器模式**
+
+给定一个语言之后，解释器模式可以定义出其文法的一种表示，并同时提供一个解释器。客户端可以使用这个解释器来解释这个语言中的句子。解释器模式包括以下角色：
+
+- Expression：抽象表达式。声明一个所有具体表达式角色都需实现的接口，包含interpret()方法
+- Terminal Expression：终结符表达式。实现抽象表达式接口，每个终结符都有一个具体终结表达式与之相对应
+- Nonterminal Expression：非终结符表达式。文法中的每条规则都需要一个具体的非终结符表达式
+- Context：上下文。用来存放文法中各个终结符所对应的具体值
+
+**怎么使用解释器模式**
+
+***步骤一：创建Expression***
+
+```java
+package com.interpreter;
+
+public interface Expression {
+	public boolean interpret(String context);
+}
+```
+
+***步骤二：创建TerminalExpression***
+
+```java
+package com.interpreter;
+
+public class TerminalExpression implements Expression {
+
+	private String data;
+
+	public TerminalExpression(String data) {
+		this.data = data;
+	}
+
+	@Override
+	public boolean interpret(String context) {
+		if (context.contains(data)) {
+			return true;
+		}
+		return false;
+	}
+	
+}
+```
+
+***步骤三：创建NonterminalExpression***
+
+OrExpression类：
+
+```java
+package com.interpreter;
+
+public class OrExpression implements Expression {
+
+	private Expression expr1 = null;
+	private Expression expr2 = null;
+
+	public OrExpression(Expression expr1, Expression expr2) {
+		this.expr1 = expr1;
+		this.expr2 = expr2;
+	}
+
+	@Override
+	public boolean interpret(String context) {
+		return expr1.interpret(context) || expr2.interpret(context);
+	}
+	
+}
+```
+
+AndExpression类：
+
+```java
+package com.interpreter;
+
+public class AndExpression implements Expression {
+
+	private Expression expr1 = null;
+	private Expression expr2 = null;
+
+	public AndExpression(Expression expr1, Expression expr2) {
+		this.expr1 = expr1;
+		this.expr2 = expr2;
+	}
+
+	@Override
+	public boolean interpret(String context) {
+		return expr1.interpret(context) && expr2.interpret(context);
+	}
+	
+}
+```
+
+***步骤四：创建Client***
+
+```java
+package com.interpreter;
+
+public class InterpreterPatternDemo {
+
+	public static Expression getMaleExpression() {
+		Expression robert = new TerminalExpression("Robert");
+		Expression john = new TerminalExpression("John");
+		return new OrExpression(robert, john);
+	}
+
+	public static Expression getMarriedWomanExpression() {
+		Expression julie = new TerminalExpression("Julie");
+		Expression married = new TerminalExpression("Married");
+		return new AndExpression(julie, married);
+	}
+
+	public static void main(String[] args) {
+		Expression isMale = getMaleExpression();
+		Expression isMarriedWoman = getMarriedWomanExpression();
+
+		System.out.println("John is male? " + isMale.interpret("John"));
+		System.out.println("Julie is a married women? " + isMarriedWoman.interpret("Married Julie"));
+	}
+
+}
+```
+
+**解释器模式有哪些优缺点**
+
+***优点***
+
+- 可扩展性较好，灵活
+- 增加了新的解释表达式的方式
+- 易于实现文法
+
+***缺点***
+
+- 执行效率较低，可利用场景较少
+- 对于复杂的文法比较难维护
+
+**解释器模式适用于什么环境**
+
+- 可将一个需要解释执行的语言中的句子表示为一个抽象语法树
+- 一些重复出现的问题可以用一种简单的语言来进行表达
+- 文法较为简单
+
+#### 第 16 章 迭代器模式
+
+**什么是迭代器模式**
+
+迭代器模式提供一种方法顺序访问一个聚合对象中各个元素，而又不需暴露该对象的内部表示，它包括以下角色：
+
+- Iterator：迭代器。定义遍历元素所需接口
+- ConcreteIterator：具体迭代器。实现了Iterator接口，并保持迭代过程中的游标位置
+- Aggregate：聚合。此抽象角色给出创建迭代器对象的接口
+- ConcreteAggregate：具体聚合。实现了创建迭代器对象的接口，返回一个合适的具体迭代器实例
+
+**怎么使用迭代器模式**
+
+***步骤一：创建Iterator***
+
+```java
+package com.iterator;
+
+public interface Iterator {
+	
+	public void first();
+
+	public void next();
+
+	public boolean isDone();
+
+	public Object currentItem();
+	
+}
+```
+
+***步骤二：创建Aggregate***
+
+```java
+package com.iterator;
+
+public abstract class Aggregate {
+    public abstract Iterator createIterator();
+}
+```
+
+***步骤三：创建ConcreteAggregate***
+
+```java
+package com.iterator;
+
+public class ConcreteAggregate extends Aggregate {
+
+	private Object[] objArray = null;
+
+	public ConcreteAggregate(Object[] objArray) {
+		this.objArray = objArray;
+	}
+
+	@Override
+	public Iterator createIterator() {
+
+		return new ConcreteIterator(this);
+	}
+
+	public Object getElement(int index) {
+
+		if (index < objArray.length) {
+			return objArray[index];
+		} else {
+			return null;
+		}
+	}
+
+	public int size() {
+		return objArray.length;
+	}
+
+}
+```
+
+***步骤四：创建ConcreteIterator***
+
+```java
+package com.iterator;
+
+public class ConcreteIterator implements Iterator {
+
+	private ConcreteAggregate agg;
+	private int index = 0;
+	private int size = 0;
+
+	public ConcreteIterator(ConcreteAggregate agg) {
+		this.agg = agg;
+		this.size = agg.size();
+		index = 0;
+	}
+
+	@Override
+	public Object currentItem() {
+		return agg.getElement(index);
+	}
+
+	@Override
+	public void first() {
+		index = 0;
+	}
+
+	@Override
+	public boolean isDone() {
+		return (index >= size);
+	}
+
+	@Override
+	public void next() {
+		if (index < size) {
+			index++;
+		}
+	}
+
+}
+```
+
+***步骤五：创建Client***
+
+```java
+package com.iterator;
+
+public class Client {
+
+	public void operation() {
+		Object[] objArray = { "One", "Two", "Three", "Four", "Five", "Six" };
+		Aggregate agg = new ConcreteAggregate(objArray);
+		Iterator it = agg.createIterator();
+		while (!it.isDone()) {
+			System.out.println(it.currentItem());
+			it.next();
+		}
+	}
+
+	public static void main(String[] args) {
+		Client client = new Client();
+		client.operation();
+	}
+
+}
+```
+
+**迭代器模式有哪些优缺点**
+
+***优点***
+
+- 支持以不同方式遍历聚合对象
+- 简化了聚合类
+- 在同一聚合上可以有多个遍历
+- 在迭代器模式中，增加新的聚合类和迭代器类很方便，无须修改原有代码
+
+***缺点***
+
+- 由于迭代器模式将存储数据和遍历数据的职责分离，增加新的聚合类需增加新的迭代器类，类的个数成对增加，一定程度增加了系统复杂性
+
+**迭代器模式适用于什么环境**
+
+- 访问聚合对象的内容而无须暴露它的内部表示
+- 需要为聚合对象提供多种遍历方式
+- 为遍历不同聚合结构提供统一接口
+
+#### 第 17 章 中介者模式
+
+**什么是中介者模式**
+
+中介者模式值得是用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。中介者模式包括以下角色：
+
+- Mediator：中介者。定义好同事类对象到中介者对象的接口，用于各个同事类之间的通信
+- ConcreteMediator：具体中介者。从抽象中介者继承而来，实现抽象中介者中定义的事件方法。
+- Colleague Class：同事类。如果一个对象会影响其他对象，同时也会被其他对象影响，那么这两个对象称为同事类。在中介者模式中，同事类之间必须通过中介者才能进行消息传递
+
+**怎么使用中介者模式**
+
+***步骤一：创建Mediator***
+
+```java
+package com.mediator;
+
+public abstract class Mediator {
+	public abstract void constact(String message, Person person);
+}
+```
+
+***步骤二：创建ConcreteMediator***
+
+```java
+package com.mediator;
+
+public class MediatorStructure extends Mediator {
+
+	private HouseOwner houseOwner;
+	private Tenant tenant;
+
+	public HouseOwner getHouseOwner() {
+		return houseOwner;
+	}
+
+	public void setHouseOwner(HouseOwner houseOwner) {
+		this.houseOwner = houseOwner;
+	}
+
+	public Tenant getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(Tenant tenant) {
+		this.tenant = tenant;
+	}
+
+	public void constact(String message, Person person) {
+		if (person == houseOwner) {
+			tenant.getMessage(message);
+		} else {
+			houseOwner.getMessage(message);
+		}
+	}
+}
+```
+
+***步骤三：创建抽象同事类***
+
+```java
+package com.mediator;
+
+public abstract class Person {
+	
+	protected String name;
+	protected Mediator mediator;
+
+	Person(String name, Mediator mediator) {
+		this.name = name;
+		this.mediator = mediator;
+	}
+
+}
+```
+
+***步骤四：创建具体同事类***
+
+HouseOwner类：
+
+```java
+package com.mediator;
+
+public class HouseOwner extends Person {
+
+	HouseOwner(String name, Mediator mediator) {
+		super(name, mediator);
+	}
+
+	public void constact(String message) {
+		mediator.constact(message, this);
+	}
+
+	public void getMessage(String message) {
+		System.out.println("房主:" + name + ",获得信息：" + message);
+	}
+}
+```
+
+Tenant类：
+
+```java
+package com.mediator;
+
+public class Tenant extends Person {
+
+	Tenant(String name, Mediator mediator) {
+		super(name, mediator);
+	}
+
+	public void constact(String message) {
+		mediator.constact(message, this);
+	}
+
+	public void getMessage(String message) {
+		System.out.println("租房者:" + name + ",获得信息：" + message);
+	}
+
+}
+```
+
+***步骤五：创建Client***
+
+```java
+package com.mediator;
+
+public class Client {
+
+	public static void main(String[] args) {
+		MediatorStructure mediator = new MediatorStructure();
+		HouseOwner houseOwner = new HouseOwner("张三", mediator);
+		Tenant tenant = new Tenant("李四", mediator);
+		mediator.setHouseOwner(houseOwner);
+		mediator.setTenant(tenant);
+		tenant.constact("听说你那里有三室的房主出租.....");
+		houseOwner.constact("是的!请问你需要租吗?");
+	}
+
+}
+```
+
+**中介者模式有哪些优缺点**
+
+***优点***
+
+- 简化对象之间的关系，将系统的各个对象之间的相互关系进行封装，将各个同事类解耦，使系统成为松耦合系统
+- 减少了子类的生成
+- 可以减少各同事类的设计与实现
+
+***缺点***
+
+- 由于中介者对象封装了系统中对象之间的相互关系，导致其变得非常复杂，使得系统维护比较困难
+
+**迭代器模式适用于什么环境**
+
+- 系统中对象之间存在比较复杂的引用关系，导致他们之间的依赖关系结构混乱且难以复用该对象
+- 想通过一个中间类封装多个类中的行为，而又不想生成太多子类
+
+#### 第 18 章 责任链模式
+
+#### 第 19 章 责任链模式
+
+#### 第 20 章 责任链模式
+
+#### 第 21 章 责任链模式
+
+#### 第 22 章 责任链模式
+
+#### 第 23 章 责任链模式
+
+#### 第 24 章 责任链模式
