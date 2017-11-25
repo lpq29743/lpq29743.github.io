@@ -1170,4 +1170,613 @@ public class LazySingleton {
 
 ### 第二部分 结构型模式
 
+#### 第 7 章 适配器模式
+
+**什么是适配器模式**
+
+适配器模式将一个类的接口适配成用户所期待的。一个适配器通常允许因为接口不兼容而不能一起工作的类能够在一起工作，做法是将类自己的接口包裹在一个已存在的类中。
+
+**怎么使用适配器模式**
+
+适配器模式有类的适配器模式和对象的适配器模式两种不同的形式。首先我们先来实现一下类适配器：
+
+***步骤一：创建Target***
+
+```java
+package com.adapter;
+
+public interface Target {
+	
+	// 使用的接口
+	public void request();
+	
+	// 已经存在的接口，这个接口需要适配
+	public void specificRequest();
+	
+}
+```
+
+***步骤二：创建Adaptee***
+
+```java
+package com.adapter;
+
+public class Adaptee {
+
+	// 原本存在的方法
+	public void specificRequest() {
+		System.out.println("specific request");
+	}
+
+}
+```
+
+***步骤三：创建Adapter***
+
+```java
+package com.adapter;
+
+public class Adapter extends Adaptee implements Target {
+
+	@Override
+	public void request() {
+		System.out.println("request");
+	}
+
+}
+```
+
+***步骤四：创建Client***
+
+```java
+package com.adapter;
+
+public class Client {
+	public static void main(String[] args) {
+		Target adapter = new Adapter();
+		adapter.request();
+	}
+}
+```
+
+这样子，我们就实现了类适配器，但Java遵循单继承，所以类适配器往往受到限制，在面向对象设计原则中，有条叫做组合/聚合复用原则，指尽可能使用组合和聚合达到复用目的而不是继承，所以一般推荐用对象适配器。其具体实现如下：
+
+***步骤一：创建Target和Adaptee***
+
+这个步骤与上面的步骤一和步骤二基本一致，所以这里省略。
+
+***步骤二：创建Adapter***
+
+```java
+package com.adapter;
+
+public class Adapter implements Target {
+
+	private Adaptee adaptee;
+
+	public Adapter(Adaptee adaptee){
+		this.adaptee = adaptee;
+	}
+	
+	@Override
+	public void request() { 
+        System.out.println("request");
+	}
+	
+	@Override
+	public void specificRequest() {
+		this.adaptee.specificRequest();
+	}
+
+}
+```
+
+***步骤三：创建Client***
+
+```java
+package com.adapter;
+
+public class Client {
+	public static void main(String[] args) {
+		Adaptee adaptee = new Adaptee();
+		Target adapter = new Adapter(adaptee);
+		adapter.request();
+	}
+}
+```
+
+**适配器模式有哪些优缺点**
+
+***优点***
+
+- 将目标类和适配者类解耦，通过引入一个适配器类来重用现有的适配者类，而无须修改原有代码
+- 增加了类的透明性和复用性，将具体实现封装在适配者类中，对于客户端类来说是透明的，且提高了适配者的复用性
+- 灵活性和扩展性好，通过配置文件可以更换适配器，也可以在不修改代码的基础上增加新适配器类，符合开闭原则
+- 类适配器模式优点：由于适配器类是适配者类子类，故可在适配器类中置换适配者方法，使得适配器灵活性更强
+- 对象适配器模式优点：一个对象适配器可把多个不同适配者适配到同一目标，即可把适配者类及其子类都适配
+
+***缺点***
+
+- 类适配器模式缺点：对于不支持多继承的语言，一次只能适配一个适配者类，而且目标抽象类只能为抽象类，不能为具体类，使用有一定局限性，不能将一个适配者类和它的子类都适配到目标接口
+- 对象适配器模式缺点：与类适配器模式相比，要想置换适配者类的方法不容易。如果一定要置换，只好先做一个适配者类的子类，将适配者类方法置换掉，再把适配者类子类当做真正适配者适配
+
+**适配器模式适用于什么环境**
+
+- 系统需要使用现有类，而这些类的接口不符合系统需要
+- 想建立一个可重复使用的类，用于与一些彼此之间没太大关联的一些类，包括一些可能将来引进的类一起工作
+
+**有哪些例子属于适配器模式**
+
+- JDBC
+
+#### 第 8 章 桥接模式
+
+**什么是桥接模式**
+
+桥接模式将抽象部分与实现部分分离，使它们独立变化。它是一种对象结构型模式。
+
+**怎么使用桥接模式**
+
+例：车从种类的角度可以分为火车和汽车，从用途的角度可分为客车和货车
+
+***步骤一：创建桥接实现接口***
+
+```java
+package com.bridge;
+
+public interface Transport {
+
+	public void transport(); 
+	
+}
+```
+
+***步骤二：创建实现桥接接口的类***
+
+Goods类：
+
+```java
+package com.bridge;
+
+public class Goods implements Transport{  
+	  
+    @Override  
+    public void transport() {
+        System.out.println("运货");  
+    }  
+  
+}
+```
+
+Guest类：
+
+```java
+package com.bridge;
+
+public class Guest implements Transport{  
+	  
+    @Override  
+    public void transport() {
+        System.out.println("运客");
+    }  
+  
+}
+```
+
+***步骤三：创建使用桥接接口的抽象类***
+
+```java
+package com.bridge;
+
+public abstract class Vehicle {  
+	  
+    private Transport implementor;  
+      
+    public void transport(){  
+        implementor.transport();  
+    }
+    
+    public Vehicle(Transport implementor) {
+		super();
+		this.implementor = implementor;
+	}
+
+}
+```
+
+***步骤四：创建继承抽象类的实体类***
+
+Car类：
+
+```java
+package com.bridge;
+
+public class Car extends Vehicle {  
+	  
+    public Car(Transport implementor) {
+		super(implementor);
+	}
+
+	@Override  
+    public void transport() {
+        System.out.print("汽车");  
+        super.transport();  
+    }
+  
+}
+```
+
+Train类：
+
+```java
+package com.bridge;
+
+public class Train extends Vehicle {
+
+	public Train(Transport implementor) {
+		super(implementor);
+	}
+
+	@Override
+	public void transport() {
+		System.out.print("火车");
+		super.transport();
+	}
+
+}
+```
+
+***步骤五：创建Client***
+
+```java
+package com.bridge;
+
+public class Client {  
+	  
+    public static void main(String[] args) {
+    	
+        Train train1 = new Train(new Goods());
+        train1.transport();
+        Train train2 = new Train(new Guest());
+        train2.transport();  
+          
+        Car car1 = new Car(new Goods());
+        car1.transport();
+        Car car2 = new Car(new Guest());
+        car2.transport();   
+  
+    }
+  
+}
+```
+
+**桥接模式有哪些优缺点**
+
+***优点***
+
+- 分离抽象接口及其实现部分
+- 桥接模式有时类似多继承，但多继承违背类的单一职责原则（即一个类只有一个变化），复用性较差，且类个数庞大，桥接模式比多继承更好
+- 桥接模式提高系统的可扩充性，在两个变化维度中任意扩展一个维度，都不需修改原有系统
+- 实现细节对客户透明，可对用户隐藏实现细节
+
+***缺点***
+
+- 桥接模式引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象设计与编程
+- 桥接模式要求正确识别出系统中两个独立变化的维度，因此使用范围具有一定局限性
+
+**桥接模式适用于什么环境**
+
+- 如果系统需要在构件的抽象化角色和具体化角色之间增加更多灵活性，避免在两个层次之间建立静态的继承联系，通过桥接模式可以使它们在抽象层建立一个关联关系
+- 抽象化角色和实现化角色可以以继承的方式独立扩展而互不影响，在程序运行时可以动态将一个抽象化子类的对象和一个实现化子类的对象进行组合，即系统需要对抽象化角色和实现化角色进行动态耦合
+- 一个类存在两个独立变化的维度，且这两个维度都需要扩展
+- 虽然系统中使用继承没有问题，但由于抽象化角色和具体化角色需要独立变化，设计要求需要独立管理这两者
+- 对于那些不希望使用继承或因为多继承导致系统类的个数急剧增加的系统，桥接模式尤为适用
+
+#### 第 9 章 组合模式
+
+**什么是组合模式**
+
+组合模式把一组相似对象当作一个单一对象，依据树形结构组合对象，用来表示部分以及整体层次，包括以下角色：
+
+- 抽象构建角色（component）：作为抽象角色，给组合对象的统一接口
+- 树叶构建角色（leaf）：代表组合对象中的树叶对象
+- 树枝构建角色（composite）：参加组合的所有子对象的对象，并给出树枝构建对象的行为
+
+**怎么使用组合模式**
+
+例：公司员工包括普通员工和领导
+
+***步骤一：创建Component***
+
+```java
+package com.bridge;
+
+public interface Transport {
+
+	public void transport(); 
+	
+}
+```
+
+***步骤二：创建Leaf***
+
+```java
+package com.composite;
+
+public class Employee implements Worker {
+
+	private String name;
+
+	public Employee(String name) {
+		super();
+		this.name = name;
+	}
+
+	@Override
+	public void doSomething() {
+		System.out.println(toString());
+	}
+
+	@Override
+	public String toString() {
+		return "我叫" + getName() + "，就一普通员工!";
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+}
+```
+
+***步骤三：创建Composite***
+
+```java
+package com.composite;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class Leader implements Worker {
+	private List<Worker> workers = new CopyOnWriteArrayList<Worker>();
+	private String name;
+
+	public Leader(String name) {
+		super();
+		this.name = name;
+	}
+
+	public void add(Worker worker) {
+		workers.add(worker);
+	}
+
+	public void remove(Worker worker) {
+		workers.remove(worker);
+	}
+
+	public Worker getChild(int i) {
+		return workers.get(i);
+	}
+
+	@Override
+	public void doSomething() {
+		System.out.println(toString());
+		Iterator<Worker> it = workers.iterator();
+		while (it.hasNext()) {
+			it.next().doSomething();
+		}
+
+	}
+
+	@Override
+	public String toString() {
+		return "我叫" + getName() + "，我是一个领导,有 " + workers.size() + "下属。";
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+}
+```
+
+***步骤四：创建Client***
+
+```java
+package com.composite;
+
+public class Client {
+
+    public static void main(String[] args) {
+        Leader leader1 = new Leader("张三");  
+        Leader leader2 = new Leader("李四");  
+        Employee employe1 = new Employee("王五");  
+        Employee employe2 = new Employee("赵六");  
+        Employee employe3 = new Employee("陈七");  
+        Employee employe4 = new Employee("徐八");  
+        leader1.add(leader2);  
+        leader1.add(employe1);  
+        leader1.add(employe2);  
+        leader2.add(employe3);  
+        leader2.add(employe4);  
+        leader1.doSomething();     
+    }
+
+}
+```
+
+**组合模式有哪些优缺点**
+
+***优点***
+
+- 清楚定义分层次的复杂对象，表示对象的全部或部分层次，使得增加新构件更容易
+- 客户端调用简单，可以一致的使用组合结构或单个对象
+- 定义了包含叶子对象和容器对象的类层次结构，叶子对象可以被组合成更复杂的容器对象，而这个容器对象又可以被组合，不断递归，形成复杂的树形结构
+- 更容易在组合体内加入对象构件，客户端不必因为加入了新的对象构件而更改原有代码
+
+***缺点***
+
+- 使设计更抽象，如果对象业务规则很复杂，则实现组合模式具有挑战性，且不是所有方法都与叶子对象子类有关联
+
+
+**桥接模式适用于什么环境**
+
+- 需要表示对象整体或部分层次，在具有整体和部分的层次结构中，希望忽略整体与部分的差异，可以一致对待
+- 让客户能够忽略不同对象层次的变化，可以针对抽象构件编程，无须关心对象层次结构的细节
+
+#### 第 10 章 装饰模式
+
+**什么是装饰模式**
+
+装饰模式通过装饰类动态的给对象添加额外的职责，包含以下角色：
+
+- 抽象构件（component）：用来规范被装饰对象，一般用接口方式给出
+- 具体构件（concrete component）：被装饰的类
+- 抽象装饰类（decorator）：持有一个构件对象的实例，并定义一个跟抽象构件一致的接口
+
+- 具体装饰类（concrete decorator）：给构件添加附加职责，实际使用中装饰角色和具体装饰角色可能由一个类承担
+
+**怎么使用装饰模式**
+
+***步骤一：创建抽象构件***
+
+```java
+package com.decorator;
+
+public interface Shape {
+	
+	void draw();
+	
+}
+```
+
+***步骤二：创建具体构件***
+
+Circle类：
+
+```java
+package com.decorator;
+
+public class Circle implements Shape {
+
+	@Override
+	public void draw() {
+		System.out.println("Shape: Circle");
+	}
+	
+}
+```
+
+Rectangle类：
+
+```java
+package com.decorator;
+
+public class Rectangle implements Shape {
+
+	@Override
+	public void draw() {
+		System.out.println("Shape: Rectangle");
+	}
+	
+}
+```
+
+***步骤三：创建抽象装饰类***
+
+```java
+package com.decorator;
+
+public abstract class ShapeDecorator implements Shape {
+	
+	protected Shape decoratedShape;
+
+	public ShapeDecorator(Shape decoratedShape) {
+		this.decoratedShape = decoratedShape;
+	}
+
+	public void draw() {
+		decoratedShape.draw();
+	}
+	
+}
+```
+
+***步骤四：创建具体装饰类***
+
+```java
+package com.decorator;
+
+public class RedShapeDecorator extends ShapeDecorator {
+
+	public RedShapeDecorator(Shape decoratedShape) {
+		super(decoratedShape);
+	}
+
+	@Override
+	public void draw() {
+		decoratedShape.draw();
+		setRedBorder(decoratedShape);
+	}
+
+	private void setRedBorder(Shape decoratedShape) {
+		System.out.println("Border Color: Red");
+	}
+	
+}
+```
+
+***步骤五：创建Client***
+
+```java
+package com.decorator;
+
+public class Client {
+
+	public static void main(String[] args) {
+		Shape circle = new Circle();
+		Shape redCircle = new RedShapeDecorator(new Circle());
+		Shape redRectangle = new RedShapeDecorator(new Rectangle());
+		
+		System.out.println("Circle with normal border");
+		circle.draw();
+		System.out.println("\nCircle of red border");
+		redCircle.draw();
+		System.out.println("\nRectangle of red border");
+		redRectangle.draw();
+	}
+
+}
+```
+
+**装饰模式有哪些优缺点**
+
+***优点***
+
+- 装饰模式与继承关系的目的都是扩展对象功能，但装饰模式可提供比继承更多的灵活性
+- 可以通过一种动态方式来扩展对象功能，通过配置文件可在运行时选择不同装饰器，从而实现不同行为
+- 通过使用不同具体装饰类以及这些装饰类的排列组合，可以创造出很多不同行为的组合
+- 具体构件类与具体装饰类可独立变化，用户可根据需要增加新的具体构件类和具体装饰类，使用时再对其进行组合，原有代码无须改变，符合开闭原则
+
+***缺点***
+
+- 使用装饰模式进行系统设计时将产生很多小对象，这些对象的区别在于它们之间相互连接的方式不同，而不是它们的类或者属性值不同，同时还将产生很多具体装饰类。这些装饰类和小对象的产生将增加系统复杂度
+- 这种比继承更加灵活的特性，同时意味着更易出错，排错困难，对于多次装饰的对象，寻找错误要逐级排查
+
+
+**装饰模式适用于什么环境**
+
+- 在不影响其他对象的情况下，以动态透明的方式给单个对象添加职责
+- 需要动态地给对象增加功能，这些功能也可以动态撤销
+- 当不能采用继承扩充系统或继承不利于系统扩展维护时。不能采用继承的情况有两类：一是系统存在大量独立扩展，为支持每一种组合将产生大量子类，使得子类数目爆炸性增长；二是因为类定义不能继承（如final类）
+
 ### 第三部分 行为型模式
