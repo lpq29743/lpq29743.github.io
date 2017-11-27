@@ -1,7 +1,7 @@
 ---
 layout: wiki
 title: Machine Learning in Action
-categories: Machine Learning in Action
+categories: Machine Learning
 description: 机器学习实战
 keywords: 机器学习, 机器学习实战
 ---
