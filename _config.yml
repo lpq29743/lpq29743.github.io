@@ -48,6 +48,7 @@ collections:
 markdown: kramdown
 kramdown:
     input: GFM
+mathjax: true
 
 # Comments Settings
 comments_provider: gitment
