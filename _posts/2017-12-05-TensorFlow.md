@@ -307,7 +307,3 @@ plt.show()
 3. 网络前向传播，计算出当前参数下的网络输出
 4. 根据网络输出和目标计算出 loss
 5. 通过 loss 方向传播更新网络中的参数
-
-Input Pipeline
-
-Style Transfer 
