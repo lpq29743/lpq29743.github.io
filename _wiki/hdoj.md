@@ -97,7 +97,7 @@ int main() {
 }
 ```
 
-#### 1.2 N的阶乘
+#### 1.2 N 的阶乘
 
 **题目来源**
 
@@ -945,7 +945,73 @@ int main() {
 }
 ```
 
-#### 4.7 小猪银行
+#### 4.7 猴子和香蕉
+
+**题目来源**
+
+[HDOJ 1069 Monkey and Banana](http://acm.hdu.edu.cn/showproblem.php?pid=1069)
+
+**题目分析**
+
+每一种砖块有三种摆法，所以实际上可选择的砖块总共有 3 \* n 块，按长度进行排序后，用动态规划的思维求出严格下降序列即可。
+
+**实现代码**
+
+```c++
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int n;
+int **block = new int* [100];
+int *result = new int[100];
+
+bool cmp(int *b1, int *b2) {
+    return b1[1] > b2[1];
+}
+
+int main() {
+    int cnt = 0;
+    while(cin >> n) {
+        if(n == 0) {
+            break;
+        }
+        for(int i = 0; i < n; i++) {
+            int temp[3];
+            cin >> temp[0] >> temp[1] >> temp[2];
+            for(int j = 0; j < 3; j++) {
+                block[3 * i + j] = new int[3];
+                block[3 * i + j][0] = temp[j];
+                block[3 * i + j][1] = max(temp[(j + 2) % 3], temp[(j + 1) % 3]);
+                block[3 * i + j][2] = min(temp[(j + 2) % 3], temp[(j + 1) % 3]);
+            }
+        }
+        sort(block, block + 3 * n, cmp);
+        for(int i = 0; i < n * 3; i++) {
+            result[i] = block[i][0];
+        }
+        for(int i = 1; i < n * 3; i++) {
+            for(int j = 0; j < i; j++) {
+                if(block[i][2] < block[j][2] && block[i][1] < block[j][1]) {
+                    if(result[i] < result[j] + block[i][0]) {
+                        result[i] = result[j] + block[i][0];
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for(int i = 0; i < n * 3; i++) {
+            if(result[i] > ans) {
+                ans = result[i];
+            }
+        }
+        cout << "Case " << ++cnt << ": maximum height = " << ans << endl;
+    }
+    return 0;
+}
+```
+
+#### 4.8 小猪银行
 
 **题目来源**
 
@@ -999,7 +1065,7 @@ int main() {
 }
 ```
 
-#### 4.8 我需要一个Offer
+#### 4.9 我需要一个 Offer
 
 **题目来源**
 
@@ -1046,7 +1112,7 @@ int main() {
 }
 ```
 
-#### 4.9 ACboy需要你的帮助
+#### 4.10 ACboy 需要你的帮助
 
 **题目来源**
 
@@ -1096,7 +1162,7 @@ int main() {
 }
 ```
 
-#### 4.10 悼念512汶川大地震遇难同胞——珍惜现在，感恩生活
+#### 4.11 珍惜现在，感恩生活
 
 **题目来源**
 
@@ -1143,7 +1209,7 @@ int main() {
 }
 ```
 
-#### 4.11 饭卡
+#### 4.12 饭卡
 
 **题目来源**
 
@@ -1200,7 +1266,7 @@ int main() {
 }
 ```
 
-#### 4.12 拾骨者
+#### 4.13 拾骨者
 
 **题目来源**
 
