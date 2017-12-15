@@ -1,9 +1,9 @@
 ---
 layout: post
 title: TensorFlow 入门
-categories: Tool
+categories: DeepLearning
 description: TensorFlow入门
-keywords: TensorFlow, 深度学习, 深度学习框架
+keywords: TensorFlow, 深度学习, 深度学习框架, 神经网络
 ---
 
 本文参考斯坦福大学公开课 [CS 20SI: Tensorflow for Deep Learning Research](http://web.stanford.edu/class/cs20si/index.html) 前半部分的内容做了简单的笔记。如果大家想要进一步学习的话，建议参与一些小项目再学习后半部分的内容。
