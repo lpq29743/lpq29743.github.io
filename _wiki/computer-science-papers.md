@@ -74,7 +74,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Attention-based LSTM for Aspect-level Sentiment Classification](http://www.aclweb.org/anthology/D16-1058) (Yequan Wang, EMNLP 2016, [code](http://www.aihuang.org/p/publications.html ))
 
-[Aspect Level Sentiment Classification with Deep Memory Network](http://www.aclweb.org/anthology/D16-1021) (Duyu Tang, EMNLP 2016, [code](https://github.com/ganeshjawahar/mem_absa))
+[Aspect Level Sentiment Classification with Deep Memory Network](http://www.aclweb.org/anthology/D16-1021) (Duyu Tang, EMNLP 2016, [code](https://github.com/pcgreat/mem_absa))
 
 [A Hierarchical Model of Reviews for Aspect-based Sentiment Analysis](http://www.aclweb.org/anthology/D16-1103) (Sebastian Ruder, EMNLP 2016)
 
