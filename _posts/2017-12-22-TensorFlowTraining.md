@@ -96,7 +96,7 @@ tf.train.AdamOptimizer(
 )
 ```
 
-### Epoch、 iteration and batch size
+### Epoch, iteration and batch size
 
 很多初学者（包括我）遇到这三个名词经常会搞混，这三个名词的意义如下：
 
