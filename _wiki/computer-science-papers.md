@@ -22,7 +22,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 #### 词嵌入
 
-[Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf) (Tomas Mikolov, 2013, [code](https://github.com/facebookresearch/fastText))
+[Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf) (Tomas Mikolov, 2013, [code](https://github.com/danielfrg/word2vec))
 
 [GloVe: Global Vectors for Word Representation](http://www.anthology.aclweb.org/D/D14/D14-1162.pdf) (Jeffrey Pennington, EMNLP 2014, [code](https://github.com/stanfordnlp/GloVe))
 
@@ -89,6 +89,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Understanding the difficulty of training deep feedforward neural networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.207.2059&rep=rep1&type=pdf) (Xavier Glorot, JMLR 2010)
 
 [Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification](https://arxiv.org/pdf/1502.01852.pdf) (Kaiming He, ICCV 2015)
+
+[Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units](https://arxiv.org/pdf/1603.05201v2.pdf) (Wenling Shang, ICML 2016)
 
 ### 其他
 
