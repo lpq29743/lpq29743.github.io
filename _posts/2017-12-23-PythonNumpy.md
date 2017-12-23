@@ -1,4 +1,10 @@
-Numpy
+---
+layout: post
+title: Python 工具库之 Numpy
+categories: Python
+description: Python工具库之Numpy
+keywords: Python, Python工具库, Numpy
+---
 
 Numpy 是 Python 的一个常用工具库，可以用来处理多维数组和矩阵运算。这篇文章就让我们一起来学习一下 Numpy。
 
@@ -36,20 +42,45 @@ Numpy 也可以执行数组之间的操作，具体如下：
 ```python
 a = np.array([[1, 2, 3], [4, 5, 6]])
 b = a * 2
-# 输出矩阵 b；[[2, 4, 6], [8, 10, 12]]
+# 输出数组 b；[[2, 4, 6], [8, 10, 12]]
 print(b)
 c = b - a
-# 输出矩阵 c：[[1, 2, 3], [4, 5, 6]]
+# 输出数组 c：[[1, 2, 3], [4, 5, 6]]
 print(c)
-# 输出矩阵 c 的第 2 列：[2, 5]
+# 输出数组 c 的第 2 列：[2, 5]
 print(c[:, 1])
-# 输出矩阵 c 的元素和：21
+# 输出数组 c 的元素和：21
 print(c.sum())
-# 输出矩阵 c 的元素平均数：3.5
+# 输出数组 c 的元素平均数：3.5
 print(c.mean())
-# 输出矩阵 c 的列平均数：[2.5, 3.5, 4.5]
+# 输出数组 c 的列平均数：[2.5, 3.5, 4.5]
 print(c.mean(axis=0))
-# 输出矩阵 c 的行平均数：[2., 5.]
+# 输出数组 c 的行平均数：[2., 5.]
 print(c.mean(axis=1))
 ```
 
+Numpy 可以对数组的形状、元素进行修改，具体如下：
+
+```python
+a = np.arange(6)
+b = a.reshape(2, 3)
+print(a)
+# 输出数组 b：[[0, 1, 2], [3, 4, 5]]
+print(b)
+# 令数组从下标为 3 的元素开始都为 1
+a[3:] = 1
+# 输出数组 a：[0, 1, 2, 1, 1, 1]
+print(a)
+# 数组 b 也随之变化，输出为：[[0, 1, 2], [1, 1, 1]]
+print(b)
+print(b.dtype)
+# 改变数组 b 的元素数据类型
+b = b.astype('float64')
+print(b.dtype)
+```
+
+Numpy 还可以直接从文件中读取数据，具体如下：
+
+```python
+npd = np.genfromtxt('data.csv', delimiter=',')
+```
