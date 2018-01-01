@@ -537,7 +537,100 @@ int main() {
 }
 ```
 
-#### 3.3 多少张桌子
+#### 3.3 单词游戏
+
+**题目来源**
+
+[HDOJ 1116 Play on Words](http://acm.hdu.edu.cn/showproblem.php?pid=1116)
+
+**题目分析**
+
+这道题的题意可转化为：假设有一张图，图中的点为从 a 到 z 的 26 个字母。如果输入一个单词，我们就以单词的首字母为起点，最后一个字母为终点，画一条有向边。如果最后由所有被访问到的点组成的子图为欧拉图或半欧拉图的话，我们可以解开题目。
+
+那么构建子图之后，我们怎么判断该子图是否含有欧拉回路或欧拉通路呢？这里我们要把握两个充要条件，一个是连通图，一个是出度和入度的要求。前者我们可以通过并查集的思想实现，而后者我们只要记录每个点的出入度即可。
+
+**实现代码**
+
+```c++
+#include <iostream>
+#include <string>
+#define MAX 30
+using namespace std;
+
+int T;
+int N;
+string s;
+int father[MAX];
+int visited[MAX], in[MAX], out[MAX];
+
+void MakeSet(int x) {
+    father[x] = x;
+}
+
+int Find(int x) {
+    if(father[x] == x) {
+        return x;
+    } else {
+        return Find(father[x]);
+    }
+}
+
+void Union(int x, int y) {
+    int xRoot = Find(x);
+    int yRoot = Find(y);
+    father[xRoot] = yRoot;
+}
+
+int main() {
+    cin >> T;
+    while(T--) {
+        for(int i = 0; i < 26; i++) {
+            visited[i] = 0;
+            in[i] = 0;
+            out[i] = 0;
+            MakeSet(i);
+        }
+        cin >> N;
+        for(int i = 1; i <= N; i++) {
+            cin >> s;
+            int u = s[0] - 'a';
+            int v = s[s.length() - 1] - 'a';
+            Union(u, v);
+            out[u]++;
+            in[v]++;
+            visited[u] = visited[v] = 1;
+        }
+        int ans = 0;
+        for(int i = 0; i < 26; i++) {
+            if(visited[i] && father[i] == i) {
+                ans++;
+            }
+        }
+        if(ans > 1) {
+            cout << "The door cannot be opened." << endl;
+            continue;
+        }
+        int x = 0, y = 0, z = 0;
+        for(int i = 0; i < 26; i++) {
+            if(visited[i] && in[i] != out[i]) {
+                if(in[i] - out[i] == 1) {
+                    x++;
+                } else if (in[i] - out[i] == -1) {
+                    y++;
+                } else {
+                    z++;
+                }
+            }
+        }
+        if(!z && ((x == 0 && y == 0) || (x == 1 && y == 1))) {
+            cout << "Ordering is possible." << endl;
+        } else {
+            cout << "The door cannot be opened." << endl;
+        }
+    }
+}
+```
+#### 3.4 多少张桌子
 
 **题目来源**
 
