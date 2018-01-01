@@ -537,6 +537,65 @@ int main() {
 }
 ```
 
+#### 3.3 多少张桌子
+
+**题目来源**
+
+[HDOJ 1213 How Many Tables](http://acm.hdu.edu.cn/showproblem.php?pid=1213)
+
+**题目分析**
+
+这是我做的第一道并查集题目。这道题比较简单，也比较典型，因此解决的方法是非常传统的方法，并不需要什么特别技巧。关于并查集的内容，可以查看并查集的[维基百科](https://zh.wikipedia.org/wiki/%E5%B9%B6%E6%9F%A5%E9%9B%86)。
+
+**实现代码**
+
+```c++
+#include <iostream>
+#define MAX 1005
+using namespace std;
+
+int T;
+int N, M;
+int father[MAX];
+
+void MakeSet(int x) {
+    father[x] = x;
+}
+
+int Find(int x) {
+    if(father[x] == x) {
+        return x;
+    } else {
+        return Find(father[x]);
+    }
+}
+
+void Union(int x, int y) {
+    int xRoot = Find(x);
+    int yRoot = Find(y);
+    father[xRoot] = yRoot;
+}
+
+int main() {
+    cin >> T;
+    while(T--) {
+        cin >> N >> M;
+        int ans = N, a, b;
+        for(int i = 1; i <= N; i++) {
+            MakeSet(i);
+        }
+        while(M--) {
+            cin >> a >> b;
+            if(Find(a) != Find(b)) {
+                Union(a, b);
+                ans--;
+            }
+        }
+        cout << ans << endl;
+    }
+}
+```
+
 ### 第 4 章 动态规划
 
 #### 4.1 最大连续子序列和
