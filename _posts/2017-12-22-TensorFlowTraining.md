@@ -8,6 +8,16 @@ keywords: TensorFlow, 深度学习, 深度学习框架, 神经网络
 
 参数的设置在神经网络的训练中占据着举足轻重的地位，本文就让我们结合 TensorFlow 一起来聊聊神经网络的训练技巧。
 
+### Train loss and Test loss
+
+这两个变量并不是实际的参数，而是实验过程中的输出。之所以先把这两个变量拿出来讲，是因为从这两个变量的变化趋势，我们可以一定程度上看出实验存在的问题，具体如下：
+
+- train loss 不断下降，test loss 不断下降，说明网络仍在学习
+- train loss 不断下降，test loss 趋于不变，说明网络过拟合
+- train loss 趋于不变，test loss 不断下降，说明数据集 100% 有问题
+- train loss 趋于不变，test loss 趋于不变，说明学习遇到瓶颈，需要减小 learning rate 或 batch size
+- train loss 不断上升，test loss 不断上升，说明网络结构设计不当、训练超参数设置不当或数据集经过清洗等
+
 ### Learning rate
 
 神经网络在利用梯度下降算法进行优化的时候，需要定义一个系数 η 来表示权重更新的速度，这个系数就是 learning rate。learning rate 的设置十分重要，设置过大会使结果超过最优值，太小则会使收敛过慢。通常在训练刚开始的时候，我们会使用较大的 learning rate， 随着训练的进行，再慢慢减小 learning rate。我们把这种训练策略叫做 weight decay。TensorFlow 提供了以下两种衰减策略：
