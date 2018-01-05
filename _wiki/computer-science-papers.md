@@ -92,6 +92,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units](https://arxiv.org/pdf/1603.05201v2.pdf) (Wenling Shang, ICML 2016)
 
+### 工具
+
+[HemI: A Toolkit for Illustrating Heatmaps](http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0111988&type=printable) (Wankun Deng, 2014, [code](http://hemi.biocuckoo.org/))
+
 ### 其他
 
 [A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf)
