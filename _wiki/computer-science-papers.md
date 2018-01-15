@@ -84,6 +84,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 ### 深度学习
 
+#### 模型
+
+[A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf) (Zachary C. Lipton, 2015)
+
 #### 调参技巧
 
 [Understanding the difficulty of training deep feedforward neural networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.207.2059&rep=rep1&type=pdf) (Xavier Glorot, JMLR 2010)
@@ -92,13 +96,25 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units](https://arxiv.org/pdf/1603.05201v2.pdf) (Wenling Shang, ICML 2016)
 
+### 推荐系统
+
+#### 新闻推荐
+
+[Google News Personalization: Scalable Online Collaborative Filtering](http://wwwconference.org/www2007/papers/paper570.pdf) (Abhinandan Das, WWW 2007)
+
+[Personalized News Recommendation Based on Click Behavior](http://www.cs.northwestern.edu/~jli156/IUI224-liu.pdf) (Jiahui Liu, 2010)
+
+[Personalized Recommendation on Dynamic Content Using Predictive Bilinear Models](http://wwwconference.org/www2009/proceedings/pdf/p691.pdf) (Wei Chu, WWW 2009)
+
+[A Contextual-Bandit Approach to Personalized News Article Recommendation](http://wwwconference.org/proceedings/www2010/www/p661.pdf) (Lihong Li, WWW 2010)
+
+[A Multi-View Deep Learning Approach for Cross Domain User Modeling in Recommendation Systems](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/frp1159-songA.pdf) (Ali Elkahky, WWW 2015)
+
 ### 工具
 
 [HemI: A Toolkit for Illustrating Heatmaps](http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0111988&type=printable) (Wankun Deng, 2014, [code](http://hemi.biocuckoo.org/))
 
 ### 其他
-
-[A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf)
 
 [Learning sentiment-specific word embedding for twitter sentiment classification](http://www.anthology.aclweb.org/P/P14/P14-1146.pdf) (ACL 2014)
 
