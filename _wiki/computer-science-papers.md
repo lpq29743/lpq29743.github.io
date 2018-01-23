@@ -28,6 +28,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Bag of Tricks for Efficient Text Classification](https://arxiv.org/pdf/1607.01759v2.pdf) (Armand Joulin, 2016, [code](https://github.com/facebookresearch/fastText))
 
+[Enriching Word Vectors with Subword Information](https://pdfs.semanticscholar.org/e2db/a792360873aef125572812f3673b1a85d850.pdf) (Piotr Bojanowski, 2016)
+
 #### 情感分析
 
 ##### 概述
