@@ -120,6 +120,8 @@ keywords: IT大神, IT大牛, 计算机大牛, 计算机大神
 
 [周志华](https://cs.nju.edu.cn/zhouzh/)（南京大学 LAMDA 所所长，著有《机器学习》一书）
 
+[杨强](https://zh.wikipedia.org/wiki/%E6%9D%A8%E5%BC%BA)（香港科技大学教授，首位 AAAI 华人院士）
+
 [吴恩达](https://zh.wikipedia.org/wiki/%E5%90%B4%E6%81%A9%E8%BE%BE)（斯坦福大学副教授，前百度首席科学家）
 
 [李航](https://baike.baidu.com/item/%E6%9D%8E%E8%88%AA/266587?fr=aladdin)（华为诺亚方舟实验室原主任，著有《统计学习方法》一书）
@@ -129,6 +131,10 @@ keywords: IT大神, IT大牛, 计算机大牛, 计算机大神
 [刘成林](https://baike.baidu.com/item/%E5%88%98%E6%88%90%E6%9E%97/5583452)（中科院自动化所副所长）
 
 [谭铁牛](https://baike.baidu.com/item/%E8%B0%AD%E9%93%81%E7%89%9B/5637584)（中科院自动化所研究员）
+
+[刘兵](https://www.cs.uic.edu/~liub/)（美国伊利诺斯芝加哥大学教授）
+
+[邱锡鹏](http://nlp.fudan.edu.cn/xpqiu/)（复旦大学副教授）
 
 **日韩篇**
 
