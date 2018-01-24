@@ -116,6 +116,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [HemI: A Toolkit for Illustrating Heatmaps](http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0111988&type=printable) (Wankun Deng, 2014, [code](http://hemi.biocuckoo.org/))
 
+[LIBSVM: A library for support vector machines](http://www.csie.ntu.edu.tw/~cjlin/libsvm) (Chih-Jen Lin, 2011)
+
 ### 其他
 
 [Learning sentiment-specific word embedding for twitter sentiment classification](http://www.anthology.aclweb.org/P/P14/P14-1146.pdf) (ACL 2014)
