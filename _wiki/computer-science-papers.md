@@ -94,11 +94,21 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [End-To-End Memory Networks](https://arxiv.org/pdf/1503.08895v5.pdf) (Sainbayar Sukhbaatar, 2015)
 
-#### 调参技巧
+#### 参数初始化
 
 [Understanding the difficulty of training deep feedforward neural networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.207.2059&rep=rep1&type=pdf) (Xavier Glorot, JMLR 2010)
 
 [Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification](https://arxiv.org/pdf/1502.01852.pdf) (Kaiming He, ICCV 2015)
+
+#### 损失函数
+
+Large-Margin Softmax Loss for Convolutional Neural Networks (Weiyang Liu, ICML 2016, [code](https://github.com/wy1iu/LargeMargin_Softmax_Loss))
+
+SphereFace: Deep Hypersphere Embedding for Face Recognition (Weiyang Liu, ICML 2017, [code](https://github.com/wy1iu/sphereface))
+
+Additive Margin Softmax for Face Verification (Feng Wang, 2018, [code](https://github.com/Joker316701882/Additive-Margin-Softmax))
+
+#### 激活函数
 
 [Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units](https://arxiv.org/pdf/1603.05201v2.pdf) (Wenling Shang, ICML 2016)
 
