@@ -72,9 +72,9 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Target-dependent twitter sentiment classification with rich automatic features](http://www.ijcai.org/Proceedings/15/Papers/194.pdf) (Duy-Tin Vo, IJCAI 2015, [code](https://github.com/duytinvo/ijcai2015))
 
-[Effective LSTMs for Target-Dependent Sentiment Classification](http://www.aclweb.org/anthology/C16-1311) (Duyu Tang, COLING 2016, [code](https://github.com/scaufengyang/TD-LSTM))
+[Effective LSTMs for Target-Dependent Sentiment Classification](http://www.aclweb.org/anthology/C16-1311) (Duyu Tang, COLING 2016, [code](https://github.com/scaufengyang/TD-LSTM), [note](https://zhuanlan.zhihu.com/p/33986102))
 
-[Attention-based LSTM for Aspect-level Sentiment Classification](http://www.aclweb.org/anthology/D16-1058) (Yequan Wang, EMNLP 2016, [code](http://www.aihuang.org/p/publications.html ))
+[Attention-based LSTM for Aspect-level Sentiment Classification](http://www.aclweb.org/anthology/D16-1058) (Yequan Wang, EMNLP 2016, [code](https://github.com/scaufengyang/TD-LSTM))
 
 [Aspect Level Sentiment Classification with Deep Memory Network](http://www.aclweb.org/anthology/D16-1021) (Duyu Tang, EMNLP 2016, [code](https://github.com/pcgreat/mem_absa))
 
