@@ -20,7 +20,7 @@ keywords: 机器学习, 深度学习, 自然语言处理
 
 针对某一个类别 $$C$$，我们定义 $$S$$ 为分类器预测为该类的集合，$$G$$ 为原本数据集中标注为该类的集合，易得 $$S \bigcap G$$是分类器预测该类正确的集合。
 
-精确率指分类器预测某类正确的比例，其计算公式为 $$ P = \frac{\left| S \bigcap G \right|}{\left| S \right|}$$ ；而召回率指标注数据集中该分类被正确预测的比例，其计算公式为 $$ R = \frac{\left| S \bigcap G \right|}{\left| G \right|}$$ 。根据精确率和召回率，我们可以得到 F1 值，其公式为 $$ F_1 = \frac{2PR}{P + R} $$ 。
+精确率指分类器预测某类正确的比例，其计算公式为 $$ P = \frac{\vert S \bigcap G \vert}{\vert S \vert}​$$ ；而召回率指标注数据集中该分类被正确预测的比例，其计算公式为 $$ R = \frac{\vert S \bigcap G \vert}{\vert G \vert}​$$ 。根据精确率和召回率，我们可以得到 F1 值，其公式为 $$ F_1 = \frac{2PR}{P + R} ​$$ 。
 
 实际上，F1 值可以细分为微平均 F1（micro-averaging）和宏平均 F1（macro-averaging ）两种：
 
@@ -33,6 +33,6 @@ keywords: 机器学习, 深度学习, 自然语言处理
 
 回归问题主要有以下三个评价指标：
 
-1. MAE（Mean Absolute Error）：即平均绝对值差，计算公式为$$\frac{1}{n}\sum_{i = 1}^n \left|f_i - y_i\right|$$
+1. MAE（Mean Absolute Error）：即平均绝对值差，计算公式为$$\frac{1}{n}\sum_{i = 1}^n \vert f_i - y_i \vert$$
 2. MSE（Mean Square Error）：即均方误差，计算公式为$$\frac{1}{n}\sum_{i = 1}^n \left( \hat{Y_i} - Y_i \right)^2$$
 3. MAE（Root Mean Square Error）：即均方根误差，计算公式为$$\sqrt{MSE}$$
