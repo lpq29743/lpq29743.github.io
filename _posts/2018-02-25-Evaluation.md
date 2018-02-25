@@ -33,8 +33,6 @@ keywords: 机器学习, 深度学习, 自然语言处理
 
 回归问题主要有以下三个评价指标：
 
-| 简称   | 英文名称                   | 中文名称   | 计算公式                                     |
-| ---- | ---------------------- | ------ | ---------------------------------------- |
-| MAE  | Mean Absolute Error    | 平均绝对值差 | $$\frac{1}{n}\sum_{i = 1}^n \left| f_i - y_i \right|$$ |
-| MSE  | Mean Square Error      | 均方误差   | $$\frac{1}{n}\sum_{i = 1}^n \left( \hat{Y_i} - Y_i \right)^2$$ |
-| RMSE | Root Mean Square Error | 均方根误差  | $$\sqrt{MSE}$$                           |
+1. MAE（Mean Absolute Error）：即平均绝对值差，计算公式为$$\frac{1}{n}\sum_{i = 1}^n \left| f_i - y_i \right|$$
+2. MSE（Mean Square Error）：即均方误差，计算公式为$$\frac{1}{n}\sum_{i = 1}^n \left( \hat{Y_i} - Y_i \right)^2$$
+3. MAE（Root Mean Square Error）：即均方根误差，计算公式为$$\sqrt{MSE}$$
