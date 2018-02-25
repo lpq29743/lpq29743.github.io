@@ -74,7 +74,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Effective LSTMs for Target-Dependent Sentiment Classification](http://www.aclweb.org/anthology/C16-1311) (Duyu Tang, COLING 2016, [code](https://github.com/scaufengyang/TD-LSTM), [note](https://zhuanlan.zhihu.com/p/33986102))
 
-[Attention-based LSTM for Aspect-level Sentiment Classification](http://www.aclweb.org/anthology/D16-1058) (Yequan Wang, EMNLP 2016, [code](https://github.com/scaufengyang/TD-LSTM))
+[Attention-based LSTM for Aspect-level Sentiment Classification](http://www.aclweb.org/anthology/D16-1058) (Yequan Wang, EMNLP 2016, [code](https://github.com/scaufengyang/TD-LSTM), [note](https://zhuanlan.zhihu.com/p/34005136))
 
 [Aspect Level Sentiment Classification with Deep Memory Network](http://www.aclweb.org/anthology/D16-1021) (Duyu Tang, EMNLP 2016, [code](https://github.com/pcgreat/mem_absa))
 
@@ -89,6 +89,12 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 #### 模型
 
 [A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf) (Zachary C. Lipton, 2015)
+
+[On the properties of neural machine translation: Encoder–Decoder approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014)
+
+[Learning phrase representations using RNN encoder-decoder for statistical machine translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014)
+
+[Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf) (Dzmitry Bahdanau, ICLR 2015)
 
 [Memory Networks](https://arxiv.org/pdf/1410.3916v11.pdf) (Jason Weston, ICLR 2015)
 
