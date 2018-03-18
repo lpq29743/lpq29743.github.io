@@ -76,13 +76,13 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Attention-based LSTM for Aspect-level Sentiment Classification](http://www.aclweb.org/anthology/D16-1058) (Yequan Wang, EMNLP 2016, [code](https://github.com/scaufengyang/TD-LSTM), [note](https://zhuanlan.zhihu.com/p/34005136))
 
-[Aspect Level Sentiment Classification with Deep Memory Network](http://www.aclweb.org/anthology/D16-1021) (Duyu Tang, EMNLP 2016, [code](https://github.com/pcgreat/mem_absa))
+[Aspect Level Sentiment Classification with Deep Memory Network](http://www.aclweb.org/anthology/D16-1021) (Duyu Tang, EMNLP 2016, [code](https://github.com/pcgreat/mem_absa), [note](https://zhuanlan.zhihu.com/p/34033477))
 
 [A Hierarchical Model of Reviews for Aspect-based Sentiment Analysis](http://www.aclweb.org/anthology/D16-1103) (Sebastian Ruder, EMNLP 2016)
 
-[Interactive Attention Networks for Aspect-Level Sentiment Classification](http://static.ijcai.org/proceedings-2017/0568.pdf) (Dehong Ma, IJCAI 2017)
+[Interactive Attention Networks for Aspect-Level Sentiment Classification](http://static.ijcai.org/proceedings-2017/0568.pdf) (Dehong Ma, IJCAI 2017, [code](https://github.com/lpq29743/IAN), [note](https://zhuanlan.zhihu.com/p/34041012))
 
-[Recurrent Attention Network on Memory for Aspect Sentiment Analysis](http://www.aclweb.org/anthology/D17-1047) (Peng Chen, EMNLP 2017)
+[Recurrent Attention Network on Memory for Aspect Sentiment Analysis](http://www.aclweb.org/anthology/D17-1047) (Peng Chen, EMNLP 2017, [note](https://zhuanlan.zhihu.com/p/34043504))
 
 ### 深度学习
 
@@ -108,11 +108,11 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 #### 损失函数
 
-Large-Margin Softmax Loss for Convolutional Neural Networks (Weiyang Liu, ICML 2016, [code](https://github.com/wy1iu/LargeMargin_Softmax_Loss))
+[Large-Margin Softmax Loss for Convolutional Neural Networks](https://arxiv.org/pdf/1612.02295.pdf) (Weiyang Liu, ICML 2016, [code](https://github.com/wy1iu/LargeMargin_Softmax_Loss))
 
-SphereFace: Deep Hypersphere Embedding for Face Recognition (Weiyang Liu, ICML 2017, [code](https://github.com/wy1iu/sphereface))
+[SphereFace: Deep Hypersphere Embedding for Face Recognition](https://arxiv.org/pdf/1704.08063.pdf) (Weiyang Liu, ICML 2017, [code](https://github.com/wy1iu/sphereface))
 
-Additive Margin Softmax for Face Verification (Feng Wang, 2018, [code](https://github.com/Joker316701882/Additive-Margin-Softmax))
+[Additive Margin Softmax for Face Verification](https://arxiv.org/pdf/1801.05599.pdf) (Feng Wang, 2018, [code](https://github.com/Joker316701882/Additive-Margin-Softmax))
 
 #### 激活函数
 
