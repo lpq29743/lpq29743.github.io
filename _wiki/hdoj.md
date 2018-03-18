@@ -2519,7 +2519,7 @@ int main() {
 using namespace std;
 
 const int origin_time = 6;
-const int directions[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const int directions[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
 
 int T;
 int N, M;
