@@ -1163,7 +1163,75 @@ int main() {
 }
 ```
 
-#### 4.8 小猪银行
+#### 4.8 做作业
+
+**题目来源**
+
+[HDOJ 1074 Doing Homework](http://acm.hdu.edu.cn/showproblem.php?pid=1074)
+
+**题目分析**
+
+这是集合上的 DP 问题，所以也就是状态压缩动态规划问题。由于最多 15 门功课的全排列的时间复杂度过大，所以我们用二进制数 i 表示做作业的情况。状态 i 总共有 15 个二进制位，1 表示已做，0 表示未做。对于状态 i，枚举当前的作业 j，如果`i & (1 << j)`为真，则表示当前状态含有作业 j。我们通过`t ^= (1 << j)`可以还原出还没做 j 作业之前的状态，这样就有两个状态了。在进行动态规划转移的时候，我们要记录当前状态的日期以及对应做的作业 j。由于题目要求按字典序输出，所以我们应该倒序循环当前作业 j。
+
+**实现代码**
+
+```c++
+#include <iostream>
+#include <string>
+#include <cstring>
+using namespace std;
+
+const int maxn = 1 << 15;
+const int inf = (1 << 31) - 1;
+
+int T, N;
+int C[20], D[20];
+int dp[maxn], day[maxn], pre[maxn];
+string S[20];
+
+void output(int x) {
+    if(!x) {
+        return;
+    }
+    output(x ^ (1 << pre[x]));
+    cout << S[pre[x]] << endl;
+}
+
+int main() {
+    cin >> T;
+    while(T--) {
+        cin >> N;
+        int bit = 1 << N;
+        for(int i = 0; i < N; i++) {
+            cin >> S[i] >> D[i] >> C[i];
+        }
+        for(int i = 1; i < bit; i++) {
+            dp[i] = inf;
+            for(int j = N - 1; j >= 0; j--) {
+                int t = 1 << j;
+                int reduce;
+                if(!(i & t)) {
+                    continue;
+                }
+                t = i ^ t;
+                reduce = day[t] + C[j] - D[j];
+                reduce = reduce < 0 ? 0 : reduce;
+                if(dp[t] + reduce < dp[i]) {
+                    dp[i] = dp[t] + reduce;
+                    day[i] = day[t] + C[j];
+                    pre[i] = j;
+                }
+            }
+        }
+        cout << dp[bit - 1] << endl;
+        output(bit - 1);
+        memset(pre, 0, sizeof(pre));
+    }
+    return 0;
+}
+```
+
+#### 4.9 小猪银行
 
 **题目来源**
 
@@ -1217,7 +1285,7 @@ int main() {
 }
 ```
 
-#### 4.9 我需要一个 Offer
+#### 4.10 我需要一个 Offer
 
 **题目来源**
 
@@ -1264,7 +1332,7 @@ int main() {
 }
 ```
 
-#### 4.10 ACboy 需要你的帮助
+#### 4.11 ACboy 需要你的帮助
 
 **题目来源**
 
@@ -1314,7 +1382,7 @@ int main() {
 }
 ```
 
-#### 4.11 珍惜现在，感恩生活
+#### 4.12 珍惜现在，感恩生活
 
 **题目来源**
 
@@ -1361,7 +1429,7 @@ int main() {
 }
 ```
 
-#### 4.12 饭卡
+#### 4.13 饭卡
 
 **题目来源**
 
@@ -1418,7 +1486,7 @@ int main() {
 }
 ```
 
-#### 4.13 拾骨者
+#### 4.14 拾骨者
 
 **题目来源**
 
