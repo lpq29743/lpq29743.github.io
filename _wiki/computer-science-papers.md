@@ -22,9 +22,9 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 #### 词嵌入
 
-[Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf) (Tomas Mikolov, 2013, [code](https://github.com/danielfrg/word2vec))
+[Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf) (Tomas Mikolov, 2013, [code](https://github.com/danielfrg/word2vec), [note](https://zhuanlan.zhihu.com/p/34718114))
 
-[GloVe: Global Vectors for Word Representation](http://www.anthology.aclweb.org/D/D14/D14-1162.pdf) (Jeffrey Pennington, EMNLP 2014, [code](https://github.com/stanfordnlp/GloVe))
+[GloVe: Global Vectors for Word Representation](http://www.anthology.aclweb.org/D/D14/D14-1162.pdf) (Jeffrey Pennington, EMNLP 2014, [code](https://github.com/stanfordnlp/GloVe), [note](https://zhuanlan.zhihu.com/p/34959040))
 
 [Bag of Tricks for Efficient Text Classification](https://arxiv.org/pdf/1607.01759v2.pdf) (Armand Joulin, 2016, [code](https://github.com/facebookresearch/fastText))
 
@@ -84,6 +84,30 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Recurrent Attention Network on Memory for Aspect Sentiment Analysis](http://www.aclweb.org/anthology/D17-1047) (Peng Chen, EMNLP 2017, [note](https://zhuanlan.zhihu.com/p/34043504))
 
+#### 问答系统与机器阅读理解
+
+[DuReader: a Chinese Machine Reading Comprehension Dataset from Real-world Applications](https://arxiv.org/pdf/1711.05073.pdf) (Wei He, 2017, [code](https://github.com/baidu/DuReader))
+
+[TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension](http://aclweb.org/anthology/P17-1147) (Mandar Joshi, ACL 2017)
+
+[ROUGE: A Package for Automatic Evaluation of Summaries]() (Chin-Yew Lin, 2004)
+
+[BLEU: a Method for Automatic Evaluation of Machine Translation](http://aclweb.org/anthology/P/P02/P02-1040.pdf) (Kishore Papineni, 2002)
+
+[Machine comprehension using match-lstm and answer pointer](https://arxiv.org/pdf/1608.07905.pdf) (Shuohang Wang, ICLR 2017, [code](https://github.com/MurtyShikhar/Question-Answering))
+
+[Bidirectional attention flow for machine comprehension](https://arxiv.org/pdf/1611.01603.pdf) (Minjoon Seo, ICLR 2017, [code](https://github.com/allenai/bi-att-flow))
+
+[Attention-over-Attention Neural Networks for Reading Comprehension](http://www.aclweb.org/anthology/P/P17/P17-1055.pdf) (Yiming Cui, ACL 2017, [code](https://github.com/OlavHN/attention-over-attention))
+
+[Simple and Effective Multi-Paragraph Reading Comprehension](https://arxiv.org/pdf/1710.10723.pdf) (Christopher Clark, 2017)
+
+[Gated Self-Matching Networks for Reading Comprehension and Question Answering](http://aclweb.org/anthology/P17-1018) (Wenhui Wang, ACL 2017, [code](https://github.com/HKUST-KnowComp/R-Net))
+
+[R-Net: machine reading comprehension with self-matching networks](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf) (Natural Language Computing Group, 2017, [code](https://github.com/HKUST-KnowComp/R-Net))
+
+[Fast and Accurate Reading Comprehension by Combining Self-Attention and Convolution](https://openreview.net/pdf?id=B14TlG-RW) (Adams Wei Yu, ICLR 2018, [code](https://github.com/minsangkim142/Fast-Reading-Comprehension))
+
 ### 深度学习
 
 #### 模型
@@ -107,6 +131,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification](https://arxiv.org/pdf/1502.01852.pdf) (Kaiming He, ICCV 2015)
 
 #### 损失函数
+
+[FaceNet: A Unified Embedding for Face Recognition and Clustering](https://www.cv-foundation.org/openaccess/content_cvpr_2015/app/1A_089.pdf) (Florian Schroff, CVPR 2015, [code](https://github.com/davidsandberg/facenet))
+
+[A Discriminative Feature Learning Approach for Deep Face Recognition](http://www.eccv2016.org/files/posters/P-3B-20.pdf) (Yandong Wen, ECCV 2016, [code](https://github.com/pangyupo/mxnet_center_loss))
 
 [Large-Margin Softmax Loss for Convolutional Neural Networks](https://arxiv.org/pdf/1612.02295.pdf) (Weiyang Liu, ICML 2016, [code](https://github.com/wy1iu/LargeMargin_Softmax_Loss))
 
