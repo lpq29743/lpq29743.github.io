@@ -90,7 +90,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension](http://aclweb.org/anthology/P17-1147) (Mandar Joshi, ACL 2017)
 
-[ROUGE: A Package for Automatic Evaluation of Summaries]() (Chin-Yew Lin, 2004)
+[ROUGE: A Package for Automatic Evaluation of Summaries](http://www.aclweb.org/anthology/W/W04/W04-1013.pdf) (Chin-Yew Lin, 2004)
 
 [BLEU: a Method for Automatic Evaluation of Machine Translation](http://aclweb.org/anthology/P/P02/P02-1040.pdf) (Kishore Papineni, 2002)
 
