@@ -1231,7 +1231,72 @@ int main() {
 }
 ```
 
-#### 4.9 小猪银行
+#### 4.9 肥鼠
+
+**题目来源**
+
+[HDOJ 1078 FatMouse and Cheese](http://acm.hdu.edu.cn/showproblem.php?pid=1078)
+
+**题目分析**
+
+这题属于动态规划里面的记忆化搜索。记忆化搜索的主要特点是自顶向下，所以这里因为终点未知，故以 (0, 0) 点为终点逆向深度优先搜索。
+
+**实现代码**
+
+```c++
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int n, k;
+int s[105][105], dp[105][105];
+int dx[4] = {1, -1, 0, 0};
+int dy[4] = {0, 0, 1, -1};
+
+int isOK(int x, int y) {
+    if(x >= 0 && x < n && y >= 0 && y < n) {
+        return 1;
+    }
+    return 0;
+}
+
+int dfs(int x, int y) {
+    if(dp[x][y]) {
+        return dp[x][y];
+    }
+    int ans = 0;
+    for(int i = 1; i <= k; i++) {
+        for(int j = 0; j < 4; j++) {
+            int newx = x + dx[j] * i;
+            int newy = y + dy[j] * i;
+            if(isOK(newx, newy) && s[newx][newy] > s[x][y]) {
+                ans = max(ans, dfs(newx, newy));
+            }
+        }
+    }
+    dp[x][y] = s[x][y] + ans;
+    return dp[x][y];
+}
+
+int main() {
+    while(1) {
+        cin >> n >> k;
+        if(n == -1 && k == -1) {
+            break;
+        }
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                cin >> s[i][j];
+                dp[i][j] = 0;
+            }
+        }
+        cout << dfs(0, 0) << endl;
+    }
+    return 0;
+}
+```
+
+#### 4.10 小猪银行
 
 **题目来源**
 
@@ -1285,7 +1350,7 @@ int main() {
 }
 ```
 
-#### 4.10 我需要一个 Offer
+#### 4.11 我需要一个 Offer
 
 **题目来源**
 
@@ -1332,7 +1397,7 @@ int main() {
 }
 ```
 
-#### 4.11 ACboy 需要你的帮助
+#### 4.12 ACboy 需要你的帮助
 
 **题目来源**
 
@@ -1382,7 +1447,7 @@ int main() {
 }
 ```
 
-#### 4.12 珍惜现在，感恩生活
+#### 4.13 珍惜现在，感恩生活
 
 **题目来源**
 
@@ -1429,7 +1494,7 @@ int main() {
 }
 ```
 
-#### 4.13 饭卡
+#### 4.14 饭卡
 
 **题目来源**
 
@@ -1486,7 +1551,7 @@ int main() {
 }
 ```
 
-#### 4.14 拾骨者
+#### 4.15 拾骨者
 
 **题目来源**
 
