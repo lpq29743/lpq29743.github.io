@@ -124,6 +124,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [End-To-End Memory Networks](https://arxiv.org/pdf/1503.08895v5.pdf) (Sainbayar Sukhbaatar, 2015)
 
+[Ask Me Anything: Dynamic Memory Networks for Natural Language Processing](http://www.thespermwhale.com/jaseweston/ram/papers/paper_21.pdf) (Ankit Kumar, 2015)
+
+[Gated End-to-End Memory Networks](http://www.aclweb.org/anthology/E/E17/E17-1001.pdf) (Fei Liu, 2016)
+
 #### 参数初始化
 
 [Understanding the difficulty of training deep feedforward neural networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.207.2059&rep=rep1&type=pdf) (Xavier Glorot, JMLR 2010)
