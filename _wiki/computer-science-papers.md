@@ -106,7 +106,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [R-Net: machine reading comprehension with self-matching networks](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf) (Natural Language Computing Group, 2017, [code](https://github.com/HKUST-KnowComp/R-Net))
 
-[Fast and Accurate Reading Comprehension by Combining Self-Attention and Convolution](https://openreview.net/pdf?id=B14TlG-RW) (Adams Wei Yu, ICLR 2018, [code](https://github.com/minsangkim142/Fast-Reading-Comprehension))
+[QANet: Combining Local Convolution with Global Self-Attention for Reading Comprehension](https://openreview.net/pdf?id=B14TlG-RW) (Adams Wei Yu, ICLR 2018, [code](https://github.com/minsangkim142/Fast-Reading-Comprehension))
 
 ### 深度学习
 
