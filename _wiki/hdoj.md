@@ -1296,7 +1296,82 @@ int main() {
 }
 ```
 
-#### 4.10 小猪银行
+#### 4.10 人类基因函数
+
+**题目来源**
+
+[HDOJ 1080 Human Gene Functions](http://acm.hdu.edu.cn/showproblem.php?pid=1080)
+
+**题目分析**
+
+这题是最长公共子序列（LCS）的变形题。我们可以得到状态转移方程：`dp[i][j] = max(dp[i - 1][j - 1] + val(a[i], b[j]), max(dp[i - 1][j] + val(a[i], '-'), dp[i][j - 1] + val(b[j], '-')))`。初始状态为`dp[i][0] = dp[i - 1][0] + val(a[i], '-')`。
+
+**实现代码**
+
+```c++
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <algorithm>
+#include <cstring>
+#define CLR(a, b) memset(a, (b), sizeof(a))
+using namespace std;
+typedef long long LL;
+const int MAXN = 1e6 +10;
+const int INF = 0x3f3f3f3f;
+char a[110], b[110];
+int dp[110][110];
+int val(char x, char y) {
+    if(y != '-' && x > y) swap(x, y);
+    if(x == 'A') {
+        if(y == 'A') return 5;
+        if(y == 'C') return -1;
+        if(y == 'G') return -2;
+        if(y == 'T') return -1;
+        return -3;
+    }
+    if(x == 'C') {
+        if(y == 'C') return 5;
+        if(y == 'G') return -3;
+        if(y == 'T') return -2;
+        return -4;
+    }
+    if(x == 'G') {
+        if(y == 'G') return 5;
+        if(y == 'T') return -2;
+        return -2;
+    }
+    if(x == 'T') {
+        if(y == 'T') return 5;
+        return -1;
+    }
+}
+int main()
+{
+    int t; scanf("%d", &t);
+    while(t--) {
+        int n, m;
+        scanf("%d%s", &n, a+1);
+        scanf("%d%s", &m, b+1);
+        CLR(dp, -INF); dp[0][0] = 0;
+        for(int i = 1; i <= n; i++) {
+            dp[i][0] = dp[i-1][0] + val(a[i], '-');
+        }
+        for(int i = 1; i <= m; i++) {
+            dp[0][i] = dp[0][i-1] + val(b[i], '-');
+        }
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= m; j++) {
+                dp[i][j] = max(dp[i-1][j-1] + val(a[i], b[j]), max(dp[i-1][j] + val(a[i], '-'), dp[i][j-1] + val(b[j], '-')));
+            }
+        }
+        printf("%d\n", dp[n][m]);
+    }
+    return 0;
+}
+```
+
+#### 4.11 小猪银行
 
 **题目来源**
 
@@ -1350,7 +1425,7 @@ int main() {
 }
 ```
 
-#### 4.11 我需要一个 Offer
+#### 4.12 我需要一个 Offer
 
 **题目来源**
 
@@ -1397,7 +1472,7 @@ int main() {
 }
 ```
 
-#### 4.12 ACboy 需要你的帮助
+#### 4.13 ACboy 需要你的帮助
 
 **题目来源**
 
@@ -1447,7 +1522,7 @@ int main() {
 }
 ```
 
-#### 4.13 珍惜现在，感恩生活
+#### 4.14 珍惜现在，感恩生活
 
 **题目来源**
 
@@ -1494,7 +1569,7 @@ int main() {
 }
 ```
 
-#### 4.14 饭卡
+#### 4.15 饭卡
 
 **题目来源**
 
@@ -1551,7 +1626,7 @@ int main() {
 }
 ```
 
-#### 4.15 拾骨者
+#### 4.16 拾骨者
 
 **题目来源**
 
