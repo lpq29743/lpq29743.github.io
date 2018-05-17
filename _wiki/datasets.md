@@ -14,6 +14,8 @@ keywords: 数据集
 
 [20 Newsgroups](http://qwone.com/~jason/20Newsgroups/)（新闻分类，文本分类，文本聚类）
 
+[IMDB Review Dataset](http://ai.stanford.edu/~amaas/data/sentiment/) （文本分类，情感分析）
+
 ### 计算机视觉
 
 [MNIST](http://yann.lecun.com/exdb/mnist/)（手写数字识别）
