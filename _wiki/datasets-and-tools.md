@@ -16,6 +16,12 @@ keywords: 数据集
 
 [IMDB Review Dataset](http://ai.stanford.edu/~amaas/data/sentiment/) （文本分类，情感分析）
 
+[维基百科语料库](https://dumps.wikimedia.org/backup-index-bydb.html) （词向量训练）
+
+[Glove](https://nlp.stanford.edu/projects/glove/) （预训练词向量）
+
+[fastText](https://fasttext.cc/docs/en/english-vectors.html) （预训练词向量）
+
 ### 计算机视觉
 
 [MNIST](http://yann.lecun.com/exdb/mnist/)（手写数字识别）
