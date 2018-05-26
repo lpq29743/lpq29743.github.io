@@ -2,9 +2,15 @@
 layout: wiki
 title: Datasets
 categories: Blog
-description: 公开数据集
-keywords: 数据集
+description: 公开数据集和开源工具
+keywords: 数据集, 工具
 ---
+
+### 机器学习
+
+[CRF++](https://taku910.github.io/crfpp/) （条件随机场）
+
+[CRFsuite](http://www.chokkan.org/software/crfsuite/) （条件随机场）
 
 ### 自然语言处理
 
@@ -21,6 +27,16 @@ keywords: 数据集
 [Glove](https://nlp.stanford.edu/projects/glove/) （预训练词向量）
 
 [fastText](https://fasttext.cc/docs/en/english-vectors.html) （预训练词向量）
+
+[HanLP 中文词向量](https://github.com/hankcs/HanLP/wiki/word2vec) （预训练词向量）
+
+[HanLP](http://hanlp.linrunsoft.com/) （中文分词，命名实体识别）
+
+[jieba](https://github.com/fxsjy/jieba) （中文分词）
+
+[spacy](https://github.com/explosion/spaCy) （英文分词，命名实体识别）
+
+[Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) （英文分词，命名实体识别）
 
 ### 计算机视觉
 
