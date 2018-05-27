@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: HDOJ
+title: Interview
 categories: Algorithm
 description: 面试题
 keywords: 面试题
@@ -63,6 +63,14 @@ A1.分母是n-1是为了保证方差的估计是无偏的。如果直接使用n�
 
 这里也可以用自由度的角度进行分析。对于n个样本，样本均值是先定的，因此只剩下n-1个样本的值是可以变化的。换句话说，样本中原有的n个自由度，有一个被分配给计算样本均值，剩下自由度即为n-1，所以用n-1作为分母来计算样本方差。
 
+Q2.**给一枚硬币，但扔出正反的概率未知，如何得到等概率的二元随机数**
+
+A2.扔两次，00、11时无输出重扔，01输出0，10输出1。
+
+Q3.**如何用一个骰子等概率地生成1到7的随机数**
+
+A3.将一个筛子扔两次可以得到36种组合，每五种组合代表一个数字，剩下的一种表示重扔。
+
 #### Machine Learning
 
 Q1.**You are given a train data set having 1000 columns and 1 million rows. The data set is based on a classification problem. Your manager has asked you to reduce the dimension of this data so that model computation time can be reduced. Your machine has memory constraints. What would you do? (You are free to make practical assumptions.)**
@@ -98,6 +106,8 @@ A3.Following are the methods of variable selection you can use:
 4. Use Random Forest, Xgboost and plot variable importance chart
 5. Use Lasso Regression
 6. Measure information gain for the available set of features and select top n features accordingly.
+
+Q4.**逻辑回归为什么不能用均方误差计算损失函数**
 
 ### Idea
 
