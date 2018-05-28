@@ -71,6 +71,30 @@ Q3.**如何用一个骰子等概率地生成1到7的随机数**
 
 A3.将一个筛子扔两次可以得到36种组合，每五种组合代表一个数字，剩下的一种表示重扔。
 
+Q4.**抛的硬币直到连续出现两次正面为止，平均要扔多少次**
+
+A4.用马尔可夫链，可做图求解递归方程。
+
+假定扔出正面(H)的概率为 p，扔出反面(T)的概率为 1 - p。我们需要扔出连续 2 个 H。在整个过程有这么几种状态：
+
+1. 当前连续 0 个正面（0H）
+2. 当前连续 1 个正面（1H）
+3. 当前连续 2 个正面（2H）
+
+如果当前是 0H，那么 p 的概率，下一个状态是 1H；1 - p 的概率维持在 0H。
+
+如果当前是 1H，那么 p 的概率，下一个状态为 2H（达到条件，任务完成）；1 - p 的概率回到 0H。
+
+假设期望 x 次后，得到 2H，则有 $$x = (1 − p)(1 + x) + p^2 × 2 + p(1 − p)(2 + x)$$，可解得 x = 6。
+
+Q5.**一米长的绳子，随机剪两刀，最长的一段有多长**
+
+A5.假设三段的长度从小到大依次为 a，a + b，a + b + c，并且满足 a + a + b + a + b + c = 3a + 2b + c = 1 以及 a > 0，b ≥ 0，c ≥ 0
+
+则可以得到 a ≤ 1/3，b ≤ 1/2，c ≤ 1，不妨可以认为 a ∼ U(0, 2k)，b ∼ U(0, 3k)，c∼U(0, 6k)。
+
+绳子最长的一段的期望为 k + 1.5k + 3k = 5.5k，绳子长度的期望为 3k + 3k + 3k = 9k。因为 9k = 1，所以 5.5k = 11/18 = 0.61111
+
 #### Machine Learning
 
 Q1.**You are given a train data set having 1000 columns and 1 million rows. The data set is based on a classification problem. Your manager has asked you to reduce the dimension of this data so that model computation time can be reduced. Your machine has memory constraints. What would you do? (You are free to make practical assumptions.)**
