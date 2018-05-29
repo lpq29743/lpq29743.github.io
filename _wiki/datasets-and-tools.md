@@ -24,6 +24,8 @@ keywords: 数据集, 工具
 
 [维基百科语料库](https://dumps.wikimedia.org/backup-index-bydb.html) （词向量训练）
 
+[Amazon Reviews](https://snap.stanford.edu/data/web-Amazon.html) （词向量训练）
+
 [Glove](https://nlp.stanford.edu/projects/glove/) （预训练词向量）
 
 [fastText](https://fasttext.cc/docs/en/english-vectors.html) （预训练词向量）
