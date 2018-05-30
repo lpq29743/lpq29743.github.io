@@ -95,6 +95,12 @@ A5.假设三段的长度从小到大依次为 a，a + b，a + b + c，并且满�
 
 绳子最长的一段的期望为 k + 1.5k + 3k = 5.5k，绳子长度的期望为 3k + 3k + 3k = 9k。因为 9k = 1，所以 5.5k = 11/18 = 0.61111
 
+#### Operating Systems
+
+Q1.**为什么要用时间复杂度来描述算法，而不是运行时间**
+
+A1.**操作系统调度，所以运行时间不一定相同**
+
 #### Machine Learning
 
 Q1.**You are given a train data set having 1000 columns and 1 million rows. The data set is based on a classification problem. Your manager has asked you to reduce the dimension of this data so that model computation time can be reduced. Your machine has memory constraints. What would you do? (You are free to make practical assumptions.)**
