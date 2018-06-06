@@ -50,9 +50,12 @@ keywords: 100 Things to Do Before I Die
 42. Life: Help a kid to one of top50 university
 43. Life: Give someone I love the best wedding
 44. Life: Take some photos with my families
-45. Life: Have a honeymoon+
+45. Life: Have a honeymoon
 46. Life: Have a romantic candlelit dinner
-47. Career: Become a CTO
-48. Career: Earn 1 million in one year
-49. Career: Work for a Top100 IT company
-50. Career: Be a small boss
+47. Life: Help three friends to achieve their dreams
+48. Life: Help my brother to achieve his dream
+49. Life: Help my love to achieve her dream
+50. Career: Become a CTO
+51. Career: Earn 1 million in one year
+52. Career: Work for a Top100 IT company
+53. Career: Be a small boss
