@@ -1371,7 +1371,72 @@ int main()
 }
 ```
 
-#### 4.11 小猪银行
+#### 4.11 最大子矩阵
+
+**题目来源**
+
+[HDOJ 1081 To The Max](http://acm.hdu.edu.cn/showproblem.php?pid=1081)
+
+**题目分析**
+
+此题实际上的将一维的最长子序列和问题扩展成二维的最大子序列问题，因此可以枚举起始行 i 和起始行 j，然后把从第 i 行的值到第 j 行的值压缩成一行，就可以将二维问题转换为一维问题。这种思路的时间复杂度为 O(n^3)，为了降低复杂度，可以用前缀和进行压缩，即提前计算并存储每一列的前缀和。
+
+**实现代码**
+
+```c++
+#include<iostream>
+#include<cstdio>
+#include<stdio.h>
+#include<cstdlib>
+#include<stdlib.h>
+#include<algorithm>
+#include<string.h>
+#include<cstring>
+using namespace std;
+ 
+const int maxn=150;
+const int INF=0x3f3f3f3f;
+int sum[maxn][maxn];
+int a[maxn][maxn],n;
+ 
+void debug(){
+    for(int i=1;i<=n;i++)
+        for(int j=1;j<=n;j++)
+            printf("%d%c",sum[i][j],j==n?'\n':' ');
+}
+ 
+int main(){
+    //freopen("input.txt","r",stdin);
+    while(scanf("%d",&n)!=EOF){
+        memset(sum,0,sizeof(sum));
+        for(int i=1;i<=n;i++)
+            for(int j=1;j<=n;j++)
+                scanf("%d",&a[i][j]);
+        for(int j=1;j<=n;j++){
+            sum[1][j]=a[1][j];
+            for(int i=2;i<=n;i++)
+                sum[i][j]=sum[i-1][j]+a[i][j];
+        }
+        //debug();
+        int ans=-INF;
+        for(int i=1;i<=n;i++)
+            for(int j=i;j<=n;j++){
+                int tmp=0,tmpans=-INF;
+                for(int k=1;k<=n;k++){
+                    int num=sum[j][k]-sum[i-1][k];
+                    if (tmp+num>=0) tmp+=num;
+                    else tmp=num;
+                    tmpans=max(tmpans,tmp);
+                }
+                ans=max(ans,tmpans);
+            }
+        printf("%d\n",ans);
+    }
+    return 0;
+}
+```
+
+#### 4.12 小猪银行
 
 **题目来源**
 
@@ -1425,7 +1490,7 @@ int main() {
 }
 ```
 
-#### 4.12 我需要一个 Offer
+#### 4.13 我需要一个 Offer
 
 **题目来源**
 
@@ -1472,7 +1537,7 @@ int main() {
 }
 ```
 
-#### 4.13 ACboy 需要你的帮助
+#### 4.14 ACboy 需要你的帮助
 
 **题目来源**
 
@@ -1522,7 +1587,7 @@ int main() {
 }
 ```
 
-#### 4.14 珍惜现在，感恩生活
+#### 4.15 珍惜现在，感恩生活
 
 **题目来源**
 
@@ -1569,7 +1634,7 @@ int main() {
 }
 ```
 
-#### 4.15 饭卡
+#### 4.16 饭卡
 
 **题目来源**
 
@@ -1626,7 +1691,7 @@ int main() {
 }
 ```
 
-#### 4.16 拾骨者
+#### 4.17 拾骨者
 
 **题目来源**
 
