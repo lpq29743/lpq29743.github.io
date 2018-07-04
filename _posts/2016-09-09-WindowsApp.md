@@ -60,8 +60,10 @@ keywords: Windows软件推荐
 - 迅雷（不解释）
 - 硕鼠（可用于下载Bilibili等网站的视频）
 - 百度网盘（360退出舞台后，百度网盘是个不错的选择）
-- putty（远程操作服务器）
+- putty（远程操作服务器工具一）
+- XShell（远程操作服务器工具二）
 - WinSCP（远程传输和操作文件）
+- BCompare（文件比较工具）
 - AntConc（自建语料库的绿色强大软件）
 - Mp3ABPlayer+draft（前者音频播放，后者听写对比，练习听力的最佳组合）
 - Notepad++（个人用过的最好编辑器）
