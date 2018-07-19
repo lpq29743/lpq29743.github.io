@@ -44,6 +44,12 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Inducing Domain-Specific Sentiment Lexicons from Unlabeled Corpora](http://www.aclweb.org/anthology/D16-1057) (William L. Hamilton, EMNLP 2016)
 
+##### 情感词嵌入
+
+[Learning sentiment-specific word embedding for twitter sentiment classification](http://www.anthology.aclweb.org/P/P14/P14-1146.pdf) (Duyu Tang, ACL 2014)
+
+[SenticNet 5: Discovering Conceptual Primitives for Sentiment Analysis by Means of Context Embeddings](http://sentic.net/senticnet-5.pdf) (Erik Cambria, AAAI 2018, [code1](http://sentic.net/downloads/), [code2](https://github.com/yurimalheiros/senticnetapi))
+
 ##### 对象抽取
 
 [Recursive neural conditional random fields for aspect-based sentiment analysis](http://www.aclweb.org/anthology/D16-1059) (Wenya Wang, EMNLP 2016, [code](https://github.com/happywwy/Recursive-Neural-Conditional-Random-Field))
@@ -82,7 +88,11 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Interactive Attention Networks for Aspect-Level Sentiment Classification](http://static.ijcai.org/proceedings-2017/0568.pdf) (Dehong Ma, IJCAI 2017, [code](https://github.com/lpq29743/IAN), [note](https://zhuanlan.zhihu.com/p/34041012))
 
-[Recurrent Attention Network on Memory for Aspect Sentiment Analysis](http://www.aclweb.org/anthology/D17-1047) (Peng Chen, EMNLP 2017, [note](https://zhuanlan.zhihu.com/p/34043504))
+[Recurrent Attention Network on Memory for Aspect Sentiment Analysis](http://www.aclweb.org/anthology/D17-1047) (Peng Chen, EMNLP 2017, [code](https://github.com/lpq29743/RAM), [note](https://zhuanlan.zhihu.com/p/34043504))
+
+[Targeted Aspect-Based Sentiment Analysis via Embedding Commonsense Knowledge into an Attentive LSTM](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16541/16152) (Yukun Ma, AAAI 2018)
+
+[Transformation Networks for Target-Oriented Sentiment Classification](https://arxiv.org/pdf/1805.01086.pdf) (Xin Li, ACL 2018, [code](https://github.com/lixin4ever/TNet))
 
 #### 问答系统与机器阅读理解
 
@@ -108,6 +118,44 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [QANet: Combining Local Convolution with Global Self-Attention for Reading Comprehension](https://openreview.net/pdf?id=B14TlG-RW) (Adams Wei Yu, ICLR 2018, [code](https://github.com/minsangkim142/Fast-Reading-Comprehension))
 
+#### 知识图谱
+
+##### 知识图谱表示和补全
+
+[Translating Embeddings for Modeling Multi-relational Data](https://www.utc.fr/~bordesan/dokuwiki/_media/en/transe_nips13.pdf) (Antoine Bordes, NIPS 2013, [code](https://github.com/thunlp/KB2E))
+
+[Knowledge Graph Embedding by Translating on Hyperplanes](https://pdfs.semanticscholar.org/2a3f/862199883ceff5e3c74126f0c80770653e05.pdf) (Zhen Wang, AAAI 2014, [code](https://github.com/thunlp/KB2E))
+
+[Learning Entity and Relation Embeddings for Knowledge Graph Completion](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.698.8922&rep=rep1&type=pdf) (Yankai Lin, AAAI 2015, [code](https://github.com/thunlp/KB2E))
+
+[Knowledge Graph Embedding via Dynamic Mapping Matrix](http://anthology.aclweb.org/P/P15/P15-1067.pdf) (Guoliang Ji, ACL 2015, [code](https://github.com/thunlp/OpenKE))
+
+[TransA: An Adaptive Approach for Knowledge Graph Embedding](https://arxiv.org/pdf/1509.05490.pdf) (Han Xiao)
+
+[Modeling Relation Paths for Representation Learning of Knowledge Bases](https://arxiv.org/pdf/1506.00379.pdf) (Yankai Lin, EMNLP 2015, [code](https://github.com/thunlp/KB2E))
+
+[TransG : A Generative Model for Knowledge Graph Embedding](http://www.aclweb.org/anthology/P16-1219) (Han Xiao, ACL 2016, [code](https://github.com/BookmanHan/Embedding))
+
+[Knowledge Graph Completion with Adaptive Sparse Transfer Matrix](http://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/download/11982/11693) (Guoliang Ji, AAAI 2016, [code](https://github.com/thunlp/Fast-TransX))
+
+[Convolutional 2D Knowledge Graph Embeddings](https://arxiv.org/pdf/1707.01476.pdf) (Pasquale Minervini, AAAI 2018, [code](https://github.com/TimDettmers/ConvE))
+
+[Open-World Knowledge Graph Completion](https://arxiv.org/pdf/1711.03438.pdf) (Baoxu Shi, AAAI 2018, [code](https://github.com/bxshi/ConMask))
+
+##### 知识图谱应用
+
+[Question Answering over Freebase via Attentive RNN with Similarity Matrix based CNN](https://arxiv.org/ftp/arxiv/papers/1804/1804.03317.pdf) (Yingqqi Qu, ISMC 2018, [code](https://github.com/quyingqi/kbqa-ar-smcnn))
+
+[Learning beyond datasets: Knowledge Graph Augmented Neural Networks for Natural language Processing](https://arxiv.org/pdf/1802.05930.pdf) (Annervaz K M, HAACL HLT 2018)
+
+[Variational Reasoning for Question Answering with Knowledge Graph](https://arxiv.org/pdf/1709.04071.pdf) (Yuyu Zhang, AAAI 2018)
+
+### 机器学习
+
+#### 模型
+
+[An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010)
+
 ### 深度学习
 
 #### 模型
@@ -118,6 +166,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Learning phrase representations using RNN encoder-decoder for statistical machine translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014)
 
+[Neural Turing Machines](https://arxiv.org/pdf/1410.5401.pdf) (Alex Graves, 2014, [code](https://github.com/carpedm20/NTM-tensorflow))
+
 [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf) (Dzmitry Bahdanau, ICLR 2015)
 
 [Memory Networks](https://arxiv.org/pdf/1410.3916v11.pdf) (Jason Weston, ICLR 2015)
@@ -127,6 +177,18 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Ask Me Anything: Dynamic Memory Networks for Natural Language Processing](http://www.thespermwhale.com/jaseweston/ram/papers/paper_21.pdf) (Ankit Kumar, 2015)
 
 [Gated End-to-End Memory Networks](http://www.aclweb.org/anthology/E/E17/E17-1001.pdf) (Fei Liu, 2016)
+
+[Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention))
+
+#### 优化器
+
+[On the Momentum Term in Gradient Descent Learning](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.57.5612&rep=rep1&type=pdf) (Ning Qian, 1999)
+
+[Adaptive Subgradient Methods for Online Learning and Stochastic Optimization](http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf) (John Duchi, JMLR 2011)
+
+[ADADELTA: An Adaptive Learning Rate Method](https://arxiv.org/pdf/1212.5701.pdf) (Matthew D. Zeiler, 2012)
+
+[ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION](https://arxiv.org/pdf/1412.6980.pdf) (Diederik P. Kingma, 2015)
 
 #### 参数初始化
 
@@ -169,13 +231,3 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [HemI: A Toolkit for Illustrating Heatmaps](http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0111988&type=printable) (Wankun Deng, 2014, [code](http://hemi.biocuckoo.org/))
 
 [LIBSVM: A library for support vector machines](http://www.csie.ntu.edu.tw/~cjlin/libsvm) (Chih-Jen Lin, 2011)
-
-### 其他
-
-[Learning sentiment-specific word embedding for twitter sentiment classification](http://www.anthology.aclweb.org/P/P14/P14-1146.pdf) (ACL 2014)
-
-[Learning to Generate Reviews and Discovering Sentiment](https://arxiv.org/pdf/1704.01444.pdf) (Alec Radford, 2017, [code](https://github.com/openai/generating-reviews-discovering-sentiment))
-
-[Learning Composition Models for Phrase Embeddings](http://www.anthology.aclweb.org/Q/Q15/Q15-1017.pdf) (Mo Yu, ACL 2015)
-
-[Adaptive Joint Learning of Compositional and Non-Compositional Phrase Embeddings](http://www.aclweb.org/anthology/P/P16/P16-1020.pdf) (Kazuma Hashimoto, ACL 2016)
