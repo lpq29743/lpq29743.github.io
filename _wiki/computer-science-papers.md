@@ -24,6 +24,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf) (Tomas Mikolov, 2013, [code](https://github.com/danielfrg/word2vec), [note](https://zhuanlan.zhihu.com/p/34718114))
 
+[Distributed Representations of Sentences and Documents](https://arxiv.org/pdf/1405.4053.pdf) (Quoc Le, 2014, [code](https://github.com/jhlau/doc2vec))
+
 [GloVe: Global Vectors for Word Representation](http://www.anthology.aclweb.org/D/D14/D14-1162.pdf) (Jeffrey Pennington, EMNLP 2014, [code](https://github.com/stanfordnlp/GloVe), [note](https://zhuanlan.zhihu.com/p/34959040))
 
 [Bag of Tricks for Efficient Text Classification](https://arxiv.org/pdf/1607.01759v2.pdf) (Armand Joulin, 2016, [code](https://github.com/facebookresearch/fastText))
