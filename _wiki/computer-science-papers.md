@@ -162,6 +162,14 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 #### 模型
 
+[Learning representations by back-propagating errors](http://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf) (David E. Rumelhart, 1986)
+
+[Backpropagation applied to handwritten zip code recognition](https://www.ics.uci.edu/~welling/teaching/273ASpring09/lecun-89e.pdf) (Yann LeCun, 1989)
+
+[Long short-term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
+
+[Generative Adversarial Nets](https://arxiv.org/pdf/1406.2661.pdf) (Ian Goodfellow, 2014)
+
 [A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf) (Zachary C. Lipton, 2015)
 
 [On the properties of neural machine translation: Encoder–Decoder approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014)
