@@ -40,6 +40,12 @@ keywords: 数据集, 工具
 
 [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) （英文分词，命名实体识别）
 
+[CNN/Daily Mail](https://github.com/deepmind/rc-data) （完形填空式阅读理解）
+
+[SQuAD](https://rajpurkar.github.io/SQuAD-explorer/)（阅读理解）
+
+[DuReader](http://ai.baidu.com/broad/subordinate?dataset=dureader) （阅读理解）
+
 ### 计算机视觉
 
 [MNIST](http://yann.lecun.com/exdb/mnist/)（手写数字识别）
