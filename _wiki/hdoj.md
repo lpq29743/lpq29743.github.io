@@ -537,7 +537,86 @@ int main() {
 }
 ```
 
-#### 3.3 单词游戏
+#### 3.3 课程和学生
+
+**题目来源**
+
+[HDOJ 1083 Girls and Boys](http://acm.hdu.edu.cn/showproblem.php?pid=1083)
+
+**题目分析**
+
+二分图最大匹配问题，直接套模板。值得注意的几点是：
+
+1. 图从 0 开始为下标
+2. 图必须对称的邻接矩阵存储
+3. 模板返回的是匹配的点的数目，该数目需是课程数的两倍才满足题意
+
+**实现代码**
+
+```c++
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define N 500
+
+int n;      // 二分图两个集合点数
+int g[N][N];    // 采用邻接矩阵记录边
+int linker[N];      // 记录右边匹配顶点及匹配边
+int used[N];
+
+int dfs(int u) {    // 寻找增广路
+    for(int v = 0; v < n; v++) {    // 遍历右侧顶点
+        if(g[u][v] && !used[v]) {   // 如果存在边且右边顶点还没用过
+            used[v] = 1;
+            if(linker[v] == -1 || dfs(linker[v])) {     // 如果能找到非匹配点
+                linker[v] = u;
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+int hungary() {
+    int res = 0;    // 最大匹配数
+    memset(linker, -1, sizeof(linker));
+    for(int u = 0; u < n; u++) {    // 从左边第1个顶点开始，寻找增广路
+        memset(used, 0, sizeof(used));
+        if(dfs(u)) {  // 如果找到增广路，则匹配数加一
+            res++;
+        }
+    }
+    return res;
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+    while(T--) {
+        int p, q;
+        scanf("%d%d", &p, &q);
+        memset(g, 0, sizeof(g));
+        for(int i = 0; i < p; i++) {
+            int num;
+            scanf("%d", &num);
+            for(int j = 0; j < num; j++) {
+                int k;
+                scanf("%d", &k);
+                g[i][p + k - 1] = g[p + k - 1][i] = 1;
+            }
+        }
+        n = p + q;
+        int result = hungary();
+        if(result == p * 2)
+            printf("YES\n");
+        else
+            printf("NO\n");
+    }
+    return 0;
+}
+```
+
+#### 3.4 单词游戏
 
 **题目来源**
 
@@ -630,7 +709,7 @@ int main() {
     }
 }
 ```
-#### 3.4 多少张桌子
+#### 3.5 多少张桌子
 
 **题目来源**
 
