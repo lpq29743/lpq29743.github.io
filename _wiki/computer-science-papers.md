@@ -32,6 +32,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Enriching Word Vectors with Subword Information](https://pdfs.semanticscholar.org/e2db/a792360873aef125572812f3673b1a85d850.pdf) (Piotr Bojanowski, 2016)
 
+[Deep contextualized word representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp))
+
 #### 情感分析
 
 ##### 概述
