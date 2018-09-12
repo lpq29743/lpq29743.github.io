@@ -1,3 +1,11 @@
+---
+layout: post
+title: 递归方程求解方法
+categories: Algorithm
+description: 递归方程求解方法
+keywords: 算法, 递归
+---
+
 #### 递推法
 
 ##### 简单递推
@@ -24,18 +32,22 @@
 
 解答：https://math.stackexchange.com/questions/1112012/recursion-tree-tn-tn-3-t2n-3-cn
 
-n替换法(猜测加归纳证明)
+#### 替换法
 
-n换元
+思路：试扩展几个 n 比较小的递推式求值，发现规律，然后猜测并用数学归纳法证明。
 
-n生成函数法
+#### 换元法
 
-n特征方程法
+思路：对函数的定义域进行转换，并在新的定义域里，定义一个新的递归方程；把问题转换为对新的递归方程的求解；然后再把所得的解转换回原方程的解
 
-nK阶常系数齐次递归方程
+#### 生成函数法
 
-nK阶常系数非齐次递归方程
+例 5：$$a_n = a_{n - 1} + a_{n-2}$$
 
-n通用递归方程法
+解答：https://math.stackexchange.com/questions/371714/solving-recursive-sequence-using-generating-functions
 
-n积分法
+#### 特征方程法
+
+例 6：$$T(n) = T(n - 1) + T(n - 2)$$
+
+解答：https://math.stackexchange.com/questions/2292707/fibonacci-recurrence-relations
