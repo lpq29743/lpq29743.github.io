@@ -170,6 +170,12 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 #### 模型
 
+[Classification and Regression Trees](http://xxpt.ynjgy.com/resource/data/110102/U/705/pdfs/L3ClassTrees.pdf) (L. Breiman, 1984, [code1](https://github.com/bensadeghi/DecisionTree.jl), [code2](https://github.com/wreardan/cart))
+
+[Induction of Decision Trees](http://hunch.net/~coms-4771/quinlan.pdf) (J. Ross Quinlan, [code](https://github.com/igrigorik/decisiontree))
+
+[C4.5: Programs for Machine Learning](https://dl.acm.org/citation.cfm?id=152181) (J. Ross Quinlan, [code](https://github.com/yandongliu/learningjs))
+
 [An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010)
 
 ### 深度学习
