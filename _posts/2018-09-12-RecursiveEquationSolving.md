@@ -14,11 +14,11 @@ keywords: 算法, 递归
 
 例 1：$$T(n) = 2T(n-1) + 4$$
 
-解答：https://stackoverflow.com/questions/22741590/what-is-the-time-complexity-of-the-recurrence-tn-2tn-1-4
+解答：[https://stackoverflow.com/questions/22741590/what-is-the-time-complexity-of-the-recurrence-tn-2tn-1-4](https://stackoverflow.com/questions/22741590/what-is-the-time-complexity-of-the-recurrence-tn-2tn-1-4)
 
 例 2：$$T(n) = 2T(n-1) + n$$
 
-解答：https://math.stackexchange.com/questions/239974/solve-the-recurrence-tn-2tn-1-n
+解答：[https://math.stackexchange.com/questions/239974/solve-the-recurrence-tn-2tn-1-n](https://math.stackexchange.com/questions/239974/solve-the-recurrence-tn-2tn-1-n)
 
 ##### 递推树辅助递推
 
@@ -26,11 +26,11 @@ keywords: 算法, 递归
 
 例 3：$$T(n) = 2T(n-1) + \log_{}n$$
 
-解答：https://cs.stackexchange.com/questions/57424/solving-tn-2tn-2-log-n-with-the-recurrence-tree-method?newreg=13ed0f2ed91f46d8b69559031a3a6cbf
+解答：[https://cs.stackexchange.com/questions/57424/solving-tn-2tn-2-log-n-with-the-recurrence-tree-method?newreg=13ed0f2ed91f46d8b69559031a3a6cbf](https://cs.stackexchange.com/questions/57424/solving-tn-2tn-2-log-n-with-the-recurrence-tree-method?newreg=13ed0f2ed91f46d8b69559031a3a6cbf)
 
 例 4：$$T(n) = T(n/3) + T(2n/3) + cn$$
 
-解答：https://math.stackexchange.com/questions/1112012/recursion-tree-tn-tn-3-t2n-3-cn
+解答：[https://math.stackexchange.com/questions/1112012/recursion-tree-tn-tn-3-t2n-3-cn](https://math.stackexchange.com/questions/1112012/recursion-tree-tn-tn-3-t2n-3-cn)
 
 #### 替换法
 
@@ -44,10 +44,10 @@ keywords: 算法, 递归
 
 例 5：$$a_n = a_{n - 1} + a_{n-2}$$
 
-解答：https://math.stackexchange.com/questions/371714/solving-recursive-sequence-using-generating-functions
+解答：[https://math.stackexchange.com/questions/371714/solving-recursive-sequence-using-generating-functions](https://math.stackexchange.com/questions/371714/solving-recursive-sequence-using-generating-functions)
 
 #### 特征方程法
 
 例 6：$$T(n) = T(n - 1) + T(n - 2)$$
 
-解答：https://math.stackexchange.com/questions/2292707/fibonacci-recurrence-relations
+解答：[https://math.stackexchange.com/questions/2292707/fibonacci-recurrence-relations](https://math.stackexchange.com/questions/2292707/fibonacci-recurrence-relations)
