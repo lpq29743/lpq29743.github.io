@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TensorFlow 训练技巧
-categories: DeepLearning
+categories: ArtificialIntelligence
 description: TensorFlow训练技巧
 keywords: TensorFlow, 深度学习, 深度学习框架, 神经网络
 ---

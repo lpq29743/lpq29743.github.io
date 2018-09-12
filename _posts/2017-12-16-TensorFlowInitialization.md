@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TensorFlow 参数初始化
-categories: DeepLearning
+categories: ArtificialIntelligence
 description: TensorFlow参数初始化
 keywords: TensorFlow, 深度学习, 深度学习框架, 神经网络
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TensorFlow 入门
-categories: DeepLearning
+categories: ArtificialIntelligence
 description: TensorFlow入门
 keywords: TensorFlow, 深度学习, 深度学习框架, 神经网络
 ---

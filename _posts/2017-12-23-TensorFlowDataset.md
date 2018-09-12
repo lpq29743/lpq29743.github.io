@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TensorFlow Dataset API
-categories: DeepLearning
+categories: ArtificialIntelligence
 description: TensorFlow Dataset API
 keywords: TensorFlow, 深度学习, 深度学习框架, 神经网络
 ---
