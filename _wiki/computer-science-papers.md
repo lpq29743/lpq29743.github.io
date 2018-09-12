@@ -34,6 +34,18 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Deep contextualized word representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp))
 
+#### 文本分类
+
+[Convolutional Neural Networks for Sentence Classification](http://www.aclweb.org/anthology/D14-1181) (Yoon Kim, EMNLP 2014, [code](https://github.com/brightmart/text_classification))
+
+[Recurrent Neural Network for Text Classification with Multi-Task Learning](https://www.ijcai.org/Proceedings/16/Papers/408.pdf) (Pengfei Liu, IJCAI 2016, [code](https://github.com/brightmart/text_classification))
+
+[Recurrent Convolutional Neural Networks for Text Classification](http://www.nlpr.ia.ac.cn/cip/~liukang/liukangPageFile/Recurrent%20Convolutional%20Neural%20Networks%20for%20Text%20Classification.pdf) (Siwei Lai, AAAI 2015, [code](https://github.com/brightmart/text_classification))
+
+[Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf) (Zichao Yang, NAACL 2016, [code](https://github.com/brightmart/text_classification))
+
+[Very Deep Convolutional Networks for Text Classification](http://cn.arxiv.org/pdf/1606.01781) (Alexis Conneau, EACL 2017, [code](https://github.com/zonetrooper32/VDCNN))
+
 #### 情感分析
 
 ##### 概述
