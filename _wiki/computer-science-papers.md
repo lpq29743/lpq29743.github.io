@@ -110,6 +110,26 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Transformation Networks for Target-Oriented Sentiment Classification](https://arxiv.org/pdf/1805.01086.pdf) (Xin Li, ACL 2018, [code](https://github.com/lixin4ever/TNet))
 
+#### 对话系统
+
+##### 对话管理
+
+[Machine Learning for Dialog State Tracking: A Review](https://ai.google/research/pubs/pub44018) (Matthew Henderson, 2015)
+
+[The Dialog State Tracking Challenge Series: A Review](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/williams2016dstc_overview-1.pdf) (Jason D. Williams  2016)
+
+[The Second Dialog State Tracking Challenge](http://www.aclweb.org/anthology/W14-4337) (Matthew Henderson, SIGDAIL 2014, [code](http://camdial.org/~mh521/dstc/))
+
+[A Network-based End-to-End Trainable Task-oriented Dialogue System](http://www.aclweb.org/anthology/E17-1042) (Tsung-Hsien Wen, EACL 2017)
+
+[Word-Based Dialog State Tracking with Recurrent Neural Networks](http://www.aclweb.org/anthology/W14-4340) (Matthew Henderson, SIGDAIL 2014)
+
+[Neural Belief Tracker: Data-Driven Dialogue State Tracking](http://aclweb.org/anthology/P17-1163) (Nikola Mrksic, ACL 2017)
+
+[Fully Statistical Neural Belief Tracking](http://aclweb.org/anthology/P18-2018) (Nikola Mrksic, ACL 2018, [code](https://github.com/nmrksic/neural-belief-tracker))
+
+[Global-Locally Self-Attentive Dialogue State Tracker](http://aclweb.org/anthology/P18-1135) (Victor Zhong, ACL 2018, [code](https://github.com/salesforce/glad))
+
 #### 问答系统与机器阅读理解
 
 [DuReader: a Chinese Machine Reading Comprehension Dataset from Real-world Applications](https://arxiv.org/pdf/1711.05073.pdf) (Wei He, 2017, [code](https://github.com/baidu/DuReader))
