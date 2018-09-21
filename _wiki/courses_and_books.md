@@ -1,3 +1,11 @@
+---
+layout: wiki
+title: Courses and Books
+categories: Blog
+description: 公开课和书籍
+keywords: 公开课, 书籍
+---
+
 #### Math
 
 ##### Calculus
