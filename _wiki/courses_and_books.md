@@ -33,6 +33,7 @@ keywords: 公开课, 书籍
 - [麻省理工学院公开课：概率论](https://www.bilibili.com/video/av6182731/?from=search&seid=18286084278241590299)
 
 ##### Convex Optimization
+- [Statistical machine learning and convex optimization(Francis Bach)](https://www.di.ens.fr/~fbach/fbach_mlss_2018.pdf)
 - [Convex Optimization(Stephen Boyd)](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
 - [斯坦福大学凸优化](https://www.bilibili.com/video/av8907218/?from=search&seid=5967878586775326355)
 
