@@ -86,6 +86,7 @@ keywords: 公开课, 书籍
 - [《1天搞懂深度学习》PPT(李宏毅)](https://www.slideshare.net/tw_dsconf/ss-62245351)
 - [李宏毅深度学习](https://www.bilibili.com/video/av9770302/)
 - [CS 20SI: Tensorflow for Deep Learning Research](https://www.bilibili.com/video/av9156347/?from=search&seid=6905181275544516403)
+- [李宏毅对抗生成网络](https://www.bilibili.com/video/av24011528?from=search&seid=11459671583323410876%5D)
 
 ##### Reinforcement Learning
 
