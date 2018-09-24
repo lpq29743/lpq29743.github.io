@@ -56,6 +56,14 @@ keywords: TensorFlow, 深度学习, 深度学习框架, 神经网络
 
 上面已经提及了一些关于梯度下降的优化。实际上近几年，也出现了很多灵活的优化算法，包括 AdaGrad、AdaDelta、RMSProp 以及 Adam 等等。
 
+先来看看 TensorFlow 中最简单的梯度下降优化器，其实现方式如下：
+
+```python
+tf.train.GradientDescentOptimizer(learning_rate=0.1)
+```
+
+梯度下降算法的改进版：随机梯度下降和批量随机梯度下降的使用也是直接调用这个算法。三个算法在 TensorFlow 中使用时的不同在于 batch size 的大小，第一个是全体数据集，第二个是 1，而最后一个则可以自定义。一般我们使用的是批量梯度下降算法，因为梯度下降算法容易陷入局部最优，而随机梯度下降则会频繁计算参数，使损失函数波动较大，而且计算量偏大。
+
 AdaGrad（adaptive gradient）允许 learning rate 基于参数进行调整，而无需人为调整。具体就是根据不常用的参数进行较大幅度的 learning rate 更新，根据常用的参数进行较小幅度的 learning rate 更新。TensorFlow 使用 AdaGrad 优化器的具体代码如下：
 
 ```python
