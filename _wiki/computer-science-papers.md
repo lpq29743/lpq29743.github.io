@@ -198,6 +198,24 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010)
 
+##### 样本不平衡
+
+[Learning from Imbalanced Data](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5128907) (Haibo He, 2009)
+
+[SMOTE: Synthetic Minority Over-sampling Technique](https://arxiv.org/pdf/1106.1813.pdf) (Nitesh V. Chawla, 2002, [code](https://github.com/scikit-learn-contrib/imbalanced-learn))
+
+[Borderline-SMOTE: A New Over-Sampling Method in Imbalanced Data Sets Learning](https://sci2s.ugr.es/keel/keel-dataset/pdfs/2005-Han-LNCS.pdf) (Hui Han, 2005)
+
+[Safe-Level-SMOTE: Safe-Level-Synthetic Minority Over-Sampling Technique for Handling the Class Imbalanced Problem](https://sci2s.ugr.es/keel/pdf/algorithm/congreso/2009-Bunkhumpornpat-LNCS.pdf) (Chumphol Bunkhumpornpat, 2009)
+
+[ADASYN: Adaptive Synthetic Sampling Approach for Imbalanced Learning](https://sci2s.ugr.es/keel/pdf/algorithm/congreso/2008-He-ieee.pdf) (Haibo He, 2008, [code](https://github.com/scikit-learn-contrib/imbalanced-learn))
+
+[kNN approach to unbalanced data distributions: A case study involving information extraction](http://www.site.uottawa.ca/~nat/Workshop2003/jzhang.pdf?attredirects=0) (Jianping Zhang, 2003, [code](http://www.site.uottawa.ca/~nat/Workshop2003/jzhang.pdf?attredirects=0))
+
+[A Study of the Behavior of Several Methods for Balancing Machine Learning Training Data](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.58.7757&rep=rep1&type=pdf) (Ronaldo C. Prati, 2004, [code](https://github.com/scikit-learn-contrib/imbalanced-learn))
+
+[Balancing Training Data for Automated Annotation of Keywords: a Case Study](https://pdfs.semanticscholar.org/c1a9/5197e15fa99f55cd0cb2ee14d2f02699a919.pdf) (Gustavo E. A. P. A. Batista, 2003, [code](https://github.com/scikit-learn-contrib/imbalanced-learn))
+
 ### 深度学习
 
 #### 模型
