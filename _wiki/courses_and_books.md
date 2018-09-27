@@ -45,8 +45,11 @@ keywords: 公开课, 书籍
 ##### Algorithms and Data Structures
 
 - [Introduction to Algorithms(Thomas H.Cormen)](https://book.douban.com/subject/1885170/)
+- [Algorithms 4th edition(Robert Sedgewick)](https://book.douban.com/subject/19952400/)
 - [Princeton University: Algorithms, Part I](https://www.coursera.org/learn/algorithms-part1)
 - [Princeton University: Algorithms, Part II](https://www.coursera.org/learn/algorithms-part2)
+- [MIT Introduction to Algorithms 6.006](https://www.bilibili.com/video/av29062909?from=search&seid=16881004743381117666) ([note](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/lecture-notes/))
+- [MIT Design and Analysis of Algorithms 6.046J](https://www.bilibili.com/video/av13140897) (note)
 
 ##### Principles of Computer Composition
 - [Computer Systems: A Programmer's Perspective(Randal E.Bryant / David O'Hallaron)](https://book.douban.com/subject/5333562/)
