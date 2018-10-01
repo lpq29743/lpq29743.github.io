@@ -222,8 +222,6 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Learning representations by back-propagating errors](http://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf) (David E. Rumelhart, 1986)
 
-[Backpropagation applied to handwritten zip code recognition](https://www.ics.uci.edu/~welling/teaching/273ASpring09/lecun-89e.pdf) (Yann LeCun, 1989)
-
 [Long short-term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
 
 [A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf) (Zachary C. Lipton, 2015)
@@ -245,6 +243,26 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Gated End-to-End Memory Networks](http://www.aclweb.org/anthology/E/E17/E17-1001.pdf) (Fei Liu, 2016)
 
 [Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention))
+
+##### 卷积神经网络
+
+[Backpropagation applied to handwritten zip code recognition](https://www.ics.uci.edu/~welling/teaching/273ASpring09/lecun-89e.pdf) (Yann LeCun, 1989)
+
+[GradientBased Learning Applied to Document Recognition](http://vision.stanford.edu/cs598_spring07/papers/Lecun98.pdf) (Yann LeCun, 1998)
+
+[Notes on Convolutional Neural Networks](http://202.116.81.74/cache/7/03/cogprints.org/036a03bc6027afc65c14907d0a1fae73/cnn_tutorial.pdf) (Jake Bouvrie, 2006)
+
+[ImageNet Classification with Deep Convolutional Neural Networks](https://www.nvidia.cn/content/tesla/pdf/machine-learning/imagenet-classification-with-deep-convolutional-nn.pdf) (Alex Krizhevsky, 2012)
+
+[Visualizing and Understanding Convolutional Networks](https://cs.nyu.edu/~fergus/papers/zeilerECCV2014.pdf) (Matthew D. Zeiler and Rob Fergus, 2014)
+
+[Going Deeper with Convolutions](https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf) (Christian Szegedy, CVPR 2015)
+
+[Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/pdf/1409.1556.pdf) (Karen Simonyan, ICLR 2015)
+
+[Deep Residual Learning for Image Recognition](https://x-algo.cn/wp-content/uploads/2016/12/residual.pdf) (Kaiming He, 2015)
+
+[Densely Connected Convolutional Networks](http://www.cs.cmu.edu/~jeanoh/16-785/papers/huang-cvpr2017-densenet.pdf) (Gao Huang, CVPR 2017)
 
 ##### 生成对抗网络
 
