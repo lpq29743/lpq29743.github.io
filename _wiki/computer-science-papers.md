@@ -186,6 +186,24 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Variational Reasoning for Question Answering with Knowledge Graph](https://arxiv.org/pdf/1709.04071.pdf) (Yuyu Zhang, AAAI 2018)
 
+#### 指代消解
+
+[Identification and Resolution of Chinese Zero Pronouns: A Machine Learning Approach](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=F05E1DD4B64B0771E279426984E7CDD1?doi=10.1.1.65.1935&rep=rep1&type=pdf) (Shanheng Zhao and Hwee Tou Ng, EMNLP 2007)
+
+[Chinese zero pronoun resolution: A joint unsupervised discourse-aware model rivaling state-of-the-art resolvers](http://www.aclweb.org/anthology/P15-2053) (Chen Chen and Vincent Ng, ACL 2015)
+
+[Chinese zero pronoun resolution with deep neural networks](http://www.aclweb.org/anthology/P16-1074) (Chen Chen and Vincent Ng, ACL 2016)
+
+[Chinese zero pronoun resolution with deep memory network](http://aclweb.org/anthology/D17-1135) (Qingyu Yin, EMNLP 2017)
+
+[A deep neural network for chinese zero pronoun resolution](https://arxiv.org/pdf/1604.05800.pdf) (Qingyu Yin, IJCAI 2017)
+
+[Generating and exploiting large-scale pseudo training data for zero pronoun resolution](https://arxiv.org/pdf/1606.01603.pdf) (Ting Liu, ACL 2017)
+
+[Deep Reinforcement Learning for Chinese Zero pronoun Resolution](http://aclweb.org/anthology/P18-1053) (Qingyu Yin, ACL 2018, [code](https://github.com/qyyin/Reinforce4ZP))
+
+[Zero Pronoun Resolution with Attention-based Neural Network](http://aclweb.org/anthology/C18-1002) (Qingyu Yin, COLING 2018, [code](https://github.com/qyyin/AttentionZP))
+
 ### 机器学习
 
 #### 模型
