@@ -102,7 +102,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [A Hierarchical Model of Reviews for Aspect-based Sentiment Analysis](http://www.aclweb.org/anthology/D16-1103) (Sebastian Ruder, EMNLP 2016)
 
-[Interactive Attention Networks for Aspect-Level Sentiment Classification](http://static.ijcai.org/proceedings-2017/0568.pdf) (Dehong Ma, IJCAI 2017, [code](https://github.com/lpq29743/IAN), [note](https://zhuanlan.zhihu.com/p/34041012))
+[Interactive Attention Networks for Aspect-Level Sentiment Classification](http://cn.arxiv.org/pdf/1709.00893) (Dehong Ma, IJCAI 2017, [code](https://github.com/lpq29743/IAN), [note](https://zhuanlan.zhihu.com/p/34041012))
 
 [Recurrent Attention Network on Memory for Aspect Sentiment Analysis](http://www.aclweb.org/anthology/D17-1047) (Peng Chen, EMNLP 2017, [code](https://github.com/lpq29743/RAM), [note](https://zhuanlan.zhihu.com/p/34043504))
 
@@ -203,6 +203,26 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Deep Reinforcement Learning for Chinese Zero pronoun Resolution](http://aclweb.org/anthology/P18-1053) (Qingyu Yin, ACL 2018, [code](https://github.com/qyyin/Reinforce4ZP))
 
 [Zero Pronoun Resolution with Attention-based Neural Network](http://aclweb.org/anthology/C18-1002) (Qingyu Yin, COLING 2018, [code](https://github.com/qyyin/AttentionZP))
+
+### 计算机视觉
+
+#### 目标检测
+
+[Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/pdf/1311.2524.pdf) (Ross Girshick, CVPR 2014, [code](https://github.com/rbgirshick/rcnn))
+
+[Fast Region-based Convolutional Networks for object detection](https://arxiv.org/pdf/1504.08083.pdf) (Ross Girshick, ICCV 2015, [code](https://github.com/rbgirshick/fast-rcnn))
+
+[Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/pdf/1506.01497.pdf) (Shaoqing Ren, NIPS 2015, [code](https://github.com/rbgirshick/py-faster-rcnn))
+
+[R-FCN: Object Detection via Region-based Fully Convolutional Networks](https://arxiv.org/pdf/1605.06409.pdf) (Jifeng Dai, NIPS 2016, [code](https://github.com/daijifeng001/R-FCN))
+
+[You Only Look Once: Unified, Real-Time Object Detection](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Redmon_You_Only_Look_CVPR_2016_paper.pdf) (Joseph Redmon, CVPR 2016, [code](https://github.com/gliese581gg/YOLO_tensorflow))
+
+[YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf) (Joseph Redmon, 2016, [code](https://github.com/experiencor/keras-yolo2))
+
+[YOLOv3: An Incremental Improvement](https://pjreddie.com/media/files/papers/YOLOv3.pdf) (Joseph Redmon, 2018, [code](https://github.com/qqwweee/keras-yolo3))
+
+[SSD: Single Shot MultiBox Detector](http://www.cs.unc.edu/~cyfu/pubs/ssd.pdf) (Wei Liu, ECCV 2016, [code](https://github.com/balancap/SSD-Tensorflow))
 
 ### 机器学习
 
