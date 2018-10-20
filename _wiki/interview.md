@@ -6,7 +6,7 @@ description: 面试题
 keywords: 面试题
 ---
 
-### Knowledge
+### Question
 
 #### Math
 
@@ -155,6 +155,8 @@ A3.Following are the methods of variable selection you can use:
 Q4.逻辑回归为什么不能用均方误差计算损失函数
 
 A4.非凸
+
+### Stack
 
 ### Idea
 
