@@ -158,9 +158,52 @@ A4.非凸
 
 ### Stack
 
+#### Machine Learning
+
+##### Emsemble Learning
+
+- Boosting
+- Bagging
+- Random Forest
+- GBDT
+- XGBoost
+
+#### Deep Learning
+
+- MLP
+- CNN
+- LSTM
+- GRU
+- Attention Mechanism
+- Memory Network
+- GAN
+- VAE
+
+#### Natural Language Processing
+
+##### Feature Engineering
+
+- Bag of Words
+- Bag of N-Grams
+- TF-IDF
+- TextRank
+- LDA
+- Word2Vec
+- Doc2Vec
+
+##### Named Entity Cognition
+
+- HMM
+- CRF
+- Viterbi Algorithm
+
 ### Idea
 
 Q1.告诉我一个你曾经做过的产品，大脑中设想过的也可以
+
+Q2.熟悉哪个算法
+
+Q3.哪门课学的比较好
 
 ### Ask Back
 
