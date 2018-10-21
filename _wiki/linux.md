@@ -6,108 +6,178 @@ description: Linux
 keywords: Linux, Linux命令
 ---
 
-### 1 ls 命令
+### ls
 
-### 2 cd 命令
+### cd
 
-### 3 pwd 命令
+### pwd
 
-### 4 mkdir 命令
+### mkdir
 
-### 5 rm 命令
+### rm
 
-### 6 rmdir 命令
+### rmdir
 
-### 7 mv 命令
+### mv
 
-### 8 cp 命令
+### cp
 
-### 9 touch 命令
+### touch
 
-### 10 cat 命令
+### cat
 
-### 11 nl 命令
+```bash
+# 显示文件内容
+cat test.txt
+# 显示多个文件内容
+cat test1.txt test2.txt
+# 倒序显示文件内容
+tac text.txt
+# 无论是否有空行，都输出行号，相当于 nl -b a test.txt
+cat -n test.txt
+# 对空行不编号
+cat -b test.txt
+# 出现多个空白行时，替代为一行的空白行
+cat -s test.txt
+# 将 test1.txt 文件覆盖到 test2.txt 文件中，相当于复制
+cat test1.txt > test2.txt
+# 合并文件
+cat test1.txt test2.txt > test.txt
+# 将 test1.txt 文件加上行号追加到 test2.txt 文件末尾
+cat -n test1.txt >> test2.txt
+# 创建文件 test.txt，并输入文件内容
+cat > test.txt
+```
 
-### 12 more 命令
+### nl
 
-### 13 less 命令
+```bash
+# 输出带有行号的文本内容
+nl test.txt
+```
 
-### 14 head 命令
+### more
 
-### 15 tail 命令
+```bash
+# 逐页显示文本内容，空格键显示下一页，回车键显示下一行，q 退出
+more test.txt
+# 逐页显示文本内容，多个空白行用一个空白行显示
+more -s test.txt
+# 从第 20 行开始显示内容
+more +20 test.txt
+```
 
-### 16 which 命令
+### less
 
-### 17 whereis 命令
+```bash
+# 逐页显示文本内容，空格键显示下一页，b 展示上一页，回车键显示下一行，q 退出
+less test.txt
+# 查看进程信息并用 less 分页显示
+ps -ef | less
+```
 
-### 18 locate 命令
+### head
 
-### 19 find 命令
+```bash
+# 显示文本开头内容，默认为 10 行
+head test.txt
+# 显示文本的前 20 行
+head -n 20 test.txt
+# 显示文本的前 20 个字节
+head -c 20 test.txt
+# 显示除了后 20 行的文本内容
+head -n -20 test.txt
+# 显示除了后 20 个字节的文本内容
+head -c -20 test.txt
+```
 
-### 20 chmod 命令
+### tail
 
-### 21 tar 命令
+```bash
+# 显示文本结尾内容，默认为 10 行
+tail test.txt
+# 持续监测文本结尾内容
+tail -f test.txt
+# 显示文本的后 20 行
+tail -n 20 test.txt
+# 从第 20 行开始显示文本内容
+tail -n +20 test.txt
+# 显示前 20 行，但从第 11 行开始
+head -n 20 test.txt | tail -n +11
+```
 
-### 22 chgrp 命令
+### which
 
-### 23 chown 命令
+### whereis
 
-### 24 gzip 命令
+### locate
 
-### 25 df 命令
+### find
 
-### 26 du 命令
+### chmod
 
-### 27 ln 命令
+### tar
 
-### 28 diff 命令
+### chgrp
 
-### 29 date 命令
+### chown
 
-### 30 cal 命令
+### gzip
 
-### 31 grep 命令
+### df
 
-### 32 wc 命令
+### du
 
-### 33 ps 命令
+### ln
 
-### 34 kill 命令
+### diff
 
-### 35 killall 命令
+### date
 
-### 36 top 命令
+### cal
 
-### 37 free 命令
+### grep
 
-### 38 vmstat 命令
+### wc
 
-### 39 iostat 命令
+### ps
 
-### 40 watch 命令
+### kill
 
-### 41 at 命令
+### killall
 
-### 42 crontab 命令
+### top
 
-### 43 lsof 命令
+### free
 
-### 44 ifconfig 命令
+### vmstat
 
-### 45 route 命令
+### iostat
 
-### 46 ping 命令
+### watch
 
-### 47 traceroute 命令
+### at
 
-### 48 netstat 命令
+### crontab
 
-### 49 ss 命令
+### lsof
 
-### 50 telnet 命令
+### ifconfig
 
-### 51 rcp 命令
+### route
 
-### 52 scp 命令
+### ping
 
-### 53 wget 命令
+### traceroute
+
+### netstat
+
+### ss
+
+### telnet
+
+### rcp
+
+### scp
+
+### wget
