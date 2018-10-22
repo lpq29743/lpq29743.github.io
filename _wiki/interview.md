@@ -210,6 +210,7 @@ A4.非凸
 ##### Dimension Reducing
 
 - PCA
+- SVD
 
 ##### Emsemble Learning
 
