@@ -110,6 +110,19 @@ normal_rv = 30 * np.mean(2 * np.random.uniform(size=300) - 1)
 
 具体步骤是先产生 300 个 (-1, 1) 随机变量，它们的均值的标准差是 1 / 30，要得到标准正态分布，所以要乘以 30。
 
+Q7.假设一段公路上，1小时内有汽车经过的概率为96%，那么，30分钟内有汽车经过的概率为
+
+A7.一小时有车的概率 = 1 - 一小时没车的概率 = 1 - 两个半小时都没车的概率 = 1 - (1 - 半小时有车的概率)^2
+
+#### Algorithm
+
+Q1.有10个排好序的数据库，那么我要找整个的中位数，怎么找
+
+A1.最简单的思路是合并数据库，然后再定位长度，时间复杂度为 O(n)，空间复杂度是 O(n)；但实际上只需要借鉴这个合并的过程，当合并到中位数的时候输出中位数即可，时间复杂度为 O(n)，空间复杂度是 O(1)。这思路十分简单，但并不是最佳算法，有序数组让我们想到的会是二分查找，因此我们可以利用二分查找来使复杂度降至 O(logn)，具体可参考：
+
+1. https://www.douban.com/note/177571938/
+2. https://stackoverflow.com/questions/6182488/median-of-5-sorted-arrays
+
 #### Operating Systems
 
 Q1.为什么要用时间复杂度来描述算法，而不是运行时间
@@ -158,7 +171,45 @@ A4.非凸
 
 ### Stack
 
+#### Algorithm
+
+- 字符串
+- 数组
+- 树
+- 查找
+- 动态规划
+- [海量数据处理](https://lpq29743.github.io/redant/algorithm/2017/02/20/MassiveData/)
+
 #### Machine Learning
+
+##### Regression
+
+- Least Squares
+- Linear Regression
+- Logistic Regression
+- Ridge Regression
+- Lasso Regression
+
+##### Classification
+
+- kNN
+- Naive Bayes
+- [SVM](https://lpq29743.github.io/redant/artificialintelligence/2018/09/12/SVM/)
+
+##### Clustering
+
+- K-Means
+- EM
+
+##### Decision Tree
+
+- CART
+- ID3
+- C4.5
+
+##### Dimension Reducing
+
+- PCA
 
 ##### Emsemble Learning
 
@@ -170,7 +221,9 @@ A4.非凸
 
 #### Deep Learning
 
+- BP
 - MLP
+- RBM
 - CNN
 - LSTM
 - GRU
