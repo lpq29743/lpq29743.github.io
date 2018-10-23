@@ -55,6 +55,18 @@ A7.这是一道非常经典的面试题，我们用两种方法来解决：
 1. 分析法：对于每一次扔鸡蛋，都可以看作是一次决策，所以最终扔的方案应该是构成一棵决策树，问题就可以转换成求最矮决策树的高度。假设第一次扔的楼层是第k层楼，则碎子树的高度为k-1，如果第一次扔鸡蛋没碎，则设第二次扔的高度为m，则对于m来讲，其碎子树高度为m-k-1，相对根节点高度则为m-k。由于要尽可能保证子树的高度一致，所以得m-k=k-1，故可得第二次扔的高度要比前一次高k-1层。从而得到方程k(k+1)/2 = 200，从而解得高度为14
 2. 动态规划法：这道题是很经典的动态规划问题，设楼层次数为n，我们可以得到状态转移方程`f(n) = min(max(k-1, f(n - k))) + 1 (0 < k <= n)`，如果我们再加入鸡蛋数目变量m，则状态转移方程为`f(n, m) = min(max(f(k - 1, m - 1), f(n - k, m))) + 1 (0 < k <= n)`
 
+Q8.海盗博弈
+
+A8.[链接1](https://www.zhihu.com/question/20014343)、[链接2](https://zhuanlan.zhihu.com/p/27388049)、[链接3](https://www.zhihu.com/question/47973941)
+
+Q9.五个囚犯先后从100颗绿豆中抓绿豆。抓得最多和最少的人将被处死，不能交流，可以摸出剩下绿豆的数量，谁的存活几率最大？
+
+A9.[链接](https://www.zhihu.com/question/19912025)
+
+Q10.三个极度嫉妒的人分一个蛋糕，采用什么策略，能让三人都觉得公平？
+
+A10.[链接](https://www.zhihu.com/question/20615717)
+
 ##### Probability Theory and Mathematical Statistics
 
 Q1.为什么样本方差（sample variance）的分母是 n-1？
@@ -114,6 +126,10 @@ Q7.假设一段公路上，1小时内有汽车经过的概率为96%，那么，3
 
 A7.一小时有车的概率 = 1 - 一小时没车的概率 = 1 - 两个半小时都没车的概率 = 1 - (1 - 半小时有车的概率)^2
 
+Q8.一枚不均匀硬币，抛了100次，有70次朝上，第101次朝上的概率是多少，公式是如何推导
+
+A8.7/10。二项分布的极大似然估计，可参考[此链接](https://www.zhihu.com/question/24124998)。
+
 #### Algorithm
 
 Q1.有10个排好序的数据库，那么我要找整个的中位数，怎么找
@@ -123,11 +139,21 @@ A1.最简单的思路是合并数据库，然后再定位长度，时间复杂�
 1. https://www.douban.com/note/177571938/
 2. https://stackoverflow.com/questions/6182488/median-of-5-sorted-arrays
 
+Q2.无序整数数组中找第 k 大的数
+
+A2.[链接](https://blog.csdn.net/wangbaochu/article/details/52949443)
+
 #### Operating Systems
 
 Q1.为什么要用时间复杂度来描述算法，而不是运行时间
 
 A1.操作系统调度，所以运行时间不一定相同
+
+#### Database Systems
+
+Q1.count(1)、count(*) 和 count(列名)的区别
+
+A1.[链接](https://blog.csdn.net/qq_15037231/article/details/80495882)
 
 #### Machine Learning
 
@@ -168,6 +194,10 @@ A3.Following are the methods of variable selection you can use:
 Q4.逻辑回归为什么不能用均方误差计算损失函数
 
 A4.非凸
+
+Q5.K-means 中我想聚成100类 结果发现只能聚成98类，为什么
+
+A5.因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn.net/shwan_ma/article/details/80096408)
 
 ### Stack
 
@@ -251,13 +281,15 @@ A4.非凸
 - CRF
 - Viterbi Algorithm
 
-### Idea
+### Subjective Question
 
 Q1.告诉我一个你曾经做过的产品，大脑中设想过的也可以
 
 Q2.熟悉哪个算法
 
 Q3.哪门课学的比较好
+
+Q4.你的优缺点
 
 ### Ask Back
 
