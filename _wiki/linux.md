@@ -139,6 +139,45 @@ head -n 20 test.txt | tail -n +11
 
 ### find
 
+```bash
+# 列出当前目录及其子目录下的所有文件和文件夹
+find .
+# 删除当前目录及其子目录下的所有文件和文件夹
+find . -delete
+# 在当前目录及其子目录下查找（按文件名）
+find . -name test.txt
+# 在 /home 目录及其子目录下查找（按文件名）
+find /home -name test.txt
+# 在当前目录及其子目录下查找（按文件名后缀）
+find . -name *.txt
+# 在当前目录及其子目录下查找（按文件名，忽略大小写）
+find . -iname test.txt
+# 在当前目录及其子目录下查找（按正则文件名）
+find . -regex .*\(\.txt\|\.pdf\)$
+# 在当前目录及其子目录下查找（按正则文件名，忽略大小写）
+find . -iregex .*\(\.txt\|\.pdf\)$
+# 列出当前目录及其子目录下的所有文件
+find . -type f
+# 列出当前目录及其子目录下的所有文件夹
+find . -type d
+# 在当前目录及其子目录下查找（按权限）
+find . -perm 777
+# 在当前目录及其子目录下查找（按文件所属的用户）
+find . -user xiaoming
+# 在当前目录及其子目录下查找（按文件所属的组）
+find . -group china
+# 在当前目录及其子目录下查找（最近 20 天内更新）
+find . -mtime -20
+# 在当前目录及其子目录下查找（20 天以前更新）
+find . -mtime +20
+# 在当前目录及其子目录下查找（按大小，刚好 50M）
+find . -size 50M
+# 在当前目录及其子目录下查找（按大小，从 50M 到 100M）
+find . -size +50M -size -100M
+# 在当前目录及其子目录下查找（按目录深度）
+find . -maxdepth 3
+```
+
 ### chmod
 
 ### tar
