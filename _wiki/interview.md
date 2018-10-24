@@ -143,6 +143,10 @@ Q2.无序整数数组中找第 k 大的数
 
 A2.[链接](https://blog.csdn.net/wangbaochu/article/details/52949443)
 
+Q3.不用库函数求一个数的立方根
+
+A3.[链接](https://blog.csdn.net/sjpz0124/article/details/47726275)
+
 #### Operating Systems
 
 Q1.为什么要用时间复杂度来描述算法，而不是运行时间
@@ -154,6 +158,10 @@ A1.操作系统调度，所以运行时间不一定相同
 Q1.count(1)、count(*) 和 count(列名)的区别
 
 A1.[链接](https://blog.csdn.net/qq_15037231/article/details/80495882)
+
+Q2.数据库三范式
+
+A2.[链接](https://www.zhihu.com/question/24696366)
 
 #### Machine Learning
 
