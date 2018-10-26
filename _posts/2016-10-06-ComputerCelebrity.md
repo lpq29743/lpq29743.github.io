@@ -72,25 +72,33 @@ keywords: IT大神, IT大牛, 计算机大牛, 计算机大神
 
 [Larry Ellision 拉里·埃里森](https://zh.wikipedia.org/wiki/%E6%8B%89%E9%87%8C%C2%B7%E5%9F%83%E9%87%8C%E6%A3%AE)（Oracle创始人）
 
-[Elon Musk 伊隆·马斯克](https://zh.wikipedia.org/wiki/%E4%BC%8A%E9%9A%86%C2%B7%E9%A9%AC%E6%96%AF%E5%85%8B)（SpaceX创办人，特斯拉汽车和PayPal的联合创办人）
+[Elon Musk 伊隆·马斯克](https://zh.wikipedia.org/wiki/%E4%BC%8A%E9%9A%86%C2%B7%E9%A9%AC%E6%96%AF%E5%85%8B)（SpaceX 创办人，特斯拉汽车和 PayPal 的联合创办人）
 
-[Guido van Rossum 吉多·范罗苏姆](https://zh.wikipedia.org/wiki/%E5%90%89%E5%A4%9A%C2%B7%E8%8C%83%E7%BD%97%E8%8B%8F%E5%A7%86)（python作者）
+[Guido van Rossum 吉多·范罗苏姆](https://zh.wikipedia.org/wiki/%E5%90%89%E5%A4%9A%C2%B7%E8%8C%83%E7%BD%97%E8%8B%8F%E5%A7%86)（python 作者）
 
 [Kevin Mitnick 凯文·米特尼克](https://zh.wikipedia.org/wiki/%E5%87%AF%E6%96%87%C2%B7%E7%B1%B3%E7%89%B9%E5%B0%BC%E5%85%8B)（头号电脑黑客）
 
-[Aaron Swartz 亚伦·斯沃茨](https://zh.wikipedia.org/wiki/%E4%BA%9A%E4%BC%A6%C2%B7%E6%96%AF%E6%B2%83%E8%8C%A8)（Reddit联合创始人，web.py的设计者，年仅26岁）
+[Aaron Swartz 亚伦·斯沃茨](https://zh.wikipedia.org/wiki/%E4%BA%9A%E4%BC%A6%C2%B7%E6%96%AF%E6%B2%83%E8%8C%A8)（Reddit 联合创始人，web.py 的设计者，年仅26岁）
 
-[John Gruber 约翰·格鲁伯](https://zh.wikipedia.org/wiki/%E7%B4%84%E7%BF%B0%C2%B7%E6%A0%BC%E9%AD%AF%E4%BC%AF)（Markdown作者）
+[John Gruber 约翰·格鲁伯](https://zh.wikipedia.org/wiki/%E7%B4%84%E7%BF%B0%C2%B7%E6%A0%BC%E9%AD%AF%E4%BC%AF)（Markdown 作者）
 
-[George Hotz 乔治·霍兹](https://zh.wikipedia.org/wiki/%E4%B9%94%E6%B2%BB%C2%B7%E9%9C%8D%E5%85%B9)（解锁iPhone）
+[George Hotz 乔治·霍兹](https://zh.wikipedia.org/wiki/%E4%B9%94%E6%B2%BB%C2%B7%E9%9C%8D%E5%85%B9)（解锁 iPhone）
 
 [Michael I. Jordan 迈克尔·I.乔丹](https://zh.wikipedia.org/wiki/%E8%BF%88%E5%85%8B%E5%B0%94%C2%B7%E4%B9%94%E4%B8%B9_(%E5%AD%A6%E8%80%85))（吴恩达老师，曾提出隐含狄利克雷分布）
 
+[Geoffrey Hinton 杰弗里·辛顿](http://www.cs.toronto.edu/~hinton/)（Yann LeCun 老师，反向传播算法作者）
+
+[Yann LeCun 扬·勒丘恩](http://yann.lecun.com/)（CNN 作者）
+
 [Christopher Manning 克里斯·曼宁](https://nlp.stanford.edu/manning/)（斯坦福大学自然语言处理专家）
+
+[Ian Goodfellow 伊恩·古德费洛](https://ai.google/research/people/105214)（GAN 作者）
+
+[Kaiming He](http://kaiminghe.com/)（Mask R-CNN 作者）
 
 **华人篇**
 
-[姚期智](https://zh.wikipedia.org/wiki/%E5%A7%9A%E6%9C%9F%E6%99%BA)（2000年图灵奖得主，是目前唯一一位获得此奖项的华人）
+[姚期智](https://zh.wikipedia.org/wiki/%E5%A7%9A%E6%9C%9F%E6%99%BA)（2000 年图灵奖得主，是目前唯一一位获得此奖项的华人）
 
 [马云](https://zh.wikipedia.org/wiki/%E9%A9%AC%E4%BA%91)（阿里巴巴集团创始人）
 
@@ -123,6 +131,8 @@ keywords: IT大神, IT大牛, 计算机大牛, 计算机大神
 [杨强](https://zh.wikipedia.org/wiki/%E6%9D%A8%E5%BC%BA)（香港科技大学教授，首位 AAAI 华人院士）
 
 [吴恩达](https://zh.wikipedia.org/wiki/%E5%90%B4%E6%81%A9%E8%BE%BE)（斯坦福大学副教授，前百度首席科学家）
+
+[李飞飞](https://zh.wikipedia.org/wiki/%E6%9D%8E%E9%A3%9B%E9%A3%9B)（斯坦福大学副教授，ImageNet 组织者）
 
 [李航](https://baike.baidu.com/item/%E6%9D%8E%E8%88%AA/266587?fr=aladdin)（华为诺亚方舟实验室原主任，著有《统计学习方法》一书）
 

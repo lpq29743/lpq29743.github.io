@@ -39,8 +39,13 @@ keywords: 数学大神, 数学大牛
 
 [Joseph-Louis Lagrange 约瑟夫·拉格朗日](https://zh.wikipedia.org/wiki/%E7%BA%A6%E7%91%9F%E5%A4%AB%C2%B7%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5)（法国，提出拉格朗日中值定理等）
 
-
 [Pierre de Fermat 皮埃尔·德·费马](https://zh.wikipedia.org/wiki/%E7%9A%AE%E5%9F%83%E7%88%BE%C2%B7%E5%BE%B7%C2%B7%E8%B2%BB%E9%A6%AC)（法国，“业余数学家之王”，提出费马大定理）
+
+[Pierre-Simon Laplace 皮埃尔-西蒙·拉普拉斯](https://zh.wikipedia.org/wiki/%E7%9A%AE%E5%9F%83%E5%B0%94-%E8%A5%BF%E8%92%99%C2%B7%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF)（法国，提出拉普拉斯变换和拉普拉斯方程）
+
+[Siméon Denis Poisson 西莫恩·德尼·泊松](https://zh.wikipedia.org/wiki/%E8%A5%BF%E8%8E%AB%E6%81%A9%C2%B7%E5%BE%B7%E5%B0%BC%C2%B7%E6%B3%8A%E6%9D%BE)（法国，博士生导师为拉格朗日和拉普拉斯，提出泊松过程、泊松方程和泊松分布）
+
+[Jean Baptiste Joseph Fourier 让·巴普蒂斯·约瑟夫·傅里叶](https://zh.wikipedia.org/wiki/%E7%BA%A6%E7%91%9F%E5%A4%AB%C2%B7%E5%82%85%E9%87%8C%E5%8F%B6)（法国，提出傅里叶技术和傅里叶变换）
 
 [Leonhard Euler 莱昂哈德·欧拉](https://zh.wikipedia.org/wiki/%E8%90%8A%E6%98%82%E5%93%88%E5%BE%B7%C2%B7%E6%AD%90%E6%8B%89)（瑞士，创立函数符号，解决了柯尼斯堡七桥问题，给出各种欧拉公式）
 
