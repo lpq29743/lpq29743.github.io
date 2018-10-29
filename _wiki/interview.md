@@ -212,7 +212,9 @@ A5.因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn
 #### Algorithm
 
 - 字符串
+  - [KMP 算法](https://www.zhihu.com/question/21923021)
 - 数组
+  - [链表](http://wuchong.me/blog/2014/03/25/interview-link-questions/)
 - 树
 - 查找
 - 动态规划
@@ -236,7 +238,13 @@ A5.因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn
 
 ##### Clustering
 
-- K-Means
+- Hierarchical Methods
+  - BIRCH
+  - CHAMELEON
+- Partitioning Methods
+  - K-Means
+- Density-based Methods
+  - DBSCAN
 - EM
 
 ##### Decision Tree

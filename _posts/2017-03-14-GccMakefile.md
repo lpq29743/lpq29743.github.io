@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 一起来学 GCC 与 Makefile
-categories: C
+categories: C/C++
 description: 一起来学GCC与Makefile
 keywords: C, GCC, Makefile, Linux C
 ---
