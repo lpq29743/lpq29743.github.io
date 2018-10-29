@@ -281,6 +281,27 @@ int main() {
 }
 ```
 
+#### multiset
+
+```c++
+#include <iostream>
+#include <multiset>
+using namespace std;
+
+int main() {
+    // 创建一个 multiset 容器
+    multiset<int> m;
+    m.insert(1);
+    m.insert(2);
+    // 删除元素
+    m.erase(1);
+    // 遍历 multiset
+    for(multiset<int>::iterator i = m.begin(); i != m.end(); i++) {
+        cout << *i << endl;
+    }
+}
+```
+
 #### map
 
 ```c++
@@ -336,6 +357,29 @@ int main() {
         m.insert(move(b));
     }
     print(m);
+}
+```
+
+#### multimap
+
+```c++
+#include <iostream>
+#include <multimap>
+#include <string>
+using namespace std;
+
+int main() {
+    // 创建一个 multimap 容器
+    multimap<string, int> m;
+    // 插入一个键为 Xiaoming，值为 16 的键值对；也可以用来修改值
+    m["Xiaoming"] = 16;
+    m["Dahong"] = 15;
+    // 输出值
+    cout << m["Xiaoming"] << endl;
+    // 遍历 multimap
+    for(multimap<string, int>::iterator i = m.begin(); i != m.end(); i++) {
+        cout << i->first << " " << i->second << endl;
+    }
 }
 ```
 
