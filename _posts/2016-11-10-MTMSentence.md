@@ -78,3 +78,9 @@ keywords: 名言佳句, 台词, 电影台词, 电视剧台词, 歌词
   事实就是如此悲哀，不是所有人都能功成名就，我们中有些人注定要在日常生活的点滴中寻找生命的意义。
 
   ——《生活大爆炸》
+
+- Welcome to the real world. It sucks.
+
+  You’re gonna love it!
+
+  ——《老友记》
