@@ -156,6 +156,14 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 #### 知识图谱
 
+##### 知识库
+
+[DBpedia: A Nucleus for a Web of Open Data](https://cis.upenn.edu/~zives/research/dbpedia.pdf) (Soren Auer, 2007, [code](https://wiki.dbpedia.org/))
+
+[Freebase: A Collaboratively Created Graph Database For Structuring Human Knowledge](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.538.7139&rep=rep1&type=pdf) (Kurt Bollacker, 2008, [code](https://developers.google.com/freebase/))
+
+[CN-DBpedia: A Never-Ending Chinese Knowledge Extraction System](https://link.springer.com/chapter/10.1007/978-3-319-60045-1_44) (Bo Xu, IEA-AIE 2017, [code](http://openkg.cn/dataset/cndbpedia))
+
 ##### 知识图谱表示和补全
 
 [Translating Embeddings for Modeling Multi-relational Data](https://www.utc.fr/~bordesan/dokuwiki/_media/en/transe_nips13.pdf) (Antoine Bordes, NIPS 2013, [code](https://github.com/thunlp/KB2E))
@@ -310,11 +318,15 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Generative Adversarial Nets](https://arxiv.org/pdf/1406.2661.pdf) (Ian Goodfellow, 2014)
 
+[NIPS 2016 Tutorial: Generative Adversarial Networks](https://arxiv.org/pdf/1701.00160.pdf) (Ian Goodfellow, NIPS 2016)
+
 [Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/pdf/1611.07004.pdf) (Phillip Isola, CVPR 2017, [code](https://github.com/phillipi/pix2pix))
 
 [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/pdf/1703.10593.pdf) (Jun-Yan Zhu, 2017, [code](https://github.com/junyanz/CycleGAN))
 
 [High-Resolution Image Synthesis and Semantic Manipulation with Conditional GANs](https://arxiv.org/pdf/1711.11585.pdf)  (Ting-Chun Wang, 2017, [code](https://github.com/NVIDIA/pix2pixHD))
+
+[Wasserstein GAN](https://arxiv.org/pdf/1701.07875.pdf) (Martin Arjovsky, 2017, [code](<https://github.com/martinarjovsky/WassersteinGAN))
 
 #### 优化器
 
