@@ -274,28 +274,6 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Learning representations by back-propagating errors](http://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf) (David E. Rumelhart, 1986)
 
-[Long short-term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
-
-[A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf) (Zachary C. Lipton, 2015)
-
-[On the properties of neural machine translation: Encoder–Decoder approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014)
-
-[Learning phrase representations using RNN encoder-decoder for statistical machine translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014)
-
-[Neural Turing Machines](https://arxiv.org/pdf/1410.5401.pdf) (Alex Graves, 2014, [code](https://github.com/carpedm20/NTM-tensorflow))
-
-[Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf) (Dzmitry Bahdanau, ICLR 2015)
-
-[Memory Networks](https://arxiv.org/pdf/1410.3916v11.pdf) (Jason Weston, ICLR 2015)
-
-[End-To-End Memory Networks](https://arxiv.org/pdf/1503.08895v5.pdf) (Sainbayar Sukhbaatar, 2015)
-
-[Ask Me Anything: Dynamic Memory Networks for Natural Language Processing](http://www.thespermwhale.com/jaseweston/ram/papers/paper_21.pdf) (Ankit Kumar, 2015)
-
-[Gated End-to-End Memory Networks](http://www.aclweb.org/anthology/E/E17/E17-1001.pdf) (Fei Liu, 2016)
-
-[Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention))
-
 ##### 卷积神经网络
 
 [Backpropagation applied to handwritten zip code recognition](https://www.ics.uci.edu/~welling/teaching/273ASpring09/lecun-89e.pdf) (Yann LeCun, 1989)
@@ -316,6 +294,12 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Densely Connected Convolutional Networks](http://www.cs.cmu.edu/~jeanoh/16-785/papers/huang-cvpr2017-densenet.pdf) (Gao Huang, CVPR 2017)
 
+##### 循环神经网络
+
+[Long short-term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
+
+[A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf) (Zachary C. Lipton, 2015)
+
 ##### 生成对抗网络
 
 [Generative Adversarial Nets](https://arxiv.org/pdf/1406.2661.pdf) (Ian Goodfellow, 2014)
@@ -329,6 +313,30 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [High-Resolution Image Synthesis and Semantic Manipulation with Conditional GANs](https://arxiv.org/pdf/1711.11585.pdf)  (Ting-Chun Wang, 2017, [code](https://github.com/NVIDIA/pix2pixHD))
 
 [Wasserstein GAN](https://arxiv.org/pdf/1701.07875.pdf) (Martin Arjovsky, 2017, [code](<https://github.com/martinarjovsky/WassersteinGAN))
+
+##### 注意力机制和记忆网络
+
+[On the properties of neural machine translation: Encoder–Decoder approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014)
+
+[Learning phrase representations using RNN encoder-decoder for statistical machine translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014)
+
+[Neural Turing Machines](https://arxiv.org/pdf/1410.5401.pdf) (Alex Graves, 2014, [code](https://github.com/carpedm20/NTM-tensorflow))
+
+[Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf) (Dzmitry Bahdanau, ICLR 2015)
+
+[Memory Networks](https://arxiv.org/pdf/1410.3916v11.pdf) (Jason Weston, ICLR 2015)
+
+[End-To-End Memory Networks](https://arxiv.org/pdf/1503.08895v5.pdf) (Sainbayar Sukhbaatar, 2015)
+
+[Ask Me Anything: Dynamic Memory Networks for Natural Language Processing](http://www.thespermwhale.com/jaseweston/ram/papers/paper_21.pdf) (Ankit Kumar, 2015)
+
+[Gated End-to-End Memory Networks](http://www.aclweb.org/anthology/E/E17/E17-1001.pdf) (Fei Liu, 2016)
+
+[Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention))
+
+[BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf) (Jacob Devlin, 2018, [code](https://github.com/google-research/bert))
+
+[You May Not Need Attention](https://arxiv.org/pdf/1810.13409.pdf) (Ofir Press, 2018, [code](https://github.com/ofirpress/YouMayNotNeedAttention))
 
 #### 优化器
 
