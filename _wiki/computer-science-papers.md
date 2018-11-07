@@ -38,9 +38,11 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Convolutional Neural Networks for Sentence Classification](http://www.aclweb.org/anthology/D14-1181) (Yoon Kim, EMNLP 2014, [code](https://github.com/brightmart/text_classification))
 
-[Recurrent Neural Network for Text Classification with Multi-Task Learning](https://www.ijcai.org/Proceedings/16/Papers/408.pdf) (Pengfei Liu, IJCAI 2016, [code](https://github.com/brightmart/text_classification))
-
 [Recurrent Convolutional Neural Networks for Text Classification](http://www.nlpr.ia.ac.cn/cip/~liukang/liukangPageFile/Recurrent%20Convolutional%20Neural%20Networks%20for%20Text%20Classification.pdf) (Siwei Lai, AAAI 2015, [code](https://github.com/brightmart/text_classification))
+
+[Character-level Convolutional Networks for Text Classification](https://arxiv.org/pdf/1509.01626.pdf) (Xiang Zhang, 2016, [code](https://github.com/dongjun-Lee/text-classification-models-tf))
+
+[Recurrent Neural Network for Text Classification with Multi-Task Learning](https://www.ijcai.org/Proceedings/16/Papers/408.pdf) (Pengfei Liu, IJCAI 2016, [code](https://github.com/brightmart/text_classification))
 
 [Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf) (Zichao Yang, NAACL 2016, [code](https://github.com/brightmart/text_classification))
 
