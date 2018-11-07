@@ -30,7 +30,13 @@ keywords: 数据集, 工具
 
 [fastText](https://fasttext.cc/docs/en/english-vectors.html) （预训练词向量）
 
+[Pre-trained ELMo Representations](https://github.com/HIT-SCIR/ELMoForManyLangs)（预训练词向量）
+
 [HanLP 中文词向量](https://github.com/hankcs/HanLP/wiki/word2vec) （预训练词向量）
+
+[Chinese Word Vectors](https://github.com/Embedding/Chinese-Word-Vectors)（预训练词向量）
+
+[Tencent AI Lab Embedding Corpus for Chinese Words and Phrases](https://ai.tencent.com/ailab/nlp/embedding.html)（预训练词向量）
 
 [HanLP](http://hanlp.linrunsoft.com/) （中文分词，命名实体识别）
 
