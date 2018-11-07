@@ -68,3 +68,4 @@ keywords: Windows软件推荐
 - AntConc（自建语料库的绿色强大软件）
 - Mp3ABPlayer+draft（前者音频播放，后者听写对比，练习听力的最佳组合）
 - Notepad++（个人用过的最好编辑器）
+- prs.exe（Windows 自带，Win + R 输入 psr.exe 调用。它会记录下你做的所有操作，然后生成一个图文并茂的详细文档,单击停止记录后，会将详细记录文档保存到一个压缩文件中）
