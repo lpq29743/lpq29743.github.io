@@ -85,7 +85,9 @@ keywords: 公开课, 书籍
 
 ##### Deep Learning
 
-- [Deep Learning: Adaptive Computation and Machine Learning series](https://book.douban.com/subject/26883982/)(Ian Goodfellow)
+- [CS231n: Convolutional Neural Networks for Visual Recognition](http://cs231n.stanford.edu/index.html)
+- [MILA Deep Learning and Reinforcement Learning Summer School](https://dlrlsummerschool.ca/speaker-slides/)
+- [Deep Learning: Adaptive Computation and Machine Learning series(Ian Goodfellow)](https://book.douban.com/subject/26883982/)
 - [《1天搞懂深度学习》PPT(李宏毅)](https://www.slideshare.net/tw_dsconf/ss-62245351)
 - [李宏毅深度学习](https://www.bilibili.com/video/av9770302/)
 - [CS 20SI: Tensorflow for Deep Learning Research](https://www.bilibili.com/video/av9156347/?from=search&seid=6905181275544516403)
