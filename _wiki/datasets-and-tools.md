@@ -22,6 +22,8 @@ keywords: 数据集, 工具
 
 [IMDB Review Dataset](http://ai.stanford.edu/~amaas/data/sentiment/) （文本分类，情感分析）
 
+[Stanford Sentiment Treebank](https://nlp.stanford.edu/sentiment/treebank.html) （情感分析）
+
 [维基百科语料库](https://dumps.wikimedia.org/backup-index-bydb.html) （词向量训练）
 
 [Amazon Reviews](https://snap.stanford.edu/data/web-Amazon.html) （词向量训练）
@@ -52,11 +54,15 @@ keywords: 数据集, 工具
 
 [DuReader](http://ai.baidu.com/broad/subordinate?dataset=dureader) （阅读理解）
 
+[HotpotQA](https://hotpotqa.github.io/) （阅读理解）
+
 ### 计算机视觉
 
 [MNIST](http://yann.lecun.com/exdb/mnist/)（手写数字识别）
 
 [CIFAR-10 & CIFAR-100](https://www.cs.toronto.edu/~kriz/cifar.html)（图像处理，图像识别）
+
+[ImageNet](http://www.image-net.org/)（图像分类）
 
 ### 推荐系统
 
