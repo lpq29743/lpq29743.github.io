@@ -170,11 +170,11 @@ TensorFlow 提供了多种交叉熵损失函数的实现：
 
 激活函数的作用是为神经网络加入一些非线性因素。它必须是可微的，这样才能够使用梯度下降法。常见的激活函数包括 Sigmoid、tanh、ReLU（Rectified Linear Unit）和 Softplus 等等。
 
-Sigmoid 函数的表达式为 $$ f(x) = \frac{1}{1+e^{-x}} $$。它的输出映射在 (0, 1) 内，单调连续，求导比较容易，但具有软饱和性，容易产生梯度消失，而且输出不是以 0 为中心。TensorFlow 实现 Sigmoid 函数的方法是`tf.nn.sigmoid()`。
+Sigmoid 函数的表达式为 $$ f(x) = \frac{1}{1+e^{-x}} $$。它的输出映射在 (0, 1) 内，单调连续，求导比较容易，但具有软饱和性（[硬饱和，软饱和，左饱和和右饱和的定义](https://blog.csdn.net/donkey_1993/article/details/81662065)），容易产生梯度消失（其导数小于等于 0.25），输出不是以 0 为中心，即非 zero-centered（[弊端](https://www.zhihu.com/question/57194292)），而且其定义中包含的幂运算相对比较耗时。TensorFlow 实现 Sigmoid 函数的方法是`tf.nn.sigmoid()`。
 
-tanh 函数的表达式为 $$ f(x) = \frac{sinhx}{coshx} = \frac{e^x - e^{-x}}{e^x + e^{-x}} = \frac{1 - e^{-2x}}{1 + e{-2x}} $$。tanh 函数的输出是以 0 为中心，收敛速度比 Sigmoid 函数要快，但还是没有解决因为软饱和性而产生的梯度消失问题。TensorFlow 实现 tanh 函数的方法是`tf.nn.tanh()`。
+tanh 函数的表达式为 $$ f(x) = \frac{sinhx}{coshx} = \frac{e^x - e^{-x}}{e^x + e^{-x}} = \frac{1 - e^{-2x}}{1 + e{-2x}} $$。tanh 函数的输出是以 0 为中心，收敛速度比 Sigmoid 函数要快，但还是没有解决因为软饱和性而产生的梯度消失问题（为了防止饱和，现在主流的做法会在激活函数前多做一步batch normalization，尽可能保证每一层网络的输入具有均值较小的、零中心的分布）。TensorFlow 实现 tanh 函数的方法是`tf.nn.tanh()`。
 
-ReLU 函数是目前使用最多的也是最受欢迎的激活函数，其表达式为 $$ f(x) = max(x, 0) $$。ReLU 函数在 x < 0 的时候是硬饱和的，而在 x > 0 的时候可以保持梯度不衰减，从而缓解梯度消失问题，并且快速收敛。随着训练的进行，部分输入会落到硬饱和区，导致对应权重无法更新，这种情况称为“神经元死亡”。TensorFlow 实现 tanh 函数的方法是`tf.nn.relu()`。
+ReLU 函数是目前使用最多的也是最受欢迎的激活函数，其表达式为 $$ f(x) = max(x, 0) $$。ReLU 函数在 x < 0 的时候是硬饱和的，而在 x > 0 的时候可以保持梯度不衰减，从而缓解梯度消失问题，并且快速收敛。随着训练的进行，部分输入会落到硬饱和区，导致对应权重无法更新，这种情况称为“神经元死亡”。TensorFlow 实现 ReLU 函数的方法是`tf.nn.relu()`。
 
 TensorFlow 还在 ReLU 函数的基础上，定义了`tf.nn.relu6()`，其表达式为 $$ min(max(x, 0), 6) $$。另外还有`tf.nn.crelu()`，关于 CReLU 函数，可以查看[这篇文章](https://arxiv.org/pdf/1603.05201v2.pdf)。
 
