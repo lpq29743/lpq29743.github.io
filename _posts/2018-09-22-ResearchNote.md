@@ -14,6 +14,11 @@ keywords: 计算机科学, 学术研究
 4. 调研的结果应用 PPT 进行记录，尤其是 Paper 的引用
 5. 主要工作的代码可以通过 Paper 中的链接、Github 以及作者的个人主页尝试查找
 
+### 灵感
+
+1. Five components in multimodal model building: Encoding, Decoding, Interaction, Prediction, Objective
+2. Three ways for modalities to interact: Matching, Fusion and Modulation
+
 ### 实验
 
 1. 做实验不要贪多，每次实验只验证一个想法。每次实验之后，必须保存代码、模型和实验结果（要带有模型参数、模块信息的标签），要进行错误分析，要进行版本控制
