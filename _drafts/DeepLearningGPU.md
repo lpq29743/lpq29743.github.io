@@ -9,6 +9,10 @@ GPU 是 NVIDIA 在发布 GeForce 256 时提出的概念。
 CUDA 安装
 
 ```bash
+# 查看 cuda 版本 
+cat /usr/local/cuda/version.txt
+# 查看 cudnn 版本 
+cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
 nvidia-smi
 nvidia-smi -l
 ```
