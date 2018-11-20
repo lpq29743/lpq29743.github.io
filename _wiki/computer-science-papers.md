@@ -370,6 +370,14 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units](https://arxiv.org/pdf/1603.05201v2.pdf) (Wenling Shang, ICML 2016)
 
+### 强化学习
+
+#### 强化学习应用
+
+[Mastering the game of Go with deep neural networks and tree search](http://www.worlduc.com/FileSystem/1/134755/1585588/ac5b78a1934c49bb93a1f3ad09d96e46.pdf) (David Silver, Nature 2016)
+
+[Mastering the game of Go without human knowledge](https://skatgame.net/mburo/ps/alphago-zero.pdf) (David Silver, Nature 2017, [code](https://github.com/gcp/leela-zero))
+
 ### 推荐系统
 
 #### 新闻推荐
