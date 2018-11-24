@@ -122,3 +122,29 @@ set和dict类似，也是一组key的集合，但不存储value。由于key不�
 
 - 可变对象：list, dictionary, set, byte array
 - 不可变对象：int，long, complex, string, float, tuple, frozen set
+
+可变对象和不可变对象的区别：
+
+1. 对于不可变对象作为函数参数，相当于C系语言的值传递
+
+   ```python
+   def add(num):
+       num = num + 10
+   d = 2
+   add(d)
+   # 2
+   print(d)
+   ```
+
+2. 对于可变对象作为函数参数，相当于C系语言的引用传递
+
+   ```python
+   def change(num):
+       num.append(1)
+   d = [0]
+   change(d)
+   # [0, 1]
+   print(d)
+   ```
+
+   ​
