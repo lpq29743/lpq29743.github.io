@@ -13,6 +13,8 @@
 - Q-value / action-value：与 Value 相似，只不过多带了一个 Action 参数，用于 Q Learning 中
 - Trajectory：State 序列以及影响这些 State 的 Action
 
+强化学习可以从不同的角度进行类型的划分。关于这点，[莫烦的教程](https://morvanzhou.github.io/tutorials/machine-learning/ML-intro/4-02-RL-methods/)写的很清楚，可以参考。
+
 几个流行的强化学习模型：
 
 ##### Q Learning
