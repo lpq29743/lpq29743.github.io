@@ -213,7 +213,7 @@ Q4.逻辑回归为什么不能用均方误差计算损失函数
 
 A4.非凸
 
-Q5.K-means 中我想聚成100类 结果发现只能聚成98类，为什么
+Q5.K-means 中我想聚成 100 类 结果发现只能聚成98类，为什么
 
 A5.因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn.net/shwan_ma/article/details/80096408)
 
@@ -226,7 +226,7 @@ A5.因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn
   - Edit Distance
   - 正则表达式
 - 数组
-  - [链表](http://wuchong.me/blog/2014/03/25/interview-link-questions/)
+  - [链表1](https://wuchong.me/blog/2014/03/25/interview-link-questions/) [链表2](https://www.jianshu.com/p/1361493e4f31)
   - [KSum 问题](https://lpq29743.github.io/redant/algorithm/2018/10/29/KSum/)
 - 树
 - 查找
