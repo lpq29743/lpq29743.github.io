@@ -138,6 +138,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension](http://aclweb.org/anthology/P17-1147) (Mandar Joshi, ACL 2017)
 
+[SQuAD: 100,000+ Questions for Machine Comprehension of Text](https://arxiv.org/pdf/1606.05250.pdf) (Pranav Rajpurkar, 2016, [code](https://rajpurkar.github.io/SQuAD-explorer/))
+
+[Know What You Don’t Know: Unanswerable Questions for SQuAD](https://arxiv.org/pdf/1806.03822.pdf) (Pranav Rajpurkar, 2018, [code](https://rajpurkar.github.io/SQuAD-explorer/))
+
 [ROUGE: A Package for Automatic Evaluation of Summaries](http://www.aclweb.org/anthology/W/W04/W04-1013.pdf) (Chin-Yew Lin, 2004)
 
 [BLEU: a Method for Automatic Evaluation of Machine Translation](http://aclweb.org/anthology/P/P02/P02-1040.pdf) (Kishore Papineni, 2002)
