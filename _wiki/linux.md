@@ -202,6 +202,10 @@ find . -maxdepth 3
 
 ### grep
 
+### awk
+
+### sed
+
 ### wc
 
 ### ps
