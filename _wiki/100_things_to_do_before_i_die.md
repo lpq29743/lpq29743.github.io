@@ -40,23 +40,24 @@ keywords: 100 Things to Do Before I Die
 32. Sports: Learn to ski
 33. Sports: Learn to play tennis
 34. Sports: Learn a martial art
-35. Movie: Make a micro film
-36. Movie: Attend Film Festival
-37. Movie: Be an extra in a movie or  a TV show
-38. Music: Attend Rock Festival
-39. Music: Vienna New Year's Concert
-40. Life: Go on a trip with my parents
-41. Life: Learn dancing with someone I love
-42. Life: Design a house for myself
-43. Life: Help a kid to one of top50 university
-44. Life: Give someone I love the best wedding
-45. Life: Take some photos with my families
-46. Life: Have a honeymoon
-47. Life: Have a romantic candlelit dinner
-48. Life: Help three friends to achieve their dreams
-49. Life: Help my brother to achieve his dream
-50. Life: Help my love to achieve her dream
-51. Career: Become a CTO
-52. Career: Earn 1 million in one year
-53. Career: Work for a Top100 IT company
-54. Career: Be a small boss
+35. Sports: Be a volunteer of a sports event or work for it
+36. Movie: Make a micro film
+37. Movie: Attend Film Festival
+38. Movie: Be an extra in a movie or  a TV show
+39. Music: Attend Rock Festival
+40. Music: Vienna New Year's Concert
+41. Life: Go on a trip with my parents
+42. Life: Learn dancing with someone I love
+43. Life: Design a house for myself
+44. Life: Help a kid to one of top50 university
+45. Life: Give someone I love the best wedding
+46. Life: Take some photos with my families
+47. Life: Have a honeymoon
+48. Life: Have a romantic candlelit dinner
+49. Life: Help three friends to achieve their dreams
+50. Life: Help my brother to achieve his dream
+51. Life: Help my love to achieve her dream
+52. Career: Become a CTO
+53. Career: Earn 1 million in one year
+54. Career: Work for a Top100 IT company
+55. Career: Be a small boss
