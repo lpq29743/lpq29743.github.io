@@ -47,6 +47,10 @@ ls -R
 
 ### cp
 
+### scp
+
+### rsync
+
 ### touch
 
 ### cat
