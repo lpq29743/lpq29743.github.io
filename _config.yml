@@ -27,6 +27,12 @@ navs:
     href: /wiki
     label: 维基
   -
+    href: /open-source
+    label: 项目
+  -
+    href: /links
+    label: 友链
+  -
     href: /about
     label: 关于
 
