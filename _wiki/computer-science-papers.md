@@ -88,6 +88,16 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Semantic Sentence Matching with Densely-connected Recurrent and Co-attentive Information](https://arxiv.org/pdf/1805.11360.pdf) (Seonhoon Kim, 2018)
 
+#### 主题建模
+
+[An Introduction to Latent Semantic Analysis](http://lsa.colorado.edu/papers/dp1.LSAintro.pdf) (Thomas K Landauer, 1998, [code](https://github.com/josephwilk/semanticpy))
+
+[Probabilistic Latent Semantic Analysis](http://www.iro.umontreal.ca/~nie/IFT6255/Hofmann-UAI99.pdf) (Thomas K Landauer, 1999, [code](https://github.com/laserwave/plsa))
+
+[Latent dirichlet allocation](http://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf) (David M. Blei, JMLR 2003, [code](https://github.com/lda-project/lda))
+
+[Mixing Dirichlet Topic Models and Word Embeddings to Make lda2vec](https://arxiv.org/pdf/1605.02019.pdf) (Christopher Moody, 2016, [code](https://github.com/cemoody/lda2vec))
+
 #### 情感分析
 
 ##### 概述
