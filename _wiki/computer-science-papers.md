@@ -50,7 +50,43 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 #### 文本匹配
 
+[Learning Deep Structured Semantic Models for Web Search using Clickthrough Data](http://delivery.acm.org/10.1145/2510000/2505665/p2333-he.pdf?ip=218.19.145.8&id=2505665&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1545793847_ac9774c47a9b2bab6395221862331678) (Po-Sen Huang, CIKM 2013, [code](https://github.com/liaha/dssm))
 
+[A Latent Semantic Model with Convolutional-Pooling Structure for Information Retrieval](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/cikm2014_cdssm_final.pdf) (Yelong Shen, CIKM 2014, [code](https://github.com/airalcorn2/Deep-Semantic-Similarity-Model))
+
+[Convolutional Neural Network Architectures for Matching Natural Language Sentences](http://www.hangli-hl.com/uploads/3/1/6/8/3168008/hu-etal-nips2014.pdf) (Baotian Hu, NIPS 2014, [code](https://github.com/ddddwy/ARCII-for-Matching-Natural-Language-Sentences))
+
+[Deep Sentence Embedding Using Long Short-Term Memory Networks: Analysis and Application to Information Retrieval](https://arxiv.org/pdf/1502.06922.pdf) (Hamid Palangi, 2015, [code](https://github.com/zhaosm/dssm-lstm))
+
+[A Deep Architecture for Semantic Matching with Multiple Positional Sentence Representations](https://arxiv.org/pdf/1511.08277.pdf) (Shengxian Wan, 2015, [code](https://github.com/coderbyr/MV-LSTM))
+
+[Learning to Rank Short Text Pairs with Convolutional Deep Neural Networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.723.6492&rep=rep1&type=pdf) (Aliaksei Severyn, SIGIR 2015, [code](https://github.com/zhangzibin/PairCNN-Ranking))
+
+[Text Matching as Image Recognition](https://arxiv.org/pdf/1602.06359.pdf) (Liang Pang, AAAI 2016, [code](https://github.com/ddddwy/MatchPyramid-for-semantic-matching))
+
+[Pairwise Word Interaction Modeling with Deep Neural Networks for Semantic Similarity Measurement](http://www.aclweb.org/anthology/N16-1108) (Hua He, NAACL 2016, [code](https://github.com/lanwuwei/Subword-PWIM))
+
+[Improved Representation Learning for Question Answer Matching](http://www.aclweb.org/anthology/P16-1044) (Ming Tan, ACL 2016, [code](https://github.com/person-lee/qa_lstm))
+
+[A Compare-Aggregate Model for Matching Text Sequences](https://arxiv.org/pdf/1611.01747.pdf) (Shuohang Wang, 2016)
+
+[A Deep Relevance Matching Model for Ad-hoc Retrieval](https://arxiv.org/pdf/1711.08611.pdf) (Jiafeng Guo, CIKM 2016, [code](https://github.com/sebastian-hofstaetter/neural-ranking-drmm))
+
+[Learning to Match using Local and Distributed Representations of Text for Web Search](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/10/wwwfp0192-mitra.pdf) (Bhaskar Mitra, WWW 2017)
+
+[End-to-End Neural Ad-hoc Ranking with Kernel Pooling](http://delivery.acm.org/10.1145/3090000/3080809/p55-xiong.pdf?ip=218.19.145.8&id=3080809&acc=CHORUS&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E6D218144511F3437&__acm__=1545743485_1f9609809da82437ccf634dc7f881b4b) (Chenyan Xiong, SIGIR 2017, [code](https://github.com/AdeDZY/K-NRM))
+
+[Bilateral Multi-Perspective Matching for Natural Language Sentences](https://arxiv.org/pdf/1702.03814.pdf) (Zhiguo Wang, IJCAI 2017, [code](https://github.com/zhiguowang/BiMPM))
+
+[Sentence Similarity Learning by Lexical Decomposition and Composition](https://www.aclweb.org/anthology/C/C16/C16-1127.pdf) (Zhiguo Wang, COLING 2017, [code](https://github.com/mcrisc/lexdecomp))
+
+[Natural Language Inference over Interaction Space](https://arxiv.org/pdf/1709.04348.pdf) (Yichen Gong, ICLR 2018, [code](https://github.com/YichenGong/Densely-Interactive-Inference-Network))
+
+[Convolutional Neural Networks for Soft-Matching N-Grams in Ad-hoc Search](http://delivery.acm.org/10.1145/3160000/3159659/p126-dai.pdf?ip=218.19.145.8&id=3159659&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1545800172_2be1e8f46ecb3f388bf3ceab8566848e) (Zhuyun Dai, WSDM 2018, [code](https://github.com/thunlp/EntityDuetNeuralRanking))
+
+[Deep Relevance Ranking Using Enhanced Document-Query Interactions](http://www2.aueb.gr/users/ion/docs/emnlp2018.pdf) (Ryan McDonald, EMNLP 2018, [code](https://github.com/nlpaueb/deep-relevance-ranking))
+
+[Semantic Sentence Matching with Densely-connected Recurrent and Co-attentive Information](https://arxiv.org/pdf/1805.11360.pdf) (Seonhoon Kim, 2018)
 
 #### 情感分析
 
