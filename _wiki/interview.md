@@ -332,6 +332,11 @@ A5.因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn
 - CRF
 - Viterbi Algorithm
 
+##### Application
+
+- Text Classification
+- Text Matching: VSM, BM25
+
 ### Subjective Question
 
 Q1.熟悉哪个算法

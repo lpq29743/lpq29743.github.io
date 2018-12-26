@@ -48,6 +48,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Very Deep Convolutional Networks for Text Classification](http://cn.arxiv.org/pdf/1606.01781) (Alexis Conneau, EACL 2017, [code](https://github.com/zonetrooper32/VDCNN))
 
+#### 文本匹配
+
+
+
 #### 情感分析
 
 ##### 概述
