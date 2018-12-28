@@ -32,6 +32,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Enriching Word Vectors with Subword Information](https://pdfs.semanticscholar.org/e2db/a792360873aef125572812f3673b1a85d850.pdf) (Piotr Bojanowski, 2016)
 
+[Learned in Translation: Contextualized Word Vectors](https://arxiv.org/pdf/1708.00107.pdf) (Byran McCann, NIPS 2017, [code](https://github.com/salesforce/cove))
+
 [Deep contextualized word representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp))
 
 #### 文本分类
@@ -210,6 +212,20 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [QANet: Combining Local Convolution with Global Self-Attention for Reading Comprehension](https://openreview.net/pdf?id=B14TlG-RW) (Adams Wei Yu, ICLR 2018, [code](https://github.com/minsangkim142/Fast-Reading-Comprehension))
 
+##### 基于知识图谱的问答
+
+[Information Extraction over Structured Data: Question Answering with Freebase](http://cs.jhu.edu/~xuchen/paper/yao-jacana-freebase-acl2014.pdf) (Xuchen Yao, ACL 2014)
+
+[Question Answering over Freebase with Multi-Column Convolutional Neural Networks](http://www.aclweb.org/anthology/P15-1026) (Li Dong, ACL 2015, [code](https://github.com/Evergcj/QA_multi-columnCNN), [note](https://blog.csdn.net/LAW_130625/article/details/78447156))
+
+[Question Answering on Freebase via Relation Extraction and Textual Evidence](https://arxiv.org/pdf/1603.00957v3.pdf) (Kun Xu, ACL 2016)
+
+[Question Answering on Knowledge Bases and Text using Universal Schema and Memory Networks](https://arxiv.org/pdf/1704.08384.pdf) (Rajarshi Das, ACL 2017)
+
+[Question Answering over Freebase via Attentive RNN with Similarity Matrix based CNN](https://arxiv.org/vc/arxiv/papers/1804/1804.03317v2.pdf) (Yingqi Qu, ISMC 2018, [code](https://github.com/quyingqi/kbqa-ar-smcnn))
+
+[Variational Reasoning for Question Answering with Knowledge Graph](https://arxiv.org/pdf/1709.04071.pdf) (Yuyu Zhang, AAAI 2018)
+
 #### 知识图谱
 
 ##### 知识库
@@ -242,13 +258,25 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Open-World Knowledge Graph Completion](https://arxiv.org/pdf/1711.03438.pdf) (Baoxu Shi, AAAI 2018, [code](https://github.com/bxshi/ConMask))
 
-##### 知识图谱应用
+##### 实体识别和链接
 
-[Question Answering over Freebase via Attentive RNN with Similarity Matrix based CNN](https://arxiv.org/ftp/arxiv/papers/1804/1804.03317.pdf) (Yingqqi Qu, ISMC 2018, [code](https://github.com/quyingqi/kbqa-ar-smcnn))
+[A Generative Entity-Mention Model for Linking Entities with Knowledge Base](https://www.aclweb.org/anthology/P/P11/P11-1095.pdf) (Xianpei Han, ACL 2011)
+
+[Overview of TAC-KBP2014 Entity Discovery and Linking Tasks](http://nlp.cs.rpi.edu/paper/edl2014overview.pdf) (Heng Ji, TAC 2014)
+
+[An Attentive Neural Architecture for Fine-grained Entity Type Classification](https://www.aclweb.org/anthology/W16-1313) (Sonse Shimaoka, 2016)
+
+[Neural Architectures for Fine-grained Entity Type Classification](https://www.aclweb.org/anthology/E17-1119) (Sonse Shimaoka, EACL 2017, [code](https://github.com/shimaokasonse/NFGEC))
+
+[Fine-Grained Entity Type Classification by Jointly Learning Representations and Label Embeddings](http://aclweb.org/anthology/E17-1075) (Abhishek Abhishek, EACL 2017, [code](https://github.com/abhipec/fnet))
+
+[Neural Fine-Grained Entity Type Classification with Hierarchy-Aware Loss](http://aclweb.org/anthology/N18-1002) (Peng Xu, NAACL 2018)
+
+##### 知识图谱应用
 
 [Learning beyond datasets: Knowledge Graph Augmented Neural Networks for Natural language Processing](https://arxiv.org/pdf/1802.05930.pdf) (Annervaz K M, HAACL HLT 2018)
 
-[Variational Reasoning for Question Answering with Knowledge Graph](https://arxiv.org/pdf/1709.04071.pdf) (Yuyu Zhang, AAAI 2018)
+[Entity-Duet Neural Ranking: Understanding the Role of Knowledge Graph Semantics in Neural Information Retrieval](http://aclweb.org/anthology/P18-1223) (Zhenghao Liu, ACL 2018, [code](https://github.com/thunlp/EntityDuetNeuralRanking))
 
 #### 指代消解
 
@@ -345,6 +373,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/pdf/1409.1556.pdf) (Karen Simonyan, ICLR 2015)
 
 [Deep Residual Learning for Image Recognition](https://x-algo.cn/wp-content/uploads/2016/12/residual.pdf) (Kaiming He, 2015)
+
+[Multi-Scale Context Aggregation by Dilated Convolutions](https://arxiv.org/pdf/1511.07122.pdf) (Fisher Yu, ICLR 2016, [code](https://github.com/iesl/dilated-cnn-ner))
 
 [Densely Connected Convolutional Networks](http://www.cs.cmu.edu/~jeanoh/16-785/papers/huang-cvpr2017-densenet.pdf) (Gao Huang, CVPR 2017)
 
