@@ -164,6 +164,20 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Transformation Networks for Target-Oriented Sentiment Classification](https://arxiv.org/pdf/1805.01086.pdf) (Xin Li, ACL 2018, [code](https://github.com/lixin4ever/TNet))
 
+#### 机器翻译
+
+[Neural Machine Translation and Sequence-to-sequence Models: A Tutorial](https://arxiv.org/pdf/1703.01619.pdf) (Graham Neubig, 2017)
+
+[Convolutional Sequence to Sequence Learning](https://arxiv.org/pdf/1705.03122.pdf) (Jonas Gehring, 2017, [code](https://github.com/facebookresearch/fairseq))
+
+[Sequence-to-Dependency Neural Machine Translation](http://www.aclweb.org/anthology/P17-1065) (Shuangzhi Wu, ACL 2017)
+
+[Multi-channel Encoder for Neural Machine Translation](https://arxiv.org/pdf/1712.02109.pdf) (Hao Xiong, AAAI 2018)
+
+[Unsupervised Neural Machine Translation](https://arxiv.org/pdf/1710.11041.pdf) (Mikel Artetxe, ICLR 2018, [code](https://github.com/artetxem/undreamt))
+
+[Non-Autoregressive Neural Machine Translation](https://arxiv.org/pdf/1711.02281.pdf) (Jiatao Gu, ICLR 2018, [code](https://github.com/salesforce/nonauto-nmt), [note](https://zhuanlan.zhihu.com/p/35866317))
+
 #### 对话系统
 
 ##### 对话管理
@@ -390,6 +404,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [NIPS 2016 Tutorial: Generative Adversarial Networks](https://arxiv.org/pdf/1701.00160.pdf) (Ian Goodfellow, NIPS 2016)
 
+[Generative Adversarial Networks: An Overview](https://arxiv.org/pdf/1710.07035.pdf) (Antonia Creswell, 2017)
+
 [Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/pdf/1611.07004.pdf) (Phillip Isola, CVPR 2017, [code](https://github.com/phillipi/pix2pix))
 
 [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/pdf/1703.10593.pdf) (Jun-Yan Zhu, 2017, [code](https://github.com/junyanz/CycleGAN))
@@ -423,6 +439,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [You May Not Need Attention](https://arxiv.org/pdf/1810.13409.pdf) (Ofir Press, 2018, [code](https://github.com/ofirpress/YouMayNotNeedAttention))
 
 #### 优化器
+
+[An overview of gradient descent optimization algorithms](https://arxiv.org/pdf/1609.04747.pdf) (Sebastian Ruder, 2017)
 
 [On the Momentum Term in Gradient Descent Learning](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.57.5612&rep=rep1&type=pdf) (Ning Qian, 1999)
 
