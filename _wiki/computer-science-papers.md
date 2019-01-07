@@ -466,6 +466,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [SphereFace: Deep Hypersphere Embedding for Face Recognition](https://arxiv.org/pdf/1704.08063.pdf) (Weiyang Liu, ICML 2017, [code](https://github.com/wy1iu/sphereface))
 
+[CosFace: Large Margin Cosine Loss for Deep Face Recognition](https://arxiv.org/pdf/1801.09414.pdf) (Hao Wang, 2018, [code](https://github.com/yule-li/CosFace))
+
+[ArcFace: Additive Angular Margin Loss for Deep Face Recognition](https://arxiv.org/pdf/1801.07698.pdf) (Jiankang Deng, 2018, [code](https://github.com/deepinsight/insightface))
+
 [Additive Margin Softmax for Face Verification](https://arxiv.org/pdf/1801.05599.pdf) (Feng Wang, 2018, [code](https://github.com/Joker316701882/Additive-Margin-Softmax))
 
 #### 激活函数
