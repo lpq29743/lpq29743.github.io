@@ -50,6 +50,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Very Deep Convolutional Networks for Text Classification](http://cn.arxiv.org/pdf/1606.01781) (Alexis Conneau, EACL 2017, [code](https://github.com/zonetrooper32/VDCNN))
 
+[A Hybrid CNN-RNN Alignment Model for Phrase-Aware Sentence Classification](http://www.aclweb.org/anthology/E17-2071) (Shiou Tian Hsu, EACL 2017)
+
 #### 文本匹配
 
 [Learning Deep Structured Semantic Models for Web Search using Clickthrough Data](http://delivery.acm.org/10.1145/2510000/2505665/p2333-he.pdf?ip=218.19.145.8&id=2505665&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1545793847_ac9774c47a9b2bab6395221862331678) (Po-Sen Huang, CIKM 2013, [code](https://github.com/liaha/dssm))
@@ -369,6 +371,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 #### 模型
 
 [Learning representations by back-propagating errors](http://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf) (David E. Rumelhart, 1986)
+
+[Highway Networks](http://de.arxiv.org/pdf/1505.00387) (Rupesh Kumar Srivastava, 2015)
 
 ##### 卷积神经网络
 
