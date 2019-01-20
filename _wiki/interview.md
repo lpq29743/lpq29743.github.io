@@ -255,7 +255,7 @@ A5.因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn
 
 - 字符串
   - [KMP 算法](https://www.zhihu.com/question/21923021)
-  - Edit Distance
+  - [Edit Distance](https://github.com/youngwind/blog/issues/106)
   - 正则表达式
 - 数组
   - [链表1](https://wuchong.me/blog/2014/03/25/interview-link-questions/) [链表2](https://www.jianshu.com/p/1361493e4f31)
