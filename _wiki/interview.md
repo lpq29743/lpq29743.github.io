@@ -87,6 +87,10 @@ Q15.共 10 瓶药丸。（1）其中一瓶每颗超重 10 毫克；（2）其中
 
 A15.（1）从 1 到 10 瓶，每瓶各拿出 1、2、3、...、10 颗；（2） 从 1 到 10 瓶，每瓶各拿出 1、2、4、...、1024 颗。
 
+Q16.捡麦穗问题
+
+A16.[链接](https://www.zhihu.com/question/66465943)
+
 ##### Probability Theory and Mathematical Statistics
 
 Q1.为什么样本方差（sample variance）的分母是 n-1？
