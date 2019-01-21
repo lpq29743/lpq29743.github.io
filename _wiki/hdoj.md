@@ -2261,6 +2261,67 @@ int main() {
 }
 ```
 
+#### 6.6 俘虏本拉登
+
+**题目来源**
+
+[HDOJ 1085 Holding Bin-Laden Captive!](http://acm.hdu.edu.cn/showproblem.php?pid=1085)
+
+**题目分析**
+
+这题为母函数经典问题，直接套模板即可。
+
+**实现代码**
+
+```c++
+#include <iostream>
+#include <stdio.h>
+#include <memory.h>
+using namespace std;
+
+struct node {
+    int val, num;
+} coin[3];
+
+const int maxn = 1e4;
+int c1[maxn], c2[maxn];
+
+int main() {
+    int tot;
+    coin[0].val = 1;
+    coin[1].val = 2;
+    coin[2].val = 5;
+    while(~scanf("%d%d%d", &coin[0].num, &coin[1].num, &coin[2].num) && (coin[0].num || coin[1].num || coin[2].num)) {
+        tot = coin[0].num * coin[0].val + coin[1].num * coin[1].val + coin[2].num * coin[2].val;
+        memset(c1, 0, sizeof(c1));
+        memset(c2, 0, sizeof(c2));
+        for(int i = 0; i <= coin[0].num; i++)
+            c1[i] = 1;
+        for(int i = 1; i < 3; i++) {
+            for(int j = 0; j <= tot; j++) {
+                for(int k = 0; k <= coin[i].num * coin[i].val && k + j <= tot; k += coin[i].val) {
+                    c2[j + k] += c1[j];
+                }
+            }
+            for(int j = 0; j <= tot; j++) {
+                c1[j] = c2[j];
+                c2[j] = 0;
+            }
+        }
+        int i;
+        for(i = 0; i <= tot; i++) {
+            if(!c1[i]) {
+
+                break;
+            }
+        }
+        printf("%d\n", i);
+    }
+
+    return 0;
+}
+```
+
 ### 第 7 章 非主流
 
 #### 7.1 圆环套玩具游戏
