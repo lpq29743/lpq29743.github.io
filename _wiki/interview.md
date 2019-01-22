@@ -333,12 +333,11 @@ A5.因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn
 
 ##### Text Processing
 
-- Normalization
+- Word Normalization and Stemming: Normalization, Case folding, Lemmatization, Morphology, Stemming and Porter's algorithm
 - Tokenization
 - Stop words
 - Part-of-Speech Tagging
 - Named Entity Recognition
-- Stemming and Lemmatization
 
 ##### Feature Engineering
 
