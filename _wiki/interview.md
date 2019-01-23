@@ -388,11 +388,15 @@ Q8.意图识别
 - 数据增强、同义词替换、回译、文档裁剪、迁移学习
 - 规则（规则学习、规则权重、规则严格过滤）和深度结合
 - 选择怎样的深度模型
-- K-fold实验、数据集分割、模型融合
+- K-fold 实验、数据集分割、模型融合
 - 错误分析
+
+Q9. 指代消解
 
 ### Ask Back
 
 Q1.What will I do here
 
 Q2.What can you offer to help and guide me
+
+Q3.转正
