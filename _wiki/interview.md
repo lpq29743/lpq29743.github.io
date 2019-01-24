@@ -176,6 +176,10 @@ Q13.蒲丰投针问题
 
 A13.[链接](https://baike.baidu.com/item/%E8%92%B2%E4%B8%B0%E6%8A%95%E9%92%88%E9%97%AE%E9%A2%98/10876943?fromtitle=%E5%B8%83%E4%B8%B0%E6%8A%95%E9%92%88&fromid=5919098)
 
+Q14.中餐馆过程
+
+A14.[链接](http://sofasofa.io/forum_main_post.php?postid=1003110)
+
 #### Algorithm
 
 Q1.有10个排好序的数据库，那么我要找整个的中位数，怎么找
