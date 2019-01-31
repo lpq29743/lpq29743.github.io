@@ -428,13 +428,15 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf) (Dzmitry Bahdanau, ICLR 2015)
 
-[Memory Networks](https://arxiv.org/pdf/1410.3916v11.pdf) (Jason Weston, ICLR 2015)
+[Memory Networks](https://arxiv.org/pdf/1410.3916v11.pdf) (Jason Weston, ICLR 2015, [note](https://zhuanlan.zhihu.com/p/32257642))
 
-[End-To-End Memory Networks](https://arxiv.org/pdf/1503.08895v5.pdf) (Sainbayar Sukhbaatar, 2015)
+[End-To-End Memory Networks](https://arxiv.org/pdf/1503.08895v5.pdf) (Sainbayar Sukhbaatar, 2015, [note](https://zhuanlan.zhihu.com/p/32257642))
 
-[Ask Me Anything: Dynamic Memory Networks for Natural Language Processing](http://www.thespermwhale.com/jaseweston/ram/papers/paper_21.pdf) (Ankit Kumar, 2015)
+[Ask Me Anything: Dynamic Memory Networks for Natural Language Processing](http://www.thespermwhale.com/jaseweston/ram/papers/paper_21.pdf) (Ankit Kumar, 2015, [note](https://zhuanlan.zhihu.com/p/32257642))
 
-[Gated End-to-End Memory Networks](http://www.aclweb.org/anthology/E/E17/E17-1001.pdf) (Fei Liu, 2016)
+[Dynamic Memory Networks for Visual and Textual Question Answering](https://arxiv.org/pdf/1603.01417.pdf) (Caiming Xiong, 2016, [code](https://github.com/ethancaballero/Improved-Dynamic-Memory-Networks-DMN-plus), [note](https://zhuanlan.zhihu.com/p/32257642))
+
+[Gated End-to-End Memory Networks](http://www.aclweb.org/anthology/E/E17/E17-1001.pdf) (Fei Liu, 2016, [note](https://zhuanlan.zhihu.com/p/30722242))
 
 [Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention))
 
