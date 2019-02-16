@@ -52,6 +52,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [A Hybrid CNN-RNN Alignment Model for Phrase-Aware Sentence Classification](http://www.aclweb.org/anthology/E17-2071) (Shiou Tian Hsu, EACL 2017)
 
+[Graph Convolutional Networks for Text Classification](https://arxiv.org/pdf/1809.05679v1.pdf) (Liang Yao, AAAI 2019, [code](https://github.com/yao8839836/text_gcn))
+
 #### 文本匹配
 
 [Learning Deep Structured Semantic Models for Web Search using Clickthrough Data](http://delivery.acm.org/10.1145/2510000/2505665/p2333-he.pdf?ip=218.19.145.8&id=2505665&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1545793847_ac9774c47a9b2bab6395221862331678) (Po-Sen Huang, CIKM 2013, [code](https://github.com/liaha/dssm))
@@ -337,6 +339,30 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [YOLOv3: An Incremental Improvement](https://pjreddie.com/media/files/papers/YOLOv3.pdf) (Joseph Redmon, 2018, [code](https://github.com/qqwweee/keras-yolo3))
 
 [SSD: Single Shot MultiBox Detector](http://www.cs.unc.edu/~cyfu/pubs/ssd.pdf) (Wei Liu, ECCV 2016, [code](https://github.com/balancap/SSD-Tensorflow))
+
+#### 图像超分辨
+
+[Image Super-Resolution Using Deep Convolutional Networks](https://arxiv.org/pdf/1501.00092.pdf) (Chao Dong, TPAMI 2015)
+
+[Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel Convolutional Neural Network](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Shi_Real-Time_Single_Image_CVPR_2016_paper.pdf) (Wenzhe Shi, CVPR 2016, [code](https://github.com/leftthomas/ESPCN))
+
+[Accurate Image Super-Resolution Using Very Deep Convolutional Networks](https://cv.snu.ac.kr/research/VDSR/VDSR_CVPR2016.pdf) (Jiwon Kim, CVPR 2016, [code](https://github.com/Jongchan/tensorflow-vdsr))
+
+[Accelerating the Super-Resolution Convolutional Neural Network](https://arxiv.org/pdf/1608.00367.pdf) (Chao Dong, ECCV 2016)
+
+[Perceptual Losses for Real-Time Style Transfer and Super-Resolution](https://cs.stanford.edu/people/jcjohns/papers/eccv16/JohnsonECCV16.pdf) (Justin Johnson, ECCV 2016, [code](https://github.com/yusuketomoto/chainer-fast-neuralstyle))
+
+[Image Restoration Using Convolutional Auto-encoders with Symmetric Skip Connections](https://arxiv.org/pdf/1606.08921.pdf) (Xiao-Jiao Mao, 2016)
+
+[Image Super-Resolution Using Dense Skip Connections](http://openaccess.thecvf.com/content_ICCV_2017/papers/Tong_Image_Super-Resolution_Using_ICCV_2017_paper.pdf) (Tong Tong, ICCV 2017, [code](https://github.com/kweisamx/TensorFlow-SR-DenseNet))
+
+[Image Super-Resolution via Deep Recursive Residual Network](http://cvlab.cse.msu.edu/pdfs/Tai_Yang_Liu_CVPR2017.pdf) (Tai Yang, CVPR 2017, [code](https://github.com/tyshiwo/DRRN_CVPR17))
+
+[Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](http://openaccess.thecvf.com/content_cvpr_2017/papers/Ledig_Photo-Realistic_Single_Image_CVPR_2017_paper.pdf) (Christian Ledig, CVPR 2017, [code](https://github.com/tensorlayer/srgan))
+
+[Pixel Recursive Super Resolution](https://arxiv.org/pdf/1702.00783.pdf) (Ryan Dahl, 2017, [code](https://github.com/nilboy/pixel-recursive-super-resolution))
+
+[Deep Back-Projection Networks for Super-Resolution](http://openaccess.thecvf.com/content_cvpr_2018/papers/Haris_Deep_Back-Projection_Networks_CVPR_2018_paper.pdf) (Muhammad Haris, CVPR 2018, [code](https://github.com/alterzero/DBPN-Pytorch))
 
 ### 机器学习
 
