@@ -164,6 +164,12 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Targeted Aspect-Based Sentiment Analysis via Embedding Commonsense Knowledge into an Attentive LSTM](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16541/16152) (Yukun Ma, AAAI 2018)
 
+[Modeling Inter-Aspect Dependencies for Aspect-Based Sentiment Analysis](http://www.aclweb.org/anthology/N18-2043) (Devamanyu Hazarika, NAACL 2018, [code](https://github.com/xgy221/lstm-inter-aspect))
+
+[IARM: Inter-aspect relation modeling with memory networks in aspect-based sentiment analysis](http://www.aclweb.org/anthology/D18-1377) (Navonil Majumder, EMNLP 2018, [code](https://github.com/SenticNet/IARM))
+
+[Convolution-based Memory Network for Aspect-based Sentiment Analysis](http://delivery.acm.org/10.1145/3220000/3210115/p1161-fan.pdf?ip=218.19.145.8&id=3210115&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1550307673_4083ae372b12292348e045d034b8feb3) (Chuang Fan, SIGIR 2018)
+
 [Transformation Networks for Target-Oriented Sentiment Classification](https://arxiv.org/pdf/1805.01086.pdf) (Xin Li, ACL 2018, [code](https://github.com/lixin4ever/TNet))
 
 #### 机器翻译
