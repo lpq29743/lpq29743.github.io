@@ -34,11 +34,17 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Learned in Translation: Contextualized Word Vectors](https://arxiv.org/pdf/1708.00107.pdf) (Byran McCann, NIPS 2017, [code](https://github.com/salesforce/cove))
 
+[A Structured Self-attentive Sentence Embedding](https://arxiv.org/pdf/1703.03130.pdf) (Zhouhan Lin, ICLR 2017, [code](https://github.com/ExplorerFreda/Structured-Self-Attentive-Sentence-Embedding))
+
 [Deep contextualized word representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp))
+
+[Baseline Needs More Love: On Simple Word-Embedding-Based Models and Associated Pooling Mechanisms](https://arxiv.org/pdf/1805.09843.pdf) (Dinghan Shen, ACL 2018, [code](https://github.com/dinghanshen/SWEM))
 
 [Glyce: Glyph-vectors for Chinese Character Representations](https://arxiv.org/pdf/1901.10125.pdf) (Yuxian Meng, 2019)
 
 #### 语言模型
+
+[A Study on Neural Network Language Modeling](https://arxiv.org/pdf/1708.07252.pdf) (Dengliang Shi, 2017)
 
 [A Neural Probabilistic Language Model](http://www.iro.umontreal.ca/~vincentp/Publications/lm_jmlr.pdf) (Yoshua Bengio, JMLR 2003)
 
@@ -71,6 +77,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Very Deep Convolutional Networks for Text Classification](http://cn.arxiv.org/pdf/1606.01781) (Alexis Conneau, EACL 2017, [code](https://github.com/zonetrooper32/VDCNN))
 
 [A Hybrid CNN-RNN Alignment Model for Phrase-Aware Sentence Classification](http://www.aclweb.org/anthology/E17-2071) (Shiou Tian Hsu, EACL 2017)
+
+[Learning Structured Representation for Text Classification via Reinforcement Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/zhang.pdf) (Tianyang Zhang, AAAI 2018)
 
 [Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/pdf/1801.06146.pdf) (Jeremy Howard, ACL 2018)
 
@@ -212,6 +220,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 #### 对话系统
 
+[A Survey on Dialogue Systems: Recent Advances and New Frontiers](https://arxiv.org/pdf/1711.01731.pdf) (Hongshen Chen, 2017)
+
+[AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine](http://www.aclweb.org/anthology/P/P17/P17-2079.pdf) (Minghui Qiu, ACL 2017)
+
 ##### 对话管理
 
 [Machine Learning for Dialog State Tracking: A Review](https://ai.google/research/pubs/pub44018) (Matthew Henderson, 2015)
@@ -284,6 +296,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 ##### 知识图谱表示和补全
 
+[Knowledge Graph Embedding: A Survey of Approaches and Applications](https://www.computer.org/csdl/trans/tk/2017/12/08047276-abs.html) (Quan Wang, 2017)
+
 [Translating Embeddings for Modeling Multi-relational Data](https://www.utc.fr/~bordesan/dokuwiki/_media/en/transe_nips13.pdf) (Antoine Bordes, NIPS 2013, [code](https://github.com/thunlp/KB2E))
 
 [Knowledge Graph Embedding by Translating on Hyperplanes](https://pdfs.semanticscholar.org/2a3f/862199883ceff5e3c74126f0c80770653e05.pdf) (Zhen Wang, AAAI 2014, [code](https://github.com/thunlp/KB2E))
@@ -341,6 +355,12 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Deep Reinforcement Learning for Chinese Zero pronoun Resolution](http://aclweb.org/anthology/P18-1053) (Qingyu Yin, ACL 2018, [code](https://github.com/qyyin/Reinforce4ZP))
 
 [Zero Pronoun Resolution with Attention-based Neural Network](http://aclweb.org/anthology/C18-1002) (Qingyu Yin, COLING 2018, [code](https://github.com/qyyin/AttentionZP))
+
+#### 自然语言生成
+
+[Survey of the State of the Art in Natural Language Generation: Core tasks, applications and evaluation](https://arxiv.org/pdf/1703.09902.pdf) (Albert Gatt, 2017)
+
+[Neural Text Generation: A Practical Guide](https://arxiv.org/pdf/1711.09534.pdf) (Ziang Xie, 2017)
 
 ### 计算机视觉
 
@@ -450,11 +470,15 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Densely Connected Convolutional Networks](http://www.cs.cmu.edu/~jeanoh/16-785/papers/huang-cvpr2017-densenet.pdf) (Gao Huang, CVPR 2017)
 
+[Tree-CNN: A Deep Convolutional Neural Network for Lifelong Learning](https://arxiv.org/pdf/1802.05800.pdf) (Deboleena Roy, 2018, [code](https://github.com/magical2world/tensorflow-Tree-CNN))
+
 ##### 循环神经网络
 
 [Long short-term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
 
 [A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf) (Zachary C. Lipton, 2015)
+
+[Simple Recurrent Units for Highly Parallelizable Recurrence](https://arxiv.org/pdf/1709.02755.pdf) (Tao Lei, EMNLP 2018, [code](https://github.com/taolei87/sru))
 
 ##### 生成对抗网络
 
@@ -463,6 +487,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [NIPS 2016 Tutorial: Generative Adversarial Networks](https://arxiv.org/pdf/1701.00160.pdf) (Ian Goodfellow, NIPS 2016)
 
 [Generative Adversarial Networks: An Overview](https://arxiv.org/pdf/1710.07035.pdf) (Antonia Creswell, 2017)
+
+[How Generative Adversarial Nets and its variants Work: An Overview of GAN](https://arxiv.org/pdf/1711.05914.pdf) (Yongjun Hong, 2017)
 
 [Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/pdf/1611.07004.pdf) (Phillip Isola, CVPR 2017, [code](https://github.com/phillipi/pix2pix))
 
@@ -473,6 +499,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Wasserstein GAN](https://arxiv.org/pdf/1701.07875.pdf) (Martin Arjovsky, 2017, [code](<https://github.com/martinarjovsky/WassersteinGAN))
 
 ##### 注意力机制和记忆网络
+
+[An Introductory Survey on Attention Mechanisms in NLP Problems](https://arxiv.org/pdf/1811.05544.pdf) (Dichao Hu, 2018)
 
 [On the properties of neural machine translation: Encoder–Decoder approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014)
 
@@ -493,6 +521,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Gated End-to-End Memory Networks](http://www.aclweb.org/anthology/E/E17/E17-1001.pdf) (Fei Liu, 2016, [note](https://zhuanlan.zhihu.com/p/30722242))
 
 [Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention))
+
+[DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding](https://arxiv.org/pdf/1709.04696.pdf) (Tao Shen, 2017, [code](https://github.com/taoshen58/DiSAN))
 
 [You May Not Need Attention](https://arxiv.org/pdf/1810.13409.pdf) (Ofir Press, 2018, [code](https://github.com/ofirpress/YouMayNotNeedAttention))
 
@@ -536,13 +566,23 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 ### 强化学习
 
+[A Brief Survey of Deep Reinforcement Learning](https://arxiv.org/pdf/1708.05866.pdf) (Kai Arulkumaran, 2017)
+
+[Deep Reinforcement Learning: An Overview](https://arxiv.org/pdf/1701.07274.pdf) (Yuxi Li, 2017)
+
 #### 强化学习应用
+
+[Playing Atari with Deep Reinforcement Learning](https://arxiv.org/pdf/1312.5602.pdf) (Volodymyr Mnih, 2013)
 
 [Mastering the game of Go with deep neural networks and tree search](http://www.worlduc.com/FileSystem/1/134755/1585588/ac5b78a1934c49bb93a1f3ad09d96e46.pdf) (David Silver, Nature 2016)
 
 [Mastering the game of Go without human knowledge](https://skatgame.net/mburo/ps/alphago-zero.pdf) (David Silver, Nature 2017, [code](https://github.com/gcp/leela-zero))
 
 ### 推荐系统
+
+[Deep Learning based Recommender System: A Survey and New Perspectives](http://de.arxiv.org/pdf/1707.07435v5) (Shuai Zhang, 2017, [code](https://github.com/cheungdaven/DeepRec))
+
+[A review on deep learning for recommender systems: challenges and remedies](https://link.springer.com/article/10.1007/s10462-018-9654-y) (Zeynep Batmaz, 2018)
 
 #### 新闻推荐
 
