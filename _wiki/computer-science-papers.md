@@ -32,11 +32,11 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Enriching Word Vectors with Subword Information](https://pdfs.semanticscholar.org/e2db/a792360873aef125572812f3673b1a85d850.pdf) (Piotr Bojanowski, 2016, [note](https://github.com/xwzhong/papernote/blob/master/embedding/Enriching%20Word%20Vectors%20with%20Subword%20Information.md))
 
-[Learned in Translation: Contextualized Word Vectors](https://arxiv.org/pdf/1708.00107.pdf) (Byran McCann, NIPS 2017, [code](https://github.com/salesforce/cove))
+[Learned in Translation: Contextualized Word Vectors](https://arxiv.org/pdf/1708.00107.pdf) (Byran McCann, NIPS 2017, [code](https://github.com/salesforce/cove), [note](https://www.sohu.com/a/162634620_610300))
 
-[A Structured Self-attentive Sentence Embedding](https://arxiv.org/pdf/1703.03130.pdf) (Zhouhan Lin, ICLR 2017, [code](https://github.com/ExplorerFreda/Structured-Self-Attentive-Sentence-Embedding))
+[A Structured Self-attentive Sentence Embedding](https://arxiv.org/pdf/1703.03130.pdf) (Zhouhan Lin, ICLR 2017, [code](https://github.com/ExplorerFreda/Structured-Self-Attentive-Sentence-Embedding), [note](https://www.sohu.com/a/130767150_505880))
 
-[Deep contextualized word representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp))
+[Deep contextualized word representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp), [note](https://zhuanlan.zhihu.com/p/38254332))
 
 [Baseline Needs More Love: On Simple Word-Embedding-Based Models and Associated Pooling Mechanisms](https://arxiv.org/pdf/1805.09843.pdf) (Dinghan Shen, ACL 2018, [code](https://github.com/dinghanshen/SWEM))
 
@@ -67,6 +67,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Convolutional Neural Networks for Sentence Classification](http://www.aclweb.org/anthology/D14-1181) (Yoon Kim, EMNLP 2014, [code](https://github.com/brightmart/text_classification))
 
 [Recurrent Convolutional Neural Networks for Text Classification](http://www.nlpr.ia.ac.cn/cip/~liukang/liukangPageFile/Recurrent%20Convolutional%20Neural%20Networks%20for%20Text%20Classification.pdf) (Siwei Lai, AAAI 2015, [code](https://github.com/brightmart/text_classification))
+
+[Deep Unordered Composition Rivals Syntactic Methods for Text Classification](http://www.aclweb.org/anthology/P15-1162) (Mohit Iyyer, ACL 2015, [code](https://github.com/miyyer/dan))
 
 [Character-level Convolutional Networks for Text Classification](https://arxiv.org/pdf/1509.01626.pdf) (Xiang Zhang, 2016, [code](https://github.com/dongjun-Lee/text-classification-models-tf))
 
@@ -255,6 +257,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [ROUGE: A Package for Automatic Evaluation of Summaries](http://www.aclweb.org/anthology/W/W04/W04-1013.pdf) (Chin-Yew Lin, 2004)
 
 [BLEU: a Method for Automatic Evaluation of Machine Translation](http://aclweb.org/anthology/P/P02/P02-1040.pdf) (Kishore Papineni, 2002)
+
+[Teaching Machines to Read and Comprehend](https://lanl.arxiv.org/pdf/1506.03340.pdf) (Karl Moritz Hermann, NIPS 2015, [code](https://github.com/thomasmesnard/DeepMind-Teaching-Machines-to-Read-and-Comprehend))
+
+[Text Understanding with the Attention Sum Reader Network](http://www.aclweb.org/anthology/P16-1086) (Rudolf Kadlec, ACL 2016, [code](https://github.com/rkadlec/asreader))
 
 [Machine comprehension using match-lstm and answer pointer](https://arxiv.org/pdf/1608.07905.pdf) (Shuohang Wang, ICLR 2017, [code](https://github.com/MurtyShikhar/Question-Answering))
 

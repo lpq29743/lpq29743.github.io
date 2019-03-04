@@ -631,7 +631,7 @@ keywords: 面试题
 
 69. 了解哪些词向量方法？
 
-    答：固定表征（word2vec，Glove，FastText）和动态表征（elmo，GPT，bert）。
+    答：固定表征（word2vec，Glove，FastText）和动态表征（cove，elmo，GPT，bert）。
 
 70. word2vec 的原理？
 
@@ -675,41 +675,93 @@ keywords: 面试题
 
     答：基于语言模型的动态词向量。采用 1 层静态向量 + 2 层 LSTM 提取特征，然后将两个方向得到的向量进行拼接。
 
-80. GPT 的原理？
+80. cove 和 elmo 的联系和区别
+
+    答：都用了 LSTM 编码，但前者的输入单位是词，后者是字符。
+
+81. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-81. bert 的原理？
+82. bert 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-82. Transformer 的原理？
+83. Transformer 的原理？
 
     答：Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
 
-83. 词向量相比传统特征有什么优势？
+84. 词向量相比传统特征有什么优势？
 
     答：传统特征具有稀疏性，且不能计算词的相似度，词向量很好地解决了这两个问题。
 
-84. 你在项目中是怎么使用词向量的？
+85. 你在项目中是怎么使用词向量的？
 
     答：一般是运用预训练词向量，对于没有在词表里面的词，用高斯分布或均匀分布随机初始化
 
-85. 词向量是预训练的好，还是根据语料训练的好？
+86. 词向量是预训练的好，还是根据语料训练的好？
 
     答：看数据量大小。
 
-86. 如何解决非词典词问题？
+87. 如何解决非词典词问题？
 
     答：UNK；随机初始化；subword。
 
-87. doc2vec 的原理是？
+88. doc2vec 的原理是？
 
     答：有 PV-DM 和 PV-DBOW 两个模型，前者的任务是将段落向量和多个词向量连接，预测下一个词，相当于 word2vec 中的 CBOW，后者以段落向量为输入，预测具体的词，相当于 word2vec 中的 Skip-Gram。
 
-88. 句子级和文档级分类的方法？
+89. 句子级和文档级分类的方法？
 
     答：句子级可以用很多成熟的模型（BiLSTM + Attention），文档级可以用 HAN 模型。
+
+90. Deep LSTM Reader 是什么？
+
+    答：LSTM 编码 Q ||| D 或 D ||| Q，得到的表示进行处理得到结果。
+
+91. Attentive Reader 是什么？
+
+    答：LSTM 模型对 Document 和 Query 分别编码，在 Document 编码后还加了 Attention 操作。
+
+92. Impatient Reader 是什么？
+
+    答：Attentive Reader 基础上改进，针对 Query 的每个 token，都有一个 Attention 向量，将得到的 Attention 向量输入 LSTM，最后的输出可处理得到结果。
+
+93. Attention Sum Reader 是什么？
+
+    答：编码后，根据 Query 在 Document 上做 Attention。
+
+94. Match-LSTM 是什么？
+
+    答：编码后，根据 Query 在 Document 上做 Attention，然后加权向量输入 LSTM 得到表示。
+
+95. Pointer-Net 是什么？
+
+    答：利用 Attention 选择 pointer，分为序列模型和边界模型。
+
+96. BiDAF 是什么？
+
+    答：双向 Attention。
+
+97. AoA Reader 是什么？
+
+    答：Attention Sum Reader 基础上改进，不过也是实现了一个双向 LSTM。
+
+98. QANet 是什么？
+
+    答：编码层变成了 CNN 和 self Attention，分别捕获局部信息和全局信息，加快了训练速度。
+
+99. R-Net 是什么？
+
+    答：基于 Match-LSTM 改进，引入了字符级向量，门限注意力机制，self Attention。
+
+100. SLQA 是什么？
+
+     答：交互层先使用双向 Attention，再使用 self Attention。另外，为了避免过分注重细节，还融入了全局信息。
+
+101. max pooling 和 mean pooling 是什么？有其他方式吗？
+
+     答：pooling 是为了降维，整合特征。平均池化可能会把有用的信息平滑掉，所以效果经常不比最大池化好。可以计算最大几个值的均值。
 
 #### Programming Language
 
@@ -919,6 +971,34 @@ keywords: 面试题
    - 错误分析
 
 10. 指代消解
+
+    - 解决零指代消解的传统方法有哪些？
+
+      传统方法是分别手动设计 ZP 和 NP 的特征，然后用 SVM 等机器学习方法分类。
+
+    - 解决零指代消解的深度方法有哪些？
+
+      主要都是基于 Attention Mechanism 和 Memory Network 的方法，也有用强化学习的。Global 信息也被大部分方法考虑。机器阅读理解方面的方法经常被迁移到此任务上。
+
+    - 如何识别是否可消解？
+
+      阈值。
+
+    - 如何识别零代词的位置？
+
+      特征提取后分类。
+
+    - 如何抽取先行词？
+
+      最近两行的名代词或名词词组。
+
+    - 遇到了哪些难题？怎么解决？
+
+      验证集过拟合，早停止。
+
+    - 学到了什么？
+
+      全局信息；当成决策问题。
 
 ### Ask Back
 
