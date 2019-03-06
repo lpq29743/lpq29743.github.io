@@ -86,6 +86,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Graph Convolutional Networks for Text Classification](https://arxiv.org/pdf/1809.05679v1.pdf) (Liang Yao, AAAI 2019, [code](https://github.com/yao8839836/text_gcn))
 
+##### 多标签文本分类
+
+[SGM: Sequence Generation Model for Multi-Label Classification](http://aclweb.org/anthology/C18-1330) (Pengcheng Yang, COLING 2018, [code](https://github.com/lancopku/SGM))
+
 #### 文本匹配
 
 [Learning Deep Structured Semantic Models for Web Search using Clickthrough Data](http://delivery.acm.org/10.1145/2510000/2505665/p2333-he.pdf?ip=218.19.145.8&id=2505665&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1545793847_ac9774c47a9b2bab6395221862331678) (Po-Sen Huang, CIKM 2013, [code](https://github.com/liaha/dssm))
@@ -196,13 +200,17 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Recurrent Attention Network on Memory for Aspect Sentiment Analysis](http://www.aclweb.org/anthology/D17-1047) (Peng Chen, EMNLP 2017, [code](https://github.com/lpq29743/RAM), [note](https://zhuanlan.zhihu.com/p/34043504))
 
+[Attention Modeling for Targeted Sentiment](http://leoncrashcode.github.io/Documents/EACL2017.pdf) (Jiangming Liu, EACL 2017, [code](https://github.com/vipzgy/AttentionTargetClassifier))
+
 [Targeted Aspect-Based Sentiment Analysis via Embedding Commonsense Knowledge into an Attentive LSTM](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16541/16152) (Yukun Ma, AAAI 2018)
 
 [Modeling Inter-Aspect Dependencies for Aspect-Based Sentiment Analysis](http://www.aclweb.org/anthology/N18-2043) (Devamanyu Hazarika, NAACL 2018, [code](https://github.com/xgy221/lstm-inter-aspect))
 
 [IARM: Inter-aspect relation modeling with memory networks in aspect-based sentiment analysis](http://www.aclweb.org/anthology/D18-1377) (Navonil Majumder, EMNLP 2018, [code](https://github.com/SenticNet/IARM))
 
-[Convolution-based Memory Network for Aspect-based Sentiment Analysis](http://delivery.acm.org/10.1145/3220000/3210115/p1161-fan.pdf?ip=218.19.145.8&id=3210115&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1550307673_4083ae372b12292348e045d034b8feb3) (Chuang Fan, SIGIR 2018)
+[Convolution-based Memory Network for Aspect-based Sentiment Analysis](https://dl.acm.org/citation.cfm?id=3209978.3210115) (Chuang Fan, SIGIR 2018)
+
+[Aspect Based Sentiment Analysis with Gated Convolutional Networks](http://www.aclweb.org/anthology/P18-1234) (Wei Xue, ACL 2018, [code](https://github.com/wxue004cs/GCAE))
 
 [Transformation Networks for Target-Oriented Sentiment Classification](https://arxiv.org/pdf/1805.01086.pdf) (Xin Li, ACL 2018, [code](https://github.com/lixin4ever/TNet))
 

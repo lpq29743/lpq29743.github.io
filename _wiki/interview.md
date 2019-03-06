@@ -169,7 +169,7 @@ keywords: 面试题
 
 9. 一枚不均匀硬币，抛了 100 次，有 70 次朝上，第 101 次朝上的概率是多少，公式是如何推导？
 
-  答：7/10。二项分布的极大似然估计，可参考[此链接](https://www.zhihu.com/question/24124998)。
+    答：7/10。二项分布的极大似然估计，可参考[此链接](https://www.zhihu.com/question/24124998)。
 
 10. 4个人，52张扑克牌，红桃 A 和黑桃 A 同时被一个人拿到的概率？
 
@@ -419,11 +419,15 @@ keywords: 面试题
 
     定义拉格朗日函数：$$L(w, b, \alpha) = \frac{1}{2} \|w\|^2 + \sum_{i = 1}^m{\alpha_i(1 - y_i(w^Tx_i + b))}$$；
 
-    对 $$w, b$$ 求导，令导数为 0，求解 $$w = \sum_{i=1}^m{\alpha_iy_ix_i}, 0=\sum_{i=1}^m{\alpha_iy_i}$$；
+    转换为拉格朗日的极小极大问题：$$\min_{w, b}\max_{\alpha}L(w, b, \alpha)$$，即先求拉格朗日的上界，再最小化上界；
 
-    代回拉格朗日函数，得到对偶问题：$$\min_\alpha{\frac{1}{2}\sum_{i=1}^m{\sum_{j=1}^m{\alpha_i\alpha_jy_iy_jx_i^Tx_j}} - \sum_{i=1}^m\alpha_i} \ \ s.t. \ \ \sum_{i=1}^m{\alpha_iy_i=0,\alpha_i \geq 0}$$；
+    可进一步转换为极大极小问题，即对偶问题：$$\max_{\alpha}\min_{w, b}L(w, b, \alpha)​$$；
 
-    求解问题，解出 $$\alpha$$，从而解得 $$w, b$$。
+    先求极小问题，对 $$w, b$$ 求导，令导数为 0，求解 $$w = \sum_{i=1}^m{\alpha_iy_ix_i}, 0=\sum_{i=1}^m{\alpha_iy_i}$$；
+
+    代回拉格朗日函数，得对偶问题：$$\max_\alpha-{\frac{1}{2}\sum_{i=1}^m{\sum_{j=1}^m{\alpha_i\alpha_jy_iy_jx_i^Tx_j}} + \sum_{i=1}^m\alpha_i} \ \ s.t. \ \ \sum_{i=1}^m{\alpha_iy_i=0,\alpha_i \geq 0}$$；
+
+    求解问题，解出 $$\alpha$$，从而解得 $$w, b$$，$$\alpha_i > 0$$ 对应的样本即为支持向量。
 
 23. 为什么要将求解 SVM 的原始问题转换为其对偶问题？
 
@@ -695,71 +699,75 @@ keywords: 面试题
 
     答：传统特征具有稀疏性，且不能计算词的相似度，词向量很好地解决了这两个问题。
 
-85. 你在项目中是怎么使用词向量的？
+85. 上下文相关词向量相比固定词向量有什么优缺点？
+
+    可以对非登录词和一词多义处理地更好，但训练代价大。
+
+86. 你在项目中是怎么使用词向量的？
 
     答：一般是运用预训练词向量，对于没有在词表里面的词，用高斯分布或均匀分布随机初始化
 
-86. 词向量是预训练的好，还是根据语料训练的好？
+87. 词向量是预训练的好，还是根据语料训练的好？
 
     答：看数据量大小。
 
-87. 如何解决非词典词问题？
+88. 如何解决非词典词问题？
 
     答：UNK；随机初始化；subword。
 
-88. doc2vec 的原理是？
+89. doc2vec 的原理是？
 
     答：有 PV-DM 和 PV-DBOW 两个模型，前者的任务是将段落向量和多个词向量连接，预测下一个词，相当于 word2vec 中的 CBOW，后者以段落向量为输入，预测具体的词，相当于 word2vec 中的 Skip-Gram。
 
-89. 句子级和文档级分类的方法？
+90. 句子级和文档级分类的方法？
 
     答：句子级可以用很多成熟的模型（BiLSTM + Attention），文档级可以用 HAN 模型。
 
-90. Deep LSTM Reader 是什么？
+91. Deep LSTM Reader 是什么？
 
     答：LSTM 编码 Q ||| D 或 D ||| Q，得到的表示进行处理得到结果。
 
-91. Attentive Reader 是什么？
+92. Attentive Reader 是什么？
 
     答：LSTM 模型对 Document 和 Query 分别编码，在 Document 编码后还加了 Attention 操作。
 
-92. Impatient Reader 是什么？
+93. Impatient Reader 是什么？
 
     答：Attentive Reader 基础上改进，针对 Query 的每个 token，都有一个 Attention 向量，将得到的 Attention 向量输入 LSTM，最后的输出可处理得到结果。
 
-93. Attention Sum Reader 是什么？
+94. Attention Sum Reader 是什么？
 
     答：编码后，根据 Query 在 Document 上做 Attention。
 
-94. Match-LSTM 是什么？
+95. Match-LSTM 是什么？
 
     答：编码后，根据 Query 在 Document 上做 Attention，然后加权向量输入 LSTM 得到表示。
 
-95. Pointer-Net 是什么？
+96. Pointer-Net 是什么？
 
     答：利用 Attention 选择 pointer，分为序列模型和边界模型。
 
-96. BiDAF 是什么？
+97. BiDAF 是什么？
 
     答：双向 Attention。
 
-97. AoA Reader 是什么？
+98. AoA Reader 是什么？
 
     答：Attention Sum Reader 基础上改进，不过也是实现了一个双向 LSTM。
 
-98. QANet 是什么？
+99. QANet 是什么？
 
     答：编码层变成了 CNN 和 self Attention，分别捕获局部信息和全局信息，加快了训练速度。
 
-99. R-Net 是什么？
+100. R-Net 是什么？
 
-    答：基于 Match-LSTM 改进，引入了字符级向量，门限注意力机制，self Attention。
+     答：基于 Match-LSTM 改进，引入了字符级向量，门限注意力机制，self Attention。
 
-100. SLQA 是什么？
+101. SLQA 是什么？
 
      答：交互层先使用双向 Attention，再使用 self Attention。另外，为了避免过分注重细节，还融入了全局信息。
 
-101. max pooling 和 mean pooling 是什么？有其他方式吗？
+102. max pooling 和 mean pooling 是什么？有其他方式吗？
 
      答：pooling 是为了降维，整合特征。平均池化可能会把有用的信息平滑掉，所以效果经常不比最大池化好。可以计算最大几个值的均值。
 

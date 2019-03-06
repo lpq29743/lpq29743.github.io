@@ -20,3 +20,14 @@ PCA 需要找到一个超平面，使得样本点离该超平面距离足够近�
 2. 协方差矩阵
 3. 奇异值分解？
 4. ​
+
+### SVD
+
+https://zealscott.com/blog/linear-algebra-notes-15-svd-decomposition/
+
+https://zhuanlan.zhihu.com/p/36546367
+
+https://zhuanlan.zhihu.com/p/36799949
+
+https://www.zhihu.com/question/38319536
+
