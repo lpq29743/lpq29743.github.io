@@ -436,6 +436,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010)
 
+[What is the expectation maximization algorithm?](http://www.cs.virginia.edu/~mr4xb/notes/EM/em_tutorial.pdf) (Chuong B Do, 2008)
+
 ##### 样本不平衡
 
 [Learning from Imbalanced Data](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5128907) (Haibo He, 2009)
