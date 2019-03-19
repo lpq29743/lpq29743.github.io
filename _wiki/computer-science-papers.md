@@ -140,6 +140,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Mixing Dirichlet Topic Models and Word Embeddings to Make lda2vec](https://arxiv.org/pdf/1605.02019.pdf) (Christopher Moody, 2016, [code](https://github.com/cemoody/lda2vec))
 
+#### 关键词抽取
+
+[TextRank: Bringing Order into Texts](http://202.116.81.74/cache/16/03/web.eecs.umich.edu/ed616fd7b9f50b15ac2f92467a16c9f7/mihalcea.emnlp04.pdf) (Rada Mihalcea, EMNLP 2014)
+
 #### 情感分析
 
 ##### 概述
@@ -283,6 +287,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [R-Net: machine reading comprehension with self-matching networks](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf) (Natural Language Computing Group, 2017, [code](https://github.com/HKUST-KnowComp/R-Net))
 
 [QANet: Combining Local Convolution with Global Self-Attention for Reading Comprehension](https://openreview.net/pdf?id=B14TlG-RW) (Adams Wei Yu, ICLR 2018, [code](https://github.com/minsangkim142/Fast-Reading-Comprehension))
+
+[Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering](http://www.aclweb.org/anthology/P18-1158) (Wei Wang, ACL 2018, [code](https://github.com/SparkJiao/SLQA))
 
 ##### 基于知识图谱的问答
 
