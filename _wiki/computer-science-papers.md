@@ -444,6 +444,22 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [What is the expectation maximization algorithm?](http://www.cs.virginia.edu/~mr4xb/notes/EM/em_tutorial.pdf) (Chuong B Do, 2008)
 
+##### 零样本学习
+
+[Zero-Shot Learning with Semantic Output Codes](http://www.cs.cmu.edu/afs/cs/project/theo-73/www/papers/zero-shot-learning.pdf) (Mark Palatucci, NIPS 2009)
+
+[Learning To Detect Unseen Object Classes by Between-Class Attribute Transfer](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=03500C970796A39BCC5A437E4AA79B10?doi=10.1.1.165.9750&rep=rep1&type=pdf) (Christoph H. Lampert, CVPR 2009)
+
+[DeViSE: A Deep Visual-Semantic Embedding Model](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=CD1A6E4145A750B305F3512006D12FE9?doi=10.1.1.466.176&rep=rep1&type=pdf) (Andrea Frome, NIPS 2013)
+
+[Label-Embedding for Attribute-Based Classification](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=94AE59377DBC233D6EE1808F16B505CB?doi=10.1.1.371.9746&rep=rep1&type=pdf) (Zeynep Akata, CVPR 2013)
+
+[Zero-Shot Recognition using Dual Visual-Semantic Mapping Paths](https://arxiv.org/pdf/1703.05002.pdf) (Yanan Li, 2017)
+
+##### 少样本学习
+
+[One-Shot Learning of Object Categories](http://vision.stanford.edu/documents/Fei-FeiFergusPerona2006.pdf) (Li Fei-Fei, PAMI 2006)
+
 ##### 样本不平衡
 
 [Learning from Imbalanced Data](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5128907) (Haibo He, 2009)
