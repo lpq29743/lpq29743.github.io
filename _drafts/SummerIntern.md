@@ -45,13 +45,37 @@ Train Loss 不下降怎么处理
 
 ### 平安科技
 
-性格测试
+#### 性格测试
+
+#### 笔试
+
+leetcode 15
+
+leetcode 45
+
+leetcode 365
+
+leetcode 773
+
+leetcode 887
+
+https://www.zhihu.com/question/19690210/answer/514119129
 
 ### 网易互娱-人工智能工程师
 
 http://www.hankcs.com/program/algorithm/poj-1981-circle-and-points.html
 
 ### 阿里大文娱
+
+#### 分享
+
+统计学习方法
+
+leetcode
+
+剑指 Offer
+
+#### 面试
 
 项目讲述
 
@@ -144,6 +168,10 @@ leetcode 845
 sigmoid 和 relu 的求导方式
 
 batch normalization 和 layer normalization
+
+### 华为
+
+笔试
 
 
 
