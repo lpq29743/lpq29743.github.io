@@ -68,7 +68,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Recurrent Convolutional Neural Networks for Text Classification](http://www.nlpr.ia.ac.cn/cip/~liukang/liukangPageFile/Recurrent%20Convolutional%20Neural%20Networks%20for%20Text%20Classification.pdf) (Siwei Lai, AAAI 2015, [code](https://github.com/brightmart/text_classification))
 
-[Deep Unordered Composition Rivals Syntactic Methods for Text Classification](http://www.aclweb.org/anthology/P15-1162) (Mohit Iyyer, ACL 2015, [code](https://github.com/miyyer/dan))
+[Deep Unordered Composition Rivals Syntactic Methods for Text Classification](http://www.aclweb.org/anthology/P15-1162) (Mohit Iyyer, ACL 2015, [code1](https://github.com/lpq29743/text_classification/blob/master/models/dl_models/dan.py), [code2](https://github.com/miyyer/dan))
 
 [Character-level Convolutional Networks for Text Classification](https://arxiv.org/pdf/1509.01626.pdf) (Xiang Zhang, 2016, [code](https://github.com/dongjun-Lee/text-classification-models-tf))
 
