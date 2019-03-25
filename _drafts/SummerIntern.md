@@ -89,7 +89,7 @@ https://ac.nowcoder.com/acm/problem/21652
 
 https://blog.csdn.net/j2_o2/article/details/87971817?tdsourcetag=s_pctim_aiomsg
 
-### 腾讯
+### 腾讯 TEG
 
 #### 一面
 
@@ -126,6 +126,40 @@ l1、l2 范数
 绝对众数
 
 64 匹马，8 条跑道，跑多少次可以决出前四名
+
+### 腾讯 PCG
+
+#### 一面
+
+Python 正则分组
+
+Python 静态方法和非静态方法
+
+Python 装饰器和其用途
+
+Python 浅拷贝和深拷贝
+
+Linux 后台运行
+
+Linux 查看 GPU 使用
+
+awk 使用
+
+vim 拷贝 3 行
+
+vim 分屏
+
+vim 一半出来查资料
+
+vim 行数
+
+TensorFlow 的 placeholder 和 Variable 的区别
+
+TensorFlow fine-tune 怎么做，参数怎么传进去，如果梯度要不变，怎么做
+
+TensorFlow estimater
+
+分类为什么用交叉熵不用均方误差
 
 #### 科大讯飞
 
