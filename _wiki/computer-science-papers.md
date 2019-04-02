@@ -396,11 +396,15 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [You Only Look Once: Unified, Real-Time Object Detection](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Redmon_You_Only_Look_CVPR_2016_paper.pdf) (Joseph Redmon, CVPR 2016, [code](https://github.com/gliese581gg/YOLO_tensorflow))
 
-[YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf) (Joseph Redmon, 2016, [code](https://github.com/experiencor/keras-yolo2))
+[SSD: Single Shot MultiBox Detector](http://www.cs.unc.edu/~cyfu/pubs/ssd.pdf) (Wei Liu, ECCV 2016, [code](https://github.com/balancap/SSD-Tensorflow))
+
+[YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf) (Joseph Redmon, CVPR 2017, [code](https://github.com/experiencor/keras-yolo2))
+
+[Mask R-CNN](https://arxiv.org/pdf/1703.06870.pdf) (Kaiming He, ICCV 2017, [code](https://github.com/facebookresearch/Detectron))
 
 [YOLOv3: An Incremental Improvement](https://pjreddie.com/media/files/papers/YOLOv3.pdf) (Joseph Redmon, 2018, [code](https://github.com/qqwweee/keras-yolo3))
 
-[SSD: Single Shot MultiBox Detector](http://www.cs.unc.edu/~cyfu/pubs/ssd.pdf) (Wei Liu, ECCV 2016, [code](https://github.com/balancap/SSD-Tensorflow))
+[TensorMask: A Foundation for Dense Object Segmentation](https://arxiv.org/pdf/1903.12174.pdf) (Xinlei Chen, 2019)
 
 #### 图像超分辨
 
@@ -602,6 +606,16 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units](https://arxiv.org/pdf/1603.05201v2.pdf) (Wenling Shang, ICML 2016)
 
+#### 归一化
+
+[Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](http://de.arxiv.org/pdf/1502.03167) (Sergey Ioffe, ICML 2015)
+
+[Layer Normalization](https://arxiv.org/pdf/1607.06450.pdf) (Jimmy Lei Ba, 2016)
+
+[Instance Normalization: The Missing Ingredient for Fast Stylization](https://arxiv.org/pdf/1607.08022.pdf) (Dmitry Ulyanov, 2017)
+
+[Group Normalization](https://arxiv.org/pdf/1803.08494.pdf) (Yuxin Wu, 2018)
+
 ### 强化学习
 
 [A Brief Survey of Deep Reinforcement Learning](https://arxiv.org/pdf/1708.05866.pdf) (Kai Arulkumaran, 2017)
@@ -633,6 +647,14 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [A Contextual-Bandit Approach to Personalized News Article Recommendation](http://wwwconference.org/proceedings/www2010/www/p661.pdf) (Lihong Li, WWW 2010)
 
 [A Multi-View Deep Learning Approach for Cross Domain User Modeling in Recommendation Systems](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/frp1159-songA.pdf) (Ali Elkahky, WWW 2015)
+
+### 大数据
+
+[The Google File System](http://index-of.es/Misc/pdf/google_file_system.pdf) (Sanjay Ghemawat, SOSP 2003)
+
+[MapReduce: Simplified Data Processing on Large Clusters](https://homeostasis.scs.carleton.ca/~soma/distos/2008-03-24/mapreduce-osdi04.pdf) (Jeffrey Dean, OSDI 2004)
+
+[Bigtable: A Distributed Storage System for Structured Data](https://fenix.tecnico.ulisboa.pt/downloadFile/845043405442710/10.g-bigtable-osdi06.pdf) (Fay Chang, OSDI 2006)
 
 ### 工具
 
