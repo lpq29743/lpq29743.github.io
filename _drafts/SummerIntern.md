@@ -220,10 +220,3 @@ batch normalization 和 layer normalization
 2, 3/2, 10/7, 7/5, 18/13, ?
 
 122, 61, 24, 5, ?
-
-
-
-
-
-
-
