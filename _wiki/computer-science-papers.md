@@ -80,9 +80,9 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [A Hybrid CNN-RNN Alignment Model for Phrase-Aware Sentence Classification](http://www.aclweb.org/anthology/E17-2071) (Shiou Tian Hsu, EACL 2017)
 
-[Learning Structured Representation for Text Classification via Reinforcement Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/zhang.pdf) (Tianyang Zhang, AAAI 2018)
+[Learning Structured Representation for Text Classification via Reinforcement Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/zhang.pdf) (Tianyang Zhang, AAAI 2018, [code](https://github.com/keavil/AAAI18-code))
 
-[Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/pdf/1801.06146.pdf) (Jeremy Howard, ACL 2018)
+[Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/pdf/1801.06146.pdf) (Jeremy Howard, ACL 2018, [code](http://nlp.fast.ai/category/classification.html), [note](https://zhuanlan.zhihu.com/p/61590026))
 
 [Graph Convolutional Networks for Text Classification](https://arxiv.org/pdf/1809.05679v1.pdf) (Liang Yao, AAAI 2019, [code](https://github.com/yao8839836/text_gcn))
 
@@ -212,11 +212,13 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [IARM: Inter-aspect relation modeling with memory networks in aspect-based sentiment analysis](http://www.aclweb.org/anthology/D18-1377) (Navonil Majumder, EMNLP 2018, [code](https://github.com/SenticNet/IARM))
 
+[Content Attention Model for Aspect Based Sentiment Analysis](https://dl.acm.org/citation.cfm?doid=3178876.3186001) (Qiao Liu, WWW 2018, [code1](https://github.com/uestcnlp/Cabasc), [code2](https://github.com/songyouwei/ABSA-PyTorch), [note](https://zhuanlan.zhihu.com/p/61575551))
+
 [Convolution-based Memory Network for Aspect-based Sentiment Analysis](https://dl.acm.org/citation.cfm?id=3209978.3210115) (Chuang Fan, SIGIR 2018)
 
 [Aspect Based Sentiment Analysis with Gated Convolutional Networks](http://www.aclweb.org/anthology/P18-1234) (Wei Xue, ACL 2018, [code](https://github.com/wxue004cs/GCAE))
 
-[Transformation Networks for Target-Oriented Sentiment Classification](https://arxiv.org/pdf/1805.01086.pdf) (Xin Li, ACL 2018, [code](https://github.com/lixin4ever/TNet))
+[Transformation Networks for Target-Oriented Sentiment Classification](https://www.aclweb.org/anthology/P18-1087) (Xin Li, ACL 2018, [code](https://github.com/lixin4ever/TNet), [note](https://zhuanlan.zhihu.com/p/61586882))
 
 #### 机器翻译
 
@@ -352,6 +354,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Neural Fine-Grained Entity Type Classification with Hierarchy-Aware Loss](http://aclweb.org/anthology/N18-1002) (Peng Xu, NAACL 2018)
 
+[Ultra-fine entity typing](https://www.aclweb.org/anthology/P18-1009) (Eunsol Choi, ACL 2018)
+
 ##### 知识图谱应用
 
 [Learning beyond datasets: Knowledge Graph Augmented Neural Networks for Natural language Processing](https://arxiv.org/pdf/1802.05930.pdf) (Annervaz K M, HAACL HLT 2018)
@@ -442,7 +446,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Greedy function approximation: a gradient boosting machine](https://projecteuclid.org/download/pdf_1/euclid.aos/1013203451) (Jerome H. Friedman, 2001, [code](https://github.com/dmlc/xgboost))
 
-[XGBoost: A Scalable Tree Boosting System](https://arxiv.org/pdf/1603.02754.pdf#page=10&zoom=100,0,198) (Tianqi Chen, SIGKDD 2016, [code](https://github.com/dmlc/xgboost))
+[XGBoost: A Scalable Tree Boosting System](https://arxiv.org/pdf/1603.02754.pdf#page=10&zoom=100,0,198) (Tianqi Chen, SIGKDD 2016, [code](https://github.com/dmlc/xgboost), [note](http://djjowfy.com/2017/08/01/XGBoost%E7%9A%84%E5%8E%9F%E7%90%86/))
 
 [An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010)
 
