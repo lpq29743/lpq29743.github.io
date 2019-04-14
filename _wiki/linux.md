@@ -35,23 +35,130 @@ ls -R
 
 ### cd
 
+```bash
+# 切换到某个路径，可为绝对路径，也可为相对路径
+cd some_dir
+# 相当于 cd ~，切换到 /home 目录
+cd
+```
+
 ### pwd
+
+```bash
+# 打印当前工作目录
+pwd
+```
 
 ### mkdir
 
+```bash
+# 创建一个新目录
+mkdir new_dir
+# 创建多个新目录
+mkdir new_dir1 new_dir2
+# 递归创建新目录
+mkdir -p new_dir/sub_new_dir
+# 创建新目录并设置权限（方式一）
+mkdir -m=r-- new_dir
+# 创建新目录并设置权限（方式二）
+mkdir -m 711 new_dir
+# 创建目录并打印信息
+mkdir -v new_dir
+```
+
 ### rm
+
+```bash
+# 删除文件
+rm file
+# 删除前询问
+rm -i file
+# 强制删除，无需确认
+rm -f file
+# 将目录及其下文件删除
+rm -r dir
+# 删除并打印信息
+rm -v file
+```
 
 ### rmdir
 
+```bash
+# 删除目录
+mkdir dir
+# 递归删除目录
+mkdir -p new_dir/sub_new_dir
+```
+
 ### mv
+
+```bash
+# 移动一个文件到目录
+mv file dir
+# 移动多个文件到目录
+mv file1 file2 dir
+# 文件改名
+mv file1 file2
+# 文件改名（询问）
+mv -i file1 file2
+# 文件改名（不询问）
+mv -f file1 file2
+# 文件覆盖前做备份
+mv -b file1 file2
+# 目录移动
+mv dir1 dir2
+```
 
 ### cp
 
+```bash
+# 复制文件
+cp file1 file2
+# 复制文件（询问）
+cp -i file1 file2
+# 复制文件（备份）
+cp -b file1 file2
+# 创建硬链接
+cp -l file1 file2
+# 创建软链接
+cp -s file1 file2
+# 递归复制目录
+cp -r dir1 dir2
+```
+
 ### scp
 
-### rsync
+```bash
+# 从本地复制到远程
+scp /path/file1 myuser@192.168.0.1:/path/file2
+# 从远程复制到本地
+scp myuser@192.168.0.1:/path/file2 /path/file1
+# 限制速度为 400 Kbit/s
+scp -l 400 /path/file1 myuser@192.168.0.1:/path/file2
+# 使用 2222 端口
+scp -P 2222 /path/file1 myuser@192.168.0.1:/path/file2
+# 使用 IPv4
+scp -4 /path/file1 myuser@192.168.0.1:/path/file2
+# 使用 IPv6
+scp -6 /path/file1 myuser@192.168.0.1:/path/file2
+```
 
 ### touch
+
+```bash
+# 创建一个空文件
+touch new_file
+# 修改文件的时间属性为当前系统时间
+touch old_file
+# 只更新访问时间
+touch -a old_file
+# 只更新修改时间
+touch -m old_file
+# 将一个文件的时间属性复制到另一个文件上
+touch -r source target
+# 指定时间属性（2 月 5 号 13 点 51 分）
+touch -t 02051351 old_file
+```
 
 ### cat
 
@@ -134,6 +241,8 @@ tail -n +20 test.txt
 # 显示前 20 行，但从第 11 行开始
 head -n 20 test.txt | tail -n +11
 ```
+
+### umask
 
 ### which
 
