@@ -161,6 +161,12 @@ TensorFlow estimater
 
 分类为什么用交叉熵不用均方误差
 
+### 腾讯
+
+笔试
+
+https://blog.csdn.net/watermelon_learn/article/details/89084823
+
 #### 科大讯飞
 
 #### 笔试
@@ -207,6 +213,14 @@ batch normalization 和 layer normalization
 
 笔试
 
+性格测试
+
+技术面
+
+TensorFlow 的动态图和静态图的应用场景分别是什么？
+
+HR 面
+
 ### 京东夏令营
 
 #### 数理逻辑测试
@@ -220,3 +234,9 @@ batch normalization 和 layer normalization
 2, 3/2, 10/7, 7/5, 18/13, ?
 
 122, 61, 24, 5, ?
+
+### 京东算法
+
+#### 笔试
+
+https://www.nowcoder.com/discuss/177850

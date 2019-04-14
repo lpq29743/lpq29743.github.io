@@ -96,7 +96,7 @@ keywords: 面试题
 
 16. 0， 6， 24，60， 120，（）?
 
-    答：0=0\*1\*2；6=1\*2\*3；24=2\*3\*4；60=3\*4\*5‘；120=4\*5\*6；210=5\*6\*7。
+    答：0=0\*1\*2；6=1\*2\*3；24=2\*3\*4；60=3\*4\*5；120=4\*5\*6；210=5\*6\*7。
 
 17. 黑色硬币问题
 
@@ -303,7 +303,7 @@ keywords: 面试题
 
 10. 一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？
 
-   答：中位数。
+    答：中位数。
 
 11. 给定两个数，求他们无限次相加中第 k 小的数？
 
@@ -1265,7 +1265,7 @@ keywords: 面试题
 
 6. C++ 中的抽象类和接口有什么区别？
 
-   答：一个类一次可以实现若干个接口,但是只能扩展一个父类。
+   答：一个类一次可以实现若干个接口，但是只能扩展一个父类。
 
 7. C++ 中的 public、private 和 protected 是什么？
 
@@ -1315,50 +1315,49 @@ keywords: 面试题
 
 10. Python 的 getter 和 setter 是什么？
 
-      答：@property 和 @name.setter。
+    答：@property 和 @name.setter。
 
 11. Python 参数传递
 
-       答：[链接](https://blog.csdn.net/wxystyle/article/details/80076165)
+    答：[链接](https://blog.csdn.net/wxystyle/article/details/80076165)
 
 12. Python 赋值、浅拷贝和深拷贝
 
-       答：[链接](https://www.cnblogs.com/wilber2013/p/4645353.html)
+    答：[链接](https://www.cnblogs.com/wilber2013/p/4645353.html)
 
 13. 装饰器
 
-             ```python
-             def deco(func):
-                 def warpper(*args, **kwargs):
-                     print('start')
-                     func(*args, **kwargs)
-                     print('end')
-                 return warpper
-              
-             @deco
-             def myfunc(parameter):
-                 print("run with %s" % parameter)
-              
-             myfunc("something")   
-             ```
+       ```python
+       def deco(func):
+           def warpper(*args, **kwargs):
+               print('start')
+               func(*args, **kwargs)
+               print('end')
+           return warpper
+       
+       @deco
+       def myfunc(parameter):
+           print("run with %s" % parameter)
+           myfunc("something")
+       ```
 
 14. 解释一下多态？
 
-       答：多态的好处就是，当我们需要传入`Dog`、`Cat`、`Tortoise`……时，我们只需要接收`Animal`类型就可以了，因为`Dog`、`Cat`、`Tortoise`都是`Animal`类型，然后，按照`Animal`类型进行操作即可。由于`Animal`类型有`run()`方法，因此，传入的任意类型，只要是`Animal`类或子类，就会自动调用实际类型的`run()`方法，这就是多态的意思：
+    答：多态的好处就是，当我们需要传入`Dog`、`Cat`、`Tortoise`……时，我们只需要接收`Animal`类型就可以了，因为`Dog`、`Cat`、`Tortoise`都是`Animal`类型，然后，按照`Animal`类型进行操作即可。由于`Animal`类型有`run()`方法，因此，传入的任意类型，只要是`Animal`类或子类，就会自动调用实际类型的`run()`方法，这就是多态的意思：
 
-       对于一个变量，我们只需要知道它是`Animal`类型，无需确切地知道它的子类型，就可以放心地调用`run()`方法，而具体调用的`run()`方法是作用在`Animal`、`Dog`、`Cat`还是`Tortoise`对象上，由运行时该对象的确切类型决定，这就是多态真正的威力：调用方只管调用，不管细节，而当我们新增一种`Animal`的子类时，只要确保`run()`方法编写正确，不用管原来的代码是如何调用的。
+    对于一个变量，我们只需要知道它是`Animal`类型，无需确切地知道它的子类型，就可以放心地调用`run()`方法，而具体调用的`run()`方法是作用在`Animal`、`Dog`、`Cat`还是`Tortoise`对象上，由运行时该对象的确切类型决定，这就是多态真正的威力：调用方只管调用，不管细节，而当我们新增一种`Animal`的子类时，只要确保`run()`方法编写正确，不用管原来的代码是如何调用的。
 
 15. 鸭子类型是什么？
 
-       答：对于 Python 这样的动态语言，则不一定需要传入`Animal`类型。我们只需要保证传入的对象有一个`run()`方法就可以了：这就是动态语言的“鸭子类型”，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。
+    答：对于 Python 这样的动态语言，则不一定需要传入`Animal`类型。我们只需要保证传入的对象有一个`run()`方法就可以了：这就是动态语言的“鸭子类型”，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。
 
 16. Counter 与运算和或运算
 
-       答：与和或操作分别返回两个 Counter 各元素的最小值和最大值。得到的 Counter 对象将删除小于 1 的元素。
+    答：与和或操作分别返回两个 Counter 各元素的最小值和最大值。得到的 Counter 对象将删除小于 1 的元素。
 
 17. Python 多线程？
 
-       答：对于 CPU 密集型，由于全局解释器锁（访问 Python 虚拟机）的存在，所以线程是线性执行的；对于 I/O 密集型，由于全局解释器锁会被释放，所以这时多线程有体现作用。
+    答：对于 CPU 密集型，由于全局解释器锁（访问 Python 虚拟机）的存在，所以线程是线性执行的；对于 I/O 密集型，由于全局解释器锁会被释放，所以这时多线程有体现作用。
 
 ##### Linux
 
@@ -1630,6 +1629,10 @@ keywords: 面试题
       全局信息；当成决策问题。
 
 ### HR
+
+- 性格测试
+
+  [链接 1](https://www.zhihu.com/question/28728468/answer/41961812)
 
 - 对工作地点有什么要求？
 
