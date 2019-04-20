@@ -89,7 +89,7 @@ https://ac.nowcoder.com/acm/problem/21652
 
 https://blog.csdn.net/j2_o2/article/details/87971817?tdsourcetag=s_pctim_aiomsg
 
-### 腾讯 TEG
+### 腾讯 TEG 第一次
 
 #### 一面
 
@@ -166,6 +166,22 @@ TensorFlow estimater
 笔试
 
 https://blog.csdn.net/watermelon_learn/article/details/89084823
+
+### 腾讯 TEG 第二次
+
+#### 一面
+
+一个数的 n 次幂
+
+求两个集合交集
+
+二分法求有序数组中一个数第一次出现的位置
+
+Attention 类别
+
+LR 是线性模型还是非线性模型，特征离散化
+
+KMeans 如何解决环中环的聚类
 
 #### 科大讯飞
 

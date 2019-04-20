@@ -31,6 +31,8 @@ ls -r
 ls -rt
 # 以递归的方式列出所有子目录和文件
 ls -R
+# 查看进程运行目录
+ls /proc/PID
 ```
 
 ### cd
@@ -343,6 +345,11 @@ find . -maxdepth 3
 
 ### lsof
 
+```bash
+# 检查端口
+lsof -i :80
+```
+
 ### ifconfig
 
 ### route
@@ -353,7 +360,17 @@ find . -maxdepth 3
 
 ### netstat
 
+```bash
+# 检查端口
+netstat -tplugn | grep :22
+```
+
 ### ss
+
+```bash
+# 检查端口
+ss -lntu | grep ':25'
+```
 
 ### telnet
 
