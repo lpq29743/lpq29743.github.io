@@ -38,8 +38,6 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Deep contextualized word representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp), [note](https://zhuanlan.zhihu.com/p/38254332))
 
-[Baseline Needs More Love: On Simple Word-Embedding-Based Models and Associated Pooling Mechanisms](https://arxiv.org/pdf/1805.09843.pdf) (Dinghan Shen, ACL 2018, [code](https://github.com/dinghanshen/SWEM))
-
 [Glyce: Glyph-vectors for Chinese Character Representations](https://arxiv.org/pdf/1901.10125.pdf) (Yuxian Meng, 2019)
 
 #### 语言模型
@@ -83,6 +81,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Learning Structured Representation for Text Classification via Reinforcement Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/zhang.pdf) (Tianyang Zhang, AAAI 2018, [code](https://github.com/keavil/AAAI18-code))
 
 [Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/pdf/1801.06146.pdf) (Jeremy Howard, ACL 2018, [code](http://nlp.fast.ai/category/classification.html), [note](https://zhuanlan.zhihu.com/p/61590026))
+
+[Baseline Needs More Love: On Simple Word-Embedding-Based Models and Associated Pooling Mechanisms](https://arxiv.org/pdf/1805.09843.pdf) (Dinghan Shen, ACL 2018, [code](https://github.com/dinghanshen/SWEM), [note](https://zhuanlan.zhihu.com/p/38056365))
 
 [Graph Convolutional Networks for Text Classification](https://arxiv.org/pdf/1809.05679v1.pdf) (Liang Yao, AAAI 2019, [code](https://github.com/yao8839836/text_gcn))
 
