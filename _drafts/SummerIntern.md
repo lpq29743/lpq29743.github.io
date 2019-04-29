@@ -183,6 +183,44 @@ LR 是线性模型还是非线性模型，特征离散化
 
 KMeans 如何解决环中环的聚类
 
+#### 二面
+
+把 list 中指定元素都移到后面
+
+linux 杀进程，找进程
+
+信息熵（1/3，1/3，1/3 和 1/2，1/4，1/4 哪个大）
+
+LR loss 与 SVM loss 有什么区别
+
+SVM 支持向量的点，正确分类的点，误分类点的误差是多少
+
+决策树分类划分标准，回归划分标准
+
+LSTM 门的实现和取值范围
+
+max-pooling 误差反向传播
+
+Transformer 的 multi-head Attention，position embedding 和如何连接词向量和位置向量
+
+elmo 中的词向量与传统的词向量有什么区别
+
+Python 怎么定义一个静态变量
+
+Python 中的 self 相当于 C++ 中的什么
+
+#### 三面
+
+multi-head Attention 为什么要做 multi-head
+
+multi-head Attention 中 query、key 和 value 是什么
+
+Java 多态
+
+SVM 损失函数
+
+LR 损失函数以及求解方式
+
 #### 科大讯飞
 
 #### 笔试
@@ -256,3 +294,25 @@ HR 面
 #### 笔试
 
 https://www.nowcoder.com/discuss/177850
+
+#### 面试
+
+SVM 核函数的作用
+
+数据不平衡处理方式
+
+Python list 怎么去重
+
+Python 深拷贝和浅拷贝
+
+求一个无序恒正的数组中的一个数，满足左边和等于右边和（想到另一题：1...n 个数，没了其中一个数，求哪个数没了）
+
+### oppo 
+
+斐波那契数列（手撕代码，时间、空间复杂度）
+
+### 美团
+
+https://www.nowcoder.com/discuss/182873
+
+https://www.nowcoder.com/discuss/182914
