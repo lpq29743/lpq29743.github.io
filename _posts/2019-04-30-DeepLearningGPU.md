@@ -1,8 +1,12 @@
-##### GPU 历史
+---
+layout: post
+title: 深度学习实践中的 GPU 使用
+categories: ArtificialIntelligence
+description: 深度学习实践中的GPU使用
+keywords: 机器学习, 深度学习, GPU, CUDA, TensorFlow, Pytorch
+---
 
-GPU 是 NVIDIA 在发布 GeForce 256 时提出的概念。
-
-公司：[NVIDIA（英伟达）](https://zh.wikipedia.org/wiki/%E8%8B%B1%E4%BC%9F%E8%BE%BE#%E7%B9%AA%E5%9C%96%E8%99%95%E7%90%86%E5%99%A8)、AMD、Qualcomm（高通）、Intel（英特尔）
+GPU 是 NVIDIA 在发布 GeForce 256 时提出的概念。主要的公司包括[NVIDIA（英伟达）](https://zh.wikipedia.org/wiki/%E8%8B%B1%E4%BC%9F%E8%BE%BE#%E7%B9%AA%E5%9C%96%E8%99%95%E7%90%86%E5%99%A8)、AMD、Qualcomm（高通）和 Intel（英特尔）。今天这篇文章主要讨论在深度学习使用中如何使用 GPU。
 
 ##### CUDA
 
@@ -13,8 +17,12 @@ CUDA 安装
 cat /usr/local/cuda/version.txt
 # 查看 cudnn 版本 
 cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
+# 查看 GPU 使用情况
 nvidia-smi
+# 一直刷新 GPU 使用情况
 nvidia-smi -l
+# 定时查看 GPU 使用情况
+watch -n 0.1 nvidia-smi
 ```
 
 ##### TensorFlow GPU
@@ -61,4 +69,11 @@ with tf.device('/cpu:0'):
 - `"/device:GPU:0"`: 使用第 0 块 GPU
 - `"/device:GPU:1"`: 使用第 1 块 GPU
 
+最后附上两个多 GPU 训练的例子：
+
+1. 简单的例子：https://nbviewer.jupyter.org/github/donnemartin/data-science-ipython-notebooks/blob/master/deep-learning/tensor-flow-examples/notebooks/4_multi_gpu/multigpu_basics.ipynb
+2. 复杂的例子：https://github.com/tensorflow/models/blob/master/tutorials/image/cifar10/cifar10_multi_gpu_train.py
+
 ##### Pytorch GPU
+
+在 Pytorch 中，GPU 是按需分配的。使用多 GPU 训练，只要用`nn.DataParallel`包装模型，并提高 batch size 就可以了。具体使用可以参考[官方文档 1](https://pytorch.org/tutorials/beginner/former_torchies/parallelism_tutorial.html)和[官方文档 2](https://pytorch.org/tutorials/beginner/blitz/data_parallel_tutorial.html)。
