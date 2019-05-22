@@ -1,3 +1,11 @@
+---
+layout: post
+title: 暑期实习笔面经
+categories: Blog
+description: 暑期实习笔面经
+keywords: 实习, 笔经, 面经
+---
+
 ### cvte
 
 技术面：
