@@ -888,63 +888,79 @@ keywords: 面试题
 
     答：有些方法可用，但总体不适用。原因：计算量大，训练慢；求导复杂；深度学习不需要高精度解；稳定性差。
 
-89. TensorFlow 内部求导机制？
+89. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
+
+    答：[链接](https://zhuanlan.zhihu.com/p/61590026)
+
+90. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
+
+    答：[链接](https://zhuanlan.zhihu.com/p/61590026)
+
+91. TensorFlow 怎么实现 learning rate decay？
+
+    答：[链接](https://blog.csdn.net/u012436149/article/details/62058318)
+
+92. Pytorch 怎么实现 learning rate decay？
+
+    答：[链接](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/)
+
+93. TensorFlow 内部求导机制？
 
     答：符号求导。先提供每一个op求导的数学实现，然后使用链式法则求出整个表达式的导数。
 
-90. TensorFlow 创建变量的方式有哪些，有什么区别？
+94. TensorFlow 创建变量的方式有哪些，有什么区别？
 
     答：`tf.Variable()`和`tf.get_variable()`。前者一律创建新的变量，遇到同名变量，会在后面加后缀 1，2；后者如果遇到同名变量，则使用之前创建的变量，但要求这个变量一定在 variable_scope 中，且有 reuse 选项。
 
-91. Pytorch 如何切换训练和测试模式？
+95. Pytorch 如何切换训练和测试模式？
 
     答：`model.train()`和`model.eval()`
 
-92. GPU 利用率低怎么办？
+96. GPU 利用率低怎么办？
 
     答：dataset API 可以支持以 streaming 的方式读取数据。
 
-93. softmax 求导？
+97. softmax 求导？
 
     答：[链接](https://blog.csdn.net/cassiePython/article/details/80089760)
 
-94. 神经网络为什么会产生梯度消失现象？
+98. 神经网络为什么会产生梯度消失现象？
 
     答：两种情况下梯度消失经常出现，一是在深层网络中，二是采用了不合适的损失函数，比如 sigmoid（导数范围从 0 到 0.25）。前者是因为根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都小于 1 的话，多次链乘之后会接近为 0，如果都大于 0 的话，多次链乘之后会接近正无穷。sigmoid 中心部位和两侧的梯度差别太大，如果权重初始化得太大或太小，激活值基本都在 sigmoid 两侧，两侧梯度几乎为 0，传播几层就没有梯度了。
 
-95. 有哪些激活函数？
+99. 有哪些激活函数？
 
     答：sigmoid，softmax，tanh，ReLU，PReLU，Leakly ReLU，Maxout。
 
-96. 挑一种激活函数推导梯度下降的过程?
+100. 挑一种激活函数推导梯度下降的过程?
 
-    答：[链接](https://blog.csdn.net/jediael_lu/article/details/77852060)
+     答：[链接](https://blog.csdn.net/jediael_lu/article/details/77852060)
 
-97. 激活函数如何选择？
+101. 激活函数如何选择？
 
-    答：除了 gate 之类的地方，尽量不要用 sigmoid，可以用 tanh 或者 relu 之类的激活函数。
+     答：除了 gate 之类的地方，尽量不要用 sigmoid，可以用 tanh 或者 relu 之类的激活函数。
 
-98. RELU 在 0 点的导数是多少？
+102. RELU 在 0 点的导数是多少？
 
-    答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003784)
+     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003784)
 
-99. dying relu？
+103. dying relu？
 
-    答：[链接](http://sofasofa.io/forum_main_post.php?postid=1004214)
+     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1004214)
 
-100. 如何调参？
+104. 如何调参？
 
      答：for 循环；贝叶斯优化。
 
-101. 什么是 Jensen 不等式？
+105. 什么是 Jensen 不等式？
 
      答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003224)
 
-102. 互信息是什么？
+106. 互信息是什么？
 
      答：$$I(X; Y) = \sum_{y \in Y}\sum_{x \in X} {p(x,y)log{\frac{p(x,y)}{p(x)p(y)}}}$$。当变量相互独立时，互信息为 0。
 
-103. KL 散度和交叉熵的区别？
+107. KL 散度和交叉熵的区别？
 
      答：自信息（一个事件的信息量）：$$I(x)=-logP(x)$$；
 
@@ -958,59 +974,59 @@ keywords: 面试题
 
      相对熵 = 交叉熵 - 信息熵。
 
-104. 如何避免梯度消失或梯度爆炸？
+108. 如何避免梯度消失或梯度爆炸？
 
      答：权重合理初始化，梯度剪切（梯度爆炸），门机制，batch normalization。
 
-105. 权重初始化方法？
+109. 权重初始化方法？
 
      答：零初始化，常量初始化，高斯/均匀随机初始化，Xavier 初始化，He 初始化，正交初始化。
 
-106. Xavier / He 初始化的目的是什么？
+110. Xavier / He 初始化的目的是什么？
 
      答：使每一层输出方差为 1。
 
-107. 多任务如何学习？
+111. 多任务如何学习？
 
      答：[链接](https://zhuanlan.zhihu.com/p/34916654)
 
-108. map，mrr 是什么？
+112. map，mrr 是什么？
 
      答：[链接](https://blog.csdn.net/hackerzer/article/details/79632951)
 
-109. 宏平均 F1 和 微平均 F1 的区别？
+113. 宏平均 F1 和 微平均 F1 的区别？
 
      答：宏平均 F1 对每个类求 F1 之后取平均，微平均 F1 针对整体求 F1。
 
-110. TF-IDF 是什么？
+114. TF-IDF 是什么？
 
      答：词频（TF）为词在当前文档中出现的频率，逆向文件频率（IDF）由总文件数目除以包含该词的文件数目，再将得到的商取以 10 为底得到。
 
-111. CNN 在文本分类上一般怎么应用？
+115. CNN 在文本分类上一般怎么应用？
 
      答：卷积核宽度为词向量的维度（词向量交换维度并不会起影响，所以没必要在词向量维度做卷积），长度为关注窗口的大小，通道数可为所用词向量。
 
-112. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
+116. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
 
      答：输出尺寸 = (输入尺寸 - filter + 2 * padding）/ stride + 1。计算尺寸不被整除，卷积向下取整，池化向上取整。
 
-113. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
+117. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
 
      答：解决了梯度消失问题。
 
-114. RNN 系列为什么要正交初始化？
+118. RNN 系列为什么要正交初始化？
 
      答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
 
-115. 怎么得到正交初始化？
+119. 怎么得到正交初始化？
 
      答：QR 分解或 SVD。
 
-116. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
+120. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
 
      答：ReLU 能解决梯度消失，但对 CNN 有效，对 RNN 无效。因为CNN 每一层使用独立的参数不同，原始的 RNN 在每个阶段都共享一个参数。如果直接把 RNN 的激活函数换成 ReLU 会导致非常大的输出值。
 
-117. LSTM 是什么？
+121. LSTM 是什么？
 
      答：遗忘门：$$f_t=\sigma(W_f[h_{t-1}, x_t] + b_f)$$，输出 [0, 1]，来表示信息保留程度。
 
@@ -1024,237 +1040,237 @@ keywords: 面试题
 
      得到最终输出：$$h_t=o_t*tanh(C_t)$$。
 
-118. GRU 是什么？
+122. GRU 是什么？
 
      答：LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
 
-119. LSTM 和 GRU 的联系和区别？
+123. LSTM 和 GRU 的联系和区别？
 
      答：都是通过使梯度的乘法变成加法，来解决 RNN 由于梯度消失而不能对长期依赖建模的问题。前者三个门，后者两个门，所以前者计算更耗时。
 
-120. 门机制为什么能解决梯度消失或爆炸问题？
+124. 门机制为什么能解决梯度消失或爆炸问题？
 
      答：[链接](https://zhuanlan.zhihu.com/p/27485750)
 
-121. LSTM 的 memory 和 MN 的 memory 有什么区别？
+125. LSTM 的 memory 和 MN 的 memory 有什么区别？
 
      答：MN 是 external memory，可以尽可能长地存储信息，而 LSTM 是 internal memory，对于太远信息的存储功能有限。
 
-122. Attention 与 LSTM 的联系与区别？
+126. Attention 与 LSTM 的联系与区别？
 
      答：长距离依赖问题，LSTM 占优；解释性方面，Attention 占优。
 
-123. 手动加权或自主学习权重哪个好？
+127. 手动加权或自主学习权重哪个好？
 
      答：手动加权相当于引入特征，更为合理，自主学习权重相当于学习特征，能够学到隐含信息。
 
-124. Attention 机制是什么?
+128. Attention 机制是什么?
 
      答：用来捕获输入的重要部分。
 
-125. 如何计算 Attention 分值？
+129. 如何计算 Attention 分值？
 
      答：dot，general，concat。
 
-126. Attention 有哪些类型？
+130. Attention 有哪些类型？
 
      答：基于 memory，多层，自注意力，双向。
 
-127. Attention 机制的 soft 和 hard 是什么？
+131. Attention 机制的 soft 和 hard 是什么？
 
      答：Hard-attention，就是 0/1 问题，哪些区域是被 attentioned，哪些区域不关注；Soft-attention，[0,1] 间连续分布问题，每个区域被关注的程度高低，用 0~1 的 score 表示。
 
-128. multi-head attention 的公式是怎样的？
+132. multi-head attention 的公式是怎样的？
 
      答：$$Attention(Q,K,V) = softmax({QK^T\over {\sqrt {d_k}}})V$$。
 
-129. Memory Network 有哪些组成部分？
+133. Memory Network 有哪些组成部分？
 
      答：Input（把输入映射为特征向量），Generalization（使用新的输入数据更新 memories），Output（给定新的输入和现有的 memory state，在特征空间里产生输出），Rresponse（将输出转化为自然语言）
 
-130. Memory Network 中，层与层之间的信息怎么传播？
+134. Memory Network 中，层与层之间的信息怎么传播？
 
      答：线性传播和非线性传播；传播上一次信息（门机制或线性层）或不传播。
 
-131. 自然语言处理数据增强的方法？
+135. 自然语言处理数据增强的方法？
 
      答：a、加噪，如随机扔词或调整语序；b、同义词替换；c、回译；d、文档裁剪；e、生成对抗网络。
 
-132. 情感分析相对于一般文本分类有什么不同？
+136. 情感分析相对于一般文本分类有什么不同？
 
      答：特征方面（情感词典，融合了情感的词向量）。
 
-133. 怎么构建情感词典？
+137. 怎么构建情感词典？
 
      答：可以先人工制作一个小型的情感词典，然后利用语料，根据一些启发式规则（如“and”连接的词情感一样，“but”相反）来获得新的情感词，不断迭代扩展词典大小。
 
-134. 情感词典会有哪些问题？
+138. 情感词典会有哪些问题？
 
      答：不同的领域的情感词可能不一样；表达情感的词不一定是情感词；讽刺语境。
 
-135. 如何检测不文明词汇？
+139. 如何检测不文明词汇？
 
      答：词典，分类问题。
 
-136. 浏览器的联想词运用了什么理论和原理？
+140. 浏览器的联想词运用了什么理论和原理？
 
      答：贝叶斯原理。
 
-137. 为什么不能用 one-hot 表示词？
+141. 为什么不能用 one-hot 表示词？
 
      答：维度灾难和语义鸿沟。
 
-138. 分布式假设是什么
+142. 分布式假设是什么
 
      答：相同上下文语境的词有类似含义。
 
-139. 了解哪些词向量方法？
+143. 了解哪些词向量方法？
 
      答：固定表征（word2vec，Glove，FastText）和动态表征（cove，elmo，GPT，bert）。
 
-140. word2vec 的原理？
+144. word2vec 的原理？
 
      答：word2vec 有两种模型 CBOW 和 Skip-Gram，前者是在已知上下文的情况下，预测当前词，后者是在已知当前词的情况下，预测上下文。
 
-141. word2vec 的两个模型哪个对小数据集和非词典词比较友好？
+145. word2vec 的两个模型哪个对小数据集和非词典词比较友好？
 
      答：CBOW 每个词在进入模型后，都相当于进行了均值处理，所以非词典词在进行加权平均后，也容易被忽视。
 
      Skip-Gram 每个词都会被单独得训练，较少受其他高频的干扰。所以对于 Skip-Gram 在小数据集和非词典词上占优。
 
-142. word2vec 中的 hierarchical softmax 是什么？
+146. word2vec 中的 hierarchical softmax 是什么？
 
      答：将一次分类分解为多次分类，从而把分类的时间复杂度从 O(N) 降低到 O(logN)，从而提高运算效率。word2vec 根据词频构建了一棵 Huffman 树，来实现 hierarchical softmax。
 
-143. word2vec 中的 negative sampling 是什么？
+147. word2vec 中的 negative sampling 是什么？
 
      答：负采样即在词汇表中采样一定数目的词作为负例，与原先的正例一起做多次二分类，从而提高模型训练速度。负采样受到词频影响，词频越高的词越可能被采样到。
 
-144. LSA 是什么？
+148. LSA 是什么？
 
      答：潜在语义分析，先构建一个单词-标题（或文章）矩阵成，然后再用 SVD 算法等进行处理。
 
-145. Glove 的原理？
+149. Glove 的原理？
 
      答：通过构建词向量和共现矩阵之间的近似关系，来进行训练
 
-146. Glove 和 LSA 有什么联系或区别？
+150. Glove 和 LSA 有什么联系或区别？
 
      答：LSA  采用计算复杂度高的 SVD 算法，Glove 可看作是对 LSA 的一种优化。
 
-147. Glove 和 word2vec 有什么联系或区别？
+151. Glove 和 word2vec 有什么联系或区别？
 
      答：word2vec 是局部语料库训练的，其特征提取是基于滑窗的；而 Glove 的滑窗是为了构建共现矩阵，是基于全局语料的，因此，word2vec 可以进行在线学习，glove 不能。word2vec 是无监督学习；Glove 通常被认为是无监督学习，但实际上 Glove还是有 label 的，即共现次数。word2vec 损失函数是带权重的交叉熵，权重固定；glove的损失函数是最小平方损失函数，权重可做映射变换。总体来看，Glove 可看作是换了目标函数和权重函数的全局 word2vec。
 
-148. FastText 的原理？
+152. FastText 的原理？
 
      答：FastText 建立在 word2vec 基础上，其用 subword 来对非词典词进行处理，用 n-gram 来考虑词序。
 
-149. elmo 的原理？
+153. elmo 的原理？
 
      答：基于语言模型的动态词向量。采用 1 层静态向量 + 2 层 LSTM 提取特征，然后将两个方向得到的向量进行拼接。
 
-150. cove 和 elmo 的联系和区别
+154. cove 和 elmo 的联系和区别
 
      答：都用了 LSTM 编码，但前者的输入单位是词，后者是字符。
 
-151. GPT 的原理？
+155. GPT 的原理？
 
      答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-152. bert 的原理？
+156. bert 的原理？
 
      答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-153. Transformer 的原理？
+157. Transformer 的原理？
 
      答：Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
 
-154. Transformer 的 position encoding 为什么选三角函数？
+158. Transformer 的 position encoding 为什么选三角函数？
 
      答：偶数位置，使用正弦编码，在奇数位置，使用余弦编码。任意位置的 $$PE_{pos+k}$$ 都可以被 $$PE_{pos}$$ 的线性函数表示。在 bert 中，position encoding 是学习得到的。
 
-155. bert 强于 rnn 的地方？
+159. bert 强于 rnn 的地方？
 
      答：并行，对大数据比较友好。
 
-156. Transformer 使用的时候，制约显存的最关键因素是什么？
+160. Transformer 使用的时候，制约显存的最关键因素是什么？
 
      答：序列长度。
 
-157. 词向量相比传统特征有什么优势？
+161. 词向量相比传统特征有什么优势？
 
      答：传统特征具有稀疏性，且不能计算词的相似度，词向量很好地解决了这两个问题。
 
-158. 上下文相关词向量相比固定词向量有什么优缺点？
+162. 上下文相关词向量相比固定词向量有什么优缺点？
 
      可以对非登录词和一词多义处理地更好，但训练代价大。
 
-159. 你在项目中是怎么使用词向量的？
+163. 你在项目中是怎么使用词向量的？
 
      答：一般是运用预训练词向量，对于没有在词表里面的词，用高斯分布或均匀分布随机初始化
 
-160. 词向量是预训练的好，还是根据语料训练的好？
+164. 词向量是预训练的好，还是根据语料训练的好？
 
      答：看数据量大小。
 
-161. 如何解决非词典词问题？
+165. 如何解决非词典词问题？
 
      答：UNK；随机初始化；subword。
 
-162. doc2vec 的原理是？
+166. doc2vec 的原理是？
 
      答：有 PV-DM 和 PV-DBOW 两个模型，前者的任务是将段落向量和多个词向量连接，预测下一个词，相当于 word2vec 中的 CBOW，后者以段落向量为输入，预测具体的词，相当于 word2vec 中的 Skip-Gram。
 
-163. 句子级和文档级分类的方法？
+167. 句子级和文档级分类的方法？
 
      答：句子级可以用很多成熟的模型（BiLSTM + Attention），文档级可以用 HAN 模型。
 
-164. Deep LSTM Reader 是什么？
+168. Deep LSTM Reader 是什么？
 
      答：LSTM 编码 Q \|\|\| D 或 D \|\|\| Q，得到的表示进行处理得到结果。
 
-165. Attentive Reader 是什么？
+169. Attentive Reader 是什么？
 
      答：LSTM 模型对 Document 和 Query 分别编码，在 Document 编码后还加了 Attention 操作。
 
-166. Impatient Reader 是什么？
+170. Impatient Reader 是什么？
 
      答：Attentive Reader 基础上改进，针对 Query 的每个 token，都有一个 Attention 向量，将得到的 Attention 向量输入 LSTM，最后的输出可处理得到结果。
 
-167. Attention Sum Reader 是什么？
+171. Attention Sum Reader 是什么？
 
      答：编码后，根据 Query 在 Document 上做 Attention。
 
-168. Match-LSTM 是什么？
+172. Match-LSTM 是什么？
 
      答：编码后，根据 Query 在 Document 上做 Attention，然后加权向量输入 LSTM 得到表示。
 
-169. Pointer-Net 是什么？
+173. Pointer-Net 是什么？
 
      答：利用 Attention 选择 pointer，分为序列模型和边界模型。
 
-170. BiDAF 是什么？
+174. BiDAF 是什么？
 
      答：双向 Attention。
 
-171. AoA Reader 是什么？
+175. AoA Reader 是什么？
 
      答：Attention Sum Reader 基础上改进，不过也是实现了一个双向 Attention。
 
-172. QANet 是什么？
+176. QANet 是什么？
 
      答：编码层变成了 CNN 和 self Attention，分别捕获局部信息和全局信息，加快了训练速度。
 
-173. R-Net 是什么？
+177. R-Net 是什么？
 
      答：基于 Match-LSTM 改进，引入了字符级向量，门限注意力机制，self Attention。
 
-174. SLQA 是什么？
+178. SLQA 是什么？
 
      答：交互层先使用双向 Attention，再使用 self Attention。另外，为了避免过分注重细节，还融入了全局信息。
 
-175. max pooling 和 mean pooling 是什么？有其他方式吗？
+179. max pooling 和 mean pooling 是什么？有其他方式吗？
 
      答：pooling 是为了降维，整合特征。平均池化可能会把有用的信息平滑掉，所以效果经常不比最大池化好。可以计算最大几个值的均值。
 
