@@ -348,7 +348,53 @@ grep -E "[1-9]+"
 
 ### awk
 
+```bash
+# 打印文件中的第一列（从 1 开始计数）
+awk '{print $1}' file
+# 打印文件中的满足第三列为正数的条目的第一列
+awk '$3 > 0 {print $1}' file
+# 打印文件中的所有列（方式一）
+awk '{print}' file
+# 打印文件中的所有列（方式二）
+awk '{print $0}' file
+# 打印文件中的最后一列，$NF = 列数
+awk '{print $NF}' file
+# 打印文件中的第一列，包含行号信息
+awk '{print NR $1}' file
+# 打印文件中的第一列（以大写形式）
+awk '{print toupper($1)}' file
+# 打印文件中的第一列（指定分隔符）
+awk -F ':' '{print $1}' file
+```
+
 ### sed
+
+```bash
+# 将文件中每一行第一次出现的 str1 替换为 str2（不会改变文件）
+sed 's/str1/str2' test.txt
+# 将文件中 str1 替换为 str2（会改变文件）
+sed -i 's/str1/str2' test.txt
+# 将文件中每一行第二次出现的 str1 替换为 str2（从 1 开始计数）
+sed 's/str1/str2/2' test.txt
+# 将文件中每一行出现的所有 str1 替换为 str2
+sed 's/str1/str2/g' test.txt
+# 将文件中每一行从第三次出现的所有 str1 替换为 str2
+sed 's/str1/str2/3g' test.txt
+# 将文件中第三行第一次出现的 str1 替换为 str2（从 1 开始计数）
+sed '3 s/str1/str2' test.txt
+# 将文件中第一行到第三行第一次出现的 str1 替换为 str2
+sed '1,3 s/str1/str2' test.txt
+# 将文件中第二行到最后一行第一次出现的 str1 替换为 str2
+sed '2,$ s/str1/str2' test.txt
+# 删除文件中的第 5 行
+sed '5d' test.txt
+# 删除文件中的最后一行
+sed '$d' test.txt
+# 删除文件中的第 3-6 行
+sed '3,6d' test.txt
+# 删除包含字符串 str 的行
+sed '/str/d' test.txt
+```
 
 ### wc
 
