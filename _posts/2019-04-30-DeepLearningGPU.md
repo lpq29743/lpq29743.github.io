@@ -52,7 +52,7 @@ config.gpu_options.per_process_gpu_memory_fraction = 0.4
 ~/ CUDA_VISIBLE_DEVICES=0  python your.py # 使用 GPU 0
 ~/ CUDA_VISIBLE_DEVICES=0,1 python your.py # 使用 GPU 0, 1
 
-# 程序中设置
+# 程序中设置（要在 import tensorflow 之前）
 os.environ['CUDA_VISIBLE_DEVICES'] = '0' #使用 GPU 0
 os.environ['CUDA_VISIBLE_DEVICES'] = '0,1' # 使用 GPU 0，1
 ```
