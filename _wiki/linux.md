@@ -342,6 +342,8 @@ grep -c str test.txt
 grep -w str test.txt
 # 在 test.txt 中寻找 str 字符串，并使查询结果高亮
 grep --color str test.txt
+# 使用正则表达式查找，相当于 egrep "[1-9]+"
+grep -E "[1-9]+"
 ```
 
 ### awk
