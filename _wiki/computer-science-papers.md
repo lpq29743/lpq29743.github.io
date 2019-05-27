@@ -36,8 +36,6 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [A Structured Self-attentive Sentence Embedding](https://arxiv.org/pdf/1703.03130.pdf) (Zhouhan Lin, ICLR 2017, [code](https://github.com/ExplorerFreda/Structured-Self-Attentive-Sentence-Embedding), [note](https://www.sohu.com/a/130767150_505880))
 
-[Deep contextualized word representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp), [note](https://zhuanlan.zhihu.com/p/38254332))
-
 [Glyce: Glyph-vectors for Chinese Character Representations](https://arxiv.org/pdf/1901.10125.pdf) (Yuxian Meng, 2019)
 
 #### 语言模型
@@ -52,13 +50,23 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Semi-supervised sequence tagging with bidirectional language models](https://arxiv.org/pdf/1705.00108.pdf) (Matthew E. Peters, ACL 2017)
 
-[Improving Language Understanding by Generative Pre-Training](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf) (Alec Radford, 2018, [code](https://github.com/openai/finetune-transformer-lm))
+[Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/pdf/1801.06146.pdf) (Jeremy Howard, ACL 2018, [code](http://nlp.fast.ai/category/classification.html), [note](https://zhuanlan.zhihu.com/p/61590026))
 
-[BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf) (Jacob Devlin, 2018, [code](https://github.com/google-research/bert))
+[Deep contextualized word representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp), [note](https://zhuanlan.zhihu.com/p/38254332))
+
+[Improving Language Understanding by Generative Pre-Training](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf) (Alec Radford, 2018, [code](https://github.com/openai/finetune-transformer-lm))
 
 [Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/pdf/1901.02860.pdf) (Zihang Dai, 2018)
 
 [Language Models are Unsupervised Multitask Learners](https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf) (Alec Radford, 2018, [code](https://github.com/openai/gpt-2))
+
+[BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf) (Jacob Devlin, NAACL 2019, [code](https://github.com/google-research/bert))
+
+[Cloze-driven Pretraining of Self-attention Networks](https://arxiv.org/pdf/1903.07785.pdf) (Alexei Baevski, 2019)
+
+[Unified Language Model Pre-training for Natural Language Understanding and Generation](https://arxiv.org/pdf/1905.03197.pdf) (Li Dongmass, 2019)
+
+[MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019)
 
 #### 文本分类
 
@@ -79,8 +87,6 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [A Hybrid CNN-RNN Alignment Model for Phrase-Aware Sentence Classification](http://www.aclweb.org/anthology/E17-2071) (Shiou Tian Hsu, EACL 2017)
 
 [Learning Structured Representation for Text Classification via Reinforcement Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/zhang.pdf) (Tianyang Zhang, AAAI 2018, [code](https://github.com/keavil/AAAI18-code))
-
-[Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/pdf/1801.06146.pdf) (Jeremy Howard, ACL 2018, [code](http://nlp.fast.ai/category/classification.html), [note](https://zhuanlan.zhihu.com/p/61590026))
 
 [Baseline Needs More Love: On Simple Word-Embedding-Based Models and Associated Pooling Mechanisms](https://arxiv.org/pdf/1805.09843.pdf) (Dinghan Shen, ACL 2018, [code](https://github.com/dinghanshen/SWEM), [note](https://zhuanlan.zhihu.com/p/38056365))
 
@@ -260,13 +266,31 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 #### 问答系统与机器阅读理解
 
+##### 数据集
+
+[Mctest: A challenge dataset for the open-domainmachine comprehension of text](https://www.aclweb.org/anthology/D13-1020) (Matthew Richardson, EMNLP 2013)
+
+[SQuAD: 100,000+ Questions for Machine Comprehension of Text](https://arxiv.org/pdf/1606.05250.pdf) (Pranav Rajpurkar, 2016, [code](https://rajpurkar.github.io/SQuAD-explorer/))
+
+[MS MARCO: A Human Generated MAchine Reading COmprehension Dataset](https://arxiv.org/pdf/1611.09268.pdf) (Payal Bajaj, 2016, [code](http://www.msmarco.org/))
+
 [DuReader: a Chinese Machine Reading Comprehension Dataset from Real-world Applications](https://arxiv.org/pdf/1711.05073.pdf) (Wei He, 2017, [code](https://github.com/baidu/DuReader))
 
 [TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension](http://aclweb.org/anthology/P17-1147) (Mandar Joshi, ACL 2017)
 
-[SQuAD: 100,000+ Questions for Machine Comprehension of Text](https://arxiv.org/pdf/1606.05250.pdf) (Pranav Rajpurkar, 2016, [code](https://rajpurkar.github.io/SQuAD-explorer/))
+[RACE: Large-scale ReAding Comprehension Dataset From Examinations](https://arxiv.org/pdf/1704.04683.pdf) (Guokun Lai, 2017, [code](https://github.com/qizhex/RACE_AR_baselines))
 
 [Know What You Don’t Know: Unanswerable Questions for SQuAD](https://arxiv.org/pdf/1806.03822.pdf) (Pranav Rajpurkar, 2018, [code](https://rajpurkar.github.io/SQuAD-explorer/))
+
+[CoQA: A Conversational Question Answering Challenge](https://arxiv.org/pdf/1808.07042.pdf) (Siva Reddy, 2018, [code](https://stanfordnlp.github.io/coqa/))
+
+[Think you have Solved Question Answering? Try ARC, the AI2 Reasoning Challenge](https://arxiv.org/pdf/1803.05457.pdf) (Peter Clark, 2018, [code](http://data.allenai.org/arc/))
+
+[QuAC : Question Answering in Context](https://arxiv.org/pdf/1808.07036v1.pdf) (Eunsol Choi, EMNLP 2018, [code](http://quac.ai/))
+
+[A dataset and baselines for sequential open-domain question answering](https://www.aclweb.org/anthology/D18-1134) (Ahmed Elgohary, EMNLP 2018, [code](http://sequential.qanta.org/))
+
+##### 机器阅读理解
 
 [ROUGE: A Package for Automatic Evaluation of Summaries](http://www.aclweb.org/anthology/W/W04/W04-1013.pdf) (Chin-Yew Lin, 2004)
 
