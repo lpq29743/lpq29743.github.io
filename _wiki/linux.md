@@ -323,6 +323,27 @@ find ./foo -type f -name "*.txt" | xargs rm
 
 ### grep
 
+```bash
+# 在 test.txt 中寻找 str 字符串
+grep str test.txt
+# 在 test1.txt，test2.txt 中寻找 str 字符串
+grep str test1.txt test2.txt
+# 在当前目录下的所有文件中寻找 str 字符串
+grep -r str .
+# 在 test.txt 中寻找 str 字符串，并输出匹配行的行号
+grep -n str test.txt
+# 在 test.txt 中寻找不含 str 字符串的行
+grep -v str test.txt
+# 在 test.txt 中寻找 str 字符串，并忽略字母大小写
+grep -i str test.txt
+# 计算在 test.txt 中中出现 str 字符串的行数
+grep -c str test.txt
+# 在 test.txt 中全字寻找 str 字符串
+grep -w str test.txt
+# 在 test.txt 中寻找 str 字符串，并使查询结果高亮
+grep --color str test.txt
+```
+
 ### awk
 
 ### sed

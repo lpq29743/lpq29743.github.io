@@ -50,17 +50,21 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Semi-supervised sequence tagging with bidirectional language models](https://arxiv.org/pdf/1705.00108.pdf) (Matthew E. Peters, ACL 2017)
 
+[Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention))
+
 [Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/pdf/1801.06146.pdf) (Jeremy Howard, ACL 2018, [code](http://nlp.fast.ai/category/classification.html), [note](https://zhuanlan.zhihu.com/p/61590026))
 
 [Deep contextualized word representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp), [note](https://zhuanlan.zhihu.com/p/38254332))
 
 [Improving Language Understanding by Generative Pre-Training](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf) (Alec Radford, 2018, [code](https://github.com/openai/finetune-transformer-lm))
 
-[Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/pdf/1901.02860.pdf) (Zihang Dai, 2018)
-
 [Language Models are Unsupervised Multitask Learners](https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf) (Alec Radford, 2018, [code](https://github.com/openai/gpt-2))
 
 [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf) (Jacob Devlin, NAACL 2019, [code](https://github.com/google-research/bert))
+
+[Universal Transformer](https://arxiv.org/pdf/1807.03819.pdf) (Mostafa Dehghani, ICLR 2019, [code](https://github.com/andreamad8/Universal-Transformer-Pytorch))
+
+[Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/pdf/1901.02860.pdf) (Zihang Dai, 2019)
 
 [Cloze-driven Pretraining of Self-attention Networks](https://arxiv.org/pdf/1903.07785.pdf) (Alexei Baevski, 2019)
 
@@ -589,8 +593,6 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Dynamic Memory Networks for Visual and Textual Question Answering](https://arxiv.org/pdf/1603.01417.pdf) (Caiming Xiong, 2016, [code](https://github.com/ethancaballero/Improved-Dynamic-Memory-Networks-DMN-plus), [note](https://zhuanlan.zhihu.com/p/32257642))
 
 [Gated End-to-End Memory Networks](http://www.aclweb.org/anthology/E/E17/E17-1001.pdf) (Fei Liu, 2016, [note](https://zhuanlan.zhihu.com/p/30722242))
-
-[Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention))
 
 [DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding](https://arxiv.org/pdf/1709.04696.pdf) (Tao Shen, 2017, [code](https://github.com/taoshen58/DiSAN))
 
