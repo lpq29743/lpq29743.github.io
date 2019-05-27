@@ -79,6 +79,8 @@ rm -i file
 rm -f file
 # 将目录及其下文件删除
 rm -r dir
+# 将当前目录下的所有内容删除
+rm -r /path/to/directory/*
 # 删除并打印信息
 rm -v file
 ```
@@ -291,6 +293,10 @@ find . -size 50M
 find . -size +50M -size -100M
 # 在当前目录及其子目录下查找（按目录深度）
 find . -maxdepth 3
+# 把搜索到的文件删除掉（方式一）
+find ./foo -type f -name "*.txt" -exec rm {} \; 
+# 把搜索到的文件删除掉（方式二）
+find ./foo -type f -name "*.txt" | xargs rm
 ```
 
 ### chmod
