@@ -304,7 +304,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Text Understanding with the Attention Sum Reader Network](http://www.aclweb.org/anthology/P16-1086) (Rudolf Kadlec, ACL 2016, [code](https://github.com/rkadlec/asreader))
 
-[Machine comprehension using match-lstm and answer pointer](https://arxiv.org/pdf/1608.07905.pdf) (Shuohang Wang, ICLR 2017, [code](https://github.com/MurtyShikhar/Question-Answering))
+[Machine comprehension using match-lstm and answer pointer](https://openreview.net/pdf?id=B1-q5Pqxl) (Shuohang Wang, ICLR 2017, [code](https://github.com/MurtyShikhar/Question-Answering))
 
 [Bidirectional attention flow for machine comprehension](https://arxiv.org/pdf/1611.01603.pdf) (Minjoon Seo, ICLR 2017, [code](https://github.com/allenai/bi-att-flow))
 
@@ -319,6 +319,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [QANet: Combining Local Convolution with Global Self-Attention for Reading Comprehension](https://openreview.net/pdf?id=B14TlG-RW) (Adams Wei Yu, ICLR 2018, [code](https://github.com/minsangkim142/Fast-Reading-Comprehension))
 
 [Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering](http://www.aclweb.org/anthology/P18-1158) (Wei Wang, ACL 2018, [code](https://github.com/SparkJiao/SLQA))
+
+[Multi-Passage Machine Reading Comprehension with Cross-Passage Answer Verification](https://www.aclweb.org/anthology/P18-1178) (Yizhong Wang, ACL 2018)
+
+[Joint Training of Candidate Extraction and Answer Selection for Reading Comprehension](https://www.aclweb.org/anthology/P18-1159) (Zhen Wang, ACL 2018)
 
 ##### 基于知识图谱的问答
 
