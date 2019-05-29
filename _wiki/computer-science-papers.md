@@ -90,6 +90,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [A Hybrid CNN-RNN Alignment Model for Phrase-Aware Sentence Classification](http://www.aclweb.org/anthology/E17-2071) (Shiou Tian Hsu, EACL 2017)
 
+[Adversarial Multi-task Learning for Text Classification](https://www.aclweb.org/anthology/P17-1001) (Pengfei Liu, ACL 2017, [code](https://github.com/FrankWork/fudan_mtl_reviews))
+
+[Multi-Task Label Embedding for Text Classification](https://aclweb.org/anthology/D18-1484) (Honglun Zhang, EMNLP 2017)
+
 [Learning Structured Representation for Text Classification via Reinforcement Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/zhang.pdf) (Tianyang Zhang, AAAI 2018, [code](https://github.com/keavil/AAAI18-code))
 
 [Baseline Needs More Love: On Simple Word-Embedding-Based Models and Associated Pooling Mechanisms](https://arxiv.org/pdf/1805.09843.pdf) (Dinghan Shen, ACL 2018, [code](https://github.com/dinghanshen/SWEM), [note](https://zhuanlan.zhihu.com/p/38056365))
@@ -154,6 +158,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [TextRank: Bringing Order into Texts](http://202.116.81.74/cache/16/03/web.eecs.umich.edu/ed616fd7b9f50b15ac2f92467a16c9f7/mihalcea.emnlp04.pdf) (Rada Mihalcea, EMNLP 2014)
 
+#### 序列标注
+
+[Semi-supervised Multitask Learning for Sequence Labeling](https://www.aclweb.org/anthology/P17-1194) (Marek Rei, ACL 2017)
+
 #### 情感分析
 
 ##### 概述
@@ -187,6 +195,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [An Unsupervised Neural Attention Model for Aspect Extraction](http://www.aclweb.org/anthology/P17-1036) (Ruidan He, ACL 2017)
 
 [Deep Multi-Task Learning for Aspect Term Extraction with Memory Interaction](http://www.aclweb.org/anthology/D17-1310) (Xin Li, EMNLP 2017)
+
+[Double Embeddings and CNN-based Sequence Labeling for Aspect Extraction](https://www.aclweb.org/anthology/P18-2094) (Hu Xu, ACL 2018, [code](https://github.com/howardhsu/DE-CNN))
 
 ##### 对象级情感分析
 
@@ -229,6 +239,10 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Aspect Based Sentiment Analysis with Gated Convolutional Networks](http://www.aclweb.org/anthology/P18-1234) (Wei Xue, ACL 2018, [code](https://github.com/wxue004cs/GCAE))
 
 [Transformation Networks for Target-Oriented Sentiment Classification](https://www.aclweb.org/anthology/P18-1087) (Xin Li, ACL 2018, [code](https://github.com/lixin4ever/TNet), [note](https://zhuanlan.zhihu.com/p/61586882))
+
+[BERT Post-Training for Review Reading Comprehension and Aspect-based Sentiment Analysis](https://arxiv.org/pdf/1904.02232.pdf) (Hu Xu, NAACL 2019, [code](https://github.com/howardhsu/BERT-for-RRC-ABSA))
+
+[Utilizing BERT for Aspect-Based Sentiment Analysis via Constructing Auxiliary Sentence](https://arxiv.org/pdf/1903.09588.pdf) (Chi Sun, NAACL 2019, [code](https://github.com/HSLCY/ABSA-BERT-pair))
 
 #### 机器翻译
 
