@@ -248,6 +248,15 @@ head -n 20 test.txt | tail -n +11
 
 ### umask
 
+```bash
+# 指定以下权限在新文件的默认权限中被删除（方式一）
+umask u=, g-w, o=rwx
+# 指定以下权限在新文件的默认权限中被删除（方式二）
+umask 022
+# 查看新创建文件的默认权限（一般看后三位数字）
+umask -s
+```
+
 ### which
 
 ### whereis
