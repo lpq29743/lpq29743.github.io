@@ -65,7 +65,7 @@ keywords: 100 Things to Do Before I Die
 56. Life: Help my brother to achieve his dream
 57. Life: Help my love to achieve her dream
 58. Life: Meditation
-    - 0523 - 
+    - 190605 - 
 59. Career: Become a CTO
 60. Career: Earn 1 million in one year
 61. Career: Work for a Top100 IT company
