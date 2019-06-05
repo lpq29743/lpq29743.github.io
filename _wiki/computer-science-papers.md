@@ -484,21 +484,35 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 #### 模型
 
+[An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010)
+
+[What is the expectation maximization algorithm?](http://www.cs.virginia.edu/~mr4xb/notes/EM/em_tutorial.pdf) (Chuong B Do, 2008)
+
+##### 决策树
+
 [Classification and Regression Trees](http://xxpt.ynjgy.com/resource/data/110102/U/705/pdfs/L3ClassTrees.pdf) (L. Breiman, 1984, [code1](https://github.com/bensadeghi/DecisionTree.jl), [code2](https://github.com/wreardan/cart))
 
 [Induction of Decision Trees](http://hunch.net/~coms-4771/quinlan.pdf) (J. Ross Quinlan, 1986, [code](https://github.com/igrigorik/decisiontree))
 
 [C4.5: Programs for Machine Learning](https://dl.acm.org/citation.cfm?id=152181) (J. Ross Quinlan, 1993, [code](https://github.com/yandongliu/learningjs))
 
+##### 支持向量机
+
+[A Training Algorithm for Optimal Margin Classifiers](http://www.svms.org/training/BOGV92.pdf) (Bernhard E Boser, 1992, [code](https://github.com/cjlin1/libsvm))
+
+[Support-Vector Networks](http://image.diku.dk/imagecanon/material/cortes_vapnik95.pdf) (Corinna Cortes, 1995, [code](https://github.com/cjlin1/libsvm))
+
+[Estimating the Support of a High-Dimensional Distribution](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.60.9423&rep=rep1&type=pdf) (Bernhard Schölkopf, 1999, [code](https://github.com/cjlin1/libsvm))
+
+[New Support Vector Algorithms](https://www.researchgate.net/publication/12413257_New_Support_Vector_Algorithms) (Bernhard Schölkopf, 2000, [code](https://github.com/cjlin1/libsvm))
+
+##### 集成方法
+
 [Greedy function approximation: a gradient boosting machine](https://projecteuclid.org/download/pdf_1/euclid.aos/1013203451) (Jerome H. Friedman, 2001, [code](https://github.com/dmlc/xgboost))
 
 [XGBoost: A Scalable Tree Boosting System](https://arxiv.org/pdf/1603.02754.pdf#page=10&zoom=100,0,198) (Tianqi Chen, SIGKDD 2016, [code](https://github.com/dmlc/xgboost), [note](http://djjowfy.com/2017/08/01/XGBoost%E7%9A%84%E5%8E%9F%E7%90%86/))
 
-[An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010)
-
-[What is the expectation maximization algorithm?](http://www.cs.virginia.edu/~mr4xb/notes/EM/em_tutorial.pdf) (Chuong B Do, 2008)
-
-##### 零样本学习
+#### 零样本学习
 
 [Zero-Shot Learning with Semantic Output Codes](http://www.cs.cmu.edu/afs/cs/project/theo-73/www/papers/zero-shot-learning.pdf) (Mark Palatucci, NIPS 2009)
 
@@ -510,11 +524,11 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Zero-Shot Recognition using Dual Visual-Semantic Mapping Paths](https://arxiv.org/pdf/1703.05002.pdf) (Yanan Li, 2017)
 
-##### 少样本学习
+#### 少样本学习
 
 [One-Shot Learning of Object Categories](http://vision.stanford.edu/documents/Fei-FeiFergusPerona2006.pdf) (Li Fei-Fei, PAMI 2006)
 
-##### 样本不平衡
+#### 样本不平衡
 
 [Learning from Imbalanced Data](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5128907) (Haibo He, 2009)
 
