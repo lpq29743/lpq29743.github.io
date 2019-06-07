@@ -1616,7 +1616,44 @@ int main() {
 }
 ```
 
-#### 4.14 ACboy 需要你的帮助
+#### 4.14 钱币兑换问题
+
+**题目来源**
+
+[HDOJ 1284 钱币兑换问题](http://acm.hdu.edu.cn/showproblem.php?pid=1284)
+
+**题目分析**
+
+本题考查的是完全背包，$$s[j]$$ 表示钱为 $$j$$ 时兑换的最多总数，转移方程为 $$s[j]=max(s[j],s[j]+s[j-i])$$，即考不考虑使用第 $$i$$ 种硬币来兑换，这个状态转移方程可简化为 $$s[j]+=s[j-i]$$。
+
+**实现代码**
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    int *s;
+    while(scanf("%d", &n)==1) {
+        s = (int *)malloc(sizeof(int) * (n + 1));
+        s[0] = 1;
+        for(int i = 1; i <= n; i++) {
+            s[i] = 0;
+        }
+        for(int i = 1; i <= 3; i++) {
+            for(int j = i; j <= n; j++) {
+                s[j] += s[j - i];
+            }
+        }
+        printf("%d\n", s[n]);
+        free(s);
+    }
+    return 0;
+}
+```
+
+#### 4.15 ACboy 需要你的帮助
 
 **题目来源**
 
@@ -1666,7 +1703,7 @@ int main() {
 }
 ```
 
-#### 4.15 珍惜现在，感恩生活
+#### 4.16 珍惜现在，感恩生活
 
 **题目来源**
 
@@ -1713,7 +1750,7 @@ int main() {
 }
 ```
 
-#### 4.16 饭卡
+#### 4.17 饭卡
 
 **题目来源**
 
@@ -1770,7 +1807,7 @@ int main() {
 }
 ```
 
-#### 4.17 拾骨者
+#### 4.18 拾骨者
 
 **题目来源**
 
@@ -1779,6 +1816,54 @@ int main() {
 **题目分析**
 
 典型的 01 背包问题，直接解决即可。
+
+**实现代码**
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int t, n, v;
+int *c, *w;
+int *f;
+
+int main() {
+    scanf("%d", &t);
+    while(t--) {
+        scanf("%d%d", &n, &v);
+        c = (int *)malloc(sizeof(int) * (n + 1));
+        w = (int *)malloc(sizeof(int) * (n + 1));
+        f = (int *)malloc(sizeof(int) * (v + 1));
+        memset(f, 0, (v + 1) * sizeof(int));
+        for(int i = 1; i <= n; i++) {
+            scanf("%d", &w[i]);
+        }
+        for(int i = 1; i <= n; i++) {
+            scanf("%d", &c[i]);
+        }
+        for(int i = 1; i <= n; i++) {
+            for(int j = v; j >= c[i]; j--) {
+                f[j] = f[j] > f[j - c[i]] + w[i] ? f[j] : f[j - c[i]] + w[i];
+            }
+        }
+        printf("%d\n", f[v]);
+    }
+    return 0;
+}
+```
+
+#### 4.19 抢劫
+
+**题目来源**
+
+[HDOJ 2955 Robberies](http://acm.hdu.edu.cn/showproblem.php?pid=2955)
+
+**题目分析**
+
+这道题看起来好像是一道简单的 01 背包问题，但认真一做，会发现背包总价值是浮点数。实际上，以被捕概率作为背包总价值是错误的，原因一方面是小数限制，另一方面是这里的被捕概率应该是 1 - 所有抢劫银行的安全概率之和。通过上面的分析，我们从另一个角度来解决问题。
+
+设 $$d[j]$$ 为抢多少钱的时候的安全概率，$$j$$ 的最大值为所有可抢劫银行的存款之和。抢的钱数越多，安全概率自然越低，我们只要用动态规划求得每个 $$j$$ 的安全概率，从后往前遍历得到刚好高于可容忍安全概率的值即可。那么怎么用动态规划呢？这里的状态转移方程是 $$d[j]=max(d[j],d[j-m[i]] * (1.0 - p[i]))$$，其意义为抢不抢第 $$i$$ 个银行，而在初始化阶段，出了 $$d[0]=1$$，其他都初始化为 0。
 
 **实现代码**
 
