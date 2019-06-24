@@ -144,6 +144,34 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Semantic Sentence Matching with Densely-connected Recurrent and Co-attentive Information](https://arxiv.org/pdf/1805.11360.pdf) (Seonhoon Kim, 2018)
 
+#### 文本摘要
+
+[The Automatic Creation of Literature Abstracts](http://courses.ischool.berkeley.edu/i256/f06/papers/luhn58.pdf) (H. P. Luhn, 1958, [code](https://github.com/miso-belica/sumy))
+
+[New Methods in Automatic Extracting](http://courses.ischool.berkeley.edu/i256/f06/papers/edmonson69.pdf) (H. P. Edmundson, 1969, [code](https://github.com/miso-belica/sumy))
+
+[Using Latent Semantic Analysis in Text Summarization and Summary Evaluation](http://www.kiv.zcu.cz/~jstein/publikace/isim2004.pdf) (Josef Steinberger, 2004, [code](https://github.com/miso-belica/sumy))
+
+[LexRank: Graph-based Lexical Centrality as Salience in Text Summarization](https://arxiv.org/pdf/1109.2128.pdf) (Gunes Erkan, 2004, [code](https://github.com/miso-belica/sumy))
+
+[TextRank: Bringing Order into Texts](https://web.eecs.umich.edu/~mihalcea/papers/mihalcea.emnlp04.pdf) (Rada Mihalcea, EMNLP 2004, [code](https://github.com/miso-belica/sumy))
+
+[Beyond SumBasic: Task-Focused Summarization with Sentence Simplification and Lexical Expansion](http://www.cis.upenn.edu/~nenkova/papers/ipm.pdf) (Lucy Vanderwende, 2007, [code](https://github.com/miso-belica/sumy))
+
+[Exploring Content Models for Multi-Document Summarization](https://www.aclweb.org/anthology/N09-1041) (Aria Haghighi, NAACL 2009, [code](https://github.com/miso-belica/sumy))
+
+[A Deep Reinforced Model for Abstractive Summarization](https://arxiv.org/pdf/1705.04304.pdf) (Romain Paulus, 2017, [code](https://github.com/oceanypt/A-DEEP-REINFORCED-MODEL-FOR-ABSTRACTIVE-SUMMARIZATION))
+
+[Convolutional Sequence to Sequence Learning](https://pdfs.semanticscholar.org/bb3e/bc09b65728d6eced04929df72a006fb5210b.pdf) (Jonas Gehring, ICML 2017, [code](https://github.com/tobyyouup/conv_seq2seq))
+
+[Don’t Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://aclweb.org/anthology/D18-1206) (Shashi Narayan, EMNLP 2018, [code](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Topic-ConvS2S))
+
+[Deep Reinforcement Learning For Sequence to Sequence Models](https://arxiv.org/pdf/1805.09461.pdf) (Yaser Keneshloo, 2018, [code](https://github.com/yaserkl/RLSeq2Seq))
+
+[A Reinforced Topic-Aware Convolutional Sequence-to-Sequence Model for Abstractive Text Summarization](https://www.ijcai.org/proceedings/2018/0619.pdf) (Li Wang, IJCAI 2018)
+
+[Controllable Abstractive Summarization](https://aclweb.org/anthology/W18-2706) (Angela Fan, ACL Workshop 2018)
+
 #### 主题建模
 
 [An Introduction to Latent Semantic Analysis](http://lsa.colorado.edu/papers/dp1.LSAintro.pdf) (Thomas K Landauer, 1998, [code](https://github.com/josephwilk/semanticpy))
@@ -182,9 +210,29 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [SenticNet 5: Discovering Conceptual Primitives for Sentiment Analysis by Means of Context Embeddings](http://sentic.net/senticnet-5.pdf) (Erik Cambria, AAAI 2018, [code1](http://sentic.net/downloads/), [code2](https://github.com/yurimalheiros/senticnetapi))
 
-##### 对象抽取
+##### 对象/观点抽取
 
-[Recursive neural conditional random fields for aspect-based sentiment analysis](http://www.aclweb.org/anthology/D16-1059) (Wenya Wang, EMNLP 2016, [code](https://github.com/happywwy/Recursive-Neural-Conditional-Random-Field))
+[Mining and Summarizing Customer Reviews](https://www.cs.uic.edu/~liub/publications/kdd04-revSummary.pdf) (Minqing Hu, KDD 2004)
+
+[Extracting Product Features and Opinions from Reviews](http://turing.cs.washington.edu/papers/emnlp05_opine.pdf) (Ana-Maria Popescu, EMNLP 2005)
+
+[Phrase Dependency Parsing for Opinion Mining](https://www.aclweb.org/anthology/D09-1159) (Yuanbin Wu, EMNLP 2009)
+
+[A Novel Lexicalized HMM-based Learning Framework for Web Opinion Mining](http://people.cs.pitt.edu/~huynv/research/aspect-sentiment/A%20novel%20lexicalized%20HMM-based%20learning%20framework%20for%20web%20opinion%20mining.pdf) (Wei Jin, ICML 2009)
+
+[Structure-Aware Review Mining and Summarization](https://pdfs.semanticscholar.org/1256/c05bd50a80bb0a223ca94674c71fd61fad5a.pdf) (Fangtao Li, COLING 2010)
+
+[Opinion Target Extraction in Chinese News Comments](https://www.aclweb.org/anthology/C10-2090) (Tengfei Ma, COLING 2010)
+
+[Extracting Opinion Targets in a Single- and Cross-Domain Setting](https://www.aclweb.org/anthology/D10-1101) (Niklas Jakob, EMNLP 2010)
+
+[Opinion Word Expansion and Target Extraction through Double Propagation](https://web.science.mq.edu.au/~rdale/transfer/CL/10-010.pdf) (Guang Qiu, CL 2011)
+
+[Opinion Target Extraction Using Word-Based Translation Model](http://www.nlpr.ia.ac.cn/cip/ZhaoJunPublications/paper/EMNLP2012.LK.pdf) (Kang Liu, EMNLP 2012)
+
+[Opinion Target Extraction Using Partially-Supervised Word Alignment Model](https://pdfs.semanticscholar.org/9751/81c84a0991bb69f5af825e2019080d22cfcd.pdf) (Kang Liu, IJCAI 2013)
+
+[Recursive Neural Conditional Random Fields for Aspect-based Sentiment Analysis](http://www.aclweb.org/anthology/D16-1059) (Wenya Wang, EMNLP 2016, [code](https://github.com/happywwy/Recursive-Neural-Conditional-Random-Field))
 
 [Improving Opinion Aspect Extraction Using Semantic Similarity and Aspect Associations](https://aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/11973/12051) (Qian Liu, AAAI 2016)
 
@@ -192,11 +240,23 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Coupled Multi-Layer Attentions for Co-Extraction of Aspect and Opinion Terms](https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14441/14256) (Wenya Wang, AAAI 2017, [code](https://github.com/happywwy/Coupled-Multi-layer-Attentions))
 
+[Recurrent Neural Networks with Auxiliary Labels for Cross-Domain Opinion Target Extraction](https://www.aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14865/14130) (Ying Ding, AAAI 2017)
+
+[Multi-task Memory Networks for Category-specific Aspect and Opinion Terms Co-extraction](https://arxiv.org/pdf/1702.01776.pdf) (Wenya Wang, 2017)
+
 [An Unsupervised Neural Attention Model for Aspect Extraction](http://www.aclweb.org/anthology/P17-1036) (Ruidan He, ACL 2017)
+
+[Lifelong Learning CRF for Supervised Aspect Extraction](https://www.aclweb.org/anthology/P17-2023) (Lei Shu, ACL 2017)
 
 [Deep Multi-Task Learning for Aspect Term Extraction with Memory Interaction](http://www.aclweb.org/anthology/D17-1310) (Xin Li, EMNLP 2017)
 
+[Aspect Term Extraction with History Attention and Selective Transformation](https://arxiv.org/pdf/1805.00760.pdf) (Xin Li, IJCAI 2018)
+
 [Double Embeddings and CNN-based Sequence Labeling for Aspect Extraction](https://www.aclweb.org/anthology/P18-2094) (Hu Xu, ACL 2018, [code](https://github.com/howardhsu/DE-CNN))
+
+[ExtRA: Extracting Prominent Review Aspects from Customer Feedback](https://aclweb.org/anthology/D18-1384) (Zhiyi Luo, EMNLP 2018)
+
+[Target-oriented Opinion Words Extraction with Target-fused Neural Sequence Labeling](https://www.aclweb.org/anthology/N19-1259) (Zhifang fan, NAACL 2019)
 
 ##### 对象级情感分析
 
@@ -243,6 +303,16 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [BERT Post-Training for Review Reading Comprehension and Aspect-based Sentiment Analysis](https://arxiv.org/pdf/1904.02232.pdf) (Hu Xu, NAACL 2019, [code](https://github.com/howardhsu/BERT-for-RRC-ABSA))
 
 [Utilizing BERT for Aspect-Based Sentiment Analysis via Constructing Auxiliary Sentence](https://arxiv.org/pdf/1903.09588.pdf) (Chi Sun, NAACL 2019, [code](https://github.com/HSLCY/ABSA-BERT-pair))
+
+##### 对象抽取和分类联合训练
+
+[Joint Learning for Targeted Sentiment Analysis](https://www.aclweb.org/anthology/D18-1504)  (Dehong Ma, EMNLP 2018)
+
+[A Unified Model for Opinion Target Extraction and Target Sentiment Prediction](https://arxiv.org/pdf/1811.05082.pdf) (Xin Li, AAAI 2019, [code](https://github.com/lixin4ever/E2E-TBSA))
+
+[DOER: Dual Cross-Shared RNN for Aspect Term-Polarity Co-Extraction](https://arxiv.org/pdf/1906.01794.pdf) (Huaishao Luo, ACL 2019, [code](https://github.com/ArrowLuo/DOER))
+
+[Open-Domain Targeted Sentiment Analysis via Span-Based Extraction and Classification](https://arxiv.org/pdf/1906.03820.pdf) (Minghao Hu, ACL 2019, [code](https://github.com/huminghao16/SpanABSA))
 
 #### 机器翻译
 
@@ -483,6 +553,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 ### 机器学习
 
 #### 模型
+
+[Occam's Razor](https://users.soe.ucsc.edu/~manfred/pubs/J9.pdf) (Anselm Blumer, 1987)
 
 [An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010)
 
