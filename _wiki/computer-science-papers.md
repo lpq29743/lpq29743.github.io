@@ -256,7 +256,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [ExtRA: Extracting Prominent Review Aspects from Customer Feedback](https://aclweb.org/anthology/D18-1384) (Zhiyi Luo, EMNLP 2018)
 
-[Target-oriented Opinion Words Extraction with Target-fused Neural Sequence Labeling](https://www.aclweb.org/anthology/N19-1259) (Zhifang fan, NAACL 2019)
+[Target-oriented Opinion Words Extraction with Target-fused Neural Sequence Labeling](https://www.aclweb.org/anthology/N19-1259) (Zhifang Fan, NAACL 2019)
 
 ##### 对象级情感分析
 
@@ -280,7 +280,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [A Hierarchical Model of Reviews for Aspect-based Sentiment Analysis](http://www.aclweb.org/anthology/D16-1103) (Sebastian Ruder, EMNLP 2016)
 
-[Interactive Attention Networks for Aspect-Level Sentiment Classification](http://cn.arxiv.org/pdf/1709.00893) (Dehong Ma, IJCAI 2017, [code](https://github.com/lpq29743/IAN), [note](https://zhuanlan.zhihu.com/p/34041012))
+[Interactive Attention Networks for Aspect-Level Sentiment Classification](https://www.ijcai.org/proceedings/2017/0568.pdf) (Dehong Ma, IJCAI 2017, [code](https://github.com/lpq29743/IAN), [note](https://zhuanlan.zhihu.com/p/34041012))
 
 [Recurrent Attention Network on Memory for Aspect Sentiment Analysis](http://www.aclweb.org/anthology/D17-1047) (Peng Chen, EMNLP 2017, [code](https://github.com/lpq29743/RAM), [note](https://zhuanlan.zhihu.com/p/34043504))
 
@@ -305,6 +305,14 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Utilizing BERT for Aspect-Based Sentiment Analysis via Constructing Auxiliary Sentence](https://arxiv.org/pdf/1903.09588.pdf) (Chi Sun, NAACL 2019, [code](https://github.com/HSLCY/ABSA-BERT-pair))
 
 ##### 对象抽取和分类联合训练
+
+[Bidirectional Inter-dependencies of Subjective Expressions and Targets and their Value for a Joint Model](https://pdfs.semanticscholar.org/6047/235275b2b8d414b8ac472fd19f2a1a6144b6.pdf) (Roman Klinger, ACL 2013)
+
+[Joint Inference for Fine-grained Opinion Extraction](https://www.aclweb.org/anthology/P13-1161) (Bishan Yang, ACL 2013)
+
+[Open Domain Targeted Sentiment](https://www.aclweb.org/anthology/D13-1171) (Margaret Mitchell, EMNLP 2013)
+
+[Neural Networks for Open Domain Targeted Sentiment](https://www.aclweb.org/anthology/D15-1073) (Meishan Zhang, EMNLP 2015, [code](https://github.com/SUTDNLP/OpenTargetedSentiment))
 
 [Joint Learning for Targeted Sentiment Analysis](https://www.aclweb.org/anthology/D18-1504)  (Dehong Ma, EMNLP 2018)
 
