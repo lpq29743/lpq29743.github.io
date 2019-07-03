@@ -80,7 +80,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Deep Unordered Composition Rivals Syntactic Methods for Text Classification](http://www.aclweb.org/anthology/P15-1162) (Mohit Iyyer, ACL 2015, [code1](https://github.com/lpq29743/text_classification/blob/master/models/dl_models/dan.py), [code2](https://github.com/miyyer/dan))
 
-[Character-level Convolutional Networks for Text Classification](https://arxiv.org/pdf/1509.01626.pdf) (Xiang Zhang, 2016, [code](https://github.com/dongjun-Lee/text-classification-models-tf))
+[Character-level Convolutional Networks for Text Classification](https://arxiv.org/pdf/1509.01626.pdf) (Xiang Zhang, NIPS 2015, [code](https://github.com/dongjun-Lee/text-classification-models-tf))
 
 [Recurrent Neural Network for Text Classification with Multi-Task Learning](https://www.ijcai.org/Proceedings/16/Papers/408.pdf) (Pengfei Liu, IJCAI 2016, [code](https://github.com/brightmart/text_classification))
 
@@ -97,6 +97,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Learning Structured Representation for Text Classification via Reinforcement Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/zhang.pdf) (Tianyang Zhang, AAAI 2018, [code](https://github.com/keavil/AAAI18-code))
 
 [Baseline Needs More Love: On Simple Word-Embedding-Based Models and Associated Pooling Mechanisms](https://arxiv.org/pdf/1805.09843.pdf) (Dinghan Shen, ACL 2018, [code](https://github.com/dinghanshen/SWEM), [note](https://zhuanlan.zhihu.com/p/38056365))
+
+[Joint Embedding of Words and Labels for Text Classification](https://www.aclweb.org/anthology/P18-1216) (Guoyin Yang, ACL 2018, [code](https://github.com/guoyinwang/LEAM))
 
 [Graph Convolutional Networks for Text Classification](https://arxiv.org/pdf/1809.05679v1.pdf) (Liang Yao, AAAI 2019, [code](https://github.com/yao8839836/text_gcn))
 
