@@ -192,6 +192,18 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Semi-supervised Multitask Learning for Sequence Labeling](https://www.aclweb.org/anthology/P17-1194) (Marek Rei, ACL 2017)
 
+#### 依存句法分析
+
+[Statistical Dependency Analysis with Support Vector machines](https://pdfs.semanticscholar.org/f0e1/883cf9d1b3c911125f46359f908557fc5827.pdf) (Hiroyasu Yamada, 2003)
+
+[A Dynamic Oracle for Arc-Eager Dependency Parsing](https://www.aclweb.org/anthology/C12-1059) (Yoav Goldberg, COLING 2012)
+
+[A Fast and Accurate Dependency Parser using Neural Networks](https://cs.stanford.edu/~danqi/papers/emnlp2014.pdf) (Danqi Chen, EMNLP 2014)
+
+[An Improved Non-monotonic Transition System for Dependency Parsing](https://aclweb.org/anthology/D15-1162) (Matthew Honnibal, EMNLP 2015)
+
+[Simple and Accurate Dependency Parsing Using Bidirectional LSTM Feature Representations](https://aclweb.org/anthology/Q16-1023) (Eliyahu Kiperwasser, 2016)
+
 #### 情感分析
 
 ##### 概述
@@ -802,6 +814,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 ### 工具
 
-[HemI: A Toolkit for Illustrating Heatmaps](http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0111988&type=printable) (Wankun Deng, 2014, [code](http://hemi.biocuckoo.org/))
+[FudanNLP: A Toolkit for Chinese Natural Language Processing](https://www.aclweb.org/anthology/P13-4009) (Xipeng Qiu, ACL 2013, [code](https://github.com/FudanNLP/fnlp))
 
 [LIBSVM: A library for support vector machines](http://www.csie.ntu.edu.tw/~cjlin/libsvm) (Chih-Jen Lin, 2011)
+
+[HemI: A Toolkit for Illustrating Heatmaps](http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0111988&type=printable) (Wankun Deng, 2014, [code](http://hemi.biocuckoo.org/))
