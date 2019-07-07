@@ -54,7 +54,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/pdf/1801.06146.pdf) (Jeremy Howard, ACL 2018, [code](http://nlp.fast.ai/category/classification.html), [note](https://zhuanlan.zhihu.com/p/61590026))
 
-[Deep contextualized word representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp), [note](https://zhuanlan.zhihu.com/p/38254332))
+[Deep Contextualized Word Representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp), [note](https://zhuanlan.zhihu.com/p/38254332))
 
 [Improving Language Understanding by Generative Pre-Training](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf) (Alec Radford, 2018, [code](https://github.com/openai/finetune-transformer-lm))
 
@@ -72,9 +72,15 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019)
 
+[ERNIE: Enhanced Language Representation with Informative Entities](https://arxiv.org/pdf/1905.07129.pdf) (Zhengyan Zhang, ACL 2019, [code](https://github.com/PaddlePaddle/LARK/tree/develop/ERNIE))
+
+[XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/pdf/1906.08237.pdf) (Zhilin Yang, 2019, [code](https://github.com/zihangdai/xlnet))
+
 #### 文本分类
 
 [Convolutional Neural Networks for Sentence Classification](http://www.aclweb.org/anthology/D14-1181) (Yoon Kim, EMNLP 2014, [code](https://github.com/brightmart/text_classification))
+
+[Discriminative Neural Sentence Modeling by Tree-Based Convolution](https://aclweb.org/anthology/D15-1279) (Lili Mou, EMNLP 2015)
 
 [Recurrent Convolutional Neural Networks for Text Classification](http://www.nlpr.ia.ac.cn/cip/~liukang/liukangPageFile/Recurrent%20Convolutional%20Neural%20Networks%20for%20Text%20Classification.pdf) (Siwei Lai, AAAI 2015, [code](https://github.com/brightmart/text_classification))
 
@@ -82,7 +88,15 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Character-level Convolutional Networks for Text Classification](https://arxiv.org/pdf/1509.01626.pdf) (Xiang Zhang, NIPS 2015, [code](https://github.com/dongjun-Lee/text-classification-models-tf))
 
+[Semi-supervised Convolutional Neural Networks for Text Categorization via Region Embedding](https://papers.nips.cc/paper/5849-semi-supervised-convolutional-neural-networks-for-text-categorization-via-region-embedding.pdf) (Rie Johnson, NIPS 2015, [code](https://github.com/riejohnson/ConText))
+
+[Effective Use of Word Order for Text Categorization with Convolutional Neural Networks](https://www.aclweb.org/anthology/N15-1011) (Rie Johnson, NAACL 2015, [code](https://github.com/riejohnson/ConText))
+
+[Supervised and Semi-Supervised Text Categorization using LSTM for Region Embeddings](https://arxiv.org/pdf/1602.02373.pdf) (Rie Johnson, ICML 2016, [code](https://github.com/riejohnson/ConText))
+
 [Recurrent Neural Network for Text Classification with Multi-Task Learning](https://www.ijcai.org/Proceedings/16/Papers/408.pdf) (Pengfei Liu, IJCAI 2016, [code](https://github.com/brightmart/text_classification))
+
+[Text Classification Improved by Integrating Bidirectional LSTM with Two-dimensional Max Pooling](https://www.aclweb.org/anthology/C16-1329) (Peng Zhou, COLING 2016, code)
 
 [Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf) (Zichao Yang, NAACL 2016, [code](https://github.com/brightmart/text_classification))
 
@@ -92,13 +106,19 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Adversarial Multi-task Learning for Text Classification](https://www.aclweb.org/anthology/P17-1001) (Pengfei Liu, ACL 2017, [code](https://github.com/FrankWork/fudan_mtl_reviews))
 
+[Deep Pyramid Convolutional Neural Networks for Text Categorization](https://www.aclweb.org/anthology/P17-1052) (Rie Johnson, ACL 2017, [code](https://github.com/riejohnson/ConText))
+
 [Multi-Task Label Embedding for Text Classification](https://aclweb.org/anthology/D18-1484) (Honglun Zhang, EMNLP 2017)
 
 [Learning Structured Representation for Text Classification via Reinforcement Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/zhang.pdf) (Tianyang Zhang, AAAI 2018, [code](https://github.com/keavil/AAAI18-code))
 
+[Translations as Additional Contexts for Sentence Classification](https://arxiv.org/pdf/1806.05516.pdf) (Reinald Kim Amplayo, IJCAI 2018)
+
 [Baseline Needs More Love: On Simple Word-Embedding-Based Models and Associated Pooling Mechanisms](https://arxiv.org/pdf/1805.09843.pdf) (Dinghan Shen, ACL 2018, [code](https://github.com/dinghanshen/SWEM), [note](https://zhuanlan.zhihu.com/p/38056365))
 
 [Joint Embedding of Words and Labels for Text Classification](https://www.aclweb.org/anthology/P18-1216) (Guoyin Yang, ACL 2018, [code](https://github.com/guoyinwang/LEAM))
+
+[Universal Sentence Encoder](https://arxiv.org/pdf/1803.11175.pdf) (Daniel Cer, 2018, [code](https://tfhub.dev/google/universal-sentence-encoder/1))
 
 [Graph Convolutional Networks for Text Classification](https://arxiv.org/pdf/1809.05679v1.pdf) (Liang Yao, AAAI 2019, [code](https://github.com/yao8839836/text_gcn))
 
@@ -202,7 +222,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [An Improved Non-monotonic Transition System for Dependency Parsing](https://aclweb.org/anthology/D15-1162) (Matthew Honnibal, EMNLP 2015)
 
-[Simple and Accurate Dependency Parsing Using Bidirectional LSTM Feature Representations](https://aclweb.org/anthology/Q16-1023) (Eliyahu Kiperwasser, 2016)
+[Simple and Accurate Dependency Parsing Using Bidirectional LSTM Feature Representations](https://aclweb.org/anthology/Q16-1023) (Eliyahu Kiperwasser, TACL 2016, [code](https://github.com/elikip/bist-parser))
 
 #### 情感分析
 
@@ -390,7 +410,9 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [RACE: Large-scale ReAding Comprehension Dataset From Examinations](https://arxiv.org/pdf/1704.04683.pdf) (Guokun Lai, 2017, [code](https://github.com/qizhex/RACE_AR_baselines))
 
-[Know What You Don’t Know: Unanswerable Questions for SQuAD](https://arxiv.org/pdf/1806.03822.pdf) (Pranav Rajpurkar, 2018, [code](https://rajpurkar.github.io/SQuAD-explorer/))
+[The NarrativeQA Reading Comprehension Challenge](https://www.aclweb.org/anthology/Q18-1023) (Tomas Kocisky, TACL 2018, [code](https://github.com/deepmind/narrativeqa))
+
+[Know What You Don’t Know: Unanswerable Questions for SQuAD](https://arxiv.org/pdf/1806.03822.pdf) (Pranav Rajpurkar, ACL 2018, [code](https://rajpurkar.github.io/SQuAD-explorer/))
 
 [CoQA: A Conversational Question Answering Challenge](https://arxiv.org/pdf/1808.07042.pdf) (Siva Reddy, 2018, [code](https://stanfordnlp.github.io/coqa/))
 
@@ -398,7 +420,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [QuAC : Question Answering in Context](https://arxiv.org/pdf/1808.07036v1.pdf) (Eunsol Choi, EMNLP 2018, [code](http://quac.ai/))
 
-[A dataset and baselines for sequential open-domain question answering](https://www.aclweb.org/anthology/D18-1134) (Ahmed Elgohary, EMNLP 2018, [code](http://sequential.qanta.org/))
+[A Dataset and Baselines for Sequential Open-Domain Question Answering](https://www.aclweb.org/anthology/D18-1134) (Ahmed Elgohary, EMNLP 2018, [code](http://sequential.qanta.org/))
 
 ##### 机器阅读理解
 
@@ -454,6 +476,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [CN-DBpedia: A Never-Ending Chinese Knowledge Extraction System](https://link.springer.com/chapter/10.1007/978-3-319-60045-1_44) (Bo Xu, IEA-AIE 2017, [code](http://openkg.cn/dataset/cndbpedia))
 
+[ConceptNet 5.5: An Open Multilingual Graph of General Knowledge](https://arxiv.org/pdf/1612.03975.pdf) (Robyn Speer, AAAI 2017, [code](http://conceptnet.io/))
+
 ##### 知识图谱表示和补全
 
 [Knowledge Graph Embedding: A Survey of Approaches and Applications](https://www.computer.org/csdl/trans/tk/2017/12/08047276-abs.html) (Quan Wang, 2017)
@@ -496,7 +520,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 ##### 知识图谱应用
 
-[Learning beyond datasets: Knowledge Graph Augmented Neural Networks for Natural language Processing](https://arxiv.org/pdf/1802.05930.pdf) (Annervaz K M, HAACL HLT 2018)
+[Learning beyond datasets: Knowledge Graph Augmented Neural Networks for Natural language Processing](https://arxiv.org/pdf/1802.05930.pdf) (Annervaz K M, NAACL 2018)
 
 [Entity-Duet Neural Ranking: Understanding the Role of Knowledge Graph Semantics in Neural Information Retrieval](http://aclweb.org/anthology/P18-1223) (Zhenghao Liu, ACL 2018, [code](https://github.com/thunlp/EntityDuetNeuralRanking))
 
@@ -514,9 +538,9 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Generating and exploiting large-scale pseudo training data for zero pronoun resolution](https://arxiv.org/pdf/1606.01603.pdf) (Ting Liu, ACL 2017)
 
-[Deep Reinforcement Learning for Chinese Zero pronoun Resolution](http://aclweb.org/anthology/P18-1053) (Qingyu Yin, ACL 2018, [code](https://github.com/qyyin/Reinforce4ZP))
+[Deep Reinforcement Learning for Chinese Zero pronoun Resolution](http://aclweb.org/anthology/P18-1053) (Qingyu Yin, ACL 2018, [code](https://github.com/qyyin/Reinforce4ZP), [note](https://www.jiqizhixin.com/articles/2018-05-21-6))
 
-[Zero Pronoun Resolution with Attention-based Neural Network](http://aclweb.org/anthology/C18-1002) (Qingyu Yin, COLING 2018, [code](https://github.com/qyyin/AttentionZP))
+[Zero Pronoun Resolution with Attention-based Neural Network](http://aclweb.org/anthology/C18-1002) (Qingyu Yin, COLING 2018, [code](https://github.com/qyyin/AttentionZP), [note](https://www.jiqizhixin.com/articles/2018-07-28-8))
 
 #### 自然语言生成
 
