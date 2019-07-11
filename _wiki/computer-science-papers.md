@@ -74,7 +74,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [ERNIE: Enhanced Language Representation with Informative Entities](https://arxiv.org/pdf/1905.07129.pdf) (Zhengyan Zhang, ACL 2019, [code](https://github.com/PaddlePaddle/LARK/tree/develop/ERNIE))
 
-[XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/pdf/1906.08237.pdf) (Zhilin Yang, 2019, [code](https://github.com/zihangdai/xlnet))
+[XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/pdf/1906.08237.pdf) (Zhilin Yang, 2019, [code](https://github.com/zihangdai/xlnet), [note](https://zhuanlan.zhihu.com/p/70257427))
 
 #### 文本分类
 
@@ -685,6 +685,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Learning representations by back-propagating errors](http://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf) (David E. Rumelhart, 1986)
 
 [Highway Networks](http://de.arxiv.org/pdf/1505.00387) (Rupesh Kumar Srivastava, 2015)
+
+[Distilling the Knowledge in a Neural Network](https://arxiv.org/pdf/1503.02531.pdf) (Geoffrey Hinton, NIPS 2015)
 
 ##### 卷积神经网络
 
