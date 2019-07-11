@@ -140,11 +140,17 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Learning to Rank Short Text Pairs with Convolutional Deep Neural Networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.723.6492&rep=rep1&type=pdf) (Aliaksei Severyn, SIGIR 2015, [code](https://github.com/zhangzibin/PairCNN-Ranking))
 
+[A Large Annotated Corpus for Learning Natural Language Inference](https://arxiv.org/pdf/1508.05326.pdf) (Samuel R. Bowman, EMNLP 2015)
+
 [Text Matching as Image Recognition](https://arxiv.org/pdf/1602.06359.pdf) (Liang Pang, AAAI 2016, [code](https://github.com/ddddwy/MatchPyramid-for-semantic-matching))
 
 [Pairwise Word Interaction Modeling with Deep Neural Networks for Semantic Similarity Measurement](http://www.aclweb.org/anthology/N16-1108) (Hua He, NAACL 2016, [code](https://github.com/lanwuwei/Subword-PWIM))
 
+[Natural Language Inference by Tree-Based Convolution and Heuristic Matching](https://arxiv.org/pdf/1512.08422.pdf) (Lili Mou, ACL 2016, [note](https://www.paperweekly.site/papers/notes/344))
+
 [Improved Representation Learning for Question Answer Matching](http://www.aclweb.org/anthology/P16-1044) (Ming Tan, ACL 2016, [code](https://github.com/person-lee/qa_lstm))
+
+[A Decomposable Attention Model for Natural Language Inference](https://arxiv.org/pdf/1606.01933.pdf) (Ankur P. Parikh, EMNLP 2016, [code](https://github.com/harvardnlp/decomp-attn))
 
 [A Compare-Aggregate Model for Matching Text Sequences](https://arxiv.org/pdf/1611.01747.pdf) (Shuohang Wang, 2016)
 
@@ -156,11 +162,17 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Bilateral Multi-Perspective Matching for Natural Language Sentences](https://arxiv.org/pdf/1702.03814.pdf) (Zhiguo Wang, IJCAI 2017, [code](https://github.com/zhiguowang/BiMPM))
 
+[Enhanced LSTM for Natural Language Inference](https://arxiv.org/pdf/1609.06038.pdf) (Chen Qian, ACL 2017, [code](https://github.com/coetaur0/ESIM), [note](https://zhuanlan.zhihu.com/p/47580077))
+
+[Supervised Learning of Universal Sentence Representations from Natural Language Inference Data](https://arxiv.org/pdf/1705.02364.pdf) (Alexis Conneau, EMNLP 2017, [code](https://github.com/facebookresearch/InferSent))
+
 [Sentence Similarity Learning by Lexical Decomposition and Composition](https://www.aclweb.org/anthology/C/C16/C16-1127.pdf) (Zhiguo Wang, COLING 2017, [code](https://github.com/mcrisc/lexdecomp))
 
 [Natural Language Inference over Interaction Space](https://arxiv.org/pdf/1709.04348.pdf) (Yichen Gong, ICLR 2018, [code](https://github.com/YichenGong/Densely-Interactive-Inference-Network))
 
 [Convolutional Neural Networks for Soft-Matching N-Grams in Ad-hoc Search](http://delivery.acm.org/10.1145/3160000/3159659/p126-dai.pdf?ip=218.19.145.8&id=3159659&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1545800172_2be1e8f46ecb3f388bf3ceab8566848e) (Zhuyun Dai, WSDM 2018, [code](https://github.com/thunlp/EntityDuetNeuralRanking))
+
+[Discourse Marker Augmented Network with Reinforcement Learning for Natural Language Inference](https://aclweb.org/anthology/P18-1091) (Boyuan Pan, ACL 2018)
 
 [Deep Relevance Ranking Using Enhanced Document-Query Interactions](http://www2.aueb.gr/users/ion/docs/emnlp2018.pdf) (Ryan McDonald, EMNLP 2018, [code](https://github.com/nlpaueb/deep-relevance-ranking))
 
@@ -523,6 +535,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 [Learning beyond datasets: Knowledge Graph Augmented Neural Networks for Natural language Processing](https://arxiv.org/pdf/1802.05930.pdf) (Annervaz K M, NAACL 2018)
 
 [Entity-Duet Neural Ranking: Understanding the Role of Knowledge Graph Semantics in Neural Information Retrieval](http://aclweb.org/anthology/P18-1223) (Zhenghao Liu, ACL 2018, [code](https://github.com/thunlp/EntityDuetNeuralRanking))
+
+[Neural Natural Language Inference Models Enhanced with External Knowledge](https://arxiv.org/pdf/1711.04289.pdf) (Chen Qian, ACL 2018)
 
 #### 指代消解
 
