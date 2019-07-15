@@ -790,6 +790,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Large-Margin Softmax Loss for Convolutional Neural Networks](https://arxiv.org/pdf/1612.02295.pdf) (Weiyang Liu, ICML 2016, [code](https://github.com/wy1iu/LargeMargin_Softmax_Loss))
 
+[Focal Loss for Dense Object Detection](https://arxiv.org/pdf/1708.02002.pdf) (Tsung-Yi Lin, ICCV 2017, [code](https://github.com/unsky/focal-loss))
+
 [SphereFace: Deep Hypersphere Embedding for Face Recognition](https://arxiv.org/pdf/1704.08063.pdf) (Weiyang Liu, ICML 2017, [code](https://github.com/wy1iu/sphereface))
 
 [CosFace: Large Margin Cosine Loss for Deep Face Recognition](https://arxiv.org/pdf/1801.09414.pdf) (Hao Wang, 2018, [code](https://github.com/yule-li/CosFace))
