@@ -698,6 +698,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Distilling the Knowledge in a Neural Network](https://arxiv.org/pdf/1503.02531.pdf) (Geoffrey Hinton, NIPS 2015)
 
+[Dynamic Routing Between Capsules](https://papers.nips.cc/paper/6975-dynamic-routing-between-capsules.pdf) (Geoffrey Hinton, NIPS 2017, [code](https://github.com/naturomics/CapsNet-Tensorflow))
+
 ##### 卷积神经网络
 
 [Backpropagation applied to handwritten zip code recognition](https://www.ics.uci.edu/~welling/teaching/273ASpring09/lecun-89e.pdf) (Yann LeCun, 1989)
