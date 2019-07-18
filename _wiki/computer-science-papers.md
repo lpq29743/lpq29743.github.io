@@ -66,6 +66,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/pdf/1901.02860.pdf) (Zihang Dai, 2019)
 
+[Star-Transformer](https://arxiv.org/pdf/1902.09113.pdf) (Qipeng Guo, 2019)
+
 [Cloze-driven Pretraining of Self-attention Networks](https://arxiv.org/pdf/1903.07785.pdf) (Alexei Baevski, 2019)
 
 [Unified Language Model Pre-training for Natural Language Understanding and Generation](https://arxiv.org/pdf/1905.03197.pdf) (Li Dongmass, 2019)
@@ -132,6 +134,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [A Latent Semantic Model with Convolutional-Pooling Structure for Information Retrieval](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/cikm2014_cdssm_final.pdf) (Yelong Shen, CIKM 2014, [code](https://github.com/airalcorn2/Deep-Semantic-Similarity-Model))
 
+[Learning Semantic Representations Using Convolutional Neural Networks for Web Search](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/www2014_cdssm_p07.pdf) (Yelong Shen, WWW 2014)
+
 [Convolutional Neural Network Architectures for Matching Natural Language Sentences](http://www.hangli-hl.com/uploads/3/1/6/8/3168008/hu-etal-nips2014.pdf) (Baotian Hu, NIPS 2014, [code](https://github.com/ddddwy/ARCII-for-Matching-Natural-Language-Sentences))
 
 [Deep Sentence Embedding Using Long Short-Term Memory Networks: Analysis and Application to Information Retrieval](https://arxiv.org/pdf/1502.06922.pdf) (Hamid Palangi, 2015, [code](https://github.com/zhaosm/dssm-lstm))
@@ -154,11 +158,15 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [A Compare-Aggregate Model for Matching Text Sequences](https://arxiv.org/pdf/1611.01747.pdf) (Shuohang Wang, 2016)
 
+[aNMM: Ranking Short Answer Texts with Attention-Based Neural Matching Model](http://maroo.cs.umass.edu/pub/web/getpdf.php?id=1240) (Liu Yang, CIKM 2016, [code](https://github.com/yangliuy/aNMM-CIKM16))
+
 [A Deep Relevance Matching Model for Ad-hoc Retrieval](https://arxiv.org/pdf/1711.08611.pdf) (Jiafeng Guo, CIKM 2016, [code](https://github.com/sebastian-hofstaetter/neural-ranking-drmm))
 
 [Learning to Match using Local and Distributed Representations of Text for Web Search](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/10/wwwfp0192-mitra.pdf) (Bhaskar Mitra, WWW 2017)
 
 [End-to-End Neural Ad-hoc Ranking with Kernel Pooling](http://delivery.acm.org/10.1145/3090000/3080809/p55-xiong.pdf?ip=218.19.145.8&id=3080809&acc=CHORUS&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E6D218144511F3437&__acm__=1545743485_1f9609809da82437ccf634dc7f881b4b) (Chenyan Xiong, SIGIR 2017, [code](https://github.com/AdeDZY/K-NRM))
+
+[Deep Sentence Embedding Using Long Short-Term Memory Networks: Analysis and Application to Information Retrieval](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/02/LSTM_DSSM_IEEE_TASLP.pdf) (Hamid Palangi, TASLP 2017)
 
 [Bilateral Multi-Perspective Matching for Natural Language Sentences](https://arxiv.org/pdf/1702.03814.pdf) (Zhiguo Wang, IJCAI 2017, [code](https://github.com/zhiguowang/BiMPM))
 
@@ -411,6 +419,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 ##### 数据集
 
 [Mctest: A challenge dataset for the open-domainmachine comprehension of text](https://www.aclweb.org/anthology/D13-1020) (Matthew Richardson, EMNLP 2013)
+
+[WIKIQA: A Challenge Dataset for Open-Domain Question Answering](https://aclweb.org/anthology/D15-1237) (Yi Yang, EMNLP 2015)
 
 [SQuAD: 100,000+ Questions for Machine Comprehension of Text](https://arxiv.org/pdf/1606.05250.pdf) (Pranav Rajpurkar, 2016, [code](https://rajpurkar.github.io/SQuAD-explorer/))
 
