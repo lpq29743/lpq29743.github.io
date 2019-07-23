@@ -688,6 +688,18 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Balancing Training Data for Automated Annotation of Keywords: a Case Study](https://pdfs.semanticscholar.org/c1a9/5197e15fa99f55cd0cb2ee14d2f02699a919.pdf) (Gustavo E. A. P. A. Batista, 2003, [code](https://github.com/scikit-learn-contrib/imbalanced-learn))
 
+#### 多任务学习
+
+[Multiple Kernel Learning, Conic Duality, and the SMO Algorithm](https://www.di.ens.fr/~fbach/skm_icml.pdf) (Francis R. Bach, ICML 2004)
+
+[Large Scale Multiple Kernel Learning](http://www.jmlr.org/papers/volume7/sonnenburg06a/sonnenburg06a.pdf) (Sören Sonnenburg, JMLR 2006)
+
+[Factorized Latent Spaces with Structured Sparsity](https://papers.nips.cc/paper/3953-factorized-latent-spaces-with-structured-sparsity.pdf) (Yangqing Jia, NIPS 2010)
+
+[Factorized Orthogonal Latent Spaces](https://ttic.uchicago.edu/~rurtasun/publications/SalzmannEkUrtasunDarrell10.pdf) (Mathieu Salzmann, 2010)
+
+[Domain Separation Networks](https://papers.nips.cc/paper/6254-domain-separation-networks.pdf) (Konstantinos Bousmalis, NIPS 2016)
+
 ### 深度学习
 
 #### 模型
