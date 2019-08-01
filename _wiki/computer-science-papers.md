@@ -76,7 +76,13 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [ERNIE: Enhanced Language Representation with Informative Entities](https://arxiv.org/pdf/1905.07129.pdf) (Zhengyan Zhang, ACL 2019, [code](https://github.com/PaddlePaddle/LARK/tree/develop/ERNIE))
 
+[Pre-Training with Whole Word Masking for Chinese BERT](https://arxiv.org/pdf/1906.08101.pdf) (Yiming Cui, 2019, [code](https://github.com/ymcui/Chinese-BERT-wwm))
+
 [XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/pdf/1906.08237.pdf) (Zhilin Yang, 2019, [code](https://github.com/zihangdai/xlnet), [note](https://zhuanlan.zhihu.com/p/70257427))
+
+[RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/pdf/1907.11692.pdf) (Yinhan Liu, 2019)
+
+[ERNIE 2.0: A Continual Pre-training Framework for Language Understanding](https://arxiv.org/pdf/1907.12412.pdf) (Yu Sun, 2019)
 
 #### 文本分类
 
