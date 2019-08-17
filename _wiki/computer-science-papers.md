@@ -554,6 +554,8 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Entity-Duet Neural Ranking: Understanding the Role of Knowledge Graph Semantics in Neural Information Retrieval](http://aclweb.org/anthology/P18-1223) (Zhenghao Liu, ACL 2018, [code](https://github.com/thunlp/EntityDuetNeuralRanking))
 
+[Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge](https://www.aclweb.org/anthology/P18-1076) (Todor Mihaylov, ACL 2018)
+
 [Neural Natural Language Inference Models Enhanced with External Knowledge](https://arxiv.org/pdf/1711.04289.pdf) (Chen Qian, ACL 2018)
 
 #### 指代消解
