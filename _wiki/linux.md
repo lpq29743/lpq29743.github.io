@@ -310,6 +310,12 @@ find ./foo -type f -name "*.txt" | xargs rm
 
 ### chmod
 
+```bash
+# 将某个目录下的所有文件修改为所有人可访问
+find ./foo -type d -exec chmod 755 {} \;
+find ./foo -type f -exec chmod 644 {} \;
+```
+
 ### tar
 
 ### chgrp
