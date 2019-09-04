@@ -230,9 +230,17 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Mixing Dirichlet Topic Models and Word Embeddings to Make lda2vec](https://arxiv.org/pdf/1605.02019.pdf) (Christopher Moody, 2016, [code](https://github.com/cemoody/lda2vec))
 
-#### 关键词抽取
+#### 关键词提取
 
 [TextRank: Bringing Order into Texts](http://202.116.81.74/cache/16/03/web.eecs.umich.edu/ed616fd7b9f50b15ac2f92467a16c9f7/mihalcea.emnlp04.pdf) (Rada Mihalcea, EMNLP 2014)
+
+[Deep Keyphrase Generation](http://memray.me/uploads/acl17-keyphrase-generation.pdf) (Rui Meng, ACL 2017, [code](https://github.com/memray/seq2seq-keyphrase))
+
+[Semi-Supervised Learning for Neural Keyphrase Generation](https://arxiv.org/pdf/1808.06773.pdf) (Hai Ye, EMNLP 2018)
+
+[Keyphrase Generation with Correlation Constraints](https://arxiv.org/pdf/1808.07185.pdf) (Jun Chen, EMNLP 2018)
+
+[Title-Guided Encoding for Keyphrase Generation](https://arxiv.org/pdf/1808.08575.pdf) (Wang Chen, AAAI 2019)
 
 #### 序列标注
 
