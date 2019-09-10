@@ -84,6 +84,7 @@ keywords: App推荐, Android软件推荐
 - Weavi（写作软件最佳选择）
 - RE文件管理器（程序员及 Android 爱好者必备）
 - KingRoot（系统自带软件删除工具）
+- CoReader-Kt（代码阅读软件）
 
 **游戏软件**
 
