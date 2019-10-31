@@ -1,22 +1,56 @@
 ---
 layout: page
 title: About
-description: 林佩勤的个人介绍
+description: Peiqin Lin's CV
 keywords: Peiqin Lin, 林佩勤
 comments: true
-menu: 关于
+menu: about
 permalink: /about/
 ---
 
-林佩勤，自然语言处理爱好者，电影摇滚爱好者。
+Peiqin Lin
 
-热门 Github 开源项目：[IAN](https://github.com/lpq29743/IAN)，[RAM](https://github.com/lpq29743/RAM)。
+Email: linpq3@mail2.sysu.edu.cn
 
-2014 年至 2018 年，于华南师范大学软件学院就读软件工程专业。
+### Research Interests
 
-2018 年至 2020 年，于中山大学数据科学与计算机学院就读软件工程专业。
+- Sentiment/Emotion Analysis
+- Coreference Resolution
+- Text Classification
+- Deep Learning for Natural Language Processing
 
-## 联系
+### Education
+
+- Sun Yat-sen University (2018 – 2020), M.E. in Software Engineering. Supervisor: [Prof. Meng Yang](http://www.smartllv.com/members.html)
+
+- South China Normal University (2014 – 2018). B.E. in Software Engineering
+
+### Publications
+
+**Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis.** First author, accepted by IJCAI 2019.
+
+- Integrating semantic parsing information into deep memory network
+- Modeling inter-aspect relation for utilizing the information of the nearby aspects
+- Designing an auxiliary task to learn the sentiment distribution for the desired aspect
+
+**A Shared-Private Model with Joint Learning and Predict-then-Extend Extraction for Targeted Sentiment Analysis.** First author, submitted to AAAI 2020.
+
+- A shared-private network to exploit the relation between target extraction and target classification
+- An heuristic predict-then-extend algorithm for target extraction
+
+**Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution.** First author, submitted to AAAI 2020.
+
+- Modeling zero pronouns and candidate antecedents interactively with Hierarchical Attention Mechanism
+- Using pairwise loss instead of cross entropy loss used in previous methods
+- Taking the constraint of correct-antecedent similarity into account for utilizing the chain information
+
+### Projects
+
+- [IAN](https://github.com/lpq29743/IAN) (70+ stars): TensorFlow implementation for "Interactive Attention Networks for Aspect-Level Sentiment Classification"
+- [RAM](https://github.com/lpq29743/RAM) (50+ stars): TensorFlow implementation for "Recurrent Attention Network on Memory for Aspect Sentiment Analysis"
+- text_classification: implementation of text classification models, including traditional ML methods and DL methods (in Pytorch)
+
+### Social
 
 {% for website in site.data.social %}
 * {{ website.sitename }}：[@{{ website.name }}]({{ website.url }})
