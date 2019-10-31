@@ -1,12 +1,12 @@
 # Site Settings
 url: https://lpq29743.github.io/redant
-title: 林佩勤的个人博客
+title: Peiqin Lin's Homepage
 subtitle: "Software is like sex: it's better when it's free."
-description: "林佩勤的个人博客"
+description: "Peiqin Lin's Homepage"
 keywords: 林佩勤, Peiqin Lin, 半截小丑, lpq29743
 timezone: Asia/Shanghai
 encoding: "utf-8"
-SEOTitle: 林佩勤的个人博客
+SEOTitle: Peiqin Lin's Homepage
 repository: lpq29743/redant
 
 # Author Settings
@@ -19,22 +19,22 @@ email: lpq29743@gmail.com
 navs:
   -
     href: 
-    label: 首页
+    label: Home
   -
     href: /categories
-    label: 分类
+    label: Categories
   -
     href: /wiki
-    label: 维基
+    label: Wiki
   -
     href: /open-source
-    label: 项目
+    label: Projects
   -
     href: /links
-    label: 友链
+    label: Links
   -
     href: /about
-    label: 关于
+    label: About
 
 # RSS Settings
 RSS: true
