@@ -1,5 +1,5 @@
 # Site Settings
-url: https://lpq29743.github.io/redant
+url: https://lpq29743.github.io/
 title: Peiqin Lin's Homepage
 subtitle: "Software is like sex: it's better when it's free."
 description: "Peiqin Lin's Homepage"
@@ -7,7 +7,7 @@ keywords: 林佩勤, Peiqin Lin, 半截小丑, lpq29743
 timezone: Asia/Shanghai
 encoding: "utf-8"
 SEOTitle: Peiqin Lin's Homepage
-repository: lpq29743/redant
+repository: lpq29743/lpq29743.github.io
 
 # Author Settings
 author: Peiqin Lin
