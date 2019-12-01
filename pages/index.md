@@ -51,8 +51,8 @@ Email: linpq3@mail2.sysu.edu.cn
 - [RAM](https://github.com/lpq29743/RAM) (50+ stars): TensorFlow implementation for "Recurrent Attention Network on Memory for Aspect Sentiment Analysis"
 - text_classification: implementation of text classification models, including traditional ML methods and DL methods (in Pytorch)
 
-### Social
+<!-- ### Social
 
 {% for website in site.data.social %}
 * {{ website.sitename }}：[@{{ website.name }}]({{ website.url }})
-{% endfor %}
+{% endfor %} -->
