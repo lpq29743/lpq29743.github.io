@@ -1,10 +1,9 @@
 ---
-layout: default
-title: About
-description: Peiqin Lin's CV
+layout: index
+title: Peiqin Lin's Homepage
+description: Peiqin Lin's Homepage
 keywords: Peiqin Lin, 林佩勤
 comments: true
-menu: about
 permalink: /
 ---
 
