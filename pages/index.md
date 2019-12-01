@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: About
 description: Peiqin Lin's CV
 keywords: Peiqin Lin, 林佩勤
@@ -7,6 +7,8 @@ comments: true
 menu: about
 permalink: /
 ---
+
+### About Me
 
 Peiqin Lin
 
