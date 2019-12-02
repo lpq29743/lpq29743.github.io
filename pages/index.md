@@ -20,9 +20,9 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 ### Education
 
-- Sun Yat-sen University (2018 – 2020), M.E. in Software Engineering. Supervisor: [Prof. Meng Yang](http://www.smartllv.com/members.html)
+- Sun Yat-sen University (2018 – 2020), M.Eng. in Software Engineering. Supervisor: [Prof. Meng Yang](http://www.smartllv.com/members.html)
 
-- South China Normal University (2014 – 2018). B.E. in Software Engineering
+- South China Normal University (2014 – 2018). B.Eng. in Software Engineering
 
 ### Publications
 
@@ -32,16 +32,16 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 - Modeling inter-aspect relation for utilizing the information of the nearby aspects
 - Designing an auxiliary task to learn the sentiment distribution for the desired aspect
 
-**A Shared-Private Model with Joint Learning and Predict-then-Extend Extraction for Targeted Sentiment Analysis.** First author, submitted to AAAI 2020.
-
-- A shared-private network to exploit the relation between target extraction and target classification
-- An heuristic predict-then-extend algorithm for target extraction
-
-**Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution.** First author, submitted to AAAI 2020.
+**Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution.** First author, accepted to AAAI 2020.
 
 - Modeling zero pronouns and candidate antecedents interactively with Hierarchical Attention Mechanism
 - Using pairwise loss instead of cross entropy loss used in previous methods
 - Taking the constraint of correct-antecedent similarity into account for utilizing the chain information
+
+**A Shared-Private Model with Joint Learning and Predict-then-Extend Extraction for Targeted Sentiment Analysis.** First author, submitted to ACL 2020.
+
+- A shared-private network to exploit the relation between target extraction and target classification
+- An heuristic predict-then-extend algorithm for target extraction
 
 ### Projects
 
