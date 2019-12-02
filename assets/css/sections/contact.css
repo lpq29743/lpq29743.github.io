@@ -1,5 +1,5 @@
 /* Button */
-.btn {
+.widget-social__item .btn {
 	padding: 5px 10px;
 	font-weight: 700;
 	color: #fff;
@@ -7,14 +7,13 @@
 	background: #2a2a2a;
 }
 
-.btn:hover {
+.widget-social__item .btn:hover {
 	color: #fff;
 	background: #e22d30;
 }
 
 /* Animation */
-.menu__item,
-.btn {
+.widget-social__item .btn {
 	transition: background-color .25s ease-out;
 }
 
