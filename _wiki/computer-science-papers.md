@@ -2,25 +2,25 @@
 layout: wiki
 title: Computer Science Papers
 categories: Blog
-description: 计算机科学论文
-keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
+description: omputer Science Papers
+keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自然语言处理论文
 ---
 
-### 论文集
+### Paper List
 
-[ACL, EMNLP, COLING, SemEval 历年论文集](https://aclanthology.coli.uni-saarland.de/)
+[ACL, EMNLP, COLING, SemEval Paper List](https://aclanthology.coli.uni-saarland.de/)
 
-[JMLR 历年论文集](http://www.jmlr.org/papers/)
+[JMLR Paper List](http://www.jmlr.org/papers/)
 
-[ICCV CVPR 历年论文集](http://openaccess.thecvf.com/menu.py)
+[ICCV CVPR Paper List](http://openaccess.thecvf.com/menu.py)
 
-[AAAI 历年论文集](http://www.aaai.org/Library/AAAI/aaai-library.php)
+[AAAI Paper List](http://www.aaai.org/Library/AAAI/aaai-library.php)
 
-[IJCAI 历年论文集](https://www.ijcai.org/proceedings/2017/)
+[IJCAI Paper List](https://www.ijcai.org/proceedings/2017/)
 
-### 自然语言处理
+### Natural Language Processing
 
-#### 词嵌入
+#### Word Embedding
 
 [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf) (Tomas Mikolov, 2013, [code](https://github.com/danielfrg/word2vec), [note](https://zhuanlan.zhihu.com/p/34718114))
 
@@ -38,7 +38,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Glyce: Glyph-vectors for Chinese Character Representations](https://arxiv.org/pdf/1901.10125.pdf) (Yuxian Meng, 2019)
 
-#### 语言模型
+#### Language Model
 
 [A Study on Neural Network Language Modeling](https://arxiv.org/pdf/1708.07252.pdf) (Dengliang Shi, 2017)
 
@@ -84,7 +84,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [ERNIE 2.0: A Continual Pre-training Framework for Language Understanding](https://arxiv.org/pdf/1907.12412.pdf) (Yu Sun, 2019)
 
-#### 文本分类
+#### Text Classification
 
 [Convolutional Neural Networks for Sentence Classification](http://www.aclweb.org/anthology/D14-1181) (Yoon Kim, EMNLP 2014, [code](https://github.com/brightmart/text_classification))
 
@@ -130,11 +130,11 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Graph Convolutional Networks for Text Classification](https://arxiv.org/pdf/1809.05679v1.pdf) (Liang Yao, AAAI 2019, [code](https://github.com/yao8839836/text_gcn))
 
-##### 多标签文本分类
+##### Multi-Label Text Classification
 
 [SGM: Sequence Generation Model for Multi-Label Classification](http://aclweb.org/anthology/C18-1330) (Pengcheng Yang, COLING 2018, [code](https://github.com/lancopku/SGM))
 
-#### 文本匹配
+#### Text Matching
 
 [Learning Deep Structured Semantic Models for Web Search using Clickthrough Data](http://delivery.acm.org/10.1145/2510000/2505665/p2333-he.pdf?ip=218.19.145.8&id=2505665&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1545793847_ac9774c47a9b2bab6395221862331678) (Po-Sen Huang, CIKM 2013, [code](https://github.com/liaha/dssm))
 
@@ -192,7 +192,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Semantic Sentence Matching with Densely-connected Recurrent and Co-attentive Information](https://arxiv.org/pdf/1805.11360.pdf) (Seonhoon Kim, 2018)
 
-#### 文本摘要
+#### Text Summarization
 
 [The Automatic Creation of Literature Abstracts](http://courses.ischool.berkeley.edu/i256/f06/papers/luhn58.pdf) (H. P. Luhn, 1958, [code](https://github.com/miso-belica/sumy))
 
@@ -220,7 +220,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Controllable Abstractive Summarization](https://aclweb.org/anthology/W18-2706) (Angela Fan, ACL Workshop 2018)
 
-#### 主题建模
+#### Topic Modeling
 
 [An Introduction to Latent Semantic Analysis](http://lsa.colorado.edu/papers/dp1.LSAintro.pdf) (Thomas K Landauer, 1998, [code](https://github.com/josephwilk/semanticpy))
 
@@ -230,7 +230,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Mixing Dirichlet Topic Models and Word Embeddings to Make lda2vec](https://arxiv.org/pdf/1605.02019.pdf) (Christopher Moody, 2016, [code](https://github.com/cemoody/lda2vec))
 
-#### 关键词提取
+#### Keyphrase Extraction
 
 [TextRank: Bringing Order into Texts](http://202.116.81.74/cache/16/03/web.eecs.umich.edu/ed616fd7b9f50b15ac2f92467a16c9f7/mihalcea.emnlp04.pdf) (Rada Mihalcea, EMNLP 2014)
 
@@ -242,11 +242,11 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Title-Guided Encoding for Keyphrase Generation](https://arxiv.org/pdf/1808.08575.pdf) (Wang Chen, AAAI 2019)
 
-#### 序列标注
+#### Sequence Labeling
 
 [Semi-supervised Multitask Learning for Sequence Labeling](https://www.aclweb.org/anthology/P17-1194) (Marek Rei, ACL 2017)
 
-#### 依存句法分析
+#### Dependency Parsing
 
 [Statistical Dependency Analysis with Support Vector machines](https://pdfs.semanticscholar.org/f0e1/883cf9d1b3c911125f46359f908557fc5827.pdf) (Hiroyasu Yamada, 2003)
 
@@ -258,27 +258,27 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Simple and Accurate Dependency Parsing Using Bidirectional LSTM Feature Representations](https://aclweb.org/anthology/Q16-1023) (Eliyahu Kiperwasser, TACL 2016, [code](https://github.com/elikip/bist-parser))
 
-#### 情感分析
+#### Sentiment Analysis
 
-##### 概述
+##### Overview
 
 [Opinion Mining and Sentiment Analysis](https://www.cse.iitb.ac.in/~pb/cs626-449-2009/prev-years-other-things-nlp/sentiment-analysis-opinion-mining-pang-lee-omsa-published.pdf) (Bo Pang, 2008)
 
 [Sentiment Analysis and Opinion Mining](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.244.9480&rep=rep1&type=pdf) (Bing Liu, 2012)
 
-##### 情感词典
+##### Sentiment Lexicon
 
 [Building Large-Scale Twitter-Specific Sentiment Lexicon: A Representation Learning Approach](http://www.aclweb.org/anthology/C14-1018) (Duyu Tang, COLING 2014)
 
 [Inducing Domain-Specific Sentiment Lexicons from Unlabeled Corpora](http://www.aclweb.org/anthology/D16-1057) (William L. Hamilton, EMNLP 2016)
 
-##### 情感词嵌入
+##### Sentiment Embedding
 
 [Learning sentiment-specific word embedding for twitter sentiment classification](http://www.anthology.aclweb.org/P/P14/P14-1146.pdf) (Duyu Tang, ACL 2014, [note](https://zhuanlan.zhihu.com/p/24217324))
 
 [SenticNet 5: Discovering Conceptual Primitives for Sentiment Analysis by Means of Context Embeddings](http://sentic.net/senticnet-5.pdf) (Erik Cambria, AAAI 2018, [code1](http://sentic.net/downloads/), [code2](https://github.com/yurimalheiros/senticnetapi))
 
-##### 对象/观点抽取
+##### Opinion Target Extraction
 
 [Mining and Summarizing Customer Reviews](https://www.cs.uic.edu/~liub/publications/kdd04-revSummary.pdf) (Minqing Hu, KDD 2004)
 
@@ -326,7 +326,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Target-oriented Opinion Words Extraction with Target-fused Neural Sequence Labeling](https://www.aclweb.org/anthology/N19-1259) (Zhifang Fan, NAACL 2019)
 
-##### 对象级情感分析
+##### Aspect Based Sentiment Classification
 
 [SemEval-2014 Task 4: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S14-2004) (Maria Pontiki, SemEval 2014)
 
@@ -372,7 +372,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Utilizing BERT for Aspect-Based Sentiment Analysis via Constructing Auxiliary Sentence](https://arxiv.org/pdf/1903.09588.pdf) (Chi Sun, NAACL 2019, [code](https://github.com/HSLCY/ABSA-BERT-pair))
 
-##### 对象抽取和分类联合训练
+##### Aspect Based Sentiment Analysis
 
 [Bidirectional Inter-dependencies of Subjective Expressions and Targets and their Value for a Joint Model](https://pdfs.semanticscholar.org/6047/235275b2b8d414b8ac472fd19f2a1a6144b6.pdf) (Roman Klinger, ACL 2013)
 
@@ -390,7 +390,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Open-Domain Targeted Sentiment Analysis via Span-Based Extraction and Classification](https://arxiv.org/pdf/1906.03820.pdf) (Minghao Hu, ACL 2019, [code](https://github.com/huminghao16/SpanABSA))
 
-#### 机器翻译
+#### Machine Translation
 
 [Neural Machine Translation and Sequence-to-sequence Models: A Tutorial](https://arxiv.org/pdf/1703.01619.pdf) (Graham Neubig, 2017)
 
@@ -404,13 +404,13 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Non-Autoregressive Neural Machine Translation](https://arxiv.org/pdf/1711.02281.pdf) (Jiatao Gu, ICLR 2018, [code](https://github.com/salesforce/nonauto-nmt), [note](https://zhuanlan.zhihu.com/p/35866317))
 
-#### 对话系统
+#### Dialogue System
 
 [A Survey on Dialogue Systems: Recent Advances and New Frontiers](https://arxiv.org/pdf/1711.01731.pdf) (Hongshen Chen, 2017)
 
 [AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine](http://www.aclweb.org/anthology/P/P17/P17-2079.pdf) (Minghui Qiu, ACL 2017)
 
-##### 对话管理
+##### Dialogue State Tracking
 
 [Machine Learning for Dialog State Tracking: A Review](https://ai.google/research/pubs/pub44018) (Matthew Henderson, 2015)
 
@@ -428,9 +428,9 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Global-Locally Self-Attentive Dialogue State Tracker](http://aclweb.org/anthology/P18-1135) (Victor Zhong, ACL 2018, [code](https://github.com/salesforce/glad))
 
-#### 问答系统与机器阅读理解
+#### Question Answering and Machine Reading Comprehension
 
-##### 数据集
+##### Dataset
 
 [Mctest: A challenge dataset for the open-domainmachine comprehension of text](https://www.aclweb.org/anthology/D13-1020) (Matthew Richardson, EMNLP 2013)
 
@@ -458,7 +458,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [A Dataset and Baselines for Sequential Open-Domain Question Answering](https://www.aclweb.org/anthology/D18-1134) (Ahmed Elgohary, EMNLP 2018, [code](http://sequential.qanta.org/))
 
-##### 机器阅读理解
+##### Machine Reading Comprehension
 
 [ROUGE: A Package for Automatic Evaluation of Summaries](http://www.aclweb.org/anthology/W/W04/W04-1013.pdf) (Chin-Yew Lin, 2004)
 
@@ -488,7 +488,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Joint Training of Candidate Extraction and Answer Selection for Reading Comprehension](https://www.aclweb.org/anthology/P18-1159) (Zhen Wang, ACL 2018)
 
-##### 基于知识图谱的问答
+##### Knowledge Based Question Answering
 
 [Information Extraction over Structured Data: Question Answering with Freebase](http://cs.jhu.edu/~xuchen/paper/yao-jacana-freebase-acl2014.pdf) (Xuchen Yao, ACL 2014)
 
@@ -502,9 +502,9 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Variational Reasoning for Question Answering with Knowledge Graph](https://arxiv.org/pdf/1709.04071.pdf) (Yuyu Zhang, AAAI 2018)
 
-#### 知识图谱
+#### Knowledge Graph
 
-##### 知识库
+##### Knowledge Base
 
 [DBpedia: A Nucleus for a Web of Open Data](https://cis.upenn.edu/~zives/research/dbpedia.pdf) (Soren Auer, 2007, [code](https://wiki.dbpedia.org/))
 
@@ -514,7 +514,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [ConceptNet 5.5: An Open Multilingual Graph of General Knowledge](https://arxiv.org/pdf/1612.03975.pdf) (Robyn Speer, AAAI 2017, [code](http://conceptnet.io/))
 
-##### 知识图谱表示和补全
+##### Knowledge Graph Embedding and Completion
 
 [Knowledge Graph Embedding: A Survey of Approaches and Applications](https://www.computer.org/csdl/trans/tk/2017/12/08047276-abs.html) (Quan Wang, 2017)
 
@@ -538,7 +538,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Open-World Knowledge Graph Completion](https://arxiv.org/pdf/1711.03438.pdf) (Baoxu Shi, AAAI 2018, [code](https://github.com/bxshi/ConMask))
 
-##### 实体识别和链接
+##### Entity Discovery and Linking
 
 [A Generative Entity-Mention Model for Linking Entities with Knowledge Base](https://www.aclweb.org/anthology/P/P11/P11-1095.pdf) (Xianpei Han, ACL 2011)
 
@@ -554,7 +554,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Ultra-fine entity typing](https://www.aclweb.org/anthology/P18-1009) (Eunsol Choi, ACL 2018)
 
-##### 知识图谱应用
+##### Knowledge Graph Application
 
 [Learning beyond datasets: Knowledge Graph Augmented Neural Networks for Natural language Processing](https://arxiv.org/pdf/1802.05930.pdf) (Annervaz K M, NAACL 2018, [note](https://blog.lorrin.info/posts/%5B2018.5.10%5DKnowledge-Graph-Augmented-Neural-Networks-for-NLP/))
 
@@ -566,7 +566,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Neural Natural Language Inference Models Enhanced with External Knowledge](https://arxiv.org/pdf/1711.04289.pdf) (Chen Qian, ACL 2018)
 
-#### 指代消解
+#### Coreference Resolution
 
 [Identification and Resolution of Chinese Zero Pronouns: A Machine Learning Approach](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=F05E1DD4B64B0771E279426984E7CDD1?doi=10.1.1.65.1935&rep=rep1&type=pdf) (Shanheng Zhao and Hwee Tou Ng, EMNLP 2007)
 
@@ -584,15 +584,15 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Zero Pronoun Resolution with Attention-based Neural Network](http://aclweb.org/anthology/C18-1002) (Qingyu Yin, COLING 2018, [code](https://github.com/qyyin/AttentionZP), [note](https://www.jiqizhixin.com/articles/2018-07-28-8))
 
-#### 自然语言生成
+#### Natural Language Generation
 
 [Survey of the State of the Art in Natural Language Generation: Core tasks, applications and evaluation](https://arxiv.org/pdf/1703.09902.pdf) (Albert Gatt, 2017)
 
 [Neural Text Generation: A Practical Guide](https://arxiv.org/pdf/1711.09534.pdf) (Ziang Xie, 2017)
 
-### 计算机视觉
+### Computer Vision
 
-#### 目标检测
+#### Object Detection
 
 [Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/pdf/1311.2524.pdf) (Ross Girshick, CVPR 2014, [code](https://github.com/rbgirshick/rcnn))
 
@@ -614,7 +614,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [TensorMask: A Foundation for Dense Object Segmentation](https://arxiv.org/pdf/1903.12174.pdf) (Xinlei Chen, 2019)
 
-#### 图像超分辨
+#### Image Super-Resolution
 
 [Image Super-Resolution Using Deep Convolutional Networks](https://arxiv.org/pdf/1501.00092.pdf) (Chao Dong, TPAMI 2015)
 
@@ -638,9 +638,9 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Deep Back-Projection Networks for Super-Resolution](http://openaccess.thecvf.com/content_cvpr_2018/papers/Haris_Deep_Back-Projection_Networks_CVPR_2018_paper.pdf) (Muhammad Haris, CVPR 2018, [code](https://github.com/alterzero/DBPN-Pytorch))
 
-### 机器学习
+### Machine Learning
 
-#### 模型
+#### Model
 
 [Occam's Razor](https://users.soe.ucsc.edu/~manfred/pubs/J9.pdf) (Anselm Blumer, 1987)
 
@@ -648,7 +648,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [What is the expectation maximization algorithm?](http://www.cs.virginia.edu/~mr4xb/notes/EM/em_tutorial.pdf) (Chuong B Do, 2008)
 
-##### 决策树
+##### Decision Tree
 
 [Classification and Regression Trees](http://xxpt.ynjgy.com/resource/data/110102/U/705/pdfs/L3ClassTrees.pdf) (L. Breiman, 1984, [code1](https://github.com/bensadeghi/DecisionTree.jl), [code2](https://github.com/wreardan/cart))
 
@@ -656,7 +656,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [C4.5: Programs for Machine Learning](https://dl.acm.org/citation.cfm?id=152181) (J. Ross Quinlan, 1993, [code](https://github.com/yandongliu/learningjs))
 
-##### 支持向量机
+##### Support Vector Machine
 
 [A Training Algorithm for Optimal Margin Classifiers](http://www.svms.org/training/BOGV92.pdf) (Bernhard E Boser, 1992, [code](https://github.com/cjlin1/libsvm))
 
@@ -666,13 +666,13 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [New Support Vector Algorithms](https://www.researchgate.net/publication/12413257_New_Support_Vector_Algorithms) (Bernhard Schölkopf, 2000, [code](https://github.com/cjlin1/libsvm))
 
-##### 集成方法
+##### Ensemble Method
 
 [Greedy function approximation: a gradient boosting machine](https://projecteuclid.org/download/pdf_1/euclid.aos/1013203451) (Jerome H. Friedman, 2001, [code](https://github.com/dmlc/xgboost))
 
 [XGBoost: A Scalable Tree Boosting System](https://arxiv.org/pdf/1603.02754.pdf#page=10&zoom=100,0,198) (Tianqi Chen, SIGKDD 2016, [code](https://github.com/dmlc/xgboost), [note](http://djjowfy.com/2017/08/01/XGBoost%E7%9A%84%E5%8E%9F%E7%90%86/))
 
-#### 零样本学习
+#### Zero-Shot Learning
 
 [Zero-Shot Learning with Semantic Output Codes](http://www.cs.cmu.edu/afs/cs/project/theo-73/www/papers/zero-shot-learning.pdf) (Mark Palatucci, NIPS 2009)
 
@@ -684,11 +684,11 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Zero-Shot Recognition using Dual Visual-Semantic Mapping Paths](https://arxiv.org/pdf/1703.05002.pdf) (Yanan Li, 2017)
 
-#### 少样本学习
+#### Few-Shot Learning
 
 [One-Shot Learning of Object Categories](http://vision.stanford.edu/documents/Fei-FeiFergusPerona2006.pdf) (Li Fei-Fei, PAMI 2006)
 
-#### 样本不平衡
+#### Imbalanced Data
 
 [Learning from Imbalanced Data](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5128907) (Haibo He, 2009)
 
@@ -706,7 +706,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Balancing Training Data for Automated Annotation of Keywords: a Case Study](https://pdfs.semanticscholar.org/c1a9/5197e15fa99f55cd0cb2ee14d2f02699a919.pdf) (Gustavo E. A. P. A. Batista, 2003, [code](https://github.com/scikit-learn-contrib/imbalanced-learn))
 
-#### 多任务学习
+#### Multi-Task Learning
 
 [Multiple Kernel Learning, Conic Duality, and the SMO Algorithm](https://www.di.ens.fr/~fbach/skm_icml.pdf) (Francis R. Bach, ICML 2004)
 
@@ -718,9 +718,9 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Domain Separation Networks](https://papers.nips.cc/paper/6254-domain-separation-networks.pdf) (Konstantinos Bousmalis, NIPS 2016)
 
-### 深度学习
+### Deep Learning
 
-#### 模型
+#### Model
 
 [Learning representations by back-propagating errors](http://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf) (David E. Rumelhart, 1986)
 
@@ -730,7 +730,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Dynamic Routing Between Capsules](https://papers.nips.cc/paper/6975-dynamic-routing-between-capsules.pdf) (Geoffrey Hinton, NIPS 2017, [code](https://github.com/naturomics/CapsNet-Tensorflow))
 
-##### 卷积神经网络
+##### Convolutional Neural Networks
 
 [Backpropagation applied to handwritten zip code recognition](https://www.ics.uci.edu/~welling/teaching/273ASpring09/lecun-89e.pdf) (Yann LeCun, 1989)
 
@@ -754,7 +754,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Tree-CNN: A Deep Convolutional Neural Network for Lifelong Learning](https://arxiv.org/pdf/1802.05800.pdf) (Deboleena Roy, 2018, [code](https://github.com/magical2world/tensorflow-Tree-CNN))
 
-##### 循环神经网络
+##### Recurrent Neural Networks
 
 [Long short-term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
 
@@ -762,7 +762,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Simple Recurrent Units for Highly Parallelizable Recurrence](https://arxiv.org/pdf/1709.02755.pdf) (Tao Lei, EMNLP 2018, [code](https://github.com/taolei87/sru))
 
-##### 生成对抗网络
+##### Generative Adversarial Networks
 
 [Generative Adversarial Nets](https://arxiv.org/pdf/1406.2661.pdf) (Ian Goodfellow, 2014)
 
@@ -780,7 +780,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Wasserstein GAN](https://arxiv.org/pdf/1701.07875.pdf) (Martin Arjovsky, 2017, [code](<https://github.com/martinarjovsky/WassersteinGAN))
 
-##### 注意力机制和记忆网络
+##### Attention Mechanism and Memory Networks
 
 [An Introductory Survey on Attention Mechanisms in NLP Problems](https://arxiv.org/pdf/1811.05544.pdf) (Dichao Hu, 2018)
 
@@ -806,7 +806,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [You May Not Need Attention](https://arxiv.org/pdf/1810.13409.pdf) (Ofir Press, 2018, [code](https://github.com/ofirpress/YouMayNotNeedAttention))
 
-#### 优化器
+#### Optimizer
 
 [An overview of gradient descent optimization algorithms](https://arxiv.org/pdf/1609.04747.pdf) (Sebastian Ruder, 2017)
 
@@ -818,13 +818,13 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION](https://arxiv.org/pdf/1412.6980.pdf) (Diederik P. Kingma, 2015)
 
-#### 参数初始化
+#### Weight Initialization
 
 [Understanding the difficulty of training deep feedforward neural networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.207.2059&rep=rep1&type=pdf) (Xavier Glorot, JMLR 2010)
 
 [Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification](https://arxiv.org/pdf/1502.01852.pdf) (Kaiming He, ICCV 2015)
 
-#### 损失函数
+#### Loss Function
 
 [FaceNet: A Unified Embedding for Face Recognition and Clustering](https://www.cv-foundation.org/openaccess/content_cvpr_2015/app/1A_089.pdf) (Florian Schroff, CVPR 2015, [code](https://github.com/davidsandberg/facenet))
 
@@ -842,11 +842,11 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Additive Margin Softmax for Face Verification](https://arxiv.org/pdf/1801.05599.pdf) (Feng Wang, 2018, [code](https://github.com/Joker316701882/Additive-Margin-Softmax))
 
-#### 激活函数
+#### Activation Function
 
 [Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units](https://arxiv.org/pdf/1603.05201v2.pdf) (Wenling Shang, ICML 2016)
 
-#### 归一化
+#### Normalization
 
 [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](http://de.arxiv.org/pdf/1502.03167) (Sergey Ioffe, ICML 2015)
 
@@ -856,13 +856,13 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Group Normalization](https://arxiv.org/pdf/1803.08494.pdf) (Yuxin Wu, 2018)
 
-### 强化学习
+### Reinforcement Learning
 
 [A Brief Survey of Deep Reinforcement Learning](https://arxiv.org/pdf/1708.05866.pdf) (Kai Arulkumaran, 2017)
 
 [Deep Reinforcement Learning: An Overview](https://arxiv.org/pdf/1701.07274.pdf) (Yuxi Li, 2017)
 
-#### 强化学习应用
+#### Reinforcement Learning Application
 
 [Playing Atari with Deep Reinforcement Learning](https://arxiv.org/pdf/1312.5602.pdf) (Volodymyr Mnih, 2013)
 
@@ -870,13 +870,13 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Mastering the game of Go without human knowledge](https://skatgame.net/mburo/ps/alphago-zero.pdf) (David Silver, Nature 2017, [code](https://github.com/gcp/leela-zero))
 
-### 推荐系统
+### Recommendation System
 
 [Deep Learning based Recommender System: A Survey and New Perspectives](http://de.arxiv.org/pdf/1707.07435v5) (Shuai Zhang, 2017, [code](https://github.com/cheungdaven/DeepRec))
 
 [A review on deep learning for recommender systems: challenges and remedies](https://link.springer.com/article/10.1007/s10462-018-9654-y) (Zeynep Batmaz, 2018)
 
-#### 新闻推荐
+#### News Recommendation
 
 [Google News Personalization: Scalable Online Collaborative Filtering](http://wwwconference.org/www2007/papers/paper570.pdf) (Abhinandan Das, WWW 2007)
 
@@ -888,7 +888,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [A Multi-View Deep Learning Approach for Cross Domain User Modeling in Recommendation Systems](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/frp1159-songA.pdf) (Ali Elkahky, WWW 2015)
 
-### 大数据
+### Big Data
 
 [The Google File System](http://index-of.es/Misc/pdf/google_file_system.pdf) (Sanjay Ghemawat, SOSP 2003)
 
@@ -896,7 +896,7 @@ keywords: 计算机科学论文, 深度学习论文, 自然语言处理论文
 
 [Bigtable: A Distributed Storage System for Structured Data](https://fenix.tecnico.ulisboa.pt/downloadFile/845043405442710/10.g-bigtable-osdi06.pdf) (Fay Chang, OSDI 2006)
 
-### 工具
+### Tool
 
 [FudanNLP: A Toolkit for Chinese Natural Language Processing](https://www.aclweb.org/anthology/P13-4009) (Xipeng Qiu, ACL 2013, [code](https://github.com/FudanNLP/fnlp))
 
