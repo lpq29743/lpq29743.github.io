@@ -21,20 +21,14 @@ navs:
     href: 
     label: Home
   -
-    href: /categories
-    label: Categories
+    href: /category
+    label: Category
   -
     href: /wiki
     label: Wiki
   -
-    href: /open-source
-    label: Projects
-  -
-    href: /links
-    label: Links
-  -
-    href: /about
-    label: About
+    href: /project
+    label: Project
 
 # RSS Settings
 RSS: true

@@ -45,9 +45,10 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 ### Projects
 
-- [IAN](https://github.com/lpq29743/IAN) (70+ stars): TensorFlow implementation for "Interactive Attention Networks for Aspect-Level Sentiment Classification"
-- [RAM](https://github.com/lpq29743/RAM) (50+ stars): TensorFlow implementation for "Recurrent Attention Network on Memory for Aspect Sentiment Analysis"
-- text_classification: implementation of text classification models, including traditional ML methods and DL methods (in Pytorch)
+- [IAN](https://github.com/lpq29743/IAN): TensorFlow implementation for "Interactive Attention Networks for Aspect-Level Sentiment Classification"
+- [RAM](https://github.com/lpq29743/RAM): TensorFlow implementation for "Recurrent Attention Network on Memory for Aspect Sentiment Analysis"
+- [text_classification](https://github.com/lpq29743/text_classification): Implementation of text classification models, including traditional ML methods and DL methods (in Pytorch)
+- See [Project Section](https://lpq29743.github.io/open-source/) for more projects ...
 
 ### Blog Posts
 
@@ -55,11 +56,11 @@ I used to use this website for writting some notes (mostly in Chinese). If you h
 
 Here are some selected blog posts:
 
-**Blog Posts (English)**
+**Selected Blog Posts (English)**
 
 - [Computer Science Papers](https://lpq29743.github.io/wiki/computer-science-papers/)
 
-**Blog Posts (Chinese)**
+**Selected Blog Posts (Chinese)**
 
 - [Interview](https://lpq29743.github.io/wiki/interview/)
 - [暑期实习笔面经](https://lpq29743.github.io/blog/2019/05/22/SummerIntern/)
