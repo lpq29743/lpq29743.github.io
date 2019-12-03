@@ -24,21 +24,25 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 - South China Normal University (2014 – 2018). B.Eng. in Software Engineering
 
-### Publications
+### Publications & Manuscripts
 
-**Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis.** First author, accepted by IJCAI 2019.
+#### Publications
 
-- Integrating semantic parsing information into deep memory network
-- Modeling inter-aspect relation for utilizing the information of the nearby aspects
-- Designing an auxiliary task to learn the sentiment distribution for the desired aspect
-
-**Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution.** First author, accepted to AAAI 2020.
+1. **Peiqin Lin**; Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI.
 
 - Modeling zero pronouns and candidate antecedents interactively with Hierarchical Attention Mechanism
 - Using pairwise loss instead of cross entropy loss used in previous methods
 - Taking the constraint of correct-antecedent similarity into account for utilizing the chain information
 
-**A Shared-Private Model with Joint Learning and Predict-then-Extend Extraction for Targeted Sentiment Analysis.** First author, submitted to ACL 2020.
+2. **Peiqin Lin**; Meng Yang; Jianhuang Lai. 2019. Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis. In IJCAI.
+
+- Integrating semantic parsing information into deep memory network
+- Modeling inter-aspect relation for utilizing the information of the nearby aspects
+- Designing an auxiliary task to learn the sentiment distribution for the desired aspect
+
+#### Manuscripts
+
+1. **Peiqin Lin**; Meng Yang. 2020. A Shared-Private Model with Joint Learning and Predict-then-Extend Extraction for Targeted Sentiment Analysis. Submitted to ACL.
 
 - A shared-private network to exploit the relation between target extraction and target classification
 - An heuristic predict-then-extend algorithm for target extraction
@@ -53,4 +57,4 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 {% for website in site.data.social %}
 * {{ website.sitename }}：[@{{ website.name }}]({{ website.url }})
-{% endfor %} -->
+  {% endfor %} -->
