@@ -28,13 +28,13 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 #### Publications
 
-1. **Peiqin Lin**; Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI.
+1.**Peiqin Lin**; Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI.
 
 - Modeling zero pronouns and candidate antecedents interactively with Hierarchical Attention Mechanism
 - Using pairwise loss instead of cross entropy loss used in previous methods
 - Taking the constraint of correct-antecedent similarity into account for utilizing the chain information
 
-2. **Peiqin Lin**; Meng Yang; Jianhuang Lai. 2019. Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis. In IJCAI.
+2.**Peiqin Lin**; Meng Yang; Jianhuang Lai. 2019. Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis. In IJCAI.
 
 - Integrating semantic parsing information into deep memory network
 - Modeling inter-aspect relation for utilizing the information of the nearby aspects
@@ -42,7 +42,7 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 #### Manuscripts
 
-1. **Peiqin Lin**; Meng Yang. 2020. A Shared-Private Model with Joint Learning and Predict-then-Extend Extraction for Targeted Sentiment Analysis. Submitted to ACL.
+1.**Peiqin Lin**; Meng Yang. 2020. A Shared-Private Model with Joint Learning and Predict-then-Extend Extraction for Targeted Sentiment Analysis. Submitted to ACL.
 
 - A shared-private network to exploit the relation between target extraction and target classification
 - An heuristic predict-then-extend algorithm for target extraction
