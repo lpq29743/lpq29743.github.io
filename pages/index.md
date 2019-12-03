@@ -20,9 +20,8 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 ### Education
 
-- Sun Yat-sen University (2018 – 2020), M.Eng. in Software Engineering. Supervisor: [Prof. Meng Yang](http://www.smartllv.com/members.html)
-
-- South China Normal University (2014 – 2018). B.Eng. in Software Engineering
+- Sun Yat-sen University (2018 – 2020). M.Eng. in Software Engineering. Supervisor: [Prof. Meng Yang](http://www.smartllv.com/members.html).
+- South China Normal University (2014 – 2018). B.Eng. in Software Engineering.
 
 ### Publications & Manuscripts
 
@@ -50,6 +49,11 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 - [text_classification](https://github.com/lpq29743/text_classification): Implementation of text classification models, including traditional ML methods and DL methods (in Pytorch)
 - See [Project Section](https://lpq29743.github.io/project/) for more projects ...
 
+### Internships
+
+- Tencent (07/2019 – 08/2019). Research Intern on Keyphrase Extraction.
+- Qibot (05/2018 – 08/2018). Research Intern on Text Classification.
+
 ### Blog Posts
 
 I used to use this website for writting some notes (mostly in Chinese). If you have any interests, you can check them out in [Category Section](https://lpq29743.github.io/category/) and [Wiki Section](https://lpq29743.github.io/wiki/).
@@ -70,6 +74,12 @@ Here are some selected blog posts:
 - [Android 反编译总结](https://lpq29743.github.io/android/2016/10/06/AndroidDecompile/), [Android 防破解总结](https://lpq29743.github.io/android/2016/10/07/AndroidSafe/)
 - [怎样系统地学习 Python 爬虫](https://lpq29743.github.io/python/2017/05/22/HowToStudyPythonSpider/)
 - [jieba 源码阅读笔记（一）](https://lpq29743.github.io/artificialintelligence/2018/12/12/Jieba1/), [jieba 源码阅读笔记（二）](https://lpq29743.github.io/artificialintelligence/2019/02/13/Jieba2/)
+
+### Hobbies
+
+- Rock: Queen, Pink Floyd, Led Zeppelin
+- Film: Stanley Kubrick, Federico Fellini, Andrei Tarkovsky
+- Game: NBA2K, Sudoku
 
 <!-- ### Social
 
