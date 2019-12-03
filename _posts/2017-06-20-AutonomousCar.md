@@ -47,7 +47,7 @@ keywords: 人工智能, 自动驾驶, 无人驾驶
 
 目前，国外著名汽车企业及IT行业巨头都竞相着手研发无人驾驶汽车技术，研发进程十分迅速，不少研发车型已接近量产。在美国及欧洲，允许正在开发的自动驾驶车上路行驶正成为一种普遍现象。美国内华达、加利福尼亚、佛罗里达及密歇根州为谷歌、奥迪等正在开发的无人驾驶车发放了公路试验牌照，谷歌无人驾驶汽车已经行驶超过80万km，实现了零事故。欧洲方面，德国向宝马发放了许可证，西班牙也允许无人驾驶汽车上路行驶。这些企业当前研发自动驾驶汽车的情况具体如下：
 
-![img](/redant/images/posts/artificialintelligence/InterAutoDriveCar.png) 
+![img](/images/posts/artificialintelligence/InterAutoDriveCar.png) 
 
 汽车企业对于全自动驾驶的观点略有分歧。戴姆勒AG总裁Dieter Zetsche认为，奔驰的确会考虑在汽车中加入少量无人驾驶技术，但绝不会剥夺车主的驾驶乐趣而推行全自动汽车。沃尔沃、日产公司相对积极，沃尔沃一直致力于无人驾驶技术以求制造最安全的汽车，日产计划2020年推出商用版无人驾驶汽车。从科技巨头到汽车制造商，再到各国政府、组织，越来越多的人将无人驾驶汽车看作整个汽车行业的未来，并积极投入金钱和精力进行相关研究。
 
@@ -63,9 +63,9 @@ keywords: 人工智能, 自动驾驶, 无人驾驶
 
 类似于人通过人眼感知环境，自动驾驶汽车通过传感器感知环境。汽车感知传感器技术可以细分为超声波测距传感器、摄像头图像传感器、雷达传感器以及激光扫描仪，具体我们可以看下面两张图：
 
-![img](/redant/images/posts/artificialintelligence/AudiFront.jpg) 
+![img](/images/posts/artificialintelligence/AudiFront.jpg) 
 
-![img](/redant/images/posts/artificialintelligence/AudiRear.jpg) 
+![img](/images/posts/artificialintelligence/AudiRear.jpg) 
 
 目前Google、Uber、Baidu等无人车驾驶厂商主要采用的都是摄像头结合激光雷达的传感器系统，但由于激光雷达成本过高，很多传统厂商都没有使用激光雷达，比如特斯拉就采用雷达（毫米波雷达）来代替激光雷达，毫米波雷达主要是采用电磁波探测周围环境，主要应用在车距保持等辅助驾驶功能。
 

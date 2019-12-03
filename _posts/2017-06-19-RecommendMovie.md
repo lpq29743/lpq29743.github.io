@@ -159,7 +159,7 @@ def recommend(self, user):
 
 UserCF是推荐系统领域较为古老的算法，而ItemCF算法则相对较新，那么哪一种算法更适用于本文的场景呢？首先我们对比一下两种算法的区别，如下图：
 
-![UserCF和ItemCF对比图](/redant/images/posts/artificialintelligence/UserCFOrItemCF.png)
+![UserCF和ItemCF对比图](/images/posts/artificialintelligence/UserCFOrItemCF.png)
 
 通过上面的对比中，我们很容易地得到结论：ItemCF算法更适用于电影推荐情景，理由如下：
 

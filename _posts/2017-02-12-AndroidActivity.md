@@ -12,7 +12,7 @@ Activity用于显示控件以及监听并处理用户事件，在Android App中�
 
 Activity生命周期是每一个讲Activity的人都不可以跳过的内容，可以说是Activity这个知识点中及其重要的一部分。在做具体的实验之前，我们先将Android API上面的这张图弄上来：
 
-![Activity生命周期](/redant/images/posts/android/activity-lifecycle.gif)
+![Activity生命周期](/images/posts/android/activity-lifecycle.gif)
 
 然后我们开始做实验。创建一个小项目，写上实验代码，就可以进行实验了！
 
@@ -294,9 +294,9 @@ affinity指定Activity依附于哪个任务，同一应用程序中所有Activit
 
 Fragment常用于平板开发和Tab切换，掌握它的生命周期也是相当重要的，首先我们先看两个图（前者是Fragment生命周期图，后者是Fragment与Activity生命周期对比图）：
 
-![Fragment生命周期](/redant/images/posts/android/fragment-lifecycle.png)
+![Fragment生命周期](/images/posts/android/fragment-lifecycle.png)
 
-![Fragment与Activity生命周期对比图](/redant/images/posts/android/lifecycle-comparison.png)
+![Fragment与Activity生命周期对比图](/images/posts/android/lifecycle-comparison.png)
 
 这里我们就不继续做实验了，从上面两个图我们可以得到：
 
