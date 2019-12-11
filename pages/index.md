@@ -38,9 +38,11 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 #### Manuscripts
 
-1. **Peiqin Lin**; Meng Yang. 2020. A Shared-Private Model with Joint Learning and Predict-then-Extend Extraction for Targeted Sentiment Analysis. Submitted to ACL.
-    - A shared-private network to exploit the relation between target extraction and target classification
-    - An heuristic predict-then-extend algorithm for target extraction
+1. A Paper Under ACL 2020 Review. First Author.
+
+; 1. **Peiqin Lin**; Meng Yang. 2020. A Shared-Private Model with Joint Learning and Predict-then-Extend Extraction for Targeted Sentiment Analysis. Submitted to ACL.
+;     - A shared-private network to exploit the relation between target extraction and target classification
+;     - An heuristic predict-then-extend algorithm for target extraction
 
 ### Projects
 
