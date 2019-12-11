@@ -47,6 +47,10 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 - [text_classification](https://github.com/lpq29743/text_classification): Implementation of text classification models, including traditional ML methods and DL methods (in Pytorch)
 - See [Project Section](https://lpq29743.github.io/project/) for more projects ...
 
+### Services
+
+- IEEE Access Reviewer
+
 ### Internships
 
 - Tencent (07/2019 – 08/2019). Research Intern on Keyphrase Extraction.
