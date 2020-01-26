@@ -40,6 +40,7 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 1. A Paper Under ACL 2020 Review. First Author.
 2. A Paper Under TASLP Review. First Author.
+3. 3 Papers Under IJCAI Review. Third Author.
 
 ### Projects
 
