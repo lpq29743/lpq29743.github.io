@@ -778,7 +778,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [High-Resolution Image Synthesis and Semantic Manipulation with Conditional GANs](https://arxiv.org/pdf/1711.11585.pdf)  (Ting-Chun Wang, 2017, [code](https://github.com/NVIDIA/pix2pixHD))
 
-[Wasserstein GAN](https://arxiv.org/pdf/1701.07875.pdf) (Martin Arjovsky, 2017, [code](<https://github.com/martinarjovsky/WassersteinGAN))
+[Wasserstein GAN](https://arxiv.org/pdf/1701.07875.pdf) (Martin Arjovsky, 2017, [code](https://github.com/martinarjovsky/WassersteinGAN))
+
+##### Graph Neural Networks
+
+[The Graph Neural Network Model](http://persagen.com/files/misc/scarselli2009graph.pdf) (Franco Scarselli, 2009)
+
+[Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/pdf/1609.02907.pdf) (Thomas N. Kipf, ICLR 2017)
 
 ##### Attention Mechanism and Memory Networks
 
