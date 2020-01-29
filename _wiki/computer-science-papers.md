@@ -390,6 +390,14 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Open-Domain Targeted Sentiment Analysis via Span-Based Extraction and Classification](https://arxiv.org/pdf/1906.03820.pdf) (Minghao Hu, ACL 2019, [code](https://github.com/huminghao16/SpanABSA))
 
+##### Emotion Cause Detection
+
+[A Text-driven Rule-based System for Emotion Cause Detection](https://dl.acm.org/doi/pdf/10.5555/1860631.1860637?download=true) (Sophia Yat Mei Lee, NAACL 2010)
+
+[A Question Answering Approach to Emotion Cause Extraction](https://arxiv.org/pdf/1708.05482.pdf) (Liu Gui, EMNLP 2017)
+
+[RTHN: A RNN-Transformer Hierarchical Network for Emotion Cause Extraction](https://arxiv.org/pdf/1906.01236.pdf) (Rui Xia, IJCAI 2019)
+
 #### Machine Translation
 
 [Neural Machine Translation and Sequence-to-sequence Models: A Tutorial](https://arxiv.org/pdf/1703.01619.pdf) (Graham Neubig, 2017)
