@@ -30,9 +30,10 @@ keywords: 100 Things to Do Before I Die
 22. Just for fun: Live somewhere without computers and telephones for a month
 23. Just for fun: Have a game machine
 24. Just for fun: Dress up as a character in the movie
-25. Studying: Get a PHD
+25. Studying: Get a Ph.D.
 26. Studying: Have a paper published in a top journal or conference
     - IJCAI 2019. 20190510.
+    - AAAI 2020. 20191111.
 27. Studying: See movies without subtitles
 28. Studying: Have a Github repository with 1000+ star
 29. Studying: Create an online course
@@ -64,9 +65,7 @@ keywords: 100 Things to Do Before I Die
 55. Life: Help three friends to achieve their dreams
 56. Life: Help my brother to achieve his dream
 57. Life: Help my love to achieve her dream
-58. Life: Meditation
-    - 190605 - 
-59. Career: Become a CTO
-60. Career: Earn 1 million in one year
-61. Career: Work for a Top100 IT company
-62. Career: Be a small boss
+58. Career: Become a CTO
+59. Career: Earn 1 million in one year
+60. Career: Work for a Top100 IT company
+61. Career: Be a small boss
