@@ -396,7 +396,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Question Answering Approach to Emotion Cause Extraction](https://arxiv.org/pdf/1708.05482.pdf) (Liu Gui, EMNLP 2017)
 
+[From Independent Prediction to Reordered Prediction: Integrating Relative Position and Global Label Information to Emotion Cause Identification](https://arxiv.org/pdf/1906.01230.pdf) (Zixiang Ding, AAAI 2019)
+
 [RTHN: A RNN-Transformer Hierarchical Network for Emotion Cause Extraction](https://arxiv.org/pdf/1906.01236.pdf) (Rui Xia, IJCAI 2019)
+
+[A Knowledge Regularized Hierarchical Approach for Emotion Cause Analysis](https://www.aclweb.org/anthology/D19-1563.pdf) (Chuang Fan, EMNLP 2019)
 
 #### Machine Translation
 
