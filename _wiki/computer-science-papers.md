@@ -32,9 +32,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Enriching Word Vectors with Subword Information](https://pdfs.semanticscholar.org/e2db/a792360873aef125572812f3673b1a85d850.pdf) (Piotr Bojanowski, 2016, [note](https://github.com/xwzhong/papernote/blob/master/embedding/Enriching%20Word%20Vectors%20with%20Subword%20Information.md))
 
+[Advances in Pre-Training Distributed Word Representations](https://arxiv.org/pdf/1712.09405.pdf) (Tomas Mikolov, 2017)
+
 [Learned in Translation: Contextualized Word Vectors](https://arxiv.org/pdf/1708.00107.pdf) (Byran McCann, NIPS 2017, [code](https://github.com/salesforce/cove), [note](https://www.sohu.com/a/162634620_610300))
 
 [A Structured Self-attentive Sentence Embedding](https://arxiv.org/pdf/1703.03130.pdf) (Zhouhan Lin, ICLR 2017, [code](https://github.com/ExplorerFreda/Structured-Self-Attentive-Sentence-Embedding), [note](https://www.sohu.com/a/130767150_505880))
+
+[Learning Word Vectors for 157 Languages](https://arxiv.org/pdf/1802.06893.pdf) (Edouard Grave, LREC 2018)
 
 [Glyce: Glyph-vectors for Chinese Character Representations](https://arxiv.org/pdf/1901.10125.pdf) (Yuxian Meng, 2019)
 
@@ -404,6 +408,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Machine Translation
 
+[Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation](https://arxiv.org/pdf/1609.08144.pdf) (Yonghui Wu, 2016)
+
+[Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf) (Rico Sennrich, ACL 2016)
+
+[Modeling Coverage for Neural Machine Translation](https://www.aclweb.org/anthology/P16-1008.pdf) (Zhaopeng Tu, ACL 2016)
+
 [Neural Machine Translation and Sequence-to-sequence Models: A Tutorial](https://arxiv.org/pdf/1703.01619.pdf) (Graham Neubig, 2017)
 
 [Convolutional Sequence to Sequence Learning](https://arxiv.org/pdf/1705.03122.pdf) (Jonas Gehring, 2017, [code](https://github.com/facebookresearch/fairseq))
@@ -772,6 +782,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf) (Zachary C. Lipton, 2015)
 
+[Regularizing and Optimizing LSTM Language Models](https://arxiv.org/pdf/1708.02182.pdf) (Stephen Merity, 2017)
+
 [Simple Recurrent Units for Highly Parallelizable Recurrence](https://arxiv.org/pdf/1709.02755.pdf) (Tao Lei, EMNLP 2018, [code](https://github.com/taolei87/sru))
 
 ##### Generative Adversarial Networks
@@ -873,6 +885,34 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Instance Normalization: The Missing Ingredient for Fast Stylization](https://arxiv.org/pdf/1607.08022.pdf) (Dmitry Ulyanov, 2017)
 
 [Group Normalization](https://arxiv.org/pdf/1803.08494.pdf) (Yuxin Wu, 2018)
+
+#### Neural Architecture Search
+
+[Neural Architecture Search with Reinforcement Learning](https://arxiv.org/pdf/1611.01578.pdf) (Barret Zoph, 2016)
+
+[Learning Transferable Architectures for Scalable Image Recognition](http://openaccess.thecvf.com/content_cvpr_2018/html/Zoph_Learning_Transferable_Architectures_CVPR_2018_paper.html) (Barret Zoph, CVPR 2018)
+
+[Progressive Neural Architecture Search](http://openaccess.thecvf.com/content_ECCV_2018/html/Chenxi_Liu_Progressive_Neural_Architecture_ECCV_2018_paper.html) (Chenxi Liu, ECCV 2018)
+
+[NetAdapt: Platform-Aware Neural Network Adaptation for Mobile Applications](http://openaccess.thecvf.com/content_ECCV_2018/html/Tien-Ju_Yang_NetAdapt_Platform-Aware_Neural_ECCV_2018_paper.html) (Tien-Ju Yang, ECCV 2018)
+
+[Efficient Neural Architecture Search via Parameter Sharing](https://arxiv.org/pdf/1802.03268.pdf) (Hieu Pham, ICML 2018)
+
+[Regularized Evolution for Image Classifier Architecture Search](https://wvvw.aaai.org/ojs/index.php/AAAI/article/view/4405) (Esteban Real, AAAI 2019)
+
+[DARTS: Differentiable Architecture Search](https://arxiv.org/pdf/1806.09055.pdf) (Hanxiao Liu, ICLR 2019)
+
+[EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/pdf/1905.11946.pdf) (Mingxing Tan, ICML 2019)
+
+[ProxylessNAS: Direct Neural Architecture Search on Target Task and Hardware](https://arxiv.org/pdf/1812.00332.pdf) (Han Cai, ICLR 2019)
+
+[Rethinking the Value of Network Pruning](https://arxiv.org/pdf/1810.05270.pdf) (Zhuang Liu, ICLR 2019)
+
+[MnasNet: Platform-Aware Neural Architecture Search for Mobile](http://openaccess.thecvf.com/content_CVPR_2019/html/Tan_MnasNet_Platform-Aware_Neural_Architecture_Search_for_Mobile_CVPR_2019_paper.html) (Mingxing Tan, CVPR 2019)
+
+[Searching for MobileNetV3](http://openaccess.thecvf.com/content_ICCV_2019/html/Howard_Searching_for_MobileNetV3_ICCV_2019_paper.html) (Andrew Howard, ICCV 2019)
+
+[Neural Architecture Search: A Survey](http://www.jmlr.org/papers/volume20/18-598/18-598.pdf) (Thomas Elsken, JMLR 2019)
 
 ### Reinforcement Learning
 
