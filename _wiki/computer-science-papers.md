@@ -90,6 +90,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Text Classification
 
+[One-Class SVMs for Document Classification](http://www.jmlr.org/papers/v2/manevitz01a.html) (Larry M. Manevitz, JMLR 2001)
+
 [Convolutional Neural Networks for Sentence Classification](http://www.aclweb.org/anthology/D14-1181) (Yoon Kim, EMNLP 2014, [code](https://github.com/brightmart/text_classification))
 
 [Discriminative Neural Sentence Modeling by Tree-Based Convolution](https://aclweb.org/anthology/D15-1279) (Lili Mou, EMNLP 2015)
@@ -103,6 +105,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Semi-supervised Convolutional Neural Networks for Text Categorization via Region Embedding](https://papers.nips.cc/paper/5849-semi-supervised-convolutional-neural-networks-for-text-categorization-via-region-embedding.pdf) (Rie Johnson, NIPS 2015, [code](https://github.com/riejohnson/ConText))
 
 [Effective Use of Word Order for Text Categorization with Convolutional Neural Networks](https://www.aclweb.org/anthology/N15-1011) (Rie Johnson, NAACL 2015, [code](https://github.com/riejohnson/ConText))
+
+[Efficient Character-level Document Classification by Combining Convolution and Recurrent Layers](https://arxiv.org/pdf/1602.00367.pdf) (Yijun Xiao, 2016)
 
 [Supervised and Semi-Supervised Text Categorization using LSTM for Region Embeddings](https://arxiv.org/pdf/1602.02373.pdf) (Rie Johnson, ICML 2016, [code](https://github.com/riejohnson/ConText))
 
@@ -133,6 +137,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Universal Sentence Encoder](https://arxiv.org/pdf/1803.11175.pdf) (Daniel Cer, 2018, [code](https://tfhub.dev/google/universal-sentence-encoder/1))
 
 [Graph Convolutional Networks for Text Classification](https://arxiv.org/pdf/1809.05679v1.pdf) (Liang Yao, AAAI 2019, [code](https://github.com/yao8839836/text_gcn))
+
+[DocBERT: BERT for Document Classification](https://arxiv.org/pdf/1904.08398.pdf) (Ashutosh Adhikari, 2019)
 
 ##### Multi-Label Text Classification
 
