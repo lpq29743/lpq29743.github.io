@@ -88,6 +88,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [ERNIE 2.0: A Continual Pre-training Framework for Language Understanding](https://arxiv.org/pdf/1907.12412.pdf) (Yu Sun, 2019)
 
+[SpanBERT: Improving Pre-training by Representing and Predicting Spans](https://arxiv.org/pdf/1907.10529.pdf) (Mandar Joshi, TACL 2019)
+
+[ALBERT: A Lite BERT for Self-supervised Learning of Language Representations](https://arxiv.org/pdf/1909.11942.pdf) (Zhenzhong Lan, ICLR 2020)
+
 #### Text Classification
 
 [One-Class SVMs for Document Classification](http://www.jmlr.org/papers/v2/manevitz01a.html) (Larry M. Manevitz, JMLR 2001)
@@ -137,6 +141,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Universal Sentence Encoder](https://arxiv.org/pdf/1803.11175.pdf) (Daniel Cer, 2018, [code](https://tfhub.dev/google/universal-sentence-encoder/1))
 
 [Graph Convolutional Networks for Text Classification](https://arxiv.org/pdf/1809.05679v1.pdf) (Liang Yao, AAAI 2019, [code](https://github.com/yao8839836/text_gcn))
+
+[Multi-Task Deep Neural Networks for Natural Language Understanding](https://arxiv.org/pdf/1901.11504.pdf) (Xiaodong Liu, ACL 2019)
 
 [DocBERT: BERT for Document Classification](https://arxiv.org/pdf/1904.08398.pdf) (Ashutosh Adhikari, 2019)
 
@@ -434,6 +440,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Dialogue System
 
+[Building End-to-End Dialogue Systems Using Generative Hierarchical Neural Network Models](https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/11957/12160) (Iulian V.Serban, AAAI 2016)
+
+[Deep Reinforcement Learning for Dialogue Generation](https://arxiv.org/pdf/1606.01541.pdf) (Jiwei Li, 2016)
+
 [A Survey on Dialogue Systems: Recent Advances and New Frontiers](https://arxiv.org/pdf/1711.01731.pdf) (Hongshen Chen, 2017)
 
 [AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine](http://www.aclweb.org/anthology/P/P17/P17-2079.pdf) (Minghui Qiu, ACL 2017)
@@ -515,6 +525,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Multi-Passage Machine Reading Comprehension with Cross-Passage Answer Verification](https://www.aclweb.org/anthology/P18-1178) (Yizhong Wang, ACL 2018)
 
 [Joint Training of Candidate Extraction and Answer Selection for Reading Comprehension](https://www.aclweb.org/anthology/P18-1159) (Zhen Wang, ACL 2018)
+
+[Improving Machine Reading Comprehension with General Reading Strategies](https://arxiv.org/pdf/1810.13441.pdf) (Kai Sun, NAACL 2019)
+
+[SG-Net: Syntax-Guided Machine Reading Comprehension](https://arxiv.org/pdf/1908.05147.pdf) (Zhuosheng Zhang, AAAI 2020)
+
+[Retrospective Reader for Machine Reading Comprehension](https://arxiv.org/pdf/2001.09694.pdf) (Zhuosheng Zhang, 2020)
 
 ##### Knowledge Based Question Answering
 
@@ -598,19 +614,21 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Identification and Resolution of Chinese Zero Pronouns: A Machine Learning Approach](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=F05E1DD4B64B0771E279426984E7CDD1?doi=10.1.1.65.1935&rep=rep1&type=pdf) (Shanheng Zhao and Hwee Tou Ng, EMNLP 2007)
 
-[Chinese zero pronoun resolution: A joint unsupervised discourse-aware model rivaling state-of-the-art resolvers](http://www.aclweb.org/anthology/P15-2053) (Chen Chen and Vincent Ng, ACL 2015)
+[Chinese Zero Pronoun Resolution: A Joint Unsupervised Discourse-Aware Model Rivaling State-of-the-Art Resolvers](http://www.aclweb.org/anthology/P15-2053) (Chen Chen and Vincent Ng, ACL 2015)
 
-[Chinese zero pronoun resolution with deep neural networks](http://www.aclweb.org/anthology/P16-1074) (Chen Chen and Vincent Ng, ACL 2016)
+[Chinese Zero Pronoun Resolution with Deep Neural Networks](http://www.aclweb.org/anthology/P16-1074) (Chen Chen and Vincent Ng, ACL 2016)
 
-[Chinese zero pronoun resolution with deep memory network](http://aclweb.org/anthology/D17-1135) (Qingyu Yin, EMNLP 2017)
+[Chinese Zero Pronoun Resolution with Deep Memory Network](http://aclweb.org/anthology/D17-1135) (Qingyu Yin, EMNLP 2017)
 
-[A deep neural network for chinese zero pronoun resolution](https://arxiv.org/pdf/1604.05800.pdf) (Qingyu Yin, IJCAI 2017)
+[A Deep Neural Network for Chinese Zero Pronoun Resolution](https://arxiv.org/pdf/1604.05800.pdf) (Qingyu Yin, IJCAI 2017)
 
-[Generating and exploiting large-scale pseudo training data for zero pronoun resolution](https://arxiv.org/pdf/1606.01603.pdf) (Ting Liu, ACL 2017)
+[Generating and Exploiting Large-Scale Pseudo Training Data for Zero Pronoun Resolution](https://arxiv.org/pdf/1606.01603.pdf) (Ting Liu, ACL 2017)
 
 [Deep Reinforcement Learning for Chinese Zero pronoun Resolution](http://aclweb.org/anthology/P18-1053) (Qingyu Yin, ACL 2018, [code](https://github.com/qyyin/Reinforce4ZP), [note](https://www.jiqizhixin.com/articles/2018-05-21-6))
 
 [Zero Pronoun Resolution with Attention-based Neural Network](http://aclweb.org/anthology/C18-1002) (Qingyu Yin, COLING 2018, [code](https://github.com/qyyin/AttentionZP), [note](https://www.jiqizhixin.com/articles/2018-07-28-8))
+
+[BERT for Coreference Resolution: Baselines and Analysis](https://arxiv.org/pdf/1908.09091.pdf) (Mandar Joshi, 2019)
 
 #### Natural Language Generation
 

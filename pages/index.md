@@ -20,7 +20,7 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 ### Education
 
-- Sun Yat-sen University (2018 – 2020). M.Eng. in Software Engineering. Supervisor: [Prof. Meng Yang](http://www.smartllv.com/members.html).
+- Sun Yat-sen University (2018 – 2020). M.Eng. in Software Engineering. Supervisor: [Prof. Meng Yang](https://scholar.google.com/citations?user=r2nw6DIAAAAJ&hl=en).
 - South China Normal University (2014 – 2018). B.Eng. in Software Engineering.
 
 ### Publications & Manuscripts
