@@ -90,6 +90,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [SpanBERT: Improving Pre-training by Representing and Predicting Spans](https://arxiv.org/pdf/1907.10529.pdf) (Mandar Joshi, TACL 2019)
 
+[Semantics-aware BERT for Language Understanding](https://arxiv.org/pdf/1909.02209.pdf) (Zhuosheng Zhang, AAAI 2020)
+
 [ALBERT: A Lite BERT for Self-supervised Learning of Language Representations](https://arxiv.org/pdf/1909.11942.pdf) (Zhenzhong Lan, ICLR 2020)
 
 #### Text Classification
@@ -274,7 +276,29 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Simple and Accurate Dependency Parsing Using Bidirectional LSTM Feature Representations](https://aclweb.org/anthology/Q16-1023) (Eliyahu Kiperwasser, TACL 2016, [code](https://github.com/elikip/bist-parser))
 
-#### Sentiment Analysis
+##### Semantic Role Labeling
+
+[The Berkeley FrameNet Project](https://dl.acm.org/doi/pdf/10.3115/980845.980860?download=true) (Collin F. Baker, ACL 1998)
+
+[Introduction to the CoNLL-2005 Shared Task: Semantic Role Labeling](https://www.aclweb.org/anthology/W05-0620.pdf) (Xavier Carreras, 2005)
+
+[End-to-end Learning of Semantic Role Labeling Using Recurrent Neural Networks](https://www.aclweb.org/anthology/P15-1109.pdf) (Jie Zhou, ACL 2015)
+
+[A Simple and Accurate Syntax-Agnostic Neural Model for Dependency-based Semantic Role Labeling](https://www.aclweb.org/anthology/K17-1041.pdf) (Diego Marcheggiani, 2017)
+
+[Deep Semantic Role Labeling: What Works and What’s Next](https://www.aclweb.org/anthology/P17-1044.pdf) (Luheng He, ACL 2017)
+
+[Encoding Sentences with Graph Convolutional Networks for Semantic Role Labeling](https://arxiv.org/pdf/1703.04826.pdf) (Diego Marcheggiani, EMNLP 2017)
+
+[Deep Semantic Role Labeling with Self-Attention](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16725/16025) (Zhixing Tan, AAAI 2018)
+
+[Linguistically-Informed Self-Attention for Semantic Role Labeling](https://arxiv.org/pdf/1804.08199.pdf) (Emma Strubell, EMNLP 2018)
+
+[A Span Selection Model for Semantic Role Labeling](https://arxiv.org/pdf/1810.02245.pdf) (Hiroki Ouchi, EMNLP 2018)
+
+[Jointly Predicting Predicates and Arguments in Neural Semantic Role Labeling](https://arxiv.org/pdf/1805.04787.pdf) (Luheng He, ACL 2018)
+
+[Dependency or Span, End-to-End Uniform Semantic Role Labeling Sentiment Analysis](https://www.aaai.org/ojs/index.php/AAAI/article/view/4645) (Zuchao Li, AAAI 2019)
 
 ##### Overview
 
@@ -408,9 +432,19 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Emotion Cause Detection
 
+[Emotion Cause Events: Corpus Construction and Analysis](https://www.researchgate.net/profile/Chu-Ren_Huang/publication/220746716_Emotion_Cause_Events_Corpus_Construction_and_Analysis/links/0912f508ff080541ac000000/Emotion-Cause-Events-Corpus-Construction-a) (Sophia Yat Mei Lee, LREC 2010)
+
 [A Text-driven Rule-based System for Emotion Cause Detection](https://dl.acm.org/doi/pdf/10.5555/1860631.1860637?download=true) (Sophia Yat Mei Lee, NAACL 2010)
 
+[Emotion Cause Detection with Linguistic Constructions](https://dl.acm.org/doi/pdf/10.5555/1873781.1873802?download=true) (Ying Chen, COLING 2010)
+
+[Text-based Emotion Classification Using Emotion Cause Extraction](https://www.sciencedirect.com/science/article/pii/S0957417413006945) (Weiyuan Li, 2013)
+
 [A Question Answering Approach to Emotion Cause Extraction](https://arxiv.org/pdf/1708.05482.pdf) (Liu Gui, EMNLP 2017)
+
+[Who Feels What and Why? Annotation of a Literature Corpus with Semantic Roles of Emotions](https://www.aclweb.org/anthology/C18-1114.pdf) (Evgeny Kim, COLING 2018)
+
+[Multiple Level Hierarchical Network-Based Clause Selection for Emotion Cause Extraction](https://ieeexplore.ieee.org/abstract/document/8598785) (Xinyi Yu, IEEE Access 2019)
 
 [From Independent Prediction to Reordered Prediction: Integrating Relative Position and Global Label Information to Emotion Cause Identification](https://arxiv.org/pdf/1906.01230.pdf) (Zixiang Ding, AAAI 2019)
 
@@ -599,6 +633,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Convolutional 2D Knowledge Graph Embeddings](https://arxiv.org/pdf/1707.01476.pdf) (Pasquale Minervini, AAAI 2018, [code](https://github.com/TimDettmers/ConvE))
 
 [Open-World Knowledge Graph Completion](https://arxiv.org/pdf/1711.03438.pdf) (Baoxu Shi, AAAI 2018, [code](https://github.com/bxshi/ConMask))
+
+[One-Shot Relational Learning for Knowledge Graphs](https://arxiv.org/pdf/1808.09040.pdf) (Wenhan Xiong, EMNLP 2018)
 
 ##### Entity Discovery and Linking
 
