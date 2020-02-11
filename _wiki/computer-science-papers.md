@@ -448,6 +448,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine](http://www.aclweb.org/anthology/P/P17/P17-2079.pdf) (Minghui Qiu, ACL 2017)
 
+[Pretraining Methods for Dialog Context Representation Learning](https://arxiv.org/pdf/1906.00414.pdf) (Shikib Mehri, ACL 2019)
+
 ##### Dialogue State Tracking
 
 [Machine Learning for Dialog State Tracking: A Review](https://ai.google/research/pubs/pub44018) (Matthew Henderson, 2015)
@@ -465,6 +467,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Fully Statistical Neural Belief Tracking](http://aclweb.org/anthology/P18-2018) (Nikola Mrksic, ACL 2018, [code](https://github.com/nmrksic/neural-belief-tracker))
 
 [Global-Locally Self-Attentive Dialogue State Tracker](http://aclweb.org/anthology/P18-1135) (Victor Zhong, ACL 2018, [code](https://github.com/salesforce/glad))
+
+[Dialog State Tracking: A Neural Reading Comprehension Approach](https://arxiv.org/pdf/1908.01946.pdf) (Shuyang Gao, SIGDIAL 2019)
 
 #### Question Answering and Machine Reading Comprehension
 
@@ -495,6 +499,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [QuAC : Question Answering in Context](https://arxiv.org/pdf/1808.07036v1.pdf) (Eunsol Choi, EMNLP 2018, [code](http://quac.ai/))
 
 [A Dataset and Baselines for Sequential Open-Domain Question Answering](https://www.aclweb.org/anthology/D18-1134) (Ahmed Elgohary, EMNLP 2018, [code](http://sequential.qanta.org/))
+
+[Interpretation of Natural Language Rules in Conversational Machine Reading](https://arxiv.org/pdf/1809.01494.pdf) (Marzieh Saeidi, EMNLP 2018)
+
+[DROP: A Reading Comprehension Benchmark Requiring Discrete Reasoning Over Paragraphs](https://arxiv.org/pdf/1903.00161.pdf) (Dheeru Dua, NAACL 2019, [code](https://allennlp.org/drop))
 
 ##### Machine Reading Comprehension
 
@@ -545,6 +553,16 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Question Answering over Freebase via Attentive RNN with Similarity Matrix based CNN](https://arxiv.org/vc/arxiv/papers/1804/1804.03317v2.pdf) (Yingqi Qu, ISMC 2018, [code](https://github.com/quyingqi/kbqa-ar-smcnn))
 
 [Variational Reasoning for Question Answering with Knowledge Graph](https://arxiv.org/pdf/1709.04071.pdf) (Yuyu Zhang, AAAI 2018)
+
+##### Conversational Question Answering
+
+[SDNet: Contextualized Attention-based Deep Network for Conversational Question Answering](https://arxiv.org/pdf/1812.03593.pdf) (Chenguang Zhu, 2018)
+
+[FlowQA: Grasping Flow in History for Conversational Machine Comprehension](https://arxiv.org/pdf/1810.06683.pdf) (Hsin-Yuan Huang, ICLR 2019)
+
+[BERT with History Answer Embedding for Conversational Question Answering](https://arxiv.org/pdf/1905.05412.pdf) (Chen Qu, SIGIR 2019, [code](https://github.com/prdwb/bert_hae))
+
+[Attentive History Selection for Conversational Question Answering](https://arxiv.org/pdf/1908.09456.pdf) (Chen Qu, CIKM 2019)
 
 #### Knowledge Graph
 
