@@ -314,7 +314,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Sentiment Embedding
 
-[Learning sentiment-specific word embedding for twitter sentiment classification](http://www.anthology.aclweb.org/P/P14/P14-1146.pdf) (Duyu Tang, ACL 2014, [note](https://zhuanlan.zhihu.com/p/24217324))
+[Learning Sentiment-Specific Word Embedding for Twitter Sentiment Classification](http://www.anthology.aclweb.org/P/P14/P14-1146.pdf) (Duyu Tang, ACL 2014, [note](https://zhuanlan.zhihu.com/p/24217324))
 
 [SenticNet 5: Discovering Conceptual Primitives for Sentiment Analysis by Means of Context Embeddings](http://sentic.net/senticnet-5.pdf) (Erik Cambria, AAAI 2018, [code1](http://sentic.net/downloads/), [code2](https://github.com/yurimalheiros/senticnetapi))
 
@@ -323,6 +323,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Mining and Summarizing Customer Reviews](https://www.cs.uic.edu/~liub/publications/kdd04-revSummary.pdf) (Minqing Hu, KDD 2004)
 
 [Extracting Product Features and Opinions from Reviews](http://turing.cs.washington.edu/papers/emnlp05_opine.pdf) (Ana-Maria Popescu, EMNLP 2005)
+
+[Modeling Online Reviews with Multi-grain Topic Models](http://ivan-titov.org/papers/www08.pdf) (Ivan Titov, WWW 2008)
 
 [Phrase Dependency Parsing for Opinion Mining](https://www.aclweb.org/anthology/D09-1159) (Yuanbin Wu, EMNLP 2009)
 
@@ -339,6 +341,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Opinion Target Extraction Using Word-Based Translation Model](http://www.nlpr.ia.ac.cn/cip/ZhaoJunPublications/paper/EMNLP2012.LK.pdf) (Kang Liu, EMNLP 2012)
 
 [Opinion Target Extraction Using Partially-Supervised Word Alignment Model](https://pdfs.semanticscholar.org/9751/81c84a0991bb69f5af825e2019080d22cfcd.pdf) (Kang Liu, IJCAI 2013)
+
+[Exploiting Domain Knowledge in Aspect Extraction](https://www.aclweb.org/anthology/D13-1172.pdf) (Zhiyuan Chen, EMNLP 2013)
 
 [Recursive Neural Conditional Random Fields for Aspect-based Sentiment Analysis](http://www.aclweb.org/anthology/D16-1059) (Wenya Wang, EMNLP 2016, [code](https://github.com/happywwy/Recursive-Neural-Conditional-Random-Field))
 
@@ -413,6 +417,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Utilizing BERT for Aspect-Based Sentiment Analysis via Constructing Auxiliary Sentence](https://arxiv.org/pdf/1903.09588.pdf) (Chi Sun, NAACL 2019, [code](https://github.com/HSLCY/ABSA-BERT-pair))
 
 ##### Aspect Based Sentiment Analysis
+
+[A Joint Model of Text and Aspect Ratings for Sentiment Summarization](http://ivan-titov.org/papers/acl08.pdf) (Ivan Titov, ACL 2008)
 
 [Bidirectional Inter-dependencies of Subjective Expressions and Targets and their Value for a Joint Model](https://pdfs.semanticscholar.org/6047/235275b2b8d414b8ac472fd19f2a1a6144b6.pdf) (Roman Klinger, ACL 2013)
 
@@ -746,7 +752,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010)
 
-[What is the expectation maximization algorithm?](http://www.cs.virginia.edu/~mr4xb/notes/EM/em_tutorial.pdf) (Chuong B Do, 2008)
+[What is the Expectation Maximization Algorithm?](http://www.cs.virginia.edu/~mr4xb/notes/EM/em_tutorial.pdf) (Chuong B Do, 2008)
 
 ##### Decision Tree
 
