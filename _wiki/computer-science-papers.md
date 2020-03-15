@@ -862,6 +862,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Tree-CNN: A Deep Convolutional Neural Network for Lifelong Learning](https://arxiv.org/pdf/1802.05800.pdf) (Deboleena Roy, 2018, [code](https://github.com/magical2world/tensorflow-Tree-CNN))
 
+[EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/pdf/1905.11946.pdf) (Mingxing Tan, 2019)
+
 ##### Recurrent Neural Networks
 
 [Long short-term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
@@ -876,7 +878,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Generative Adversarial Nets](https://arxiv.org/pdf/1406.2661.pdf) (Ian Goodfellow, 2014)
 
+[Conditional Generative Adversarial Nets](https://arxiv.org/pdf/1411.1784.pdf) (Mehdi Mirza, 2014)
+
+[Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/pdf/1511.06434.pdf) (Alec Radford, ICLR 2016)
+
 [NIPS 2016 Tutorial: Generative Adversarial Networks](https://arxiv.org/pdf/1701.00160.pdf) (Ian Goodfellow, NIPS 2016)
+
+[Conditional Image Synthesis with Auxiliary Classifier GANs](https://arxiv.org/pdf/1610.09585.pdf) (Augustus Odena, 2016)
+
+[Improved Techniques for Training GANs](https://arxiv.org/pdf/1606.03498.pdf) (Tim Salimans, 2016)
 
 [Generative Adversarial Networks: An Overview](https://arxiv.org/pdf/1710.07035.pdf) (Antonia Creswell, 2017)
 
@@ -884,11 +894,29 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/pdf/1611.07004.pdf) (Phillip Isola, CVPR 2017, [code](https://github.com/phillipi/pix2pix))
 
+[StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks](https://arxiv.org/pdf/1612.03242.pdf) (Han Zhang, ICCV 2017)
+
 [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/pdf/1703.10593.pdf) (Jun-Yan Zhu, 2017, [code](https://github.com/junyanz/CycleGAN))
 
 [High-Resolution Image Synthesis and Semantic Manipulation with Conditional GANs](https://arxiv.org/pdf/1711.11585.pdf)  (Ting-Chun Wang, 2017, [code](https://github.com/NVIDIA/pix2pixHD))
 
+[Learning from Simulated and Unsupervised Images through Adversarial Training](https://www.arxiv-vanity.com/papers/1612.07828/) (Ashish Shrivastava, ICCV 2017)
+
 [Wasserstein GAN](https://arxiv.org/pdf/1701.07875.pdf) (Martin Arjovsky, 2017, [code](https://github.com/martinarjovsky/WassersteinGAN))
+
+[Self-Attention Generative Adversarial Networks](https://arxiv.org/pdf/1805.08318.pdf) (Han Zhang, 2018)
+
+[Progressive Growing of GANs for Improved Quality, Stability, and Variation](https://arxiv.org/pdf/1710.10196.pdf) (Tero Karras, ICLR 2018)
+
+[Transferring GANs: Generating Images from Limited Data](https://arxiv.org/pdf/1805.01677.pdf) (Yaxing Wang, 2018)
+
+[Self-Supervised GANs via Auxiliary Rotation Loss](https://arxiv.org/pdf/1811.11212.pdf) (Ting Chen, CVPR 2019)
+
+[A Style-Based Generator Architecture for Generative Adversarial Networks](https://arxiv.org/pdf/1812.04948.pdf) (Tero Karras, CVPR 2019, [code](https://github.com/NVlabs/stylegan))
+
+[Large Scale GAN Training for High Fidelity Natural Image Synthesis](https://arxiv.org/pdf/1809.11096.pdf) (Andrew Brock, ICLR 2019)
+
+[Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/pdf/1912.04958.pdf) (Tero Karras, 2019)
 
 ##### Graph Neural Networks
 
@@ -960,6 +988,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Activation Function
 
+[Empirical Evaluation of Rectified Activations in Convolution Network](https://arxiv.org/pdf/1505.00853.pdf) (Bing Xu, 2015)
+
 [Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units](https://arxiv.org/pdf/1603.05201v2.pdf) (Wenling Shang, ICML 2016)
 
 #### Normalization
@@ -1010,9 +1040,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Playing Atari with Deep Reinforcement Learning](https://arxiv.org/pdf/1312.5602.pdf) (Volodymyr Mnih, 2013)
 
-[Mastering the game of Go with deep neural networks and tree search](http://www.worlduc.com/FileSystem/1/134755/1585588/ac5b78a1934c49bb93a1f3ad09d96e46.pdf) (David Silver, Nature 2016)
+[Mastering the Game of Go with Deep Neural Networks and Tree Search](http://www.worlduc.com/FileSystem/1/134755/1585588/ac5b78a1934c49bb93a1f3ad09d96e46.pdf) (David Silver, Nature 2016)
 
-[Mastering the game of Go without human knowledge](https://skatgame.net/mburo/ps/alphago-zero.pdf) (David Silver, Nature 2017, [code](https://github.com/gcp/leela-zero))
+[Mastering the Game of Go without Human Knowledge](https://skatgame.net/mburo/ps/alphago-zero.pdf) (David Silver, Nature 2017, [code](https://github.com/gcp/leela-zero))
+
+[Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm](https://arxiv.org/pdf/1712.01815.pdf) (David Silver, 2017)
 
 ### Recommendation System
 
