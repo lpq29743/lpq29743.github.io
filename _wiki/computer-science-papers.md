@@ -556,9 +556,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Text Understanding with the Attention Sum Reader Network](http://www.aclweb.org/anthology/P16-1086) (Rudolf Kadlec, ACL 2016, [code](https://github.com/rkadlec/asreader))
 
-[Machine comprehension using match-lstm and answer pointer](https://openreview.net/pdf?id=B1-q5Pqxl) (Shuohang Wang, ICLR 2017, [code](https://github.com/MurtyShikhar/Question-Answering))
+[Machine Comprehension Using Match-LSTM and Answer Pointer](https://openreview.net/pdf?id=B1-q5Pqxl) (Shuohang Wang, ICLR 2017, [code](https://github.com/MurtyShikhar/Question-Answering))
 
-[Bidirectional attention flow for machine comprehension](https://arxiv.org/pdf/1611.01603.pdf) (Minjoon Seo, ICLR 2017, [code](https://github.com/allenai/bi-att-flow))
+[Bidirectional Attention Flow for Machine Comprehension](https://arxiv.org/pdf/1611.01603.pdf) (Minjoon Seo, ICLR 2017, [code](https://github.com/allenai/bi-att-flow))
 
 [Attention-over-Attention Neural Networks for Reading Comprehension](http://www.aclweb.org/anthology/P/P17/P17-1055.pdf) (Yiming Cui, ACL 2017, [code](https://github.com/OlavHN/attention-over-attention))
 
@@ -566,7 +566,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Gated Self-Matching Networks for Reading Comprehension and Question Answering](http://aclweb.org/anthology/P17-1018) (Wenhui Wang, ACL 2017, [code](https://github.com/HKUST-KnowComp/R-Net))
 
-[R-Net: machine reading comprehension with self-matching networks](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf) (Natural Language Computing Group, 2017, [code](https://github.com/HKUST-KnowComp/R-Net))
+[R-Net: Machine Reading Comprehension with Self-Matching Networks](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf) (Natural Language Computing Group, 2017, [code](https://github.com/HKUST-KnowComp/R-Net))
 
 [QANet: Combining Local Convolution with Global Self-Attention for Reading Comprehension](https://openreview.net/pdf?id=B14TlG-RW) (Adams Wei Yu, ICLR 2018, [code](https://github.com/minsangkim142/Fast-Reading-Comprehension))
 
@@ -581,6 +581,16 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [SG-Net: Syntax-Guided Machine Reading Comprehension](https://arxiv.org/pdf/1908.05147.pdf) (Zhuosheng Zhang, AAAI 2020)
 
 [Retrospective Reader for Machine Reading Comprehension](https://arxiv.org/pdf/2001.09694.pdf) (Zhuosheng Zhang, 2020)
+
+##### Answer Selection
+
+[LSTM-based Deep Learning Models for Non-factoid Answer Selection](https://arxiv.org/abs/1511.04108) (Ming Tan, ICLR 2016)
+
+[Hierarchical Attention Flow for Multiple-Choice Reading Comprehension](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewFile/16331/16177) (Haichao Zhu, AAAI 2018)
+
+[A Co-Matching Model for Multi-choice Reading Comprehension](https://www.aclweb.org/anthology/P18-2118.pdf) (Shuohang Ming, ACL 2018)
+
+[Option Comparison Network for Multiple-choice Reading Comprehension](https://arxiv.org/pdf/1903.03033.pdf) (Qiu Ran, 2019)
 
 ##### Knowledge Based Question Answering
 
@@ -870,9 +880,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf) (Zachary C. Lipton, 2015)
 
+[Adaptive Computation Time for Recurrent Neural Networks](https://arxiv.org/pdf/1603.08983.pdf) (Alex Graves, 2016)
+
 [Regularizing and Optimizing LSTM Language Models](https://arxiv.org/pdf/1708.02182.pdf) (Stephen Merity, 2017)
 
 [Simple Recurrent Units for Highly Parallelizable Recurrence](https://arxiv.org/pdf/1709.02755.pdf) (Tao Lei, EMNLP 2018, [code](https://github.com/taolei87/sru))
+
+[Skip RNN: Learning to Skip State Updates in Recurrent Neural Networks](https://arxiv.org/pdf/1708.06834.pdf) (Victor Campos, ICLR 2018)
 
 ##### Generative Adversarial Networks
 
@@ -949,6 +963,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding](https://arxiv.org/pdf/1709.04696.pdf) (Tao Shen, 2017, [code](https://github.com/taoshen58/DiSAN))
 
 [You May Not Need Attention](https://arxiv.org/pdf/1810.13409.pdf) (Ofir Press, 2018, [code](https://github.com/ofirpress/YouMayNotNeedAttention))
+
+[Self-Attention with Relative Position Representations](https://arxiv.org/pdf/1803.02155.pdf) (Peter Shaw, 2018)
 
 #### Optimizer
 
