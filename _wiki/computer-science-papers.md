@@ -684,6 +684,36 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Coreference Resolution
 
+[Deep Reinforcement Learning for Mention-Ranking Coreference Models](https://www.aclweb.org/anthology/D16-1245.pdf) (Kevin Clark, EMNLP 2016)
+
+[Higher-order Coreference Resolution with Coarse-to-fine Inference](https://www.aclweb.org/anthology/N18-2108.pdf) (Kenton Lee, NAACL 2018)
+
+[BERT for Coreference Resolution: Baselines and Analysis](https://arxiv.org/pdf/1908.09091.pdf) (Mandar Joshi, EMNLP 2019, [code](https://github.com/mandarjoshi90/coref))
+
+[GECOR: An End-to-End Generative Ellipsis and Co-reference Resolution Model for Task-Oriented Dialogue](https://arxiv.org/pdf/1909.12086.pdf) (Jun Quan, 2019)
+
+[Incorporating Structural Information for Better Coreference Resolution](https://www.ijcai.org/Proceedings/2019/0700.pdf) (Kong Fang, IJCAI 2019)
+
+[Learning Word Representations with Cross-Sentence Dependency for End-to-End Co-reference Resolution](https://www.aclweb.org/anthology/D18-1518.pdf) (HongYin Luo, EMNLP 2019)
+
+[End-to-end Deep Reinforcement Learning Based Coreference Resolution](https://www.aclweb.org/anthology/P19-1064.pdf) (Hongliang Fei, ACL 2019)
+
+[The Referential Reader: A Recurrent Entity Network for Anaphora Resolution](https://www.aclweb.org/anthology/P19-1593.pdf) (Fei Liu, ACL 2019)
+
+##### Pronoun Resolution
+
+[Commonsense Knowledge Enhanced Embeddings for Solving Pronoun Disambiguation Problems in Winograd Schema Challenge](https://arxiv.org/pdf/1611.04146.pdf) (Quan Liu, 2016)
+
+[WikiCREM: A Large Unsupervised Corpus for Coreference Resolution](https://arxiv.org/pdf/1908.08025.pdf) (Vid Kocijan, 2019)
+
+[Look Again at the Syntax: Relational Graph Convolutional Network for Gendered Ambiguous Pronoun Resolution](https://arxiv.org/pdf/1905.08868.pdf) (Yinchuan Xu, 2019, [code](https://github.com/ianycxu/RGCN-with-BERT))
+
+[Incorporating Context and External Knowledge for Pronoun Coreference Resolution](https://www.aclweb.org/anthology/N19-1093.pdf) (Hongming Zhang, NAACL 2019)
+
+[Knowledge-aware Pronoun Coreference Resolution](https://www.aclweb.org/anthology/P19-1083.pdf) (Hongming Zhang, ACL 2019)
+
+##### Zero Pronoun Resolution
+
 [Identification and Resolution of Chinese Zero Pronouns: A Machine Learning Approach](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=F05E1DD4B64B0771E279426984E7CDD1?doi=10.1.1.65.1935&rep=rep1&type=pdf) (Shanheng Zhao and Hwee Tou Ng, EMNLP 2007)
 
 [Chinese Zero Pronoun Resolution: A Joint Unsupervised Discourse-Aware Model Rivaling State-of-the-Art Resolvers](http://www.aclweb.org/anthology/P15-2053) (Chen Chen and Vincent Ng, ACL 2015)
@@ -699,8 +729,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Deep Reinforcement Learning for Chinese Zero pronoun Resolution](http://aclweb.org/anthology/P18-1053) (Qingyu Yin, ACL 2018, [code](https://github.com/qyyin/Reinforce4ZP), [note](https://www.jiqizhixin.com/articles/2018-05-21-6))
 
 [Zero Pronoun Resolution with Attention-based Neural Network](http://aclweb.org/anthology/C18-1002) (Qingyu Yin, COLING 2018, [code](https://github.com/qyyin/AttentionZP), [note](https://www.jiqizhixin.com/articles/2018-07-28-8))
-
-[BERT for Coreference Resolution: Baselines and Analysis](https://arxiv.org/pdf/1908.09091.pdf) (Mandar Joshi, 2019)
 
 #### Natural Language Generation
 
