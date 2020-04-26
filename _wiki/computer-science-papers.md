@@ -726,7 +726,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Deep Neural Network for Chinese Zero Pronoun Resolution](https://arxiv.org/pdf/1604.05800.pdf) (Qingyu Yin, IJCAI 2017)
 
-[Generating and Exploiting Large-Scale Pseudo Training Data for Zero Pronoun Resolution](https://arxiv.org/pdf/1606.01603.pdf) (Ting Liu, ACL 2017)
+[Generating and Exploiting Large-Scale Pseudo Training Data for Zero Pronoun Resolution](https://arxiv.org/pdf/1606.01603.pdf) (Ting Liu, ACL 2017, [note](https://zhuanlan.zhihu.com/p/136544141))
 
 [Deep Reinforcement Learning for Chinese Zero pronoun Resolution](http://aclweb.org/anthology/P18-1053) (Qingyu Yin, ACL 2018, [code](https://github.com/qyyin/Reinforce4ZP), [note](https://www.jiqizhixin.com/articles/2018-05-21-6))
 
