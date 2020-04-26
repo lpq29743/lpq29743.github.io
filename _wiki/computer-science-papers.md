@@ -672,6 +672,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Knowledge Graph Application
 
+[Incorporating Loose-Structured Knowledge into LSTM with Recall Gate for Conversation Modeling](https://arxiv.org/pdf/1605.05110.pdf) (IJCNN 2017, [note](https://zhuanlan.zhihu.com/p/92605720))
+
 [Learning beyond datasets: Knowledge Graph Augmented Neural Networks for Natural language Processing](https://arxiv.org/pdf/1802.05930.pdf) (Annervaz K M, NAACL 2018, [note](https://blog.lorrin.info/posts/%5B2018.5.10%5DKnowledge-Graph-Augmented-Neural-Networks-for-NLP/))
 
 [Improving Natural Language Inference Using External Knowledge in the Science Questions Domain](https://arxiv.org/pdf/1809.05724.pdf) (Xiaoyan Wang, 2018, [note](https://zhuanlan.zhihu.com/p/77646912))
