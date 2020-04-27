@@ -430,9 +430,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Neural Networks for Open Domain Targeted Sentiment](https://www.aclweb.org/anthology/D15-1073) (Meishan Zhang, EMNLP 2015, [code](https://github.com/SUTDNLP/OpenTargetedSentiment))
 
+[Learning Latent Sentiment Scopes for Entity-Level Sentiment Analysis](https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14931/14137) (Hao Li, AAAI 2017)
+
 [Joint Learning for Targeted Sentiment Analysis](https://www.aclweb.org/anthology/D18-1504)  (Dehong Ma, EMNLP 2018)
 
 [A Unified Model for Opinion Target Extraction and Target Sentiment Prediction](https://arxiv.org/pdf/1811.05082.pdf) (Xin Li, AAAI 2019, [code](https://github.com/lixin4ever/E2E-TBSA))
+
+[A Span-based Joint Model for Opinion Target Extraction and Target Sentiment Classification](https://www.ijcai.org/Proceedings/2019/0762.pdf) (Yan Zhou, IJCAI 2019)
+
+[An Interactive Multi-Task Learning Network for End-to-End Aspect-Based Sentiment Analysis](https://arxiv.org/pdf/1906.06906.pdf) (Ruidan He, ACL 2019)
 
 [DOER: Dual Cross-Shared RNN for Aspect Term-Polarity Co-Extraction](https://arxiv.org/pdf/1906.01794.pdf) (Huaishao Luo, ACL 2019, [code](https://github.com/ArrowLuo/DOER))
 
