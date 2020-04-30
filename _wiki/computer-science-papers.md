@@ -132,7 +132,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Multi-Task Label Embedding for Text Classification](https://aclweb.org/anthology/D18-1484) (Honglun Zhang, EMNLP 2017)
 
-[Learning Structured Representation for Text Classification via Reinforcement Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/zhang.pdf) (Tianyang Zhang, AAAI 2018, [code](https://github.com/keavil/AAAI18-code))
+[Learning Structured Representation for Text Classification via Reinforcement Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/zhang.pdf) (Tianyang Zhang, AAAI 2018, [code](https://github.com/keavil/AAAI18-code), [note](https://zhuanlan.zhihu.com/p/36836402))
 
 [Translations as Additional Contexts for Sentence Classification](https://arxiv.org/pdf/1806.05516.pdf) (Reinald Kim Amplayo, IJCAI 2018)
 
@@ -150,7 +150,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Multi-Label Text Classification
 
-[SGM: Sequence Generation Model for Multi-Label Classification](http://aclweb.org/anthology/C18-1330) (Pengcheng Yang, COLING 2018, [code](https://github.com/lancopku/SGM))
+[SGM: Sequence Generation Model for Multi-Label Classification](http://aclweb.org/anthology/C18-1330) (Pengcheng Yang, COLING 2018, [code](https://github.com/lancopku/SGM), [note](https://zhuanlan.zhihu.com/p/53910836))
 
 #### Text Matching
 
@@ -693,6 +693,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 #### Coreference Resolution
 
 [Deep Reinforcement Learning for Mention-Ranking Coreference Models](https://www.aclweb.org/anthology/D16-1245.pdf) (Kevin Clark, EMNLP 2016)
+
+[Improving Coreference Resolution by Learning Entity-Level Distributed Representations](https://nlp.stanford.edu/pubs/clark2016improving.pdf) (Kevin Clark, ACL 2016)
 
 [Higher-order Coreference Resolution with Coarse-to-fine Inference](https://www.aclweb.org/anthology/N18-2108.pdf) (Kenton Lee, NAACL 2018)
 
