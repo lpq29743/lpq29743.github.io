@@ -412,7 +412,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Aspect Based Sentiment Analysis with Gated Convolutional Networks](http://www.aclweb.org/anthology/P18-1234) (Wei Xue, ACL 2018, [code](https://github.com/wxue004cs/GCAE))
 
+[Exploiting Document Knowledge for Aspect-level Sentiment Classification](https://www.aclweb.org/anthology/P18-2092.pdf) (Ruidan He, ACL 2018)
+
 [Transformation Networks for Target-Oriented Sentiment Classification](https://www.aclweb.org/anthology/P18-1087) (Xin Li, ACL 2018, [code](https://github.com/lixin4ever/TNet), [note](https://zhuanlan.zhihu.com/p/61586882))
+
+[Multi-grained Attention Network for Aspect-Level Sentiment Classification](https://www.aclweb.org/anthology/D18-1380.pdf) (Feifan Fan, EMNLP 2018, [note](https://zhuanlan.zhihu.com/p/64301255))
+
+[A Position-aware Bidirectional Attention Network for Aspect-level Sentiment Analysis](https://www.aclweb.org/anthology/C18-1066.pdf) (Shuqin Gu, COLING 2018, [note](https://zhuanlan.zhihu.com/p/62696026))
+
+[Attentional Encoder Network for Targeted Sentiment Classification](https://arxiv.org/pdf/1902.09314.pdf) (Youwei Song, 2019)
 
 [BERT Post-Training for Review Reading Comprehension and Aspect-based Sentiment Analysis](https://arxiv.org/pdf/1904.02232.pdf) (Hu Xu, NAACL 2019, [code](https://github.com/howardhsu/BERT-for-RRC-ABSA))
 
