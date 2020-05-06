@@ -460,11 +460,19 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Emotion Cause Detection with Linguistic Constructions](https://dl.acm.org/doi/pdf/10.5555/1873781.1873802?download=true) (Ying Chen, COLING 2010)
 
+[EMOCause: An Easy-adaptable Approach to Emotion Cause Contexts](https://www.aclweb.org/anthology/W11-1720.pdf) (Irene Russo, 2011)
+
 [Text-based Emotion Classification Using Emotion Cause Extraction](https://www.sciencedirect.com/science/article/pii/S0957417413006945) (Weiyuan Li, 2013)
+
+[Event-Driven Emotion Cause Extraction with Corpus Construction](https://www.aclweb.org/anthology/D16-1170.pdf) (Lin Gui, EMNLP 2016)
 
 [A Question Answering Approach to Emotion Cause Extraction](https://arxiv.org/pdf/1708.05482.pdf) (Liu Gui, EMNLP 2017)
 
+[A Co-Attention Neural Network Model for Emotion Cause Analysis with Emotional Context Awareness](https://www.aclweb.org/anthology/D18-1506.pdf) (Xiangju Li, EMNLP 2018)
+
 [Who Feels What and Why? Annotation of a Literature Corpus with Semantic Roles of Emotions](https://www.aclweb.org/anthology/C18-1114.pdf) (Evgeny Kim, COLING 2018)
+
+[Context-aware emotion cause analysis with multi-attention-based neural network](https://www.sciencedirect.com/science/article/abs/pii/S0950705119301273) (Xiangju Li, KBS 2019)
 
 [Multiple Level Hierarchical Network-Based Clause Selection for Emotion Cause Extraction](https://ieeexplore.ieee.org/abstract/document/8598785) (Xinyi Yu, IEEE Access 2019)
 
