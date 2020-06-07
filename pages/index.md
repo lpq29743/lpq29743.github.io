@@ -9,7 +9,7 @@ permalink: /
 
 ### About Me
 
-My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of School of Data and Computer Science at Sun Yat-sen University and am expected to graduate in July 2020. I'm fortunate to specialize in Natural Language Processing (NLP), specifically Sentiment Analysis and Coreference Resolution, under the supervision of [Prof. Meng Yang](http://www.smartllv.com/members.html). **Note: I am seeking for Ph.D position now. If you have any interests, feel free to contact with me.**
+My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of School of Data and Computer Science at Sun Yat-sen University and am expected to graduate in July 2020. I'm fortunate to specialize in Natural Language Processing (NLP), specifically Sentiment Analysis and Coreference Resolution, under the supervision of [Associate Prof. Meng Yang](https://scholar.google.com/citations?user=r2nw6DIAAAAJ&hl=en). **Note: I am seeking for Ph.D position now. If you have any interests, feel free to contact with me.**
 
 ### Research Interests
 
@@ -20,7 +20,7 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 ### Education
 
-- Sun Yat-sen University (2018 – 2020). M.Eng. in Software Engineering. Supervisor: [Prof. Meng Yang](https://scholar.google.com/citations?user=r2nw6DIAAAAJ&hl=en).
+- Sun Yat-sen University (2018 – 2020). M.Eng. in Software Engineering. Supervisor: [Associate Prof. Meng Yang](https://scholar.google.com/citations?user=r2nw6DIAAAAJ&hl=en).
 - South China Normal University (2014 – 2018). B.Eng. in Software Engineering.
 
 ### Publications & Manuscripts
@@ -38,9 +38,9 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 #### Manuscripts
 
-1. A Paper Under ACL 2020 Review. First Author.
+1. Two Papers Under EMNLP 2020 Review. First Author.
 2. A Paper Under TASLP Review. First Author.
-3. 3 Papers Under IJCAI Review. Third Author.
+3. A Papers Under NLPCC 2020 Review. Third Author.
 
 ### Projects
 
