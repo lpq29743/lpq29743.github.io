@@ -38,34 +38,35 @@ keywords: 100 Things to Do Before I Die
 28. Studying: Have a Github repository with 1000+ star
 29. Studying: Create an online course
 30. Studying: Write a book and get it published
-31. Sports: Watch a game of Bayern Munich
-32. Sports: Watch a game of Spurs
-33. Sports: Bike riding over 100 kilometers
-34. Sports: Run a half marathon
-35. Sports: Learn to swim
-36. Sports: Learn to skate
-37. Sports: Learn to ski
-38. Sports: Learn to play tennis
-39. Sports: Learn a martial art
-40. Sports: Be a volunteer of a sports event or work for it
-41. Movie: Make a micro film
-42. Movie: Attend Film Festival
-43. Movie: Be an extra in a movie or a TV show
-44. Music: Attend Rock Festival
-45. Music: Vienna New Year's Concert
-46. Music: Learn to play an instrument
-47. Life: Go on a trip with my parents
-48. Life: Learn dancing with someone I love
-49. Life: Design a house for myself
-50. Life: Help a kid to one of top50 university
-51. Life: Give someone I love the best wedding
-52. Life: Take some photos with my families
-53. Life: Have a honeymoon
-54. Life: Have a romantic candlelit dinner
-55. Life: Help three friends to achieve their dreams
-56. Life: Help my brother to achieve his dream
-57. Life: Help my love to achieve her dream
-58. Career: Become a CTO
-59. Career: Earn 1 million in one year
-60. Career: Work for a Top100 IT company
-61. Career: Be a small boss
+31. Studying: Learn five languages
+32. Sports: Watch a game of Bayern Munich
+33. Sports: Watch a game of Spurs
+34. Sports: Bike riding over 100 kilometers
+35. Sports: Run a half marathon
+36. Sports: Learn to swim
+37. Sports: Learn to skate
+38. Sports: Learn to ski
+39. Sports: Learn to play tennis
+40. Sports: Learn a martial art
+41. Sports: Be a volunteer of a sports event or work for it
+42. Movie: Make a micro film
+43. Movie: Attend Film Festival
+44. Movie: Be an extra in a movie or a TV show
+45. Music: Attend Rock Festival
+46. Music: Vienna New Year's Concert
+47. Music: Learn to play an instrument
+48. Life: Go on a trip with my parents
+49. Life: Learn dancing with someone I love
+50. Life: Design a house for myself
+51. Life: Help a kid to one of top50 university
+52. Life: Give someone I love the best wedding
+53. Life: Take some photos with my families
+54. Life: Have a honeymoon
+55. Life: Have a romantic candlelit dinner
+56. Life: Help three friends to achieve their dreams
+57. Life: Help my brother to achieve his dream
+58. Life: Help my love to achieve her dream
+59. Career: Become a CTO
+60. Career: Earn 1 million in one year
+61. Career: Work for a Top100 IT company
+62. Career: Be a small boss
