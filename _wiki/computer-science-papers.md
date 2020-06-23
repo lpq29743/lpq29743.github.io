@@ -46,31 +46,31 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Study on Neural Network Language Modeling](https://arxiv.org/pdf/1708.07252.pdf) (Dengliang Shi, 2017)
 
-[A Neural Probabilistic Language Model](http://www.iro.umontreal.ca/~vincentp/Publications/lm_jmlr.pdf) (Yoshua Bengio, JMLR 2003)
+[A Neural Probabilistic Language Model](http://www.iro.umontreal.ca/~vincentp/Publications/lm_jmlr.pdf) (Yoshua Bengio, JMLR 2003, [note](https://zhuanlan.zhihu.com/p/21101055))
 
-[Semi-supervised Sequence Learning](https://arxiv.org/pdf/1511.01432.pdf) (Andrew M. Dai, NIPS 2015)
+[Semi-supervised Sequence Learning](https://arxiv.org/pdf/1511.01432.pdf) (Andrew M. Dai, NIPS 2015, [note](https://zhuanlan.zhihu.com/p/21313501))
 
-[Character-Aware Neural Language Models](https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/viewFile/12489/12017) (Yoon Kim, AAAI 2016)
+[Character-Aware Neural Language Models](https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/viewFile/12489/12017) (Yoon Kim, AAAI 2016, [note](https://zhuanlan.zhihu.com/p/21242454))
 
-[Semi-supervised sequence tagging with bidirectional language models](https://arxiv.org/pdf/1705.00108.pdf) (Matthew E. Peters, ACL 2017)
+[Semi-supervised Sequence Tagging with Bidirectional Language Models](https://arxiv.org/pdf/1705.00108.pdf) (Matthew E. Peters, ACL 2017, [note](https://zhuanlan.zhihu.com/p/105879581))
 
-[Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention))
+[Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention), [note](https://zhuanlan.zhihu.com/p/48508221))
 
 [Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/pdf/1801.06146.pdf) (Jeremy Howard, ACL 2018, [code](http://nlp.fast.ai/category/classification.html), [note](https://zhuanlan.zhihu.com/p/61590026))
 
 [Deep Contextualized Word Representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp), [note](https://zhuanlan.zhihu.com/p/38254332))
 
-[Improving Language Understanding by Generative Pre-Training](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf) (Alec Radford, 2018, [code](https://github.com/openai/finetune-transformer-lm))
+[Improving Language Understanding by Generative Pre-Training](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf) (Alec Radford, 2018, [code](https://github.com/openai/finetune-transformer-lm), [note](https://zhuanlan.zhihu.com/p/54754171))
 
-[Language Models are Unsupervised Multitask Learners](https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf) (Alec Radford, 2018, [code](https://github.com/openai/gpt-2))
+[Language Models are Unsupervised Multitask Learners](https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf) (Alec Radford, 2018, [code](https://github.com/openai/gpt-2), [note](https://zhuanlan.zhihu.com/p/79714797))
 
-[BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf) (Jacob Devlin, NAACL 2019, [code](https://github.com/google-research/bert))
+[BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf) (Jacob Devlin, NAACL 2019, [code](https://github.com/google-research/bert), [note](https://zhuanlan.zhihu.com/p/46652512))
 
-[Universal Transformer](https://arxiv.org/pdf/1807.03819.pdf) (Mostafa Dehghani, ICLR 2019, [code](https://github.com/andreamad8/Universal-Transformer-Pytorch))
+[Universal Transformer](https://arxiv.org/pdf/1807.03819.pdf) (Mostafa Dehghani, ICLR 2019, [code](https://github.com/andreamad8/Universal-Transformer-Pytorch), [note](https://zhuanlan.zhihu.com/p/44655133))
 
-[Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/pdf/1901.02860.pdf) (Zihang Dai, 2019)
+[Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/pdf/1901.02860.pdf) (Zihang Dai, 2019, [note](https://zhuanlan.zhihu.com/p/70745925))
 
-[Star-Transformer](https://arxiv.org/pdf/1902.09113.pdf) (Qipeng Guo, 2019)
+[Star-Transformer](https://arxiv.org/pdf/1902.09113.pdf) (Qipeng Guo, 2019, [note](https://zhuanlan.zhihu.com/p/97888995))
 
 [Cloze-driven Pretraining of Self-attention Networks](https://arxiv.org/pdf/1903.07785.pdf) (Alexei Baevski, 2019)
 
@@ -366,7 +366,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Aspect Term Extraction with History Attention and Selective Transformation](https://arxiv.org/pdf/1805.00760.pdf) (Xin Li, IJCAI 2018)
 
-[Double Embeddings and CNN-based Sequence Labeling for Aspect Extraction](https://www.aclweb.org/anthology/P18-2094) (Hu Xu, ACL 2018, [code](https://github.com/howardhsu/DE-CNN))
+[Double Embeddings and CNN-based Sequence Labeling for Aspect Extraction](https://www.aclweb.org/anthology/P18-2094) (Hu Xu, ACL 2018, [code](https://github.com/howardhsu/DE-CNN), [note](https://zhuanlan.zhihu.com/p/72092287))
 
 [ExtRA: Extracting Prominent Review Aspects from Customer Feedback](https://aclweb.org/anthology/D18-1384) (Zhiyi Luo, EMNLP 2018)
 
