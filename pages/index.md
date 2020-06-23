@@ -79,6 +79,21 @@ Here are some selected blog posts:
 - [怎样系统地学习 Python 爬虫](https://lpq29743.github.io/python/2017/05/22/HowToStudyPythonSpider/)
 - [jieba 源码阅读笔记（一）](https://lpq29743.github.io/artificialintelligence/2018/12/12/Jieba1/), [jieba 源码阅读笔记（二）](https://lpq29743.github.io/artificialintelligence/2019/02/13/Jieba2/)
 
+### Skills
+
+#### Languages
+
+- Chinese (Native)
+- English (Proficient, IELTS 6.5)
+- Chaoshan dialect (Native)
+- Cantonese (Intermediate)
+
+#### Programming Languages
+
+- Python (Good Knowledge)
+- Java (Basic Knowledge)
+- C/C++ (Basic Knowledge)
+
 ### Hobbies
 
 - Rock: Queen, Pink Floyd, Led Zeppelin
