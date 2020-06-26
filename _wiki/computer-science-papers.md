@@ -422,6 +422,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Attentional Encoder Network for Targeted Sentiment Classification](https://arxiv.org/pdf/1902.09314.pdf) (Youwei Song, 2019)
 
+[Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis](https://www.ijcai.org/Proceedings/2019/0707.pdf) (Peiqin Lin, IJCAI 2019, [code](https://github.com/lpq29743/DMMN-SDCM))
+
 [BERT Post-Training for Review Reading Comprehension and Aspect-based Sentiment Analysis](https://arxiv.org/pdf/1904.02232.pdf) (Hu Xu, NAACL 2019, [code](https://github.com/howardhsu/BERT-for-RRC-ABSA))
 
 [Utilizing BERT for Aspect-Based Sentiment Analysis via Constructing Auxiliary Sentence](https://arxiv.org/pdf/1903.09588.pdf) (Chi Sun, NAACL 2019, [code](https://github.com/HSLCY/ABSA-BERT-pair))
@@ -442,15 +444,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Joint Learning for Targeted Sentiment Analysis](https://www.aclweb.org/anthology/D18-1504)  (Dehong Ma, EMNLP 2018)
 
-[A Unified Model for Opinion Target Extraction and Target Sentiment Prediction](https://arxiv.org/pdf/1811.05082.pdf) (Xin Li, AAAI 2019, [code](https://github.com/lixin4ever/E2E-TBSA))
+[A Unified Model for Opinion Target Extraction and Target Sentiment Prediction](https://arxiv.org/pdf/1811.05082.pdf) (Xin Li, AAAI 2019, [code](https://github.com/lixin4ever/E2E-TBSA), [note](https://zhuanlan.zhihu.com/p/52705613))
 
 [A Span-based Joint Model for Opinion Target Extraction and Target Sentiment Classification](https://www.ijcai.org/Proceedings/2019/0762.pdf) (Yan Zhou, IJCAI 2019)
 
 [An Interactive Multi-Task Learning Network for End-to-End Aspect-Based Sentiment Analysis](https://arxiv.org/pdf/1906.06906.pdf) (Ruidan He, ACL 2019)
 
-[DOER: Dual Cross-Shared RNN for Aspect Term-Polarity Co-Extraction](https://arxiv.org/pdf/1906.01794.pdf) (Huaishao Luo, ACL 2019, [code](https://github.com/ArrowLuo/DOER))
+[DOER: Dual Cross-Shared RNN for Aspect Term-Polarity Co-Extraction](https://arxiv.org/pdf/1906.01794.pdf) (Huaishao Luo, ACL 2019, [code](https://github.com/ArrowLuo/DOER), [note](https://blog.csdn.net/weixin_44740082/article/details/103281743))
 
-[Open-Domain Targeted Sentiment Analysis via Span-Based Extraction and Classification](https://arxiv.org/pdf/1906.03820.pdf) (Minghao Hu, ACL 2019, [code](https://github.com/huminghao16/SpanABSA))
+[Open-Domain Targeted Sentiment Analysis via Span-Based Extraction and Classification](https://arxiv.org/pdf/1906.03820.pdf) (Minghao Hu, ACL 2019, [code](https://github.com/huminghao16/SpanABSA), [note](https://zhuanlan.zhihu.com/p/144393570))
 
 ##### Emotion Cause Detection
 
@@ -476,11 +478,17 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Multiple Level Hierarchical Network-Based Clause Selection for Emotion Cause Extraction](https://ieeexplore.ieee.org/abstract/document/8598785) (Xinyi Yu, IEEE Access 2019)
 
-[From Independent Prediction to Reordered Prediction: Integrating Relative Position and Global Label Information to Emotion Cause Identification](https://arxiv.org/pdf/1906.01230.pdf) (Zixiang Ding, AAAI 2019)
+[From Independent Prediction to Reordered Prediction: Integrating Relative Position and Global Label Information to Emotion Cause Identification](https://arxiv.org/pdf/1906.01230.pdf) (Zixiang Ding, AAAI 2019, [code](https://github.com/NUSTM/PAEDGL))
 
-[RTHN: A RNN-Transformer Hierarchical Network for Emotion Cause Extraction](https://arxiv.org/pdf/1906.01236.pdf) (Rui Xia, IJCAI 2019)
+[RTHN: A RNN-Transformer Hierarchical Network for Emotion Cause Extraction](https://arxiv.org/pdf/1906.01236.pdf) (Rui Xia, IJCAI 2019, [code](https://github.com/NUSTM/RTHN))
 
 [A Knowledge Regularized Hierarchical Approach for Emotion Cause Analysis](https://www.aclweb.org/anthology/D19-1563.pdf) (Chuang Fan, EMNLP 2019)
+
+##### Emotion Cause Analysis
+
+[Joint Learning for Emotion Classification and Emotion Cause Detection](https://www.aclweb.org/anthology/D18-1066) (Ying Chen, EMNLP 2018)
+
+[Emotion-Cause Pair Extraction: A New Task to Emotion Analysis in Texts](https://www.aclweb.org/anthology/P19-1096) (Rui Xia, ACL 2019, [code](https://github.com/NUSTM/ECPE))
 
 #### Machine Translation
 
