@@ -31,7 +31,7 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
     - Modeling zero pronouns and candidate antecedents interactively with Hierarchical Attention Mechanism
     - Using pairwise loss instead of cross entropy loss used in previous methods
     - Taking the constraint of correct-antecedent similarity into account for utilizing the chain information
-2. **Peiqin Lin**; Meng Yang; Jianhuang Lai. 2019. Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis. In IJCAI. [\[Paper\]](https://www.ijcai.org/Proceedings/2019/0707.pdf)[\[Code\]](https://github.com/lpq29743/DMMN-SDCM)
+2. **Peiqin Lin**; Meng Yang; Jianhuang Lai. 2019. Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis. In IJCAI. [\[Paper\]](https://www.ijcai.org/Proceedings/2019/0707.pdf)[\[Code\]](https://github.com/lpq29743/DMMN-SDCM)[[Slides]](assets/files/IJCAI19-DMMN-SDCM.pdf)[[Note]](https://zhuanlan.zhihu.com/p/150462314)
     - Integrating semantic parsing information into deep memory network
     - Modeling inter-aspect relation for utilizing the information of the nearby aspects
     - Designing an auxiliary task to learn the sentiment distribution for the desired aspect
