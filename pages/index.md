@@ -27,7 +27,7 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 #### Publications
 
-1. **Peiqin Lin**; Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI. [[Paper]](https://144.208.67.177/ojs/index.php/AAAI/article/view/6352)
+1. **Peiqin Lin**; Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI. [[Paper]](https://144.208.67.177/ojs/index.php/AAAI/article/view/6352)[[Code]](https://github.com/lpq29743/HAN-PL)[[Slides]](assets/files/AAAI20-HAN-PL.pdf)[[Note]](https://zhuanlan.zhihu.com/p/151387067)
     - Modeling zero pronouns and candidate antecedents interactively with Hierarchical Attention Mechanism
     - Using pairwise loss instead of cross entropy loss used in previous methods
     - Taking the constraint of correct-antecedent similarity into account for utilizing the chain information
