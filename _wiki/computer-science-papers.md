@@ -72,27 +72,43 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Star-Transformer](https://arxiv.org/pdf/1902.09113.pdf) (Qipeng Guo, 2019, [note](https://zhuanlan.zhihu.com/p/97888995))
 
-[Cloze-driven Pretraining of Self-attention Networks](https://arxiv.org/pdf/1903.07785.pdf) (Alexei Baevski, 2019)
+[Cloze-driven Pretraining of Self-attention Networks](https://arxiv.org/pdf/1903.07785.pdf) (Alexei Baevski, EMNLP 2019)
 
-[Unified Language Model Pre-training for Natural Language Understanding and Generation](https://arxiv.org/pdf/1905.03197.pdf) (Li Dongmass, 2019)
+[Unified Language Model Pre-training for Natural Language Understanding and Generation](https://arxiv.org/pdf/1905.03197.pdf) (Li Dongmass, 2019, [note](https://zhuanlan.zhihu.com/p/68755034))
 
-[MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019)
+[MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019, [note](https://zhuanlan.zhihu.com/p/71022527))
 
-[ERNIE: Enhanced Language Representation with Informative Entities](https://arxiv.org/pdf/1905.07129.pdf) (Zhengyan Zhang, ACL 2019, [code](https://github.com/PaddlePaddle/LARK/tree/develop/ERNIE))
+[ERNIE: Enhanced Language Representation with Informative Entities](https://arxiv.org/pdf/1905.07129.pdf) (Zhengyan Zhang, ACL 2019, [code](https://github.com/PaddlePaddle/LARK/tree/develop/ERNIE), [note](https://zhuanlan.zhihu.com/p/87008569))
 
-[Pre-Training with Whole Word Masking for Chinese BERT](https://arxiv.org/pdf/1906.08101.pdf) (Yiming Cui, 2019, [code](https://github.com/ymcui/Chinese-BERT-wwm))
+[Pre-Training with Whole Word Masking for Chinese BERT](https://arxiv.org/pdf/1906.08101.pdf) (Yiming Cui, 2019, [code](https://github.com/ymcui/Chinese-BERT-wwm), [note](https://zhuanlan.zhihu.com/p/96792453))
 
 [XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/pdf/1906.08237.pdf) (Zhilin Yang, 2019, [code](https://github.com/zihangdai/xlnet), [note](https://zhuanlan.zhihu.com/p/70257427))
 
-[RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/pdf/1907.11692.pdf) (Yinhan Liu, 2019)
+[RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/pdf/1907.11692.pdf) (Yinhan Liu, 2019, [note](https://zhuanlan.zhihu.com/p/82804993))
 
-[ERNIE 2.0: A Continual Pre-training Framework for Language Understanding](https://arxiv.org/pdf/1907.12412.pdf) (Yu Sun, 2019)
+[ERNIE 2.0: A Continual Pre-training Framework for Language Understanding](https://arxiv.org/pdf/1907.12412.pdf) (Yu Sun, 2019, [note](https://zhuanlan.zhihu.com/p/76125042))
 
-[SpanBERT: Improving Pre-training by Representing and Predicting Spans](https://arxiv.org/pdf/1907.10529.pdf) (Mandar Joshi, TACL 2019)
+[Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism](https://arxiv.org/pdf/1909.08053.pdf) (Mohammad Shoeybi, 2019, [code](https://github.com/NVIDIA/Megatron-LM))
 
-[Semantics-aware BERT for Language Understanding](https://arxiv.org/pdf/1909.02209.pdf) (Zhuosheng Zhang, AAAI 2020)
+[Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf) (Alec Radford, 2019, [note](https://zhuanlan.zhihu.com/p/79714797), [code](https://github.com/openai/gpt-2))
 
-[ALBERT: A Lite BERT for Self-supervised Learning of Language Representations](https://arxiv.org/pdf/1909.11942.pdf) (Zhenzhong Lan, ICLR 2020)
+[SpanBERT: Improving Pre-training by Representing and Predicting Spans](https://arxiv.org/pdf/1907.10529.pdf) (Mandar Joshi, TACL 2019, [note](https://zhuanlan.zhihu.com/p/75893972))
+
+[DistilBERT, a Distilled Version of BERT: Smaller, Faster, Cheaper and Lighter](https://arxiv.org/pdf/1910.01108.pdf) (Victor Sahn, 2019, [code](https://github.com/huggingface/transformers/tree/master/examples/distillation), [note](https://zhuanlan.zhihu.com/p/89522799))
+
+[Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer](https://arxiv.org/pdf/1910.10683.pdf) (Colin Raffel, 2019, [code](https://github.com/google-research/text-to-text-transfer-transformer), [note](https://zhuanlan.zhihu.com/p/88377084))
+
+[Semantics-aware BERT for Language Understanding](https://arxiv.org/pdf/1909.02209.pdf) (Zhuosheng Zhang, AAAI 2020, [note](https://zhuanlan.zhihu.com/p/115457267))
+
+[ALBERT: A Lite BERT for Self-supervised Learning of Language Representations](https://arxiv.org/pdf/1909.11942.pdf) (Zhenzhong Lan, ICLR 2020, [note](https://www.zhihu.com/question/347898375/answer/863537122))
+
+[ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators](https://arxiv.org/pdf/2003.10555.pdf) (Kevin Clark, ICLR 2020, [code](https://github.com/google-research/electra), [note](https://zhuanlan.zhihu.com/p/89763176))
+
+[Language Models are Few-Shot Learners](https://arxiv.org/pdf/2005.14165.pdf) (Tom B. Brown, 2020, [code](https://github.com/openai/gpt-3), [note](https://zhuanlan.zhihu.com/p/144764546))
+
+[AdaBERT: Task-Adaptive BERT Compression with Differentiable Neural Architecture Search](https://arxiv.org/pdf/2001.04246.pdf) (Daoyuan Chen, IJCAI 2020, [note](https://zhuanlan.zhihu.com/p/144549207))
+
+[FastBERT: a Self-distilling BERT with Adaptive Inference Time](https://www.aclweb.org/anthology/2020.acl-main.537.pdf) (Weijie Liu, ACL 2020, [note](https://zhuanlan.zhihu.com/p/127869267))
 
 #### Text Classification
 
