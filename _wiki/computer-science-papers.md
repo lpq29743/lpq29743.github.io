@@ -54,8 +54,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Semi-supervised Sequence Tagging with Bidirectional Language Models](https://arxiv.org/pdf/1705.00108.pdf) (Matthew E. Peters, ACL 2017, [note](https://zhuanlan.zhihu.com/p/105879581))
 
-[Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention), [note](https://zhuanlan.zhihu.com/p/48508221))
-
 [Universal Language Model Fine-tuning for Text Classification](https://arxiv.org/pdf/1801.06146.pdf) (Jeremy Howard, ACL 2018, [code](http://nlp.fast.ai/category/classification.html), [note](https://zhuanlan.zhihu.com/p/61590026))
 
 [Deep Contextualized Word Representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp), [note](https://zhuanlan.zhihu.com/p/38254332))
@@ -75,8 +73,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Cloze-driven Pretraining of Self-attention Networks](https://arxiv.org/pdf/1903.07785.pdf) (Alexei Baevski, EMNLP 2019)
 
 [Unified Language Model Pre-training for Natural Language Understanding and Generation](https://arxiv.org/pdf/1905.03197.pdf) (Li Dongmass, 2019, [note](https://zhuanlan.zhihu.com/p/68755034))
-
-[MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019, [note](https://zhuanlan.zhihu.com/p/71022527))
 
 [ERNIE: Enhanced Language Representation with Informative Entities](https://arxiv.org/pdf/1905.07129.pdf) (Zhengyan Zhang, ACL 2019, [code](https://github.com/PaddlePaddle/LARK/tree/develop/ERNIE), [note](https://zhuanlan.zhihu.com/p/87008569))
 
@@ -114,15 +110,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [One-Class SVMs for Document Classification](http://www.jmlr.org/papers/v2/manevitz01a.html) (Larry M. Manevitz, JMLR 2001)
 
-[Convolutional Neural Networks for Sentence Classification](http://www.aclweb.org/anthology/D14-1181) (Yoon Kim, EMNLP 2014, [code](https://github.com/brightmart/text_classification))
+[Convolutional Neural Networks for Sentence Classification](http://www.aclweb.org/anthology/D14-1181) (Yoon Kim, EMNLP 2014, [code](https://github.com/brightmart/text_classification), [note](https://zhuanlan.zhihu.com/p/21242710))
 
 [Discriminative Neural Sentence Modeling by Tree-Based Convolution](https://aclweb.org/anthology/D15-1279) (Lili Mou, EMNLP 2015)
 
-[Recurrent Convolutional Neural Networks for Text Classification](http://www.nlpr.ia.ac.cn/cip/~liukang/liukangPageFile/Recurrent%20Convolutional%20Neural%20Networks%20for%20Text%20Classification.pdf) (Siwei Lai, AAAI 2015, [code](https://github.com/brightmart/text_classification))
+[Recurrent Convolutional Neural Networks for Text Classification](http://www.nlpr.ia.ac.cn/cip/~liukang/liukangPageFile/Recurrent%20Convolutional%20Neural%20Networks%20for%20Text%20Classification.pdf) (Siwei Lai, AAAI 2015, [code](https://github.com/brightmart/text_classification), [note](https://zhuanlan.zhihu.com/p/21253220))
 
 [Deep Unordered Composition Rivals Syntactic Methods for Text Classification](http://www.aclweb.org/anthology/P15-1162) (Mohit Iyyer, ACL 2015, [code1](https://github.com/lpq29743/text_classification/blob/master/models/dl_models/dan.py), [code2](https://github.com/miyyer/dan))
 
-[Character-level Convolutional Networks for Text Classification](https://arxiv.org/pdf/1509.01626.pdf) (Xiang Zhang, NIPS 2015, [code](https://github.com/dongjun-Lee/text-classification-models-tf))
+[Character-level Convolutional Networks for Text Classification](https://arxiv.org/pdf/1509.01626.pdf) (Xiang Zhang, NIPS 2015, [code](https://github.com/dongjun-Lee/text-classification-models-tf), [note](https://zhuanlan.zhihu.com/p/51698513))
 
 [Semi-supervised Convolutional Neural Networks for Text Categorization via Region Embedding](https://papers.nips.cc/paper/5849-semi-supervised-convolutional-neural-networks-for-text-categorization-via-region-embedding.pdf) (Rie Johnson, NIPS 2015, [code](https://github.com/riejohnson/ConText))
 
@@ -132,47 +128,47 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Supervised and Semi-Supervised Text Categorization using LSTM for Region Embeddings](https://arxiv.org/pdf/1602.02373.pdf) (Rie Johnson, ICML 2016, [code](https://github.com/riejohnson/ConText))
 
-[Recurrent Neural Network for Text Classification with Multi-Task Learning](https://www.ijcai.org/Proceedings/16/Papers/408.pdf) (Pengfei Liu, IJCAI 2016, [code](https://github.com/brightmart/text_classification))
-
 [Text Classification Improved by Integrating Bidirectional LSTM with Two-dimensional Max Pooling](https://www.aclweb.org/anthology/C16-1329) (Peng Zhou, COLING 2016, code)
 
-[Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf) (Zichao Yang, NAACL 2016, [code](https://github.com/brightmart/text_classification))
+[Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf) (Zichao Yang, NAACL 2016, [code](https://github.com/brightmart/text_classification), [note](https://zhuanlan.zhihu.com/p/26892711))
 
-[Very Deep Convolutional Networks for Text Classification](http://cn.arxiv.org/pdf/1606.01781) (Alexis Conneau, EACL 2017, [code](https://github.com/zonetrooper32/VDCNN))
+[Very Deep Convolutional Networks for Text Classification](http://cn.arxiv.org/pdf/1606.01781) (Alexis Conneau, EACL 2017, [code](https://github.com/zonetrooper32/VDCNN), [note](https://zhuanlan.zhihu.com/p/39593725))
 
-[A Hybrid CNN-RNN Alignment Model for Phrase-Aware Sentence Classification](http://www.aclweb.org/anthology/E17-2071) (Shiou Tian Hsu, EACL 2017)
+[A Hybrid CNN-RNN Alignment Model for Phrase-Aware Sentence Classification](http://www.aclweb.org/anthology/E17-2071) (Shiou Tian Hsu, EACL 2017, [note](https://zhuanlan.zhihu.com/p/35008282))
 
-[Adversarial Multi-task Learning for Text Classification](https://www.aclweb.org/anthology/P17-1001) (Pengfei Liu, ACL 2017, [code](https://github.com/FrankWork/fudan_mtl_reviews))
+[Deep Pyramid Convolutional Neural Networks for Text Categorization](https://www.aclweb.org/anthology/P17-1052) (Rie Johnson, ACL 2017, [code](https://github.com/riejohnson/ConText), [note](https://zhuanlan.zhihu.com/p/56189443))
 
-[Deep Pyramid Convolutional Neural Networks for Text Categorization](https://www.aclweb.org/anthology/P17-1052) (Rie Johnson, ACL 2017, [code](https://github.com/riejohnson/ConText))
-
-[Multi-Task Label Embedding for Text Classification](https://aclweb.org/anthology/D18-1484) (Honglun Zhang, EMNLP 2017)
+[Multi-Task Label Embedding for Text Classification](https://aclweb.org/anthology/D18-1484) (Honglun Zhang, EMNLP 2017, [note](https://zhuanlan.zhihu.com/p/37669263))
 
 [Learning Structured Representation for Text Classification via Reinforcement Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/zhang.pdf) (Tianyang Zhang, AAAI 2018, [code](https://github.com/keavil/AAAI18-code), [note](https://zhuanlan.zhihu.com/p/36836402))
 
-[Translations as Additional Contexts for Sentence Classification](https://arxiv.org/pdf/1806.05516.pdf) (Reinald Kim Amplayo, IJCAI 2018)
+[Translations as Additional Contexts for Sentence Classification](https://arxiv.org/pdf/1806.05516.pdf) (Reinald Kim Amplayo, IJCAI 2018, [code](https://github.com/rktamplayo/MCFA))
 
 [Baseline Needs More Love: On Simple Word-Embedding-Based Models and Associated Pooling Mechanisms](https://arxiv.org/pdf/1805.09843.pdf) (Dinghan Shen, ACL 2018, [code](https://github.com/dinghanshen/SWEM), [note](https://zhuanlan.zhihu.com/p/38056365))
 
-[Joint Embedding of Words and Labels for Text Classification](https://www.aclweb.org/anthology/P18-1216) (Guoyin Yang, ACL 2018, [code](https://github.com/guoyinwang/LEAM))
+[Joint Embedding of Words and Labels for Text Classification](https://www.aclweb.org/anthology/P18-1216) (Guoyin Yang, ACL 2018, [code](https://github.com/guoyinwang/LEAM), [note](https://zhuanlan.zhihu.com/p/54734708))
 
-[Universal Sentence Encoder](https://arxiv.org/pdf/1803.11175.pdf) (Daniel Cer, 2018, [code](https://tfhub.dev/google/universal-sentence-encoder/1))
+[Universal Sentence Encoder](https://arxiv.org/pdf/1803.11175.pdf) (Daniel Cer, 2018, [code](https://tfhub.dev/google/universal-sentence-encoder/1), [note](https://zhuanlan.zhihu.com/p/35174235))
 
-[Graph Convolutional Networks for Text Classification](https://arxiv.org/pdf/1809.05679v1.pdf) (Liang Yao, AAAI 2019, [code](https://github.com/yao8839836/text_gcn))
+[Graph Convolutional Networks for Text Classification](https://arxiv.org/pdf/1809.05679v1.pdf) (Liang Yao, AAAI 2019, [code](https://github.com/yao8839836/text_gcn), [note](https://zhuanlan.zhihu.com/p/75708556))
 
-[Multi-Task Deep Neural Networks for Natural Language Understanding](https://arxiv.org/pdf/1901.11504.pdf) (Xiaodong Liu, ACL 2019)
-
-[DocBERT: BERT for Document Classification](https://arxiv.org/pdf/1904.08398.pdf) (Ashutosh Adhikari, 2019)
+[DocBERT: BERT for Document Classification](https://arxiv.org/pdf/1904.08398.pdf) (Ashutosh Adhikari, 2019, [code](https://github.com/castorini/hedwig))
 
 ##### Multi-Label Text Classification
 
+[Semantic-Unit-Based Dilated Convolution for Multi-Label Text Classification](https://arxiv.org/pdf/1808.08561.pdf) (Junyang Lin, EMNLP 2018, [code](https://github.com/lancopku/SU4MLC), [note](https://zhuanlan.zhihu.com/p/59546989))
+
 [SGM: Sequence Generation Model for Multi-Label Classification](http://aclweb.org/anthology/C18-1330) (Pengcheng Yang, COLING 2018, [code](https://github.com/lancopku/SGM), [note](https://zhuanlan.zhihu.com/p/53910836))
+
+[A Deep Reinforced Sequence-to-Set Model for Multi-Label Classification](https://www.aclweb.org/anthology/P19-1518.pdf) (Pengcheng Yang, ACL 2019, [code](https://github.com/lancopku/Seq2Set), [note](https://blog.csdn.net/MaybeForever/article/details/102822057))
+
+[AttentionXML: Label Tree-based Attention-Aware Deep Model for High-Performance Extreme Multi-Label Text Classification](http://papers.nips.cc/paper/8817-attentionxml-label-tree-based-attention-aware-deep-model-for-high-performance-extreme-multi-label-text-classification.pdf) (Ronghui You, NIPS 2019, [code](https://github.com/yourh/AttentionXML), [note](https://zhuanlan.zhihu.com/p/96759318))
 
 #### Text Matching
 
-[Learning Deep Structured Semantic Models for Web Search using Clickthrough Data](http://delivery.acm.org/10.1145/2510000/2505665/p2333-he.pdf?ip=218.19.145.8&id=2505665&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1545793847_ac9774c47a9b2bab6395221862331678) (Po-Sen Huang, CIKM 2013, [code](https://github.com/liaha/dssm))
+[Learning Deep Structured Semantic Models for Web Search using Clickthrough Data](http://delivery.acm.org/10.1145/2510000/2505665/p2333-he.pdf?ip=218.19.145.8&id=2505665&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1545793847_ac9774c47a9b2bab6395221862331678) (Po-Sen Huang, CIKM 2013, [code](https://github.com/liaha/dssm), [note](https://zhuanlan.zhihu.com/p/53326791))
 
-[A Latent Semantic Model with Convolutional-Pooling Structure for Information Retrieval](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/cikm2014_cdssm_final.pdf) (Yelong Shen, CIKM 2014, [code](https://github.com/airalcorn2/Deep-Semantic-Similarity-Model))
+[A Latent Semantic Model with Convolutional-Pooling Structure for Information Retrieval](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/cikm2014_cdssm_final.pdf) (Yelong Shen, CIKM 2014, [code](https://github.com/airalcorn2/Deep-Semantic-Similarity-Model), [note](https://zhuanlan.zhihu.com/p/32915377))
 
 [Learning Semantic Representations Using Convolutional Neural Networks for Web Search](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/www2014_cdssm_p07.pdf) (Yelong Shen, WWW 2014)
 
@@ -180,51 +176,53 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Deep Sentence Embedding Using Long Short-Term Memory Networks: Analysis and Application to Information Retrieval](https://arxiv.org/pdf/1502.06922.pdf) (Hamid Palangi, 2015, [code](https://github.com/zhaosm/dssm-lstm))
 
-[A Deep Architecture for Semantic Matching with Multiple Positional Sentence Representations](https://arxiv.org/pdf/1511.08277.pdf) (Shengxian Wan, 2015, [code](https://github.com/coderbyr/MV-LSTM))
+[A Deep Architecture for Semantic Matching with Multiple Positional Sentence Representations](https://arxiv.org/pdf/1511.08277.pdf) (Shengxian Wan, 2015, [code](https://github.com/coderbyr/MV-LSTM), [note](https://zhuanlan.zhihu.com/p/40741576))
 
-[Learning to Rank Short Text Pairs with Convolutional Deep Neural Networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.723.6492&rep=rep1&type=pdf) (Aliaksei Severyn, SIGIR 2015, [code](https://github.com/zhangzibin/PairCNN-Ranking))
+[Learning to Rank Short Text Pairs with Convolutional Deep Neural Networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.723.6492&rep=rep1&type=pdf) (Aliaksei Severyn, SIGIR 2015, [code](https://github.com/zhangzibin/PairCNN-Ranking), [note](https://zhuanlan.zhihu.com/p/32915377))
 
-[A Large Annotated Corpus for Learning Natural Language Inference](https://arxiv.org/pdf/1508.05326.pdf) (Samuel R. Bowman, EMNLP 2015)
+[A Large Annotated Corpus for Learning Natural Language Inference](https://arxiv.org/pdf/1508.05326.pdf) (Samuel R. Bowman, EMNLP 2015, [code](https://nlp.stanford.edu/projects/snli/), [note](https://blog.eson.org/pub/a1c27ad7/))
 
-[Text Matching as Image Recognition](https://arxiv.org/pdf/1602.06359.pdf) (Liang Pang, AAAI 2016, [code](https://github.com/ddddwy/MatchPyramid-for-semantic-matching))
+[Text Matching as Image Recognition](https://arxiv.org/pdf/1602.06359.pdf) (Liang Pang, AAAI 2016, [code](https://github.com/ddddwy/MatchPyramid-for-semantic-matching), [note](https://zhuanlan.zhihu.com/p/40741576))
 
 [Pairwise Word Interaction Modeling with Deep Neural Networks for Semantic Similarity Measurement](http://www.aclweb.org/anthology/N16-1108) (Hua He, NAACL 2016, [code](https://github.com/lanwuwei/Subword-PWIM))
 
 [Natural Language Inference by Tree-Based Convolution and Heuristic Matching](https://arxiv.org/pdf/1512.08422.pdf) (Lili Mou, ACL 2016, [note](https://www.paperweekly.site/papers/notes/344))
 
-[Improved Representation Learning for Question Answer Matching](http://www.aclweb.org/anthology/P16-1044) (Ming Tan, ACL 2016, [code](https://github.com/person-lee/qa_lstm))
+[Improved Representation Learning for Question Answer Matching](http://www.aclweb.org/anthology/P16-1044) (Ming Tan, ACL 2016, [code](https://github.com/person-lee/qa_lstm), [note](https://zhuanlan.zhihu.com/p/23163137))
 
-[A Decomposable Attention Model for Natural Language Inference](https://arxiv.org/pdf/1606.01933.pdf) (Ankur P. Parikh, EMNLP 2016, [code](https://github.com/harvardnlp/decomp-attn))
+[A Decomposable Attention Model for Natural Language Inference](https://arxiv.org/pdf/1606.01933.pdf) (Ankur P. Parikh, EMNLP 2016, [code](https://github.com/harvardnlp/decomp-attn), [note](https://zhuanlan.zhihu.com/p/26237357))
 
-[A Compare-Aggregate Model for Matching Text Sequences](https://arxiv.org/pdf/1611.01747.pdf) (Shuohang Wang, 2016)
+[A Compare-Aggregate Model for Matching Text Sequences](https://arxiv.org/pdf/1611.01747.pdf) (Shuohang Wang, 2016, [code](https://github.com/pcgreat/SeqMatchSeq), [note](https://zhuanlan.zhihu.com/p/27805225))
 
 [aNMM: Ranking Short Answer Texts with Attention-Based Neural Matching Model](http://maroo.cs.umass.edu/pub/web/getpdf.php?id=1240) (Liu Yang, CIKM 2016, [code](https://github.com/yangliuy/aNMM-CIKM16))
 
-[A Deep Relevance Matching Model for Ad-hoc Retrieval](https://arxiv.org/pdf/1711.08611.pdf) (Jiafeng Guo, CIKM 2016, [code](https://github.com/sebastian-hofstaetter/neural-ranking-drmm))
+[A Deep Relevance Matching Model for Ad-hoc Retrieval](https://arxiv.org/pdf/1711.08611.pdf) (Jiafeng Guo, CIKM 2016, [code](https://github.com/sebastian-hofstaetter/neural-ranking-drmm), [note](https://zhuanlan.zhihu.com/p/94195125))
 
-[Learning to Match using Local and Distributed Representations of Text for Web Search](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/10/wwwfp0192-mitra.pdf) (Bhaskar Mitra, WWW 2017)
+[Learning to Match using Local and Distributed Representations of Text for Web Search](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/10/wwwfp0192-mitra.pdf) (Bhaskar Mitra, WWW 2017, [note](https://www.jianshu.com/p/ab24387a076b))
 
-[End-to-End Neural Ad-hoc Ranking with Kernel Pooling](http://delivery.acm.org/10.1145/3090000/3080809/p55-xiong.pdf?ip=218.19.145.8&id=3080809&acc=CHORUS&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E6D218144511F3437&__acm__=1545743485_1f9609809da82437ccf634dc7f881b4b) (Chenyan Xiong, SIGIR 2017, [code](https://github.com/AdeDZY/K-NRM))
+[End-to-End Neural Ad-hoc Ranking with Kernel Pooling](http://delivery.acm.org/10.1145/3090000/3080809/p55-xiong.pdf?ip=218.19.145.8&id=3080809&acc=CHORUS&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E6D218144511F3437&__acm__=1545743485_1f9609809da82437ccf634dc7f881b4b) (Chenyan Xiong, SIGIR 2017, [code](https://github.com/AdeDZY/K-NRM), [note](https://blog.csdn.net/SrdLaplace/article/details/86481422))
 
 [Deep Sentence Embedding Using Long Short-Term Memory Networks: Analysis and Application to Information Retrieval](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/02/LSTM_DSSM_IEEE_TASLP.pdf) (Hamid Palangi, TASLP 2017)
 
-[Bilateral Multi-Perspective Matching for Natural Language Sentences](https://arxiv.org/pdf/1702.03814.pdf) (Zhiguo Wang, IJCAI 2017, [code](https://github.com/zhiguowang/BiMPM))
+[Bilateral Multi-Perspective Matching for Natural Language Sentences](https://arxiv.org/pdf/1702.03814.pdf) (Zhiguo Wang, IJCAI 2017, [code](https://github.com/zhiguowang/BiMPM), [note](https://zhuanlan.zhihu.com/p/50184415))
 
 [Enhanced LSTM for Natural Language Inference](https://arxiv.org/pdf/1609.06038.pdf) (Chen Qian, ACL 2017, [code](https://github.com/coetaur0/ESIM), [note](https://zhuanlan.zhihu.com/p/47580077))
 
-[Supervised Learning of Universal Sentence Representations from Natural Language Inference Data](https://arxiv.org/pdf/1705.02364.pdf) (Alexis Conneau, EMNLP 2017, [code](https://github.com/facebookresearch/InferSent))
+[Supervised Learning of Universal Sentence Representations from Natural Language Inference Data](https://arxiv.org/pdf/1705.02364.pdf) (Alexis Conneau, EMNLP 2017, [code](https://github.com/facebookresearch/InferSent), [note](https://blog.csdn.net/sinat_31188625/article/details/77992960))
 
-[Sentence Similarity Learning by Lexical Decomposition and Composition](https://www.aclweb.org/anthology/C/C16/C16-1127.pdf) (Zhiguo Wang, COLING 2017, [code](https://github.com/mcrisc/lexdecomp))
+[Sentence Similarity Learning by Lexical Decomposition and Composition](https://www.aclweb.org/anthology/C/C16/C16-1127.pdf) (Zhiguo Wang, COLING 2017, [code](https://github.com/mcrisc/lexdecomp), [note](http://octopuscoder.github.io/2017/08/18/%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB-Sentence-Similarity-Learning-by-Lexical-Decomposition-and-Composition/))
 
-[Natural Language Inference over Interaction Space](https://arxiv.org/pdf/1709.04348.pdf) (Yichen Gong, ICLR 2018, [code](https://github.com/YichenGong/Densely-Interactive-Inference-Network))
+[Natural Language Inference over Interaction Space](https://arxiv.org/pdf/1709.04348.pdf) (Yichen Gong, ICLR 2018, [code](https://github.com/YichenGong/Densely-Interactive-Inference-Network), [note](https://www.cnblogs.com/databingo/p/9311892.html))
 
-[Convolutional Neural Networks for Soft-Matching N-Grams in Ad-hoc Search](http://delivery.acm.org/10.1145/3160000/3159659/p126-dai.pdf?ip=218.19.145.8&id=3159659&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1545800172_2be1e8f46ecb3f388bf3ceab8566848e) (Zhuyun Dai, WSDM 2018, [code](https://github.com/thunlp/EntityDuetNeuralRanking))
+[Convolutional Neural Networks for Soft-Matching N-Grams in Ad-hoc Search](http://delivery.acm.org/10.1145/3160000/3159659/p126-dai.pdf?ip=218.19.145.8&id=3159659&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1545800172_2be1e8f46ecb3f388bf3ceab8566848e) (Zhuyun Dai, WSDM 2018, [code](https://github.com/thunlp/EntityDuetNeuralRanking), [note](https://blog.csdn.net/SrdLaplace/article/details/86481422))
 
-[Discourse Marker Augmented Network with Reinforcement Learning for Natural Language Inference](https://aclweb.org/anthology/P18-1091) (Boyuan Pan, ACL 2018)
+[Discourse Marker Augmented Network with Reinforcement Learning for Natural Language Inference](https://aclweb.org/anthology/P18-1091) (Boyuan Pan, ACL 2018, [code](https://github.com/ZJULearning/DMP), [note](https://zhuanlan.zhihu.com/p/37899900))
 
-[Deep Relevance Ranking Using Enhanced Document-Query Interactions](http://www2.aueb.gr/users/ion/docs/emnlp2018.pdf) (Ryan McDonald, EMNLP 2018, [code](https://github.com/nlpaueb/deep-relevance-ranking))
+[Deep Relevance Ranking Using Enhanced Document-Query Interactions](http://www2.aueb.gr/users/ion/docs/emnlp2018.pdf) (Ryan McDonald, EMNLP 2018, [code](https://github.com/nlpaueb/deep-relevance-ranking), [note](https://zhuanlan.zhihu.com/p/46755219))
 
-[Semantic Sentence Matching with Densely-connected Recurrent and Co-attentive Information](https://arxiv.org/pdf/1805.11360.pdf) (Seonhoon Kim, 2018)
+[Semantic Sentence Matching with Densely-connected Recurrent and Co-attentive Information](https://arxiv.org/pdf/1805.11360.pdf) (Seonhoon Kim, AAAI 2019, [note](https://zhuanlan.zhihu.com/p/47948866))
+
+[Gaussian Transformer: A Lightweight Approach for Natural Language Inference](https://www.aaai.org/ojs/index.php/AAAI/article/view/4614) (Maosheng Guo, AAAI 2019, [code](https://github.com/lzy1732008/GaussionTransformer), [note](https://zhuanlan.zhihu.com/p/75411024))
 
 #### Text Summarization
 
@@ -236,33 +234,95 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [LexRank: Graph-based Lexical Centrality as Salience in Text Summarization](https://arxiv.org/pdf/1109.2128.pdf) (Gunes Erkan, 2004, [code](https://github.com/miso-belica/sumy))
 
-[TextRank: Bringing Order into Texts](https://web.eecs.umich.edu/~mihalcea/papers/mihalcea.emnlp04.pdf) (Rada Mihalcea, EMNLP 2004, [code](https://github.com/miso-belica/sumy))
+[TextRank: Bringing Order into Texts](https://web.eecs.umich.edu/~mihalcea/papers/mihalcea.emnlp04.pdf) (Rada Mihalcea, EMNLP 2004, [code](https://github.com/miso-belica/sumy), [note](https://zhuanlan.zhihu.com/p/55270310))
 
 [Beyond SumBasic: Task-Focused Summarization with Sentence Simplification and Lexical Expansion](http://www.cis.upenn.edu/~nenkova/papers/ipm.pdf) (Lucy Vanderwende, 2007, [code](https://github.com/miso-belica/sumy))
 
 [Exploring Content Models for Multi-Document Summarization](https://www.aclweb.org/anthology/N09-1041) (Aria Haghighi, NAACL 2009, [code](https://github.com/miso-belica/sumy))
 
-[A Deep Reinforced Model for Abstractive Summarization](https://arxiv.org/pdf/1705.04304.pdf) (Romain Paulus, 2017, [code](https://github.com/oceanypt/A-DEEP-REINFORCED-MODEL-FOR-ABSTRACTIVE-SUMMARIZATION))
+[A Deep Reinforced Model for Abstractive Summarization](https://arxiv.org/pdf/1705.04304.pdf) (Romain Paulus, 2017, [code](https://github.com/oceanypt/A-DEEP-REINFORCED-MODEL-FOR-ABSTRACTIVE-SUMMARIZATION), [note](https://zhuanlan.zhihu.com/p/59510696))
 
-[Convolutional Sequence to Sequence Learning](https://pdfs.semanticscholar.org/bb3e/bc09b65728d6eced04929df72a006fb5210b.pdf) (Jonas Gehring, ICML 2017, [code](https://github.com/tobyyouup/conv_seq2seq))
-
-[Don’t Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://aclweb.org/anthology/D18-1206) (Shashi Narayan, EMNLP 2018, [code](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Topic-ConvS2S))
-
-[Deep Reinforcement Learning For Sequence to Sequence Models](https://arxiv.org/pdf/1805.09461.pdf) (Yaser Keneshloo, 2018, [code](https://github.com/yaserkl/RLSeq2Seq))
-
-[A Reinforced Topic-Aware Convolutional Sequence-to-Sequence Model for Abstractive Text Summarization](https://www.ijcai.org/proceedings/2018/0619.pdf) (Li Wang, IJCAI 2018)
+[A Reinforced Topic-Aware Convolutional Sequence-to-Sequence Model for Abstractive Text Summarization](https://www.ijcai.org/proceedings/2018/0619.pdf) (Li Wang, IJCAI 2018, [note](https://blog.csdn.net/imsuhxz/article/details/82655811))
 
 [Controllable Abstractive Summarization](https://aclweb.org/anthology/W18-2706) (Angela Fan, ACL Workshop 2018)
 
+[Don’t Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://aclweb.org/anthology/D18-1206) (Shashi Narayan, EMNLP 2018, [code](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Topic-ConvS2S), [note](https://zhuanlan.zhihu.com/p/92994889))
+
+[Abstractive Summarization of Reddit Posts with Multi-level Memory Networks](https://arxiv.org/pdf/1811.00783.pdf) (Byeongchang Kim, NAACL 2019, [code](https://github.com/ctr4si/MMN), [note](https://zhuanlan.zhihu.com/p/62333393))
+
+[Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model](https://arxiv.org/pdf/1906.01749.pdf) (Alexander R. Fabbri, ACL 2019, [code](https://github.com/Alex-Fabbri/Multi-News), [note](https://zhuanlan.zhihu.com/p/83768781))
+
+[Improving the Similarity Measure of Determinantal Point Processes for Extractive Multi-Document Summarization](https://arxiv.org/pdf/1906.00072.pdf) (Sangwoo Cho, ACL 2019)
+
+[Scoring Sentence Singletons and Pairs for Abstractive Summarization](https://arxiv.org/pdf/1906.00077.pdf) (Logan Lebanoff, ACL 2019, [code](https://github.com/ucfnlp/summarization-sing-pair-mix), [note](https://www.aminer.cn/research_report/5d47c526d5e908133c9468eb))
+
+[How to Write Summaries with Patterns? Learning towards Abstractive Summarization through Prototype Editing](https://arxiv.org/pdf/1909.08837.pdf) (Shen Gao, EMNLP 2019, [code](https://github.com/gsh199449/proto-summ))
+
+[Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) (Yang Liu, EMNLP 2019, [code](https://github.com/nlpyang/PreSumm), [note](https://zhuanlan.zhihu.com/p/88953532))
+
+[Neural Text Summarization: A Critical Evaluation](https://arxiv.org/pdf/1908.08960.pdf) (Wojciech Kryscinski, EMNLP 2019)
+
+[PEGASUS: Pre-training with Extracted Gap-sentences for Abstractive Summarization](https://arxiv.org/pdf/1912.08777.pdf) (Jingqing Zhang, ICML 2020, [code](https://github.com/google-research/pegasus), [note](https://www.linkresearcher.com/theses/7054cdb3-b934-4fd8-9e5b-b4a320f5c6c7))
+
+[Extractive Summarization as Text Matching](https://arxiv.org/pdf/2004.08795.pdf) (MIng Zhong, ACL 2020, [code](https://github.com/maszhongming/MatchSum), [note](https://zhuanlan.zhihu.com/p/138351484))
+
+[Heterogeneous Graph Neural Networks for Extractive Document Summarization](https://arxiv.org/pdf/2004.12393.pdf) (Danqing Wang, ACL 2020, [code](https://github.com/brxx122/HeterSumGraph), [note](https://zhuanlan.zhihu.com/p/138600416))
+
+[Optimizing the Factual Correctness of a Summary: A Study of Summarizing Radiology Reports](https://arxiv.org/pdf/1911.02541.pdf) (Yuhao Zhang, ACL 2020)
+
+[Asking and Answering Questions to Evaluate the Factual Consistency of Summaries](https://arxiv.org/pdf/2004.04228.pdf) (Alex Wang, ACL 2020, [note](https://zhuanlan.zhihu.com/p/130280217))
+
+[FEQA: A Question Answering Evaluation Framework for Faithfulness Assessment in Abstractive Summarization](https://arxiv.org/pdf/2005.03754.pdf) (Esin Durmus, ACL 2020)
+
+[The Summary Loop: Learning to Write Abstractive Summaries Without Examples](http://people.ischool.berkeley.edu/~hearst/papers/Laban_ACL2020_Abstractive_Summarization.pdf) (Philippe Laban, ACL 2020)
+
+[Discourse-Aware Neural Extractive Text Summarization](https://arxiv.org/pdf/1910.14142.pdf) (Jiacheng Xu, ACL 2020, [code](https://github.com/jiacheng-xu/DiscoBERT), [note](https://procjx.github.io/2019/11/02/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91Discourse-Aware-Neural-Extractive-Model-for-Text-Summarization/))
+
 #### Topic Modeling
 
-[An Introduction to Latent Semantic Analysis](http://lsa.colorado.edu/papers/dp1.LSAintro.pdf) (Thomas K Landauer, 1998, [code](https://github.com/josephwilk/semanticpy))
+[An Introduction to Latent Semantic Analysis](http://lsa.colorado.edu/papers/dp1.LSAintro.pdf) (Thomas K Landauer, 1998, [code](https://github.com/josephwilk/semanticpy), [note](https://zhuanlan.zhihu.com/p/37873878))
 
-[Probabilistic Latent Semantic Analysis](http://www.iro.umontreal.ca/~nie/IFT6255/Hofmann-UAI99.pdf) (Thomas K Landauer, 1999, [code](https://github.com/laserwave/plsa))
+[Probabilistic Latent Semantic Analysis](http://www.iro.umontreal.ca/~nie/IFT6255/Hofmann-UAI99.pdf) (Thomas K Landauer, 1999, [code](https://github.com/laserwave/plsa), [note](https://zhuanlan.zhihu.com/p/37873878))
 
-[Latent dirichlet allocation](http://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf) (David M. Blei, JMLR 2003, [code](https://github.com/lda-project/lda))
+[Latent Dirichlet Allocation](http://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf) (David M. Blei, JMLR 2003, [code](https://github.com/lda-project/lda), [note](https://zhuanlan.zhihu.com/p/37873878))
 
-[Mixing Dirichlet Topic Models and Word Embeddings to Make lda2vec](https://arxiv.org/pdf/1605.02019.pdf) (Christopher Moody, 2016, [code](https://github.com/cemoody/lda2vec))
+[Correlated Topic Models](http://papers.neurips.cc/paper/2906-correlated-topic-models.pdf) (David M. Blei, NIPS 2005)
+
+[Supervised Topic Models](https://papers.nips.cc/paper/3328-supervised-topic-models.pdf) (David M. Blei, NIPS 2008)
+
+[Labeled LDA: A Supervised Topic Model for Credit Attribution in Multi-Labeled Corpora](https://www.aclweb.org/anthology/D09-1026.pdf) (Daniel Ramage, EMNLP 2009, [code](https://github.com/JoeZJH/Labeled-LDA-Python), [note](https://blog.csdn.net/qy20115549/article/details/90771054))
+
+[Partially Labeled Topic Models for Interpretable Text Mining](http://susandumais.com/kdd2011-pldp-final.pdf) (Daniel Ramage, KDD 2011)
+
+[MedLDA: Maximum Margin Supervised Topic Models](http://www.jmlr.org/papers/volume13/zhu12a/zhu12a.pdf) (Jun Zhu, JMLR 2013)
+
+[LightLDA: Big Topic Models on Modest Computer Clusters](https://arxiv.org/pdf/1412.1576.pdf) (Jinhui Yuan, WWW 2015, [code](https://github.com/microsoft/LightLDA), [note](http://d0evi1.com/lightlda/))
+
+[Efficient Methods for Incorporating Knowledge into Topic Models](https://www.aclweb.org/anthology/D15-1037.pdf) (Yi Yang, EMNLP 2015)
+
+[Mixing Dirichlet Topic Models and Word Embeddings to Make lda2vec](https://arxiv.org/pdf/1605.02019.pdf) (Christopher Moody, 2016, [code](https://github.com/cemoody/lda2vec), [note](https://zhuanlan.zhihu.com/p/37873878))
+
+[Eicient Correlated Topic Modeling with Topic Embedding](https://arxiv.org/pdf/1707.00206.pdf) (Junxian He, KDD 2017)
+
+[Adapting Topic Models using Lexical Associations with Tree Priors](https://www.aclweb.org/anthology/D17-1203.pdf) (Weiwei Yang, EMNLP 2017)
+
+[A Word Embeddings Informed Focused Topic Model](http://proceedings.mlr.press/v77/zhao17a/zhao17a.pdf) (He Zhao, ACML 2017)
+
+[MetaLDA: A Topic Model that Efficiently Incorporates Meta Information](https://arxiv.org/pdf/1709.06365.pdf) (He Zhao, ICDM 2017, [code](https://github.com/ethanhezhao/MetaLDA))
+
+[ASTM: An Attentional Segmentation Based Topic Model for Short Texts](https://ieeexplore.ieee.org/abstract/document/8594882) (Jiamiao Wang, ICDM 2018, [code](https://github.com/wjmzjx/ASTM))
+
+[PhraseCTM: Correlated Topic Modeling on Phrases within Markov Random Fields](https://www.aclweb.org/anthology/P18-2083.pdf) (Weijie Huang, ACL 2018)
+
+[Improving Topic Quality by Promoting Named Entities in Topic Modeling](https://www.aclweb.org/anthology/P18-2040.pdf) (Katsiaryna Krasnashchok, ACL 2018)
+
+[Inter and Intra Topic Structure Learning with Word Embeddings](http://proceedings.mlr.press/v80/zhao18a/zhao18a.pdf) (He Zhao, ICML 2018, [code](https://github.com/ethanhezhao/WEDTM))
+
+[Dirichlet belief networks for topic structure learning](http://papers.nips.cc/paper/8020-dirichlet-belief-networks-for-topic-structure-learning.pdf) (He Zhao, NIPS 2018)
+
+[The Dynamic Embedded Topic Model](https://arxiv.org/pdf/1907.05545.pdf) (Adji B. Dieng, 2019, [code](https://github.com/adjidieng/DETM))
+
+[Topic Modeling in Embedding Spaces](https://arxiv.org/pdf/1907.04907.pdf) (Adji B. Dieng, 2019, [code](https://github.com/adjidieng/ETM), [note](https://zhuanlan.zhihu.com/p/105741773))
 
 #### Keyphrase Extraction
 
@@ -275,6 +335,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Keyphrase Generation with Correlation Constraints](https://arxiv.org/pdf/1808.07185.pdf) (Jun Chen, EMNLP 2018)
 
 [Title-Guided Encoding for Keyphrase Generation](https://arxiv.org/pdf/1808.08575.pdf) (Wang Chen, AAAI 2019)
+
+[Graph Attention Topic Modeling Network](https://yangliang.github.io/pdf/www20.pdf) (Liang Yang, WWW 2020)
 
 #### Sequence Labeling
 
@@ -506,6 +568,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Emotion-Cause Pair Extraction: A New Task to Emotion Analysis in Texts](https://www.aclweb.org/anthology/P19-1096) (Rui Xia, ACL 2019, [code](https://github.com/NUSTM/ECPE))
 
+[ECPE-2D: Emotion-Cause Pair Extraction based on Joint Two-Dimensional Representation, Interaction and Prediction](https://www.aclweb.org/anthology/2020.acl-main.288.pdf) (Zixiang Ding, ACL 2020)
+
 #### Machine Translation
 
 [Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation](https://arxiv.org/pdf/1609.08144.pdf) (Yonghui Wu, 2016)
@@ -515,8 +579,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Modeling Coverage for Neural Machine Translation](https://www.aclweb.org/anthology/P16-1008.pdf) (Zhaopeng Tu, ACL 2016)
 
 [Neural Machine Translation and Sequence-to-sequence Models: A Tutorial](https://arxiv.org/pdf/1703.01619.pdf) (Graham Neubig, 2017)
-
-[Convolutional Sequence to Sequence Learning](https://arxiv.org/pdf/1705.03122.pdf) (Jonas Gehring, 2017, [code](https://github.com/facebookresearch/fairseq))
 
 [Sequence-to-Dependency Neural Machine Translation](http://www.aclweb.org/anthology/P17-1065) (Shuangzhi Wu, ACL 2017)
 
@@ -786,6 +848,14 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Neural Text Generation: A Practical Guide](https://arxiv.org/pdf/1711.09534.pdf) (Ziang Xie, 2017)
 
+#### Sequence to Sequence
+
+[Convolutional Sequence to Sequence Learning](https://pdfs.semanticscholar.org/bb3e/bc09b65728d6eced04929df72a006fb5210b.pdf) (Jonas Gehring, ICML 2017, [code](https://github.com/tobyyouup/conv_seq2seq), [note](https://zhuanlan.zhihu.com/p/26918935))
+
+[Deep Reinforcement Learning For Sequence to Sequence Models](https://arxiv.org/pdf/1805.09461.pdf) (Yaser Keneshloo, 2018, [code](https://github.com/yaserkl/RLSeq2Seq), [note](https://www.jianshu.com/p/1213de861491))
+
+[MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019, [note](https://zhuanlan.zhihu.com/p/71022527))
+
 ### Computer Vision
 
 #### Object Detection
@@ -914,6 +984,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Domain Separation Networks](https://papers.nips.cc/paper/6254-domain-separation-networks.pdf) (Konstantinos Bousmalis, NIPS 2016)
 
+[Recurrent Neural Network for Text Classification with Multi-Task Learning](https://www.ijcai.org/Proceedings/16/Papers/408.pdf) (Pengfei Liu, IJCAI 2016, [code](https://github.com/brightmart/text_classification), [note](https://zhuanlan.zhihu.com/p/27562717))
+
+[Adversarial Multi-task Learning for Text Classification](https://www.aclweb.org/anthology/P17-1001) (Pengfei Liu, ACL 2017, [code](https://github.com/FrankWork/fudan_mtl_reviews), [note](https://zhuanlan.zhihu.com/p/31653852))
+
+[Multi-Task Deep Neural Networks for Natural Language Understanding](https://arxiv.org/pdf/1901.11504.pdf) (Xiaodong Liu, ACL 2019, [note](https://zhuanlan.zhihu.com/p/60282783))
+
 ### Deep Learning
 
 #### Model
@@ -1040,9 +1116,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding](https://arxiv.org/pdf/1709.04696.pdf) (Tao Shen, 2017, [code](https://github.com/taoshen58/DiSAN))
 
+[Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention), [note](https://zhuanlan.zhihu.com/p/48508221))
+
 [You May Not Need Attention](https://arxiv.org/pdf/1810.13409.pdf) (Ofir Press, 2018, [code](https://github.com/ofirpress/YouMayNotNeedAttention))
 
 [Self-Attention with Relative Position Representations](https://arxiv.org/pdf/1803.02155.pdf) (Peter Shaw, 2018)
+
+[Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf) (Iz Beltagy, 2020, [note](https://zhuanlan.zhihu.com/p/134748587))
 
 #### Optimizer
 
