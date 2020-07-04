@@ -9,7 +9,7 @@ permalink: /
 
 ### About Me
 
-My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of School of Data and Computer Science at Sun Yat-sen University and am expected to graduate in July 2020. I'm fortunate to specialize in Natural Language Processing (NLP), specifically Sentiment Analysis and Coreference Resolution, under the supervision of [Associate Prof. Meng Yang](https://scholar.google.com/citations?user=r2nw6DIAAAAJ&hl=en). **Note: I am seeking for Ph.D position now. If you have any interests, feel free to contact with me.**
+My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of School of Data and Computer Science at Sun Yat-sen University and am expected to graduate in July 2020. I'm fortunate to specialize in Natural Language Processing (NLP), specifically Sentiment Analysis and Coreference Resolution, under the supervision of [Associate Prof. Meng Yang](https://scholar.google.com/citations?user=r2nw6DIAAAAJ&hl=en). **Note: I am seeking for Ph.D. position now. If you have any interests, feel free to contact me.**
 
 ### Research Interests
 
