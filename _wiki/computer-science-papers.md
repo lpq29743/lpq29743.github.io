@@ -292,17 +292,31 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Labeled LDA: A Supervised Topic Model for Credit Attribution in Multi-Labeled Corpora](https://www.aclweb.org/anthology/D09-1026.pdf) (Daniel Ramage, EMNLP 2009, [code](https://github.com/JoeZJH/Labeled-LDA-Python), [note](https://blog.csdn.net/qy20115549/article/details/90771054))
 
+[DiscLDA: Discriminative Learning for Dimensionality Reduction and Classification](http://papers.nips.cc/paper/3599-disclda-discriminative-learning-for-dimensionality-reduction-and-classification.pdf) (Simon Lacoste-Julien, NIPS 2009, [code](https://github.com/teffland/disclda))
+
 [Partially Labeled Topic Models for Interpretable Text Mining](http://susandumais.com/kdd2011-pldp-final.pdf) (Daniel Ramage, KDD 2011)
 
 [MedLDA: Maximum Margin Supervised Topic Models](http://www.jmlr.org/papers/volume13/zhu12a/zhu12a.pdf) (Jun Zhu, JMLR 2013)
+
+[A Biterm Topic Model for Short Texts](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.402.4032&rep=rep1&type=pdf) (Xiaohui Yan, WWW 2013, [code](https://github.com/markoarnauto/biterm), [note](https://blog.csdn.net/windows2/article/details/16812363))
+
+[BTM: Topic Modeling over Short Texts](https://ieeexplore.ieee.org/abstract/document/6778764) (Xueqi Chen, TKDE 2014)
 
 [LightLDA: Big Topic Models on Modest Computer Clusters](https://arxiv.org/pdf/1412.1576.pdf) (Jinhui Yuan, WWW 2015, [code](https://github.com/microsoft/LightLDA), [note](http://d0evi1.com/lightlda/))
 
 [Efficient Methods for Incorporating Knowledge into Topic Models](https://www.aclweb.org/anthology/D15-1037.pdf) (Yi Yang, EMNLP 2015)
 
+[Improving Topic Models with Latent Feature Word Representations](https://www.aclweb.org/anthology/Q15-1022v2.pdf) (Dat Quoc Nguyen, TACL 2015, [code](https://github.com/datquocnguyen/LFTM))
+
+[Short and Sparse Text Topic Modeling via Self-Aggregation](https://www.aaai.org/ocs/index.php/IJCAI/IJCAI15/paper/view/10847/10978) (Xiaojun Quan, IJCAI 2015, [code](https://github.com/WHUIR/SATM))
+
 [Mixing Dirichlet Topic Models and Word Embeddings to Make lda2vec](https://arxiv.org/pdf/1605.02019.pdf) (Christopher Moody, 2016, [code](https://github.com/cemoody/lda2vec), [note](https://zhuanlan.zhihu.com/p/37873878))
 
-[Eicient Correlated Topic Modeling with Topic Embedding](https://arxiv.org/pdf/1707.00206.pdf) (Junxian He, KDD 2017)
+[Topic Modeling for Short Texts with Auxiliary Word Embeddings](https://www.ntu.edu.sg/home/AXSun/paper/sigir16text.pdf) (Chenliang Li, SIGIR 2016, [code](https://github.com/NobodyWHU/GPUDMM))
+
+[Topic Modeling of Short Texts: A Pseudo-Document View](https://www.kdd.org/kdd2016/papers/files/rpp1190-zuoA.pdf) (Yuan Zuo, KDD 2016)
+
+[Efficient Correlated Topic Modeling with Topic Embedding](https://arxiv.org/pdf/1707.00206.pdf) (Junxian He, KDD 2017)
 
 [Adapting Topic Models using Lexical Associations with Tree Priors](https://www.aclweb.org/anthology/D17-1203.pdf) (Weiwei Yang, EMNLP 2017)
 
@@ -310,7 +324,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [MetaLDA: A Topic Model that Efficiently Incorporates Meta Information](https://arxiv.org/pdf/1709.06365.pdf) (He Zhao, ICDM 2017, [code](https://github.com/ethanhezhao/MetaLDA))
 
+[Incorporating Knowledge Graph Embeddings into Topic Modeling](https://www.aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14170/14086) (Liang Yao, AAAI 2017, [note](https://blog.csdn.net/smileyk/article/details/78221342))
+
+[Anchored Correlation Explanation: Topic Modeling with Minimal Domain Knowledge](https://arxiv.org/pdf/1611.10277.pdf) (Ryan J. Gallagher, TACL 2017, [code](https://github.com/gregversteeg/corex_topic))
+
 [ASTM: An Attentional Segmentation Based Topic Model for Short Texts](https://ieeexplore.ieee.org/abstract/document/8594882) (Jiamiao Wang, ICDM 2018, [code](https://github.com/wjmzjx/ASTM))
+
+[Short-Text Topic Modeling via Non-negative Matrix Factorization Enriched with Local Word-Context Correlations](http://dmkd.cs.vt.edu/papers/WWW18.pdf) (Tian Shi, WWW 2018, [code](https://github.com/tshi04/SeaNMF))
 
 [PhraseCTM: Correlated Topic Modeling on Phrases within Markov Random Fields](https://www.aclweb.org/anthology/P18-2083.pdf) (Weijie Huang, ACL 2018)
 
@@ -318,11 +338,21 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Inter and Intra Topic Structure Learning with Word Embeddings](http://proceedings.mlr.press/v80/zhao18a/zhao18a.pdf) (He Zhao, ICML 2018, [code](https://github.com/ethanhezhao/WEDTM))
 
-[Dirichlet belief networks for topic structure learning](http://papers.nips.cc/paper/8020-dirichlet-belief-networks-for-topic-structure-learning.pdf) (He Zhao, NIPS 2018)
+[Dirichlet Belief Networks for Topic Structure Learning](http://papers.nips.cc/paper/8020-dirichlet-belief-networks-for-topic-structure-learning.pdf) (He Zhao, NIPS 2018)
+
+[Document Informed Neural Autoregressive Topic Models with Distributional Prior](https://www.aaai.org/ojs/index.php/AAAI/article/view/4616) (Pankaj Gupta, AAAI 2019, [code](https://github.com/pgcool/iDocNADEe))
+
+[textTOvec: Deep Contextualized Neural Autoregressive Topic Models of Language with Distributed Compositional Prior](https://arxiv.org/pdf/1810.03947.pdf) (Pankaj Gupta, ICLR 2019, [code](https://github.com/pgcool/textTOvec))
+
+[CluWords: Exploiting Semantic Word Clustering Representation for Enhanced Topic Modeling](https://dl.acm.org/doi/abs/10.1145/3289600.3291032) (Felipe Viegas, WSDM 2019)
 
 [The Dynamic Embedded Topic Model](https://arxiv.org/pdf/1907.05545.pdf) (Adji B. Dieng, 2019, [code](https://github.com/adjidieng/DETM))
 
 [Topic Modeling in Embedding Spaces](https://arxiv.org/pdf/1907.04907.pdf) (Adji B. Dieng, 2019, [code](https://github.com/adjidieng/ETM), [note](https://zhuanlan.zhihu.com/p/105741773))
+
+[Neural Mixed Counting Models for Dispersed Topic Discovery](https://www.aclweb.org/anthology/2020.acl-main.548.pdf) (Jiemin Wu, ACL 2020)
+
+[Discriminative Topic Mining via Category-Name Guided Text Embedding](https://arxiv.org/pdf/1908.07162.pdf) (Yu Meng, WWW 2020, [code](https://github.com/yumeng5/CatE))
 
 #### Keyphrase Extraction
 
