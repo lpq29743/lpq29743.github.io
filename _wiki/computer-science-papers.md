@@ -354,11 +354,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Discriminative Topic Mining via Category-Name Guided Text Embedding](https://arxiv.org/pdf/1908.07162.pdf) (Yu Meng, WWW 2020, [code](https://github.com/yumeng5/CatE))
 
+[Graph Attention Topic Modeling Network](https://yangliang.github.io/pdf/www20.pdf) (Liang Yang, WWW 2020)
+
 #### Keyphrase Extraction
 
-[TextRank: Bringing Order into Texts](http://202.116.81.74/cache/16/03/web.eecs.umich.edu/ed616fd7b9f50b15ac2f92467a16c9f7/mihalcea.emnlp04.pdf) (Rada Mihalcea, EMNLP 2014)
+[TextRank: Bringing Order into Texts](http://202.116.81.74/cache/16/03/web.eecs.umich.edu/ed616fd7b9f50b15ac2f92467a16c9f7/mihalcea.emnlp04.pdf) (Rada Mihalcea, EMNLP 2014, [code](https://github.com/summanlp/textrank), [note](https://www.jiqizhixin.com/articles/2018-12-28-18))
 
-[Deep Keyphrase Generation](http://memray.me/uploads/acl17-keyphrase-generation.pdf) (Rui Meng, ACL 2017, [code](https://github.com/memray/seq2seq-keyphrase))
+[Deep Keyphrase Generation](http://memray.me/uploads/acl17-keyphrase-generation.pdf) (Rui Meng, ACL 2017, [code](https://github.com/memray/seq2seq-keyphrase), [note](https://www.jianshu.com/p/5492e7c916f8))
 
 [Semi-Supervised Learning for Neural Keyphrase Generation](https://arxiv.org/pdf/1808.06773.pdf) (Hai Ye, EMNLP 2018)
 
@@ -366,7 +368,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Title-Guided Encoding for Keyphrase Generation](https://arxiv.org/pdf/1808.08575.pdf) (Wang Chen, AAAI 2019)
 
-[Graph Attention Topic Modeling Network](https://yangliang.github.io/pdf/www20.pdf) (Liang Yang, WWW 2020)
+[An Integrated Approach for Keyphrase Generation via Exploring the Power of Retrieval and Extraction](https://arxiv.org/pdf/1904.03454.pdf) (Wang Chen, NAACL 2019, [code](https://github.com/Chen-Wang-CUHK/KG-KE-KR-M), [note](https://github.com/Chen-Wang-CUHK/KG-KE-KR-M))
+
+[Incorporating Linguistic Constraints into Keyphrase Generation](https://www.aclweb.org/anthology/P19-1515.pdf) (Jing Zhao, ACL 2019)
+
+[Topic-Aware Neural Keyphrase Generation for Social Media Language](https://arxiv.org/pdf/1906.03889.pdf) (Yue Wang, ACL 2019, [code](https://github.com/yuewang-cuhk/TAKG))
+
+[Neural Keyphrase Generation via Reinforcement Learning with Adaptive Rewards](https://arxiv.org/pdf/1906.04106.pdf) (Hou Pong Chan, ACL 2019, [code](https://github.com/kenchan0226/keyphrase-generation-rl), [note](https://procjx.github.io/2019/10/31/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91Neural-Keyphrase-Generation-via-Reinforcement-Learning-with-Adaptive-Rewards/))
+
+[Open Domain Web Keyphrase Extraction Beyond Language Modeling](https://arxiv.org/pdf/1911.02671.pdf) (Lee Xiong, EMNLP 2019)
 
 #### Sequence Labeling
 
