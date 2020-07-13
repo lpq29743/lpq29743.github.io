@@ -1,1 +1,1 @@
-个人博客：https://lpq29743.github.io/redant/
+Personal Website: https://lpq29743.github.io
