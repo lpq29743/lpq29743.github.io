@@ -380,7 +380,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Sequence Labeling
 
-[Semi-supervised Multitask Learning for Sequence Labeling](https://www.aclweb.org/anthology/P17-1194) (Marek Rei, ACL 2017)
+[Semi-supervised Multitask Learning for Sequence Labeling](https://www.aclweb.org/anthology/P17-1194) (Marek Rei, ACL 2017, [note](https://zhuanlan.zhihu.com/p/34643000))
+
+[Empower Sequence Labeling with Task-Aware Neural Language Model](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/17123/16075) (Liyuan Liu, AAAI 2018, [code](https://github.com/LiyuanLucasLiu/LM-LSTM-CRF), [note](https://zhuanlan.zhihu.com/p/32716990))
 
 #### Dependency Parsing
 
