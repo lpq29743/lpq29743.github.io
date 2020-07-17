@@ -380,9 +380,19 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Sequence Labeling
 
+[End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF](https://arxiv.org/pdf/1603.01354.pdf) (Xuezhe Ma, ACL 2016, [code](https://github.com/jayavardhanr/End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF-Tutorial), [note](https://jeffchy.github.io/2018/09/24/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9AEnd-to-End-Sequence-Labeling-via-Bi-directional-LSTM-CNN-CRF/))
+
+[Transfer Learning for Sequence Tagging with Hierarchical Recurrent Networks](https://arxiv.org/pdf/1703.06345.pdf) (Zhilin Yang, ICLR 2017, [code](https://github.com/kimiyoung/transfer), [note](https://blog.csdn.net/Raina_qing/article/details/88830027))
+
 [Semi-supervised Multitask Learning for Sequence Labeling](https://www.aclweb.org/anthology/P17-1194) (Marek Rei, ACL 2017, [note](https://zhuanlan.zhihu.com/p/34643000))
 
+[Semi-supervised Sequence Tagging with Bidirectional Language Models](https://arxiv.org/pdf/1705.00108.pdf) (Matthew E. Peters, ACL 2017, [note](https://zhuanlan.zhihu.com/p/38140507))
+
 [Empower Sequence Labeling with Task-Aware Neural Language Model](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/17123/16075) (Liyuan Liu, AAAI 2018, [code](https://github.com/LiyuanLucasLiu/LM-LSTM-CRF), [note](https://zhuanlan.zhihu.com/p/32716990))
+
+[Contextual String Embeddings for Sequence Labeling](https://www.aclweb.org/anthology/C18-1139.pdf) (Alan Akbik, COLING 2018, [code](https://github.com/flairNLP/flair), [note](https://www.cnblogs.com/Arborday/p/9960031.html))
+
+[Hierarchically-Refined Label Attention Network for Sequence Labeling](https://arxiv.org/pdf/1908.08676.pdf) (Leyang Cui, EMNLP 2019, [code](https://github.com/Nealcly/BiLSTM-LAN), [note](https://zhuanlan.zhihu.com/p/92672564))
 
 #### Dependency Parsing
 
