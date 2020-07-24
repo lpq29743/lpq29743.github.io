@@ -414,7 +414,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Simpler but More Accurate Semantic Dependency Parsing](https://www.aclweb.org/anthology/P18-2077.pdf) (Timothy Dozat, ACL 2018, [code](https://github.com/tdozat/Parser-v3))
 
-Multi-Task Semantic Dependency Parsing with Policy Gradient for Learning Easy-First Strategies (Shuhei Kurita, ACL 2019)
+[Multi-Task Semantic Dependency Parsing with Policy Gradient for Learning Easy-First Strategies](https://arxiv.org/pdf/1906.01239.pdf) (Shuhei Kurita, ACL 2019)
 
 ##### Semantic Role Labeling
 
