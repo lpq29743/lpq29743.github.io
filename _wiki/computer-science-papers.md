@@ -396,15 +396,25 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Dependency Parsing
 
-[Statistical Dependency Analysis with Support Vector machines](https://pdfs.semanticscholar.org/f0e1/883cf9d1b3c911125f46359f908557fc5827.pdf) (Hiroyasu Yamada, 2003)
+[Statistical Dependency Analysis with Support Vector machines](https://pdfs.semanticscholar.org/f0e1/883cf9d1b3c911125f46359f908557fc5827.pdf) (Hiroyasu Yamada, 2003, [code](https://github.com/rohit-jain/parzer))
 
-[A Dynamic Oracle for Arc-Eager Dependency Parsing](https://www.aclweb.org/anthology/C12-1059) (Yoav Goldberg, COLING 2012)
+[A Dynamic Oracle for Arc-Eager Dependency Parsing](https://www.aclweb.org/anthology/C12-1059) (Yoav Goldberg, COLING 2012, [code](https://github.com/dpressel/arcs-py))
 
-[A Fast and Accurate Dependency Parser using Neural Networks](https://cs.stanford.edu/~danqi/papers/emnlp2014.pdf) (Danqi Chen, EMNLP 2014)
+[Training Deterministic Parsers with Non-Deterministic Oracles](https://www.aclweb.org/anthology/Q13-1033.pdf) (Yoav Goldberg, TACL 2013, [code](https://github.com/dpressel/arcs-py))
+
+[A Fast and Accurate Dependency Parser using Neural Networks](https://cs.stanford.edu/~danqi/papers/emnlp2014.pdf) (Danqi Chen, EMNLP 2014, [code](https://github.com/khenrix/stanford_nn_parser), [note](https://nocater.github.io/2018/11/13/%E8%AE%BA%E6%96%87-A-Fast-and-Accurate-Dependency-Parserusing-Neural-Networks/))
 
 [An Improved Non-monotonic Transition System for Dependency Parsing](https://aclweb.org/anthology/D15-1162) (Matthew Honnibal, EMNLP 2015)
 
-[Simple and Accurate Dependency Parsing Using Bidirectional LSTM Feature Representations](https://aclweb.org/anthology/Q16-1023) (Eliyahu Kiperwasser, TACL 2016, [code](https://github.com/elikip/bist-parser))
+[Simple and Accurate Dependency Parsing Using Bidirectional LSTM Feature Representations](https://aclweb.org/anthology/Q16-1023) (Eliyahu Kiperwasser, TACL 2016, [code](https://github.com/elikip/bist-parser), [note](http://fancyerii.github.io/books/nndepparser/))
+
+[Deep Biaffine Attention for Neural Dependency Parsing](https://arxiv.org/pdf/1611.01734.pdf) (Timothy Dozat, ICLR 2017, [code](https://github.com/yzhangcs/parser), [note](https://www.hankcs.com/nlp/parsing/deep-biaffine-attention-for-neural-dependency-parsing.html))
+
+[Deep Multitask Learning for Semantic Dependency Parsing](https://arxiv.org/pdf/1704.06855.pdf) (Hao Peng, ACL 2017, [code](https://github.com/Noahs-ARK/NeurboParser), [note](https://chao1224.gitbooks.io/running-paper/content/nlp/acl/acl2017/deep-multitask-learning-for-semantic-dependency-parsing.html))
+
+[Simpler but More Accurate Semantic Dependency Parsing](https://www.aclweb.org/anthology/P18-2077.pdf) (Timothy Dozat, ACL 2018, [code](https://github.com/tdozat/Parser-v3))
+
+Multi-Task Semantic Dependency Parsing with Policy Gradient for Learning Easy-First Strategies (Shuhei Kurita, ACL 2019)
 
 ##### Semantic Role Labeling
 
