@@ -440,6 +440,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Dependency or Span, End-to-End Uniform Semantic Role Labeling Sentiment Analysis](https://www.aaai.org/ojs/index.php/AAAI/article/view/4645) (Zuchao Li, AAAI 2019)
 
+[Semantic Role Labeling with Associated Memory Network](https://arxiv.org/pdf/1908.02367.pdf) (Chaoyu Guan, NAACL 2019, [code](https://github.com/Frozenmad/AMN_SRL))
+
 #### Sentiment Analysis
 
 ##### Overview
@@ -459,6 +461,14 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Learning Sentiment-Specific Word Embedding for Twitter Sentiment Classification](http://www.anthology.aclweb.org/P/P14/P14-1146.pdf) (Duyu Tang, ACL 2014, [note](https://zhuanlan.zhihu.com/p/24217324))
 
 [SenticNet 5: Discovering Conceptual Primitives for Sentiment Analysis by Means of Context Embeddings](http://sentic.net/senticnet-5.pdf) (Erik Cambria, AAAI 2018, [code1](http://sentic.net/downloads/), [code2](https://github.com/yurimalheiros/senticnetapi))
+
+##### Dataset
+
+[SemEval-2014 Task 4: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S14-2004) (Maria Pontiki, SemEval 2014)
+
+[SemEval-2015 Task 12: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S15-2082) (Maria Pontiki, SemEval 2015)
+
+[SemEval-2016 Task 5: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S16-1002) (Maria Pontiki, SemEval 2016)
 
 ##### Opinion Target Extraction
 
@@ -514,12 +524,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Aspect Based Sentiment Classification
 
-[SemEval-2014 Task 4: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S14-2004) (Maria Pontiki, SemEval 2014)
-
-[SemEval-2015 Task 12: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S15-2082) (Maria Pontiki, SemEval 2015)
-
-[SemEval-2016 Task 5: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S16-1002) (Maria Pontiki, SemEval 2016)
-
 [Target-dependent twitter sentiment classification](http://www.anthology.aclweb.org/P/P11/P11-1016.pdf) (Long Jiang, ACL 2011)
 
 [Adaptive Recursive Neural Network for Target-dependent Twitter Sentiment Classification](http://www.aclweb.org/anthology/P14-2009) (Li Dong, ACL 2014)
@@ -562,7 +566,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Attentional Encoder Network for Targeted Sentiment Classification](https://arxiv.org/pdf/1902.09314.pdf) (Youwei Song, 2019)
 
-[Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis](https://www.ijcai.org/Proceedings/2019/0707.pdf) (Peiqin Lin, IJCAI 2019, [code](https://github.com/lpq29743/DMMN-SDCM))
+[Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis](https://www.ijcai.org/Proceedings/2019/0707.pdf) (Peiqin Lin, IJCAI 2019, [code](https://github.com/lpq29743/DMMN-SDCM), [note](https://zhuanlan.zhihu.com/p/150462314))
 
 [BERT Post-Training for Review Reading Comprehension and Aspect-based Sentiment Analysis](https://arxiv.org/pdf/1904.02232.pdf) (Hu Xu, NAACL 2019, [code](https://github.com/howardhsu/BERT-for-RRC-ABSA))
 
