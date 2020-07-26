@@ -422,21 +422,21 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Introduction to the CoNLL-2005 Shared Task: Semantic Role Labeling](https://www.aclweb.org/anthology/W05-0620.pdf) (Xavier Carreras, 2005)
 
-[End-to-end Learning of Semantic Role Labeling Using Recurrent Neural Networks](https://www.aclweb.org/anthology/P15-1109.pdf) (Jie Zhou, ACL 2015)
+[End-to-end Learning of Semantic Role Labeling Using Recurrent Neural Networks](https://www.aclweb.org/anthology/P15-1109.pdf) (Jie Zhou, ACL 2015, [code](https://github.com/sanjaymeena/semantic_role_labeling_deep_learning))
 
-[A Simple and Accurate Syntax-Agnostic Neural Model for Dependency-based Semantic Role Labeling](https://www.aclweb.org/anthology/K17-1041.pdf) (Diego Marcheggiani, 2017)
+[A Simple and Accurate Syntax-Agnostic Neural Model for Dependency-based Semantic Role Labeling](https://www.aclweb.org/anthology/K17-1041.pdf) (Diego Marcheggiani, 2017, [code](https://github.com/diegma/neural-dep-srl))
 
-[Deep Semantic Role Labeling: What Works and What’s Next](https://www.aclweb.org/anthology/P17-1044.pdf) (Luheng He, ACL 2017)
+[Deep Semantic Role Labeling: What Works and What’s Next](https://www.aclweb.org/anthology/P17-1044.pdf) (Luheng He, ACL 2017, [code](https://github.com/luheng/deep_srl), [note](https://www.sohu.com/a/154327575_473283))
 
-[Encoding Sentences with Graph Convolutional Networks for Semantic Role Labeling](https://arxiv.org/pdf/1703.04826.pdf) (Diego Marcheggiani, EMNLP 2017)
+[Encoding Sentences with Graph Convolutional Networks for Semantic Role Labeling](https://arxiv.org/pdf/1703.04826.pdf) (Diego Marcheggiani, EMNLP 2017, [code](https://github.com/diegma/neural-dep-srl), [note](https://zhuanlan.zhihu.com/p/31805975))
 
-[Deep Semantic Role Labeling with Self-Attention](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16725/16025) (Zhixing Tan, AAAI 2018)
+[Deep Semantic Role Labeling with Self-Attention](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16725/16025) (Zhixing Tan, AAAI 2018, [code](https://github.com/XMUNLP/Tagger), [note](https://zhuanlan.zhihu.com/p/35179449))
 
-[Linguistically-Informed Self-Attention for Semantic Role Labeling](https://arxiv.org/pdf/1804.08199.pdf) (Emma Strubell, EMNLP 2018)
+[Linguistically-Informed Self-Attention for Semantic Role Labeling](https://arxiv.org/pdf/1804.08199.pdf) (Emma Strubell, EMNLP 2018, [code](https://github.com/strubell/LISA))
 
-[A Span Selection Model for Semantic Role Labeling](https://arxiv.org/pdf/1810.02245.pdf) (Hiroki Ouchi, EMNLP 2018)
+[A Span Selection Model for Semantic Role Labeling](https://arxiv.org/pdf/1810.02245.pdf) (Hiroki Ouchi, EMNLP 2018, [code](https://github.com/hiroki13/span-based-srl), [note](https://github.com/BrambleXu/knowledge-graph-learning/issues/136))
 
-[Jointly Predicting Predicates and Arguments in Neural Semantic Role Labeling](https://arxiv.org/pdf/1805.04787.pdf) (Luheng He, ACL 2018)
+[Jointly Predicting Predicates and Arguments in Neural Semantic Role Labeling](https://arxiv.org/pdf/1805.04787.pdf) (Luheng He, ACL 2018, [code](https://github.com/luheng/lsgn), [note](https://blog.csdn.net/choose_c/article/details/90273333))
 
 [Dependency or Span, End-to-End Uniform Semantic Role Labeling Sentiment Analysis](https://www.aaai.org/ojs/index.php/AAAI/article/view/4645) (Zuchao Li, AAAI 2019)
 
