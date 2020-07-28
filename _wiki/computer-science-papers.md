@@ -696,35 +696,73 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Dialogue System
 
-[Building End-to-End Dialogue Systems Using Generative Hierarchical Neural Network Models](https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/11957/12160) (Iulian V.Serban, AAAI 2016)
+[A Survey on Dialogue Systems: Recent Advances and New Frontiers](https://arxiv.org/pdf/1711.01731.pdf) (Hongshen Chen, 2017, [note](https://cloud.tencent.com/developer/article/1337267))
 
-[Deep Reinforcement Learning for Dialogue Generation](https://arxiv.org/pdf/1606.01541.pdf) (Jiwei Li, 2016)
+[AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine](http://www.aclweb.org/anthology/P/P17/P17-2079.pdf) (Minghui Qiu, ACL 2017, [note](https://blog.csdn.net/u011239443/article/details/83829265))
 
-[A Survey on Dialogue Systems: Recent Advances and New Frontiers](https://arxiv.org/pdf/1711.01731.pdf) (Hongshen Chen, 2017)
+[Pretraining Methods for Dialog Context Representation Learning](https://arxiv.org/pdf/1906.00414.pdf) (Shikib Mehri, ACL 2019, [note](https://zhuanlan.zhihu.com/p/82001834))
 
-[AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine](http://www.aclweb.org/anthology/P/P17/P17-2079.pdf) (Minghui Qiu, ACL 2017)
+##### Dataset
 
-[Pretraining Methods for Dialog Context Representation Learning](https://arxiv.org/pdf/1906.00414.pdf) (Shikib Mehri, ACL 2019)
+[How to Build User Simulators to Train RL-based Dialog Systems](https://arxiv.org/pdf/1909.01388.pdf) (Weiyan Shi, EMNLP 2019, [code](https://github.com/wyshi/user-simulator))
+
+[Towards Scalable Multi-domain Conversational Agents: The Schema-Guided Dialogue Dataset](https://arxiv.org/pdf/1909.05855.pdf) (Abhinav Rastogi, AAAI 2020, [code](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue), [note](https://blog.csdn.net/weixin_44385551/article/details/103098092))
+
+[CrossWOZ: A Large-Scale Chinese Cross-Domain Task-Oriented Dialogue Dataset](https://arxiv.org/pdf/2002.11893.pdf) (Qi Zhu, TACL 2020, [code](https://github.com/thu-coai/CrossWOZ), [note](https://zhuanlan.zhihu.com/p/115366490))
 
 ##### Dialogue State Tracking
+
+[The Second Dialog State Tracking Challenge](http://www.aclweb.org/anthology/W14-4337) (Matthew Henderson, SIGDAIL 2014, [code](http://camdial.org/~mh521/dstc/))
+
+[Word-Based Dialog State Tracking with Recurrent Neural Networks](http://www.aclweb.org/anthology/W14-4340) (Matthew Henderson, SIGDAIL 2014)
 
 [Machine Learning for Dialog State Tracking: A Review](https://ai.google/research/pubs/pub44018) (Matthew Henderson, 2015)
 
 [The Dialog State Tracking Challenge Series: A Review](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/williams2016dstc_overview-1.pdf) (Jason D. Williams  2016)
 
-[The Second Dialog State Tracking Challenge](http://www.aclweb.org/anthology/W14-4337) (Matthew Henderson, SIGDAIL 2014, [code](http://camdial.org/~mh521/dstc/))
+[A Network-based End-to-End Trainable Task-oriented Dialogue System](http://www.aclweb.org/anthology/E17-1042) (Tsung-Hsien Wen, EACL 2017, [code](https://github.com/edward-zhu/dialog), [note](https://www.jianshu.com/p/96c8fd2d2876))
 
-[A Network-based End-to-End Trainable Task-oriented Dialogue System](http://www.aclweb.org/anthology/E17-1042) (Tsung-Hsien Wen, EACL 2017)
-
-[Word-Based Dialog State Tracking with Recurrent Neural Networks](http://www.aclweb.org/anthology/W14-4340) (Matthew Henderson, SIGDAIL 2014)
-
-[Neural Belief Tracker: Data-Driven Dialogue State Tracking](http://aclweb.org/anthology/P17-1163) (Nikola Mrksic, ACL 2017)
+[Neural Belief Tracker: Data-Driven Dialogue State Tracking](http://aclweb.org/anthology/P17-1163) (Nikola Mrksic, ACL 2017, [code](https://github.com/nmrksic/neural-belief-tracker), [note](https://zhuanlan.zhihu.com/p/27470864))
 
 [Fully Statistical Neural Belief Tracking](http://aclweb.org/anthology/P18-2018) (Nikola Mrksic, ACL 2018, [code](https://github.com/nmrksic/neural-belief-tracker))
 
 [Global-Locally Self-Attentive Dialogue State Tracker](http://aclweb.org/anthology/P18-1135) (Victor Zhong, ACL 2018, [code](https://github.com/salesforce/glad))
 
 [Dialog State Tracking: A Neural Reading Comprehension Approach](https://arxiv.org/pdf/1908.01946.pdf) (Shuyang Gao, SIGDIAL 2019)
+
+##### Task-Oriented Dialogue System
+
+[Sequicity: Simplifying Task-oriented Dialogue Systems with Single Sequence-to-Sequence Architectures](https://www.aclweb.org/anthology/P18-1133.pdf) (Wenqiang Lei, ACL 2018, [code](https://github.com/WING-NUS/sequicity), [note](https://blog.csdn.net/weixin_40533355/article/details/82997788))
+
+[Multi-level Memory for Task Oriented Dialogs](https://arxiv.org/pdf/1810.10647.pdf) (Revanth Reddy, NAACL 2019, [note](https://zhuanlan.zhihu.com/p/64595503))
+
+[Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/1905.08743.pdf) (Chien-Sheng Wu, ACL 2019, [code](https://github.com/jasonwu0731/trade-dst), [note](https://zhuanlan.zhihu.com/p/72580652))
+
+[A Working Memory Model for Task-oriented Dialog Response Generation](https://www.aclweb.org/anthology/P19-1258.pdf) (Xiuyi Chen, ACL 2019, [note](https://blog.csdn.net/weixin_44487404/article/details/105665796))
+
+[Global-to-local Memory Pointer Networks for Task-Oriented Dialogue](https://arxiv.org/pdf/1901.04713.pdf) (Chien-Sheng Wu, ICLR 2019, [code](https://github.com/jasonwu0731/GLMP), [note](https://zhuanlan.zhihu.com/p/57535074))
+
+[Entity-Consistent End-to-end Task-Oriented Dialogue System with KB Retriever](https://arxiv.org/pdf/1909.06762.pdf) (Libo Qin, EMNLP 2019, [code](https://github.com/yizhen20133868/Retriever-Dialogue))
+
+##### Dialogue Generation
+
+[Building End-to-End Dialogue Systems Using Generative Hierarchical Neural Network Models](https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/11957/12160) (Iulian V.Serban, AAAI 2016)
+
+[How NOT To Evaluate Your Dialogue System: An Empirical Study of Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.org/pdf/1603.08023.pdf) (Chia-Wei Liu, EMNLP 2016)
+
+[Deep Reinforcement Learning for Dialogue Generation](https://arxiv.org/pdf/1606.01541.pdf) (Jiwei Li, 2016, [note](https://zhuanlan.zhihu.com/p/21587758))
+
+[Knowledge Diffusion for Neural Dialogue Generation](https://www.aclweb.org/anthology/P18-1138.pdf) (Shuman Liu, ACL 2018, [note](https://zhuanlan.zhihu.com/p/51939126))
+
+[Hierarchical Variational Memory Network for Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3178876.3186077) (Hongshen Chen, WWW 2018, [code](https://github.com/chenhongshen/HVMN), [note](https://blog.csdn.net/qq_38684093/article/details/84038264))
+
+[Explicit State Tracking with Semi-Supervisionfor Neural Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3269206.3271683) (Xisen Jin, CIKM 2018, [code](https://github.com/AuCson/SEDST), [note](https://zhuanlan.zhihu.com/p/62306940))
+
+[Domain Adaptive Dialog Generation via Meta Learning](https://arxiv.org/pdf/1906.03520.pdf) (Kun Qian, ACL 2019, [code](https://github.com/qbetterk/DAML), [note](https://liusih.github.io/2019/09/09/Domain%20Adaptive%20Dialog%20Generation%20via%20Meta%20Learning/))
+
+[ReCoSa: Detecting the Relevant Contexts with Self-Attention for Multi-turn Dialogue Generation](https://arxiv.org/pdf/1907.05339.pdf) (Hainan Zhang, ACL 2019, [code](https://github.com/zhanghainan/ReCoSa), [note](https://zhuanlan.zhihu.com/p/74229505))
+
+[Semantically Conditioned Dialog Response Generation via Hierarchical Disentangled Self-Attention](https://arxiv.org/pdf/1905.12866.pdf) (Wenhu Chen, ACL 2019, [code](https://github.com/wenhuchen/HDSA-Dialog), [note](https://zhuanlan.zhihu.com/p/82460398))
 
 #### Question Answering and Machine Reading Comprehension
 
