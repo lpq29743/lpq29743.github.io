@@ -464,25 +464,25 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Dataset
 
-[SemEval-2014 Task 4: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S14-2004) (Maria Pontiki, SemEval 2014)
+[SemEval-2014 Task 4: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S14-2004) (Maria Pontiki, SemEval 2014, [code](http://alt.qcri.org/semeval2014/task4/), [note](https://zhuanlan.zhihu.com/p/59494279))
 
-[SemEval-2015 Task 12: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S15-2082) (Maria Pontiki, SemEval 2015)
+[SemEval-2015 Task 12: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S15-2082) (Maria Pontiki, SemEval 2015, [code](http://alt.qcri.org/semeval2015/task12/), [note](https://zhuanlan.zhihu.com/p/59791999))
 
-[SemEval-2016 Task 5: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S16-1002) (Maria Pontiki, SemEval 2016)
+[SemEval-2016 Task 5: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S16-1002) (Maria Pontiki, SemEval 2016, [code](http://alt.qcri.org/semeval2016/task5/))
 
 ##### Opinion Target Extraction
 
-[Mining and Summarizing Customer Reviews](https://www.cs.uic.edu/~liub/publications/kdd04-revSummary.pdf) (Minqing Hu, KDD 2004)
+[Mining and Summarizing Customer Reviews](https://www.cs.uic.edu/~liub/publications/kdd04-revSummary.pdf) (Minqing Hu, KDD 2004, [note](https://zhuanlan.zhihu.com/p/76436724))
 
 [Extracting Product Features and Opinions from Reviews](http://turing.cs.washington.edu/papers/emnlp05_opine.pdf) (Ana-Maria Popescu, EMNLP 2005)
 
-[Modeling Online Reviews with Multi-grain Topic Models](http://ivan-titov.org/papers/www08.pdf) (Ivan Titov, WWW 2008)
+[Modeling Online Reviews with Multi-grain Topic Models](http://ivan-titov.org/papers/www08.pdf) (Ivan Titov, WWW 2008, [code](https://github.com/m-ochi/mglda))
 
 [Phrase Dependency Parsing for Opinion Mining](https://www.aclweb.org/anthology/D09-1159) (Yuanbin Wu, EMNLP 2009)
 
 [A Novel Lexicalized HMM-based Learning Framework for Web Opinion Mining](http://people.cs.pitt.edu/~huynv/research/aspect-sentiment/A%20novel%20lexicalized%20HMM-based%20learning%20framework%20for%20web%20opinion%20mining.pdf) (Wei Jin, ICML 2009)
 
-[Structure-Aware Review Mining and Summarization](https://pdfs.semanticscholar.org/1256/c05bd50a80bb0a223ca94674c71fd61fad5a.pdf) (Fangtao Li, COLING 2010)
+[Structure-Aware Review Mining and Summarization](https://pdfs.semanticscholar.org/1256/c05bd50a80bb0a223ca94674c71fd61fad5a.pdf) (Fangtao Li, COLING 2010, [note](https://www.jianshu.com/p/b3ccdf21fef0))
 
 [Opinion Target Extraction in Chinese News Comments](https://www.aclweb.org/anthology/C10-2090) (Tengfei Ma, COLING 2010)
 
@@ -496,37 +496,37 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Exploiting Domain Knowledge in Aspect Extraction](https://www.aclweb.org/anthology/D13-1172.pdf) (Zhiyuan Chen, EMNLP 2013)
 
-[Recursive Neural Conditional Random Fields for Aspect-based Sentiment Analysis](http://www.aclweb.org/anthology/D16-1059) (Wenya Wang, EMNLP 2016, [code](https://github.com/happywwy/Recursive-Neural-Conditional-Random-Field))
+[Recursive Neural Conditional Random Fields for Aspect-based Sentiment Analysis](http://www.aclweb.org/anthology/D16-1059) (Wenya Wang, EMNLP 2016, [code](https://github.com/happywwy/Recursive-Neural-Conditional-Random-Field), [note](https://www.jianshu.com/p/419cee7f2814))
 
-[Improving Opinion Aspect Extraction Using Semantic Similarity and Aspect Associations](https://aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/11973/12051) (Qian Liu, AAAI 2016)
+[Improving Opinion Aspect Extraction Using Semantic Similarity and Aspect Associations](https://aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/11973/12051) (Qian Liu, AAAI 2016, [note](https://blog.csdn.net/qifeiyang112358/article/details/82849248))
 
-[Unsupervised word and dependency path embeddings for aspect term extraction](https://arxiv.org/pdf/1605.07843.pdf) (Yichun Yin, IJCAI 2016)
+[Unsupervised word and dependency path embeddings for aspect term extraction](https://arxiv.org/pdf/1605.07843.pdf) (Yichun Yin, IJCAI 2016, [note](https://zhuanlan.zhihu.com/p/27246419))
 
-[Coupled Multi-Layer Attentions for Co-Extraction of Aspect and Opinion Terms](https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14441/14256) (Wenya Wang, AAAI 2017, [code](https://github.com/happywwy/Coupled-Multi-layer-Attentions))
+[Coupled Multi-Layer Attentions for Co-Extraction of Aspect and Opinion Terms](https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14441/14256) (Wenya Wang, AAAI 2017, [code](https://github.com/happywwy/Coupled-Multi-layer-Attentions), [note](https://zhuanlan.zhihu.com/p/33088676))
 
 [Recurrent Neural Networks with Auxiliary Labels for Cross-Domain Opinion Target Extraction](https://www.aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14865/14130) (Ying Ding, AAAI 2017)
 
 [Multi-task Memory Networks for Category-specific Aspect and Opinion Terms Co-extraction](https://arxiv.org/pdf/1702.01776.pdf) (Wenya Wang, 2017)
 
-[An Unsupervised Neural Attention Model for Aspect Extraction](http://www.aclweb.org/anthology/P17-1036) (Ruidan He, ACL 2017)
+[An Unsupervised Neural Attention Model for Aspect Extraction](http://www.aclweb.org/anthology/P17-1036) (Ruidan He, ACL 2017, [code](https://github.com/ruidan/Unsupervised-Aspect-Extraction), [note](https://www.jianshu.com/p/241cb238e21f))
 
 [Lifelong Learning CRF for Supervised Aspect Extraction](https://www.aclweb.org/anthology/P17-2023) (Lei Shu, ACL 2017)
 
-[Deep Multi-Task Learning for Aspect Term Extraction with Memory Interaction](http://www.aclweb.org/anthology/D17-1310) (Xin Li, EMNLP 2017)
+[Deep Multi-Task Learning for Aspect Term Extraction with Memory Interaction](http://www.aclweb.org/anthology/D17-1310) (Xin Li, EMNLP 2017, [note](https://zhuanlan.zhihu.com/p/51632476))
 
-[Aspect Term Extraction with History Attention and Selective Transformation](https://arxiv.org/pdf/1805.00760.pdf) (Xin Li, IJCAI 2018)
+[Aspect Term Extraction with History Attention and Selective Transformation](https://arxiv.org/pdf/1805.00760.pdf) (Xin Li, IJCAI 2018, [code](https://github.com/lixin4ever/HAST), [note](https://zhuanlan.zhihu.com/p/51189078))
 
 [Double Embeddings and CNN-based Sequence Labeling for Aspect Extraction](https://www.aclweb.org/anthology/P18-2094) (Hu Xu, ACL 2018, [code](https://github.com/howardhsu/DE-CNN), [note](https://zhuanlan.zhihu.com/p/72092287))
 
-[ExtRA: Extracting Prominent Review Aspects from Customer Feedback](https://aclweb.org/anthology/D18-1384) (Zhiyi Luo, EMNLP 2018)
+[ExtRA: Extracting Prominent Review Aspects from Customer Feedback](https://aclweb.org/anthology/D18-1384) (Zhiyi Luo, EMNLP 2018, [note](https://zhuanlan.zhihu.com/p/51767759))
 
-[Target-oriented Opinion Words Extraction with Target-fused Neural Sequence Labeling](https://www.aclweb.org/anthology/N19-1259) (Zhifang Fan, NAACL 2019)
+[Target-oriented Opinion Words Extraction with Target-fused Neural Sequence Labeling](https://www.aclweb.org/anthology/N19-1259) (Zhifang Fan, NAACL 2019, [code](https://github.com/NJUNLP/TOWE), [note](https://www.linkresearcher.com/theses/761656d7-5d1e-4d54-a723-361ee1eaa113))
 
 ##### Aspect Based Sentiment Classification
 
 [Target-dependent twitter sentiment classification](http://www.anthology.aclweb.org/P/P11/P11-1016.pdf) (Long Jiang, ACL 2011)
 
-[Adaptive Recursive Neural Network for Target-dependent Twitter Sentiment Classification](http://www.aclweb.org/anthology/P14-2009) (Li Dong, ACL 2014)
+[Adaptive Recursive Neural Network for Target-dependent Twitter Sentiment Classification](http://www.aclweb.org/anthology/P14-2009) (Li Dong, ACL 2014, [note](https://blog.csdn.net/VictoriaW/article/details/51943563))
 
 [Target-dependent twitter sentiment classification with rich automatic features](http://www.ijcai.org/Proceedings/15/Papers/194.pdf) (Duy-Tin Vo, IJCAI 2015, [code](https://github.com/duytinvo/ijcai2015))
 
@@ -536,7 +536,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Aspect Level Sentiment Classification with Deep Memory Network](http://www.aclweb.org/anthology/D16-1021) (Duyu Tang, EMNLP 2016, [code](https://github.com/pcgreat/mem_absa), [note](https://zhuanlan.zhihu.com/p/34033477))
 
-[A Hierarchical Model of Reviews for Aspect-based Sentiment Analysis](http://www.aclweb.org/anthology/D16-1103) (Sebastian Ruder, EMNLP 2016)
+[A Hierarchical Model of Reviews for Aspect-based Sentiment Analysis](http://www.aclweb.org/anthology/D16-1103) (Sebastian Ruder, EMNLP 2016, [note](https://zhuanlan.zhihu.com/p/23477057))
 
 [Interactive Attention Networks for Aspect-Level Sentiment Classification](https://www.ijcai.org/proceedings/2017/0568.pdf) (Dehong Ma, IJCAI 2017, [code](https://github.com/lpq29743/IAN), [note](https://zhuanlan.zhihu.com/p/34041012))
 
@@ -544,9 +544,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Attention Modeling for Targeted Sentiment](http://leoncrashcode.github.io/Documents/EACL2017.pdf) (Jiangming Liu, EACL 2017, [code](https://github.com/vipzgy/AttentionTargetClassifier))
 
-[Targeted Aspect-Based Sentiment Analysis via Embedding Commonsense Knowledge into an Attentive LSTM](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16541/16152) (Yukun Ma, AAAI 2018)
+[Targeted Aspect-Based Sentiment Analysis via Embedding Commonsense Knowledge into an Attentive LSTM](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16541/16152) (Yukun Ma, AAAI 2018, [note](https://zhuanlan.zhihu.com/p/53251543))
 
-[Modeling Inter-Aspect Dependencies for Aspect-Based Sentiment Analysis](http://www.aclweb.org/anthology/N18-2043) (Devamanyu Hazarika, NAACL 2018, [code](https://github.com/xgy221/lstm-inter-aspect))
+[Modeling Inter-Aspect Dependencies for Aspect-Based Sentiment Analysis](http://www.aclweb.org/anthology/N18-2043) (Devamanyu Hazarika, NAACL 2018, [code](https://github.com/xgy221/lstm-inter-aspect), [note](https://zhuanlan.zhihu.com/p/54327441))
 
 [IARM: Inter-aspect relation modeling with memory networks in aspect-based sentiment analysis](http://www.aclweb.org/anthology/D18-1377) (Navonil Majumder, EMNLP 2018, [code](https://github.com/SenticNet/IARM))
 
@@ -554,23 +554,23 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Convolution-based Memory Network for Aspect-based Sentiment Analysis](https://dl.acm.org/citation.cfm?id=3209978.3210115) (Chuang Fan, SIGIR 2018)
 
-[Aspect Based Sentiment Analysis with Gated Convolutional Networks](http://www.aclweb.org/anthology/P18-1234) (Wei Xue, ACL 2018, [code](https://github.com/wxue004cs/GCAE))
+[Aspect Based Sentiment Analysis with Gated Convolutional Networks](http://www.aclweb.org/anthology/P18-1234) (Wei Xue, ACL 2018, [code](https://github.com/wxue004cs/GCAE), [note](https://zhuanlan.zhihu.com/p/50284374))
 
-[Exploiting Document Knowledge for Aspect-level Sentiment Classification](https://www.aclweb.org/anthology/P18-2092.pdf) (Ruidan He, ACL 2018)
+[Exploiting Document Knowledge for Aspect-level Sentiment Classification](https://www.aclweb.org/anthology/P18-2092.pdf) (Ruidan He, ACL 2018, [code](https://github.com/ruidan/Aspect-level-sentiment), [note](https://zhuanlan.zhihu.com/p/52123748))
 
 [Transformation Networks for Target-Oriented Sentiment Classification](https://www.aclweb.org/anthology/P18-1087) (Xin Li, ACL 2018, [code](https://github.com/lixin4ever/TNet), [note](https://zhuanlan.zhihu.com/p/61586882))
 
 [Multi-grained Attention Network for Aspect-Level Sentiment Classification](https://www.aclweb.org/anthology/D18-1380.pdf) (Feifan Fan, EMNLP 2018, [note](https://zhuanlan.zhihu.com/p/64301255))
 
-[A Position-aware Bidirectional Attention Network for Aspect-level Sentiment Analysis](https://www.aclweb.org/anthology/C18-1066.pdf) (Shuqin Gu, COLING 2018, [note](https://zhuanlan.zhihu.com/p/62696026))
+[A Position-aware Bidirectional Attention Network for Aspect-level Sentiment Analysis](https://www.aclweb.org/anthology/C18-1066.pdf) (Shuqin Gu, COLING 2018, [code](https://github.com/hiyouga/PBAN-PyTorch), [note](https://zhuanlan.zhihu.com/p/62696026))
 
-[Attentional Encoder Network for Targeted Sentiment Classification](https://arxiv.org/pdf/1902.09314.pdf) (Youwei Song, 2019)
+[Attentional Encoder Network for Targeted Sentiment Classification](https://arxiv.org/pdf/1902.09314.pdf) (Youwei Song, 2019, [code](https://zhuanlan.zhihu.com/p/68858093))
 
 [Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis](https://www.ijcai.org/Proceedings/2019/0707.pdf) (Peiqin Lin, IJCAI 2019, [code](https://github.com/lpq29743/DMMN-SDCM), [note](https://zhuanlan.zhihu.com/p/150462314))
 
-[BERT Post-Training for Review Reading Comprehension and Aspect-based Sentiment Analysis](https://arxiv.org/pdf/1904.02232.pdf) (Hu Xu, NAACL 2019, [code](https://github.com/howardhsu/BERT-for-RRC-ABSA))
+[BERT Post-Training for Review Reading Comprehension and Aspect-based Sentiment Analysis](https://arxiv.org/pdf/1904.02232.pdf) (Hu Xu, NAACL 2019, [code](https://github.com/howardhsu/BERT-for-RRC-ABSA), [note](https://zhuanlan.zhihu.com/p/72092287))
 
-[Utilizing BERT for Aspect-Based Sentiment Analysis via Constructing Auxiliary Sentence](https://arxiv.org/pdf/1903.09588.pdf) (Chi Sun, NAACL 2019, [code](https://github.com/HSLCY/ABSA-BERT-pair))
+[Utilizing BERT for Aspect-Based Sentiment Analysis via Constructing Auxiliary Sentence](https://arxiv.org/pdf/1903.09588.pdf) (Chi Sun, NAACL 2019, [code](https://github.com/HSLCY/ABSA-BERT-pair), [note](https://zhuanlan.zhihu.com/p/69786643))
 
 ##### Aspect Based Sentiment Analysis
 
@@ -592,7 +592,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Span-based Joint Model for Opinion Target Extraction and Target Sentiment Classification](https://www.ijcai.org/Proceedings/2019/0762.pdf) (Yan Zhou, IJCAI 2019)
 
-[An Interactive Multi-Task Learning Network for End-to-End Aspect-Based Sentiment Analysis](https://arxiv.org/pdf/1906.06906.pdf) (Ruidan He, ACL 2019)
+[An Interactive Multi-Task Learning Network for End-to-End Aspect-Based Sentiment Analysis](https://arxiv.org/pdf/1906.06906.pdf) (Ruidan He, ACL 2019, [code](https://github.com/ruidan/IMN-E2E-ABSA), [note](https://blog.csdn.net/BeforeEasy/article/details/104219019))
 
 [DOER: Dual Cross-Shared RNN for Aspect Term-Polarity Co-Extraction](https://arxiv.org/pdf/1906.01794.pdf) (Huaishao Luo, ACL 2019, [code](https://github.com/ArrowLuo/DOER), [note](https://blog.csdn.net/weixin_44740082/article/details/103281743))
 
@@ -632,7 +632,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Joint Learning for Emotion Classification and Emotion Cause Detection](https://www.aclweb.org/anthology/D18-1066) (Ying Chen, EMNLP 2018)
 
-[Emotion-Cause Pair Extraction: A New Task to Emotion Analysis in Texts](https://www.aclweb.org/anthology/P19-1096) (Rui Xia, ACL 2019, [code](https://github.com/NUSTM/ECPE))
+[Emotion-Cause Pair Extraction: A New Task to Emotion Analysis in Texts](https://www.aclweb.org/anthology/P19-1096) (Rui Xia, ACL 2019, [code](https://github.com/NUSTM/ECPE), [note](https://mikito.mythsman.com/post/5d2bf2685ed28235d7573179/))
 
 [ECPE-2D: Emotion-Cause Pair Extraction based on Joint Two-Dimensional Representation, Interaction and Prediction](https://www.aclweb.org/anthology/2020.acl-main.288.pdf) (Zixiang Ding, ACL 2020)
 
@@ -774,23 +774,23 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [SQuAD: 100,000+ Questions for Machine Comprehension of Text](https://arxiv.org/pdf/1606.05250.pdf) (Pranav Rajpurkar, 2016, [code](https://rajpurkar.github.io/SQuAD-explorer/))
 
-[MS MARCO: A Human Generated MAchine Reading COmprehension Dataset](https://arxiv.org/pdf/1611.09268.pdf) (Payal Bajaj, 2016, [code](http://www.msmarco.org/))
+[MS MARCO: A Human Generated MAchine Reading COmprehension Dataset](https://arxiv.org/pdf/1611.09268.pdf) (Payal Bajaj, 2016, [code](http://www.msmarco.org/), [note](https://bingning.wang/research/Article/?id=88))
 
 [DuReader: a Chinese Machine Reading Comprehension Dataset from Real-world Applications](https://arxiv.org/pdf/1711.05073.pdf) (Wei He, 2017, [code](https://github.com/baidu/DuReader))
 
-[TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension](http://aclweb.org/anthology/P17-1147) (Mandar Joshi, ACL 2017)
+[TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension](http://aclweb.org/anthology/P17-1147) (Mandar Joshi, ACL 2017, [code](https://github.com/mandarjoshi90/triviaqa))
 
 [RACE: Large-scale ReAding Comprehension Dataset From Examinations](https://arxiv.org/pdf/1704.04683.pdf) (Guokun Lai, 2017, [code](https://github.com/qizhex/RACE_AR_baselines))
 
-[The NarrativeQA Reading Comprehension Challenge](https://www.aclweb.org/anthology/Q18-1023) (Tomas Kocisky, TACL 2018, [code](https://github.com/deepmind/narrativeqa))
+[The NarrativeQA Reading Comprehension Challenge](https://www.aclweb.org/anthology/Q18-1023) (Tomas Kocisky, TACL 2018, [code](https://github.com/deepmind/narrativeqa), [note](https://www.paperweekly.site/papers/notes/400))
 
-[Know What You Don’t Know: Unanswerable Questions for SQuAD](https://arxiv.org/pdf/1806.03822.pdf) (Pranav Rajpurkar, ACL 2018, [code](https://rajpurkar.github.io/SQuAD-explorer/))
+[Know What You Don’t Know: Unanswerable Questions for SQuAD](https://arxiv.org/pdf/1806.03822.pdf) (Pranav Rajpurkar, ACL 2018, [code](https://rajpurkar.github.io/SQuAD-explorer/), [note](https://www.sohu.com/a/235513642_129720))
 
 [CoQA: A Conversational Question Answering Challenge](https://arxiv.org/pdf/1808.07042.pdf) (Siva Reddy, 2018, [code](https://stanfordnlp.github.io/coqa/))
 
 [Think you have Solved Question Answering? Try ARC, the AI2 Reasoning Challenge](https://arxiv.org/pdf/1803.05457.pdf) (Peter Clark, 2018, [code](http://data.allenai.org/arc/))
 
-[QuAC : Question Answering in Context](https://arxiv.org/pdf/1808.07036v1.pdf) (Eunsol Choi, EMNLP 2018, [code](http://quac.ai/))
+[QuAC : Question Answering in Context](https://arxiv.org/pdf/1808.07036v1.pdf) (Eunsol Choi, EMNLP 2018, [code](http://quac.ai/), [note](https://zhuanlan.zhihu.com/p/84110287))
 
 [A Dataset and Baselines for Sequential Open-Domain Question Answering](https://www.aclweb.org/anthology/D18-1134) (Ahmed Elgohary, EMNLP 2018, [code](http://sequential.qanta.org/))
 
@@ -798,75 +798,77 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [DROP: A Reading Comprehension Benchmark Requiring Discrete Reasoning Over Paragraphs](https://arxiv.org/pdf/1903.00161.pdf) (Dheeru Dua, NAACL 2019, [code](https://allennlp.org/drop))
 
+[Quoref: A Reading Comprehension Dataset with Questions Requiring Coreferential Reasoning](https://arxiv.org/pdf/1908.05803.pdf) (Pradeep Dasigi, EMNLP 2019, [code](https://allennlp.org/quoref))
+
 ##### Machine Reading Comprehension
+
+[BLEU: a Method for Automatic Evaluation of Machine Translation](http://aclweb.org/anthology/P/P02/P02-1040.pdf) (Kishore Papineni, ACL 2002, [note](https://www.jianshu.com/p/320ffec4e99f))
 
 [ROUGE: A Package for Automatic Evaluation of Summaries](http://www.aclweb.org/anthology/W/W04/W04-1013.pdf) (Chin-Yew Lin, 2004)
 
-[BLEU: a Method for Automatic Evaluation of Machine Translation](http://aclweb.org/anthology/P/P02/P02-1040.pdf) (Kishore Papineni, 2002)
+[Teaching Machines to Read and Comprehend](https://lanl.arxiv.org/pdf/1506.03340.pdf) (Karl Moritz Hermann, NIPS 2015, [code](https://github.com/thomasmesnard/DeepMind-Teaching-Machines-to-Read-and-Comprehend), [note](https://zhuanlan.zhihu.com/p/21343662))
 
-[Teaching Machines to Read and Comprehend](https://lanl.arxiv.org/pdf/1506.03340.pdf) (Karl Moritz Hermann, NIPS 2015, [code](https://github.com/thomasmesnard/DeepMind-Teaching-Machines-to-Read-and-Comprehend))
+[Text Understanding with the Attention Sum Reader Network](http://www.aclweb.org/anthology/P16-1086) (Rudolf Kadlec, ACL 2016, [code](https://github.com/rkadlec/asreader), [note](https://zhuanlan.zhihu.com/p/21354432))
 
-[Text Understanding with the Attention Sum Reader Network](http://www.aclweb.org/anthology/P16-1086) (Rudolf Kadlec, ACL 2016, [code](https://github.com/rkadlec/asreader))
+[Machine Comprehension Using Match-LSTM and Answer Pointer](https://openreview.net/pdf?id=B1-q5Pqxl) (Shuohang Wang, ICLR 2017, [code](https://github.com/MurtyShikhar/Question-Answering), [note](https://zhuanlan.zhihu.com/p/55957106))
 
-[Machine Comprehension Using Match-LSTM and Answer Pointer](https://openreview.net/pdf?id=B1-q5Pqxl) (Shuohang Wang, ICLR 2017, [code](https://github.com/MurtyShikhar/Question-Answering))
+[Bidirectional Attention Flow for Machine Comprehension](https://arxiv.org/pdf/1611.01603.pdf) (Minjoon Seo, ICLR 2017, [code](https://github.com/allenai/bi-att-flow), [note](https://zhuanlan.zhihu.com/p/55975534))
 
-[Bidirectional Attention Flow for Machine Comprehension](https://arxiv.org/pdf/1611.01603.pdf) (Minjoon Seo, ICLR 2017, [code](https://github.com/allenai/bi-att-flow))
+[Attention-over-Attention Neural Networks for Reading Comprehension](http://www.aclweb.org/anthology/P/P17/P17-1055.pdf) (Yiming Cui, ACL 2017, [code](https://github.com/OlavHN/attention-over-attention), [note](https://zhuanlan.zhihu.com/p/56246026))
 
-[Attention-over-Attention Neural Networks for Reading Comprehension](http://www.aclweb.org/anthology/P/P17/P17-1055.pdf) (Yiming Cui, ACL 2017, [code](https://github.com/OlavHN/attention-over-attention))
+[Simple and Effective Multi-Paragraph Reading Comprehension](https://arxiv.org/pdf/1710.10723.pdf) (Christopher Clark, 2017, [code](https://github.com/allenai/document-qa), [note](https://zhuanlan.zhihu.com/p/36812682))
 
-[Simple and Effective Multi-Paragraph Reading Comprehension](https://arxiv.org/pdf/1710.10723.pdf) (Christopher Clark, 2017)
+[Gated Self-Matching Networks for Reading Comprehension and Question Answering](http://aclweb.org/anthology/P17-1018) (Wenhui Wang, ACL 2017, [code](https://github.com/HKUST-KnowComp/R-Net), [note](https://www.jianshu.com/p/71d3b4737c23))
 
-[Gated Self-Matching Networks for Reading Comprehension and Question Answering](http://aclweb.org/anthology/P17-1018) (Wenhui Wang, ACL 2017, [code](https://github.com/HKUST-KnowComp/R-Net))
+[R-Net: Machine Reading Comprehension with Self-Matching Networks](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf) (Natural Language Computing Group, 2017, [code](https://github.com/HKUST-KnowComp/R-Net), [note](https://zhuanlan.zhihu.com/p/40271565))
 
-[R-Net: Machine Reading Comprehension with Self-Matching Networks](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf) (Natural Language Computing Group, 2017, [code](https://github.com/HKUST-KnowComp/R-Net))
+[QANet: Combining Local Convolution with Global Self-Attention for Reading Comprehension](https://openreview.net/pdf?id=B14TlG-RW) (Adams Wei Yu, ICLR 2018, [code](https://github.com/minsangkim142/Fast-Reading-Comprehension), [note](https://zhuanlan.zhihu.com/p/56285539))
 
-[QANet: Combining Local Convolution with Global Self-Attention for Reading Comprehension](https://openreview.net/pdf?id=B14TlG-RW) (Adams Wei Yu, ICLR 2018, [code](https://github.com/minsangkim142/Fast-Reading-Comprehension))
+[Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering](http://www.aclweb.org/anthology/P18-1158) (Wei Wang, ACL 2018, [code](https://github.com/SparkJiao/SLQA), [note](https://zhuanlan.zhihu.com/p/43556383))
 
-[Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering](http://www.aclweb.org/anthology/P18-1158) (Wei Wang, ACL 2018, [code](https://github.com/SparkJiao/SLQA))
+[Multi-Passage Machine Reading Comprehension with Cross-Passage Answer Verification](https://www.aclweb.org/anthology/P18-1178) (Yizhong Wang, ACL 2018, [note](https://indexfziq.github.io/2019/03/08/VNET/))
 
-[Multi-Passage Machine Reading Comprehension with Cross-Passage Answer Verification](https://www.aclweb.org/anthology/P18-1178) (Yizhong Wang, ACL 2018)
+[Joint Training of Candidate Extraction and Answer Selection for Reading Comprehension](https://www.aclweb.org/anthology/P18-1159) (Zhen Wang, ACL 2018, [note](https://zhuanlan.zhihu.com/p/41161714))
 
-[Joint Training of Candidate Extraction and Answer Selection for Reading Comprehension](https://www.aclweb.org/anthology/P18-1159) (Zhen Wang, ACL 2018)
+[Improving Machine Reading Comprehension with General Reading Strategies](https://arxiv.org/pdf/1810.13441.pdf) (Kai Sun, NAACL 2019, [code](https://github.com/nlpdata/strategy), [note](https://blog.csdn.net/mottled233/article/details/104535173))
 
-[Improving Machine Reading Comprehension with General Reading Strategies](https://arxiv.org/pdf/1810.13441.pdf) (Kai Sun, NAACL 2019)
+[SG-Net: Syntax-Guided Machine Reading Comprehension](https://arxiv.org/pdf/1908.05147.pdf) (Zhuosheng Zhang, AAAI 2020, [code](https://github.com/cooelf/SG-Net), [note](https://zhuanlan.zhihu.com/p/82073864))
 
-[SG-Net: Syntax-Guided Machine Reading Comprehension](https://arxiv.org/pdf/1908.05147.pdf) (Zhuosheng Zhang, AAAI 2020)
-
-[Retrospective Reader for Machine Reading Comprehension](https://arxiv.org/pdf/2001.09694.pdf) (Zhuosheng Zhang, 2020)
+[Retrospective Reader for Machine Reading Comprehension](https://arxiv.org/pdf/2001.09694.pdf) (Zhuosheng Zhang, 2020, [note](https://zhuanlan.zhihu.com/p/137552707))
 
 ##### Answer Selection
 
-[LSTM-based Deep Learning Models for Non-factoid Answer Selection](https://arxiv.org/abs/1511.04108) (Ming Tan, ICLR 2016)
+[LSTM-based Deep Learning Models for Non-factoid Answer Selection](https://arxiv.org/abs/1511.04108) (Ming Tan, ICLR 2016, [note](https://blog.csdn.net/u010960155/article/details/86756911))
 
 [Hierarchical Attention Flow for Multiple-Choice Reading Comprehension](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewFile/16331/16177) (Haichao Zhu, AAAI 2018)
 
 [A Co-Matching Model for Multi-choice Reading Comprehension](https://www.aclweb.org/anthology/P18-2118.pdf) (Shuohang Ming, ACL 2018)
 
-[Option Comparison Network for Multiple-choice Reading Comprehension](https://arxiv.org/pdf/1903.03033.pdf) (Qiu Ran, 2019)
+[Option Comparison Network for Multiple-choice Reading Comprehension](https://arxiv.org/pdf/1903.03033.pdf) (Qiu Ran, 2019, [note](https://www.zybuluo.com/songying/note/1428013))
 
 ##### Knowledge Based Question Answering
 
-[Information Extraction over Structured Data: Question Answering with Freebase](http://cs.jhu.edu/~xuchen/paper/yao-jacana-freebase-acl2014.pdf) (Xuchen Yao, ACL 2014)
+[Information Extraction over Structured Data: Question Answering with Freebase](http://cs.jhu.edu/~xuchen/paper/yao-jacana-freebase-acl2014.pdf) (Xuchen Yao, ACL 2014, [note](https://blog.csdn.net/LAW_130625/article/details/78398888))
 
 [Question Answering over Freebase with Multi-Column Convolutional Neural Networks](http://www.aclweb.org/anthology/P15-1026) (Li Dong, ACL 2015, [code](https://github.com/Evergcj/QA_multi-columnCNN), [note](https://blog.csdn.net/LAW_130625/article/details/78447156))
 
-[Question Answering on Freebase via Relation Extraction and Textual Evidence](https://arxiv.org/pdf/1603.00957v3.pdf) (Kun Xu, ACL 2016)
+[Question Answering on Freebase via Relation Extraction and Textual Evidence](https://arxiv.org/pdf/1603.00957v3.pdf) (Kun Xu, ACL 2016, [note](https://zhuanlan.zhihu.com/p/22630320?refer=c_51425207))
 
-[Question Answering on Knowledge Bases and Text using Universal Schema and Memory Networks](https://arxiv.org/pdf/1704.08384.pdf) (Rajarshi Das, ACL 2017)
+[Question Answering on Knowledge Bases and Text using Universal Schema and Memory Networks](https://arxiv.org/pdf/1704.08384.pdf) (Rajarshi Das, ACL 2017, [note](https://zhuanlan.zhihu.com/p/26791788))
 
-[Question Answering over Freebase via Attentive RNN with Similarity Matrix based CNN](https://arxiv.org/vc/arxiv/papers/1804/1804.03317v2.pdf) (Yingqi Qu, ISMC 2018, [code](https://github.com/quyingqi/kbqa-ar-smcnn))
+[Question Answering over Freebase via Attentive RNN with Similarity Matrix based CNN](https://arxiv.org/vc/arxiv/papers/1804/1804.03317v2.pdf) (Yingqi Qu, ISMC 2018, [code](https://github.com/quyingqi/kbqa-ar-smcnn), [note](https://blog.csdn.net/Evaooooes/article/details/88691356))
 
-[Variational Reasoning for Question Answering with Knowledge Graph](https://arxiv.org/pdf/1709.04071.pdf) (Yuyu Zhang, AAAI 2018)
+[Variational Reasoning for Question Answering with Knowledge Graph](https://arxiv.org/pdf/1709.04071.pdf) (Yuyu Zhang, AAAI 2018, [note](http://blog.openkg.cn/%E8%AE%BA%E6%96%87%E6%B5%85%E5%B0%9D-%E5%9F%BA%E4%BA%8E%E7%9F%A5%E8%AF%86%E5%9B%BE%E7%9A%84%E9%97%AE%E7%AD%94%E5%8F%98%E5%88%86%E6%8E%A8%E7%90%86/))
 
 ##### Conversational Question Answering
 
-[SDNet: Contextualized Attention-based Deep Network for Conversational Question Answering](https://arxiv.org/pdf/1812.03593.pdf) (Chenguang Zhu, 2018)
+[SDNet: Contextualized Attention-based Deep Network for Conversational Question Answering](https://arxiv.org/pdf/1812.03593.pdf) (Chenguang Zhu, 2018, [code](https://github.com/Microsoft/SDNet), [note](https://zhuanlan.zhihu.com/p/66100785))
 
-[FlowQA: Grasping Flow in History for Conversational Machine Comprehension](https://arxiv.org/pdf/1810.06683.pdf) (Hsin-Yuan Huang, ICLR 2019)
+[FlowQA: Grasping Flow in History for Conversational Machine Comprehension](https://arxiv.org/pdf/1810.06683.pdf) (Hsin-Yuan Huang, ICLR 2019, [code](https://github.com/momohuang/FlowQA), [note](https://zhuanlan.zhihu.com/p/53028792))
 
 [BERT with History Answer Embedding for Conversational Question Answering](https://arxiv.org/pdf/1905.05412.pdf) (Chen Qu, SIGIR 2019, [code](https://github.com/prdwb/bert_hae))
 
-[Attentive History Selection for Conversational Question Answering](https://arxiv.org/pdf/1908.09456.pdf) (Chen Qu, CIKM 2019)
+[Attentive History Selection for Conversational Question Answering](https://arxiv.org/pdf/1908.09456.pdf) (Chen Qu, CIKM 2019, [code](https://github.com/prdwb/attentive_history_selection), [note](https://zhuanlan.zhihu.com/p/129800180))
 
 #### Knowledge Graph
 
@@ -876,51 +878,51 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Freebase: A Collaboratively Created Graph Database For Structuring Human Knowledge](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.538.7139&rep=rep1&type=pdf) (Kurt Bollacker, 2008, [code](https://developers.google.com/freebase/))
 
-[CN-DBpedia: A Never-Ending Chinese Knowledge Extraction System](https://link.springer.com/chapter/10.1007/978-3-319-60045-1_44) (Bo Xu, IEA-AIE 2017, [code](http://openkg.cn/dataset/cndbpedia))
+[CN-DBpedia: A Never-Ending Chinese Knowledge Extraction System](https://link.springer.com/chapter/10.1007/978-3-319-60045-1_44) (Bo Xu, IEA-AIE 2017, [code](http://openkg.cn/dataset/cndbpedia), [note](https://blog.csdn.net/u013007703/article/details/90376440))
 
 [ConceptNet 5.5: An Open Multilingual Graph of General Knowledge](https://arxiv.org/pdf/1612.03975.pdf) (Robyn Speer, AAAI 2017, [code](http://conceptnet.io/))
 
 ##### Knowledge Graph Embedding and Completion
 
-[Knowledge Graph Embedding: A Survey of Approaches and Applications](https://www.computer.org/csdl/trans/tk/2017/12/08047276-abs.html) (Quan Wang, 2017)
+[Translating Embeddings for Modeling Multi-relational Data](https://www.utc.fr/~bordesan/dokuwiki/_media/en/transe_nips13.pdf) (Antoine Bordes, NIPS 2013, [code](https://github.com/thunlp/KB2E), [note](https://zhuanlan.zhihu.com/p/32993044))
 
-[Translating Embeddings for Modeling Multi-relational Data](https://www.utc.fr/~bordesan/dokuwiki/_media/en/transe_nips13.pdf) (Antoine Bordes, NIPS 2013, [code](https://github.com/thunlp/KB2E))
+[Knowledge Graph Embedding by Translating on Hyperplanes](https://pdfs.semanticscholar.org/2a3f/862199883ceff5e3c74126f0c80770653e05.pdf) (Zhen Wang, AAAI 2014, [code](https://github.com/thunlp/KB2E), [note](https://zhuanlan.zhihu.com/p/32993044))
 
-[Knowledge Graph Embedding by Translating on Hyperplanes](https://pdfs.semanticscholar.org/2a3f/862199883ceff5e3c74126f0c80770653e05.pdf) (Zhen Wang, AAAI 2014, [code](https://github.com/thunlp/KB2E))
+[Learning Entity and Relation Embeddings for Knowledge Graph Completion](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.698.8922&rep=rep1&type=pdf) (Yankai Lin, AAAI 2015, [code](https://github.com/thunlp/KB2E), [note](https://zhuanlan.zhihu.com/p/32993044))
 
-[Learning Entity and Relation Embeddings for Knowledge Graph Completion](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.698.8922&rep=rep1&type=pdf) (Yankai Lin, AAAI 2015, [code](https://github.com/thunlp/KB2E))
+[Knowledge Graph Embedding via Dynamic Mapping Matrix](http://anthology.aclweb.org/P/P15/P15-1067.pdf) (Guoliang Ji, ACL 2015, [code](https://github.com/thunlp/OpenKE), [note](https://zhuanlan.zhihu.com/p/32993044))
 
-[Knowledge Graph Embedding via Dynamic Mapping Matrix](http://anthology.aclweb.org/P/P15/P15-1067.pdf) (Guoliang Ji, ACL 2015, [code](https://github.com/thunlp/OpenKE))
+[TransA: An Adaptive Approach for Knowledge Graph Embedding](https://arxiv.org/pdf/1509.05490.pdf) (Han Xiao, 2015, [note](https://blog.csdn.net/junruitian/article/details/87006668))
 
-[TransA: An Adaptive Approach for Knowledge Graph Embedding](https://arxiv.org/pdf/1509.05490.pdf) (Han Xiao)
+[Modeling Relation Paths for Representation Learning of Knowledge Bases](https://arxiv.org/pdf/1506.00379.pdf) (Yankai Lin, EMNLP 2015, [code](https://github.com/thunlp/KB2E), [note](https://www.jianshu.com/p/c3ace92cd6ef))
 
-[Modeling Relation Paths for Representation Learning of Knowledge Bases](https://arxiv.org/pdf/1506.00379.pdf) (Yankai Lin, EMNLP 2015, [code](https://github.com/thunlp/KB2E))
+[TransG : A Generative Model for Knowledge Graph Embedding](http://www.aclweb.org/anthology/P16-1219) (Han Xiao, ACL 2016, [code](https://github.com/BookmanHan/Embedding), [note](https://blog.csdn.net/junruitian/article/details/87006668))
 
-[TransG : A Generative Model for Knowledge Graph Embedding](http://www.aclweb.org/anthology/P16-1219) (Han Xiao, ACL 2016, [code](https://github.com/BookmanHan/Embedding))
+[Knowledge Graph Completion with Adaptive Sparse Transfer Matrix](http://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/download/11982/11693) (Guoliang Ji, AAAI 2016, [code](https://github.com/thunlp/Fast-TransX), [note](https://blog.csdn.net/qq_36426650/article/details/103483838))
 
-[Knowledge Graph Completion with Adaptive Sparse Transfer Matrix](http://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/download/11982/11693) (Guoliang Ji, AAAI 2016, [code](https://github.com/thunlp/Fast-TransX))
+[Knowledge Graph Embedding: A Survey of Approaches and Applications](https://www.computer.org/csdl/trans/tk/2017/12/08047276-abs.html) (Quan Wang, TKDE 2017, [note](https://zhuanlan.zhihu.com/p/106024679))
 
-[Convolutional 2D Knowledge Graph Embeddings](https://arxiv.org/pdf/1707.01476.pdf) (Pasquale Minervini, AAAI 2018, [code](https://github.com/TimDettmers/ConvE))
+[Convolutional 2D Knowledge Graph Embeddings](https://arxiv.org/pdf/1707.01476.pdf) (Pasquale Minervini, AAAI 2018, [code](https://github.com/TimDettmers/ConvE), [note](https://blog.csdn.net/damuge2/article/details/87974995))
 
-[Open-World Knowledge Graph Completion](https://arxiv.org/pdf/1711.03438.pdf) (Baoxu Shi, AAAI 2018, [code](https://github.com/bxshi/ConMask))
+[Open-World Knowledge Graph Completion](https://arxiv.org/pdf/1711.03438.pdf) (Baoxu Shi, AAAI 2018, [code](https://github.com/bxshi/ConMask), [note](https://juewang.me/posts/[2018.2.26]Open-World-Knowledge-Graph-Completion/))
 
-[One-Shot Relational Learning for Knowledge Graphs](https://arxiv.org/pdf/1808.09040.pdf) (Wenhan Xiong, EMNLP 2018)
+[One-Shot Relational Learning for Knowledge Graphs](https://arxiv.org/pdf/1808.09040.pdf) (Wenhan Xiong, EMNLP 2018, [code](https://github.com/xwhan/One-shot-Relational-Learning), [note](https://zhuanlan.zhihu.com/p/59646318))
 
 ##### Entity Discovery and Linking
 
-[A Generative Entity-Mention Model for Linking Entities with Knowledge Base](https://www.aclweb.org/anthology/P/P11/P11-1095.pdf) (Xianpei Han, ACL 2011)
+[A Generative Entity-Mention Model for Linking Entities with Knowledge Base](https://www.aclweb.org/anthology/P/P11/P11-1095.pdf) (Xianpei Han, ACL 2011, [note](https://www.cnblogs.com/dhName/p/11078630.html))
 
 [Overview of TAC-KBP2014 Entity Discovery and Linking Tasks](http://nlp.cs.rpi.edu/paper/edl2014overview.pdf) (Heng Ji, TAC 2014)
 
-[An Attentive Neural Architecture for Fine-grained Entity Type Classification](https://www.aclweb.org/anthology/W16-1313) (Sonse Shimaoka, 2016)
+[An Attentive Neural Architecture for Fine-grained Entity Type Classification](https://www.aclweb.org/anthology/W16-1313) (Sonse Shimaoka, 2016, [note](https://blog.csdn.net/weixin_40485502/article/details/104019427))
 
 [Neural Architectures for Fine-grained Entity Type Classification](https://www.aclweb.org/anthology/E17-1119) (Sonse Shimaoka, EACL 2017, [code](https://github.com/shimaokasonse/NFGEC))
 
 [Fine-Grained Entity Type Classification by Jointly Learning Representations and Label Embeddings](http://aclweb.org/anthology/E17-1075) (Abhishek Abhishek, EACL 2017, [code](https://github.com/abhipec/fnet))
 
-[Neural Fine-Grained Entity Type Classification with Hierarchy-Aware Loss](http://aclweb.org/anthology/N18-1002) (Peng Xu, NAACL 2018)
+[Neural Fine-Grained Entity Type Classification with Hierarchy-Aware Loss](http://aclweb.org/anthology/N18-1002) (Peng Xu, NAACL 2018, [code](https://github.com/billy-inn/NFETC))
 
-[Ultra-fine entity typing](https://www.aclweb.org/anthology/P18-1009) (Eunsol Choi, ACL 2018)
+[Ultra-fine entity typing](https://www.aclweb.org/anthology/P18-1009) (Eunsol Choi, ACL 2018, [note](https://blog.csdn.net/xff1994/article/details/90293957))
 
 ##### Knowledge Graph Application
 
@@ -930,23 +932,23 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Improving Natural Language Inference Using External Knowledge in the Science Questions Domain](https://arxiv.org/pdf/1809.05724.pdf) (Xiaoyan Wang, 2018, [note](https://zhuanlan.zhihu.com/p/77646912))
 
-[Entity-Duet Neural Ranking: Understanding the Role of Knowledge Graph Semantics in Neural Information Retrieval](http://aclweb.org/anthology/P18-1223) (Zhenghao Liu, ACL 2018, [code](https://github.com/thunlp/EntityDuetNeuralRanking))
+[Entity-Duet Neural Ranking: Understanding the Role of Knowledge Graph Semantics in Neural Information Retrieval](http://aclweb.org/anthology/P18-1223) (Zhenghao Liu, ACL 2018, [code](https://github.com/thunlp/EntityDuetNeuralRanking), [note](https://blog.csdn.net/weixin_43087818/article/details/103764135))
 
 [Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge](https://www.aclweb.org/anthology/P18-1076) (Todor Mihaylov, ACL 2018)
 
-[Neural Natural Language Inference Models Enhanced with External Knowledge](https://arxiv.org/pdf/1711.04289.pdf) (Chen Qian, ACL 2018)
+[Neural Natural Language Inference Models Enhanced with External Knowledge](https://arxiv.org/pdf/1711.04289.pdf) (Chen Qian, ACL 2018, [code](https://github.com/feifengwhu/NLP_External_knowledge))
 
 #### Coreference Resolution
 
-[Deep Reinforcement Learning for Mention-Ranking Coreference Models](https://www.aclweb.org/anthology/D16-1245.pdf) (Kevin Clark, EMNLP 2016)
+[Deep Reinforcement Learning for Mention-Ranking Coreference Models](https://www.aclweb.org/anthology/D16-1245.pdf) (Kevin Clark, EMNLP 2016, [code](https://github.com/clarkkev/deep-coref))
 
-[Improving Coreference Resolution by Learning Entity-Level Distributed Representations](https://nlp.stanford.edu/pubs/clark2016improving.pdf) (Kevin Clark, ACL 2016)
+[Improving Coreference Resolution by Learning Entity-Level Distributed Representations](https://nlp.stanford.edu/pubs/clark2016improving.pdf) (Kevin Clark, ACL 2016, [code](https://github.com/clarkkev/deep-coref), [note](https://zhuanlan.zhihu.com/p/97097668))
 
-[Higher-order Coreference Resolution with Coarse-to-fine Inference](https://www.aclweb.org/anthology/N18-2108.pdf) (Kenton Lee, NAACL 2018)
+[Higher-order Coreference Resolution with Coarse-to-fine Inference](https://www.aclweb.org/anthology/N18-2108.pdf) (Kenton Lee, NAACL 2018, [code](https://github.com/kentonl/e2e-coref), [note](https://zhuanlan.zhihu.com/p/93900881))
 
-[BERT for Coreference Resolution: Baselines and Analysis](https://arxiv.org/pdf/1908.09091.pdf) (Mandar Joshi, EMNLP 2019, [code](https://github.com/mandarjoshi90/coref))
+[BERT for Coreference Resolution: Baselines and Analysis](https://arxiv.org/pdf/1908.09091.pdf) (Mandar Joshi, EMNLP 2019, [code](https://github.com/mandarjoshi90/coref), [note](https://blog.csdn.net/BeiLi_ShanGui/article/details/103156488))
 
-[GECOR: An End-to-End Generative Ellipsis and Co-reference Resolution Model for Task-Oriented Dialogue](https://arxiv.org/pdf/1909.12086.pdf) (Jun Quan, 2019)
+[GECOR: An End-to-End Generative Ellipsis and Co-reference Resolution Model for Task-Oriented Dialogue](https://arxiv.org/pdf/1909.12086.pdf) (Jun Quan, 2019, [note](https://blog.csdn.net/lwgkzl/article/details/102482928))
 
 [Incorporating Structural Information for Better Coreference Resolution](https://www.ijcai.org/Proceedings/2019/0700.pdf) (Kong Fang, IJCAI 2019)
 
@@ -958,15 +960,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Pronoun Resolution
 
-[Commonsense Knowledge Enhanced Embeddings for Solving Pronoun Disambiguation Problems in Winograd Schema Challenge](https://arxiv.org/pdf/1611.04146.pdf) (Quan Liu, 2016)
+[Commonsense Knowledge Enhanced Embeddings for Solving Pronoun Disambiguation Problems in Winograd Schema Challenge](https://arxiv.org/pdf/1611.04146.pdf) (Quan Liu, 2016, [note](https://www.jianshu.com/p/b94bcacce74c))
 
 [WikiCREM: A Large Unsupervised Corpus for Coreference Resolution](https://arxiv.org/pdf/1908.08025.pdf) (Vid Kocijan, 2019)
 
 [Look Again at the Syntax: Relational Graph Convolutional Network for Gendered Ambiguous Pronoun Resolution](https://arxiv.org/pdf/1905.08868.pdf) (Yinchuan Xu, 2019, [code](https://github.com/ianycxu/RGCN-with-BERT))
 
-[Incorporating Context and External Knowledge for Pronoun Coreference Resolution](https://www.aclweb.org/anthology/N19-1093.pdf) (Hongming Zhang, NAACL 2019)
+[Incorporating Context and External Knowledge for Pronoun Coreference Resolution](https://www.aclweb.org/anthology/N19-1093.pdf) (Hongming Zhang, NAACL 2019, [code](https://github.com/HKUST-KnowComp/Pronoun-Coref), [note](https://zhuanlan.zhihu.com/p/88020550))
 
-[Knowledge-aware Pronoun Coreference Resolution](https://www.aclweb.org/anthology/P19-1083.pdf) (Hongming Zhang, ACL 2019)
+[Knowledge-aware Pronoun Coreference Resolution](https://www.aclweb.org/anthology/P19-1083.pdf) (Hongming Zhang, ACL 2019, [code](https://github.com/HKUST-KnowComp/Pronoun-Coref-KG), [note](https://zhuanlan.zhihu.com/p/85180047))
 
 ##### Zero Pronoun Resolution
 
@@ -992,13 +994,29 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Neural Text Generation: A Practical Guide](https://arxiv.org/pdf/1711.09534.pdf) (Ziang Xie, 2017)
 
+[Data-to-Text Generation with Content Selection and Planning](https://www.aaai.org/ojs/index.php/AAAI/article/view/4668) (Ratish Puduppully, AAAI 2019, [code](https://github.com/ratishsp/data2text-plan-py), [note](https://zhuanlan.zhihu.com/p/85275520))
+
+[Text Generation from Knowledge Graphs with Graph Transformers](https://arxiv.org/pdf/1904.02342.pdf) (Rik Koncel-Kedziorski, NAACL 2019, [code](https://github.com/rikdz/GraphWriter), [note](https://zhuanlan.zhihu.com/p/90084109))
+
+[Modeling Graph Structure in Transformer for Better AMR-to-Text Generation](https://arxiv.org/pdf/1909.00136.pdf) (Jie Zhu, EMNLP 2019)
+
+[Enhancing AMR-to-Text Generation with Dual Graph Representations](https://arxiv.org/pdf/1909.00352.pdf) (Leonardo F. R. Ribeiro, EMNLP 2019, [code](https://github.com/UKPLab/emnlp2019-dualgraph), [note](https://zhuanlan.zhihu.com/p/105701258))
+
+[Table-to-Text Generation with Effective Hierarchical Encoder on Three Dimensions (Row, Column and Time)](https://arxiv.org/pdf/1909.02304.pdf) (Heng Gong, EMNLP 2019)
+
+[Data-to-text Generation with Entity Modeling](https://arxiv.org/pdf/1906.03221.pdf) (Ratish Puduppully, ACL 2019, [code](https://github.com/ratishsp/data2text-entity-py), [note](https://zhuanlan.zhihu.com/p/82054729))
+
+[GPT-too: A language-model-first approach for AMR-to-text generation](https://arxiv.org/pdf/2005.09123.pdf) (Manuel Mager, ACL 2020, [code](https://github.com/IBM/GPT-too-AMR2text))
+
+[Line Graph Enhanced AMR-to-Text Generation with Mix-Order Graph Attention Networks](https://www.aclweb.org/anthology/2020.acl-main.67.pdf) (Yanbin Zhao, ACL 2020)
+
 #### Sequence to Sequence
 
 [Convolutional Sequence to Sequence Learning](https://pdfs.semanticscholar.org/bb3e/bc09b65728d6eced04929df72a006fb5210b.pdf) (Jonas Gehring, ICML 2017, [code](https://github.com/tobyyouup/conv_seq2seq), [note](https://zhuanlan.zhihu.com/p/26918935))
 
 [Deep Reinforcement Learning For Sequence to Sequence Models](https://arxiv.org/pdf/1805.09461.pdf) (Yaser Keneshloo, 2018, [code](https://github.com/yaserkl/RLSeq2Seq), [note](https://www.jianshu.com/p/1213de861491))
 
-[MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019, [note](https://zhuanlan.zhihu.com/p/71022527))
+[MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019, [code](https://github.com/microsoft/MASS), [note](https://zhuanlan.zhihu.com/p/71022527))
 
 ### Computer Vision
 
