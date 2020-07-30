@@ -1022,67 +1022,67 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Object Detection
 
-[Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/pdf/1311.2524.pdf) (Ross Girshick, CVPR 2014, [code](https://github.com/rbgirshick/rcnn))
+[Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/pdf/1311.2524.pdf) (Ross Girshick, CVPR 2014, [code](https://github.com/rbgirshick/rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
 
-[Fast Region-based Convolutional Networks for object detection](https://arxiv.org/pdf/1504.08083.pdf) (Ross Girshick, ICCV 2015, [code](https://github.com/rbgirshick/fast-rcnn))
+[Fast Region-based Convolutional Networks for object detection](https://arxiv.org/pdf/1504.08083.pdf) (Ross Girshick, ICCV 2015, [code](https://github.com/rbgirshick/fast-rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
 
-[Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/pdf/1506.01497.pdf) (Shaoqing Ren, NIPS 2015, [code](https://github.com/rbgirshick/py-faster-rcnn))
+[Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/pdf/1506.01497.pdf) (Shaoqing Ren, NIPS 2015, [code](https://github.com/rbgirshick/py-faster-rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
 
-[R-FCN: Object Detection via Region-based Fully Convolutional Networks](https://arxiv.org/pdf/1605.06409.pdf) (Jifeng Dai, NIPS 2016, [code](https://github.com/daijifeng001/R-FCN))
+[R-FCN: Object Detection via Region-based Fully Convolutional Networks](https://arxiv.org/pdf/1605.06409.pdf) (Jifeng Dai, NIPS 2016, [code](https://github.com/daijifeng001/R-FCN), [note](https://zhuanlan.zhihu.com/p/30867916))
 
-[You Only Look Once: Unified, Real-Time Object Detection](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Redmon_You_Only_Look_CVPR_2016_paper.pdf) (Joseph Redmon, CVPR 2016, [code](https://github.com/gliese581gg/YOLO_tensorflow))
+[You Only Look Once: Unified, Real-Time Object Detection](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Redmon_You_Only_Look_CVPR_2016_paper.pdf) (Joseph Redmon, CVPR 2016, [code](https://github.com/gliese581gg/YOLO_tensorflow), [note](https://zhuanlan.zhihu.com/p/32525231))
 
-[SSD: Single Shot MultiBox Detector](http://www.cs.unc.edu/~cyfu/pubs/ssd.pdf) (Wei Liu, ECCV 2016, [code](https://github.com/balancap/SSD-Tensorflow))
+[SSD: Single Shot MultiBox Detector](http://www.cs.unc.edu/~cyfu/pubs/ssd.pdf) (Wei Liu, ECCV 2016, [code](https://github.com/balancap/SSD-Tensorflow), [note](https://zhuanlan.zhihu.com/p/33544892))
 
-[YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf) (Joseph Redmon, CVPR 2017, [code](https://github.com/experiencor/keras-yolo2))
+[YOLO9000: Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf) (Joseph Redmon, CVPR 2017, [code](https://github.com/experiencor/keras-yolo2), [note](https://zhuanlan.zhihu.com/p/25052190))
 
-[Mask R-CNN](https://arxiv.org/pdf/1703.06870.pdf) (Kaiming He, ICCV 2017, [code](https://github.com/facebookresearch/Detectron))
+[Mask R-CNN](https://arxiv.org/pdf/1703.06870.pdf) (Kaiming He, ICCV 2017, [code](https://github.com/facebookresearch/Detectron), [note](https://zhuanlan.zhihu.com/p/47579399))
 
-[YOLOv3: An Incremental Improvement](https://pjreddie.com/media/files/papers/YOLOv3.pdf) (Joseph Redmon, 2018, [code](https://github.com/qqwweee/keras-yolo3))
+[YOLOv3: An Incremental Improvement](https://pjreddie.com/media/files/papers/YOLOv3.pdf) (Joseph Redmon, 2018, [code](https://github.com/qqwweee/keras-yolo3), [note](https://zhuanlan.zhihu.com/p/76802514))
 
-[TensorMask: A Foundation for Dense Object Segmentation](https://arxiv.org/pdf/1903.12174.pdf) (Xinlei Chen, 2019)
+[TensorMask: A Foundation for Dense Object Segmentation](https://arxiv.org/pdf/1903.12174.pdf) (Xinlei Chen, 2019, [note](https://zhuanlan.zhihu.com/p/60984659))
 
 #### Image Super-Resolution
 
 [Image Super-Resolution Using Deep Convolutional Networks](https://arxiv.org/pdf/1501.00092.pdf) (Chao Dong, TPAMI 2015)
 
-[Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel Convolutional Neural Network](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Shi_Real-Time_Single_Image_CVPR_2016_paper.pdf) (Wenzhe Shi, CVPR 2016, [code](https://github.com/leftthomas/ESPCN))
+[Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel Convolutional Neural Network](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Shi_Real-Time_Single_Image_CVPR_2016_paper.pdf) (Wenzhe Shi, CVPR 2016, [code](https://github.com/leftthomas/ESPCN), [note](https://zhuanlan.zhihu.com/p/76338220))
 
-[Accurate Image Super-Resolution Using Very Deep Convolutional Networks](https://cv.snu.ac.kr/research/VDSR/VDSR_CVPR2016.pdf) (Jiwon Kim, CVPR 2016, [code](https://github.com/Jongchan/tensorflow-vdsr))
+[Accurate Image Super-Resolution Using Very Deep Convolutional Networks](https://cv.snu.ac.kr/research/VDSR/VDSR_CVPR2016.pdf) (Jiwon Kim, CVPR 2016, [code](https://github.com/Jongchan/tensorflow-vdsr), [note](https://blog.csdn.net/shwan_ma/article/details/78193777))
 
-[Accelerating the Super-Resolution Convolutional Neural Network](https://arxiv.org/pdf/1608.00367.pdf) (Chao Dong, ECCV 2016)
+[Accelerating the Super-Resolution Convolutional Neural Network](https://arxiv.org/pdf/1608.00367.pdf) (Chao Dong, ECCV 2016, [code](https://github.com/Saafke/FSRCNN_Tensorflow), [note](https://blog.csdn.net/shwan_ma/article/details/78171649))
 
-[Perceptual Losses for Real-Time Style Transfer and Super-Resolution](https://cs.stanford.edu/people/jcjohns/papers/eccv16/JohnsonECCV16.pdf) (Justin Johnson, ECCV 2016, [code](https://github.com/yusuketomoto/chainer-fast-neuralstyle))
+[Perceptual Losses for Real-Time Style Transfer and Super-Resolution](https://cs.stanford.edu/people/jcjohns/papers/eccv16/JohnsonECCV16.pdf) (Justin Johnson, ECCV 2016, [code](https://github.com/yusuketomoto/chainer-fast-neuralstyle), [note](https://blog.csdn.net/kid_14_12/article/details/85871965))
 
-[Image Restoration Using Convolutional Auto-encoders with Symmetric Skip Connections](https://arxiv.org/pdf/1606.08921.pdf) (Xiao-Jiao Mao, 2016)
+[Image Restoration Using Convolutional Auto-encoders with Symmetric Skip Connections](https://arxiv.org/pdf/1606.08921.pdf) (Xiao-Jiao Mao, 2016, [code](https://github.com/ved27/RED-net), [note](https://blog.csdn.net/happyday_d/article/details/85239395))
 
-[Image Super-Resolution Using Dense Skip Connections](http://openaccess.thecvf.com/content_ICCV_2017/papers/Tong_Image_Super-Resolution_Using_ICCV_2017_paper.pdf) (Tong Tong, ICCV 2017, [code](https://github.com/kweisamx/TensorFlow-SR-DenseNet))
+[Image Super-Resolution Using Dense Skip Connections](http://openaccess.thecvf.com/content_ICCV_2017/papers/Tong_Image_Super-Resolution_Using_ICCV_2017_paper.pdf) (Tong Tong, ICCV 2017, [code](https://github.com/kweisamx/TensorFlow-SR-DenseNet), [note](https://blog.csdn.net/happyday_d/article/details/85461715))
 
-[Image Super-Resolution via Deep Recursive Residual Network](http://cvlab.cse.msu.edu/pdfs/Tai_Yang_Liu_CVPR2017.pdf) (Tai Yang, CVPR 2017, [code](https://github.com/tyshiwo/DRRN_CVPR17))
+[Image Super-Resolution via Deep Recursive Residual Network](http://cvlab.cse.msu.edu/pdfs/Tai_Yang_Liu_CVPR2017.pdf) (Tai Yang, CVPR 2017, [code](https://github.com/tyshiwo/DRRN_CVPR17), [note](https://blog.csdn.net/wangkun1340378/article/details/74542166))
 
-[Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](http://openaccess.thecvf.com/content_cvpr_2017/papers/Ledig_Photo-Realistic_Single_Image_CVPR_2017_paper.pdf) (Christian Ledig, CVPR 2017, [code](https://github.com/tensorlayer/srgan))
+[Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](http://openaccess.thecvf.com/content_cvpr_2017/papers/Ledig_Photo-Realistic_Single_Image_CVPR_2017_paper.pdf) (Christian Ledig, CVPR 2017, [code](https://github.com/tensorlayer/srgan), [note](https://www.cnblogs.com/wangxiaocvpr/p/5989802.html))
 
 [Pixel Recursive Super Resolution](https://arxiv.org/pdf/1702.00783.pdf) (Ryan Dahl, 2017, [code](https://github.com/nilboy/pixel-recursive-super-resolution))
 
-[Deep Back-Projection Networks for Super-Resolution](http://openaccess.thecvf.com/content_cvpr_2018/papers/Haris_Deep_Back-Projection_Networks_CVPR_2018_paper.pdf) (Muhammad Haris, CVPR 2018, [code](https://github.com/alterzero/DBPN-Pytorch))
+[Deep Back-Projection Networks for Super-Resolution](http://openaccess.thecvf.com/content_cvpr_2018/papers/Haris_Deep_Back-Projection_Networks_CVPR_2018_paper.pdf) (Muhammad Haris, CVPR 2018, [code](https://github.com/alterzero/DBPN-Pytorch), [note](https://zhuanlan.zhihu.com/p/34400207))
 
 ### Machine Learning
 
 #### Model
 
-[Occam's Razor](https://users.soe.ucsc.edu/~manfred/pubs/J9.pdf) (Anselm Blumer, 1987)
+[Occam's Razor](https://users.soe.ucsc.edu/~manfred/pubs/J9.pdf) (Anselm Blumer, 1987, [note](https://zh.wikipedia.org/zh-hans/%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80))
 
-[An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010)
+[What is the Expectation Maximization Algorithm?](http://www.cs.virginia.edu/~mr4xb/notes/EM/em_tutorial.pdf) (Chuong B Do, 2008, [note](https://zhuanlan.zhihu.com/p/40991784))
 
-[What is the Expectation Maximization Algorithm?](http://www.cs.virginia.edu/~mr4xb/notes/EM/em_tutorial.pdf) (Chuong B Do, 2008)
+[An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010, [code](https://github.com/timvieira/crf), [note](https://zhuanlan.zhihu.com/p/70067113))
 
 ##### Decision Tree
 
-[Classification and Regression Trees](http://xxpt.ynjgy.com/resource/data/110102/U/705/pdfs/L3ClassTrees.pdf) (L. Breiman, 1984, [code1](https://github.com/bensadeghi/DecisionTree.jl), [code2](https://github.com/wreardan/cart))
+[Classification and Regression Trees](http://xxpt.ynjgy.com/resource/data/110102/U/705/pdfs/L3ClassTrees.pdf) (L. Breiman, 1984, [code1](https://github.com/bensadeghi/DecisionTree.jl), [code2](https://github.com/wreardan/cart), [note](https://www.cnblogs.com/wxquare/p/5379970.html))
 
-[Induction of Decision Trees](http://hunch.net/~coms-4771/quinlan.pdf) (J. Ross Quinlan, 1986, [code](https://github.com/igrigorik/decisiontree))
+[Induction of Decision Trees](http://hunch.net/~coms-4771/quinlan.pdf) (J. Ross Quinlan, 1986, [code](https://github.com/igrigorik/decisiontree), [note](https://www.cnblogs.com/wxquare/p/5379970.html))
 
-[C4.5: Programs for Machine Learning](https://dl.acm.org/citation.cfm?id=152181) (J. Ross Quinlan, 1993, [code](https://github.com/yandongliu/learningjs))
+[C4.5: Programs for Machine Learning](https://dl.acm.org/citation.cfm?id=152181) (J. Ross Quinlan, 1993, [code](https://github.com/yandongliu/learningjs), [note](https://www.cnblogs.com/wxquare/p/5379970.html))
 
 ##### Support Vector Machine
 
@@ -1096,43 +1096,43 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Ensemble Method
 
-[Greedy function approximation: a gradient boosting machine](https://projecteuclid.org/download/pdf_1/euclid.aos/1013203451) (Jerome H. Friedman, 2001, [code](https://github.com/dmlc/xgboost))
+[Greedy function approximation: a gradient boosting machine](https://projecteuclid.org/download/pdf_1/euclid.aos/1013203451) (Jerome H. Friedman, 2001, [code](https://github.com/dmlc/xgboost), [note](https://www.jianshu.com/p/005a4e6ac775))
 
 [XGBoost: A Scalable Tree Boosting System](https://arxiv.org/pdf/1603.02754.pdf#page=10&zoom=100,0,198) (Tianqi Chen, SIGKDD 2016, [code](https://github.com/dmlc/xgboost), [note](http://djjowfy.com/2017/08/01/XGBoost%E7%9A%84%E5%8E%9F%E7%90%86/))
 
 #### Zero-Shot Learning
 
-[Zero-Shot Learning with Semantic Output Codes](http://www.cs.cmu.edu/afs/cs/project/theo-73/www/papers/zero-shot-learning.pdf) (Mark Palatucci, NIPS 2009)
+[Zero-Shot Learning with Semantic Output Codes](http://www.cs.cmu.edu/afs/cs/project/theo-73/www/papers/zero-shot-learning.pdf) (Mark Palatucci, NIPS 2009, [note](https://zhuanlan.zhihu.com/p/34076480))
 
-[Learning To Detect Unseen Object Classes by Between-Class Attribute Transfer](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=03500C970796A39BCC5A437E4AA79B10?doi=10.1.1.165.9750&rep=rep1&type=pdf) (Christoph H. Lampert, CVPR 2009)
+[Learning To Detect Unseen Object Classes by Between-Class Attribute Transfer](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=03500C970796A39BCC5A437E4AA79B10?doi=10.1.1.165.9750&rep=rep1&type=pdf) (Christoph H. Lampert, CVPR 2009, [code](https://github.com/ahmedmazariML/Learning-To-Detect-Unseen-Object-Classes-by-Between-Class-Attribute-Transfer), [note](https://tongtianta.site/paper/23631))
 
-[DeViSE: A Deep Visual-Semantic Embedding Model](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=CD1A6E4145A750B305F3512006D12FE9?doi=10.1.1.466.176&rep=rep1&type=pdf) (Andrea Frome, NIPS 2013)
+[DeViSE: A Deep Visual-Semantic Embedding Model](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=CD1A6E4145A750B305F3512006D12FE9?doi=10.1.1.466.176&rep=rep1&type=pdf) (Andrea Frome, NIPS 2013, [note](https://zhuanlan.zhihu.com/p/52352455))
 
-[Label-Embedding for Attribute-Based Classification](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=94AE59377DBC233D6EE1808F16B505CB?doi=10.1.1.371.9746&rep=rep1&type=pdf) (Zeynep Akata, CVPR 2013)
+[Label-Embedding for Attribute-Based Classification](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=94AE59377DBC233D6EE1808F16B505CB?doi=10.1.1.371.9746&rep=rep1&type=pdf) (Zeynep Akata, CVPR 2013, [note](https://blog.csdn.net/hanss2/article/details/80537356))
 
-[Zero-Shot Recognition using Dual Visual-Semantic Mapping Paths](https://arxiv.org/pdf/1703.05002.pdf) (Yanan Li, 2017)
+[Zero-Shot Recognition using Dual Visual-Semantic Mapping Paths](https://arxiv.org/pdf/1703.05002.pdf) (Yanan Li, CVPR 2017, [note](https://zhuanlan.zhihu.com/p/29392845))
 
 #### Few-Shot Learning
 
-[One-Shot Learning of Object Categories](http://vision.stanford.edu/documents/Fei-FeiFergusPerona2006.pdf) (Li Fei-Fei, PAMI 2006)
+[One-Shot Learning of Object Categories](http://vision.stanford.edu/documents/Fei-FeiFergusPerona2006.pdf) (Li Fei-Fei, PAMI 2006, [note](https://blog.csdn.net/sinat_36594453/article/details/89817314))
 
 #### Imbalanced Data
 
-[Learning from Imbalanced Data](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5128907) (Haibo He, 2009)
-
-[SMOTE: Synthetic Minority Over-sampling Technique](https://arxiv.org/pdf/1106.1813.pdf) (Nitesh V. Chawla, 2002, [code](https://github.com/scikit-learn-contrib/imbalanced-learn))
-
-[Borderline-SMOTE: A New Over-Sampling Method in Imbalanced Data Sets Learning](https://sci2s.ugr.es/keel/keel-dataset/pdfs/2005-Han-LNCS.pdf) (Hui Han, 2005)
-
-[Safe-Level-SMOTE: Safe-Level-Synthetic Minority Over-Sampling Technique for Handling the Class Imbalanced Problem](https://sci2s.ugr.es/keel/pdf/algorithm/congreso/2009-Bunkhumpornpat-LNCS.pdf) (Chumphol Bunkhumpornpat, 2009)
-
-[ADASYN: Adaptive Synthetic Sampling Approach for Imbalanced Learning](https://sci2s.ugr.es/keel/pdf/algorithm/congreso/2008-He-ieee.pdf) (Haibo He, 2008, [code](https://github.com/scikit-learn-contrib/imbalanced-learn))
+[SMOTE: Synthetic Minority Over-sampling Technique](https://arxiv.org/pdf/1106.1813.pdf) (Nitesh V. Chawla, 2002, [code](https://github.com/scikit-learn-contrib/imbalanced-learn), [note](https://blog.csdn.net/shine19930820/article/details/54143241))
 
 [kNN approach to unbalanced data distributions: A case study involving information extraction](http://www.site.uottawa.ca/~nat/Workshop2003/jzhang.pdf?attredirects=0) (Jianping Zhang, 2003, [code](http://www.site.uottawa.ca/~nat/Workshop2003/jzhang.pdf?attredirects=0))
 
+[Balancing Training Data for Automated Annotation of Keywords: a Case Study](https://pdfs.semanticscholar.org/c1a9/5197e15fa99f55cd0cb2ee14d2f02699a919.pdf) (Gustavo E. A. P. A. Batista, 2003, [code](https://github.com/scikit-learn-contrib/imbalanced-learn))
+
 [A Study of the Behavior of Several Methods for Balancing Machine Learning Training Data](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.58.7757&rep=rep1&type=pdf) (Ronaldo C. Prati, 2004, [code](https://github.com/scikit-learn-contrib/imbalanced-learn))
 
-[Balancing Training Data for Automated Annotation of Keywords: a Case Study](https://pdfs.semanticscholar.org/c1a9/5197e15fa99f55cd0cb2ee14d2f02699a919.pdf) (Gustavo E. A. P. A. Batista, 2003, [code](https://github.com/scikit-learn-contrib/imbalanced-learn))
+[Borderline-SMOTE: A New Over-Sampling Method in Imbalanced Data Sets Learning](https://sci2s.ugr.es/keel/keel-dataset/pdfs/2005-Han-LNCS.pdf) (Hui Han, 2005, [note](https://blog.csdn.net/shine19930820/article/details/54143241))
+
+[ADASYN: Adaptive Synthetic Sampling Approach for Imbalanced Learning](https://sci2s.ugr.es/keel/pdf/algorithm/congreso/2008-He-ieee.pdf) (Haibo He, 2008, [code](https://github.com/scikit-learn-contrib/imbalanced-learn), [note](https://blog.csdn.net/weixin_40118768/article/details/80226423))
+
+[Safe-Level-SMOTE: Safe-Level-Synthetic Minority Over-Sampling Technique for Handling the Class Imbalanced Problem](https://sci2s.ugr.es/keel/pdf/algorithm/congreso/2009-Bunkhumpornpat-LNCS.pdf) (Chumphol Bunkhumpornpat, 2009)
+
+[Learning from Imbalanced Data](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5128907) (Haibo He, 2009, [note](https://blog.csdn.net/shine19930820/article/details/54143241))
 
 #### Multi-Task Learning
 
@@ -1144,13 +1144,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Factorized Orthogonal Latent Spaces](https://ttic.uchicago.edu/~rurtasun/publications/SalzmannEkUrtasunDarrell10.pdf) (Mathieu Salzmann, 2010)
 
-[Domain Separation Networks](https://papers.nips.cc/paper/6254-domain-separation-networks.pdf) (Konstantinos Bousmalis, NIPS 2016)
+[Domain Separation Networks](https://papers.nips.cc/paper/6254-domain-separation-networks.pdf) (Konstantinos Bousmalis, NIPS 2016, [note](https://zhuanlan.zhihu.com/p/49479734))
 
 [Recurrent Neural Network for Text Classification with Multi-Task Learning](https://www.ijcai.org/Proceedings/16/Papers/408.pdf) (Pengfei Liu, IJCAI 2016, [code](https://github.com/brightmart/text_classification), [note](https://zhuanlan.zhihu.com/p/27562717))
 
 [Adversarial Multi-task Learning for Text Classification](https://www.aclweb.org/anthology/P17-1001) (Pengfei Liu, ACL 2017, [code](https://github.com/FrankWork/fudan_mtl_reviews), [note](https://zhuanlan.zhihu.com/p/31653852))
 
-[Multi-Task Deep Neural Networks for Natural Language Understanding](https://arxiv.org/pdf/1901.11504.pdf) (Xiaodong Liu, ACL 2019, [note](https://zhuanlan.zhihu.com/p/60282783))
+[Multi-Task Deep Neural Networks for Natural Language Understanding](https://arxiv.org/pdf/1901.11504.pdf) (Xiaodong Liu, ACL 2019, [code](https://github.com/namisan/mt-dnn), [note](https://zhuanlan.zhihu.com/p/60282783))
 
 ### Deep Learning
 
@@ -1158,113 +1158,111 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Learning representations by back-propagating errors](http://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf) (David E. Rumelhart, 1986)
 
-[Highway Networks](http://de.arxiv.org/pdf/1505.00387) (Rupesh Kumar Srivastava, 2015)
+[Highway Networks](http://de.arxiv.org/pdf/1505.00387) (Rupesh Kumar Srivastava, 2015, [note](https://zhuanlan.zhihu.com/p/38130339))
 
-[Distilling the Knowledge in a Neural Network](https://arxiv.org/pdf/1503.02531.pdf) (Geoffrey Hinton, NIPS 2015)
+[Distilling the Knowledge in a Neural Network](https://arxiv.org/pdf/1503.02531.pdf) (Geoffrey Hinton, NIPS 2015, [note](https://xmfbit.github.io/2018/06/07/knowledge-distilling/))
 
-[Dynamic Routing Between Capsules](https://papers.nips.cc/paper/6975-dynamic-routing-between-capsules.pdf) (Geoffrey Hinton, NIPS 2017, [code](https://github.com/naturomics/CapsNet-Tensorflow))
+[Dynamic Routing Between Capsules](https://papers.nips.cc/paper/6975-dynamic-routing-between-capsules.pdf) (Geoffrey Hinton, NIPS 2017, [code](https://github.com/naturomics/CapsNet-Tensorflow), [note](https://zhuanlan.zhihu.com/p/32156167))
 
 ##### Convolutional Neural Networks
 
-[Backpropagation applied to handwritten zip code recognition](https://www.ics.uci.edu/~welling/teaching/273ASpring09/lecun-89e.pdf) (Yann LeCun, 1989)
+[Backpropagation applied to handwritten zip code recognition](https://www.ics.uci.edu/~welling/teaching/273ASpring09/lecun-89e.pdf) (Yann LeCun, 1989, [note](https://blog.csdn.net/u012679707/article/details/80738633))
 
-[GradientBased Learning Applied to Document Recognition](http://vision.stanford.edu/cs598_spring07/papers/Lecun98.pdf) (Yann LeCun, 1998)
+[Gradient-Based Learning Applied to Document Recognition](http://vision.stanford.edu/cs598_spring07/papers/Lecun98.pdf) (Yann LeCun, 1998, [note](https://blog.csdn.net/sunshine_010/article/details/79876255))
 
-[Notes on Convolutional Neural Networks](http://202.116.81.74/cache/7/03/cogprints.org/036a03bc6027afc65c14907d0a1fae73/cnn_tutorial.pdf) (Jake Bouvrie, 2006)
+[Notes on Convolutional Neural Networks](http://202.116.81.74/cache/7/03/cogprints.org/036a03bc6027afc65c14907d0a1fae73/cnn_tutorial.pdf) (Jake Bouvrie, 2006, [note](https://blog.csdn.net/langb2014/article/details/48470181))
 
-[ImageNet Classification with Deep Convolutional Neural Networks](https://www.nvidia.cn/content/tesla/pdf/machine-learning/imagenet-classification-with-deep-convolutional-nn.pdf) (Alex Krizhevsky, 2012)
+[ImageNet Classification with Deep Convolutional Neural Networks](https://www.nvidia.cn/content/tesla/pdf/machine-learning/imagenet-classification-with-deep-convolutional-nn.pdf) (Alex Krizhevsky, NIPS 2012, [note](https://zhuanlan.zhihu.com/p/20324656))
 
-[Visualizing and Understanding Convolutional Networks](https://cs.nyu.edu/~fergus/papers/zeilerECCV2014.pdf) (Matthew D. Zeiler and Rob Fergus, 2014)
+[Visualizing and Understanding Convolutional Networks](https://cs.nyu.edu/~fergus/papers/zeilerECCV2014.pdf) (Matthew D. Zeiler, 2014, [note](https://www.zybuluo.com/lutingting/note/459569))
 
-[Going Deeper with Convolutions](https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf) (Christian Szegedy, CVPR 2015)
+[Going Deeper with Convolutions](https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf) (Christian Szegedy, CVPR 2015, [note](https://blog.csdn.net/lhanchao/article/details/55804968))
 
-[Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/pdf/1409.1556.pdf) (Karen Simonyan, ICLR 2015)
+[Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/pdf/1409.1556.pdf) (Karen Simonyan, ICLR 2015, [note](https://zhuanlan.zhihu.com/p/32853559))
 
-[Deep Residual Learning for Image Recognition](https://x-algo.cn/wp-content/uploads/2016/12/residual.pdf) (Kaiming He, 2015)
+[Deep Residual Learning for Image Recognition](https://x-algo.cn/wp-content/uploads/2016/12/residual.pdf) (Kaiming He, 2015, [note](https://zhuanlan.zhihu.com/p/47199669))
 
-[Multi-Scale Context Aggregation by Dilated Convolutions](https://arxiv.org/pdf/1511.07122.pdf) (Fisher Yu, ICLR 2016, [code](https://github.com/iesl/dilated-cnn-ner))
+[Multi-Scale Context Aggregation by Dilated Convolutions](https://arxiv.org/pdf/1511.07122.pdf) (Fisher Yu, ICLR 2016, [code](https://github.com/iesl/dilated-cnn-ner), [note](https://www.cnblogs.com/fourmi/p/10049998.html))
 
-[Densely Connected Convolutional Networks](http://www.cs.cmu.edu/~jeanoh/16-785/papers/huang-cvpr2017-densenet.pdf) (Gao Huang, CVPR 2017)
+[Densely Connected Convolutional Networks](http://www.cs.cmu.edu/~jeanoh/16-785/papers/huang-cvpr2017-densenet.pdf) (Gao Huang, CVPR 2017, [code](https://github.com/liuzhuang13/DenseNet))
 
-[Tree-CNN: A Deep Convolutional Neural Network for Lifelong Learning](https://arxiv.org/pdf/1802.05800.pdf) (Deboleena Roy, 2018, [code](https://github.com/magical2world/tensorflow-Tree-CNN))
+[Tree-CNN: A Deep Convolutional Neural Network for Lifelong Learning](https://arxiv.org/pdf/1802.05800.pdf) (Deboleena Roy, 2018, [code](https://github.com/magical2world/tensorflow-Tree-CNN), [note](https://blog.csdn.net/qq_24305433/article/details/79856672))
 
-[EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/pdf/1905.11946.pdf) (Mingxing Tan, 2019)
+[EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/pdf/1905.11946.pdf) (Mingxing Tan, 2019, [note](https://medium.com/@fanzongshaoxing/%E6%96%87%E7%AB%A0%E8%A7%A3%E8%AF%BB-efficientnet-rethinking-model-scaling-for-convolutional-neural-networks-icml2019-b55ee9720a4a))
 
 ##### Recurrent Neural Networks
 
 [Long short-term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
 
-[A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf) (Zachary C. Lipton, 2015)
+[A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf) (Zachary C. Lipton, 2015, [note](https://blog.csdn.net/xizero00/article/details/51225065))
 
-[Adaptive Computation Time for Recurrent Neural Networks](https://arxiv.org/pdf/1603.08983.pdf) (Alex Graves, 2016)
+[Adaptive Computation Time for Recurrent Neural Networks](https://arxiv.org/pdf/1603.08983.pdf) (Alex Graves, 2016, [note](https://blog.csdn.net/liuyuemaicha/article/details/53999091))
 
-[Regularizing and Optimizing LSTM Language Models](https://arxiv.org/pdf/1708.02182.pdf) (Stephen Merity, 2017)
+[Regularizing and Optimizing LSTM Language Models](https://arxiv.org/pdf/1708.02182.pdf) (Stephen Merity, 2017, [note](https://ldzhangyx.github.io/2019/07/31/awd-lstm/))
 
 [Simple Recurrent Units for Highly Parallelizable Recurrence](https://arxiv.org/pdf/1709.02755.pdf) (Tao Lei, EMNLP 2018, [code](https://github.com/taolei87/sru))
 
-[Skip RNN: Learning to Skip State Updates in Recurrent Neural Networks](https://arxiv.org/pdf/1708.06834.pdf) (Victor Campos, ICLR 2018)
+[Skip RNN: Learning to Skip State Updates in Recurrent Neural Networks](https://arxiv.org/pdf/1708.06834.pdf) (Victor Campos, ICLR 2018, [note](https://www.jianshu.com/p/5c4dd629b1ec))
 
 ##### Generative Adversarial Networks
 
 [Generative Adversarial Nets](https://arxiv.org/pdf/1406.2661.pdf) (Ian Goodfellow, 2014)
 
-[Conditional Generative Adversarial Nets](https://arxiv.org/pdf/1411.1784.pdf) (Mehdi Mirza, 2014)
+[Conditional Generative Adversarial Nets](https://arxiv.org/pdf/1411.1784.pdf) (Mehdi Mirza, 2014, [note](https://zhuanlan.zhihu.com/p/23648795))
 
-[Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/pdf/1511.06434.pdf) (Alec Radford, ICLR 2016)
+[Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/pdf/1511.06434.pdf) (Alec Radford, ICLR 2016, [note](https://www.cnblogs.com/wangxiaocvpr/p/5965434.html))
 
-[NIPS 2016 Tutorial: Generative Adversarial Networks](https://arxiv.org/pdf/1701.00160.pdf) (Ian Goodfellow, NIPS 2016)
+[NIPS 2016 Tutorial: Generative Adversarial Networks](https://arxiv.org/pdf/1701.00160.pdf) (Ian Goodfellow, NIPS 2016, [note](https://blog.csdn.net/cskywit/article/details/86612142))
 
-[Conditional Image Synthesis with Auxiliary Classifier GANs](https://arxiv.org/pdf/1610.09585.pdf) (Augustus Odena, 2016)
+[Conditional Image Synthesis with Auxiliary Classifier GANs](https://arxiv.org/pdf/1610.09585.pdf) (Augustus Odena, 2016, [note](https://blog.csdn.net/qq_24477135/article/details/85758496))
 
-[Improved Techniques for Training GANs](https://arxiv.org/pdf/1606.03498.pdf) (Tim Salimans, 2016)
+[Improved Techniques for Training GANs](https://arxiv.org/pdf/1606.03498.pdf) (Tim Salimans, 2016, [note](https://blog.csdn.net/zijin0802034/article/details/58643889))
 
 [Generative Adversarial Networks: An Overview](https://arxiv.org/pdf/1710.07035.pdf) (Antonia Creswell, 2017)
 
 [How Generative Adversarial Nets and its variants Work: An Overview of GAN](https://arxiv.org/pdf/1711.05914.pdf) (Yongjun Hong, 2017)
 
-[Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/pdf/1611.07004.pdf) (Phillip Isola, CVPR 2017, [code](https://github.com/phillipi/pix2pix))
+[Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/pdf/1611.07004.pdf) (Phillip Isola, CVPR 2017, [code](https://github.com/phillipi/pix2pix), [note](https://blog.csdn.net/Teeyohuang/article/details/82699781))
 
-[StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks](https://arxiv.org/pdf/1612.03242.pdf) (Han Zhang, ICCV 2017)
+[StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks](https://arxiv.org/pdf/1612.03242.pdf) (Han Zhang, ICCV 2017, [code](https://github.com/hanzhanggit/StackGAN), [note](https://blog.csdn.net/a312863063/article/details/83574422))
 
-[Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/pdf/1703.10593.pdf) (Jun-Yan Zhu, 2017, [code](https://github.com/junyanz/CycleGAN))
+[Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/pdf/1703.10593.pdf) (Jun-Yan Zhu, ICCV 2017, [code](https://github.com/junyanz/CycleGAN), [note](https://blog.csdn.net/hhy_csdn/article/details/82913776))
 
-[High-Resolution Image Synthesis and Semantic Manipulation with Conditional GANs](https://arxiv.org/pdf/1711.11585.pdf)  (Ting-Chun Wang, 2017, [code](https://github.com/NVIDIA/pix2pixHD))
+[High-Resolution Image Synthesis and Semantic Manipulation with Conditional GANs](https://arxiv.org/pdf/1711.11585.pdf)  (Ting-Chun Wang, CVPR 2018, [code](https://github.com/NVIDIA/pix2pixHD), [note](https://zhuanlan.zhihu.com/p/35955531))
 
-[Learning from Simulated and Unsupervised Images through Adversarial Training](https://www.arxiv-vanity.com/papers/1612.07828/) (Ashish Shrivastava, ICCV 2017)
+[Learning from Simulated and Unsupervised Images through Adversarial Training](https://www.arxiv-vanity.com/papers/1612.07828/) (Ashish Shrivastava, ICCV 2017, [code](https://github.com/carpedm20/simulated-unsupervised-tensorflow), [note](https://blog.csdn.net/daydayjump/article/details/81977479))
 
-[Wasserstein GAN](https://arxiv.org/pdf/1701.07875.pdf) (Martin Arjovsky, 2017, [code](https://github.com/martinarjovsky/WassersteinGAN))
+[Wasserstein GAN](https://arxiv.org/pdf/1701.07875.pdf) (Martin Arjovsky, 2017, [code](https://github.com/martinarjovsky/WassersteinGAN), [note](https://zhuanlan.zhihu.com/p/25071913))
 
-[Self-Attention Generative Adversarial Networks](https://arxiv.org/pdf/1805.08318.pdf) (Han Zhang, 2018)
+[Self-Attention Generative Adversarial Networks](https://arxiv.org/pdf/1805.08318.pdf) (Han Zhang, 2018, [code](https://github.com/heykeetae/Self-Attention-GAN), [note](https://www.paperweekly.site/papers/notes/414))
 
-[Progressive Growing of GANs for Improved Quality, Stability, and Variation](https://arxiv.org/pdf/1710.10196.pdf) (Tero Karras, ICLR 2018)
+[Progressive Growing of GANs for Improved Quality, Stability, and Variation](https://arxiv.org/pdf/1710.10196.pdf) (Tero Karras, ICLR 2018, [code](https://github.com/tkarras/progressive_growing_of_gans), [note](https://zhuanlan.zhihu.com/p/30637133))
 
-[Transferring GANs: Generating Images from Limited Data](https://arxiv.org/pdf/1805.01677.pdf) (Yaxing Wang, 2018)
+[Transferring GANs: Generating Images from Limited Data](https://arxiv.org/pdf/1805.01677.pdf) (Yaxing Wang, ECCV 2018, [code](https://github.com/yaxingwang/Transferring-GANs), [note](https://medium.com/@xiaosean5408/transferring-gans%E7%B0%A1%E4%BB%8B-transferring-gans-generating-images-from-limited-data-90bcf6be7fd2))
 
-[Self-Supervised GANs via Auxiliary Rotation Loss](https://arxiv.org/pdf/1811.11212.pdf) (Ting Chen, CVPR 2019)
+[Self-Supervised GANs via Auxiliary Rotation Loss](https://arxiv.org/pdf/1811.11212.pdf) (Ting Chen, CVPR 2019, [code](https://github.com/vandit15/Self-Supervised-Gans-Pytorch), [note](https://blog.csdn.net/weixin_44363205/article/details/104918734))
 
-[A Style-Based Generator Architecture for Generative Adversarial Networks](https://arxiv.org/pdf/1812.04948.pdf) (Tero Karras, CVPR 2019, [code](https://github.com/NVlabs/stylegan))
+[A Style-Based Generator Architecture for Generative Adversarial Networks](https://arxiv.org/pdf/1812.04948.pdf) (Tero Karras, CVPR 2019, [code](https://github.com/NVlabs/stylegan), [note](https://blog.csdn.net/weixin_42360095/article/details/89522153))
 
-[Large Scale GAN Training for High Fidelity Natural Image Synthesis](https://arxiv.org/pdf/1809.11096.pdf) (Andrew Brock, ICLR 2019)
+[Large Scale GAN Training for High Fidelity Natural Image Synthesis](https://arxiv.org/pdf/1809.11096.pdf) (Andrew Brock, ICLR 2019, [note](https://zhuanlan.zhihu.com/p/46581611))
 
-[Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/pdf/1912.04958.pdf) (Tero Karras, 2019)
+[Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/pdf/1912.04958.pdf) (Tero Karras, 2019, [note](https://blog.csdn.net/lynlindasy/article/details/104495583))
 
 ##### Graph Neural Networks
 
-[The Graph Neural Network Model](http://persagen.com/files/misc/scarselli2009graph.pdf) (Franco Scarselli, 2009)
+[The Graph Neural Network Model](http://persagen.com/files/misc/scarselli2009graph.pdf) (Franco Scarselli, 2009, [note](https://zhuanlan.zhihu.com/p/76290138))
 
-[Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/pdf/1609.02907.pdf) (Thomas N. Kipf, ICLR 2017)
+[Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/pdf/1609.02907.pdf) (Thomas N. Kipf, ICLR 2017, [code](https://github.com/tkipf/gcn), [note](https://zhuanlan.zhihu.com/p/35630785))
 
 ##### Attention Mechanism and Memory Networks
 
-[An Introductory Survey on Attention Mechanisms in NLP Problems](https://arxiv.org/pdf/1811.05544.pdf) (Dichao Hu, 2018)
+[On the properties of neural machine translation: Encoder–Decoder approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014, [note](https://blog.csdn.net/BeforeEasy/article/details/80332497))
 
-[On the properties of neural machine translation: Encoder–Decoder approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014)
+[Learning phrase representations using RNN encoder-decoder for statistical machine translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014, [note](https://cuiqingcai.com/5737.html))
 
-[Learning phrase representations using RNN encoder-decoder for statistical machine translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014)
+[Neural Turing Machines](https://arxiv.org/pdf/1410.5401.pdf) (Alex Graves, 2014, [code](https://github.com/carpedm20/NTM-tensorflow), [note](https://zhuanlan.zhihu.com/p/30383994))
 
-[Neural Turing Machines](https://arxiv.org/pdf/1410.5401.pdf) (Alex Graves, 2014, [code](https://github.com/carpedm20/NTM-tensorflow))
-
-[Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf) (Dzmitry Bahdanau, ICLR 2015)
+[Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf) (Dzmitry Bahdanau, ICLR 2015, [note](https://blog.csdn.net/WUTab/article/details/73657905))
 
 [Memory Networks](https://arxiv.org/pdf/1410.3916v11.pdf) (Jason Weston, ICLR 2015, [note](https://zhuanlan.zhihu.com/p/32257642))
 
@@ -1276,67 +1274,69 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Gated End-to-End Memory Networks](http://www.aclweb.org/anthology/E/E17/E17-1001.pdf) (Fei Liu, 2016, [note](https://zhuanlan.zhihu.com/p/30722242))
 
-[DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding](https://arxiv.org/pdf/1709.04696.pdf) (Tao Shen, 2017, [code](https://github.com/taoshen58/DiSAN))
+[DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding](https://arxiv.org/pdf/1709.04696.pdf) (Tao Shen, 2017, [code](https://github.com/taoshen58/DiSAN), [note](https://zhuanlan.zhihu.com/p/36349043))
 
 [Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention), [note](https://zhuanlan.zhihu.com/p/48508221))
 
-[You May Not Need Attention](https://arxiv.org/pdf/1810.13409.pdf) (Ofir Press, 2018, [code](https://github.com/ofirpress/YouMayNotNeedAttention))
+[You May Not Need Attention](https://arxiv.org/pdf/1810.13409.pdf) (Ofir Press, 2018, [code](https://github.com/ofirpress/YouMayNotNeedAttention), [note](https://zhuanlan.zhihu.com/p/48374997))
 
-[Self-Attention with Relative Position Representations](https://arxiv.org/pdf/1803.02155.pdf) (Peter Shaw, 2018)
+[An Introductory Survey on Attention Mechanisms in NLP Problems](https://arxiv.org/pdf/1811.05544.pdf) (Dichao Hu, 2018, [note](https://blog.csdn.net/cskywit/article/details/84753293))
+
+[Self-Attention with Relative Position Representations](https://arxiv.org/pdf/1803.02155.pdf) (Peter Shaw, 2018, [note](https://www.jianshu.com/p/cb5b2d967e90))
 
 [Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf) (Iz Beltagy, 2020, [note](https://zhuanlan.zhihu.com/p/134748587))
 
 #### Optimizer
 
-[An overview of gradient descent optimization algorithms](https://arxiv.org/pdf/1609.04747.pdf) (Sebastian Ruder, 2017)
-
 [On the Momentum Term in Gradient Descent Learning](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.57.5612&rep=rep1&type=pdf) (Ning Qian, 1999)
 
 [Adaptive Subgradient Methods for Online Learning and Stochastic Optimization](http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf) (John Duchi, JMLR 2011)
 
-[ADADELTA: An Adaptive Learning Rate Method](https://arxiv.org/pdf/1212.5701.pdf) (Matthew D. Zeiler, 2012)
+[ADADELTA: An Adaptive Learning Rate Method](https://arxiv.org/pdf/1212.5701.pdf) (Matthew D. Zeiler, 2012, [note](https://zh.d2l.ai/chapter_optimization/adadelta.html))
 
-[ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION](https://arxiv.org/pdf/1412.6980.pdf) (Diederik P. Kingma, 2015)
+[ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION](https://arxiv.org/pdf/1412.6980.pdf) (Diederik P. Kingma, 2015, [note](https://www.jianshu.com/p/aebcaf8af76e))
+
+[An overview of gradient descent optimization algorithms](https://arxiv.org/pdf/1609.04747.pdf) (Sebastian Ruder, 2017, [note](https://zhuanlan.zhihu.com/p/21539419))
 
 #### Weight Initialization
 
-[Understanding the difficulty of training deep feedforward neural networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.207.2059&rep=rep1&type=pdf) (Xavier Glorot, JMLR 2010)
+[Understanding the difficulty of training deep feedforward neural networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.207.2059&rep=rep1&type=pdf) (Xavier Glorot, JMLR 2010, [note](https://zhuanlan.zhihu.com/p/43840797))
 
-[Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification](https://arxiv.org/pdf/1502.01852.pdf) (Kaiming He, ICCV 2015)
+[Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification](https://arxiv.org/pdf/1502.01852.pdf) (Kaiming He, ICCV 2015, [note](https://www.cnblogs.com/everyday-haoguo/p/Note-PRelu.html))
 
 #### Loss Function
 
-[FaceNet: A Unified Embedding for Face Recognition and Clustering](https://www.cv-foundation.org/openaccess/content_cvpr_2015/app/1A_089.pdf) (Florian Schroff, CVPR 2015, [code](https://github.com/davidsandberg/facenet))
+[FaceNet: A Unified Embedding for Face Recognition and Clustering](https://www.cv-foundation.org/openaccess/content_cvpr_2015/app/1A_089.pdf) (Florian Schroff, CVPR 2015, [code](https://github.com/davidsandberg/facenet), [note](https://blog.csdn.net/chenriwei2/article/details/45031677))
 
-[A Discriminative Feature Learning Approach for Deep Face Recognition](http://www.eccv2016.org/files/posters/P-3B-20.pdf) (Yandong Wen, ECCV 2016, [code](https://github.com/pangyupo/mxnet_center_loss))
+[A Discriminative Feature Learning Approach for Deep Face Recognition](http://www.eccv2016.org/files/posters/P-3B-20.pdf) (Yandong Wen, ECCV 2016, [code](https://github.com/pangyupo/mxnet_center_loss), [note](https://blog.csdn.net/oJiMoDeYe12345/article/details/78548663))
 
-[Large-Margin Softmax Loss for Convolutional Neural Networks](https://arxiv.org/pdf/1612.02295.pdf) (Weiyang Liu, ICML 2016, [code](https://github.com/wy1iu/LargeMargin_Softmax_Loss))
+[Large-Margin Softmax Loss for Convolutional Neural Networks](https://arxiv.org/pdf/1612.02295.pdf) (Weiyang Liu, ICML 2016, [code](https://github.com/wy1iu/LargeMargin_Softmax_Loss), [note](https://zhuanlan.zhihu.com/p/45448909))
 
-[Focal Loss for Dense Object Detection](https://arxiv.org/pdf/1708.02002.pdf) (Tsung-Yi Lin, ICCV 2017, [code](https://github.com/unsky/focal-loss))
+[Focal Loss for Dense Object Detection](https://arxiv.org/pdf/1708.02002.pdf) (Tsung-Yi Lin, ICCV 2017, [code](https://github.com/unsky/focal-loss), [note](https://zhuanlan.zhihu.com/p/49981234))
 
-[SphereFace: Deep Hypersphere Embedding for Face Recognition](https://arxiv.org/pdf/1704.08063.pdf) (Weiyang Liu, ICML 2017, [code](https://github.com/wy1iu/sphereface))
+[SphereFace: Deep Hypersphere Embedding for Face Recognition](https://arxiv.org/pdf/1704.08063.pdf) (Weiyang Liu, ICML 2017, [code](https://github.com/wy1iu/sphereface), [note](https://zhuanlan.zhihu.com/p/45448909))
 
-[CosFace: Large Margin Cosine Loss for Deep Face Recognition](https://arxiv.org/pdf/1801.09414.pdf) (Hao Wang, 2018, [code](https://github.com/yule-li/CosFace))
+[CosFace: Large Margin Cosine Loss for Deep Face Recognition](https://arxiv.org/pdf/1801.09414.pdf) (Hao Wang, 2018, [code](https://github.com/yule-li/CosFace), [note](https://zhuanlan.zhihu.com/p/59736735))
 
-[ArcFace: Additive Angular Margin Loss for Deep Face Recognition](https://arxiv.org/pdf/1801.07698.pdf) (Jiankang Deng, 2018, [code](https://github.com/deepinsight/insightface))
+[ArcFace: Additive Angular Margin Loss for Deep Face Recognition](https://arxiv.org/pdf/1801.07698.pdf) (Jiankang Deng, 2018, [code](https://github.com/deepinsight/insightface), [note](https://zhuanlan.zhihu.com/p/76541084))
 
-[Additive Margin Softmax for Face Verification](https://arxiv.org/pdf/1801.05599.pdf) (Feng Wang, 2018, [code](https://github.com/Joker316701882/Additive-Margin-Softmax))
+[Additive Margin Softmax for Face Verification](https://arxiv.org/pdf/1801.05599.pdf) (Feng Wang, 2018, [code](https://github.com/Joker316701882/Additive-Margin-Softmax), [note](https://blog.csdn.net/shaoxiaohu1/article/details/79139039))
 
 #### Activation Function
 
 [Empirical Evaluation of Rectified Activations in Convolution Network](https://arxiv.org/pdf/1505.00853.pdf) (Bing Xu, 2015)
 
-[Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units](https://arxiv.org/pdf/1603.05201v2.pdf) (Wenling Shang, ICML 2016)
+[Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units](https://arxiv.org/pdf/1603.05201v2.pdf) (Wenling Shang, ICML 2016, [note](https://blog.csdn.net/cv_family_z/article/details/52399921))
 
 #### Normalization
 
-[Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](http://de.arxiv.org/pdf/1502.03167) (Sergey Ioffe, ICML 2015)
+[Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](http://de.arxiv.org/pdf/1502.03167) (Sergey Ioffe, ICML 2015, [note](https://zhuanlan.zhihu.com/p/50444499))
 
-[Layer Normalization](https://arxiv.org/pdf/1607.06450.pdf) (Jimmy Lei Ba, 2016)
+[Layer Normalization](https://arxiv.org/pdf/1607.06450.pdf) (Jimmy Lei Ba, 2016, [note](https://zhuanlan.zhihu.com/p/54530247))
 
 [Instance Normalization: The Missing Ingredient for Fast Stylization](https://arxiv.org/pdf/1607.08022.pdf) (Dmitry Ulyanov, 2017)
 
-[Group Normalization](https://arxiv.org/pdf/1803.08494.pdf) (Yuxin Wu, 2018)
+[Group Normalization](https://arxiv.org/pdf/1803.08494.pdf) (Yuxin Wu, 2018, [note](https://zhuanlan.zhihu.com/p/35005794))
 
 #### Neural Architecture Search
 
