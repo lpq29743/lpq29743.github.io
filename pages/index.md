@@ -27,11 +27,14 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 #### Publications
 
-1. **Peiqin Lin**; Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI. [[Paper]](https://144.208.67.177/ojs/index.php/AAAI/article/view/6352)[[Code]](https://github.com/lpq29743/HAN-PL)[[Slides]](assets/files/AAAI20-HAN-PL.pdf)[[Note]](https://zhuanlan.zhihu.com/p/151387067)
+1. Yu Gu; Meng Yang; **Peiqin Lin**. 2020. Lightweight Multiple Perspective Fusion with Information Enriching for BERT-based Answer Selection. In NLPCC.
+    - Using question category and name entity recognition to enrich the information
+    - Fusing the multi-layer discrimination inside different layers of BERT
+2. **Peiqin Lin**; Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI. [[Paper]](https://144.208.67.177/ojs/index.php/AAAI/article/view/6352)[[Code]](https://github.com/lpq29743/HAN-PL)[[Slides]](assets/files/AAAI20-HAN-PL.pdf)[[Note]](https://zhuanlan.zhihu.com/p/151387067)
     - Modeling zero pronouns and candidate antecedents interactively with Hierarchical Attention Mechanism
     - Using pairwise loss instead of cross entropy loss used in previous methods
     - Taking the constraint of correct-antecedent similarity into account for utilizing the chain information
-2. **Peiqin Lin**; Meng Yang; Jianhuang Lai. 2019. Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis. In IJCAI. [\[Paper\]](https://www.ijcai.org/Proceedings/2019/0707.pdf)[\[Code\]](https://github.com/lpq29743/DMMN-SDCM)[[Slides]](assets/files/IJCAI19-DMMN-SDCM.pdf)[[Note]](https://zhuanlan.zhihu.com/p/150462314)
+3. **Peiqin Lin**; Meng Yang; Jianhuang Lai. 2019. Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis. In IJCAI. [\[Paper\]](https://www.ijcai.org/Proceedings/2019/0707.pdf)[\[Code\]](https://github.com/lpq29743/DMMN-SDCM)[[Slides]](assets/files/IJCAI19-DMMN-SDCM.pdf)[[Note]](https://zhuanlan.zhihu.com/p/150462314)
     - Integrating semantic parsing information into deep memory network
     - Modeling inter-aspect relation for utilizing the information of the nearby aspects
     - Designing an auxiliary task to learn the sentiment distribution for the desired aspect
@@ -40,7 +43,6 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 1. Two Papers Under EMNLP 2020 Review. First Author.
 2. A Paper Under TASLP Review. First Author.
-3. A Papers Under NLPCC 2020 Review. Third Author.
 
 ### Projects
 
