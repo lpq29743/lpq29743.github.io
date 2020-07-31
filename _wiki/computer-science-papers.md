@@ -256,7 +256,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Scoring Sentence Singletons and Pairs for Abstractive Summarization](https://arxiv.org/pdf/1906.00077.pdf) (Logan Lebanoff, ACL 2019, [code](https://github.com/ucfnlp/summarization-sing-pair-mix), [note](https://www.aminer.cn/research_report/5d47c526d5e908133c9468eb))
 
-[How to Write Summaries with Patterns? Learning towards Abstractive Summarization through Prototype Editing](https://arxiv.org/pdf/1909.08837.pdf) (Shen Gao, EMNLP 2019, [code](https://github.com/gsh199449/proto-summ))
+[How to Write Summaries with Patterns? Learning towards Abstractive Summarization through Prototype Editing](https://arxiv.org/pdf/1909.08837.pdf) (Shen Gao, EMNLP 2019, [code](https://github.com/gsh199449/proto-summ), [note](https://www.icst.pku.edu.cn/xwgg/xwdt/2019/1318876.htm))
 
 [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) (Yang Liu, EMNLP 2019, [code](https://github.com/nlpyang/PreSumm), [note](https://zhuanlan.zhihu.com/p/88953532))
 
