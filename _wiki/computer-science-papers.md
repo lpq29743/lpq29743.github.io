@@ -1340,78 +1340,78 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Neural Architecture Search
 
-[Neural Architecture Search with Reinforcement Learning](https://arxiv.org/pdf/1611.01578.pdf) (Barret Zoph, 2016)
+[Neural Architecture Search with Reinforcement Learning](https://arxiv.org/pdf/1611.01578.pdf) (Barret Zoph, ICLR 2017, [note](https://zhuanlan.zhihu.com/p/47221948))
 
-[Learning Transferable Architectures for Scalable Image Recognition](http://openaccess.thecvf.com/content_cvpr_2018/html/Zoph_Learning_Transferable_Architectures_CVPR_2018_paper.html) (Barret Zoph, CVPR 2018)
+[Learning Transferable Architectures for Scalable Image Recognition](http://openaccess.thecvf.com/content_cvpr_2018/html/Zoph_Learning_Transferable_Architectures_CVPR_2018_paper.html) (Barret Zoph, CVPR 2018, [note](https://zhuanlan.zhihu.com/p/31655995))
 
-[Progressive Neural Architecture Search](http://openaccess.thecvf.com/content_ECCV_2018/html/Chenxi_Liu_Progressive_Neural_Architecture_ECCV_2018_paper.html) (Chenxi Liu, ECCV 2018)
+[Progressive Neural Architecture Search](http://openaccess.thecvf.com/content_ECCV_2018/html/Chenxi_Liu_Progressive_Neural_Architecture_ECCV_2018_paper.html) (Chenxi Liu, ECCV 2018, [note](https://blog.csdn.net/dhaiuda/article/details/102599427))
 
-[NetAdapt: Platform-Aware Neural Network Adaptation for Mobile Applications](http://openaccess.thecvf.com/content_ECCV_2018/html/Tien-Ju_Yang_NetAdapt_Platform-Aware_Neural_ECCV_2018_paper.html) (Tien-Ju Yang, ECCV 2018)
+[NetAdapt: Platform-Aware Neural Network Adaptation for Mobile Applications](http://openaccess.thecvf.com/content_ECCV_2018/html/Tien-Ju_Yang_NetAdapt_Platform-Aware_Neural_ECCV_2018_paper.html) (Tien-Ju Yang, ECCV 2018, [code](https://github.com/denru01/netadapt), [note](https://blog.csdn.net/thisiszdy/article/details/90515075))
 
-[Efficient Neural Architecture Search via Parameter Sharing](https://arxiv.org/pdf/1802.03268.pdf) (Hieu Pham, ICML 2018)
+[Efficient Neural Architecture Search via Parameter Sharing](https://arxiv.org/pdf/1802.03268.pdf) (Hieu Pham, ICML 2018, [note](https://cloud.tencent.com/developer/article/1182704))
 
-[Regularized Evolution for Image Classifier Architecture Search](https://wvvw.aaai.org/ojs/index.php/AAAI/article/view/4405) (Esteban Real, AAAI 2019)
+[Regularized Evolution for Image Classifier Architecture Search](https://wvvw.aaai.org/ojs/index.php/AAAI/article/view/4405) (Esteban Real, AAAI 2019, [note](https://blog.csdn.net/dhaiuda/article/details/93337707))
 
-[DARTS: Differentiable Architecture Search](https://arxiv.org/pdf/1806.09055.pdf) (Hanxiao Liu, ICLR 2019)
+[DARTS: Differentiable Architecture Search](https://arxiv.org/pdf/1806.09055.pdf) (Hanxiao Liu, ICLR 2019, [code](https://github.com/quark0/darts), [note](https://www.cnblogs.com/wangxiaocvpr/p/10556789.html))
 
-[EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/pdf/1905.11946.pdf) (Mingxing Tan, ICML 2019)
+[EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/pdf/1905.11946.pdf) (Mingxing Tan, ICML 2019, [code](https://github.com/qubvel/efficientnet), [note](https://zhuanlan.zhihu.com/p/70369784))
 
-[ProxylessNAS: Direct Neural Architecture Search on Target Task and Hardware](https://arxiv.org/pdf/1812.00332.pdf) (Han Cai, ICLR 2019)
+[ProxylessNAS: Direct Neural Architecture Search on Target Task and Hardware](https://arxiv.org/pdf/1812.00332.pdf) (Han Cai, ICLR 2019, [code](https://github.com/mit-han-lab/proxylessnas), [note](https://zhuanlan.zhihu.com/p/55220311))
 
-[Rethinking the Value of Network Pruning](https://arxiv.org/pdf/1810.05270.pdf) (Zhuang Liu, ICLR 2019)
+[Rethinking the Value of Network Pruning](https://arxiv.org/pdf/1810.05270.pdf) (Zhuang Liu, ICLR 2019, [code](https://github.com/Eric-mingjie/rethinking-network-pruning), [note](https://xmfbit.github.io/2018/10/22/paper-rethinking-the-value-of-network-pruning/))
 
-[MnasNet: Platform-Aware Neural Architecture Search for Mobile](http://openaccess.thecvf.com/content_CVPR_2019/html/Tan_MnasNet_Platform-Aware_Neural_Architecture_Search_for_Mobile_CVPR_2019_paper.html) (Mingxing Tan, CVPR 2019)
+[MnasNet: Platform-Aware Neural Architecture Search for Mobile](http://openaccess.thecvf.com/content_CVPR_2019/html/Tan_MnasNet_Platform-Aware_Neural_Architecture_Search_for_Mobile_CVPR_2019_paper.html) (Mingxing Tan, CVPR 2019, [code](https://github.com/mingxingtan/mnasnet), [note](https://zhuanlan.zhihu.com/p/42474017))
 
-[Searching for MobileNetV3](http://openaccess.thecvf.com/content_ICCV_2019/html/Howard_Searching_for_MobileNetV3_ICCV_2019_paper.html) (Andrew Howard, ICCV 2019)
+[Searching for MobileNetV3](http://openaccess.thecvf.com/content_ICCV_2019/html/Howard_Searching_for_MobileNetV3_ICCV_2019_paper.html) (Andrew Howard, ICCV 2019, [note](https://blog.nex3z.com/2020/07/27/reading-searching-for-mobilenetv3/))
 
-[Neural Architecture Search: A Survey](http://www.jmlr.org/papers/volume20/18-598/18-598.pdf) (Thomas Elsken, JMLR 2019)
+[Neural Architecture Search: A Survey](http://www.jmlr.org/papers/volume20/18-598/18-598.pdf) (Thomas Elsken, JMLR 2019, [note](https://zhuanlan.zhihu.com/p/123144164))
 
 ### Reinforcement Learning
 
-[A Brief Survey of Deep Reinforcement Learning](https://arxiv.org/pdf/1708.05866.pdf) (Kai Arulkumaran, 2017)
+[A Brief Survey of Deep Reinforcement Learning](https://arxiv.org/pdf/1708.05866.pdf) (Kai Arulkumaran, 2017, [note](https://blog.csdn.net/KyrieHe/article/details/79504481))
 
-[Deep Reinforcement Learning: An Overview](https://arxiv.org/pdf/1701.07274.pdf) (Yuxi Li, 2017)
+[Deep Reinforcement Learning: An Overview](https://arxiv.org/pdf/1701.07274.pdf) (Yuxi Li, 2017, [note](https://zhuanlan.zhihu.com/p/31595581))
 
 #### Reinforcement Learning Application
 
-[Playing Atari with Deep Reinforcement Learning](https://arxiv.org/pdf/1312.5602.pdf) (Volodymyr Mnih, 2013)
+[Playing Atari with Deep Reinforcement Learning](https://arxiv.org/pdf/1312.5602.pdf) (Volodymyr Mnih, 2013, [note](https://zhuanlan.zhihu.com/p/33962867))
 
 [Mastering the Game of Go with Deep Neural Networks and Tree Search](http://www.worlduc.com/FileSystem/1/134755/1585588/ac5b78a1934c49bb93a1f3ad09d96e46.pdf) (David Silver, Nature 2016)
 
-[Mastering the Game of Go without Human Knowledge](https://skatgame.net/mburo/ps/alphago-zero.pdf) (David Silver, Nature 2017, [code](https://github.com/gcp/leela-zero))
+[Mastering the Game of Go without Human Knowledge](https://skatgame.net/mburo/ps/alphago-zero.pdf) (David Silver, Nature 2017, [code](https://github.com/gcp/leela-zero), [note](https://zhuanlan.zhihu.com/p/101669366))
 
 [Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm](https://arxiv.org/pdf/1712.01815.pdf) (David Silver, 2017)
 
 ### Recommendation System
 
-[Deep Learning based Recommender System: A Survey and New Perspectives](http://de.arxiv.org/pdf/1707.07435v5) (Shuai Zhang, 2017, [code](https://github.com/cheungdaven/DeepRec))
+[Deep Learning based Recommender System: A Survey and New Perspectives](http://de.arxiv.org/pdf/1707.07435v5) (Shuai Zhang, 2017, [code](https://github.com/cheungdaven/DeepRec), [note](https://www.cnblogs.com/z1141000271/p/11399916.html))
 
-[A review on deep learning for recommender systems: challenges and remedies](https://link.springer.com/article/10.1007/s10462-018-9654-y) (Zeynep Batmaz, 2018)
+[A review on deep learning for recommender systems: challenges and remedies](https://link.springer.com/article/10.1007/s10462-018-9654-y) (Zeynep Batmaz, 2018, [note](https://blog.csdn.net/qq_35771020/article/details/88759986))
 
 #### News Recommendation
 
-[Google News Personalization: Scalable Online Collaborative Filtering](http://wwwconference.org/www2007/papers/paper570.pdf) (Abhinandan Das, WWW 2007)
+[Google News Personalization: Scalable Online Collaborative Filtering](http://wwwconference.org/www2007/papers/paper570.pdf) (Abhinandan Das, WWW 2007, [note](https://blog.csdn.net/jj12345jj198999/article/details/12654531))
 
-[Personalized News Recommendation Based on Click Behavior](http://www.cs.northwestern.edu/~jli156/IUI224-liu.pdf) (Jiahui Liu, 2010)
+[Personalized News Recommendation Based on Click Behavior](http://www.cs.northwestern.edu/~jli156/IUI224-liu.pdf) (Jiahui Liu, 2010, [note](https://www.jianshu.com/p/f3d147fbce3f))
 
-[Personalized Recommendation on Dynamic Content Using Predictive Bilinear Models](http://wwwconference.org/www2009/proceedings/pdf/p691.pdf) (Wei Chu, WWW 2009)
+[Personalized Recommendation on Dynamic Content Using Predictive Bilinear Models](http://wwwconference.org/www2009/proceedings/pdf/p691.pdf) (Wei Chu, WWW 2009, [note](https://zhuanlan.zhihu.com/p/75484786))
 
-[A Contextual-Bandit Approach to Personalized News Article Recommendation](http://wwwconference.org/proceedings/www2010/www/p661.pdf) (Lihong Li, WWW 2010)
+[A Contextual-Bandit Approach to Personalized News Article Recommendation](http://wwwconference.org/proceedings/www2010/www/p661.pdf) (Lihong Li, WWW 2010, [note](https://zhuanlan.zhihu.com/p/34940176))
 
-[A Multi-View Deep Learning Approach for Cross Domain User Modeling in Recommendation Systems](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/frp1159-songA.pdf) (Ali Elkahky, WWW 2015)
+[A Multi-View Deep Learning Approach for Cross Domain User Modeling in Recommendation Systems](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/frp1159-songA.pdf) (Ali Elkahky, WWW 2015, [note](https://zhuanlan.zhihu.com/p/56384078))
 
 ### Big Data
 
-[The Google File System](http://index-of.es/Misc/pdf/google_file_system.pdf) (Sanjay Ghemawat, SOSP 2003)
+[The Google File System](http://index-of.es/Misc/pdf/google_file_system.pdf) (Sanjay Ghemawat, SOSP 2003, [note](https://zhuanlan.zhihu.com/p/28155582))
 
-[MapReduce: Simplified Data Processing on Large Clusters](https://homeostasis.scs.carleton.ca/~soma/distos/2008-03-24/mapreduce-osdi04.pdf) (Jeffrey Dean, OSDI 2004)
+[MapReduce: Simplified Data Processing on Large Clusters](https://homeostasis.scs.carleton.ca/~soma/distos/2008-03-24/mapreduce-osdi04.pdf) (Jeffrey Dean, OSDI 2004, [note](https://juejin.im/post/6844903812784717831))
 
-[Bigtable: A Distributed Storage System for Structured Data](https://fenix.tecnico.ulisboa.pt/downloadFile/845043405442710/10.g-bigtable-osdi06.pdf) (Fay Chang, OSDI 2006)
+[Bigtable: A Distributed Storage System for Structured Data](https://fenix.tecnico.ulisboa.pt/downloadFile/845043405442710/10.g-bigtable-osdi06.pdf) (Fay Chang, OSDI 2006, [note](https://zh.wikipedia.org/wiki/Bigtable))
 
 ### Tool
 
 [FudanNLP: A Toolkit for Chinese Natural Language Processing](https://www.aclweb.org/anthology/P13-4009) (Xipeng Qiu, ACL 2013, [code](https://github.com/FudanNLP/fnlp))
 
-[LIBSVM: A library for support vector machines](http://www.csie.ntu.edu.tw/~cjlin/libsvm) (Chih-Jen Lin, 2011)
+[LIBSVM: A library for support vector machines](http://www.csie.ntu.edu.tw/~cjlin/libsvm) (Chih-Jen Lin, 2011, [code](https://github.com/cjlin1/libsvm), [note](https://blog.csdn.net/s9434/article/details/75091602))
 
 [HemI: A Toolkit for Illustrating Heatmaps](http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0111988&type=printable) (Wankun Deng, 2014, [code](http://hemi.biocuckoo.org/))
