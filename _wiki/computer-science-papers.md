@@ -252,7 +252,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model](https://arxiv.org/pdf/1906.01749.pdf) (Alexander R. Fabbri, ACL 2019, [code](https://github.com/Alex-Fabbri/Multi-News), [note](https://zhuanlan.zhihu.com/p/83768781))
 
-[Improving the Similarity Measure of Determinantal Point Processes for Extractive Multi-Document Summarization](https://arxiv.org/pdf/1906.00072.pdf) (Sangwoo Cho, ACL 2019)
+[Improving the Similarity Measure of Determinantal Point Processes for Extractive Multi-Document Summarization](https://arxiv.org/pdf/1906.00072.pdf) (Sangwoo Cho, ACL 2019, [code](https://github.com/ucfnlp/summarization-dpp-capsnet), [note](https://wemp.app/posts/beb15b57-0dd1-4ec8-8d7a-47a1de75dbbb))
 
 [Scoring Sentence Singletons and Pairs for Abstractive Summarization](https://arxiv.org/pdf/1906.00077.pdf) (Logan Lebanoff, ACL 2019, [code](https://github.com/ucfnlp/summarization-sing-pair-mix), [note](https://www.aminer.cn/research_report/5d47c526d5e908133c9468eb))
 
