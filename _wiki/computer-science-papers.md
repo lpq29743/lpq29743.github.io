@@ -84,9 +84,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [ERNIE 2.0: A Continual Pre-training Framework for Language Understanding](https://arxiv.org/pdf/1907.12412.pdf) (Yu Sun, 2019, [note](https://zhuanlan.zhihu.com/p/76125042))
 
-[Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism](https://arxiv.org/pdf/1909.08053.pdf) (Mohammad Shoeybi, 2019, [code](https://github.com/NVIDIA/Megatron-LM))
+[Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism](https://arxiv.org/pdf/1909.08053.pdf) (Mohammad Shoeybi, 2019, [code](https://github.com/NVIDIA/Megatron-LM), [note](https://www.infoq.cn/article/Ex_tDlV5VoMzLKpOObAf))
 
-[Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf) (Alec Radford, 2019, [note](https://zhuanlan.zhihu.com/p/79714797), [code](https://github.com/openai/gpt-2))
+[Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf) (Alec Radford, 2019, [code](https://github.com/openai/gpt-2), [note](https://zhuanlan.zhihu.com/p/79714797))
 
 [SpanBERT: Improving Pre-training by Representing and Predicting Spans](https://arxiv.org/pdf/1907.10529.pdf) (Mandar Joshi, TACL 2019, [note](https://zhuanlan.zhihu.com/p/75893972))
 
