@@ -268,7 +268,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Heterogeneous Graph Neural Networks for Extractive Document Summarization](https://arxiv.org/pdf/2004.12393.pdf) (Danqing Wang, ACL 2020, [code](https://github.com/brxx122/HeterSumGraph), [note](https://zhuanlan.zhihu.com/p/138600416))
 
-[Optimizing the Factual Correctness of a Summary: A Study of Summarizing Radiology Reports](https://arxiv.org/pdf/1911.02541.pdf) (Yuhao Zhang, ACL 2020)
+[Optimizing the Factual Correctness of a Summary: A Study of Summarizing Radiology Reports](https://arxiv.org/pdf/1911.02541.pdf) (Yuhao Zhang, ACL 2020, [note](https://zhuanlan.zhihu.com/p/166193118))
 
 [Asking and Answering Questions to Evaluate the Factual Consistency of Summaries](https://arxiv.org/pdf/2004.04228.pdf) (Alex Wang, ACL 2020, [note](https://zhuanlan.zhihu.com/p/130280217))
 
