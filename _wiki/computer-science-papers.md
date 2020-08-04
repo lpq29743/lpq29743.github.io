@@ -340,7 +340,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Dirichlet Belief Networks for Topic Structure Learning](http://papers.nips.cc/paper/8020-dirichlet-belief-networks-for-topic-structure-learning.pdf) (He Zhao, NIPS 2018)
 
-[Document Informed Neural Autoregressive Topic Models with Distributional Prior](https://www.aaai.org/ojs/index.php/AAAI/article/view/4616) (Pankaj Gupta, AAAI 2019, [code](https://github.com/pgcool/iDocNADEe))
+[Document Informed Neural Autoregressive Topic Models with Distributional Prior](https://arxiv.org/pdf/1809.06709.pdf) (Pankaj Gupta, AAAI 2019, [code](https://github.com/pgcool/iDocNADEe))
 
 [textTOvec: Deep Contextualized Neural Autoregressive Topic Models of Language with Distributed Compositional Prior](https://arxiv.org/pdf/1810.03947.pdf) (Pankaj Gupta, ICLR 2019, [code](https://github.com/pgcool/textTOvec))
 
