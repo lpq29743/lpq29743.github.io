@@ -294,7 +294,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [DiscLDA: Discriminative Learning for Dimensionality Reduction and Classification](http://papers.nips.cc/paper/3599-disclda-discriminative-learning-for-dimensionality-reduction-and-classification.pdf) (Simon Lacoste-Julien, NIPS 2009, [code](https://github.com/teffland/disclda))
 
+[Replicated Softmax: an Undirected Topic Model](https://papers.nips.cc/paper/3856-replicated-softmax-an-undirected-topic-model.pdf) (Ruslan Salakhutdinov, NIPS 2009)
+
 [Partially Labeled Topic Models for Interpretable Text Mining](http://susandumais.com/kdd2011-pldp-final.pdf) (Daniel Ramage, KDD 2011)
+
+[A Neural Autoregressive Topic Model](https://papers.nips.cc/paper/4613-a-neural-autoregressive-topic-model.pdf) (Hugo Larochelle, NIPS 2012, [code](https://github.com/AYLIEN/docnade))
 
 [MedLDA: Maximum Margin Supervised Topic Models](http://www.jmlr.org/papers/volume13/zhu12a/zhu12a.pdf) (Jun Zhu, JMLR 2013)
 
