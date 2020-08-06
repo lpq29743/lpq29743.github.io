@@ -714,9 +714,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine](http://www.aclweb.org/anthology/P/P17/P17-2079.pdf) (Minghui Qiu, ACL 2017, [note](https://blog.csdn.net/u011239443/article/details/83829265))
 
+[ICON: Interactive Conversational Memory Network for Multimodal Emotion Detection](https://www.aclweb.org/anthology/D18-1280.pdf) (Devamanyu Hazarika, EMNLP 2018, [note](https://zhuanlan.zhihu.com/p/63506119))
+
 [Pretraining Methods for Dialog Context Representation Learning](https://arxiv.org/pdf/1906.00414.pdf) (Shikib Mehri, ACL 2019, [note](https://zhuanlan.zhihu.com/p/82001834))
 
 ##### Dataset
+
+[MELD: A Multimodal Multi-Party Dataset for Emotion Recognition in Conversations](https://arxiv.org/pdf/1810.02508.pdf) (Soujanya Poria, ACL 2019, [code](https://github.com/declare-lab/MELD))
 
 [How to Build User Simulators to Train RL-based Dialog Systems](https://arxiv.org/pdf/1909.01388.pdf) (Weiyan Shi, EMNLP 2019, [code](https://github.com/wyshi/user-simulator))
 
