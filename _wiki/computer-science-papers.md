@@ -572,7 +572,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Position-aware Bidirectional Attention Network for Aspect-level Sentiment Analysis](https://www.aclweb.org/anthology/C18-1066.pdf) (Shuqin Gu, COLING 2018, [code](https://github.com/hiyouga/PBAN-PyTorch), [note](https://zhuanlan.zhihu.com/p/62696026))
 
-[Attentional Encoder Network for Targeted Sentiment Classification](https://arxiv.org/pdf/1902.09314.pdf) (Youwei Song, 2019, [code](https://zhuanlan.zhihu.com/p/68858093))
+[Attentional Encoder Network for Targeted Sentiment Classification](https://arxiv.org/pdf/1902.09314.pdf) (Youwei Song, 2019, [code](https://github.com/songyouwei/ABSA-PyTorch/blob/master/models/aen.py), [note](https://zhuanlan.zhihu.com/p/68858093))
 
 [Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis](https://www.ijcai.org/Proceedings/2019/0707.pdf) (Peiqin Lin, IJCAI 2019, [code](https://github.com/lpq29743/DMMN-SDCM), [note](https://zhuanlan.zhihu.com/p/150462314))
 
