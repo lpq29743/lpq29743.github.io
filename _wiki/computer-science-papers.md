@@ -446,7 +446,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Jointly Predicting Predicates and Arguments in Neural Semantic Role Labeling](https://arxiv.org/pdf/1805.04787.pdf) (Luheng He, ACL 2018, [code](https://github.com/luheng/lsgn), [note](https://blog.csdn.net/choose_c/article/details/90273333))
 
-[Dependency or Span, End-to-End Uniform Semantic Role Labeling Sentiment Analysis](https://www.aaai.org/ojs/index.php/AAAI/article/view/4645) (Zuchao Li, AAAI 2019)
+[Dependency or Span, End-to-End Uniform Semantic Role Labeling Sentiment Analysis](https://arxiv.org/pdf/1901.05280.pdf) (Zuchao Li, AAAI 2019, [code](https://github.com/bcmi220/unisrl), [note](https://www.sohu.com/a/295644284_129720))
 
 [Semantic Role Labeling with Associated Memory Network](https://arxiv.org/pdf/1908.02367.pdf) (Chaoyu Guan, NAACL 2019, [code](https://github.com/Frozenmad/AMN_SRL))
 
