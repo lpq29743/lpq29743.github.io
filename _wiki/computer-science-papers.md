@@ -580,6 +580,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Attentional Encoder Network for Targeted Sentiment Classification](https://arxiv.org/pdf/1902.09314.pdf) (Youwei Song, 2019, [code](https://github.com/songyouwei/ABSA-PyTorch/blob/master/models/aen.py), [note](https://zhuanlan.zhihu.com/p/68858093))
 
+[Adapting BERT for Target-Oriented Multimodal Sentiment Classification](https://www.ijcai.org/Proceedings/2019/0751.pdf) (Jianfei Yu, IJCAI 2019, [code](https://github.com/jefferyYu/TomBERT))
+
 [Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis](https://www.ijcai.org/Proceedings/2019/0707.pdf) (Peiqin Lin, IJCAI 2019, [code](https://github.com/lpq29743/DMMN-SDCM), [note](https://zhuanlan.zhihu.com/p/150462314))
 
 [BERT Post-Training for Review Reading Comprehension and Aspect-based Sentiment Analysis](https://arxiv.org/pdf/1904.02232.pdf) (Hu Xu, NAACL 2019, [code](https://github.com/howardhsu/BERT-for-RRC-ABSA), [note](https://zhuanlan.zhihu.com/p/72092287))
