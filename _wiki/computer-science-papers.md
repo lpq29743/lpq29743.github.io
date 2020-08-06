@@ -626,7 +626,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Who Feels What and Why? Annotation of a Literature Corpus with Semantic Roles of Emotions](https://www.aclweb.org/anthology/C18-1114.pdf) (Evgeny Kim, COLING 2018)
 
-[Context-aware emotion cause analysis with multi-attention-based neural network](https://www.sciencedirect.com/science/article/abs/pii/S0950705119301273) (Xiangju Li, KBS 2019)
+[Context-Aware Emotion Cause Analysis with Multi-Attention-Based Neural Network](https://www.sciencedirect.com/science/article/abs/pii/S0950705119301273) (Xiangju Li, KBS 2019)
 
 [Multiple Level Hierarchical Network-Based Clause Selection for Emotion Cause Extraction](https://ieeexplore.ieee.org/abstract/document/8598785) (Xinyi Yu, IEEE Access 2019)
 
