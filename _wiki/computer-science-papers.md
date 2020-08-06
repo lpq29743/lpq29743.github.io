@@ -378,11 +378,17 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [An Integrated Approach for Keyphrase Generation via Exploring the Power of Retrieval and Extraction](https://arxiv.org/pdf/1904.03454.pdf) (Wang Chen, NAACL 2019, [code](https://github.com/Chen-Wang-CUHK/KG-KE-KR-M), [note](https://github.com/Chen-Wang-CUHK/KG-KE-KR-M))
 
+[Glocal: Incorporating Global Information in Local Convolution for Keyphrase Extraction](https://www.aclweb.org/anthology/N19-1182.pdf) (Animesh Prasad, NAACL 2019)
+
+[Keyphrase Generation: A Text Summarization Struggle](https://www.aclweb.org/anthology/N19-1070.pdf) (Erion Cano, NAACL 2019)
+
 [Incorporating Linguistic Constraints into Keyphrase Generation](https://www.aclweb.org/anthology/P19-1515.pdf) (Jing Zhao, ACL 2019)
 
 [Topic-Aware Neural Keyphrase Generation for Social Media Language](https://arxiv.org/pdf/1906.03889.pdf) (Yue Wang, ACL 2019, [code](https://github.com/yuewang-cuhk/TAKG))
 
 [Neural Keyphrase Generation via Reinforcement Learning with Adaptive Rewards](https://arxiv.org/pdf/1906.04106.pdf) (Hou Pong Chan, ACL 2019, [code](https://github.com/kenchan0226/keyphrase-generation-rl), [note](https://procjx.github.io/2019/10/31/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91Neural-Keyphrase-Generation-via-Reinforcement-Learning-with-Adaptive-Rewards/))
+
+[Using Human Attention to Extract Keyphrase from Microblog Post](https://www.aclweb.org/anthology/P19-1588.pdf) (Yingyi Zhang, ACL 2019, [note](https://blog.csdn.net/qq_34325086/article/details/102365847))
 
 [Open Domain Web Keyphrase Extraction Beyond Language Modeling](https://arxiv.org/pdf/1911.02671.pdf) (Lee Xiong, EMNLP 2019)
 
@@ -766,11 +772,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Explicit State Tracking with Semi-Supervisionfor Neural Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3269206.3271683) (Xisen Jin, CIKM 2018, [code](https://github.com/AuCson/SEDST), [note](https://zhuanlan.zhihu.com/p/62306940))
 
+[A Syntactically Constrained Bidirectional-Asynchronous Approach for Emotional Conversation Generation](https://www.aclweb.org/anthology/D18-1071.pdf) (Jingyuan Li, EMNLP 2018)
+
 [Domain Adaptive Dialog Generation via Meta Learning](https://arxiv.org/pdf/1906.03520.pdf) (Kun Qian, ACL 2019, [code](https://github.com/qbetterk/DAML), [note](https://liusih.github.io/2019/09/09/Domain%20Adaptive%20Dialog%20Generation%20via%20Meta%20Learning/))
 
 [ReCoSa: Detecting the Relevant Contexts with Self-Attention for Multi-turn Dialogue Generation](https://arxiv.org/pdf/1907.05339.pdf) (Hainan Zhang, ACL 2019, [code](https://github.com/zhanghainan/ReCoSa), [note](https://zhuanlan.zhihu.com/p/74229505))
 
 [Semantically Conditioned Dialog Response Generation via Hierarchical Disentangled Self-Attention](https://arxiv.org/pdf/1905.12866.pdf) (Wenhu Chen, ACL 2019, [code](https://github.com/wenhuchen/HDSA-Dialog), [note](https://zhuanlan.zhihu.com/p/82460398))
+
+[Generating Responses with a Specific Emotion in Dialog](https://www.aclweb.org/anthology/P19-1359.pdf) (Zhenqiao Song, ACL 2019, [note](https://www.dazhuanlan.com/2020/02/10/5e403d064876d/))
 
 #### Question Answering and Machine Reading Comprehension
 
@@ -978,6 +988,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Knowledge-aware Pronoun Coreference Resolution](https://www.aclweb.org/anthology/P19-1083.pdf) (Hongming Zhang, ACL 2019, [code](https://github.com/HKUST-KnowComp/Pronoun-Coref-KG), [note](https://zhuanlan.zhihu.com/p/85180047))
 
+[What You See is What You Get: Visual Pronoun Coreference Resolution in Dialogues](https://arxiv.org/pdf/1909.00421.pdf) (Xintong Yu, EMNLP 2019, [note](https://zhuanlan.zhihu.com/p/91231002))
+
 ##### Zero Pronoun Resolution
 
 [Identification and Resolution of Chinese Zero Pronouns: A Machine Learning Approach](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=F05E1DD4B64B0771E279426984E7CDD1?doi=10.1.1.65.1935&rep=rep1&type=pdf) (Shanheng Zhao and Hwee Tou Ng, EMNLP 2007)
@@ -1005,6 +1017,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Data-to-Text Generation with Content Selection and Planning](https://www.aaai.org/ojs/index.php/AAAI/article/view/4668) (Ratish Puduppully, AAAI 2019, [code](https://github.com/ratishsp/data2text-plan-py), [note](https://zhuanlan.zhihu.com/p/85275520))
 
 [Text Generation from Knowledge Graphs with Graph Transformers](https://arxiv.org/pdf/1904.02342.pdf) (Rik Koncel-Kedziorski, NAACL 2019, [code](https://github.com/rikdz/GraphWriter), [note](https://zhuanlan.zhihu.com/p/90084109))
+
+[Submodular Optimization-based Diverse Paraphrasing and its Effectiveness in Data Augmentation](https://www.aclweb.org/anthology/N19-1363.pdf) (Ashutosh Kumar, NAACL 2019, [code](https://github.com/malllabiisc/DiPS))
 
 [Modeling Graph Structure in Transformer for Better AMR-to-Text Generation](https://arxiv.org/pdf/1909.00136.pdf) (Jie Zhu, EMNLP 2019)
 
