@@ -1428,6 +1428,34 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Multi-View Deep Learning Approach for Cross Domain User Modeling in Recommendation Systems](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/frp1159-songA.pdf) (Ali Elkahky, WWW 2015, [note](https://zhuanlan.zhihu.com/p/56384078))
 
+#### Click-Through Rate
+
+[Factorization Machines](https://cseweb.ucsd.edu/classes/fa17/cse291-b/reading/Rendle2010FM.pdf) (Steffen Rendle, ICDM 2010, [note](https://zhuanlan.zhihu.com/p/50426292))
+
+[Higher-Order Factorization Machine](https://papers.nips.cc/paper/6144-higher-order-factorization-machines.pdf) (Mathieu Blondel, NIPS 2016)
+
+[Field-aware Factorization Machines for CTR Prediction](https://www.csie.ntu.edu.tw/~cjlin/papers/ffm.pdf) (Yu-Chin Juan, RecSys 2016, [note](https://blog.csdn.net/Dby_freedom/article/details/84899120))
+
+[DeepFM: A Factorization-Machine based Neural Network for CTR Prediction](https://www.ijcai.org/Proceedings/2017/0239.pdf) (Huifeng Guo, IJCAI 2017, [note](https://blog.csdn.net/Dby_freedom/article/details/85263694))
+
+[Deep Interest Network for Click-Through Rate Prediction](https://arxiv.org/pdf/1706.06978.pdf) (Guorui Zhou, KDD 2018, [note](https://www.jianshu.com/p/7af364dcea12))
+
+[Deep Interest Evolution Network for Click-Through Rate Prediction](https://arxiv.org/pdf/1809.03672.pdf) (Guorui Zhou, AAAI 2019, [code](https://github.com/mouna99/dien), [note](https://zhuanlan.zhihu.com/p/50758485))
+
+[Representation Learning-Assisted Click-Through Rate Prediction](https://www.ijcai.org/Proceedings/2019/0634.pdf) (Wentao Ouyang, IJCAI 2019, [note](https://zhuanlan.zhihu.com/p/102075293))
+
+[Deep Spatio-Temporal Neural Networks for Click-Through Rate Prediction](https://arxiv.org/pdf/1906.03776.pdf) (Wentao Ouyang, KDD 2019, [code](https://github.com/oywtece/dstn), [note](https://www.sohu.com/a/326460892_99979179))
+
+[Feature Generation by Convolutional Neural Network for Click-Through Rate Prediction](https://arxiv.org/pdf/1904.04447.pdf) (Bin Liu, WWW 2019, [note](https://blog.csdn.net/w55100/article/details/90601310))
+
+[Interpretable Click-Through Rate Prediction through Hierarchical Attention](https://dl.acm.org/doi/pdf/10.1145/3336191.3371785) (Zeyu Li, WSDM 2020)
+
+[User Behavior Retrieval for Click-Through Rate Prediction](https://arxiv.org/pdf/2005.14171.pdf) (Jiarui Qin, SIGIR 2020)
+
+[Deep Time-Stream Framework for Click-through Rate Prediction by Tracking Interest Evolution](https://arxiv.org/pdf/2001.03025.pdf) (Shu-Ting Shi, AAAI 2020)
+
+[Deep Match to Rank Model for Personalized Click-Through Rate Prediction](https://aaai.org/ojs/index.php/AAAI/article/view/5346) (Zequn Lyu, AAAI 2020, [code](https://github.com/lvze92/DMR), [note](https://www.jianshu.com/p/60eed27e06d4))
+
 ### Big Data
 
 [The Google File System](http://index-of.es/Misc/pdf/google_file_system.pdf) (Sanjay Ghemawat, SOSP 2003, [note](https://zhuanlan.zhihu.com/p/28155582))
