@@ -1,0 +1,7 @@
+@inproceedings{lin2019deep,
+  title={Deep Mask Memory Network with Semantic Dependency and Context Moment for Aspect Level Sentiment Classification},
+  author={Lin, Peiqin and Yang, Meng and Lai, Jianhuang},
+  booktitle={Proceedings of the International Joint Conference on Artificial Intelligence},  
+  pages={5088--5094},
+  year={2019}
+}

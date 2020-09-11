@@ -27,22 +27,26 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 #### Publications
 
-1. Yu Gu; Meng Yang; **Peiqin Lin**. 2020. Lightweight Multiple Perspective Fusion with Information Enriching for BERT-based Answer Selection. In NLPCC.
-    - Using question category and name entity recognition to enrich the information
-    - Fusing the multi-layer discrimination inside different layers of BERT
-2. **Peiqin Lin**; Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI. [[Paper]](https://144.208.67.177/ojs/index.php/AAAI/article/view/6352)[[Code]](https://github.com/lpq29743/HAN-PL)[[Slides]](assets/files/AAAI20-HAN-PL.pdf)[[Note]](https://zhuanlan.zhihu.com/p/151387067)
-    - Modeling zero pronouns and candidate antecedents interactively with Hierarchical Attention Mechanism
-    - Using pairwise loss instead of cross entropy loss used in previous methods
-    - Taking the constraint of correct-antecedent similarity into account for utilizing the chain information
-3. **Peiqin Lin**; Meng Yang; Jianhuang Lai. 2019. Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis. In IJCAI. [\[Paper\]](https://www.ijcai.org/Proceedings/2019/0707.pdf)[\[Code\]](https://github.com/lpq29743/DMMN-SDCM)[[Slides]](assets/files/IJCAI19-DMMN-SDCM.pdf)[[Note]](https://zhuanlan.zhihu.com/p/150462314)
-    - Integrating semantic parsing information into deep memory network
-    - Modeling inter-aspect relation for utilizing the information of the nearby aspects
-    - Designing an auxiliary task to learn the sentiment distribution for the desired aspect
+1. Yu Gu; Meng Yang; **Peiqin Lin**. 2020. Lightweight Multiple Perspective Fusion with Information Enriching for BERT-based Answer Selection. In The CCF International Conference on Natural Language Processing and Chinese Computing (NLPCC), Zhengzhou, China.
+2. **Peiqin Lin**; Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI Conference on Artificial Intelligence (AAAI), New York, USA. [[Paper]](https://144.208.67.177/ojs/index.php/AAAI/article/view/6352)[[Code]](https://github.com/lpq29743/HAN-PL)[[Slides]](assets/files/AAAI20-HAN-PL.pdf)[[[Bib]](assets/files/AAAI20-HAN-PL.txt)[Note]](https://zhuanlan.zhihu.com/p/151387067)
+3. Peiqin Lin. 2020. A Local-Global Representation Network for Aspect Level Sentiment Analysis. Master Thesis (Sun Yat-sen University Outstanding Thesis Award).
+4. **Peiqin Lin**; Meng Yang; Jianhuang Lai. 2019. Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis. In International Joint Conference on Artificial Intelligence (IJCAI), Macao, China. [\[Paper\]](https://www.ijcai.org/Proceedings/2019/0707.pdf)[\[Code\]](https://github.com/lpq29743/DMMN-SDCM)[[Slides]](assets/files/IJCAI19-DMMN-SDCM.pdf)[[Bib]](assets/files/IJCAI19-DMMN-SDCM.txt)[[Note]](https://zhuanlan.zhihu.com/p/150462314)
 
 #### Manuscripts
 
-1. Two Papers Under EMNLP 2020 Review. First Author.
+1. Two Papers Under EMNLP 2020 Review. First and Third Author.
 2. A Paper Under TASLP Review. First Author.
+3. Two Papers Under AAAI 2021 Review. First and Second Author.
+
+### Services
+
+#### Program Committee Member/Conference Reviewer
+
+- AAAI 2021
+
+#### Journal Reviewer
+
+- IEEE Access Reviewer
 
 ### Projects
 
@@ -50,10 +54,6 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 - [RAM](https://github.com/lpq29743/RAM): TensorFlow implementation for "Recurrent Attention Network on Memory for Aspect Sentiment Analysis"
 - [text_classification](https://github.com/lpq29743/text_classification): Implementation of text classification models, including traditional ML methods and DL methods (in Pytorch)
 - See [Project Section](https://lpq29743.github.io/project/) for more projects ...
-
-### Services
-
-- IEEE Access Reviewer
 
 ### Internships
 

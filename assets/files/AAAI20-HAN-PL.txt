@@ -1,0 +1,7 @@
+@inproceedings{lin2020hierarchical,
+  title={Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution},
+  author={Lin, Peiqin and Yang, Meng},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  pages={8352--8359},
+  year={2020}
+}
