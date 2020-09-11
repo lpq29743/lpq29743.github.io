@@ -36,7 +36,7 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 1. Two Papers Under EMNLP 2020 Review. First and Third Author.
 2. A Paper Under TASLP Review. First Author.
-3. Two Papers Under AAAI 2021 Review. First and Second Author.
+3. Two Papers Under AAAI 2021 Review. First and Third Author.
 
 ### Services
 
