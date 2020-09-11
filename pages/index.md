@@ -46,7 +46,7 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 #### Journal Reviewer
 
-- IEEE Access Reviewer
+- IEEE Access
 
 ### Projects
 
