@@ -29,7 +29,7 @@ My name is Peiqin Lin (林佩勤). Currently, I am a 2nd year M.Eng. student of 
 
 1. Yu Gu; Meng Yang; **Peiqin Lin**. 2020. Lightweight Multiple Perspective Fusion with Information Enriching for BERT-based Answer Selection. In The CCF International Conference on Natural Language Processing and Chinese Computing (NLPCC), Zhengzhou, China.
 2. **Peiqin Lin**; Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI Conference on Artificial Intelligence (AAAI), New York, USA. [[Paper]](https://144.208.67.177/ojs/index.php/AAAI/article/view/6352)[[Code]](https://github.com/lpq29743/HAN-PL)[[Slides]](assets/files/AAAI20-HAN-PL.pdf)[[Bib]](assets/files/AAAI20-HAN-PL.txt)[Note]](https://zhuanlan.zhihu.com/p/151387067)
-3. Peiqin Lin. 2020. A Local-Global Representation Network for Aspect Level Sentiment Analysis. Master Thesis (Sun Yat-sen University Outstanding Thesis Award).
+3. **Peiqin Lin**. 2020. A Local-Global Representation Network for Aspect Level Sentiment Analysis. Master Thesis (Sun Yat-sen University Outstanding Thesis Award).
 4. **Peiqin Lin**; Meng Yang; Jianhuang Lai. 2019. Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis. In International Joint Conference on Artificial Intelligence (IJCAI), Macao, China. [\[Paper\]](https://www.ijcai.org/Proceedings/2019/0707.pdf)[\[Code\]](https://github.com/lpq29743/DMMN-SDCM)[[Slides]](assets/files/IJCAI19-DMMN-SDCM.pdf)[[Bib]](assets/files/IJCAI19-DMMN-SDCM.txt)[[Note]](https://zhuanlan.zhihu.com/p/150462314)
 
 #### Manuscripts
