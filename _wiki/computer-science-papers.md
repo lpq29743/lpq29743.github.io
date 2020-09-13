@@ -580,7 +580,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Attentional Encoder Network for Targeted Sentiment Classification](https://arxiv.org/pdf/1902.09314.pdf) (Youwei Song, 2019, [code](https://github.com/songyouwei/ABSA-PyTorch/blob/master/models/aen.py), [note](https://zhuanlan.zhihu.com/p/68858093))
 
-[Adapting BERT for Target-Oriented Multimodal Sentiment Classification](https://www.ijcai.org/Proceedings/2019/0751.pdf) (Jianfei Yu, IJCAI 2019, [code](https://github.com/jefferyYu/TomBERT))
+[Adapting BERT for Target-Oriented Multimodal Sentiment Classification](https://www.ijcai.org/Proceedings/2019/0751.pdf) (Jianfei Yu, IJCAI 2019, [code](https://github.com/jefferyYu/TomBERT), [note](https://zhuanlan.zhihu.com/p/239892083))
 
 [Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis](https://www.ijcai.org/Proceedings/2019/0707.pdf) (Peiqin Lin, IJCAI 2019, [code](https://github.com/lpq29743/DMMN-SDCM), [note](https://zhuanlan.zhihu.com/p/150462314))
 
@@ -638,7 +638,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Multiple Level Hierarchical Network-Based Clause Selection for Emotion Cause Extraction](https://ieeexplore.ieee.org/abstract/document/8598785) (Xinyi Yu, IEEE Access 2019)
 
-[From Independent Prediction to Reordered Prediction: Integrating Relative Position and Global Label Information to Emotion Cause Identification](https://arxiv.org/pdf/1906.01230.pdf) (Zixiang Ding, AAAI 2019, [code](https://github.com/NUSTM/PAEDGL))
+[From Independent Prediction to Reordered Prediction: Integrating Relative Position and Global Label Information to Emotion Cause Identification](https://arxiv.org/pdf/1906.01230.pdf) (Zixiang Ding, AAAI 2019, [code](https://github.com/NUSTM/PAEDGL), [note](https://zhuanlan.zhihu.com/p/240460324))
 
 [RTHN: A RNN-Transformer Hierarchical Network for Emotion Cause Extraction](https://arxiv.org/pdf/1906.01236.pdf) (Rui Xia, IJCAI 2019, [code](https://github.com/NUSTM/RTHN))
 
@@ -650,7 +650,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Emotion-Cause Pair Extraction: A New Task to Emotion Analysis in Texts](https://www.aclweb.org/anthology/P19-1096) (Rui Xia, ACL 2019, [code](https://github.com/NUSTM/ECPE), [note](https://mikito.mythsman.com/post/5d2bf2685ed28235d7573179/))
 
-[ECPE-2D: Emotion-Cause Pair Extraction based on Joint Two-Dimensional Representation, Interaction and Prediction](https://www.aclweb.org/anthology/2020.acl-main.288.pdf) (Zixiang Ding, ACL 2020)
+[ECPE-2D: Emotion-Cause Pair Extraction based on Joint Two-Dimensional Representation, Interaction and Prediction](https://www.aclweb.org/anthology/2020.acl-main.288.pdf) (Zixiang Ding, ACL 2020, [code](https://github.com/NUSTM/ECPE-2D))
 
 #### Machine Translation
 
