@@ -834,6 +834,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Text Understanding with the Attention Sum Reader Network](http://www.aclweb.org/anthology/P16-1086) (Rudolf Kadlec, ACL 2016, [code](https://github.com/rkadlec/asreader), [note](https://zhuanlan.zhihu.com/p/21354432))
 
+[ReasoNet: Learning to Stop Reading in Machine Comprehension](https://arxiv.org/pdf/1609.05284.pdf) (Yelong Shen, KDD 2017, [note](http://cairohy.github.io/2017/05/22/deeplearning/NLP-RC-ReasoNet-NIPS2016-%E3%80%8AReasoNet%20Learning%20to%20Stop%20Reading%20in%20Machine%20Comprehension%E3%80%8B/))
+
 [Machine Comprehension Using Match-LSTM and Answer Pointer](https://openreview.net/pdf?id=B1-q5Pqxl) (Shuohang Wang, ICLR 2017, [code](https://github.com/MurtyShikhar/Question-Answering), [note](https://zhuanlan.zhihu.com/p/55957106))
 
 [Bidirectional Attention Flow for Machine Comprehension](https://arxiv.org/pdf/1611.01603.pdf) (Minjoon Seo, ICLR 2017, [code](https://github.com/allenai/bi-att-flow), [note](https://zhuanlan.zhihu.com/p/55975534))
