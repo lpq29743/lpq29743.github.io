@@ -676,9 +676,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Massively Multilingual Neural Machine Translation](https://arxiv.org/pdf/1903.00089.pdf) (Roee Aharoni, NAACL 2019)
 
-[The FLoRes Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English](https://arxiv.org/pdf/1902.01382.pdf) (Francisco Guzman, EMNLP 2019)
+[The FLoRes Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English](https://arxiv.org/pdf/1902.01382.pdf) (Francisco Guzman, EMNLP 2019, [code](https://github.com/facebookresearch/flores))
 
-[Pivot-based Transfer Learning for Neural Machine Translation between Non-English Languages](https://arxiv.org/pdf/1909.09524.pdf) (Xinyi Wang, EMNLP 2019)
+[Pivot-based Transfer Learning for Neural Machine Translation between Non-English Languages](https://arxiv.org/pdf/1909.09524.pdf) (Yunsu Kim, EMNLP 2019)
 
 [Mixed Multi-Head Self-Attention for Neural Machine Translation](https://www.aclweb.org/anthology/D19-5622.pdf) (Hongyi Cui, EMNLP 2019)
 
