@@ -972,13 +972,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Higher-order Coreference Resolution with Coarse-to-fine Inference](https://www.aclweb.org/anthology/N18-2108.pdf) (Kenton Lee, NAACL 2018, [code](https://github.com/kentonl/e2e-coref), [note](https://zhuanlan.zhihu.com/p/93900881))
 
+[Learning Word Representations with Cross-Sentence Dependency for End-to-End Co-reference Resolution](https://www.aclweb.org/anthology/D18-1518.pdf) (Hongyin Luo, EMNLP 2018)
+
 [BERT for Coreference Resolution: Baselines and Analysis](https://arxiv.org/pdf/1908.09091.pdf) (Mandar Joshi, EMNLP 2019, [code](https://github.com/mandarjoshi90/coref), [note](https://blog.csdn.net/BeiLi_ShanGui/article/details/103156488))
 
 [GECOR: An End-to-End Generative Ellipsis and Co-reference Resolution Model for Task-Oriented Dialogue](https://arxiv.org/pdf/1909.12086.pdf) (Jun Quan, 2019, [note](https://blog.csdn.net/lwgkzl/article/details/102482928))
 
 [Incorporating Structural Information for Better Coreference Resolution](https://www.ijcai.org/Proceedings/2019/0700.pdf) (Kong Fang, IJCAI 2019)
-
-[Learning Word Representations with Cross-Sentence Dependency for End-to-End Co-reference Resolution](https://www.aclweb.org/anthology/D18-1518.pdf) (HongYin Luo, EMNLP 2019)
 
 [End-to-end Deep Reinforcement Learning Based Coreference Resolution](https://www.aclweb.org/anthology/P19-1064.pdf) (Hongliang Fei, ACL 2019)
 
@@ -1015,6 +1015,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Deep Reinforcement Learning for Chinese Zero pronoun Resolution](http://aclweb.org/anthology/P18-1053) (Qingyu Yin, ACL 2018, [code](https://github.com/qyyin/Reinforce4ZP), [note](https://www.jiqizhixin.com/articles/2018-05-21-6))
 
 [Zero Pronoun Resolution with Attention-based Neural Network](http://aclweb.org/anthology/C18-1002) (Qingyu Yin, COLING 2018, [code](https://github.com/qyyin/AttentionZP), [note](https://www.jiqizhixin.com/articles/2018-07-28-8))
+
+[Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution](https://144.208.67.177/ojs/index.php/AAAI/article/view/6352) (Peiqin Lin, AAAI 2020, [code](https://github.com/lpq29743/HAN-PL), [note](https://zhuanlan.zhihu.com/p/151387067))
 
 #### Natural Language Generation
 
