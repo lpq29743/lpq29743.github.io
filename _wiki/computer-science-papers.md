@@ -1318,6 +1318,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf) (Iz Beltagy, 2020, [note](https://zhuanlan.zhihu.com/p/134748587))
 
+[How Does Selective Mechanism Improve Self-Attention Networks?](https://arxiv.org/pdf/2005.00979.pdf) (Xinwei Geng, ACL 2020)
+
 #### Optimizer
 
 [On the Momentum Term in Gradient Descent Learning](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.57.5612&rep=rep1&type=pdf) (Ning Qian, 1999)
