@@ -1358,9 +1358,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Activation Function
 
+[Rectified Linear Units Improve Restricted Boltzmann Machines](https://www.cs.toronto.edu/~fritz/absps/reluICML.pdf) (Vinod Nair, ICML 2010)
+
 [Empirical Evaluation of Rectified Activations in Convolution Network](https://arxiv.org/pdf/1505.00853.pdf) (Bing Xu, 2015)
 
 [Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units](https://arxiv.org/pdf/1603.05201v2.pdf) (Wenling Shang, ICML 2016, [note](https://blog.csdn.net/cv_family_z/article/details/52399921))
+
+[Gaussian Error Linear Units (GELUs)](https://arxiv.org/pdf/1606.08415.pdf) (Dan Hendrycks, 2016, [code](https://github.com/hendrycks/GELUs), [note](https://zhuanlan.zhihu.com/p/100175788))
 
 #### Normalization
 
