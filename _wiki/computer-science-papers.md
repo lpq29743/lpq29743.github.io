@@ -1058,6 +1058,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019, [code](https://github.com/microsoft/MASS), [note](https://zhuanlan.zhihu.com/p/71022527))
 
+[Sparse Sequence-to-Sequence Models](https://arxiv.org/pdf/1905.05702.pdf) (Ben Peters, ACL 2019, [note](https://zhuanlan.zhihu.com/p/76607614))
+
 ### Computer Vision
 
 #### Object Detection
@@ -1324,6 +1326,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Self-Attention with Relative Position Representations](https://arxiv.org/pdf/1803.02155.pdf) (Peter Shaw, 2018, [note](https://www.jianshu.com/p/cb5b2d967e90))
 
+[Adaptively Sparse Transformers](https://arxiv.org/pdf/1909.00015.pdf) (Goncalo M. Correia, EMNLP 2019)
+
 [Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf) (Iz Beltagy, 2020, [note](https://zhuanlan.zhihu.com/p/134748587))
 
 [How Does Selective Mechanism Improve Self-Attention Networks?](https://arxiv.org/pdf/2005.00979.pdf) (Xinwei Geng, ACL 2020)
@@ -1353,6 +1357,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [A Discriminative Feature Learning Approach for Deep Face Recognition](http://www.eccv2016.org/files/posters/P-3B-20.pdf) (Yandong Wen, ECCV 2016, [code](https://github.com/pangyupo/mxnet_center_loss), [note](https://blog.csdn.net/oJiMoDeYe12345/article/details/78548663))
 
 [Large-Margin Softmax Loss for Convolutional Neural Networks](https://arxiv.org/pdf/1612.02295.pdf) (Weiyang Liu, ICML 2016, [code](https://github.com/wy1iu/LargeMargin_Softmax_Loss), [note](https://zhuanlan.zhihu.com/p/45448909))
+
+[From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification](http://proceedings.mlr.press/v48/martins16.pdf) (Andre F. T. Martins, ICML 2016, [code](https://github.com/KrisKorrel/sparsemax-pytorch))
 
 [Focal Loss for Dense Object Detection](https://arxiv.org/pdf/1708.02002.pdf) (Tsung-Yi Lin, ICCV 2017, [code](https://github.com/unsky/focal-loss), [note](https://zhuanlan.zhihu.com/p/49981234))
 
