@@ -22,25 +22,6 @@
 	overflow: hidden;
 }
 
-.profile__container {
-	text-align: center;
-}
-
-.profile__avatar {
-	display: inline-block;
-	width: 96px;
-	height: 96px;
-	background-size: cover;
-	border: 2px solid #fff;
-	-moz-border-radius: 50%;
-	border-radius: 50%;
-	box-shadow: 0 0 0 3px #46433a;
-}
-
-.profile__name {
-	text-align: center;
-}
-
 .widget:last-child {
 	margin-bottom: 0;
 }
