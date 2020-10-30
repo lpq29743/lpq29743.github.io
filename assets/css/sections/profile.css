@@ -4,8 +4,8 @@
 
 .profile__avatar {
 	display: inline-block;
+	width: 100%;
 	/*
-	width: 96px;
 	height: 96px;
 	*/
 	background-size: cover;
