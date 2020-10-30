@@ -1046,6 +1046,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Line Graph Enhanced AMR-to-Text Generation with Mix-Order Graph Attention Networks](https://www.aclweb.org/anthology/2020.acl-main.67.pdf) (Yanbin Zhao, ACL 2020)
 
+[Best-First Beam Search](https://arxiv.org/pdf/2007.03909.pdf) (Clara Meister, TACL 2020, [code](https://github.com/huggingface/transformers/issues/6565), [note](https://zhuanlan.zhihu.com/p/187270580))
+
+[The Curious Case of Neural Text Degeneration](https://arxiv.org/pdf/1904.09751.pdf) (Ari Holtzman, ICLR 2020, [note](https://zhuanlan.zhihu.com/p/115076102))
+
 #### Sequence to Sequence
 
 [Convolutional Sequence to Sequence Learning](https://pdfs.semanticscholar.org/bb3e/bc09b65728d6eced04929df72a006fb5210b.pdf) (Jonas Gehring, ICML 2017, [code](https://github.com/tobyyouup/conv_seq2seq), [note](https://zhuanlan.zhihu.com/p/26918935))
