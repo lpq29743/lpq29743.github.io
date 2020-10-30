@@ -580,6 +580,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Attentional Encoder Network for Targeted Sentiment Classification](https://arxiv.org/pdf/1902.09314.pdf) (Youwei Song, 2019, [code](https://github.com/songyouwei/ABSA-PyTorch/blob/master/models/aen.py), [note](https://zhuanlan.zhihu.com/p/68858093))
 
+[A Human-Like Semantic Cognition Network for Aspect-Level Sentiment Classification](https://www.aaai.org/ojs/index.php/AAAI/article/view/4635) (Zeyang Lei, AAAI 2019, [code](https://github.com/eeGuoJun/AAAI2019_HSCN))
+
 [Adapting BERT for Target-Oriented Multimodal Sentiment Classification](https://www.ijcai.org/Proceedings/2019/0751.pdf) (Jianfei Yu, IJCAI 2019, [code](https://github.com/jefferyYu/TomBERT), [note](https://zhuanlan.zhihu.com/p/239892083))
 
 [Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis](https://www.ijcai.org/Proceedings/2019/0707.pdf) (Peiqin Lin, IJCAI 2019, [code](https://github.com/lpq29743/DMMN-SDCM), [note](https://zhuanlan.zhihu.com/p/150462314))
@@ -587,6 +589,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [BERT Post-Training for Review Reading Comprehension and Aspect-based Sentiment Analysis](https://arxiv.org/pdf/1904.02232.pdf) (Hu Xu, NAACL 2019, [code](https://github.com/howardhsu/BERT-for-RRC-ABSA), [note](https://zhuanlan.zhihu.com/p/72092287))
 
 [Utilizing BERT for Aspect-Based Sentiment Analysis via Constructing Auxiliary Sentence](https://arxiv.org/pdf/1903.09588.pdf) (Chi Sun, NAACL 2019, [code](https://github.com/HSLCY/ABSA-BERT-pair), [note](https://zhuanlan.zhihu.com/p/69786643))
+
+[Replicate, Walk, and Stop on Syntax: an Effective Neural Network Model for Aspect-Level Sentiment Classification](https://www.researchgate.net/profile/Samuel_Mensah8/publication/342238197_Replicate_Walk_and_Stop_on_Syntax_An_Effective_Neural_Network_Model_for_Aspect-Level_Sentiment_Classification/links/5f0ceff392851c38a51ccd83/Replicate-Walk-and-Stop-on-Syntax-An-Effective-Neural-Network-Model-for-Aspect-Level-Sentiment-Classification.pdf) (Yaowei Zheng, AAAI 2020, [code](https://github.com/hiyouga/RepWalk))
 
 ##### Aspect Based Sentiment Analysis
 
