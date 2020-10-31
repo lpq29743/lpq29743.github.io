@@ -142,6 +142,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Learning Structured Representation for Text Classification via Reinforcement Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/zhang.pdf) (Tianyang Zhang, AAAI 2018, [code](https://github.com/keavil/AAAI18-code), [note](https://zhuanlan.zhihu.com/p/36836402))
 
+[Marrying Up Regular Expressions with Neural Networks: A Case Study for Spoken Language Understanding](https://arxiv.org/pdf/1805.05588.pdf) (Bingfeng Luo, ACL 2018, [note](https://zhuanlan.zhihu.com/p/43815470))
+
 [Translations as Additional Contexts for Sentence Classification](https://arxiv.org/pdf/1806.05516.pdf) (Reinald Kim Amplayo, IJCAI 2018, [code](https://github.com/rktamplayo/MCFA))
 
 [Baseline Needs More Love: On Simple Word-Embedding-Based Models and Associated Pooling Mechanisms](https://arxiv.org/pdf/1805.09843.pdf) (Dinghan Shen, ACL 2018, [code](https://github.com/dinghanshen/SWEM), [note](https://zhuanlan.zhihu.com/p/38056365))
