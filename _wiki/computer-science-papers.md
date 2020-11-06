@@ -40,6 +40,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Learning Word Vectors for 157 Languages](https://arxiv.org/pdf/1802.06893.pdf) (Edouard Grave, LREC 2018)
 
+[Learning Gender-Neutral Word Embeddings](https://arxiv.org/pdf/1809.01496.pdf) (Jieyu Zhao, EMNLP 2018)
+
 [Glyce: Glyph-vectors for Chinese Character Representations](https://arxiv.org/pdf/1901.10125.pdf) (Yuxian Meng, NIPS 2019, [code](https://github.com/ShannonAI/glyce), [note](https://zhuanlan.zhihu.com/p/55967737))
 
 #### Language Model
@@ -71,6 +73,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Star-Transformer](https://arxiv.org/pdf/1902.09113.pdf) (Qipeng Guo, 2019, [note](https://zhuanlan.zhihu.com/p/97888995))
 
 [Cloze-driven Pretraining of Self-attention Networks](https://arxiv.org/pdf/1903.07785.pdf) (Alexei Baevski, EMNLP 2019)
+
+[Fine-tune BERT with Sparse Self-Attention Mechanism](https://www.aclweb.org/anthology/D19-1361.pdf) (Baiyun Cui, EMNLP 2019)
 
 [Unified Language Model Pre-training for Natural Language Understanding and Generation](https://arxiv.org/pdf/1905.03197.pdf) (Li Dongmass, 2019, [note](https://zhuanlan.zhihu.com/p/68755034))
 
@@ -257,6 +261,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Improving the Similarity Measure of Determinantal Point Processes for Extractive Multi-Document Summarization](https://arxiv.org/pdf/1906.00072.pdf) (Sangwoo Cho, ACL 2019, [code](https://github.com/ucfnlp/summarization-dpp-capsnet), [note](https://wemp.app/posts/beb15b57-0dd1-4ec8-8d7a-47a1de75dbbb))
 
 [Scoring Sentence Singletons and Pairs for Abstractive Summarization](https://arxiv.org/pdf/1906.00077.pdf) (Logan Lebanoff, ACL 2019, [code](https://github.com/ucfnlp/summarization-sing-pair-mix), [note](https://www.aminer.cn/research_report/5d47c526d5e908133c9468eb))
+
+[Hierarchical Transformers for Multi-Document Summarization](https://arxiv.org/pdf/1905.13164.pdf) (Yang Liu, ACL 2019)
 
 [How to Write Summaries with Patterns? Learning towards Abstractive Summarization through Prototype Editing](https://arxiv.org/pdf/1909.08837.pdf) (Shen Gao, EMNLP 2019, [code](https://github.com/gsh199449/proto-summ), [note](https://www.icst.pku.edu.cn/xwgg/xwdt/2019/1318876.htm))
 
@@ -466,6 +472,14 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Sentiment Analysis and Opinion Mining](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.244.9480&rep=rep1&type=pdf) (Bing Liu, 2012)
 
+##### Dataset
+
+[SemEval-2014 Task 4: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S14-2004) (Maria Pontiki, SemEval 2014, [code](http://alt.qcri.org/semeval2014/task4/), [note](https://zhuanlan.zhihu.com/p/59494279))
+
+[SemEval-2015 Task 12: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S15-2082) (Maria Pontiki, SemEval 2015, [code](http://alt.qcri.org/semeval2015/task12/), [note](https://zhuanlan.zhihu.com/p/59791999))
+
+[SemEval-2016 Task 5: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S16-1002) (Maria Pontiki, SemEval 2016, [code](http://alt.qcri.org/semeval2016/task5/))
+
 ##### Sentiment Lexicon
 
 [Building Large-Scale Twitter-Specific Sentiment Lexicon: A Representation Learning Approach](http://www.aclweb.org/anthology/C14-1018) (Duyu Tang, COLING 2014)
@@ -478,13 +492,35 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [SenticNet 5: Discovering Conceptual Primitives for Sentiment Analysis by Means of Context Embeddings](http://sentic.net/senticnet-5.pdf) (Erik Cambria, AAAI 2018, [code1](http://sentic.net/downloads/), [code2](https://github.com/yurimalheiros/senticnetapi))
 
-##### Dataset
+##### Sentiment Classification
 
-[SemEval-2014 Task 4: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S14-2004) (Maria Pontiki, SemEval 2014, [code](http://alt.qcri.org/semeval2014/task4/), [note](https://zhuanlan.zhihu.com/p/59494279))
+[Recursive Deep Models for Semantic Compositionality Over a Sentiment Treebank](https://nlp.stanford.edu/~socherr/EMNLP2013_RNTN.pdf) (Richard Socher, EMNLP 2013)
 
-[SemEval-2015 Task 12: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S15-2082) (Maria Pontiki, SemEval 2015, [code](http://alt.qcri.org/semeval2015/task12/), [note](https://zhuanlan.zhihu.com/p/59791999))
+[Deep Convolutional Neural Networks for Sentiment Analysis of Short Texts](https://www.aclweb.org/anthology/C14-1008.pdf) (C´ıcero Nogueira dos Santos, COLING 2014)
 
-[SemEval-2016 Task 5: Aspect Based Sentiment Analysis](http://www.aclweb.org/anthology/S16-1002) (Maria Pontiki, SemEval 2016, [code](http://alt.qcri.org/semeval2016/task5/))
+[Document Modeling with Gated Recurrent Neural Network for Sentiment Classification](https://www.aclweb.org/anthology/D15-1167.pdf) (Duyu Tang, EMNLP 2015)
+
+[Cached Long Short-Term Memory Neural Networks for Document-Level Sentiment Classification](https://arxiv.org/pdf/1610.04989.pdf) (Jiacheng Xu, EMNLP 2016)
+
+[Neural Sentiment Classification with User and Product Attention](https://www.aclweb.org/anthology/D16-1171.pdf) (Huimin Chen, EMNLP 2016)
+
+[Combination of Convolutional and Recurrent Neural Network for Sentiment Analysis of Short Texts](https://www.aclweb.org/anthology/C16-1229.pdf) (Xingyou Wang, COLING 2016)
+
+[A Cognition Based Attention Model for Sentiment Analysis](https://www.aclweb.org/anthology/D17-1048.pdf) (Yunfei Long, EMNLP 2017)
+
+[Improving Review Representations with User Attention and Product Attention for Sentiment Classification](https://arxiv.org/pdf/1801.07861.pdf) (Zhen Wu, AAAI 2018)
+
+[SNNN: Promoting Word Sentiment and Negation in Neural Sentiment Classification](https://pdfs.semanticscholar.org/e82d/6ac78f83ceca584ed56f6c5591e964bf2406.pdf) (Qinmin Hu, AAAI 2018)
+
+[A Helping Hand: Transfer Learning for Deep Sentiment Analysis](https://www.aclweb.org/anthology/P18-1235.pdf) (Xin Dong, ACL 2018)
+
+[Cold-Start Aware User and Product Attention for Sentiment Classification](https://arxiv.org/pdf/1806.05507.pdf) (Reinald Kim Amplayo, ACL 2018)
+
+[A Lexicon-Based Supervised Attention Model for Neural Sentiment Analysis](https://www.aclweb.org/anthology/C18-1074.pdf) (Yicheng Zou, COLING 2018)
+
+[Neural Review Rating Prediction with User and Product Memory](https://dl.acm.org/doi/abs/10.1145/3357384.3358138) (Zhiguan Yuan, CIKM 2019)
+
+[Sentiment Lexicon Enhanced Neural Sentiment Classification](https://dl.acm.org/doi/abs/10.1145/3357384.3357973) (Chuhan Wu, CIKM 2019)
 
 ##### Opinion Target Extraction
 
@@ -1330,9 +1366,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Adaptively Sparse Transformers](https://arxiv.org/pdf/1909.00015.pdf) (Goncalo M. Correia, EMNLP 2019)
 
+[Self-Attention with Structural Position Representations](https://arxiv.org/pdf/1909.00383.pdf) (Xing Wang, EMNLP 2019)
+
+[Tree Transformer: Integrating Tree Structures into Self-Attention](https://arxiv.org/pdf/1909.06639.pdf) (Yau-Shian Wang, EMNLP 2019)
+
 [Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf) (Iz Beltagy, 2020, [note](https://zhuanlan.zhihu.com/p/134748587))
 
 [How Does Selective Mechanism Improve Self-Attention Networks?](https://arxiv.org/pdf/2005.00979.pdf) (Xinwei Geng, ACL 2020)
+
+[The Unstoppable Rise of Computational Linguistics in Deep Learning](https://arxiv.org/pdf/2005.06420.pdf) (James Henderson, ACL 2020)
 
 #### Optimizer
 
@@ -1358,9 +1400,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Discriminative Feature Learning Approach for Deep Face Recognition](http://www.eccv2016.org/files/posters/P-3B-20.pdf) (Yandong Wen, ECCV 2016, [code](https://github.com/pangyupo/mxnet_center_loss), [note](https://blog.csdn.net/oJiMoDeYe12345/article/details/78548663))
 
+[An exploration of softmax alternatives belonging to the spherical loss family](https://arxiv.org/pdf/1511.05042.pdf) (Alexandre de Brebisson, ICLR 2016)
+
 [Large-Margin Softmax Loss for Convolutional Neural Networks](https://arxiv.org/pdf/1612.02295.pdf) (Weiyang Liu, ICML 2016, [code](https://github.com/wy1iu/LargeMargin_Softmax_Loss), [note](https://zhuanlan.zhihu.com/p/45448909))
 
-[From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification](http://proceedings.mlr.press/v48/martins16.pdf) (Andre F. T. Martins, ICML 2016, [code](https://github.com/KrisKorrel/sparsemax-pytorch))
+[From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification](http://proceedings.mlr.press/v48/martins16.pdf) (Andre F. T. Martins, ICML 2016, [code](https://github.com/KrisKorrel/sparsemax-pytorch), [note](https://www.cs.utah.edu/~tli/posts/2019/01/blog-post-1/))
 
 [Focal Loss for Dense Object Detection](https://arxiv.org/pdf/1708.02002.pdf) (Tsung-Yi Lin, ICCV 2017, [code](https://github.com/unsky/focal-loss), [note](https://zhuanlan.zhihu.com/p/49981234))
 
@@ -1371,6 +1415,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [ArcFace: Additive Angular Margin Loss for Deep Face Recognition](https://arxiv.org/pdf/1801.07698.pdf) (Jiankang Deng, 2018, [code](https://github.com/deepinsight/insightface), [note](https://zhuanlan.zhihu.com/p/76541084))
 
 [Additive Margin Softmax for Face Verification](https://arxiv.org/pdf/1801.05599.pdf) (Feng Wang, 2018, [code](https://github.com/Joker316701882/Additive-Margin-Softmax), [note](https://blog.csdn.net/shaoxiaohu1/article/details/79139039))
+
+[On Controllable Sparse Alternatives to Softmax](http://papers.nips.cc/paper/7878-on-controllable-sparse-alternatives-to-softmax.pdf) (Anirban Laha, NIPS 2018)
+
+[DropMax: Adaptive Variational Softmax](http://papers.nips.cc/paper/7371-dropmax-adaptive-variational-softmax.pdf) (Hae Beom Lee, NIPS 2018)
 
 #### Activation Function
 
