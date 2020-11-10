@@ -656,6 +656,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Open-Domain Targeted Sentiment Analysis via Span-Based Extraction and Classification](https://arxiv.org/pdf/1906.03820.pdf) (Minghao Hu, ACL 2019, [code](https://github.com/huminghao16/SpanABSA), [note](https://zhuanlan.zhihu.com/p/144393570))
 
+[Understanding Pre-trained BERT for Aspect-based Sentiment Analysis](https://arxiv.org/pdf/2011.00169.pdf) (Hu Xu, COLING 2020, [code](https://github.com/howardhsu/BERT-for-RRC-ABSA))
+
 ##### Emotion Cause Detection
 
 [Emotion Cause Events: Corpus Construction and Analysis](https://www.researchgate.net/profile/Chu-Ren_Huang/publication/220746716_Emotion_Cause_Events_Corpus_Construction_and_Analysis/links/0912f508ff080541ac000000/Emotion-Cause-Events-Corpus-Construction-a) (Sophia Yat Mei Lee, LREC 2010)
@@ -1328,6 +1330,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/pdf/1912.04958.pdf) (Tero Karras, 2019, [note](https://blog.csdn.net/lynlindasy/article/details/104495583))
 
+##### Variational Autoencoders
+
+[Auto-Encoding Variational Bayes](https://arxiv.org/pdf/1312.6114.pdf) (Diederik P. Kingma, ICLR 2014)
+
 ##### Graph Neural Networks
 
 [The Graph Neural Network Model](http://persagen.com/files/misc/scarselli2009graph.pdf) (Franco Scarselli, 2009, [note](https://zhuanlan.zhihu.com/p/76290138))
@@ -1358,11 +1364,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention), [note](https://zhuanlan.zhihu.com/p/48508221))
 
+[Learning What’s Easy: Fully Differentiable Neural Easy-First Taggers](https://www.aclweb.org/anthology/D17-1036.pdf) (Andre F. T. Martins, EMNLP 2017)
+
 [You May Not Need Attention](https://arxiv.org/pdf/1810.13409.pdf) (Ofir Press, 2018, [code](https://github.com/ofirpress/YouMayNotNeedAttention), [note](https://zhuanlan.zhihu.com/p/48374997))
 
 [An Introductory Survey on Attention Mechanisms in NLP Problems](https://arxiv.org/pdf/1811.05544.pdf) (Dichao Hu, 2018, [note](https://blog.csdn.net/cskywit/article/details/84753293))
 
 [Self-Attention with Relative Position Representations](https://arxiv.org/pdf/1803.02155.pdf) (Peter Shaw, 2018, [note](https://www.jianshu.com/p/cb5b2d967e90))
+
+[Sparse and Constrained Attention for Neural Machine Translation](https://arxiv.org/pdf/1805.08241.pdf) (Chaitanya Malaviya, ACL 2018)
 
 [Adaptively Sparse Transformers](https://arxiv.org/pdf/1909.00015.pdf) (Goncalo M. Correia, EMNLP 2019)
 
@@ -1371,6 +1381,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Tree Transformer: Integrating Tree Structures into Self-Attention](https://arxiv.org/pdf/1909.06639.pdf) (Yau-Shian Wang, EMNLP 2019)
 
 [Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf) (Iz Beltagy, 2020, [note](https://zhuanlan.zhihu.com/p/134748587))
+
+[Linformer: Self-Attention with Linear Complexity](https://arxiv.org/pdf/2006.04768.pdf) (Sinong Wang, 2020)
 
 [How Does Selective Mechanism Improve Self-Attention Networks?](https://arxiv.org/pdf/2005.00979.pdf) (Xinwei Geng, ACL 2020)
 
@@ -1384,7 +1396,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [ADADELTA: An Adaptive Learning Rate Method](https://arxiv.org/pdf/1212.5701.pdf) (Matthew D. Zeiler, 2012, [note](https://zh.d2l.ai/chapter_optimization/adadelta.html))
 
-[ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION](https://arxiv.org/pdf/1412.6980.pdf) (Diederik P. Kingma, 2015, [note](https://www.jianshu.com/p/aebcaf8af76e))
+[ADAM: A Method for Stochastic Optimization](https://arxiv.org/pdf/1412.6980.pdf) (Diederik P. Kingma, 2015, [note](https://www.jianshu.com/p/aebcaf8af76e))
 
 [An overview of gradient descent optimization algorithms](https://arxiv.org/pdf/1609.04747.pdf) (Sebastian Ruder, 2017, [note](https://zhuanlan.zhihu.com/p/21539419))
 
