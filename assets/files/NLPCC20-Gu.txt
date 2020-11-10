@@ -1,0 +1,8 @@
+@inproceedings{gu2020lightweight,
+  title={Lightweight Multiple Perspective Fusion with Information Enriching for BERT-Based Answer Selection},
+  author={Gu, Yu and Yang, Meng and Lin, Peiqin},
+  booktitle={CCF International Conference on Natural Language Processing and Chinese Computing},
+  pages={543--554},
+  year={2020},
+  organization={Springer}
+}
