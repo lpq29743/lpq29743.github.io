@@ -870,9 +870,19 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Interpretation of Natural Language Rules in Conversational Machine Reading](https://arxiv.org/pdf/1809.01494.pdf) (Marzieh Saeidi, EMNLP 2018)
 
+[Can a Suit of Armor Conduct Electricity? A New Dataset for Open Book Question Answering](https://arxiv.org/pdf/1809.02789.pdf) (Todor Mihaylov, EMNLP 2018)
+
 [DROP: A Reading Comprehension Benchmark Requiring Discrete Reasoning Over Paragraphs](https://arxiv.org/pdf/1903.00161.pdf) (Dheeru Dua, NAACL 2019, [code](https://allennlp.org/drop))
 
+[CommonsenseQA: A Question Answering Challenge Targeting Commonsense Knowledge](https://arxiv.org/pdf/1811.00937.pdf) (Alon Talmor, NAACL 2019, [note](https://little1tow.github.io/2019/06/14/2019-05-31/))
+
 [Quoref: A Reading Comprehension Dataset with Questions Requiring Coreferential Reasoning](https://arxiv.org/pdf/1908.05803.pdf) (Pradeep Dasigi, EMNLP 2019, [code](https://allennlp.org/quoref))
+
+[COSMOS QA: Machine Reading Comprehension with Contextual Commonsense Reasoning](https://arxiv.org/pdf/1909.00277.pdf) (Lifu Huang, EMNLP 2019)
+
+[SocialIQA: Commonsense Reasoning about Social Interactions](https://arxiv.org/pdf/1904.09728.pdf) (Maarten Sap, EMNLP 2019)
+
+[PIQA: Reasoning about Physical Commonsense in Natural Language](https://arxiv.org/pdf/1911.11641.pdf) (Yonatan Bisk, AAAI 2020)
 
 ##### Machine Reading Comprehension
 
@@ -957,6 +967,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [CN-DBpedia: A Never-Ending Chinese Knowledge Extraction System](https://link.springer.com/chapter/10.1007/978-3-319-60045-1_44) (Bo Xu, IEA-AIE 2017, [code](http://openkg.cn/dataset/cndbpedia), [note](https://blog.csdn.net/u013007703/article/details/90376440))
 
 [ConceptNet 5.5: An Open Multilingual Graph of General Knowledge](https://arxiv.org/pdf/1612.03975.pdf) (Robyn Speer, AAAI 2017, [code](http://conceptnet.io/))
+
+[ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning](https://arxiv.org/pdf/1811.00146.pdf) (Maarten Sap, AAAI 2019)
+
+[GenericsKB: A Knowledge Base of Generic Statements](https://arxiv.org/pdf/2005.00660.pdf) (Sumithra Bhakthavatsalam, 2020, [code](https://allenai.org/data/genericskb))
 
 ##### Knowledge Graph Embedding and Completion
 
