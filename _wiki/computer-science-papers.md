@@ -102,6 +102,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [ALBERT: A Lite BERT for Self-supervised Learning of Language Representations](https://arxiv.org/pdf/1909.11942.pdf) (Zhenzhong Lan, ICLR 2020, [note](https://www.zhihu.com/question/347898375/answer/863537122))
 
+[Plug and Play Language Models: a Simple Approach to Controlled Text Generation](https://arxiv.org/pdf/1912.02164.pdf) (Sumanth Dathathri, ICLR 2020)
+
 [ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators](https://arxiv.org/pdf/2003.10555.pdf) (Kevin Clark, ICLR 2020, [code](https://github.com/google-research/electra), [note](https://zhuanlan.zhihu.com/p/89763176))
 
 [Language Models are Few-Shot Learners](https://arxiv.org/pdf/2005.14165.pdf) (Tom B. Brown, 2020, [code](https://github.com/openai/gpt-3), [note](https://zhuanlan.zhihu.com/p/144764546))
@@ -263,6 +265,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Scoring Sentence Singletons and Pairs for Abstractive Summarization](https://arxiv.org/pdf/1906.00077.pdf) (Logan Lebanoff, ACL 2019, [code](https://github.com/ucfnlp/summarization-sing-pair-mix), [note](https://www.aminer.cn/research_report/5d47c526d5e908133c9468eb))
 
 [Hierarchical Transformers for Multi-Document Summarization](https://arxiv.org/pdf/1905.13164.pdf) (Yang Liu, ACL 2019)
+
+[HIBERT: Document Level Pre-training of Hierarchical Bidirectional Transformers for Document Summarization](https://www.aclweb.org/anthology/P19-1499.pdf) (Xingxing Zhang, ACL 2019, [note](https://zhuanlan.zhihu.com/p/93598582))
 
 [How to Write Summaries with Patterns? Learning towards Abstractive Summarization through Prototype Editing](https://arxiv.org/pdf/1909.08837.pdf) (Shen Gao, EMNLP 2019, [code](https://github.com/gsh199449/proto-summ), [note](https://www.icst.pku.edu.cn/xwgg/xwdt/2019/1318876.htm))
 
@@ -629,6 +633,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Utilizing BERT for Aspect-Based Sentiment Analysis via Constructing Auxiliary Sentence](https://arxiv.org/pdf/1903.09588.pdf) (Chi Sun, NAACL 2019, [code](https://github.com/HSLCY/ABSA-BERT-pair), [note](https://zhuanlan.zhihu.com/p/69786643))
 
 [Replicate, Walk, and Stop on Syntax: an Effective Neural Network Model for Aspect-Level Sentiment Classification](https://www.researchgate.net/profile/Samuel_Mensah8/publication/342238197_Replicate_Walk_and_Stop_on_Syntax_An_Effective_Neural_Network_Model_for_Aspect-Level_Sentiment_Classification/links/5f0ceff392851c38a51ccd83/Replicate-Walk-and-Stop-on-Syntax-An-Effective-Neural-Network-Model-for-Aspect-Level-Sentiment-Classification.pdf) (Yaowei Zheng, AAAI 2020, [code](https://github.com/hiyouga/RepWalk))
+
+[Inducing Target-Specific Latent Structures for Aspect Sentiment Classification](https://www.aclweb.org/anthology/2020.emnlp-main.451.pdf) (Chenhua Chen, EMNLP 2020, [note](https://zhuanlan.zhihu.com/p/311246774))
 
 ##### Aspect Based Sentiment Analysis
 
@@ -1366,6 +1372,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Learning What’s Easy: Fully Differentiable Neural Easy-First Taggers](https://www.aclweb.org/anthology/D17-1036.pdf) (Andre F. T. Martins, EMNLP 2017)
 
+[Structured Attention Networks](https://arxiv.org/pdf/1702.00887.pdf) (Yoon Kim, ICLR 2017)
+
 [You May Not Need Attention](https://arxiv.org/pdf/1810.13409.pdf) (Ofir Press, 2018, [code](https://github.com/ofirpress/YouMayNotNeedAttention), [note](https://zhuanlan.zhihu.com/p/48374997))
 
 [An Introductory Survey on Attention Mechanisms in NLP Problems](https://arxiv.org/pdf/1811.05544.pdf) (Dichao Hu, 2018, [note](https://blog.csdn.net/cskywit/article/details/84753293))
@@ -1374,11 +1382,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Sparse and Constrained Attention for Neural Machine Translation](https://arxiv.org/pdf/1805.08241.pdf) (Chaitanya Malaviya, ACL 2018)
 
+[Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned](https://arxiv.org/pdf/1905.09418.pdf) (Elena Voita, ACL 2019)
+
 [Adaptively Sparse Transformers](https://arxiv.org/pdf/1909.00015.pdf) (Goncalo M. Correia, EMNLP 2019)
 
 [Self-Attention with Structural Position Representations](https://arxiv.org/pdf/1909.00383.pdf) (Xing Wang, EMNLP 2019)
 
 [Tree Transformer: Integrating Tree Structures into Self-Attention](https://arxiv.org/pdf/1909.06639.pdf) (Yau-Shian Wang, EMNLP 2019)
+
+[Revealing the Dark Secrets of BERT](https://arxiv.org/pdf/1908.08593.pdf) (Olga Kovaleva, EMNLP 2019, [note](https://zhuanlan.zhihu.com/p/117645185))
 
 [Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf) (Iz Beltagy, 2020, [note](https://zhuanlan.zhihu.com/p/134748587))
 
@@ -1387,6 +1399,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [How Does Selective Mechanism Improve Self-Attention Networks?](https://arxiv.org/pdf/2005.00979.pdf) (Xinwei Geng, ACL 2020)
 
 [The Unstoppable Rise of Computational Linguistics in Deep Learning](https://arxiv.org/pdf/2005.06420.pdf) (James Henderson, ACL 2020)
+
+[ETC: Encoding Long and Structured Data in Transformers](https://www.aclweb.org/anthology/2020.emnlp-main.19.pdf) (Joshua Ainslie, EMNLP 2020)
 
 #### Optimizer
 
