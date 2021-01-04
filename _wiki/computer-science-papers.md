@@ -800,27 +800,61 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Dialog State Tracking: A Neural Reading Comprehension Approach](https://arxiv.org/pdf/1908.01946.pdf) (Shuyang Gao, SIGDIAL 2019)
 
-##### Task-Oriented Dialogue System
+##### Dialogue Act Recognition
 
-[Sequicity: Simplifying Task-oriented Dialogue Systems with Single Sequence-to-Sequence Architectures](https://www.aclweb.org/anthology/P18-1133.pdf) (Wenqiang Lei, ACL 2018, [code](https://github.com/WING-NUS/sequicity), [note](https://blog.csdn.net/weixin_40533355/article/details/82997788))
+[Dialogue Act Modeling for Automatic Tagging and Recognition of Conversational Speech](https://www.aclweb.org/anthology/J00-3003.pdf) (Andreas Stolcke, CL 2000)
 
-[Multi-level Memory for Task Oriented Dialogs](https://arxiv.org/pdf/1810.10647.pdf) (Revanth Reddy, NAACL 2019, [note](https://zhuanlan.zhihu.com/p/64595503))
+[Dialogue Act Recognition via CRF-Attentive Structured Network](https://arxiv.org/pdf/1711.05568.pdf) (Zheqian Chen, SIGIR 2018)
 
-[Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/1905.08743.pdf) (Chien-Sheng Wu, ACL 2019, [code](https://github.com/jasonwu0731/trade-dst), [note](https://zhuanlan.zhihu.com/p/72580652))
+[Dialogue Act Sequence Labeling using Hierarchical encoder with CRF](https://arxiv.org/pdf/1709.04250.pdf) (Harshit Kumar, AAAI 2018, [code](https://github.com/YanWenqiang/HBLSTM-CRF))
 
-[A Working Memory Model for Task-oriented Dialog Response Generation](https://www.aclweb.org/anthology/P19-1258.pdf) (Xiuyi Chen, ACL 2019, [note](https://blog.csdn.net/weixin_44487404/article/details/105665796))
+[Dialogue Act Classification with Context-Aware Self-Attention](https://www.aclweb.org/anthology/N19-1373.pdf) (Vipul Raheja, NAACL 2019)
 
-[Global-to-local Memory Pointer Networks for Task-Oriented Dialogue](https://arxiv.org/pdf/1901.04713.pdf) (Chien-Sheng Wu, ICLR 2019, [code](https://github.com/jasonwu0731/GLMP), [note](https://zhuanlan.zhihu.com/p/57535074))
+[A Dual-Attention Hierarchical Recurrent Neural Network for Dialogue Act Classification](https://arxiv.org/pdf/1810.09154.pdf) (Ruizhe Li, CONLL 2019)
 
-[Entity-Consistent End-to-end Task-Oriented Dialogue System with KB Retriever](https://arxiv.org/pdf/1909.06762.pdf) (Libo Qin, EMNLP 2019, [code](https://github.com/yizhen20133868/Retriever-Dialogue))
+##### Dialogue Emotion Recognition
+
+[DialogueRNN: An Attentive RNN for Emotion Detection in Conversations](https://arxiv.org/pdf/1811.00405.pdf) (Navonil Majumder, AAAI 2019, [note](https://zhuanlan.zhihu.com/p/68497862))
+
+[HiGRU: Hierarchical Gated Recurrent Units for Utterance-level Emotion Recognition](https://arxiv.org/pdf/1904.04446.pdf) (Wenxiang Jiao, NAACL 2019)
+
+[Modeling both Context- and Speaker-Sensitive Dependence for Emotion Detection in Multi-speaker Conversations](https://www.ijcai.org/Proceedings/2019/0752.pdf) (Dong Zhang, IJCAI 2019)
+
+[DialogueGCN: A Graph Convolutional Neural Network for Emotion Recognition in Conversation](https://arxiv.org/pdf/1908.11540.pdf) (Deepanway Ghosal, EMNLP 2019)
+
+[Knowledge-Enriched Transformer for Emotion Detection in Textual Conversations](https://arxiv.org/pdf/1909.10681.pdf) (Peixiang Zhong, EMNLP 2019, [code](https://github.com/zhongpeixiang/KET), [note](https://zhuanlan.zhihu.com/p/90548422))
+
+##### Dialogue Summarization
+
+[Unsupervised Abstractive Meeting Summarization with Multi-Sentence Compression and Budgeted Submodular Maximization](https://www.aclweb.org/anthology/P18-1062.pdf) (Guokan Shang, ACL 2018)
+
+[Abstractive Dialogue Summarization with Sentence-Gated Modeling Optimized by Dialogue Acts](https://arxiv.org/pdf/1809.05715.pdf) (Chih-Wen Goo SLT 2018)
+
+[Abstractive Meeting Summarization via Hierarchical Adaptive Segmental Network Learning](https://dl.acm.org/doi/10.1145/3308558.3313619) (Zhou Zhao, WWW 2019)
+
+[Automatic Dialogue Summary Generation for Customer Service](https://dl.acm.org/doi/10.1145/3292500.3330683) (Chunyi Liu, KDD 2019)
+
+[Topic-aware Pointer-Generator Networks for Summarizing Spoken Conversations](https://arxiv.org/pdf/1910.01335.pdf) (Zhengyuan Liu, ASRU 2019)
+
+[Keep Meeting Summaries on Topic: Abstractive Multi-Modal Meeting Summarization](https://www.aclweb.org/anthology/P19-1210.pdf) (Manling Li, ACL 2019)
+
+[End-to-End Abstractive Summarization for Meetings](https://arxiv.org/pdf/2004.02016v1.pdf) (Chenguang Zhu, 2020)
 
 ##### Dialogue Generation
+
+[Semantically Conditioned LSTM-based Natural Language Generation for Spoken Dialogue Systems](https://www.aclweb.org/anthology/D15-1199.pdf) (Tsung-Hsien Wen, EMNLP 2015)
 
 [Building End-to-End Dialogue Systems Using Generative Hierarchical Neural Network Models](https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/11957/12160) (Iulian V.Serban, AAAI 2016)
 
 [How NOT To Evaluate Your Dialogue System: An Empirical Study of Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.org/pdf/1603.08023.pdf) (Chia-Wei Liu, EMNLP 2016)
 
+[A Diversity-Promoting Objective Function for Neural Conversation Models](https://arxiv.org/pdf/1510.03055.pdf) (Jiwei Li, NAACL 2016, [note](https://zhuanlan.zhihu.com/p/35496909))
+
 [Deep Reinforcement Learning for Dialogue Generation](https://arxiv.org/pdf/1606.01541.pdf) (Jiwei Li, 2016, [note](https://zhuanlan.zhihu.com/p/21587758))
+
+[Mechanism-Aware Neural Machine for Dialogue Response Generation](https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14471/14267) (Ganbin Zhou, AAAI 2017)
+
+[Generating High-Quality and Informative Conversation Responses with Sequence-to-Sequence Models](https://arxiv.org/pdf/1701.03185.pdf) (Louis Shao, EMNLP 2017)
 
 [Knowledge Diffusion for Neural Dialogue Generation](https://www.aclweb.org/anthology/P18-1138.pdf) (Shuman Liu, ACL 2018, [note](https://zhuanlan.zhihu.com/p/51939126))
 
@@ -837,6 +871,38 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Semantically Conditioned Dialog Response Generation via Hierarchical Disentangled Self-Attention](https://arxiv.org/pdf/1905.12866.pdf) (Wenhu Chen, ACL 2019, [code](https://github.com/wenhuchen/HDSA-Dialog), [note](https://zhuanlan.zhihu.com/p/82460398))
 
 [Generating Responses with a Specific Emotion in Dialog](https://www.aclweb.org/anthology/P19-1359.pdf) (Zhenqiao Song, ACL 2019, [note](https://www.dazhuanlan.com/2020/02/10/5e403d064876d/))
+
+##### Task-Oriented Dialogue System
+
+[Sequicity: Simplifying Task-oriented Dialogue Systems with Single Sequence-to-Sequence Architectures](https://www.aclweb.org/anthology/P18-1133.pdf) (Wenqiang Lei, ACL 2018, [code](https://github.com/WING-NUS/sequicity), [note](https://blog.csdn.net/weixin_40533355/article/details/82997788))
+
+[Multi-level Memory for Task Oriented Dialogs](https://arxiv.org/pdf/1810.10647.pdf) (Revanth Reddy, NAACL 2019, [note](https://zhuanlan.zhihu.com/p/64595503))
+
+[Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/1905.08743.pdf) (Chien-Sheng Wu, ACL 2019, [code](https://github.com/jasonwu0731/trade-dst), [note](https://zhuanlan.zhihu.com/p/72580652))
+
+[A Working Memory Model for Task-oriented Dialog Response Generation](https://www.aclweb.org/anthology/P19-1258.pdf) (Xiuyi Chen, ACL 2019, [note](https://blog.csdn.net/weixin_44487404/article/details/105665796))
+
+[Global-to-local Memory Pointer Networks for Task-Oriented Dialogue](https://arxiv.org/pdf/1901.04713.pdf) (Chien-Sheng Wu, ICLR 2019, [code](https://github.com/jasonwu0731/GLMP), [note](https://zhuanlan.zhihu.com/p/57535074))
+
+[Entity-Consistent End-to-end Task-Oriented Dialogue System with KB Retriever](https://arxiv.org/pdf/1909.06762.pdf) (Libo Qin, EMNLP 2019, [code](https://github.com/yizhen20133868/Retriever-Dialogue))
+
+[Recommendation as a Communication Game: Self-Supervised Bot-Play for Goal-oriented Dialogue](https://arxiv.org/pdf/1909.03922.pdf) (Dongyeop Kang, EMNLP 2019)
+
+[Leveraging Historical Interaction Data for Improving Conversational Recommender System](https://arxiv.org/pdf/2008.08247.pdf) (Kun Zhou, CIKM 2020)
+
+[Improving Conversational Recommender Systems via Knowledge Graph based Semantic Fusion](https://arxiv.org/pdf/2007.04032.pdf) (Kun Zhou, KDD 2020, [note](https://cloud.tencent.com/developer/article/1663741))
+
+[Towards Conversational Recommendation over Multi-Type Dialogs](https://arxiv.org/pdf/2005.03954.pdf) (Zeming Liu, ACL 2020, [note](https://www.jiqizhixin.com/articles/2020-09-10-3))
+
+##### Conversational Recommender System
+
+[Towards Conversational Recommender Systems](https://www.kdd.org/kdd2016/papers/files/rfp0063-christakopoulouA.pdf) (Konstantina Christakopoulou, KDD 2016)
+
+[Conversational Recommender System](https://arxiv.org/pdf/1806.03277.pdf) (Yueming Sun, SIGIR 2018)
+
+[Towards Deep Conversational Recommendations](https://papers.nips.cc/paper/2018/file/800de15c79c8d840f4e78d3af937d4d4-Paper.pdf) (Raymond Li, NIPS 2018, [note](http://www.xuwei.io/2019/05/02/%E3%80%8Atowards-deep-conversational-recommendations%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/))
+
+[Towards Knowledge-Based Recommender Dialog System](https://arxiv.org/pdf/1908.05391.pdf) (Qibin Chen, EMNLP 2019, [code](https://github.com/THUDM/KBRD), [note](https://zhuanlan.zhihu.com/p/270386920))
 
 #### Question Answering and Machine Reading Comprehension
 
@@ -955,6 +1021,22 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [BERT with History Answer Embedding for Conversational Question Answering](https://arxiv.org/pdf/1905.05412.pdf) (Chen Qu, SIGIR 2019, [code](https://github.com/prdwb/bert_hae))
 
 [Attentive History Selection for Conversational Question Answering](https://arxiv.org/pdf/1908.09456.pdf) (Chen Qu, CIKM 2019, [code](https://github.com/prdwb/attentive_history_selection), [note](https://zhuanlan.zhihu.com/p/129800180))
+
+##### Visual Question Answering
+
+[Explicit Knowledge-based Reasoning for Visual Question Answering](https://arxiv.org/pdf/1511.02570.pdf) (Peng Wang, IJCAI 2017)
+
+[FVQA: Fact-based Visual Question Answering](https://arxiv.org/pdf/1606.05433.pdf) (Peng Wang, TPAMI 2018, [note](https://zhuanlan.zhihu.com/p/66282581))
+
+[Straight to the Facts: Learning Knowledge Base Retrieval for Factual Visual Question Answering](https://arxiv.org/pdf/1809.01124.pdf) (Medhini Narasimhan, ECCV 2018)
+
+[Out of the Box: Reasoning with Graph Convolution Nets for Factual Visual Question Answering](https://arxiv.org/pdf/1811.00538.pdf) (Medhini Narasimhan, NIPS 2018)
+
+[OK-VQA: A Visual Question Answering Benchmark Requiring External Knowledge](https://arxiv.org/pdf/1906.00067.pdf) (Kenneth Marino, CVPR 2019, [code](https://okvqa.allenai.org/), [note](https://blog.csdn.net/z704630835/article/details/100095787))
+
+[KnowIT VQA: Answering Knowledge-Based Questions about Videos](https://ojs.aaai.org/index.php/AAAI/article/view/6713) (Noa Garcia, AAAI 2020)
+
+[BERT Representations for Video Question Answering](http://openaccess.thecvf.com/content_WACV_2020/html/Yang_BERT_representations_for_Video_Question_Answering_WACV_2020_paper.html) (Zekun Yang, WACV 2020)
 
 #### Knowledge Graph
 
