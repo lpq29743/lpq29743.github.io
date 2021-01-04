@@ -766,8 +766,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine](http://www.aclweb.org/anthology/P/P17/P17-2079.pdf) (Minghui Qiu, ACL 2017, [note](https://blog.csdn.net/u011239443/article/details/83829265))
 
-[ICON: Interactive Conversational Memory Network for Multimodal Emotion Detection](https://www.aclweb.org/anthology/D18-1280.pdf) (Devamanyu Hazarika, EMNLP 2018, [note](https://zhuanlan.zhihu.com/p/63506119))
-
 [Pretraining Methods for Dialog Context Representation Learning](https://arxiv.org/pdf/1906.00414.pdf) (Shikib Mehri, ACL 2019, [note](https://zhuanlan.zhihu.com/p/82001834))
 
 ##### Dataset
@@ -800,6 +798,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Dialog State Tracking: A Neural Reading Comprehension Approach](https://arxiv.org/pdf/1908.01946.pdf) (Shuyang Gao, SIGDIAL 2019)
 
+[Scalable and Accurate Dialogue State Tracking via Hierarchical Sequence Generation](https://arxiv.org/pdf/1909.00754.pdf) (Liliang Ren, EMNLP 2019)
+
+[Efficient Dialogue State Tracking by Selectively Overwriting Memory](https://arxiv.org/pdf/1911.03906.pdf) (Sungdong Kim, ACL 2020)
+
 ##### Dialogue Act Recognition
 
 [Dialogue Act Modeling for Automatic Tagging and Recognition of Conversational Speech](https://www.aclweb.org/anthology/J00-3003.pdf) (Andreas Stolcke, CL 2000)
@@ -808,11 +810,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Dialogue Act Sequence Labeling using Hierarchical encoder with CRF](https://arxiv.org/pdf/1709.04250.pdf) (Harshit Kumar, AAAI 2018, [code](https://github.com/YanWenqiang/HBLSTM-CRF))
 
-[Dialogue Act Classification with Context-Aware Self-Attention](https://www.aclweb.org/anthology/N19-1373.pdf) (Vipul Raheja, NAACL 2019)
-
 [A Dual-Attention Hierarchical Recurrent Neural Network for Dialogue Act Classification](https://arxiv.org/pdf/1810.09154.pdf) (Ruizhe Li, CONLL 2019)
 
+[Dialogue Act Classification with Context-Aware Self-Attention](https://www.aclweb.org/anthology/N19-1373.pdf) (Vipul Raheja, NAACL 2019)
+
 ##### Dialogue Emotion Recognition
+
+[ICON: Interactive Conversational Memory Network for Multimodal Emotion Detection](https://www.aclweb.org/anthology/D18-1280.pdf) (Devamanyu Hazarika, EMNLP 2018, [note](https://zhuanlan.zhihu.com/p/63506119))
 
 [DialogueRNN: An Attentive RNN for Emotion Detection in Conversations](https://arxiv.org/pdf/1811.00405.pdf) (Navonil Majumder, AAAI 2019, [note](https://zhuanlan.zhihu.com/p/68497862))
 
@@ -886,13 +890,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Entity-Consistent End-to-end Task-Oriented Dialogue System with KB Retriever](https://arxiv.org/pdf/1909.06762.pdf) (Libo Qin, EMNLP 2019, [code](https://github.com/yizhen20133868/Retriever-Dialogue))
 
-[Recommendation as a Communication Game: Self-Supervised Bot-Play for Goal-oriented Dialogue](https://arxiv.org/pdf/1909.03922.pdf) (Dongyeop Kang, EMNLP 2019)
-
-[Leveraging Historical Interaction Data for Improving Conversational Recommender System](https://arxiv.org/pdf/2008.08247.pdf) (Kun Zhou, CIKM 2020)
-
-[Improving Conversational Recommender Systems via Knowledge Graph based Semantic Fusion](https://arxiv.org/pdf/2007.04032.pdf) (Kun Zhou, KDD 2020, [note](https://cloud.tencent.com/developer/article/1663741))
-
-[Towards Conversational Recommendation over Multi-Type Dialogs](https://arxiv.org/pdf/2005.03954.pdf) (Zeming Liu, ACL 2020, [note](https://www.jiqizhixin.com/articles/2020-09-10-3))
+[TOD-BERT: Pre-trained Natural Language Understanding for Task-Oriented Dialogue](https://arxiv.org/pdf/2004.06871.pdf) (Chien-Sheng Wu, EMNLP 2020)
 
 ##### Conversational Recommender System
 
@@ -903,6 +901,14 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Towards Deep Conversational Recommendations](https://papers.nips.cc/paper/2018/file/800de15c79c8d840f4e78d3af937d4d4-Paper.pdf) (Raymond Li, NIPS 2018, [note](http://www.xuwei.io/2019/05/02/%E3%80%8Atowards-deep-conversational-recommendations%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/))
 
 [Towards Knowledge-Based Recommender Dialog System](https://arxiv.org/pdf/1908.05391.pdf) (Qibin Chen, EMNLP 2019, [code](https://github.com/THUDM/KBRD), [note](https://zhuanlan.zhihu.com/p/270386920))
+
+[Recommendation as a Communication Game: Self-Supervised Bot-Play for Goal-oriented Dialogue](https://arxiv.org/pdf/1909.03922.pdf) (Dongyeop Kang, EMNLP 2019)
+
+[Leveraging Historical Interaction Data for Improving Conversational Recommender System](https://arxiv.org/pdf/2008.08247.pdf) (Kun Zhou, CIKM 2020)
+
+[Improving Conversational Recommender Systems via Knowledge Graph based Semantic Fusion](https://arxiv.org/pdf/2007.04032.pdf) (Kun Zhou, KDD 2020, [note](https://cloud.tencent.com/developer/article/1663741))
+
+[Towards Conversational Recommendation over Multi-Type Dialogs](https://arxiv.org/pdf/2005.03954.pdf) (Zeming Liu, ACL 2020, [note](https://www.jiqizhixin.com/articles/2020-09-10-3))
 
 #### Question Answering and Machine Reading Comprehension
 
