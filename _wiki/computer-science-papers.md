@@ -846,6 +846,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Dialogue Act Classification with Context-Aware Self-Attention](https://www.aclweb.org/anthology/N19-1373.pdf) (Vipul Raheja, NAACL 2019)
 
+[Modeling Long-Range Context for Concurrent Dialogue Acts Recognition](https://dl.acm.org/doi/abs/10.1145/3357384.3358145) (Yue Yu, CIKM 2019)
+
+[Towards Emotion-aided Multi-modal Dialogue Act Classification](https://www.aclweb.org/anthology/2020.acl-main.402.pdf) (Tulika Saha, ACL 2020)
+
 ##### Dialogue Emotion Recognition
 
 [Toward Detecting Emotions in Spoken Dialogs](https://ieeexplore.ieee.org/abstract/document/1395974) (Chul Min Lee, 2005)
@@ -958,7 +962,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Entity-Consistent End-to-end Task-Oriented Dialogue System with KB Retriever](https://arxiv.org/pdf/1909.06762.pdf) (Libo Qin, EMNLP 2019, [code](https://github.com/yizhen20133868/Retriever-Dialogue))
 
+[Hello, It's GPT-2 -- How Can I Help You? Towards the Use of Pretrained Language Models for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/1907.05774.pdf) (Paweł Budzianowski, 2019)
+
 [TOD-BERT: Pre-trained Natural Language Understanding for Task-Oriented Dialogue](https://arxiv.org/pdf/2004.06871.pdf) (Chien-Sheng Wu, EMNLP 2020)
+
+[MinTL: Minimalist Transfer Learning for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/2009.12005.pdf) (Zhaojiang Lin, EMNLP 2020)
+
+[Learning Knowledge Bases with Parameters for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/2009.13656.pdf) (Andrea Madotto, EMNLP 2020 Findings)
 
 ##### Conversational Recommender System
 
