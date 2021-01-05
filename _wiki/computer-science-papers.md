@@ -252,7 +252,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Reinforced Topic-Aware Convolutional Sequence-to-Sequence Model for Abstractive Text Summarization](https://www.ijcai.org/proceedings/2018/0619.pdf) (Li Wang, IJCAI 2018, [note](https://blog.csdn.net/imsuhxz/article/details/82655811))
 
-[Controllable Abstractive Summarization](https://aclweb.org/anthology/W18-2706) (Angela Fan, ACL Workshop 2018)
+[Controllable Abstractive Summarization](https://aclweb.org/anthology/W18-2706) (Angela Fan, ACL 2018)
 
 [Don’t Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://aclweb.org/anthology/D18-1206) (Shashi Narayan, EMNLP 2018, [code](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Topic-ConvS2S), [note](https://zhuanlan.zhihu.com/p/92994889))
 
@@ -768,7 +768,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine](http://www.aclweb.org/anthology/P/P17/P17-2079.pdf) (Minghui Qiu, ACL 2017, [note](https://blog.csdn.net/u011239443/article/details/83829265))
 
+[Neural Approaches to Conversational AI](https://dl.acm.org/doi/abs/10.1145/3209978.3210183) (Jianfeng Gao, SIGIR 2018)
+
 [Pretraining Methods for Dialog Context Representation Learning](https://arxiv.org/pdf/1906.00414.pdf) (Shikib Mehri, ACL 2019, [note](https://zhuanlan.zhihu.com/p/82001834))
+
+[The Design and Implementation of XiaoIce, an Empathetic Social Chatbot](https://www.mitpressjournals.org/doi/full/10.1162/coli_a_00368) (Li Zhou, CL 2020)
+
+[Challenges in Building Intelligent Open-domain Dialog Systems](https://dl.acm.org/doi/abs/10.1145/3383123) (Minlie Huang, TIS 2020)
 
 ##### Dataset
 
@@ -781,6 +787,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Towards Scalable Multi-domain Conversational Agents: The Schema-Guided Dialogue Dataset](https://arxiv.org/pdf/1909.05855.pdf) (Abhinav Rastogi, AAAI 2020, [code](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue), [note](https://blog.csdn.net/weixin_44385551/article/details/103098092))
 
 [CrossWOZ: A Large-Scale Chinese Cross-Domain Task-Oriented Dialogue Dataset](https://arxiv.org/pdf/2002.11893.pdf) (Qi Zhu, TACL 2020, [code](https://github.com/thu-coai/CrossWOZ), [note](https://zhuanlan.zhihu.com/p/115366490))
+
+[A Large-Scale Chinese Short-Text Conversation Dataset](https://link.springer.com/chapter/10.1007/978-3-030-60450-9_8) (Yida Wang, NLPCC 2020)
 
 ##### Dialogue State Tracking
 
@@ -892,11 +900,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Knowledge Diffusion for Neural Dialogue Generation](https://www.aclweb.org/anthology/P18-1138.pdf) (Shuman Liu, ACL 2018, [note](https://zhuanlan.zhihu.com/p/51939126))
 
+[Generating Informative and Diverse Conversational Responses via Adversarial Information Maximization](https://papers.nips.cc/paper/2018/file/23ce1851341ec1fa9e0c259de10bf87c-Paper.pdf) (Yizhe Zhang, NIPS 2018)
+
 [Hierarchical Variational Memory Network for Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3178876.3186077) (Hongshen Chen, WWW 2018, [code](https://github.com/chenhongshen/HVMN), [note](https://blog.csdn.net/qq_38684093/article/details/84038264))
 
 [Explicit State Tracking with Semi-Supervisionfor Neural Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3269206.3271683) (Xisen Jin, CIKM 2018, [code](https://github.com/AuCson/SEDST), [note](https://zhuanlan.zhihu.com/p/62306940))
 
 [A Syntactically Constrained Bidirectional-Asynchronous Approach for Emotional Conversation Generation](https://www.aclweb.org/anthology/D18-1071.pdf) (Jingyuan Li, EMNLP 2018)
+
+[Jointly Optimizing Diversity and Relevance in Neural Response Generation](https://arxiv.org/pdf/1902.11205.pdf) (Xiang Gao, NAACL 2019, [code](https://github.com/golsun/SpaceFusion?utm_source=catalyzex.com))
 
 [Domain Adaptive Dialog Generation via Meta Learning](https://arxiv.org/pdf/1906.03520.pdf) (Kun Qian, ACL 2019, [code](https://github.com/qbetterk/DAML), [note](https://liusih.github.io/2019/09/09/Domain%20Adaptive%20Dialog%20Generation%20via%20Meta%20Learning/))
 
@@ -906,7 +918,35 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Generating Responses with a Specific Emotion in Dialog](https://www.aclweb.org/anthology/P19-1359.pdf) (Zhenqiao Song, ACL 2019, [note](https://www.dazhuanlan.com/2020/02/10/5e403d064876d/))
 
+[Hierarchical Reinforcement Learning for Open-Domain Dialog](https://ojs.aaai.org/index.php/AAAI/article/view/6400) (Abdelrhman Saleh, AAAI 2020)
+
+[RefNet: A Reference-Aware Network for Background Based Conversation](https://ojs.aaai.org/index.php/AAAI/article/view/6370) (Chuan Meng, AAAI 2020)
+
+[Thinking Globally, Acting Locally: Distantly Supervised Global-to-Local Knowledge Selection for Background Based Conversation](https://ojs.aaai.org/index.php/AAAI/article/view/6395) (Pengjie Ren, AAAI 2020)
+
+[A Neural Topical Expansion Framework for Unstructured Persona-oriented Dialogue Generation](https://arxiv.org/pdf/2002.02153.pdf) (Minghong Xu, ECAI 2020)
+
+[DialoGPT: Large-Scale Generative Pre-training for Conversational Response Generation](https://arxiv.org/pdf/1911.00536.pdf) (Yizhe Zhang, ACL 2020, [code](https://github.com/microsoft/DialoGPT?utm_source=catalyzex.com))
+
+[PLATO: Pre-trained Dialogue Generation Model with Discrete Latent Variable](https://arxiv.org/pdf/1910.07931.pdf) (Siqi Bao, ACL 2020)
+
+[CDL: Curriculum Dual Learning for Emotion-Controllable Response Generation](https://arxiv.org/pdf/2005.00329.pdf) (Lei Shen, ACL 2020)
+
+[An Empirical Investigation of Pre-Trained Transformer Language Models for Open-Domain Dialogue Generation](https://arxiv.org/pdf/2003.04195.pdf) (Piji Li, 2020)
+
+[Knowledge-Grounded Dialogue Generation with Pre-trained Language Models](https://arxiv.org/pdf/2010.08824.pdf) (Xueliang Zhao, EMNLP 2020)
+
+[Plug-and-Play Conversational Models](https://arxiv.org/pdf/2010.04344.pdf) (Andrea Madotto, EMNLP 2020 Findings)
+
+[Bridging the Gap between Prior and Posterior Knowledge Selection for Knowledge-Grounded Dialogue Generation](https://www.aclweb.org/anthology/2020.emnlp-main.275.pdf) (Xiuyi Chen, EMNLP 2020)
+
+[EmpDG: Multiresolution Interactive Empathetic Dialogue Generation](https://arxiv.org/pdf/1911.08698.pdf) (Qintong Li, COLING 2020)
+
+[Stylized Dialogue Response Generation Using Stylized Unpaired Texts](https://arxiv.org/pdf/2009.12719.pdf) (Yinhe Zheng, AAAI 2021)
+
 ##### Task-Oriented Dialogue System
+
+[Mem2Seq: Effectively Incorporating Knowledge Bases into End-to-End Task-Oriented Dialog Systems](https://arxiv.org/pdf/1804.08217.pdf) (Andrea Madotto, ACL 2018)
 
 [Sequicity: Simplifying Task-oriented Dialogue Systems with Single Sequence-to-Sequence Architectures](https://www.aclweb.org/anthology/P18-1133.pdf) (Wenqiang Lei, ACL 2018, [code](https://github.com/WING-NUS/sequicity), [note](https://blog.csdn.net/weixin_40533355/article/details/82997788))
 
@@ -1046,15 +1086,23 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Variational Reasoning for Question Answering with Knowledge Graph](https://arxiv.org/pdf/1709.04071.pdf) (Yuyu Zhang, AAAI 2018, [note](http://blog.openkg.cn/%E8%AE%BA%E6%96%87%E6%B5%85%E5%B0%9D-%E5%9F%BA%E4%BA%8E%E7%9F%A5%E8%AF%86%E5%9B%BE%E7%9A%84%E9%97%AE%E7%AD%94%E5%8F%98%E5%88%86%E6%8E%A8%E7%90%86/))
 
+[Retrieve, Program, Repeat: Complex Knowledge Base Question Answering via Alternate Meta-learning](https://arxiv.org/pdf/2010.15875.pdf) (Yuncheng Hua, IJCAI 2020)
+
 ##### Conversational Question Answering
 
 [SDNet: Contextualized Attention-based Deep Network for Conversational Question Answering](https://arxiv.org/pdf/1812.03593.pdf) (Chenguang Zhu, 2018, [code](https://github.com/Microsoft/SDNet), [note](https://zhuanlan.zhihu.com/p/66100785))
+
+[Dialog-to-Action: Conversational Question Answering Over a Large-Scale Knowledge Base](https://papers.nips.cc/paper/2018/file/d63fbf8c3173730f82b150c5ef38b8ff-Paper.pdf) (Daya Guo, NIPS 2018)
 
 [FlowQA: Grasping Flow in History for Conversational Machine Comprehension](https://arxiv.org/pdf/1810.06683.pdf) (Hsin-Yuan Huang, ICLR 2019, [code](https://github.com/momohuang/FlowQA), [note](https://zhuanlan.zhihu.com/p/53028792))
 
 [BERT with History Answer Embedding for Conversational Question Answering](https://arxiv.org/pdf/1905.05412.pdf) (Chen Qu, SIGIR 2019, [code](https://github.com/prdwb/bert_hae))
 
+[Look before you Hop: Conversational Question Answering over Knowledge Graphs Using Judicious Context Expansion](https://dl.acm.org/doi/abs/10.1145/3357384.3358016) (Philipp Christmann, CIKM 2019)
+
 [Attentive History Selection for Conversational Question Answering](https://arxiv.org/pdf/1908.09456.pdf) (Chen Qu, CIKM 2019, [code](https://github.com/prdwb/attentive_history_selection), [note](https://zhuanlan.zhihu.com/p/129800180))
+
+[Multi-Task Learning for Conversational Question Answering over a Large-Scale Knowledge Base](https://arxiv.org/pdf/1910.05069.pdf) (Tao Shen, EMNLP 2019)
 
 ##### Visual Question Answering
 
