@@ -662,6 +662,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Open-Domain Targeted Sentiment Analysis via Span-Based Extraction and Classification](https://arxiv.org/pdf/1906.03820.pdf) (Minghao Hu, ACL 2019, [code](https://github.com/huminghao16/SpanABSA), [note](https://zhuanlan.zhihu.com/p/144393570))
 
+[A Shared-Private Representation Model with Coarse-to-Fine Extraction for Target Sentiment Analysis](https://www.aclweb.org/anthology/2020.findings-emnlp.382.pdf) (Peiqin Lin, EMNLP 2020 Findings, [code](https://github.com/lpq29743/SPRM), [note](https://zhuanlan.zhihu.com/p/268419578))
+
 [Understanding Pre-trained BERT for Aspect-based Sentiment Analysis](https://arxiv.org/pdf/2011.00169.pdf) (Hu Xu, COLING 2020, [code](https://github.com/howardhsu/BERT-for-RRC-ABSA))
 
 ##### Emotion Cause Detection
@@ -770,6 +772,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Dataset
 
+[MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling](https://arxiv.org/pdf/1810.00278.pdf) (Paweł Budzianowski, EMNLP 2018)
+
 [MELD: A Multimodal Multi-Party Dataset for Emotion Recognition in Conversations](https://arxiv.org/pdf/1810.02508.pdf) (Soujanya Poria, ACL 2019, [code](https://github.com/declare-lab/MELD))
 
 [How to Build User Simulators to Train RL-based Dialog Systems](https://arxiv.org/pdf/1909.01388.pdf) (Weiyan Shi, EMNLP 2019, [code](https://github.com/wyshi/user-simulator))
@@ -798,23 +802,49 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Dialog State Tracking: A Neural Reading Comprehension Approach](https://arxiv.org/pdf/1908.01946.pdf) (Shuyang Gao, SIGDIAL 2019)
 
+[Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/1905.08743.pdf) (Chien-Sheng Wu, ACL 2019, [code](https://github.com/jasonwu0731/trade-dst), [note](https://zhuanlan.zhihu.com/p/72580652))
+
 [Scalable and Accurate Dialogue State Tracking via Hierarchical Sequence Generation](https://arxiv.org/pdf/1909.00754.pdf) (Liliang Ren, EMNLP 2019)
 
 [Efficient Dialogue State Tracking by Selectively Overwriting Memory](https://arxiv.org/pdf/1911.03906.pdf) (Sungdong Kim, ACL 2020)
+
+[Efficient Context and Schema Fusion Networks for Multi-Domain Dialogue State Tracking](https://arxiv.org/pdf/2004.03386.pdf) (Su Zhu, EMNLP 2020 Findings)
+
+[Non-Autoregressive Dialog State Tracking](https://arxiv.org/pdf/2002.08024.pdf) (Hung Le, ICLR 2020)
 
 ##### Dialogue Act Recognition
 
 [Dialogue Act Modeling for Automatic Tagging and Recognition of Conversational Speech](https://www.aclweb.org/anthology/J00-3003.pdf) (Andreas Stolcke, CL 2000)
 
+[Dialogue Act Classification in Domain-Independent Conversations Using a Deep Recurrent Neural Network](https://www.aclweb.org/anthology/C16-1189.pdf) (Hamed Khanpour, COLING 2016)
+
+[Multi-level Gated Recurrent Neural Network for Dialog Act Classification](https://arxiv.org/pdf/1910.01822.pdf) (Wei Li, COLING 2016)
+
+[Neural-based Context Representation Learning for Dialog Act Classification](https://arxiv.org/pdf/1708.02561.pdf) (Daniel Ortega, SIGDIAL 2017)
+
+[Using Context Information for Dialog Act Classification in DNN Framework](https://www.aclweb.org/anthology/D17-1231.pdf) (Yang Liu, EMNLP 2017)
+
+[A Hierarchical Neural Model for Learning Sequences of Dialogue Acts](https://www.aclweb.org/anthology/E17-1041.pdf) (Quan Hung Tran, EACL 2017)
+
 [Dialogue Act Recognition via CRF-Attentive Structured Network](https://arxiv.org/pdf/1711.05568.pdf) (Zheqian Chen, SIGIR 2018)
 
 [Dialogue Act Sequence Labeling using Hierarchical encoder with CRF](https://arxiv.org/pdf/1709.04250.pdf) (Harshit Kumar, AAAI 2018, [code](https://github.com/YanWenqiang/HBLSTM-CRF))
+
+[A Context-based Approach for Dialogue Act Recognition using Simple Recurrent Neural Networks](https://arxiv.org/pdf/1805.06280.pdf) (Chandrakant Bothe, LREC 2018)
+
+[Conversational Analysis using Utterance-level Attention-based Bidirectional Recurrent Neural Networks](https://arxiv.org/pdf/1805.06242.pdf) (Chandrakant Bothe, INTERSPEECH 2018)
 
 [A Dual-Attention Hierarchical Recurrent Neural Network for Dialogue Act Classification](https://arxiv.org/pdf/1810.09154.pdf) (Ruizhe Li, CONLL 2019)
 
 [Dialogue Act Classification with Context-Aware Self-Attention](https://www.aclweb.org/anthology/N19-1373.pdf) (Vipul Raheja, NAACL 2019)
 
 ##### Dialogue Emotion Recognition
+
+[Toward Detecting Emotions in Spoken Dialogs](https://ieeexplore.ieee.org/abstract/document/1395974) (Chul Min Lee, 2005)
+
+[Real-Life Emotions Detection with Lexical and Paralinguistic Cues on Human-Human Call Center Dialogs](https://www.isca-speech.org/archive/archive_papers/interspeech_2006/i06_1636.pdf) (Laurence Devillers, 2006)
+
+[Conversational Memory Network for Emotion Recognition in Dyadic Dialogue Videos](https://w.sentic.net/conversational-memory-network.pdf) (Devamanyu Hazarika, NAACL 2018)
 
 [ICON: Interactive Conversational Memory Network for Multimodal Emotion Detection](https://www.aclweb.org/anthology/D18-1280.pdf) (Devamanyu Hazarika, EMNLP 2018, [note](https://zhuanlan.zhihu.com/p/63506119))
 
@@ -881,8 +911,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Sequicity: Simplifying Task-oriented Dialogue Systems with Single Sequence-to-Sequence Architectures](https://www.aclweb.org/anthology/P18-1133.pdf) (Wenqiang Lei, ACL 2018, [code](https://github.com/WING-NUS/sequicity), [note](https://blog.csdn.net/weixin_40533355/article/details/82997788))
 
 [Multi-level Memory for Task Oriented Dialogs](https://arxiv.org/pdf/1810.10647.pdf) (Revanth Reddy, NAACL 2019, [note](https://zhuanlan.zhihu.com/p/64595503))
-
-[Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/1905.08743.pdf) (Chien-Sheng Wu, ACL 2019, [code](https://github.com/jasonwu0731/trade-dst), [note](https://zhuanlan.zhihu.com/p/72580652))
 
 [A Working Memory Model for Task-oriented Dialog Response Generation](https://www.aclweb.org/anthology/P19-1258.pdf) (Xiuyi Chen, ACL 2019, [note](https://blog.csdn.net/weixin_44487404/article/details/105665796))
 
