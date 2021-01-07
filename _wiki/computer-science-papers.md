@@ -248,15 +248,45 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Exploring Content Models for Multi-Document Summarization](https://www.aclweb.org/anthology/N09-1041) (Aria Haghighi, NAACL 2009, [code](https://github.com/miso-belica/sumy))
 
+[A Neural Attention Model for Abstractive Sentence Summarization](https://arxiv.org/pdf/1509.00685.pdf) (Alexander M. Rush, EMNLP 2015, [code](https://github.com/Ganeshpadmanaban/Neural-Attention-Model-Abstractive-Summarization?utm_source=catalyzex.com))
+
 [A Deep Reinforced Model for Abstractive Summarization](https://arxiv.org/pdf/1705.04304.pdf) (Romain Paulus, 2017, [code](https://github.com/oceanypt/A-DEEP-REINFORCED-MODEL-FOR-ABSTRACTIVE-SUMMARIZATION), [note](https://zhuanlan.zhihu.com/p/59510696))
+
+[Get To The Point: Summarization with Pointer-Generator Networks](https://arxiv.org/pdf/1704.04368.pdf) (Abigail See, 2017)
+
+[SummaRuNNer: A Recurrent Neural Network Based Sequence Model for Extractive Summarization of Documents](https://ojs.aaai.org/index.php/AAAI/article/view/10958) (Ramesh Nallapati, AAAI 2017)
+
+[Abstractive Document Summarization with a Graph-Based Attentional Neural Model](https://www.aclweb.org/anthology/P17-1108.pdf) (Jiwei Tan, ACL 2017)
+
+[Ranking Sentences for Extractive Summarization with Reinforcement Learning](https://arxiv.org/pdf/1802.08636.pdf) (Shashi Narayan, NAACL 2018, [code](https://github.com/EdinburghNLP/Refresh?utm_source=catalyzex.com))
+
+[Deep Communicating Agents for Abstractive Summarization](https://arxiv.org/pdf/1803.10357.pdf) (Asli Celikyilmaz, NAACL 2018, [code](https://github.com/theDoctor2013/DCA-AbstractiveSummarization?utm_source=catalyzex.com))
+
+[Newsroom: A Dataset of 1.3 Million Summaries with Diverse Extractive Strategies](https://arxiv.org/pdf/1804.11283.pdf) (Max Grusky, NAACL 2018, [code](https://github.com/SumUpAnalytics/goldsum?utm_source=catalyzex.com))
 
 [A Reinforced Topic-Aware Convolutional Sequence-to-Sequence Model for Abstractive Text Summarization](https://www.ijcai.org/proceedings/2018/0619.pdf) (Li Wang, IJCAI 2018, [note](https://blog.csdn.net/imsuhxz/article/details/82655811))
 
 [Controllable Abstractive Summarization](https://aclweb.org/anthology/W18-2706) (Angela Fan, ACL 2018)
 
+[Fast Abstractive Summarization with Reinforce-Selected Sentence Rewriting](https://arxiv.org/pdf/1805.11080.pdf) (Yen-Chun Chen, ACL 2018, [code](https://github.com/ChenRocks/fast_abs_rl?utm_source=catalyzex.com))
+
 [Don’t Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization](https://aclweb.org/anthology/D18-1206) (Shashi Narayan, EMNLP 2018, [code](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Topic-ConvS2S), [note](https://zhuanlan.zhihu.com/p/92994889))
 
+[Bottom-Up Abstractive Summarization](https://arxiv.org/pdf/1808.10792.pdf) (Sebastian Gehrmann, EMNLP 2018, [code](https://github.com/sebastianGehrmann/bottom-up-summary?utm_source=catalyzex.com))
+
+[BanditSum: Extractive Summarization as a Contextual Bandit](https://arxiv.org/pdf/1809.09672.pdf) (Yue Dong, EMNLP 2018, [code](https://github.com/yuedongP/BanditSum?utm_source=catalyzex.com))
+
+[Adapting the Neural Encoder-Decoder Framework from Single to Multi-Document Summarization](https://arxiv.org/pdf/1808.06218.pdf) (Logan Lebanoff, EMNLP 2018, [code](https://github.com/ucfnlp/multidoc_summarization?utm_source=catalyzex.com))
+
+[Neural Latent Extractive Document Summarization](https://arxiv.org/pdf/1808.07187.pdf) (Xingxing Zhang, EMNLP 2018)
+
+[Abstractive Summarization: A Survey of the State of the Art](https://ojs.aaai.org//index.php/AAAI/article/view/5056) (Hui Lin, AAAI 2019)
+
 [Abstractive Summarization of Reddit Posts with Multi-level Memory Networks](https://arxiv.org/pdf/1811.00783.pdf) (Byeongchang Kim, NAACL 2019, [code](https://github.com/ctr4si/MMN), [note](https://zhuanlan.zhihu.com/p/62333393))
+
+[Guiding Extractive Summarization with Question-Answering Rewards](https://arxiv.org/pdf/1904.02321.pdf) (Kristjan Arumae, NAACL 2019, [code](https://github.com/ucfnlp/summ_qa_rewards?utm_source=catalyzex.com))
+
+[Single Document Summarization as Tree Induction](https://www.aclweb.org/anthology/N19-1173.pdf) (Yang Liu, NAACL 2019)
 
 [Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model](https://arxiv.org/pdf/1906.01749.pdf) (Alexander R. Fabbri, ACL 2019, [code](https://github.com/Alex-Fabbri/Multi-News), [note](https://zhuanlan.zhihu.com/p/83768781))
 
@@ -268,13 +298,31 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [HIBERT: Document Level Pre-training of Hierarchical Bidirectional Transformers for Document Summarization](https://www.aclweb.org/anthology/P19-1499.pdf) (Xingxing Zhang, ACL 2019, [note](https://zhuanlan.zhihu.com/p/93598582))
 
+[Searching for Effective Neural Extractive Summarization: What Works and What’s Next](https://arxiv.org/pdf/1907.03491.pdf) (Ming Zhong, ACL 2019, [code](https://github.com/maszhongming/Effective_Extractive_Summarization?utm_source=catalyzex.com))
+
 [How to Write Summaries with Patterns? Learning towards Abstractive Summarization through Prototype Editing](https://arxiv.org/pdf/1909.08837.pdf) (Shen Gao, EMNLP 2019, [code](https://github.com/gsh199449/proto-summ), [note](https://www.icst.pku.edu.cn/xwgg/xwdt/2019/1318876.htm))
+
+[Better Rewards Yield Better Summaries: Learning to Summarise Without References](https://arxiv.org/pdf/1909.01214.pdf) (Florian Bohm, EMNLP 2019, [code](https://github.com/yg211/summary-reward-no-reference?utm_source=catalyzex.com))
 
 [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) (Yang Liu, EMNLP 2019, [code](https://github.com/nlpyang/PreSumm), [note](https://zhuanlan.zhihu.com/p/88953532))
 
 [Neural Text Summarization: A Critical Evaluation](https://arxiv.org/pdf/1908.08960.pdf) (Wojciech Kryscinski, EMNLP 2019)
 
+[Answers Unite! Unsupervised Metrics for Reinforced Summarization Models](https://arxiv.org/pdf/1909.01610.pdf) (Thomas Scialom, EMNLP 2019, [code](https://github.com/recitalAI/summa-qa?utm_source=catalyzex.com))
+
+[Neural Extractive Text Summarization with Syntactic Compression](https://arxiv.org/pdf/1902.00863.pdf) (Jiacheng Xu, EMNLP 2019, [code](https://github.com/jiacheng-xu/neu-compression-sum?utm_source=catalyzex.com))
+
+[Abstractive Multi-Document Summarization Based on Semantic Link Network](https://ieeexplore.ieee.org/abstract/document/8736808) (Wei Li, TKDE 2019)
+
+[Controlling the Amount of Verbatim Copying in Abstractive Summarization](https://ojs.aaai.org/index.php/AAAI/article/view/6420) (Kaiqiang Song, AAAI 2020)
+
+[Joint Parsing and Generation for Abstractive Summarization](https://ojs.aaai.org/index.php/AAAI/article/view/6419) (Kaiqiang Song, AAAI 2020)
+
+[Keywords-Guided Abstractive Sentence Summarization](https://ojs.aaai.org/index.php/AAAI/article/view/6333) (Haoran Li, AAAI 2020)
+
 [PEGASUS: Pre-training with Extracted Gap-sentences for Abstractive Summarization](https://arxiv.org/pdf/1912.08777.pdf) (Jingqing Zhang, ICML 2020, [code](https://github.com/google-research/pegasus), [note](https://www.linkresearcher.com/theses/7054cdb3-b934-4fd8-9e5b-b4a320f5c6c7))
+
+[Discriminative Adversarial Search for Abstractive Summarization](https://arxiv.org/pdf/2002.10375.pdf) (Thomas Scialom, ICML 2020)
 
 [Extractive Summarization as Text Matching](https://arxiv.org/pdf/2004.08795.pdf) (MIng Zhong, ACL 2020, [code](https://github.com/maszhongming/MatchSum), [note](https://zhuanlan.zhihu.com/p/138351484))
 
@@ -284,11 +332,37 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Asking and Answering Questions to Evaluate the Factual Consistency of Summaries](https://arxiv.org/pdf/2004.04228.pdf) (Alex Wang, ACL 2020, [note](https://zhuanlan.zhihu.com/p/130280217))
 
+[Fact-based Content Weighting for Evaluating Abstractive Summarisation](https://www.aclweb.org/anthology/2020.acl-main.455.pdf) (Xinnuo Xu, ACL 2020)
+
+[On Faithfulness and Factuality in Abstractive Summarization](https://arxiv.org/pdf/2005.00661.pdf) (Joshua Maynez, ACL 2020, [code](https://github.com/google-research-datasets/xsum_hallucination_annotations?utm_source=catalyzex.com))
+
 [FEQA: A Question Answering Evaluation Framework for Faithfulness Assessment in Abstractive Summarization](https://arxiv.org/pdf/2005.03754.pdf) (Esin Durmus, ACL 2020)
 
 [The Summary Loop: Learning to Write Abstractive Summaries Without Examples](http://people.ischool.berkeley.edu/~hearst/papers/Laban_ACL2020_Abstractive_Summarization.pdf) (Philippe Laban, ACL 2020)
 
 [Discourse-Aware Neural Extractive Text Summarization](https://arxiv.org/pdf/1910.14142.pdf) (Jiacheng Xu, ACL 2020, [code](https://github.com/jiacheng-xu/DiscoBERT), [note](https://procjx.github.io/2019/11/02/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91Discourse-Aware-Neural-Extractive-Model-for-Text-Summarization/))
+
+[Self-Attention Guided Copy Mechanism for Abstractive Summarization](https://www.aclweb.org/anthology/2020.acl-main.125.pdf) (Song Xu, ACL 2020)
+
+[Attend, Translate and Summarize: An Efficient Method for Neural Cross-Lingual Summarization](https://www.aclweb.org/anthology/2020.acl-main.121.pdf) (Junnan Zhu, ACL 2020)
+
+[Optimizing the Factual Correctness of a Summary: A Study of Summarizing Radiology Reports](https://arxiv.org/pdf/1911.02541.pdf) (Yuhao Zhang, ACL 2020)
+
+[Leveraging Graph to Improve Abstractive Multi-Document Summarization](https://arxiv.org/pdf/2005.10043.pdf) (Wei Li, ACL 2020, [code](https://github.com/PaddlePaddle/Research/tree/master/NLP/ACL2020-GraphSum?utm_source=catalyzex.com))
+
+[Learning to Summarize from Human Feedback](https://arxiv.org/pdf/2009.01325.pdf) (Nisan Stiennon, NIPS 2020)
+
+[What Have We Achieved on Text Summarization?](https://arxiv.org/pdf/2010.04529.pdf) (Dandan Huang, EMNLP 2020)
+
+[Re-evaluating Evaluation in Text Summarization](https://arxiv.org/pdf/2010.07100.pdf) (Manik Bhandari, EMNLP 2020, [code](https://github.com/neulab/REALSumm?utm_source=catalyzex.com))
+
+[Unsupervised Reference-Free Summary Quality Evaluation via Contrastive Learning](https://arxiv.org/pdf/2010.01781.pdf) (Hanlu Wu, EMNLP 2020, [code](https://github.com/whl97/LS-Score?utm_source=catalyzex.com))
+
+[Evaluating the Factual Consistency of Abstractive Text Summarization](https://www.aclweb.org/anthology/2020.emnlp-main.750.pdf) (Wojciech Kryscinski, EMNLP 2020)
+
+[Multi-document Summarization with Maximal Marginal Relevance-guided Reinforcement Learning](https://arxiv.org/pdf/2010.00117.pdf) (Yuning Mao, EMNLP 2020, [code](https://github.com/morningmoni/RL-MMR?utm_source=catalyzex.com))
+
+[Reducing Quantity Hallucinations in Abstractive Summarization](https://arxiv.org/pdf/2009.13312.pdf) (Zheng Zhao, EMNLP 2020 Findings)
 
 #### Topic Modeling
 
@@ -774,11 +848,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [The Design and Implementation of XiaoIce, an Empathetic Social Chatbot](https://www.mitpressjournals.org/doi/full/10.1162/coli_a_00368) (Li Zhou, CL 2020)
 
-[Challenges in Building Intelligent Open-domain Dialog Systems](https://dl.acm.org/doi/abs/10.1145/3383123) (Minlie Huang, TIS 2020)
+[Challenges in Building Intelligent Open-domain Dialog Systems](https://arxiv.org/pdf/1905.05709.pdf) (Minlie Huang, TIS 2020)
 
 ##### Dataset
 
 [MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling](https://arxiv.org/pdf/1810.00278.pdf) (Paweł Budzianowski, EMNLP 2018)
+
+[MultiWOZ 2.1: Multi-Domain Dialogue State Corrections and State Tracking Baselines](https://arxiv.org/pdf/1907.01669.pdf) (Mihail Eric, 2019, [code](https://github.com/budzianowski/multiwoz?utm_source=catalyzex.com))
 
 [MELD: A Multimodal Multi-Party Dataset for Emotion Recognition in Conversations](https://arxiv.org/pdf/1810.02508.pdf) (Soujanya Poria, ACL 2019, [code](https://github.com/declare-lab/MELD))
 
@@ -788,7 +864,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [CrossWOZ: A Large-Scale Chinese Cross-Domain Task-Oriented Dialogue Dataset](https://arxiv.org/pdf/2002.11893.pdf) (Qi Zhu, TACL 2020, [code](https://github.com/thu-coai/CrossWOZ), [note](https://zhuanlan.zhihu.com/p/115366490))
 
-[A Large-Scale Chinese Short-Text Conversation Dataset](https://link.springer.com/chapter/10.1007/978-3-030-60450-9_8) (Yida Wang, NLPCC 2020)
+[A Large-Scale Chinese Short-Text Conversation Dataset](https://link.springer.com/chapter/10.1007/978-3-030-60450-9_8) (Yida Wang, NLPCC 2020, [code](https://github.com/thu-coai/CDial-GPT))
 
 ##### Dialogue State Tracking
 
@@ -812,11 +888,17 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/1905.08743.pdf) (Chien-Sheng Wu, ACL 2019, [code](https://github.com/jasonwu0731/trade-dst), [note](https://zhuanlan.zhihu.com/p/72580652))
 
+[SUMBT: Slot-Utterance Matching for Universal and Scalable Belief Tracking](https://arxiv.org/pdf/1907.07421.pdf) (Hwaran Lee, ACL 2019)
+
 [Scalable and Accurate Dialogue State Tracking via Hierarchical Sequence Generation](https://arxiv.org/pdf/1909.00754.pdf) (Liliang Ren, EMNLP 2019)
 
 [Efficient Dialogue State Tracking by Selectively Overwriting Memory](https://arxiv.org/pdf/1911.03906.pdf) (Sungdong Kim, ACL 2020)
 
+[Parallel Interactive Networks for Multi-Domain Dialogue State Generation](https://www.aclweb.org/anthology/2020.emnlp-main.151.pdf) (Junfan Chen, EMNLP 2020)
+
 [Efficient Context and Schema Fusion Networks for Multi-Domain Dialogue State Tracking](https://arxiv.org/pdf/2004.03386.pdf) (Su Zhu, EMNLP 2020 Findings)
+
+[GCDST: A Graph-based and Copy-augmented Multi-domain Dialogue State Tracking](https://www.aclweb.org/anthology/2020.findings-emnlp.95.pdf) (Peng Wu, EMNLP 2020 Findings)
 
 [Non-Autoregressive Dialog State Tracking](https://arxiv.org/pdf/2002.08024.pdf) (Hung Le, ICLR 2020)
 
@@ -846,7 +928,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Dialogue Act Classification with Context-Aware Self-Attention](https://www.aclweb.org/anthology/N19-1373.pdf) (Vipul Raheja, NAACL 2019)
 
-[Modeling Long-Range Context for Concurrent Dialogue Acts Recognition](https://dl.acm.org/doi/abs/10.1145/3357384.3358145) (Yue Yu, CIKM 2019)
+[Modeling Long-Range Context for Concurrent Dialogue Acts Recognition](https://dl.acm.org/doi/pdf/10.1145/3357384.3358145) (Yue Yu, CIKM 2019)
 
 [Towards Emotion-aided Multi-modal Dialogue Act Classification](https://www.aclweb.org/anthology/2020.acl-main.402.pdf) (Tulika Saha, ACL 2020)
 
