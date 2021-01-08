@@ -932,6 +932,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Towards Emotion-aided Multi-modal Dialogue Act Classification](https://www.aclweb.org/anthology/2020.acl-main.402.pdf) (Tulika Saha, ACL 2020)
 
+[Integrating User History into Heterogeneous Graph for Dialogue Act Recognition](https://www.aclweb.org/anthology/2020.coling-main.372.pdf) (Dong Wang, COLING 2020)
+
 ##### Dialogue Emotion Recognition
 
 [Toward Detecting Emotions in Spoken Dialogs](https://ieeexplore.ieee.org/abstract/document/1395974) (Chul Min Lee, 2005)
