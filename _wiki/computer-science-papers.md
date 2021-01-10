@@ -112,6 +112,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [FastBERT: a Self-distilling BERT with Adaptive Inference Time](https://www.aclweb.org/anthology/2020.acl-main.537.pdf) (Weijie Liu, ACL 2020, [note](https://zhuanlan.zhihu.com/p/127869267))
 
+[A Primer in BERTology: What We Know About How BERT Works](https://www.mitpressjournals.org/doi/full/10.1162/tacl_a_00349) (Anna Rogers, TACL 2020)
+
 #### Text Classification
 
 [One-Class SVMs for Document Classification](http://www.jmlr.org/papers/v2/manevitz01a.html) (Larry M. Manevitz, JMLR 2001)
@@ -850,6 +852,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Challenges in Building Intelligent Open-domain Dialog Systems](https://arxiv.org/pdf/1905.05709.pdf) (Minlie Huang, TIS 2020)
 
+[Towards a Human-like Open-Domain Chatbot](https://arxiv.org/pdf/2001.09977.pdf) (Daniel Adiwardana, 2020, [code](https://github.com/rustyoldrake/Character-Cartridges-Embodied-Identity?utm_source=catalyzex.com))
+
 ##### Dataset
 
 [MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling](https://arxiv.org/pdf/1810.00278.pdf) (Paweł Budzianowski, EMNLP 2018, [code](https://github.com/budzianowski/multiwoz))
@@ -1401,6 +1405,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [YOLOv3: An Incremental Improvement](https://pjreddie.com/media/files/papers/YOLOv3.pdf) (Joseph Redmon, 2018, [code](https://github.com/qqwweee/keras-yolo3), [note](https://zhuanlan.zhihu.com/p/76802514))
 
 [TensorMask: A Foundation for Dense Object Segmentation](https://arxiv.org/pdf/1903.12174.pdf) (Xinlei Chen, 2019, [note](https://zhuanlan.zhihu.com/p/60984659))
+
+[YOLOv4: Optimal Speed and Accuracy of Object Detection](https://arxiv.org/pdf/2004.10934.pdf) (Alexey Bochkovskiy, 2020, [code](https://github.com/AlexeyAB/darknet?utm_source=catalyzex.com))
 
 #### Image Super-Resolution
 
