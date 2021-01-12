@@ -116,7 +116,7 @@ keywords: 面试题
 
 ##### Probability Theory and Mathematical Statistics
 
-1. 为什么样本方差（sample variance）的分母是 $$n - 1$$？
+1. 为什么样本方差（sample variance）的分母（denominator）是 $$n - 1$$？
 
     答：如果期望已知，分母就是 $$n$$，如果未知，分母是 $$n - 1$$ 是为了保证方差的估计是无偏的（unbiased）。如果直接使用 $$n$$ 为分母作为估计，那么会倾向于低估方差（可用数学方法证明），所以为了正确的估计方差，所以可以把原先的估计值稍微放大一点，即把分母 $$n$$ 改为 $$n - 1$$。
 
@@ -191,7 +191,7 @@ keywords: 面试题
 
     答：解法一：C(1,4) * C(11,50) / C(13,52)，C(1,4) = 从四个人中任选 1 人为红桃 A + 黑桃 A，C(11,50) = 从剩余 50 张牌中抽取 11 张给指定人，C(13,52) = 从 52 张牌中随机抽取 13 张；
 
-     解法二：对于抓到红桃 A 的人，再抓黑桃 A 的概率就是 12/51 = 4/17。
+    解法二：对于抓到红桃 A 的人，再抓黑桃 A 的概率就是 12/51 = 4/17。
 
 12. 假设有一副被打乱的扑克牌，52 张，其中 13 张黑桃，一个人从这副牌里随机的抽牌，每次抽一张，并且不放回，假设在第X次抽牌的时候，第一次抽到黑桃。请问 X 的数学期望是多少?
 
@@ -454,7 +454,7 @@ keywords: 面试题
 
    c. To reduce dimensionality, we can separate the numerical and categorical variables and remove the correlated variables. For numerical variables, we’ll use correlation. For categorical variables, we’ll use chi-square test.
 
-   d. Also, we can use PCA and pick the components which can explain the maximum variance in the data set.
+   d. Also, we can use Principal Component Analysis (PCA) and pick the components which can explain the maximum variance in the data set.
 
    e. Using online learning algorithms like Vowpal Wabbit (available in Python) is a possible option.
 
