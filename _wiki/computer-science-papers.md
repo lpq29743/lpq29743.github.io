@@ -840,21 +840,27 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Dialogue System
 
+[A Persona-Based Neural Conversation Model](https://arxiv.org/pdf/1603.06155.pdf) (Jiwei Li, ACL 2016, [code](https://github.com/shrebox/Personified-Chatbot?utm_source=catalyzex.com))
+
 [A Survey on Dialogue Systems: Recent Advances and New Frontiers](https://arxiv.org/pdf/1711.01731.pdf) (Hongshen Chen, 2017, [note](https://cloud.tencent.com/developer/article/1337267))
 
 [AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine](http://www.aclweb.org/anthology/P/P17/P17-2079.pdf) (Minghui Qiu, ACL 2017, [note](https://blog.csdn.net/u011239443/article/details/83829265))
 
 [Neural Approaches to Conversational AI](https://dl.acm.org/doi/abs/10.1145/3209978.3210183) (Jianfeng Gao, SIGIR 2018)
 
-[Towards Exploiting Background Knowledge for Building Conversation Systems](https://arxiv.org/pdf/1809.08205.pdf) (Mikita Moghe, EMNLP 2018, [code](https://github.com/nikitacs16/Holl-E?utm_source=catalyzex.com))
-
-[Wizard of Wikipedia: Knowledge-Powered Conversational Agents](https://arxiv.org/pdf/1811.01241.pdf) (Emily Dinan, 2018)
+[Personalizing Dialogue Agents: I have a dog, do you have pets too?](https://www.aclweb.org/anthology/P18-1205.pdf) (Saizheng Zhang, ACL 2018)
 
 [Pretraining Methods for Dialog Context Representation Learning](https://arxiv.org/pdf/1906.00414.pdf) (Shikib Mehri, ACL 2019, [note](https://zhuanlan.zhihu.com/p/82001834))
+
+[Personalizing Dialogue Agents via Meta-Learning](https://www.aclweb.org/anthology/P19-1542.pdf) (Andrea Madotto, ACL 2019)
 
 [The Design and Implementation of XiaoIce, an Empathetic Social Chatbot](https://www.mitpressjournals.org/doi/full/10.1162/coli_a_00368) (Li Zhou, CL 2020)
 
 [Challenges in Building Intelligent Open-domain Dialog Systems](https://arxiv.org/pdf/1905.05709.pdf) (Minlie Huang, TIS 2020)
+
+[Learning to Customize Model Structures for Few-shot Dialogue Generation Tasks](https://arxiv.org/pdf/1910.14326.pdf) (Yiping Song, ACL 2020, [code](https://github.com/zequnl/CMAML?utm_source=catalyzex.com))
+
+[Towards Persona-Based Empathetic Conversational Model](https://www.aclweb.org/anthology/2020.emnlp-main.531.pdf) (Peixiang Zhong, EMNLP 2020, [code](https://github.com/zhongpeixiang/PEC?utm_source=catalyzex.com))
 
 [Towards a Human-like Open-Domain Chatbot](https://arxiv.org/pdf/2001.09977.pdf) (Daniel Adiwardana, 2020, [code](https://github.com/rustyoldrake/Character-Cartridges-Embodied-Identity?utm_source=catalyzex.com))
 
@@ -862,7 +868,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling](https://arxiv.org/pdf/1810.00278.pdf) (Paweł Budzianowski, EMNLP 2018, [code](https://github.com/budzianowski/multiwoz))
 
+[Towards Exploiting Background Knowledge for Building Conversation Systems](https://arxiv.org/pdf/1809.08205.pdf) (Mikita Moghe, EMNLP 2018, [code](https://github.com/nikitacs16/Holl-E?utm_source=catalyzex.com))
+
+[Training Millions of Personalized Dialogue Agents](https://arxiv.org/pdf/1809.01984.pdf) (Pierre-Emmanuel Mazare, EMNLP 2018)
+
 [MultiWOZ 2.1: Multi-Domain Dialogue State Corrections and State Tracking Baselines](https://arxiv.org/pdf/1907.01669.pdf) (Mihail Eric, 2019, [code](https://github.com/budzianowski/multiwoz?utm_source=catalyzex.com))
+
+[Wizard of Wikipedia: Knowledge-Powered Conversational Agents](https://arxiv.org/pdf/1811.01241.pdf) (Emily Dinan, ICLR 2019)
 
 [MELD: A Multimodal Multi-Party Dataset for Emotion Recognition in Conversations](https://arxiv.org/pdf/1810.02508.pdf) (Soujanya Poria, ACL 2019, [code](https://github.com/declare-lab/MELD))
 
@@ -1016,6 +1028,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Learning to Select Knowledge for Response Generation in Dialog Systems](https://www.ijcai.org/Proceedings/2019/0706.pdf) (Rongzhong Lian, IJCAI 2019)
 
+[Exploiting Persona Information for Diverse Generation of Conversational Responses](https://arxiv.org/pdf/1905.12188.pdf) (Haoyu Song, IJCAI 2019, [code](https://github.com/vsharecodes/percvae?utm_source=catalyzex.com))
+
 [Domain Adaptive Dialog Generation via Meta Learning](https://arxiv.org/pdf/1906.03520.pdf) (Kun Qian, ACL 2019, [code](https://github.com/qbetterk/DAML), [note](https://liusih.github.io/2019/09/09/Domain%20Adaptive%20Dialog%20Generation%20via%20Meta%20Learning/))
 
 [ReCoSa: Detecting the Relevant Contexts with Self-Attention for Multi-turn Dialogue Generation](https://arxiv.org/pdf/1907.05339.pdf) (Hainan Zhang, ACL 2019, [code](https://github.com/zhanghainan/ReCoSa), [note](https://zhuanlan.zhihu.com/p/74229505))
@@ -1032,6 +1046,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Thinking Globally, Acting Locally: Distantly Supervised Global-to-Local Knowledge Selection for Background Based Conversation](https://ojs.aaai.org/index.php/AAAI/article/view/6395) (Pengjie Ren, AAAI 2020)
 
+[Generating Persona Consistent Dialogues by Exploiting Natural Language Inference](https://ojs.aaai.org/index.php/AAAI/article/view/6417) (Haoyu Song, AAAI 2020)
+
 [A Neural Topical Expansion Framework for Unstructured Persona-oriented Dialogue Generation](https://arxiv.org/pdf/2002.02153.pdf) (Minghong Xu, ECAI 2020)
 
 [DialoGPT: Large-Scale Generative Pre-training for Conversational Response Generation](https://arxiv.org/pdf/1911.00536.pdf) (Yizhe Zhang, ACL 2020, [code](https://github.com/microsoft/DialoGPT?utm_source=catalyzex.com))
@@ -1039,6 +1055,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [PLATO: Pre-trained Dialogue Generation Model with Discrete Latent Variable](https://arxiv.org/pdf/1910.07931.pdf) (Siqi Bao, ACL 2020)
 
 [CDL: Curriculum Dual Learning for Emotion-Controllable Response Generation](https://arxiv.org/pdf/2005.00329.pdf) (Lei Shen, ACL 2020)
+
+[You Impress Me: Dialogue Generation via Mutual Persona Perception](https://arxiv.org/pdf/2004.05388.pdf) (Qian Liu, ACL 2020, [code](https://github.com/SivilTaram/Persona-Dialogue-Generation?utm_source=catalyzex.com))
+
+[Generate, Delete and Rewrite: A Three-Stage Framework for Improving Persona Consistency of Dialogue Generation](https://arxiv.org/pdf/2004.07672.pdf) (Hanyu Song, ACL 2020)
 
 [Diverse and Informative Dialogue Generation with Context-Specific Commonsense Knowledge Awareness](https://www.aclweb.org/anthology/2020.acl-main.515.pdf) (Sixing Wu, ACL 2020)
 
@@ -1049,6 +1069,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [An Empirical Investigation of Pre-Trained Transformer Language Models for Open-Domain Dialogue Generation](https://arxiv.org/pdf/2003.04195.pdf) (Piji Li, 2020)
 
 [Knowledge-Grounded Dialogue Generation with Pre-trained Language Models](https://arxiv.org/pdf/2010.08824.pdf) (Xueliang Zhao, EMNLP 2020)
+
+[Like hiking? You probably enjoy nature: Persona-grounded Dialog with Commonsense Expansions](https://arxiv.org/pdf/2010.03205.pdf) (Bodhisattwa Prasad Majumder, EMNLP 2020)
 
 [Plug-and-Play Conversational Models](https://arxiv.org/pdf/2010.04344.pdf) (Andrea Madotto, EMNLP 2020 Findings)
 
