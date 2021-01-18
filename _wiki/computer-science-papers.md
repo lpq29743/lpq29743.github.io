@@ -1006,6 +1006,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Generating High-Quality and Informative Conversation Responses with Sequence-to-Sequence Models](https://arxiv.org/pdf/1701.03185.pdf) (Louis Shao, EMNLP 2017)
 
+[Emotional Chatting Machine: Emotional Conversation Generation with Internal and External Memory](https://ojs.aaai.org/index.php/AAAI/article/view/11325) (Hao Zhou, AAAI 2018, [code](https://github.com/tuxchow/ecm?utm_source=catalyzex.com))
+
+[Affective Neural Response Generation](https://link.springer.com/chapter/10.1007/978-3-319-76941-7_12) (Nabiha Asghar, ECIR 2018)
+
 [Knowledge Diffusion for Neural Dialogue Generation](https://www.aclweb.org/anthology/P18-1138.pdf) (Shuman Liu, ACL 2018, [note](https://zhuanlan.zhihu.com/p/51939126))
 
 [Generating Informative and Diverse Conversational Responses via Adversarial Information Maximization](https://papers.nips.cc/paper/2018/file/23ce1851341ec1fa9e0c259de10bf87c-Paper.pdf) (Yizhe Zhang, NIPS 2018)
@@ -1016,11 +1020,19 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Syntactically Constrained Bidirectional-Asynchronous Approach for Emotional Conversation Generation](https://www.aclweb.org/anthology/D18-1071.pdf) (Jingyuan Li, EMNLP 2018)
 
+[Topic-enhanced emotional conversation generation with attention mechanism](https://www.sciencedirect.com/science/article/abs/pii/S095070511830457X) (Yehong Peng, KBS 2019)
+
+[An Affect-Rich Neural Conversational Model with Biased Attention and Weighted Cross-Entropy Loss](https://ojs.aaai.org//index.php/AAAI/article/view/4740) (Peixiang Zhong, AAAI 2019, [code](https://github.com/zhongpeixiang/affect-rich-conversational-model?utm_source=catalyzex.com))
+
 [Jointly Optimizing Diversity and Relevance in Neural Response Generation](https://arxiv.org/pdf/1902.11205.pdf) (Xiang Gao, NAACL 2019, [code](https://github.com/golsun/SpaceFusion?utm_source=catalyzex.com))
+
+[Affect-Driven Dialog Generation](https://arxiv.org/pdf/1904.02793.pdf) (Pierre Colombo, NAACL 2019)
 
 [Learning to Select Knowledge for Response Generation in Dialog Systems](https://www.ijcai.org/Proceedings/2019/0706.pdf) (Rongzhong Lian, IJCAI 2019)
 
 [Domain Adaptive Dialog Generation via Meta Learning](https://arxiv.org/pdf/1906.03520.pdf) (Kun Qian, ACL 2019, [code](https://github.com/qbetterk/DAML), [note](https://liusih.github.io/2019/09/09/Domain%20Adaptive%20Dialog%20Generation%20via%20Meta%20Learning/))
+
+[Towards Empathetic Open-domain Conversation Models: a New Benchmark and Dataset](https://arxiv.org/pdf/1811.00207.pdf) (Hannah Rashkin, ACL 2019)
 
 [ReCoSa: Detecting the Relevant Contexts with Self-Attention for Multi-turn Dialogue Generation](https://arxiv.org/pdf/1907.05339.pdf) (Hainan Zhang, ACL 2019, [code](https://github.com/zhanghainan/ReCoSa), [note](https://zhuanlan.zhihu.com/p/74229505))
 
@@ -1045,6 +1057,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Diverse and Informative Dialogue Generation with Context-Specific Commonsense Knowledge Awareness](https://www.aclweb.org/anthology/2020.acl-main.515.pdf) (Sixing Wu, ACL 2020)
 
 [Conversational Graph Grounded Policy Learning for Open-Domain Conversation Generation](https://www.aclweb.org/anthology/2020.acl-main.166.pdf) (Jun Xu, ACL 2020)
+
+[What If Bots Feel Moods?](https://dl.acm.org/doi/abs/10.1145/3397271.3401108) (Lisong Qiu, SIGIR 2020)
 
 [TopicKA: Generating Commonsense Knowledge-Aware Dialogue Responses Towards the Recommended Topic Fact](https://www.ijcai.org/Proceedings/2020/0521.pdf) (Sixing Wu, IJCAI 2020)
 
