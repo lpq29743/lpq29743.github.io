@@ -1052,8 +1052,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Bridging the Gap between Prior and Posterior Knowledge Selection for Knowledge-Grounded Dialogue Generation](https://www.aclweb.org/anthology/2020.emnlp-main.275.pdf) (Xiuyi Chen, EMNLP 2020)
 
-[Stylized Dialogue Response Generation Using Stylized Unpaired Texts](https://arxiv.org/pdf/2009.12719.pdf) (Yinhe Zheng, AAAI 2021)
-
 ##### Emotional Dialogue Generation
 
 [Emotional Chatting Machine: Emotional Conversation Generation with Internal and External Memory](https://ojs.aaai.org/index.php/AAAI/article/view/11325) (Hao Zhou, AAAI 2018, [code](https://github.com/tuxchow/ecm?utm_source=catalyzex.com))
@@ -1079,6 +1077,14 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Towards Persona-Based Empathetic Conversational Model](https://www.aclweb.org/anthology/2020.emnlp-main.531.pdf) (Peixiang Zhong, EMNLP 2020, [code](https://github.com/zhongpeixiang/PEC?utm_source=catalyzex.com))
 
 [EmpDG: Multiresolution Interactive Empathetic Dialogue Generation](https://arxiv.org/pdf/1911.08698.pdf) (Qintong Li, COLING 2020)
+
+##### Stylized Response Generation
+
+[Polite Dialogue Generation Without Parallel Data](https://www.mitpressjournals.org/doi/abs/10.1162/tacl_a_00027) (Tong Niu, TACL 2018)
+
+[Structuring Latent Spaces for Stylized Response Generation](https://arxiv.org/pdf/1909.05361.pdf) (Xiang Gao, EMNLP 2019, [code](https://github.com/golsun/StyleFusion?utm_source=catalyzex.com))
+
+[Stylized Dialogue Response Generation Using Stylized Unpaired Texts](https://arxiv.org/pdf/2009.12719.pdf) (Yinhe Zheng, AAAI 2021)
 
 ##### Persona-Based Dialogue System
 
