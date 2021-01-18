@@ -846,6 +846,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Neural Approaches to Conversational AI](https://dl.acm.org/doi/abs/10.1145/3209978.3210183) (Jianfeng Gao, SIGIR 2018)
 
+[Towards Exploiting Background Knowledge for Building Conversation Systems](https://arxiv.org/pdf/1809.08205.pdf) (Mikita Moghe, EMNLP 2018, [code](https://github.com/nikitacs16/Holl-E?utm_source=catalyzex.com))
+
+[Wizard of Wikipedia: Knowledge-Powered Conversational Agents](https://arxiv.org/pdf/1811.01241.pdf) (Emily Dinan, 2018)
+
 [Pretraining Methods for Dialog Context Representation Learning](https://arxiv.org/pdf/1906.00414.pdf) (Shikib Mehri, ACL 2019, [note](https://zhuanlan.zhihu.com/p/82001834))
 
 [The Design and Implementation of XiaoIce, an Empathetic Social Chatbot](https://www.mitpressjournals.org/doi/full/10.1162/coli_a_00368) (Li Zhou, CL 2020)
@@ -888,6 +892,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Global-Locally Self-Attentive Dialogue State Tracker](http://aclweb.org/anthology/P18-1135) (Victor Zhong, ACL 2018, [code](https://github.com/salesforce/glad))
 
+[Towards Universal Dialogue State Tracking](https://www.aclweb.org/anthology/D18-1299.pdf) (Liliang Ren, EMNLP 2018, [code](https://github.com/renll/StateNet?utm_source=catalyzex.com))
+
 [Dialog State Tracking: A Neural Reading Comprehension Approach](https://arxiv.org/pdf/1908.01946.pdf) (Shuyang Gao, SIGDIAL 2019)
 
 [Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/1905.08743.pdf) (Chien-Sheng Wu, ACL 2019, [code](https://github.com/jasonwu0731/trade-dst), [note](https://zhuanlan.zhihu.com/p/72580652))
@@ -895,6 +901,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [SUMBT: Slot-Utterance Matching for Universal and Scalable Belief Tracking](https://arxiv.org/pdf/1907.07421.pdf) (Hwaran Lee, ACL 2019)
 
 [Scalable and Accurate Dialogue State Tracking via Hierarchical Sequence Generation](https://arxiv.org/pdf/1909.00754.pdf) (Liliang Ren, EMNLP 2019)
+
+[HyST: A Hybrid Approach for Flexible and Accurate Dialogue State Tracking](https://arxiv.org/pdf/1907.00883.pdf) (Rahul Goel, Interspeech 2019)
 
 [Efficient Dialogue State Tracking by Selectively Overwriting Memory](https://arxiv.org/pdf/1911.03906.pdf) (Sungdong Kim, ACL 2020)
 
@@ -972,7 +980,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Keep Meeting Summaries on Topic: Abstractive Multi-Modal Meeting Summarization](https://www.aclweb.org/anthology/P19-1210.pdf) (Manling Li, ACL 2019)
 
-[End-to-End Abstractive Summarization for Meetings](https://arxiv.org/pdf/2004.02016v1.pdf) (Chenguang Zhu, 2020)
+[A Hierarchical Network for Abstractive Meeting Summarization with Cross-Domain Pretraining](https://arxiv.org/abs/2004.02016v4) (Chenguang Zhu, EMNLP 2020, [code](https://github.com/JudeLee19/HMNet-End-to-End-Abstractive-Summarization-for-Meetings?utm_source=catalyzex.com))
+
+[How Domain Terminology Affects Meeting Summarization Performance](https://arxiv.org/pdf/2011.00692.pdf) (Jia Jin Koay, COLING 2020)
 
 ##### Dialogue Generation
 
@@ -985,6 +995,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [A Diversity-Promoting Objective Function for Neural Conversation Models](https://arxiv.org/pdf/1510.03055.pdf) (Jiwei Li, NAACL 2016, [note](https://zhuanlan.zhihu.com/p/35496909))
 
 [Deep Reinforcement Learning for Dialogue Generation](https://arxiv.org/pdf/1606.01541.pdf) (Jiwei Li, 2016, [note](https://zhuanlan.zhihu.com/p/21587758))
+
+[A Hierarchical Latent Variable Encoder-Decoder Model for Generating Dialogues](https://ojs.aaai.org/index.php/AAAI/article/view/10983) (Iulian Serban, AAAI 2017, [code](https://github.com/mike-n-7/ADEM?utm_source=catalyzex.com))
 
 [Mechanism-Aware Neural Machine for Dialogue Response Generation](https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14471/14267) (Ganbin Zhou, AAAI 2017)
 
@@ -1002,6 +1014,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Jointly Optimizing Diversity and Relevance in Neural Response Generation](https://arxiv.org/pdf/1902.11205.pdf) (Xiang Gao, NAACL 2019, [code](https://github.com/golsun/SpaceFusion?utm_source=catalyzex.com))
 
+[Learning to Select Knowledge for Response Generation in Dialog Systems](https://www.ijcai.org/Proceedings/2019/0706.pdf) (Rongzhong Lian, IJCAI 2019)
+
 [Domain Adaptive Dialog Generation via Meta Learning](https://arxiv.org/pdf/1906.03520.pdf) (Kun Qian, ACL 2019, [code](https://github.com/qbetterk/DAML), [note](https://liusih.github.io/2019/09/09/Domain%20Adaptive%20Dialog%20Generation%20via%20Meta%20Learning/))
 
 [ReCoSa: Detecting the Relevant Contexts with Self-Attention for Multi-turn Dialogue Generation](https://arxiv.org/pdf/1907.05339.pdf) (Hainan Zhang, ACL 2019, [code](https://github.com/zhanghainan/ReCoSa), [note](https://zhuanlan.zhihu.com/p/74229505))
@@ -1009,6 +1023,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Semantically Conditioned Dialog Response Generation via Hierarchical Disentangled Self-Attention](https://arxiv.org/pdf/1905.12866.pdf) (Wenhu Chen, ACL 2019, [code](https://github.com/wenhuchen/HDSA-Dialog), [note](https://zhuanlan.zhihu.com/p/82460398))
 
 [Generating Responses with a Specific Emotion in Dialog](https://www.aclweb.org/anthology/P19-1359.pdf) (Zhenqiao Song, ACL 2019, [note](https://www.dazhuanlan.com/2020/02/10/5e403d064876d/))
+
+[Knowledge Aware Conversation Generation with Explainable Reasoning over Augmented Graphs](https://arxiv.org/pdf/1903.10245.pdf) (Zhibin Liu, EMNLP 2019, [code](https://github.com/PaddlePaddle/models?utm_source=catalyzex.com))
 
 [Hierarchical Reinforcement Learning for Open-Domain Dialog](https://ojs.aaai.org/index.php/AAAI/article/view/6400) (Abdelrhman Saleh, AAAI 2020)
 
@@ -1023,6 +1039,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [PLATO: Pre-trained Dialogue Generation Model with Discrete Latent Variable](https://arxiv.org/pdf/1910.07931.pdf) (Siqi Bao, ACL 2020)
 
 [CDL: Curriculum Dual Learning for Emotion-Controllable Response Generation](https://arxiv.org/pdf/2005.00329.pdf) (Lei Shen, ACL 2020)
+
+[Diverse and Informative Dialogue Generation with Context-Specific Commonsense Knowledge Awareness](https://www.aclweb.org/anthology/2020.acl-main.515.pdf) (Sixing Wu, ACL 2020)
+
+[Conversational Graph Grounded Policy Learning for Open-Domain Conversation Generation](https://www.aclweb.org/anthology/2020.acl-main.166.pdf) (Jun Xu, ACL 2020)
+
+[TopicKA: Generating Commonsense Knowledge-Aware Dialogue Responses Towards the Recommended Topic Fact](https://www.ijcai.org/Proceedings/2020/0521.pdf) (Sixing Wu, IJCAI 2020)
 
 [An Empirical Investigation of Pre-Trained Transformer Language Models for Open-Domain Dialogue Generation](https://arxiv.org/pdf/2003.04195.pdf) (Piji Li, 2020)
 
