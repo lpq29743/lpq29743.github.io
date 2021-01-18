@@ -1006,19 +1006,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Generating High-Quality and Informative Conversation Responses with Sequence-to-Sequence Models](https://arxiv.org/pdf/1701.03185.pdf) (Louis Shao, EMNLP 2017)
 
-[Knowledge Diffusion for Neural Dialogue Generation](https://www.aclweb.org/anthology/P18-1138.pdf) (Shuman Liu, ACL 2018, [note](https://zhuanlan.zhihu.com/p/51939126))
-
 [Generating Informative and Diverse Conversational Responses via Adversarial Information Maximization](https://papers.nips.cc/paper/2018/file/23ce1851341ec1fa9e0c259de10bf87c-Paper.pdf) (Yizhe Zhang, NIPS 2018)
 
 [Hierarchical Variational Memory Network for Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3178876.3186077) (Hongshen Chen, WWW 2018, [code](https://github.com/chenhongshen/HVMN), [note](https://blog.csdn.net/qq_38684093/article/details/84038264))
 
 [Explicit State Tracking with Semi-Supervisionfor Neural Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3269206.3271683) (Xisen Jin, CIKM 2018, [code](https://github.com/AuCson/SEDST), [note](https://zhuanlan.zhihu.com/p/62306940))
 
-[A Syntactically Constrained Bidirectional-Asynchronous Approach for Emotional Conversation Generation](https://www.aclweb.org/anthology/D18-1071.pdf) (Jingyuan Li, EMNLP 2018)
-
 [Jointly Optimizing Diversity and Relevance in Neural Response Generation](https://arxiv.org/pdf/1902.11205.pdf) (Xiang Gao, NAACL 2019, [code](https://github.com/golsun/SpaceFusion?utm_source=catalyzex.com))
-
-[Learning to Select Knowledge for Response Generation in Dialog Systems](https://www.ijcai.org/Proceedings/2019/0706.pdf) (Rongzhong Lian, IJCAI 2019)
 
 [Domain Adaptive Dialog Generation via Meta Learning](https://arxiv.org/pdf/1906.03520.pdf) (Kun Qian, ACL 2019, [code](https://github.com/qbetterk/DAML), [note](https://liusih.github.io/2019/09/09/Domain%20Adaptive%20Dialog%20Generation%20via%20Meta%20Learning/))
 
@@ -1026,35 +1020,23 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Semantically Conditioned Dialog Response Generation via Hierarchical Disentangled Self-Attention](https://arxiv.org/pdf/1905.12866.pdf) (Wenhu Chen, ACL 2019, [code](https://github.com/wenhuchen/HDSA-Dialog), [note](https://zhuanlan.zhihu.com/p/82460398))
 
-[Knowledge Aware Conversation Generation with Explainable Reasoning over Augmented Graphs](https://arxiv.org/pdf/1903.10245.pdf) (Zhibin Liu, EMNLP 2019, [code](https://github.com/PaddlePaddle/models?utm_source=catalyzex.com))
-
 [Hierarchical Reinforcement Learning for Open-Domain Dialog](https://ojs.aaai.org/index.php/AAAI/article/view/6400) (Abdelrhman Saleh, AAAI 2020)
-
-[RefNet: A Reference-Aware Network for Background Based Conversation](https://ojs.aaai.org/index.php/AAAI/article/view/6370) (Chuan Meng, AAAI 2020)
-
-[Thinking Globally, Acting Locally: Distantly Supervised Global-to-Local Knowledge Selection for Background Based Conversation](https://ojs.aaai.org/index.php/AAAI/article/view/6395) (Pengjie Ren, AAAI 2020)
 
 [DialoGPT: Large-Scale Generative Pre-training for Conversational Response Generation](https://arxiv.org/pdf/1911.00536.pdf) (Yizhe Zhang, ACL 2020, [code](https://github.com/microsoft/DialoGPT?utm_source=catalyzex.com))
 
 [PLATO: Pre-trained Dialogue Generation Model with Discrete Latent Variable](https://arxiv.org/pdf/1910.07931.pdf) (Siqi Bao, ACL 2020)
 
-[Diverse and Informative Dialogue Generation with Context-Specific Commonsense Knowledge Awareness](https://www.aclweb.org/anthology/2020.acl-main.515.pdf) (Sixing Wu, ACL 2020)
-
 [Conversational Graph Grounded Policy Learning for Open-Domain Conversation Generation](https://www.aclweb.org/anthology/2020.acl-main.166.pdf) (Jun Xu, ACL 2020)
-
-[TopicKA: Generating Commonsense Knowledge-Aware Dialogue Responses Towards the Recommended Topic Fact](https://www.ijcai.org/Proceedings/2020/0521.pdf) (Sixing Wu, IJCAI 2020)
 
 [An Empirical Investigation of Pre-Trained Transformer Language Models for Open-Domain Dialogue Generation](https://arxiv.org/pdf/2003.04195.pdf) (Piji Li, 2020)
 
-[Knowledge-Grounded Dialogue Generation with Pre-trained Language Models](https://arxiv.org/pdf/2010.08824.pdf) (Xueliang Zhao, EMNLP 2020)
-
 [Plug-and-Play Conversational Models](https://arxiv.org/pdf/2010.04344.pdf) (Andrea Madotto, EMNLP 2020 Findings)
-
-[Bridging the Gap between Prior and Posterior Knowledge Selection for Knowledge-Grounded Dialogue Generation](https://www.aclweb.org/anthology/2020.emnlp-main.275.pdf) (Xiuyi Chen, EMNLP 2020)
 
 ##### Emotional Dialogue Generation
 
 [Emotional Chatting Machine: Emotional Conversation Generation with Internal and External Memory](https://ojs.aaai.org/index.php/AAAI/article/view/11325) (Hao Zhou, AAAI 2018, [code](https://github.com/tuxchow/ecm?utm_source=catalyzex.com))
+
+[A Syntactically Constrained Bidirectional-Asynchronous Approach for Emotional Conversation Generation](https://www.aclweb.org/anthology/D18-1071.pdf) (Jingyuan Li, EMNLP 2018)
 
 [Affective Neural Response Generation](https://link.springer.com/chapter/10.1007/978-3-319-76941-7_12) (Nabiha Asghar, ECIR 2018)
 
@@ -1105,6 +1087,38 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [You Impress Me: Dialogue Generation via Mutual Persona Perception](https://arxiv.org/pdf/2004.05388.pdf) (Qian Liu, ACL 2020, [code](https://github.com/SivilTaram/Persona-Dialogue-Generation?utm_source=catalyzex.com))
 
 [Like hiking? You probably enjoy nature: Persona-grounded Dialog with Commonsense Expansions](https://arxiv.org/pdf/2010.03205.pdf) (Bodhisattwa Prasad Majumder, EMNLP 2020)
+
+##### Knowledge-Grounded Dialogue System
+
+[A Knowledge-Grounded Neural Conversation Model](https://ojs.aaai.org/index.php/AAAI/article/view/11977) (Marjan Ghazvininejad, AAAI 2018, [code](https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling?utm_source=catalyzex.com))
+
+[Augmenting End-to-End Dialogue Systems With Commonsense Knowledge](https://ojs.aaai.org/index.php/AAAI/article/view/11923) (Tom Young, AAAI 2018)
+
+[Commonsense Knowledge Aware Conversation Generation with Graph Attention](https://www.ijcai.org/Proceedings/2018/0643.pdf) (Hao Zhou, IJCAI 2018)
+
+[Knowledge Diffusion for Neural Dialogue Generation](https://www.aclweb.org/anthology/P18-1138.pdf) (Shuman Liu, ACL 2018, [note](https://zhuanlan.zhihu.com/p/51939126))
+
+[Learning to Select Knowledge for Response Generation in Dialog Systems](https://www.ijcai.org/Proceedings/2019/0706.pdf) (Rongzhong Lian, IJCAI 2019)
+
+[Enhancing Conversational Dialogue Models with Grounded Knowledge](https://dl.acm.org/doi/abs/10.1145/3357384.3357889) (Wen Zheng, CIKM 2019)
+
+[Knowledge Aware Conversation Generation with Explainable Reasoning over Augmented Graphs](https://arxiv.org/pdf/1903.10245.pdf) (Zhibin Liu, EMNLP 2019, [code](https://github.com/PaddlePaddle/models?utm_source=catalyzex.com))
+
+[Thinking Globally, Acting Locally: Distantly Supervised Global-to-Local Knowledge Selection for Background Based Conversation](https://ojs.aaai.org/index.php/AAAI/article/view/6395) (Pengjie Ren, AAAI 2020)
+
+[RefNet: A Reference-Aware Network for Background Based Conversation](https://ojs.aaai.org/index.php/AAAI/article/view/6370) (Chuan Meng, AAAI 2020)
+
+[Low-Resource Knowledge-Grounded Dialogue Generation](https://arxiv.org/pdf/2002.10348.pdf) (Xueliang Zhao, ICLR 2020)
+
+[Sequential Latent Knowledge Selection for Knowledge-Grounded Dialogue](https://arxiv.org/pdf/2002.07510.pdf) (Byeongchang Kim, ICLR 2020, [code](https://github.com/bckim92/sequential-knowledge-transformer?utm_source=catalyzex.com))
+
+[TopicKA: Generating Commonsense Knowledge-Aware Dialogue Responses Towards the Recommended Topic Fact](https://www.ijcai.org/Proceedings/2020/0521.pdf) (Sixing Wu, IJCAI 2020)
+
+[Diverse and Informative Dialogue Generation with Context-Specific Commonsense Knowledge Awareness](https://www.aclweb.org/anthology/2020.acl-main.515.pdf) (Sixing Wu, ACL 2020)
+
+[Knowledge-Grounded Dialogue Generation with Pre-trained Language Models](https://arxiv.org/pdf/2010.08824.pdf) (Xueliang Zhao, EMNLP 2020)
+
+[Bridging the Gap between Prior and Posterior Knowledge Selection for Knowledge-Grounded Dialogue Generation](https://www.aclweb.org/anthology/2020.emnlp-main.275.pdf) (Xiuyi Chen, EMNLP 2020)
 
 ##### Task-Oriented Dialogue System
 
