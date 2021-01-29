@@ -164,6 +164,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [DocBERT: BERT for Document Classification](https://arxiv.org/pdf/1904.08398.pdf) (Ashutosh Adhikari, 2019, [code](https://github.com/castorini/hedwig))
 
+[Text Classification Using Label Names Only: A Language Model Self-Training Approach](https://arxiv.org/pdf/2010.07245.pdf) (Yu Meng, EMNLP 2020, [code](https://github.com/yumeng5/LOTClass))
+
 ##### Multi-Label Text Classification
 
 [Semantic-Unit-Based Dilated Convolution for Multi-Label Text Classification](https://arxiv.org/pdf/1808.08561.pdf) (Junyang Lin, EMNLP 2018, [code](https://github.com/lancopku/SU4MLC), [note](https://zhuanlan.zhihu.com/p/59546989))
