@@ -840,6 +840,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Knowledge Distillation for Multilingual Unsupervised Neural Machine Translation](https://arxiv.org/pdf/2004.10171.pdf) (Haipeng Sun, ACL 2020)
 
+[Exploring Supervised and Unsupervised Rewards in Machine Translation](https://arxiv.org/pdf/2102.11403.pdf) (Julia Ive, EACL 2020)
+
 #### Dialogue System
 
 [A Survey on Dialogue Systems: Recent Advances and New Frontiers](https://arxiv.org/pdf/1711.01731.pdf) (Hongshen Chen, 2017, [note](https://cloud.tencent.com/developer/article/1337267))
@@ -1458,6 +1460,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [The Curious Case of Neural Text Degeneration](https://arxiv.org/pdf/1904.09751.pdf) (Ari Holtzman, ICLR 2020, [note](https://zhuanlan.zhihu.com/p/115076102))
 
+[The GEM Benchmark: Natural Language Generation, its Evaluation and Metrics](https://arxiv.org/pdf/2102.01672.pdf) (Sebastian Gehrmann, 2021)
+
 #### Sequence to Sequence
 
 [Convolutional Sequence to Sequence Learning](https://pdfs.semanticscholar.org/bb3e/bc09b65728d6eced04929df72a006fb5210b.pdf) (Jonas Gehring, ICML 2017, [code](https://github.com/tobyyouup/conv_seq2seq), [note](https://zhuanlan.zhihu.com/p/26918935))
@@ -1773,6 +1777,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [On the Momentum Term in Gradient Descent Learning](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.57.5612&rep=rep1&type=pdf) (Ning Qian, 1999)
 
 [Adaptive Subgradient Methods for Online Learning and Stochastic Optimization](http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf) (John Duchi, JMLR 2011)
+
+[Sequential Model-Based Optimization for General Algorithm Configuration](https://ml.informatik.uni-freiburg.de/papers/11-LION5-SMAC.pdf) (Frank Hutter, LION 2011)
 
 [ADADELTA: An Adaptive Learning Rate Method](https://arxiv.org/pdf/1212.5701.pdf) (Matthew D. Zeiler, 2012, [note](https://zh.d2l.ai/chapter_optimization/adadelta.html))
 
