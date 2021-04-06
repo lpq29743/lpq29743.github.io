@@ -1472,6 +1472,22 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Sparse Sequence-to-Sequence Models](https://arxiv.org/pdf/1905.05702.pdf) (Ben Peters, ACL 2019, [note](https://zhuanlan.zhihu.com/p/76607614))
 
+#### Natural Language Processing for Programming Language
+
+[code2seq: Generating sequences from structured representations of code](https://arxiv.org/pdf/1808.01400.pdf) (Uri Alon, ICLR 2019, [code](https://github.com/tech-srl/code2seq))
+
+##### Code Comment Generation
+
+[Towards automatically generating summary comments for java methods](https://dl.acm.org/doi/abs/10.1145/1858996.1859006) (Giriprasad Sridhara, ASE 2010)
+
+[On automatically generating commit messages via summarization of source code changes](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.714.7445&rep=rep1&type=pdf) (Luis Fernando Cortés-Coy, SCAM 2014)
+
+[Source code analysis extractive approach to generate textual summary](http://www.jatit.org/volumes/Vol95No21/12Vol95No21.pdf) (Kareem Abbas Dawood, 2017)
+
+##### Code Retrieval
+
+[Deep code search](https://guxd.github.io/papers/deepcs.pdf) (Xiaodong Gu, ICSE 2018)
+
 ### Computer Vision
 
 #### Object Detection
@@ -1570,7 +1586,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Few-Shot Learning
 
+[Learning from one example through shared densities on transform](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.3.9021&rep=rep1&type=pdf) (Erik G Miller, CVPR 2000)
+
 [One-Shot Learning of Object Categories](http://vision.stanford.edu/documents/Fei-FeiFergusPerona2006.pdf) (Li Fei-Fei, PAMI 2006, [note](https://blog.csdn.net/sinat_36594453/article/details/89817314))
+
+[Siamese neural networks for one-shot image recognition](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) (Gregory Koch, ICML 2015 Workshop, [note](https://zhuanlan.zhihu.com/p/86283037))
 
 #### Imbalanced Data
 
@@ -1613,6 +1633,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 #### Model
 
 [Learning representations by back-propagating errors](http://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf) (David E. Rumelhart, 1986)
+
+[Curriculum Learning](https://mila.quebec/wp-content/uploads/2019/08/2009_curriculum_icml.pdf) (Yoshua Bengio, ICML 2009, [note](https://zhuanlan.zhihu.com/p/114825029))
 
 [Highway Networks](http://de.arxiv.org/pdf/1505.00387) (Rupesh Kumar Srivastava, 2015, [note](https://zhuanlan.zhihu.com/p/38130339))
 
