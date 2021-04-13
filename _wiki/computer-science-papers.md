@@ -1514,6 +1514,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [YOLOv4: Optimal Speed and Accuracy of Object Detection](https://arxiv.org/pdf/2004.10934.pdf) (Alexey Bochkovskiy, 2020, [code](https://github.com/AlexeyAB/darknet?utm_source=catalyzex.com))
 
+[EfficientDet: Scalable and Efficient Object Detection](https://arxiv.org/pdf/1911.09070v3.pdf) (Mingxing Tan, CVPR 2020)
+
 #### Image Super-Resolution
 
 [Image Super-Resolution Using Deep Convolutional Networks](https://arxiv.org/pdf/1501.00092.pdf) (Chao Dong, TPAMI 2015)
@@ -1666,7 +1668,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Tree-CNN: A Deep Convolutional Neural Network for Lifelong Learning](https://arxiv.org/pdf/1802.05800.pdf) (Deboleena Roy, 2018, [code](https://github.com/magical2world/tensorflow-Tree-CNN), [note](https://blog.csdn.net/qq_24305433/article/details/79856672))
 
-[EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/pdf/1905.11946.pdf) (Mingxing Tan, 2019, [note](https://medium.com/@fanzongshaoxing/%E6%96%87%E7%AB%A0%E8%A7%A3%E8%AF%BB-efficientnet-rethinking-model-scaling-for-convolutional-neural-networks-icml2019-b55ee9720a4a))
+[EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/pdf/1905.11946.pdf) (Mingxing Tan, ICML 2019, [code](https://github.com/qubvel/efficientnet), [note](https://zhuanlan.zhihu.com/p/70369784))
+
+[EfficientNetV2: Smaller Models and Faster Training](https://arxiv.org/pdf/2104.00298.pdf) (Mingxing Tan, 2021)
 
 ##### Recurrent Neural Networks
 
@@ -1876,8 +1880,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [DARTS: Differentiable Architecture Search](https://arxiv.org/pdf/1806.09055.pdf) (Hanxiao Liu, ICLR 2019, [code](https://github.com/quark0/darts), [note](https://www.cnblogs.com/wangxiaocvpr/p/10556789.html))
 
-[EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/pdf/1905.11946.pdf) (Mingxing Tan, ICML 2019, [code](https://github.com/qubvel/efficientnet), [note](https://zhuanlan.zhihu.com/p/70369784))
-
 [ProxylessNAS: Direct Neural Architecture Search on Target Task and Hardware](https://arxiv.org/pdf/1812.00332.pdf) (Han Cai, ICLR 2019, [code](https://github.com/mit-han-lab/proxylessnas), [note](https://zhuanlan.zhihu.com/p/55220311))
 
 [Rethinking the Value of Network Pruning](https://arxiv.org/pdf/1810.05270.pdf) (Zhuang Liu, ICLR 2019, [code](https://github.com/Eric-mingjie/rethinking-network-pruning), [note](https://xmfbit.github.io/2018/10/22/paper-rethinking-the-value-of-network-pruning/))
@@ -1887,6 +1889,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Searching for MobileNetV3](http://openaccess.thecvf.com/content_ICCV_2019/html/Howard_Searching_for_MobileNetV3_ICCV_2019_paper.html) (Andrew Howard, ICCV 2019, [note](https://blog.nex3z.com/2020/07/27/reading-searching-for-mobilenetv3/))
 
 [Neural Architecture Search: A Survey](http://www.jmlr.org/papers/volume20/18-598/18-598.pdf) (Thomas Elsken, JMLR 2019, [note](https://zhuanlan.zhihu.com/p/123144164))
+
+[Designing Network Design Spaces](https://arxiv.org/pdf/2003.13678.pdf) (Ilija Radosavovic, CVPR 2020)
+
+[Neural Architecture Design for GPU-Efficient Networks](https://arxiv.org/pdf/2006.14090.pdf) (Ming Lin, 2020, [code](https://github.com/idstcv/GPU-Efficient-Networks), [note](https://zhuanlan.zhihu.com/p/151042330))
 
 ### Reinforcement Learning
 
