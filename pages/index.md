@@ -13,9 +13,9 @@ My name is Peiqin Lin (林佩勤). Currently, I am a Research Assistant at Hong 
 
 #### Research Interests
 
-- Sentiment/Emotion Analysis: Aspect Based Sentiment Analysis, Emotion Cause Analysis, Emotion-aware Dialogue System
-- Machine Translation: Parallel Corpora Alignment, Multilingual Machine Translation, Low-Resource Translation
-- Coreference Resolution
+- **Sentiment/Emotion Analysis**: Aspect Based Sentiment Analysis, Emotion Cause Analysis, Emotion-aware Dialogue System
+- **Machine Translation**: Parallel Corpora Alignment, Multilingual Machine Translation, Low-Resource Translation
+- **Coreference Resolution**
 
 #### Education
 
