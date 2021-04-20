@@ -1,0 +1,8 @@
+@article{lin2021deep,
+  title={Deep Selective Memory Network With Selective Attention and Inter-Aspect Modeling for Aspect Level Sentiment Classification},
+  author={Lin, Peiqin and Yang, Meng and Lai, Jianhuang},
+  journal={IEEE/ACM TRANSACTIONS ON AUDIO, SPEECH, AND LANGUAGE PROCESSING},
+  volume={29},
+  pages={1093},
+  year={2021}
+}
