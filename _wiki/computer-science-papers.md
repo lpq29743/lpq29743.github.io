@@ -210,6 +210,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Deep Relevance Matching Model for Ad-hoc Retrieval](https://arxiv.org/pdf/1711.08611.pdf) (Jiafeng Guo, CIKM 2016, [code](https://github.com/sebastian-hofstaetter/neural-ranking-drmm), [note](https://zhuanlan.zhihu.com/p/94195125))
 
+[ABCNN: Attention-Based Convolutional Neural Network for Modeling Sentence Pairs](https://arxiv.org/pdf/1512.05193.pdf) (Wenpeng Yin, TACL 2016, [code](https://github.com/shamalwinchurkar/question-classification?utm_source=catalyzex.com))
+
 [Learning to Match using Local and Distributed Representations of Text for Web Search](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/10/wwwfp0192-mitra.pdf) (Bhaskar Mitra, WWW 2017, [note](https://www.jianshu.com/p/ab24387a076b))
 
 [End-to-End Neural Ad-hoc Ranking with Kernel Pooling](http://delivery.acm.org/10.1145/3090000/3080809/p55-xiong.pdf?ip=218.19.145.8&id=3080809&acc=CHORUS&key=BF85BBA5741FDC6E%2E3D07CFA6C3F555EA%2E4D4702B0C3E38B35%2E6D218144511F3437&__acm__=1545743485_1f9609809da82437ccf634dc7f881b4b) (Chenyan Xiong, SIGIR 2017, [code](https://github.com/AdeDZY/K-NRM), [note](https://blog.csdn.net/SrdLaplace/article/details/86481422))
@@ -1292,6 +1294,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Visual Question Answering
 
+[VQA: Visual Question Answering](https://arxiv.org/pdf/1505.00468.pdf) (Aishwarya Agrawal, ICCV 2015)
+
+[Hierarchical Question-Image Co-Attention for Visual Question Answering](https://arxiv.org/pdf/1606.00061.pdf) (Jiasen Lu, NIPS 2016)
+
 [Explicit Knowledge-based Reasoning for Visual Question Answering](https://arxiv.org/pdf/1511.02570.pdf) (Peng Wang, IJCAI 2017)
 
 [FVQA: Fact-based Visual Question Answering](https://arxiv.org/pdf/1606.05433.pdf) (Peng Wang, TPAMI 2018, [note](https://zhuanlan.zhihu.com/p/66282581))
@@ -1492,6 +1498,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Object Detection
 
+[Rapid object detection using a boosted cascade of simple features](https://ieeexplore.ieee.org/abstract/document/990517) (CVPR 2001, Paul Viola)
+
 [Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/pdf/1311.2524.pdf) (Ross Girshick, CVPR 2014, [code](https://github.com/rbgirshick/rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
 
 [Fast Region-based Convolutional Networks for object detection](https://arxiv.org/pdf/1504.08083.pdf) (Ross Girshick, ICCV 2015, [code](https://github.com/rbgirshick/fast-rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
@@ -1515,6 +1523,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [YOLOv4: Optimal Speed and Accuracy of Object Detection](https://arxiv.org/pdf/2004.10934.pdf) (Alexey Bochkovskiy, 2020, [code](https://github.com/AlexeyAB/darknet?utm_source=catalyzex.com))
 
 [EfficientDet: Scalable and Efficient Object Detection](https://arxiv.org/pdf/1911.09070v3.pdf) (Mingxing Tan, CVPR 2020)
+
+##### Semantic Segmentation
+
+[Fully Convolutional Networks for Semantic Segmentation](https://arxiv.org/pdf/1411.4038.pdf) (Jonathan Long, CVPR 2015, [code](https://github.com/anoushkrit/Knowledge?utm_source=catalyzex.com), [note](https://blog.csdn.net/qq_36269513/article/details/80420363))
 
 #### Image Super-Resolution
 
@@ -1663,6 +1675,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Deep Residual Learning for Image Recognition](https://x-algo.cn/wp-content/uploads/2016/12/residual.pdf) (Kaiming He, 2015, [note](https://zhuanlan.zhihu.com/p/47199669))
 
 [Multi-Scale Context Aggregation by Dilated Convolutions](https://arxiv.org/pdf/1511.07122.pdf) (Fisher Yu, ICLR 2016, [code](https://github.com/iesl/dilated-cnn-ner), [note](https://www.cnblogs.com/fourmi/p/10049998.html))
+
+[Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/pdf/1512.00567.pdf) (Christian Szegedy, CVPR 2016, [code](https://github.com/pytorch/vision?utm_source=catalyzex.com), [note](https://zhuanlan.zhihu.com/p/50751422))
 
 [Densely Connected Convolutional Networks](http://www.cs.cmu.edu/~jeanoh/16-785/papers/huang-cvpr2017-densenet.pdf) (Gao Huang, CVPR 2017, [code](https://github.com/liuzhuang13/DenseNet))
 
@@ -1866,9 +1880,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Neural Architecture Search
 
+[MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861.pdf) (Andrew Howard, 2017, code)
+
 [Neural Architecture Search with Reinforcement Learning](https://arxiv.org/pdf/1611.01578.pdf) (Barret Zoph, ICLR 2017, [note](https://zhuanlan.zhihu.com/p/47221948))
 
 [Learning Transferable Architectures for Scalable Image Recognition](http://openaccess.thecvf.com/content_cvpr_2018/html/Zoph_Learning_Transferable_Architectures_CVPR_2018_paper.html) (Barret Zoph, CVPR 2018, [note](https://zhuanlan.zhihu.com/p/31655995))
+
+[MobileNetV2: Inverted Residuals and Linear Bottlenecks](https://arxiv.org/pdf/1801.04381.pdf) (Mark Sandler, CVPR 2018, [code](https://github.com/pytorch/vision?utm_source=catalyzex.com))
 
 [Progressive Neural Architecture Search](http://openaccess.thecvf.com/content_ECCV_2018/html/Chenxi_Liu_Progressive_Neural_Architecture_ECCV_2018_paper.html) (Chenxi Liu, ECCV 2018, [note](https://blog.csdn.net/dhaiuda/article/details/102599427))
 
