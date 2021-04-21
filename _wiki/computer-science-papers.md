@@ -1042,6 +1042,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Emotional Chatting Machine: Emotional Conversation Generation with Internal and External Memory](https://ojs.aaai.org/index.php/AAAI/article/view/11325) (Hao Zhou, AAAI 2018, [code](https://github.com/tuxchow/ecm?utm_source=catalyzex.com))
 
+[Eliciting Positive Emotion through Affect-Sensitive Dialogue Response Generation: A Neural Network Approach](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewPDFInterstitial/16317/16080) (Nurul Lubis, AAAI 2018)
+
 [A Syntactically Constrained Bidirectional-Asynchronous Approach for Emotional Conversation Generation](https://www.aclweb.org/anthology/D18-1071.pdf) (Jingyuan Li, EMNLP 2018)
 
 [Affective Neural Response Generation](https://link.springer.com/chapter/10.1007/978-3-319-76941-7_12) (Nabiha Asghar, ECIR 2018)
@@ -1059,6 +1061,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 ##### Empathetic Dialogue Generation
 
 [Towards Empathetic Open-domain Conversation Models: a New Benchmark and Dataset](https://arxiv.org/pdf/1811.00207.pdf) (Hannah Rashkin, ACL 2019)
+
+[MoEL: Mixture of Empathetic Listeners](https://www.aclweb.org/anthology/D19-1012.pdf) (Zhaojiang Lin, EMNLP 2019, [code](https://github.com/HLTCHKUST/MoEL))
 
 [What If Bots Feel Moods?](https://dl.acm.org/doi/abs/10.1145/3397271.3401108) (Lisong Qiu, SIGIR 2020)
 
