@@ -1038,7 +1038,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Plug-and-Play Conversational Models](https://arxiv.org/pdf/2010.04344.pdf) (Andrea Madotto, EMNLP 2020 Findings)
 
-##### Emotional Dialogue Generation
+##### Empathetic Dialogue Generation
+
+[Predicting and Eliciting Addressee’s Emotion in Online Dialogue](https://www.aclweb.org/anthology/P13-1095.pdf) (Takayuki Hasegawa, ACL 2013)
+
+[Large-scale Analysis of Counseling Conversations: An Application of Natural Language Processing to Mental Health](https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00111/43371/Large-scale-Analysis-of-Counseling-Conversations) (Tim Althoff, TACL 2016, [code](http://snap.stanford.edu/counseling/))
 
 [Emotional Chatting Machine: Emotional Conversation Generation with Internal and External Memory](https://ojs.aaai.org/index.php/AAAI/article/view/11325) (Hao Zhou, AAAI 2018, [code](https://github.com/tuxchow/ecm?utm_source=catalyzex.com))
 
@@ -1050,15 +1054,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Topic-Enhanced Emotional Conversation Generation with Attention Mechanism](https://www.sciencedirect.com/science/article/abs/pii/S095070511830457X) (Yehong Peng, KBS 2019)
 
+[Positive Emotion Elicitation in Chat-Based Dialogue Systems](https://ieeexplore.ieee.org/document/8649596) (Nurul Lubis, TASLP 2019)
+
 [An Affect-Rich Neural Conversational Model with Biased Attention and Weighted Cross-Entropy Loss](https://ojs.aaai.org//index.php/AAAI/article/view/4740) (Peixiang Zhong, AAAI 2019, [code](https://github.com/zhongpeixiang/affect-rich-conversational-model?utm_source=catalyzex.com))
 
 [Affect-Driven Dialog Generation](https://arxiv.org/pdf/1904.02793.pdf) (Pierre Colombo, NAACL 2019)
 
 [Generating Responses with a Specific Emotion in Dialog](https://www.aclweb.org/anthology/P19-1359.pdf) (Zhenqiao Song, ACL 2019, [note](https://www.dazhuanlan.com/2020/02/10/5e403d064876d/))
-
-[CDL: Curriculum Dual Learning for Emotion-Controllable Response Generation](https://arxiv.org/pdf/2005.00329.pdf) (Lei Shen, ACL 2020)
-
-##### Empathetic Dialogue Generation
 
 [Towards Empathetic Open-domain Conversation Models: a New Benchmark and Dataset](https://arxiv.org/pdf/1811.00207.pdf) (Hannah Rashkin, ACL 2019)
 
@@ -1066,9 +1068,17 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [What If Bots Feel Moods?](https://dl.acm.org/doi/abs/10.1145/3397271.3401108) (Lisong Qiu, SIGIR 2020)
 
-[Towards Persona-Based Empathetic Conversational Model](https://www.aclweb.org/anthology/2020.emnlp-main.531.pdf) (Peixiang Zhong, EMNLP 2020, [code](https://github.com/zhongpeixiang/PEC?utm_source=catalyzex.com))
+[EmoElicitor: An Open Domain Response Generation Model with User Emotional Reaction Awareness](https://www.ijcai.org/proceedings/2020/0503.pdf) (Shifeng Li, IJCAI 2020)
+
+[CDL: Curriculum Dual Learning for Emotion-Controllable Response Generation](https://arxiv.org/pdf/2005.00329.pdf) (Lei Shen, ACL 2020)
+
+[Balancing Objectives in Counseling Conversations: Advancing Forwards or Looking Backwards](https://arxiv.org/pdf/2005.04245.pdf) (Justine Zhang, ACL 2020)
+
+[A Computational Approach to Understanding Empathy Expressed in Text-Based Mental Health Support](https://arxiv.org/pdf/2009.08441.pdf) (Ashish Sharma, EMNLP 2020)
 
 [EmpDG: Multiresolution Interactive Empathetic Dialogue Generation](https://arxiv.org/pdf/1911.08698.pdf) (Qintong Li, COLING 2020)
+
+[Towards Facilitating Empathic Conversations in Online Mental Health Support: A Reinforcement Learning Approach](https://arxiv.org/pdf/2101.07714.pdf) (Ashish Sharma, WWW 2021)
 
 ##### Stylized Response Generation
 
@@ -1097,6 +1107,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [You Impress Me: Dialogue Generation via Mutual Persona Perception](https://arxiv.org/pdf/2004.05388.pdf) (Qian Liu, ACL 2020, [code](https://github.com/SivilTaram/Persona-Dialogue-Generation?utm_source=catalyzex.com))
 
 [Like hiking? You probably enjoy nature: Persona-grounded Dialog with Commonsense Expansions](https://arxiv.org/pdf/2010.03205.pdf) (Bodhisattwa Prasad Majumder, EMNLP 2020)
+
+[Towards Persona-Based Empathetic Conversational Model](https://www.aclweb.org/anthology/2020.emnlp-main.531.pdf) (Peixiang Zhong, EMNLP 2020, [code](https://github.com/zhongpeixiang/PEC?utm_source=catalyzex.com))
 
 ##### Knowledge-Grounded Dialogue System
 
