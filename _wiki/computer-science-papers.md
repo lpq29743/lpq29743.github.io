@@ -370,6 +370,34 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Reducing Quantity Hallucinations in Abstractive Summarization](https://arxiv.org/pdf/2009.13312.pdf) (Zheng Zhao, EMNLP 2020 Findings)
 
+#### Text Style Transfer
+
+[Style Transfer from Non-Parallel Text by Cross-Alignment](https://arxiv.org/pdf/1705.09655.pdf) (Tianxiao Shen, NIPS 2017, [code](https://github.com/shentianxiao/language-style-transfer?utm_source=catalyzex.com))
+
+[Style Transfer in Text: Exploration and Evaluation](https://arxiv.org/pdf/1711.06861.pdf) (Zhenxin Fu, AAAI 2018, [code](https://github.com/fuzhenxin/text_style_transfer?utm_source=catalyzex.com))
+
+[Delete, Retrieve, Generate: A Simple Approach to Sentiment and Style Transfer](https://www.aclweb.org/anthology/N18-1169.pdf) (Juncen Li, NAACL 2018, [code](https://github.com/rpryzant/delete_retrieve_generate), [note](https://blog.csdn.net/u014475479/article/details/81945534))
+
+[Style Transfer Through Back-Translation](https://arxiv.org/pdf/1804.09000.pdf) (Shrimai Prabhumoye, ACL 2018, [code](https://github.com/shrimai/Style-Transfer-Through-Back-Translation?utm_source=catalyzex.com))
+
+[Unsupervised Text Style Transfer using Language Models as Discriminators](https://arxiv.org/pdf/1805.11749.pdf) (Zichao Yang, NIPS 2018, [code](https://github.com/asyml/texar/tree/master/examples/text_style_transfer?utm_source=catalyzex.com))
+
+[Reinforcement Learning Based Text Style Transfer without Parallel Training Corpus](https://arxiv.org/pdf/1903.10671.pdf) (Hongyu Gong, NAACL 2019, [code](https://github.com/HongyuGong/TextStyleTransfer))
+
+[A Dual Reinforcement Learning Framework for Unsupervised Text Style Transfer](https://arxiv.org/pdf/1905.10060.pdf) (Fuli Luo, IJCAI 2019, [code](https://github.com/luofuli/DualRL?utm_source=catalyzex.com))
+
+[Mask and Infill: Applying Masked Language Model for Sentiment Transfer](https://arxiv.org/pdf/1908.08039.pdf) (Xing Wu, IJCAI 2019, [code](https://github.com/IIEKES/MLM_transfer))
+
+[Disentangled Representation Learning for Non-Parallel Text Style Transfer](https://www.aclweb.org/anthology/P19-1041.pdf) (Vineet John, ACL 2019, [note](https://zhuanlan.zhihu.com/p/102783862))
+
+[A Hierarchical Reinforced Sequence Operation Method for Unsupervised Text Style Transfer](https://arxiv.org/pdf/1906.01833.pdf) (Chen Wu, ACL 2019, [code](https://github.com/ChenWu98/Point-Then-Operate), [note](https://www.cnblogs.com/bernieloveslife/p/12748942.html))
+
+[Style Transformer: Unpaired Text Style Transfer without Disentangled Latent Representation](https://arxiv.org/pdf/1905.05621.pdf) (Ning Dai, ACL 2019, [code](https://github.com/fastnlp/style-transformer?utm_source=catalyzex.com), [note](http://ziyangluo.tech/2020/05/12/TSTpaper2StyleTran/))
+
+[Semi-supervised Text Style Transfer: Cross Projection in Latent Space](https://arxiv.org/pdf/1909.11493.pdf) (Mingyue Shang, EMNLP 2019)
+
+[Multiple-Attribute Text Style Transfer](https://openreview.net/pdf?id=H1g2NhC5KQ) (Guillaume Lample, ICLR 2019)
+
 #### Topic Modeling
 
 ##### Unsupervised Topic Modeling
@@ -1621,6 +1649,16 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [One-Shot Learning of Object Categories](http://vision.stanford.edu/documents/Fei-FeiFergusPerona2006.pdf) (Li Fei-Fei, PAMI 2006, [note](https://blog.csdn.net/sinat_36594453/article/details/89817314))
 
 [Siamese neural networks for one-shot image recognition](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) (Gregory Koch, ICML 2015 Workshop, [note](https://zhuanlan.zhihu.com/p/86283037))
+
+#### Meta Learning
+
+[Matching Networks for One Shot Learning](https://arxiv.org/pdf/1606.04080.pdf) (Oriol Vinyals, NIPS 2016, [note](https://zhuanlan.zhihu.com/p/32101204))
+
+[Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks](https://arxiv.org/pdf/1703.03400.pdf) (Chelsea Finn, ICML 2017, [code](https://github.com/cbfinn/maml?utm_source=catalyzex.com), [note](https://zhuanlan.zhihu.com/p/57864886))
+
+[Meta-Learning Representations for Continual Learning](https://arxiv.org/pdf/1905.12588.pdf) (Khurram Javed, NIPS 2019, [code](https://github.com/khurramjaved96/mrcl?utm_source=catalyzex.com))
+
+[Learning to Continually Learn](https://arxiv.org/pdf/2002.09571.pdf) (Shawn Beaulieu, ECAI 2020, [code](https://github.com/uvm-neurobotics-lab/ANML?utm_source=catalyzex.com))
 
 #### Imbalanced Data
 
