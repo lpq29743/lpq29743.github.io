@@ -512,6 +512,18 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Open Domain Web Keyphrase Extraction Beyond Language Modeling](https://arxiv.org/pdf/1911.02671.pdf) (Lee Xiong, EMNLP 2019)
 
+#### Word Segmentation
+
+[Adversarial Multi-Criteria Learning for Chinese Word Segmentation](https://www.aclweb.org/anthology/P17-1110.pdf) (Xinchi Chen, ACL 2017)
+
+[State-of-the-art Chinese Word Segmentation with Bi-LSTMs](https://arxiv.org/pdf/1808.06511.pdf) (Ji Ma, 2018, [code](https://github.com/efeatikkan/Chinese_Word_Segmenter?utm_source=catalyzex.com))
+
+[Improving Chinese Word Segmentation with Wordhood Memory Networks](https://www.aclweb.org/anthology/2020.acl-main.734v2.pdf) (Yuanhe Tian, ACL 2020, [code](https://github.com/SVAIGBA/WMSeg))
+
+[A Concise Model for Multi-Criteria Chinese Word Segmentation with Transformer Encoder](https://arxiv.org/pdf/1906.12035.pdf) (Xipeng Qiu, EMNLP 2020, [code](https://github.com/acphile/MCCWS))
+
+[Towards Fast and Accurate Neural Chinese Word Segmentation with Multi-Criteria Learning](https://arxiv.org/pdf/1903.04190.pdf) (Weipeng Huang, COLING 2020)
+
 #### Sequence Labeling
 
 [End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF](https://arxiv.org/pdf/1603.01354.pdf) (Xuezhe Ma, ACL 2016, [code](https://github.com/jayavardhanr/End-to-end-Sequence-Labeling-via-Bi-directional-LSTM-CNNs-CRF-Tutorial), [note](https://jeffchy.github.io/2018/09/24/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%EF%BC%9AEnd-to-End-Sequence-Labeling-via-Bi-directional-LSTM-CNN-CRF/))
@@ -528,27 +540,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Hierarchically-Refined Label Attention Network for Sequence Labeling](https://arxiv.org/pdf/1908.08676.pdf) (Leyang Cui, EMNLP 2019, [code](https://github.com/Nealcly/BiLSTM-LAN), [note](https://zhuanlan.zhihu.com/p/92672564))
 
-#### Dependency Parsing
+##### Named Entity Recognition
 
-[Statistical Dependency Analysis with Support Vector machines](https://pdfs.semanticscholar.org/f0e1/883cf9d1b3c911125f46359f908557fc5827.pdf) (Hiroyasu Yamada, 2003, [code](https://github.com/rohit-jain/parzer))
+[Chinese NER Using Lattice LSTM](https://arxiv.org/pdf/1805.02023.pdf) (Yue Zhang, ACL 2018)
 
-[A Dynamic Oracle for Arc-Eager Dependency Parsing](https://www.aclweb.org/anthology/C12-1059) (Yoav Goldberg, COLING 2012, [code](https://github.com/dpressel/arcs-py))
+[Leverage Lexical Knowledge for Chinese Named Entity Recognition via Collaborative Graph Network](https://www.aclweb.org/anthology/D19-1396.pdf) (Dianbo Sui, EMNLP 2019)
 
-[Training Deterministic Parsers with Non-Deterministic Oracles](https://www.aclweb.org/anthology/Q13-1033.pdf) (Yoav Goldberg, TACL 2013, [code](https://github.com/dpressel/arcs-py))
+[A Survey on Deep Learning for Named Entity Recognition](https://ieeexplore.ieee.org/abstract/document/9039685) (Jing Li, TKDE 2020)
 
-[A Fast and Accurate Dependency Parser using Neural Networks](https://cs.stanford.edu/~danqi/papers/emnlp2014.pdf) (Danqi Chen, EMNLP 2014, [code](https://github.com/khenrix/stanford_nn_parser), [note](https://nocater.github.io/2018/11/13/%E8%AE%BA%E6%96%87-A-Fast-and-Accurate-Dependency-Parserusing-Neural-Networks/))
-
-[An Improved Non-monotonic Transition System for Dependency Parsing](https://aclweb.org/anthology/D15-1162) (Matthew Honnibal, EMNLP 2015)
-
-[Simple and Accurate Dependency Parsing Using Bidirectional LSTM Feature Representations](https://aclweb.org/anthology/Q16-1023) (Eliyahu Kiperwasser, TACL 2016, [code](https://github.com/elikip/bist-parser), [note](http://fancyerii.github.io/books/nndepparser/))
-
-[Deep Biaffine Attention for Neural Dependency Parsing](https://arxiv.org/pdf/1611.01734.pdf) (Timothy Dozat, ICLR 2017, [code](https://github.com/yzhangcs/parser), [note](https://www.hankcs.com/nlp/parsing/deep-biaffine-attention-for-neural-dependency-parsing.html))
-
-[Deep Multitask Learning for Semantic Dependency Parsing](https://arxiv.org/pdf/1704.06855.pdf) (Hao Peng, ACL 2017, [code](https://github.com/Noahs-ARK/NeurboParser), [note](https://chao1224.gitbooks.io/running-paper/content/nlp/acl/acl2017/deep-multitask-learning-for-semantic-dependency-parsing.html))
-
-[Simpler but More Accurate Semantic Dependency Parsing](https://www.aclweb.org/anthology/P18-2077.pdf) (Timothy Dozat, ACL 2018, [code](https://github.com/tdozat/Parser-v3))
-
-[Multi-Task Semantic Dependency Parsing with Policy Gradient for Learning Easy-First Strategies](https://arxiv.org/pdf/1906.01239.pdf) (Shuhei Kurita, ACL 2019)
+[A Unified MRC Framework for Named Entity Recognition](https://arxiv.org/pdf/1910.11476.pdf) (Xiaoya Li, ACL 2020, [code](https://github.com/ShannonAI/mrc-for-flat-nested-ner?utm_source=catalyzex.com))
 
 ##### Semantic Role Labeling
 
@@ -575,6 +575,28 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Dependency or Span, End-to-End Uniform Semantic Role Labeling Sentiment Analysis](https://arxiv.org/pdf/1901.05280.pdf) (Zuchao Li, AAAI 2019, [code](https://github.com/bcmi220/unisrl), [note](https://www.sohu.com/a/295644284_129720))
 
 [Semantic Role Labeling with Associated Memory Network](https://arxiv.org/pdf/1908.02367.pdf) (Chaoyu Guan, NAACL 2019, [code](https://github.com/Frozenmad/AMN_SRL))
+
+#### Dependency Parsing
+
+[Statistical Dependency Analysis with Support Vector machines](https://pdfs.semanticscholar.org/f0e1/883cf9d1b3c911125f46359f908557fc5827.pdf) (Hiroyasu Yamada, 2003, [code](https://github.com/rohit-jain/parzer))
+
+[A Dynamic Oracle for Arc-Eager Dependency Parsing](https://www.aclweb.org/anthology/C12-1059) (Yoav Goldberg, COLING 2012, [code](https://github.com/dpressel/arcs-py))
+
+[Training Deterministic Parsers with Non-Deterministic Oracles](https://www.aclweb.org/anthology/Q13-1033.pdf) (Yoav Goldberg, TACL 2013, [code](https://github.com/dpressel/arcs-py))
+
+[A Fast and Accurate Dependency Parser using Neural Networks](https://cs.stanford.edu/~danqi/papers/emnlp2014.pdf) (Danqi Chen, EMNLP 2014, [code](https://github.com/khenrix/stanford_nn_parser), [note](https://nocater.github.io/2018/11/13/%E8%AE%BA%E6%96%87-A-Fast-and-Accurate-Dependency-Parserusing-Neural-Networks/))
+
+[An Improved Non-monotonic Transition System for Dependency Parsing](https://aclweb.org/anthology/D15-1162) (Matthew Honnibal, EMNLP 2015)
+
+[Simple and Accurate Dependency Parsing Using Bidirectional LSTM Feature Representations](https://aclweb.org/anthology/Q16-1023) (Eliyahu Kiperwasser, TACL 2016, [code](https://github.com/elikip/bist-parser), [note](http://fancyerii.github.io/books/nndepparser/))
+
+[Deep Biaffine Attention for Neural Dependency Parsing](https://arxiv.org/pdf/1611.01734.pdf) (Timothy Dozat, ICLR 2017, [code](https://github.com/yzhangcs/parser), [note](https://www.hankcs.com/nlp/parsing/deep-biaffine-attention-for-neural-dependency-parsing.html))
+
+[Deep Multitask Learning for Semantic Dependency Parsing](https://arxiv.org/pdf/1704.06855.pdf) (Hao Peng, ACL 2017, [code](https://github.com/Noahs-ARK/NeurboParser), [note](https://chao1224.gitbooks.io/running-paper/content/nlp/acl/acl2017/deep-multitask-learning-for-semantic-dependency-parsing.html))
+
+[Simpler but More Accurate Semantic Dependency Parsing](https://www.aclweb.org/anthology/P18-2077.pdf) (Timothy Dozat, ACL 2018, [code](https://github.com/tdozat/Parser-v3))
+
+[Multi-Task Semantic Dependency Parsing with Policy Gradient for Learning Easy-First Strategies](https://arxiv.org/pdf/1906.01239.pdf) (Shuhei Kurita, ACL 2019)
 
 #### Sentiment Analysis
 
@@ -834,6 +856,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Rapid Adaptation of Neural Machine Translation to New Languages](https://arxiv.org/pdf/1808.04189.pdf) (Graham Neubig, EMNLP 2018)
 
+[A Survey of Domain Adaptation for Neural Machine Translation](https://arxiv.org/pdf/1806.00258.pdf) (Chenhui Chu, COLING 2018)
+
 [Massively Multilingual Neural Machine Translation](https://arxiv.org/pdf/1903.00089.pdf) (Roee Aharoni, NAACL 2019)
 
 [The FLoRes Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English](https://arxiv.org/pdf/1902.01382.pdf) (Francisco Guzman, EMNLP 2019, [code](https://github.com/facebookresearch/flores))
@@ -877,6 +901,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [A Survey on Dialogue Systems: Recent Advances and New Frontiers](https://arxiv.org/pdf/1711.01731.pdf) (Hongshen Chen, 2017, [note](https://cloud.tencent.com/developer/article/1337267))
 
 [AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine](http://www.aclweb.org/anthology/P/P17/P17-2079.pdf) (Minghui Qiu, ACL 2017, [note](https://blog.csdn.net/u011239443/article/details/83829265))
+
+[Learning Discourse-level Diversity for Neural Dialog Models using Conditional Variational Autoencoders](https://www.aclweb.org/anthology/P17-1061.pdf) (Tiancheng Zhao, ACL 2017, [note](http://www.xuwei.io/2019/04/05/%E3%80%8Alearning-discourse-level-diversity-for-neural-dialog-models-using-conditional-variational-autoencoders%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/))
 
 [Neural Approaches to Conversational AI](https://dl.acm.org/doi/abs/10.1145/3209978.3210183) (Jianfeng Gao, SIGIR 2018)
 
@@ -1798,9 +1824,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/pdf/1912.04958.pdf) (Tero Karras, 2019, [note](https://blog.csdn.net/lynlindasy/article/details/104495583))
 
-##### Variational Autoencoders
+##### Variational Autoencoder
 
 [Auto-Encoding Variational Bayes](https://arxiv.org/pdf/1312.6114.pdf) (Diederik P. Kingma, ICLR 2014)
+
+[Learning Structured Output Representation using Deep Conditional Generative Models](https://papers.nips.cc/paper/2015/file/8d55a249e6baa5c06772297520da2051-Paper.pdf) (Kihyuk Sohn, NIPS 2015)
 
 ##### Graph Neural Networks
 
