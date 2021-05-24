@@ -1560,6 +1560,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Submodular Optimization-based Diverse Paraphrasing and its Effectiveness in Data Augmentation](https://www.aclweb.org/anthology/N19-1363.pdf) (Ashutosh Kumar, NAACL 2019, [code](https://github.com/malllabiisc/DiPS))
 
+[T-CVAE: Transformer-Based Conditioned Variational Autoencoder for Story Completion](https://www.ijcai.org/proceedings/2019/0727.pdf) (Tianming Wang, IJCAI 2019, [note](https://zhuanlan.zhihu.com/p/91166636))
+
 [Modeling Graph Structure in Transformer for Better AMR-to-Text Generation](https://arxiv.org/pdf/1909.00136.pdf) (Jie Zhu, EMNLP 2019)
 
 [Enhancing AMR-to-Text Generation with Dual Graph Representations](https://arxiv.org/pdf/1909.00352.pdf) (Leonardo F. R. Ribeiro, EMNLP 2019, [code](https://github.com/UKPLab/emnlp2019-dualgraph), [note](https://zhuanlan.zhihu.com/p/105701258))
