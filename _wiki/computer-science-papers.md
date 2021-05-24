@@ -114,6 +114,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Primer in BERTology: What We Know About How BERT Works](https://www.mitpressjournals.org/doi/full/10.1162/tacl_a_00349) (Anna Rogers, TACL 2020)
 
+[K-ADAPTER: Infusing Knowledge into Pre-Trained Models with Adapters](https://arxiv.org/pdf/2002.01808.pdf) (Ruize Wang, 2020)
+
 #### Text Classification
 
 [One-Class SVMs for Document Classification](http://www.jmlr.org/papers/v2/manevitz01a.html) (Larry M. Manevitz, JMLR 2001)
@@ -161,6 +163,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Universal Sentence Encoder](https://arxiv.org/pdf/1803.11175.pdf) (Daniel Cer, 2018, [code](https://tfhub.dev/google/universal-sentence-encoder/1), [note](https://zhuanlan.zhihu.com/p/35174235))
 
 [Graph Convolutional Networks for Text Classification](https://arxiv.org/pdf/1809.05679v1.pdf) (Liang Yao, AAAI 2019, [code](https://github.com/yao8839836/text_gcn), [note](https://zhuanlan.zhihu.com/p/75708556))
+
+[Topics to Avoid: Demoting Latent Confounds in Text Classification](https://arxiv.org/pdf/1909.00453.pdf) (Sachin Kumar, EMNLP 2019)
 
 [DocBERT: BERT for Document Classification](https://arxiv.org/pdf/1904.08398.pdf) (Ashutosh Adhikari, 2019, [code](https://github.com/castorini/hedwig))
 
@@ -237,6 +241,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Semantic Sentence Matching with Densely-connected Recurrent and Co-attentive Information](https://arxiv.org/pdf/1805.11360.pdf) (Seonhoon Kim, AAAI 2019, [note](https://zhuanlan.zhihu.com/p/47948866))
 
 [Gaussian Transformer: A Lightweight Approach for Natural Language Inference](https://www.aaai.org/ojs/index.php/AAAI/article/view/4614) (Maosheng Guo, AAAI 2019, [code](https://github.com/lzy1732008/GaussionTransformer), [note](https://zhuanlan.zhihu.com/p/75411024))
+
+[Are Natural Language Inference Models IMPPRESsive? Learning IMPlicature and PRESupposition](https://arxiv.org/pdf/2004.03066.pdf) (Paloma Jeretic, ACL 2020)
+
+[Do Neural Models Learn Systematicity of Monotonicity Inference in Natural Language?](https://arxiv.org/pdf/2004.14839.pdf) (Hitomi Yanaka, ACL 2020)
+
+[Uncertain Natural Language Inference](https://www.aclweb.org/anthology/2020.acl-main.774.pdf) (Tongfei Chen, ACL 2020)
 
 #### Text Summarization
 
@@ -370,11 +380,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Reducing Quantity Hallucinations in Abstractive Summarization](https://arxiv.org/pdf/2009.13312.pdf) (Zheng Zhao, EMNLP 2020 Findings)
 
+[Unsupervised Opinion Summarization with Content Planning](https://arxiv.org/pdf/2012.07808.pdf) (Reinald Kim Amplayo, AAAI 2021)
+
 #### Text Style Transfer
 
 [Style Transfer from Non-Parallel Text by Cross-Alignment](https://arxiv.org/pdf/1705.09655.pdf) (Tianxiao Shen, NIPS 2017, [code](https://github.com/shentianxiao/language-style-transfer?utm_source=catalyzex.com))
 
-[Style Transfer in Text: Exploration and Evaluation](https://arxiv.org/pdf/1711.06861.pdf) (Zhenxin Fu, AAAI 2018, [code](https://github.com/fuzhenxin/text_style_transfer?utm_source=catalyzex.com))
+[Style Transfer in Text: Exploration and Evaluation](https://arxiv.org/pdf/1711.06861.pdf) (Zhenxin Fu, AAAI 2018, [code](https://github.com/fuzhenxin/text_style_transfer?utm_source=catalyzex.com), [note](https://zhuanlan.zhihu.com/p/32300981))
 
 [Delete, Retrieve, Generate: A Simple Approach to Sentiment and Style Transfer](https://www.aclweb.org/anthology/N18-1169.pdf) (Juncen Li, NAACL 2018, [code](https://github.com/rpryzant/delete_retrieve_generate), [note](https://blog.csdn.net/u014475479/article/details/81945534))
 
@@ -388,7 +400,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Mask and Infill: Applying Masked Language Model for Sentiment Transfer](https://arxiv.org/pdf/1908.08039.pdf) (Xing Wu, IJCAI 2019, [code](https://github.com/IIEKES/MLM_transfer))
 
-[Disentangled Representation Learning for Non-Parallel Text Style Transfer](https://www.aclweb.org/anthology/P19-1041.pdf) (Vineet John, ACL 2019, [note](https://zhuanlan.zhihu.com/p/102783862))
+[Disentangled Representation Learning for Non-Parallel Text Style Transfer](https://www.aclweb.org/anthology/P19-1041.pdf) (Vineet John, ACL 2019, [code](https://github.com/h3lio5/linguistic-style-transfer-pytorch), [note](https://zhuanlan.zhihu.com/p/102783862))
 
 [A Hierarchical Reinforced Sequence Operation Method for Unsupervised Text Style Transfer](https://arxiv.org/pdf/1906.01833.pdf) (Chen Wu, ACL 2019, [code](https://github.com/ChenWu98/Point-Then-Operate), [note](https://www.cnblogs.com/bernieloveslife/p/12748942.html))
 
@@ -852,6 +864,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Non-Autoregressive Neural Machine Translation](https://arxiv.org/pdf/1711.02281.pdf) (Jiatao Gu, ICLR 2018, [code](https://github.com/salesforce/nonauto-nmt), [note](https://zhuanlan.zhihu.com/p/35866317))
 
+[Word Translation Without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) (Alexis Conneau, ICLR 2018)
+
 [Phrase-Based & Neural Unsupervised Machine Translation](https://arxiv.org/pdf/1804.07755.pdf) (Guillaume Lample, EMNLP 2018, [code](https://github.com/facebookresearch/UnsupervisedMT), [note](https://blog.csdn.net/ljp1919/article/details/103074097))
 
 [Rapid Adaptation of Neural Machine Translation to New Languages](https://arxiv.org/pdf/1808.04189.pdf) (Graham Neubig, EMNLP 2018)
@@ -886,15 +900,23 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Generalized Data Augmentation for Low-Resource Translation](https://arxiv.org/pdf/1906.03785.pdf) (Mengzhou Xia, ACL 2019, [code](https://github.com/xiamengzhou/DataAugForLRL))
 
+[Latent Variable Model for Multi-modal Translation](https://www.aclweb.org/anthology/P19-1642.pdf) (Iacer Calixto, ACL 2019)
+
+[Distilling Translations with Visual Awareness](https://www.aclweb.org/anthology/P19-1653.pdf) (ACL 2019)
+
 [Cross-Lingual Pre-Training Based Transfer for Zero-Shot Neural Machine Translation](https://www.aaai.org/ojs/index.php/AAAI/article/view/5341) (Baijun Ji, AAAI 2020)
 
 [Balancing Training for Multilingual Neural Machine Translation](https://arxiv.org/pdf/2004.06748.pdf) (Xinyi Wang, ACL 2020)
 
 [Learning a Multi-Domain Curriculum for Neural Machine Translation](https://arxiv.org/pdf/1908.10940.pdf) (Wei Wang, ACL 2020)
 
+[Multimodal Transformer for Multimodal Machine Translation](https://www.aclweb.org/anthology/2020.acl-main.400.pdf) (Shaowei Yao, ACL 2020)
+
 [Knowledge Distillation for Multilingual Unsupervised Neural Machine Translation](https://arxiv.org/pdf/2004.10171.pdf) (Haipeng Sun, ACL 2020)
 
 [Exploring Supervised and Unsupervised Rewards in Machine Translation](https://arxiv.org/pdf/2102.11403.pdf) (Julia Ive, EACL 2020)
+
+[Context-Aware Cross-Attention for Non-Autoregressive Translation](https://arxiv.org/pdf/2011.00770.pdf) (Liang Ding, COLING 2020)
 
 #### Dialogue System
 
@@ -1064,9 +1086,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Mechanism-Aware Neural Machine for Dialogue Response Generation](https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14471/14267) (Ganbin Zhou, AAAI 2017)
 
+[A Conditional Variational Framework for Dialog Generation](https://www.aclweb.org/anthology/P17-2080.pdf) (Xiaoyu Shen, ACL 2017)
+
 [Generating High-Quality and Informative Conversation Responses with Sequence-to-Sequence Models](https://arxiv.org/pdf/1701.03185.pdf) (Louis Shao, EMNLP 2017)
 
 [Generating Informative and Diverse Conversational Responses via Adversarial Information Maximization](https://papers.nips.cc/paper/2018/file/23ce1851341ec1fa9e0c259de10bf87c-Paper.pdf) (Yizhe Zhang, NIPS 2018)
+
+[Variational Autoregressive Decoder for Neural Response Generation](https://www.aclweb.org/anthology/D18-1354.pdf) (Jiachen Du, EMNLP 2018)
 
 [Hierarchical Variational Memory Network for Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3178876.3186077) (Hongshen Chen, WWW 2018, [code](https://github.com/chenhongshen/HVMN), [note](https://blog.csdn.net/qq_38684093/article/details/84038264))
 
@@ -1076,11 +1102,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Domain Adaptive Dialog Generation via Meta Learning](https://arxiv.org/pdf/1906.03520.pdf) (Kun Qian, ACL 2019, [code](https://github.com/qbetterk/DAML), [note](https://liusih.github.io/2019/09/09/Domain%20Adaptive%20Dialog%20Generation%20via%20Meta%20Learning/))
 
+[Incremental Transformer with Deliberation Decoder for Document Grounded Conversations](https://arxiv.org/pdf/1907.08854.pdf) (Zekang Li, ACL 2019)
+
 [ReCoSa: Detecting the Relevant Contexts with Self-Attention for Multi-turn Dialogue Generation](https://arxiv.org/pdf/1907.05339.pdf) (Hainan Zhang, ACL 2019, [code](https://github.com/zhanghainan/ReCoSa), [note](https://zhuanlan.zhihu.com/p/74229505))
 
 [Semantically Conditioned Dialog Response Generation via Hierarchical Disentangled Self-Attention](https://arxiv.org/pdf/1905.12866.pdf) (Wenhu Chen, ACL 2019, [code](https://github.com/wenhuchen/HDSA-Dialog), [note](https://zhuanlan.zhihu.com/p/82460398))
 
 [Hierarchical Reinforcement Learning for Open-Domain Dialog](https://ojs.aaai.org/index.php/AAAI/article/view/6400) (Abdelrhman Saleh, AAAI 2020)
+
+[Hierarchical Prediction and Adversarial Learning For Conditional Response Generation](https://ieeexplore.ieee.org/document/9020173) (Yanran Li, TKDE 2020)
 
 [DialoGPT: Large-Scale Generative Pre-training for Conversational Response Generation](https://arxiv.org/pdf/1911.00536.pdf) (Yizhe Zhang, ACL 2020, [code](https://github.com/microsoft/DialoGPT?utm_source=catalyzex.com))
 
@@ -1089,6 +1119,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Conversational Graph Grounded Policy Learning for Open-Domain Conversation Generation](https://www.aclweb.org/anthology/2020.acl-main.166.pdf) (Jun Xu, ACL 2020)
 
 [An Empirical Investigation of Pre-Trained Transformer Language Models for Open-Domain Dialogue Generation](https://arxiv.org/pdf/2003.04195.pdf) (Piji Li, 2020)
+
+[The Adapter-Bot: All-In-One Controllable Conversational Model](https://arxiv.org/pdf/2008.12579.pdf) (Andrea Madotto, 2020)
 
 [Plug-and-Play Conversational Models](https://arxiv.org/pdf/2010.04344.pdf) (Andrea Madotto, EMNLP 2020 Findings)
 
@@ -1103,6 +1135,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Eliciting Positive Emotion through Affect-Sensitive Dialogue Response Generation: A Neural Network Approach](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewPDFInterstitial/16317/16080) (Nurul Lubis, AAAI 2018)
 
 [A Syntactically Constrained Bidirectional-Asynchronous Approach for Emotional Conversation Generation](https://www.aclweb.org/anthology/D18-1071.pdf) (Jingyuan Li, EMNLP 2018)
+
+[MOJITALK: Generating Emotional Responses at Scale](https://www.aclweb.org/anthology/P18-1104.pdf) (Xianda Zhou, EMNLP 2018)
 
 [Affective Neural Response Generation](https://link.springer.com/chapter/10.1007/978-3-319-76941-7_12) (Nabiha Asghar, ECIR 2018)
 
@@ -1129,6 +1163,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Balancing Objectives in Counseling Conversations: Advancing Forwards or Looking Backwards](https://arxiv.org/pdf/2005.04245.pdf) (Justine Zhang, ACL 2020)
 
 [A Computational Approach to Understanding Empathy Expressed in Text-Based Mental Health Support](https://arxiv.org/pdf/2009.08441.pdf) (Ashish Sharma, EMNLP 2020)
+
+[Towards Empathetic Dialogue Generation over Multi-type Knowledge](https://arxiv.org/pdf/2009.09708.pdf) (Qintong Li, 2020)
 
 [EmpDG: Multiresolution Interactive Empathetic Dialogue Generation](https://arxiv.org/pdf/1911.08698.pdf) (Qintong Li, COLING 2020)
 
@@ -1195,6 +1231,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Knowledge-Grounded Dialogue Generation with Pre-trained Language Models](https://arxiv.org/pdf/2010.08824.pdf) (Xueliang Zhao, EMNLP 2020)
 
 [Bridging the Gap between Prior and Posterior Knowledge Selection for Knowledge-Grounded Dialogue Generation](https://www.aclweb.org/anthology/2020.emnlp-main.275.pdf) (Xiuyi Chen, EMNLP 2020)
+
+[Retrieval-Free Knowledge-Grounded Dialogue Response Generation with Adapters](https://arxiv.org/pdf/2105.06232.pdf) (Yan Xu, 2021)
 
 ##### Task-Oriented Dialogue System
 
@@ -1514,6 +1552,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Neural Text Generation: A Practical Guide](https://arxiv.org/pdf/1711.09534.pdf) (Ziang Xie, 2017)
 
+[Toward Controlled Generation of Text](https://arxiv.org/pdf/1703.00955.pdf) (Zhiting Hu, 2017)
+
 [Data-to-Text Generation with Content Selection and Planning](https://www.aaai.org/ojs/index.php/AAAI/article/view/4668) (Ratish Puduppully, AAAI 2019, [code](https://github.com/ratishsp/data2text-plan-py), [note](https://zhuanlan.zhihu.com/p/85275520))
 
 [Text Generation from Knowledge Graphs with Graph Transformers](https://arxiv.org/pdf/1904.02342.pdf) (Rik Koncel-Kedziorski, NAACL 2019, [code](https://github.com/rikdz/GraphWriter), [note](https://zhuanlan.zhihu.com/p/90084109))
@@ -1538,9 +1578,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [The GEM Benchmark: Natural Language Generation, its Evaluation and Metrics](https://arxiv.org/pdf/2102.01672.pdf) (Sebastian Gehrmann, 2021)
 
+[Neural Text Generation with Part-of-Speech Guided Softmax](https://arxiv.org/pdf/2105.03641.pdf) (Zhixian Yang, 2021)
+
+[DEXPERTS: On-the-Fly Controlled Text Generation with Experts and Anti-Experts](https://arxiv.org/pdf/2105.03023.pdf) (Alisa Liu, ACL 2021)
+
 #### Sequence to Sequence
 
 [Convolutional Sequence to Sequence Learning](https://pdfs.semanticscholar.org/bb3e/bc09b65728d6eced04929df72a006fb5210b.pdf) (Jonas Gehring, ICML 2017, [code](https://github.com/tobyyouup/conv_seq2seq), [note](https://zhuanlan.zhihu.com/p/26918935))
+
+[Deliberation Networks: Sequence Generation Beyond One-Pass Decoding](https://papers.nips.cc/paper/2017/file/c6036a69be21cb660499b75718a3ef24-Paper.pdf) (Yingce Xia, NIPS 2017)
 
 [Deep Reinforcement Learning For Sequence to Sequence Models](https://arxiv.org/pdf/1805.09461.pdf) (Yaser Keneshloo, 2018, [code](https://github.com/yaserkl/RLSeq2Seq), [note](https://www.jianshu.com/p/1213de861491))
 
@@ -1592,9 +1638,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [YOLOv4: Optimal Speed and Accuracy of Object Detection](https://arxiv.org/pdf/2004.10934.pdf) (Alexey Bochkovskiy, 2020, [code](https://github.com/AlexeyAB/darknet?utm_source=catalyzex.com))
 
+[RelationNet++: Bridging Visual Representations for Object Detection via Transformer Decoder](https://arxiv.org/pdf/2010.15831.pdf) (Cheng Chi, NIPS 2020)
+
 [EfficientDet: Scalable and Efficient Object Detection](https://arxiv.org/pdf/1911.09070v3.pdf) (Mingxing Tan, CVPR 2020)
 
-##### Semantic Segmentation
+#### Semantic Segmentation
 
 [Fully Convolutional Networks for Semantic Segmentation](https://arxiv.org/pdf/1411.4038.pdf) (Jonathan Long, CVPR 2015, [code](https://github.com/anoushkrit/Knowledge?utm_source=catalyzex.com), [note](https://blog.csdn.net/qq_36269513/article/details/80420363))
 
@@ -1766,6 +1814,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [EfficientNetV2: Smaller Models and Faster Training](https://arxiv.org/pdf/2104.00298.pdf) (Mingxing Tan, 2021)
 
+[Are Pre-trained Convolutions Better than Pre-trained Transformers?](https://arxiv.org/pdf/2105.03322.pdf) (Yi Tay, ACL 2021)
+
 ##### Recurrent Neural Networks
 
 [Long short-term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
@@ -1870,6 +1920,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Self-Attention with Relative Position Representations](https://arxiv.org/pdf/1803.02155.pdf) (Peter Shaw, 2018, [note](https://www.jianshu.com/p/cb5b2d967e90))
 
+[Input Combination Strategies for Multi-Source Transformer Decoder](https://arxiv.org/pdf/1811.04716.pdf) (Jindrich Libovicky, WMT 2018)
+
 [Sparse and Constrained Attention for Neural Machine Translation](https://arxiv.org/pdf/1805.08241.pdf) (Chaitanya Malaviya, ACL 2018)
 
 [Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned](https://arxiv.org/pdf/1905.09418.pdf) (Elena Voita, ACL 2019)
@@ -1891,6 +1943,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [The Unstoppable Rise of Computational Linguistics in Deep Learning](https://arxiv.org/pdf/2005.06420.pdf) (James Henderson, ACL 2020)
 
 [ETC: Encoding Long and Structured Data in Transformers](https://www.aclweb.org/anthology/2020.emnlp-main.19.pdf) (Joshua Ainslie, EMNLP 2020)
+
+[On the Sub-layer Functionalities of Transformer Decoder](https://arxiv.org/pdf/2010.02648.pdf) (Yilin Yang, Findings of EMNLP 2020)
 
 [Multi-Head Attention: Collaborate Instead of Concatenate](https://openreview.net/forum?id=bK-rJMKrOsm) (Jean-Baptiste Cordonnier, 2020, [code](https://github.com/epfml/collaborative-attention), [note](https://medium.com/im%E6%97%A5%E8%A8%98/%E8%AB%96%E6%96%87%E5%88%86%E4%BA%AB-multi-head-attention-collaborate-instead-of-concatenate-196dccff6118))
 
