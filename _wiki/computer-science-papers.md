@@ -238,6 +238,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Discourse Marker Augmented Network with Reinforcement Learning for Natural Language Inference](https://aclweb.org/anthology/P18-1091) (Boyuan Pan, ACL 2018, [code](https://github.com/ZJULearning/DMP), [note](https://zhuanlan.zhihu.com/p/37899900))
 
+[Neural Natural Language Inference Models Enhanced with External Knowledge](https://arxiv.org/pdf/1711.04289.pdf) (Chen Qian, ACL 2018, [code](https://github.com/feifengwhu/NLP_External_knowledge))
+
+[Improving Natural Language Inference Using External Knowledge in the Science Questions Domain](https://arxiv.org/pdf/1809.05724.pdf) (Xiaoyan Wang, 2018, [note](https://zhuanlan.zhihu.com/p/77646912))
+
 [Gaussian Transformer: A Lightweight Approach for Natural Language Inference](https://www.aaai.org/ojs/index.php/AAAI/article/view/4614) (Maosheng Guo, AAAI 2019, [code](https://github.com/lzy1732008/GaussionTransformer), [note](https://zhuanlan.zhihu.com/p/75411024))
 
 [Are Natural Language Inference Models IMPPRESsive? Learning IMPlicature and PRESupposition](https://arxiv.org/pdf/2004.03066.pdf) (Paloma Jeretic, ACL 2020)
@@ -1158,6 +1162,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Knowledge-Grounded Dialogue System
 
+[Incorporating Loose-Structured Knowledge into LSTM with Recall Gate for Conversation Modeling](https://arxiv.org/pdf/1605.05110.pdf) (IJCNN 2017, [note](https://zhuanlan.zhihu.com/p/92605720))
+
 [A Knowledge-Grounded Neural Conversation Model](https://ojs.aaai.org/index.php/AAAI/article/view/11977) (Marjan Ghazvininejad, AAAI 2018, [code](https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling?utm_source=catalyzex.com))
 
 [Augmenting End-to-End Dialogue Systems With Commonsense Knowledge](https://ojs.aaai.org/index.php/AAAI/article/view/11923) (Tom Young, AAAI 2018)
@@ -1285,6 +1291,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Multi-Passage Machine Reading Comprehension with Cross-Passage Answer Verification](https://www.aclweb.org/anthology/P18-1178) (Yizhong Wang, ACL 2018, [note](https://indexfziq.github.io/2019/03/08/VNET/))
 
 [Joint Training of Candidate Extraction and Answer Selection for Reading Comprehension](https://www.aclweb.org/anthology/P18-1159) (Zhen Wang, ACL 2018, [note](https://zhuanlan.zhihu.com/p/41161714))
+
+[Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge](https://www.aclweb.org/anthology/P18-1076) (Todor Mihaylov, ACL 2018)
 
 [Improving Machine Reading Comprehension with General Reading Strategies](https://arxiv.org/pdf/1810.13441.pdf) (Kai Sun, NAACL 2019, [code](https://github.com/nlpdata/strategy), [note](https://blog.csdn.net/mottled233/article/details/104535173))
 
@@ -1414,17 +1422,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Knowledge Graph Application
 
-[Incorporating Loose-Structured Knowledge into LSTM with Recall Gate for Conversation Modeling](https://arxiv.org/pdf/1605.05110.pdf) (IJCNN 2017, [note](https://zhuanlan.zhihu.com/p/92605720))
-
 [Learning beyond datasets: Knowledge Graph Augmented Neural Networks for Natural language Processing](https://arxiv.org/pdf/1802.05930.pdf) (Annervaz K M, NAACL 2018, [note](https://blog.lorrin.info/posts/%5B2018.5.10%5DKnowledge-Graph-Augmented-Neural-Networks-for-NLP/))
 
-[Improving Natural Language Inference Using External Knowledge in the Science Questions Domain](https://arxiv.org/pdf/1809.05724.pdf) (Xiaoyan Wang, 2018, [note](https://zhuanlan.zhihu.com/p/77646912))
-
 [Entity-Duet Neural Ranking: Understanding the Role of Knowledge Graph Semantics in Neural Information Retrieval](http://aclweb.org/anthology/P18-1223) (Zhenghao Liu, ACL 2018, [code](https://github.com/thunlp/EntityDuetNeuralRanking), [note](https://blog.csdn.net/weixin_43087818/article/details/103764135))
-
-[Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge](https://www.aclweb.org/anthology/P18-1076) (Todor Mihaylov, ACL 2018)
-
-[Neural Natural Language Inference Models Enhanced with External Knowledge](https://arxiv.org/pdf/1711.04289.pdf) (Chen Qian, ACL 2018, [code](https://github.com/feifengwhu/NLP_External_knowledge))
 
 #### Coreference Resolution
 
@@ -1482,15 +1482,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Machine Translation
 
-[Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation](https://arxiv.org/pdf/1609.08144.pdf) (Yonghui Wu, 2016, [note](https://blog.csdn.net/Xiao_yanling/article/details/90290862))
-
 [Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf) (Rico Sennrich, ACL 2016, [code](https://github.com/rsennrich/subword-nmt), [note](https://zhuanlan.zhihu.com/p/38574684))
 
 [Modeling Coverage for Neural Machine Translation](https://www.aclweb.org/anthology/P16-1008.pdf) (Zhaopeng Tu, ACL 2016, [note](https://zhuanlan.zhihu.com/p/22993927))
 
-[Neural Machine Translation and Sequence-to-sequence Models: A Tutorial](https://arxiv.org/pdf/1703.01619.pdf) (Graham Neubig, 2017, [note](https://google.github.io/seq2seq/nmt/))
+[Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation](https://arxiv.org/pdf/1609.08144.pdf) (Yonghui Wu, 2016, [note](https://blog.csdn.net/Xiao_yanling/article/details/90290862))
 
 [Sequence-to-Dependency Neural Machine Translation](http://www.aclweb.org/anthology/P17-1065) (Shuangzhi Wu, ACL 2017, [note](https://www.jianshu.com/p/2eb3c89234cb))
+
+[Neural Machine Translation and Sequence-to-sequence Models: A Tutorial](https://arxiv.org/pdf/1703.01619.pdf) (Graham Neubig, 2017, [note](https://google.github.io/seq2seq/nmt/))
 
 [Multi-channel Encoder for Neural Machine Translation](https://arxiv.org/pdf/1712.02109.pdf) (Hao Xiong, AAAI 2018, [note](https://www.jiqizhixin.com/articles/2017-12-14-10))
 
@@ -1506,33 +1506,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Survey of Domain Adaptation for Neural Machine Translation](https://arxiv.org/pdf/1806.00258.pdf) (Chenhui Chu, COLING 2018)
 
-[Massively Multilingual Neural Machine Translation](https://arxiv.org/pdf/1903.00089.pdf) (Roee Aharoni, NAACL 2019)
-
-[The FLoRes Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English](https://arxiv.org/pdf/1902.01382.pdf) (Francisco Guzman, EMNLP 2019, [code](https://github.com/facebookresearch/flores))
-
 [Pivot-based Transfer Learning for Neural Machine Translation between Non-English Languages](https://arxiv.org/pdf/1909.09524.pdf) (Yunsu Kim, EMNLP 2019)
 
 [Mixed Multi-Head Self-Attention for Neural Machine Translation](https://www.aclweb.org/anthology/D19-5622.pdf) (Hongyi Cui, EMNLP 2019)
 
-[Multilingual Neural Machine Translation with Language Clustering](https://arxiv.org/pdf/1908.09324.pdf) (Xu Tan, EMNLP 2019)
-
-[Handling Syntactic Divergence in Low-resource Machine Translation](https://arxiv.org/pdf/1909.00040.pdf) (Chunting Zhou, EMNLP 2019)
-
 [Simple, Scalable Adaptation for Neural Machine Translation](https://arxiv.org/pdf/1909.08478.pdf) (Ankur Bapna, EMNLP 2019, [note](https://zhuanlan.zhihu.com/p/114955522))
-
-[Multilingual Neural Machine Translation with Knowledge Distillation](https://arxiv.org/pdf/1902.10461.pdf) (Xu Tan, ICLR 2019, [code](https://github.com/RayeRen/multilingual-kd-pytorch))
-
-[Multilingual Neural Machine Translation With Soft Decoupled Encoding](https://arxiv.org/pdf/1902.03499.pdf) (Xinyi Wang, ICLR 2019, [code](https://github.com/cindyxinyiwang/SDE), [note](https://zhuanlan.zhihu.com/p/60845246))
-
-[Revisiting Low-Resource Neural Machine Translation: A Case Study](https://arxiv.org/pdf/1905.11901.pdf) (Rico Sennrich, ACL 2019)
 
 [Dynamically Composing Domain-Data Selection with Clean-Data Selection by "Co-Curricular Learning" for Neural Machine Translation](https://arxiv.org/pdf/1906.01130.pdf) (Wei Wang, ACL 2019)
 
 [Effective Cross-lingual Transfer of Neural Machine Translation Models without Shared Vocabularies](https://arxiv.org/pdf/1905.05475.pdf) (Yunsu Kim, ACL 2019, [code](https://github.com/yunsukim86/sockeye-transfer))
-
-[Target Conditioned Sampling: Optimizing Data Selection for Multilingual Neural Machine Translation](https://arxiv.org/pdf/1905.08212.pdf) (Xinyi Wang, ACL 2019)
-
-[Generalized Data Augmentation for Low-Resource Translation](https://arxiv.org/pdf/1906.03785.pdf) (Mengzhou Xia, ACL 2019, [code](https://github.com/xiamengzhou/DataAugForLRL))
 
 [Latent Variable Model for Multi-modal Translation](https://www.aclweb.org/anthology/P19-1642.pdf) (Iacer Calixto, ACL 2019)
 
@@ -1540,17 +1522,39 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Cross-Lingual Pre-Training Based Transfer for Zero-Shot Neural Machine Translation](https://www.aaai.org/ojs/index.php/AAAI/article/view/5341) (Baijun Ji, AAAI 2020)
 
-[Balancing Training for Multilingual Neural Machine Translation](https://arxiv.org/pdf/2004.06748.pdf) (Xinyi Wang, ACL 2020)
-
 [Learning a Multi-Domain Curriculum for Neural Machine Translation](https://arxiv.org/pdf/1908.10940.pdf) (Wei Wang, ACL 2020)
 
 [Multimodal Transformer for Multimodal Machine Translation](https://www.aclweb.org/anthology/2020.acl-main.400.pdf) (Shaowei Yao, ACL 2020)
 
-[Knowledge Distillation for Multilingual Unsupervised Neural Machine Translation](https://arxiv.org/pdf/2004.10171.pdf) (Haipeng Sun, ACL 2020)
-
 [Exploring Supervised and Unsupervised Rewards in Machine Translation](https://arxiv.org/pdf/2102.11403.pdf) (Julia Ive, EACL 2020)
 
 [Context-Aware Cross-Attention for Non-Autoregressive Translation](https://arxiv.org/pdf/2011.00770.pdf) (Liang Ding, COLING 2020)
+
+##### Low-Resource Machine Translation
+
+[Generalized Data Augmentation for Low-Resource Translation](https://arxiv.org/pdf/1906.03785.pdf) (Mengzhou Xia, ACL 2019, [code](https://github.com/xiamengzhou/DataAugForLRL))
+
+[Revisiting Low-Resource Neural Machine Translation: A Case Study](https://arxiv.org/pdf/1905.11901.pdf) (Rico Sennrich, ACL 2019)
+
+[Handling Syntactic Divergence in Low-resource Machine Translation](https://arxiv.org/pdf/1909.00040.pdf) (Chunting Zhou, EMNLP 2019)
+
+[The FLoRes Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English](https://arxiv.org/pdf/1902.01382.pdf) (Francisco Guzman, EMNLP 2019, [code](https://github.com/facebookresearch/flores))
+
+##### Multilingual Machine Translation
+
+[Multilingual Neural Machine Translation with Knowledge Distillation](https://arxiv.org/pdf/1902.10461.pdf) (Xu Tan, ICLR 2019, [code](https://github.com/RayeRen/multilingual-kd-pytorch))
+
+[Multilingual Neural Machine Translation With Soft Decoupled Encoding](https://arxiv.org/pdf/1902.03499.pdf) (Xinyi Wang, ICLR 2019, [code](https://github.com/cindyxinyiwang/SDE), [note](https://zhuanlan.zhihu.com/p/60845246))
+
+[Massively Multilingual Neural Machine Translation](https://arxiv.org/pdf/1903.00089.pdf) (Roee Aharoni, NAACL 2019)
+
+[Target Conditioned Sampling: Optimizing Data Selection for Multilingual Neural Machine Translation](https://arxiv.org/pdf/1905.08212.pdf) (Xinyi Wang, ACL 2019)
+
+[Multilingual Neural Machine Translation with Language Clustering](https://arxiv.org/pdf/1908.09324.pdf) (Xu Tan, EMNLP 2019)
+
+[Balancing Training for Multilingual Neural Machine Translation](https://arxiv.org/pdf/2004.06748.pdf) (Xinyi Wang, ACL 2020)
+
+[Knowledge Distillation for Multilingual Unsupervised Neural Machine Translation](https://arxiv.org/pdf/2004.10171.pdf) (Haipeng Sun, ACL 2020)
 
 #### Natural Language Generation
 
