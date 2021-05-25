@@ -858,17 +858,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine](http://www.aclweb.org/anthology/P/P17/P17-2079.pdf) (Minghui Qiu, ACL 2017, [note](https://blog.csdn.net/u011239443/article/details/83829265))
 
-[Learning Discourse-level Diversity for Neural Dialog Models using Conditional Variational Autoencoders](https://www.aclweb.org/anthology/P17-1061.pdf) (Tiancheng Zhao, ACL 2017, [note](http://www.xuwei.io/2019/04/05/%E3%80%8Alearning-discourse-level-diversity-for-neural-dialog-models-using-conditional-variational-autoencoders%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/))
-
 [Neural Approaches to Conversational AI](https://dl.acm.org/doi/abs/10.1145/3209978.3210183) (Jianfeng Gao, SIGIR 2018)
-
-[Pretraining Methods for Dialog Context Representation Learning](https://arxiv.org/pdf/1906.00414.pdf) (Shikib Mehri, ACL 2019, [note](https://zhuanlan.zhihu.com/p/82001834))
 
 [The Design and Implementation of XiaoIce, an Empathetic Social Chatbot](https://www.mitpressjournals.org/doi/full/10.1162/coli_a_00368) (Li Zhou, CL 2020)
 
 [Challenges in Building Intelligent Open-domain Dialog Systems](https://arxiv.org/pdf/1905.05709.pdf) (Minlie Huang, TIS 2020)
-
-[Learning to Customize Model Structures for Few-shot Dialogue Generation Tasks](https://arxiv.org/pdf/1910.14326.pdf) (Yiping Song, ACL 2020, [code](https://github.com/zequnl/CMAML?utm_source=catalyzex.com))
 
 [Towards a Human-like Open-Domain Chatbot](https://arxiv.org/pdf/2001.09977.pdf) (Daniel Adiwardana, 2020, [code](https://github.com/rustyoldrake/Character-Cartridges-Embodied-Identity?utm_source=catalyzex.com))
 
@@ -1004,15 +998,37 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [How Domain Terminology Affects Meeting Summarization Performance](https://arxiv.org/pdf/2011.00692.pdf) (Jia Jin Koay, COLING 2020)
 
-##### Dialogue Generation
+##### Task-Oriented Dialogue System
+
+[Mem2Seq: Effectively Incorporating Knowledge Bases into End-to-End Task-Oriented Dialog Systems](https://arxiv.org/pdf/1804.08217.pdf) (Andrea Madotto, ACL 2018)
+
+[Sequicity: Simplifying Task-oriented Dialogue Systems with Single Sequence-to-Sequence Architectures](https://www.aclweb.org/anthology/P18-1133.pdf) (Wenqiang Lei, ACL 2018, [code](https://github.com/WING-NUS/sequicity), [note](https://blog.csdn.net/weixin_40533355/article/details/82997788))
+
+[Multi-level Memory for Task Oriented Dialogs](https://arxiv.org/pdf/1810.10647.pdf) (Revanth Reddy, NAACL 2019, [note](https://zhuanlan.zhihu.com/p/64595503))
+
+[A Working Memory Model for Task-oriented Dialog Response Generation](https://www.aclweb.org/anthology/P19-1258.pdf) (Xiuyi Chen, ACL 2019, [note](https://blog.csdn.net/weixin_44487404/article/details/105665796))
+
+[Global-to-local Memory Pointer Networks for Task-Oriented Dialogue](https://arxiv.org/pdf/1901.04713.pdf) (Chien-Sheng Wu, ICLR 2019, [code](https://github.com/jasonwu0731/GLMP), [note](https://zhuanlan.zhihu.com/p/57535074))
+
+[Entity-Consistent End-to-end Task-Oriented Dialogue System with KB Retriever](https://arxiv.org/pdf/1909.06762.pdf) (Libo Qin, EMNLP 2019, [code](https://github.com/yizhen20133868/Retriever-Dialogue))
+
+[Hello, It's GPT-2 -- How Can I Help You? Towards the Use of Pretrained Language Models for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/1907.05774.pdf) (Paweł Budzianowski, 2019)
+
+[TOD-BERT: Pre-trained Natural Language Understanding for Task-Oriented Dialogue](https://arxiv.org/pdf/2004.06871.pdf) (Chien-Sheng Wu, EMNLP 2020)
+
+[MinTL: Minimalist Transfer Learning for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/2009.12005.pdf) (Zhaojiang Lin, EMNLP 2020)
+
+[Learning Knowledge Bases with Parameters for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/2009.13656.pdf) (Andrea Madotto, EMNLP 2020 Findings)
+
+##### Dialogue Modeling and Generation
 
 [Semantically Conditioned LSTM-based Natural Language Generation for Spoken Dialogue Systems](https://www.aclweb.org/anthology/D15-1199.pdf) (Tsung-Hsien Wen, EMNLP 2015)
 
 [Building End-to-End Dialogue Systems Using Generative Hierarchical Neural Network Models](https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/11957/12160) (Iulian V.Serban, AAAI 2016)
 
-[How NOT To Evaluate Your Dialogue System: An Empirical Study of Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.org/pdf/1603.08023.pdf) (Chia-Wei Liu, EMNLP 2016)
-
 [A Diversity-Promoting Objective Function for Neural Conversation Models](https://arxiv.org/pdf/1510.03055.pdf) (Jiwei Li, NAACL 2016, [note](https://zhuanlan.zhihu.com/p/35496909))
+
+[How NOT To Evaluate Your Dialogue System: An Empirical Study of Unsupervised Evaluation Metrics for Dialogue Response Generation](https://arxiv.org/pdf/1603.08023.pdf) (Chia-Wei Liu, EMNLP 2016)
 
 [Deep Reinforcement Learning for Dialogue Generation](https://arxiv.org/pdf/1606.01541.pdf) (Jiwei Li, 2016, [note](https://zhuanlan.zhihu.com/p/21587758))
 
@@ -1022,19 +1038,23 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Conditional Variational Framework for Dialog Generation](https://www.aclweb.org/anthology/P17-2080.pdf) (Xiaoyu Shen, ACL 2017)
 
+[Learning Discourse-level Diversity for Neural Dialog Models using Conditional Variational Autoencoders](https://www.aclweb.org/anthology/P17-1061.pdf) (Tiancheng Zhao, ACL 2017, [note](http://www.xuwei.io/2019/04/05/%E3%80%8Alearning-discourse-level-diversity-for-neural-dialog-models-using-conditional-variational-autoencoders%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/))
+
 [Generating High-Quality and Informative Conversation Responses with Sequence-to-Sequence Models](https://arxiv.org/pdf/1701.03185.pdf) (Louis Shao, EMNLP 2017)
-
-[Generating Informative and Diverse Conversational Responses via Adversarial Information Maximization](https://papers.nips.cc/paper/2018/file/23ce1851341ec1fa9e0c259de10bf87c-Paper.pdf) (Yizhe Zhang, NIPS 2018)
-
-[Variational Autoregressive Decoder for Neural Response Generation](https://www.aclweb.org/anthology/D18-1354.pdf) (Jiachen Du, EMNLP 2018)
 
 [Hierarchical Variational Memory Network for Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3178876.3186077) (Hongshen Chen, WWW 2018, [code](https://github.com/chenhongshen/HVMN), [note](https://blog.csdn.net/qq_38684093/article/details/84038264))
 
+[Variational Autoregressive Decoder for Neural Response Generation](https://www.aclweb.org/anthology/D18-1354.pdf) (Jiachen Du, EMNLP 2018)
+
 [Explicit State Tracking with Semi-Supervisionfor Neural Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3269206.3271683) (Xisen Jin, CIKM 2018, [code](https://github.com/AuCson/SEDST), [note](https://zhuanlan.zhihu.com/p/62306940))
+
+[Generating Informative and Diverse Conversational Responses via Adversarial Information Maximization](https://papers.nips.cc/paper/2018/file/23ce1851341ec1fa9e0c259de10bf87c-Paper.pdf) (Yizhe Zhang, NeuIPS 2018)
 
 [Jointly Optimizing Diversity and Relevance in Neural Response Generation](https://arxiv.org/pdf/1902.11205.pdf) (Xiang Gao, NAACL 2019, [code](https://github.com/golsun/SpaceFusion?utm_source=catalyzex.com))
 
 [Domain Adaptive Dialog Generation via Meta Learning](https://arxiv.org/pdf/1906.03520.pdf) (Kun Qian, ACL 2019, [code](https://github.com/qbetterk/DAML), [note](https://liusih.github.io/2019/09/09/Domain%20Adaptive%20Dialog%20Generation%20via%20Meta%20Learning/))
+
+[Pretraining Methods for Dialog Context Representation Learning](https://arxiv.org/pdf/1906.00414.pdf) (Shikib Mehri, ACL 2019, [note](https://zhuanlan.zhihu.com/p/82001834))
 
 [Incremental Transformer with Deliberation Decoder for Document Grounded Conversations](https://arxiv.org/pdf/1907.08854.pdf) (Zekang Li, ACL 2019)
 
@@ -1042,21 +1062,31 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Semantically Conditioned Dialog Response Generation via Hierarchical Disentangled Self-Attention](https://arxiv.org/pdf/1905.12866.pdf) (Wenhu Chen, ACL 2019, [code](https://github.com/wenhuchen/HDSA-Dialog), [note](https://zhuanlan.zhihu.com/p/82460398))
 
-[Hierarchical Reinforcement Learning for Open-Domain Dialog](https://ojs.aaai.org/index.php/AAAI/article/view/6400) (Abdelrhman Saleh, AAAI 2020)
-
 [Hierarchical Prediction and Adversarial Learning For Conditional Response Generation](https://ieeexplore.ieee.org/document/9020173) (Yanran Li, TKDE 2020)
+
+[Hierarchical Reinforcement Learning for Open-Domain Dialog](https://ojs.aaai.org/index.php/AAAI/article/view/6400) (Abdelrhman Saleh, AAAI 2020)
 
 [DialoGPT: Large-Scale Generative Pre-training for Conversational Response Generation](https://arxiv.org/pdf/1911.00536.pdf) (Yizhe Zhang, ACL 2020, [code](https://github.com/microsoft/DialoGPT?utm_source=catalyzex.com))
 
 [PLATO: Pre-trained Dialogue Generation Model with Discrete Latent Variable](https://arxiv.org/pdf/1910.07931.pdf) (Siqi Bao, ACL 2020)
 
+[Learning to Customize Model Structures for Few-shot Dialogue Generation Tasks](https://arxiv.org/pdf/1910.14326.pdf) (Yiping Song, ACL 2020, [code](https://github.com/zequnl/CMAML?utm_source=catalyzex.com))
+
 [Conversational Graph Grounded Policy Learning for Open-Domain Conversation Generation](https://www.aclweb.org/anthology/2020.acl-main.166.pdf) (Jun Xu, ACL 2020)
+
+[Plug-and-Play Conversational Models](https://arxiv.org/pdf/2010.04344.pdf) (Andrea Madotto, EMNLP 2020 Findings)
 
 [An Empirical Investigation of Pre-Trained Transformer Language Models for Open-Domain Dialogue Generation](https://arxiv.org/pdf/2003.04195.pdf) (Piji Li, 2020)
 
 [The Adapter-Bot: All-In-One Controllable Conversational Model](https://arxiv.org/pdf/2008.12579.pdf) (Andrea Madotto, 2020)
 
-[Plug-and-Play Conversational Models](https://arxiv.org/pdf/2010.04344.pdf) (Andrea Madotto, EMNLP 2020 Findings)
+##### Stylized Response Generation
+
+[Polite Dialogue Generation Without Parallel Data](https://www.mitpressjournals.org/doi/abs/10.1162/tacl_a_00027) (Tong Niu, TACL 2018)
+
+[Structuring Latent Spaces for Stylized Response Generation](https://arxiv.org/pdf/1909.05361.pdf) (Xiang Gao, EMNLP 2019, [code](https://github.com/golsun/StyleFusion?utm_source=catalyzex.com))
+
+[Stylized Dialogue Response Generation Using Stylized Unpaired Texts](https://arxiv.org/pdf/2009.12719.pdf) (Yinhe Zheng, AAAI 2021)
 
 ##### Empathetic Dialogue Generation
 
@@ -1103,14 +1133,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [EmpDG: Multiresolution Interactive Empathetic Dialogue Generation](https://arxiv.org/pdf/1911.08698.pdf) (Qintong Li, COLING 2020)
 
 [Towards Facilitating Empathic Conversations in Online Mental Health Support: A Reinforcement Learning Approach](https://arxiv.org/pdf/2101.07714.pdf) (Ashish Sharma, WWW 2021)
-
-##### Stylized Response Generation
-
-[Polite Dialogue Generation Without Parallel Data](https://www.mitpressjournals.org/doi/abs/10.1162/tacl_a_00027) (Tong Niu, TACL 2018)
-
-[Structuring Latent Spaces for Stylized Response Generation](https://arxiv.org/pdf/1909.05361.pdf) (Xiang Gao, EMNLP 2019, [code](https://github.com/golsun/StyleFusion?utm_source=catalyzex.com))
-
-[Stylized Dialogue Response Generation Using Stylized Unpaired Texts](https://arxiv.org/pdf/2009.12719.pdf) (Yinhe Zheng, AAAI 2021)
 
 ##### Persona-Based Dialogue System
 
@@ -1167,28 +1189,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Bridging the Gap between Prior and Posterior Knowledge Selection for Knowledge-Grounded Dialogue Generation](https://www.aclweb.org/anthology/2020.emnlp-main.275.pdf) (Xiuyi Chen, EMNLP 2020)
 
 [Retrieval-Free Knowledge-Grounded Dialogue Response Generation with Adapters](https://arxiv.org/pdf/2105.06232.pdf) (Yan Xu, 2021)
-
-##### Task-Oriented Dialogue System
-
-[Mem2Seq: Effectively Incorporating Knowledge Bases into End-to-End Task-Oriented Dialog Systems](https://arxiv.org/pdf/1804.08217.pdf) (Andrea Madotto, ACL 2018)
-
-[Sequicity: Simplifying Task-oriented Dialogue Systems with Single Sequence-to-Sequence Architectures](https://www.aclweb.org/anthology/P18-1133.pdf) (Wenqiang Lei, ACL 2018, [code](https://github.com/WING-NUS/sequicity), [note](https://blog.csdn.net/weixin_40533355/article/details/82997788))
-
-[Multi-level Memory for Task Oriented Dialogs](https://arxiv.org/pdf/1810.10647.pdf) (Revanth Reddy, NAACL 2019, [note](https://zhuanlan.zhihu.com/p/64595503))
-
-[A Working Memory Model for Task-oriented Dialog Response Generation](https://www.aclweb.org/anthology/P19-1258.pdf) (Xiuyi Chen, ACL 2019, [note](https://blog.csdn.net/weixin_44487404/article/details/105665796))
-
-[Global-to-local Memory Pointer Networks for Task-Oriented Dialogue](https://arxiv.org/pdf/1901.04713.pdf) (Chien-Sheng Wu, ICLR 2019, [code](https://github.com/jasonwu0731/GLMP), [note](https://zhuanlan.zhihu.com/p/57535074))
-
-[Entity-Consistent End-to-end Task-Oriented Dialogue System with KB Retriever](https://arxiv.org/pdf/1909.06762.pdf) (Libo Qin, EMNLP 2019, [code](https://github.com/yizhen20133868/Retriever-Dialogue))
-
-[Hello, It's GPT-2 -- How Can I Help You? Towards the Use of Pretrained Language Models for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/1907.05774.pdf) (Paweł Budzianowski, 2019)
-
-[TOD-BERT: Pre-trained Natural Language Understanding for Task-Oriented Dialogue](https://arxiv.org/pdf/2004.06871.pdf) (Chien-Sheng Wu, EMNLP 2020)
-
-[MinTL: Minimalist Transfer Learning for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/2009.12005.pdf) (Zhaojiang Lin, EMNLP 2020)
-
-[Learning Knowledge Bases with Parameters for Task-Oriented Dialogue Systems](https://arxiv.org/pdf/2009.13656.pdf) (Andrea Madotto, EMNLP 2020 Findings)
 
 ##### Conversational Recommender System
 
@@ -1964,7 +1964,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [ETC: Encoding Long and Structured Data in Transformers](https://www.aclweb.org/anthology/2020.emnlp-main.19.pdf) (Joshua Ainslie, EMNLP 2020)
 
-[On the Sub-layer Functionalities of Transformer Decoder](https://arxiv.org/pdf/2010.02648.pdf) (Yilin Yang, Findings of EMNLP 2020)
+[On the Sub-layer Functionalities of Transformer Decoder](https://arxiv.org/pdf/2010.02648.pdf) (Yilin Yang, EMNLP 2020 Findings)
 
 [Multi-Head Attention: Collaborate Instead of Concatenate](https://openreview.net/forum?id=bK-rJMKrOsm) (Jean-Baptiste Cordonnier, 2020, [code](https://github.com/epfml/collaborative-attention), [note](https://medium.com/im%E6%97%A5%E8%A8%98/%E8%AB%96%E6%96%87%E5%88%86%E4%BA%AB-multi-head-attention-collaborate-instead-of-concatenate-196dccff6118))
 
