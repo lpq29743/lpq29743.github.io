@@ -78,6 +78,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Cloze-driven Pretraining of Self-attention Networks](https://arxiv.org/pdf/1903.07785.pdf) (Alexei Baevski, EMNLP 2019)
 
+[Revealing the Dark Secrets of BERT](https://arxiv.org/pdf/1908.08593.pdf) (Olga Kovaleva, EMNLP 2019, [note](https://zhuanlan.zhihu.com/p/117645185))
+
 [Unified Language Model Pre-training for Natural Language Understanding and Generation](https://arxiv.org/pdf/1905.03197.pdf) (Li Dong, NeuIPS 2019, [note](https://zhuanlan.zhihu.com/p/68755034))
 
 [XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/pdf/1906.08237.pdf) (Zhilin Yang, NeuIPS 2019, [code](https://github.com/zihangdai/xlnet), [note](https://zhuanlan.zhihu.com/p/70257427))
@@ -140,6 +142,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Supervised and Semi-Supervised Text Categorization using LSTM for Region Embeddings](https://arxiv.org/pdf/1602.02373.pdf) (Rie Johnson, ICML 2016, [code](https://github.com/riejohnson/ConText))
 
+[Recurrent Neural Network for Text Classification with Multi-Task Learning](https://www.ijcai.org/Proceedings/16/Papers/408.pdf) (Pengfei Liu, IJCAI 2016, [code](https://github.com/brightmart/text_classification), [note](https://zhuanlan.zhihu.com/p/27562717))
+
 [Text Classification Improved by Integrating Bidirectional LSTM with Two-dimensional Max Pooling](https://www.aclweb.org/anthology/C16-1329) (Peng Zhou, COLING 2016)
 
 [Efficient Character-level Document Classification by Combining Convolution and Recurrent Layers](https://arxiv.org/pdf/1602.00367.pdf) (Yijun Xiao, 2016)
@@ -147,6 +151,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [A Hybrid CNN-RNN Alignment Model for Phrase-Aware Sentence Classification](http://www.aclweb.org/anthology/E17-2071) (Shiou Tian Hsu, EACL 2017, [note](https://zhuanlan.zhihu.com/p/35008282))
 
 [Very Deep Convolutional Networks for Text Classification](http://cn.arxiv.org/pdf/1606.01781) (Alexis Conneau, EACL 2017, [code](https://github.com/zonetrooper32/VDCNN), [note](https://zhuanlan.zhihu.com/p/39593725))
+
+[Adversarial Multi-task Learning for Text Classification](https://www.aclweb.org/anthology/P17-1001) (Pengfei Liu, ACL 2017, [code](https://github.com/FrankWork/fudan_mtl_reviews), [note](https://zhuanlan.zhihu.com/p/31653852))
 
 [Deep Pyramid Convolutional Neural Networks for Text Categorization](https://www.aclweb.org/anthology/P17-1052) (Rie Johnson, ACL 2017, [code](https://github.com/riejohnson/ConText), [note](https://zhuanlan.zhihu.com/p/56189443))
 
@@ -1480,7 +1486,69 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution](https://144.208.67.177/ojs/index.php/AAAI/article/view/6352) (Peiqin Lin, AAAI 2020, [code](https://github.com/lpq29743/HAN-PL), [note](https://zhuanlan.zhihu.com/p/151387067))
 
+#### Natural Language Generation
+
+[Survey of the State of the Art in Natural Language Generation: Core tasks, applications and evaluation](https://arxiv.org/pdf/1703.09902.pdf) (Albert Gatt, 2017)
+
+[Neural Text Generation: A Practical Guide](https://arxiv.org/pdf/1711.09534.pdf) (Ziang Xie, 2017)
+
+[Best-First Beam Search](https://arxiv.org/pdf/2007.03909.pdf) (Clara Meister, TACL 2020, [code](https://github.com/huggingface/transformers/issues/6565), [note](https://zhuanlan.zhihu.com/p/187270580))
+
+[The Curious Case of Neural Text Degeneration](https://arxiv.org/pdf/1904.09751.pdf) (Ari Holtzman, ICLR 2020, [note](https://zhuanlan.zhihu.com/p/115076102))
+
+[The GEM Benchmark: Natural Language Generation, its Evaluation and Metrics](https://arxiv.org/pdf/2102.01672.pdf) (Sebastian Gehrmann, 2021)
+
+[Neural Text Generation with Part-of-Speech Guided Softmax](https://arxiv.org/pdf/2105.03641.pdf) (Zhixian Yang, 2021)
+
+##### Sequence to Sequence
+
+[Convolutional Sequence to Sequence Learning](https://pdfs.semanticscholar.org/bb3e/bc09b65728d6eced04929df72a006fb5210b.pdf) (Jonas Gehring, ICML 2017, [code](https://github.com/tobyyouup/conv_seq2seq), [note](https://zhuanlan.zhihu.com/p/26918935))
+
+[Deliberation Networks: Sequence Generation Beyond One-Pass Decoding](https://papers.nips.cc/paper/2017/file/c6036a69be21cb660499b75718a3ef24-Paper.pdf) (Yingce Xia, NIPS 2017)
+
+[Deep Reinforcement Learning For Sequence to Sequence Models](https://arxiv.org/pdf/1805.09461.pdf) (Yaser Keneshloo, 2018, [code](https://github.com/yaserkl/RLSeq2Seq), [note](https://www.jianshu.com/p/1213de861491))
+
+[MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019, [code](https://github.com/microsoft/MASS), [note](https://zhuanlan.zhihu.com/p/71022527))
+
+[Sparse Sequence-to-Sequence Models](https://arxiv.org/pdf/1905.05702.pdf) (Ben Peters, ACL 2019, [note](https://zhuanlan.zhihu.com/p/76607614))
+
+##### Graph to Sequence
+
+[Text Generation from Knowledge Graphs with Graph Transformers](https://arxiv.org/pdf/1904.02342.pdf) (Rik Koncel-Kedziorski, NAACL 2019, [code](https://github.com/rikdz/GraphWriter), [note](https://zhuanlan.zhihu.com/p/90084109))
+
+##### Controlled Text Generation
+
+[Toward Controlled Generation of Text](https://arxiv.org/pdf/1703.00955.pdf) (Zhiting Hu, 2017)
+
+[T-CVAE: Transformer-Based Conditioned Variational Autoencoder for Story Completion](https://www.ijcai.org/proceedings/2019/0727.pdf) (Tianming Wang, IJCAI 2019, [note](https://zhuanlan.zhihu.com/p/91166636))
+
+[Plug and Play Language Models: a Simple Approach to Controlled Text Generation](https://arxiv.org/pdf/1912.02164.pdf) (Sumanth Dathathri, ICLR 2020)
+
+[DEXPERTS: On-the-Fly Controlled Text Generation with Experts and Anti-Experts](https://arxiv.org/pdf/2105.03023.pdf) (Alisa Liu, ACL 2021)
+
+##### AMR-to-Text Generation
+
+[Modeling Graph Structure in Transformer for Better AMR-to-Text Generation](https://arxiv.org/pdf/1909.00136.pdf) (Jie Zhu, EMNLP 2019)
+
+[Enhancing AMR-to-Text Generation with Dual Graph Representations](https://arxiv.org/pdf/1909.00352.pdf) (Leonardo F. R. Ribeiro, EMNLP 2019, [code](https://github.com/UKPLab/emnlp2019-dualgraph), [note](https://zhuanlan.zhihu.com/p/105701258))
+
+[Line Graph Enhanced AMR-to-Text Generation with Mix-Order Graph Attention Networks](https://www.aclweb.org/anthology/2020.acl-main.67.pdf) (Yanbin Zhao, ACL 2020)
+
+[GPT-too: A language-model-first approach for AMR-to-text generation](https://arxiv.org/pdf/2005.09123.pdf) (Manuel Mager, ACL 2020, [code](https://github.com/IBM/GPT-too-AMR2text))
+
+##### Data-to-Text Generation
+
+[Data-to-Text Generation with Content Selection and Planning](https://www.aaai.org/ojs/index.php/AAAI/article/view/4668) (Ratish Puduppully, AAAI 2019, [code](https://github.com/ratishsp/data2text-plan-py), [note](https://zhuanlan.zhihu.com/p/85275520))
+
+[Data-to-text Generation with Entity Modeling](https://arxiv.org/pdf/1906.03221.pdf) (Ratish Puduppully, ACL 2019, [code](https://github.com/ratishsp/data2text-entity-py), [note](https://zhuanlan.zhihu.com/p/82054729))
+
+[Table-to-Text Generation with Effective Hierarchical Encoder on Three Dimensions (Row, Column and Time)](https://arxiv.org/pdf/1909.02304.pdf) (Heng Gong, EMNLP 2019)
+
 #### Machine Translation
+
+[Learning phrase representations using RNN encoder-decoder for statistical machine translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014, [note](https://cuiqingcai.com/5737.html))
+
+[On the properties of neural machine translation: Encoder–Decoder approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014, [note](https://blog.csdn.net/BeforeEasy/article/details/80332497))
 
 [Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf) (Rico Sennrich, ACL 2016, [code](https://github.com/rsennrich/subword-nmt), [note](https://zhuanlan.zhihu.com/p/38574684))
 
@@ -1499,6 +1567,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Non-Autoregressive Neural Machine Translation](https://arxiv.org/pdf/1711.02281.pdf) (Jiatao Gu, ICLR 2018, [code](https://github.com/salesforce/nonauto-nmt), [note](https://zhuanlan.zhihu.com/p/35866317))
 
 [Word Translation Without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) (Alexis Conneau, ICLR 2018)
+
+[Sparse and Constrained Attention for Neural Machine Translation](https://arxiv.org/pdf/1805.08241.pdf) (Chaitanya Malaviya, ACL 2018)
 
 [Phrase-Based & Neural Unsupervised Machine Translation](https://arxiv.org/pdf/1804.07755.pdf) (Guillaume Lample, EMNLP 2018, [code](https://github.com/facebookresearch/UnsupervisedMT), [note](https://blog.csdn.net/ljp1919/article/details/103074097))
 
@@ -1556,57 +1626,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Knowledge Distillation for Multilingual Unsupervised Neural Machine Translation](https://arxiv.org/pdf/2004.10171.pdf) (Haipeng Sun, ACL 2020)
 
-#### Natural Language Generation
-
-[Survey of the State of the Art in Natural Language Generation: Core tasks, applications and evaluation](https://arxiv.org/pdf/1703.09902.pdf) (Albert Gatt, 2017)
-
-[Neural Text Generation: A Practical Guide](https://arxiv.org/pdf/1711.09534.pdf) (Ziang Xie, 2017)
-
-[Toward Controlled Generation of Text](https://arxiv.org/pdf/1703.00955.pdf) (Zhiting Hu, 2017)
-
-[Data-to-Text Generation with Content Selection and Planning](https://www.aaai.org/ojs/index.php/AAAI/article/view/4668) (Ratish Puduppully, AAAI 2019, [code](https://github.com/ratishsp/data2text-plan-py), [note](https://zhuanlan.zhihu.com/p/85275520))
-
-[Text Generation from Knowledge Graphs with Graph Transformers](https://arxiv.org/pdf/1904.02342.pdf) (Rik Koncel-Kedziorski, NAACL 2019, [code](https://github.com/rikdz/GraphWriter), [note](https://zhuanlan.zhihu.com/p/90084109))
+#### Paraphrase Generation
 
 [Submodular Optimization-based Diverse Paraphrasing and its Effectiveness in Data Augmentation](https://www.aclweb.org/anthology/N19-1363.pdf) (Ashutosh Kumar, NAACL 2019, [code](https://github.com/malllabiisc/DiPS))
-
-[T-CVAE: Transformer-Based Conditioned Variational Autoencoder for Story Completion](https://www.ijcai.org/proceedings/2019/0727.pdf) (Tianming Wang, IJCAI 2019, [note](https://zhuanlan.zhihu.com/p/91166636))
-
-[Modeling Graph Structure in Transformer for Better AMR-to-Text Generation](https://arxiv.org/pdf/1909.00136.pdf) (Jie Zhu, EMNLP 2019)
-
-[Enhancing AMR-to-Text Generation with Dual Graph Representations](https://arxiv.org/pdf/1909.00352.pdf) (Leonardo F. R. Ribeiro, EMNLP 2019, [code](https://github.com/UKPLab/emnlp2019-dualgraph), [note](https://zhuanlan.zhihu.com/p/105701258))
-
-[Table-to-Text Generation with Effective Hierarchical Encoder on Three Dimensions (Row, Column and Time)](https://arxiv.org/pdf/1909.02304.pdf) (Heng Gong, EMNLP 2019)
-
-[Data-to-text Generation with Entity Modeling](https://arxiv.org/pdf/1906.03221.pdf) (Ratish Puduppully, ACL 2019, [code](https://github.com/ratishsp/data2text-entity-py), [note](https://zhuanlan.zhihu.com/p/82054729))
-
-[Plug and Play Language Models: a Simple Approach to Controlled Text Generation](https://arxiv.org/pdf/1912.02164.pdf) (Sumanth Dathathri, ICLR 2020)
-
-[GPT-too: A language-model-first approach for AMR-to-text generation](https://arxiv.org/pdf/2005.09123.pdf) (Manuel Mager, ACL 2020, [code](https://github.com/IBM/GPT-too-AMR2text))
-
-[Line Graph Enhanced AMR-to-Text Generation with Mix-Order Graph Attention Networks](https://www.aclweb.org/anthology/2020.acl-main.67.pdf) (Yanbin Zhao, ACL 2020)
-
-[Best-First Beam Search](https://arxiv.org/pdf/2007.03909.pdf) (Clara Meister, TACL 2020, [code](https://github.com/huggingface/transformers/issues/6565), [note](https://zhuanlan.zhihu.com/p/187270580))
-
-[The Curious Case of Neural Text Degeneration](https://arxiv.org/pdf/1904.09751.pdf) (Ari Holtzman, ICLR 2020, [note](https://zhuanlan.zhihu.com/p/115076102))
-
-[The GEM Benchmark: Natural Language Generation, its Evaluation and Metrics](https://arxiv.org/pdf/2102.01672.pdf) (Sebastian Gehrmann, 2021)
-
-[Neural Text Generation with Part-of-Speech Guided Softmax](https://arxiv.org/pdf/2105.03641.pdf) (Zhixian Yang, 2021)
-
-[DEXPERTS: On-the-Fly Controlled Text Generation with Experts and Anti-Experts](https://arxiv.org/pdf/2105.03023.pdf) (Alisa Liu, ACL 2021)
-
-#### Sequence to Sequence
-
-[Convolutional Sequence to Sequence Learning](https://pdfs.semanticscholar.org/bb3e/bc09b65728d6eced04929df72a006fb5210b.pdf) (Jonas Gehring, ICML 2017, [code](https://github.com/tobyyouup/conv_seq2seq), [note](https://zhuanlan.zhihu.com/p/26918935))
-
-[Deliberation Networks: Sequence Generation Beyond One-Pass Decoding](https://papers.nips.cc/paper/2017/file/c6036a69be21cb660499b75718a3ef24-Paper.pdf) (Yingce Xia, NIPS 2017)
-
-[Deep Reinforcement Learning For Sequence to Sequence Models](https://arxiv.org/pdf/1805.09461.pdf) (Yaser Keneshloo, 2018, [code](https://github.com/yaserkl/RLSeq2Seq), [note](https://www.jianshu.com/p/1213de861491))
-
-[MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019, [code](https://github.com/microsoft/MASS), [note](https://zhuanlan.zhihu.com/p/71022527))
-
-[Sparse Sequence-to-Sequence Models](https://arxiv.org/pdf/1905.05702.pdf) (Ben Peters, ACL 2019, [note](https://zhuanlan.zhihu.com/p/76607614))
 
 #### Natural Language Processing for Programming Language
 
@@ -1634,13 +1656,17 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Rapid object detection using a boosted cascade of simple features](https://ieeexplore.ieee.org/abstract/document/990517) (CVPR 2001, Paul Viola)
 
+[Learning To Detect Unseen Object Classes by Between-Class Attribute Transfer](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=03500C970796A39BCC5A437E4AA79B10?doi=10.1.1.165.9750&rep=rep1&type=pdf) (Christoph H. Lampert, CVPR 2009, [code](https://github.com/ahmedmazariML/Learning-To-Detect-Unseen-Object-Classes-by-Between-Class-Attribute-Transfer), [note](https://tongtianta.site/paper/23631))
+
+[DeViSE: A Deep Visual-Semantic Embedding Model](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=CD1A6E4145A750B305F3512006D12FE9?doi=10.1.1.466.176&rep=rep1&type=pdf) (Andrea Frome, NeuIPS 2013, [note](https://zhuanlan.zhihu.com/p/52352455))
+
 [Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/pdf/1311.2524.pdf) (Ross Girshick, CVPR 2014, [code](https://github.com/rbgirshick/rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
 
 [Fast Region-based Convolutional Networks for object detection](https://arxiv.org/pdf/1504.08083.pdf) (Ross Girshick, ICCV 2015, [code](https://github.com/rbgirshick/fast-rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
 
-[Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/pdf/1506.01497.pdf) (Shaoqing Ren, NIPS 2015, [code](https://github.com/rbgirshick/py-faster-rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
+[Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/pdf/1506.01497.pdf) (Shaoqing Ren, NeuIPS 2015, [code](https://github.com/rbgirshick/py-faster-rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
 
-[R-FCN: Object Detection via Region-based Fully Convolutional Networks](https://arxiv.org/pdf/1605.06409.pdf) (Jifeng Dai, NIPS 2016, [code](https://github.com/daijifeng001/R-FCN), [note](https://zhuanlan.zhihu.com/p/30867916))
+[R-FCN: Object Detection via Region-based Fully Convolutional Networks](https://arxiv.org/pdf/1605.06409.pdf) (Jifeng Dai, NeuIPS 2016, [code](https://github.com/daijifeng001/R-FCN), [note](https://zhuanlan.zhihu.com/p/30867916))
 
 [You Only Look Once: Unified, Real-Time Object Detection](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Redmon_You_Only_Look_CVPR_2016_paper.pdf) (Joseph Redmon, CVPR 2016, [code](https://github.com/gliese581gg/YOLO_tensorflow), [note](https://zhuanlan.zhihu.com/p/32525231))
 
@@ -1692,12 +1718,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Model
 
-[Occam's Razor](https://users.soe.ucsc.edu/~manfred/pubs/J9.pdf) (Anselm Blumer, 1987, [note](https://zh.wikipedia.org/zh-hans/%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80))
-
-[What is the Expectation Maximization Algorithm?](http://www.cs.virginia.edu/~mr4xb/notes/EM/em_tutorial.pdf) (Chuong B Do, 2008, [note](https://zhuanlan.zhihu.com/p/40991784))
-
-[An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010, [code](https://github.com/timvieira/crf), [note](https://zhuanlan.zhihu.com/p/70067113))
-
 ##### Decision Tree
 
 [Classification and Regression Trees](http://xxpt.ynjgy.com/resource/data/110102/U/705/pdfs/L3ClassTrees.pdf) (L. Breiman, 1984, [code1](https://github.com/bensadeghi/DecisionTree.jl), [code2](https://github.com/wreardan/cart), [note](https://www.cnblogs.com/wxquare/p/5379970.html))
@@ -1716,19 +1736,33 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [New Support Vector Algorithms](https://www.researchgate.net/publication/12413257_New_Support_Vector_Algorithms) (Bernhard Schölkopf, 2000, [code](https://github.com/cjlin1/libsvm))
 
+##### Conditional Random Field
+
+[An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010, [code](https://github.com/timvieira/crf), [note](https://zhuanlan.zhihu.com/p/70067113))
+
+##### Expectation Maximization
+
+[Maximum likelihood from incomplete data via the EM algorithm](https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/j.2517-6161.1977.tb01600.x) (Arthur Dempster, 1977, [note](https://zhuanlan.zhihu.com/p/40991784))
+
+[The EM Algorithm and Extensions](https://onlinelibrary.wiley.com/doi/book/10.1002/9780470191613) (Geoff McLachlan, 1997)
+
 ##### Ensemble Method
 
 [Greedy function approximation: a gradient boosting machine](https://projecteuclid.org/download/pdf_1/euclid.aos/1013203451) (Jerome H. Friedman, 2001, [code](https://github.com/dmlc/xgboost), [note](https://www.jianshu.com/p/005a4e6ac775))
 
 [XGBoost: A Scalable Tree Boosting System](https://arxiv.org/pdf/1603.02754.pdf#page=10&zoom=100,0,198) (Tianqi Chen, SIGKDD 2016, [code](https://github.com/dmlc/xgboost), [note](http://djjowfy.com/2017/08/01/XGBoost%E7%9A%84%E5%8E%9F%E7%90%86/))
 
+#### Learning Theory
+
+[On the Uniform Convergence of Relative Frequencies of Events to their Probabilities](https://link.springer.com/chapter/10.1007/978-3-319-21852-6_3) (Vladimir Vapnik, 1971)
+
+[A Theory of the Learnable](https://dl.acm.org/doi/pdf/10.1145/1968.1972?casa_token=jkM2-kt89ncAAAAA:Eavindse5LyhN1lfVXUQHJej6wwPne4TV_AASPF6bkwDveiydsl6fpGD4prUdXEpYCoeF7kN4RfaElE) (Leslie Valiant, 1984)
+
+[Occam's Razor](https://users.soe.ucsc.edu/~manfred/pubs/J9.pdf) (Anselm Blumer, 1987, [note](https://zh.wikipedia.org/zh-hans/%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80))
+
 #### Zero-Shot Learning
 
-[Zero-Shot Learning with Semantic Output Codes](http://www.cs.cmu.edu/afs/cs/project/theo-73/www/papers/zero-shot-learning.pdf) (Mark Palatucci, NIPS 2009, [note](https://zhuanlan.zhihu.com/p/34076480))
-
-[Learning To Detect Unseen Object Classes by Between-Class Attribute Transfer](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=03500C970796A39BCC5A437E4AA79B10?doi=10.1.1.165.9750&rep=rep1&type=pdf) (Christoph H. Lampert, CVPR 2009, [code](https://github.com/ahmedmazariML/Learning-To-Detect-Unseen-Object-Classes-by-Between-Class-Attribute-Transfer), [note](https://tongtianta.site/paper/23631))
-
-[DeViSE: A Deep Visual-Semantic Embedding Model](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=CD1A6E4145A750B305F3512006D12FE9?doi=10.1.1.466.176&rep=rep1&type=pdf) (Andrea Frome, NIPS 2013, [note](https://zhuanlan.zhihu.com/p/52352455))
+[Zero-Shot Learning with Semantic Output Codes](http://www.cs.cmu.edu/afs/cs/project/theo-73/www/papers/zero-shot-learning.pdf) (Mark Palatucci, NeuIPS 2009, [note](https://zhuanlan.zhihu.com/p/34076480))
 
 [Label-Embedding for Attribute-Based Classification](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=94AE59377DBC233D6EE1808F16B505CB?doi=10.1.1.371.9746&rep=rep1&type=pdf) (Zeynep Akata, CVPR 2013, [note](https://blog.csdn.net/hanss2/article/details/80537356))
 
@@ -1742,15 +1776,23 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Siamese neural networks for one-shot image recognition](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) (Gregory Koch, ICML 2015 Workshop, [note](https://zhuanlan.zhihu.com/p/86283037))
 
-#### Meta Learning
+[Matching Networks for One Shot Learning](https://arxiv.org/pdf/1606.04080.pdf) (Oriol Vinyals, NeuIPS 2016, [note](https://zhuanlan.zhihu.com/p/32101204))
 
-[Matching Networks for One Shot Learning](https://arxiv.org/pdf/1606.04080.pdf) (Oriol Vinyals, NIPS 2016, [note](https://zhuanlan.zhihu.com/p/32101204))
+#### Meta Learning
 
 [Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks](https://arxiv.org/pdf/1703.03400.pdf) (Chelsea Finn, ICML 2017, [code](https://github.com/cbfinn/maml?utm_source=catalyzex.com), [note](https://zhuanlan.zhihu.com/p/57864886))
 
 [Meta-Learning Representations for Continual Learning](https://arxiv.org/pdf/1905.12588.pdf) (Khurram Javed, NIPS 2019, [code](https://github.com/khurramjaved96/mrcl?utm_source=catalyzex.com))
 
 [Learning to Continually Learn](https://arxiv.org/pdf/2002.09571.pdf) (Shawn Beaulieu, ECAI 2020, [code](https://github.com/uvm-neurobotics-lab/ANML?utm_source=catalyzex.com))
+
+#### Curriculum Learning
+
+[Curriculum Learning](https://mila.quebec/wp-content/uploads/2019/08/2009_curriculum_icml.pdf) (Yoshua Bengio, ICML 2009, [note](https://zhuanlan.zhihu.com/p/114825029))
+
+[Self-Paced Curriculum Learning](https://ojs.aaai.org/index.php/AAAI/article/view/9608) (Lu Jiang, AAAI 2015)
+
+[Automated Curriculum Learning for Neural Networks](http://proceedings.mlr.press/v70/graves17a/graves17a.pdf) (Alex Graves, ICML 2017)
 
 #### Imbalanced Data
 
@@ -1776,15 +1818,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Large Scale Multiple Kernel Learning](http://www.jmlr.org/papers/volume7/sonnenburg06a/sonnenburg06a.pdf) (Sören Sonnenburg, JMLR 2006)
 
-[Factorized Latent Spaces with Structured Sparsity](https://papers.nips.cc/paper/3953-factorized-latent-spaces-with-structured-sparsity.pdf) (Yangqing Jia, NIPS 2010)
+[Factorized Latent Spaces with Structured Sparsity](https://papers.nips.cc/paper/3953-factorized-latent-spaces-with-structured-sparsity.pdf) (Yangqing Jia, NeuIPS 2010)
 
 [Factorized Orthogonal Latent Spaces](https://ttic.uchicago.edu/~rurtasun/publications/SalzmannEkUrtasunDarrell10.pdf) (Mathieu Salzmann, 2010)
 
-[Domain Separation Networks](https://papers.nips.cc/paper/6254-domain-separation-networks.pdf) (Konstantinos Bousmalis, NIPS 2016, [note](https://zhuanlan.zhihu.com/p/49479734))
-
-[Recurrent Neural Network for Text Classification with Multi-Task Learning](https://www.ijcai.org/Proceedings/16/Papers/408.pdf) (Pengfei Liu, IJCAI 2016, [code](https://github.com/brightmart/text_classification), [note](https://zhuanlan.zhihu.com/p/27562717))
-
-[Adversarial Multi-task Learning for Text Classification](https://www.aclweb.org/anthology/P17-1001) (Pengfei Liu, ACL 2017, [code](https://github.com/FrankWork/fudan_mtl_reviews), [note](https://zhuanlan.zhihu.com/p/31653852))
+[Domain Separation Networks](https://papers.nips.cc/paper/6254-domain-separation-networks.pdf) (Konstantinos Bousmalis, NeuIPS 2016, [note](https://zhuanlan.zhihu.com/p/49479734))
 
 [Multi-Task Deep Neural Networks for Natural Language Understanding](https://arxiv.org/pdf/1901.11504.pdf) (Xiaodong Liu, ACL 2019, [code](https://github.com/namisan/mt-dnn), [note](https://zhuanlan.zhihu.com/p/60282783))
 
@@ -1792,17 +1830,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Model
 
-[Learning representations by back-propagating errors](http://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf) (David E. Rumelhart, 1986)
-
-[Curriculum Learning](https://mila.quebec/wp-content/uploads/2019/08/2009_curriculum_icml.pdf) (Yoshua Bengio, ICML 2009, [note](https://zhuanlan.zhihu.com/p/114825029))
-
-[Highway Networks](http://de.arxiv.org/pdf/1505.00387) (Rupesh Kumar Srivastava, 2015, [note](https://zhuanlan.zhihu.com/p/38130339))
-
-[Distilling the Knowledge in a Neural Network](https://arxiv.org/pdf/1503.02531.pdf) (Geoffrey Hinton, NIPS 2015, [note](https://xmfbit.github.io/2018/06/07/knowledge-distilling/))
-
-[Dynamic Routing Between Capsules](https://papers.nips.cc/paper/6975-dynamic-routing-between-capsules.pdf) (Geoffrey Hinton, NIPS 2017, [code](https://github.com/naturomics/CapsNet-Tensorflow), [note](https://zhuanlan.zhihu.com/p/32156167))
-
-##### Convolutional Neural Networks
+##### Convolutional Neural Network
 
 [Backpropagation applied to handwritten zip code recognition](https://www.ics.uci.edu/~welling/teaching/273ASpring09/lecun-89e.pdf) (Yann LeCun, 1989, [note](https://blog.csdn.net/u012679707/article/details/80738633))
 
@@ -1820,6 +1848,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Deep Residual Learning for Image Recognition](https://x-algo.cn/wp-content/uploads/2016/12/residual.pdf) (Kaiming He, 2015, [note](https://zhuanlan.zhihu.com/p/47199669))
 
+[Highway Networks](http://de.arxiv.org/pdf/1505.00387) (Rupesh Kumar Srivastava, 2015, [note](https://zhuanlan.zhihu.com/p/38130339))
+
 [Multi-Scale Context Aggregation by Dilated Convolutions](https://arxiv.org/pdf/1511.07122.pdf) (Fisher Yu, ICLR 2016, [code](https://github.com/iesl/dilated-cnn-ner), [note](https://www.cnblogs.com/fourmi/p/10049998.html))
 
 [Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/pdf/1512.00567.pdf) (Christian Szegedy, CVPR 2016, [code](https://github.com/pytorch/vision?utm_source=catalyzex.com), [note](https://zhuanlan.zhihu.com/p/50751422))
@@ -1834,7 +1864,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Are Pre-trained Convolutions Better than Pre-trained Transformers?](https://arxiv.org/pdf/2105.03322.pdf) (Yi Tay, ACL 2021)
 
-##### Recurrent Neural Networks
+##### Recurrent Neural Network
 
 [Long short-term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
 
@@ -1896,23 +1926,37 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Auto-Encoding Variational Bayes](https://arxiv.org/pdf/1312.6114.pdf) (Diederik P. Kingma, ICLR 2014)
 
-[Learning Structured Output Representation using Deep Conditional Generative Models](https://papers.nips.cc/paper/2015/file/8d55a249e6baa5c06772297520da2051-Paper.pdf) (Kihyuk Sohn, NIPS 2015)
+[Learning Structured Output Representation using Deep Conditional Generative Models](https://papers.nips.cc/paper/2015/file/8d55a249e6baa5c06772297520da2051-Paper.pdf) (Kihyuk Sohn, NeuIPS 2015)
 
-##### Graph Neural Networks
+##### Graph Neural Network
 
 [The Graph Neural Network Model](http://persagen.com/files/misc/scarselli2009graph.pdf) (Franco Scarselli, 2009, [note](https://zhuanlan.zhihu.com/p/76290138))
 
 [Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/pdf/1609.02907.pdf) (Thomas N. Kipf, ICLR 2017, [code](https://github.com/tkipf/gcn), [note](https://zhuanlan.zhihu.com/p/35630785))
 
-##### Attention Mechanism and Memory Networks
+##### Capsule Network
 
-[On the properties of neural machine translation: Encoder–Decoder approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014, [note](https://blog.csdn.net/BeforeEasy/article/details/80332497))
+[Dynamic Routing Between Capsules](https://papers.nips.cc/paper/6975-dynamic-routing-between-capsules.pdf) (Geoffrey Hinton, NeuIPS 2017, [code](https://github.com/naturomics/CapsNet-Tensorflow), [note](https://zhuanlan.zhihu.com/p/32156167))
 
-[Learning phrase representations using RNN encoder-decoder for statistical machine translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014, [note](https://cuiqingcai.com/5737.html))
+[Matrix Capsules with EM Routing](https://openreview.net/pdf?id=HJWLfGWRb) (Geoffrey Hinton, ICLR 2018)
 
-[Neural Turing Machines](https://arxiv.org/pdf/1410.5401.pdf) (Alex Graves, 2014, [code](https://github.com/carpedm20/NTM-tensorflow), [note](https://zhuanlan.zhihu.com/p/30383994))
+##### Attention Mechanism
 
 [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf) (Dzmitry Bahdanau, ICLR 2015, [note](https://blog.csdn.net/WUTab/article/details/73657905))
+
+[DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding](https://arxiv.org/pdf/1709.04696.pdf) (Tao Shen, 2017, [code](https://github.com/taoshen58/DiSAN), [note](https://zhuanlan.zhihu.com/p/36349043))
+
+[Learning What’s Easy: Fully Differentiable Neural Easy-First Taggers](https://www.aclweb.org/anthology/D17-1036.pdf) (Andre F. T. Martins, EMNLP 2017)
+
+[Structured Attention Networks](https://arxiv.org/pdf/1702.00887.pdf) (Yoon Kim, ICLR 2017)
+
+[You May Not Need Attention](https://arxiv.org/pdf/1810.13409.pdf) (Ofir Press, 2018, [code](https://github.com/ofirpress/YouMayNotNeedAttention), [note](https://zhuanlan.zhihu.com/p/48374997))
+
+[An Introductory Survey on Attention Mechanisms in NLP Problems](https://arxiv.org/pdf/1811.05544.pdf) (Dichao Hu, 2018, [note](https://blog.csdn.net/cskywit/article/details/84753293))
+
+##### Memory Network
+
+[Neural Turing Machines](https://arxiv.org/pdf/1410.5401.pdf) (Alex Graves, 2014, [code](https://github.com/carpedm20/NTM-tensorflow), [note](https://zhuanlan.zhihu.com/p/30383994))
 
 [Memory Networks](https://arxiv.org/pdf/1410.3916v11.pdf) (Jason Weston, ICLR 2015, [note](https://zhuanlan.zhihu.com/p/32257642))
 
@@ -1924,23 +1968,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Gated End-to-End Memory Networks](http://www.aclweb.org/anthology/E/E17/E17-1001.pdf) (Fei Liu, 2016, [note](https://zhuanlan.zhihu.com/p/30722242))
 
-[DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding](https://arxiv.org/pdf/1709.04696.pdf) (Tao Shen, 2017, [code](https://github.com/taoshen58/DiSAN), [note](https://zhuanlan.zhihu.com/p/36349043))
+##### Transformer
 
 [Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf) (Ashish Vaswani, 2017, [code1](https://github.com/jadore801120/attention-is-all-you-need-pytorch), [code2](https://github.com/Kyubyong/transformer), [code3](https://github.com/bojone/attention), [note](https://zhuanlan.zhihu.com/p/48508221))
-
-[Learning What’s Easy: Fully Differentiable Neural Easy-First Taggers](https://www.aclweb.org/anthology/D17-1036.pdf) (Andre F. T. Martins, EMNLP 2017)
-
-[Structured Attention Networks](https://arxiv.org/pdf/1702.00887.pdf) (Yoon Kim, ICLR 2017)
-
-[You May Not Need Attention](https://arxiv.org/pdf/1810.13409.pdf) (Ofir Press, 2018, [code](https://github.com/ofirpress/YouMayNotNeedAttention), [note](https://zhuanlan.zhihu.com/p/48374997))
-
-[An Introductory Survey on Attention Mechanisms in NLP Problems](https://arxiv.org/pdf/1811.05544.pdf) (Dichao Hu, 2018, [note](https://blog.csdn.net/cskywit/article/details/84753293))
 
 [Self-Attention with Relative Position Representations](https://arxiv.org/pdf/1803.02155.pdf) (Peter Shaw, 2018, [note](https://www.jianshu.com/p/cb5b2d967e90))
 
 [Input Combination Strategies for Multi-Source Transformer Decoder](https://arxiv.org/pdf/1811.04716.pdf) (Jindrich Libovicky, WMT 2018)
-
-[Sparse and Constrained Attention for Neural Machine Translation](https://arxiv.org/pdf/1805.08241.pdf) (Chaitanya Malaviya, ACL 2018)
 
 [Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned](https://arxiv.org/pdf/1905.09418.pdf) (Elena Voita, ACL 2019)
 
@@ -1956,8 +1990,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Tree Transformer: Integrating Tree Structures into Self-Attention](https://arxiv.org/pdf/1909.06639.pdf) (Yau-Shian Wang, EMNLP 2019)
 
-[Revealing the Dark Secrets of BERT](https://arxiv.org/pdf/1908.08593.pdf) (Olga Kovaleva, EMNLP 2019, [note](https://zhuanlan.zhihu.com/p/117645185))
-
 [Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf) (Iz Beltagy, 2020, [note](https://zhuanlan.zhihu.com/p/134748587))
 
 [Linformer: Self-Attention with Linear Complexity](https://arxiv.org/pdf/2006.04768.pdf) (Sinong Wang, 2020)
@@ -1972,7 +2004,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Multi-Head Attention: Collaborate Instead of Concatenate](https://openreview.net/forum?id=bK-rJMKrOsm) (Jean-Baptiste Cordonnier, 2020, [code](https://github.com/epfml/collaborative-attention), [note](https://medium.com/im%E6%97%A5%E8%A8%98/%E8%AB%96%E6%96%87%E5%88%86%E4%BA%AB-multi-head-attention-collaborate-instead-of-concatenate-196dccff6118))
 
-#### Optimizer
+#### Optimization
+
+[Learning representations by back-propagating errors](http://www.iro.umontreal.ca/~pift6266/A06/refs/backprop_old.pdf) (David E. Rumelhart, 1986)
 
 [On the Momentum Term in Gradient Descent Learning](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.57.5612&rep=rep1&type=pdf) (Ning Qian, 1999)
 
@@ -2040,7 +2074,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Neural Architecture Search
 
-[MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861.pdf) (Andrew Howard, 2017, code)
+[Distilling the Knowledge in a Neural Network](https://arxiv.org/pdf/1503.02531.pdf) (Geoffrey Hinton, NeuIPS 2015, [note](https://xmfbit.github.io/2018/06/07/knowledge-distilling/))
+
+[MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861.pdf) (Andrew Howard, 2017)
 
 [Neural Architecture Search with Reinforcement Learning](https://arxiv.org/pdf/1611.01578.pdf) (Barret Zoph, ICLR 2017, [note](https://zhuanlan.zhihu.com/p/47221948))
 
