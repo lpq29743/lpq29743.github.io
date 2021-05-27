@@ -98,6 +98,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators](https://arxiv.org/pdf/2003.10555.pdf) (Kevin Clark, ICLR 2020, [code](https://github.com/google-research/electra), [note](https://zhuanlan.zhihu.com/p/89763176))
 
+[Optimus: Organizing Sentences via Pre-trained Modeling of a Latent Space](https://arxiv.org/pdf/2004.04092.pdf) (Chunyuan Li, EMNLP 2020, [code](https://github.com/ChunyuanLI/Optimus), [note](https://zhuanlan.zhihu.com/p/143517152))
+
 [Language Models are Few-Shot Learners](https://arxiv.org/pdf/2005.14165.pdf) (Tom B. Brown, 2020, [code](https://github.com/openai/gpt-3), [note](https://zhuanlan.zhihu.com/p/144764546))
 
 ##### Knowledge-Enriched Language Model
@@ -1052,6 +1054,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Generating High-Quality and Informative Conversation Responses with Sequence-to-Sequence Models](https://arxiv.org/pdf/1701.03185.pdf) (Louis Shao, EMNLP 2017)
 
+[Improving Variational Encoder-Decoders in Dialogue Generation](https://ojs.aaai.org/index.php/AAAI/article/view/11960) (Xiaoyu Shen, AAAI 2018)
+
 [Hierarchical Variational Memory Network for Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3178876.3186077) (Hongshen Chen, WWW 2018, [code](https://github.com/chenhongshen/HVMN), [note](https://blog.csdn.net/qq_38684093/article/details/84038264))
 
 [Variational Autoregressive Decoder for Neural Response Generation](https://www.aclweb.org/anthology/D18-1354.pdf) (Jiachen Du, EMNLP 2018)
@@ -1089,6 +1093,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [An Empirical Investigation of Pre-Trained Transformer Language Models for Open-Domain Dialogue Generation](https://arxiv.org/pdf/2003.04195.pdf) (Piji Li, 2020)
 
 [The Adapter-Bot: All-In-One Controllable Conversational Model](https://arxiv.org/pdf/2008.12579.pdf) (Andrea Madotto, 2020)
+
+[Variational Transformers for Diverse Response Generation](https://arxiv.org/pdf/2003.12738.pdf) (Zhaojiang Lin, 2020)
 
 ##### Stylized Response Generation
 
@@ -1492,6 +1498,22 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Neural Text Generation: A Practical Guide](https://arxiv.org/pdf/1711.09534.pdf) (Ziang Xie, 2017)
 
+[A Hybrid Convolutional Variational Autoencoder for Text Generation](https://arxiv.org/pdf/1702.02390.pdf) (Stanislau Semeniuta, 2017)
+
+[Natural Language Generation by Hierarchical Decoding with Linguistic Patterns](https://arxiv.org/pdf/1808.02747.pdf) (Shang-Yu Su, NAACL 2018)
+
+[Topic-Guided Variational Autoencoders for Text Generation](https://arxiv.org/pdf/1903.07137.pdf) (Wenlin Wang, NAACL 2019)
+
+[Generating Long and Informative Reviews with Aspect-Aware Coarse-to-Fine Decoding](https://arxiv.org/pdf/1906.05667.pdf) (Junyi Li, ACL 2019)
+
+[Syntax-Infused Variational Autoencoder for Text Generation](https://arxiv.org/pdf/1906.02181.pdf) (Xinyuan Zhang, ACL 2019)
+
+[Towards Generating Long and Coherent Text with Multi-Level Latent Variable Models](https://arxiv.org/pdf/1902.00154.pdf) (Dinghan Shan, ACL 2019)
+
+[Keeping Notes: Conditional Natural Language Generation with a Scratchpad Mechanism](https://www.aclweb.org/anthology/P19-1407.pdf) (Ryan Y. Benmalek, ACL 2019)
+
+[Long and Diverse Text Generation with Planning-based Hierarchical Variational Model](https://arxiv.org/pdf/1908.06605.pdf) (Zhihong Shao, EMNLP 2019)
+
 [Best-First Beam Search](https://arxiv.org/pdf/2007.03909.pdf) (Clara Meister, TACL 2020, [code](https://github.com/huggingface/transformers/issues/6565), [note](https://zhuanlan.zhihu.com/p/187270580))
 
 [The Curious Case of Neural Text Degeneration](https://arxiv.org/pdf/1904.09751.pdf) (Ari Holtzman, ICLR 2020, [note](https://zhuanlan.zhihu.com/p/115076102))
@@ -1629,6 +1651,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 #### Paraphrase Generation
 
 [Submodular Optimization-based Diverse Paraphrasing and its Effectiveness in Data Augmentation](https://www.aclweb.org/anthology/N19-1363.pdf) (Ashutosh Kumar, NAACL 2019, [code](https://github.com/malllabiisc/DiPS))
+
+[A Multi-Task Approach for Disentangling Syntax and Semantics in Sentence Representations](https://arxiv.org/pdf/1904.01173.pdf) (Mingda Chen, NAACL 2019, [code](https://github.com/mingdachen/disentangle-semantics-syntax))
+
+[Paraphrase Generation with Latent Bag of Words](https://arxiv.org/pdf/2001.01941.pdf) (Yao Fu, NeuIPS 2019)
 
 #### Natural Language Processing for Programming Language
 
@@ -1926,7 +1952,35 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Auto-Encoding Variational Bayes](https://arxiv.org/pdf/1312.6114.pdf) (Diederik P. Kingma, ICLR 2014)
 
-[Learning Structured Output Representation using Deep Conditional Generative Models](https://papers.nips.cc/paper/2015/file/8d55a249e6baa5c06772297520da2051-Paper.pdf) (Kihyuk Sohn, NeuIPS 2015)
+[Variational Inference with Normalizing Flows](http://proceedings.mlr.press/v37/rezende15.pdf) (Danilo Jimenez Rezende, ICML 2015, [note](https://bingning.wang/research/Article/?id=100))
+
+[Learning Structured Output Representation using Deep Conditional Generative Models](https://papers.nips.cc/paper/2015/file/8d55a249e6baa5c06772297520da2051-Paper.pdf) (Kihyuk Sohn, NeuIPS 2015, [note](https://zhuanlan.zhihu.com/p/25518643))
+
+[Improved Variational Inference with Inverse Autoregressive Flow](https://arxiv.org/pdf/1606.04934.pdf) (Diederik P. Kingma, NeuIPS 2016)
+
+[beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework](https://openreview.net/pdf?id=Sy2fzU9gl) (Irina Higgins, ICLR 2017)
+
+[Deep Variational Information Bottleneck](https://arxiv.org/abs/1612.00410) (Alexander A. Alemi, ICLR 2017)
+
+[Variational Lossy Autoencoder](https://arxiv.org/pdf/1611.02731.pdf) (Xi Chen, ICLR 2017)
+
+[Neural Discrete Representation Learning](https://arxiv.org/pdf/1711.00937.pdf) (Aaron van den Oord, NeuIPS 2017)
+
+[Adversarially Regularized Autoencoders](http://proceedings.mlr.press/v80/zhao18b/zhao18b.pdf) (Junbo Zhao, ICML 2018)
+
+[Disentangling by Factorising](http://proceedings.mlr.press/v80/kim18b/kim18b.pdf) (Hyunjik Kim, ICML 2018)
+
+[Isolating Sources of Disentanglement in VAEs](https://arxiv.org/pdf/1802.04942.pdf) (Ricky T. Q. Chen, NeuIPS 2018)
+
+[Learning Disentangled Joint Continuous and Discrete Representations](https://arxiv.org/pdf/1804.00104.pdf) (Emilien Dupont, NeuIPS 2018)
+
+[Structured Disentangled Representations](http://proceedings.mlr.press/v89/esmaeili19a/esmaeili19a.pdf) (Babak Esmaeili, AISTATS 2019)
+
+[Generating Diverse High-Fidelity Images with VQ-VAE-2](https://arxiv.org/pdf/1906.00446.pdf) (Ali Razavi, NeuIPS 2019)
+
+[Variational Autoencoders and Nonlinear ICA: A Unifying Framework](http://proceedings.mlr.press/v108/khemakhem20a/khemakhem20a.pdf) (Ilyes Khemakhem, AISTATS 2020)
+
+[From Variational to Deterministic Autoencoders](https://arxiv.org/abs/1903.12436) (Partha Ghosh, ICLR 2020)
 
 ##### Graph Neural Network
 
@@ -2067,6 +2121,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](http://de.arxiv.org/pdf/1502.03167) (Sergey Ioffe, ICML 2015, [note](https://zhuanlan.zhihu.com/p/50444499))
 
 [Layer Normalization](https://arxiv.org/pdf/1607.06450.pdf) (Jimmy Lei Ba, 2016, [note](https://zhuanlan.zhihu.com/p/54530247))
+
+[Weight Normalization: A Simple Reparameterization to Accelerate Training of Deep Neural Networks](https://arxiv.org/pdf/1602.07868.pdf) (Tim Salimans, 2016)
 
 [Instance Normalization: The Missing Ingredient for Fast Stylization](https://arxiv.org/pdf/1607.08022.pdf) (Dmitry Ulyanov, 2017)
 
