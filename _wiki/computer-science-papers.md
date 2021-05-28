@@ -1532,8 +1532,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019, [code](https://github.com/microsoft/MASS), [note](https://zhuanlan.zhihu.com/p/71022527))
 
-[Sparse Sequence-to-Sequence Models](https://arxiv.org/pdf/1905.05702.pdf) (Ben Peters, ACL 2019, [note](https://zhuanlan.zhihu.com/p/76607614))
-
 ##### Graph to Sequence
 
 [Text Generation from Knowledge Graphs with Graph Transformers](https://arxiv.org/pdf/1904.02342.pdf) (Rik Koncel-Kedziorski, NAACL 2019, [code](https://github.com/rikdz/GraphWriter), [note](https://zhuanlan.zhihu.com/p/90084109))
@@ -1589,8 +1587,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Non-Autoregressive Neural Machine Translation](https://arxiv.org/pdf/1711.02281.pdf) (Jiatao Gu, ICLR 2018, [code](https://github.com/salesforce/nonauto-nmt), [note](https://zhuanlan.zhihu.com/p/35866317))
 
 [Word Translation Without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) (Alexis Conneau, ICLR 2018)
-
-[Sparse and Constrained Attention for Neural Machine Translation](https://arxiv.org/pdf/1805.08241.pdf) (Chaitanya Malaviya, ACL 2018)
 
 [Phrase-Based & Neural Unsupervised Machine Translation](https://arxiv.org/pdf/1804.07755.pdf) (Guillaume Lample, EMNLP 2018, [code](https://github.com/facebookresearch/UnsupervisedMT), [note](https://blog.csdn.net/ljp1919/article/details/103074097))
 
@@ -1742,9 +1738,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ### Machine Learning
 
-#### Model
-
-##### Decision Tree
+#### Decision Tree
 
 [Classification and Regression Trees](http://xxpt.ynjgy.com/resource/data/110102/U/705/pdfs/L3ClassTrees.pdf) (L. Breiman, 1984, [code1](https://github.com/bensadeghi/DecisionTree.jl), [code2](https://github.com/wreardan/cart), [note](https://www.cnblogs.com/wxquare/p/5379970.html))
 
@@ -1752,7 +1746,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [C4.5: Programs for Machine Learning](https://dl.acm.org/citation.cfm?id=152181) (J. Ross Quinlan, 1993, [code](https://github.com/yandongliu/learningjs), [note](https://www.cnblogs.com/wxquare/p/5379970.html))
 
-##### Support Vector Machine
+#### Support Vector Machine
 
 [A Training Algorithm for Optimal Margin Classifiers](http://www.svms.org/training/BOGV92.pdf) (Bernhard E Boser, 1992, [code](https://github.com/cjlin1/libsvm))
 
@@ -1762,17 +1756,17 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [New Support Vector Algorithms](https://www.researchgate.net/publication/12413257_New_Support_Vector_Algorithms) (Bernhard Schölkopf, 2000, [code](https://github.com/cjlin1/libsvm))
 
-##### Conditional Random Field
+#### Conditional Random Field
 
 [An Introduction to Conditional Random Fields](https://arxiv.org/pdf/1011.4088.pdf) (Charles Sutton, 2010, [code](https://github.com/timvieira/crf), [note](https://zhuanlan.zhihu.com/p/70067113))
 
-##### Expectation Maximization
+#### Expectation Maximization
 
 [Maximum likelihood from incomplete data via the EM algorithm](https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/j.2517-6161.1977.tb01600.x) (Arthur Dempster, 1977, [note](https://zhuanlan.zhihu.com/p/40991784))
 
 [The EM Algorithm and Extensions](https://onlinelibrary.wiley.com/doi/book/10.1002/9780470191613) (Geoff McLachlan, 1997)
 
-##### Ensemble Method
+#### Ensemble Method
 
 [Greedy function approximation: a gradient boosting machine](https://projecteuclid.org/download/pdf_1/euclid.aos/1013203451) (Jerome H. Friedman, 2001, [code](https://github.com/dmlc/xgboost), [note](https://www.jianshu.com/p/005a4e6ac775))
 
@@ -1854,9 +1848,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ### Deep Learning
 
-#### Model
-
-##### Convolutional Neural Network
+#### Convolutional Neural Network
 
 [Backpropagation applied to handwritten zip code recognition](https://www.ics.uci.edu/~welling/teaching/273ASpring09/lecun-89e.pdf) (Yann LeCun, 1989, [note](https://blog.csdn.net/u012679707/article/details/80738633))
 
@@ -1890,7 +1882,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Are Pre-trained Convolutions Better than Pre-trained Transformers?](https://arxiv.org/pdf/2105.03322.pdf) (Yi Tay, ACL 2021)
 
-##### Recurrent Neural Network
+#### Recurrent Neural Network
 
 [Long short-term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
 
@@ -1904,7 +1896,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Skip RNN: Learning to Skip State Updates in Recurrent Neural Networks](https://arxiv.org/pdf/1708.06834.pdf) (Victor Campos, ICLR 2018, [note](https://www.jianshu.com/p/5c4dd629b1ec))
 
-##### Generative Adversarial Networks
+#### Generative Adversarial Networks
 
 [Generative Adversarial Nets](https://arxiv.org/pdf/1406.2661.pdf) (Ian Goodfellow, 2014)
 
@@ -1948,7 +1940,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/pdf/1912.04958.pdf) (Tero Karras, 2019, [note](https://blog.csdn.net/lynlindasy/article/details/104495583))
 
-##### Variational Autoencoder
+#### Variational Autoencoder
 
 [Auto-Encoding Variational Bayes](https://arxiv.org/pdf/1312.6114.pdf) (Diederik P. Kingma, ICLR 2014)
 
@@ -1982,19 +1974,19 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [From Variational to Deterministic Autoencoders](https://arxiv.org/abs/1903.12436) (Partha Ghosh, ICLR 2020)
 
-##### Graph Neural Network
+#### Graph Neural Network
 
 [The Graph Neural Network Model](http://persagen.com/files/misc/scarselli2009graph.pdf) (Franco Scarselli, 2009, [note](https://zhuanlan.zhihu.com/p/76290138))
 
 [Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/pdf/1609.02907.pdf) (Thomas N. Kipf, ICLR 2017, [code](https://github.com/tkipf/gcn), [note](https://zhuanlan.zhihu.com/p/35630785))
 
-##### Capsule Network
+#### Capsule Network
 
 [Dynamic Routing Between Capsules](https://papers.nips.cc/paper/6975-dynamic-routing-between-capsules.pdf) (Geoffrey Hinton, NeuIPS 2017, [code](https://github.com/naturomics/CapsNet-Tensorflow), [note](https://zhuanlan.zhihu.com/p/32156167))
 
 [Matrix Capsules with EM Routing](https://openreview.net/pdf?id=HJWLfGWRb) (Geoffrey Hinton, ICLR 2018)
 
-##### Attention Mechanism
+#### Attention Mechanism
 
 [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf) (Dzmitry Bahdanau, ICLR 2015, [note](https://blog.csdn.net/WUTab/article/details/73657905))
 
@@ -2034,8 +2026,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Universal Transformer](https://arxiv.org/pdf/1807.03819.pdf) (Mostafa Dehghani, ICLR 2019, [code](https://github.com/andreamad8/Universal-Transformer-Pytorch), [note](https://zhuanlan.zhihu.com/p/44655133))
 
-[Adaptively Sparse Transformers](https://arxiv.org/pdf/1909.00015.pdf) (Goncalo M. Correia, EMNLP 2019)
-
 [Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/pdf/1901.02860.pdf) (Zihang Dai, ACL 2019, [note](https://zhuanlan.zhihu.com/p/70745925))
 
 [Star-Transformer](https://arxiv.org/pdf/1902.09113.pdf) (Qipeng Guo, 2019, [note](https://zhuanlan.zhihu.com/p/97888995))
@@ -2044,9 +2034,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Tree Transformer: Integrating Tree Structures into Self-Attention](https://arxiv.org/pdf/1909.06639.pdf) (Yau-Shian Wang, EMNLP 2019)
 
-[Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf) (Iz Beltagy, 2020, [note](https://zhuanlan.zhihu.com/p/134748587))
-
-[Linformer: Self-Attention with Linear Complexity](https://arxiv.org/pdf/2006.04768.pdf) (Sinong Wang, 2020)
+[Reformer: The Efficient Transformer](https://arxiv.org/pdf/2001.04451.pdf) (Nikita Kitaev, ICLR 2020)
 
 [How Does Selective Mechanism Improve Self-Attention Networks?](https://arxiv.org/pdf/2005.00979.pdf) (Xinwei Geng, ACL 2020)
 
@@ -2056,7 +2044,25 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [On the Sub-layer Functionalities of Transformer Decoder](https://arxiv.org/pdf/2010.02648.pdf) (Yilin Yang, EMNLP 2020 Findings)
 
+[Longformer: The Long-Document Transformer](https://arxiv.org/pdf/2004.05150.pdf) (Iz Beltagy, 2020, [note](https://zhuanlan.zhihu.com/p/134748587))
+
+[Linformer: Self-Attention with Linear Complexity](https://arxiv.org/pdf/2006.04768.pdf) (Sinong Wang, 2020)
+
 [Multi-Head Attention: Collaborate Instead of Concatenate](https://openreview.net/forum?id=bK-rJMKrOsm) (Jean-Baptiste Cordonnier, 2020, [code](https://github.com/epfml/collaborative-attention), [note](https://medium.com/im%E6%97%A5%E8%A8%98/%E8%AB%96%E6%96%87%E5%88%86%E4%BA%AB-multi-head-attention-collaborate-instead-of-concatenate-196dccff6118))
+
+##### Sparse Attention
+
+[From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification](http://proceedings.mlr.press/v48/martins16.pdf) (Andre F. T. Martins, ICML 2016, [code](https://github.com/KrisKorrel/sparsemax-pytorch), [note](https://www.cs.utah.edu/~tli/posts/2019/01/blog-post-1/))
+
+[A Regularized Framework for Sparse and Structured Neural Attention](https://arxiv.org/pdf/1705.07704.pdf) (Vlad Niculae, NeuIPS 2017)
+
+[Sparse and Constrained Attention for Neural Machine Translation](https://arxiv.org/pdf/1805.08241.pdf) (Chaitanya Malaviya, ACL 2018)
+
+[Sparse Sequence-to-Sequence Models](https://arxiv.org/pdf/1905.05702.pdf) (Ben Peters, ACL 2019, [note](https://zhuanlan.zhihu.com/p/76607614))
+
+[Adaptively Sparse Transformers](https://arxiv.org/pdf/1909.00015.pdf) (Goncalo M. Correia, EMNLP 2019)
+
+[Efficient Content-Based Sparse Attention with Routing Transformers](https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00353/97776/Efficient-Content-Based-Sparse-Attention-with) (Aurko Roy, TACL 2021)
 
 #### Optimization
 
@@ -2089,8 +2095,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [An exploration of softmax alternatives belonging to the spherical loss family](https://arxiv.org/pdf/1511.05042.pdf) (Alexandre de Brebisson, ICLR 2016)
 
 [Large-Margin Softmax Loss for Convolutional Neural Networks](https://arxiv.org/pdf/1612.02295.pdf) (Weiyang Liu, ICML 2016, [code](https://github.com/wy1iu/LargeMargin_Softmax_Loss), [note](https://zhuanlan.zhihu.com/p/45448909))
-
-[From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification](http://proceedings.mlr.press/v48/martins16.pdf) (Andre F. T. Martins, ICML 2016, [code](https://github.com/KrisKorrel/sparsemax-pytorch), [note](https://www.cs.utah.edu/~tli/posts/2019/01/blog-post-1/))
 
 [Focal Loss for Dense Object Detection](https://arxiv.org/pdf/1708.02002.pdf) (Tsung-Yi Lin, ICCV 2017, [code](https://github.com/unsky/focal-loss), [note](https://zhuanlan.zhihu.com/p/49981234))
 
