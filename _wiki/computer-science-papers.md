@@ -1088,6 +1088,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Conversational Graph Grounded Policy Learning for Open-Domain Conversation Generation](https://www.aclweb.org/anthology/2020.acl-main.166.pdf) (Jun Xu, ACL 2020)
 
+[Group-wise Contrastive Learning for Neural Dialogue Generation](https://arxiv.org/pdf/2009.07543.pdf) (Hengyi Cai, EMNLP 2020)
+
 [Plug-and-Play Conversational Models](https://arxiv.org/pdf/2010.04344.pdf) (Andrea Madotto, EMNLP 2020 Findings)
 
 [An Empirical Investigation of Pre-Trained Transformer Language Models for Open-Domain Dialogue Generation](https://arxiv.org/pdf/2003.04195.pdf) (Piji Li, 2020)
@@ -1149,6 +1151,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [EmpDG: Multiresolution Interactive Empathetic Dialogue Generation](https://arxiv.org/pdf/1911.08698.pdf) (Qintong Li, COLING 2020)
 
 [Towards Facilitating Empathic Conversations in Online Mental Health Support: A Reinforcement Learning Approach](https://arxiv.org/pdf/2101.07714.pdf) (Ashish Sharma, WWW 2021)
+
+[Emotion Eliciting Machine: Emotion Eliciting Conversation Generation based on Dual Generator](https://arxiv.org/pdf/2105.08251.pdf) (Hao Jiang, 2021)
 
 ##### Persona-Based Dialogue System
 
@@ -1576,17 +1580,23 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation](https://arxiv.org/pdf/1609.08144.pdf) (Yonghui Wu, 2016, [note](https://blog.csdn.net/Xiao_yanling/article/details/90290862))
 
+[Neural Machine Translation with Reconstruction](https://ojs.aaai.org/index.php/AAAI/article/view/10950) (Zhaopeng Tu, AAAI 2017)
+
 [Sequence-to-Dependency Neural Machine Translation](http://www.aclweb.org/anthology/P17-1065) (Shuangzhi Wu, ACL 2017, [note](https://www.jianshu.com/p/2eb3c89234cb))
 
 [Neural Machine Translation and Sequence-to-sequence Models: A Tutorial](https://arxiv.org/pdf/1703.01619.pdf) (Graham Neubig, 2017, [note](https://google.github.io/seq2seq/nmt/))
 
 [Multi-channel Encoder for Neural Machine Translation](https://arxiv.org/pdf/1712.02109.pdf) (Hao Xiong, AAAI 2018, [note](https://www.jiqizhixin.com/articles/2017-12-14-10))
 
+[Translating Pro-Drop Languages with Reconstruction Models](https://ojs.aaai.org/index.php/AAAI/article/view/11913) (Longyue Wang, AAAI 2018)
+
 [Unsupervised Neural Machine Translation](https://arxiv.org/pdf/1710.11041.pdf) (Mikel Artetxe, ICLR 2018, [code](https://github.com/artetxem/undreamt), [note](https://zhuanlan.zhihu.com/p/30649985))
 
 [Non-Autoregressive Neural Machine Translation](https://arxiv.org/pdf/1711.02281.pdf) (Jiatao Gu, ICLR 2018, [code](https://github.com/salesforce/nonauto-nmt), [note](https://zhuanlan.zhihu.com/p/35866317))
 
 [Word Translation Without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) (Alexis Conneau, ICLR 2018)
+
+[Learning to Jointly Translate and Predict Dropped Pronouns with a Shared Reconstruction Mechanism](https://arxiv.org/pdf/1810.06195.pdf) (Longyue Wang, EMNLP 2018)
 
 [Phrase-Based & Neural Unsupervised Machine Translation](https://arxiv.org/pdf/1804.07755.pdf) (Guillaume Lample, EMNLP 2018, [code](https://github.com/facebookresearch/UnsupervisedMT), [note](https://blog.csdn.net/ljp1919/article/details/103074097))
 
@@ -1735,6 +1745,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Pixel Recursive Super Resolution](https://arxiv.org/pdf/1702.00783.pdf) (Ryan Dahl, 2017, [code](https://github.com/nilboy/pixel-recursive-super-resolution))
 
 [Deep Back-Projection Networks for Super-Resolution](http://openaccess.thecvf.com/content_cvpr_2018/papers/Haris_Deep_Back-Projection_Networks_CVPR_2018_paper.pdf) (Muhammad Haris, CVPR 2018, [code](https://github.com/alterzero/DBPN-Pytorch), [note](https://zhuanlan.zhihu.com/p/34400207))
+
+#### Person Re-identification
+
+[Joint Discriminative and Generative Learning for Person Re-identification](https://arxiv.org/pdf/1904.07223.pdf) (Zhedong Zheng, CVPR 2019, [code](https://github.com/NVlabs/DG-Net?utm_source=catalyzex.com))
 
 ### Machine Learning
 
