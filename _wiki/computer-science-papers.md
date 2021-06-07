@@ -260,6 +260,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Text Summarization
 
+[SEQ3 : Differentiable Sequence-to-Sequence-to-Sequence Autoencoder for Unsupervised Abstractive Sentence Compression](https://arxiv.org/pdf/1904.03651.pdf) (Christos Baziotis, NAACL 2019)
+
 [Answers Unite! Unsupervised Metrics for Reinforced Summarization Models](https://arxiv.org/pdf/1909.01610.pdf) (Thomas Scialom, EMNLP 2019, [code](https://github.com/recitalAI/summa-qa?utm_source=catalyzex.com))
 
 [Better Rewards Yield Better Summaries: Learning to Summarise Without References](https://arxiv.org/pdf/1909.01214.pdf) (Florian Bohm, EMNLP 2019, [code](https://github.com/yg211/summary-reward-no-reference?utm_source=catalyzex.com))
@@ -273,6 +275,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Re-evaluating Evaluation in Text Summarization](https://arxiv.org/pdf/2010.07100.pdf) (Manik Bhandari, EMNLP 2020, [code](https://github.com/neulab/REALSumm?utm_source=catalyzex.com))
 
 [Unsupervised Reference-Free Summary Quality Evaluation via Contrastive Learning](https://arxiv.org/pdf/2010.01781.pdf) (Hanlu Wu, EMNLP 2020, [code](https://github.com/whl97/LS-Score?utm_source=catalyzex.com))
+
+[The Style-Content Duality of Attractiveness: Learning to Write Eye-Catching Headlines via Disentanglement](https://arxiv.org/pdf/2012.07419.pdf) (Mingzhe Li, AAAI 2021)
 
 ##### Extractive Summarization
 
@@ -1662,6 +1666,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Paraphrase Generation with Latent Bag of Words](https://arxiv.org/pdf/2001.01941.pdf) (Yao Fu, NeuIPS 2019)
 
+#### Storytelling
+
+[Content Learning with Structure-Aware Writing: A Graph-Infused Dual Conditional Variational Autoencoder for Automatic Storytelling](https://www.aaai.org/AAAI21Papers/AAAI-10130.YuMH.pdf) (Meng-Hsuan Yu, AAAI 2021)
+
 #### Natural Language Processing for Programming Language
 
 [code2seq: Generating sequences from structured representations of code](https://arxiv.org/pdf/1808.01400.pdf) (Uri Alon, ICLR 2019, [code](https://github.com/tech-srl/code2seq))
@@ -1954,7 +1962,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/pdf/1912.04958.pdf) (Tero Karras, 2019, [note](https://blog.csdn.net/lynlindasy/article/details/104495583))
 
-#### Variational Autoencoder
+#### Autoencoder
+
+[Extracting and Composing Robust Features with Denoising Autoencoders](https://www.cs.toronto.edu/~larocheh/publications/icml-2008-denoising-autoencoders.pdf) (Pascal Vincent, ICML 2008)
+
+##### Variational Autoencoder
 
 [Auto-Encoding Variational Bayes](https://arxiv.org/pdf/1312.6114.pdf) (Diederik P. Kingma, ICLR 2014)
 
@@ -2133,6 +2145,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Understanding and Improving Convolutional Neural Networks via Concatenated Rectified Linear Units](https://arxiv.org/pdf/1603.05201v2.pdf) (Wenling Shang, ICML 2016, [note](https://blog.csdn.net/cv_family_z/article/details/52399921))
 
 [Gaussian Error Linear Units (GELUs)](https://arxiv.org/pdf/1606.08415.pdf) (Dan Hendrycks, 2016, [code](https://github.com/hendrycks/GELUs), [note](https://zhuanlan.zhihu.com/p/100175788))
+
+[Categorical Reparameterization with Gumbel-Softmax](https://arxiv.org/pdf/1611.01144) (Eric Jang, ICLR 2017, [note](https://zhuanlan.zhihu.com/p/50065712))
 
 #### Normalization
 
