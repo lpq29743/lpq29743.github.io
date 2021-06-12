@@ -58,6 +58,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Universal Sentence Encoder](https://arxiv.org/pdf/1803.11175.pdf) (Daniel Cer, 2018, [code](https://tfhub.dev/google/universal-sentence-encoder/1), [note](https://zhuanlan.zhihu.com/p/35174235))
 
+[Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks](https://arxiv.org/pdf/1908.10084.pdf) (Nils Reimers, EMNLP 2019)
+
 ##### Contextual Language Model
 
 [Semi-supervised Sequence Learning](https://arxiv.org/pdf/1511.01432.pdf) (Andrew M. Dai, NeuIPS 2015, [note](https://zhuanlan.zhihu.com/p/21313501))
@@ -177,6 +179,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [DocBERT: BERT for Document Classification](https://arxiv.org/pdf/1904.08398.pdf) (Ashutosh Adhikari, 2019, [code](https://github.com/castorini/hedwig))
 
 [Text Classification Using Label Names Only: A Language Model Self-Training Approach](https://arxiv.org/pdf/2010.07245.pdf) (Yu Meng, EMNLP 2020, [code](https://github.com/yumeng5/LOTClass))
+
+[Inductive Topic Variational Graph Auto-Encoder for Text Classification](https://www.aclweb.org/anthology/2021.naacl-main.333.pdf) (Qianqian Xie, NAACL 2021)
 
 ##### Multi-Label Text Classification
 
@@ -1120,6 +1124,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Eliciting Positive Emotion through Affect-Sensitive Dialogue Response Generation: A Neural Network Approach](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewPDFInterstitial/16317/16080) (Nurul Lubis, AAAI 2018)
 
+[Automatic Dialogue Generation with Expressed Emotions](https://www.aclweb.org/anthology/N18-2008.pdf) (Chenyang Huang, NAACL 2018)
+
 [A Syntactically Constrained Bidirectional-Asynchronous Approach for Emotional Conversation Generation](https://www.aclweb.org/anthology/D18-1071.pdf) (Jingyuan Li, EMNLP 2018)
 
 [MOJITALK: Generating Emotional Responses at Scale](https://www.aclweb.org/anthology/P18-1104.pdf) (Xianda Zhou, EMNLP 2018)
@@ -1282,10 +1288,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Machine Reading Comprehension
 
-[BLEU: a Method for Automatic Evaluation of Machine Translation](http://aclweb.org/anthology/P/P02/P02-1040.pdf) (Kishore Papineni, ACL 2002, [note](https://www.jianshu.com/p/320ffec4e99f))
-
-[ROUGE: A Package for Automatic Evaluation of Summaries](http://www.aclweb.org/anthology/W/W04/W04-1013.pdf) (Chin-Yew Lin, 2004)
-
 [Teaching Machines to Read and Comprehend](https://lanl.arxiv.org/pdf/1506.03340.pdf) (Karl Moritz Hermann, NIPS 2015, [code](https://github.com/thomasmesnard/DeepMind-Teaching-Machines-to-Read-and-Comprehend), [note](https://zhuanlan.zhihu.com/p/21343662))
 
 [Text Understanding with the Attention Sum Reader Network](http://www.aclweb.org/anthology/P16-1086) (Rudolf Kadlec, ACL 2016, [code](https://github.com/rkadlec/asreader), [note](https://zhuanlan.zhihu.com/p/21354432))
@@ -1382,7 +1384,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [BERT Representations for Video Question Answering](http://openaccess.thecvf.com/content_WACV_2020/html/Yang_BERT_representations_for_Video_Question_Answering_WACV_2020_paper.html) (Zekun Yang, WACV 2020)
 
-#### Knowledge Graph
+#### Knowledge Representation and Reasoning
 
 ##### Knowledge Base
 
@@ -1397,6 +1399,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning](https://arxiv.org/pdf/1811.00146.pdf) (Maarten Sap, AAAI 2019)
 
 [GenericsKB: A Knowledge Base of Generic Statements](https://arxiv.org/pdf/2005.00660.pdf) (Sumithra Bhakthavatsalam, 2020, [code](https://allenai.org/data/genericskb))
+
+##### Knowledge Base Construction
+
+[COMET : Commonsense Transformers for Automatic Knowledge Graph Construction](https://arxiv.org/pdf/1906.05317.pdf) (Antoine Bosselut, ACL 2019)
 
 ##### Knowledge Graph Embedding and Completion
 
@@ -1439,6 +1445,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Neural Fine-Grained Entity Type Classification with Hierarchy-Aware Loss](http://aclweb.org/anthology/N18-1002) (Peng Xu, NAACL 2018, [code](https://github.com/billy-inn/NFETC))
 
 [Ultra-fine entity typing](https://www.aclweb.org/anthology/P18-1009) (Eunsol Choi, ACL 2018, [note](https://blog.csdn.net/xff1994/article/details/90293957))
+
+##### Causal Knowledge
+
+[Automatic Extraction of Causal Relations from Natural Language Texts: A Comprehensive Survey](https://arxiv.org/pdf/1605.07895.pdf) (Nabiha Asghar, 2016)
+
+[Guided Generation of Cause and Effect](https://www.ijcai.org/Proceedings/2020/0502.pdf) (Zhongyang Li, IJCAI 2020)
 
 ##### Knowledge Graph Application
 
@@ -1529,6 +1541,38 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [The GEM Benchmark: Natural Language Generation, its Evaluation and Metrics](https://arxiv.org/pdf/2102.01672.pdf) (Sebastian Gehrmann, 2021)
 
 [Neural Text Generation with Part-of-Speech Guided Softmax](https://arxiv.org/pdf/2105.03641.pdf) (Zhixian Yang, 2021)
+
+##### Automatic Metric
+
+[Binary Codes Capable of Correcting Deletions, Insertions and Reversals](https://nymity.ch/sybilhunting/pdf/Levenshtein1966a.pdf) (VI Levenshtein, 1966)
+
+[A New Quantitative Quality Measure for Machine Translation Systems](https://www.aclweb.org/anthology/C92-2067.pdf) (Keh-Yih Su, COLING 1992)
+
+[An Evaluation Tool for Machine Translation: Fast Evaluation for MT Research](http://www.lrec-conf.org/proceedings/lrec2000/pdf/278.pdf) (Sonja Nießen, LREC 2000)
+
+[Using Multiple Edit Distances to Automatically Rank Machine Translation Output](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.590.6755&rep=rep1&type=pdf) (Yasuhiro Akiba, 2001)
+
+[BLEU: a Method for Automatic Evaluation of Machine Translation](http://aclweb.org/anthology/P/P02/P02-1040.pdf) (Kishore Papineni, ACL 2002, [note](https://www.jianshu.com/p/320ffec4e99f))
+
+[Automatic Evaluation of Machine Translation Quality using N-gram CoOccurrence Statistics](https://dl.acm.org/doi/abs/10.5555/1289189.1289273) (George R Doddington, 2002)
+
+[A Novel String-to-String Distance Measure with Applications to Machine Translation Evaluation](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.4.522&rep=rep1&type=pdf) (Gregor Leusch, 2003)
+
+[ROUGE: A Package for Automatic Evaluation of Summaries](http://www.aclweb.org/anthology/W/W04/W04-1013.pdf) (Chin-Yew Lin, 2004)
+
+[METEOR: An Automatic Metric for MT Evaluation with Improved Correlation with Human Judgments](https://www.aclweb.org/anthology/W05-0909.pdf) (Satanjeev Banerjee, ACL 2005 Workshop)
+
+[∆BLEU: A Discriminative Metric for Generation Tasks with Intrinsically Diverse Targets](https://www.aclweb.org/anthology/P15-2073.pdf) (Michel Galley, ACL 2015)
+
+[Sentence Mover’s Similarity: Automatic Evaluation for Multi-Sentence Texts](https://www.aclweb.org/anthology/P19-1264.pdf) (Elizabeth Clark, ACL 2019)
+
+[MoverScore: Text Generation Evaluating with Contextualized Embeddings and Earth Mover Distance](https://arxiv.org/pdf/1909.02622.pdf) (Wei Zhao, EMNLP 2019)
+
+[BERTScore: Evaluating Text Generation with BERT](https://arxiv.org/pdf/1904.09675.pdf) (Tianyi Zhang, ICLR 2020)
+
+[BLEURT: Learning Robust Metrics for Text Generation](https://arxiv.org/pdf/2004.04696.pdf) (Thibault Sellam, ACL 2020)
+
+[Evaluation of Text Generation: A Survey](https://arxiv.org/pdf/2006.14799.pdf) (Asli Celikyilmaz, 2020)
 
 ##### Sequence to Sequence
 
@@ -1976,6 +2020,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Improved Variational Inference with Inverse Autoregressive Flow](https://arxiv.org/pdf/1606.04934.pdf) (Diederik P. Kingma, NeuIPS 2016)
 
+[Variational Graph AutoEncoders](https://arxiv.org/pdf/1611.07308.pdf) (Thomas N. Kipf, NeuIPS 2016 Workshop)
+
 [beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework](https://openreview.net/pdf?id=Sy2fzU9gl) (Irina Higgins, ICLR 2017)
 
 [Deep Variational Information Bottleneck](https://arxiv.org/abs/1612.00410) (Alexander A. Alemi, ICLR 2017)
@@ -1988,9 +2034,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Disentangling by Factorising](http://proceedings.mlr.press/v80/kim18b/kim18b.pdf) (Hyunjik Kim, ICML 2018)
 
+[Adversarially Regularized Graph Autoencoder for Graph Embedding](https://www.ijcai.org/proceedings/2018/0362.pdf) (Shirui Pan, IJCAI 2018)
+
 [Isolating Sources of Disentanglement in VAEs](https://arxiv.org/pdf/1802.04942.pdf) (Ricky T. Q. Chen, NeuIPS 2018)
 
 [Learning Disentangled Joint Continuous and Discrete Representations](https://arxiv.org/pdf/1804.00104.pdf) (Emilien Dupont, NeuIPS 2018)
+
+[GraphVAE: Towards Generation of Small Graphs Using Variational Autoencoders](https://arxiv.org/pdf/1802.03480.pdf) (Martin Simonovsky, 2018)
 
 [Structured Disentangled Representations](http://proceedings.mlr.press/v89/esmaeili19a/esmaeili19a.pdf) (Babak Esmaeili, AISTATS 2019)
 
@@ -2005,6 +2055,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [The Graph Neural Network Model](http://persagen.com/files/misc/scarselli2009graph.pdf) (Franco Scarselli, 2009, [note](https://zhuanlan.zhihu.com/p/76290138))
 
 [Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/pdf/1609.02907.pdf) (Thomas N. Kipf, ICLR 2017, [code](https://github.com/tkipf/gcn), [note](https://zhuanlan.zhihu.com/p/35630785))
+
+[A Comprehensive Survey on Graph Neural Networks](https://arxiv.org/pdf/1901.00596.pdf) (Zonghan Wu, TNNLS 2019)
 
 #### Capsule Network
 
