@@ -104,6 +104,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Language Models are Few-Shot Learners](https://arxiv.org/pdf/2005.14165.pdf) (Tom B. Brown, 2020, [code](https://github.com/openai/gpt-3), [note](https://zhuanlan.zhihu.com/p/144764546))
 
+[Are Pre-trained Convolutions Better than Pre-trained Transformers?](https://arxiv.org/pdf/2105.03322.pdf) (Yi Tay, ACL 2021)
+
 ##### Knowledge-Enriched Language Model
 
 [ERNIE: Enhanced Language Representation with Informative Entities](https://arxiv.org/pdf/1905.07129.pdf) (Zhengyan Zhang, ACL 2019, [code](https://github.com/PaddlePaddle/LARK/tree/develop/ERNIE), [note](https://zhuanlan.zhihu.com/p/87008569))
@@ -834,6 +836,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Understanding Pre-trained BERT for Aspect-based Sentiment Analysis](https://arxiv.org/pdf/2011.00169.pdf) (Hu Xu, COLING 2020, [code](https://github.com/howardhsu/BERT-for-RRC-ABSA))
 
+[A Unified Generative Framework for Aspect-Based Sentiment Analysis](https://arxiv.org/pdf/2106.04300.pdf) (Hang Yan, ACL 2021)
+
 ##### Emotion Cause Detection
 
 [Emotion Cause Events: Corpus Construction and Analysis](https://www.researchgate.net/profile/Chu-Ren_Huang/publication/220746716_Emotion_Cause_Events_Corpus_Construction_and_Analysis/links/0912f508ff080541ac000000/Emotion-Cause-Events-Corpus-Construction-a) (Sophia Yat Mei Lee, LREC 2010)
@@ -863,6 +867,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [RTHN: A RNN-Transformer Hierarchical Network for Emotion Cause Extraction](https://arxiv.org/pdf/1906.01236.pdf) (Rui Xia, IJCAI 2019, [code](https://github.com/NUSTM/RTHN))
 
 [A Knowledge Regularized Hierarchical Approach for Emotion Cause Analysis](https://www.aclweb.org/anthology/D19-1563.pdf) (Chuang Fan, EMNLP 2019)
+
+[Position Bias Mitigation: A Knowledge-Aware Graph Model for Emotion Cause Extraction](https://arxiv.org/pdf/2106.03518.pdf) (Hanqi Yan, ACL 2021, [code](https://github.com/hanqi-qi/Position-Bias-Mitigation-in-Emotion-Cause-Analysis))
 
 ##### Emotion Cause Analysis
 
@@ -1079,6 +1085,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Pretraining Methods for Dialog Context Representation Learning](https://arxiv.org/pdf/1906.00414.pdf) (Shikib Mehri, ACL 2019, [note](https://zhuanlan.zhihu.com/p/82001834))
 
 [Incremental Transformer with Deliberation Decoder for Document Grounded Conversations](https://arxiv.org/pdf/1907.08854.pdf) (Zekang Li, ACL 2019)
+
+[Improving Neural Conversational Models with Entropy-Based Data Filtering](https://www.aclweb.org/anthology/P19-1567.pdf) (Richard Csaky, ACL 2019, [code](https://github.com/ricsinaruto/dialog-eval))
 
 [ReCoSa: Detecting the Relevant Contexts with Self-Attention for Multi-turn Dialogue Generation](https://arxiv.org/pdf/1907.05339.pdf) (Hainan Zhang, ACL 2019, [code](https://github.com/zhanghainan/ReCoSa), [note](https://zhuanlan.zhihu.com/p/74229505))
 
@@ -1664,7 +1672,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Latent Variable Model for Multi-modal Translation](https://www.aclweb.org/anthology/P19-1642.pdf) (Iacer Calixto, ACL 2019)
 
-[Distilling Translations with Visual Awareness](https://www.aclweb.org/anthology/P19-1653.pdf) (ACL 2019)
+[Distilling Translations with Visual Awareness](https://www.aclweb.org/anthology/P19-1653.pdf) (Julia Ive, ACL 2019)
+
+[Reducing Word Omission Errors in Neural Machine Translation: A Contrastive Learning Approach](https://www.aclweb.org/anthology/P19-1623.pdf) (Zonghan Yang, ACL 2019)
 
 [Cross-Lingual Pre-Training Based Transfer for Zero-Shot Neural Machine Translation](https://www.aaai.org/ojs/index.php/AAAI/article/view/5341) (Baijun Ji, AAAI 2020)
 
@@ -1735,6 +1745,50 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Learning Gender-Neutral Word Embeddings](https://arxiv.org/pdf/1809.01496.pdf) (Jieyu Zhao, EMNLP 2018)
 
 ### Computer Vision
+
+#### Feature Detector and Descriptor
+
+[Towards Automatic Visual Obstacle Avoidance](https://philpapers.org/rec/MORTTA-3) (Hans P. Moravec, 1977)
+
+[A Computational Approach to Edge Detection](https://ieeexplore.ieee.org/document/4767851) (John Canny, TPAMI 1986)
+
+[A Combined Corner and Edge Detector](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.434.4816&rep=rep1&type=pdf) (Chris Harris, 1988)
+
+[Scale-Space and Edge Detection Using Anisotropic Diffusion](https://ieeexplore.ieee.org/document/56205) (Pietro Perona, TPAMI 1990)
+
+[SUSAN—A New Approach to Low Level Image Processing](https://link.springer.com/article/10.1023/A:1007963824710) (Stephen M. Smith, 1997)
+
+[Object Recognition from Local Scale-Invariant Features](https://www.cs.ubc.ca/~lowe/papers/iccv99.pdf) (David G. Lowe, ICCV 1999)
+
+[Multiresolution Gray Scale and Rotation Invariant Texture Classification with Local Binary Patterns](http://vision.stanford.edu/teaching/cs231b_spring1415/papers/lbp.pdf) (Timo Ojala, TPAMI 2002)
+
+[Robust Wide Baseline Stereo from Maximally Stable Extremal Regions](https://www.sciencedirect.com/science/article/pii/S0262885604000435) (Jiri Matas, BMVC 2002)
+
+[Image Registration Methods: A Survey](https://www.sciencedirect.com/science/article/pii/S0262885603001379) (Barbara Zitova, 2003)
+
+[Distinctive Image Features from Scale-Invariant Keypoints](https://people.eecs.berkeley.edu/~malik/cs294/lowe-ijcv04.pdf) (David G. Lowe, IJCV 2004)
+
+[A Comparison of Affine Region Detectors](https://www.robots.ox.ac.uk/~vgg/research/affine/det_eval_files/vibes_ijcv2004.pdf) (Krystian Mikolajczyk, IJCV 2004)
+
+[A Performance Evaluation of Local Descriptors](https://www.robots.ox.ac.uk/~vgg/research/affine/det_eval_files/mikolajczyk_pami2004.pdf) (Krystian Mikolajczyk, TPAMI 2005)
+
+[Histograms of Oriented Gradients for Human Detection](https://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf) (Navneet Dalal, CVPR 2005)
+
+[Machine Learning for High-Speed Corner Detection](https://link.springer.com/chapter/10.1007/11744023_34) (Edward Rosten, ECCV 2006)
+
+[SURF: Speeded Up Robust Features](https://link.springer.com/chapter/10.1007/11744023_32) (Herbert Bay, ECCV 2006)
+
+[CenSurE: Center Surround Extremas for Realtime Feature Detection and Matching](https://link.springer.com/chapter/10.1007/978-3-540-88693-8_8) (Motilal Agrawal, ECCV 2008)
+
+[Local Invariant Feature Detectors: A Survey](https://homes.esat.kuleuven.be/~tuytelaa/FT_survey_interestpoints08.pdf) (Tinne Tuytelaars, 2008)
+
+[Discriminative Learning of Local Image Descriptors](http://matthewalunbrown.com/papers/pami2010.pdf) (Matthew Brown, TPAMI 2010)
+
+[DAISY: An Efficient Dense Descriptor Applied to Wide-Baseline Stereo](https://ieeexplore.ieee.org/document/4815264) (Engin Tola, TPAMI 2010)
+
+[ORB: An efficient alternative to SIFT or SURF](https://ieeexplore.ieee.org/document/6126544) (Ethan Rublee, ICCV 2011)
+
+[LIFT: Learned Invariant Feature Transform](https://arxiv.org/pdf/1603.09114.pdf) (Kwang Moo Yi, ECCV 2016)
 
 #### Object Detection
 
@@ -1846,40 +1900,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Occam's Razor](https://users.soe.ucsc.edu/~manfred/pubs/J9.pdf) (Anselm Blumer, 1987, [note](https://zh.wikipedia.org/zh-hans/%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80))
 
-#### Zero-Shot Learning
-
-[Zero-Shot Learning with Semantic Output Codes](http://www.cs.cmu.edu/afs/cs/project/theo-73/www/papers/zero-shot-learning.pdf) (Mark Palatucci, NeuIPS 2009, [note](https://zhuanlan.zhihu.com/p/34076480))
-
-[Label-Embedding for Attribute-Based Classification](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=94AE59377DBC233D6EE1808F16B505CB?doi=10.1.1.371.9746&rep=rep1&type=pdf) (Zeynep Akata, CVPR 2013, [note](https://blog.csdn.net/hanss2/article/details/80537356))
-
-[Zero-Shot Recognition using Dual Visual-Semantic Mapping Paths](https://arxiv.org/pdf/1703.05002.pdf) (Yanan Li, CVPR 2017, [note](https://zhuanlan.zhihu.com/p/29392845))
-
-#### Few-Shot Learning
-
-[Learning from one example through shared densities on transform](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.3.9021&rep=rep1&type=pdf) (Erik G Miller, CVPR 2000)
-
-[One-Shot Learning of Object Categories](http://vision.stanford.edu/documents/Fei-FeiFergusPerona2006.pdf) (Li Fei-Fei, PAMI 2006, [note](https://blog.csdn.net/sinat_36594453/article/details/89817314))
-
-[Siamese neural networks for one-shot image recognition](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) (Gregory Koch, ICML 2015 Workshop, [note](https://zhuanlan.zhihu.com/p/86283037))
-
-[Matching Networks for One Shot Learning](https://arxiv.org/pdf/1606.04080.pdf) (Oriol Vinyals, NeuIPS 2016, [note](https://zhuanlan.zhihu.com/p/32101204))
-
-#### Meta Learning
-
-[Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks](https://arxiv.org/pdf/1703.03400.pdf) (Chelsea Finn, ICML 2017, [code](https://github.com/cbfinn/maml?utm_source=catalyzex.com), [note](https://zhuanlan.zhihu.com/p/57864886))
-
-[Meta-Learning Representations for Continual Learning](https://arxiv.org/pdf/1905.12588.pdf) (Khurram Javed, NIPS 2019, [code](https://github.com/khurramjaved96/mrcl?utm_source=catalyzex.com))
-
-[Learning to Continually Learn](https://arxiv.org/pdf/2002.09571.pdf) (Shawn Beaulieu, ECAI 2020, [code](https://github.com/uvm-neurobotics-lab/ANML?utm_source=catalyzex.com))
-
-#### Curriculum Learning
-
-[Curriculum Learning](https://mila.quebec/wp-content/uploads/2019/08/2009_curriculum_icml.pdf) (Yoshua Bengio, ICML 2009, [note](https://zhuanlan.zhihu.com/p/114825029))
-
-[Self-Paced Curriculum Learning](https://ojs.aaai.org/index.php/AAAI/article/view/9608) (Lu Jiang, AAAI 2015)
-
-[Automated Curriculum Learning for Neural Networks](http://proceedings.mlr.press/v70/graves17a/graves17a.pdf) (Alex Graves, ICML 2017)
-
 #### Imbalanced Data
 
 [SMOTE: Synthetic Minority Over-sampling Technique](https://arxiv.org/pdf/1106.1813.pdf) (Nitesh V. Chawla, 2002, [code](https://github.com/scikit-learn-contrib/imbalanced-learn), [note](https://blog.csdn.net/shine19930820/article/details/54143241))
@@ -1914,39 +1934,77 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ### Deep Learning
 
+#### Artificial Neural Network
+
+[A logical Calculus of Ideas Immanent in Nervous Activity](https://link.springer.com/article/10.1007%252FBF02478259) (Warren McCulloch, 1943)
+
+[The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.335.3398&rep=rep1&type=pdf) (Frank Rosenblatt, 1958)
+
+[Principles of Neurodynamics: Perceptrons and the Theory of Brain Mechanisms](https://babel.hathitrust.org/cgi/pt?id=mdp.39015039846566&view=1up&seq=8) (Frank Rosenblatt, 1961)
+
+[Phoneme Recognition Using Time-Delay Neural Networks](https://isl.anthropomatik.kit.edu/downloads/PhonemeRecognitionUsingTimeDelayNeuralNetworks_NEU(1).pdf) (Alexander Waibel, 1989)
+
 #### Convolutional Neural Network
 
-[Backpropagation applied to handwritten zip code recognition](https://www.ics.uci.edu/~welling/teaching/273ASpring09/lecun-89e.pdf) (Yann LeCun, 1989, [note](https://blog.csdn.net/u012679707/article/details/80738633))
+[Receptive Fields, Binocular Interaction and Functional Architecture in the Cat's Visual Cortex](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1359523/) (David Hunter Hubel, 1962)
+
+[Backpropagation Applied to Handwritten Zip Code Recognition](https://www.ics.uci.edu/~welling/teaching/273ASpring09/lecun-89e.pdf) (Yann LeCun, 1989, [note](https://blog.csdn.net/u012679707/article/details/80738633))
 
 [Gradient-Based Learning Applied to Document Recognition](http://vision.stanford.edu/cs598_spring07/papers/Lecun98.pdf) (Yann LeCun, 1998, [note](https://blog.csdn.net/sunshine_010/article/details/79876255))
 
 [Notes on Convolutional Neural Networks](http://202.116.81.74/cache/7/03/cogprints.org/036a03bc6027afc65c14907d0a1fae73/cnn_tutorial.pdf) (Jake Bouvrie, 2006, [note](https://blog.csdn.net/langb2014/article/details/48470181))
 
-[ImageNet Classification with Deep Convolutional Neural Networks](https://www.nvidia.cn/content/tesla/pdf/machine-learning/imagenet-classification-with-deep-convolutional-nn.pdf) (Alex Krizhevsky, NIPS 2012, [note](https://zhuanlan.zhihu.com/p/20324656))
+[ImageNet Classification with Deep Convolutional Neural Networks](https://www.nvidia.cn/content/tesla/pdf/machine-learning/imagenet-classification-with-deep-convolutional-nn.pdf) (Alex Krizhevsky, NeuIPS 2012, [note](https://zhuanlan.zhihu.com/p/20324656))
 
-[Visualizing and Understanding Convolutional Networks](https://cs.nyu.edu/~fergus/papers/zeilerECCV2014.pdf) (Matthew D. Zeiler, 2014, [note](https://www.zybuluo.com/lutingting/note/459569))
+[Simplifying ConvNets for Fast Learning](https://liris.cnrs.fr/Documents/Liris-5659.pdf) (Franck Mamalet, 2012)
+
+[Visualizing and Understanding Convolutional Networks](https://cs.nyu.edu/~fergus/papers/zeilerECCV2014.pdf) (Matthew D. Zeiler, ECCV 2014, [note](https://www.zybuluo.com/lutingting/note/459569))
+
+[Rigid-Motion Scattering for Texture Classification](https://arxiv.org/pdf/1403.1687.pdf) (Laurent Sifre, 2014)
 
 [Going Deeper with Convolutions](https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf) (Christian Szegedy, CVPR 2015, [note](https://blog.csdn.net/lhanchao/article/details/55804968))
 
 [Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/pdf/1409.1556.pdf) (Karen Simonyan, ICLR 2015, [note](https://zhuanlan.zhihu.com/p/32853559))
 
-[Deep Residual Learning for Image Recognition](https://x-algo.cn/wp-content/uploads/2016/12/residual.pdf) (Kaiming He, 2015, [note](https://zhuanlan.zhihu.com/p/47199669))
-
 [Highway Networks](http://de.arxiv.org/pdf/1505.00387) (Rupesh Kumar Srivastava, 2015, [note](https://zhuanlan.zhihu.com/p/38130339))
 
 [Multi-Scale Context Aggregation by Dilated Convolutions](https://arxiv.org/pdf/1511.07122.pdf) (Fisher Yu, ICLR 2016, [code](https://github.com/iesl/dilated-cnn-ner), [note](https://www.cnblogs.com/fourmi/p/10049998.html))
 
+[Deep Residual Learning for Image Recognition](https://x-algo.cn/wp-content/uploads/2016/12/residual.pdf) (Kaiming He, CVPR 2016, [note](https://zhuanlan.zhihu.com/p/47199669))
+
 [Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/pdf/1512.00567.pdf) (Christian Szegedy, CVPR 2016, [code](https://github.com/pytorch/vision?utm_source=catalyzex.com), [note](https://zhuanlan.zhihu.com/p/50751422))
 
+[Deep Networks with Stochastic Depth](https://arxiv.org/pdf/1603.09382.pdf) (Gao Huang, ECCV 2016)
+
+[Resnet in Resnet: Generalizing Residual Architectures](https://arxiv.org/pdf/1603.08029.pdf) (Sasha Targ, ICLR 2016 Workshop)
+
+[Wide Residual Networks](https://arxiv.org/pdf/1605.07146.pdf) (Sergey Zagoruyko, BMVC 2016)
+
+[Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning](https://arxiv.org/pdf/1602.07261.pdf) (Christian Szegedy, AAAI 2017)
+
 [Densely Connected Convolutional Networks](http://www.cs.cmu.edu/~jeanoh/16-785/papers/huang-cvpr2017-densenet.pdf) (Gao Huang, CVPR 2017, [code](https://github.com/liuzhuang13/DenseNet))
+
+[Aggregated Residual Transformations for Deep Neural Networks](https://arxiv.org/pdf/1611.05431.pdf) (Saining Xie, CVPR 2017)
+
+[Xception: Deep Learning with Depthwise Separable Convolutions](https://arxiv.org/pdf/1610.02357.pdf) (Francois Chollet, CVPR 2017)
+
+[Deep Roots: Improving CNN Efficiency with Hierarchical Filter Groups](https://openaccess.thecvf.com/content_cvpr_2017/papers/Ioannou_Deep_Roots_Improving_CVPR_2017_paper.pdf) (Yani Ioannou, CVPR 2017)
+
+[Factorized Convolutional Neural Networks](https://openaccess.thecvf.com/content_ICCV_2017_workshops/papers/w10/Wang_Factorized_Convolutional_Neural_ICCV_2017_paper.pdf) (Min Wang, ICCV 2017)
+
+[Deformable Convolutional Networks](https://openaccess.thecvf.com/content_ICCV_2017/papers/Dai_Deformable_Convolutional_Networks_ICCV_2017_paper.pdf) (Jifeng Dai, ICCV 2017)
+
+[Convolution with Logarithmic Filter Groups for Efficient Shallow CNN](https://arxiv.org/pdf/1707.09855.pdf) (Tae Kwan Lee, 2017)
+
+[Squeeze-and-Excitation Networks](https://openaccess.thecvf.com/content_cvpr_2018/papers/Hu_Squeeze-and-Excitation_Networks_CVPR_2018_paper.pdf) (Jie Hu, CVPR 2018)
 
 [Tree-CNN: A Deep Convolutional Neural Network for Lifelong Learning](https://arxiv.org/pdf/1802.05800.pdf) (Deboleena Roy, 2018, [code](https://github.com/magical2world/tensorflow-Tree-CNN), [note](https://blog.csdn.net/qq_24305433/article/details/79856672))
 
 [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/pdf/1905.11946.pdf) (Mingxing Tan, ICML 2019, [code](https://github.com/qubvel/efficientnet), [note](https://zhuanlan.zhihu.com/p/70369784))
 
-[EfficientNetV2: Smaller Models and Faster Training](https://arxiv.org/pdf/2104.00298.pdf) (Mingxing Tan, 2021)
+[HBONet: Harmonious Bottleneck on Two Orthogonal Dimensions](https://arxiv.org/pdf/1908.03888.pdf) (Duo Li, ICCV 2019, [code](https://github.com/d-li14/HBONet))
 
-[Are Pre-trained Convolutions Better than Pre-trained Transformers?](https://arxiv.org/pdf/2105.03322.pdf) (Yi Tay, ACL 2021)
+[EfficientNetV2: Smaller Models and Faster Training](https://arxiv.org/pdf/2104.00298.pdf) (Mingxing Tan, 2021)
 
 #### Recurrent Neural Network
 
@@ -1970,7 +2028,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/pdf/1511.06434.pdf) (Alec Radford, ICLR 2016, [note](https://www.cnblogs.com/wangxiaocvpr/p/5965434.html))
 
-[NIPS 2016 Tutorial: Generative Adversarial Networks](https://arxiv.org/pdf/1701.00160.pdf) (Ian Goodfellow, NIPS 2016, [note](https://blog.csdn.net/cskywit/article/details/86612142))
+[NIPS 2016 Tutorial: Generative Adversarial Networks](https://arxiv.org/pdf/1701.00160.pdf) (Ian Goodfellow, NeuIPS 2016, [note](https://blog.csdn.net/cskywit/article/details/86612142))
 
 [Conditional Image Synthesis with Auxiliary Classifier GANs](https://arxiv.org/pdf/1610.09585.pdf) (Augustus Odena, 2016, [note](https://blog.csdn.net/qq_24477135/article/details/85758496))
 
@@ -2212,17 +2270,137 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Group Normalization](https://arxiv.org/pdf/1803.08494.pdf) (Yuxin Wu, 2018, [note](https://zhuanlan.zhihu.com/p/35005794))
 
-#### Neural Architecture Search
+#### Reinforcement Learning
+
+[A Brief Survey of Deep Reinforcement Learning](https://arxiv.org/pdf/1708.05866.pdf) (Kai Arulkumaran, 2017, [note](https://blog.csdn.net/KyrieHe/article/details/79504481))
+
+[Deep Reinforcement Learning: An Overview](https://arxiv.org/pdf/1701.07274.pdf) (Yuxi Li, 2017, [note](https://zhuanlan.zhihu.com/p/31595581))
+
+##### Reinforcement Learning Application
+
+[Playing Atari with Deep Reinforcement Learning](https://arxiv.org/pdf/1312.5602.pdf) (Volodymyr Mnih, 2013, [note](https://zhuanlan.zhihu.com/p/33962867))
+
+[Mastering the Game of Go with Deep Neural Networks and Tree Search](http://www.worlduc.com/FileSystem/1/134755/1585588/ac5b78a1934c49bb93a1f3ad09d96e46.pdf) (David Silver, Nature 2016)
+
+[Mastering the Game of Go without Human Knowledge](https://skatgame.net/mburo/ps/alphago-zero.pdf) (David Silver, Nature 2017, [code](https://github.com/gcp/leela-zero), [note](https://zhuanlan.zhihu.com/p/101669366))
+
+[Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm](https://arxiv.org/pdf/1712.01815.pdf) (David Silver, 2017)
+
+#### Contrastive Learning
+
+[Dimensionality Reduction by Learning an Invariant Mapping](http://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf) (Raia Hadsell, CVPR 2006)
+
+[Improved Deep Metric Learning with Multi-class N-pair Loss Objective](https://papers.nips.cc/paper/2016/file/6b180037abbebea991d8b1232f8a8ca9-Paper.pdf) (Kihyuk Sohn, NeuIPS 2016)
+
+[Representation Learning with Contrastive Predictive Coding](https://arxiv.org/pdf/1807.03748.pdf) (Aaron van den Oord, 2018)
+
+[Learning Deep Representations by Mutual Information Estimation and Maximization](https://arxiv.org/pdf/1808.06670.pdf) (R Devon Hjelm, ICLR 2019)
+
+[Learning Representations by Maximizing Mutual Information Across Views](https://arxiv.org/pdf/1906.00910.pdf) (Philip Bachman, 2019, [code](https://github.com/Philip-Bachman/amdim-public))
+
+[Contrastive Multiview Coding](https://arxiv.org/pdf/1906.05849.pdf) (Yonglong Tian, 2019)
+
+[Momentum Contrast for Unsupervised Visual Representation Learning](https://arxiv.org/pdf/1911.05722.pdf) (Kaiming He, CVPR 2020)
+
+[A Simple Framework for Contrastive Learning of Visual Representations](https://arxiv.org/pdf/2002.05709.pdf) (Ting Chen, ICML 2020)
+
+[Unsupervised Learning of Visual Features by Contrasting Cluster Assignments](https://arxiv.org/pdf/2006.09882.pdf) (Mathilde Caron, NeuIPS 2020)
+
+[Improved Baselines with Momentum Contrastive Learning](https://arxiv.org/pdf/2003.04297.pdf) (Xinlei Chen, 2020)
+
+[Exploring Simple Siamese Representation Learning](https://arxiv.org/pdf/2011.10566.pdf) (Xinlei Chen, 2020, [note](https://zhuanlan.zhihu.com/p/331678807))
+
+[Bootstrap Your Own Latent A New Approach to Self-Supervised Learning](https://arxiv.org/pdf/2006.07733.pdf) (Jean-Bastien Gril, 2020, [code](https://github.com/lucidrains/byol-pytorch))
+
+[An Empirical Study of Training Self-Supervised Vision Transformers](https://arxiv.org/pdf/2104.02057.pdf) (Xinlei Chen, 2021)
+
+#### Incremental/Continual/Lifelong Learning
+
+[iCaRL: Incremental Classifier and Representation Learning](https://openaccess.thecvf.com/content_cvpr_2017/papers/Rebuffi_iCaRL_Incremental_Classifier_CVPR_2017_paper.pdf) (Sylvestre-Alvise Rebuffi, CVPR 2017)
+
+[Gradient Episodic Memory for Continual Learning](https://arxiv.org/abs/1706.08840) (David Lopez-Paz, NeuIPS 2017)
+
+[Continual Learning with Deep Generative Replay](https://arxiv.org/pdf/1705.08690.pdf) (Hanul Shin, NeuIPS 2017)
+
+[End-to-End Incremental Learning](https://openaccess.thecvf.com/content_ECCV_2018/papers/Francisco_M._Castro_End-to-End_Incremental_Learning_ECCV_2018_paper.pdf) (Francisco M. Castro, ECCV 2018)
+
+[Lifelong Machine Learning](https://www.cs.uic.edu/~liub/lifelong-machine-learning-draft.pdf) (Zhiyuan Chen, 2018)
+
+[Large Scale Incremental Learning](http://openaccess.thecvf.com/content_CVPR_2019/html/Wu_Large_Scale_Incremental_Learning_CVPR_2019_paper.html) (Yue Wu, CVPR 2019)
+
+[Learning a Unified Classifier Incrementally via Rebalancing](http://openaccess.thecvf.com/content_CVPR_2019/html/Hou_Learning_a_Unified_Classifier_Incrementally_via_Rebalancing_CVPR_2019_paper.html) (Saihui Hou, CVPR 2019)
+
+[Continual Lifelong Learning with Neural Networks: A Review](https://www.sciencedirect.com/science/article/pii/S0893608019300231) (German I. Parisi, 2019)
+
+[Mnemonics Training: Multi-Class Incremental Learning without Forgetting](https://openaccess.thecvf.com/content_CVPR_2020/papers/Liu_Mnemonics_Training_Multi-Class_Incremental_Learning_Without_Forgetting_CVPR_2020_paper.pdf) (Yaoyao Liu, CVPR 2020)
+
+#### Zero-Shot Learning
+
+[Zero-Shot Learning with Semantic Output Codes](http://www.cs.cmu.edu/afs/cs/project/theo-73/www/papers/zero-shot-learning.pdf) (Mark Palatucci, NeuIPS 2009, [note](https://zhuanlan.zhihu.com/p/34076480))
+
+[Label-Embedding for Attribute-Based Classification](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=94AE59377DBC233D6EE1808F16B505CB?doi=10.1.1.371.9746&rep=rep1&type=pdf) (Zeynep Akata, CVPR 2013, [note](https://blog.csdn.net/hanss2/article/details/80537356))
+
+[Zero-Shot Recognition using Dual Visual-Semantic Mapping Paths](https://arxiv.org/pdf/1703.05002.pdf) (Yanan Li, CVPR 2017, [note](https://zhuanlan.zhihu.com/p/29392845))
+
+#### Few-Shot Learning
+
+[Learning from one example through shared densities on transform](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.3.9021&rep=rep1&type=pdf) (Erik G Miller, CVPR 2000)
+
+[One-Shot Learning of Object Categories](http://vision.stanford.edu/documents/Fei-FeiFergusPerona2006.pdf) (Li Fei-Fei, PAMI 2006, [note](https://blog.csdn.net/sinat_36594453/article/details/89817314))
+
+[Siamese neural networks for one-shot image recognition](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) (Gregory Koch, ICML 2015 Workshop, [note](https://zhuanlan.zhihu.com/p/86283037))
+
+[Matching Networks for One Shot Learning](https://arxiv.org/pdf/1606.04080.pdf) (Oriol Vinyals, NeuIPS 2016, [note](https://zhuanlan.zhihu.com/p/32101204))
+
+#### Meta Learning
+
+[Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks](https://arxiv.org/pdf/1703.03400.pdf) (Chelsea Finn, ICML 2017, [code](https://github.com/cbfinn/maml?utm_source=catalyzex.com), [note](https://zhuanlan.zhihu.com/p/57864886))
+
+[Meta-Learning Representations for Continual Learning](https://arxiv.org/pdf/1905.12588.pdf) (Khurram Javed, NIPS 2019, [code](https://github.com/khurramjaved96/mrcl?utm_source=catalyzex.com))
+
+[Learning to Continually Learn](https://arxiv.org/pdf/2002.09571.pdf) (Shawn Beaulieu, ECAI 2020, [code](https://github.com/uvm-neurobotics-lab/ANML?utm_source=catalyzex.com))
+
+#### Curriculum Learning
+
+[Curriculum Learning](https://mila.quebec/wp-content/uploads/2019/08/2009_curriculum_icml.pdf) (Yoshua Bengio, ICML 2009, [note](https://zhuanlan.zhihu.com/p/114825029))
+
+[Self-Paced Curriculum Learning](https://ojs.aaai.org/index.php/AAAI/article/view/9608) (Lu Jiang, AAAI 2015)
+
+[Automated Curriculum Learning for Neural Networks](http://proceedings.mlr.press/v70/graves17a/graves17a.pdf) (Alex Graves, ICML 2017)
+
+#### Model Compression and Acceleration
+
+[A Survey of Model Compression and Acceleration for Deep Neural Networks](https://arxiv.org/pdf/1710.09282.pdf) (Yu Cheng, 2017)
+
+##### Parameter Pruning and Quantization
+
+[Rethinking the Value of Network Pruning](https://arxiv.org/pdf/1810.05270.pdf) (Zhuang Liu, ICLR 2019, [code](https://github.com/Eric-mingjie/rethinking-network-pruning), [note](https://xmfbit.github.io/2018/10/22/paper-rethinking-the-value-of-network-pruning/))
+
+##### Human-Designed Model
+
+[MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861.pdf) (Andrew Howard, 2017)
+
+[MobileNetV2: Inverted Residuals and Linear Bottlenecks](https://arxiv.org/pdf/1801.04381.pdf) (Mark Sandler, CVPR 2018, [code](https://github.com/pytorch/vision?utm_source=catalyzex.com))
+
+[ShuffleNet: An Extremely Efficient Convolutional Neural Network for Mobile](https://openaccess.thecvf.com/content_cvpr_2018/papers/Zhang_ShuffleNet_An_Extremely_CVPR_2018_paper.pdf) (Xiangyu Zhang, CVPR 2018)
+
+[ShuffleNet V2: Practical Guidelines for Efficient CNN Architecture Design](https://openaccess.thecvf.com/content_ECCV_2018/papers/Ningning_Light-weight_CNN_Architecture_ECCV_2018_paper.pdf) (Ningning Ma, ECCV 2018)
+
+[GhostNet: More Features from Cheap Operations](https://arxiv.org/pdf/1911.11907.pdf) (Kai Han, CVPR 2020)
+
+##### Knowledge Distillation
 
 [Distilling the Knowledge in a Neural Network](https://arxiv.org/pdf/1503.02531.pdf) (Geoffrey Hinton, NeuIPS 2015, [note](https://xmfbit.github.io/2018/06/07/knowledge-distilling/))
 
-[MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861.pdf) (Andrew Howard, 2017)
+[Designing Network Design Spaces](https://arxiv.org/pdf/2003.13678.pdf) (Ilija Radosavovic, CVPR 2020)
+
+[Knowledge Distillation: A Survey](https://link.springer.com/content/pdf/10.1007/s11263-021-01453-z.pdf) (Jianping Gou, IJCV 2021)
+
+#### Neural Architecture Search
 
 [Neural Architecture Search with Reinforcement Learning](https://arxiv.org/pdf/1611.01578.pdf) (Barret Zoph, ICLR 2017, [note](https://zhuanlan.zhihu.com/p/47221948))
 
 [Learning Transferable Architectures for Scalable Image Recognition](http://openaccess.thecvf.com/content_cvpr_2018/html/Zoph_Learning_Transferable_Architectures_CVPR_2018_paper.html) (Barret Zoph, CVPR 2018, [note](https://zhuanlan.zhihu.com/p/31655995))
-
-[MobileNetV2: Inverted Residuals and Linear Bottlenecks](https://arxiv.org/pdf/1801.04381.pdf) (Mark Sandler, CVPR 2018, [code](https://github.com/pytorch/vision?utm_source=catalyzex.com))
 
 [Progressive Neural Architecture Search](http://openaccess.thecvf.com/content_ECCV_2018/html/Chenxi_Liu_Progressive_Neural_Architecture_ECCV_2018_paper.html) (Chenxi Liu, ECCV 2018, [note](https://blog.csdn.net/dhaiuda/article/details/102599427))
 
@@ -2236,33 +2414,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [ProxylessNAS: Direct Neural Architecture Search on Target Task and Hardware](https://arxiv.org/pdf/1812.00332.pdf) (Han Cai, ICLR 2019, [code](https://github.com/mit-han-lab/proxylessnas), [note](https://zhuanlan.zhihu.com/p/55220311))
 
-[Rethinking the Value of Network Pruning](https://arxiv.org/pdf/1810.05270.pdf) (Zhuang Liu, ICLR 2019, [code](https://github.com/Eric-mingjie/rethinking-network-pruning), [note](https://xmfbit.github.io/2018/10/22/paper-rethinking-the-value-of-network-pruning/))
-
 [MnasNet: Platform-Aware Neural Architecture Search for Mobile](http://openaccess.thecvf.com/content_CVPR_2019/html/Tan_MnasNet_Platform-Aware_Neural_Architecture_Search_for_Mobile_CVPR_2019_paper.html) (Mingxing Tan, CVPR 2019, [code](https://github.com/mingxingtan/mnasnet), [note](https://zhuanlan.zhihu.com/p/42474017))
 
 [Searching for MobileNetV3](http://openaccess.thecvf.com/content_ICCV_2019/html/Howard_Searching_for_MobileNetV3_ICCV_2019_paper.html) (Andrew Howard, ICCV 2019, [note](https://blog.nex3z.com/2020/07/27/reading-searching-for-mobilenetv3/))
 
 [Neural Architecture Search: A Survey](http://www.jmlr.org/papers/volume20/18-598/18-598.pdf) (Thomas Elsken, JMLR 2019, [note](https://zhuanlan.zhihu.com/p/123144164))
 
-[Designing Network Design Spaces](https://arxiv.org/pdf/2003.13678.pdf) (Ilija Radosavovic, CVPR 2020)
-
 [Neural Architecture Design for GPU-Efficient Networks](https://arxiv.org/pdf/2006.14090.pdf) (Ming Lin, 2020, [code](https://github.com/idstcv/GPU-Efficient-Networks), [note](https://zhuanlan.zhihu.com/p/151042330))
-
-### Reinforcement Learning
-
-[A Brief Survey of Deep Reinforcement Learning](https://arxiv.org/pdf/1708.05866.pdf) (Kai Arulkumaran, 2017, [note](https://blog.csdn.net/KyrieHe/article/details/79504481))
-
-[Deep Reinforcement Learning: An Overview](https://arxiv.org/pdf/1701.07274.pdf) (Yuxi Li, 2017, [note](https://zhuanlan.zhihu.com/p/31595581))
-
-#### Reinforcement Learning Application
-
-[Playing Atari with Deep Reinforcement Learning](https://arxiv.org/pdf/1312.5602.pdf) (Volodymyr Mnih, 2013, [note](https://zhuanlan.zhihu.com/p/33962867))
-
-[Mastering the Game of Go with Deep Neural Networks and Tree Search](http://www.worlduc.com/FileSystem/1/134755/1585588/ac5b78a1934c49bb93a1f3ad09d96e46.pdf) (David Silver, Nature 2016)
-
-[Mastering the Game of Go without Human Knowledge](https://skatgame.net/mburo/ps/alphago-zero.pdf) (David Silver, Nature 2017, [code](https://github.com/gcp/leela-zero), [note](https://zhuanlan.zhihu.com/p/101669366))
-
-[Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm](https://arxiv.org/pdf/1712.01815.pdf) (David Silver, 2017)
 
 ### Recommendation System
 
