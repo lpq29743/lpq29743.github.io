@@ -1070,6 +1070,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Improving Variational Encoder-Decoders in Dialogue Generation](https://ojs.aaai.org/index.php/AAAI/article/view/11960) (Xiaoyu Shen, AAAI 2018)
 
+[RUBER: An Unsupervised Method for Automatic Evaluation of Open-Domain Dialog Systems](https://ojs.aaai.org/index.php/AAAI/article/view/11321) (Chongyang Tao, AAAI 2018)
+
 [Hierarchical Variational Memory Network for Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3178876.3186077) (Hongshen Chen, WWW 2018, [code](https://github.com/chenhongshen/HVMN), [note](https://blog.csdn.net/qq_38684093/article/details/84038264))
 
 [Variational Autoregressive Decoder for Neural Response Generation](https://www.aclweb.org/anthology/D18-1354.pdf) (Jiachen Du, EMNLP 2018)
@@ -1169,6 +1171,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [EmpDG: Multiresolution Interactive Empathetic Dialogue Generation](https://arxiv.org/pdf/1911.08698.pdf) (Qintong Li, COLING 2020)
 
 [Towards Facilitating Empathic Conversations in Online Mental Health Support: A Reinforcement Learning Approach](https://arxiv.org/pdf/2101.07714.pdf) (Ashish Sharma, WWW 2021)
+
+[Towards Emotional Support Dialog Systems](https://arxiv.org/pdf/2106.01144.pdf) (Siyang Liu, ACL 2021, [code](https://github.com/thu-coai/Emotional-Support-Conversation), [note](https://mp.weixin.qq.com/s/Gj_h4YSK0cxDxh6EIiTWKw))
+
+[CoMAE: A Multi-factor Hierarchical Framework for Empathetic Response Generation](https://arxiv.org/pdf/2105.08316.pdf) (Chujie Zheng, ACL 2021 Findings)
 
 [Emotion Eliciting Machine: Emotion Eliciting Conversation Generation based on Dual Generator](https://arxiv.org/pdf/2105.08251.pdf) (Hao Jiang, 2021)
 
@@ -2116,6 +2122,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Comprehensive Survey on Graph Neural Networks](https://arxiv.org/pdf/1901.00596.pdf) (Zonghan Wu, TNNLS 2019)
 
+[Graph Neural Networks for Natural Language Processing: A Survey](https://arxiv.org/pdf/2106.06090.pdf) (Lingfei Wu, 2021)
+
 #### Capsule Network
 
 [Dynamic Routing Between Capsules](https://papers.nips.cc/paper/6975-dynamic-routing-between-capsules.pdf) (Geoffrey Hinton, NeuIPS 2017, [code](https://github.com/naturomics/CapsNet-Tensorflow), [note](https://zhuanlan.zhihu.com/p/32156167))
@@ -2285,6 +2293,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Mastering the Game of Go without Human Knowledge](https://skatgame.net/mburo/ps/alphago-zero.pdf) (David Silver, Nature 2017, [code](https://github.com/gcp/leela-zero), [note](https://zhuanlan.zhihu.com/p/101669366))
 
 [Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm](https://arxiv.org/pdf/1712.01815.pdf) (David Silver, 2017)
+
+[DouZero: Mastering DouDizhu with Self-Play Deep Reinforcement Learning](https://arxiv.org/pdf/2106.06135.pdf) (Daochen Zha, ICML 2021)
 
 #### Contrastive Learning
 
