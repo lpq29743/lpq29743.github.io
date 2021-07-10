@@ -1552,6 +1552,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [The Curious Case of Neural Text Degeneration](https://arxiv.org/pdf/1904.09751.pdf) (Ari Holtzman, ICLR 2020, [note](https://zhuanlan.zhihu.com/p/115076102))
 
+[Neural Text Generation With Unlikelihood Training](https://arxiv.org/pdf/1908.04319.pdf) (Sean Welleck, [note](https://zhuanlan.zhihu.com/p/78695564))
+
 [The GEM Benchmark: Natural Language Generation, its Evaluation and Metrics](https://arxiv.org/pdf/2102.01672.pdf) (Sebastian Gehrmann, 2021)
 
 [Neural Text Generation with Part-of-Speech Guided Softmax](https://arxiv.org/pdf/2105.03641.pdf) (Zhixian Yang, 2021)
@@ -1640,6 +1642,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Modeling Coverage for Neural Machine Translation](https://www.aclweb.org/anthology/P16-1008.pdf) (Zhaopeng Tu, ACL 2016, [note](https://zhuanlan.zhihu.com/p/22993927))
 
+[Does String-Based Neural MT Learn Source Syntax?](https://aclanthology.org/D16-1159.pdf) (Xing Shi, EMNLP 2016)
+
 [Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation](https://arxiv.org/pdf/1609.08144.pdf) (Yonghui Wu, 2016, [note](https://blog.csdn.net/Xiao_yanling/article/details/90290862))
 
 [Neural Machine Translation with Reconstruction](https://ojs.aaai.org/index.php/AAAI/article/view/10950) (Zhaopeng Tu, AAAI 2017)
@@ -1683,6 +1687,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Reducing Word Omission Errors in Neural Machine Translation: A Contrastive Learning Approach](https://www.aclweb.org/anthology/P19-1623.pdf) (Zonghan Yang, ACL 2019)
 
 [Cross-Lingual Pre-Training Based Transfer for Zero-Shot Neural Machine Translation](https://www.aaai.org/ojs/index.php/AAAI/article/view/5341) (Baijun Ji, AAAI 2020)
+
+[Mirror-Generative Neural Machine Translation](https://openreview.net/pdf?id=HkxQRTNYPH) (Zaixiang Zheng, ICLR 2020)
 
 [Learning a Multi-Domain Curriculum for Neural Machine Translation](https://arxiv.org/pdf/1908.10940.pdf) (Wei Wang, ACL 2020)
 
@@ -1833,6 +1839,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 #### Semantic Segmentation
 
 [Fully Convolutional Networks for Semantic Segmentation](https://arxiv.org/pdf/1411.4038.pdf) (Jonathan Long, CVPR 2015, [code](https://github.com/anoushkrit/Knowledge?utm_source=catalyzex.com), [note](https://blog.csdn.net/qq_36269513/article/details/80420363))
+
+[Dual Attention Network for Scene Segmentation](http://openaccess.thecvf.com/content_CVPR_2019/html/Fu_Dual_Attention_Network_for_Scene_Segmentation_CVPR_2019_paper.html) (Jun Fu, CVPR 2019)
 
 #### Image Super-Resolution
 
@@ -2170,13 +2178,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Universal Transformer](https://arxiv.org/pdf/1807.03819.pdf) (Mostafa Dehghani, ICLR 2019, [code](https://github.com/andreamad8/Universal-Transformer-Pytorch), [note](https://zhuanlan.zhihu.com/p/44655133))
 
-[Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/pdf/1901.02860.pdf) (Zihang Dai, ACL 2019, [note](https://zhuanlan.zhihu.com/p/70745925))
+[Adaptive Attention Span in Transformers](https://arxiv.org/pdf/1905.07799.pdf) (Sainbayar Sukhbaatar, ACL 2019)
 
-[Star-Transformer](https://arxiv.org/pdf/1902.09113.pdf) (Qipeng Guo, 2019, [note](https://zhuanlan.zhihu.com/p/97888995))
+[Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/pdf/1901.02860.pdf) (Zihang Dai, ACL 2019, [note](https://zhuanlan.zhihu.com/p/70745925))
 
 [Self-Attention with Structural Position Representations](https://arxiv.org/pdf/1909.00383.pdf) (Xing Wang, EMNLP 2019)
 
 [Tree Transformer: Integrating Tree Structures into Self-Attention](https://arxiv.org/pdf/1909.06639.pdf) (Yau-Shian Wang, EMNLP 2019)
+
+[Star-Transformer](https://arxiv.org/pdf/1902.09113.pdf) (Qipeng Guo, 2019, [note](https://zhuanlan.zhihu.com/p/97888995))
 
 [Reformer: The Efficient Transformer](https://arxiv.org/pdf/2001.04451.pdf) (Nikita Kitaev, ICLR 2020)
 
@@ -2365,6 +2375,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 #### Meta Learning
 
 [Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks](https://arxiv.org/pdf/1703.03400.pdf) (Chelsea Finn, ICML 2017, [code](https://github.com/cbfinn/maml?utm_source=catalyzex.com), [note](https://zhuanlan.zhihu.com/p/57864886))
+
+[Meta-Learning: A Survey](https://arxiv.org/pdf/1810.03548.pdf) (Joaquin Vanschoren, 2018)
 
 [Meta-Learning Representations for Continual Learning](https://arxiv.org/pdf/1905.12588.pdf) (Khurram Javed, NIPS 2019, [code](https://github.com/khurramjaved96/mrcl?utm_source=catalyzex.com))
 
