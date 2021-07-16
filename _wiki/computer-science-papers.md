@@ -1724,7 +1724,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [The Mathematics of Statistical Machine Translation: Parameter Estimation](https://aclanthology.org/J93-2003.pdf) (Peter E Brown, CL 1993)
 
-[A Systematic Comparison of Various Statistical Alignment Models](https://watermark.silverchair.com/089120103321337421.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAs8wggLLBgkqhkiG9w0BBwagggK8MIICuAIBADCCArEGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMkCEvPs_rjOQ1vujTAgEQgIICgq9VNVpiuBa5_Kw7zn35yQ0srXxnm6UXC7v1TCL2et0s17aTNOiFRpU2Eyi32wUlJPZ4IImNscvUcXbI-h_I1n5DO16iUfRadsoF4wlP-jBkuJ6Hi-wVp4L9sRcQ2ivzLj2QsMvBy-ZyRgoWP91RaQTeV4kkD7ggRB03n5ujWF0IDtn-83BA-oHYhrFAzfyo8mIxGV9PFqfymtZjg-61JdU1I2OHkXPQT-SaGIy1CWJyuLbMmg1bm_IsuhiQPrfZDq2V7I5XXjxH7k024-RD3oJ17wTN53W6f7YbMnHHilVSzmDfqZE0QdM_HF47dklvse4ZD_0qBnDl_APKFG7ctloY3T19fznYviPcF5zSFbyyax3FKjw1DFYqR80FsuRZmzzuTiGw156Ntml_SfE9dObmdE6L8la8kWzHaaa1uo4_NgZ_0qSeLEmFH9hQB7MJZZbwKDjEj8_0M6deMLTtHkZ1OUiqMRgdP6mNa4JHOf3R1vz8LFDgiEVOyR9LN-KUffamhjpN4ZDf47Xw9YS9VLGlYAwOiAivqTM0InPjW8kEwXP07_VX2n1HbY21FYE1cvZkRb-V-KfORmjj3zWqNGKO-EUXMtoXUF2G1JyNfYMhMEvgL-IsCv39SUTiWhO_bK2fxBb7j7JcrRDuRQ_RapQ06wSJWXshvvap2QLg5CFvLBSZIUT1d6d6GNLuYu0WhW9T_PiWuJSbwFpPjbRdcYTGt-JEFfNJqTdBWsG4tzePJ6hcm3K6R93ytOxV1TjfLb4LIJ2vGTSZFukJbToKdpEuOjbmCzBtM4Ua275bddrQXVinUUCpS52KFAfIji0g2dET_1GkKpR2JjE_ThXgVFRMwg) (Franz Josef Och, CL 2013)
+[HMM-Based Word Alignment in Statistical Translation](https://aclanthology.org/C96-2141.pdf) (Stephan Vogel, COLING 1996)
+
+[Improved Statistical Alignment Models](https://aclanthology.org/P00-1056.pdf) (Franz Josef Och, ACL 2000)
+
+[A Systematic Comparison of Various Statistical Alignment Models](https://watermark.silverchair.com/089120103321337421.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAs8wggLLBgkqhkiG9w0BBwagggK8MIICuAIBADCCArEGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMkCEvPs_rjOQ1vujTAgEQgIICgq9VNVpiuBa5_Kw7zn35yQ0srXxnm6UXC7v1TCL2et0s17aTNOiFRpU2Eyi32wUlJPZ4IImNscvUcXbI-h_I1n5DO16iUfRadsoF4wlP-jBkuJ6Hi-wVp4L9sRcQ2ivzLj2QsMvBy-ZyRgoWP91RaQTeV4kkD7ggRB03n5ujWF0IDtn-83BA-oHYhrFAzfyo8mIxGV9PFqfymtZjg-61JdU1I2OHkXPQT-SaGIy1CWJyuLbMmg1bm_IsuhiQPrfZDq2V7I5XXjxH7k024-RD3oJ17wTN53W6f7YbMnHHilVSzmDfqZE0QdM_HF47dklvse4ZD_0qBnDl_APKFG7ctloY3T19fznYviPcF5zSFbyyax3FKjw1DFYqR80FsuRZmzzuTiGw156Ntml_SfE9dObmdE6L8la8kWzHaaa1uo4_NgZ_0qSeLEmFH9hQB7MJZZbwKDjEj8_0M6deMLTtHkZ1OUiqMRgdP6mNa4JHOf3R1vz8LFDgiEVOyR9LN-KUffamhjpN4ZDf47Xw9YS9VLGlYAwOiAivqTM0InPjW8kEwXP07_VX2n1HbY21FYE1cvZkRb-V-KfORmjj3zWqNGKO-EUXMtoXUF2G1JyNfYMhMEvgL-IsCv39SUTiWhO_bK2fxBb7j7JcrRDuRQ_RapQ06wSJWXshvvap2QLg5CFvLBSZIUT1d6d6GNLuYu0WhW9T_PiWuJSbwFpPjbRdcYTGt-JEFfNJqTdBWsG4tzePJ6hcm3K6R93ytOxV1TjfLb4LIJ2vGTSZFukJbToKdpEuOjbmCzBtM4Ua275bddrQXVinUUCpS52KFAfIji0g2dET_1GkKpR2JjE_ThXgVFRMwg) (Franz Josef Och, CL 2003)
+
+[NeurAlign: Combining Word Alignments Using Neural Networks](https://aclanthology.org/H05-1009.pdf) (Necip Fazil Ayan, 2005)
+
+[Parallel Implementations of Word Alignment Tool](https://aclanthology.org/W08-0509.pdf) (Qin Gao, 2008)
 
 [A Simple, Fast, and Effective Reparameterization of IBM Model 2](https://aclanthology.org/N13-1073.pdf) (Chris Dyer, NAACL 2013)
 
@@ -1733,6 +1741,16 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Word Alignment Modeling with Context Dependent Deep Neural Network](https://aclanthology.org/P13-1017.pdf) (Nan Yang, ACL 2013)
 
 [Recurrent Neural Networks for Word Alignment Model](https://aclanthology.org/P14-1138.pdf) (Akihiro Tamura, ACL 2014)
+
+[Efficient Word Alignment with Markov Chain Monte Carlo](https://helda.helsinki.fi/bitstream/handle/10138/232817/Efficient_Word_Alignment_with_Markov_Chain_Monte_Carlo.pdf?sequence=1) (Robert Östling, 2016, [code](https://github.com/robertostling/efmaral))
+
+[Neural Network-based Word Alignment through Score Aggregation](https://arxiv.org/pdf/1606.09560.pdf) (Joel Legrand, 2016)
+
+[On The Alignment Problem In Multi-Head Attention-Based Neural Machine Translation](https://arxiv.org/pdf/1809.03985.pdf) (Tamer Alkhouli, 2018)
+
+[SimAlign: High Quality Word Alignments Without Parallel Training Data Using Static and Contextualized Embeddings](https://arxiv.org/pdf/2004.08728.pdf) (Masoud Jalili Sabet, EMNLP 2020 Findings)
+
+[Neural Baselines for Word Alignment](https://arxiv.org/pdf/2009.13116.pdf) (Anh Khoa Ngo Ho, 2020)
 
 [MASK-ALIGN: Self-Supervised Neural Word Alignment](https://arxiv.org/pdf/2012.07162.pdf) (Chi Chen, ACL 2021, [code](https://github.com/THUNLP-MT/Mask-Align))
 
