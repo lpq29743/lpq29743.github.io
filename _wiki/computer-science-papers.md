@@ -112,6 +112,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [ERNIE 2.0: A Continual Pre-training Framework for Language Understanding](https://arxiv.org/pdf/1907.12412.pdf) (Yu Sun, AAAI 2020, [note](https://zhuanlan.zhihu.com/p/76125042))
 
+[ERNIE 3.0: Large-scale Knowledge Enhanced Pre-training for Language Understanding and Generation](https://arxiv.org/pdf/2107.02137.pdf) (Yu Sun, 2021)
+
 [Semantics-aware BERT for Language Understanding](https://arxiv.org/pdf/1909.02209.pdf) (Zhuosheng Zhang, AAAI 2020, [note](https://zhuanlan.zhihu.com/p/115457267))
 
 [K-ADAPTER: Infusing Knowledge into Pre-Trained Models with Adapters](https://arxiv.org/pdf/2002.01808.pdf) (Ruize Wang, 2020)
@@ -327,6 +329,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 ##### Abstractive Summarization
 
 [A Neural Attention Model for Abstractive Sentence Summarization](https://arxiv.org/pdf/1509.00685.pdf) (Alexander M. Rush, EMNLP 2015, [code](https://github.com/Ganeshpadmanaban/Neural-Attention-Model-Abstractive-Summarization?utm_source=catalyzex.com))
+
+[Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond](https://arxiv.org/pdf/1602.06023.pdf) (Ramesh Nallapati, CoNLL 2016, [note](https://zhuanlan.zhihu.com/p/21388527))
 
 [Abstractive Document Summarization with a Graph-Based Attentional Neural Model](https://www.aclweb.org/anthology/P17-1108.pdf) (Jiwei Tan, ACL 2017)
 
@@ -815,6 +819,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Joint Inference for Fine-grained Opinion Extraction](https://www.aclweb.org/anthology/P13-1161) (Bishan Yang, ACL 2013)
 
 [Open Domain Targeted Sentiment](https://www.aclweb.org/anthology/D13-1171) (Margaret Mitchell, EMNLP 2013)
+
+[Joint Modeling of Opinion Expression Extraction and Attribute Classification](https://www.aclweb.org/anthology/Q14-1039.pdf) (Bishan Yang, TACL 2014)
 
 [Neural Networks for Open Domain Targeted Sentiment](https://www.aclweb.org/anthology/D15-1073) (Meishan Zhang, EMNLP 2015, [code](https://github.com/SUTDNLP/OpenTargetedSentiment))
 
@@ -1460,6 +1466,20 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Ultra-fine entity typing](https://www.aclweb.org/anthology/P18-1009) (Eunsol Choi, ACL 2018, [note](https://blog.csdn.net/xff1994/article/details/90293957))
 
+##### Entity Set Expansion
+
+[Web-Scale Distributional Similarity and Entity Set Expansion](https://aclanthology.org/D09-1098.pdf) (Patrick Pantel, EMNLP 2009)
+
+[EgoSet: Exploiting Word Ego-networks and User-generated Ontology for Multifaceted Set Expansion](https://dl.acm.org/doi/abs/10.1145/2835776.2835808?casa_token=WO5mp1Qk4WMAAAAA:OWY3rVjXu57DFQafsDOP6mz3u6GROVN-Z1O9uvRPNgZ6-IYVlFY_jN5yXmYHjkcI63NfabkWOa8D1lU) (Xin Rong, WSDM 2016)
+
+[SetExpan: Corpus-Based Set Expansion via Context Feature Selection and Rank Ensemble](https://link.springer.com/chapter/10.1007/978-3-319-71249-9_18) (Jiaming Shen, ECML PKDD 2017)
+
+[HiExpan: Task-Guided Taxonomy Construction by Hierarchical Tree Expansion](https://dl.acm.org/doi/abs/10.1145/3219819.3220115) (Jiaming Shen, KDD 2018)
+
+[TaxoExpan: Self-supervised Taxonomy Expansion with Position-Enhanced Graph Neural Network](https://dl.acm.org/doi/abs/10.1145/3366423.3380132?casa_token=ZxAWXTyFuO4AAAAA:J_673jkMVGIhJvBkHkyQGGlz6KeuD7aFghWvN7ARUVKqxABsD8G-at1HzLefvofpf_zo_xyAogcMfEI) (Jiaming Shen, WWW 2020)
+
+[Empower Entity Set Expansion via Language Model Probing](https://arxiv.org/pdf/2004.13897.pdf) (Yunyi Zhang, ACL 2020)
+
 ##### Causal Knowledge
 
 [Automatic Extraction of Causal Relations from Natural Language Texts: A Comprehensive Survey](https://arxiv.org/pdf/1605.07895.pdf) (Nabiha Asghar, 2016)
@@ -1698,6 +1718,20 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Context-Aware Cross-Attention for Non-Autoregressive Translation](https://arxiv.org/pdf/2011.00770.pdf) (Liang Ding, COLING 2020)
 
+##### Word Alignment
+
+[The Mathematics of Statistical Machine Translation: Parameter Estimation](https://aclanthology.org/J93-2003.pdf) (Peter E Brown, CL 1993)
+
+[A Systematic Comparison of Various Statistical Alignment Models](https://watermark.silverchair.com/089120103321337421.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAs8wggLLBgkqhkiG9w0BBwagggK8MIICuAIBADCCArEGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMkCEvPs_rjOQ1vujTAgEQgIICgq9VNVpiuBa5_Kw7zn35yQ0srXxnm6UXC7v1TCL2et0s17aTNOiFRpU2Eyi32wUlJPZ4IImNscvUcXbI-h_I1n5DO16iUfRadsoF4wlP-jBkuJ6Hi-wVp4L9sRcQ2ivzLj2QsMvBy-ZyRgoWP91RaQTeV4kkD7ggRB03n5ujWF0IDtn-83BA-oHYhrFAzfyo8mIxGV9PFqfymtZjg-61JdU1I2OHkXPQT-SaGIy1CWJyuLbMmg1bm_IsuhiQPrfZDq2V7I5XXjxH7k024-RD3oJ17wTN53W6f7YbMnHHilVSzmDfqZE0QdM_HF47dklvse4ZD_0qBnDl_APKFG7ctloY3T19fznYviPcF5zSFbyyax3FKjw1DFYqR80FsuRZmzzuTiGw156Ntml_SfE9dObmdE6L8la8kWzHaaa1uo4_NgZ_0qSeLEmFH9hQB7MJZZbwKDjEj8_0M6deMLTtHkZ1OUiqMRgdP6mNa4JHOf3R1vz8LFDgiEVOyR9LN-KUffamhjpN4ZDf47Xw9YS9VLGlYAwOiAivqTM0InPjW8kEwXP07_VX2n1HbY21FYE1cvZkRb-V-KfORmjj3zWqNGKO-EUXMtoXUF2G1JyNfYMhMEvgL-IsCv39SUTiWhO_bK2fxBb7j7JcrRDuRQ_RapQ06wSJWXshvvap2QLg5CFvLBSZIUT1d6d6GNLuYu0WhW9T_PiWuJSbwFpPjbRdcYTGt-JEFfNJqTdBWsG4tzePJ6hcm3K6R93ytOxV1TjfLb4LIJ2vGTSZFukJbToKdpEuOjbmCzBtM4Ua275bddrQXVinUUCpS52KFAfIji0g2dET_1GkKpR2JjE_ThXgVFRMwg) (Franz Josef Och, CL 2013)
+
+[A Simple, Fast, and Effective Reparameterization of IBM Model 2](https://aclanthology.org/N13-1073.pdf) (Chris Dyer, NAACL 2013)
+
+[Word Alignment Modeling with Context Dependent Deep Neural Network](https://aclanthology.org/P13-1017.pdf) (Nan Yang, ACL 2013)
+
+[Recurrent Neural Networks for Word Alignment Model](https://aclanthology.org/P14-1138.pdf) (Akihiro Tamura, ACL 2014)
+
+[MASK-ALIGN: Self-Supervised Neural Word Alignment](https://arxiv.org/pdf/2012.07162.pdf) (Chi Chen, ACL 2021, [code](https://github.com/THUNLP-MT/Mask-Align))
+
 ##### Low-Resource Machine Translation
 
 [Generalized Data Augmentation for Low-Resource Translation](https://arxiv.org/pdf/1906.03785.pdf) (Mengzhou Xia, ACL 2019, [code](https://github.com/xiamengzhou/DataAugForLRL))
@@ -1751,6 +1785,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 ##### Code Retrieval
 
 [Deep code search](https://guxd.github.io/papers/deepcs.pdf) (Xiaodong Gu, ICSE 2018)
+
+#### Interpretability in Natural Language Processing
+
+[What Does BERT Look At? An Analysis of BERT’s Attention](https://arxiv.org/pdf/1906.04341.pdf) (Kevin Clark, ACL 2019 Workshop)
+
+[Revealing the Dark Secrets of BERT](https://arxiv.org/pdf/1908.08593.pdf) (Olga Kovaleva, EMNLP 2019)
 
 #### Fairness in Natural Language Processing
 
@@ -2128,6 +2168,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/pdf/1609.02907.pdf) (Thomas N. Kipf, ICLR 2017, [code](https://github.com/tkipf/gcn), [note](https://zhuanlan.zhihu.com/p/35630785))
 
+[Graph Attention Networks](https://arxiv.org/pdf/1710.10903.pdf) (Petar Veličković, ICLR 2018, [code](https://github.com/PetarV-/GAT), [note](https://zhuanlan.zhihu.com/p/34232818))
+
 [A Comprehensive Survey on Graph Neural Networks](https://arxiv.org/pdf/1901.00596.pdf) (Zonghan Wu, TNNLS 2019)
 
 [Graph Neural Networks for Natural Language Processing: A Survey](https://arxiv.org/pdf/2106.06090.pdf) (Lingfei Wu, 2021)
@@ -2443,6 +2485,20 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Neural Architecture Search: A Survey](http://www.jmlr.org/papers/volume20/18-598/18-598.pdf) (Thomas Elsken, JMLR 2019, [note](https://zhuanlan.zhihu.com/p/123144164))
 
 [Neural Architecture Design for GPU-Efficient Networks](https://arxiv.org/pdf/2006.14090.pdf) (Ming Lin, 2020, [code](https://github.com/idstcv/GPU-Efficient-Networks), [note](https://zhuanlan.zhihu.com/p/151042330))
+
+#### Evidential Deep Learning and Uncertainty
+
+[Dropout as a Bayesian Approximation: Representing Model Uncertainty in Deep Learning](https://arxiv.org/pdf/1506.02142.pdf) (Yarin Gal, ICML 2016, [note](https://zhuanlan.zhihu.com/p/82108924))
+
+[A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](https://papers.nips.cc/paper/2016/file/076a0c97d09cf1a0ec3e19c7f2529f2b-Paper.pdf) (Yarin Gal, NeuIPS 2016)
+
+[What Uncertainties Do We Need in Bayesian Deep Learning for Computer Vision?](https://arxiv.org/pdf/1703.04977.pdf) (Alex Kendall, NeuIPS 2017, [note](https://zhuanlan.zhihu.com/p/98756147))
+
+[Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles](https://proceedings.neurips.cc/paper/2017/file/9ef2ed4b7fd2c810847ffa5fa85bce38-Paper.pdf) (Balaji Lakshminarayanan, NeuIPS 2017)
+
+[Evidential Deep Learning to Quantify Classification Uncertainty](https://papers.nips.cc/paper/2018/file/a981f2b708044d6fb4a71a1463242520-Paper.pdf) (Murat Sensoy, NeuIPS 2018)
+
+[Can You Trust Your Model's Uncertainty? Evaluating Predictive Uncertainty Under Dataset Shift](https://arxiv.org/pdf/1906.02530.pdf) (Yaniv Ovadia, NeuIPS 2019)
 
 ### Recommendation System
 
