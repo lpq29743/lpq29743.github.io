@@ -104,6 +104,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Language Models are Few-Shot Learners](https://arxiv.org/pdf/2005.14165.pdf) (Tom B. Brown, 2020, [code](https://github.com/openai/gpt-3), [note](https://zhuanlan.zhihu.com/p/144764546))
 
+[Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](https://arxiv.org/pdf/2101.03961.pdf) (William Fedus, 2020)
+
 [Are Pre-trained Convolutions Better than Pre-trained Transformers?](https://arxiv.org/pdf/2105.03322.pdf) (Yi Tay, ACL 2021)
 
 ##### Knowledge-Enriched Language Model
@@ -1726,6 +1728,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Simple, Fast, and Effective Reparameterization of IBM Model 2](https://aclanthology.org/N13-1073.pdf) (Chris Dyer, NAACL 2013)
 
+[A Systematic Bayesian Treatment of the IBM Alignment Models](https://aclanthology.org/N13-1117.pdf) (Yarin Gal, NAACL 2013)
+
 [Word Alignment Modeling with Context Dependent Deep Neural Network](https://aclanthology.org/P13-1017.pdf) (Nan Yang, ACL 2013)
 
 [Recurrent Neural Networks for Word Alignment Model](https://aclanthology.org/P14-1138.pdf) (Akihiro Tamura, ACL 2014)
@@ -2245,6 +2249,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Linformer: Self-Attention with Linear Complexity](https://arxiv.org/pdf/2006.04768.pdf) (Sinong Wang, 2020)
 
 [Multi-Head Attention: Collaborate Instead of Concatenate](https://openreview.net/forum?id=bK-rJMKrOsm) (Jean-Baptiste Cordonnier, 2020, [code](https://github.com/epfml/collaborative-attention), [note](https://medium.com/im%E6%97%A5%E8%A8%98/%E8%AB%96%E6%96%87%E5%88%86%E4%BA%AB-multi-head-attention-collaborate-instead-of-concatenate-196dccff6118))
+
+[Synthesizer: Rethinking Self-Attention for Transformer Models](http://proceedings.mlr.press/v139/tay21a/tay21a.pdf) (Yi Tay, ICML 2021, [note](https://zhuanlan.zhihu.com/p/148054019))
 
 ##### Sparse Attention
 
