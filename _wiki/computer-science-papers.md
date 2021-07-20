@@ -240,6 +240,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Semantic Sentence Matching with Densely-connected Recurrent and Co-attentive Information](https://arxiv.org/pdf/1805.11360.pdf) (Seonhoon Kim, AAAI 2019, [note](https://zhuanlan.zhihu.com/p/47948866))
 
+[Rationalizing Text Matching: Learning Sparse Alignments via Optimal Transport](https://arxiv.org/pdf/2005.13111.pdf) (Kyle Swanson, ACL 2020)
+
 #### Natural Language Inference
 
 [A Large Annotated Corpus for Learning Natural Language Inference](https://arxiv.org/pdf/1508.05326.pdf) (Samuel R. Bowman, EMNLP 2015, [code](https://nlp.stanford.edu/projects/snli/), [note](https://blog.eson.org/pub/a1c27ad7/))
@@ -1752,6 +1754,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Neural Baselines for Word Alignment](https://arxiv.org/pdf/2009.13116.pdf) (Anh Khoa Ngo Ho, 2020)
 
+[Word Alignment by Fine-tuning Embeddings on Parallel Corpora](https://arxiv.org/pdf/2101.08231.pdf) (Zi-Yi Dou, EACL 2021)
+
 [MASK-ALIGN: Self-Supervised Neural Word Alignment](https://arxiv.org/pdf/2012.07162.pdf) (Chi Chen, ACL 2021, [code](https://github.com/THUNLP-MT/Mask-Align))
 
 ##### Low-Resource Machine Translation
@@ -2126,8 +2130,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Wasserstein GAN](https://arxiv.org/pdf/1701.07875.pdf) (Martin Arjovsky, 2017, [code](https://github.com/martinarjovsky/WassersteinGAN), [note](https://zhuanlan.zhihu.com/p/25071913))
 
-[Self-Attention Generative Adversarial Networks](https://arxiv.org/pdf/1805.08318.pdf) (Han Zhang, 2018, [code](https://github.com/heykeetae/Self-Attention-GAN), [note](https://www.paperweekly.site/papers/notes/414))
-
 [Progressive Growing of GANs for Improved Quality, Stability, and Variation](https://arxiv.org/pdf/1710.10196.pdf) (Tero Karras, ICLR 2018, [code](https://github.com/tkarras/progressive_growing_of_gans), [note](https://zhuanlan.zhihu.com/p/30637133))
 
 [Transferring GANs: Generating Images from Limited Data](https://arxiv.org/pdf/1805.01677.pdf) (Yaxing Wang, ECCV 2018, [code](https://github.com/yaxingwang/Transferring-GANs), [note](https://medium.com/@xiaosean5408/transferring-gans%E7%B0%A1%E4%BB%8B-transferring-gans-generating-images-from-limited-data-90bcf6be7fd2))
@@ -2138,7 +2140,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Large Scale GAN Training for High Fidelity Natural Image Synthesis](https://arxiv.org/pdf/1809.11096.pdf) (Andrew Brock, ICLR 2019, [note](https://zhuanlan.zhihu.com/p/46581611))
 
-[Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/pdf/1912.04958.pdf) (Tero Karras, 2019, [note](https://blog.csdn.net/lynlindasy/article/details/104495583))
+[Self-Attention Generative Adversarial Networks](https://arxiv.org/pdf/1805.08318.pdf) (Han Zhang, ICML 2019, [code](https://github.com/heykeetae/Self-Attention-GAN), [note](https://www.paperweekly.site/papers/notes/414))
+
+[Analyzing and Improving the Image Quality of StyleGAN](https://arxiv.org/pdf/1912.04958.pdf) (Tero Karras, CVPR 2020, [note](https://blog.csdn.net/lynlindasy/article/details/104495583))
+
+[Generative Adversarial Transformers](https://arxiv.org/pdf/2103.01209.pdf) (Drew A. Hudson, ICML 2021)
 
 #### Autoencoder
 
@@ -2246,6 +2252,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/pdf/1901.02860.pdf) (Zihang Dai, ACL 2019, [note](https://zhuanlan.zhihu.com/p/70745925))
 
+[Adaptively Sparse Transformers](https://arxiv.org/pdf/1909.00015.pdf) (Goncalo M. Correia, EMNLP 2019)
+
 [Self-Attention with Structural Position Representations](https://arxiv.org/pdf/1909.00383.pdf) (Xing Wang, EMNLP 2019)
 
 [Tree Transformer: Integrating Tree Structures into Self-Attention](https://arxiv.org/pdf/1909.06639.pdf) (Yau-Shian Wang, EMNLP 2019)
@@ -2258,6 +2266,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [The Unstoppable Rise of Computational Linguistics in Deep Learning](https://arxiv.org/pdf/2005.06420.pdf) (James Henderson, ACL 2020)
 
+[O(n) Connections are Expressive Enough: Universal Approximability of Sparse Transformers](https://arxiv.org/pdf/2006.04862.pdf) (Chulhee Yun, NeuIPS 2020)
+
 [ETC: Encoding Long and Structured Data in Transformers](https://www.aclweb.org/anthology/2020.emnlp-main.19.pdf) (Joshua Ainslie, EMNLP 2020)
 
 [On the Sub-layer Functionalities of Transformer Decoder](https://arxiv.org/pdf/2010.02648.pdf) (Yilin Yang, EMNLP 2020 Findings)
@@ -2267,6 +2277,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Linformer: Self-Attention with Linear Complexity](https://arxiv.org/pdf/2006.04768.pdf) (Sinong Wang, 2020)
 
 [Multi-Head Attention: Collaborate Instead of Concatenate](https://openreview.net/forum?id=bK-rJMKrOsm) (Jean-Baptiste Cordonnier, 2020, [code](https://github.com/epfml/collaborative-attention), [note](https://medium.com/im%E6%97%A5%E8%A8%98/%E8%AB%96%E6%96%87%E5%88%86%E4%BA%AB-multi-head-attention-collaborate-instead-of-concatenate-196dccff6118))
+
+[Efficient Content-Based Sparse Attention with Routing Transformers](https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00353/97776/Efficient-Content-Based-Sparse-Attention-with) (Aurko Roy, TACL 2021)
 
 [Synthesizer: Rethinking Self-Attention for Transformer Models](http://proceedings.mlr.press/v139/tay21a/tay21a.pdf) (Yi Tay, ICML 2021, [note](https://zhuanlan.zhihu.com/p/148054019))
 
@@ -2278,11 +2290,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Sparse and Constrained Attention for Neural Machine Translation](https://arxiv.org/pdf/1805.08241.pdf) (Chaitanya Malaviya, ACL 2018)
 
+[On Controllable Sparse Alternatives to Softmax](https://arxiv.org/pdf/1810.11975.pdf) (Anirban Laha, NeuIPS 2018)
+
 [Sparse Sequence-to-Sequence Models](https://arxiv.org/pdf/1905.05702.pdf) (Ben Peters, ACL 2019, [note](https://zhuanlan.zhihu.com/p/76607614))
-
-[Adaptively Sparse Transformers](https://arxiv.org/pdf/1909.00015.pdf) (Goncalo M. Correia, EMNLP 2019)
-
-[Efficient Content-Based Sparse Attention with Routing Transformers](https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00353/97776/Efficient-Content-Based-Sparse-Attention-with) (Aurko Roy, TACL 2021)
 
 #### Optimization
 
@@ -2569,6 +2579,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Deep Time-Stream Framework for Click-through Rate Prediction by Tracking Interest Evolution](https://arxiv.org/pdf/2001.03025.pdf) (Shu-Ting Shi, AAAI 2020)
 
 [Deep Match to Rank Model for Personalized Click-Through Rate Prediction](https://aaai.org/ojs/index.php/AAAI/article/view/5346) (Zequn Lyu, AAAI 2020, [code](https://github.com/lvze92/DMR), [note](https://www.jianshu.com/p/60eed27e06d4))
+
+[Deep Multi-Interest Network for Click-through Rate Prediction](https://dl.acm.org/doi/abs/10.1145/3340531.3412092?casa_token=nH4IJveJv8IAAAAA:DGfLy48IytEIldltBbIJCiY6dG6qzoZac3M_rXJBxJArwTQ8KhqcV3Qh_FCP7gUp_tDz9RnxZ55yeqo) (Zhibo Xiao, CIKM 2020)
 
 ### Big Data
 
