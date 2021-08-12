@@ -48,6 +48,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Glyce: Glyph-vectors for Chinese Character Representations](https://arxiv.org/pdf/1901.10125.pdf) (Yuxian Meng, NeuIPS 2019, [code](https://github.com/ShannonAI/glyce), [note](https://zhuanlan.zhihu.com/p/55967737))
 
+[Obtaining Better Static Word Embeddings Using Contextual Embedding Models](https://arxiv.org/pdf/2106.04302.pdf) (Prakhar Gupta, ACL 2021)
+
+[Learning Zero-Shot Multifaceted Visually Grounded Word Embeddings via Multi-Task Training](https://arxiv.org/pdf/2104.07500.pdf) (Hassan Shahmohammadi, 2021)
+
 ##### Sentence/Paragraph/Document Embedding
 
 [Distributed Representations of Sentences and Documents](https://arxiv.org/pdf/1405.4053.pdf) (Quoc Le, ICML 2014, [code](https://github.com/jhlau/doc2vec), [note](https://blog.acolyer.org/2016/06/01/distributed-representations-of-sentences-and-documents/))
@@ -107,6 +111,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](https://arxiv.org/pdf/2101.03961.pdf) (William Fedus, 2020)
 
 [Are Pre-trained Convolutions Better than Pre-trained Transformers?](https://arxiv.org/pdf/2105.03322.pdf) (Yi Tay, ACL 2021)
+
+[True Few-Shot Learning with Language Models](https://arxiv.org/pdf/2105.11447.pdf) (Ethan Perez, 2021)
 
 ##### Knowledge-Enriched Language Model
 
@@ -187,6 +193,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Text Classification Using Label Names Only: A Language Model Self-Training Approach](https://arxiv.org/pdf/2010.07245.pdf) (Yu Meng, EMNLP 2020, [code](https://github.com/yumeng5/LOTClass))
 
 [Inductive Topic Variational Graph Auto-Encoder for Text Classification](https://www.aclweb.org/anthology/2021.naacl-main.333.pdf) (Qianqian Xie, NAACL 2021)
+
+[Knowledgeable Prompt-tuning: Incorporating Knowledge into Prompt Verbalizer for Text Classification](https://arxiv.org/pdf/2108.02035.pdf) (Shengding Hu, 2021)
 
 ##### Multi-Label Text Classification
 
@@ -412,6 +420,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Opinion Summarization
 
+[Unsupervised Opinion Summarization with Noising and Denoising](https://arxiv.org/pdf/2004.10150.pdf) (Reinald Kim Amplayo, ACL 2020)
+
 [Unsupervised Opinion Summarization with Content Planning](https://arxiv.org/pdf/2012.07808.pdf) (Reinald Kim Amplayo, AAAI 2021)
 
 ##### Cross-Lingual Summarization
@@ -571,6 +581,16 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [A Concise Model for Multi-Criteria Chinese Word Segmentation with Transformer Encoder](https://arxiv.org/pdf/1906.12035.pdf) (Xipeng Qiu, EMNLP 2020, [code](https://github.com/acphile/MCCWS))
 
 [Towards Fast and Accurate Neural Chinese Word Segmentation with Multi-Criteria Learning](https://arxiv.org/pdf/1903.04190.pdf) (Weipeng Huang, COLING 2020)
+
+#### Spelling Correction
+
+[A Spelling Correction Program Based on a Noisy Channel Model](https://aclanthology.org/C90-2036.pdf) (Mark D. Kemighan, COLING 1990)
+
+[Context Based Spelling Correction](https://www.sciencedirect.com/science/article/pii/030645739190066U) (Eric Mays, 1991)
+
+#### Structured Prediction
+
+[Structured Prediction as Translation Between Augmented Natural Languages](https://arxiv.org/abs/2101.05779) (Giovanni Paolini, ICLR 2021)
 
 #### Sequence Labeling
 
@@ -1126,6 +1146,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Variational Transformers for Diverse Response Generation](https://arxiv.org/pdf/2003.12738.pdf) (Zhaojiang Lin, 2020)
 
+[Diversifying Dialog Generation via Adaptive Label Smoothing](https://arxiv.org/pdf/2105.14556.pdf) (Yida Wang, ACL 2021)
+
 ##### Stylized Response Generation
 
 [Polite Dialogue Generation Without Parallel Data](https://www.mitpressjournals.org/doi/abs/10.1162/tacl_a_00027) (Tong Niu, TACL 2018)
@@ -1309,6 +1331,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [SocialIQA: Commonsense Reasoning about Social Interactions](https://arxiv.org/pdf/1904.09728.pdf) (Maarten Sap, EMNLP 2019)
 
 [PIQA: Reasoning about Physical Commonsense in Natural Language](https://arxiv.org/pdf/1911.11641.pdf) (Yonatan Bisk, AAAI 2020)
+
+[CommonsenseQA 2.0: Exposing the Limits of AI through Gamification](https://openreview.net/pdf?id=qF7FlUT5dxa) (Alon Talmor, 2021)
 
 ##### Machine Reading Comprehension
 
@@ -1552,6 +1576,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Natural Language Generation
 
+[Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks](https://proceedings.neurips.cc/paper/2015/file/e995f98d56967d946471af29d7bf99f1-Paper.pdf) (Samy Bengio, NeurIPS 2015)
+
 [Survey of the State of the Art in Natural Language Generation: Core tasks, applications and evaluation](https://arxiv.org/pdf/1703.09902.pdf) (Albert Gatt, 2017)
 
 [Neural Text Generation: A Practical Guide](https://arxiv.org/pdf/1711.09534.pdf) (Ziang Xie, 2017)
@@ -1570,13 +1596,19 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Keeping Notes: Conditional Natural Language Generation with a Scratchpad Mechanism](https://www.aclweb.org/anthology/P19-1407.pdf) (Ryan Y. Benmalek, ACL 2019)
 
+[Scheduled Sampling for Transformers](https://arxiv.org/pdf/1906.07651.pdf) (Tsvetomila Mihaylova, ACL 2019)
+
 [Long and Diverse Text Generation with Planning-based Hierarchical Variational Model](https://arxiv.org/pdf/1908.06605.pdf) (Zhihong Shao, EMNLP 2019)
+
+[Neural Text Generation With Unlikelihood Training](https://arxiv.org/pdf/1908.04319.pdf) (Sean Welleck, 2019, [note](https://zhuanlan.zhihu.com/p/78695564))
 
 [Best-First Beam Search](https://arxiv.org/pdf/2007.03909.pdf) (Clara Meister, TACL 2020, [code](https://github.com/huggingface/transformers/issues/6565), [note](https://zhuanlan.zhihu.com/p/187270580))
 
 [The Curious Case of Neural Text Degeneration](https://arxiv.org/pdf/1904.09751.pdf) (Ari Holtzman, ICLR 2020, [note](https://zhuanlan.zhihu.com/p/115076102))
 
-[Neural Text Generation With Unlikelihood Training](https://arxiv.org/pdf/1908.04319.pdf) (Sean Welleck, [note](https://zhuanlan.zhihu.com/p/78695564))
+[Distilling Knowledge Learned in BERT for Text Generation](https://arxiv.org/pdf/1911.03829.pdf) (Yen-Chun Chen, ACL 2020)
+
+[Contrastive Learning with Adversarial Perturbations for Conditional Text Generation](https://openreview.net/pdf?id=Wga_hrCa3P3) (Seanie Lee, ICLR 2021, [code](https://github.com/seanie12/CLAPS))
 
 [The GEM Benchmark: Natural Language Generation, its Evaluation and Metrics](https://arxiv.org/pdf/2102.01672.pdf) (Sebastian Gehrmann, 2021)
 
@@ -1622,6 +1654,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Deep Reinforcement Learning For Sequence to Sequence Models](https://arxiv.org/pdf/1805.09461.pdf) (Yaser Keneshloo, 2018, [code](https://github.com/yaserkl/RLSeq2Seq), [note](https://www.jianshu.com/p/1213de861491))
 
+[Von Mises*-*Fisher Loss for Training Sequence to* *Sequence Models with Continuous Outputs](https://arxiv.org/pdf/1812.04616.pdf) (Sachin Kumar, ICLR 2019, [code](https://github.com/Sachin19/seq2seq-con))
+
 [MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019, [code](https://github.com/microsoft/MASS), [note](https://zhuanlan.zhihu.com/p/71022527))
 
 ##### Graph to Sequence
@@ -1657,6 +1691,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Table-to-Text Generation with Effective Hierarchical Encoder on Three Dimensions (Row, Column and Time)](https://arxiv.org/pdf/1909.02304.pdf) (Heng Gong, EMNLP 2019)
 
 #### Machine Translation
+
+[Exploiting Similarities among Languages for Machine Translation](https://arxiv.org/pdf/1309.4168.pdf) (Tomas Mikolov, 2013)
 
 [Learning phrase representations using RNN encoder-decoder for statistical machine translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014, [note](https://cuiqingcai.com/5737.html))
 
@@ -1710,9 +1746,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Reducing Word Omission Errors in Neural Machine Translation: A Contrastive Learning Approach](https://www.aclweb.org/anthology/P19-1623.pdf) (Zonghan Yang, ACL 2019)
 
+[Bridging the Gap between Training and Inference for Neural Machine Translation](https://arxiv.org/pdf/1906.02448.pdf) (Wen Zhang, ACL 2019)
+
 [Cross-Lingual Pre-Training Based Transfer for Zero-Shot Neural Machine Translation](https://www.aaai.org/ojs/index.php/AAAI/article/view/5341) (Baijun Ji, AAAI 2020)
 
+[Towards Making the Most of BERT in Neural Machine Translation](https://ojs.aaai.org/index.php/AAAI/article/view/6479) (Jiacheng Yang, AAAI 2020)
+
 [Mirror-Generative Neural Machine Translation](https://openreview.net/pdf?id=HkxQRTNYPH) (Zaixiang Zheng, ICLR 2020)
+
+[Incorporating Bert into Neural Machine Translation](https://arxiv.org/abs/2002.06823) (Jinhua Zhu, ICLR 2020)
 
 [Learning a Multi-Domain Curriculum for Neural Machine Translation](https://arxiv.org/pdf/1908.10940.pdf) (Wei Wang, ACL 2020)
 
@@ -1722,11 +1764,35 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Context-Aware Cross-Attention for Non-Autoregressive Translation](https://arxiv.org/pdf/2011.00770.pdf) (Liang Ding, COLING 2020)
 
-##### Word Alignment
+[Counterfactual Data Augmentation for Neural Machine Translation](https://aclanthology.org/2021.naacl-main.18.pdf) (Qi Liu, NAACL 2021)
 
-[The Mathematics of Statistical Machine Translation: Parameter Estimation](https://aclanthology.org/J93-2003.pdf) (Peter E Brown, CL 1993)
+[Can Latent Alignments Improve Autoregressive Machine Translation?](https://arxiv.org/pdf/2104.09554.pdf) (Adi Haviv, NAACL 2021)
+
+[Order-Agnostic Cross Entropy for Non-Autoregressive Machine Translation](https://arxiv.org/pdf/2106.05093.pdf) (Cunxiao Du, ICML 2021)
+
+[Mixed Cross Entropy Loss for Neural Machine Translation](http://proceedings.mlr.press/v139/li21n/li21n.pdf) (Haoran Li, ICML 2021)
+
+[Rejuvenating Low-Frequency Words: Making the Most of Parallel Data in Non-Autoregressive Translation](https://arxiv.org/pdf/2106.00903.pdf) (Liang Ding, ACL 2021)
+
+[Self-Training Sampling with Monolingual Data Uncertainty for Neural Machine Translation](https://arxiv.org/pdf/2106.00941.pdf) (Wenxiang Jiao, ACL 2021)
+
+[Neural Machine Translation with Monolingual Translation Memory](https://arxiv.org/pdf/2105.11269.pdf) (Deng Cai, ACL 2021)
+
+[On the Language Coverage Bias for Neural Machine Translation](https://arxiv.org/pdf/2106.03297.pdf) (Shuo Wang, ACL 2021 Findings)
+
+[Machine Translation Decoding beyond Beam Search](https://arxiv.org/pdf/2104.05336.pdf) (Remi Leblond, 2021)
+
+[To Ship or Not to Ship: An Extensive Evaluation of Automatic Metrics for Machine Translation](https://arxiv.org/pdf/2107.10821.pdf) (Tom Kocmi, 2021)
+
+[Phrase-level Active Learning for Neural Machine Translation](https://arxiv.org/pdf/2106.11375.pdf) (Junjie Hu, 2021)
+
+##### Word/Phrase/Sentence Alignment
+
+[The Mathematics of Statistical Machine Translation: Parameter Estimation](https://aclanthology.org/J93-2003.pdf) (Peter E Brown, CL 1993, [code](https://zhuanlan.zhihu.com/p/72640549))
 
 [HMM-Based Word Alignment in Statistical Translation](https://aclanthology.org/C96-2141.pdf) (Stephan Vogel, COLING 1996)
+
+[Models of Translational Equivalence among Words](https://aclanthology.org/J00-2004.pdf) (I. Dan Melamed, CL 2000)
 
 [Improved Statistical Alignment Models](https://aclanthology.org/P00-1056.pdf) (Franz Josef Och, ACL 2000)
 
@@ -1734,7 +1800,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [NeurAlign: Combining Word Alignments Using Neural Networks](https://aclanthology.org/H05-1009.pdf) (Necip Fazil Ayan, 2005)
 
+[Measuring Word Alignment Quality for Statistical Machine Translation](https://direct.mit.edu/coli/article/33/3/293/1949/Measuring-Word-Alignment-Quality-for-Statistical) (Alexander Fraser, CL 2007)
+
 [Parallel Implementations of Word Alignment Tool](https://aclanthology.org/W08-0509.pdf) (Qin Gao, 2008)
+
+[Unsupervised Word Alignment with Arbitrary Features](https://aclanthology.org/P11-1042.pdf) (Chris Dyer, ACL 2011)
 
 [A Simple, Fast, and Effective Reparameterization of IBM Model 2](https://aclanthology.org/N13-1073.pdf) (Chris Dyer, NAACL 2013)
 
@@ -1744,13 +1814,23 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Recurrent Neural Networks for Word Alignment Model](https://aclanthology.org/P14-1138.pdf) (Akihiro Tamura, ACL 2014)
 
+[Contrastive Unsupervised Word Alignment with Non-Local Features](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/view/9570/9556) (Yang Liu, AAAI 2015)
+
 [Efficient Word Alignment with Markov Chain Monte Carlo](https://helda.helsinki.fi/bitstream/handle/10138/232817/Efficient_Word_Alignment_with_Markov_Chain_Monte_Carlo.pdf?sequence=1) (Robert Östling, 2016, [code](https://github.com/robertostling/efmaral))
 
 [Neural Network-based Word Alignment through Score Aggregation](https://arxiv.org/pdf/1606.09560.pdf) (Joel Legrand, 2016)
 
 [On The Alignment Problem In Multi-Head Attention-Based Neural Machine Translation](https://arxiv.org/pdf/1809.03985.pdf) (Tamer Alkhouli, 2018)
 
+[End-to-end Neural Word Alignment Outperforms GIZA++](https://aclanthology.org/2020.acl-main.146.pdf) (Thomas Zenkel, ACL 2020)
+
+[A Supervised Word Alignment Method based on Cross-Language Span Prediction using Multilingual BERT](https://aclanthology.org/2020.emnlp-main.41.pdf) (Masaaki Nagata, EMNLP 2020)
+
+[Accurate Word Alignment Induction from Neural Machine Translation](https://arxiv.org/pdf/2004.14837.pdf) (Yun Chen, EMNLP 2020)
+
 [SimAlign: High Quality Word Alignments Without Parallel Training Data Using Static and Contextualized Embeddings](https://arxiv.org/pdf/2004.08728.pdf) (Masoud Jalili Sabet, EMNLP 2020 Findings)
+
+[SpanAlign: Sentence Alignment Method based on Cross-Language Span Prediction and ILP](https://aclanthology.org/2020.coling-main.418.pdf) (Katsuki Chousa, COLING 2020)
 
 [Neural Baselines for Word Alignment](https://arxiv.org/pdf/2009.13116.pdf) (Anh Khoa Ngo Ho, 2020)
 
@@ -1758,7 +1838,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [MASK-ALIGN: Self-Supervised Neural Word Alignment](https://arxiv.org/pdf/2012.07162.pdf) (Chi Chen, ACL 2021, [code](https://github.com/THUNLP-MT/Mask-Align))
 
+[Embedding-Enhanced Giza++: Improving Alignment in Low- and HighResource Scenarios Using Embedding Space Geometry](https://arxiv.org/pdf/2104.08721.pdf) (Kelly Marchisio, 2021)
+
 ##### Low-Resource Machine Translation
+
+[Rapid Adaptation of Neural Machine Translation to New Languages](https://arxiv.org/pdf/1808.04189.pdf) (Graham Neubig, EMNLP 2018)
 
 [Generalized Data Augmentation for Low-Resource Translation](https://arxiv.org/pdf/1906.03785.pdf) (Mengzhou Xia, ACL 2019, [code](https://github.com/xiamengzhou/DataAugForLRL))
 
@@ -1780,9 +1864,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Multilingual Neural Machine Translation with Language Clustering](https://arxiv.org/pdf/1908.09324.pdf) (Xu Tan, EMNLP 2019)
 
+[XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalisation](http://proceedings.mlr.press/v119/hu20b/hu20b.pdf) (Junjie Hu, ICML 2020)
+
 [Balancing Training for Multilingual Neural Machine Translation](https://arxiv.org/pdf/2004.06748.pdf) (Xinyi Wang, ACL 2020)
 
 [Knowledge Distillation for Multilingual Unsupervised Neural Machine Translation](https://arxiv.org/pdf/2004.10171.pdf) (Haipeng Sun, ACL 2020)
+
+[Explicit Alignment Objectives for Multilingual Bidirectional Encoders](https://arxiv.org/pdf/2010.07972.pdf) (Junjie Hu, NAACL 2021)
+
+[Lightweight Adapter Tuning for Multilingual Speech Translation](https://arxiv.org/pdf/2106.01463.pdf) (Hang Le, ACL 2021)
 
 #### Paraphrase Generation
 
@@ -1812,15 +1902,43 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Deep code search](https://guxd.github.io/papers/deepcs.pdf) (Xiaodong Gu, ICSE 2018)
 
+#### Low-Resource Natural Language Processing
+
+[Variational Information Bottleneck for Effective Low-Resource Fine-Tuning](https://arxiv.org/abs/2106.05469) (Rabeeh Karimi Mahabadi, ICLR 2021)
+
+#### Multilinguality
+
+[How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models](https://arxiv.org/pdf/2012.15613.pdf) (Phillip Rust, ACL 2021)
+
+[A Closer Look at Few-Shot Crosslingual Transfer: The Choice of Shots Matters](https://arxiv.org/pdf/2012.15682.pdf) (Mengjie Zhao, ACL 2021)
+
+[XLM-E: Cross-lingual Language Model Pre-training via ELECTRA](https://arxiv.org/pdf/2106.16138.pdf) (Zewen Chi, 2021)
+
 #### Interpretability in Natural Language Processing
+
+[What you can cram into a single vector: Probing sentence embeddings for linguistic properties](https://arxiv.org/pdf/1805.01070.pdf) (Alexis Conneau, ACL 2018)
+
+[Linguistic Knowledge and Transferability of Contextual Representations](https://arxiv.org/pdf/1903.08855.pdf) (Nelson F. Liu, NAACL 2019)
 
 [What Does BERT Look At? An Analysis of BERT’s Attention](https://arxiv.org/pdf/1906.04341.pdf) (Kevin Clark, ACL 2019 Workshop)
 
 [Revealing the Dark Secrets of BERT](https://arxiv.org/pdf/1908.08593.pdf) (Olga Kovaleva, EMNLP 2019)
 
+[How Can We Know What Language Models Know?](https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00324/96460/How-Can-We-Know-What-Language-Models-Know) (Zhengbao Jiang, TACL 2020)
+
+[Generating Hierarchical Explanations on Text Classification via Feature Interaction Detection](https://arxiv.org/pdf/2004.02015.pdf) (Hanjie Chen, ACL 2020)
+
+[AUTOPROMPT: Eliciting Knowledge from Language Models with Automatically Generated Prompts](https://arxiv.org/pdf/2010.15980.pdf) (Taylor Shin, 2020)
+
+[When Do You Need Billions of Words of Pretraining Data?](https://arxiv.org/pdf/2011.04946.pdf) (Yian Zhang, 2020)
+
+[SparseBERT: Rethinking the Importance Analysis in Self-attention](https://arxiv.org/pdf/2102.12871.pdf) (Han Shi, ICML 2021)
+
 #### Fairness in Natural Language Processing
 
 [Learning Gender-Neutral Word Embeddings](https://arxiv.org/pdf/1809.01496.pdf) (Jieyu Zhao, EMNLP 2018)
+
+[StereoSet: Measuring Stereotypical Bias in Pretrained Language Models](https://arxiv.org/pdf/2004.09456.pdf) (Moin Nadeem, 2020)
 
 ### Computer Vision
 
@@ -2282,6 +2400,14 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Synthesizer: Rethinking Self-Attention for Transformer Models](http://proceedings.mlr.press/v139/tay21a/tay21a.pdf) (Yi Tay, ICML 2021, [note](https://zhuanlan.zhihu.com/p/148054019))
 
+[Relative Positional Encoding for Transformers with Linear Complexity](http://proceedings.mlr.press/v139/liutkus21a/liutkus21a.pdf) (Antoine Liutkus, ICML 2021)
+
+[The Case for Translation-Invariant Self-Attention in Transformer-Based Language Models](https://arxiv.org/pdf/2106.01950.pdf) (Ulme Wennberg, ACL 2021)
+
+[Not All Attention Is All You Need](https://arxiv.org/pdf/2104.04692.pdf) (Hongqiu Wu, 2021)
+
+[Going Beyond Linear Transformers with Recurrent Fast Weight Programmers](https://arxiv.org/pdf/2106.06295.pdf) (Kazuki Irie, 2021)
+
 ##### Sparse Attention
 
 [From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification](http://proceedings.mlr.press/v48/martins16.pdf) (Andre F. T. Martins, ICML 2016, [code](https://github.com/KrisKorrel/sparsemax-pytorch), [note](https://www.cs.utah.edu/~tli/posts/2019/01/blog-post-1/))
@@ -2293,6 +2419,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [On Controllable Sparse Alternatives to Softmax](https://arxiv.org/pdf/1810.11975.pdf) (Anirban Laha, NeuIPS 2018)
 
 [Sparse Sequence-to-Sequence Models](https://arxiv.org/pdf/1905.05702.pdf) (Ben Peters, ACL 2019, [note](https://zhuanlan.zhihu.com/p/76607614))
+
+[Is Sparse Attention more Interpretable?](https://arxiv.org/pdf/2106.01087.pdf) (Clara Meister, ACL 2021)
+
+[Sparse Attention with Linear Units](https://arxiv.org/abs/2104.07012) (Biao Zhang, 2021)
 
 #### Optimization
 
@@ -2382,9 +2512,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [DouZero: Mastering DouDizhu with Self-Play Deep Reinforcement Learning](https://arxiv.org/pdf/2106.06135.pdf) (Daochen Zha, ICML 2021)
 
-#### Contrastive Learning
+#### Self-Supervised Learning
 
 [Dimensionality Reduction by Learning an Invariant Mapping](http://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf) (Raia Hadsell, CVPR 2006)
+
+[Pixel Recurrent Neural Networks](http://proceedings.mlr.press/v48/oord16.pdf) (Aaron van den Oord, ICML 2016)
+
+[Conditional Image Generation with PixelCNN Decoders](https://arxiv.org/pdf/1606.05328.pdf) (Aaron van den Oord, NeuIPS 2016)
 
 [Improved Deep Metric Learning with Multi-class N-pair Loss Objective](https://papers.nips.cc/paper/2016/file/6b180037abbebea991d8b1232f8a8ca9-Paper.pdf) (Kihyuk Sohn, NeuIPS 2016)
 
@@ -2407,6 +2541,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Exploring Simple Siamese Representation Learning](https://arxiv.org/pdf/2011.10566.pdf) (Xinlei Chen, 2020, [note](https://zhuanlan.zhihu.com/p/331678807))
 
 [Bootstrap Your Own Latent A New Approach to Self-Supervised Learning](https://arxiv.org/pdf/2006.07733.pdf) (Jean-Bastien Gril, 2020, [code](https://github.com/lucidrains/byol-pytorch))
+
+[Self-supervised Learning: Generative or Contrastive](https://arxiv.org/pdf/2006.08218.pdf) (Xiao Liu, TKDE 2021)
+
+[Barlow Twins: Self-Supervised Learning via Redundancy Reduction](https://arxiv.org/pdf/2103.03230.pdf) (Jure Zbontar, ICML 2021, [code](https://github.com/facebookresearch/barlowtwins))
+
+[Understanding self-supervised Learning Dynamics without Contrastive Pairs](https://arxiv.org/pdf/2102.06810.pdf) (Yuandong Tian, ICML 2021)
 
 [An Empirical Study of Training Self-Supervised Vision Transformers](https://arxiv.org/pdf/2104.02057.pdf) (Xinlei Chen, 2021)
 
@@ -2466,6 +2606,20 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Automated Curriculum Learning for Neural Networks](http://proceedings.mlr.press/v70/graves17a/graves17a.pdf) (Alex Graves, ICML 2017)
 
+#### Federated Learning
+
+[Federated Machine Learning: Concept and Applications](https://dl.acm.org/doi/abs/10.1145/3298981) (Qiang Yang, 2019)
+
+[Advances and Open Problems in Federated Learning](https://arxiv.org/abs/1912.04977) (Peter Kairouz, 2019)
+
+[Towards Federated Learning at Scale: System Design](https://arxiv.org/pdf/1902.01046.pdf) (Keith Bonawitz, 2019)
+
+[SecureBoost: A Lossless Federated Learning Framework](https://arxiv.org/pdf/1901.08755.pdf) (Kewei Cheng, 2019)
+
+[Personalized Federated Learning with Theoretical Guarantees: A Model-Agnostic Meta-Learning Approach](https://proceedings.neurips.cc/paper/2020/file/24389bfe4fe2eba8bf9aa9203a44cdad-Paper.pdf) (Alireza Fallah, NeuIPS 2020)
+
+[Cluster-driven Graph Federated Learning over Multiple Domains](https://arxiv.org/pdf/2104.14628.pdf) (Debora Caldarola, CVPR 2021)
+
 #### Model Compression and Acceleration
 
 [A Survey of Model Compression and Acceleration for Deep Neural Networks](https://arxiv.org/pdf/1710.09282.pdf) (Yu Cheng, 2017)
@@ -2519,6 +2673,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Neural Architecture Search: A Survey](http://www.jmlr.org/papers/volume20/18-598/18-598.pdf) (Thomas Elsken, JMLR 2019, [note](https://zhuanlan.zhihu.com/p/123144164))
 
 [Neural Architecture Design for GPU-Efficient Networks](https://arxiv.org/pdf/2006.14090.pdf) (Ming Lin, 2020, [code](https://github.com/idstcv/GPU-Efficient-Networks), [note](https://zhuanlan.zhihu.com/p/151042330))
+
+#### Interpretability
+
+[A Survey on Neural Network Interpretability](https://arxiv.org/pdf/2012.14261.pdf) (Yu Zhang, 2020)
 
 #### Evidential Deep Learning and Uncertainty
 
