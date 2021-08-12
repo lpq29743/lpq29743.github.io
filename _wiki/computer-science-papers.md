@@ -1692,6 +1692,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Machine Translation
 
+[Statistical Phrase-Based Translation](https://aclanthology.org/N03-1017.pdf) (Philipp Koehn, NAACL 2003)
+
+[Moses: Open Source Toolkit for Statistical Machine Translation](https://aclanthology.org/P07-2045.pdf) (Philipp Koehn, ACL 2007)
+
+[Statistical Machine Translation](https://books.google.com.hk/books?hl=en&lr=&id=kKYgAwAAQBAJ&oi=fnd&pg=PR11&dq=info:a-eei_wZtkcJ:scholar.google.com&ots=k7yo-Tb54u&sig=3YW5kEUyuihW52UjZk3Aq1H1m0Q&redir_esc=y#v=onepage&q&f=false) (Philipp Koehn, 2010)
+
 [Exploiting Similarities among Languages for Machine Translation](https://arxiv.org/pdf/1309.4168.pdf) (Tomas Mikolov, 2013)
 
 [Learning phrase representations using RNN encoder-decoder for statistical machine translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014, [note](https://cuiqingcai.com/5737.html))
@@ -1699,6 +1705,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [On the properties of neural machine translation: Encoder–Decoder approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014, [note](https://blog.csdn.net/BeforeEasy/article/details/80332497))
 
 [Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf) (Rico Sennrich, ACL 2016, [code](https://github.com/rsennrich/subword-nmt), [note](https://zhuanlan.zhihu.com/p/38574684))
+
+[Improving Neural Machine Translation Models with Monolingual Data](https://arxiv.org/pdf/1511.06709.pdf) (Rico Sennrich, ACL 2016)
 
 [Modeling Coverage for Neural Machine Translation](https://www.aclweb.org/anthology/P16-1008.pdf) (Zhaopeng Tu, ACL 2016, [note](https://zhuanlan.zhihu.com/p/22993927))
 
@@ -1711,6 +1719,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Sequence-to-Dependency Neural Machine Translation](http://www.aclweb.org/anthology/P17-1065) (Shuangzhi Wu, ACL 2017, [note](https://www.jianshu.com/p/2eb3c89234cb))
 
 [Neural Machine Translation and Sequence-to-sequence Models: A Tutorial](https://arxiv.org/pdf/1703.01619.pdf) (Graham Neubig, 2017, [note](https://google.github.io/seq2seq/nmt/))
+
+[Six Challenges for Neural Machine Translation](https://arxiv.org/pdf/1706.03872.pdf) (Philipp Koehn, 2017)
 
 [Multi-channel Encoder for Neural Machine Translation](https://arxiv.org/pdf/1712.02109.pdf) (Hao Xiong, AAAI 2018, [note](https://www.jiqizhixin.com/articles/2017-12-14-10))
 
@@ -1778,6 +1788,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Neural Machine Translation with Monolingual Translation Memory](https://arxiv.org/pdf/2105.11269.pdf) (Deng Cai, ACL 2021)
 
+[Vocabulary Learning via Optimal Transport for Machine Translation](https://arxiv.org/pdf/2012.15671.pdf) (Jingjing Xu, ACL 2021, [note](https://zhuanlan.zhihu.com/p/387561592))
+
 [On the Language Coverage Bias for Neural Machine Translation](https://arxiv.org/pdf/2106.03297.pdf) (Shuo Wang, ACL 2021 Findings)
 
 [Machine Translation Decoding beyond Beam Search](https://arxiv.org/pdf/2104.05336.pdf) (Remi Leblond, 2021)
@@ -1785,6 +1797,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [To Ship or Not to Ship: An Extensive Evaluation of Automatic Metrics for Machine Translation](https://arxiv.org/pdf/2107.10821.pdf) (Tom Kocmi, 2021)
 
 [Phrase-level Active Learning for Neural Machine Translation](https://arxiv.org/pdf/2106.11375.pdf) (Junjie Hu, 2021)
+
+##### Dataset
+
+[Europarl: A Parallel Corpus for Statistical Machine Translation](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.459.5497&rep=rep1&type=pdf) (Philipp Koehn, 2005)
 
 ##### Word/Phrase/Sentence Alignment
 
@@ -1797,6 +1813,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Improved Statistical Alignment Models](https://aclanthology.org/P00-1056.pdf) (Franz Josef Och, ACL 2000)
 
 [A Systematic Comparison of Various Statistical Alignment Models](https://watermark.silverchair.com/089120103321337421.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAs8wggLLBgkqhkiG9w0BBwagggK8MIICuAIBADCCArEGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMkCEvPs_rjOQ1vujTAgEQgIICgq9VNVpiuBa5_Kw7zn35yQ0srXxnm6UXC7v1TCL2et0s17aTNOiFRpU2Eyi32wUlJPZ4IImNscvUcXbI-h_I1n5DO16iUfRadsoF4wlP-jBkuJ6Hi-wVp4L9sRcQ2ivzLj2QsMvBy-ZyRgoWP91RaQTeV4kkD7ggRB03n5ujWF0IDtn-83BA-oHYhrFAzfyo8mIxGV9PFqfymtZjg-61JdU1I2OHkXPQT-SaGIy1CWJyuLbMmg1bm_IsuhiQPrfZDq2V7I5XXjxH7k024-RD3oJ17wTN53W6f7YbMnHHilVSzmDfqZE0QdM_HF47dklvse4ZD_0qBnDl_APKFG7ctloY3T19fznYviPcF5zSFbyyax3FKjw1DFYqR80FsuRZmzzuTiGw156Ntml_SfE9dObmdE6L8la8kWzHaaa1uo4_NgZ_0qSeLEmFH9hQB7MJZZbwKDjEj8_0M6deMLTtHkZ1OUiqMRgdP6mNa4JHOf3R1vz8LFDgiEVOyR9LN-KUffamhjpN4ZDf47Xw9YS9VLGlYAwOiAivqTM0InPjW8kEwXP07_VX2n1HbY21FYE1cvZkRb-V-KfORmjj3zWqNGKO-EUXMtoXUF2G1JyNfYMhMEvgL-IsCv39SUTiWhO_bK2fxBb7j7JcrRDuRQ_RapQ06wSJWXshvvap2QLg5CFvLBSZIUT1d6d6GNLuYu0WhW9T_PiWuJSbwFpPjbRdcYTGt-JEFfNJqTdBWsG4tzePJ6hcm3K6R93ytOxV1TjfLb4LIJ2vGTSZFukJbToKdpEuOjbmCzBtM4Ua275bddrQXVinUUCpS52KFAfIji0g2dET_1GkKpR2JjE_ThXgVFRMwg) (Franz Josef Och, CL 2003)
+
+[Log-Linear Models for Word Alignment](https://www.aclweb.org/anthology/P05-1057.pdf) (Yang Liu, ACL 2005)
 
 [NeurAlign: Combining Word Alignments Using Neural Networks](https://aclanthology.org/H05-1009.pdf) (Necip Fazil Ayan, 2005)
 
@@ -1874,6 +1892,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Lightweight Adapter Tuning for Multilingual Speech Translation](https://arxiv.org/pdf/2106.01463.pdf) (Hang Le, ACL 2021)
 
+##### Context-Aware Machine Translation
+
+[Context-Aware Neural Machine Translation Learns Anaphora Resolution](https://arxiv.org/pdf/1805.10163.pdf) (Elena Voita, ACL 2018)
+
+[When a Good Translation is Wrong in Context: Context-Aware Machine Translation Improves on Deixis, Ellipsis, and Lexical Cohesion](https://arxiv.org/pdf/1905.05979.pdf) (Elena Voita, ACL 2019)
+
 #### Paraphrase Generation
 
 [Submodular Optimization-based Diverse Paraphrasing and its Effectiveness in Data Augmentation](https://www.aclweb.org/anthology/N19-1363.pdf) (Ashutosh Kumar, NAACL 2019, [code](https://github.com/malllabiisc/DiPS))
@@ -1907,6 +1931,14 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Variational Information Bottleneck for Effective Low-Resource Fine-Tuning](https://arxiv.org/abs/2106.05469) (Rabeeh Karimi Mahabadi, ICLR 2021)
 
 #### Multilinguality
+
+[Monolingual and Cross-Lingual Information Retrieval Models Based on (Bilingual) Word Embeddings](https://dl.acm.org/doi/abs/10.1145/2766462.2767752) (Ivan Vulić, SIGIR 2015)
+
+[How to (Properly) Evaluate Cross-Lingual Word Embeddings: On Strong Baselines, Comparative Analyses, and Some Misconceptions](https://arxiv.org/pdf/1902.00508.pdf) (Goran Glavaš, ACL 2019)
+
+[A Survey of Cross-lingual Word Embedding Models](https://arxiv.org/pdf/1706.04902.pdf) (Sebastian Ruder, JAIR 2019)
+
+[MAD-X: An Adapter-Based Framework for Multi-Task Cross-Lingual Transfer](https://arxiv.org/pdf/2005.00052.pdf) (Jonas Pfeiffer, EMNLP 2020)
 
 [How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models](https://arxiv.org/pdf/2012.15613.pdf) (Phillip Rust, ACL 2021)
 
