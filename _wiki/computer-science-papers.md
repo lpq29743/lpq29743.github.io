@@ -1700,9 +1700,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Exploiting Similarities among Languages for Machine Translation](https://arxiv.org/pdf/1309.4168.pdf) (Tomas Mikolov, 2013)
 
-[Learning phrase representations using RNN encoder-decoder for statistical machine translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014, [note](https://cuiqingcai.com/5737.html))
+[Learning Phrase Representations Using RNN Encoder-Decoder for Statistical Machine Translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014, [note](https://cuiqingcai.com/5737.html))
 
-[On the properties of neural machine translation: Encoder–Decoder approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014, [note](https://blog.csdn.net/BeforeEasy/article/details/80332497))
+[On the Properties of Neural Machine Translation: Encoder–Decoder Approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014, [note](https://blog.csdn.net/BeforeEasy/article/details/80332497))
 
 [Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf) (Rico Sennrich, ACL 2016, [code](https://github.com/rsennrich/subword-nmt), [note](https://zhuanlan.zhihu.com/p/38574684))
 
@@ -1860,6 +1860,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Low-Resource Machine Translation
 
+[Meta-Learning for Low-Resource Neural Machine Translation](https://arxiv.org/pdf/1808.08437.pdf) (Jiatao Gu, EMNLP 2018)
+
 [Rapid Adaptation of Neural Machine Translation to New Languages](https://arxiv.org/pdf/1808.04189.pdf) (Graham Neubig, EMNLP 2018)
 
 [Generalized Data Augmentation for Low-Resource Translation](https://arxiv.org/pdf/1906.03785.pdf) (Mengzhou Xia, ACL 2019, [code](https://github.com/xiamengzhou/DataAugForLRL))
@@ -1891,6 +1893,32 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Explicit Alignment Objectives for Multilingual Bidirectional Encoders](https://arxiv.org/pdf/2010.07972.pdf) (Junjie Hu, NAACL 2021)
 
 [Lightweight Adapter Tuning for Multilingual Speech Translation](https://arxiv.org/pdf/2106.01463.pdf) (Hang Le, ACL 2021)
+
+##### Multi-Domain Machine Translation
+
+[Multi-Domain Neural Machine Translation with Word-Level Domain Context Discrimination](https://aclanthology.org/D18-1041.pdf) (Jiali Zeng, EMNLP 2018)
+
+[A Survey of Domain Adaptation for Neural Machine Translation](https://arxiv.org/pdf/1806.00258.pdf) (Chenhui Chu, COLING 2018)
+
+[Improving Domain Adaptation Translation with Domain Invariant and Specific Information](https://arxiv.org/pdf/1904.03879.pdf) (Shuhao Gu, NAACL 2019)
+
+[Domain Adaptation of Neural Machine Translation by Lexicon Induction](https://arxiv.org/pdf/1906.00376.pdf) (Junjie Hu, ACL 2019)
+
+[Iterative Dual Domain Adaptation for Neural Machine Translation](https://arxiv.org/pdf/1912.07239.pdf) (EMNLP 2019)
+
+[Go From the General to the Particular: Multi-Domain Translation with Domain Transformation Networks](https://ojs.aaai.org/index.php/AAAI/article/view/6461) (Yong Wang, AAAI 2020)
+
+[Learning a Multi-Domain Curriculum for Neural Machine Translation](https://arxiv.org/pdf/1908.10940.pdf) (Wei Wang, ACL 2020)
+
+[Multi-Domain Neural Machine Translation with Word-Level Adaptive Layer-wise Domain Mixing](https://arxiv.org/pdf/1911.02692.pdf) (Haoming Jiang, ACL 2020)
+
+[Distilling Multiple Domains for Neural Machine Translation](https://aclanthology.org/2020.emnlp-main.364.pdf) (Anna Currey, EMNLP 2020)
+
+[Exploring Discriminative Word-Level Domain Contexts for Multi-Domain Neural Machine Translation](https://ieeexplore.ieee.org/abstract/document/8907409) (Jinsong Su, TPAMI 2021)
+
+[Finding Sparse Structures for Domain Specific Neural Machine Translation](https://arxiv.org/pdf/2012.10586.pdf) (Jianze Liang, AAAI 2021)
+
+[Pruning-then-Expanding Model for Domain Adaptation of Neural Machine Translation](https://arxiv.org/pdf/2103.13678.pdf) (Shuhao Gu, NAACL 2021)
 
 ##### Context-Aware Machine Translation
 
