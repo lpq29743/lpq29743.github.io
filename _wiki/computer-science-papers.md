@@ -1780,6 +1780,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Europarl: A Parallel Corpus for Statistical Machine Translation](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.459.5497&rep=rep1&type=pdf) (Philipp Koehn, 2005)
 
+[Creating a Massively Parallel Bible Corpus](http://cysouw.de/home/presentations_files/cysouwmayerPARALLELLREC.pdf) (Thomas Mayer, 2014)
+
 ##### Word/Phrase/Sentence Alignment
 
 [The Mathematics of Statistical Machine Translation: Parameter Estimation](https://aclanthology.org/J93-2003.pdf) (Peter E Brown, CL 1993, [code](https://zhuanlan.zhihu.com/p/72640549))
@@ -1872,6 +1874,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Multilingual Machine Translation
 
+[Google's Multilingual Neural Machine Translation System: Enabling Zero-Shot Translation](https://arxiv.org/pdf/1611.04558.pdf) (Melvin Johnson, TACL 2017)
+
 [Multilingual Neural Machine Translation with Knowledge Distillation](https://arxiv.org/pdf/1902.10461.pdf) (Xu Tan, ICLR 2019, [code](https://github.com/RayeRen/multilingual-kd-pytorch))
 
 [Multilingual Neural Machine Translation With Soft Decoupled Encoding](https://arxiv.org/pdf/1902.03499.pdf) (Xinyi Wang, ICLR 2019, [code](https://github.com/cindyxinyiwang/SDE), [note](https://zhuanlan.zhihu.com/p/60845246))
@@ -1888,9 +1892,17 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Knowledge Distillation for Multilingual Unsupervised Neural Machine Translation](https://arxiv.org/pdf/2004.10171.pdf) (Haipeng Sun, ACL 2020)
 
+[Improving Massively Multilingual Neural Machine Translation and Zero-Shot Translation](https://arxiv.org/pdf/2004.11867.pdf) (Biao Zhang, ACL 2020)
+
+[Leveraging Monolingual Data with Self-Supervision for Multilingual Neural Machine Translation](https://arxiv.org/pdf/2005.04816.pdf) (Aditya Siddhant, ACL 2020)
+
+[Beyond English-Centric Multilingual Machine Translation](https://arxiv.org/pdf/2010.11125.pdf) (Angela Fan, 2020)
+
 [Explicit Alignment Objectives for Multilingual Bidirectional Encoders](https://arxiv.org/pdf/2010.07972.pdf) (Junjie Hu, NAACL 2021)
 
 [Lightweight Adapter Tuning for Multilingual Speech Translation](https://arxiv.org/pdf/2106.01463.pdf) (Hang Le, ACL 2021)
+
+[Contrastive Learning for Many-to-many Multilingual Neural Machine Translation](https://arxiv.org/pdf/2105.09501.pdf) (Xiao Pan, ACL 2021)
 
 ##### Multi-Domain Machine Translation
 
@@ -1965,6 +1977,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 #### Multilinguality
 
 [Monolingual and Cross-Lingual Information Retrieval Models Based on (Bilingual) Word Embeddings](https://dl.acm.org/doi/abs/10.1145/2766462.2767752) (Ivan Vulić, SIGIR 2015)
+
+[On the Limitations of Unsupervised Bilingual Dictionary Induction](https://arxiv.org/pdf/1805.03620.pdf) (Anders Søgaard, ACL 2018)
 
 [How to (Properly) Evaluate Cross-Lingual Word Embeddings: On Strong Baselines, Comparative Analyses, and Some Misconceptions](https://arxiv.org/pdf/1902.00508.pdf) (Goran Glavaš, ACL 2019)
 
