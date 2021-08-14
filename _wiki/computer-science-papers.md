@@ -834,6 +834,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Inducing Target-Specific Latent Structures for Aspect Sentiment Classification](https://www.aclweb.org/anthology/2020.emnlp-main.451.pdf) (Chenhua Chen, EMNLP 2020, [note](https://zhuanlan.zhihu.com/p/311246774))
 
+[Tasty Burgers, Soggy Fries: Probing Aspect Robustness in Aspect-Based Sentiment Analysis](https://arxiv.org/pdf/2009.07964.pdf) (Xiaoyu Xing, EMNLP 2020)
+
 ##### Aspect-Based Sentiment Analysis
 
 [A Joint Model of Text and Aspect Ratings for Sentiment Summarization](http://ivan-titov.org/papers/acl08.pdf) (Ivan Titov, ACL 2008)
@@ -1726,19 +1728,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Translating Pro-Drop Languages with Reconstruction Models](https://ojs.aaai.org/index.php/AAAI/article/view/11913) (Longyue Wang, AAAI 2018)
 
-[Unsupervised Neural Machine Translation](https://arxiv.org/pdf/1710.11041.pdf) (Mikel Artetxe, ICLR 2018, [code](https://github.com/artetxem/undreamt), [note](https://zhuanlan.zhihu.com/p/30649985))
-
-[Non-Autoregressive Neural Machine Translation](https://arxiv.org/pdf/1711.02281.pdf) (Jiatao Gu, ICLR 2018, [code](https://github.com/salesforce/nonauto-nmt), [note](https://zhuanlan.zhihu.com/p/35866317))
-
-[Word Translation Without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) (Alexis Conneau, ICLR 2018)
-
 [Learning to Jointly Translate and Predict Dropped Pronouns with a Shared Reconstruction Mechanism](https://arxiv.org/pdf/1810.06195.pdf) (Longyue Wang, EMNLP 2018)
-
-[Phrase-Based & Neural Unsupervised Machine Translation](https://arxiv.org/pdf/1804.07755.pdf) (Guillaume Lample, EMNLP 2018, [code](https://github.com/facebookresearch/UnsupervisedMT), [note](https://blog.csdn.net/ljp1919/article/details/103074097))
-
-[Rapid Adaptation of Neural Machine Translation to New Languages](https://arxiv.org/pdf/1808.04189.pdf) (Graham Neubig, EMNLP 2018)
-
-[A Survey of Domain Adaptation for Neural Machine Translation](https://arxiv.org/pdf/1806.00258.pdf) (Chenhui Chu, COLING 2018)
 
 [Pivot-based Transfer Learning for Neural Machine Translation between Non-English Languages](https://arxiv.org/pdf/1909.09524.pdf) (Yunsu Kim, EMNLP 2019)
 
@@ -1749,8 +1739,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Dynamically Composing Domain-Data Selection with Clean-Data Selection by "Co-Curricular Learning" for Neural Machine Translation](https://arxiv.org/pdf/1906.01130.pdf) (Wei Wang, ACL 2019)
 
 [Effective Cross-lingual Transfer of Neural Machine Translation Models without Shared Vocabularies](https://arxiv.org/pdf/1905.05475.pdf) (Yunsu Kim, ACL 2019, [code](https://github.com/yunsukim86/sockeye-transfer))
-
-[Latent Variable Model for Multi-modal Translation](https://www.aclweb.org/anthology/P19-1642.pdf) (Iacer Calixto, ACL 2019)
 
 [Distilling Translations with Visual Awareness](https://www.aclweb.org/anthology/P19-1653.pdf) (Julia Ive, ACL 2019)
 
@@ -1766,23 +1754,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Incorporating Bert into Neural Machine Translation](https://arxiv.org/abs/2002.06823) (Jinhua Zhu, ICLR 2020)
 
-[Learning a Multi-Domain Curriculum for Neural Machine Translation](https://arxiv.org/pdf/1908.10940.pdf) (Wei Wang, ACL 2020)
-
-[Multimodal Transformer for Multimodal Machine Translation](https://www.aclweb.org/anthology/2020.acl-main.400.pdf) (Shaowei Yao, ACL 2020)
-
 [Exploring Supervised and Unsupervised Rewards in Machine Translation](https://arxiv.org/pdf/2102.11403.pdf) (Julia Ive, EACL 2020)
-
-[Context-Aware Cross-Attention for Non-Autoregressive Translation](https://arxiv.org/pdf/2011.00770.pdf) (Liang Ding, COLING 2020)
 
 [Counterfactual Data Augmentation for Neural Machine Translation](https://aclanthology.org/2021.naacl-main.18.pdf) (Qi Liu, NAACL 2021)
 
 [Can Latent Alignments Improve Autoregressive Machine Translation?](https://arxiv.org/pdf/2104.09554.pdf) (Adi Haviv, NAACL 2021)
 
-[Order-Agnostic Cross Entropy for Non-Autoregressive Machine Translation](https://arxiv.org/pdf/2106.05093.pdf) (Cunxiao Du, ICML 2021)
-
 [Mixed Cross Entropy Loss for Neural Machine Translation](http://proceedings.mlr.press/v139/li21n/li21n.pdf) (Haoran Li, ICML 2021)
-
-[Rejuvenating Low-Frequency Words: Making the Most of Parallel Data in Non-Autoregressive Translation](https://arxiv.org/pdf/2106.00903.pdf) (Liang Ding, ACL 2021)
 
 [Self-Training Sampling with Monolingual Data Uncertainty for Neural Machine Translation](https://arxiv.org/pdf/2106.00941.pdf) (Wenxiang Jiao, ACL 2021)
 
@@ -1858,6 +1836,26 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Embedding-Enhanced Giza++: Improving Alignment in Low- and HighResource Scenarios Using Embedding Space Geometry](https://arxiv.org/pdf/2104.08721.pdf) (Kelly Marchisio, 2021)
 
+##### Unsupervised Machine Translation
+
+[Word Translation Without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) (Alexis Conneau, ICLR 2018)
+
+[Unsupervised Neural Machine Translation](https://arxiv.org/pdf/1710.11041.pdf) (Mikel Artetxe, ICLR 2018, [code](https://github.com/artetxem/undreamt), [note](https://zhuanlan.zhihu.com/p/30649985))
+
+[Unsupervised Machine Translation Using Monolingual Corpora Only](https://arxiv.org/pdf/1711.00043.pdf) (Guillaume Lample, ICLR 2018)
+
+[Phrase-Based & Neural Unsupervised Machine Translation](https://arxiv.org/pdf/1804.07755.pdf) (Guillaume Lample, EMNLP 2018, [code](https://github.com/facebookresearch/UnsupervisedMT), [note](https://blog.csdn.net/ljp1919/article/details/103074097))
+
+##### Non-Autoregressive Machine Translation
+
+[Non-Autoregressive Neural Machine Translation](https://arxiv.org/pdf/1711.02281.pdf) (Jiatao Gu, ICLR 2018, [code](https://github.com/salesforce/nonauto-nmt), [note](https://zhuanlan.zhihu.com/p/35866317))
+
+[Context-Aware Cross-Attention for Non-Autoregressive Translation](https://arxiv.org/pdf/2011.00770.pdf) (Liang Ding, COLING 2020)
+
+[Order-Agnostic Cross Entropy for Non-Autoregressive Machine Translation](https://arxiv.org/pdf/2106.05093.pdf) (Cunxiao Du, ICML 2021)
+
+[Rejuvenating Low-Frequency Words: Making the Most of Parallel Data in Non-Autoregressive Translation](https://arxiv.org/pdf/2106.00903.pdf) (Liang Ding, ACL 2021)
+
 ##### Low-Resource Machine Translation
 
 [Meta-Learning for Low-Resource Neural Machine Translation](https://arxiv.org/pdf/1808.08437.pdf) (Jiatao Gu, EMNLP 2018)
@@ -1919,6 +1917,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Finding Sparse Structures for Domain Specific Neural Machine Translation](https://arxiv.org/pdf/2012.10586.pdf) (Jianze Liang, AAAI 2021)
 
 [Pruning-then-Expanding Model for Domain Adaptation of Neural Machine Translation](https://arxiv.org/pdf/2103.13678.pdf) (Shuhao Gu, NAACL 2021)
+
+##### Multi-Modal Translation
+
+[Latent Variable Model for Multi-modal Translation](https://www.aclweb.org/anthology/P19-1642.pdf) (Iacer Calixto, ACL 2019)
+
+[Multimodal Transformer for Multimodal Machine Translation](https://www.aclweb.org/anthology/2020.acl-main.400.pdf) (Shaowei Yao, ACL 2020)
 
 ##### Context-Aware Machine Translation
 
