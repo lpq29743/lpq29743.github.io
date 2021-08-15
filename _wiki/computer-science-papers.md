@@ -1732,10 +1732,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [On the Properties of Neural Machine Translation: Encoder–Decoder Approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014, [note](https://blog.csdn.net/BeforeEasy/article/details/80332497))
 
-[Learning Translation Models from Monolingual Continuous Representations](https://aclanthology.org/N15-1176.pdf) (Kai Zhao, NAACL 2015)
-
-[Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf) (Rico Sennrich, ACL 2016, [code](https://github.com/rsennrich/subword-nmt), [note](https://zhuanlan.zhihu.com/p/38574684))
-
 [Improving Neural Machine Translation Models with Monolingual Data](https://arxiv.org/pdf/1511.06709.pdf) (Rico Sennrich, ACL 2016)
 
 [Modeling Coverage for Neural Machine Translation](https://www.aclweb.org/anthology/P16-1008.pdf) (Zhaopeng Tu, ACL 2016, [note](https://zhuanlan.zhihu.com/p/22993927))
@@ -1758,8 +1754,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Learning to Jointly Translate and Predict Dropped Pronouns with a Shared Reconstruction Mechanism](https://arxiv.org/pdf/1810.06195.pdf) (Longyue Wang, EMNLP 2018)
 
-[Loss in Translation: Learning Bilingual Word Mapping with a Retrieval Criterion](https://aclanthology.org/D18-1330.pdf) (Armand Joulin, EMNLP 2018)
-
 [Pivot-based Transfer Learning for Neural Machine Translation between Non-English Languages](https://arxiv.org/pdf/1909.09524.pdf) (Yunsu Kim, EMNLP 2019)
 
 [Mixed Multi-Head Self-Attention for Neural Machine Translation](https://www.aclweb.org/anthology/D19-5622.pdf) (Hongyi Cui, EMNLP 2019)
@@ -1768,15 +1762,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Dynamically Composing Domain-Data Selection with Clean-Data Selection by "Co-Curricular Learning" for Neural Machine Translation](https://arxiv.org/pdf/1906.01130.pdf) (Wei Wang, ACL 2019)
 
-[Effective Cross-lingual Transfer of Neural Machine Translation Models without Shared Vocabularies](https://arxiv.org/pdf/1905.05475.pdf) (Yunsu Kim, ACL 2019, [code](https://github.com/yunsukim86/sockeye-transfer))
-
 [Distilling Translations with Visual Awareness](https://www.aclweb.org/anthology/P19-1653.pdf) (Julia Ive, ACL 2019)
 
 [Reducing Word Omission Errors in Neural Machine Translation: A Contrastive Learning Approach](https://www.aclweb.org/anthology/P19-1623.pdf) (Zonghan Yang, ACL 2019)
 
 [Bridging the Gap between Training and Inference for Neural Machine Translation](https://arxiv.org/pdf/1906.02448.pdf) (Wen Zhang, ACL 2019)
-
-[Cross-Lingual Pre-Training Based Transfer for Zero-Shot Neural Machine Translation](https://www.aaai.org/ojs/index.php/AAAI/article/view/5341) (Baijun Ji, AAAI 2020)
 
 [Towards Making the Most of BERT in Neural Machine Translation](https://ojs.aaai.org/index.php/AAAI/article/view/6479) (Jiacheng Yang, AAAI 2020)
 
@@ -1796,13 +1786,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Neural Machine Translation with Monolingual Translation Memory](https://arxiv.org/pdf/2105.11269.pdf) (Deng Cai, ACL 2021)
 
-[Vocabulary Learning via Optimal Transport for Machine Translation](https://arxiv.org/pdf/2012.15671.pdf) (Jingjing Xu, ACL 2021, [note](https://zhuanlan.zhihu.com/p/387561592))
-
 [On the Language Coverage Bias for Neural Machine Translation](https://arxiv.org/pdf/2106.03297.pdf) (Shuo Wang, ACL 2021 Findings)
 
 [Machine Translation Decoding beyond Beam Search](https://arxiv.org/pdf/2104.05336.pdf) (Remi Leblond, 2021)
-
-[To Ship or Not to Ship: An Extensive Evaluation of Automatic Metrics for Machine Translation](https://arxiv.org/pdf/2107.10821.pdf) (Tom Kocmi, 2021)
 
 [Phrase-level Active Learning for Neural Machine Translation](https://arxiv.org/pdf/2106.11375.pdf) (Junjie Hu, 2021)
 
@@ -1814,6 +1800,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Massively Parallel Corpus: the Bible in 100 Languages](https://link.springer.com/article/10.1007/s10579-014-9287-y) (Christos Christodouloupoulos, 2015)
 
+##### Automatic Metric
+
+[To Ship or Not to Ship: An Extensive Evaluation of Automatic Metrics for Machine Translation](https://arxiv.org/pdf/2107.10821.pdf) (Tom Kocmi, 2021)
+
 ##### Dictionary Induction
 
 [Exploiting Similarities among Languages for Machine Translation](https://arxiv.org/pdf/1309.4168.pdf) (Tomas Mikolov, 2013)
@@ -1823,6 +1813,14 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Word Translation Without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) (Alexis Conneau, ICLR 2018)
 
 [On the Limitations of Unsupervised Bilingual Dictionary Induction](https://arxiv.org/pdf/1805.03620.pdf) (Anders Søgaard, ACL 2018)
+
+##### Vocabulary Coverage
+
+[Learning Translation Models from Monolingual Continuous Representations](https://aclanthology.org/N15-1176.pdf) (Kai Zhao, NAACL 2015)
+
+[Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf) (Rico Sennrich, ACL 2016, [code](https://github.com/rsennrich/subword-nmt), [note](https://zhuanlan.zhihu.com/p/38574684))
+
+[Vocabulary Learning via Optimal Transport for Machine Translation](https://arxiv.org/pdf/2012.15671.pdf) (Jingjing Xu, ACL 2021, [note](https://zhuanlan.zhihu.com/p/387561592))
 
 ##### Word/Phrase/Sentence/Document Alignment
 
@@ -1946,6 +1944,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [The FLoRes Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English](https://arxiv.org/pdf/1902.01382.pdf) (Francisco Guzman, EMNLP 2019, [code](https://github.com/facebookresearch/flores))
 
+[Cross-Lingual Pre-Training Based Transfer for Zero-Shot Neural Machine Translation](https://www.aaai.org/ojs/index.php/AAAI/article/view/5341) (Baijun Ji, AAAI 2020)
+
 ##### Multilingual Machine Translation
 
 [Google's Multilingual Neural Machine Translation System: Enabling Zero-Shot Translation](https://arxiv.org/pdf/1611.04558.pdf) (Melvin Johnson, TACL 2017)
@@ -1957,6 +1957,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Massively Multilingual Neural Machine Translation](https://arxiv.org/pdf/1903.00089.pdf) (Roee Aharoni, NAACL 2019)
 
 [Target Conditioned Sampling: Optimizing Data Selection for Multilingual Neural Machine Translation](https://arxiv.org/pdf/1905.08212.pdf) (Xinyi Wang, ACL 2019)
+
+[Effective Cross-lingual Transfer of Neural Machine Translation Models without Shared Vocabularies](https://arxiv.org/pdf/1905.05475.pdf) (Yunsu Kim, ACL 2019, [code](https://github.com/yunsukim86/sockeye-transfer))
 
 [Multilingual Neural Machine Translation with Language Clustering](https://arxiv.org/pdf/1908.09324.pdf) (Xu Tan, EMNLP 2019)
 
@@ -2045,6 +2047,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 ##### Multilingual Embedding
 
 [Learning Continuous Phrase Representations for Translation Modeling](https://aclanthology.org/P14-1066.pdf) (Jianfeng Gao, ACL 2014)
+
+[Loss in Translation: Learning Bilingual Word Mapping with a Retrieval Criterion](https://aclanthology.org/D18-1330.pdf) (Armand Joulin, EMNLP 2018)
 
 [A Survey of Cross-lingual Word Embedding Models](https://arxiv.org/pdf/1706.04902.pdf) (Sebastian Ruder, JAIR 2019)
 
