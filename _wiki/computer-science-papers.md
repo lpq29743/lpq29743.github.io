@@ -1650,6 +1650,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Sequence to Sequence
 
+[Sequence to Sequence Learning with Neural Networks](https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf) (Ilya Sutskever, NeuIPS 2014)
+
 [Convolutional Sequence to Sequence Learning](https://pdfs.semanticscholar.org/bb3e/bc09b65728d6eced04929df72a006fb5210b.pdf) (Jonas Gehring, ICML 2017, [code](https://github.com/tobyyouup/conv_seq2seq), [note](https://zhuanlan.zhihu.com/p/26918935))
 
 [Deliberation Networks: Sequence Generation Beyond One-Pass Decoding](https://papers.nips.cc/paper/2017/file/c6036a69be21cb660499b75718a3ef24-Paper.pdf) (Yingce Xia, NIPS 2017)
@@ -1710,6 +1712,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Statistical Phrase-Based Translation](https://aclanthology.org/N03-1017.pdf) (Philipp Koehn, NAACL 2003)
 
+[Minimum Error Rate Training in Statistical Machine Translation](http://aclweb.org/anthology/P03-1021) (Franz Josef Och, ACL 2003)
+
+[Hierarchical Phrase-Based Translation](http://aclweb.org/anthology/J07-2003) (David Chiang, CL 2007)
+
 [Moses: Open Source Toolkit for Statistical Machine Translation](https://aclanthology.org/P07-2045.pdf) (Philipp Koehn, ACL 2007)
 
 [Statistical Machine Translation](https://books.google.com.hk/books?hl=en&lr=&id=kKYgAwAAQBAJ&oi=fnd&pg=PR11&dq=info:a-eei_wZtkcJ:scholar.google.com&ots=k7yo-Tb54u&sig=3YW5kEUyuihW52UjZk3Aq1H1m0Q&redir_esc=y#v=onepage&q&f=false) (Philipp Koehn, 2010)
@@ -1722,13 +1728,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Modeling Coverage for Neural Machine Translation](https://www.aclweb.org/anthology/P16-1008.pdf) (Zhaopeng Tu, ACL 2016, [note](https://zhuanlan.zhihu.com/p/22993927))
 
-[Does String-Based Neural MT Learn Source Syntax?](https://aclanthology.org/D16-1159.pdf) (Xing Shi, EMNLP 2016)
-
 [Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation](https://arxiv.org/pdf/1609.08144.pdf) (Yonghui Wu, 2016, [note](https://blog.csdn.net/Xiao_yanling/article/details/90290862))
 
 [Neural Machine Translation with Reconstruction](https://ojs.aaai.org/index.php/AAAI/article/view/10950) (Zhaopeng Tu, AAAI 2017)
-
-[Sequence-to-Dependency Neural Machine Translation](http://www.aclweb.org/anthology/P17-1065) (Shuangzhi Wu, ACL 2017, [note](https://www.jianshu.com/p/2eb3c89234cb))
 
 [Neural Machine Translation and Sequence-to-sequence Models: A Tutorial](https://arxiv.org/pdf/1703.01619.pdf) (Graham Neubig, 2017, [note](https://google.github.io/seq2seq/nmt/))
 
@@ -1753,6 +1755,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Reducing Word Omission Errors in Neural Machine Translation: A Contrastive Learning Approach](https://www.aclweb.org/anthology/P19-1623.pdf) (Zonghan Yang, ACL 2019)
 
 [Bridging the Gap between Training and Inference for Neural Machine Translation](https://arxiv.org/pdf/1906.02448.pdf) (Wen Zhang, ACL 2019)
+
+[Neural Machine Translation: A Review and Survey](https://arxiv.org/pdf/1912.02047.pdf) (Felix Stahlberg, 2019)
 
 [Towards Making the Most of BERT in Neural Machine Translation](https://ojs.aaai.org/index.php/AAAI/article/view/6479) (Jiacheng Yang, AAAI 2020)
 
@@ -2016,6 +2020,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Multimodal Transformer for Multimodal Machine Translation](https://www.aclweb.org/anthology/2020.acl-main.400.pdf) (Shaowei Yao, ACL 2020)
 
+##### Tree-Based Machine Translation
+
+[Sequence-to-Dependency Neural Machine Translation](http://www.aclweb.org/anthology/P17-1065) (Shuangzhi Wu, ACL 2017, [note](https://www.jianshu.com/p/2eb3c89234cb))
+
 ##### Context-Aware Machine Translation
 
 [Context-Aware Neural Machine Translation Learns Anaphora Resolution](https://arxiv.org/pdf/1805.10163.pdf) (Elena Voita, ACL 2018)
@@ -2023,6 +2031,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [When a Good Translation is Wrong in Context: Context-Aware Machine Translation Improves on Deixis, Ellipsis, and Lexical Cohesion](https://arxiv.org/pdf/1905.05979.pdf) (Elena Voita, ACL 2019)
 
 [Measuring and Increasing Context Usage in Context-Aware Machine Translation](https://arxiv.org/pdf/2105.03482.pdf) (Patrick Fernandes, ACL 2021)
+
+##### Interpretability
+
+[Does String-Based Neural MT Learn Source Syntax?](https://aclanthology.org/D16-1159.pdf) (Xing Shi, EMNLP 2016)
 
 #### Low-Resource Natural Language Processing
 
