@@ -38,6 +38,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf) (Tomas Mikolov, 2013, [code](https://github.com/danielfrg/word2vec), [note](https://zhuanlan.zhihu.com/p/34718114))
 
+[Don't Count, Predict! A Systematic Comparison of Context-Counting vs. Context-Predicting Semantic Vectors](https://aclanthology.org/P14-1023.pdf) (Marco Baroni, ACL 2014)
+
 [GloVe: Global Vectors for Word Representation](http://www.anthology.aclweb.org/D/D14/D14-1162.pdf) (Jeffrey Pennington, EMNLP 2014, [code](https://github.com/stanfordnlp/GloVe), [note](https://zhuanlan.zhihu.com/p/34959040))
 
 [Character-Aware Neural Language Models](https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/viewFile/12489/12017) (Yoon Kim, AAAI 2016, [note](https://zhuanlan.zhihu.com/p/21242454))
@@ -61,6 +63,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 ##### Sentence/Paragraph/Document Embedding
 
 [Distributed Representations of Sentences and Documents](https://arxiv.org/pdf/1405.4053.pdf) (Quoc Le, ICML 2014, [code](https://github.com/jhlau/doc2vec), [note](https://blog.acolyer.org/2016/06/01/distributed-representations-of-sentences-and-documents/))
+
+[Skip-Thought Vectors](https://arxiv.org/pdf/1506.06726.pdf) (Ryan Kiros, NeuIPS 2015)
 
 [Deep Sentence Embedding Using Long Short-Term Memory Networks: Analysis and Application to Information Retrieval](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/02/LSTM_DSSM_IEEE_TASLP.pdf) (Hamid Palangi, TASLP 2017, [code](https://github.com/zhaosm/dssm-lstm))
 
@@ -1702,6 +1706,18 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Table-to-Text Generation with Effective Hierarchical Encoder on Three Dimensions (Row, Column and Time)](https://arxiv.org/pdf/1909.02304.pdf) (Heng Gong, EMNLP 2019)
 
+#### Paraphrase Generation
+
+[Submodular Optimization-based Diverse Paraphrasing and its Effectiveness in Data Augmentation](https://www.aclweb.org/anthology/N19-1363.pdf) (Ashutosh Kumar, NAACL 2019, [code](https://github.com/malllabiisc/DiPS))
+
+[A Multi-Task Approach for Disentangling Syntax and Semantics in Sentence Representations](https://arxiv.org/pdf/1904.01173.pdf) (Mingda Chen, NAACL 2019, [code](https://github.com/mingdachen/disentangle-semantics-syntax))
+
+[Paraphrase Generation with Latent Bag of Words](https://arxiv.org/pdf/2001.01941.pdf) (Yao Fu, NeuIPS 2019)
+
+#### Storytelling
+
+[Content Learning with Structure-Aware Writing: A Graph-Infused Dual Conditional Variational Autoencoder for Automatic Storytelling](https://www.aaai.org/AAAI21Papers/AAAI-10130.YuMH.pdf) (Meng-Hsuan Yu, AAAI 2021)
+
 #### Machine Translation
 
 [A Statistical Approach To Machine Translation](https://aclanthology.org/J90-2002.pdf) (Peter F. Brown, CL 1990)
@@ -1712,11 +1728,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Statistical Machine Translation](https://books.google.com.hk/books?hl=en&lr=&id=kKYgAwAAQBAJ&oi=fnd&pg=PR11&dq=info:a-eei_wZtkcJ:scholar.google.com&ots=k7yo-Tb54u&sig=3YW5kEUyuihW52UjZk3Aq1H1m0Q&redir_esc=y#v=onepage&q&f=false) (Philipp Koehn, 2010)
 
-[Exploiting Similarities among Languages for Machine Translation](https://arxiv.org/pdf/1309.4168.pdf) (Tomas Mikolov, 2013)
-
 [Learning Phrase Representations Using RNN Encoder-Decoder for Statistical Machine Translation](https://arxiv.org/pdf/1406.1078.pdf) (Kyunghyun Cho, EMNLP 2014, [note](https://cuiqingcai.com/5737.html))
 
 [On the Properties of Neural Machine Translation: Encoder–Decoder Approaches](https://arxiv.org/pdf/1409.1259.pdf) (Kyunghyun Cho, 2014, [note](https://blog.csdn.net/BeforeEasy/article/details/80332497))
+
+[Learning Translation Models from Monolingual Continuous Representations](https://aclanthology.org/N15-1176.pdf) (Kai Zhao, NAACL 2015)
 
 [Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf) (Rico Sennrich, ACL 2016, [code](https://github.com/rsennrich/subword-nmt), [note](https://zhuanlan.zhihu.com/p/38574684))
 
@@ -1741,6 +1757,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Translating Pro-Drop Languages with Reconstruction Models](https://ojs.aaai.org/index.php/AAAI/article/view/11913) (Longyue Wang, AAAI 2018)
 
 [Learning to Jointly Translate and Predict Dropped Pronouns with a Shared Reconstruction Mechanism](https://arxiv.org/pdf/1810.06195.pdf) (Longyue Wang, EMNLP 2018)
+
+[Loss in Translation: Learning Bilingual Word Mapping with a Retrieval Criterion](https://aclanthology.org/D18-1330.pdf) (Armand Joulin, EMNLP 2018)
 
 [Pivot-based Transfer Learning for Neural Machine Translation between Non-English Languages](https://arxiv.org/pdf/1909.09524.pdf) (Yunsu Kim, EMNLP 2019)
 
@@ -1795,6 +1813,16 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Creating a Massively Parallel Bible Corpus](http://cysouw.de/home/presentations_files/cysouwmayerPARALLELLREC.pdf) (Thomas Mayer, 2014)
 
 [A Massively Parallel Corpus: the Bible in 100 Languages](https://link.springer.com/article/10.1007/s10579-014-9287-y) (Christos Christodouloupoulos, 2015)
+
+##### Dictionary Induction
+
+[Exploiting Similarities among Languages for Machine Translation](https://arxiv.org/pdf/1309.4168.pdf) (Tomas Mikolov, 2013)
+
+[Normalized Word Embedding and Orthogonal Transform for Bilingual Word Translation](https://aclanthology.org/N15-1104.pdf) (Chao Xing, NAACL 2015)
+
+[Word Translation Without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) (Alexis Conneau, ICLR 2018)
+
+[On the Limitations of Unsupervised Bilingual Dictionary Induction](https://arxiv.org/pdf/1805.03620.pdf) (Anders Søgaard, ACL 2018)
 
 ##### Word/Phrase/Sentence/Document Alignment
 
@@ -1886,13 +1914,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Unsupervised Machine Translation
 
-[Word Translation Without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) (Alexis Conneau, ICLR 2018)
-
 [Unsupervised Neural Machine Translation](https://arxiv.org/pdf/1710.11041.pdf) (Mikel Artetxe, ICLR 2018, [code](https://github.com/artetxem/undreamt), [note](https://zhuanlan.zhihu.com/p/30649985))
 
 [Unsupervised Machine Translation Using Monolingual Corpora Only](https://arxiv.org/pdf/1711.00043.pdf) (Guillaume Lample, ICLR 2018)
 
 [Phrase-Based & Neural Unsupervised Machine Translation](https://arxiv.org/pdf/1804.07755.pdf) (Guillaume Lample, EMNLP 2018, [code](https://github.com/facebookresearch/UnsupervisedMT), [note](https://blog.csdn.net/ljp1919/article/details/103074097))
+
+[Non-Adversarial Unsupervised Word Translation](https://arxiv.org/pdf/1801.06126.pdf) (Yedid Hoshen, EMNLP 2018, [code](https://github.com/facebookresearch/Non-adversarialTranslation))
 
 ##### Non-Autoregressive Machine Translation
 
@@ -1931,6 +1959,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Target Conditioned Sampling: Optimizing Data Selection for Multilingual Neural Machine Translation](https://arxiv.org/pdf/1905.08212.pdf) (Xinyi Wang, ACL 2019)
 
 [Multilingual Neural Machine Translation with Language Clustering](https://arxiv.org/pdf/1908.09324.pdf) (Xu Tan, EMNLP 2019)
+
+[Multilingual Denoising Pre-training for Neural Machine Translation](https://arxiv.org/pdf/2001.08210.pdf) (Yinhan Liu, TACL 2020)
 
 [XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalisation](http://proceedings.mlr.press/v119/hu20b/hu20b.pdf) (Junjie Hu, ICML 2020)
 
@@ -1992,17 +2022,33 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Measuring and Increasing Context Usage in Context-Aware Machine Translation](https://arxiv.org/pdf/2105.03482.pdf) (Patrick Fernandes, ACL 2021)
 
-#### Paraphrase Generation
+#### Low-Resource Natural Language Processing
 
-[Submodular Optimization-based Diverse Paraphrasing and its Effectiveness in Data Augmentation](https://www.aclweb.org/anthology/N19-1363.pdf) (Ashutosh Kumar, NAACL 2019, [code](https://github.com/malllabiisc/DiPS))
+[Variational Information Bottleneck for Effective Low-Resource Fine-Tuning](https://arxiv.org/abs/2106.05469) (Rabeeh Karimi Mahabadi, ICLR 2021)
 
-[A Multi-Task Approach for Disentangling Syntax and Semantics in Sentence Representations](https://arxiv.org/pdf/1904.01173.pdf) (Mingda Chen, NAACL 2019, [code](https://github.com/mingdachen/disentangle-semantics-syntax))
+#### Multilinguality
 
-[Paraphrase Generation with Latent Bag of Words](https://arxiv.org/pdf/2001.01941.pdf) (Yao Fu, NeuIPS 2019)
+[Monolingual and Cross-Lingual Information Retrieval Models Based on (Bilingual) Word Embeddings](https://dl.acm.org/doi/abs/10.1145/2766462.2767752) (Ivan Vulić, SIGIR 2015)
 
-#### Storytelling
+[Cross-lingual Language Model Pretraining](https://papers.nips.cc/paper/2019/file/c04c19c2c2474dbf5f7ac4372c5b9af1-Paper.pdf) (Alexis Conneau, NeuIPS 2019, [code](https://github.com/facebookresearch/XLM))
 
-[Content Learning with Structure-Aware Writing: A Graph-Infused Dual Conditional Variational Autoencoder for Automatic Storytelling](https://www.aaai.org/AAAI21Papers/AAAI-10130.YuMH.pdf) (Meng-Hsuan Yu, AAAI 2021)
+[Unsupervised Cross-lingual Representation Learning at Scale](https://aclanthology.org/2020.acl-main.747.pdf) (Alexis Conneau, ACL 2020, [code](https://github.com/pytorch/fairseq))
+
+[MAD-X: An Adapter-Based Framework for Multi-Task Cross-Lingual Transfer](https://arxiv.org/pdf/2005.00052.pdf) (Jonas Pfeiffer, EMNLP 2020)
+
+[How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models](https://arxiv.org/pdf/2012.15613.pdf) (Phillip Rust, ACL 2021)
+
+[A Closer Look at Few-Shot Crosslingual Transfer: The Choice of Shots Matters](https://arxiv.org/pdf/2012.15682.pdf) (Mengjie Zhao, ACL 2021)
+
+[XLM-E: Cross-lingual Language Model Pre-training via ELECTRA](https://arxiv.org/pdf/2106.16138.pdf) (Zewen Chi, 2021)
+
+##### Multilingual Embedding
+
+[Learning Continuous Phrase Representations for Translation Modeling](https://aclanthology.org/P14-1066.pdf) (Jianfeng Gao, ACL 2014)
+
+[A Survey of Cross-lingual Word Embedding Models](https://arxiv.org/pdf/1706.04902.pdf) (Sebastian Ruder, JAIR 2019)
+
+[How to (Properly) Evaluate Cross-Lingual Word Embeddings: On Strong Baselines, Comparative Analyses, and Some Misconceptions](https://arxiv.org/pdf/1902.00508.pdf) (Goran Glavaš, ACL 2019)
 
 #### Natural Language Processing for Programming Language
 
@@ -2019,28 +2065,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 ##### Code Retrieval
 
 [Deep code search](https://guxd.github.io/papers/deepcs.pdf) (Xiaodong Gu, ICSE 2018)
-
-#### Low-Resource Natural Language Processing
-
-[Variational Information Bottleneck for Effective Low-Resource Fine-Tuning](https://arxiv.org/abs/2106.05469) (Rabeeh Karimi Mahabadi, ICLR 2021)
-
-#### Multilinguality
-
-[Monolingual and Cross-Lingual Information Retrieval Models Based on (Bilingual) Word Embeddings](https://dl.acm.org/doi/abs/10.1145/2766462.2767752) (Ivan Vulić, SIGIR 2015)
-
-[On the Limitations of Unsupervised Bilingual Dictionary Induction](https://arxiv.org/pdf/1805.03620.pdf) (Anders Søgaard, ACL 2018)
-
-[How to (Properly) Evaluate Cross-Lingual Word Embeddings: On Strong Baselines, Comparative Analyses, and Some Misconceptions](https://arxiv.org/pdf/1902.00508.pdf) (Goran Glavaš, ACL 2019)
-
-[A Survey of Cross-lingual Word Embedding Models](https://arxiv.org/pdf/1706.04902.pdf) (Sebastian Ruder, JAIR 2019)
-
-[MAD-X: An Adapter-Based Framework for Multi-Task Cross-Lingual Transfer](https://arxiv.org/pdf/2005.00052.pdf) (Jonas Pfeiffer, EMNLP 2020)
-
-[How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models](https://arxiv.org/pdf/2012.15613.pdf) (Phillip Rust, ACL 2021)
-
-[A Closer Look at Few-Shot Crosslingual Transfer: The Choice of Shots Matters](https://arxiv.org/pdf/2012.15682.pdf) (Mengjie Zhao, ACL 2021)
-
-[XLM-E: Cross-lingual Language Model Pre-training via ELECTRA](https://arxiv.org/pdf/2106.16138.pdf) (Zewen Chi, 2021)
 
 #### Interpretability in Natural Language Processing
 
@@ -2334,7 +2358,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Recurrent Neural Network
 
-[Long short-term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
+[Long Short-Term memory](http://xueshu.baidu.com/s?wd=paperuri%3A%28051bcc198724a1da0b831afe39380852%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fciteseerx.ist.psu.edu%2Fviewdoc%2Fdownload%3Fdoi%3D1) (Sepp Hochreiter, 1997)
+
+[Recurrent Neural Network Regularization](https://arxiv.org/abs/1409.2329) (Wojciech Zaremba, ICLR 2015)
 
 [A Critical Review of Recurrent Neural Networks for Sequence Learning](http://pdfs.semanticscholar.org/0651/b333c2669227b0cc42de403268a4546ece70.pdf) (Zachary C. Lipton, 2015, [note](https://blog.csdn.net/xizero00/article/details/51225065))
 
