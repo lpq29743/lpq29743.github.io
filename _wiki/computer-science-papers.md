@@ -20,15 +20,21 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ### Natural Language Processing
 
-#### Pretrained Language Model
+#### Language Model
 
 [A Primer in BERTology: What We Know About How BERT Works](https://www.mitpressjournals.org/doi/full/10.1162/tacl_a_00349) (Anna Rogers, TACL 2020)
 
 [Pre-trained Models for Natural Language Processing: A Survey](https://arxiv.org/pdf/2003.08271.pdf) (Xipeng Qiu, 2020)
 
-##### Word Embedding
+##### Discrete Word Vector
+
+[Class-Based n-gram Models of Natural Language](https://www.cs.cmu.edu/~roni/11761/PreviousYearsHandouts/classlm.pdf) (Peter F. Brown, CL 1992)
+
+##### Continuous Word Vector
 
 [A Neural Probabilistic Language Model](http://www.iro.umontreal.ca/~vincentp/Publications/lm_jmlr.pdf) (Yoshua Bengio, JMLR 2003, [note](https://zhuanlan.zhihu.com/p/21101055))
+
+[Natural Language Processing (Almost) from Scratch](https://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf?source=post_page---------------------------) (Ronan Collobert, JMLR 2011)
 
 [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf) (Tomas Mikolov, 2013, [code](https://github.com/danielfrg/word2vec), [note](https://zhuanlan.zhihu.com/p/34718114))
 
@@ -81,6 +87,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [SpanBERT: Improving Pre-training by Representing and Predicting Spans](https://arxiv.org/pdf/1907.10529.pdf) (Mandar Joshi, TACL 2019, [note](https://zhuanlan.zhihu.com/p/75893972))
 
 [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf) (Jacob Devlin, NAACL 2019, [code](https://github.com/google-research/bert), [note](https://zhuanlan.zhihu.com/p/46652512))
+
+[What Kind of Language Is Hard to Language-Model?](https://arxiv.org/pdf/1906.04726.pdf) (Sabrina J. Mielke, ACL 2019)
 
 [Cloze-driven Pretraining of Self-attention Networks](https://arxiv.org/pdf/1903.07785.pdf) (Alexei Baevski, EMNLP 2019)
 
@@ -835,6 +843,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Inducing Target-Specific Latent Structures for Aspect Sentiment Classification](https://www.aclweb.org/anthology/2020.emnlp-main.451.pdf) (Chenhua Chen, EMNLP 2020, [note](https://zhuanlan.zhihu.com/p/311246774))
 
 [Tasty Burgers, Soggy Fries: Probing Aspect Robustness in Aspect-Based Sentiment Analysis](https://arxiv.org/pdf/2009.07964.pdf) (Xiaoyu Xing, EMNLP 2020)
+
+[Interventional Aspect-Based Sentiment Analysis](https://arxiv.org/pdf/2104.11681.pdf) (Zhen Bi, 2021)
 
 ##### Aspect-Based Sentiment Analysis
 
@@ -1694,6 +1704,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Machine Translation
 
+[A Statistical Approach To Machine Translation](https://aclanthology.org/J90-2002.pdf) (Peter F. Brown, CL 1990)
+
 [Statistical Phrase-Based Translation](https://aclanthology.org/N03-1017.pdf) (Philipp Koehn, NAACL 2003)
 
 [Moses: Open Source Toolkit for Statistical Machine Translation](https://aclanthology.org/P07-2045.pdf) (Philipp Koehn, ACL 2007)
@@ -1782,27 +1794,51 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Creating a Massively Parallel Bible Corpus](http://cysouw.de/home/presentations_files/cysouwmayerPARALLELLREC.pdf) (Thomas Mayer, 2014)
 
-##### Word/Phrase/Sentence Alignment
+[A Massively Parallel Corpus: the Bible in 100 Languages](https://link.springer.com/article/10.1007/s10579-014-9287-y) (Christos Christodouloupoulos, 2015)
 
-[The Mathematics of Statistical Machine Translation: Parameter Estimation](https://aclanthology.org/J93-2003.pdf) (Peter E Brown, CL 1993, [code](https://zhuanlan.zhihu.com/p/72640549))
+##### Word/Phrase/Sentence/Document Alignment
+
+[Aligning Sentences in Parallel Corpora](https://aclanthology.org/P91-1022.pdf) (Peter F. Brown, ACL 1991)
+
+[The Mathematics of Statistical Machine Translation: Parameter Estimation](https://aclanthology.org/J93-2003.pdf) (Peter F. Brown, CL 1993, [code](https://zhuanlan.zhihu.com/p/72640549))
+
+[A Program for Aligning Sentences in Bilingual Corpora](https://aclanthology.org/J93-1004.pdf) (William A. Gale, CL 1993)
 
 [HMM-Based Word Alignment in Statistical Translation](https://aclanthology.org/C96-2141.pdf) (Stephan Vogel, COLING 1996)
+
+[Bilingual Sentence Alignment: Balancing Robustness and Accuracy](https://link.springer.com/article/10.1023/A:1008010319408) (Michel Simard, 1998)
 
 [Models of Translational Equivalence among Words](https://aclanthology.org/J00-2004.pdf) (I. Dan Melamed, CL 2000)
 
 [Improved Statistical Alignment Models](https://aclanthology.org/P00-1056.pdf) (Franz Josef Och, ACL 2000)
 
+[Fast and Accurate Sentence Alignment of Bilingual Corpora](https://link.springer.com/chapter/10.1007/3-540-45820-4_14) (Robert C. Moore, 2002)
+
 [A Systematic Comparison of Various Statistical Alignment Models](https://watermark.silverchair.com/089120103321337421.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAs8wggLLBgkqhkiG9w0BBwagggK8MIICuAIBADCCArEGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMkCEvPs_rjOQ1vujTAgEQgIICgq9VNVpiuBa5_Kw7zn35yQ0srXxnm6UXC7v1TCL2et0s17aTNOiFRpU2Eyi32wUlJPZ4IImNscvUcXbI-h_I1n5DO16iUfRadsoF4wlP-jBkuJ6Hi-wVp4L9sRcQ2ivzLj2QsMvBy-ZyRgoWP91RaQTeV4kkD7ggRB03n5ujWF0IDtn-83BA-oHYhrFAzfyo8mIxGV9PFqfymtZjg-61JdU1I2OHkXPQT-SaGIy1CWJyuLbMmg1bm_IsuhiQPrfZDq2V7I5XXjxH7k024-RD3oJ17wTN53W6f7YbMnHHilVSzmDfqZE0QdM_HF47dklvse4ZD_0qBnDl_APKFG7ctloY3T19fznYviPcF5zSFbyyax3FKjw1DFYqR80FsuRZmzzuTiGw156Ntml_SfE9dObmdE6L8la8kWzHaaa1uo4_NgZ_0qSeLEmFH9hQB7MJZZbwKDjEj8_0M6deMLTtHkZ1OUiqMRgdP6mNa4JHOf3R1vz8LFDgiEVOyR9LN-KUffamhjpN4ZDf47Xw9YS9VLGlYAwOiAivqTM0InPjW8kEwXP07_VX2n1HbY21FYE1cvZkRb-V-KfORmjj3zWqNGKO-EUXMtoXUF2G1JyNfYMhMEvgL-IsCv39SUTiWhO_bK2fxBb7j7JcrRDuRQ_RapQ06wSJWXshvvap2QLg5CFvLBSZIUT1d6d6GNLuYu0WhW9T_PiWuJSbwFpPjbRdcYTGt-JEFfNJqTdBWsG4tzePJ6hcm3K6R93ytOxV1TjfLb4LIJ2vGTSZFukJbToKdpEuOjbmCzBtM4Ua275bddrQXVinUUCpS52KFAfIji0g2dET_1GkKpR2JjE_ThXgVFRMwg) (Franz Josef Och, CL 2003)
 
 [Log-Linear Models for Word Alignment](https://www.aclweb.org/anthology/P05-1057.pdf) (Yang Liu, ACL 2005)
+
+[Aligning Parallel Bilingual Corpora Statistically with Punctuation Criteria](https://aclanthology.org/O05-2005.pdf) (Thomas C. Chuang, 2005)
 
 [NeurAlign: Combining Word Alignments Using Neural Networks](https://aclanthology.org/H05-1009.pdf) (Necip Fazil Ayan, 2005)
 
 [Measuring Word Alignment Quality for Statistical Machine Translation](https://direct.mit.edu/coli/article/33/3/293/1949/Measuring-Word-Alignment-Quality-for-Statistical) (Alexander Fraser, CL 2007)
 
+[Segmentation and Alignment of Parallel Text for Statistical Machine Translation](https://www.cambridge.org/core/journals/natural-language-engineering/article/abs/segmentation-and-alignment-of-parallel-text-for-statistical-machine-translation/697D66DD385601AA57ECE2E848899BF7) (Yonggang Deng, 2007)
+
+[Improved Sentence Alignment for Movie Subtitles](http://lml.bas.bg/ranlp2007/DOCS/RANLP2007.pdf#page=595) (Jörg Tiedemann, 2007)
+
+[Linguistically-Based Sub-Sentential Alignment for Terminology Extraction from a Bilingual Automotive Corpus](https://biblio.ugent.be/publication/434669) (Lieve Macken, COLING 2008)
+
 [Parallel Implementations of Word Alignment Tool](https://aclanthology.org/W08-0509.pdf) (Qin Gao, 2008)
 
+[Improved Unsupervised Sentence Alignment for Symmetrical and Asymmetrical Parallel Corpora](https://aclanthology.org/C10-2010.pdf) (Fabienne Braune, COLING 2010)
+
+[Fast-Champollion: A Fast and Robust Sentence Alignment Algorithm](https://aclanthology.org/C10-2081.pdf) (Peng Li, COLING 2010)
+
 [Unsupervised Word Alignment with Arbitrary Features](https://aclanthology.org/P11-1042.pdf) (Chris Dyer, ACL 2011)
+
+[Iterative, MT-based Sentence Alignment of Parallel Texts](https://aclanthology.org/W11-4624.pdf) (Rico Sennrich, 2011)
 
 [A Simple, Fast, and Effective Reparameterization of IBM Model 2](https://aclanthology.org/N13-1073.pdf) (Chris Dyer, NAACL 2013)
 
@@ -1810,15 +1846,21 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Word Alignment Modeling with Context Dependent Deep Neural Network](https://aclanthology.org/P13-1017.pdf) (Nan Yang, ACL 2013)
 
+[Yet Another Fast, Robust and Open Source Sentence Aligner. Time to Reconsider Sentence Alignment?](http://atour.iro.umontreal.ca/rali/sites/default/files/publis/MTSummit-2013-Fethi.pdf) (Fethi Lamraoui, 2013)
+
 [Recurrent Neural Networks for Word Alignment Model](https://aclanthology.org/P14-1138.pdf) (Akihiro Tamura, ACL 2014)
 
 [Contrastive Unsupervised Word Alignment with Non-Local Features](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/view/9570/9556) (Yang Liu, AAAI 2015)
+
+[Findings of the WMT 2016 Bilingual Document Alignment Shared Task](https://aclanthology.org/W16-2347.pdf) (Christian Buck, WMT 2016)
 
 [Efficient Word Alignment with Markov Chain Monte Carlo](https://helda.helsinki.fi/bitstream/handle/10138/232817/Efficient_Word_Alignment_with_Markov_Chain_Monte_Carlo.pdf?sequence=1) (Robert Östling, 2016, [code](https://github.com/robertostling/efmaral))
 
 [Neural Network-based Word Alignment through Score Aggregation](https://arxiv.org/pdf/1606.09560.pdf) (Joel Legrand, 2016)
 
 [On The Alignment Problem In Multi-Head Attention-Based Neural Machine Translation](https://arxiv.org/pdf/1809.03985.pdf) (Tamer Alkhouli, 2018)
+
+[Vecalign: Improved Sentence Alignment in Linear Time and Space](https://aclanthology.org/D19-1136.pdf) (Brian Thompson, EMNLP 2019)
 
 [End-to-end Neural Word Alignment Outperforms GIZA++](https://aclanthology.org/2020.acl-main.146.pdf) (Thomas Zenkel, ACL 2020)
 
@@ -1836,7 +1878,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [MASK-ALIGN: Self-Supervised Neural Word Alignment](https://arxiv.org/pdf/2012.07162.pdf) (Chi Chen, ACL 2021, [code](https://github.com/THUNLP-MT/Mask-Align))
 
+[A Bidirectional Transformer Based Alignment Model for Unsupervised Word Alignment](https://aclanthology.org/2021.acl-long.24.pdf) (Jingyi Zhang, ACL 2021)
+
 [Embedding-Enhanced Giza++: Improving Alignment in Low- and HighResource Scenarios Using Embedding Space Geometry](https://arxiv.org/pdf/2104.08721.pdf) (Kelly Marchisio, 2021)
+
+[SLUA: A Super Lightweight Unsupervised Word Alignment Model via Cross-Lingual Contrastive Learning](https://arxiv.org/pdf/2102.04009.pdf) (Di Wu, 2021)
 
 ##### Unsupervised Machine Translation
 
@@ -1912,6 +1958,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Improving Domain Adaptation Translation with Domain Invariant and Specific Information](https://arxiv.org/pdf/1904.03879.pdf) (Shuhao Gu, NAACL 2019)
 
+[Overcoming Catastrophic Forgetting During Domain Adaptation of Neural Machine Translation](https://aclanthology.org/N19-1209.pdf) (Brian Thompson, NAACL 2019)
+
 [Domain Adaptation of Neural Machine Translation by Lexicon Induction](https://arxiv.org/pdf/1906.00376.pdf) (Junjie Hu, ACL 2019)
 
 [Iterative Dual Domain Adaptation for Neural Machine Translation](https://arxiv.org/pdf/1912.07239.pdf) (EMNLP 2019)
@@ -1941,6 +1989,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Context-Aware Neural Machine Translation Learns Anaphora Resolution](https://arxiv.org/pdf/1805.10163.pdf) (Elena Voita, ACL 2018)
 
 [When a Good Translation is Wrong in Context: Context-Aware Machine Translation Improves on Deixis, Ellipsis, and Lexical Cohesion](https://arxiv.org/pdf/1905.05979.pdf) (Elena Voita, ACL 2019)
+
+[Measuring and Increasing Context Usage in Context-Aware Machine Translation](https://arxiv.org/pdf/2105.03482.pdf) (Patrick Fernandes, ACL 2021)
 
 #### Paraphrase Generation
 
@@ -2461,6 +2511,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [How Does Selective Mechanism Improve Self-Attention Networks?](https://arxiv.org/pdf/2005.00979.pdf) (Xinwei Geng, ACL 2020)
 
 [The Unstoppable Rise of Computational Linguistics in Deep Learning](https://arxiv.org/pdf/2005.06420.pdf) (James Henderson, ACL 2020)
+
+[Self-Attention with Cross-Lingual Position Representation](https://arxiv.org/pdf/2004.13310.pdf) (Liang Ding, ACL 2020)
 
 [O(n) Connections are Expressive Enough: Universal Approximability of Sparse Transformers](https://arxiv.org/pdf/2006.04862.pdf) (Chulhee Yun, NeuIPS 2020)
 
