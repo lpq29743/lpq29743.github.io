@@ -1634,21 +1634,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Binary Codes Capable of Correcting Deletions, Insertions and Reversals](https://nymity.ch/sybilhunting/pdf/Levenshtein1966a.pdf) (VI Levenshtein, 1966)
 
-[A New Quantitative Quality Measure for Machine Translation Systems](https://www.aclweb.org/anthology/C92-2067.pdf) (Keh-Yih Su, COLING 1992)
-
-[An Evaluation Tool for Machine Translation: Fast Evaluation for MT Research](http://www.lrec-conf.org/proceedings/lrec2000/pdf/278.pdf) (Sonja Nießen, LREC 2000)
-
-[Using Multiple Edit Distances to Automatically Rank Machine Translation Output](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.590.6755&rep=rep1&type=pdf) (Yasuhiro Akiba, 2001)
-
-[BLEU: a Method for Automatic Evaluation of Machine Translation](http://aclweb.org/anthology/P/P02/P02-1040.pdf) (Kishore Papineni, ACL 2002, [note](https://www.jianshu.com/p/320ffec4e99f))
-
-[Automatic Evaluation of Machine Translation Quality using N-gram CoOccurrence Statistics](https://dl.acm.org/doi/abs/10.5555/1289189.1289273) (George R Doddington, 2002)
-
-[A Novel String-to-String Distance Measure with Applications to Machine Translation Evaluation](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.4.522&rep=rep1&type=pdf) (Gregor Leusch, 2003)
-
 [ROUGE: A Package for Automatic Evaluation of Summaries](http://www.aclweb.org/anthology/W/W04/W04-1013.pdf) (Chin-Yew Lin, 2004)
-
-[METEOR: An Automatic Metric for MT Evaluation with Improved Correlation with Human Judgments](https://www.aclweb.org/anthology/W05-0909.pdf) (Satanjeev Banerjee, ACL 2005 Workshop)
 
 [∆BLEU: A Discriminative Metric for Generation Tasks with Intrinsically Diverse Targets](https://www.aclweb.org/anthology/P15-2073.pdf) (Michel Galley, ACL 2015)
 
@@ -1801,6 +1787,20 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [A Massively Parallel Corpus: the Bible in 100 Languages](https://link.springer.com/article/10.1007/s10579-014-9287-y) (Christos Christodouloupoulos, 2015)
 
 ##### Automatic Metric
+
+[A New Quantitative Quality Measure for Machine Translation Systems](https://www.aclweb.org/anthology/C92-2067.pdf) (Keh-Yih Su, COLING 1992)
+
+[An Evaluation Tool for Machine Translation: Fast Evaluation for MT Research](http://www.lrec-conf.org/proceedings/lrec2000/pdf/278.pdf) (Sonja Nießen, LREC 2000)
+
+[Using Multiple Edit Distances to Automatically Rank Machine Translation Output](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.590.6755&rep=rep1&type=pdf) (Yasuhiro Akiba, 2001)
+
+[BLEU: a Method for Automatic Evaluation of Machine Translation](http://aclweb.org/anthology/P/P02/P02-1040.pdf) (Kishore Papineni, ACL 2002, [note](https://www.jianshu.com/p/320ffec4e99f))
+
+[Automatic Evaluation of Machine Translation Quality using N-gram CoOccurrence Statistics](https://dl.acm.org/doi/abs/10.5555/1289189.1289273) (George R Doddington, 2002)
+
+[A Novel String-to-String Distance Measure with Applications to Machine Translation Evaluation](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.4.522&rep=rep1&type=pdf) (Gregor Leusch, 2003)
+
+[METEOR: An Automatic Metric for MT Evaluation with Improved Correlation with Human Judgments](https://www.aclweb.org/anthology/W05-0909.pdf) (Satanjeev Banerjee, ACL 2005 Workshop)
 
 [To Ship or Not to Ship: An Extensive Evaluation of Automatic Metrics for Machine Translation](https://arxiv.org/pdf/2107.10821.pdf) (Tom Kocmi, 2021)
 
