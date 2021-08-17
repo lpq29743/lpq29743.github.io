@@ -1750,8 +1750,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Dynamically Composing Domain-Data Selection with Clean-Data Selection by "Co-Curricular Learning" for Neural Machine Translation](https://arxiv.org/pdf/1906.01130.pdf) (Wei Wang, ACL 2019)
 
-[Distilling Translations with Visual Awareness](https://www.aclweb.org/anthology/P19-1653.pdf) (Julia Ive, ACL 2019)
-
 [Reducing Word Omission Errors in Neural Machine Translation: A Contrastive Learning Approach](https://www.aclweb.org/anthology/P19-1623.pdf) (Zonghan Yang, ACL 2019)
 
 [Bridging the Gap between Training and Inference for Neural Machine Translation](https://arxiv.org/pdf/1906.02448.pdf) (Wen Zhang, ACL 2019)
@@ -1789,6 +1787,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Creating a Massively Parallel Bible Corpus](http://cysouw.de/home/presentations_files/cysouwmayerPARALLELLREC.pdf) (Thomas Mayer, 2014)
 
 [A Massively Parallel Corpus: the Bible in 100 Languages](https://link.springer.com/article/10.1007/s10579-014-9287-y) (Christos Christodouloupoulos, 2015)
+
+[The United Nations Parallel Corpus v1.0](https://conferences.unite.un.org/UNCorpus/Content/Doc/un.pdf) (Michał Ziemski, LREC 2016, [code](https://conferences.unite.un.org/uncorpus))
+
+[Ancient–Modern Chinese Translation with a New Large Training Dataset](https://arxiv.org/pdf/1808.03738.pdf) (Dayiheng Liu, 2020)
 
 ##### Automatic Metric
 
@@ -1851,6 +1853,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Aligning Parallel Bilingual Corpora Statistically with Punctuation Criteria](https://aclanthology.org/O05-2005.pdf) (Thomas C. Chuang, 2005)
 
 [NeurAlign: Combining Word Alignments Using Neural Networks](https://aclanthology.org/H05-1009.pdf) (Necip Fazil Ayan, 2005)
+
+[Alignment by Agreement](https://cs.stanford.edu/~pliang/papers/alignment-naacl2006.pdf) (Percy Liang, NAACL 2006)
 
 [Measuring Word Alignment Quality for Statistical Machine Translation](https://direct.mit.edu/coli/article/33/3/293/1949/Measuring-Word-Alignment-Quality-for-Statistical) (Alexander Fraser, CL 2007)
 
@@ -1936,6 +1940,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Low-Resource Machine Translation
 
+[Google's Multilingual Neural Machine Translation System: Enabling Zero-Shot Translation](https://arxiv.org/pdf/1611.04558.pdf) (Melvin Johnson, TACL 2017)
+
 [Meta-Learning for Low-Resource Neural Machine Translation](https://arxiv.org/pdf/1808.08437.pdf) (Jiatao Gu, EMNLP 2018)
 
 [Rapid Adaptation of Neural Machine Translation to New Languages](https://arxiv.org/pdf/1808.04189.pdf) (Graham Neubig, EMNLP 2018)
@@ -1950,9 +1956,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Cross-Lingual Pre-Training Based Transfer for Zero-Shot Neural Machine Translation](https://www.aaai.org/ojs/index.php/AAAI/article/view/5341) (Baijun Ji, AAAI 2020)
 
-##### Multilingual Machine Translation
+[Improving Massively Multilingual Neural Machine Translation and Zero-Shot Translation](https://arxiv.org/pdf/2004.11867.pdf) (Biao Zhang, ACL 2020)
 
-[Google's Multilingual Neural Machine Translation System: Enabling Zero-Shot Translation](https://arxiv.org/pdf/1611.04558.pdf) (Melvin Johnson, TACL 2017)
+[Harnessing Multilinguality in Unsupervised Machine Translation for Rare Languages](https://arxiv.org/pdf/2009.11201.pdf) (Xavier Garcia, NAACL 2021)
+
+##### Multilingual Machine Translation
 
 [Multilingual Neural Machine Translation with Knowledge Distillation](https://arxiv.org/pdf/1902.10461.pdf) (Xu Tan, ICLR 2019, [code](https://github.com/RayeRen/multilingual-kd-pytorch))
 
@@ -1973,8 +1981,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Balancing Training for Multilingual Neural Machine Translation](https://arxiv.org/pdf/2004.06748.pdf) (Xinyi Wang, ACL 2020)
 
 [Knowledge Distillation for Multilingual Unsupervised Neural Machine Translation](https://arxiv.org/pdf/2004.10171.pdf) (Haipeng Sun, ACL 2020)
-
-[Improving Massively Multilingual Neural Machine Translation and Zero-Shot Translation](https://arxiv.org/pdf/2004.11867.pdf) (Biao Zhang, ACL 2020)
 
 [Leveraging Monolingual Data with Self-Supervision for Multilingual Neural Machine Translation](https://arxiv.org/pdf/2005.04816.pdf) (Aditya Siddhant, ACL 2020)
 
@@ -2016,6 +2022,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Multi-Modal Translation
 
+[Distilling Translations with Visual Awareness](https://www.aclweb.org/anthology/P19-1653.pdf) (Julia Ive, ACL 2019)
+
 [Latent Variable Model for Multi-modal Translation](https://www.aclweb.org/anthology/P19-1642.pdf) (Iacer Calixto, ACL 2019)
 
 [Multimodal Transformer for Multimodal Machine Translation](https://www.aclweb.org/anthology/2020.acl-main.400.pdf) (Shaowei Yao, ACL 2020)
@@ -2026,19 +2034,31 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Context-Aware Machine Translation
 
+[Neural Machine Translation with Extended Context](https://arxiv.org/pdf/1708.05943.pdf) (Jorg Tiedemann, EMNLP 2017 Workshop)
+
 [Context-Aware Neural Machine Translation Learns Anaphora Resolution](https://arxiv.org/pdf/1805.10163.pdf) (Elena Voita, ACL 2018)
 
 [When a Good Translation is Wrong in Context: Context-Aware Machine Translation Improves on Deixis, Ellipsis, and Lexical Cohesion](https://arxiv.org/pdf/1905.05979.pdf) (Elena Voita, ACL 2019)
 
 [Measuring and Increasing Context Usage in Context-Aware Machine Translation](https://arxiv.org/pdf/2105.03482.pdf) (Patrick Fernandes, ACL 2021)
 
+##### Simultaneous Machine Translation
+
+[Monotonic Multihead Attention](https://arxiv.org/pdf/1909.12406.pdf) (Xutai Ma, 2019)
+
 ##### Interpretability
 
 [Does String-Based Neural MT Learn Source Syntax?](https://aclanthology.org/D16-1159.pdf) (Xing Shi, EMNLP 2016)
 
+##### Robustness
+
+[Synthetic and Natural Noise Both Break Neural Machine Translation](https://arxiv.org/pdf/1711.02173.pdf) (Yonatan Belinkov, ICLR 2018)
+
 #### Low-Resource Natural Language Processing
 
 [Variational Information Bottleneck for Effective Low-Resource Fine-Tuning](https://arxiv.org/abs/2106.05469) (Rabeeh Karimi Mahabadi, ICLR 2021)
+
+[When Word Embeddings Become Endangered](https://arxiv.org/pdf/2103.13275.pdf) (Khalid Alnajjar, 2021)
 
 #### Multilinguality
 
@@ -2049,6 +2069,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Unsupervised Cross-lingual Representation Learning at Scale](https://aclanthology.org/2020.acl-main.747.pdf) (Alexis Conneau, ACL 2020, [code](https://github.com/pytorch/fairseq))
 
 [MAD-X: An Adapter-Based Framework for Multi-Task Cross-Lingual Transfer](https://arxiv.org/pdf/2005.00052.pdf) (Jonas Pfeiffer, EMNLP 2020)
+
+[Natural Language Processing for Similar Languages, Varieties, and Dialects: A Survey](https://www.cambridge.org/core/journals/natural-language-engineering/article/natural-language-processing-for-similar-languages-varieties-and-dialects-a-survey/229652C86E329F83346BB6C66B9521A6) (Marcos Zampieri, 2020)
 
 [How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models](https://arxiv.org/pdf/2012.15613.pdf) (Phillip Rust, ACL 2021)
 
@@ -2065,6 +2087,30 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [A Survey of Cross-lingual Word Embedding Models](https://arxiv.org/pdf/1706.04902.pdf) (Sebastian Ruder, JAIR 2019)
 
 [How to (Properly) Evaluate Cross-Lingual Word Embeddings: On Strong Baselines, Comparative Analyses, and Some Misconceptions](https://arxiv.org/pdf/1902.00508.pdf) (Goran Glavaš, ACL 2019)
+
+[MuRIL: Multilingual Representations for Indian Languages](https://arxiv.org/pdf/2103.10730.pdf) (Simran Khanuja, 2021)
+
+##### Code Switching
+
+[Challenges of Computational Processing of Code-Switching](https://aclanthology.org/W16-5801.pdf) (Özlem Çetinoglu, 2016)
+
+##### Historical Text
+
+[Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change](https://arxiv.org/pdf/1605.09096.pdf) (William L. Hamilton, ACL 2016, [code](https://nlp.stanford.edu/projects/histwords/))
+
+[Dynamic Word Embeddings](http://proceedings.mlr.press/v70/bamler17a/bamler17a.pdf) (Robert Bamler, ICML 2017)
+
+[The CLIN27 Shared Task : Translating Historical Text to Contemporary Language for Improving Automatic Linguistic Annotation](https://ifarm.nl/clin2017st/) (Erik Tjong Kim Sang, 2017)
+
+[Cultural Shift or Linguistic Drift? Comparing Two Computational Measures of Semantic Change](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5452980/) (William L. Hamilton, 2017)
+
+[Diachronic Word Embeddings and Semantic Shifts: A Survey](https://arxiv.org/pdf/1806.03537.pdf) (Andrey Kutuzov, COLING 2018)
+
+[Word Embeddings Quantify 100 Years of Gender and Ethnic Stereotypes](https://www.pnas.org/content/115/16/E3635.short) (Nikhil Garg, 2018)
+
+[A Large-Scale Comparison of Historical Text Normalization Systems](https://arxiv.org/pdf/1904.02036.pdf) (Marcel Bollmann, NAACL 2019)
+
+[The Classical Language Toolkit: An NLP Framework for Pre-Modern Languages](https://aclanthology.org/2021.acl-demo.3.pdf) (Kyle P. Johnson, ACL 2021 Demo)
 
 #### Natural Language Processing for Programming Language
 
@@ -2819,6 +2865,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Designing Network Design Spaces](https://arxiv.org/pdf/2003.13678.pdf) (Ilija Radosavovic, CVPR 2020)
 
 [Knowledge Distillation: A Survey](https://link.springer.com/content/pdf/10.1007/s11263-021-01453-z.pdf) (Jianping Gou, IJCV 2021)
+
+[Does Knowledge Distillation Really Work?](https://arxiv.org/pdf/2106.05945.pdf) (Samuel Stanton, 2021)
 
 #### Neural Architecture Search
 
