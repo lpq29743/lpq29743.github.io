@@ -1742,8 +1742,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Learning to Jointly Translate and Predict Dropped Pronouns with a Shared Reconstruction Mechanism](https://arxiv.org/pdf/1810.06195.pdf) (Longyue Wang, EMNLP 2018)
 
-[Pivot-based Transfer Learning for Neural Machine Translation between Non-English Languages](https://arxiv.org/pdf/1909.09524.pdf) (Yunsu Kim, EMNLP 2019)
-
 [Mixed Multi-Head Self-Attention for Neural Machine Translation](https://www.aclweb.org/anthology/D19-5622.pdf) (Hongyi Cui, EMNLP 2019)
 
 [Simple, Scalable Adaptation for Neural Machine Translation](https://arxiv.org/pdf/1909.08478.pdf) (Ankur Bapna, EMNLP 2019, [note](https://zhuanlan.zhihu.com/p/114955522))
@@ -1782,13 +1780,19 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Dataset
 
-[Europarl: A Parallel Corpus for Statistical Machine Translation](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.459.5497&rep=rep1&type=pdf) (Philipp Koehn, 2005)
+[Europarl: A Parallel Corpus for Statistical Machine Translation](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.459.5497&rep=rep1&type=pdf) (Philipp Koehn, 2005, [code](http://www.statmt.org/europarl/))
+
+[The JRC-Acquis: A Multilingual Aligned Parallel Corpus with 20+ Languages](https://arxiv.org/pdf/cs/0609058.pdf) (Ralf Steinberger, 2006, [code](https://opus.nlpl.eu/JRC-Acquis.php))
 
 [Creating a Massively Parallel Bible Corpus](http://cysouw.de/home/presentations_files/cysouwmayerPARALLELLREC.pdf) (Thomas Mayer, 2014)
 
 [A Massively Parallel Corpus: the Bible in 100 Languages](https://link.springer.com/article/10.1007/s10579-014-9287-y) (Christos Christodouloupoulos, 2015)
 
 [The United Nations Parallel Corpus v1.0](https://conferences.unite.un.org/UNCorpus/Content/Doc/un.pdf) (Michał Ziemski, LREC 2016, [code](https://conferences.unite.un.org/uncorpus))
+
+[JW300: A Wide-Coverage Parallel Corpus for Low-Resource Languages](https://www.repository.cam.ac.uk/bitstream/handle/1810/296987/P19-1310.pdf?sequence=3) (Zeljko Agic, ACL 2019, [code](https://opus.nlpl.eu/JW300.php))
+
+[WikiMatrix: Mining 135M Parallel Sentences in 1620 Language Pairs from Wikipedia](https://arxiv.org/pdf/1907.05791.pdf) (Holger Schwenk, 2019, [code](https://github.com/facebookresearch/LASER/tree/master/tasks/WikiMatrix))
 
 [Ancient–Modern Chinese Translation with a New Large Training Dataset](https://arxiv.org/pdf/1808.03738.pdf) (Dayiheng Liu, 2020)
 
@@ -1808,21 +1812,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [METEOR: An Automatic Metric for MT Evaluation with Improved Correlation with Human Judgments](https://www.aclweb.org/anthology/W05-0909.pdf) (Satanjeev Banerjee, ACL 2005 Workshop)
 
+[Scientific Credibility of Machine Translation Research: A Meta-Evaluation of 769 Papers](https://aclanthology.org/2021.acl-long.566.pdf) (Benjamin Marie, ACL 2021)
+
 [To Ship or Not to Ship: An Extensive Evaluation of Automatic Metrics for Machine Translation](https://arxiv.org/pdf/2107.10821.pdf) (Tom Kocmi, 2021)
-
-##### Dictionary Induction
-
-[Exploiting Similarities among Languages for Machine Translation](https://arxiv.org/pdf/1309.4168.pdf) (Tomas Mikolov, 2013)
-
-[Normalized Word Embedding and Orthogonal Transform for Bilingual Word Translation](https://aclanthology.org/N15-1104.pdf) (Chao Xing, NAACL 2015)
-
-[Word Translation Without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) (Alexis Conneau, ICLR 2018)
-
-[On the Limitations of Unsupervised Bilingual Dictionary Induction](https://arxiv.org/pdf/1805.03620.pdf) (Anders Søgaard, ACL 2018)
 
 ##### Vocabulary Coverage
 
 [Learning Translation Models from Monolingual Continuous Representations](https://aclanthology.org/N15-1176.pdf) (Kai Zhao, NAACL 2015)
+
+[Addressing the Rare Word Problem in Neural Machine Translation](https://arxiv.org/pdf/1410.8206.pdf) (Minh-Thang Luong, ACL 2015)
 
 [Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf) (Rico Sennrich, ACL 2016, [code](https://github.com/rsennrich/subword-nmt), [note](https://zhuanlan.zhihu.com/p/38574684))
 
@@ -1835,6 +1833,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [The Mathematics of Statistical Machine Translation: Parameter Estimation](https://aclanthology.org/J93-2003.pdf) (Peter F. Brown, CL 1993, [code](https://zhuanlan.zhihu.com/p/72640549))
 
 [A Program for Aligning Sentences in Bilingual Corpora](https://aclanthology.org/J93-1004.pdf) (William A. Gale, CL 1993)
+
+[Text-Translation Alignment](https://dl.acm.org/doi/abs/10.5555/972450.972457) (Martin Kay, 1993)
+
+[Using Cognates to Align Sentences in Bilingual Corpora](https://dl.acm.org/doi/abs/10.5555/962367.962411) (Michel Simard, 1993)
 
 [HMM-Based Word Alignment in Statistical Translation](https://aclanthology.org/C96-2141.pdf) (Stephan Vogel, COLING 1996)
 
@@ -1974,9 +1976,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Multilingual Neural Machine Translation with Language Clustering](https://arxiv.org/pdf/1908.09324.pdf) (Xu Tan, EMNLP 2019)
 
-[Multilingual Denoising Pre-training for Neural Machine Translation](https://arxiv.org/pdf/2001.08210.pdf) (Yinhan Liu, TACL 2020)
+[Pivot-based Transfer Learning for Neural Machine Translation between Non-English Languages](https://arxiv.org/pdf/1909.09524.pdf) (Yunsu Kim, EMNLP 2019)
 
-[XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalisation](http://proceedings.mlr.press/v119/hu20b/hu20b.pdf) (Junjie Hu, ICML 2020)
+[Multilingual Denoising Pre-training for Neural Machine Translation](https://arxiv.org/pdf/2001.08210.pdf) (Yinhan Liu, TACL 2020)
 
 [Balancing Training for Multilingual Neural Machine Translation](https://arxiv.org/pdf/2004.06748.pdf) (Xinyi Wang, ACL 2020)
 
@@ -2062,45 +2064,25 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Multilinguality
 
-[Monolingual and Cross-Lingual Information Retrieval Models Based on (Bilingual) Word Embeddings](https://dl.acm.org/doi/abs/10.1145/2766462.2767752) (Ivan Vulić, SIGIR 2015)
-
-[Cross-lingual Language Model Pretraining](https://papers.nips.cc/paper/2019/file/c04c19c2c2474dbf5f7ac4372c5b9af1-Paper.pdf) (Alexis Conneau, NeuIPS 2019, [code](https://github.com/facebookresearch/XLM))
-
-[Unsupervised Cross-lingual Representation Learning at Scale](https://aclanthology.org/2020.acl-main.747.pdf) (Alexis Conneau, ACL 2020, [code](https://github.com/pytorch/fairseq))
-
-[MAD-X: An Adapter-Based Framework for Multi-Task Cross-Lingual Transfer](https://arxiv.org/pdf/2005.00052.pdf) (Jonas Pfeiffer, EMNLP 2020)
-
 [Natural Language Processing for Similar Languages, Varieties, and Dialects: A Survey](https://www.cambridge.org/core/journals/natural-language-engineering/article/natural-language-processing-for-similar-languages-varieties-and-dialects-a-survey/229652C86E329F83346BB6C66B9521A6) (Marcos Zampieri, 2020)
 
-[How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models](https://arxiv.org/pdf/2012.15613.pdf) (Phillip Rust, ACL 2021)
+##### Typology
 
-[A Closer Look at Few-Shot Crosslingual Transfer: The Choice of Shots Matters](https://arxiv.org/pdf/2012.15682.pdf) (Mengjie Zhao, ACL 2021)
+[Comparing Language Similarity across Genetic and Typologically-Based Groupings](https://aclanthology.org/C10-1044.pdf) (Ryan Georgi, COLING 2010)
 
-[XLM-E: Cross-lingual Language Model Pre-training via ELECTRA](https://arxiv.org/pdf/2106.16138.pdf) (Zewen Chi, 2021)
+[The World Atlas of Language Structures Online](https://pure.mpg.de/pubman/faces/ViewItemOverviewPage.jsp?itemId=item_1554621) (Matthew S. Dryer, 2013, [code](https://wals.info/))
 
-##### Multilingual Embedding
+[Learning Language Representations for Typology Prediction](https://arxiv.org/pdf/1707.09569.pdf) (Chaitanya Malaviya, EMNLP 2017)
 
-[Learning Continuous Phrase Representations for Translation Modeling](https://aclanthology.org/P14-1066.pdf) (Jianfeng Gao, ACL 2014)
+[Modeling Language Variation and Universals: A Survey on Typological Linguistics for Natural Language Processing](https://direct.mit.edu/coli/article/45/3/559/93372/Modeling-Language-Variation-and-Universals-A) (Edoardo Maria Ponti, CL 2019)
 
-[Loss in Translation: Learning Bilingual Word Mapping with a Retrieval Criterion](https://aclanthology.org/D18-1330.pdf) (Armand Joulin, EMNLP 2018)
-
-[A Survey of Cross-lingual Word Embedding Models](https://arxiv.org/pdf/1706.04902.pdf) (Sebastian Ruder, JAIR 2019)
-
-[How to (Properly) Evaluate Cross-Lingual Word Embeddings: On Strong Baselines, Comparative Analyses, and Some Misconceptions](https://arxiv.org/pdf/1902.00508.pdf) (Goran Glavaš, ACL 2019)
-
-[MuRIL: Multilingual Representations for Indian Languages](https://arxiv.org/pdf/2103.10730.pdf) (Simran Khanuja, 2021)
-
-##### Code Switching
-
-[Challenges of Computational Processing of Code-Switching](https://aclanthology.org/W16-5801.pdf) (Özlem Çetinoglu, 2016)
-
-##### Historical Text
+##### Historical Linguistics
 
 [Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change](https://arxiv.org/pdf/1605.09096.pdf) (William L. Hamilton, ACL 2016, [code](https://nlp.stanford.edu/projects/histwords/))
 
 [Dynamic Word Embeddings](http://proceedings.mlr.press/v70/bamler17a/bamler17a.pdf) (Robert Bamler, ICML 2017)
 
-[The CLIN27 Shared Task : Translating Historical Text to Contemporary Language for Improving Automatic Linguistic Annotation](https://ifarm.nl/clin2017st/) (Erik Tjong Kim Sang, 2017)
+[The CLIN27 Shared Task: Translating Historical Text to Contemporary Language for Improving Automatic Linguistic Annotation](https://ifarm.nl/clin2017st/) (Erik Tjong Kim Sang, 2017)
 
 [Cultural Shift or Linguistic Drift? Comparing Two Computational Measures of Semantic Change](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5452980/) (William L. Hamilton, 2017)
 
@@ -2111,6 +2093,58 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [A Large-Scale Comparison of Historical Text Normalization Systems](https://arxiv.org/pdf/1904.02036.pdf) (Marcel Bollmann, NAACL 2019)
 
 [The Classical Language Toolkit: An NLP Framework for Pre-Modern Languages](https://aclanthology.org/2021.acl-demo.3.pdf) (Kyle P. Johnson, ACL 2021 Demo)
+
+##### Code Switching
+
+[Challenges of Computational Processing of Code-Switching](https://aclanthology.org/W16-5801.pdf) (Özlem Çetinoglu, 2016)
+
+##### Language Identification
+
+[Word Level Language Identification in Online Multilingual Communication](https://aclanthology.org/D13-1084.pdf) (Dong Nguyen, EMNLP 2013)
+
+[Automatic Language Identification in Texts: A Survey](https://arxiv.org/pdf/1804.08186.pdf) (Tommi Jauhiainen, 2018)
+
+##### Multilingual Training/Cross-lingual Transfer
+
+[Exploiting Similarities among Languages for Machine Translation](https://arxiv.org/pdf/1309.4168.pdf) (Tomas Mikolov, 2013)
+
+[Learning Continuous Phrase Representations for Translation Modeling](https://aclanthology.org/P14-1066.pdf) (Jianfeng Gao, ACL 2014)
+
+[Normalized Word Embedding and Orthogonal Transform for Bilingual Word Translation](https://aclanthology.org/N15-1104.pdf) (Chao Xing, NAACL 2015)
+
+[Word Translation Without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) (Alexis Conneau, ICLR 2018)
+
+[On the Limitations of Unsupervised Bilingual Dictionary Induction](https://arxiv.org/pdf/1805.03620.pdf) (Anders Søgaard, ACL 2018)
+
+[Loss in Translation: Learning Bilingual Word Mapping with a Retrieval Criterion](https://aclanthology.org/D18-1330.pdf) (Armand Joulin, EMNLP 2018)
+
+[A Survey of Cross-lingual Word Embedding Models](https://arxiv.org/pdf/1706.04902.pdf) (Sebastian Ruder, JAIR 2019)
+
+[How to (Properly) Evaluate Cross-Lingual Word Embeddings: On Strong Baselines, Comparative Analyses, and Some Misconceptions](https://arxiv.org/pdf/1902.00508.pdf) (Goran Glavaš, ACL 2019)
+
+[Choosing Transfer Languages for Cross-Lingual Learning](https://aclanthology.org/P19-1301.pdf) (Yu-Hsiang Lin, ACL 2019, [code](https://github.com/neulab/langrank))
+
+[Cross-lingual Language Model Pretraining](https://papers.nips.cc/paper/2019/file/c04c19c2c2474dbf5f7ac4372c5b9af1-Paper.pdf) (Alexis Conneau, NeuIPS 2019, [code](https://github.com/facebookresearch/XLM))
+
+[XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalisation](http://proceedings.mlr.press/v119/hu20b/hu20b.pdf) (Junjie Hu, ICML 2020)
+
+[Unsupervised Cross-lingual Representation Learning at Scale](https://aclanthology.org/2020.acl-main.747.pdf) (Alexis Conneau, ACL 2020, [code](https://github.com/pytorch/fairseq))
+
+[MAD-X: An Adapter-Based Framework for Multi-Task Cross-Lingual Transfer](https://arxiv.org/pdf/2005.00052.pdf) (Jonas Pfeiffer, EMNLP 2020)
+
+[Combining Word Embeddings with Bilingual Orthography Embeddings for Bilingual Dictionary Induction](https://aclanthology.org/2020.coling-main.531.pdf) (COLING 2020)
+
+[How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models](https://arxiv.org/pdf/2012.15613.pdf) (Phillip Rust, ACL 2021)
+
+[A Closer Look at Few-Shot Crosslingual Transfer: The Choice of Shots Matters](https://arxiv.org/pdf/2012.15682.pdf) (Mengjie Zhao, ACL 2021)
+
+[MuRIL: Multilingual Representations for Indian Languages](https://arxiv.org/pdf/2103.10730.pdf) (Simran Khanuja, 2021)
+
+[XLM-E: Cross-lingual Language Model Pre-training via ELECTRA](https://arxiv.org/pdf/2106.16138.pdf) (Zewen Chi, 2021)
+
+##### Application
+
+[Monolingual and Cross-Lingual Information Retrieval Models Based on (Bilingual) Word Embeddings](https://dl.acm.org/doi/abs/10.1145/2766462.2767752) (Ivan Vulić, SIGIR 2015)
 
 #### Natural Language Processing for Programming Language
 
