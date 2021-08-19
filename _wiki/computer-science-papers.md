@@ -1590,6 +1590,22 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution](https://144.208.67.177/ojs/index.php/AAAI/article/view/6352) (Peiqin Lin, AAAI 2020, [code](https://github.com/lpq29743/HAN-PL), [note](https://zhuanlan.zhihu.com/p/151387067))
 
+#### Natural Language Processing for Programming Language
+
+[code2seq: Generating sequences from structured representations of code](https://arxiv.org/pdf/1808.01400.pdf) (Uri Alon, ICLR 2019, [code](https://github.com/tech-srl/code2seq))
+
+##### Code Comment Generation
+
+[Towards automatically generating summary comments for java methods](https://dl.acm.org/doi/abs/10.1145/1858996.1859006) (Giriprasad Sridhara, ASE 2010)
+
+[On automatically generating commit messages via summarization of source code changes](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.714.7445&rep=rep1&type=pdf) (Luis Fernando Cortés-Coy, SCAM 2014)
+
+[Source code analysis extractive approach to generate textual summary](http://www.jatit.org/volumes/Vol95No21/12Vol95No21.pdf) (Kareem Abbas Dawood, 2017)
+
+##### Code Retrieval
+
+[Deep code search](https://guxd.github.io/papers/deepcs.pdf) (Xiaodong Gu, ICSE 2018)
+
 #### Natural Language Generation
 
 [Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks](https://proceedings.neurips.cc/paper/2015/file/e995f98d56967d946471af29d7bf99f1-Paper.pdf) (Samy Bengio, NeurIPS 2015)
@@ -2056,12 +2072,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Synthetic and Natural Noise Both Break Neural Machine Translation](https://arxiv.org/pdf/1711.02173.pdf) (Yonatan Belinkov, ICLR 2018)
 
-#### Low-Resource Natural Language Processing
-
-[Variational Information Bottleneck for Effective Low-Resource Fine-Tuning](https://arxiv.org/abs/2106.05469) (Rabeeh Karimi Mahabadi, ICLR 2021)
-
-[When Word Embeddings Become Endangered](https://arxiv.org/pdf/2103.13275.pdf) (Khalid Alnajjar, 2021)
-
 #### Multilinguality
 
 [Natural Language Processing for Similar Languages, Varieties, and Dialects: A Survey](https://www.cambridge.org/core/journals/natural-language-engineering/article/natural-language-processing-for-similar-languages-varieties-and-dialects-a-survey/229652C86E329F83346BB6C66B9521A6) (Marcos Zampieri, 2020)
@@ -2142,25 +2152,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [XLM-E: Cross-lingual Language Model Pre-training via ELECTRA](https://arxiv.org/pdf/2106.16138.pdf) (Zewen Chi, 2021)
 
+[When Word Embeddings Become Endangered](https://arxiv.org/pdf/2103.13275.pdf) (Khalid Alnajjar, 2021)
+
 ##### Application
 
 [Monolingual and Cross-Lingual Information Retrieval Models Based on (Bilingual) Word Embeddings](https://dl.acm.org/doi/abs/10.1145/2766462.2767752) (Ivan Vulić, SIGIR 2015)
 
-#### Natural Language Processing for Programming Language
+#### Low-Resource Natural Language Processing
 
-[code2seq: Generating sequences from structured representations of code](https://arxiv.org/pdf/1808.01400.pdf) (Uri Alon, ICLR 2019, [code](https://github.com/tech-srl/code2seq))
-
-##### Code Comment Generation
-
-[Towards automatically generating summary comments for java methods](https://dl.acm.org/doi/abs/10.1145/1858996.1859006) (Giriprasad Sridhara, ASE 2010)
-
-[On automatically generating commit messages via summarization of source code changes](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.714.7445&rep=rep1&type=pdf) (Luis Fernando Cortés-Coy, SCAM 2014)
-
-[Source code analysis extractive approach to generate textual summary](http://www.jatit.org/volumes/Vol95No21/12Vol95No21.pdf) (Kareem Abbas Dawood, 2017)
-
-##### Code Retrieval
-
-[Deep code search](https://guxd.github.io/papers/deepcs.pdf) (Xiaodong Gu, ICSE 2018)
+[Variational Information Bottleneck for Effective Low-Resource Fine-Tuning](https://arxiv.org/abs/2106.05469) (Rabeeh Karimi Mahabadi, ICLR 2021)
 
 #### Interpretability in Natural Language Processing
 
