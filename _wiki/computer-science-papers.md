@@ -2080,21 +2080,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Natural Language Processing for Similar Languages, Varieties, and Dialects: A Survey](https://www.cambridge.org/core/journals/natural-language-engineering/article/natural-language-processing-for-similar-languages-varieties-and-dialects-a-survey/229652C86E329F83346BB6C66B9521A6) (Marcos Zampieri, 2020)
 
-##### Typology
-
-[Comparing Language Similarity across Genetic and Typologically-Based Groupings](https://aclanthology.org/C10-1044.pdf) (Ryan Georgi, COLING 2010)
-
-[The World Atlas of Language Structures Online](https://pure.mpg.de/pubman/faces/ViewItemOverviewPage.jsp?itemId=item_1554621) (Matthew S. Dryer, 2013, [code](https://wals.info/))
-
-[Learning Language Representations for Typology Prediction](https://arxiv.org/pdf/1707.09569.pdf) (Chaitanya Malaviya, EMNLP 2017)
-
-[Modeling Language Variation and Universals: A Survey on Typological Linguistics for Natural Language Processing](https://direct.mit.edu/coli/article/45/3/559/93372/Modeling-Language-Variation-and-Universals-A) (Edoardo Maria Ponti, CL 2019)
-
-##### Historical Language
+##### Linguistic Typology and Historical Linguistics
 
 [A Statistical Model for Lost Language Deciphermen](https://dspace.mit.edu/handle/1721.1/62802) (Benjamin Snyder, ACL 2010)
 
+[Comparing Language Similarity across Genetic and Typologically-Based Groupings](https://aclanthology.org/C10-1044.pdf) (Ryan Georgi, COLING 2010)
+
 [Unsupervised Transcription of Historical Documents](https://aclanthology.org/P13-1021.pdf) (Taylor Berg-Kirkpatrick, ACL 2013)
+
+[The World Atlas of Language Structures Online](https://pure.mpg.de/pubman/faces/ViewItemOverviewPage.jsp?itemId=item_1554621) (Matthew S. Dryer, 2013, [code](https://wals.info/))
 
 [Unsupervised Code-Switching for Multilingual Historical Document Transcription](https://aclanthology.org/N15-1109.pdf) (Dan Garrette, NAACL 2015)
 
@@ -2104,6 +2098,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Dynamic Word Embeddings](http://proceedings.mlr.press/v70/bamler17a/bamler17a.pdf) (Robert Bamler, ICML 2017)
 
+[Learning Language Representations for Typology Prediction](https://arxiv.org/pdf/1707.09569.pdf) (Chaitanya Malaviya, EMNLP 2017)
+
 [The CLIN27 Shared Task: Translating Historical Text to Contemporary Language for Improving Automatic Linguistic Annotation](https://ifarm.nl/clin2017st/) (Erik Tjong Kim Sang, 2017)
 
 [Cultural Shift or Linguistic Drift? Comparing Two Computational Measures of Semantic Change](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5452980/) (William L. Hamilton, 2017)
@@ -2111,6 +2107,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Diachronic Word Embeddings and Semantic Shifts: A Survey](https://arxiv.org/pdf/1806.03537.pdf) (Andrey Kutuzov, COLING 2018)
 
 [Word Embeddings Quantify 100 Years of Gender and Ethnic Stereotypes](https://www.pnas.org/content/115/16/E3635.short) (Nikhil Garg, 2018)
+
+[Modeling Language Variation and Universals: A Survey on Typological Linguistics for Natural Language Processing](https://direct.mit.edu/coli/article/45/3/559/93372/Modeling-Language-Variation-and-Universals-A) (Edoardo Maria Ponti, CL 2019)
 
 [A Large-Scale Comparison of Historical Text Normalization Systems](https://arxiv.org/pdf/1904.02036.pdf) (Marcel Bollmann, NAACL 2019)
 
