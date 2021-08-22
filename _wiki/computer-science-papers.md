@@ -1994,6 +1994,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Pivot-based Transfer Learning for Neural Machine Translation between Non-English Languages](https://arxiv.org/pdf/1909.09524.pdf) (Yunsu Kim, EMNLP 2019)
 
+[Massively Multilingual Neural Machine Translation in the Wild: Findings and Challenges](https://arxiv.org/pdf/1907.05019.pdf) (Naveen Arivazhagan, 2019)
+
 [Multilingual Denoising Pre-training for Neural Machine Translation](https://arxiv.org/pdf/2001.08210.pdf) (Yinhan Liu, TACL 2020)
 
 [Balancing Training for Multilingual Neural Machine Translation](https://arxiv.org/pdf/2004.06748.pdf) (Xinyi Wang, ACL 2020)
@@ -2074,6 +2076,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Multilinguality
 
+[The State and Fate of Linguistic Diversity and Inclusion in the NLP World](https://arxiv.org/pdf/2004.09095.pdf) (Pratik Joshi, ACL 2020)
+
 [Natural Language Processing for Similar Languages, Varieties, and Dialects: A Survey](https://www.cambridge.org/core/journals/natural-language-engineering/article/natural-language-processing-for-similar-languages-varieties-and-dialects-a-survey/229652C86E329F83346BB6C66B9521A6) (Marcos Zampieri, 2020)
 
 ##### Typology
@@ -2086,7 +2090,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Modeling Language Variation and Universals: A Survey on Typological Linguistics for Natural Language Processing](https://direct.mit.edu/coli/article/45/3/559/93372/Modeling-Language-Variation-and-Universals-A) (Edoardo Maria Ponti, CL 2019)
 
-##### Historical Linguistics
+##### Historical Language
+
+[A Statistical Model for Lost Language Deciphermen](https://dspace.mit.edu/handle/1721.1/62802) (Benjamin Snyder, ACL 2010)
+
+[Unsupervised Transcription of Historical Documents](https://aclanthology.org/P13-1021.pdf) (Taylor Berg-Kirkpatrick, ACL 2013)
+
+[Unsupervised Code-Switching for Multilingual Historical Document Transcription](https://aclanthology.org/N15-1109.pdf) (Dan Garrette, NAACL 2015)
+
+[An Unsupervised Model of Orthographic Variation for Historical Document Transcription](https://aclanthology.org/N16-1055.pdf) (Dan Garrette, NAACL 2016)
 
 [Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change](https://arxiv.org/pdf/1605.09096.pdf) (William L. Hamilton, ACL 2016, [code](https://nlp.stanford.edu/projects/histwords/))
 
@@ -2101,6 +2113,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Word Embeddings Quantify 100 Years of Gender and Ethnic Stereotypes](https://www.pnas.org/content/115/16/E3635.short) (Nikhil Garg, 2018)
 
 [A Large-Scale Comparison of Historical Text Normalization Systems](https://arxiv.org/pdf/1904.02036.pdf) (Marcel Bollmann, NAACL 2019)
+
+[Neural Decipherment via Minimum-Cost Flow: from Ugaritic to Linear B](https://arxiv.org/pdf/1906.06718.pdf) (Jiaming Luo, ACL 2019)
+
+[Restoring Ancient Text Using Deep Learning: A Case Study on Greek Epigraphy](https://arxiv.org/pdf/1910.06262.pdf) (Yannis Assael, EMNLP 2019)
 
 [The Classical Language Toolkit: An NLP Framework for Pre-Modern Languages](https://aclanthology.org/2021.acl-demo.3.pdf) (Kyle P. Johnson, ACL 2021 Demo)
 
