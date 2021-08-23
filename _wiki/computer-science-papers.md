@@ -54,7 +54,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Learning Chinese Word Embeddings from Stroke, Structure and Pinyin of Characters](https://dl.acm.org/doi/10.1145/3357384.3358005) (Yun Zhang, CIKM 2019)
 
-[Glyce: Glyph-vectors for Chinese Character Representations](https://arxiv.org/pdf/1901.10125.pdf) (Yuxian Meng, NeuIPS 2019, [code](https://github.com/ShannonAI/glyce), [note](https://zhuanlan.zhihu.com/p/55967737))
+[Glyce: Glyph-vectors for Chinese Character Representations](https://arxiv.org/pdf/1901.10125.pdf) (Yuxian Meng, NeurIPS 2019, [code](https://github.com/ShannonAI/glyce), [note](https://zhuanlan.zhihu.com/p/55967737))
 
 [Obtaining Better Static Word Embeddings Using Contextual Embedding Models](https://arxiv.org/pdf/2106.04302.pdf) (Prakhar Gupta, ACL 2021)
 
@@ -64,7 +64,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Distributed Representations of Sentences and Documents](https://arxiv.org/pdf/1405.4053.pdf) (Quoc Le, ICML 2014, [code](https://github.com/jhlau/doc2vec), [note](https://blog.acolyer.org/2016/06/01/distributed-representations-of-sentences-and-documents/))
 
-[Skip-Thought Vectors](https://arxiv.org/pdf/1506.06726.pdf) (Ryan Kiros, NeuIPS 2015)
+[Skip-Thought Vectors](https://arxiv.org/pdf/1506.06726.pdf) (Ryan Kiros, NeurIPS 2015)
 
 [Deep Sentence Embedding Using Long Short-Term Memory Networks: Analysis and Application to Information Retrieval](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/02/LSTM_DSSM_IEEE_TASLP.pdf) (Hamid Palangi, TASLP 2017, [code](https://github.com/zhaosm/dssm-lstm))
 
@@ -76,11 +76,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Contextual Language Model
 
-[Semi-supervised Sequence Learning](https://arxiv.org/pdf/1511.01432.pdf) (Andrew M. Dai, NeuIPS 2015, [note](https://zhuanlan.zhihu.com/p/21313501))
+[Semi-supervised Sequence Learning](https://arxiv.org/pdf/1511.01432.pdf) (Andrew M. Dai, NeurIPS 2015, [note](https://zhuanlan.zhihu.com/p/21313501))
 
 [Semi-supervised Sequence Tagging with Bidirectional Language Models](https://arxiv.org/pdf/1705.00108.pdf) (Matthew E. Peters, ACL 2017, [note](https://zhuanlan.zhihu.com/p/105879581))
 
-[Learned in Translation: Contextualized Word Vectors](https://arxiv.org/pdf/1708.00107.pdf) (Bryan McCann, NeuIPS 2017, [code](https://github.com/salesforce/cove), [note](https://www.sohu.com/a/162634620_610300))
+[Learned in Translation: Contextualized Word Vectors](https://arxiv.org/pdf/1708.00107.pdf) (Bryan McCann, NeurIPS 2017, [code](https://github.com/salesforce/cove), [note](https://www.sohu.com/a/162634620_610300))
 
 [Deep Contextualized Word Representations](https://arxiv.org/pdf/1802.05365.pdf) (Matthew E. Peters, NAACL 2018, [code](https://github.com/allenai/allennlp), [note](https://zhuanlan.zhihu.com/p/38254332))
 
@@ -98,9 +98,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Revealing the Dark Secrets of BERT](https://arxiv.org/pdf/1908.08593.pdf) (Olga Kovaleva, EMNLP 2019, [note](https://zhuanlan.zhihu.com/p/117645185))
 
-[Unified Language Model Pre-training for Natural Language Understanding and Generation](https://arxiv.org/pdf/1905.03197.pdf) (Li Dong, NeuIPS 2019, [note](https://zhuanlan.zhihu.com/p/68755034))
+[Unified Language Model Pre-training for Natural Language Understanding and Generation](https://arxiv.org/pdf/1905.03197.pdf) (Li Dong, NeurIPS 2019, [note](https://zhuanlan.zhihu.com/p/68755034))
 
-[XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/pdf/1906.08237.pdf) (Zhilin Yang, NeuIPS 2019, [code](https://github.com/zihangdai/xlnet), [note](https://zhuanlan.zhihu.com/p/70257427))
+[XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/pdf/1906.08237.pdf) (Zhilin Yang, NeurIPS 2019, [code](https://github.com/zihangdai/xlnet), [note](https://zhuanlan.zhihu.com/p/70257427))
 
 [Pre-Training with Whole Word Masking for Chinese BERT](https://arxiv.org/pdf/1906.08101.pdf) (Yiming Cui, 2019, [code](https://github.com/ymcui/Chinese-BERT-wwm), [note](https://zhuanlan.zhihu.com/p/96792453))
 
@@ -162,9 +162,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Discriminative Neural Sentence Modeling by Tree-Based Convolution](https://aclweb.org/anthology/D15-1279) (Lili Mou, EMNLP 2015)
 
-[Character-level Convolutional Networks for Text Classification](https://arxiv.org/pdf/1509.01626.pdf) (Xiang Zhang, NeuIPS 2015, [code](https://github.com/dongjun-Lee/text-classification-models-tf), [note](https://zhuanlan.zhihu.com/p/51698513))
+[Character-level Convolutional Networks for Text Classification](https://arxiv.org/pdf/1509.01626.pdf) (Xiang Zhang, NeurIPS 2015, [code](https://github.com/dongjun-Lee/text-classification-models-tf), [note](https://zhuanlan.zhihu.com/p/51698513))
 
-[Semi-supervised Convolutional Neural Networks for Text Categorization via Region Embedding](https://papers.nips.cc/paper/5849-semi-supervised-convolutional-neural-networks-for-text-categorization-via-region-embedding.pdf) (Rie Johnson, NeuIPS 2015, [code](https://github.com/riejohnson/ConText))
+[Semi-supervised Convolutional Neural Networks for Text Categorization via Region Embedding](https://papers.nips.cc/paper/5849-semi-supervised-convolutional-neural-networks-for-text-categorization-via-region-embedding.pdf) (Rie Johnson, NeurIPS 2015, [code](https://github.com/riejohnson/ConText))
 
 [Hierarchical Attention Networks for Document Classification](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf) (Zichao Yang, NAACL 2016, [code](https://github.com/brightmart/text_classification), [note](https://zhuanlan.zhihu.com/p/26892711))
 
@@ -216,7 +216,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Deep Reinforced Sequence-to-Set Model for Multi-Label Classification](https://www.aclweb.org/anthology/P19-1518.pdf) (Pengcheng Yang, ACL 2019, [code](https://github.com/lancopku/Seq2Set), [note](https://blog.csdn.net/MaybeForever/article/details/102822057))
 
-[AttentionXML: Label Tree-based Attention-Aware Deep Model for High-Performance Extreme Multi-Label Text Classification](http://papers.nips.cc/paper/8817-attentionxml-label-tree-based-attention-aware-deep-model-for-high-performance-extreme-multi-label-text-classification.pdf) (Ronghui You, NeuIPS 2019, [code](https://github.com/yourh/AttentionXML), [note](https://zhuanlan.zhihu.com/p/96759318))
+[AttentionXML: Label Tree-based Attention-Aware Deep Model for High-Performance Extreme Multi-Label Text Classification](http://papers.nips.cc/paper/8817-attentionxml-label-tree-based-attention-aware-deep-model-for-high-performance-extreme-multi-label-text-classification.pdf) (Ronghui You, NeurIPS 2019, [code](https://github.com/yourh/AttentionXML), [note](https://zhuanlan.zhihu.com/p/96759318))
 
 #### Text Matching
 
@@ -226,7 +226,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Latent Semantic Model with Convolutional-Pooling Structure for Information Retrieval](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/cikm2014_cdssm_final.pdf) (Yelong Shen, CIKM 2014, [code](https://github.com/airalcorn2/Deep-Semantic-Similarity-Model), [note](https://zhuanlan.zhihu.com/p/32915377))
 
-[Convolutional Neural Network Architectures for Matching Natural Language Sentences](http://www.hangli-hl.com/uploads/3/1/6/8/3168008/hu-etal-nips2014.pdf) (Baotian Hu, NeuIPS 2014, [code](https://github.com/ddddwy/ARCII-for-Matching-Natural-Language-Sentences))
+[Convolutional Neural Network Architectures for Matching Natural Language Sentences](http://www.hangli-hl.com/uploads/3/1/6/8/3168008/hu-etal-nips2014.pdf) (Baotian Hu, NeurIPS 2014, [code](https://github.com/ddddwy/ARCII-for-Matching-Natural-Language-Sentences))
 
 [Learning to Rank Short Text Pairs with Convolutional Deep Neural Networks](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.723.6492&rep=rep1&type=pdf) (Aliaksei Severyn, SIGIR 2015, [code](https://github.com/zhangzibin/PairCNN-Ranking), [note](https://zhuanlan.zhihu.com/p/32915377))
 
@@ -410,7 +410,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Reducing Quantity Hallucinations in Abstractive Summarization](https://arxiv.org/pdf/2009.13312.pdf) (Zheng Zhao, EMNLP 2020 Findings)
 
-[Learning to Summarize from Human Feedback](https://arxiv.org/pdf/2009.01325.pdf) (Nisan Stiennon, NeuIPS 2020)
+[Learning to Summarize from Human Feedback](https://arxiv.org/pdf/2009.01325.pdf) (Nisan Stiennon, NeurIPS 2020)
 
 ##### Multi-Document Summarization
 
@@ -442,7 +442,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Text Style Transfer
 
-[Style Transfer from Non-Parallel Text by Cross-Alignment](https://arxiv.org/pdf/1705.09655.pdf) (Tianxiao Shen, NeuIPS 2017, [code](https://github.com/shentianxiao/language-style-transfer?utm_source=catalyzex.com))
+[Style Transfer from Non-Parallel Text by Cross-Alignment](https://arxiv.org/pdf/1705.09655.pdf) (Tianxiao Shen, NeurIPS 2017, [code](https://github.com/shentianxiao/language-style-transfer?utm_source=catalyzex.com))
 
 [Style Transfer in Text: Exploration and Evaluation](https://arxiv.org/pdf/1711.06861.pdf) (Zhenxin Fu, AAAI 2018, [code](https://github.com/fuzhenxin/text_style_transfer?utm_source=catalyzex.com), [note](https://zhuanlan.zhihu.com/p/32300981))
 
@@ -450,7 +450,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Style Transfer Through Back-Translation](https://arxiv.org/pdf/1804.09000.pdf) (Shrimai Prabhumoye, ACL 2018, [code](https://github.com/shrimai/Style-Transfer-Through-Back-Translation?utm_source=catalyzex.com))
 
-[Unsupervised Text Style Transfer using Language Models as Discriminators](https://arxiv.org/pdf/1805.11749.pdf) (Zichao Yang, NeuIPS 2018, [code](https://github.com/asyml/texar/tree/master/examples/text_style_transfer?utm_source=catalyzex.com))
+[Unsupervised Text Style Transfer using Language Models as Discriminators](https://arxiv.org/pdf/1805.11749.pdf) (Zichao Yang, NeurIPS 2018, [code](https://github.com/asyml/texar/tree/master/examples/text_style_transfer?utm_source=catalyzex.com))
 
 [Reinforcement Learning Based Text Style Transfer without Parallel Training Corpus](https://arxiv.org/pdf/1903.10671.pdf) (Hongyu Gong, NAACL 2019, [code](https://github.com/HongyuGong/TextStyleTransfer))
 
@@ -478,9 +478,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Latent Dirichlet Allocation](http://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf) (David M. Blei, JMLR 2003, [code](https://github.com/lda-project/lda), [note](https://zhuanlan.zhihu.com/p/37873878))
 
-[Correlated Topic Models](http://papers.neurips.cc/paper/2906-correlated-topic-models.pdf) (David M. Blei, NIPS 2005)
+[Correlated Topic Models](http://papers.neurips.cc/paper/2906-correlated-topic-models.pdf) (David M. Blei, NeurIPS 2005)
 
-[A Neural Autoregressive Topic Model](https://papers.nips.cc/paper/4613-a-neural-autoregressive-topic-model.pdf) (Hugo Larochelle, NIPS 2012, [code](https://github.com/AYLIEN/docnade))
+[A Neural Autoregressive Topic Model](https://papers.nips.cc/paper/4613-a-neural-autoregressive-topic-model.pdf) (Hugo Larochelle, NeurIPS 2012, [code](https://github.com/AYLIEN/docnade))
 
 [LightLDA: Big Topic Models on Modest Computer Clusters](https://arxiv.org/pdf/1412.1576.pdf) (Jinhui Yuan, WWW 2015, [code](https://github.com/microsoft/LightLDA), [note](http://d0evi1.com/lightlda/))
 
@@ -518,13 +518,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Supervised Topic Modeling
 
-[Supervised Topic Models](https://papers.nips.cc/paper/3328-supervised-topic-models.pdf) (David M. Blei, NIPS 2008)
+[Supervised Topic Models](https://papers.nips.cc/paper/3328-supervised-topic-models.pdf) (David M. Blei, NeurIPS 2008)
 
 [Labeled LDA: A Supervised Topic Model for Credit Attribution in Multi-Labeled Corpora](https://www.aclweb.org/anthology/D09-1026.pdf) (Daniel Ramage, EMNLP 2009, [code](https://github.com/JoeZJH/Labeled-LDA-Python), [note](https://blog.csdn.net/qy20115549/article/details/90771054))
 
-[DiscLDA: Discriminative Learning for Dimensionality Reduction and Classification](http://papers.nips.cc/paper/3599-disclda-discriminative-learning-for-dimensionality-reduction-and-classification.pdf) (Simon Lacoste-Julien, NIPS 2009, [code](https://github.com/teffland/disclda))
+[DiscLDA: Discriminative Learning for Dimensionality Reduction and Classification](http://papers.nips.cc/paper/3599-disclda-discriminative-learning-for-dimensionality-reduction-and-classification.pdf) (Simon Lacoste-Julien, NeurIPS 2009, [code](https://github.com/teffland/disclda))
 
-[Replicated Softmax: an Undirected Topic Model](https://papers.nips.cc/paper/3856-replicated-softmax-an-undirected-topic-model.pdf) (Ruslan Salakhutdinov, NIPS 2009)
+[Replicated Softmax: an Undirected Topic Model](https://papers.nips.cc/paper/3856-replicated-softmax-an-undirected-topic-model.pdf) (Ruslan Salakhutdinov, NeurIPS 2009)
 
 [Partially Labeled Topic Models for Interpretable Text Mining](http://susandumais.com/kdd2011-pldp-final.pdf) (Daniel Ramage, KDD 2011)
 
@@ -550,7 +550,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [PhraseCTM: Correlated Topic Modeling on Phrases within Markov Random Fields](https://www.aclweb.org/anthology/P18-2083.pdf) (Weijie Huang, ACL 2018)
 
-[Dirichlet Belief Networks for Topic Structure Learning](http://papers.nips.cc/paper/8020-dirichlet-belief-networks-for-topic-structure-learning.pdf) (He Zhao, NIPS 2018)
+[Dirichlet Belief Networks for Topic Structure Learning](http://papers.nips.cc/paper/8020-dirichlet-belief-networks-for-topic-structure-learning.pdf) (He Zhao, NeurIPS 2018)
 
 [Discriminative Topic Mining via Category-Name Guided Text Embedding](https://arxiv.org/pdf/1908.07162.pdf) (Yu Meng, WWW 2020, [code](https://github.com/yumeng5/CatE))
 
@@ -1124,7 +1124,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Explicit State Tracking with Semi-Supervisionfor Neural Dialogue Generation](https://dl.acm.org/doi/abs/10.1145/3269206.3271683) (Xisen Jin, CIKM 2018, [code](https://github.com/AuCson/SEDST), [note](https://zhuanlan.zhihu.com/p/62306940))
 
-[Generating Informative and Diverse Conversational Responses via Adversarial Information Maximization](https://papers.nips.cc/paper/2018/file/23ce1851341ec1fa9e0c259de10bf87c-Paper.pdf) (Yizhe Zhang, NeuIPS 2018)
+[Generating Informative and Diverse Conversational Responses via Adversarial Information Maximization](https://papers.nips.cc/paper/2018/file/23ce1851341ec1fa9e0c259de10bf87c-Paper.pdf) (Yizhe Zhang, NeurIPS 2018)
 
 [Jointly Optimizing Diversity and Relevance in Neural Response Generation](https://arxiv.org/pdf/1902.11205.pdf) (Xiang Gao, NAACL 2019, [code](https://github.com/golsun/SpaceFusion?utm_source=catalyzex.com))
 
@@ -1290,7 +1290,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Conversational Recommender System](https://arxiv.org/pdf/1806.03277.pdf) (Yueming Sun, SIGIR 2018)
 
-[Towards Deep Conversational Recommendations](https://papers.nips.cc/paper/2018/file/800de15c79c8d840f4e78d3af937d4d4-Paper.pdf) (Raymond Li, NIPS 2018, [note](http://www.xuwei.io/2019/05/02/%E3%80%8Atowards-deep-conversational-recommendations%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/))
+[Towards Deep Conversational Recommendations](https://papers.nips.cc/paper/2018/file/800de15c79c8d840f4e78d3af937d4d4-Paper.pdf) (Raymond Li, NeurIPS 2018, [note](http://www.xuwei.io/2019/05/02/%E3%80%8Atowards-deep-conversational-recommendations%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/))
 
 [Towards Knowledge-Based Recommender Dialog System](https://arxiv.org/pdf/1908.05391.pdf) (Qibin Chen, EMNLP 2019, [code](https://github.com/THUDM/KBRD), [note](https://zhuanlan.zhihu.com/p/270386920))
 
@@ -1352,11 +1352,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Machine Reading Comprehension
 
-[Teaching Machines to Read and Comprehend](https://lanl.arxiv.org/pdf/1506.03340.pdf) (Karl Moritz Hermann, NIPS 2015, [code](https://github.com/thomasmesnard/DeepMind-Teaching-Machines-to-Read-and-Comprehend), [note](https://zhuanlan.zhihu.com/p/21343662))
+[Teaching Machines to Read and Comprehend](https://lanl.arxiv.org/pdf/1506.03340.pdf) (Karl Moritz Hermann, NeurIPS 2015, [code](https://github.com/thomasmesnard/DeepMind-Teaching-Machines-to-Read-and-Comprehend), [note](https://zhuanlan.zhihu.com/p/21343662))
 
 [Text Understanding with the Attention Sum Reader Network](http://www.aclweb.org/anthology/P16-1086) (Rudolf Kadlec, ACL 2016, [code](https://github.com/rkadlec/asreader), [note](https://zhuanlan.zhihu.com/p/21354432))
 
-[ReasoNet: Learning to Stop Reading in Machine Comprehension](https://arxiv.org/pdf/1609.05284.pdf) (Yelong Shen, KDD 2017, [note](http://cairohy.github.io/2017/05/22/deeplearning/NLP-RC-ReasoNet-NIPS2016-%E3%80%8AReasoNet%20Learning%20to%20Stop%20Reading%20in%20Machine%20Comprehension%E3%80%8B/))
+[ReasoNet: Learning to Stop Reading in Machine Comprehension](https://arxiv.org/pdf/1609.05284.pdf) (Yelong Shen, KDD 2017, [note](http://cairohy.github.io/2017/05/22/deeplearning/NLP-RC-ReasoNet-NeurIPS2016-%E3%80%8AReasoNet%20Learning%20to%20Stop%20Reading%20in%20Machine%20Comprehension%E3%80%8B/))
 
 [Machine Comprehension Using Match-LSTM and Answer Pointer](https://openreview.net/pdf?id=B1-q5Pqxl) (Shuohang Wang, ICLR 2017, [code](https://github.com/MurtyShikhar/Question-Answering), [note](https://zhuanlan.zhihu.com/p/55957106))
 
@@ -1416,7 +1416,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [SDNet: Contextualized Attention-based Deep Network for Conversational Question Answering](https://arxiv.org/pdf/1812.03593.pdf) (Chenguang Zhu, 2018, [code](https://github.com/Microsoft/SDNet), [note](https://zhuanlan.zhihu.com/p/66100785))
 
-[Dialog-to-Action: Conversational Question Answering Over a Large-Scale Knowledge Base](https://papers.nips.cc/paper/2018/file/d63fbf8c3173730f82b150c5ef38b8ff-Paper.pdf) (Daya Guo, NIPS 2018)
+[Dialog-to-Action: Conversational Question Answering Over a Large-Scale Knowledge Base](https://papers.nips.cc/paper/2018/file/d63fbf8c3173730f82b150c5ef38b8ff-Paper.pdf) (Daya Guo, NeurIPS 2018)
 
 [FlowQA: Grasping Flow in History for Conversational Machine Comprehension](https://arxiv.org/pdf/1810.06683.pdf) (Hsin-Yuan Huang, ICLR 2019, [code](https://github.com/momohuang/FlowQA), [note](https://zhuanlan.zhihu.com/p/53028792))
 
@@ -1432,7 +1432,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [VQA: Visual Question Answering](https://arxiv.org/pdf/1505.00468.pdf) (Aishwarya Agrawal, ICCV 2015)
 
-[Hierarchical Question-Image Co-Attention for Visual Question Answering](https://arxiv.org/pdf/1606.00061.pdf) (Jiasen Lu, NIPS 2016)
+[Hierarchical Question-Image Co-Attention for Visual Question Answering](https://arxiv.org/pdf/1606.00061.pdf) (Jiasen Lu, NeurIPS 2016)
 
 [Explicit Knowledge-based Reasoning for Visual Question Answering](https://arxiv.org/pdf/1511.02570.pdf) (Peng Wang, IJCAI 2017)
 
@@ -1440,7 +1440,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Straight to the Facts: Learning Knowledge Base Retrieval for Factual Visual Question Answering](https://arxiv.org/pdf/1809.01124.pdf) (Medhini Narasimhan, ECCV 2018)
 
-[Out of the Box: Reasoning with Graph Convolution Nets for Factual Visual Question Answering](https://arxiv.org/pdf/1811.00538.pdf) (Medhini Narasimhan, NIPS 2018)
+[Out of the Box: Reasoning with Graph Convolution Nets for Factual Visual Question Answering](https://arxiv.org/pdf/1811.00538.pdf) (Medhini Narasimhan, NeurIPS 2018)
 
 [OK-VQA: A Visual Question Answering Benchmark Requiring External Knowledge](https://arxiv.org/pdf/1906.00067.pdf) (Kenneth Marino, CVPR 2019, [code](https://okvqa.allenai.org/), [note](https://blog.csdn.net/z704630835/article/details/100095787))
 
@@ -1470,7 +1470,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Knowledge Graph Embedding and Completion
 
-[Translating Embeddings for Modeling Multi-relational Data](https://www.utc.fr/~bordesan/dokuwiki/_media/en/transe_nips13.pdf) (Antoine Bordes, NIPS 2013, [code](https://github.com/thunlp/KB2E), [note](https://zhuanlan.zhihu.com/p/32993044))
+[Translating Embeddings for Modeling Multi-relational Data](https://www.utc.fr/~bordesan/dokuwiki/_media/en/transe_nips13.pdf) (Antoine Bordes, NeurIPS 2013, [code](https://github.com/thunlp/KB2E), [note](https://zhuanlan.zhihu.com/p/32993044))
 
 [Knowledge Graph Embedding by Translating on Hyperplanes](https://pdfs.semanticscholar.org/2a3f/862199883ceff5e3c74126f0c80770653e05.pdf) (Zhen Wang, AAAI 2014, [code](https://github.com/thunlp/KB2E), [note](https://zhuanlan.zhihu.com/p/32993044))
 
@@ -1666,11 +1666,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Sequence to Sequence
 
-[Sequence to Sequence Learning with Neural Networks](https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf) (Ilya Sutskever, NeuIPS 2014)
+[Sequence to Sequence Learning with Neural Networks](https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf) (Ilya Sutskever, NeurIPS 2014)
 
 [Convolutional Sequence to Sequence Learning](https://pdfs.semanticscholar.org/bb3e/bc09b65728d6eced04929df72a006fb5210b.pdf) (Jonas Gehring, ICML 2017, [code](https://github.com/tobyyouup/conv_seq2seq), [note](https://zhuanlan.zhihu.com/p/26918935))
 
-[Deliberation Networks: Sequence Generation Beyond One-Pass Decoding](https://papers.nips.cc/paper/2017/file/c6036a69be21cb660499b75718a3ef24-Paper.pdf) (Yingce Xia, NIPS 2017)
+[Deliberation Networks: Sequence Generation Beyond One-Pass Decoding](https://papers.nips.cc/paper/2017/file/c6036a69be21cb660499b75718a3ef24-Paper.pdf) (Yingce Xia, NeurIPS 2017)
 
 [Deep Reinforcement Learning For Sequence to Sequence Models](https://arxiv.org/pdf/1805.09461.pdf) (Yaser Keneshloo, 2018, [code](https://github.com/yaserkl/RLSeq2Seq), [note](https://www.jianshu.com/p/1213de861491))
 
@@ -1716,7 +1716,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Multi-Task Approach for Disentangling Syntax and Semantics in Sentence Representations](https://arxiv.org/pdf/1904.01173.pdf) (Mingda Chen, NAACL 2019, [code](https://github.com/mingdachen/disentangle-semantics-syntax))
 
-[Paraphrase Generation with Latent Bag of Words](https://arxiv.org/pdf/2001.01941.pdf) (Yao Fu, NeuIPS 2019)
+[Paraphrase Generation with Latent Bag of Words](https://arxiv.org/pdf/2001.01941.pdf) (Yao Fu, NeurIPS 2019)
 
 #### Storytelling
 
@@ -2148,7 +2148,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Choosing Transfer Languages for Cross-Lingual Learning](https://aclanthology.org/P19-1301.pdf) (Yu-Hsiang Lin, ACL 2019, [code](https://github.com/neulab/langrank))
 
-[Cross-lingual Language Model Pretraining](https://papers.nips.cc/paper/2019/file/c04c19c2c2474dbf5f7ac4372c5b9af1-Paper.pdf) (Alexis Conneau, NeuIPS 2019, [code](https://github.com/facebookresearch/XLM))
+[Cross-lingual Language Model Pretraining](https://papers.nips.cc/paper/2019/file/c04c19c2c2474dbf5f7ac4372c5b9af1-Paper.pdf) (Alexis Conneau, NeurIPS 2019, [code](https://github.com/facebookresearch/XLM))
 
 [XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalisation](http://proceedings.mlr.press/v119/hu20b/hu20b.pdf) (Junjie Hu, ICML 2020)
 
@@ -2254,15 +2254,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Learning To Detect Unseen Object Classes by Between-Class Attribute Transfer](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=03500C970796A39BCC5A437E4AA79B10?doi=10.1.1.165.9750&rep=rep1&type=pdf) (Christoph H. Lampert, CVPR 2009, [code](https://github.com/ahmedmazariML/Learning-To-Detect-Unseen-Object-Classes-by-Between-Class-Attribute-Transfer), [note](https://tongtianta.site/paper/23631))
 
-[DeViSE: A Deep Visual-Semantic Embedding Model](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=CD1A6E4145A750B305F3512006D12FE9?doi=10.1.1.466.176&rep=rep1&type=pdf) (Andrea Frome, NeuIPS 2013, [note](https://zhuanlan.zhihu.com/p/52352455))
+[DeViSE: A Deep Visual-Semantic Embedding Model](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=CD1A6E4145A750B305F3512006D12FE9?doi=10.1.1.466.176&rep=rep1&type=pdf) (Andrea Frome, NeurIPS 2013, [note](https://zhuanlan.zhihu.com/p/52352455))
 
 [Rich feature hierarchies for accurate object detection and semantic segmentation](https://arxiv.org/pdf/1311.2524.pdf) (Ross Girshick, CVPR 2014, [code](https://github.com/rbgirshick/rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
 
 [Fast Region-based Convolutional Networks for object detection](https://arxiv.org/pdf/1504.08083.pdf) (Ross Girshick, ICCV 2015, [code](https://github.com/rbgirshick/fast-rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
 
-[Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/pdf/1506.01497.pdf) (Shaoqing Ren, NeuIPS 2015, [code](https://github.com/rbgirshick/py-faster-rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
+[Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/pdf/1506.01497.pdf) (Shaoqing Ren, NeurIPS 2015, [code](https://github.com/rbgirshick/py-faster-rcnn), [note](https://zhuanlan.zhihu.com/p/47579399))
 
-[R-FCN: Object Detection via Region-based Fully Convolutional Networks](https://arxiv.org/pdf/1605.06409.pdf) (Jifeng Dai, NeuIPS 2016, [code](https://github.com/daijifeng001/R-FCN), [note](https://zhuanlan.zhihu.com/p/30867916))
+[R-FCN: Object Detection via Region-based Fully Convolutional Networks](https://arxiv.org/pdf/1605.06409.pdf) (Jifeng Dai, NeurIPS 2016, [code](https://github.com/daijifeng001/R-FCN), [note](https://zhuanlan.zhihu.com/p/30867916))
 
 [You Only Look Once: Unified, Real-Time Object Detection](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Redmon_You_Only_Look_CVPR_2016_paper.pdf) (Joseph Redmon, CVPR 2016, [code](https://github.com/gliese581gg/YOLO_tensorflow), [note](https://zhuanlan.zhihu.com/p/32525231))
 
@@ -2278,7 +2278,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [YOLOv4: Optimal Speed and Accuracy of Object Detection](https://arxiv.org/pdf/2004.10934.pdf) (Alexey Bochkovskiy, 2020, [code](https://github.com/AlexeyAB/darknet?utm_source=catalyzex.com))
 
-[RelationNet++: Bridging Visual Representations for Object Detection via Transformer Decoder](https://arxiv.org/pdf/2010.15831.pdf) (Cheng Chi, NIPS 2020)
+[RelationNet++: Bridging Visual Representations for Object Detection via Transformer Decoder](https://arxiv.org/pdf/2010.15831.pdf) (Cheng Chi, NeurIPS 2020)
 
 [EfficientDet: Scalable and Efficient Object Detection](https://arxiv.org/pdf/1911.09070v3.pdf) (Mingxing Tan, CVPR 2020)
 
@@ -2384,11 +2384,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Large Scale Multiple Kernel Learning](http://www.jmlr.org/papers/volume7/sonnenburg06a/sonnenburg06a.pdf) (Sören Sonnenburg, JMLR 2006)
 
-[Factorized Latent Spaces with Structured Sparsity](https://papers.nips.cc/paper/3953-factorized-latent-spaces-with-structured-sparsity.pdf) (Yangqing Jia, NeuIPS 2010)
+[Factorized Latent Spaces with Structured Sparsity](https://papers.nips.cc/paper/3953-factorized-latent-spaces-with-structured-sparsity.pdf) (Yangqing Jia, NeurIPS 2010)
 
 [Factorized Orthogonal Latent Spaces](https://ttic.uchicago.edu/~rurtasun/publications/SalzmannEkUrtasunDarrell10.pdf) (Mathieu Salzmann, 2010)
 
-[Domain Separation Networks](https://papers.nips.cc/paper/6254-domain-separation-networks.pdf) (Konstantinos Bousmalis, NeuIPS 2016, [note](https://zhuanlan.zhihu.com/p/49479734))
+[Domain Separation Networks](https://papers.nips.cc/paper/6254-domain-separation-networks.pdf) (Konstantinos Bousmalis, NeurIPS 2016, [note](https://zhuanlan.zhihu.com/p/49479734))
 
 [Multi-Task Deep Neural Networks for Natural Language Understanding](https://arxiv.org/pdf/1901.11504.pdf) (Xiaodong Liu, ACL 2019, [code](https://github.com/namisan/mt-dnn), [note](https://zhuanlan.zhihu.com/p/60282783))
 
@@ -2414,7 +2414,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Notes on Convolutional Neural Networks](http://202.116.81.74/cache/7/03/cogprints.org/036a03bc6027afc65c14907d0a1fae73/cnn_tutorial.pdf) (Jake Bouvrie, 2006, [note](https://blog.csdn.net/langb2014/article/details/48470181))
 
-[ImageNet Classification with Deep Convolutional Neural Networks](https://www.nvidia.cn/content/tesla/pdf/machine-learning/imagenet-classification-with-deep-convolutional-nn.pdf) (Alex Krizhevsky, NeuIPS 2012, [note](https://zhuanlan.zhihu.com/p/20324656))
+[ImageNet Classification with Deep Convolutional Neural Networks](https://www.nvidia.cn/content/tesla/pdf/machine-learning/imagenet-classification-with-deep-convolutional-nn.pdf) (Alex Krizhevsky, NeurIPS 2012, [note](https://zhuanlan.zhihu.com/p/20324656))
 
 [Simplifying ConvNets for Fast Learning](https://liris.cnrs.fr/Documents/Liris-5659.pdf) (Franck Mamalet, 2012)
 
@@ -2490,7 +2490,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/pdf/1511.06434.pdf) (Alec Radford, ICLR 2016, [note](https://www.cnblogs.com/wangxiaocvpr/p/5965434.html))
 
-[NIPS 2016 Tutorial: Generative Adversarial Networks](https://arxiv.org/pdf/1701.00160.pdf) (Ian Goodfellow, NeuIPS 2016, [note](https://blog.csdn.net/cskywit/article/details/86612142))
+[NeurIPS 2016 Tutorial: Generative Adversarial Networks](https://arxiv.org/pdf/1701.00160.pdf) (Ian Goodfellow, NeurIPS 2016, [note](https://blog.csdn.net/cskywit/article/details/86612142))
 
 [Conditional Image Synthesis with Auxiliary Classifier GANs](https://arxiv.org/pdf/1610.09585.pdf) (Augustus Odena, 2016, [note](https://blog.csdn.net/qq_24477135/article/details/85758496))
 
@@ -2538,11 +2538,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Variational Inference with Normalizing Flows](http://proceedings.mlr.press/v37/rezende15.pdf) (Danilo Jimenez Rezende, ICML 2015, [note](https://bingning.wang/research/Article/?id=100))
 
-[Learning Structured Output Representation using Deep Conditional Generative Models](https://papers.nips.cc/paper/2015/file/8d55a249e6baa5c06772297520da2051-Paper.pdf) (Kihyuk Sohn, NeuIPS 2015, [note](https://zhuanlan.zhihu.com/p/25518643))
+[Learning Structured Output Representation using Deep Conditional Generative Models](https://papers.nips.cc/paper/2015/file/8d55a249e6baa5c06772297520da2051-Paper.pdf) (Kihyuk Sohn, NeurIPS 2015, [note](https://zhuanlan.zhihu.com/p/25518643))
 
-[Improved Variational Inference with Inverse Autoregressive Flow](https://arxiv.org/pdf/1606.04934.pdf) (Diederik P. Kingma, NeuIPS 2016)
+[Improved Variational Inference with Inverse Autoregressive Flow](https://arxiv.org/pdf/1606.04934.pdf) (Diederik P. Kingma, NeurIPS 2016)
 
-[Variational Graph AutoEncoders](https://arxiv.org/pdf/1611.07308.pdf) (Thomas N. Kipf, NeuIPS 2016 Workshop)
+[Variational Graph AutoEncoders](https://arxiv.org/pdf/1611.07308.pdf) (Thomas N. Kipf, NeurIPS 2016 Workshop)
 
 [beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework](https://openreview.net/pdf?id=Sy2fzU9gl) (Irina Higgins, ICLR 2017)
 
@@ -2550,7 +2550,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Variational Lossy Autoencoder](https://arxiv.org/pdf/1611.02731.pdf) (Xi Chen, ICLR 2017)
 
-[Neural Discrete Representation Learning](https://arxiv.org/pdf/1711.00937.pdf) (Aaron van den Oord, NeuIPS 2017)
+[Neural Discrete Representation Learning](https://arxiv.org/pdf/1711.00937.pdf) (Aaron van den Oord, NeurIPS 2017)
 
 [Adversarially Regularized Autoencoders](http://proceedings.mlr.press/v80/zhao18b/zhao18b.pdf) (Junbo Zhao, ICML 2018)
 
@@ -2558,15 +2558,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Adversarially Regularized Graph Autoencoder for Graph Embedding](https://www.ijcai.org/proceedings/2018/0362.pdf) (Shirui Pan, IJCAI 2018)
 
-[Isolating Sources of Disentanglement in VAEs](https://arxiv.org/pdf/1802.04942.pdf) (Ricky T. Q. Chen, NeuIPS 2018)
+[Isolating Sources of Disentanglement in VAEs](https://arxiv.org/pdf/1802.04942.pdf) (Ricky T. Q. Chen, NeurIPS 2018)
 
-[Learning Disentangled Joint Continuous and Discrete Representations](https://arxiv.org/pdf/1804.00104.pdf) (Emilien Dupont, NeuIPS 2018)
+[Learning Disentangled Joint Continuous and Discrete Representations](https://arxiv.org/pdf/1804.00104.pdf) (Emilien Dupont, NeurIPS 2018)
 
 [GraphVAE: Towards Generation of Small Graphs Using Variational Autoencoders](https://arxiv.org/pdf/1802.03480.pdf) (Martin Simonovsky, 2018)
 
 [Structured Disentangled Representations](http://proceedings.mlr.press/v89/esmaeili19a/esmaeili19a.pdf) (Babak Esmaeili, AISTATS 2019)
 
-[Generating Diverse High-Fidelity Images with VQ-VAE-2](https://arxiv.org/pdf/1906.00446.pdf) (Ali Razavi, NeuIPS 2019)
+[Generating Diverse High-Fidelity Images with VQ-VAE-2](https://arxiv.org/pdf/1906.00446.pdf) (Ali Razavi, NeurIPS 2019)
 
 [Variational Autoencoders and Nonlinear ICA: A Unifying Framework](http://proceedings.mlr.press/v108/khemakhem20a/khemakhem20a.pdf) (Ilyes Khemakhem, AISTATS 2020)
 
@@ -2586,7 +2586,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Capsule Network
 
-[Dynamic Routing Between Capsules](https://papers.nips.cc/paper/6975-dynamic-routing-between-capsules.pdf) (Geoffrey Hinton, NeuIPS 2017, [code](https://github.com/naturomics/CapsNet-Tensorflow), [note](https://zhuanlan.zhihu.com/p/32156167))
+[Dynamic Routing Between Capsules](https://papers.nips.cc/paper/6975-dynamic-routing-between-capsules.pdf) (Geoffrey Hinton, NeurIPS 2017, [code](https://github.com/naturomics/CapsNet-Tensorflow), [note](https://zhuanlan.zhihu.com/p/32156167))
 
 [Matrix Capsules with EM Routing](https://openreview.net/pdf?id=HJWLfGWRb) (Geoffrey Hinton, ICLR 2018)
 
@@ -2650,7 +2650,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Self-Attention with Cross-Lingual Position Representation](https://arxiv.org/pdf/2004.13310.pdf) (Liang Ding, ACL 2020)
 
-[O(n) Connections are Expressive Enough: Universal Approximability of Sparse Transformers](https://arxiv.org/pdf/2006.04862.pdf) (Chulhee Yun, NeuIPS 2020)
+[O(n) Connections are Expressive Enough: Universal Approximability of Sparse Transformers](https://arxiv.org/pdf/2006.04862.pdf) (Chulhee Yun, NeurIPS 2020)
 
 [ETC: Encoding Long and Structured Data in Transformers](https://www.aclweb.org/anthology/2020.emnlp-main.19.pdf) (Joshua Ainslie, EMNLP 2020)
 
@@ -2678,11 +2678,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification](http://proceedings.mlr.press/v48/martins16.pdf) (Andre F. T. Martins, ICML 2016, [code](https://github.com/KrisKorrel/sparsemax-pytorch), [note](https://www.cs.utah.edu/~tli/posts/2019/01/blog-post-1/))
 
-[A Regularized Framework for Sparse and Structured Neural Attention](https://arxiv.org/pdf/1705.07704.pdf) (Vlad Niculae, NeuIPS 2017)
+[A Regularized Framework for Sparse and Structured Neural Attention](https://arxiv.org/pdf/1705.07704.pdf) (Vlad Niculae, NeurIPS 2017)
 
 [Sparse and Constrained Attention for Neural Machine Translation](https://arxiv.org/pdf/1805.08241.pdf) (Chaitanya Malaviya, ACL 2018)
 
-[On Controllable Sparse Alternatives to Softmax](https://arxiv.org/pdf/1810.11975.pdf) (Anirban Laha, NeuIPS 2018)
+[On Controllable Sparse Alternatives to Softmax](https://arxiv.org/pdf/1810.11975.pdf) (Anirban Laha, NeurIPS 2018)
 
 [Sparse Sequence-to-Sequence Models](https://arxiv.org/pdf/1905.05702.pdf) (Ben Peters, ACL 2019, [note](https://zhuanlan.zhihu.com/p/76607614))
 
@@ -2732,9 +2732,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Additive Margin Softmax for Face Verification](https://arxiv.org/pdf/1801.05599.pdf) (Feng Wang, 2018, [code](https://github.com/Joker316701882/Additive-Margin-Softmax), [note](https://blog.csdn.net/shaoxiaohu1/article/details/79139039))
 
-[On Controllable Sparse Alternatives to Softmax](http://papers.nips.cc/paper/7878-on-controllable-sparse-alternatives-to-softmax.pdf) (Anirban Laha, NIPS 2018)
+[On Controllable Sparse Alternatives to Softmax](http://papers.nips.cc/paper/7878-on-controllable-sparse-alternatives-to-softmax.pdf) (Anirban Laha, NeurIPS 2018)
 
-[DropMax: Adaptive Variational Softmax](http://papers.nips.cc/paper/7371-dropmax-adaptive-variational-softmax.pdf) (Hae Beom Lee, NIPS 2018)
+[DropMax: Adaptive Variational Softmax](http://papers.nips.cc/paper/7371-dropmax-adaptive-variational-softmax.pdf) (Hae Beom Lee, NeurIPS 2018)
 
 #### Activation Function
 
@@ -2784,9 +2784,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Pixel Recurrent Neural Networks](http://proceedings.mlr.press/v48/oord16.pdf) (Aaron van den Oord, ICML 2016)
 
-[Conditional Image Generation with PixelCNN Decoders](https://arxiv.org/pdf/1606.05328.pdf) (Aaron van den Oord, NeuIPS 2016)
+[Conditional Image Generation with PixelCNN Decoders](https://arxiv.org/pdf/1606.05328.pdf) (Aaron van den Oord, NeurIPS 2016)
 
-[Improved Deep Metric Learning with Multi-class N-pair Loss Objective](https://papers.nips.cc/paper/2016/file/6b180037abbebea991d8b1232f8a8ca9-Paper.pdf) (Kihyuk Sohn, NeuIPS 2016)
+[Improved Deep Metric Learning with Multi-class N-pair Loss Objective](https://papers.nips.cc/paper/2016/file/6b180037abbebea991d8b1232f8a8ca9-Paper.pdf) (Kihyuk Sohn, NeurIPS 2016)
 
 [Representation Learning with Contrastive Predictive Coding](https://arxiv.org/pdf/1807.03748.pdf) (Aaron van den Oord, 2018)
 
@@ -2800,7 +2800,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Simple Framework for Contrastive Learning of Visual Representations](https://arxiv.org/pdf/2002.05709.pdf) (Ting Chen, ICML 2020)
 
-[Unsupervised Learning of Visual Features by Contrasting Cluster Assignments](https://arxiv.org/pdf/2006.09882.pdf) (Mathilde Caron, NeuIPS 2020)
+[Unsupervised Learning of Visual Features by Contrasting Cluster Assignments](https://arxiv.org/pdf/2006.09882.pdf) (Mathilde Caron, NeurIPS 2020)
 
 [Improved Baselines with Momentum Contrastive Learning](https://arxiv.org/pdf/2003.04297.pdf) (Xinlei Chen, 2020)
 
@@ -2820,9 +2820,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [iCaRL: Incremental Classifier and Representation Learning](https://openaccess.thecvf.com/content_cvpr_2017/papers/Rebuffi_iCaRL_Incremental_Classifier_CVPR_2017_paper.pdf) (Sylvestre-Alvise Rebuffi, CVPR 2017)
 
-[Gradient Episodic Memory for Continual Learning](https://arxiv.org/abs/1706.08840) (David Lopez-Paz, NeuIPS 2017)
+[Gradient Episodic Memory for Continual Learning](https://arxiv.org/abs/1706.08840) (David Lopez-Paz, NeurIPS 2017)
 
-[Continual Learning with Deep Generative Replay](https://arxiv.org/pdf/1705.08690.pdf) (Hanul Shin, NeuIPS 2017)
+[Continual Learning with Deep Generative Replay](https://arxiv.org/pdf/1705.08690.pdf) (Hanul Shin, NeurIPS 2017)
 
 [End-to-End Incremental Learning](https://openaccess.thecvf.com/content_ECCV_2018/papers/Francisco_M._Castro_End-to-End_Incremental_Learning_ECCV_2018_paper.pdf) (Francisco M. Castro, ECCV 2018)
 
@@ -2838,7 +2838,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Zero-Shot Learning
 
-[Zero-Shot Learning with Semantic Output Codes](http://www.cs.cmu.edu/afs/cs/project/theo-73/www/papers/zero-shot-learning.pdf) (Mark Palatucci, NeuIPS 2009, [note](https://zhuanlan.zhihu.com/p/34076480))
+[Zero-Shot Learning with Semantic Output Codes](http://www.cs.cmu.edu/afs/cs/project/theo-73/www/papers/zero-shot-learning.pdf) (Mark Palatucci, NeurIPS 2009, [note](https://zhuanlan.zhihu.com/p/34076480))
 
 [Label-Embedding for Attribute-Based Classification](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=94AE59377DBC233D6EE1808F16B505CB?doi=10.1.1.371.9746&rep=rep1&type=pdf) (Zeynep Akata, CVPR 2013, [note](https://blog.csdn.net/hanss2/article/details/80537356))
 
@@ -2852,7 +2852,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Siamese neural networks for one-shot image recognition](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) (Gregory Koch, ICML 2015 Workshop, [note](https://zhuanlan.zhihu.com/p/86283037))
 
-[Matching Networks for One Shot Learning](https://arxiv.org/pdf/1606.04080.pdf) (Oriol Vinyals, NeuIPS 2016, [note](https://zhuanlan.zhihu.com/p/32101204))
+[Matching Networks for One Shot Learning](https://arxiv.org/pdf/1606.04080.pdf) (Oriol Vinyals, NeurIPS 2016, [note](https://zhuanlan.zhihu.com/p/32101204))
 
 #### Meta Learning
 
@@ -2860,7 +2860,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Meta-Learning: A Survey](https://arxiv.org/pdf/1810.03548.pdf) (Joaquin Vanschoren, 2018)
 
-[Meta-Learning Representations for Continual Learning](https://arxiv.org/pdf/1905.12588.pdf) (Khurram Javed, NIPS 2019, [code](https://github.com/khurramjaved96/mrcl?utm_source=catalyzex.com))
+[Meta-Learning Representations for Continual Learning](https://arxiv.org/pdf/1905.12588.pdf) (Khurram Javed, NeurIPS 2019, [code](https://github.com/khurramjaved96/mrcl?utm_source=catalyzex.com))
 
 [Learning to Continually Learn](https://arxiv.org/pdf/2002.09571.pdf) (Shawn Beaulieu, ECAI 2020, [code](https://github.com/uvm-neurobotics-lab/ANML?utm_source=catalyzex.com))
 
@@ -2882,7 +2882,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [SecureBoost: A Lossless Federated Learning Framework](https://arxiv.org/pdf/1901.08755.pdf) (Kewei Cheng, 2019)
 
-[Personalized Federated Learning with Theoretical Guarantees: A Model-Agnostic Meta-Learning Approach](https://proceedings.neurips.cc/paper/2020/file/24389bfe4fe2eba8bf9aa9203a44cdad-Paper.pdf) (Alireza Fallah, NeuIPS 2020)
+[Personalized Federated Learning with Theoretical Guarantees: A Model-Agnostic Meta-Learning Approach](https://proceedings.neurips.cc/paper/2020/file/24389bfe4fe2eba8bf9aa9203a44cdad-Paper.pdf) (Alireza Fallah, NeurIPS 2020)
 
 [Cluster-driven Graph Federated Learning over Multiple Domains](https://arxiv.org/pdf/2104.14628.pdf) (Debora Caldarola, CVPR 2021)
 
@@ -2908,7 +2908,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Knowledge Distillation
 
-[Distilling the Knowledge in a Neural Network](https://arxiv.org/pdf/1503.02531.pdf) (Geoffrey Hinton, NeuIPS 2015, [note](https://xmfbit.github.io/2018/06/07/knowledge-distilling/))
+[Distilling the Knowledge in a Neural Network](https://arxiv.org/pdf/1503.02531.pdf) (Geoffrey Hinton, NeurIPS 2015, [note](https://xmfbit.github.io/2018/06/07/knowledge-distilling/))
 
 [Designing Network Design Spaces](https://arxiv.org/pdf/2003.13678.pdf) (Ilija Radosavovic, CVPR 2020)
 
@@ -2950,15 +2950,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Dropout as a Bayesian Approximation: Representing Model Uncertainty in Deep Learning](https://arxiv.org/pdf/1506.02142.pdf) (Yarin Gal, ICML 2016, [note](https://zhuanlan.zhihu.com/p/82108924))
 
-[A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](https://papers.nips.cc/paper/2016/file/076a0c97d09cf1a0ec3e19c7f2529f2b-Paper.pdf) (Yarin Gal, NeuIPS 2016)
+[A Theoretically Grounded Application of Dropout in Recurrent Neural Networks](https://papers.nips.cc/paper/2016/file/076a0c97d09cf1a0ec3e19c7f2529f2b-Paper.pdf) (Yarin Gal, NeurIPS 2016)
 
-[What Uncertainties Do We Need in Bayesian Deep Learning for Computer Vision?](https://arxiv.org/pdf/1703.04977.pdf) (Alex Kendall, NeuIPS 2017, [note](https://zhuanlan.zhihu.com/p/98756147))
+[What Uncertainties Do We Need in Bayesian Deep Learning for Computer Vision?](https://arxiv.org/pdf/1703.04977.pdf) (Alex Kendall, NeurIPS 2017, [note](https://zhuanlan.zhihu.com/p/98756147))
 
-[Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles](https://proceedings.neurips.cc/paper/2017/file/9ef2ed4b7fd2c810847ffa5fa85bce38-Paper.pdf) (Balaji Lakshminarayanan, NeuIPS 2017)
+[Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles](https://proceedings.neurips.cc/paper/2017/file/9ef2ed4b7fd2c810847ffa5fa85bce38-Paper.pdf) (Balaji Lakshminarayanan, NeurIPS 2017)
 
-[Evidential Deep Learning to Quantify Classification Uncertainty](https://papers.nips.cc/paper/2018/file/a981f2b708044d6fb4a71a1463242520-Paper.pdf) (Murat Sensoy, NeuIPS 2018)
+[Evidential Deep Learning to Quantify Classification Uncertainty](https://papers.nips.cc/paper/2018/file/a981f2b708044d6fb4a71a1463242520-Paper.pdf) (Murat Sensoy, NeurIPS 2018)
 
-[Can You Trust Your Model's Uncertainty? Evaluating Predictive Uncertainty Under Dataset Shift](https://arxiv.org/pdf/1906.02530.pdf) (Yaniv Ovadia, NeuIPS 2019)
+[Can You Trust Your Model's Uncertainty? Evaluating Predictive Uncertainty Under Dataset Shift](https://arxiv.org/pdf/1906.02530.pdf) (Yaniv Ovadia, NeurIPS 2019)
 
 ### Recommendation System
 
@@ -2982,7 +2982,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Factorization Machines](https://cseweb.ucsd.edu/classes/fa17/cse291-b/reading/Rendle2010FM.pdf) (Steffen Rendle, ICDM 2010, [note](https://zhuanlan.zhihu.com/p/50426292))
 
-[Higher-Order Factorization Machine](https://papers.nips.cc/paper/6144-higher-order-factorization-machines.pdf) (Mathieu Blondel, NIPS 2016)
+[Higher-Order Factorization Machine](https://papers.nips.cc/paper/6144-higher-order-factorization-machines.pdf) (Mathieu Blondel, NeurIPS 2016)
 
 [Field-aware Factorization Machines for CTR Prediction](https://www.csie.ntu.edu.tw/~cjlin/papers/ffm.pdf) (Yu-Chin Juan, RecSys 2016, [note](https://blog.csdn.net/Dby_freedom/article/details/84899120))
 
@@ -3015,6 +3015,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [MapReduce: Simplified Data Processing on Large Clusters](https://homeostasis.scs.carleton.ca/~soma/distos/2008-03-24/mapreduce-osdi04.pdf) (Jeffrey Dean, OSDI 2004, [note](https://juejin.im/post/6844903812784717831))
 
 [Bigtable: A Distributed Storage System for Structured Data](https://fenix.tecnico.ulisboa.pt/downloadFile/845043405442710/10.g-bigtable-osdi06.pdf) (Fay Chang, OSDI 2006, [note](https://zh.wikipedia.org/wiki/Bigtable))
+
+[Dynamo: Amazon's Highly Available Key-Value Store](https://dl.acm.org/doi/abs/10.1145/1323293.1294281) (Giuseppe DeCandia, SIGOPS 2007)
+
+[Cassandra: A Decentralized Structured Storage System](https://dl.acm.org/doi/abs/10.1145/1773912.1773922) (Avinash Lakshman, SIGOPS 2010)
 
 ### Tool
 
