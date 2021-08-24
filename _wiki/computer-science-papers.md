@@ -1784,6 +1784,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Exploring Supervised and Unsupervised Rewards in Machine Translation](https://arxiv.org/pdf/2102.11403.pdf) (Julia Ive, EACL 2020)
 
+[Self-Induced Curriculum Learning in Self-Supervised Neural Machine Translation](https://arxiv.org/pdf/2004.03151.pdf) (Dana Ruiter, EMNLP 2020)
+
 [Counterfactual Data Augmentation for Neural Machine Translation](https://aclanthology.org/2021.naacl-main.18.pdf) (Qi Liu, NAACL 2021)
 
 [Can Latent Alignments Improve Autoregressive Machine Translation?](https://arxiv.org/pdf/2104.09554.pdf) (Adi Haviv, NAACL 2021)
@@ -2072,6 +2074,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [When a Good Translation is Wrong in Context: Context-Aware Machine Translation Improves on Deixis, Ellipsis, and Lexical Cohesion](https://arxiv.org/pdf/1905.05979.pdf) (Elena Voita, ACL 2019)
 
+[Improving Context-Aware Neural Machine Translation with Source-side Monolingual Documents](https://www.ijcai.org/proceedings/2021/0522.pdf) (Linqing Chen, IJCAI 2021)
+
 [Measuring and Increasing Context Usage in Context-Aware Machine Translation](https://arxiv.org/pdf/2105.03482.pdf) (Patrick Fernandes, ACL 2021)
 
 ##### Simultaneous Machine Translation
@@ -2096,11 +2100,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Multilinguality
 
-[The State and Fate of Linguistic Diversity and Inclusion in the NLP World](https://arxiv.org/pdf/2004.09095.pdf) (Pratik Joshi, ACL 2020)
-
-[Natural Language Processing for Similar Languages, Varieties, and Dialects: A Survey](https://www.cambridge.org/core/journals/natural-language-engineering/article/natural-language-processing-for-similar-languages-varieties-and-dialects-a-survey/229652C86E329F83346BB6C66B9521A6) (Marcos Zampieri, 2020)
-
-##### Linguistic Typology and Historical Linguistics
+##### Language Diversity and Evolution
 
 [A Statistical Model for Lost Language Deciphermen](https://dspace.mit.edu/handle/1721.1/62802) (Benjamin Snyder, ACL 2010)
 
@@ -2135,6 +2135,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Neural Decipherment via Minimum-Cost Flow: from Ugaritic to Linear B](https://arxiv.org/pdf/1906.06718.pdf) (Jiaming Luo, ACL 2019)
 
 [Restoring Ancient Text Using Deep Learning: A Case Study on Greek Epigraphy](https://arxiv.org/pdf/1910.06262.pdf) (Yannis Assael, EMNLP 2019)
+
+[The State and Fate of Linguistic Diversity and Inclusion in the NLP World](https://arxiv.org/pdf/2004.09095.pdf) (Pratik Joshi, ACL 2020)
+
+[Natural Language Processing for Similar Languages, Varieties, and Dialects: A Survey](https://www.cambridge.org/core/journals/natural-language-engineering/article/natural-language-processing-for-similar-languages-varieties-and-dialects-a-survey/229652C86E329F83346BB6C66B9521A6) (Marcos Zampieri, 2020)
+
+[Learning to Recognize Dialect Features](https://arxiv.org/pdf/2010.12707.pdf) (Dorottya Demszky, NAACL 2021)
 
 [The Classical Language Toolkit: An NLP Framework for Pre-Modern Languages](https://aclanthology.org/2021.acl-demo.3.pdf) (Kyle P. Johnson, ACL 2021 Demo)
 
