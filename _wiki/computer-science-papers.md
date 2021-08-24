@@ -74,6 +74,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks](https://arxiv.org/pdf/1908.10084.pdf) (Nils Reimers, EMNLP 2019)
 
+[On the Sentence Embeddings from Pre-trained Language Models](https://arxiv.org/pdf/2011.05864.pdf) (Bohan Li, EMNLP 2020)
+
+[An Unsupervised Sentence Embedding Method by Mutual Information Maximization](https://arxiv.org/pdf/2009.12061.pdf) (Yan Zhang, EMNLP 2020)
+
 ##### Contextual Language Model
 
 [Semi-supervised Sequence Learning](https://arxiv.org/pdf/1511.01432.pdf) (Andrew M. Dai, NeurIPS 2015, [note](https://zhuanlan.zhihu.com/p/21313501))
@@ -1674,9 +1678,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Deep Reinforcement Learning For Sequence to Sequence Models](https://arxiv.org/pdf/1805.09461.pdf) (Yaser Keneshloo, 2018, [code](https://github.com/yaserkl/RLSeq2Seq), [note](https://www.jianshu.com/p/1213de861491))
 
-[Von Mises*-*Fisher Loss for Training Sequence to* *Sequence Models with Continuous Outputs](https://arxiv.org/pdf/1812.04616.pdf) (Sachin Kumar, ICLR 2019, [code](https://github.com/Sachin19/seq2seq-con))
+[Von Mises*-*Fisher Loss for Training Sequence to Sequence Models with Continuous Outputs](https://arxiv.org/pdf/1812.04616.pdf) (Sachin Kumar, ICLR 2019, [code](https://github.com/Sachin19/seq2seq-con))
 
 [MASS: Masked Sequence to Sequence Pre-training for Language Generation](https://arxiv.org/pdf/1905.02450.pdf) (Kaitao Song, 2019, [code](https://github.com/microsoft/MASS), [note](https://zhuanlan.zhihu.com/p/71022527))
+
+[BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension](https://arxiv.org/pdf/1910.13461.pdf) (Mike Lewis, ACL 2020)
 
 ##### Graph to Sequence
 
@@ -1912,9 +1918,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [On The Alignment Problem In Multi-Head Attention-Based Neural Machine Translation](https://arxiv.org/pdf/1809.03985.pdf) (Tamer Alkhouli, 2018)
 
-[Vecalign: Improved Sentence Alignment in Linear Time and Space](https://aclanthology.org/D19-1136.pdf) (Brian Thompson, EMNLP 2019)
+[Vecalign: Improved Sentence Alignment in Linear Time and Space](https://aclanthology.org/D19-1136.pdf) (Brian Thompson, EMNLP 2019, [code](https://github.com/thompsonb/vecalign))
 
 [End-to-end Neural Word Alignment Outperforms GIZA++](https://aclanthology.org/2020.acl-main.146.pdf) (Thomas Zenkel, ACL 2020)
+
+[Parallel Sentence Mining by Constrained Decoding](https://aclanthology.org/2020.acl-main.152.pdf) (Pinzhen Chen, ACL 2020)
 
 [A Supervised Word Alignment Method based on Cross-Language Span Prediction using Multilingual BERT](https://aclanthology.org/2020.emnlp-main.41.pdf) (Masaaki Nagata, EMNLP 2020)
 
@@ -2070,6 +2078,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Monotonic Multihead Attention](https://arxiv.org/pdf/1909.12406.pdf) (Xutai Ma, 2019)
 
+[Learning Adaptive Segmentation Policy for Simultaneous Translation](https://aclanthology.org/2020.emnlp-main.178.pdf) (Ruiqing Zhang, EMNLP 2020)
+
 ##### Interpretability
 
 [Does String-Based Neural MT Learn Source Syntax?](https://aclanthology.org/D16-1159.pdf) (Xing Shi, EMNLP 2016)
@@ -2081,6 +2091,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Towards Robust Neural Machine Translation](https://arxiv.org/pdf/1805.06130.pdf) (Yong Cheng, ACL 2018)
 
 [Robust Neural Machine Translation with Doubly Adversarial Inputs](https://arxiv.org/pdf/1906.02443.pdf) (Yong Cheng, ACL 2019)
+
+[Evaluating Robustness to Input Perturbations for Neural Machine Translation](https://arxiv.org/pdf/2005.00580.pdf) (Xing Liu, ACL 2020)
 
 #### Multilinguality
 
