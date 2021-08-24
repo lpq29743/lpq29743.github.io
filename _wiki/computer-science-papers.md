@@ -1944,7 +1944,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Phrase-Based & Neural Unsupervised Machine Translation](https://arxiv.org/pdf/1804.07755.pdf) (Guillaume Lample, EMNLP 2018, [code](https://github.com/facebookresearch/UnsupervisedMT), [note](https://blog.csdn.net/ljp1919/article/details/103074097))
 
-[Non-Adversarial Unsupervised Word Translation](https://arxiv.org/pdf/1801.06126.pdf) (Yedid Hoshen, EMNLP 2018, [code](https://github.com/facebookresearch/Non-adversarialTranslation))
+[An Effective Approach to Unsupervised Machine Translation](https://arxiv.org/pdf/1902.01313.pdf) (Mikel Artetxe, ACL 2019)
+
+[When and Why is Unsupervised Neural Machine Translation Useless?](https://arxiv.org/pdf/2004.10581.pdf) (Yunsu Kim, EAMT 2020)
+
+[When Does Unsupervised Machine Translation Work?](https://arxiv.org/pdf/2004.05516.pdf) (Kelly Marchisio, WMT 2020)
 
 ##### Non-Autoregressive Machine Translation
 
@@ -2074,6 +2078,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Synthetic and Natural Noise Both Break Neural Machine Translation](https://arxiv.org/pdf/1711.02173.pdf) (Yonatan Belinkov, ICLR 2018)
 
+[Towards Robust Neural Machine Translation](https://arxiv.org/pdf/1805.06130.pdf) (Yong Cheng, ACL 2018)
+
+[Robust Neural Machine Translation with Doubly Adversarial Inputs](https://arxiv.org/pdf/1906.02443.pdf) (Yong Cheng, ACL 2019)
+
 #### Multilinguality
 
 [The State and Fate of Linguistic Diversity and Inclusion in the NLP World](https://arxiv.org/pdf/2004.09095.pdf) (Pratik Joshi, ACL 2020)
@@ -2122,6 +2130,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Challenges of Computational Processing of Code-Switching](https://aclanthology.org/W16-5801.pdf) (Özlem Çetinoglu, 2016)
 
+[Code-switched Language Models Using Dual RNNs and Same-Source Pretraining](https://arxiv.org/pdf/1809.01962.pdf) (Saurabh Garg, EMNLP 2018)
+
+[Language Modeling for Code-Switching: Evaluation, Integration of Monolingual Data, and Discriminative Training](https://arxiv.org/pdf/1810.11895.pdf) (Hila Gonen, EMNLP 2019)
+
+[Modeling Code-Switch Languages Using Bilingual Parallel Corpus](https://aclanthology.org/2020.acl-main.80.pdf) (Grandee Lee, ACL 2020)
+
 ##### Language Identification
 
 [Word Level Language Identification in Online Multilingual Communication](https://aclanthology.org/D13-1084.pdf) (Dong Nguyen, EMNLP 2013)
@@ -2141,6 +2155,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [On the Limitations of Unsupervised Bilingual Dictionary Induction](https://arxiv.org/pdf/1805.03620.pdf) (Anders Søgaard, ACL 2018)
 
 [Loss in Translation: Learning Bilingual Word Mapping with a Retrieval Criterion](https://aclanthology.org/D18-1330.pdf) (Armand Joulin, EMNLP 2018)
+
+[Non-Adversarial Unsupervised Word Translation](https://arxiv.org/pdf/1801.06126.pdf) (Yedid Hoshen, EMNLP 2018, [code](https://github.com/facebookresearch/Non-adversarialTranslation))
 
 [A Survey of Cross-lingual Word Embedding Models](https://arxiv.org/pdf/1706.04902.pdf) (Sebastian Ruder, JAIR 2019)
 
