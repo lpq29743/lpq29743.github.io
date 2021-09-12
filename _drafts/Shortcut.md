@@ -1,8 +1,0 @@
-- Win + “+”：放大屏幕
-- Win + D：快速锁屏
-- Alt + Tab：应用切换
-- Ctrl + “+”：放大页面
-- Ctrl + W：关闭当前页面或文档
-- Ctrl + Shift + T：恢复被关页面
-- Ctrl + Tab：切换到下一个窗口
-- Ctrl + Shift + Tab：切换到上一个窗口

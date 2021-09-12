@@ -21,14 +21,8 @@ navs:
     href: 
     label: Home
   -
-    href: /category
-    label: Category
-  -
-    href: /wiki
-    label: Wiki
-  -
-    href: /project
-    label: Project
+    href: /publications
+    label: Publications
 
 # RSS Settings
 RSS: true
