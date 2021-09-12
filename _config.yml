@@ -16,13 +16,10 @@ location: Guangdong, China
 email: lpq29743@gmail.com
 
 # Navigation Settings
-navs:
-  -
-    href: 
-    label: Home
-  -
-    href: /publications
-    label: Publications
+# navs:
+#   -
+#     href: 
+#     label: Home
 
 # RSS Settings
 RSS: true
