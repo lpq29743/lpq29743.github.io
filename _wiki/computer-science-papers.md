@@ -1850,33 +1850,19 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Vocabulary Learning via Optimal Transport for Machine Translation](https://arxiv.org/pdf/2012.15671.pdf) (Jingjing Xu, ACL 2021, [note](https://zhuanlan.zhihu.com/p/387561592))
 
-##### Word/Phrase/Sentence/Document Alignment
-
-[Aligning Sentences in Parallel Corpora](https://aclanthology.org/P91-1022.pdf) (Peter F. Brown, ACL 1991)
+##### Word Alignment
 
 [The Mathematics of Statistical Machine Translation: Parameter Estimation](https://aclanthology.org/J93-2003.pdf) (Peter F. Brown, CL 1993, [code](https://zhuanlan.zhihu.com/p/72640549))
 
-[A Program for Aligning Sentences in Bilingual Corpora](https://aclanthology.org/J93-1004.pdf) (William A. Gale, CL 1993)
-
-[Text-Translation Alignment](https://dl.acm.org/doi/abs/10.5555/972450.972457) (Martin Kay, 1993)
-
-[Using Cognates to Align Sentences in Bilingual Corpora](https://dl.acm.org/doi/abs/10.5555/962367.962411) (Michel Simard, 1993)
-
 [HMM-Based Word Alignment in Statistical Translation](https://aclanthology.org/C96-2141.pdf) (Stephan Vogel, COLING 1996)
-
-[Bilingual Sentence Alignment: Balancing Robustness and Accuracy](https://link.springer.com/article/10.1023/A:1008010319408) (Michel Simard, 1998)
 
 [Models of Translational Equivalence among Words](https://aclanthology.org/J00-2004.pdf) (I. Dan Melamed, CL 2000)
 
 [Improved Statistical Alignment Models](https://aclanthology.org/P00-1056.pdf) (Franz Josef Och, ACL 2000)
 
-[Fast and Accurate Sentence Alignment of Bilingual Corpora](https://link.springer.com/chapter/10.1007/3-540-45820-4_14) (Robert C. Moore, 2002)
-
 [A Systematic Comparison of Various Statistical Alignment Models](https://watermark.silverchair.com/089120103321337421.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAs8wggLLBgkqhkiG9w0BBwagggK8MIICuAIBADCCArEGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMkCEvPs_rjOQ1vujTAgEQgIICgq9VNVpiuBa5_Kw7zn35yQ0srXxnm6UXC7v1TCL2et0s17aTNOiFRpU2Eyi32wUlJPZ4IImNscvUcXbI-h_I1n5DO16iUfRadsoF4wlP-jBkuJ6Hi-wVp4L9sRcQ2ivzLj2QsMvBy-ZyRgoWP91RaQTeV4kkD7ggRB03n5ujWF0IDtn-83BA-oHYhrFAzfyo8mIxGV9PFqfymtZjg-61JdU1I2OHkXPQT-SaGIy1CWJyuLbMmg1bm_IsuhiQPrfZDq2V7I5XXjxH7k024-RD3oJ17wTN53W6f7YbMnHHilVSzmDfqZE0QdM_HF47dklvse4ZD_0qBnDl_APKFG7ctloY3T19fznYviPcF5zSFbyyax3FKjw1DFYqR80FsuRZmzzuTiGw156Ntml_SfE9dObmdE6L8la8kWzHaaa1uo4_NgZ_0qSeLEmFH9hQB7MJZZbwKDjEj8_0M6deMLTtHkZ1OUiqMRgdP6mNa4JHOf3R1vz8LFDgiEVOyR9LN-KUffamhjpN4ZDf47Xw9YS9VLGlYAwOiAivqTM0InPjW8kEwXP07_VX2n1HbY21FYE1cvZkRb-V-KfORmjj3zWqNGKO-EUXMtoXUF2G1JyNfYMhMEvgL-IsCv39SUTiWhO_bK2fxBb7j7JcrRDuRQ_RapQ06wSJWXshvvap2QLg5CFvLBSZIUT1d6d6GNLuYu0WhW9T_PiWuJSbwFpPjbRdcYTGt-JEFfNJqTdBWsG4tzePJ6hcm3K6R93ytOxV1TjfLb4LIJ2vGTSZFukJbToKdpEuOjbmCzBtM4Ua275bddrQXVinUUCpS52KFAfIji0g2dET_1GkKpR2JjE_ThXgVFRMwg) (Franz Josef Och, CL 2003)
 
 [Log-Linear Models for Word Alignment](https://www.aclweb.org/anthology/P05-1057.pdf) (Yang Liu, ACL 2005)
-
-[Aligning Parallel Bilingual Corpora Statistically with Punctuation Criteria](https://aclanthology.org/O05-2005.pdf) (Thomas C. Chuang, 2005)
 
 [NeurAlign: Combining Word Alignments Using Neural Networks](https://aclanthology.org/H05-1009.pdf) (Necip Fazil Ayan, 2005)
 
@@ -1884,21 +1870,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Measuring Word Alignment Quality for Statistical Machine Translation](https://direct.mit.edu/coli/article/33/3/293/1949/Measuring-Word-Alignment-Quality-for-Statistical) (Alexander Fraser, CL 2007)
 
-[Segmentation and Alignment of Parallel Text for Statistical Machine Translation](https://www.cambridge.org/core/journals/natural-language-engineering/article/abs/segmentation-and-alignment-of-parallel-text-for-statistical-machine-translation/697D66DD385601AA57ECE2E848899BF7) (Yonggang Deng, 2007)
-
-[Improved Sentence Alignment for Movie Subtitles](http://lml.bas.bg/ranlp2007/DOCS/RANLP2007.pdf#page=595) (Jörg Tiedemann, 2007)
-
-[Linguistically-Based Sub-Sentential Alignment for Terminology Extraction from a Bilingual Automotive Corpus](https://biblio.ugent.be/publication/434669) (Lieve Macken, COLING 2008)
-
 [Parallel Implementations of Word Alignment Tool](https://aclanthology.org/W08-0509.pdf) (Qin Gao, 2008)
 
-[Improved Unsupervised Sentence Alignment for Symmetrical and Asymmetrical Parallel Corpora](https://aclanthology.org/C10-2010.pdf) (Fabienne Braune, COLING 2010)
-
-[Fast-Champollion: A Fast and Robust Sentence Alignment Algorithm](https://aclanthology.org/C10-2081.pdf) (Peng Li, COLING 2010)
-
 [Unsupervised Word Alignment with Arbitrary Features](https://aclanthology.org/P11-1042.pdf) (Chris Dyer, ACL 2011)
-
-[Iterative, MT-based Sentence Alignment of Parallel Texts](https://aclanthology.org/W11-4624.pdf) (Rico Sennrich, 2011)
 
 [A Simple, Fast, and Effective Reparameterization of IBM Model 2](https://aclanthology.org/N13-1073.pdf) (Chris Dyer, NAACL 2013)
 
@@ -1906,13 +1880,9 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Word Alignment Modeling with Context Dependent Deep Neural Network](https://aclanthology.org/P13-1017.pdf) (Nan Yang, ACL 2013)
 
-[Yet Another Fast, Robust and Open Source Sentence Aligner. Time to Reconsider Sentence Alignment?](http://atour.iro.umontreal.ca/rali/sites/default/files/publis/MTSummit-2013-Fethi.pdf) (Fethi Lamraoui, 2013)
-
 [Recurrent Neural Networks for Word Alignment Model](https://aclanthology.org/P14-1138.pdf) (Akihiro Tamura, ACL 2014)
 
 [Contrastive Unsupervised Word Alignment with Non-Local Features](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/view/9570/9556) (Yang Liu, AAAI 2015)
-
-[Findings of the WMT 2016 Bilingual Document Alignment Shared Task](https://aclanthology.org/W16-2347.pdf) (Christian Buck, WMT 2016)
 
 [Efficient Word Alignment with Markov Chain Monte Carlo](https://helda.helsinki.fi/bitstream/handle/10138/232817/Efficient_Word_Alignment_with_Markov_Chain_Monte_Carlo.pdf?sequence=1) (Robert Östling, 2016, [code](https://github.com/robertostling/efmaral))
 
@@ -1920,19 +1890,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [On The Alignment Problem In Multi-Head Attention-Based Neural Machine Translation](https://arxiv.org/pdf/1809.03985.pdf) (Tamer Alkhouli, 2018)
 
-[Vecalign: Improved Sentence Alignment in Linear Time and Space](https://aclanthology.org/D19-1136.pdf) (Brian Thompson, EMNLP 2019, [code](https://github.com/thompsonb/vecalign))
+[Jointly Learning to Align and Translate with Transformer Models](https://arxiv.org/pdf/1909.02074.pdf) (Sarthak Garg, EMNLP 2019)
 
 [End-to-end Neural Word Alignment Outperforms GIZA++](https://aclanthology.org/2020.acl-main.146.pdf) (Thomas Zenkel, ACL 2020)
-
-[Parallel Sentence Mining by Constrained Decoding](https://aclanthology.org/2020.acl-main.152.pdf) (Pinzhen Chen, ACL 2020)
 
 [A Supervised Word Alignment Method based on Cross-Language Span Prediction using Multilingual BERT](https://aclanthology.org/2020.emnlp-main.41.pdf) (Masaaki Nagata, EMNLP 2020)
 
 [Accurate Word Alignment Induction from Neural Machine Translation](https://arxiv.org/pdf/2004.14837.pdf) (Yun Chen, EMNLP 2020)
 
 [SimAlign: High Quality Word Alignments Without Parallel Training Data Using Static and Contextualized Embeddings](https://arxiv.org/pdf/2004.08728.pdf) (Masoud Jalili Sabet, EMNLP 2020 Findings)
-
-[SpanAlign: Sentence Alignment Method based on Cross-Language Span Prediction and ILP](https://aclanthology.org/2020.coling-main.418.pdf) (Katsuki Chousa, COLING 2020)
 
 [Neural Baselines for Word Alignment](https://arxiv.org/pdf/2009.13116.pdf) (Anh Khoa Ngo Ho, 2020)
 
@@ -1942,9 +1908,55 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Bidirectional Transformer Based Alignment Model for Unsupervised Word Alignment](https://aclanthology.org/2021.acl-long.24.pdf) (Jingyi Zhang, ACL 2021)
 
-[Embedding-Enhanced Giza++: Improving Alignment in Low- and HighResource Scenarios Using Embedding Space Geometry](https://arxiv.org/pdf/2104.08721.pdf) (Kelly Marchisio, 2021)
+[Embedding-Enhanced Giza++: Improving Alignment in Low- and High-Resource Scenarios Using Embedding Space Geometry](https://arxiv.org/pdf/2104.08721.pdf) (Kelly Marchisio, 2021)
 
 [SLUA: A Super Lightweight Unsupervised Word Alignment Model via Cross-Lingual Contrastive Learning](https://arxiv.org/pdf/2102.04009.pdf) (Di Wu, 2021)
+
+##### Sentence Alignment
+
+[Aligning Sentences in Parallel Corpora](https://aclanthology.org/P91-1022.pdf) (Peter F. Brown, ACL 1991)
+
+[A Program for Aligning Sentences in Bilingual Corpora](https://aclanthology.org/J93-1004.pdf) (William A. Gale, CL 1993)
+
+[Text-Translation Alignment](https://dl.acm.org/doi/abs/10.5555/972450.972457) (Martin Kay, 1993)
+
+[Using Cognates to Align Sentences in Bilingual Corpora](https://dl.acm.org/doi/abs/10.5555/962367.962411) (Michel Simard, 1993)
+
+[Bilingual Sentence Alignment: Balancing Robustness and Accuracy](https://link.springer.com/article/10.1023/A:1008010319408) (Michel Simard, 1998)
+
+[Fast and Accurate Sentence Alignment of Bilingual Corpora](https://link.springer.com/chapter/10.1007/3-540-45820-4_14) (Robert C. Moore, 2002)
+
+[Aligning Parallel Bilingual Corpora Statistically with Punctuation Criteria](https://aclanthology.org/O05-2005.pdf) (Thomas C. Chuang, 2005)
+
+[Segmentation and Alignment of Parallel Text for Statistical Machine Translation](https://www.cambridge.org/core/journals/natural-language-engineering/article/abs/segmentation-and-alignment-of-parallel-text-for-statistical-machine-translation/697D66DD385601AA57ECE2E848899BF7) (Yonggang Deng, 2007)
+
+[Improved Sentence Alignment for Movie Subtitles](http://lml.bas.bg/ranlp2007/DOCS/RANLP2007.pdf#page=595) (Jörg Tiedemann, 2007)
+
+[Linguistically-Based Sub-Sentential Alignment for Terminology Extraction from a Bilingual Automotive Corpus](https://biblio.ugent.be/publication/434669) (Lieve Macken, COLING 2008)
+
+[Improved Unsupervised Sentence Alignment for Symmetrical and Asymmetrical Parallel Corpora](https://aclanthology.org/C10-2010.pdf) (Fabienne Braune, COLING 2010)
+
+[Fast-Champollion: A Fast and Robust Sentence Alignment Algorithm](https://aclanthology.org/C10-2081.pdf) (Peng Li, COLING 2010)
+
+[Iterative, MT-based Sentence Alignment of Parallel Texts](https://aclanthology.org/W11-4624.pdf) (Rico Sennrich, 2011)
+
+[Yet Another Fast, Robust and Open Source Sentence Aligner. Time to Reconsider Sentence Alignment?](http://atour.iro.umontreal.ca/rali/sites/default/files/publis/MTSummit-2013-Fethi.pdf) (Fethi Lamraoui, 2013)
+
+[Overview of the Second BUCC Shared Task: Spotting Parallel Sentences in Comparable Corpora](https://aclanthology.org/W17-2512.pdf) (Pierre Zweigenbaum, 2017)
+
+[Extracting Parallel Sentences with Bidirectional Recurrent Neural Networks to Improve Machine Translation](https://aclanthology.org/C18-1122.pdf) (Francis Gregoire, COLING 2018)
+
+[Margin-based Parallel Corpus Mining with Multilingual Sentence Embeddings](https://aclanthology.org/P19-1309.pdf) (Mikel Artetxe, ACL 2019)
+
+[Vecalign: Improved Sentence Alignment in Linear Time and Space](https://aclanthology.org/D19-1136.pdf) (Brian Thompson, EMNLP 2019, [code](https://github.com/thompsonb/vecalign))
+
+[Parallel Sentence Mining by Constrained Decoding](https://aclanthology.org/2020.acl-main.152.pdf) (Pinzhen Chen, ACL 2020)
+
+[SpanAlign: Sentence Alignment Method based on Cross-Language Span Prediction and ILP](https://aclanthology.org/2020.coling-main.418.pdf) (Katsuki Chousa, COLING 2020)
+
+##### Document Alignment
+
+[Findings of the WMT 2016 Bilingual Document Alignment Shared Task](https://aclanthology.org/W16-2347.pdf) (Christian Buck, WMT 2016)
 
 ##### Unsupervised Machine Translation
 
