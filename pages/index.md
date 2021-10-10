@@ -9,7 +9,8 @@ permalink: /
 
 #### About Me
 
-My name is Peiqin Lin (林佩勤). Currently, I am a Research Assistant at Hong Kong Polytechnic University, under the supervision of [Wenjie Li](http://www4.comp.polyu.edu.hk/~cswjli/). In this Fall, as an [ELLIS Ph.D. student](https://ellis.eu/phd-postdoc), I will join [the Center for Information and Language Processing (CIS), LMU Munich](https://schuetze.cis.lmu.de/) under the supervison of [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html). 
+My name is Peiqin Lin (林佩勤). Currently, I am an [ELLIS Ph.D. student](https://ellis.eu/phd-postdoc) at [the Center
+for Information and Language Processing (CIS), LMU Munich](https://schuetze.cis.lmu.de/), under the supervison of [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html). 
 
 #### Research Interests
 
@@ -17,10 +18,11 @@ My name is Peiqin Lin (林佩勤). Currently, I am a Research Assistant at Hong 
 - **Sentiment Analysis**: Aspect Based Sentiment Analysis, Emotion Cause Analysis, Emotion-aware Dialogue System
 - **Coreference Resolution**
 
-See more in my research statement.
+See more in my research statement (coming soon).
 
 #### Education
 
+- LMU Munich (Oct 2021 - ). Ph.D. student in Computer Science. Supervisor: [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html). 
 - Sun Yat-sen University (Sep 2018 – Jun 2020). M.Eng. in Software Engineering. Supervisor: [Meng Yang](https://scholar.google.com/citations?user=r2nw6DIAAAAJ&hl=en).
 - South China Normal University (Sep 2014 – Jun 2018). B.Eng. in Software Engineering.
 
@@ -70,8 +72,8 @@ See me in [my publications](https://lpq29743.github.io/publications/).
 
 #### Hobbies
 
-- Rock: Queen, Pink Floyd, Led Zeppelin
-- Film: Stanley Kubrick, Federico Fellini, Andrei Tarkovsky
+- Music: Queen, Pink Floyd, Led Zeppelin
+- Movie: Stanley Kubrick, Federico Fellini, Andrei Tarkovsky
 - Game: NBA2K, Sudoku
 
 <!-- ### Social
