@@ -78,6 +78,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [An Unsupervised Sentence Embedding Method by Mutual Information Maximization](https://arxiv.org/pdf/2009.12061.pdf) (Yan Zhang, EMNLP 2020)
 
+[Sentence-T5: Scalable Sentence Encoders from Pre-trained Text-to-Text Models](https://arxiv.org/pdf/2108.08877.pdf) (Jianmo Ni, 2021)
+
 ##### Contextual Language Model
 
 [Semi-supervised Sequence Learning](https://arxiv.org/pdf/1511.01432.pdf) (Andrew M. Dai, NeurIPS 2015, [note](https://zhuanlan.zhihu.com/p/21313501))
@@ -129,6 +131,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Are Pre-trained Convolutions Better than Pre-trained Transformers?](https://arxiv.org/pdf/2105.03322.pdf) (Yi Tay, ACL 2021)
 
 [True Few-Shot Learning with Language Models](https://arxiv.org/pdf/2105.11447.pdf) (Ethan Perez, 2021)
+
+[Multimodal Few-Shot Learning with Frozen Language Models](https://arxiv.org/pdf/2106.13884.pdf) (Maria Tsimpoukelli, 2021)
+
+[Pre-train, Prompt, and Predict: A Systematic Survey of Prompting Methods in Natural Language Processing](https://arxiv.org/pdf/2107.13586.pdf) (Pengfei Liu, 2021, [code](http://pretrain.nlpedia.ai/), [note](https://zhuanlan.zhihu.com/p/395795968))
+
+[Prefix-Tuning: Optimizing Continuous Prompts for Generation](https://arxiv.org/pdf/2101.00190.pdf) (Xiang Lisa Li, 2021)
 
 ##### Knowledge-Enriched Language Model
 
@@ -708,7 +716,17 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Learning Sentiment-Specific Word Embedding for Twitter Sentiment Classification](http://www.anthology.aclweb.org/P/P14/P14-1146.pdf) (Duyu Tang, ACL 2014, [note](https://zhuanlan.zhihu.com/p/24217324))
 
+[Sentiment Embeddings with Applications to Sentiment Analysis](https://ieeexplore.ieee.org/document/7296633) (Duyu Tang, TKDE 2015)
+
+[Refining Word Embeddings for Sentiment Analysis](https://aclanthology.org/D17-1056.pdf) (Liang-Chih Yu, EMNLP 2017)
+
 [SenticNet 5: Discovering Conceptual Primitives for Sentiment Analysis by Means of Context Embeddings](http://sentic.net/senticnet-5.pdf) (Erik Cambria, AAAI 2018, [code1](http://sentic.net/downloads/), [code2](https://github.com/yurimalheiros/senticnetapi))
+
+[Emo2Vec: Learning Generalized Emotion Representation by Multi-task Training](https://aclanthology.org/W18-6243.pdf) (Peng Xu, EMNLP 2018 Workshop)
+
+[Learning Emotion-enriched Word Representations](https://aclanthology.org/C18-1081.pdf) (Ameeta Agrawal, COLING 2018)
+
+[Distributed Representations of Emotion Categories in Emotion Space](https://aclanthology.org/2021.acl-long.184.pdf) (Xiangyu Wang, ACL 2021)
 
 ##### Sentiment Classification
 
@@ -1228,6 +1246,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [CoMAE: A Multi-factor Hierarchical Framework for Empathetic Response Generation](https://arxiv.org/pdf/2105.08316.pdf) (Chujie Zheng, ACL 2021 Findings)
 
+[Perspective-taking and Pragmatics for Generating Empathetic Responses Focused on Emotion Causes](https://arxiv.org/pdf/2109.08828.pdf) (Hyunwoo Kim, EMNLP 2021)
+
 [Emotion Eliciting Machine: Emotion Eliciting Conversation Generation based on Dual Generator](https://arxiv.org/pdf/2105.08251.pdf) (Hao Jiang, 2021)
 
 ##### Persona-Based Dialogue System
@@ -1598,6 +1618,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [code2seq: Generating sequences from structured representations of code](https://arxiv.org/pdf/1808.01400.pdf) (Uri Alon, ICLR 2019, [code](https://github.com/tech-srl/code2seq))
 
+[Evaluating Large Language Models Trained on Code](https://arxiv.org/pdf/2107.03374.pdf) (Mark Chen, 2021)
+
 ##### Code Comment Generation
 
 [Towards automatically generating summary comments for java methods](https://dl.acm.org/doi/abs/10.1145/1858996.1859006) (Giriprasad Sridhara, ASE 2010)
@@ -1667,6 +1689,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [BLEURT: Learning Robust Metrics for Text Generation](https://arxiv.org/pdf/2004.04696.pdf) (Thibault Sellam, ACL 2020)
 
 [Evaluation of Text Generation: A Survey](https://arxiv.org/pdf/2006.14799.pdf) (Asli Celikyilmaz, 2020)
+
+[Lower Perplexity is Not Always Human-Like](https://arxiv.org/pdf/2106.01229.pdf) (Tatsuki Kuribayashi, ACL 2021)
 
 ##### Sequence to Sequence
 
@@ -1907,6 +1931,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [MASK-ALIGN: Self-Supervised Neural Word Alignment](https://arxiv.org/pdf/2012.07162.pdf) (Chi Chen, ACL 2021, [code](https://github.com/THUNLP-MT/Mask-Align))
 
 [A Bidirectional Transformer Based Alignment Model for Unsupervised Word Alignment](https://aclanthology.org/2021.acl-long.24.pdf) (Jingyi Zhang, ACL 2021)
+
+[Graph Algorithms for Multiparallel Word Alignment](https://arxiv.org/pdf/2109.06283.pdf) (Ayyoob Imani, EMNLP 2020)
 
 [Embedding-Enhanced Giza++: Improving Alignment in Low- and High-Resource Scenarios Using Embedding Space Geometry](https://arxiv.org/pdf/2104.08721.pdf) (Kelly Marchisio, 2021)
 
@@ -2293,6 +2319,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [ORB: An efficient alternative to SIFT or SURF](https://ieeexplore.ieee.org/document/6126544) (Ethan Rublee, ICCV 2011)
 
 [LIFT: Learned Invariant Feature Transform](https://arxiv.org/pdf/1603.09114.pdf) (Kwang Moo Yi, ECCV 2016)
+
+#### Vision Representation
+
+[BEiT: BERT Pre-Training of Image Transformers](https://arxiv.org/pdf/2106.08254.pdf) (Hanbo Bao, 2021)
+
+[Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/pdf/2103.00020.pdf) (Alec Radford, 2021)
 
 #### Object Detection
 
@@ -2805,6 +2837,12 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Instance Normalization: The Missing Ingredient for Fast Stylization](https://arxiv.org/pdf/1607.08022.pdf) (Dmitry Ulyanov, 2017)
 
 [Group Normalization](https://arxiv.org/pdf/1803.08494.pdf) (Yuxin Wu, 2018, [note](https://zhuanlan.zhihu.com/p/35005794))
+
+#### Regularization
+
+[Just Train Twice: Improving Group Robustness without Training Group Information](http://proceedings.mlr.press/v139/liu21f/liu21f.pdf) (Evan Zheran Liu, ICML 2021)
+
+[R-Drop: Regularized Dropout for Neural Networks](https://arxiv.org/pdf/2106.14448.pdf) (Xiaobo Liang, 2021)
 
 #### Reinforcement Learning
 
