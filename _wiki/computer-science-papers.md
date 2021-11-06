@@ -124,6 +124,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Optimus: Organizing Sentences via Pre-trained Modeling of a Latent Space](https://arxiv.org/pdf/2004.04092.pdf) (Chunyuan Li, EMNLP 2020, [code](https://github.com/ChunyuanLI/Optimus), [note](https://zhuanlan.zhihu.com/p/143517152))
 
+[Pre-Training Transformers as Energy-Based Cloze Models](https://aclanthology.org/2020.emnlp-main.20.pdf) (Kevin Clark, EMNLP 2020)
+
 [Language Models are Few-Shot Learners](https://arxiv.org/pdf/2005.14165.pdf) (Tom B. Brown, 2020, [code](https://github.com/openai/gpt-3), [note](https://zhuanlan.zhihu.com/p/144764546))
 
 [Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](https://arxiv.org/pdf/2101.03961.pdf) (William Fedus, 2020)
@@ -1931,6 +1933,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [MASK-ALIGN: Self-Supervised Neural Word Alignment](https://arxiv.org/pdf/2012.07162.pdf) (Chi Chen, ACL 2021, [code](https://github.com/THUNLP-MT/Mask-Align))
 
 [A Bidirectional Transformer Based Alignment Model for Unsupervised Word Alignment](https://aclanthology.org/2021.acl-long.24.pdf) (Jingyi Zhang, ACL 2021)
+
+[ParCourE: A Parallel Corpus Explorer for a Massively Multilingual Corpus](https://arxiv.org/pdf/2107.06632.pdf) (Ayyoob Imani, ACL 2021 demo)
 
 [Graph Algorithms for Multiparallel Word Alignment](https://arxiv.org/pdf/2109.06283.pdf) (Ayyoob Imani, EMNLP 2020)
 
