@@ -1886,7 +1886,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Improved Statistical Alignment Models](https://aclanthology.org/P00-1056.pdf) (Franz Josef Och, ACL 2000)
 
-[A Systematic Comparison of Various Statistical Alignment Models](https://watermark.silverchair.com/089120103321337421.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAs8wggLLBgkqhkiG9w0BBwagggK8MIICuAIBADCCArEGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMkCEvPs_rjOQ1vujTAgEQgIICgq9VNVpiuBa5_Kw7zn35yQ0srXxnm6UXC7v1TCL2et0s17aTNOiFRpU2Eyi32wUlJPZ4IImNscvUcXbI-h_I1n5DO16iUfRadsoF4wlP-jBkuJ6Hi-wVp4L9sRcQ2ivzLj2QsMvBy-ZyRgoWP91RaQTeV4kkD7ggRB03n5ujWF0IDtn-83BA-oHYhrFAzfyo8mIxGV9PFqfymtZjg-61JdU1I2OHkXPQT-SaGIy1CWJyuLbMmg1bm_IsuhiQPrfZDq2V7I5XXjxH7k024-RD3oJ17wTN53W6f7YbMnHHilVSzmDfqZE0QdM_HF47dklvse4ZD_0qBnDl_APKFG7ctloY3T19fznYviPcF5zSFbyyax3FKjw1DFYqR80FsuRZmzzuTiGw156Ntml_SfE9dObmdE6L8la8kWzHaaa1uo4_NgZ_0qSeLEmFH9hQB7MJZZbwKDjEj8_0M6deMLTtHkZ1OUiqMRgdP6mNa4JHOf3R1vz8LFDgiEVOyR9LN-KUffamhjpN4ZDf47Xw9YS9VLGlYAwOiAivqTM0InPjW8kEwXP07_VX2n1HbY21FYE1cvZkRb-V-KfORmjj3zWqNGKO-EUXMtoXUF2G1JyNfYMhMEvgL-IsCv39SUTiWhO_bK2fxBb7j7JcrRDuRQ_RapQ06wSJWXshvvap2QLg5CFvLBSZIUT1d6d6GNLuYu0WhW9T_PiWuJSbwFpPjbRdcYTGt-JEFfNJqTdBWsG4tzePJ6hcm3K6R93ytOxV1TjfLb4LIJ2vGTSZFukJbToKdpEuOjbmCzBtM4Ua275bddrQXVinUUCpS52KFAfIji0g2dET_1GkKpR2JjE_ThXgVFRMwg) (Franz Josef Och, CL 2003)
+[A Systematic Comparison of Various Statistical Alignment Models](https://aclanthology.org/J03-1002.pdf) (Franz Josef Och, CL 2003)
 
 [Log-Linear Models for Word Alignment](https://www.aclweb.org/anthology/P05-1057.pdf) (Yang Liu, ACL 2005)
 
@@ -1896,9 +1896,17 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Measuring Word Alignment Quality for Statistical Machine Translation](https://direct.mit.edu/coli/article/33/3/293/1949/Measuring-Word-Alignment-Quality-for-Statistical) (Alexander Fraser, CL 2007)
 
+[Building a golden collection of parallel Multi-Language Word Alignment](http://www.inesc-id.pt/pt/indicadores/Ficheiros/4735.pdf) (João de Almeida Varelas Graça, LREC 2008, [code](https://www.hlt.inesc-id.pt/w/Word_Alignments#))
+
 [Parallel Implementations of Word Alignment Tool](https://aclanthology.org/W08-0509.pdf) (Qin Gao, 2008)
 
 [Unsupervised Word Alignment with Arbitrary Features](https://aclanthology.org/P11-1042.pdf) (Chris Dyer, ACL 2011)
+
+[Bayesian Word Alignment for Statistical Machine Translation](https://aclanthology.org/P11-2032.pdf) (Coşkun Mermer, ACL 2011)
+
+[Improving the IBM Alignment Models Using Variational Bayes](https://aclanthology.org/www.mt-archive.info/10/ACL-2012-Riley.pdf) (Darcey Riley, ACL 2012)
+
+[Improving Statistical Machine Translation Using Bayesian Word Alignment and Gibbs Sampling](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/05/FinalPrinted.pdf) (Coşkun Mermer, TASLP 2013)
 
 [A Simple, Fast, and Effective Reparameterization of IBM Model 2](https://aclanthology.org/N13-1073.pdf) (Chris Dyer, NAACL 2013)
 
