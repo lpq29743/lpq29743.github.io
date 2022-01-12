@@ -1228,6 +1228,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [MoEL: Mixture of Empathetic Listeners](https://www.aclweb.org/anthology/D19-1012.pdf) (Zhaojiang Lin, EMNLP 2019, [code](https://github.com/HLTCHKUST/MoEL))
 
+[CAiRE: An End-to-End Empathetic Chatbot](https://ojs.aaai.org/index.php/AAAI/article/view/7098) (Zhaojiang Lin, AAAI 2020)
+
 [What If Bots Feel Moods?](https://dl.acm.org/doi/abs/10.1145/3397271.3401108) (Lisong Qiu, SIGIR 2020)
 
 [EmoElicitor: An Open Domain Response Generation Model with User Emotional Reaction Awareness](https://www.ijcai.org/proceedings/2020/0503.pdf) (Shifeng Li, IJCAI 2020)
@@ -1238,9 +1240,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Computational Approach to Understanding Empathy Expressed in Text-Based Mental Health Support](https://arxiv.org/pdf/2009.08441.pdf) (Ashish Sharma, EMNLP 2020)
 
+[MIME: MIMicking Emotions for Empathetic Response Generation](https://arxiv.org/pdf/2010.01454.pdf) (Navonil Majumder, EMNLP 2020)
+
 [Towards Empathetic Dialogue Generation over Multi-type Knowledge](https://arxiv.org/pdf/2009.09708.pdf) (Qintong Li, 2020)
 
 [EmpDG: Multiresolution Interactive Empathetic Dialogue Generation](https://arxiv.org/pdf/1911.08698.pdf) (Qintong Li, COLING 2020)
+
+[Empathetic Response Generation through Graph-based Multi-hop Reasoning on Emotional Causality](https://www.sciencedirect.com/science/article/pii/S0950705121008091?casa_token=vk3Q_bzjsjcAAAAA:RwdXd8y98F7xfYW2kVbavsN6jsOPoM2cEGYuGSmSnSme79P2RSOKgDFaVcqrbA8sDCvZ4rasZw) (Jiashuo Wang, KBS 2021)
 
 [Towards Facilitating Empathic Conversations in Online Mental Health Support: A Reinforcement Learning Approach](https://arxiv.org/pdf/2101.07714.pdf) (Ashish Sharma, WWW 2021)
 
@@ -1250,7 +1256,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Perspective-taking and Pragmatics for Generating Empathetic Responses Focused on Emotion Causes](https://arxiv.org/pdf/2109.08828.pdf) (Hyunwoo Kim, EMNLP 2021)
 
+[Constructing Emotion Consensus and Utilizing Unpaired Data for Empathetic Dialogue Generation](https://arxiv.org/pdf/2109.07779.pdf) (Lei Shen, EMNLP 2021 Findings)
+
+[Improving Empathetic Response Generation by Recognizing Emotion Cause in Conversations](https://aclanthology.org/2021.findings-emnlp.70.pdf) (Jun Gao, EMNLP 2021 Findings)
+
 [Emotion Eliciting Machine: Emotion Eliciting Conversation Generation based on Dual Generator](https://arxiv.org/pdf/2105.08251.pdf) (Hao Jiang, 2021)
+
+[EmpBot: A T5-based Empathetic Chatbot focusing on Sentiments](https://arxiv.org/pdf/2111.00310.pdf) (Emmanouil Zaranis, 2021)
+
+[CEM: Commonsense-aware Empathetic Response Generation](https://arxiv.org/pdf/2109.05739.pdf) (Sahand Sabour, AAAI 2022)
 
 ##### Persona-Based Dialogue System
 
