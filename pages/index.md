@@ -18,8 +18,6 @@ for Information and Language Processing (CIS), LMU Munich](https://schuetze.cis.
 - **Sentiment Analysis**: Aspect Based Sentiment Analysis, Emotion Cause Analysis, Emotion-aware Dialogue System
 - **Coreference Resolution**
 
-See more in my research statement (coming soon).
-
 #### Education
 
 - LMU Munich (Oct 2021 - ). Ph.D. student in Computer Science. Supervisor: [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html). 
