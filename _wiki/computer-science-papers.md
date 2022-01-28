@@ -2164,6 +2164,24 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Multilinguality
 
+##### Language Identification
+
+[Word Level Language Identification in Online Multilingual Communication](https://aclanthology.org/D13-1084.pdf) (Dong Nguyen, EMNLP 2013)
+
+[Automatic Language Identification in Texts: A Survey](https://arxiv.org/pdf/1804.08186.pdf) (Tommi Jauhiainen, JAIR 2019)
+
+##### Code Switching
+
+[Challenges of Computational Processing of Code-Switching](https://aclanthology.org/W16-5801.pdf) (Özlem Çetinoglu, 2016)
+
+[Code-switched Language Models Using Dual RNNs and Same-Source Pretraining](https://arxiv.org/pdf/1809.01962.pdf) (Saurabh Garg, EMNLP 2018)
+
+[Language Modeling for Code-Switching: Evaluation, Integration of Monolingual Data, and Discriminative Training](https://arxiv.org/pdf/1810.11895.pdf) (Hila Gonen, EMNLP 2019)
+
+[Modeling Code-Switch Languages Using Bilingual Parallel Corpus](https://aclanthology.org/2020.acl-main.80.pdf) (Grandee Lee, ACL 2020)
+
+[A Survey of Code-switched Speech and Language Processing](https://arxiv.org/pdf/1904.00784.pdf) (Sunayana Sitaram, 2020)
+
 ##### Language Diversity and Evolution
 
 [A Statistical Model for Lost Language Deciphermen](https://dspace.mit.edu/handle/1721.1/62802) (Benjamin Snyder, ACL 2010)
@@ -2207,22 +2225,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Learning to Recognize Dialect Features](https://arxiv.org/pdf/2010.12707.pdf) (Dorottya Demszky, NAACL 2021)
 
 [The Classical Language Toolkit: An NLP Framework for Pre-Modern Languages](https://aclanthology.org/2021.acl-demo.3.pdf) (Kyle P. Johnson, ACL 2021 Demo)
-
-##### Code Switching
-
-[Challenges of Computational Processing of Code-Switching](https://aclanthology.org/W16-5801.pdf) (Özlem Çetinoglu, 2016)
-
-[Code-switched Language Models Using Dual RNNs and Same-Source Pretraining](https://arxiv.org/pdf/1809.01962.pdf) (Saurabh Garg, EMNLP 2018)
-
-[Language Modeling for Code-Switching: Evaluation, Integration of Monolingual Data, and Discriminative Training](https://arxiv.org/pdf/1810.11895.pdf) (Hila Gonen, EMNLP 2019)
-
-[Modeling Code-Switch Languages Using Bilingual Parallel Corpus](https://aclanthology.org/2020.acl-main.80.pdf) (Grandee Lee, ACL 2020)
-
-##### Language Identification
-
-[Word Level Language Identification in Online Multilingual Communication](https://aclanthology.org/D13-1084.pdf) (Dong Nguyen, EMNLP 2013)
-
-[Automatic Language Identification in Texts: A Survey](https://arxiv.org/pdf/1804.08186.pdf) (Tommi Jauhiainen, 2018)
 
 ##### Multilingual Training/Cross-lingual Transfer
 
