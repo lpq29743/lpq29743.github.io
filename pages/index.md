@@ -32,7 +32,7 @@ for Information and Language Processing (CIS), LMU Munich](https://schuetze.cis.
 4. **Peiqin Lin** and Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI Conference on Artificial Intelligence (AAAI), New York, USA. [[Paper]](https://ojs.aaai.org//index.php/AAAI/article/view/6352)[[Code]](https://github.com/lpq29743/HAN-PL)[[Slides]](assets/files/AAAI20-HAN-PL.pdf)[[Bib]](assets/files/AAAI20-HAN-PL.txt)[[Note]](https://zhuanlan.zhihu.com/p/151387067)
 5. **Peiqin Lin**, Meng Yang, and Jianhuang Lai. 2019. Deep Mask Memory Networks with Semantic Dependency and Context Moment for Aspect-based Sentiment Analysis. In International Joint Conference on Artificial Intelligence (IJCAI), Macao, China. [[Paper]](https://www.ijcai.org/Proceedings/2019/0707.pdf)[[Code]](https://github.com/lpq29743/DMMN-SDCM)[[Slides]](assets/files/IJCAI19-DMMN-SDCM.pdf)[[Bib]](assets/files/IJCAI19-DMMN-SDCM.txt)[[Note]](https://zhuanlan.zhihu.com/p/150462314)
 
-See me in [my publications](https://lpq29743.github.io/publications/).
+See more in [my publications](https://lpq29743.github.io/publications/).
 
 #### Empolyment
 
