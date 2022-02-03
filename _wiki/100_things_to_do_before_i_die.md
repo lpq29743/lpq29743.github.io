@@ -44,6 +44,7 @@ keywords: 100 Things to Do Before I Die
 31. Life: Have a game machine
 32. Life: Keep a pet
 33. Life: Live in a different country for at least 6 months
+    - Munich: 25.09.2021-
 34. Life: Live in a small town in another country for at least 1 month
 35. Life: Live somewhere without computers and telephones for a month
 36. Life: Massage
@@ -56,22 +57,28 @@ keywords: 100 Things to Do Before I Die
 43. Life: Sleep outside under the sky
 44. Life: Spa
 45. Life: Wear my hair long
+    - 08.05.2020-20.10.2020
+    - 25.09.2021-
 46. Studying: A paper award
 47. Studying: Academic cooperate with experts in other areas
 48. Studying: Create a course
 49. Studying: Get a Ph.D. degree
 50. Studying: Get citation
+    - 10 citations: 22.11.2020
 51. Studying: Give an invited talk
 52. Studying: Have a Github repository with 1000+ star
 53. Studying: Have a paper published in a top journal or conference
-    - IJCAI 2019. 20190510.
-    - AAAI 2020. 20191111.
+    - IJCAI 2019: 10.05.2019
+    - AAAI 2020: 11.11.2019
+    - EMNLP 2020 Findings: 15.09.2020
+    - TASLP: 29.01.2021
 54. Studying: Have a tutorial
 55. Studying: Make my research useful for people who need help
 56. Studying: Mentor a student
 57. Studying: Organize a workshop
 58. Studying: See foreign movies without subtitles
 59. Studying: Work for a top-tier company
+    - Tencent: 01.07.2019-20.08.2019
 60. Studying: Write a book and get it published
 61. Sports: Watch a Bayern Munich game
 62. Sports: Watch a F1 game
