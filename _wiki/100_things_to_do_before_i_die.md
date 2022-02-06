@@ -88,7 +88,7 @@ keywords: 100 Things to Do Before I Die
 66. Sports: Watch an Olympic game
 67. Sports: Be a volunteer of a sports event or work for it
 68. Sports: Bike riding over 100 kilometers
-69. Sports: Hike barefoot over 20 kilometers
+69. Sports: Hike over 50 kilometers
 70. Sports: Run a half marathon
 71. Sports: Learn to swim
 72. Sports: Learn to skate
