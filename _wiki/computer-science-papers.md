@@ -1730,9 +1730,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Controlled Text Generation
 
-[Toward Controlled Generation of Text](https://arxiv.org/pdf/1703.00955.pdf) (Zhiting Hu, 2017)
+[Toward Controlled Generation of Text](https://arxiv.org/pdf/1703.00955.pdf) (Zhiting Hu, ICML 2017)
+
+[Improved Variational Autoencoders for Text Modeling using Dilated Convolutions](https://arxiv.org/pdf/1702.08139.pdf) (Zichao Yang, ICML 2017)
+
+[Adversarially Regularized Autoencoders](https://arxiv.org/pdf/1706.04223.pdf) (Jake Zhao, 2017)
 
 [T-CVAE: Transformer-Based Conditioned Variational Autoencoder for Story Completion](https://www.ijcai.org/proceedings/2019/0727.pdf) (Tianming Wang, IJCAI 2019, [note](https://zhuanlan.zhihu.com/p/91166636))
+
+[Complementary Auxiliary Classifiers for Label-Conditional Text Generation](https://ojs.aaai.org/index.php/AAAI/article/view/6346) (Yuan Li, AAAI 2020)
 
 [Plug and Play Language Models: a Simple Approach to Controlled Text Generation](https://arxiv.org/pdf/1912.02164.pdf) (Sumanth Dathathri, ICLR 2020)
 
