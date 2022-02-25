@@ -34,6 +34,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [A Neural Probabilistic Language Model](http://www.iro.umontreal.ca/~vincentp/Publications/lm_jmlr.pdf) (Yoshua Bengio, JMLR 2003, [note](https://zhuanlan.zhihu.com/p/21101055))
 
+[A Unified Architecture for Natural Language Processing: Deep Neural Networks with Multitask Learning](http://machinelearning.org/archive/icml2008/papers/391.pdf) (Ronan Collobert, ICML 2008)
+
+[A Scalable Hierarchical Distributed Language Model](https://papers.nips.cc/paper/2008/file/1e056d2b0ebd5c878c550da6ac5d3724-Paper.pdf) (Andriy Mnih, NeuIPS 2008)
+
 [Natural Language Processing (Almost) from Scratch](https://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf?source=post_page---------------------------) (Ronan Collobert, JMLR 2011)
 
 [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781.pdf) (Tomas Mikolov, 2013, [code](https://github.com/danielfrg/word2vec), [note](https://zhuanlan.zhihu.com/p/34718114))
@@ -486,6 +490,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 ##### Unsupervised Topic Modeling
 
+[Indexing by Latent Semantic Analysis](http://lsa.colorado.edu/papers/JASIS.lsi.90.pdf) (Scott Deerwester, 1990)
+
 [An Introduction to Latent Semantic Analysis](http://lsa.colorado.edu/papers/dp1.LSAintro.pdf) (Thomas K Landauer, 1998, [code](https://github.com/josephwilk/semanticpy), [note](https://zhuanlan.zhihu.com/p/37873878))
 
 [Probabilistic Latent Semantic Analysis](http://www.iro.umontreal.ca/~nie/IFT6255/Hofmann-UAI99.pdf) (Thomas K Landauer, 1999, [code](https://github.com/laserwave/plsa), [note](https://zhuanlan.zhihu.com/p/37873878))
@@ -634,15 +640,13 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Hierarchically-Refined Label Attention Network for Sequence Labeling](https://arxiv.org/pdf/1908.08676.pdf) (Leyang Cui, EMNLP 2019, [code](https://github.com/Nealcly/BiLSTM-LAN), [note](https://zhuanlan.zhihu.com/p/92672564))
 
-##### Named Entity Recognition
+##### Part-Of-Speech Tagging
 
-[Chinese NER Using Lattice LSTM](https://arxiv.org/pdf/1805.02023.pdf) (Yue Zhang, ACL 2018)
+[Feature-Rich Part-of-Speech Tagging with a Cyclic Dependency Network](https://aclanthology.org/N03-1033.pdf) (Kristina Toutanova, NAACL 2013)
 
-[Leverage Lexical Knowledge for Chinese Named Entity Recognition via Collaborative Graph Network](https://www.aclweb.org/anthology/D19-1396.pdf) (Dianbo Sui, EMNLP 2019)
+[Part-of-Speech Tagging from 97% to 100%: Is It Time for Some Linguistics?](https://link.springer.com/chapter/10.1007/978-3-642-19400-9_14) (Christopher D. Manning, 2011)
 
-[A Survey on Deep Learning for Named Entity Recognition](https://ieeexplore.ieee.org/abstract/document/9039685) (Jing Li, TKDE 2020)
-
-[A Unified MRC Framework for Named Entity Recognition](https://arxiv.org/pdf/1910.11476.pdf) (Xiaoya Li, ACL 2020, [code](https://github.com/ShannonAI/mrc-for-flat-nested-ner?utm_source=catalyzex.com))
+[Learning Character-level Representations for Part-of-Speech Tagging](http://proceedings.mlr.press/v32/santos14.pdf) (C´ıcero Nogueira dos Santos, ICML 2014)
 
 ##### Semantic Role Labeling
 
@@ -652,11 +656,11 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [End-to-end Learning of Semantic Role Labeling Using Recurrent Neural Networks](https://www.aclweb.org/anthology/P15-1109.pdf) (Jie Zhou, ACL 2015, [code](https://github.com/sanjaymeena/semantic_role_labeling_deep_learning))
 
-[A Simple and Accurate Syntax-Agnostic Neural Model for Dependency-based Semantic Role Labeling](https://www.aclweb.org/anthology/K17-1041.pdf) (Diego Marcheggiani, 2017, [code](https://github.com/diegma/neural-dep-srl))
-
 [Deep Semantic Role Labeling: What Works and What’s Next](https://www.aclweb.org/anthology/P17-1044.pdf) (Luheng He, ACL 2017, [code](https://github.com/luheng/deep_srl), [note](https://www.sohu.com/a/154327575_473283))
 
 [Encoding Sentences with Graph Convolutional Networks for Semantic Role Labeling](https://arxiv.org/pdf/1703.04826.pdf) (Diego Marcheggiani, EMNLP 2017, [code](https://github.com/diegma/neural-dep-srl), [note](https://zhuanlan.zhihu.com/p/31805975))
+
+[A Simple and Accurate Syntax-Agnostic Neural Model for Dependency-based Semantic Role Labeling](https://www.aclweb.org/anthology/K17-1041.pdf) (Diego Marcheggiani, 2017, [code](https://github.com/diegma/neural-dep-srl))
 
 [Deep Semantic Role Labeling with Self-Attention](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16725/16025) (Zhixing Tan, AAAI 2018, [code](https://github.com/XMUNLP/Tagger), [note](https://zhuanlan.zhihu.com/p/35179449))
 
@@ -669,6 +673,78 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [Dependency or Span, End-to-End Uniform Semantic Role Labeling Sentiment Analysis](https://arxiv.org/pdf/1901.05280.pdf) (Zuchao Li, AAAI 2019, [code](https://github.com/bcmi220/unisrl), [note](https://www.sohu.com/a/295644284_129720))
 
 [Semantic Role Labeling with Associated Memory Network](https://arxiv.org/pdf/1908.02367.pdf) (Chaoyu Guan, NAACL 2019, [code](https://github.com/Frozenmad/AMN_SRL))
+
+#### Entity and Relation Extraction
+
+##### Entity Extraction
+
+[Chinese NER Using Lattice LSTM](https://arxiv.org/pdf/1805.02023.pdf) (Yue Zhang, ACL 2018)
+
+[Leverage Lexical Knowledge for Chinese Named Entity Recognition via Collaborative Graph Network](https://www.aclweb.org/anthology/D19-1396.pdf) (Dianbo Sui, EMNLP 2019)
+
+[A Survey on Deep Learning for Named Entity Recognition](https://ieeexplore.ieee.org/abstract/document/9039685) (Jing Li, TKDE 2020)
+
+[A Unified MRC Framework for Named Entity Recognition](https://arxiv.org/pdf/1910.11476.pdf) (Xiaoya Li, ACL 2020, [code](https://github.com/ShannonAI/mrc-for-flat-nested-ner?utm_source=catalyzex.com))
+
+[SPANNER: Named Entity Re-/Recognition as Span Prediction](https://arxiv.org/pdf/2106.00641.pdf) (Jinlan Fu, ACL 2021)
+
+[Discontinuous Named Entity Recognition as Maximal Clique Discovery](https://arxiv.org/pdf/2106.00218.pdf) (Yucheng Wang, ACL 2021)
+
+##### Relation Extraction
+
+[Kernel Methods for Relation Extraction](https://www.jmlr.org/papers/volume3/zelenko03a/zelenko03a.pdf) (Dmitry Zelenko, JMLR 2003)
+
+[A Rich Feature Vector for Protein-Protein Interaction Extraction from Multiple Corpora](https://aclanthology.org/D09-1013.pdf) (Makoto Miwa, EMNLP 2009)
+
+[Exploiting Syntactico-Semantic Structures for Relation Extraction](https://aclanthology.org/P11-1056.pdf) (Yee Seng Chan, ACL 2011)
+
+[Relation Classification via Convolutional Deep Neural Network](https://aclanthology.org/C14-1220.pdf) (Daojian Zeng, COLING 2014)
+
+[Attention-Based Bidirectional Long Short-Term Memory Networks for Relation Classification](https://aclanthology.org/P16-2034.pdf) (Peng Zhou, ACL 2016)
+
+[End-to-End Relation Extraction using LSTMs on Sequences and Tree Structures](https://arxiv.org/pdf/1601.00770.pdf) (Makoto Miwa, ACL 2016)
+
+[Relation Classification via Multi-Level Attention CNNs](https://aclanthology.org/P16-1123.pdf) (Linlin Wang, ACL 2016)
+
+[Neural Relation Extraction with Selective Attention over Instances](https://aclanthology.org/P16-1200.pdf) (Yankai Lin, ACL 2016)
+
+[Reinforcement Learning for Relation Classification From Noisy Data](https://ojs.aaai.org/index.php/AAAI/article/view/12063) (Jun Feng, AAAI 2018)
+
+[Graph Convolution over Pruned Dependency Trees Improves Relation Extraction](https://arxiv.org/pdf/1809.10185.pdf) (Yuhao Zhang, EMNLP 2018)
+
+[A Hierarchical Framework for Relation Extraction with Reinforcement Learning](https://ojs.aaai.org/index.php/AAAI/article/view/4688) (Ryuichi Takanobu, AAAI 2019)
+
+[Attention Guided Graph Convolutional Networks for Relation Extraction](https://arxiv.org/pdf/1906.07510.pdf) (Zhijiang Guo, ACL 2019)
+
+[Reasoning with Latent Structure Refinement for Document-Level Relation Extraction](https://arxiv.org/pdf/2005.06312.pdf) (Guoshun Nan, ACL 2020)
+
+[Double Graph Based Reasoning for Document-level Relation Extraction](https://arxiv.org/pdf/2009.13752.pdf) (Shuang Zeng, EMNLP 2020)
+
+[Document-level Relation Extraction as Semantic Segmentation](https://arxiv.org/pdf/2106.03618.pdf) (Ningyu Zhang, IJCAI 2021)
+
+[KnowPrompt: Knowledge-aware Prompt-tuning with Synergistic Optimization for Relation Extraction](https://arxiv.org/pdf/2104.07650.pdf) (Xiang Chen, WWW 2022)
+
+##### Joint Entity and Relation Extraction
+
+[Incremental Joint Extraction of Entity Mentions and Relations](https://aclanthology.org/P14-1038.pdf) (Qi Li, ACL 2014)
+
+[Modeling Joint Entity and Relation Extraction with Table Representation](https://aclanthology.org/D14-1200.pdf) (Makoto Miwa, EMNLP 2014)
+
+[Joint Extraction of Entities and Relations Based on a Novel Tagging Scheme](https://arxiv.org/pdf/1706.05075.pdf) (Songcong Zheng, 2017)
+
+[GraphRel: Modeling Text as Relational Graphs for Joint Entity and Relation Extraction](https://aclanthology.org/P19-1136.pdf) (Tsu-Jui Fu, ACL 2019)
+
+[Entity-Relation Extraction as Multi-turn Question Answering](https://arxiv.org/pdf/1905.05529.pdf) (Xiaoya Li, ACL 2019)
+
+[Effective Modeling of Encoder-Decoder Architecture for Joint Entity and Relation Extraction](https://ojs.aaai.org/index.php/AAAI/article/view/6374) (Tapas Nayak, AAAI 2020)
+
+[Span-based Joint Entity and Relation Extraction with Transformer Pre-training](https://arxiv.org/pdf/1909.07755.pdf) (Markus Eberts, ECAI 2020)
+
+[Two are Better than One: Joint Entity and Relation Extraction with Table-Sequence Encoders](https://arxiv.org/pdf/2010.03851.pdf) (Jue Wang, EMNLP 2020)
+
+[TPLinker: Single-stage Joint Extraction of Entities and Relations Through Token Pair Linking](https://arxiv.org/pdf/2010.13415.pdf) (Yucheng Wang, COLING 2020)
+
+[A Frustratingly Easy Approach for Entity and Relation Extraction](https://arxiv.org/pdf/2010.12812.pdf) (Zexuan Zhong, NAACL 2021)
 
 #### Dependency Parsing
 
@@ -1964,7 +2040,7 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [ParCourE: A Parallel Corpus Explorer for a Massively Multilingual Corpus](https://arxiv.org/pdf/2107.06632.pdf) (Ayyoob Imani, ACL 2021 demo)
 
-[Graph Algorithms for Multiparallel Word Alignment](https://arxiv.org/pdf/2109.06283.pdf) (Ayyoob Imani, EMNLP 2020)
+[Graph Algorithms for Multiparallel Word Alignment](https://arxiv.org/pdf/2109.06283.pdf) (Ayyoob Imani, EMNLP 2021)
 
 [Embedding-Enhanced Giza++: Improving Alignment in Low- and High-Resource Scenarios Using Embedding Space Geometry](https://arxiv.org/pdf/2104.08721.pdf) (Kelly Marchisio, 2021)
 
@@ -2264,6 +2340,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Combining Word Embeddings with Bilingual Orthography Embeddings for Bilingual Dictionary Induction](https://aclanthology.org/2020.coling-main.531.pdf) (COLING 2020)
 
+[Variational Information Bottleneck for Effective Low-Resource Fine-Tuning](https://arxiv.org/abs/2106.05469) (Rabeeh Karimi Mahabadi, ICLR 2021)
+
 [How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models](https://arxiv.org/pdf/2012.15613.pdf) (Phillip Rust, ACL 2021)
 
 [A Closer Look at Few-Shot Crosslingual Transfer: The Choice of Shots Matters](https://arxiv.org/pdf/2012.15682.pdf) (Mengjie Zhao, ACL 2021)
@@ -2274,13 +2352,17 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [When Word Embeddings Become Endangered](https://arxiv.org/pdf/2103.13275.pdf) (Khalid Alnajjar, 2021)
 
-##### Application
+##### Multilingual/Cross-lingual Application
+
+[Named Entity Transliteration Generation Leveraging Statistical Machine Translation Technology](https://aclanthology.org/W11-3217.pdf) (Pradeep Dasigi, 2011)
 
 [Monolingual and Cross-Lingual Information Retrieval Models Based on (Bilingual) Word Embeddings](https://dl.acm.org/doi/abs/10.1145/2766462.2767752) (Ivan Vulić, SIGIR 2015)
 
-#### Low-Resource Natural Language Processing
+[Creating a Translation Matrix of the Bible’s Names Across 591 Languages](https://aclanthology.org/L18-1263.pdf) (Winston Wu, LREC 2018)
 
-[Variational Information Bottleneck for Effective Low-Resource Fine-Tuning](https://arxiv.org/abs/2106.05469) (Rabeeh Karimi Mahabadi, ICLR 2021)
+[UniTrans : Unifying Model Transfer and Data Transfer for Cross-Lingual Named Entity Recognition with Unlabeled Data](https://arxiv.org/pdf/2007.07683.pdf) (Qianhui Wu, IJCAI 2020)
+
+[Cross-Lingual Named Entity Recognition Using Parallel Corpus: A New Approach Using XLM-RoBERTa Alignment](https://arxiv.org/pdf/2101.11112.pdf) (Bing Li, 2021)
 
 #### Interpretability in Natural Language Processing
 
@@ -2642,7 +2724,15 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 #### Autoencoder
 
+[Auto-Association by Multilayer Perceptrons and Singular Value Decomposition](https://link.springer.com/article/10.1007/BF00332918) (Herve Bourland, 1988)
+
+[Reducing the Dimensionality of Data with Neural Networks](https://www.cs.toronto.edu/~hinton/science.pdf) (Geoffrey Hinton, 2006)
+
 [Extracting and Composing Robust Features with Denoising Autoencoders](https://www.cs.toronto.edu/~larocheh/publications/icml-2008-denoising-autoencoders.pdf) (Pascal Vincent, ICML 2008)
+
+[Contractive Auto-Encoders: Explicit Invariance During Feature Extraction](https://icml.cc/2011/papers/455_icmlpaper.pdf) (Salah Rifai, ICML 2011)
+
+[Sparse Autoencoder](https://web.stanford.edu/class/cs294a/sparseAutoencoder.pdf) (Andrew Ng, 2011)
 
 ##### Variational Autoencoder
 
@@ -2843,8 +2933,6 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [ArcFace: Additive Angular Margin Loss for Deep Face Recognition](https://arxiv.org/pdf/1801.07698.pdf) (Jiankang Deng, 2018, [code](https://github.com/deepinsight/insightface), [note](https://zhuanlan.zhihu.com/p/76541084))
 
 [Additive Margin Softmax for Face Verification](https://arxiv.org/pdf/1801.05599.pdf) (Feng Wang, 2018, [code](https://github.com/Joker316701882/Additive-Margin-Softmax), [note](https://blog.csdn.net/shaoxiaohu1/article/details/79139039))
-
-[On Controllable Sparse Alternatives to Softmax](http://papers.nips.cc/paper/7878-on-controllable-sparse-alternatives-to-softmax.pdf) (Anirban Laha, NeurIPS 2018)
 
 [DropMax: Adaptive Variational Softmax](http://papers.nips.cc/paper/7371-dropmax-adaptive-variational-softmax.pdf) (Hae Beom Lee, NeurIPS 2018)
 
