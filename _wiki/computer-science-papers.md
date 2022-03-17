@@ -2966,6 +2966,10 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [R-Drop: Regularized Dropout for Neural Networks](https://arxiv.org/pdf/2106.14448.pdf) (Xiaobo Liang, 2021)
 
+#### Visualization
+
+[Visualizing Data using t-SNE](https://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf?fbclid=IwA) (Laurens van der Maaten, JMLR 2008)
+
 #### Reinforcement Learning
 
 [A Brief Survey of Deep Reinforcement Learning](https://arxiv.org/pdf/1708.05866.pdf) (Kai Arulkumaran, 2017, [note](https://blog.csdn.net/KyrieHe/article/details/79504481))
