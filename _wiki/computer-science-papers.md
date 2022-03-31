@@ -144,6 +144,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Prefix-Tuning: Optimizing Continuous Prompts for Generation](https://arxiv.org/pdf/2101.00190.pdf) (Xiang Lisa Li, 2021)
 
+[ByT5: Towards a Token-Free Future with Pre-trained Byte-to-Byte Models](https://arxiv.org/pdf/2105.13626.pdf) (Linting Xue, TACL 2022)
+
 ##### Knowledge-Enriched Language Model
 
 [ERNIE: Enhanced Language Representation with Informative Entities](https://arxiv.org/pdf/1905.07129.pdf) (Zhengyan Zhang, ACL 2019, [code](https://github.com/PaddlePaddle/LARK/tree/develop/ERNIE), [note](https://zhuanlan.zhihu.com/p/87008569))
@@ -1324,6 +1326,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Empathetic Response Generation through Graph-based Multi-hop Reasoning on Emotional Causality](https://www.sciencedirect.com/science/article/pii/S0950705121008091?casa_token=vk3Q_bzjsjcAAAAA:RwdXd8y98F7xfYW2kVbavsN6jsOPoM2cEGYuGSmSnSme79P2RSOKgDFaVcqrbA8sDCvZ4rasZw) (Jiashuo Wang, KBS 2021)
 
+[Dual-View Conditional Variational Auto-Encoder for Emotional Dialogue Generation](https://dl.acm.org/doi/full/10.1145/3481890?casa_token=edSpJGyvtvkAAAAA%3Af97AVCWaJGAh9ggDIrb3hz3R3TwEc6lHCveuZLrKgTqHavmuNWAVsjtuqGQO13SnjXfVO989McQ) (Mei Li, TALLIP 2021)
+
 [Towards Facilitating Empathic Conversations in Online Mental Health Support: A Reinforcement Learning Approach](https://arxiv.org/pdf/2101.07714.pdf) (Ashish Sharma, WWW 2021)
 
 [Towards Emotional Support Dialog Systems](https://arxiv.org/pdf/2106.01144.pdf) (Siyang Liu, ACL 2021, [code](https://github.com/thu-coai/Emotional-Support-Conversation), [note](https://mp.weixin.qq.com/s/Gj_h4YSK0cxDxh6EIiTWKw))
@@ -2076,6 +2080,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 
 [Yet Another Fast, Robust and Open Source Sentence Aligner. Time to Reconsider Sentence Alignment?](http://atour.iro.umontreal.ca/rali/sites/default/files/publis/MTSummit-2013-Fethi.pdf) (Fethi Lamraoui, 2013)
 
+[A Strong Baseline for Learning Cross-Lingual Word Embeddings from Sentence Alignments](https://arxiv.org/pdf/1608.05426.pdf) (Omer Levy, EACL 2017)
+
 [Overview of the Second BUCC Shared Task: Spotting Parallel Sentences in Comparable Corpora](https://aclanthology.org/W17-2512.pdf) (Pierre Zweigenbaum, 2017)
 
 [Extracting Parallel Sentences with Bidirectional Recurrent Neural Networks to Improve Machine Translation](https://aclanthology.org/C18-1122.pdf) (Francis Gregoire, COLING 2018)
@@ -2383,6 +2389,8 @@ keywords: omputer Science Papers, 计算机科学论文, 深度学习论文, 自
 [When Do You Need Billions of Words of Pretraining Data?](https://arxiv.org/pdf/2011.04946.pdf) (Yian Zhang, 2020)
 
 [SparseBERT: Rethinking the Importance Analysis in Self-attention](https://arxiv.org/pdf/2102.12871.pdf) (Han Shi, ICML 2021)
+
+[Superbizarre Is Not Superb: Derivational Morphology Improves BERT’s Interpretation of Complex Words](https://arxiv.org/pdf/2101.00403.pdf) (Valentin Hofmann, ACL 2021)
 
 #### Fairness in Natural Language Processing
 
