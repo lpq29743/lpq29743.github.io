@@ -9,8 +9,7 @@ permalink: /
 
 #### About Me
 
-My name is Peiqin Lin (林佩勤). Currently, I am an [ELLIS Ph.D. student](https://ellis.eu/phd-postdoc) at [the Center
-for Information and Language Processing (CIS), LMU Munich](https://schuetze.cis.lmu.de/), under the supervison of [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html). 
+My name is Peiqin Lin (林佩勤). Currently, I am an [ELLIS Ph.D. student](https://ellis.eu/phd-postdoc) at [the Center for Information and Language Processing (CIS), LMU Munich](https://schuetze.cis.lmu.de/), under the supervison of [Hinrich Schütze](https://schuetze.cis.lmu.de/team/), [Helmut Schmid](https://www.cis.uni-muenchen.de/~schmid/), and [André F. T. Martins](https://andre-martins.github.io/index.html). 
 
 #### Research Interests
 
