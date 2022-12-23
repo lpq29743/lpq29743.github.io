@@ -52,6 +52,8 @@ keywords: 100 Things to Do Before I Die
 38. Life: Play real shooting
 39. Life: Sauna
 40. Life: See snow and build a snowman
+	1. Snow: 26.11.2021
+	1. Snowman: 16.12.2022
 41. Life: Self-portraiting ten times
 42. Life: Sing a song for 50+ people
 43. Life: Sleep outside under the sky
