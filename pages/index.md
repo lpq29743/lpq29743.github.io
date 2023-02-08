@@ -9,13 +9,7 @@ permalink: /
 
 #### About Me
 
-My name is Peiqin Lin (林佩勤). Currently, I am an [ELLIS Ph.D. student](https://ellis.eu/phd-postdoc) at [the Center for Information and Language Processing (CIS), LMU Munich](https://schuetze.cis.lmu.de/), under the supervison of [Hinrich Schütze](https://schuetze.cis.lmu.de/team/), [Helmut Schmid](https://www.cis.uni-muenchen.de/~schmid/), and [André F. T. Martins](https://andre-martins.github.io/index.html). 
-
-#### Research Interests
-
-- **Machine Translation/Multilinguality**: Parallel Corpora Alignment, Multilingual Machine Translation, Low-Resource Translation
-- **Sentiment Analysis**: Aspect Based Sentiment Analysis, Emotion Cause Analysis, Emotion-aware Dialogue System
-- **Coreference Resolution**
+My name is Peiqin Lin (林佩勤) originally from [Haimen, China](https://en.wikipedia.org/wiki/Haimen,_Guangdong). Currently, I am an [ELLIS Ph.D. student](https://ellis.eu/phd-postdoc) at [the Center for InformaMion and Language Processing (CIS), LMU Munich](https://schuetze.cis.lmu.de/) and [SARDINE Group, Instituto Superior Técnico](https://sardine-lab.github.io/), under the supervison of [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html). I work on multilingualism and cross-lingual NLP.
 
 #### Education
 
@@ -56,29 +50,10 @@ See more in [my publications](https://lpq29743.github.io/publications/).
 - TALLIP
 - IEEE Access
 
-#### Skills
-
-##### Languages
+#### Languages
 
 - Chinese (Native)
 - English (Proficient, IELTS 6.5)
-- Chaoshan dialect (Native)
+- [Teochew dialect](https://en.wikipedia.org/wiki/Teochew_dialect) (Native)
 - Cantonese (Intermediate)
 
-##### Programming Languages
-
-- Python (Good Knowledge)
-- Java (Basic Knowledge)
-- C/C++ (Basic Knowledge)
-
-#### Hobbies
-
-- Music: Queen, Pink Floyd, Led Zeppelin
-- Movie: Stanley Kubrick, Federico Fellini, Andrei Tarkovsky
-- Game: NBA2K, Sudoku
-
-<!-- ### Social
-
-{% for website in site.data.social %}
-* {{ website.sitename }}：[@{{ website.name }}]({{ website.url }})
-  {% endfor %} -->
