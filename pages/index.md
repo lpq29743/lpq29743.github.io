@@ -25,6 +25,8 @@ My name is Peiqin Lin (林佩勤) originally from [Haimen, China](https://en.wik
 - **Peiqin Lin**. 2020. A Local-Global Representation Network for Aspect Level Sentiment Analysis. Master Thesis (Sun Yat-sen University Outstanding Thesis Award).
 - **Peiqin Lin**, Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI, New York, USA. [[Paper]](https://ojs.aaai.org//index.php/AAAI/article/view/6352)[[Code]](https://github.com/lpq29743/HAN-PL)[[Slides]](assets/files/AAAI20-HAN-PL.pdf))
 
+(\* denotes equal contribution)
+
 See more in [my publications](https://lpq29743.github.io/publications/).
 
 #### Empolyment
