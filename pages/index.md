@@ -20,10 +20,10 @@ My name is Peiqin Lin (林佩勤) originally from [Haimen, China](https://en.wik
 #### Selected Publications
 
 - Ayyoob Imani\*, **Peiqin Lin**\*, Amir Hossein Kargaran, Silvia Severini, Masoud Jalili Sabet, Nora Kassner, Chunlan Ma, Helmut Schmid, André F. T. Martins, François Yvon, Hinrich Schütze. 2023. Glot500: Scaling Multilingual Corpora and Language Models to 500 Languages. In ACL, Toronto, Canada. [[Paper]](https://arxiv.org/abs/2305.12182)[[Code]](https://github.com/cisnlp/Glot500)[[Huggingface]](https://huggingface.co/cis-lmu/glot500-base)
-- **Peiqin Lin**, Meng Yang, Jianhuang Lai. 2021. Deep Selective Memory Network with Selective Attention and Inter-Aspect Modeling for Aspect Level Sentiment Classification. In TASLP. [[Paper]](https://ieeexplore.ieee.org/document/9352558)[[Code]](https://github.com/lpq29743/DSMN-SAIM))
+- **Peiqin Lin**, Meng Yang, Jianhuang Lai. 2021. Deep Selective Memory Network with Selective Attention and Inter-Aspect Modeling for Aspect Level Sentiment Classification. In TASLP. [[Paper]](https://ieeexplore.ieee.org/document/9352558)[[Code]](https://github.com/lpq29743/DSMN-SAIM)
 - **Peiqin Lin**, Meng Yang. 2020. A Shared-Private Representation Model with Coarse-to-Fine Extraction for Target Sentiment Analysis. In EMNLP Findings, Virtual. [[Paper]](https://www.aclweb.org/anthology/2020.findings-emnlp.382.pdf)[[Code]](https://github.com/lpq29743/SPRM)
 - **Peiqin Lin**. 2020. A Local-Global Representation Network for Aspect Level Sentiment Analysis. Master Thesis (Sun Yat-sen University Outstanding Thesis Award).
-- **Peiqin Lin**, Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI, New York, USA. [[Paper]](https://ojs.aaai.org//index.php/AAAI/article/view/6352)[[Code]](https://github.com/lpq29743/HAN-PL)[[Slides]](assets/files/AAAI20-HAN-PL.pdf))
+- **Peiqin Lin**, Meng Yang. 2020. Hierarchical Attention Network with Pairwise Loss for Chinese Zero Pronoun Resolution. In AAAI, New York, USA. [[Paper]](https://ojs.aaai.org//index.php/AAAI/article/view/6352)[[Code]](https://github.com/lpq29743/HAN-PL)[[Slides]](assets/files/AAAI20-HAN-PL.pdf)
 
 (\* denotes equal contribution)
 
