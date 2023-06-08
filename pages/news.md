@@ -6,6 +6,7 @@ comments: false
 permalink: /news/
 ---
 
+- **06/2023** Invited to serve as Program Committee of EMNLP 2023.
 - **05/2023** One paper accepted to ACL 2023.
 - **02/2023** Visit Sardine Group at IST as an ELLIS Ph.D. student.
 - **12/2022** Invited to serve as Program Committee of ACL 2023.
