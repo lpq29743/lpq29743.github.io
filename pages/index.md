@@ -19,9 +19,7 @@ My name is Peiqin Lin (林佩勤) originally from [Haimen, China](https://en.wik
 
 #### Selected Publications
 
-- Glot500: Scaling Multilingual Corpora and Language Models to 500 Languages.
-Ayyoob Imani\*, **Peiqin Lin**\*, Amir Hossein Kargaran, Silvia Severini, Masoud Jalili Sabet, Nora Kassner, Chunlan Ma, Helmut Schmid, André F. T. Martins, François Yvon, Hinrich Schütze.
-In ACL 2023, Toronto, Canada. **Area Chair Award** [[Paper]](https://arxiv.org/abs/2305.12182)[[Code]](https://github.com/cisnlp/Glot500)[[Huggingface]](https://huggingface.co/cis-lmu/glot500-base)
+- Ayyoob Imani\*, **Peiqin Lin**\*, Amir Hossein Kargaran, Silvia Severini, Masoud Jalili Sabet, Nora Kassner, Chunlan Ma, Helmut Schmid, André F. T. Martins, François Yvon, Hinrich Schütze. 2023. Glot500: Scaling Multilingual Corpora and Language Models to 500 Languages. In ACL, Toronto, Canada. [[Paper]](https://arxiv.org/abs/2305.12182)[[Code]](https://github.com/cisnlp/Glot500)[[Huggingface]](https://huggingface.co/cis-lmu/glot500-base) (Area Chair Award)
 - **Peiqin Lin**, Meng Yang, Jianhuang Lai. 2021. Deep Selective Memory Network with Selective Attention and Inter-Aspect Modeling for Aspect Level Sentiment Classification. In TASLP. [[Paper]](https://ieeexplore.ieee.org/document/9352558)[[Code]](https://github.com/lpq29743/DSMN-SAIM)
 - **Peiqin Lin**, Meng Yang. 2020. A Shared-Private Representation Model with Coarse-to-Fine Extraction for Target Sentiment Analysis. In EMNLP Findings, Virtual. [[Paper]](https://www.aclweb.org/anthology/2020.findings-emnlp.382.pdf)[[Code]](https://github.com/lpq29743/SPRM)
 - **Peiqin Lin**. 2020. A Local-Global Representation Network for Aspect Level Sentiment Analysis. Master Thesis. (Sun Yat-sen University Outstanding Thesis Award)
