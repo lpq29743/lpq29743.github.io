@@ -6,6 +6,7 @@ comments: false
 permalink: /news/
 ---
 
+- **08/2023** Invited to serve as Program Committee of EMNLP 2023 Industry Track.
 - **07/2023** Won an Area Chair Award of ACL 2023.
 - **06/2023** Invited to serve as Program Committee of EMNLP 2023.
 - **05/2023** One paper accepted to ACL 2023.
