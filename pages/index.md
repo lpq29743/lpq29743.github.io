@@ -50,7 +50,6 @@ See more in [my publications](https://lpq29743.github.io/publications/).
 ##### Journal Reviewer
 
 - TALLIP
-- IEEE Access
 
 #### Languages
 

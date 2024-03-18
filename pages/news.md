@@ -6,7 +6,8 @@ comments: false
 permalink: /news/
 ---
 
-- **01/2024** One paper accepted to Findings of EACL 2024.
+- **03/2024** Two papers accepted to NAACL 2024.
+- **01/2024** One paper accepted to EACL 2024.
 - **08/2023** Invited to serve as Program Committee of EMNLP 2023 Industry Track.
 - **07/2023** Won an Area Chair Award of ACL 2023.
 - **06/2023** Invited to serve as Program Committee of EMNLP 2023.
@@ -27,7 +28,7 @@ permalink: /news/
 - **03/2021** Invited to serve as Program Committee of SocialNLP 2021.
 - **02/2021** Invited to serve as Program Committee of ACL 2021.
 - **01/2021** One paper accepted to TASLP.
-- **09/2020** One paper accepted to Findings of EMNLP 2020.
+- **09/2020** One paper accepted to EMNLP 2020.
 - **09/2020** Invited to serve as Program Committee of AAAI 2021.
 - **07/2020** One paper (oral) accepted to NLPCC 2020.
 - **06/2020** Defended my Master Thesis "A Local-Global Representation Network for Aspect Level Sentiment Analysis".
