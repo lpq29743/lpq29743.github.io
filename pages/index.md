@@ -11,6 +11,8 @@ permalink: /
 
 My name is Peiqin Lin (林佩勤) originally from [Haimen, China](https://en.wikipedia.org/wiki/Haimen,_Guangdong). Currently, I am an [ELLIS Ph.D. student](https://ellis.eu/phd-postdoc) at [the Center for Information and Language Processing (CIS), LMU Munich](https://schuetze.cis.lmu.de/) and [SARDINE Group, Instituto Superior Técnico](https://sardine-lab.github.io/), under the supervison of [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html). I work on multilingualism and cross-lingual NLP.
 
+Note: I will be on the job market in summer 2025! If you have any interesting research opportunities available, please reach out to me via email.
+
 #### Education
 
 - LMU Munich (Oct 2021 - ). Ph.D. student in Computer Science. Supervisor: [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html). 
