@@ -6,6 +6,10 @@ comments: false
 permalink: /publications/
 ---
 
+- **Peiqin Lin**, André F. T. Martins, Hinrich Schütze. **XAMPLER: Learning to Retrieve Cross-Lingual In-Context Examples**. In NAACL Findings 2025. [[Paper]](https://arxiv.org/abs/2405.05116)
+- **Peiqin Lin**, André F. T. Martins, Hinrich Schütze. **A Recipe of Parallel Corpora Exploitation for Multilingual Large Language Models**. In NAACL Findings 2025. [[Paper]](https://arxiv.org/abs/2407.00436)
+- Jiayang Yu, Yihang Zhang, Bin Wang, **Peiqin Lin**, Yongkang Liu, Shi Feng. **SSMLoRA: Enhancing Low-Rank Adaptation with State Space Model**. In NAACL 2025.
+- Shaoxiong Ji, Zihao Li, Indraneil Paul, Jaakko Paavola, **Peiqin Lin**, Pinzhen Chen, Dayyán O'Brien, Hengyu Luo, Hinrich Schütze, Jörg Tiedemann, Barry Haddow. **Emma-500: Enhancing Massively Multilingual Adaptation of Large Language Models**. In arXiv 2024. [[Paper]](https://arxiv.org/abs/2409.17892)
 - **Peiqin Lin**\*, Shaoxiong Ji\*, Jörg Tiedemann, André F. T. Martins, Hinrich Schütze. **MaLA-500: Massive Language Adaptation of Large Language Models**. In arXiv 2024. [[Paper]](https://arxiv.org/abs/2401.13303)[[Huggingface]](https://huggingface.co/MaLA-LM/mala-500)
 - **Peiqin Lin**\*, Chengzhi Hu\*, Zheyu Zhang, André F. T. Martins, Hinrich Schütze. **mPLM-Sim: Unveiling Better Cross-Lingual Similarity and Transfer in Multilingual Pretrained Language Models**. In EACL Findings 2024, Malta. [[Paper]](https://arxiv.org/abs/2305.13684)[[Code]](https://github.com/cisnlp/mPLM-Sim)
 - Stephen Mayhew, Terra Blevins, Shuheng Liu, Marek Šuppa, Hila Gonen, Joseph Marvin Imperial, Börje F. Karlsson, **Peiqin Lin**, Nikola Ljubešić, LJ Miranda, Barbara Plank, Arij Riabi, Yuval Pinter. **Universal NER: A Gold-Standard Multilingual Named Entity Recognition Benchmark**. In arXiv 2023. [[Paper]](https://arxiv.org/abs/2311.09122)

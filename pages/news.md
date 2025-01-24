@@ -6,6 +6,7 @@ comments: false
 permalink: /news/
 ---
 
+- **01/2025** Three papers accepted to NAACL 2025.
 - **03/2024** Two papers accepted to NAACL 2024.
 - **01/2024** One paper accepted to EACL 2024.
 - **08/2023** Invited to serve as Program Committee of EMNLP 2023 Industry Track.

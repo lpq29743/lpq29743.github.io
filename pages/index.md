@@ -21,11 +21,12 @@ Note: I will be on the job market in summer 2025! If you have any interesting re
 
 #### Selected Publications
 
+- **Peiqin Lin**, André F. T. Martins, Hinrich Schütze. **XAMPLER: Learning to Retrieve Cross-Lingual In-Context Examples**. In NAACL Findings 2025. [[Paper]](https://arxiv.org/abs/2405.05116)
+- **Peiqin Lin**, André F. T. Martins, Hinrich Schütze. **A Recipe of Parallel Corpora Exploitation for Multilingual Large Language Models**. In NAACL Findings 2025. [[Paper]](https://arxiv.org/abs/2407.00436)
+- Shaoxiong Ji, Zihao Li, Indraneil Paul, Jaakko Paavola, **Peiqin Lin**, Pinzhen Chen, Dayyán O'Brien, Hengyu Luo, Hinrich Schütze, Jörg Tiedemann, Barry Haddow. **Emma-500: Enhancing Massively Multilingual Adaptation of Large Language Models**. In arXiv 2024. [[Paper]](https://arxiv.org/abs/2409.17892)
 - **Peiqin Lin**\*, Shaoxiong Ji\*, Jörg Tiedemann, André F. T. Martins, Hinrich Schütze. **MaLA-500: Massive Language Adaptation of Large Language Models**. In arXiv 2024. [[Paper]](https://arxiv.org/abs/2401.13303)[[Huggingface]](https://huggingface.co/MaLA-LM/mala-500)
 - **Peiqin Lin**\*, Chengzhi Hu\*, Zheyu Zhang, André F. T. Martins, Hinrich Schütze. **mPLM-Sim: Unveiling Better Cross-Lingual Similarity and Transfer in Multilingual Pretrained Language Models**. In EACL Findings 2024, Malta. [[Paper]](https://arxiv.org/abs/2305.13684)[[Code]](https://github.com/cisnlp/mPLM-Sim)
 - Ayyoob Imani\*, **Peiqin Lin**\*, Amir Hossein Kargaran, Silvia Severini, Masoud Jalili Sabet, Nora Kassner, Chunlan Ma, Helmut Schmid, André F. T. Martins, François Yvon, Hinrich Schütze. **Glot500: Scaling Multilingual Corpora and Language Models to 500 Languages**. In ACL 2023, Toronto, Canada. [[Paper]](https://arxiv.org/abs/2305.12182)[[Code]](https://github.com/cisnlp/Glot500)[[Slides]](assets/files/ACL23-Glot500.pdf)[[Huggingface]](https://huggingface.co/cis-lmu/glot500-base) (Area Chair Award)
-- **Peiqin Lin**, Meng Yang, Jianhuang Lai. **Deep Selective Memory Network with Selective Attention and Inter-Aspect Modeling for Aspect Level Sentiment Classification**. In TASLP 2021. [[Paper]](https://ieeexplore.ieee.org/document/9352558)[[Code]](https://github.com/lpq29743/DSMN-SAIM)
-- **Peiqin Lin**. **A Local-Global Representation Network for Aspect Level Sentiment Analysis**. Master Thesis. 2020. (Sun Yat-sen University Outstanding Thesis Award)
 
 (\* denotes equal contribution)
 
