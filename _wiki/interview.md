@@ -6,11 +6,9 @@ description: 面试题
 keywords: 面试题
 ---
 
-### Question
+### Math
 
-#### Math
-
-##### Fun Math
+#### Fun Math
 
 1. 有 1000 个一模一样的瓶子，其中有 999 瓶是普通的水，有一瓶是毒药。任何喝下毒药的生物都会在一星期之后死亡。现在，你只有 10 只小白鼠和一星期的时间，如何检验出哪个瓶子里有毒药？
 
@@ -114,7 +112,7 @@ keywords: 面试题
 
     答：[链接](https://www.zhihu.com/question/66465943)
 
-##### Probability Theory and Mathematical Statistics
+#### Probability Theory and Mathematical Statistics
 
 1. 为什么样本方差（sample variance）的分母（denominator）是 $$n - 1$$？
 
@@ -257,7 +255,7 @@ keywords: 面试题
 
     答：$$p(\theta \| x)=\frac{p(x \| \theta)p(\theta)}{p(x)}$$。$$x$$ 为观察得到的数据（结果），$$\theta$$ 为决定数据分布的参数（原因），$$p(\theta \| x)$$ 为后验分布，$$p(\theta)$$ 为先验分布，$$p(x \| \theta)$$ 为似然。
 
-#### Algorithm
+### Algorithm
 
 1. 有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？
 
@@ -375,7 +373,22 @@ keywords: 面试题
 
     答：必败态当且仅当所有堆硬币的数量都异或起来结果为 0。
 
-#### Operating Systems
+24. Key Algorithms
+
+- 字符串
+  - [KMP 算法](https://www.zhihu.com/question/21923021)
+  - [Edit Distance](https://github.com/youngwind/blog/issues/106)
+  - 正则表达式
+- 数组
+  - [链表1](https://wuchong.me/blog/2014/03/25/interview-link-questions/) [链表2](https://www.jianshu.com/p/1361493e4f31)
+  - 前缀、中缀、后缀表达式
+- 树
+- 查找
+  - [KSum 问题](https://lpq29743.github.io/redant/algorithm/2018/10/29/KSum/)
+- 动态规划
+- [海量数据处理](https://lpq29743.github.io/redant/algorithm/2017/02/20/MassiveData/)
+
+### Operating Systems
 
 1. 为什么要用时间复杂度来描述算法，而不是运行时间？
 
@@ -398,7 +411,7 @@ keywords: 面试题
 
    答：[链接](https://www.cnblogs.com/chuxiuhong/p/6103928.html)
 
-#### Computer Networks
+### Computer Networks
 
 1. 集线器和交换机有什么区别？
 
@@ -422,7 +435,7 @@ keywords: 面试题
 
    客户端发回 ACK 报文确认，并将确认序号设置为收到序号加 1。
 
-#### Database Systems
+### Database Systems
 
 1. count(1)、count(*) 和 count(列名) 的区别？
 
@@ -442,7 +455,7 @@ keywords: 面试题
 
    答：[链接](https://www.zhihu.com/question/24696366)
 
-#### Machine Learning
+### Machine Learning
 
 1. You are given a train data set having 1000 columns and 1 million rows. The data set is based on a classification problem. Your manager has asked you to reduce the dimension of this data so that model computation time can be reduced. Your machine has memory constraints. What would you do? (You are free to make practical assumptions.)
 
@@ -1304,9 +1317,9 @@ keywords: 面试题
 
      答：pooling 是为了降维，整合特征。平均池化可能会把有用的信息平滑掉，所以效果经常不比最大池化好。可以计算最大几个值的均值。
 
-#### Programming
+### Programming
 
-##### C/C++
+#### C/C++
 
 1. 字节对齐？
 
@@ -1375,7 +1388,7 @@ keywords: 面试题
 
    c. 保护（protected）成员只能被该类的成员函数或派生类的成员函数访问。
 
-##### Python
+#### Python
 
 1. Python 中的 \*args 和 \*\*kwargs 是什么意思？
 
@@ -1465,32 +1478,15 @@ keywords: 面试题
 
        答：对于 CPU 密集型，由于全局解释器锁（访问 Python 虚拟机）的存在，所以线程是线性执行的；对于 I/O 密集型，由于全局解释器锁会被释放，所以这时多线程有体现作用。
 
-##### Linux
+#### Linux
 
 1. 程序如何后台运行？
 
    答：[链接](https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/)
 
-### Stack
+### Machine Learning
 
-#### Algorithm
-
-- 字符串
-  - [KMP 算法](https://www.zhihu.com/question/21923021)
-  - [Edit Distance](https://github.com/youngwind/blog/issues/106)
-  - 正则表达式
-- 数组
-  - [链表1](https://wuchong.me/blog/2014/03/25/interview-link-questions/) [链表2](https://www.jianshu.com/p/1361493e4f31)
-  - 前缀、中缀、后缀表达式
-- 树
-- 查找
-  - [KSum 问题](https://lpq29743.github.io/redant/algorithm/2018/10/29/KSum/)
-- 动态规划
-- [海量数据处理](https://lpq29743.github.io/redant/algorithm/2017/02/20/MassiveData/)
-
-#### Machine Learning
-
-##### Regression
+#### Regression
 
 - Least Squares
 - Linear Regression
@@ -1498,14 +1494,14 @@ keywords: 面试题
 - Ridge Regression
 - Lasso Regression
 
-##### Classification
+#### Classification
 
 - kNN
 - [Maximum Entropy Model](https://wanghuaishi.wordpress.com/2017/02/21/%E5%9B%BE%E8%A7%A3%E6%9C%80%E5%A4%A7%E7%86%B5%E5%8E%9F%E7%90%86%EF%BC%88the-maximum-entropy-principle%EF%BC%89/)
 - Naive Bayes
 - [SVM](https://lpq29743.github.io/redant/artificialintelligence/2018/09/12/SVM/)
 
-##### Clustering
+#### Clustering
 
 - Hierarchical Methods
   - BIRCH
@@ -1516,18 +1512,18 @@ keywords: 面试题
   - DBSCAN
 - EM
 
-##### Decision Tree
+#### Decision Tree
 
 - CART
 - ID3
 - C4.5
 
-##### Dimension Reducing
+#### Dimension Reducing
 
 - PCA
 - SVD
 
-##### Emsemble Learning
+#### Emsemble Learning
 
 - Boosting
 - Bagging
@@ -1551,9 +1547,9 @@ keywords: 面试题
 - GAN
 - VAE
 
-#### Natural Language Processing
+### Natural Language Processing
 
-##### Text Processing
+#### Text Processing
 
 - Word Normalization and Stemming: Normalization, Case folding, Lemmatization, Morphology, Stemming and Porter's algorithm
 - Tokenization
@@ -1561,7 +1557,7 @@ keywords: 面试题
 - Part-of-Speech Tagging
 - Named Entity Recognition
 
-##### Feature Engineering
+#### Feature Engineering
 
 - Bag of Words
 - Bag of N-Grams
@@ -1571,13 +1567,13 @@ keywords: 面试题
 - Word2Vec
 - Doc2Vec
 
-##### Named Entity Cognition
+#### Named Entity Cognition
 
 - HMM
 - CRF
 - Viterbi Algorithm
 
-##### Application
+#### Application
 
 - Text Classification
 - Text Matching: VSM, BM25
