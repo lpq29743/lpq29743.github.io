@@ -455,868 +455,6 @@ keywords: 面试题
 
    答：[链接](https://www.zhihu.com/question/24696366)
 
-### Machine Learning
-
-1. You are given a train data set having 1000 columns and 1 million rows. The data set is based on a classification problem. Your manager has asked you to reduce the dimension of this data so that model computation time can be reduced. Your machine has memory constraints. What would you do? (You are free to make practical assumptions.)
-
-   Answer: Processing a high dimensional data on a limited memory machine is a strenuous task, your interviewer would be fully aware of that. Following are the methods you can use to tackle such situation:
-
-   a. Since we have lower RAM, we should close all other applications in our machine, including the web browser, so that most of the memory can be put to use.
-
-   b. We can randomly sample the data set. This means, we can create a smaller data set, let’s say, having 1000 variables and 300000 rows and do the computations.
-
-   c. To reduce dimensionality, we can separate the numerical and categorical variables and remove the correlated variables. For numerical variables, we’ll use correlation. For categorical variables, we’ll use chi-square test.
-
-   d. Also, we can use Principal Component Analysis (PCA) and pick the components which can explain the maximum variance in the data set.
-
-   e. Using online learning algorithms like Vowpal Wabbit (available in Python) is a possible option.
-
-   f. Building a linear model using Stochastic Gradient Descent is also helpful.
-
-   g. We can also apply our business understanding to estimate which all predictors can impact the response variable. But, this is an intuitive approach, failing to identify useful predictors might result in significant loss of information
-
-2. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
-
-   Answer: If you have worked on enough data sets, you should deduce that cancer detection results in imbalanced data. In an imbalanced data set, accuracy should not be used as a measure of performance because 96% (as given) might only be predicting majority class correctly, but our class of interest is minority class (4%) which is the people who actually got diagnosed with cancer. Hence, in order to evaluate model performance, we should use Sensitivity (True Positive Rate), Specificity (True Negative Rate), F measure to determine class wise performance of the classifier. If the minority class performance is found to to be poor, we can undertake the following steps:
-
-   a. We can use undersampling, oversampling or SMOTE to make the data balanced.
-
-   b. We can alter the prediction threshold value by doing [probability caliberation](https://www.analyticsvidhya.com/blog/2016/07/platt-scaling-isotonic-regression-minimize-logloss-error/) and finding a optimal threshold using AUC-ROC curve.
-
-   c. We can assign weight to classes such that the minority classes gets larger weight.
-
-   d. We can also use anomaly detection.
-
-   Know more: Imbalanced Classification
-
-3. While working on a data set, how do you select important variables? Explain your methods.
-
-   Answer: Following are the methods of variable selection you can use:
-
-   a. Remove the correlated variables prior to selecting important variables
-
-   b. Use linear regression and select variables based on p values
-
-   c. Use Forward Selection, Backward Selection, Stepwise Selection
-
-   d. Use Random Forest, Xgboost and plot variable importance chart
-
-   e. Use Lasso Regression
-
-   f. Measure information gain for the available set of features and select top n features accordingly.
-
-4. 手推 LR？
-
-   答：[链接](https://blog.csdn.net/ltlitao717/article/details/75453480)
-
-5. 逻辑斯特回归为什么不能用均方误差计算损失函数？
-
-   答：[链接](http://sofasofa.io/forum_main_post.php?postid=1001792)。另外也因为 LR 的极大似然等价于交叉熵。
-
-6. 为什么 LR 要用 sigmoid 函数？
-
-   答：[链接](http://sofasofa.io/forum_main_post.php?postid=1004244)
-
-7. 逻辑斯特回归为什么要对特征进行离散化？
-
-   答：模型是使用离散特征还是连续特征，其实是一个“海量离散特征+简单模型” 同 “少量连续特征+复杂模型”的权衡。既可以离散化用线性模型，也可以用连续特征加深度学习。
-
-   a. 离散特征的增加和减少都很容易，易于模型的快速迭代； 
-
-   b. 稀疏向量内积乘法运算速度快； 
-
-   c. 离散化后的特征对异常数据有很强的鲁棒性：比如一个特征是年龄 >30 是 1，否则 0。如果特征没有离散化，一个异常数据“年龄 300 岁”会给模型造成很大的干扰； 
-
-   d. 变量离散化为相当于为模型引入了非线性，能够提升模型表达能力，加大拟合； 
-
-   e. 特征离散化后，模型会更稳定，比如如果对用户年龄离散化，20 - 30 作为一个区间，不会因为一个用户年龄长了一岁就变成一个完全不同的人。当然处于区间相邻处的样本会刚好相反，所以怎么划分区间是门学问； 
-
-   f. 特征离散化以后，起到了简化了逻辑回归模型的作用，降低了模型过拟合的风险。
-
-8. 给一个有 m 个样本，n 维特征的数据集，如果用 LR 算法，那么梯度是几维？
-
-   答：n 维。
-
-9. L1 和 L2 的联系和区别？
-
-   答：都是正则化系数，L1（Lasso）得到稀疏的权值，用于特征选择，L2（Ridge）得到平滑的权值。
-
-10. 为什么 L1 更容易得到稀疏解？
-
-    答：因为损失函数的等高线易与 L1 正则的坐标轴上的点相切。第一象限与正方形相切的圆的中心只能是在第一象限正方形边的垂直区域内，而第一象限的圆都可以与中心点的圆相切。
-
-    The question can be answered in a geometric view. L1 loss can be represented as a diamond, while L2 loss can be represented as a circle. Therefore, the loss is likely to intersect with the diamond on only one point, which is in axises.
-
-11. 如何用机器学习算法计算特征重要性？
-
-    答：LR 后看系数。
-
-12. K-means 中我想聚成 100 类 结果发现只能聚成98类，为什么？
-
-    答：因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn.net/shwan_ma/article/details/80096408)。
-
-13. 线性回归中特征不小心重复会有影响吗？
-
-    答：会，导致矩阵不可逆。
-
-14. 最小二乘法为什么可以解决线性回归问题？
-
-    答：残差满足正态分布时，用最大似然估计法可以证明最小二乘法是合理的。
-
-15. 描述一下最小二乘法的几何意义？
-
-    答：最小二乘法中的几何意义是高维空间中的一个向量在低维子空间的投影。$$WX$$ 实际上是当前样本形成的线性组合空间 $$S$$，最小化的过程是找到一个合适的 $$W$$，使得不在 $$S$$ 上的 $$Y$$ 到 $$S$$ 的投影距离最小。
-
-16. 什么是机器学习？
-
-    答：机器学习的目标是让机器能够将非形式化的人类操作传达给机器，从而让机器能够模拟人的一些简单的活动：如识别文本情况、识别图片内容等。
-
-17. 什么是深度学习？
-
-    答：深度学习是机器学习的一种，其目标是试图用神经网络模拟大脑的神经元活动，用更深的网络来模拟人的思考。
-
-18. 强化学习和监督学习有什么区别？
-
-    答：监督学习中每一个决策（预测标签）是独立的，它对决策的优化取决于标签，强化学习每一个决策是相互影响的，它对决策的优化取决于延时标签（奖励）。
-
-19. 单层感知机为什么不能解决异或问题？
-
-    答：因为异或操作需要两条线来划分边界，而单层感知机可以理解为一个线性分类器，只能解决与、或、非问题。
-
-20. 如何对单层感知机进行改进，使其能够解决异或问题？
-
-    答：多层感知机，或在进入激活函数前加一个多项式模块，从而添加非线性成分。
-
-21. 正规方程是什么？它有什么作用？
-
-    答：$$(X^TX)^{-1}X^Ty$$。可以一次运算得出结果，但特征数目过多时不适用。
-
-22. 怎么判断分类器是线性分类器还是非线性分类器？
-
-    答：根据决策面是否是线性的。
-
-23. KNN 的训练损失是多少？
-
-    答：KNN 实际上不算训练，损失为 0。
-
-24. KNN 算法的 k 值应该如何选择？
-
-    答：k 值太小，模型复杂度较高，容易过拟合；k 值太大，模型复杂度不够，较远的点也可能影响分类结果，分类模糊，导致分类结果不理想。当 k 取训练集大小时，分类结果都为训练集中最多的类。k 值一般选取较小的值，且要低于训练样本数的平方根，可以使用交叉验证法选取。
-
-25. KNN 怎么更快地找到最近邻点？
-
-    答：KD 树和 ball 树，KD 树根据样本构建，但训练样例远大于特征维度时才适用。
-
-26. KNN 算法可以根据距离加权吗？
-
-    答：可以用反函数或高斯函数进行距离加权，前者为近邻样本赋予较大权重，稍远的会衰减地很快，因此对噪声数据比较敏感，后者能解决这个问题，但比较复杂。
-
-27. 常见的距离度量方法有哪些？
-
-    答：$$L_p$$ 距离 / Minkowski 距离 / 闵式距离是最常规的距离度量方式，其公式为 $$(\|x-y\|^p)^{1/p}$$。当 $$p = 1$$ 时为曼哈顿距离，$$p = 2$$ 时为欧式距离，$$p$$ 为无穷大时为各个坐标距离的最大值，即切比雪夫距离。
-
-28. 衡量相似度的方法？
-
-    答：欧式距离，Jaccard 相似度（两集合交集大小 / 并集大小），余弦相似度，皮尔逊相关系数（数值归一化后计算余弦相似度），汉明距离。
-
-29. id3 是什么？
-
-    答：利用信息增益（大的特征优选）的决策多叉树。
-
-30. c4.5 是什么？
-
-    答：信息增益容易倾向选择取值多的属性，所以 c4.5 是利用信息增益比（大的特征优选）的决策多叉树。
-
-31. cart 是什么？
-
-    答：利用基尼系数（从数据集 D 中随机抽取两个样本，类别标志不一样概率，小的优选）的决策二叉树，可为回归树，也可为分类树。
-
-32. 决策树中的特征选择方法有哪些？
-
-    答：分类：信息增益、信息增益比和基尼系数；回归：误差（一般取叶子结点数值的方差和）。
-
-33. 什么是支持向量机？
-
-    答：支持向量机就是构造一个的超平面，使得距离超平面最近的那些点，即支持向量与超平面之间的 margin 最大，从而将两个集合分开。
-
-34. LR 和 SVM 的联系与区别？
-
-    答：[链接](https://www.cnblogs.com/zhizhan/p/5038747.html)
-
-    联系：都可以处理分类问题（一般为线性二分类）；都可以增加不同正则化项。两种算法性能接近；两个方法都增加对分类影响较大的数据点的权重，SVM 是只考虑 support vectors，LR 是通过非线性映射，减小了离分类平面较远的点的权重。
-
-    区别：LR 是参数模型，SVM 是非参数模型；从目标函数来看，LR 采用的是 log loss，SVM 采用的是 hinge loss。
-
-35. 当数据线性可分、接近线性可分以及线性不可分时，分别使用什么 SVM？
-
-    答：硬间隔最大化、软间隔最大化以及核技巧。
-
-36. SVM 为什么采用间隔最大化？
-
-    答：当训练数据线性可分时，存在无穷个分离超平面可以将两类数据正确分开。感知机利用误分类最小策略，求得分离超平面，不过此时的解有无穷多个。线性可分支持向量机利用间隔最大化求得最优分离超平面，这时，解是唯一的。另一方面，此时的分隔超平面所产生的分类结果是最鲁棒的，对未知实例的泛化能力最强。
-
-37. 手推 SVM
-
-    答：超平面：$$y=w^TX+b$$；
-
-    样本点 $$P(x_i, y_i)$$ 到超平面的几何距离：$$\frac{\|w^Tx_i+b\|}{\|w\|}$$；
-
-    样本点 $$P(x_i, y_i)$$ 到超平面的几何间隔：$$y_i\frac{w^Tx_i+b}{\|w\|} \geq 0$$；
-
-    SVM 解决问题：$$\max_{w,b}{\min_{x_i}y_i\frac{w^Tx_i+b}{\|w\|}}$$；
-
-    由于 $$w, b$$ 可缩放，所以令最近点满足 $$y_i(w^Tx_i+b)=1$$，问题转换为 $$\max_{w}{\frac{1}{\|w\|}} \ \ s.t. \ \ y_i(w^Tx_i + b) \geq 1$$；
-
-    定义拉格朗日函数：$$L(w, b, \alpha) = \frac{1}{2} \|w\|^2 + \sum_{i = 1}^m{\alpha_i(1 - y_i(w^Tx_i + b))}$$；
-
-    转换为拉格朗日的极小极大问题：$$\min_{w, b}\max_{\alpha}L(w, b, \alpha)$$，即先求拉格朗日的上界，再最小化上界；
-
-    可进一步转换为极大极小问题，即对偶问题：$$\max_{\alpha}\min_{w, b}L(w, b, \alpha)$$；
-
-    先求极小问题，对 $$w, b$$ 求导，令导数为 0，求解 $$w = \sum_{i=1}^m{\alpha_iy_ix_i}, 0=\sum_{i=1}^m{\alpha_iy_i}$$；
-
-    代回拉格朗日函数，得对偶问题：$$\max_\alpha-{\frac{1}{2}\sum_{i=1}^m{\sum_{j=1}^m{\alpha_i\alpha_jy_iy_jx_i^Tx_j}} + \sum_{i=1}^m\alpha_i} \ \ s.t. \ \ \sum_{i=1}^m{\alpha_iy_i=0,\alpha_i \geq 0}$$；
-
-    求解问题，解出 $$\alpha$$，从而解得 $$w, b$$，$$\alpha_i > 0$$ 对应的样本即为支持向量。
-
-38. 为什么要将求解 SVM 的原始问题转换为其对偶问题？
-
-    答：一是对偶问题往往更易求解。二是可以自然引入核函数，进而推广到非线性分类问题。
-
-39. 为什么 SVM 对缺失数据敏感？
-
-    答：缺失数据是指缺失某些特征数据，向量数据不完整。SVM 没有处理缺失值的策略。而 SVM 希望样本在特征空间中线性可分，所以特征空间的好坏对 SVM 的性能很重要。缺失特征数据将影响训练结果的好坏。
-
-40. 什么是几何间隔，什么是函数间隔？
-
-    答：几何间隔 $$y_i\frac{w^Tx_i+b}{\|w\|}$$，函数间隔 $$y_i(w^Tx_i+b)$$。函数间隔可以无限大，几何间隔不可以。
-
-41. 什么是参数模型，什么是非参数模型？
-
-    答：参数模型假设总体服从某分布，该分布由一些参数确定；非参数模型对于总体分布不做任何假设，只有在给定一些样本的条件下，能够依据非参数统计的方法进行推断。
-
-42. 支持向量机的训练在本质上是在最优化哪个值？
-
-    答：w。w 得到 b 自然可以得到。
-
-43. 如何用支持向量机实现深度学习？
-
-    答：可以用支持向量机作为网络的最后一层，进行分类。
-
-44. 给一组数据，问决策树、LR、NB 以及 SVM 等算法学出来是什么样子的？
-
-    答：[链接](https://www.zhihu.com/question/26726794)
-
-45. 结构风险和经验风险分别是什么？
-
-    答：经验风险就是使所有训练样本的损失平均值最小，结构风险其实就是加多一个正则项。
-
-46. 什么是生成模型，什么是判别模型？
-
-    答：生成模型：学习得到联合概率分布 P(x, y)，即特征 x 和标记 y 共同出现的概率，然后求条件概率分布。能够学习到数据生成的机制。
-
-    判别模型：学习得到条件概率分布 P(y \| x)，即在特征 x 出现的情况下标记 y 出现的概率。
-
-    数据要求：生成模型需要的数据量比较大，能够较好地估计概率密度；而判别模型对数据样本量的要求没有那么多。
-
-47. 什么是基于核的机器学习算法？
-
-    答：判别式模型需要把正负样本区分开，那势必会遇到区分不开的情形，这时要用到核函数，所以可认为判别式模型都要用核函数的。
-
-48. 朴素贝叶斯为何如此朴素？
-
-    答：对条件概率分布作了条件独立性（conditional independence）的假设。
-
-49. 朴素贝叶斯中特征不小心重复会有影响吗？
-
-    答：会，破坏了原本的独立性假设。
-
-50. 拉普拉斯平滑是什么？
-
-    答：为了解决零概率问题：如果某个量 x，在训练集中没有出现过，会导致概率结果是 0。这是不合理的，不能因为一个事件没有观察到就武断的认为该事件的概率是 0。拉普拉斯平滑即加法平滑。假定训练样本很大时，每个分量 x 的计数加 1 造成的估计概率变化可以忽略不计，但可以方便有效的避免零概率问题。
-
-51. SVM 有哪些核函数？
-
-    答：线性核和高斯核，即线性核与 RBF（径向基）核。 线性核：主要用于线性可分，参数少，速度快，对于一般数据，分类效果已经很理想了。 RBF 核：主要用于线性不可分，参数多，分类结果非常依赖于参数。 如果 Feature 数量跟样本数量差不多，应选用线性核的 SVM。 如果 Feature 数量比较小，样本数量一般，选用高斯核的 SVM。其他的核函数包括幂指数核、拉普拉斯核以及 Sigmoid 核等等。
-
-52. 高斯核为什么有效？
-
-    答：[链接](https://stats.stackexchange.com/questions/131138/what-makes-the-gaussian-kernel-so-magical-for-pca-and-also-in-general)
-
-53. 支持向量机可以用来做回归吗？
-
-    答：支持向量机分类是使两类的点在各自的支持向量外，而支持向量机回归是把所有的点都看成一类，并要求在支持向量内。
-
-54. 多分类问题如何转二分类方法？
-
-    答：a. 一对多法（one-versus-rest）。把某类样本归为一类，其他归为另一类，k 个类别的样本就构造出了 k 个 SVM；
-
-    b. 一对一法（one-versus-one）。在任意两类样本间设计一个 SVM，k 个类别需要 k(k - 1) / 2 个 SVM；
-
-    c. 层次支持向量机（H-SVMs）。先将所有类别分成两个子类，再将子类进一步划分成两个次级子类，如此循环。
-
-55. SVM 和 softmax 的区别？
-
-    答：SVM 具有附加稳定性，当样例满足边界条件时，该样例不会影响损失函数；而 softmax 将考虑所有的样例。
-
-56. 感知机和 SVM 有什么区别？
-
-    答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003714)
-
-57. One-class SVM？
-
-    答：只要针对异常检测问题。
-
-58. 上溢（overflow）和下溢（underflow）是什么，softmax 函数会出现哪种情况，该怎么解决？
-
-    答：上溢即大量级的数被近似为正负无穷时，发生上溢。发生上溢后，这些数值会变为非数值。下溢即有些逼近零的数，如零除或者对零取对数时，得到负无穷，如果对负无穷进一步运算，则会得到非数字。softmax 函数中有指数运算，如果要运算的数过小或过大，则会下溢或上溢。解决上溢的方式是让每一个值都减去最大分量的值，由于这样做之后分母有一项为 1，所以不会出现下溢。同样对于取对数，可以让所有数都加 1。
-
-59. 讲一下 EM 算法，E 步和 M 步的具体步骤，E 中的期望是什么？
-
-    答：初始化参数 $$\theta^{old}$$；E 步：估计 $$p(Z\|X, \theta^{old})$$，求得样本的后验期望值；M 步：根据极大似然估计求得 $$\theta^{new}$$；根据 $$\theta$$，迭代至收敛。
-
-60. KMeans 和 EM 有什么关系，和 GMM 有什么关系？
-
-    答：KMeans 的目标函数（整个数据集点到各自聚类中心的距离的平方和）可以用 EM 算法求解。K-Means 算法归类为 GMM 的 EM 解法的一个特例。
-
-61. 什么样的数据集不适合用深度学习？
-
-    答：数据集太小或数据集没有局部相关特性。
-
-62. 数据集太小用什么算法合适？
-
-    答：先考虑获取更多数据或数据增强，简单的线性/逻辑回归模型或贝叶斯模型能在小数据集上有好的表现。
-
-63. 解释一下奥卡姆剃刀原理？
-
-    答：如果两个模型的预测能力差不多，就选简单的。原因有二，简单模型往往解释性更好；复杂的模型更有可能过拟合。
-
-64. 解释一下没有免费的午餐原理？
-
-    答：A 算法在某些数据集或任务上表现比 B 算法好，则一定存在一些数据集或任务，B 算法表现比 A 算法好。这告诉我们具体问题具体分析。
-
-65. 什么是白化？
-
-    答：输入数据分布变换到 0 均值，单位方差的正态分布
-
-66. batch normalization
-
-    答：BatchNorm 就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。
-
-    对于深度学习这种包含很多隐层的网络结构，在训练过程中，因为各层参数不停变化，所以每个隐层都面临 covariate shift 的问题，输入分布老是变来变去，这就是 Internal Covariate Shift，Internal 指的是深层网络隐层，发生在网络内部。BatchNorm 的基本思想是让每个隐层节点的激活输入分布固定下来，避免 Internal Covariate Shift 问题。
-
-    经过 BN 后，大部分 Activation 的值落入非线性函数的线性区内，对应导数远离导数饱和区，加速训练收敛过程。
-
-    BN 为了保证非线性的获得，对变换后的 x 又进行了 scale 加上 shift 操作：y = scale * x + shift)。
-
-67. 特征标准化有什么意义？怎么做？
-
-    答：消除不同指标量纲的影响。归一化，正态化。
-
-68. SVD 算法是什么？
-
-    答：$$A=U \sum V^T$$。把一个矩阵分解为正交矩阵 $$U$$（经过 $$A$$ 变换后的新标准正交基），对角矩阵 $$\sum$$ （$$V$$ 中向量与 $$U$$ 中对应向量之间的比例关系，$$\sum$$ 中的每个 $$\sigma$$ 会从大到小排序，值越大代表该维度重要性越高）和正交矩阵 $$V$$（原始域的标准正交基）。
-
-69. bias 和 variance 的含义是什么？
-
-    答：bias 要求让 Error(train) 尽可能小，variance 要求让 Error(train) 尽可能等于 Error(test)。bias 体现了模型的精确度，variance 体现了模型的泛化能力。两个值都是希望越小越好。
-
-70. ensemble method 中哪种方法降低 bias，哪种方法降低 variance
-
-    答：bagging 降低 variance，boosting 既能降低 bias，又能降低 variance。
-
-    根据中心极限定理：样本平均值将会约等于其所在总体的平均值，取样次数越多，结果就越接近正态分布；而且样本大小越大，样本平均值分布的标准差就越小。
-
-    在 bagging 中，可以把建立每一个分类器的过程都看作给定数据集下的随机变量，把分类器的组合看作样本，很明显分类器越多，预测结果的 variance 就越小。
-
-    boosting 的每一轮迭代都是基于前面的残差，不断的去学习残差，从而使模型一步步去逼近真实值，整个过程都在优化 loss function，很明显随着迭代次数增加，预测结果的 bias 就越小。另外，boosting 也属于集成学习，是由若干个若分类器组成的一个强分类器，但由于各阶段分类器之间相关性较强，若把 boosting 也看成一次抽样，变量之间并不相互独立，也不是完全相关，存在一定的互相依赖关系，因此方差降低得较少。
-
-71. 集成方法的个体学习器有什么要求？
-
-    答：好而不同。
-
-72. 集成方法分为什么？有哪些方法？
-
-    答：个体学习器不存在强依赖关系，可同时生成，有 Bagging、Random Forest；个体学习器存在强依赖关系，须串行生成，有 Boosting，AdaBoost，GBDT。
-
-73. 强可学习和弱可学习是什么？
-
-    答：对于存在一个多项式的学习算法，若正确率很高，则是强可学习的，若仅比随机猜测略好，则是弱可学习的。
-
-74. Bagging 的工作机制是什么？
-
-    答：利用自助采样法得到多套数据集，然后通过多个基分类器分类。
-
-75. Boosting 的工作机制是什么？
-
-    答：通过基学习器的表现对训练样本分布进行调整，使得分错样本得到更多关注。
-
-76. Random Forest 是什么？
-
-    答：随机森林是 Bagging 的变种，其以决策树为基学习器，并在决策树的训练过程中加入了随机属性选择。其可以处理离散特征，又可以处理连续特征。
-
-77. 随机森林相比普通的 bagging 的改进是什么？
-
-    答：不仅对样本随机选择，还对特征随机选择。
-
-78. bagging 的自动校验是什么？
-
-    答：包外估计。
-
-79. GBDT 相对于随机森林的改进是什么？
-
-    答：随机森林中每棵决策树是独立的，而在 GBDT 中，每棵树都是以前一棵树的残差（真实值跟预测值的差值，刚好是平方损失函数的负梯度）为学习目标去拟合。基于残差的 GBDT 对异常值敏感，可以用绝对损失或 huber 损失来代替平方损失函数。
-
-80. 随机森林和 GBDT 的联系和区别？
-
-    答：相同点：都是由多棵树组成；最终的结果都是由多棵树一起决定
-
-    不同点：组成随机森林的树可以分类树也可以是回归树，而 GBDT 只由回归树组成；组成随机森林的树可以并行生成，而 GBDT 是串行生成；随机森林的结果是多数表决表决的，而 GBDT 则是多棵树累加之和；随机森林对异常值不敏感，而 GBDT 对异常值比较敏感；随机森林是通过减少模型的方差来提高性能，而 GBDT 是减少模型的偏差来提高性能的；随机森林不需要进行数据预处理，即特征归一化。而 GBDT 则需要进行特征归一化
-
-81. AdaBoost 是什么？
-
-    答：此方法通过提高前一轮弱分类器错误分类样本权值来提高集成学习效果，它在预测时采用加权多数表决的方法，即加大分类误差率小的弱分类器的权值，减小分类误差率大的弱分类器的权值。
-
-82. GBDT 和 XgBoost 区别？
-
-    答：XgBoost 将**树模型的复杂度**（叶节点的数量和叶节点的得分越高，树就越复杂）作为正则项加在优化目标上，公式推导中用到了**二阶导数**信息，支持并行操作。
-
-83. 提升树是什么？
-
-    答：如果用于分类，那就是特殊的 AdaBoost，基分类器都为决策树，回归则情况有所不同。
-
-84. HMM 的两个假设是什么？
-
-    答：齐次马尔可夫性假设（当前时刻状态只跟上一状态相关）和观测独立性假设（当前观测只跟当前状态相关）。
-
-85. CRF 是什么？
-
-    答：给定一组输入随机变量，另一组输出随机变量的条件概率分布模型，输出随机变量构成马尔可夫随机场。
-
-86. HMM 和 CRF 的联系与区别
-
-    答：a.HMM 是生成模型，CRF 是判别模型
-
-    b.HMM 是概率有向图，CRF 是概率无向图
-
-    c.HMM 求解过程可能是局部最优，CRF 可以全局最优
-
-    d.CRF 概率归一化较合理，HMM 则会导致 label bias 问题
-
-87. sgd、momentum、rmsprop、adam 区别与联系
-
-    答：都是梯度下降，SGD 没动量，Momentum 是一阶动量，RMSProp 是二阶动量，Adam 是一阶动量 + 二阶动量。
-
-88. 一阶优化和二阶优化对应的矩阵？
-
-    一阶对应 Jacobian 矩阵，二阶对应 Hessian 矩阵。当矩阵正定（positive definite），梯度为 0 处为极小值。
-
-89. 深度学习为什么不用二阶优化？
-
-    答：有些方法可用，但总体不适用。原因：计算量大，训练慢；求导复杂；深度学习不需要高精度解；稳定性差。
-
-90. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
-
-    答：[链接](https://zhuanlan.zhihu.com/p/61590026)
-
-91. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
-
-    答：[链接](https://zhuanlan.zhihu.com/p/61590026)
-
-92. TensorFlow 怎么实现 learning rate decay？
-
-    答：[链接](https://blog.csdn.net/u012436149/article/details/62058318)
-
-93. Pytorch 怎么实现 learning rate decay？
-
-    答：[链接](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/)
-
-94. TensorFlow 内部求导机制？
-
-    答：符号求导。先提供每一个op求导的数学实现，然后使用链式法则求出整个表达式的导数。
-
-95. TensorFlow 创建变量的方式有哪些，有什么区别？
-
-    答：`tf.Variable()`和`tf.get_variable()`。前者一律创建新的变量，遇到同名变量，会在后面加后缀 1，2；后者如果遇到同名变量，则使用之前创建的变量，但要求这个变量一定在 variable_scope 中，且有 reuse 选项。
-
-96. Pytorch 如何切换训练和测试模式？
-
-    答：`model.train()`和`model.eval()`
-
-97. GPU 利用率低怎么办？
-
-    答：dataset API 可以支持以 streaming 的方式读取数据。
-
-98. softmax 求导？
-
-    The derivation of the softmax function?
-
-    答：[链接](https://zhuanlan.zhihu.com/p/25723112)。$$softmax'(z)=softmax(z)(y_i-softmax(z))$$，其中$$y_i$$为标签。如果表示为 Jacobian 矩阵可为$$J_{softmax}=Diag(p)-pp^T$$，其中$$p=softmax(z)$$，而$$Diag(p)$$是以p为对角线的矩阵。
-
-99. 为什么 softmax 包含 “soft”？
-
-    答：“soft”表示 softmax 函数是连续可导的，以保证梯度下降可以用来优化损失函数。
-
-    “soft” means that the softmax function is continuous and differentiable so that the gradient descent can be used to optimize the loss function.
-
-100. 怎么得到一个 soft 版本的 argmax？
-
-     答：用 softmax 的结果与 index 的倒置相乘。
-
-101. 神经网络为什么会产生梯度消失现象？
-
-     答：两种情况下梯度消失经常出现，一是在深层网络中，二是采用了不合适的损失函数，比如 sigmoid（导数范围从 0 到 0.25）。前者是因为根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都小于 1 的话，多次链乘之后会接近为 0，如果都大于 0 的话，多次链乘之后会接近正无穷。sigmoid 中心部位和两侧的梯度差别太大，如果权重初始化得太大或太小，激活值基本都在 sigmoid 两侧，两侧梯度几乎为 0，传播几层就没有梯度了。
-
-102. 有哪些激活函数？
-
-     答：sigmoid，softmax，tanh，ReLU，PReLU，Leakly ReLU，Maxout。
-
-103. 挑一种激活函数推导梯度下降的过程?
-
-     答：[链接](https://blog.csdn.net/jediael_lu/article/details/77852060)
-
-104. 激活函数如何选择？
-
-     答：除了 gate 之类的地方，尽量不要用 sigmoid，可以用 tanh 或者 relu 之类的激活函数。
-
-105. RELU 在 0 点的导数是多少？
-
-     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003784)
-
-106. dying relu？
-
-     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1004214)
-
-107. 如何调参？
-
-     答：for 循环；贝叶斯优化。
-
-108. 什么是 Jensen 不等式？
-
-     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003224)
-
-109. 互信息是什么？
-
-     答：$$I(X; Y) = \sum_{y \in Y}\sum_{x \in X} {p(x,y)log{\frac{p(x,y)}{p(x)p(y)}}}$$。当变量相互独立时，互信息为 0。
-
-110. KL 散度和交叉熵的区别？
-
-     答：自信息（一个事件的信息量）：$$I(x)=-logP(x)$$；
-
-     信息熵（一个分布的信息量）：$$H(x)=E_{X \sim P}[I(x)]=-E_{X \sim P}[P(x)]$$；
-
-     交叉熵（在给定的真实分布下，使用非真实分布所指定的策略需要的代价）：$$-\sum_{k=1}^N{p_klog_2{q_k}}$$；
-
-     交叉熵越低，策略越好，当交叉熵 = 信息熵，表示使用了真实分布；
-
-     相对熵 / KL 散度（两个分布之间的差异）：$$KL(f(x) \| g(x))=\sum_{x \in X} {f(x) * log_2{\frac{f(x)}{g(x)}}}$$；
-
-     相对熵 = 交叉熵 - 信息熵。
-
-111. 如何避免梯度消失或梯度爆炸？
-
-     答：权重合理初始化，梯度剪切（梯度爆炸），门机制，batch normalization。
-
-112. 权重初始化方法？
-
-     答：零初始化，常量初始化，高斯/均匀随机初始化，Xavier 初始化，He 初始化，正交初始化。
-
-113. 为什么不能零初始化或常量初始化？
-
-     答：if the neurons start with the same weights, then all the neurons will follow the same gradient, and will always end up doing the same thing as one another.
-
-114. Xavier / He 初始化的目的是什么？
-
-     答：使每一层输出方差为 1。
-
-115. 多任务如何学习？
-
-     答：[链接](https://zhuanlan.zhihu.com/p/34916654)
-
-116. map，mrr 是什么？
-
-     答：[链接](https://blog.csdn.net/hackerzer/article/details/79632951)
-
-117. 宏平均 F1 和 微平均 F1 的区别？
-
-     答：宏平均 F1 对每个类求 F1 之后取平均，微平均 F1 针对整体求 F1。
-
-118. TF-IDF 是什么？
-
-     答：词频（TF）为词在当前文档中出现的频率，逆向文件频率（IDF）由总文件数目除以包含该词的文件数目，再将得到的商取以 10 为底得到。
-
-119. CNN 在文本分类上一般怎么应用？
-
-     答：卷积核宽度为词向量的维度（词向量交换维度并不会起影响，所以没必要在词向量维度做卷积），长度为关注窗口的大小，通道数可为所用词向量。
-
-120. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
-
-     答：输出尺寸 = (输入尺寸 - filter + 2 * padding）/ stride + 1。计算尺寸不被整除，卷积向下取整，池化向上取整。
-
-121. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
-
-     答：解决了梯度消失问题。
-
-122. RNN 系列为什么要正交初始化？
-
-     答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
-
-123. 怎么得到正交初始化？
-
-     答：QR 分解或 SVD。
-
-124. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
-
-     答：ReLU 能解决梯度消失，但对 CNN 有效，对 RNN 无效。因为CNN 每一层使用独立的参数不同，原始的 RNN 在每个阶段都共享一个参数。如果直接把 RNN 的激活函数换成 ReLU 会导致非常大的输出值。
-
-125. LSTM 是什么？
-
-     答：遗忘门：$$f_t=\sigma(W_f[h_{t-1}, x_t] + b_f)$$，输出 [0, 1]，来表示信息保留程度。
-
-     输入门：$$i_t=\sigma(W_i[h_{t-1}, x_t] + b_i)$$，输出 [0, 1]，来表示信息更新程度。
-
-     输入转换为初步输出：$$\tilde{C_t}=\sigma(W_C[h_{t-1}, x_t] + b_C)$$。
-
-     使用遗忘门和输入门：$$C_t=f_t*C_{t-1}+i_t*\tilde{C_t}$$。
-
-     输出门：$$o_t=\sigma(W_o[h_{t-1}, x_t] + b_o)$$，输出 [0, 1]，来表示信息输出程度。
-
-     得到最终输出：$$h_t=o_t*tanh(C_t)$$。
-
-126. GRU 是什么？
-
-     答：LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
-
-127. LSTM 和 GRU 的联系和区别？
-
-     答：都是通过使梯度的乘法变成加法，来解决 RNN 由于梯度消失而不能对长期依赖建模的问题。前者三个门，后者两个门，所以前者计算更耗时。
-
-128. 门机制为什么能解决梯度消失或爆炸问题？
-
-     答：[链接](https://zhuanlan.zhihu.com/p/27485750)
-
-129. LSTM 的 memory 和 MN 的 memory 有什么区别？
-
-     答：MN 是 external memory，可以尽可能长地存储信息，而 LSTM 是 internal memory，对于太远信息的存储功能有限。
-
-130. Attention 与 LSTM 的联系与区别？
-
-     答：长距离依赖问题，LSTM 占优；解释性方面，Attention 占优。
-
-131. 手动加权或自主学习权重哪个好？
-
-     答：手动加权相当于引入特征，更为合理，自主学习权重相当于学习特征，能够学到隐含信息。
-
-132. Attention 机制是什么?
-
-     答：用来捕获输入的重要部分。
-
-133. 如何计算 Attention 分值？
-
-     答：dot，general，concat。
-
-134. Attention 有哪些类型？
-
-     答：基于 memory，多层，自注意力，双向。
-
-135. Attention 机制的 soft 和 hard 是什么？
-
-     答：Hard-attention，就是 0/1 问题，哪些区域是被 attentioned，哪些区域不关注；Soft-attention，[0,1] 间连续分布问题，每个区域被关注的程度高低，用 0~1 的 score 表示。
-
-136. multi-head attention 的公式是怎样的？
-
-     答：$$Attention(Q,K,V) = softmax({QK^T\over {\sqrt {d_k}}})V$$。
-
-137. Memory Network 有哪些组成部分？
-
-     答：Input（把输入映射为特征向量），Generalization（使用新的输入数据更新 memories），Output（给定新的输入和现有的 memory state，在特征空间里产生输出），Rresponse（将输出转化为自然语言）
-
-138. Memory Network 中，层与层之间的信息怎么传播？
-
-     答：线性传播和非线性传播；传播上一次信息（门机制或线性层）或不传播。
-
-139. 自然语言处理数据增强的方法？
-
-     答：a、加噪，如随机扔词或调整语序；b、同义词替换；c、回译；d、文档裁剪；e、生成对抗网络。
-
-140. 情感分析相对于一般文本分类有什么不同？
-
-     答：特征方面（情感词典，融合了情感的词向量）。
-
-141. 怎么构建情感词典？
-
-     答：可以先人工制作一个小型的情感词典，然后利用语料，根据一些启发式规则（如“and”连接的词情感一样，“but”相反）来获得新的情感词，不断迭代扩展词典大小。
-
-142. 情感词典会有哪些问题？
-
-     答：不同的领域的情感词可能不一样；表达情感的词不一定是情感词；讽刺语境。
-
-143. 如何检测不文明词汇？
-
-     答：词典，分类问题。
-
-144. 浏览器的联想词运用了什么理论和原理？
-
-     答：贝叶斯原理。
-
-145. 为什么不能用 one-hot 表示词？
-
-     答：维度灾难和语义鸿沟。
-
-146. 分布式假设是什么
-
-     答：相同上下文语境的词有类似含义。
-
-147. 了解哪些词向量方法？
-
-     答：固定表征（word2vec，Glove，FastText）和动态表征（cove，elmo，GPT，bert）。
-
-148. word2vec 的原理？
-
-     答：word2vec 有两种模型 CBOW 和 Skip-Gram，前者是在已知上下文的情况下，预测当前词，后者是在已知当前词的情况下，预测上下文。
-
-149. word2vec 的两个模型哪个对小数据集和非词典词比较友好？
-
-     答：CBOW 每个词在进入模型后，都相当于进行了均值处理，所以非词典词在进行加权平均后，也容易被忽视。
-
-     Skip-Gram 每个词都会被单独得训练，较少受其他高频的干扰。所以对于 Skip-Gram 在小数据集和非词典词上占优。
-
-150. word2vec 中的 hierarchical softmax 是什么？
-
-     答：将一次分类分解为多次分类，从而把分类的时间复杂度从 O(N) 降低到 O(logN)，从而提高运算效率。word2vec 根据词频构建了一棵 Huffman 树，来实现 hierarchical softmax。
-
-151. word2vec 中的 negative sampling 是什么？
-
-     答：负采样即在词汇表中采样一定数目的词作为负例，与原先的正例一起做多次二分类，从而提高模型训练速度。负采样受到词频影响，词频越高的词越可能被采样到。
-
-152. LSA 是什么？
-
-     答：潜在语义分析，先构建一个单词-标题（或文章）矩阵成，然后再用 SVD 算法等进行处理。
-
-153. Glove 的原理？
-
-     答：通过构建词向量和共现矩阵之间的近似关系，来进行训练
-
-154. Glove 和 LSA 有什么联系或区别？
-
-     答：LSA  采用计算复杂度高的 SVD 算法，Glove 可看作是对 LSA 的一种优化。
-
-155. Glove 和 word2vec 有什么联系或区别？
-
-     答：word2vec 是局部语料库训练的，其特征提取是基于滑窗的；而 Glove 的滑窗是为了构建共现矩阵，是基于全局语料的，因此，word2vec 可以进行在线学习，glove 不能。word2vec 是无监督学习；Glove 通常被认为是无监督学习，但实际上 Glove还是有 label 的，即共现次数。word2vec 损失函数是带权重的交叉熵，权重固定；glove的损失函数是最小平方损失函数，权重可做映射变换。总体来看，Glove 可看作是换了目标函数和权重函数的全局 word2vec。
-
-156. FastText 的原理？
-
-     答：FastText 建立在 word2vec 基础上，其用 subword 来对非词典词进行处理，用 n-gram 来考虑词序。
-
-157. elmo 的原理？
-
-     答：基于语言模型的动态词向量。采用 1 层静态向量 + 2 层 LSTM 提取特征，然后将两个方向得到的向量进行拼接。
-
-158. cove 和 elmo 的联系和区别
-
-     答：都用了 LSTM 编码，但前者的输入单位是词，后者是字符。
-
-159. GPT 的原理？
-
-     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
-
-160. bert 的原理？
-
-     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
-
-161. Transformer 的原理？
-
-     答：Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
-
-162. Transformer 的 position encoding 为什么选三角函数？
-
-     答：偶数位置，使用正弦编码，在奇数位置，使用余弦编码。任意位置的 $$PE_{pos+k}$$ 都可以被 $$PE_{pos}$$ 的线性函数表示。在 bert 中，position encoding 是学习得到的。
-
-163. bert 强于 rnn 的地方？
-
-     答：并行，对大数据比较友好。
-
-164. Transformer 使用的时候，制约显存的最关键因素是什么？
-
-     答：序列长度。
-
-165. 词向量相比传统特征有什么优势？
-
-     答：传统特征具有稀疏性，且不能计算词的相似度，词向量很好地解决了这两个问题。
-
-166. 上下文相关词向量相比固定词向量有什么优缺点？
-
-     可以对非登录词和一词多义处理地更好，但训练代价大。
-
-167. 你在项目中是怎么使用词向量的？
-
-     答：一般是运用预训练词向量，对于没有在词表里面的词，用高斯分布或均匀分布随机初始化
-
-168. 词向量是预训练的好，还是根据语料训练的好？
-
-     答：看数据量大小。
-
-169. 如何解决非词典词问题？
-
-     答：UNK；随机初始化；subword。
-
-170. doc2vec 的原理是？
-
-     答：有 PV-DM 和 PV-DBOW 两个模型，前者的任务是将段落向量和多个词向量连接，预测下一个词，相当于 word2vec 中的 CBOW，后者以段落向量为输入，预测具体的词，相当于 word2vec 中的 Skip-Gram。
-
-171. 句子级和文档级分类的方法？
-
-     答：句子级可以用很多成熟的模型（BiLSTM + Attention），文档级可以用 HAN 模型。
-
-172. Deep LSTM Reader 是什么？
-
-     答：LSTM 编码 Q \|\|\| D 或 D \|\|\| Q，得到的表示进行处理得到结果。
-
-173. Attentive Reader 是什么？
-
-     答：LSTM 模型对 Document 和 Query 分别编码，在 Document 编码后还加了 Attention 操作。
-
-174. Impatient Reader 是什么？
-
-     答：Attentive Reader 基础上改进，针对 Query 的每个 token，都有一个 Attention 向量，将得到的 Attention 向量输入 LSTM，最后的输出可处理得到结果。
-
-175. Attention Sum Reader 是什么？
-
-     答：编码后，根据 Query 在 Document 上做 Attention。
-
-176. Match-LSTM 是什么？
-
-     答：编码后，根据 Query 在 Document 上做 Attention，然后加权向量输入 LSTM 得到表示。
-
-177. Pointer-Net 是什么？
-
-     答：利用 Attention 选择 pointer，分为序列模型和边界模型。
-
-178. BiDAF 是什么？
-
-     答：双向 Attention。
-
-179. AoA Reader 是什么？
-
-     答：Attention Sum Reader 基础上改进，不过也是实现了一个双向 Attention。
-
-180. QANet 是什么？
-
-     答：编码层变成了 CNN 和 self Attention，分别捕获局部信息和全局信息，加快了训练速度。
-
-181. R-Net 是什么？
-
-     答：基于 Match-LSTM 改进，引入了字符级向量，门限注意力机制，self Attention。
-
-182. SLQA 是什么？
-
-     答：交互层先使用双向 Attention，再使用 self Attention。另外，为了避免过分注重细节，还融入了全局信息。
-
-183. max pooling 和 mean pooling 是什么？有其他方式吗？
-
-     答：pooling 是为了降维，整合特征。平均池化可能会把有用的信息平滑掉，所以效果经常不比最大池化好。可以计算最大几个值的均值。
-
 ### Programming
 
 #### C/C++
@@ -1486,155 +624,759 @@ keywords: 面试题
 
 ### Machine Learning
 
+#### Basic
+
+1. 解释一下奥卡姆剃刀原理？
+
+    答：如果两个模型的预测能力差不多，就选简单的。原因有二，简单模型往往解释性更好；复杂的模型更有可能过拟合。
+
+2. 解释一下没有免费的午餐原理？
+
+    答：A 算法在某些数据集或任务上表现比 B 算法好，则一定存在一些数据集或任务，B 算法表现比 A 算法好。这告诉我们具体问题具体分析。
+
+3. L1 和 L2 的联系和区别？
+
+   答：都是正则化系数，L1（Lasso）得到稀疏的权值，用于特征选择，L2（Ridge）得到平滑的权值。
+
+4. 为什么 L1 更容易得到稀疏解？
+
+    答：因为损失函数的等高线易与 L1 正则的坐标轴上的点相切。第一象限与正方形相切的圆的中心只能是在第一象限正方形边的垂直区域内，而第一象限的圆都可以与中心点的圆相切。
+
+    The question can be answered in a geometric view. L1 loss can be represented as a diamond, while L2 loss can be represented as a circle. Therefore, the loss is likely to intersect with the diamond on only one point, which is in axises.
+
+6. 结构风险和经验风险分别是什么？
+
+    答：经验风险就是使所有训练样本的损失平均值最小，结构风险其实就是加多一个正则项。
+
+7. 什么是生成模型，什么是判别模型？
+
+    答：生成模型：学习得到联合概率分布 P(x, y)，即特征 x 和标记 y 共同出现的概率，然后求条件概率分布。能够学习到数据生成的机制。
+
+    判别模型：学习得到条件概率分布 P(y \| x)，即在特征 x 出现的情况下标记 y 出现的概率。
+
+    数据要求：生成模型需要的数据量比较大，能够较好地估计概率密度；而判别模型对数据样本量的要求没有那么多。****
+
+8. 什么是参数模型，什么是非参数模型？
+
+    答：参数模型假设总体服从某分布，该分布由一些参数确定；非参数模型对于总体分布不做任何假设，只有在给定一些样本的条件下，能够依据非参数统计的方法进行推断。
+
+9. 拉普拉斯平滑是什么？
+
+    答：为了解决零概率问题：如果某个量 x，在训练集中没有出现过，会导致概率结果是 0。这是不合理的，不能因为一个事件没有观察到就武断的认为该事件的概率是 0。拉普拉斯平滑即加法平滑。假定训练样本很大时，每个分量 x 的计数加 1 造成的估计概率变化可以忽略不计，但可以方便有效的避免零概率问题。
+
+10. bias 和 variance 的含义是什么？
+
+    答：bias 要求让 Error(train) 尽可能小，variance 要求让 Error(train) 尽可能等于 Error(test)。bias 体现了模型的精确度，variance 体现了模型的泛化能力。两个值都是希望越小越好。
+
+11. map，mrr 是什么？
+
+     答：[链接](https://blog.csdn.net/hackerzer/article/details/79632951)
+
+12. 宏平均 F1 和 微平均 F1 的区别？
+
+     答：宏平均 F1 对每个类求 F1 之后取平均，微平均 F1 针对整体求 F1。
+
 #### Regression
 
-- Least Squares
-- Linear Regression
-- Logistic Regression
-- Ridge Regression
-- Lasso Regression
+1. 手推 LR？
+
+   答：[链接](https://blog.csdn.net/ltlitao717/article/details/75453480)
+
+2. 逻辑斯特回归为什么不能用均方误差计算损失函数？
+
+   答：[链接](http://sofasofa.io/forum_main_post.php?postid=1001792)。另外也因为 LR 的极大似然等价于交叉熵。
+
+3. 为什么 LR 要用 sigmoid 函数？
+
+   答：[链接](http://sofasofa.io/forum_main_post.php?postid=1004244)
+
+4. 逻辑斯特回归为什么要对特征进行离散化？
+
+   答：模型是使用离散特征还是连续特征，其实是一个“海量离散特征+简单模型” 同 “少量连续特征+复杂模型”的权衡。既可以离散化用线性模型，也可以用连续特征加深度学习。
+
+   a. 离散特征的增加和减少都很容易，易于模型的快速迭代； 
+
+   b. 稀疏向量内积乘法运算速度快； 
+
+   c. 离散化后的特征对异常数据有很强的鲁棒性：比如一个特征是年龄 >30 是 1，否则 0。如果特征没有离散化，一个异常数据“年龄 300 岁”会给模型造成很大的干扰； 
+
+   d. 变量离散化为相当于为模型引入了非线性，能够提升模型表达能力，加大拟合； 
+
+   e. 特征离散化后，模型会更稳定，比如如果对用户年龄离散化，20 - 30 作为一个区间，不会因为一个用户年龄长了一岁就变成一个完全不同的人。当然处于区间相邻处的样本会刚好相反，所以怎么划分区间是门学问； 
+
+   f. 特征离散化以后，起到了简化了逻辑回归模型的作用，降低了模型过拟合的风险。
+
+5. 给一个有 m 个样本，n 维特征的数据集，如果用 LR 算法，那么梯度是几维？
+
+   答：n 维。
+
+6. 如何用机器学习算法计算特征重要性？
+
+    答：LR 后看系数。
+
+7. 线性回归中特征不小心重复会有影响吗？
+
+    答：会，导致矩阵不可逆。
+
+8. 最小二乘法为什么可以解决线性回归问题？
+
+    答：残差满足正态分布时，用最大似然估计法可以证明最小二乘法是合理的。
+
+9. 描述一下最小二乘法的几何意义？
+
+    答：最小二乘法中的几何意义是高维空间中的一个向量在低维子空间的投影。$$WX$$ 实际上是当前样本形成的线性组合空间 $$S$$，最小化的过程是找到一个合适的 $$W$$，使得不在 $$S$$ 上的 $$Y$$ 到 $$S$$ 的投影距离最小。
+
+10. 正规方程是什么？它有什么作用？
+
+    答：$$(X^TX)^{-1}X^Ty$$。可以一次运算得出结果，但特征数目过多时不适用。
 
 #### Classification
 
-- kNN
-- [Maximum Entropy Model](https://wanghuaishi.wordpress.com/2017/02/21/%E5%9B%BE%E8%A7%A3%E6%9C%80%E5%A4%A7%E7%86%B5%E5%8E%9F%E7%90%86%EF%BC%88the-maximum-entropy-principle%EF%BC%89/)
-- Naive Bayes
-- [SVM](https://lpq29743.github.io/redant/artificialintelligence/2018/09/12/SVM/)
+1. 单层感知机为什么不能解决异或问题？
+
+    答：因为异或操作需要两条线来划分边界，而单层感知机可以理解为一个线性分类器，只能解决与、或、非问题。
+
+2. 如何对单层感知机进行改进，使其能够解决异或问题？
+
+    答：多层感知机，或在进入激活函数前加一个多项式模块，从而添加非线性成分。
+
+3. 怎么判断分类器是线性分类器还是非线性分类器？
+
+    答：根据决策面是否是线性的。
+
+4. KNN 的训练损失是多少？
+
+    答：KNN 实际上不算训练，损失为 0。
+
+5. KNN 算法的 k 值应该如何选择？
+
+    答：k 值太小，模型复杂度较高，容易过拟合；k 值太大，模型复杂度不够，较远的点也可能影响分类结果，分类模糊，导致分类结果不理想。当 k 取训练集大小时，分类结果都为训练集中最多的类。k 值一般选取较小的值，且要低于训练样本数的平方根，可以使用交叉验证法选取。
+
+6. KNN 怎么更快地找到最近邻点？
+
+    答：KD 树和 ball 树，KD 树根据样本构建，但训练样例远大于特征维度时才适用。
+
+7. KNN 算法可以根据距离加权吗？
+
+    答：可以用反函数或高斯函数进行距离加权，前者为近邻样本赋予较大权重，稍远的会衰减地很快，因此对噪声数据比较敏感，后者能解决这个问题，但比较复杂。
+
+8. 常见的距离度量方法有哪些？
+
+    答：$$L_p$$ 距离 / Minkowski 距离 / 闵式距离是最常规的距离度量方式，其公式为 $$(\|x-y\|^p)^{1/p}$$。当 $$p = 1$$ 时为曼哈顿距离，$$p = 2$$ 时为欧式距离，$$p$$ 为无穷大时为各个坐标距离的最大值，即切比雪夫距离。
+
+9. 衡量相似度的方法？
+
+    答：欧式距离，Jaccard 相似度（两集合交集大小 / 并集大小），余弦相似度，皮尔逊相关系数（数值归一化后计算余弦相似度），汉明距离。
+
+10. 什么是支持向量机？
+
+    答：支持向量机就是构造一个的超平面，使得距离超平面最近的那些点，即支持向量与超平面之间的 margin 最大，从而将两个集合分开。
+
+11. LR 和 SVM 的联系与区别？
+
+    答：[链接](https://www.cnblogs.com/zhizhan/p/5038747.html)
+
+    联系：都可以处理分类问题（一般为线性二分类）；都可以增加不同正则化项。两种算法性能接近；两个方法都增加对分类影响较大的数据点的权重，SVM 是只考虑 support vectors，LR 是通过非线性映射，减小了离分类平面较远的点的权重。
+
+    区别：LR 是参数模型，SVM 是非参数模型；从目标函数来看，LR 采用的是 log loss，SVM 采用的是 hinge loss。
+
+12. 当数据线性可分、接近线性可分以及线性不可分时，分别使用什么 SVM？
+
+    答：硬间隔最大化、软间隔最大化以及核技巧。
+
+13. SVM 为什么采用间隔最大化？
+
+    答：当训练数据线性可分时，存在无穷个分离超平面可以将两类数据正确分开。感知机利用误分类最小策略，求得分离超平面，不过此时的解有无穷多个。线性可分支持向量机利用间隔最大化求得最优分离超平面，这时，解是唯一的。另一方面，此时的分隔超平面所产生的分类结果是最鲁棒的，对未知实例的泛化能力最强。
+
+14. 手推 SVM
+
+    答：
+    
+    [SVM](https://lpq29743.github.io/redant/artificialintelligence/2018/09/12/SVM/)
+    
+    超平面：$$y=w^TX+b$$；
+
+    样本点 $$P(x_i, y_i)$$ 到超平面的几何距离：$$\frac{\|w^Tx_i+b\|}{\|w\|}$$；
+
+    样本点 $$P(x_i, y_i)$$ 到超平面的几何间隔：$$y_i\frac{w^Tx_i+b}{\|w\|} \geq 0$$；
+
+    SVM 解决问题：$$\max_{w,b}{\min_{x_i}y_i\frac{w^Tx_i+b}{\|w\|}}$$；
+
+    由于 $$w, b$$ 可缩放，所以令最近点满足 $$y_i(w^Tx_i+b)=1$$，问题转换为 $$\max_{w}{\frac{1}{\|w\|}} \ \ s.t. \ \ y_i(w^Tx_i + b) \geq 1$$；
+
+    定义拉格朗日函数：$$L(w, b, \alpha) = \frac{1}{2} \|w\|^2 + \sum_{i = 1}^m{\alpha_i(1 - y_i(w^Tx_i + b))}$$；
+
+    转换为拉格朗日的极小极大问题：$$\min_{w, b}\max_{\alpha}L(w, b, \alpha)$$，即先求拉格朗日的上界，再最小化上界；
+
+    可进一步转换为极大极小问题，即对偶问题：$$\max_{\alpha}\min_{w, b}L(w, b, \alpha)$$；
+
+    先求极小问题，对 $$w, b$$ 求导，令导数为 0，求解 $$w = \sum_{i=1}^m{\alpha_iy_ix_i}, 0=\sum_{i=1}^m{\alpha_iy_i}$$；
+
+    代回拉格朗日函数，得对偶问题：$$\max_\alpha-{\frac{1}{2}\sum_{i=1}^m{\sum_{j=1}^m{\alpha_i\alpha_jy_iy_jx_i^Tx_j}} + \sum_{i=1}^m\alpha_i} \ \ s.t. \ \ \sum_{i=1}^m{\alpha_iy_i=0,\alpha_i \geq 0}$$；
+
+    求解问题，解出 $$\alpha$$，从而解得 $$w, b$$，$$\alpha_i > 0$$ 对应的样本即为支持向量。
+
+15. 为什么要将求解 SVM 的原始问题转换为其对偶问题？
+
+    答：一是对偶问题往往更易求解。二是可以自然引入核函数，进而推广到非线性分类问题。
+
+16. 为什么 SVM 对缺失数据敏感？
+
+    答：缺失数据是指缺失某些特征数据，向量数据不完整。SVM 没有处理缺失值的策略。而 SVM 希望样本在特征空间中线性可分，所以特征空间的好坏对 SVM 的性能很重要。缺失特征数据将影响训练结果的好坏。
+
+17. 什么是几何间隔，什么是函数间隔？
+
+    答：几何间隔 $$y_i\frac{w^Tx_i+b}{\|w\|}$$，函数间隔 $$y_i(w^Tx_i+b)$$。函数间隔可以无限大，几何间隔不可以。
+
+18. 支持向量机的训练在本质上是在最优化哪个值？
+
+    答：w。w 得到 b 自然可以得到。
+
+19. 如何用支持向量机实现深度学习？
+
+    答：可以用支持向量机作为网络的最后一层，进行分类。
+
+20. 给一组数据，问决策树、LR、NB 以及 SVM 等算法学出来是什么样子的？
+
+    答：[链接](https://www.zhihu.com/question/26726794)
+
+21. 什么是基于核的机器学习算法？
+
+    答：判别式模型需要把正负样本区分开，那势必会遇到区分不开的情形，这时要用到核函数，所以可认为判别式模型都要用核函数的。
+
+22. SVM 有哪些核函数？
+
+    答：线性核和高斯核，即线性核与 RBF（径向基）核。 线性核：主要用于线性可分，参数少，速度快，对于一般数据，分类效果已经很理想了。 RBF 核：主要用于线性不可分，参数多，分类结果非常依赖于参数。 如果 Feature 数量跟样本数量差不多，应选用线性核的 SVM。 如果 Feature 数量比较小，样本数量一般，选用高斯核的 SVM。其他的核函数包括幂指数核、拉普拉斯核以及 Sigmoid 核等等。
+
+23. 高斯核为什么有效？
+
+    答：[链接](https://stats.stackexchange.com/questions/131138/what-makes-the-gaussian-kernel-so-magical-for-pca-and-also-in-general)
+
+24. 支持向量机可以用来做回归吗？
+
+    答：支持向量机分类是使两类的点在各自的支持向量外，而支持向量机回归是把所有的点都看成一类，并要求在支持向量内。
+
+25. SVM 和 softmax 的区别？
+
+    答：SVM 具有附加稳定性，当样例满足边界条件时，该样例不会影响损失函数；而 softmax 将考虑所有的样例。
+
+26. 感知机和 SVM 有什么区别？
+
+    答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003714)
+
+27. One-class SVM？
+
+    答：只要针对异常检测问题。
+
+28. 朴素贝叶斯为何如此朴素？
+
+    答：对条件概率分布作了条件独立性（conditional independence）的假设。
+
+29. 朴素贝叶斯中特征不小心重复会有影响吗？
+
+    答：会，破坏了原本的独立性假设。
+
+30. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
+
+   Answer: If you have worked on enough data sets, you should deduce that cancer detection results in imbalanced data. In an imbalanced data set, accuracy should not be used as a measure of performance because 96% (as given) might only be predicting majority class correctly, but our class of interest is minority class (4%) which is the people who actually got diagnosed with cancer. Hence, in order to evaluate model performance, we should use Sensitivity (True Positive Rate), Specificity (True Negative Rate), F measure to determine class wise performance of the classifier. If the minority class performance is found to to be poor, we can undertake the following steps:
+
+   a. We can use undersampling, oversampling or SMOTE to make the data balanced.
+
+   b. We can alter the prediction threshold value by doing [probability caliberation](https://www.analyticsvidhya.com/blog/2016/07/platt-scaling-isotonic-regression-minimize-logloss-error/) and finding a optimal threshold using AUC-ROC curve.
+
+   c. We can assign weight to classes such that the minority classes gets larger weight.
+
+   d. We can also use anomaly detection.
+
+   Know more: Imbalanced Classification
+
+31. 多分类问题如何转二分类方法？
+
+    答：a. 一对多法（one-versus-rest）。把某类样本归为一类，其他归为另一类，k 个类别的样本就构造出了 k 个 SVM；
+
+    b. 一对一法（one-versus-one）。在任意两类样本间设计一个 SVM，k 个类别需要 k(k - 1) / 2 个 SVM；
+
+    c. 层次支持向量机（H-SVMs）。先将所有类别分成两个子类，再将子类进一步划分成两个次级子类，如此循环。
+
+32. 上溢（overflow）和下溢（underflow）是什么，softmax 函数会出现哪种情况，该怎么解决？
+
+    答：上溢即大量级的数被近似为正负无穷时，发生上溢。发生上溢后，这些数值会变为非数值。下溢即有些逼近零的数，如零除或者对零取对数时，得到负无穷，如果对负无穷进一步运算，则会得到非数字。softmax 函数中有指数运算，如果要运算的数过小或过大，则会下溢或上溢。解决上溢的方式是让每一个值都减去最大分量的值，由于这样做之后分母有一项为 1，所以不会出现下溢。同样对于取对数，可以让所有数都加 1。
 
 #### Clustering
 
-- Hierarchical Methods
-  - BIRCH
-  - CHAMELEON
-- Partitioning Methods
-  - K-Means
-- Density-based Methods
-  - DBSCAN
-- EM
+1. K-means 中我想聚成 100 类 结果发现只能聚成98类，为什么？
+
+    答：因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn.net/shwan_ma/article/details/80096408)。
+
+2. 讲一下 EM 算法，E 步和 M 步的具体步骤，E 中的期望是什么？
+
+    答：初始化参数 $$\theta^{old}$$；E 步：估计 $$p(Z\|X, \theta^{old})$$，求得样本的后验期望值；M 步：根据极大似然估计求得 $$\theta^{new}$$；根据 $$\theta$$，迭代至收敛。
+
+3. KMeans 和 EM 有什么关系，和 GMM 有什么关系？
+
+    答：KMeans 的目标函数（整个数据集点到各自聚类中心的距离的平方和）可以用 EM 算法求解。K-Means 算法归类为 GMM 的 EM 解法的一个特例。
 
 #### Decision Tree
 
-- CART
-- ID3
-- C4.5
+1. id3 是什么？
+
+    答：利用信息增益（大的特征优选）的决策多叉树。
+
+2. c4.5 是什么？
+
+    答：信息增益容易倾向选择取值多的属性，所以 c4.5 是利用信息增益比（大的特征优选）的决策多叉树。
+
+3. cart 是什么？
+
+    答：利用基尼系数（从数据集 D 中随机抽取两个样本，类别标志不一样概率，小的优选）的决策二叉树，可为回归树，也可为分类树。
+
+4. 决策树中的特征选择方法有哪些？
+
+    答：分类：信息增益、信息增益比和基尼系数；回归：误差（一般取叶子结点数值的方差和）。
 
 #### Dimension Reducing
 
-- PCA
-- SVD
+1. SVD 算法是什么？
+
+    答：$$A=U \sum V^T$$。把一个矩阵分解为正交矩阵 $$U$$（经过 $$A$$ 变换后的新标准正交基），对角矩阵 $$\sum$$ （$$V$$ 中向量与 $$U$$ 中对应向量之间的比例关系，$$\sum$$ 中的每个 $$\sigma$$ 会从大到小排序，值越大代表该维度重要性越高）和正交矩阵 $$V$$（原始域的标准正交基）。
 
 #### Emsemble Learning
 
-- Boosting
-- Bagging
-- AdaBoost
-- Random Forest
-- GBDT
-- XGBoost
+1. ensemble method 中哪种方法降低 bias，哪种方法降低 variance
+
+    答：bagging 降低 variance，boosting 既能降低 bias，又能降低 variance。
+
+    根据中心极限定理：样本平均值将会约等于其所在总体的平均值，取样次数越多，结果就越接近正态分布；而且样本大小越大，样本平均值分布的标准差就越小。
+
+    在 bagging 中，可以把建立每一个分类器的过程都看作给定数据集下的随机变量，把分类器的组合看作样本，很明显分类器越多，预测结果的 variance 就越小。
+
+    boosting 的每一轮迭代都是基于前面的残差，不断的去学习残差，从而使模型一步步去逼近真实值，整个过程都在优化 loss function，很明显随着迭代次数增加，预测结果的 bias 就越小。另外，boosting 也属于集成学习，是由若干个若分类器组成的一个强分类器，但由于各阶段分类器之间相关性较强，若把 boosting 也看成一次抽样，变量之间并不相互独立，也不是完全相关，存在一定的互相依赖关系，因此方差降低得较少。
+
+2. 集成方法的个体学习器有什么要求？
+
+    答：好而不同。
+
+3. 集成方法分为什么？有哪些方法？
+
+    答：个体学习器不存在强依赖关系，可同时生成，有 Bagging、Random Forest；个体学习器存在强依赖关系，须串行生成，有 Boosting，AdaBoost，GBDT。
+
+4. 强可学习和弱可学习是什么？
+
+    答：对于存在一个多项式的学习算法，若正确率很高，则是强可学习的，若仅比随机猜测略好，则是弱可学习的。
+
+5. Bagging 的工作机制是什么？
+
+    答：利用自助采样法得到多套数据集，然后通过多个基分类器分类。
+
+6. Boosting 的工作机制是什么？
+
+    答：通过基学习器的表现对训练样本分布进行调整，使得分错样本得到更多关注。
+
+7. Random Forest 是什么？
+
+    答：随机森林是 Bagging 的变种，其以决策树为基学习器，并在决策树的训练过程中加入了随机属性选择。其可以处理离散特征，又可以处理连续特征。
+
+8. 随机森林相比普通的 bagging 的改进是什么？
+
+    答：不仅对样本随机选择，还对特征随机选择。
+
+9. bagging 的自动校验是什么？
+
+    答：包外估计。
+
+10. GBDT 相对于随机森林的改进是什么？
+
+    答：随机森林中每棵决策树是独立的，而在 GBDT 中，每棵树都是以前一棵树的残差（真实值跟预测值的差值，刚好是平方损失函数的负梯度）为学习目标去拟合。基于残差的 GBDT 对异常值敏感，可以用绝对损失或 huber 损失来代替平方损失函数。
+
+11. 随机森林和 GBDT 的联系和区别？
+
+    答：相同点：都是由多棵树组成；最终的结果都是由多棵树一起决定
+
+    不同点：组成随机森林的树可以分类树也可以是回归树，而 GBDT 只由回归树组成；组成随机森林的树可以并行生成，而 GBDT 是串行生成；随机森林的结果是多数表决表决的，而 GBDT 则是多棵树累加之和；随机森林对异常值不敏感，而 GBDT 对异常值比较敏感；随机森林是通过减少模型的方差来提高性能，而 GBDT 是减少模型的偏差来提高性能的；随机森林不需要进行数据预处理，即特征归一化。而 GBDT 则需要进行特征归一化
+
+12. AdaBoost 是什么？
+
+    答：此方法通过提高前一轮弱分类器错误分类样本权值来提高集成学习效果，它在预测时采用加权多数表决的方法，即加大分类误差率小的弱分类器的权值，减小分类误差率大的弱分类器的权值。
+
+13. GBDT 和 XgBoost 区别？
+
+    答：XgBoost 将**树模型的复杂度**（叶节点的数量和叶节点的得分越高，树就越复杂）作为正则项加在优化目标上，公式推导中用到了**二阶导数**信息，支持并行操作。
+
+14. 提升树是什么？
+
+    答：如果用于分类，那就是特殊的 AdaBoost，基分类器都为决策树，回归则情况有所不同。
 
 #### Deep Learning
 
-- BP
-- Regularization
-- Optimization
-- MLP
-- RBM
-- CNN
-- LSTM
-- GRU
-- Attention Mechanism
-- Memory Network
-- GAN
-- VAE
+1. 强化学习和监督学习有什么区别？
+
+    答：监督学习中每一个决策（预测标签）是独立的，它对决策的优化取决于标签，强化学习每一个决策是相互影响的，它对决策的优化取决于延时标签（奖励）。
+
+2. 什么是白化？
+
+    答：输入数据分布变换到 0 均值，单位方差的正态分布
+
+3. batch normalization
+
+    答：BatchNorm 就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。
+
+    对于深度学习这种包含很多隐层的网络结构，在训练过程中，因为各层参数不停变化，所以每个隐层都面临 covariate shift 的问题，输入分布老是变来变去，这就是 Internal Covariate Shift，Internal 指的是深层网络隐层，发生在网络内部。BatchNorm 的基本思想是让每个隐层节点的激活输入分布固定下来，避免 Internal Covariate Shift 问题。
+
+    经过 BN 后，大部分 Activation 的值落入非线性函数的线性区内，对应导数远离导数饱和区，加速训练收敛过程。
+
+    BN 为了保证非线性的获得，对变换后的 x 又进行了 scale 加上 shift 操作：y = scale * x + shift)。
+
+4. 特征标准化有什么意义？怎么做？
+
+    答：消除不同指标量纲的影响。归一化，正态化。
+
+5. sgd、momentum、rmsprop、adam 区别与联系
+
+    答：都是梯度下降，SGD 没动量，Momentum 是一阶动量，RMSProp 是二阶动量，Adam 是一阶动量 + 二阶动量。
+
+6. 一阶优化和二阶优化对应的矩阵？
+
+    一阶对应 Jacobian 矩阵，二阶对应 Hessian 矩阵。当矩阵正定（positive definite），梯度为 0 处为极小值。
+
+7. 深度学习为什么不用二阶优化？
+
+    答：有些方法可用，但总体不适用。原因：计算量大，训练慢；求导复杂；深度学习不需要高精度解；稳定性差。
+
+8. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
+
+    答：[链接](https://zhuanlan.zhihu.com/p/61590026)
+
+9. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
+
+    答：[链接](https://zhuanlan.zhihu.com/p/61590026)
+
+10. TensorFlow 怎么实现 learning rate decay？
+
+    答：[链接](https://blog.csdn.net/u012436149/article/details/62058318)
+
+11. Pytorch 怎么实现 learning rate decay？
+
+    答：[链接](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/)
+
+12. TensorFlow 内部求导机制？
+
+    答：符号求导。先提供每一个op求导的数学实现，然后使用链式法则求出整个表达式的导数。
+
+13. TensorFlow 创建变量的方式有哪些，有什么区别？
+
+    答：`tf.Variable()`和`tf.get_variable()`。前者一律创建新的变量，遇到同名变量，会在后面加后缀 1，2；后者如果遇到同名变量，则使用之前创建的变量，但要求这个变量一定在 variable_scope 中，且有 reuse 选项。
+
+14. Pytorch 如何切换训练和测试模式？
+
+    答：`model.train()`和`model.eval()`
+
+15. GPU 利用率低怎么办？
+
+    答：dataset API 可以支持以 streaming 的方式读取数据。
+
+16. softmax 求导？
+
+    The derivation of the softmax function?
+
+    答：[链接](https://zhuanlan.zhihu.com/p/25723112)。$$softmax'(z)=softmax(z)(y_i-softmax(z))$$，其中$$y_i$$为标签。如果表示为 Jacobian 矩阵可为$$J_{softmax}=Diag(p)-pp^T$$，其中$$p=softmax(z)$$，而$$Diag(p)$$是以p为对角线的矩阵。
+
+17. 为什么 softmax 包含 “soft”？
+
+    答：“soft”表示 softmax 函数是连续可导的，以保证梯度下降可以用来优化损失函数。
+
+    “soft” means that the softmax function is continuous and differentiable so that the gradient descent can be used to optimize the loss function.
+
+18. 怎么得到一个 soft 版本的 argmax？
+
+     答：用 softmax 的结果与 index 的倒置相乘。
+
+19. 神经网络为什么会产生梯度消失现象？
+
+     答：两种情况下梯度消失经常出现，一是在深层网络中，二是采用了不合适的损失函数，比如 sigmoid（导数范围从 0 到 0.25）。前者是因为根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都小于 1 的话，多次链乘之后会接近为 0，如果都大于 0 的话，多次链乘之后会接近正无穷。sigmoid 中心部位和两侧的梯度差别太大，如果权重初始化得太大或太小，激活值基本都在 sigmoid 两侧，两侧梯度几乎为 0，传播几层就没有梯度了。
+
+20. 有哪些激活函数？
+
+     答：sigmoid，softmax，tanh，ReLU，PReLU，Leakly ReLU，Maxout。
+
+21. 挑一种激活函数推导梯度下降的过程?
+
+     答：[链接](https://blog.csdn.net/jediael_lu/article/details/77852060)
+
+22. 激活函数如何选择？
+
+     答：除了 gate 之类的地方，尽量不要用 sigmoid，可以用 tanh 或者 relu 之类的激活函数。
+
+23. RELU 在 0 点的导数是多少？
+
+     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003784)
+
+24. dying relu？
+
+     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1004214)
+
+25. 如何调参？
+
+     答：for 循环；贝叶斯优化。
+
+26. 什么是 Jensen 不等式？
+
+     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003224)
+
+27. 互信息是什么？
+
+     答：$$I(X; Y) = \sum_{y \in Y}\sum_{x \in X} {p(x,y)log{\frac{p(x,y)}{p(x)p(y)}}}$$。当变量相互独立时，互信息为 0。
+
+28. KL 散度和交叉熵的区别？
+
+     答：自信息（一个事件的信息量）：$$I(x)=-logP(x)$$；
+
+     信息熵（一个分布的信息量）：$$H(x)=E_{X \sim P}[I(x)]=-E_{X \sim P}[P(x)]$$；
+
+     交叉熵（在给定的真实分布下，使用非真实分布所指定的策略需要的代价）：$$-\sum_{k=1}^N{p_klog_2{q_k}}$$；
+
+     交叉熵越低，策略越好，当交叉熵 = 信息熵，表示使用了真实分布；
+
+     相对熵 / KL 散度（两个分布之间的差异）：$$KL(f(x) \| g(x))=\sum_{x \in X} {f(x) * log_2{\frac{f(x)}{g(x)}}}$$；
+
+     相对熵 = 交叉熵 - 信息熵。
+
+29. 如何避免梯度消失或梯度爆炸？
+
+     答：权重合理初始化，梯度剪切（梯度爆炸），门机制，batch normalization。
+
+30. 权重初始化方法？
+
+     答：零初始化，常量初始化，高斯/均匀随机初始化，Xavier 初始化，He 初始化，正交初始化。
+
+31. 为什么不能零初始化或常量初始化？
+
+     答：if the neurons start with the same weights, then all the neurons will follow the same gradient, and will always end up doing the same thing as one another.
+
+32. Xavier / He 初始化的目的是什么？
+
+     答：使每一层输出方差为 1。
+
+33. 多任务如何学习？
+
+     答：[链接](https://zhuanlan.zhihu.com/p/34916654)
+
+34. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
+
+     答：输出尺寸 = (输入尺寸 - filter + 2 * padding）/ stride + 1。计算尺寸不被整除，卷积向下取整，池化向上取整。
+
+35. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
+
+     答：解决了梯度消失问题。
+
+36. RNN 系列为什么要正交初始化？
+
+     答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
+
+37. 怎么得到正交初始化？
+
+     答：QR 分解或 SVD。
+
+38. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
+
+     答：ReLU 能解决梯度消失，但对 CNN 有效，对 RNN 无效。因为CNN 每一层使用独立的参数不同，原始的 RNN 在每个阶段都共享一个参数。如果直接把 RNN 的激活函数换成 ReLU 会导致非常大的输出值。
+
+39. LSTM 是什么？
+
+     答：遗忘门：$$f_t=\sigma(W_f[h_{t-1}, x_t] + b_f)$$，输出 [0, 1]，来表示信息保留程度。
+
+     输入门：$$i_t=\sigma(W_i[h_{t-1}, x_t] + b_i)$$，输出 [0, 1]，来表示信息更新程度。
+
+     输入转换为初步输出：$$\tilde{C_t}=\sigma(W_C[h_{t-1}, x_t] + b_C)$$。
+
+     使用遗忘门和输入门：$$C_t=f_t*C_{t-1}+i_t*\tilde{C_t}$$。
+
+     输出门：$$o_t=\sigma(W_o[h_{t-1}, x_t] + b_o)$$，输出 [0, 1]，来表示信息输出程度。
+
+     得到最终输出：$$h_t=o_t*tanh(C_t)$$。
+
+40. GRU 是什么？
+
+     答：LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
+
+41. LSTM 和 GRU 的联系和区别？
+
+     答：都是通过使梯度的乘法变成加法，来解决 RNN 由于梯度消失而不能对长期依赖建模的问题。前者三个门，后者两个门，所以前者计算更耗时。
+
+42. 门机制为什么能解决梯度消失或爆炸问题？
+
+     答：[链接](https://zhuanlan.zhihu.com/p/27485750)
 
 ### Natural Language Processing
 
-#### Text Processing
+#### Traditional Methods
 
-- Word Normalization and Stemming: Normalization, Case folding, Lemmatization, Morphology, Stemming and Porter's algorithm
-- Tokenization
-- Stop words
-- Part-of-Speech Tagging
-- Named Entity Recognition
+1. TF-IDF 是什么？
 
-#### Feature Engineering
+     答：词频（TF）为词在当前文档中出现的频率，逆向文件频率（IDF）由总文件数目除以包含该词的文件数目，再将得到的商取以 10 为底得到。
 
-- Bag of Words
-- Bag of N-Grams
-- TF-IDF
-- TextRank
-- LDA
-- Word2Vec
-- Doc2Vec
+2. 手动加权或自主学习权重哪个好？
 
-#### Named Entity Cognition
+     答：手动加权相当于引入特征，更为合理，自主学习权重相当于学习特征，能够学到隐含信息。
 
-- HMM
-- CRF
-- Viterbi Algorithm
+3. 自然语言处理数据增强的方法？
 
-#### Application
+     答：a、加噪，如随机扔词或调整语序；b、同义词替换；c、回译；d、文档裁剪；e、生成对抗网络。
 
-- Text Classification
-- Text Matching: VSM, BM25
-- Dialogue System
-- Machine Translation
+4. HMM 的两个假设是什么？
+
+    答：齐次马尔可夫性假设（当前时刻状态只跟上一状态相关）和观测独立性假设（当前观测只跟当前状态相关）。
+
+5. CRF 是什么？
+
+    答：给定一组输入随机变量，另一组输出随机变量的条件概率分布模型，输出随机变量构成马尔可夫随机场。
+
+6. HMM 和 CRF 的联系与区别
+
+    答：a.HMM 是生成模型，CRF 是判别模型
+
+    b.HMM 是概率有向图，CRF 是概率无向图
+
+    c.HMM 求解过程可能是局部最优，CRF 可以全局最优
+
+    d.CRF 概率归一化较合理，HMM 则会导致 label bias 问题
+
+#### Word2Vec + Neural Networks
+
+1. 为什么不能用 one-hot 表示词？
+
+     答：维度灾难和语义鸿沟。
+
+2. 分布式假设是什么
+
+     答：相同上下文语境的词有类似含义。
+
+3. 了解哪些词向量方法？
+
+     答：固定表征（word2vec，Glove，FastText）和动态表征（cove，elmo，GPT，bert）。
+
+4. word2vec 的原理？
+
+     答：word2vec 有两种模型 CBOW 和 Skip-Gram，前者是在已知上下文的情况下，预测当前词，后者是在已知当前词的情况下，预测上下文。
+
+5. word2vec 的两个模型哪个对小数据集和非词典词比较友好？
+
+     答：CBOW 每个词在进入模型后，都相当于进行了均值处理，所以非词典词在进行加权平均后，也容易被忽视。
+
+     Skip-Gram 每个词都会被单独得训练，较少受其他高频的干扰。所以对于 Skip-Gram 在小数据集和非词典词上占优。
+
+6. word2vec 中的 hierarchical softmax 是什么？
+
+     答：将一次分类分解为多次分类，从而把分类的时间复杂度从 O(N) 降低到 O(logN)，从而提高运算效率。word2vec 根据词频构建了一棵 Huffman 树，来实现 hierarchical softmax。
+
+7. word2vec 中的 negative sampling 是什么？
+
+     答：负采样即在词汇表中采样一定数目的词作为负例，与原先的正例一起做多次二分类，从而提高模型训练速度。负采样受到词频影响，词频越高的词越可能被采样到。
+
+8. LSA 是什么？
+
+     答：潜在语义分析，先构建一个单词-标题（或文章）矩阵成，然后再用 SVD 算法等进行处理。
+
+9. Glove 的原理？
+
+     答：通过构建词向量和共现矩阵之间的近似关系，来进行训练
+
+10. Glove 和 LSA 有什么联系或区别？
+
+     答：LSA  采用计算复杂度高的 SVD 算法，Glove 可看作是对 LSA 的一种优化。
+
+11. Glove 和 word2vec 有什么联系或区别？
+
+     答：word2vec 是局部语料库训练的，其特征提取是基于滑窗的；而 Glove 的滑窗是为了构建共现矩阵，是基于全局语料的，因此，word2vec 可以进行在线学习，glove 不能。word2vec 是无监督学习；Glove 通常被认为是无监督学习，但实际上 Glove还是有 label 的，即共现次数。word2vec 损失函数是带权重的交叉熵，权重固定；glove的损失函数是最小平方损失函数，权重可做映射变换。总体来看，Glove 可看作是换了目标函数和权重函数的全局 word2vec。
+
+12. FastText 的原理？
+
+     答：FastText 建立在 word2vec 基础上，其用 subword 来对非词典词进行处理，用 n-gram 来考虑词序。
+
+13. elmo 的原理？
+
+     答：基于语言模型的动态词向量。采用 1 层静态向量 + 2 层 LSTM 提取特征，然后将两个方向得到的向量进行拼接。
+
+14. cove 和 elmo 的联系和区别
+
+     答：都用了 LSTM 编码，但前者的输入单位是词，后者是字符。
+
+15. CNN 在文本分类上一般怎么应用？
+
+     答：卷积核宽度为词向量的维度（词向量交换维度并不会起影响，所以没必要在词向量维度做卷积），长度为关注窗口的大小，通道数可为所用词向量。
+
+#### Attention + Transformers
+
+1. Attention 机制的 soft 和 hard 是什么？
+
+     答：Hard-attention，就是 0/1 问题，哪些区域是被 attentioned，哪些区域不关注；Soft-attention，[0,1] 间连续分布问题，每个区域被关注的程度高低，用 0~1 的 score 表示。
+
+2. multi-head attention 的公式是怎样的？
+
+     答：$$Attention(Q,K,V) = softmax({QK^T\over {\sqrt {d_k}}})V$$。
+     
+18. Transformer 的原理？
+
+     答：Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
+
+19. Transformer 的 position encoding 为什么选三角函数？
+
+     答：偶数位置，使用正弦编码，在奇数位置，使用余弦编码。任意位置的 $$PE_{pos+k}$$ 都可以被 $$PE_{pos}$$ 的线性函数表示。在 bert 中，position encoding 是学习得到的。
+     
+21. Transformer 使用的时候，制约显存的最关键因素是什么？
+
+     答：序列长度。
+
+#### Large Language Models
+
+16. GPT 的原理？
+
+     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
+
+17. bert 的原理？
+
+     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
+
+20. bert 强于 rnn 的地方？
+
+     答：并行，对大数据比较友好。
+
+#### Sentiment Analysis
+
+1. 情感分析相对于一般文本分类有什么不同？
+
+     答：特征方面（情感词典，融合了情感的词向量）。
+
+2. 怎么构建情感词典？
+
+     答：可以先人工制作一个小型的情感词典，然后利用语料，根据一些启发式规则（如“and”连接的词情感一样，“but”相反）来获得新的情感词，不断迭代扩展词典大小。
+
+3. 情感词典会有哪些问题？
+
+     答：不同的领域的情感词可能不一样；表达情感的词不一定是情感词；讽刺语境。
+
+4. 如何检测不文明词汇？
+
+     答：词典，分类问题。
+
+#### Other Applications
+
+1. 浏览器的联想词运用了什么理论和原理？
+
+     答：贝叶斯原理。
 
 ### Subjective Question
 
-1. 熟悉哪个算法
+1. Choose one paper
 
-2. 哪门课学的比较好
+2. 你用过我们的产品吗？怎么样
 
-3. 看过哪些书
+3. 遇到了哪些难题？怎么解决？
 
-4. 你的优缺点
+	前期走了很多弯路，后期又思路匮乏。要合理沟通，及时反馈问题，不定时追踪研究任务及整个领域的发展情况。
 
-5. 你用过我们的产品吗？怎么样
+4. Projects
 
-6. DMMN-SDCM
-
-   - 传统解决 ABSA 的方法有哪些？
-
-     传统的机器学习方法主要有两部分组成：特征提取和分类器。前者主要是根据任务而人工提取的一些特征，这些特征的优劣往往直接决定了模型整体的性能，对于对象级情感分析任务，这些特征可包括句子级特征（句子中各类情感词的数目）和对象级特征（根据语法解析树抽取的对象级特征）。后者一般则是用常见的分类器，如支持向量机（SVM）实现。
-
-   - 深度学习解决 ABSA 的方法有哪些？
-
-     最早期的方法是以对象词作为最后输入从而获得 target-dependent feature，后面 attention mechanism 和 memory network 开始在 ABSA 任务上大放异彩，近两年有些工作开始融入了 CNN。除此之外，还有部分工作会考虑到情感的先验知识引入，对象间的关系建模等。
-
-   - 未来 ABSA 方法会怎么发展？
-
-     会更看重对象间之间的关系，即全局信息，可用强化学习等来做（不过根据零指代消解方面的工作，强化学习不一定比简单的 Attention 机制要有效），另外，可能会更看重把对象抽取和对象级情感分析两个任务结合起来，做端到端。
-
-   - 抽取对象有没有了解？
-
-     解析树 + 规则，序列标注问题。
-
-   - 3 分被拒原因？
-
-     文章写的不清楚（视野），Reviewer 本身原因。
-
-   - 遇到了哪些难题？怎么解决？
-
-     前期走了很多弯路，后期又思路匮乏。要合理沟通，及时反馈问题，不定时追踪研究任务及整个领域的发展情况。
-
-   - 学到了什么？
-
-     调研；每次实验快速验证思路；错误分析；思路，代码和实验结果都要记录或版本控制。
-
-   - 对象级分析可以用于方面级吗？
-
-     少了动态的 memory，但其他都适用。
-
-   - 词组情感？
-
-     多层 memory，CNN，LSTM 也带了上下文的信息。
-
-7. IAN
-
-8. RAM
-
-9. 意图识别
+5. 意图识别
 
    问题点：
 
@@ -1648,7 +1390,7 @@ keywords: 面试题
    - 规则（规则学习、规则权重、规则严格过滤）和深度结合
    - 选择怎样的深度模型
    - K-fold 实验、数据集分割、模型融合
-   - 错误分析、
+   - 错误分析
 
    具体问题：
 
@@ -1680,17 +1422,9 @@ keywords: 面试题
 
      衡量的标准：精度、泛化。
 
-   - 规则加权是什么？
-
-     岭回归。
-
    - 如何把规则和深度结合起来？
 
      特征连接进全连接网络。
-
-   - 在什么情况下适合用 CNN，在什么情况下用 LSTM？
-
-     短文本或语法不强的文本可能对某些关键词敏感，使用 CNN 可能有更好的效果，而且速度更好，有些文本更看重上下文，LSTM 可能更适用。
 
    - 遇到了哪些难题？怎么解决？
 
@@ -1701,34 +1435,6 @@ keywords: 面试题
      数据比模型更重要。
 
 10. 指代消解
-
-    - 解决零指代消解的传统方法有哪些？
-
-      传统方法是分别手动设计 ZP 和 NP 的特征，然后用 SVM 等机器学习方法分类。
-
-    - 解决零指代消解的深度方法有哪些？
-
-      主要都是基于 Attention Mechanism 和 Memory Network 的方法，也有用强化学习的。Global 信息也被大部分方法考虑。机器阅读理解方面的方法经常被迁移到此任务上。
-
-    - 如何识别是否可消解？
-
-      阈值。
-
-    - 如何识别零代词的位置？
-
-      特征提取后分类。
-
-    - 如何抽取先行词？
-
-      最近两行的名代词或名词词组。
-
-    - 遇到了哪些难题？怎么解决？
-
-      验证集过拟合，早停止。
-
-    - 学到了什么？
-
-      全局信息；当成决策问题。
 
 ### HR
 
@@ -1748,33 +1454,12 @@ keywords: 面试题
 
   996，适度加班，短期高强度工作。
 
-- 家人希望你在哪里工作？
-
-  东部城市。
-
-- 长处和不足？
-
-  负责，团队沟通能力；保守（碍于知识层面的限制，需要多学习）
-
 - 未来的职业规划？
 
   [链接](https://www.zhihu.com/question/20054953)
 
-- 来公司工作，最担忧的是什么？
-
-  技术得不到提升，工作内容与应聘时有太大差异。
-
-- 50 万积蓄会怎么安排？
-
-  投资，对家人和自己进行投资。
-
 ### Ask Back
 
 1. What will I do here
-2. What can you offer to help and guide me
-3. 部门业务
-4. 部门计划
-5. 入职培训
-6. 业务发展
-7. 面试建议
-8. 转正
+2. 部门业务
+3. 转正
