@@ -1320,31 +1320,53 @@ keywords: 面试题
 
      答：$$Attention(Q,K,V) = softmax({QK^T\over {\sqrt {d_k}}})V$$。
      
-18. Transformer 的原理？
+3. Transformer 的原理？
 
      答：Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
 
-19. Transformer 的 position encoding 为什么选三角函数？
+4. Transformer 的 position encoding 为什么选三角函数？
 
      答：偶数位置，使用正弦编码，在奇数位置，使用余弦编码。任意位置的 $$PE_{pos+k}$$ 都可以被 $$PE_{pos}$$ 的线性函数表示。在 bert 中，position encoding 是学习得到的。
      
-21. Transformer 使用的时候，制约显存的最关键因素是什么？
+5. Transformer 使用的时候，制约显存的最关键因素是什么？
 
      答：序列长度。
 
 #### Large Language Models
 
-16. GPT 的原理？
+1. GPT 的原理？
 
      答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-17. bert 的原理？
+2. bert 的原理？
 
      答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-20. bert 强于 rnn 的地方？
+3. bert 强于 rnn 的地方？
 
      答：并行，对大数据比较友好。
+
+4. 数据收集，数据质量控制，数据生成
+
+#### Applications
+
+1. 浏览器的联想词运用了什么理论和原理？
+
+     答：贝叶斯原理。
+
+### CV and position related
+
+#### Basic
+
+1. Choose one paper
+
+2. Choose one LLM
+
+     答：Qwen, LLaMA, GPT, deepseek; multilingual, coding, RAG
+
+3. Choose one project
+
+	答：task description; solution; results; future work; challenges
 
 #### Sentiment Analysis
 
@@ -1364,83 +1386,7 @@ keywords: 面试题
 
      答：词典，分类问题。
 
-#### Other Applications
-
-1. 浏览器的联想词运用了什么理论和原理？
-
-     答：贝叶斯原理。
-
-### Subjective Question
-
-1. Choose one paper
-
-2. 你用过我们的产品吗？怎么样
-
-3. 遇到了哪些难题？怎么解决？
-
-	前期走了很多弯路，后期又思路匮乏。要合理沟通，及时反馈问题，不定时追踪研究任务及整个领域的发展情况。
-
-4. Projects
-
-5. 意图识别
-
-   问题点：
-
-   - [类别不平衡（人为数据增强、损失加权、阈值控制、评价指标）](https://lpq29743.github.io/redant/artificialintelligence/2018/09/26/UnbalancedData/)
-   - 类别过多
-   - 数据量过少
-   - 评价指标（准确率、召回率、F1 值、宏平均、微平均等）
-   - 过拟合（训练和测试的不一样，允许丢失部分准确率）
-   - 实体替换、数据预处理、数据读取（pandas）
-   - 数据增强、同义词替换、回译、文档裁剪、迁移学习
-   - 规则（规则学习、规则权重、规则严格过滤）和深度结合
-   - 选择怎样的深度模型
-   - K-fold 实验、数据集分割、模型融合
-   - 错误分析
-
-   具体问题：
-
-   - 传统的解决文本分类的方法是什么？
-
-     词袋模型 / tf-idf / n-grams + 分类器
-
-   - 深度学习处理文本分类的方法有哪些？
-
-     CNN / RNN / Attention / Bert。
-
-   - 多标签分类怎么做？
-
-     二分类，序列决策。
-
-   - 类别不平衡怎么处理？
-
-     数据（采集或增强），指标，损失加权，下采样，上采样。
-
-   - 数据量过少怎么处理？
-
-     数据增强；用简单的网络。
-
-   - 数据怎么预处理？
-
-     停用词处理，同义词转换。
-
-   - 规则抽取是什么？
-
-     衡量的标准：精度、泛化。
-
-   - 如何把规则和深度结合起来？
-
-     特征连接进全连接网络。
-
-   - 遇到了哪些难题？怎么解决？
-
-     无效词影响分类效果，停用词处理。
-
-   - 学到了什么？
-
-     数据比模型更重要。
-
-10. 指代消解
+#### Multilinguality
 
 ### Others
 
