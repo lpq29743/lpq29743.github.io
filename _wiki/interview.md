@@ -1405,27 +1405,31 @@ keywords: 面试题
 
 5. Deepseek
 
+     答：1. 采用 GRPO 算法，显著降低 RL 训练成本。
+
 6. 数据收集，数据质量控制，数据生成
 
 7. Tokenizer
 
 8. Position Embedding
 
-9. SFT
+9. Normalization
 
-10. RLHF (PPO, DPO, GRPO)
+10. SFT
 
-11. Base eval
+11. RLHF (PPO, DPO, GRPO)
 
-12. Chat Eval
+12. Base eval
 
-13. Halluciation
+13. Chat Eval
 
-14. RAG
+14. Halluciation
 
-15. Reasoning
+15. RAG
 
-16. 多卡多机训练
+16. Reasoning
+
+17. 多卡多机训练
 
 #### Applications
 
