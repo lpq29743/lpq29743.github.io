@@ -112,7 +112,7 @@ keywords: 面试题
 
     答：[链接](https://www.zhihu.com/question/66465943)
 
-#### Probability Theory and Mathematical Statistics
+#### Statistics
 
 1. 为什么样本方差（sample variance）的分母（denominator）是 $$n - 1$$？
 
@@ -388,7 +388,9 @@ keywords: 面试题
 - 动态规划
 - [海量数据处理](https://lpq29743.github.io/redant/algorithm/2017/02/20/MassiveData/)
 
-### Operating Systems
+### Computer Science
+
+#### Operating Systems
 
 1. 为什么要用时间复杂度来描述算法，而不是运行时间？
 
@@ -411,7 +413,7 @@ keywords: 面试题
 
    答：[链接](https://www.cnblogs.com/chuxiuhong/p/6103928.html)
 
-### Computer Networks
+#### Computer Networks
 
 1. 集线器和交换机有什么区别？
 
@@ -435,7 +437,7 @@ keywords: 面试题
 
    客户端发回 ACK 报文确认，并将确认序号设置为收到序号加 1。
 
-### Database Systems
+#### Database Systems
 
 1. count(1)、count(*) 和 count(列名) 的区别？
 
