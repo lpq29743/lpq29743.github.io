@@ -1444,9 +1444,7 @@ keywords: 面试题
 
 ### Others
 
-1. 性格测试
-
-  [链接 1](https://www.zhihu.com/question/28728468/answer/41961812)
+1. 性格测试: [链接 1](https://www.zhihu.com/question/28728468/answer/41961812)
 
 2. 个人工作内容
 
@@ -1456,12 +1454,8 @@ keywords: 面试题
 
 5. 转正
 
-6. 薪资 & 定级
-
-  [链接 1](https://www.zhihu.com/question/19841590)，[链接 2](https://www.zhihu.com/question/34557602)
+6. 薪资 & 定级: [链接 1](https://www.zhihu.com/question/19841590)，[链接 2](https://www.zhihu.com/question/34557602)
 
 7. 工作时间：日常工作时间，单双休，年假
 
-8. 职业规划
-
-  [链接](https://www.zhihu.com/question/20054953)
+8. 职业规划: [链接](https://www.zhihu.com/question/20054953)
