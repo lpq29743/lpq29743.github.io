@@ -1364,7 +1364,7 @@ keywords: 面试题
 
 4. multi-head attention 时间复杂度
 
-     答：$$O(d * seq_len * seq_len)$$。
+     答：$$O(d * seq\_len * seq\_len)$$。
 
 5. Transformer 的原理？
 
