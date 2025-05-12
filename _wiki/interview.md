@@ -384,9 +384,9 @@ keywords: 面试题
   - 前缀、中缀、后缀表达式
 - 树
 - 查找
-  - [KSum 问题](https://lpq29743.github.io/redant/algorithm/2018/10/29/KSum/)
+  - [KSum 问题](https://lpq29743.github.io/algorithm/2018/10/29/KSum/)
 - 动态规划
-- [海量数据处理](https://lpq29743.github.io/redant/algorithm/2017/02/20/MassiveData/)
+- [海量数据处理](https://lpq29743.github.io/algorithm/2017/02/20/MassiveData/)
 
 ### Computer Science
 
@@ -794,7 +794,7 @@ keywords: 面试题
 
     答：
     
-    [SVM](https://lpq29743.github.io/redant/artificialintelligence/2018/09/12/SVM/)
+    [SVM](https://lpq29743.github.io/artificialintelligence/2018/09/12/SVM/)
     
     超平面：$$y=w^TX+b$$；
 
@@ -1320,17 +1320,72 @@ keywords: 面试题
 
      答：$$Attention(Q,K,V) = softmax({QK^T\over {\sqrt {d_k}}})V$$。
      
-3. Transformer 的原理？
+3. multi-head attention 实现
+
+     答：```
+		import torch
+		import torch.nn as nn
+		import math
+		
+		class MultiHeadAttention(nn.Module):
+		    def __init__(self, embed_dim, num_heads):
+		        super(MultiHeadAttention, self).__init__()
+		        assert embed_dim % num_heads == 0, "Embedding dimension must be divisible by number of heads"
+		        
+		        self.embed_dim = embed_dim
+		        self.num_heads = num_heads
+		        self.head_dim = embed_dim // num_heads
+		        
+		        # Linear projections for query, key, and value
+		        self.qkv_proj = nn.Linear(embed_dim, embed_dim * 3)
+		        self.out_proj = nn.Linear(embed_dim, embed_dim)
+		
+		    def forward(self, x):
+		        batch_size, seq_len, embed_dim = x.size()
+		        
+		        # Project input to query, key, and value
+		        qkv = self.qkv_proj(x)  # (batch_size, seq_len, 3 * embed_dim)
+		        qkv = qkv.reshape(batch_size, seq_len, 3, self.num_heads, self.head_dim)
+		        qkv = qkv.permute(2, 0, 3, 1, 4)  # (3, batch_size, num_heads, seq_len, head_dim)
+		        q, k, v = qkv[0], qkv[1], qkv[2]
+		        
+		        # Compute scaled dot-product attention
+		        attn_scores = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(self.head_dim)
+		        attn_weights = torch.softmax(attn_scores, dim=-1)
+		        attn_output = torch.matmul(attn_weights, v)  # (batch_size, num_heads, seq_len, head_dim)
+		
+		        # Concatenate heads
+		        attn_output = attn_output.transpose(1, 2).contiguous().reshape(batch_size, seq_len, embed_dim)
+		        
+		        # Final projection
+		        output = self.out_proj(attn_output)
+		        return output
+		```
+
+4. multi-head attention 时间复杂度
+
+     答：$$O(d * seq_len * seq_len)$$。
+
+5. Transformer 的原理？
 
      答：Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
 
-4. Transformer 的 position encoding 为什么选三角函数？
+6. Transformer 的 position encoding 为什么选三角函数？
 
      答：偶数位置，使用正弦编码，在奇数位置，使用余弦编码。任意位置的 $$PE_{pos+k}$$ 都可以被 $$PE_{pos}$$ 的线性函数表示。在 bert 中，position encoding 是学习得到的。
      
-5. Transformer 使用的时候，制约显存的最关键因素是什么？
+
+7. Transformer 使用的时候，制约显存的最关键因素是什么？
 
      答：序列长度。
+
+8. 为什么要 multi-head
+
+     答：多头注意力允许模型在不同的表示子空间中学习信息，这样可以让模型同时关注不同的信息维度。每个头学习到的信息可以独立地编码输入序列的不同方面，然后将这些信息综合起来，得到更丰富的表示。
+
+9. 为什么要除以 $$\sqrt {d_k}$$
+
+     答：可以防止内积过大导致softmax函数梯度变得非常小，这有助于数值稳定性，使得学习过程更加稳定。此外，它还可以看作是一种缩放因子，帮助模型在不同维度上保持一致的性能。
 
 #### Large Language Models
 
@@ -1346,7 +1401,31 @@ keywords: 面试题
 
      答：并行，对大数据比较友好。
 
-4. 数据收集，数据质量控制，数据生成
+4. Qwen
+
+5. Deepseek
+
+6. 数据收集，数据质量控制，数据生成
+
+7. Tokenizer
+
+8. Position Embedding
+
+9. SFT
+
+10. RLHF (PPO, DPO, GRPO)
+
+11. Base eval
+
+12. Chat Eval
+
+13. Halluciation
+
+14. RAG
+
+15. Reasoning
+
+16. 多卡多机训练
 
 #### Applications
 
