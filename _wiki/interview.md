@@ -906,15 +906,62 @@ keywords: 面试题
 
 #### Clustering
 
-1. K-means 中我想聚成 100 类 结果发现只能聚成98类，为什么？
+1. 手撕 KMeans
+
+    答：```
+    import numpy as np
+
+def euclidean_distance(x1, x2):
+    return np.linalg.norm(x1 - x2)
+
+def kmeans(X, k, max_iters=100, tol=1e-4, seed=42):
+    np.random.seed(seed)
+
+    # Step 1: 初始化质心（随机选取 k 个样本作为初始中心）
+    n_samples, n_features = X.shape
+    initial_idx = np.random.choice(n_samples, k, replace=False)
+    centroids = X[initial_idx]
+
+    for iteration in range(max_iters):
+        # Step 2: 将每个样本分配到最近的质心
+        clusters = [[] for _ in range(k)]
+        for idx, sample in enumerate(X):
+            distances = [euclidean_distance(sample, point) for point in centroids]
+            cluster_idx = np.argmin(distances)
+            clusters[cluster_idx].append(idx)
+
+        # Step 3: 保存当前质心，用于后续比较
+        prev_centroids = centroids.copy()
+
+        # Step 4: 重新计算每个簇的质心
+        for i in range(k):
+            if clusters[i]:  # 防止除以 0
+                points = X[clusters[i]]
+                centroids[i] = np.mean(points, axis=0)
+
+        # Step 5: 判断是否收敛（质心变化小于 tol）
+        centroid_shifts = [euclidean_distance(centroids[i], prev_centroids[i]) for i in range(k)]
+        if max(centroid_shifts) < tol:
+            break
+
+    # 输出最终簇标签
+    labels = np.zeros(n_samples, dtype=int)
+    for cluster_idx, sample_indices in enumerate(clusters):
+        for sample_idx in sample_indices:
+            labels[sample_idx] = cluster_idx
+
+    return centroids, labels
+    ```
+
+2. KMeans 中我想聚成 100 类 结果发现只能聚成98类，为什么？
 
     答：因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn.net/shwan_ma/article/details/80096408)。
 
-2. 讲一下 EM 算法，E 步和 M 步的具体步骤，E 中的期望是什么？
+3. 讲一下 EM 算法，E 步和 M 步的具体步骤，E 中的期望是什么？
 
     答：初始化参数 $$\theta^{old}$$；E 步：估计 $$p(Z\|X, \theta^{old})$$，求得样本的后验期望值；M 步：根据极大似然估计求得 $$\theta^{new}$$；根据 $$\theta$$，迭代至收敛。
 
-3. KMeans 和 EM 有什么关系，和 GMM 有什么关系？
+4. KMeans 和 EM 有什么关系，和 GMM 有什么关系？
 
     答：KMeans 的目标函数（整个数据集点到各自聚类中心的距离的平方和）可以用 EM 算法求解。K-Means 算法归类为 GMM 的 EM 解法的一个特例。
 
@@ -1036,103 +1083,107 @@ keywords: 面试题
 
     答：消除不同指标量纲的影响。归一化，正态化。
 
-5. sgd、momentum、rmsprop、adam 区别与联系
+5. 初始化的方法
+   
+    答：[链接](https://lpq29743.github.io/artificialintelligence/2017/12/16/TensorFlowInitialization/)
+
+6. sgd、momentum、rmsprop、adam 区别与联系
 
     答：都是梯度下降，SGD 没动量，Momentum 是一阶动量，RMSProp 是二阶动量，Adam 是一阶动量 + 二阶动量。
 
-6. 一阶优化和二阶优化对应的矩阵？
+7. 一阶优化和二阶优化对应的矩阵？
 
     一阶对应 Jacobian 矩阵，二阶对应 Hessian 矩阵。当矩阵正定（positive definite），梯度为 0 处为极小值。
 
-7. 深度学习为什么不用二阶优化？
+8. 深度学习为什么不用二阶优化？
 
     答：有些方法可用，但总体不适用。原因：计算量大，训练慢；求导复杂；深度学习不需要高精度解；稳定性差。
 
-8. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
+9. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
 
     答：[链接](https://zhuanlan.zhihu.com/p/61590026)
 
-9. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
+10. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
 
     答：[链接](https://zhuanlan.zhihu.com/p/61590026)
 
-10. TensorFlow 怎么实现 learning rate decay？
+11. TensorFlow 怎么实现 learning rate decay？
 
     答：[链接](https://blog.csdn.net/u012436149/article/details/62058318)
 
-11. Pytorch 怎么实现 learning rate decay？
+12. Pytorch 怎么实现 learning rate decay？
 
     答：[链接](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/)
 
-12. TensorFlow 内部求导机制？
+13. TensorFlow 内部求导机制？
 
     答：符号求导。先提供每一个op求导的数学实现，然后使用链式法则求出整个表达式的导数。
 
-13. TensorFlow 创建变量的方式有哪些，有什么区别？
+14. TensorFlow 创建变量的方式有哪些，有什么区别？
 
     答：`tf.Variable()`和`tf.get_variable()`。前者一律创建新的变量，遇到同名变量，会在后面加后缀 1，2；后者如果遇到同名变量，则使用之前创建的变量，但要求这个变量一定在 variable_scope 中，且有 reuse 选项。
 
-14. Pytorch 如何切换训练和测试模式？
+15. Pytorch 如何切换训练和测试模式？
 
     答：`model.train()`和`model.eval()`
 
-15. GPU 利用率低怎么办？
+16. GPU 利用率低怎么办？
 
     答：dataset API 可以支持以 streaming 的方式读取数据。
 
-16. softmax 求导？
+17. softmax 求导？
 
     The derivation of the softmax function?
 
     答：[链接](https://zhuanlan.zhihu.com/p/25723112)。$$softmax'(z)=softmax(z)(y_i-softmax(z))$$，其中$$y_i$$为标签。如果表示为 Jacobian 矩阵可为$$J_{softmax}=Diag(p)-pp^T$$，其中$$p=softmax(z)$$，而$$Diag(p)$$是以p为对角线的矩阵。
 
-17. 为什么 softmax 包含 “soft”？
+18. 为什么 softmax 包含 “soft”？
 
     答：“soft”表示 softmax 函数是连续可导的，以保证梯度下降可以用来优化损失函数。
 
     “soft” means that the softmax function is continuous and differentiable so that the gradient descent can be used to optimize the loss function.
 
-18. 怎么得到一个 soft 版本的 argmax？
+19. 怎么得到一个 soft 版本的 argmax？
 
      答：用 softmax 的结果与 index 的倒置相乘。
 
-19. 神经网络为什么会产生梯度消失现象？
+20. 神经网络为什么会产生梯度消失现象？
 
      答：两种情况下梯度消失经常出现，一是在深层网络中，二是采用了不合适的损失函数，比如 sigmoid（导数范围从 0 到 0.25）。前者是因为根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都小于 1 的话，多次链乘之后会接近为 0，如果都大于 0 的话，多次链乘之后会接近正无穷。sigmoid 中心部位和两侧的梯度差别太大，如果权重初始化得太大或太小，激活值基本都在 sigmoid 两侧，两侧梯度几乎为 0，传播几层就没有梯度了。
 
-20. 有哪些激活函数？
+21. 有哪些激活函数？
 
      答：sigmoid，softmax，tanh，ReLU，PReLU，Leakly ReLU，Maxout。
 
-21. 挑一种激活函数推导梯度下降的过程?
+22. 挑一种激活函数推导梯度下降的过程?
 
      答：[链接](https://blog.csdn.net/jediael_lu/article/details/77852060)
 
-22. 激活函数如何选择？
+23. 激活函数如何选择？
 
      答：除了 gate 之类的地方，尽量不要用 sigmoid，可以用 tanh 或者 relu 之类的激活函数。
 
-23. RELU 在 0 点的导数是多少？
+24. RELU 在 0 点的导数是多少？
 
      答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003784)
 
-24. dying relu？
+25. dying relu？
 
      答：[链接](http://sofasofa.io/forum_main_post.php?postid=1004214)
 
-25. 如何调参？
+26. 如何调参？
 
      答：for 循环；贝叶斯优化。
 
-26. 什么是 Jensen 不等式？
+27. 什么是 Jensen 不等式？
 
      答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003224)
 
-27. 互信息是什么？
+28. 互信息是什么？
 
      答：$$I(X; Y) = \sum_{y \in Y}\sum_{x \in X} {p(x,y)log{\frac{p(x,y)}{p(x)p(y)}}}$$。当变量相互独立时，互信息为 0。
 
-28. KL 散度和交叉熵的区别？
+29. KL 散度和交叉熵的区别？
 
      答：自信息（一个事件的信息量）：$$I(x)=-logP(x)$$；
 
@@ -1146,47 +1197,47 @@ keywords: 面试题
 
      相对熵 = 交叉熵 - 信息熵。
 
-29. 如何避免梯度消失或梯度爆炸？
+30. 如何避免梯度消失或梯度爆炸？
 
      答：权重合理初始化，梯度剪切（梯度爆炸），门机制，batch normalization。
 
-30. 权重初始化方法？
+31. 权重初始化方法？
 
      答：零初始化，常量初始化，高斯/均匀随机初始化，Xavier 初始化，He 初始化，正交初始化。
 
-31. 为什么不能零初始化或常量初始化？
+32. 为什么不能零初始化或常量初始化？
 
      答：if the neurons start with the same weights, then all the neurons will follow the same gradient, and will always end up doing the same thing as one another.
 
-32. Xavier / He 初始化的目的是什么？
+33. Xavier / He 初始化的目的是什么？
 
      答：使每一层输出方差为 1。
 
-33. 多任务如何学习？
+34. 多任务如何学习？
 
      答：[链接](https://zhuanlan.zhihu.com/p/34916654)
 
-34. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
+35. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
 
      答：输出尺寸 = (输入尺寸 - filter + 2 * padding）/ stride + 1。计算尺寸不被整除，卷积向下取整，池化向上取整。
 
-35. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
+36. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
 
      答：解决了梯度消失问题。
 
-36. RNN 系列为什么要正交初始化？
+37. RNN 系列为什么要正交初始化？
 
      答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
 
-37. 怎么得到正交初始化？
+38. 怎么得到正交初始化？
 
      答：QR 分解或 SVD。
 
-38. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
+39. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
 
      答：ReLU 能解决梯度消失，但对 CNN 有效，对 RNN 无效。因为CNN 每一层使用独立的参数不同，原始的 RNN 在每个阶段都共享一个参数。如果直接把 RNN 的激活函数换成 ReLU 会导致非常大的输出值。
 
-39. LSTM 是什么？
+40. LSTM 是什么？
 
      答：遗忘门：$$f_t=\sigma(W_f[h_{t-1}, x_t] + b_f)$$，输出 [0, 1]，来表示信息保留程度。
 
@@ -1200,15 +1251,15 @@ keywords: 面试题
 
      得到最终输出：$$h_t=o_t*tanh(C_t)$$。
 
-40. GRU 是什么？
+41. GRU 是什么？
 
      答：LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
 
-41. LSTM 和 GRU 的联系和区别？
+42. LSTM 和 GRU 的联系和区别？
 
      答：都是通过使梯度的乘法变成加法，来解决 RNN 由于梯度消失而不能对长期依赖建模的问题。前者三个门，后者两个门，所以前者计算更耗时。
 
-42. 门机制为什么能解决梯度消失或爆炸问题？
+43. 门机制为什么能解决梯度消失或爆炸问题？
 
      答：[链接](https://zhuanlan.zhihu.com/p/27485750)
 
@@ -1383,7 +1434,15 @@ keywords: 面试题
 
      答：多头注意力允许模型在不同的表示子空间中学习信息，这样可以让模型同时关注不同的信息维度。每个头学习到的信息可以独立地编码输入序列的不同方面，然后将这些信息综合起来，得到更丰富的表示。
 
-9. 为什么要除以 $$\sqrt {d_k}$$
+9. Transformer 的 Q 和 K 为什么使用不同的权重矩阵生成？如果强行让 Q=K 会发生什么？
+
+     答：注意力将退化为自相似匹配，容易捕捉到 trivial 信息（如位置对称性）；表达能力显著下降，模型性能变差；实际论文实验证明，共用 Q/K/V 权重会损害性能
+
+10. Transformer 为什么是 Q * K^T，而不是 Q + K？
+
+     答：点积是最自然的相似度度量，而加法并不能提供一个明确的匹配度分数，它只是两个向量的混合，没有“匹配程度”的含义。
+
+11. 为什么要除以 $$\sqrt {d_k}$$
 
      答：可以防止内积过大导致softmax函数梯度变得非常小，这有助于数值稳定性，使得学习过程更加稳定。此外，它还可以看作是一种缩放因子，帮助模型在不同维度上保持一致的性能。
 
@@ -1413,23 +1472,108 @@ keywords: 面试题
 
 8. Position Embedding
 
-9. Normalization
+     答：Sinusoidal，Learnable Embedding, RoPE, AliBi 
 
-10. SFT
+9. LLM 常用的激活函数有？
 
-11. RLHF (PPO, DPO, GRPO)
+     答：ReLU, GeLU, Swish
 
-12. Base eval
+10. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
 
-13. Chat Eval
+     答：BN 是跨样本统计的，会泄漏信息，所以 LN 更 make sense，RMSNorm 参数量为 LN 一半，更高效和稳定，并表现与 LN 相似
 
-14. Halluciation
+11. 为什么 LLM 流行 MoE？
 
-15. RAG
+     答：MoE 能显著提高模型容量而不成比例地增加计算成本
 
-16. Reasoning
+12. SFT
 
-17. 多卡多机训练
+13. RLHF (PPO, DPO, GRPO)
+
+     答：PPO
+     
+     $$L^{\text{PPO}}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t,\ \text{clip}(r_t(\theta),\ 1 - \epsilon,\ 1 + \epsilon) \hat{A}_t \right) \right]$$
+     
+     其中 $$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
+     
+     PPO 流程如下：
+     
+	 1. 生成多个回复样本
+	 
+	 2. 通过奖励模型计算 reward（通常是 sample-level 的一个标量）
+	 
+	 3. 用 value head 输出每个 token 的 V(s_t)
+	 
+	 4. 从 reward 回溯分配每个 token 的 TD 残差 $$\delta_t$$
+	 
+	 5. 用 GAE 计算每个 token 的优势 A_t​
+	 
+	 6. 对策略（token logits）进行加权训练
+     
+     DPO
+     
+     $$L^{\text{DPO}}(\theta) = -\log \left( \frac{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right)}{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right) + \exp\left( \beta \cdot \log \pi_\theta(y^- \mid x) \right)} \right)$$
+     
+     其中，$$y^+$$ 是人类偏好的回答，$$y^-$$ 是较差的回答，$$\beta$$ 是温度系数，控制偏好强度
+     
+     GRPO
+     
+     $$L^{\text{GRPO}}(\theta) = - \log \left( \frac{\exp\left(R_\theta(x, y^+)\right)}{\exp\left(R_\theta(x, y^+)\right) + \exp\left(R_\theta(x, y^-)\right)} \right)$$
+     
+     其中，$R_\theta$ 表示奖励形式的打分函数：
+     
+     $$R_\theta(x, y) = \beta \cdot \left( \log \pi_\theta(y \mid x) - \log \pi_{\text{ref}}(y \mid x) \right)$$
+     
+     $$\pi_{\text{ref}}$$ 是参考策略（例如预训练模型），用于提供稳定的对比基准。
+     
+     PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level
+
+
+4. PPO 有了 reward model 为什么还要 critic/value model？
+
+     答：critic/value model 是内部奖励，会在 RL 过程中更新，reward model 是外部奖励，是训练好的
+
+5. GRPO 怎么去掉 critic/value model 的？
+
+     答：采样多次，用 reward model 评价的平均值来充当 critic/value model
+
+6. LoRA 的 A 和 B 矩阵用什么初始化方法？
+
+     答：A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’。
+
+7. Base eval
+
+8. Chat Eval
+
+9. Safety / Halluciation
+
+10. RAG; KG + LLM
+
+11. Reasoning
+
+12. LLM 常用的优化器有？
+
+     答：AdamW，Lion
+
+13. 多卡多机训练
+
+      答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
+
+14. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+
+      答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
+
+15. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+
+     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
+
+16. deepspeed 的 Zero-1， Zero 2， Zero 3
+
+     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存
+
+17. vllm
+
+     答：把 KV 缓存当作“虚拟内存”；每条序列的缓存按页（page）管理，动态分配到显存中；PagedAttention = 分页机制 + 注意力机制
 
 #### Applications
 
@@ -1487,4 +1631,4 @@ keywords: 面试题
 
 7. 工作时间：日常工作时间，单双休，年假
 
-8. 职业规划: [链接](https://www.zhihu.com/question/20054953)
+8. 职业规划（工作方向）: [链接](https://www.zhihu.com/question/20054953)
