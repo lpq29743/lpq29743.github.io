@@ -382,7 +382,7 @@ keywords: 面试题
 - 数组
   - [链表1](https://wuchong.me/blog/2014/03/25/interview-link-questions/) [链表2](https://www.jianshu.com/p/1361493e4f31)
   - 前缀、中缀、后缀表达式
-- 树
+- 树（前序遍历，中序遍历，后序遍历，层次遍历）
 - 查找
   - [KSum 问题](https://lpq29743.github.io/algorithm/2018/10/29/KSum/)
 - 动态规划
@@ -732,6 +732,54 @@ keywords: 面试题
 
     答：$$(X^TX)^{-1}X^Ty$$。可以一次运算得出结果，但特征数目过多时不适用。
 
+11. 用最小二乘法实现线性回归
+
+    答：
+    ```
+    import numpy as np
+	# 1. 生成数据（y = 2x + 3 + noise）
+	np.random.seed(42)
+	X = np.random.rand(100, 1)  # 100 个样本，1 个特征
+	y = 2 * X[:, 0] + 3 + np.random.randn(100) * 0.1  # 添加噪声
+	
+	# 2. 添加偏置项 x0 = 1（扩展 X 为 [x, 1]）
+	X_b = np.c_[X, np.ones((X.shape[0], 1))]  # shape: [100, 2]
+	
+	# 3. 正规方程解：theta = (X^T X)^(-1) X^T y
+	theta = np.linalg.inv(X_b.T @ X_b) @ X_b.T @ y
+	
+	print("权重和偏置（w, b）：", theta)
+    ```
+
+12. 用梯度下降实现线性回归
+
+    答：
+    ```
+    # 初始化
+	w = np.random.randn()
+	b = np.random.randn()
+	lr = 0.1
+	
+	for epoch in range(1000):
+	    y_pred = w * X[:, 0] + b
+	    error = y_pred - y
+	    loss = (error ** 2).mean()
+	
+	    # 手动计算梯度
+	    grad_w = 2 * (error * X[:, 0]).mean()
+	    grad_b = 2 * error.mean()
+	
+	    # 更新参数
+	    w -= lr * grad_w
+	    b -= lr * grad_b
+	
+	    if epoch % 100 == 0:
+	        print(f"Epoch {epoch}: loss={loss:.4f}, w={w:.4f}, b={b:.4f}")
+    ```
+
+13. 
+
+
 #### Classification
 
 1. 单层感知机为什么不能解决异或问题？
@@ -878,7 +926,52 @@ keywords: 面试题
 
     答：会，破坏了原本的独立性假设。
 
-30. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
+30. 用 numpy 实现 cross entropy loss
+
+    答：
+    ```
+    import numpy as np
+    
+	def softmax(logits):
+	    """
+	    计算 softmax 概率，确保数值稳定。
+	    logits: 形状为 (N, C)，N 是样本数，C 是类别数
+	    """
+	    shifted = logits - np.max(logits, axis=1, keepdims=True)
+	    exps = np.exp(shifted)
+	    return exps / np.sum(exps, axis=1, keepdims=True)
+	
+	def cross_entropy_loss(probs, labels):
+	    """
+	    计算平均交叉熵损失。
+	    probs: softmax 后的概率，形状为 (N, C)
+	    labels: 每个样本的真实类别索引，形状为 (N,)
+	    """
+	    N = probs.shape[0]
+	    # 取出每个样本对应真实类别的概率，防止 log(0) 加个小常数
+	    log_likelihood = -np.log(probs[np.arange(N), labels] + 1e-15)
+	    return np.sum(log_likelihood) / N
+	
+	# 示例数据
+	logits = np.array([
+	    [2.0, 1.0, 0.1],
+	    [0.5, 2.5, 0.3],
+	    [1.2, 0.7, 3.0]
+	])
+	labels = np.array([0, 1, 2])  # 每个样本的真实标签
+	
+	# 计算 softmax 概率
+	probs = softmax(logits)
+	
+	# 计算交叉熵损失
+	loss = cross_entropy_loss(probs, labels)
+	
+	# 打印结果
+	print("Softmax probabilities:\n", probs)
+	print("\nCross-entropy loss:", loss)
+    ```
+
+31. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
 
    Answer: If you have worked on enough data sets, you should deduce that cancer detection results in imbalanced data. In an imbalanced data set, accuracy should not be used as a measure of performance because 96% (as given) might only be predicting majority class correctly, but our class of interest is minority class (4%) which is the people who actually got diagnosed with cancer. Hence, in order to evaluate model performance, we should use Sensitivity (True Positive Rate), Specificity (True Negative Rate), F measure to determine class wise performance of the classifier. If the minority class performance is found to to be poor, we can undertake the following steps:
 
@@ -892,7 +985,7 @@ keywords: 面试题
 
    Know more: Imbalanced Classification
 
-31. 多分类问题如何转二分类方法？
+32. 多分类问题如何转二分类方法？
 
     答：a. 一对多法（one-versus-rest）。把某类样本归为一类，其他归为另一类，k 个类别的样本就构造出了 k 个 SVM；
 
@@ -900,7 +993,7 @@ keywords: 面试题
 
     c. 层次支持向量机（H-SVMs）。先将所有类别分成两个子类，再将子类进一步划分成两个次级子类，如此循环。
 
-32. 上溢（overflow）和下溢（underflow）是什么，softmax 函数会出现哪种情况，该怎么解决？
+33. 上溢（overflow）和下溢（underflow）是什么，softmax 函数会出现哪种情况，该怎么解决？
 
     答：上溢即大量级的数被近似为正负无穷时，发生上溢。发生上溢后，这些数值会变为非数值。下溢即有些逼近零的数，如零除或者对零取对数时，得到负无穷，如果对负无穷进一步运算，则会得到非数字。softmax 函数中有指数运算，如果要运算的数过小或过大，则会下溢或上溢。解决上溢的方式是让每一个值都减去最大分量的值，由于这样做之后分母有一项为 1，所以不会出现下溢。同样对于取对数，可以让所有数都加 1。
 
@@ -910,47 +1003,49 @@ keywords: 面试题
 
     答：```
     import numpy as np
-
-def euclidean_distance(x1, x2):
-    return np.linalg.norm(x1 - x2)
-
-def kmeans(X, k, max_iters=100, tol=1e-4, seed=42):
-    np.random.seed(seed)
-
-    # Step 1: 初始化质心（随机选取 k 个样本作为初始中心）
-    n_samples, n_features = X.shape
-    initial_idx = np.random.choice(n_samples, k, replace=False)
-    centroids = X[initial_idx]
-
-    for iteration in range(max_iters):
-        # Step 2: 将每个样本分配到最近的质心
-        clusters = [[] for _ in range(k)]
-        for idx, sample in enumerate(X):
-            distances = [euclidean_distance(sample, point) for point in centroids]
-            cluster_idx = np.argmin(distances)
-            clusters[cluster_idx].append(idx)
-
-        # Step 3: 保存当前质心，用于后续比较
-        prev_centroids = centroids.copy()
-
-        # Step 4: 重新计算每个簇的质心
-        for i in range(k):
-            if clusters[i]:  # 防止除以 0
-                points = X[clusters[i]]
-                centroids[i] = np.mean(points, axis=0)
-
-        # Step 5: 判断是否收敛（质心变化小于 tol）
-        centroid_shifts = [euclidean_distance(centroids[i], prev_centroids[i]) for i in range(k)]
-        if max(centroid_shifts) < tol:
-            break
-
-    # 输出最终簇标签
-    labels = np.zeros(n_samples, dtype=int)
-    for cluster_idx, sample_indices in enumerate(clusters):
-        for sample_idx in sample_indices:
-            labels[sample_idx] = cluster_idx
-
-    return centroids, labels
+    
+	class KMeans:
+	    def __init__(self, n_clusters=3, max_iter=100, tol=1e-4, random_state=None):
+	        self.n_clusters = n_clusters
+	        self.max_iter = max_iter
+	        self.tol = tol
+	        self.random_state = random_state
+	
+	    def fit(self, X):
+	        np.random.seed(self.random_state)
+	        n_samples, _ = X.shape
+	
+	        # Step 1: 初始化质心（随机选择 K 个样本）
+	        initial_idxs = np.random.choice(n_samples, self.n_clusters, replace=False)
+	        self.centroids = X[initial_idxs]
+	
+	        for i in range(self.max_iter):
+	            # Step 2: 分配每个样本到最近的质心
+	            distances = self._compute_distances(X)
+	            labels = np.argmin(distances, axis=1)
+	
+	            # Step 3: 更新质心
+	            new_centroids = np.array([
+	                X[labels == j].mean(axis=0) if np.any(labels == j) else self.centroids[j]
+	                for j in range(self.n_clusters)
+	            ])
+	
+	            # Step 4: 判断收敛（质心移动小于 tol）
+	            shift = np.linalg.norm(new_centroids - self.centroids)
+	            self.centroids = new_centroids
+	            if shift < self.tol:
+	                break
+	
+	        self.labels_ = labels  # 保存训练标签
+	
+	    def predict(self, X):
+	        # 计算每个点到所有质心的距离，返回最近质心的索引
+	        distances = self._compute_distances(X)
+	        return np.argmin(distances, axis=1)
+	
+	    def _compute_distances(self, X):
+	        # 返回 (n_samples, n_clusters) 的距离矩阵
+	        return np.linalg.norm(X[:, np.newaxis] - self.centroids, axis=2)
     ```
 
 2. KMeans 中我想聚成 100 类 结果发现只能聚成98类，为什么？
@@ -1147,43 +1242,47 @@ def kmeans(X, k, max_iters=100, tol=1e-4, seed=42):
 
      答：用 softmax 的结果与 index 的倒置相乘。
 
-20. 神经网络为什么会产生梯度消失现象？
+20. argmax 不可导怎么办？
+
+     答：gumbel softmax。
+
+21. 神经网络为什么会产生梯度消失现象？
 
      答：两种情况下梯度消失经常出现，一是在深层网络中，二是采用了不合适的损失函数，比如 sigmoid（导数范围从 0 到 0.25）。前者是因为根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都小于 1 的话，多次链乘之后会接近为 0，如果都大于 0 的话，多次链乘之后会接近正无穷。sigmoid 中心部位和两侧的梯度差别太大，如果权重初始化得太大或太小，激活值基本都在 sigmoid 两侧，两侧梯度几乎为 0，传播几层就没有梯度了。
 
-21. 有哪些激活函数？
+22. 有哪些激活函数？
 
      答：sigmoid，softmax，tanh，ReLU，PReLU，Leakly ReLU，Maxout。
 
-22. 挑一种激活函数推导梯度下降的过程?
+23. 挑一种激活函数推导梯度下降的过程?
 
      答：[链接](https://blog.csdn.net/jediael_lu/article/details/77852060)
 
-23. 激活函数如何选择？
+24. 激活函数如何选择？
 
      答：除了 gate 之类的地方，尽量不要用 sigmoid，可以用 tanh 或者 relu 之类的激活函数。
 
-24. RELU 在 0 点的导数是多少？
+25. RELU 在 0 点的导数是多少？
 
      答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003784)
 
-25. dying relu？
+26. dying relu？
 
      答：[链接](http://sofasofa.io/forum_main_post.php?postid=1004214)
 
-26. 如何调参？
+27. 如何调参？
 
      答：for 循环；贝叶斯优化。
 
-27. 什么是 Jensen 不等式？
+28. 什么是 Jensen 不等式？
 
      答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003224)
 
-28. 互信息是什么？
+29. 互信息是什么？
 
      答：$$I(X; Y) = \sum_{y \in Y}\sum_{x \in X} {p(x,y)log{\frac{p(x,y)}{p(x)p(y)}}}$$。当变量相互独立时，互信息为 0。
 
-29. KL 散度和交叉熵的区别？
+30. KL 散度和交叉熵的区别？
 
      答：自信息（一个事件的信息量）：$$I(x)=-logP(x)$$；
 
@@ -1197,47 +1296,47 @@ def kmeans(X, k, max_iters=100, tol=1e-4, seed=42):
 
      相对熵 = 交叉熵 - 信息熵。
 
-30. 如何避免梯度消失或梯度爆炸？
+31. 如何避免梯度消失或梯度爆炸？
 
      答：权重合理初始化，梯度剪切（梯度爆炸），门机制，batch normalization。
 
-31. 权重初始化方法？
+32. 权重初始化方法？
 
      答：零初始化，常量初始化，高斯/均匀随机初始化，Xavier 初始化，He 初始化，正交初始化。
 
-32. 为什么不能零初始化或常量初始化？
+33. 为什么不能零初始化或常量初始化？
 
      答：if the neurons start with the same weights, then all the neurons will follow the same gradient, and will always end up doing the same thing as one another.
 
-33. Xavier / He 初始化的目的是什么？
+34. Xavier / He 初始化的目的是什么？
 
      答：使每一层输出方差为 1。
 
-34. 多任务如何学习？
+35. 多任务如何学习？
 
      答：[链接](https://zhuanlan.zhihu.com/p/34916654)
 
-35. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
+36. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
 
      答：输出尺寸 = (输入尺寸 - filter + 2 * padding）/ stride + 1。计算尺寸不被整除，卷积向下取整，池化向上取整。
 
-36. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
+37. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
 
      答：解决了梯度消失问题。
 
-37. RNN 系列为什么要正交初始化？
+38. RNN 系列为什么要正交初始化？
 
      答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
 
-38. 怎么得到正交初始化？
+39. 怎么得到正交初始化？
 
      答：QR 分解或 SVD。
 
-39. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
+40. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
 
      答：ReLU 能解决梯度消失，但对 CNN 有效，对 RNN 无效。因为CNN 每一层使用独立的参数不同，原始的 RNN 在每个阶段都共享一个参数。如果直接把 RNN 的激活函数换成 ReLU 会导致非常大的输出值。
 
-40. LSTM 是什么？
+41. LSTM 是什么？
 
      答：遗忘门：$$f_t=\sigma(W_f[h_{t-1}, x_t] + b_f)$$，输出 [0, 1]，来表示信息保留程度。
 
@@ -1251,15 +1350,15 @@ def kmeans(X, k, max_iters=100, tol=1e-4, seed=42):
 
      得到最终输出：$$h_t=o_t*tanh(C_t)$$。
 
-41. GRU 是什么？
+42. GRU 是什么？
 
      答：LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
 
-42. LSTM 和 GRU 的联系和区别？
+43. LSTM 和 GRU 的联系和区别？
 
      答：都是通过使梯度的乘法变成加法，来解决 RNN 由于梯度消失而不能对长期依赖建模的问题。前者三个门，后者两个门，所以前者计算更耗时。
 
-43. 门机制为什么能解决梯度消失或爆炸问题？
+44. 门机制为什么能解决梯度消失或爆炸问题？
 
      答：[链接](https://zhuanlan.zhihu.com/p/27485750)
 
@@ -1373,76 +1472,191 @@ def kmeans(X, k, max_iters=100, tol=1e-4, seed=42):
      
 3. multi-head attention 实现
 
-     答：```
-		import torch
-		import torch.nn as nn
-		import math
-		
-		class MultiHeadAttention(nn.Module):
-		    def __init__(self, embed_dim, num_heads):
-		        super(MultiHeadAttention, self).__init__()
-		        assert embed_dim % num_heads == 0, "Embedding dimension must be divisible by number of heads"
-		        
-		        self.embed_dim = embed_dim
-		        self.num_heads = num_heads
-		        self.head_dim = embed_dim // num_heads
-		        
-		        # Linear projections for query, key, and value
-		        self.qkv_proj = nn.Linear(embed_dim, embed_dim * 3)
-		        self.out_proj = nn.Linear(embed_dim, embed_dim)
-		
-		    def forward(self, x):
-		        batch_size, seq_len, embed_dim = x.size()
-		        
-		        # Project input to query, key, and value
-		        qkv = self.qkv_proj(x)  # (batch_size, seq_len, 3 * embed_dim)
-		        qkv = qkv.reshape(batch_size, seq_len, 3, self.num_heads, self.head_dim)
-		        qkv = qkv.permute(2, 0, 3, 1, 4)  # (3, batch_size, num_heads, seq_len, head_dim)
-		        q, k, v = qkv[0], qkv[1], qkv[2]
-		        
-		        # Compute scaled dot-product attention
-		        attn_scores = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(self.head_dim)
-		        attn_weights = torch.softmax(attn_scores, dim=-1)
-		        attn_output = torch.matmul(attn_weights, v)  # (batch_size, num_heads, seq_len, head_dim)
-		
-		        # Concatenate heads
-		        attn_output = attn_output.transpose(1, 2).contiguous().reshape(batch_size, seq_len, embed_dim)
-		        
-		        # Final projection
-		        output = self.out_proj(attn_output)
-		        return output
-		```
+     答：
+     ```
+     import torch
+     import torch.nn as nn
+     import torch.nn.functional as F
+     
+     class MultiHeadAttention(nn.Module):
+	    def __init__(self, embed_dim, num_heads):
+	        super(MultiHeadAttention, self).__init__()
+	        assert embed_dim % num_heads == 0, "Embedding dimension must be divisible by number of heads"
+	
+	        self.embed_dim = embed_dim
+	        self.num_heads = num_heads
+	        self.head_dim = embed_dim // num_heads
+	
+	        # Linear layers to project input to Q, K, V
+	        self.q_proj = nn.Linear(embed_dim, embed_dim)
+	        self.k_proj = nn.Linear(embed_dim, embed_dim)
+	        self.v_proj = nn.Linear(embed_dim, embed_dim)
+	
+	        # Final output projection
+	        self.out_proj = nn.Linear(embed_dim, embed_dim)
+	
+	    def forward(self, x):
+	        B, T, E = x.size()
+	
+	        # Linear projections
+	        Q = self.q_proj(x)  # (B, T, E)
+	        K = self.k_proj(x)
+	        V = self.v_proj(x)
+	
+	        # Split into multiple heads: (B, num_heads, T, head_dim)
+	        Q = Q.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+	        K = K.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+	        V = V.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+	
+	        # Scaled dot-product attention
+	        scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.head_dim ** 0.5)  # (B, num_heads, T, T)
+	        weights = F.softmax(scores, dim=-1)
+	        attended = torch.matmul(weights, V)  # (B, num_heads, T, head_dim)
+	
+	        # Concatenate heads: (B, T, E)
+	        attended = attended.transpose(1, 2).contiguous().view(B, T, E)
+	
+	        # Final linear projection
+	        output = self.out_proj(attended)
+	        return output
+     ```
 
 4. multi-head attention 时间复杂度
 
      答：$$O(d * seq\_len * seq\_len)$$。
 
-5. Transformer 的原理？
+5. grouped-query attention 实现
+
+	答：grouped-query attention 中，query 使用比 key/value 更少的 heads
+    ```
+    import torch
+    import torch.nn as nn
+    import torch.nn.functional as F
+     
+	class GroupedQueryAttention(nn.Module):
+	    def __init__(self, embed_dim, num_query_heads, num_kv_heads):
+	        super(GroupedQueryAttention, self).__init__()
+	        assert embed_dim % num_query_heads == 0, "embed_dim must be divisible by num_query_heads"
+	        assert embed_dim % num_kv_heads == 0, "embed_dim must be divisible by num_kv_heads"
+	
+	        self.embed_dim = embed_dim
+	        self.num_query_heads = num_query_heads
+	        self.num_kv_heads = num_kv_heads
+	        self.q_head_dim = embed_dim // num_query_heads
+	        self.kv_head_dim = embed_dim // num_kv_heads
+	
+	        # Projection layers
+	        self.q_proj = nn.Linear(embed_dim, embed_dim)
+	        self.k_proj = nn.Linear(embed_dim, embed_dim)
+	        self.v_proj = nn.Linear(embed_dim, embed_dim)
+	        self.out_proj = nn.Linear(embed_dim, embed_dim)
+	
+	    def forward(self, x):
+	        B, T, E = x.shape
+	
+	        # Project inputs
+	        Q = self.q_proj(x).view(B, T, self.num_query_heads, self.q_head_dim).transpose(1, 2)  # (B, QH, T, Dq)
+	        K = self.k_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dk)
+	        V = self.v_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dv)
+	
+	        # Expand K/V to match query heads if needed
+	        if self.num_query_heads != self.num_kv_heads:
+	            repeat_factor = self.num_query_heads // self.num_kv_heads
+	            K = K.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dk)
+	            V = V.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dv)
+	
+	        # Scaled dot-product attention
+	        scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.q_head_dim ** 0.5)  # (B, QH, T, T)
+	        attn_weights = F.softmax(scores, dim=-1)
+	        context = torch.matmul(attn_weights, V)  # (B, QH, T, Dv)
+	
+	        # Combine heads
+	        context = context.transpose(1, 2).contiguous().view(B, T, E)  # (B, T, E)
+	        output = self.out_proj(context)  # Final linear projection
+	
+	        return output
+     ```
+
+6. multi-head attention + kv cache 实现
+
+     答：query 必须每步重算，而 key/value 是过去的记忆，可以缓存。
+     ```
+    import torch
+	import torch.nn as nn
+	import torch.nn.functional as F
+	class SelfAttentionWithKVCache(nn.Module):
+	    def __init__(self, embed_dim, num_heads, max_seq_len):
+	        super().__init__()
+	        assert embed_dim % num_heads == 0
+	        self.embed_dim = embed_dim
+	        self.num_heads = num_heads
+	        self.head_dim = embed_dim // num_heads
+	
+	        self.q_proj = nn.Linear(embed_dim, embed_dim)
+	        self.k_proj = nn.Linear(embed_dim, embed_dim)
+	        self.v_proj = nn.Linear(embed_dim, embed_dim)
+	        self.out_proj = nn.Linear(embed_dim, embed_dim)
+	
+	        # 初始化 KV Cache（支持最多 max_seq_len 步）
+	        self.register_buffer("key_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
+	        self.register_buffer("value_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
+	        self.max_seq_len = max_seq_len
+	
+	    def forward(self, x, start_pos):
+	        """
+	        x: [B, 1, E] - 当前一步的 token 表示
+	        start_pos: int - 当前 token 在生成序列中的位置
+	        """
+	        B, T, E = x.shape  # T == 1 during generation
+	
+	        # QKV projection
+	        Q = self.q_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)  # [B, H, 1, D]
+	        K = self.k_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+	        V = self.v_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+	
+	        # 更新 KV cache
+	        self.key_cache[:, :, start_pos:start_pos+1, :] = K
+	        self.value_cache[:, :, start_pos:start_pos+1, :] = V
+	
+	        # 从 0 到当前 step，取所有 KV
+	        K_cached = self.key_cache[:, :, :start_pos+1, :]   # [B, H, T_cache, D]
+	        V_cached = self.value_cache[:, :, :start_pos+1, :] # [B, H, T_cache, D]
+	
+	        # 注意力计算
+	        scores = torch.matmul(Q, K_cached.transpose(-2, -1)) / (self.head_dim ** 0.5)  # [B, H, 1, T_cache]
+	        attn_weights = F.softmax(scores, dim=-1)
+	        out = torch.matmul(attn_weights, V_cached)  # [B, H, 1, D]
+	
+	        out = out.transpose(1, 2).contiguous().view(B, T, E)  # [B, 1, E]
+	        return self.out_proj(out)
+     ```
+
+7. Transformer 的原理？
 
      答：Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
 
-6. Transformer 的 position encoding 为什么选三角函数？
+8. Transformer 的 position encoding 为什么选三角函数？
 
      答：偶数位置，使用正弦编码，在奇数位置，使用余弦编码。任意位置的 $$PE_{pos+k}$$ 都可以被 $$PE_{pos}$$ 的线性函数表示。在 bert 中，position encoding 是学习得到的。
      
 
-7. Transformer 使用的时候，制约显存的最关键因素是什么？
+9. Transformer 使用的时候，制约显存的最关键因素是什么？
 
      答：序列长度。
 
-8. 为什么要 multi-head
+10. 为什么要 multi-head
 
      答：多头注意力允许模型在不同的表示子空间中学习信息，这样可以让模型同时关注不同的信息维度。每个头学习到的信息可以独立地编码输入序列的不同方面，然后将这些信息综合起来，得到更丰富的表示。
 
-9. Transformer 的 Q 和 K 为什么使用不同的权重矩阵生成？如果强行让 Q=K 会发生什么？
+11. Transformer 的 Q 和 K 为什么使用不同的权重矩阵生成？如果强行让 Q=K 会发生什么？
 
      答：注意力将退化为自相似匹配，容易捕捉到 trivial 信息（如位置对称性）；表达能力显著下降，模型性能变差；实际论文实验证明，共用 Q/K/V 权重会损害性能
 
-10. Transformer 为什么是 Q * K^T，而不是 Q + K？
+12. Transformer 为什么是 Q * K^T，而不是 Q + K？
 
      答：点积是最自然的相似度度量，而加法并不能提供一个明确的匹配度分数，它只是两个向量的混合，没有“匹配程度”的含义。
 
-11. 为什么要除以 $$\sqrt {d_k}$$
+13. 为什么要除以 $$\sqrt {d_k}$$
 
      答：可以防止内积过大导致softmax函数梯度变得非常小，这有助于数值稳定性，使得学习过程更加稳定。此外，它还可以看作是一种缩放因子，帮助模型在不同维度上保持一致的性能。
 
@@ -1456,39 +1670,92 @@ def kmeans(X, k, max_iters=100, tol=1e-4, seed=42):
 
      答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-3. bert 强于 rnn 的地方？
+3. bert 的训练目标？
+
+     答：bert 有 masked language modeling 和 next sentence prediction 两个目标
+
+4. roberta 相比 bert 做了哪些改进？
+
+     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
+
+5. bert 强于 rnn 的地方？
 
      答：并行，对大数据比较友好。
 
-4. Qwen
+6. Qwen
 
-5. Deepseek
+7. Deepseek
 
      答：1. 采用 GRPO 算法，显著降低 RL 训练成本。
 
-6. 数据收集，数据质量控制，数据生成
+8. 数据收集，数据质量控制，数据生成
 
-7. Tokenizer
+9. Tokenizer
 
-8. Position Embedding
+10. Position Embedding
 
      答：Sinusoidal，Learnable Embedding, RoPE, AliBi 
 
-9. LLM 常用的激活函数有？
+11. LLM 常用的激活函数有？
 
      答：ReLU, GeLU, Swish
 
-10. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
+12. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
 
-     答：BN 是跨样本统计的，会泄漏信息，所以 LN 更 make sense，RMSNorm 参数量为 LN 一半，更高效和稳定，并表现与 LN 相似
+     答：BN 是跨样本统计的，会泄漏信息，所以 LN 更 make sense，RMSNorm 参数量（d，缩放因子）为 LN （2d，缩放因子和偏移因子） 一半，更高效和稳定，并表现与 LN 相似
 
-11. 为什么 LLM 流行 MoE？
+13. 实现 LayerNorm
+
+    答：
+    ```
+    import torch
+	import torch.nn as nn
+	
+	class LayerNorm(nn.Module):
+	    def __init__(self, dim, eps=1e-5):
+	        super(LayerNorm, self).__init__()
+	        self.eps = eps
+	        self.gamma = nn.Parameter(torch.ones(dim))  # 缩放因子
+	        self.beta = nn.Parameter(torch.zeros(dim))  # 偏移因子
+	
+	    def forward(self, x):
+	        mean = x.mean(dim=-1, keepdim=True)
+	        var = x.var(dim=-1, unbiased=False, keepdim=True)
+	        x_norm = (x - mean) / torch.sqrt(var + self.eps)
+	        return self.gamma * x_norm + self.beta
+    ```
+
+14. 实现 RMSNorm
+
+    答：RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
+	```
+	import torch
+	import torch.nn as nn
+	
+	class RMSNorm(nn.Module):
+	    def __init__(self, dim, eps=1e-8):
+	        super(RMSNorm, self).__init__()
+	        self.eps = eps
+	        self.scale = nn.Parameter(torch.ones(dim))  # 可学习缩放因子
+	
+	    def forward(self, x):
+	        # 计算 RMS
+	        rms = x.pow(2).mean(dim=-1, keepdim=True).add(self.eps).sqrt()
+	        x_norm = x / rms
+	        return self.scale * x_norm
+	```
+
+15. Pre Norm 和 Post Norm 有什么区别？
+
+     答：Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
+
+16. 为什么 LLM 流行 MoE？
 
      答：MoE 能显著提高模型容量而不成比例地增加计算成本
 
-12. SFT
+17. SFT
 
-13. RLHF (PPO, DPO, GRPO)
+18. RLHF (PPO, DPO, GRPO)
 
      答：PPO
      
@@ -1529,49 +1796,59 @@ def kmeans(X, k, max_iters=100, tol=1e-4, seed=42):
      PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level
 
 
-4. PPO 有了 reward model 为什么还要 critic/value model？
+19. PPO 有了 reward model 为什么还要 critic/value model？
 
      答：critic/value model 是内部奖励，会在 RL 过程中更新，reward model 是外部奖励，是训练好的
 
-5. GRPO 怎么去掉 critic/value model 的？
+20. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-6. LoRA 的 A 和 B 矩阵用什么初始化方法？
+21. LoRA 的 A 和 B 矩阵用什么初始化方法？
 
      答：A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’。
 
-7. Base eval
+22. Base eval
 
-8. Chat Eval
+     答：MMLU（通用语言理解类），GSM8K（编程与数学能力）
 
-9. Safety / Halluciation
+23. Chat Eval
 
-10. RAG; KG + LLM
+     答：MT-Bench，AlpacaEval，Arena
 
-11. Reasoning
+24. Safety / Halluciation
 
-12. LLM 常用的优化器有？
+25. Long Context
+
+26. RAG; KG + LLM
+
+27. Reasoning
+
+28. MCP 和 function calling 有什么区别？
+
+     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
+
+29. LLM 常用的优化器有？
 
      答：AdamW，Lion
 
-13. 多卡多机训练
+30. 多卡多机训练
 
       答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-14. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+31. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
       答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-15. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+32. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
      答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-16. deepspeed 的 Zero-1， Zero 2， Zero 3
+33. deepspeed 的 Zero-1， Zero 2， Zero 3
 
      答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存
 
-17. vllm
+34. vllm
 
      答：把 KV 缓存当作“虚拟内存”；每条序列的缓存按页（page）管理，动态分配到显存中；PagedAttention = 分页机制 + 注意力机制
 
