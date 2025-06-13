@@ -59,56 +59,59 @@ keywords: 面试题
    a. 分析法：对于每一次扔鸡蛋，都可以看作是一次决策，所以最终扔的方案应该是构成一棵决策树，问题就可以转换成求最矮决策树的高度。假设第一次扔的楼层是第 k 层楼，则碎子树的高度为 k - 1，如果第一次扔鸡蛋没碎，则设第二次扔的高度为 m，则对于 m 来讲，其碎子树高度为 m - k - 1，相对根节点高度则为 m - k。由于要尽可能保证子树的高度一致，所以得 m - k = k - 1，故可得第二次扔的高度要比前一次高 k - 1 层。从而得到方程 k(k + 1) / 2 = 200，从而解得高度为 14；
 
    b. 动态规划法：这道题是很经典的动态规划问题，设楼层次数为 n，我们可以得到状态转移方程`f(n) = min(max(k-1, f(n - k))) + 1 (0 < k <= n)`，如果我们再加入鸡蛋数目变量 m，则状态转移方程为`f(n, m) = min(max(f(k - 1, m - 1), f(n - k, m))) + 1 (0 < k <= n)。`
+8. 16个硬币，A和B轮流拿走一些，每次拿走的个数只能是1，2，4中的一个数。谁最后拿硬币谁输。请问：A或B有无策略保证自己赢？
 
-8. 海盗博弈
+   答：B可以保证自己赢。 如果A拿1个，则B拿2个； 如果A拿2个，则B拿1个； 如果A拿4个，则B拿2个。这样每次AB加起来都是3或者6，所以最后会剩下1个或4个。 如果是1个则A直接输了； 如果剩下4个，A全拿则输了，如果不全拿，B继续采取上面的策略，最后还是剩下1个，还是A输。
+
+9. 海盗博弈
 
    答：[链接1](https://www.zhihu.com/question/20014343)、[链接2](https://zhuanlan.zhihu.com/p/27388049)、[链接3](https://www.zhihu.com/question/47973941)
 
-9. 五个囚犯先后从100颗绿豆中抓绿豆。抓得最多和最少的人将被处死，不能交流，可以摸出剩下绿豆的数量，谁的存活几率最大？
+10. 五个囚犯先后从100颗绿豆中抓绿豆。抓得最多和最少的人将被处死，不能交流，可以摸出剩下绿豆的数量，谁的存活几率最大？
 
    答：[链接](https://www.zhihu.com/question/19912025)
 
-10. 三个极度嫉妒的人分一个蛋糕，采用什么策略，能让三人都觉得公平？
+11. 三个极度嫉妒的人分一个蛋糕，采用什么策略，能让三人都觉得公平？
 
     答：[链接](https://www.zhihu.com/question/20615717)
 
-11. 有 5 个直线排列的洞，兔子每天换一个相邻的洞，每天插一次，怎样做一定能找到兔子，次数不限。
+12. 有 5 个直线排列的洞，兔子每天换一个相邻的洞，每天插一次，怎样做一定能找到兔子，次数不限。
 
     答：第一天，守住第二个洞，没有的话，第二天还守住第二个洞，还没有的话，一二洞可排除，兔子前两天一定不会在一二两个洞，第三天检查第三个洞，如果没有，此时，兔子只可能在第二四五三个洞，第四天检查第四个洞，如果还没有，说明只可能在一三五三个洞，第五天还检查第四个洞，如果没有的话，说明兔子不可能在第四五个洞，也不可能在第一三个洞，只可能在第二个洞，第六天检查第三个洞，如果没有，第七天一定可以在第二个洞里抓到它的。
 
-12. 64 匹马，8 个赛道，找出跑得最快的 4 匹马，至少比赛几场？ 
+13. 64 匹马，8 个赛道，找出跑得最快的 4 匹马，至少比赛几场？ 
 
     答：[链接](https://blog.csdn.net/madefromme/article/details/81584325)
 
-13. 有 8 个台球，其中一个比其他的 7 个都要重一些。如果仅仅是使用天平而不称出具体的重量，请问最少几次能找出那个最重的台球？
+14. 有 8 个台球，其中一个比其他的 7 个都要重一些。如果仅仅是使用天平而不称出具体的重量，请问最少几次能找出那个最重的台球？
 
     答：2 次。把所有的球分成 3 组，其中 2 组是 3 个球，最后一组是两个球。首先，把 3 个球的两组放在天平上。如果其中一方比较重，把偏重的那一组球任意拿出来两个放在天平上。如果两组球一样重，那就把剩下的 2 个球放在天平上称重。
 
-14. 有 n 名球员参加比赛，第一轮抽签两两对决，如果 n 为奇数，则剩下一人轮空，后面的轮次采取类似做法。问总共有几场比赛？
+15. 有 n 名球员参加比赛，第一轮抽签两两对决，如果 n 为奇数，则剩下一人轮空，后面的轮次采取类似做法。问总共有几场比赛？
 
     答：因为总共要淘汰 n - 1 人，所以比赛场数为 n - 1 场。
 
-15. 一瓶可乐两元钱，喝完后两个空瓶可以换一瓶可乐，假设你有40块，请问你最多可以喝到几瓶汽水？
+16. 一瓶可乐两元钱，喝完后两个空瓶可以换一瓶可乐，假设你有40块，请问你最多可以喝到几瓶汽水？
 
     答：此题与上题类似，每一次换可乐之后都会损失一个瓶盖，所以 20 瓶可乐可以换到 19 瓶可乐，因此总共可以可以喝到 39 瓶可乐。如果开放借瓶盖的话，由于最后我们只剩一个瓶盖，所以最多只能借一个，而且只有当可乐数不是 2 的幂的时候借，因此，如果可以借的话总共可以喝 40 瓶可乐。
 
-16. 0， 6， 24，60， 120，（）?
+17. 0， 6， 24，60， 120，（）?
 
     答：0=0\*1\*2；6=1\*2\*3；24=2\*3\*4；60=3\*4\*5；120=4\*5\*6；210=5\*6\*7。
 
-17. 黑色硬币问题
+18. 黑色硬币问题
 
     答：[链接](https://www.bilibili.com/video/av19584232)
 
-18. 难铺的瓷砖
+19. 难铺的瓷砖
 
     答：[链接](https://wenku.baidu.com/view/8605c11452d380eb62946d70.html)
 
-19. 共 10 瓶药丸。（1）其中一瓶每颗超重 10 毫克；（2）其中多瓶每颗超重 10 毫克。用最少称重数目给出错误的瓶号。
+20. 共 10 瓶药丸。（1）其中一瓶每颗超重 10 毫克；（2）其中多瓶每颗超重 10 毫克。用最少称重数目给出错误的瓶号。
 
     答：（1）从 1 到 10 瓶，每瓶拿出 1、2、3、...、10 颗；（2） 从 1 到 10 瓶，每瓶各拿出 1、2、4、...、1024 颗。
 
-20. 捡麦穗问题
+21. 捡麦穗问题
 
     答：[链接](https://www.zhihu.com/question/66465943)
 
@@ -1226,63 +1229,67 @@ keywords: 面试题
 
     答：dataset API 可以支持以 streaming 的方式读取数据。
 
-17. softmax 求导？
+17. 矩阵计算：AB=C，y=f(C)，y 对 C 的偏导为 P，求 y 对 A 和 B的偏导。
+
+    答：$$PB^T$$ 和 $$A^TP$$。
+
+18. softmax 求导？
 
     The derivation of the softmax function?
 
     答：[链接](https://zhuanlan.zhihu.com/p/25723112)。$$softmax'(z)=softmax(z)(y_i-softmax(z))$$，其中$$y_i$$为标签。如果表示为 Jacobian 矩阵可为$$J_{softmax}=Diag(p)-pp^T$$，其中$$p=softmax(z)$$，而$$Diag(p)$$是以p为对角线的矩阵。
 
-18. 为什么 softmax 包含 “soft”？
+19. 为什么 softmax 包含 “soft”？
 
     答：“soft”表示 softmax 函数是连续可导的，以保证梯度下降可以用来优化损失函数。
 
     “soft” means that the softmax function is continuous and differentiable so that the gradient descent can be used to optimize the loss function.
 
-19. 怎么得到一个 soft 版本的 argmax？
+20. 怎么得到一个 soft 版本的 argmax？
 
      答：用 softmax 的结果与 index 的倒置相乘。
 
-20. argmax 不可导怎么办？
+21. argmax 不可导怎么办？
 
      答：gumbel softmax。
 
-21. 神经网络为什么会产生梯度消失现象？
+22. 神经网络为什么会产生梯度消失现象？
 
      答：两种情况下梯度消失经常出现，一是在深层网络中，二是采用了不合适的损失函数，比如 sigmoid（导数范围从 0 到 0.25）。前者是因为根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都小于 1 的话，多次链乘之后会接近为 0，如果都大于 0 的话，多次链乘之后会接近正无穷。sigmoid 中心部位和两侧的梯度差别太大，如果权重初始化得太大或太小，激活值基本都在 sigmoid 两侧，两侧梯度几乎为 0，传播几层就没有梯度了。
 
-22. 有哪些激活函数？
+23. 有哪些激活函数？
 
      答：sigmoid，softmax，tanh，ReLU，PReLU，Leakly ReLU，Maxout。
 
-23. 挑一种激活函数推导梯度下降的过程?
+24. 挑一种激活函数推导梯度下降的过程?
 
      答：[链接](https://blog.csdn.net/jediael_lu/article/details/77852060)
 
-24. 激活函数如何选择？
+25. 激活函数如何选择？
 
      答：除了 gate 之类的地方，尽量不要用 sigmoid，可以用 tanh 或者 relu 之类的激活函数。
 
-25. RELU 在 0 点的导数是多少？
+26. RELU 在 0 点的导数是多少？
 
      答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003784)
 
-26. dying relu？
+27. dying relu？
 
      答：[链接](http://sofasofa.io/forum_main_post.php?postid=1004214)
 
-27. 如何调参？
+28. 如何调参？
 
      答：for 循环；贝叶斯优化。
 
-28. 什么是 Jensen 不等式？
+29. 什么是 Jensen 不等式？
 
      答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003224)
 
-29. 互信息是什么？
+30. 互信息是什么？
 
      答：$$I(X; Y) = \sum_{y \in Y}\sum_{x \in X} {p(x,y)log{\frac{p(x,y)}{p(x)p(y)}}}$$。当变量相互独立时，互信息为 0。
 
-30. KL 散度和交叉熵的区别？
+31. KL 散度和交叉熵的区别？
 
      答：自信息（一个事件的信息量）：$$I(x)=-logP(x)$$；
 
@@ -1296,47 +1303,47 @@ keywords: 面试题
 
      相对熵 = 交叉熵 - 信息熵。
 
-31. 如何避免梯度消失或梯度爆炸？
+32. 如何避免梯度消失或梯度爆炸？
 
      答：权重合理初始化，梯度剪切（梯度爆炸），门机制，batch normalization。
 
-32. 权重初始化方法？
+33. 权重初始化方法？
 
      答：零初始化，常量初始化，高斯/均匀随机初始化，Xavier 初始化，He 初始化，正交初始化。
 
-33. 为什么不能零初始化或常量初始化？
+34. 为什么不能零初始化或常量初始化？
 
      答：if the neurons start with the same weights, then all the neurons will follow the same gradient, and will always end up doing the same thing as one another.
 
-34. Xavier / He 初始化的目的是什么？
+35. Xavier / He 初始化的目的是什么？
 
      答：使每一层输出方差为 1。
 
-35. 多任务如何学习？
+36. 多任务如何学习？
 
      答：[链接](https://zhuanlan.zhihu.com/p/34916654)
 
-36. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
+37. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
 
      答：输出尺寸 = (输入尺寸 - filter + 2 * padding）/ stride + 1。计算尺寸不被整除，卷积向下取整，池化向上取整。
 
-37. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
+38. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
 
      答：解决了梯度消失问题。
 
-38. RNN 系列为什么要正交初始化？
+39. RNN 系列为什么要正交初始化？
 
      答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
 
-39. 怎么得到正交初始化？
+40. 怎么得到正交初始化？
 
      答：QR 分解或 SVD。
 
-40. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
+41. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
 
      答：ReLU 能解决梯度消失，但对 CNN 有效，对 RNN 无效。因为CNN 每一层使用独立的参数不同，原始的 RNN 在每个阶段都共享一个参数。如果直接把 RNN 的激活函数换成 ReLU 会导致非常大的输出值。
 
-41. LSTM 是什么？
+42. LSTM 是什么？
 
      答：遗忘门：$$f_t=\sigma(W_f[h_{t-1}, x_t] + b_f)$$，输出 [0, 1]，来表示信息保留程度。
 
@@ -1350,15 +1357,15 @@ keywords: 面试题
 
      得到最终输出：$$h_t=o_t*tanh(C_t)$$。
 
-42. GRU 是什么？
+43. GRU 是什么？
 
      答：LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
 
-43. LSTM 和 GRU 的联系和区别？
+44. LSTM 和 GRU 的联系和区别？
 
      答：都是通过使梯度的乘法变成加法，来解决 RNN 由于梯度消失而不能对长期依赖建模的问题。前者三个门，后者两个门，所以前者计算更耗时。
 
-44. 门机制为什么能解决梯度消失或爆炸问题？
+45. 门机制为什么能解决梯度消失或爆炸问题？
 
      答：[链接](https://zhuanlan.zhihu.com/p/27485750)
 
@@ -1687,10 +1694,16 @@ keywords: 面试题
 7. Deepseek
 
      答：1. 采用 GRPO 算法，显著降低 RL 训练成本。
+     2. R1 中的 MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
+     3. R1 在 SFT（Supervised Fine-Tuning）阶段采用冷启动（cold start），不使用预训练模型的全部参数直接微调，其核心目的是避免训练初期的不稳定与性能退化，稳定训练过程、充分激活新结构（如 MLA）。
+     4. fp8 精度计算
+     5. Multi-Token Predition
 
 8. 数据收集，数据质量控制，数据生成
 
 9. Tokenizer
+
+     答：前向匹配（Forward Maximum Matching）+ 动态规划（如 Viterbi 算法）
 
 10. Position Embedding
 
@@ -1698,7 +1711,9 @@ keywords: 面试题
 
 11. LLM 常用的激活函数有？
 
-     答：ReLU, GeLU, Swish
+     答：ReLU，GeLU，GLU，SwiGLU。ReLU，GeLU 不能门控，GLU，SwiGLU 能门控。
+     SwiGLU = 线性 × SwiSH 激活。
+     Swish 函数代替了原始 GLU 中的 Sigmoid 激活。
 
 12. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
 
@@ -1820,6 +1835,8 @@ keywords: 面试题
 
 25. Long Context
 
+     答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
+
 26. RAG; KG + LLM
 
 27. Reasoning
@@ -1828,29 +1845,43 @@ keywords: 面试题
 
      答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-29. LLM 常用的优化器有？
+29. bf16，fp16，fp32区别
+
+     答：bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。
+
+30. LLM 常用的优化器有？
 
      答：AdamW，Lion
 
-30. 多卡多机训练
+31. 混合精度计算
+
+     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
+
+32. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
+
+     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2字节，fp32 精度为 4字节。
+     训练显存 ≈ 模型参数 × 3（包括权重 + 梯度 + Optimizer状态） + 激活 + buffer，主要瓶颈是激活值和优化器状态，batch_size 越大，激活越大；序列长度越长，attention buffer 越大。
+     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 **KV Cache**。 
+
+33. 多卡多机训练
 
       答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-31. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+34. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
       答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-32. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+35. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
      答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-33. deepspeed 的 Zero-1， Zero 2， Zero 3
+36. deepspeed 的 Zero-1， Zero 2， Zero 3
 
      答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存
 
-34. vllm
+37. vllm
 
-     答：把 KV 缓存当作“虚拟内存”；每条序列的缓存按页（page）管理，动态分配到显存中；PagedAttention = 分页机制 + 注意力机制
+     答：把 KV 缓存当作虚拟内存；每条序列的缓存按页（page）管理，动态分配到显存中；PagedAttention = 分页机制 + 注意力机制
 
 #### Applications
 
@@ -1908,4 +1939,6 @@ keywords: 面试题
 
 7. 工作时间：日常工作时间，单双休，年假
 
-8. 职业规划（工作方向）: [链接](https://www.zhihu.com/question/20054953)
+8. 为什么加入我们公司？
+
+9. 职业规划（工作方向）: [链接](https://www.zhihu.com/question/20054953)
