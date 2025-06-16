@@ -12,64 +12,65 @@ keywords: 面试题
 
 1. 有 1000 个一模一样的瓶子，其中有 999 瓶是普通的水，有一瓶是毒药。任何喝下毒药的生物都会在一星期之后死亡。现在，你只有 10 只小白鼠和一星期的时间，如何检验出哪个瓶子里有毒药？
 
-   答：可以用二进制编码的思维来解决。先对 1000 个瓶子以二进制数的形式进行编号，则至少需要十位的二进制数进行表示。再用这10只小白鼠分别对应二进制数的 10 个数位，让每只小白鼠喝下编号对应数位值为 1 的瓶子。最后根据小白鼠的死亡情况得到一个十位二进制数，编号与其相等的瓶子里面有毒药。
+    答：可以用二进制编码的思维来解决。先对 1000 个瓶子以二进制数的形式进行编号，则至少需要十位的二进制数进行表示。再用这10只小白鼠分别对应二进制数的 10 个数位，让每只小白鼠喝下编号对应数位值为 1 的瓶子。最后根据小白鼠的死亡情况得到一个十位二进制数，编号与其相等的瓶子里面有毒药。
 
 2. 1000 桶水，其中一桶有毒，猪喝毒水后会在 15 分钟内死去，想用一个小时找到这桶毒水，至少需要几头猪？
 
-   答：由于一只猪总共有五种状态，所以可以用五进制的方法解决，将 1000桶水表示成五进制至少需要 5 位，所以至少需要五头猪。
+    答：由于一只猪总共有五种状态，所以可以用五进制的方法解决，将 1000桶水表示成五进制至少需要 5 位，所以至少需要五头猪。
 
 3. 1000 桶水中两桶有毒，猪喝毒水后会在 15 分钟内死去，想用一个小时找到毒水，至少需要几只猪？如何实现？
 
-   答：从理论上来讲，1000 桶水两桶有毒，有 499500 种状态，而一头猪有 5 种状态，求解 5^l > 499500，求得 l > 8.15，所以 9 只猪就可以找到毒水：
-
-   a. 我们先把1000桶水分为10组，每只猪试验一组，一组空白；
-
-   b. 如果只有一只猪死，那么说明两桶毒水都在那 100 桶水中，再把这 100 桶水分为 10 组，剩下的 9 只猪试验 9 组，另外 10 桶不实验，这样问题可一步一步缩小；
-
-   c. 如果有两只猪死，则说明有两组 100 桶水各有一桶毒水，每组用 3 头猪即可实验。
+    答：从理论上来讲，1000 桶水两桶有毒，有 499500 种状态，而一头猪有 5 种状态，求解 5^l > 499500，求得 l > 8.15，所以 9 只猪就可以找到毒水：
+    
+    a. 我们先把1000桶水分为10组，每只猪试验一组，一组空白；
+    
+    b. 如果只有一只猪死，那么说明两桶毒水都在那 100 桶水中，再把这 100 桶水分为 10 组，剩下的 9 只猪试验 9 组，另外 10 桶不实验，这样问题可一步一步缩小；
+    
+    c. 如果有两只猪死，则说明有两组 100 桶水各有一桶毒水，每组用 3 头猪即可实验。
 
 4. 一个村子里有很多户人家，每家都养了一条狗。现在发现村子里面出现了 n 只疯狗，村里规定，谁要是发现了自己的狗是疯狗，就要将自己的狗枪毙。但问题是，村子里面的人只能看出别人家的狗是不是疯狗，而不能看出自己的狗是不是疯的，如果看出别人家的狗是疯狗，也不能告诉别人。于是大家开始观察，第一天晚上，没有枪声，第二天晚上，没有枪声，直到第 n 天晚上，这 n 只狗才被同时枪毙，请问这是为什么？
 
-   答：具体分析流程如下：
-
-   a. 首先从只有一条疯狗分析起，如果只有一条疯狗，那么疯狗的主人在第 1 天就会发现其他家庭一只疯狗都没有，从而枪毙自己家的狗；
-
-   b. 如果有两条疯狗，那么拥有疯狗的家庭在第一天由于看到别人家有疯狗，就不会枪毙自己家的狗，但发现第一晚没人枪毙自己的狗后，他会知道村子里有两条疯狗，其中一条就是自己的。实际上，整个村子的人都会在第一晚没人枪毙自己的狗后，知道整个村子至少有两条疯狗；
-
-   c. 继续分析，如果第二晚还没有枪声，那说明拥有疯狗的人都看到了至少两条疯狗，所以他不会认为自己拥有疯狗，但经过没有枪声的第二晚后，全村人便达成了村子至少有三条疯狗的事实；
-
-   d. 同理可得，拥有疯狗的家庭由于能看到 n - 1 条狗，他需要 n 天才能判断村子里至少有 n 条疯狗，其中一条就是自己家的狗，从而在第 n 天晚上枪毙自己家的狗。
+    答：具体分析流程如下：
+    
+    a. 首先从只有一条疯狗分析起，如果只有一条疯狗，那么疯狗的主人在第 1 天就会发现其他家庭一只疯狗都没有，从而枪毙自己家的狗；
+    
+    b. 如果有两条疯狗，那么拥有疯狗的家庭在第一天由于看到别人家有疯狗，就不会枪毙自己家的狗，但发现第一晚没人枪毙自己的狗后，他会知道村子里有两条疯狗，其中一条就是自己的。实际上，整个村子的人都会在第一晚没人枪毙自己的狗后，知道整个村子至少有两条疯狗；
+    
+    c. 继续分析，如果第二晚还没有枪声，那说明拥有疯狗的人都看到了至少两条疯狗，所以他不会认为自己拥有疯狗，但经过没有枪声的第二晚后，全村人便达成了村子至少有三条疯狗的事实；
+    
+    d. 同理可得，拥有疯狗的家庭由于能看到 n - 1 条狗，他需要 n 天才能判断村子里至少有 n 条疯狗，其中一条就是自己家的狗，从而在第 n 天晚上枪毙自己家的狗。
 
 5. 五个同事决定计算他们的平均工资，在大家互相不告诉薪水的情况下，如何才能做到这一点？
 
-   答：这道题的方法有很多，比如有：
-
-   a. 每个人把自己的工资随意拆成四个数的和，分别把四个数字告诉自己以外的四个人；每个人手里收到四个数字，加起来，报出；五个人的数字相加，即可得到五个人的总收入，除以5得到平均工资；
-
-   b. 找个计算器，叫第一个人输入一个巨大的不规则的数，然后把自己的收入加上去，之后依次传给其他人，每人都把自己的收入加上之前的数。最后传回第一个人。第一个人再把最后的总和减去他选中的那个不规则数，然后除以人数，即可得到大家的平均。
+    答：这道题的方法有很多，比如有：
+    
+    a. 每个人把自己的工资随意拆成四个数的和，分别把四个数字告诉自己以外的四个人；每个人手里收到四个数字，加起来，报出；五个人的数字相加，即可得到五个人的总收入，除以5得到平均工资；
+    
+    b. 找个计算器，叫第一个人输入一个巨大的不规则的数，然后把自己的收入加上去，之后依次传给其他人，每人都把自己的收入加上之前的数。最后传回第一个人。第一个人再把最后的总和减去他选中的那个不规则数，然后除以人数，即可得到大家的平均。
 
 6. 圆桌上有 1 到 1000 号，1 号右手边是 2 号，左手边是 1000 号。1 号开枪打死 2 号，把枪交给 3 号，3 号打死 4 号交给5号。。999 号打死 1000 号后把枪交给 1 号，继续循环。最后留下来的是几号？
 
-   答：约瑟夫环问题，套公式 $$f(n) = 2(n - 2^{log_2n}) + 1$$ 直接得到结果为 977。
+    答：约瑟夫环问题，套公式 $$f(n) = 2(n - 2^{log_2n}) + 1$$ 直接得到结果为 977。
 
 7. 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从前 n-1 层扔鸡蛋都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。已知鸡蛋在 0 层扔不会碎。提出一个策略，要保证能测出鸡蛋恰好会碎的楼层，并使此策略在最坏情况下所扔次数最少？
 
-   答：这是一道非常经典的面试题，我们用两种方法来解决：
-
-   a. 分析法：对于每一次扔鸡蛋，都可以看作是一次决策，所以最终扔的方案应该是构成一棵决策树，问题就可以转换成求最矮决策树的高度。假设第一次扔的楼层是第 k 层楼，则碎子树的高度为 k - 1，如果第一次扔鸡蛋没碎，则设第二次扔的高度为 m，则对于 m 来讲，其碎子树高度为 m - k - 1，相对根节点高度则为 m - k。由于要尽可能保证子树的高度一致，所以得 m - k = k - 1，故可得第二次扔的高度要比前一次高 k - 1 层。从而得到方程 k(k + 1) / 2 = 200，从而解得高度为 14；
-
-   b. 动态规划法：这道题是很经典的动态规划问题，设楼层次数为 n，我们可以得到状态转移方程`f(n) = min(max(k-1, f(n - k))) + 1 (0 < k <= n)`，如果我们再加入鸡蛋数目变量 m，则状态转移方程为`f(n, m) = min(max(f(k - 1, m - 1), f(n - k, m))) + 1 (0 < k <= n)。`
+    答：这是一道非常经典的面试题，我们用两种方法来解决：
+    
+    a. 分析法：对于每一次扔鸡蛋，都可以看作是一次决策，所以最终扔的方案应该是构成一棵决策树，问题就可以转换成求最矮决策树的高度。假设第一次扔的楼层是第 k 层楼，则碎子树的高度为 k - 1，如果第一次扔鸡蛋没碎，则设第二次扔的高度为 m，则对于 m 来讲，其碎子树高度为 m - k - 1，相对根节点高度则为 m - k。由于要尽可能保证子树的高度一致，所以得 m - k = k - 1，故可得第二次扔的高度要比前一次高 k - 1 层。从而得到方程 k(k + 1) / 2 = 200，从而解得高度为 14；
+    
+    b. 动态规划法：这道题是很经典的动态规划问题，设楼层次数为 n，我们可以得到状态转移方程`f(n) = min(max(k-1, f(n - k))) + 1 (0 < k <= n)`，如果我们再加入鸡蛋数目变量 m，则状态转移方程为`f(n, m) = min(max(f(k - 1, m - 1), f(n - k, m))) + 1 (0 < k <= n)。
+`
 8. 16个硬币，A和B轮流拿走一些，每次拿走的个数只能是1，2，4中的一个数。谁最后拿硬币谁输。请问：A或B有无策略保证自己赢？
 
-   答：B可以保证自己赢。 如果A拿1个，则B拿2个； 如果A拿2个，则B拿1个； 如果A拿4个，则B拿2个。这样每次AB加起来都是3或者6，所以最后会剩下1个或4个。 如果是1个则A直接输了； 如果剩下4个，A全拿则输了，如果不全拿，B继续采取上面的策略，最后还是剩下1个，还是A输。
+    答：B可以保证自己赢。 如果A拿1个，则B拿2个； 如果A拿2个，则B拿1个； 如果A拿4个，则B拿2个。这样每次AB加起来都是3或者6，所以最后会剩下1个或4个。 如果是1个则A直接输了； 如果剩下4个，A全拿则输了，如果不全拿，B继续采取上面的策略，最后还是剩下1个，还是A输。
 
 9. 海盗博弈
 
-   答：[链接1](https://www.zhihu.com/question/20014343)、[链接2](https://zhuanlan.zhihu.com/p/27388049)、[链接3](https://www.zhihu.com/question/47973941)
+    答：[链接1](https://www.zhihu.com/question/20014343)、[链接2](https://zhuanlan.zhihu.com/p/27388049)、[链接3](https://www.zhihu.com/question/47973941)
 
 10. 五个囚犯先后从100颗绿豆中抓绿豆。抓得最多和最少的人将被处死，不能交流，可以摸出剩下绿豆的数量，谁的存活几率最大？
 
-   答：[链接](https://www.zhihu.com/question/19912025)
+    答：[链接](https://www.zhihu.com/question/19912025)
 
 11. 三个极度嫉妒的人分一个蛋糕，采用什么策略，能让三人都觉得公平？
 
@@ -262,45 +263,49 @@ keywords: 面试题
 
 1. 有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？
 
-   答：最简单的思路是合并数据库，然后再定位长度，时间复杂度为 O(n)，空间复杂度是 O(n)；但实际上只需要借鉴这个合并的过程，当合并到中位数的时候输出中位数即可，时间复杂度为 O(n)，空间复杂度是 O(1)。这思路十分简单，但并不是最佳算法，有序数组让我们想到的会是二分查找，因此我们可以利用二分查找来使复杂度降至 O(logn)，具体可参考：
-
-   a. https://www.douban.com/note/177571938/
-
-   b. https://stackoverflow.com/questions/6182488/median-of-5-sorted-arrays
+    答：最简单的思路是合并数据库，然后再定位长度，时间复杂度为 O(n)，空间复杂度是 O(n)；但实际上只需要借鉴这个合并的过程，当合并到中位数的时候输出中位数即可，时间复杂度为 O(n)，空间复杂度是 O(1)。这思路十分简单，但并不是最佳算法，有序数组让我们想到的会是二分查找，因此我们可以利用二分查找来使复杂度降至 O(logn)，具体可参考：
+    
+    a. https://www.douban.com/note/177571938/
+    
+    b. https://stackoverflow.com/questions/6182488/median-of-5-sorted-arrays
 
 2. 稳定排序？
 
-   答：稳定的排序算法：冒泡排序、插入排序、归并排序和基数排序；
-
-   不是稳定的排序算法：选择排序、快速排序、希尔排序、堆排序。
+    答：稳定的排序算法：冒泡排序、插入排序、归并排序和基数排序；
+    
+    不是稳定的排序算法：选择排序、快速排序、希尔排序、堆排序。
 
 3. 原地排序与非原地排序？
 
-   答：原地排序就是指在排序过程中不申请多余的存储空间，只利用原来存储待排数据的存储空间进行比较和交换的数据排序。非原地排序就是要利用额外的数组。
+    答：原地排序就是指在排序过程中不申请多余的存储空间，只利用原来存储待排数据的存储空间进行比较和交换的数据排序。非原地排序就是要利用额外的数组。
 
 4. 数组最大最小值最优算法？
 
-   答：[链接](https://www.zhihu.com/question/28892158)
+    答：[链接](https://www.zhihu.com/question/28892158)
 
 5. 无序整数数组中找第 k 大的数？
 
-   答：[链接](https://blog.csdn.net/wangbaochu/article/details/52949443)
+    答：方法一：最小堆：建一个大小为 k 的最小堆。遍历数组，将元素加入堆中，如果堆大小超过 k，就弹出堆顶（最小元素）。最终堆顶就是第 k 大的数。时间复杂度：O(n log k)，空间复杂度：O(k)
+    
+    方法二：快速选择（Quickselect），类似快速排序的分区思想（partition）；每次将数组划分为两个区间，选择一边递归；平均时间复杂度 O(n)，最坏 O(n²)。
+    
+    方法三：内置排序
 
 6. 在 n 个数中取最大的 k 个数，时间复杂度是？
 
-   答：nlogk。堆的大小为 k，总共要调整 n 次。
+    答：nlogk。堆的大小为 k，总共要调整 n 次。
 
 7. 不用库函数求一个数的立方根？
 
-   答：[链接](https://blog.csdn.net/sjpz0124/article/details/47726275)
+    答：[链接](https://blog.csdn.net/sjpz0124/article/details/47726275)
 
 8. 二进制中 1 的个数？
 
-   答：把一个整数减去 1，再和原整数做与运算，会把该整数最右边的 1 变成 0。那么一个整数的二进制表示中有多少个 1，就可以进行多少次这样的操作。具体解题思路可参见《剑指 Offer》。
+    答：把一个整数减去 1，再和原整数做与运算，会把该整数最右边的 1 变成 0。那么一个整数的二进制表示中有多少个 1，就可以进行多少次这样的操作。具体解题思路可参见《剑指 Offer》。
 
 9. 8 位二进制整型补码表示取值范围是？
 
-   答：-2^32 到 2^32 - 1。补码中正负 0 统一用正 0 表示，所以负数多出一个数。
+    答：-2^32 到 2^32 - 1。补码中正负 0 统一用正 0 表示，所以负数多出一个数。
 
 10. 数值的整数次方？
 
@@ -619,7 +624,7 @@ keywords: 面试题
 
 18. Python 多线程？
 
-       答：对于 CPU 密集型，由于全局解释器锁（访问 Python 虚拟机）的存在，所以线程是线性执行的；对于 I/O 密集型，由于全局解释器锁会被释放，所以这时多线程有体现作用。
+       答：对于 CPU 密集型，由于全局解释器锁（GIL）的存在，GIL 保证在任何时刻只有一个线程执行 Python 字节码，所以线程是线性执行的；对于 I/O 密集型，由于线程在等待 I/O 操作时会释放全局解释器锁，所以这时多线程有体现作用。
 
 #### Linux
 
@@ -659,7 +664,7 @@ keywords: 面试题
 
     判别模型：学习得到条件概率分布 P(y \| x)，即在特征 x 出现的情况下标记 y 出现的概率。
 
-    数据要求：生成模型需要的数据量比较大，能够较好地估计概率密度；而判别模型对数据样本量的要求没有那么多。****
+    数据要求：生成模型需要的数据量比较大，能够较好地估计概率密度；而判别模型对数据样本量的要求没有那么多。
 
 8. 什么是参数模型，什么是非参数模型？
 
@@ -682,6 +687,73 @@ keywords: 面试题
      答：宏平均 F1 对每个类求 F1 之后取平均，微平均 F1 针对整体求 F1。
 
 #### Regression
+
+1. 线性回归的基本假设是？
+
+    答：线性性；独立性；同方差性；正态性；无多重共线性。
+
+2. 线性回归中特征不小心重复会有影响吗？
+
+    答：会，导致矩阵不可逆。
+
+3. 最小二乘法为什么可以解决线性回归问题？
+
+    答：残差满足正态分布时，用最大似然估计法可以证明最小二乘法是合理的。
+
+4. 描述一下最小二乘法的几何意义？
+
+    答：最小二乘法中的几何意义是高维空间中的一个向量在低维子空间的投影。$$WX$$ 实际上是当前样本形成的线性组合空间 $$S$$，最小化的过程是找到一个合适的 $$W$$，使得不在 $$S$$ 上的 $$Y$$ 到 $$S$$ 的投影距离最小。
+
+5. 正规方程是什么？它有什么作用？
+
+    答：$$(X^TX)^{-1}X^Ty$$。可以一次运算得出结果，但特征数目过多时不适用。
+
+6. 用最小二乘法实现线性回归
+
+    答：
+    ```
+    import numpy as np
+	# 1. 生成数据（y = 2x + 3 + noise）
+	np.random.seed(42)
+	X = np.random.rand(100, 1)  # 100 个样本，1 个特征
+	y = 2 * X[:, 0] + 3 + np.random.randn(100) * 0.1  # 添加噪声
+	
+	# 2. 添加偏置项 x0 = 1（扩展 X 为 [x, 1]）
+	X_b = np.c_[X, np.ones((X.shape[0], 1))]  # shape: [100, 2]
+	
+	# 3. 正规方程解：theta = (X^T X)^(-1) X^T y
+	theta = np.linalg.inv(X_b.T @ X_b) @ X_b.T @ y
+	
+	print("权重和偏置（w, b）：", theta)
+    ```
+
+7. 用梯度下降实现线性回归
+
+    答：
+    ```
+    # 初始化
+	w = np.random.randn()
+	b = np.random.randn()
+	lr = 0.1
+	
+	for epoch in range(1000):
+	    y_pred = w * X[:, 0] + b
+	    error = y_pred - y
+	    loss = (error ** 2).mean()
+	
+	    # 手动计算梯度
+	    grad_w = 2 * (error * X[:, 0]).mean()
+	    grad_b = 2 * error.mean()
+	
+	    # 更新参数
+	    w -= lr * grad_w
+	    b -= lr * grad_b
+	
+	    if epoch % 100 == 0:
+	        print(f"Epoch {epoch}: loss={loss:.4f}, w={w:.4f}, b={b:.4f}")
+    ```
+
+#### Classification
 
 1. 手推 LR？
 
@@ -719,113 +791,47 @@ keywords: 面试题
 
     答：LR 后看系数。
 
-7. 线性回归中特征不小心重复会有影响吗？
-
-    答：会，导致矩阵不可逆。
-
-8. 最小二乘法为什么可以解决线性回归问题？
-
-    答：残差满足正态分布时，用最大似然估计法可以证明最小二乘法是合理的。
-
-9. 描述一下最小二乘法的几何意义？
-
-    答：最小二乘法中的几何意义是高维空间中的一个向量在低维子空间的投影。$$WX$$ 实际上是当前样本形成的线性组合空间 $$S$$，最小化的过程是找到一个合适的 $$W$$，使得不在 $$S$$ 上的 $$Y$$ 到 $$S$$ 的投影距离最小。
-
-10. 正规方程是什么？它有什么作用？
-
-    答：$$(X^TX)^{-1}X^Ty$$。可以一次运算得出结果，但特征数目过多时不适用。
-
-11. 用最小二乘法实现线性回归
-
-    答：
-    ```
-    import numpy as np
-	# 1. 生成数据（y = 2x + 3 + noise）
-	np.random.seed(42)
-	X = np.random.rand(100, 1)  # 100 个样本，1 个特征
-	y = 2 * X[:, 0] + 3 + np.random.randn(100) * 0.1  # 添加噪声
-	
-	# 2. 添加偏置项 x0 = 1（扩展 X 为 [x, 1]）
-	X_b = np.c_[X, np.ones((X.shape[0], 1))]  # shape: [100, 2]
-	
-	# 3. 正规方程解：theta = (X^T X)^(-1) X^T y
-	theta = np.linalg.inv(X_b.T @ X_b) @ X_b.T @ y
-	
-	print("权重和偏置（w, b）：", theta)
-    ```
-
-12. 用梯度下降实现线性回归
-
-    答：
-    ```
-    # 初始化
-	w = np.random.randn()
-	b = np.random.randn()
-	lr = 0.1
-	
-	for epoch in range(1000):
-	    y_pred = w * X[:, 0] + b
-	    error = y_pred - y
-	    loss = (error ** 2).mean()
-	
-	    # 手动计算梯度
-	    grad_w = 2 * (error * X[:, 0]).mean()
-	    grad_b = 2 * error.mean()
-	
-	    # 更新参数
-	    w -= lr * grad_w
-	    b -= lr * grad_b
-	
-	    if epoch % 100 == 0:
-	        print(f"Epoch {epoch}: loss={loss:.4f}, w={w:.4f}, b={b:.4f}")
-    ```
-
-13. 
-
-
-#### Classification
-
-1. 单层感知机为什么不能解决异或问题？
+7. 单层感知机为什么不能解决异或问题？
 
     答：因为异或操作需要两条线来划分边界，而单层感知机可以理解为一个线性分类器，只能解决与、或、非问题。
 
-2. 如何对单层感知机进行改进，使其能够解决异或问题？
+8. 如何对单层感知机进行改进，使其能够解决异或问题？
 
     答：多层感知机，或在进入激活函数前加一个多项式模块，从而添加非线性成分。
 
-3. 怎么判断分类器是线性分类器还是非线性分类器？
+9. 怎么判断分类器是线性分类器还是非线性分类器？
 
     答：根据决策面是否是线性的。
 
-4. KNN 的训练损失是多少？
+10. KNN 的训练损失是多少？
 
     答：KNN 实际上不算训练，损失为 0。
 
-5. KNN 算法的 k 值应该如何选择？
+11. KNN 算法的 k 值应该如何选择？
 
     答：k 值太小，模型复杂度较高，容易过拟合；k 值太大，模型复杂度不够，较远的点也可能影响分类结果，分类模糊，导致分类结果不理想。当 k 取训练集大小时，分类结果都为训练集中最多的类。k 值一般选取较小的值，且要低于训练样本数的平方根，可以使用交叉验证法选取。
 
-6. KNN 怎么更快地找到最近邻点？
+12. KNN 怎么更快地找到最近邻点？
 
     答：KD 树和 ball 树，KD 树根据样本构建，但训练样例远大于特征维度时才适用。
 
-7. KNN 算法可以根据距离加权吗？
+13. KNN 算法可以根据距离加权吗？
 
     答：可以用反函数或高斯函数进行距离加权，前者为近邻样本赋予较大权重，稍远的会衰减地很快，因此对噪声数据比较敏感，后者能解决这个问题，但比较复杂。
 
-8. 常见的距离度量方法有哪些？
+14. 常见的距离度量方法有哪些？
 
     答：$$L_p$$ 距离 / Minkowski 距离 / 闵式距离是最常规的距离度量方式，其公式为 $$(\|x-y\|^p)^{1/p}$$。当 $$p = 1$$ 时为曼哈顿距离，$$p = 2$$ 时为欧式距离，$$p$$ 为无穷大时为各个坐标距离的最大值，即切比雪夫距离。
 
-9. 衡量相似度的方法？
+15. 衡量相似度的方法？
 
     答：欧式距离，Jaccard 相似度（两集合交集大小 / 并集大小），余弦相似度，皮尔逊相关系数（数值归一化后计算余弦相似度），汉明距离。
 
-10. 什么是支持向量机？
+16. 什么是支持向量机？
 
     答：支持向量机就是构造一个的超平面，使得距离超平面最近的那些点，即支持向量与超平面之间的 margin 最大，从而将两个集合分开。
 
-11. LR 和 SVM 的联系与区别？
+17. LR 和 SVM 的联系与区别？
 
     答：[链接](https://www.cnblogs.com/zhizhan/p/5038747.html)
 
@@ -833,15 +839,15 @@ keywords: 面试题
 
     区别：LR 是参数模型，SVM 是非参数模型；从目标函数来看，LR 采用的是 log loss，SVM 采用的是 hinge loss。
 
-12. 当数据线性可分、接近线性可分以及线性不可分时，分别使用什么 SVM？
+18. 当数据线性可分、接近线性可分以及线性不可分时，分别使用什么 SVM？
 
     答：硬间隔最大化、软间隔最大化以及核技巧。
 
-13. SVM 为什么采用间隔最大化？
+19. SVM 为什么采用间隔最大化？
 
     答：当训练数据线性可分时，存在无穷个分离超平面可以将两类数据正确分开。感知机利用误分类最小策略，求得分离超平面，不过此时的解有无穷多个。线性可分支持向量机利用间隔最大化求得最优分离超平面，这时，解是唯一的。另一方面，此时的分隔超平面所产生的分类结果是最鲁棒的，对未知实例的泛化能力最强。
 
-14. 手推 SVM
+20. 手推 SVM
 
     答：
     
@@ -869,67 +875,67 @@ keywords: 面试题
 
     求解问题，解出 $$\alpha$$，从而解得 $$w, b$$，$$\alpha_i > 0$$ 对应的样本即为支持向量。
 
-15. 为什么要将求解 SVM 的原始问题转换为其对偶问题？
+21. 为什么要将求解 SVM 的原始问题转换为其对偶问题？
 
     答：一是对偶问题往往更易求解。二是可以自然引入核函数，进而推广到非线性分类问题。
 
-16. 为什么 SVM 对缺失数据敏感？
+22. 为什么 SVM 对缺失数据敏感？
 
     答：缺失数据是指缺失某些特征数据，向量数据不完整。SVM 没有处理缺失值的策略。而 SVM 希望样本在特征空间中线性可分，所以特征空间的好坏对 SVM 的性能很重要。缺失特征数据将影响训练结果的好坏。
 
-17. 什么是几何间隔，什么是函数间隔？
+23. 什么是几何间隔，什么是函数间隔？
 
     答：几何间隔 $$y_i\frac{w^Tx_i+b}{\|w\|}$$，函数间隔 $$y_i(w^Tx_i+b)$$。函数间隔可以无限大，几何间隔不可以。
 
-18. 支持向量机的训练在本质上是在最优化哪个值？
+24. 支持向量机的训练在本质上是在最优化哪个值？
 
     答：w。w 得到 b 自然可以得到。
 
-19. 如何用支持向量机实现深度学习？
+25. 如何用支持向量机实现深度学习？
 
     答：可以用支持向量机作为网络的最后一层，进行分类。
 
-20. 给一组数据，问决策树、LR、NB 以及 SVM 等算法学出来是什么样子的？
+26. 给一组数据，问决策树、LR、NB 以及 SVM 等算法学出来是什么样子的？
 
     答：[链接](https://www.zhihu.com/question/26726794)
 
-21. 什么是基于核的机器学习算法？
+27. 什么是基于核的机器学习算法？
 
     答：判别式模型需要把正负样本区分开，那势必会遇到区分不开的情形，这时要用到核函数，所以可认为判别式模型都要用核函数的。
 
-22. SVM 有哪些核函数？
+28. SVM 有哪些核函数？
 
     答：线性核和高斯核，即线性核与 RBF（径向基）核。 线性核：主要用于线性可分，参数少，速度快，对于一般数据，分类效果已经很理想了。 RBF 核：主要用于线性不可分，参数多，分类结果非常依赖于参数。 如果 Feature 数量跟样本数量差不多，应选用线性核的 SVM。 如果 Feature 数量比较小，样本数量一般，选用高斯核的 SVM。其他的核函数包括幂指数核、拉普拉斯核以及 Sigmoid 核等等。
 
-23. 高斯核为什么有效？
+29. 高斯核为什么有效？
 
     答：[链接](https://stats.stackexchange.com/questions/131138/what-makes-the-gaussian-kernel-so-magical-for-pca-and-also-in-general)
 
-24. 支持向量机可以用来做回归吗？
+30. 支持向量机可以用来做回归吗？
 
     答：支持向量机分类是使两类的点在各自的支持向量外，而支持向量机回归是把所有的点都看成一类，并要求在支持向量内。
 
-25. SVM 和 softmax 的区别？
+31. SVM 和 softmax 的区别？
 
     答：SVM 具有附加稳定性，当样例满足边界条件时，该样例不会影响损失函数；而 softmax 将考虑所有的样例。
 
-26. 感知机和 SVM 有什么区别？
+32. 感知机和 SVM 有什么区别？
 
     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003714)
 
-27. One-class SVM？
+33. One-class SVM？
 
     答：只要针对异常检测问题。
 
-28. 朴素贝叶斯为何如此朴素？
+34. 朴素贝叶斯为何如此朴素？
 
     答：对条件概率分布作了条件独立性（conditional independence）的假设。
 
-29. 朴素贝叶斯中特征不小心重复会有影响吗？
+35. 朴素贝叶斯中特征不小心重复会有影响吗？
 
     答：会，破坏了原本的独立性假设。
 
-30. 用 numpy 实现 cross entropy loss
+36. 用 numpy 实现 cross entropy loss
 
     答：
     ```
@@ -974,7 +980,7 @@ keywords: 面试题
 	print("\nCross-entropy loss:", loss)
     ```
 
-31. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
+37. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
 
    Answer: If you have worked on enough data sets, you should deduce that cancer detection results in imbalanced data. In an imbalanced data set, accuracy should not be used as a measure of performance because 96% (as given) might only be predicting majority class correctly, but our class of interest is minority class (4%) which is the people who actually got diagnosed with cancer. Hence, in order to evaluate model performance, we should use Sensitivity (True Positive Rate), Specificity (True Negative Rate), F measure to determine class wise performance of the classifier. If the minority class performance is found to to be poor, we can undertake the following steps:
 
@@ -988,7 +994,7 @@ keywords: 面试题
 
    Know more: Imbalanced Classification
 
-32. 多分类问题如何转二分类方法？
+38. 多分类问题如何转二分类方法？
 
     答：a. 一对多法（one-versus-rest）。把某类样本归为一类，其他归为另一类，k 个类别的样本就构造出了 k 个 SVM；
 
@@ -996,7 +1002,7 @@ keywords: 面试题
 
     c. 层次支持向量机（H-SVMs）。先将所有类别分成两个子类，再将子类进一步划分成两个次级子类，如此循环。
 
-33. 上溢（overflow）和下溢（underflow）是什么，softmax 函数会出现哪种情况，该怎么解决？
+39. 上溢（overflow）和下溢（underflow）是什么，softmax 函数会出现哪种情况，该怎么解决？
 
     答：上溢即大量级的数被近似为正负无穷时，发生上溢。发生上溢后，这些数值会变为非数值。下溢即有些逼近零的数，如零除或者对零取对数时，得到负无穷，如果对负无穷进一步运算，则会得到非数字。softmax 函数中有指数运算，如果要运算的数过小或过大，则会下溢或上溢。解决上溢的方式是让每一个值都减去最大分量的值，由于这样做之后分母有一项为 1，所以不会出现下溢。同样对于取对数，可以让所有数都加 1。
 
@@ -1004,7 +1010,8 @@ keywords: 面试题
 
 1. 手撕 KMeans
 
-    答：```
+    答：
+    ```
     import numpy as np
     
 	class KMeans:
@@ -1051,15 +1058,19 @@ keywords: 面试题
 	        return np.linalg.norm(X[:, np.newaxis] - self.centroids, axis=2)
     ```
 
-2. KMeans 中我想聚成 100 类 结果发现只能聚成98类，为什么？
+2. KMeans 中我想聚成 100 类 结果发现只能聚成 98 类，为什么？
 
     答：因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn.net/shwan_ma/article/details/80096408)。
 
-3. 讲一下 EM 算法，E 步和 M 步的具体步骤，E 中的期望是什么？
+3. 为什么在高维空间中聚类效果会变差？如何应对？
+
+    答：高维导致“距离集中”，影响距离度量有效性（维度灾难）。可先进行降维（如 PCA、t-SNE、UMAP）再聚类。
+
+4. 讲一下 EM 算法，E 步和 M 步的具体步骤，E 中的期望是什么？
 
     答：初始化参数 $$\theta^{old}$$；E 步：估计 $$p(Z\|X, \theta^{old})$$，求得样本的后验期望值；M 步：根据极大似然估计求得 $$\theta^{new}$$；根据 $$\theta$$，迭代至收敛。
 
-4. KMeans 和 EM 有什么关系，和 GMM 有什么关系？
+5. KMeans 和 EM 有什么关系，和 GMM 有什么关系？
 
     答：KMeans 的目标函数（整个数据集点到各自聚类中心的距离的平方和）可以用 EM 算法求解。K-Means 算法归类为 GMM 的 EM 解法的一个特例。
 
@@ -1081,6 +1092,13 @@ keywords: 面试题
 
     答：分类：信息增益、信息增益比和基尼系数；回归：误差（一般取叶子结点数值的方差和）。
 
+5. 决策树容易过拟合的原因是什么？如何缓解？
+
+    答：训练数据中噪声或特征太多，树可以完美拟合训练集。
+    
+    缓解方法：剪枝；设置最大深度、最小叶子节点数；使用集成方法（如随机森林）
+
+
 #### Dimension Reducing
 
 1. SVD 算法是什么？
@@ -1089,7 +1107,7 @@ keywords: 面试题
 
 2. PCA，SVD 和 LDA 有什么区别？
 
-    答：PCA 和 SVD 是无监督算法，不需要类别信息，他们都可以将数据投影到低维空间，以最大程度保留原始数据的方差信息。LDA 是有监督算法，需要类别信息，他在降维的同时让类间距离尽可能大，类内距离尽可能小。
+    答：PCA 和 SVD 是无监督算法，不需要类别信息，他们都可以将数据投影到低维空间，以最大程度保留原始数据的方差信息。PCA 基本思想：找到数据方差最大的方向，将高维数据投影到这些方向上以实现降维。主要步骤：中心化 → 计算协方差矩阵 → 特征值分解 → 选择前 k 个主成分 → 投影。LDA 是有监督算法，需要类别信息，他在降维的同时让类间距离尽可能大，类内距离尽可能小。
 
 #### Emsemble Learning
 
@@ -1175,7 +1193,7 @@ keywords: 面试题
 
     经过 BN 后，大部分 Activation 的值落入非线性函数的线性区内，对应导数远离导数饱和区，加速训练收敛过程。
 
-    BN 为了保证非线性的获得，对变换后的 x 又进行了 scale 加上 shift 操作：y = scale * x + shift)。
+    BN 为了保证非线性的获得，对变换后的 x 又进行了 scale 加上 shift 操作：y = scale * x + shift。
 
 4. 特征标准化有什么意义？怎么做？
 
@@ -1467,17 +1485,13 @@ keywords: 面试题
 
      答：卷积核宽度为词向量的维度（词向量交换维度并不会起影响，所以没必要在词向量维度做卷积），长度为关注窗口的大小，通道数可为所用词向量。
 
-#### Attention + Transformers
+#### Large Language Models
 
-1. Attention 机制的 soft 和 hard 是什么？
-
-     答：Hard-attention，就是 0/1 问题，哪些区域是被 attentioned，哪些区域不关注；Soft-attention，[0,1] 间连续分布问题，每个区域被关注的程度高低，用 0~1 的 score 表示。
-
-2. multi-head attention 的公式是怎样的？
+1. multi-head attention 的公式是怎样的？
 
      答：$$Attention(Q,K,V) = softmax({QK^T\over {\sqrt {d_k}}})V$$。
-     
-3. multi-head attention 实现
+ 
+2. multi-head attention 实现
 
      答：
      ```
@@ -1528,11 +1542,11 @@ keywords: 面试题
 	        return output
      ```
 
-4. multi-head attention 时间复杂度
+3. multi-head attention 时间复杂度
 
      答：$$O(d * seq\_len * seq\_len)$$。
 
-5. grouped-query attention 实现
+4. grouped-query attention 实现
 
 	答：grouped-query attention 中，query 使用比 key/value 更少的 heads
     ```
@@ -1584,7 +1598,7 @@ keywords: 面试题
 	        return output
      ```
 
-6. multi-head attention + kv cache 实现
+5. multi-head attention + kv cache 实现
 
      答：query 必须每步重算，而 key/value 是过去的记忆，可以缓存。
      ```
@@ -1638,6 +1652,16 @@ keywords: 面试题
 	        return self.out_proj(out)
      ```
 
+6. FlashAttention
+
+     答：FlashAttention 基于以下几点：
+    1. 块分割(blocking)
+    将 Q,K,V 按块划分，分块计算Attention。每次只加载当前块，节省内存。
+    2. 在线计算softmax（online-softmax） 
+    传统softmax需要先计算全部 QK^T，然后减max值再求exp，最后归一化。而FlashAttention在线计算softmax，避免存储整个矩阵。
+    3. 单遍扫描（one-pass）计算  
+    通过巧妙算法实现只需遍历一次 Q,K,V 即可计算Attention输出，避免多次加载。
+
 7. Transformer 的原理？
 
      答：Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
@@ -1645,7 +1669,6 @@ keywords: 面试题
 8. Transformer 的 position encoding 为什么选三角函数？
 
      答：偶数位置，使用正弦编码，在奇数位置，使用余弦编码。任意位置的 $$PE_{pos+k}$$ 都可以被 $$PE_{pos}$$ 的线性函数表示。在 bert 中，position encoding 是学习得到的。
-     
 
 9. Transformer 使用的时候，制约显存的最关键因素是什么？
 
@@ -1667,31 +1690,29 @@ keywords: 面试题
 
      答：可以防止内积过大导致softmax函数梯度变得非常小，这有助于数值稳定性，使得学习过程更加稳定。此外，它还可以看作是一种缩放因子，帮助模型在不同维度上保持一致的性能。
 
-#### Large Language Models
-
-1. GPT 的原理？
+14. GPT 的原理？
 
      答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-2. bert 的原理？
+15. bert 的原理？
 
      答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-3. bert 的训练目标？
+16. bert 的训练目标？
 
      答：bert 有 masked language modeling 和 next sentence prediction 两个目标
 
-4. roberta 相比 bert 做了哪些改进？
+17. roberta 相比 bert 做了哪些改进？
 
      答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-5. bert 强于 rnn 的地方？
+18. bert 强于 rnn 的地方？
 
      答：并行，对大数据比较友好。
 
-6. Qwen
+19. Qwen
 
-7. Deepseek
+20. Deepseek
 
      答：1. 采用 GRPO 算法，显著降低 RL 训练成本。
      2. R1 中的 MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
@@ -1699,27 +1720,28 @@ keywords: 面试题
      4. fp8 精度计算
      5. Multi-Token Predition
 
-8. 数据收集，数据质量控制，数据生成
+21. 数据收集，数据质量控制，数据生成
 
-9. Tokenizer
+22. Tokenizer
 
      答：前向匹配（Forward Maximum Matching）+ 动态规划（如 Viterbi 算法）
 
-10. Position Embedding
+23. Position Embedding
 
-     答：Sinusoidal，Learnable Embedding, RoPE, AliBi 
+     答：绝对位置编码，分为 Sinusoidal（无需学习参数）和 Learnable Embedding。
+     相对位置编码（可针对长序列），分为 RoPE（对 Query 和 Key 的每个向量维度用旋转变换编码位置信息）和 AliBi（通过为 Attention 权重加上线性位置偏置来编码位置信息）。
 
-11. LLM 常用的激活函数有？
+24. LLM 常用的激活函数有？
 
      答：ReLU，GeLU，GLU，SwiGLU。ReLU，GeLU 不能门控，GLU，SwiGLU 能门控。
      SwiGLU = 线性 × SwiSH 激活。
      Swish 函数代替了原始 GLU 中的 Sigmoid 激活。
 
-12. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
+25. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
 
      答：BN 是跨样本统计的，会泄漏信息，所以 LN 更 make sense，RMSNorm 参数量（d，缩放因子）为 LN （2d，缩放因子和偏移因子） 一半，更高效和稳定，并表现与 LN 相似
 
-13. 实现 LayerNorm
+26. 实现 LayerNorm
 
     答：
     ```
@@ -1740,7 +1762,7 @@ keywords: 面试题
 	        return self.gamma * x_norm + self.beta
     ```
 
-14. 实现 RMSNorm
+27. 实现 RMSNorm
 
     答：RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
 	```
@@ -1760,17 +1782,17 @@ keywords: 面试题
 	        return self.scale * x_norm
 	```
 
-15. Pre Norm 和 Post Norm 有什么区别？
+28. Pre Norm 和 Post Norm 有什么区别？
 
      答：Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
 
-16. 为什么 LLM 流行 MoE？
+29. 为什么 LLM 流行 MoE？
 
      答：MoE 能显著提高模型容量而不成比例地增加计算成本
 
-17. SFT
+30. SFT
 
-18. RLHF (PPO, DPO, GRPO)
+31. RLHF (PPO, DPO, GRPO)
 
      答：PPO
      
@@ -1811,75 +1833,91 @@ keywords: 面试题
      PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level
 
 
-19. PPO 有了 reward model 为什么还要 critic/value model？
+32. PPO 有了 reward model 为什么还要 critic/value model？
 
      答：critic/value model 是内部奖励，会在 RL 过程中更新，reward model 是外部奖励，是训练好的
 
-20. GRPO 怎么去掉 critic/value model 的？
+33. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-21. LoRA 的 A 和 B 矩阵用什么初始化方法？
+34. LoRA 的 A 和 B 矩阵用什么初始化方法？
 
      答：A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’。
 
-22. Base eval
+35. Base eval
 
      答：MMLU（通用语言理解类），GSM8K（编程与数学能力）
 
-23. Chat Eval
+36. Chat Eval
 
      答：MT-Bench，AlpacaEval，Arena
 
-24. Safety / Halluciation
+37. Safety / Halluciation
 
-25. Long Context
+38. Long Context
 
      答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
 
-26. RAG; KG + LLM
+39. LLM设计中的 System 1 和 System 2
 
-27. Reasoning
+     答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
+     
+     通过 Prompt Engineering 或架构设计激活 System 2：
+    
+    - Chain-of-Thought（思路链）提示，引导模型一步步“推理”。
+        
+    - 多阶段推理框架，如ReAct、Self-Ask、Tool Augmentation。
+        
+    - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-28. MCP 和 function calling 有什么区别？
+40. RAG; KG + LLM
+
+41. Reasoning
+
+42. MCP 和 function calling 有什么区别？
 
      答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-29. bf16，fp16，fp32区别
+43. LangChain
+
+     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
+
+44. bf16，fp16，fp32区别
 
      答：bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。
 
-30. LLM 常用的优化器有？
+45. LLM 常用的优化器有？
 
      答：AdamW，Lion
 
-31. 混合精度计算
+46. 混合精度计算
 
      答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-32. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
+47. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
 
      答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2字节，fp32 精度为 4字节。
      训练显存 ≈ 模型参数 × 3（包括权重 + 梯度 + Optimizer状态） + 激活 + buffer，主要瓶颈是激活值和优化器状态，batch_size 越大，激活越大；序列长度越长，attention buffer 越大。
      推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 **KV Cache**。 
 
-33. 多卡多机训练
+48. 多卡多机训练
 
       答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-34. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+49. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
       答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-35. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+50. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
      答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-36. deepspeed 的 Zero-1， Zero 2， Zero 3
+51. deepspeed 的 Zero-1， Zero 2， Zero 3
 
      答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存
 
-37. vllm
+52. vllm
 
      答：把 KV 缓存当作虚拟内存；每条序列的缓存按页（page）管理，动态分配到显存中；PagedAttention = 分页机制 + 注意力机制
 
