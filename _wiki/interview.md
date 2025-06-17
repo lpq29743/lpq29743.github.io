@@ -235,6 +235,10 @@ keywords: 面试题
 
     答：[链接](https://www.zhihu.com/question/310998719)
 
+21. 请解释协方差矩阵的含义
+
+    答：协方差矩阵描述多变量间的线性关系，矩阵的每个元素代表两个变量的协方差。
+
 22. 什么是卡方检验？
 
     答：卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离程度就决定卡方值的大小，如果卡方值越大，二者偏差程度越大；反之，二者偏差越小；若两个值完全相等时，卡方值就为0，表明理论值完全符合。
@@ -291,47 +295,67 @@ keywords: 面试题
     
     方法三：内置排序
 
-6. 在 n 个数中取最大的 k 个数，时间复杂度是？
+6. 从一个几乎排序好的数组中找出第 k 小的元素，时间复杂度尽量低。  
+
+    答：利用“插入排序”特性，数组接近有序，插入排序接近线性。也可以用快速选择算法，平均 O(n)。
+
+7. 在 n 个数中取最大的 k 个数，时间复杂度是？
 
     答：nlogk。堆的大小为 k，总共要调整 n 次。
 
-7. 不用库函数求一个数的立方根？
+8. 不用库函数求一个数的立方根？
 
     答：[链接](https://blog.csdn.net/sjpz0124/article/details/47726275)
 
-8. 二进制中 1 的个数？
+9. 二进制中 1 的个数？
 
     答：把一个整数减去 1，再和原整数做与运算，会把该整数最右边的 1 变成 0。那么一个整数的二进制表示中有多少个 1，就可以进行多少次这样的操作。具体解题思路可参见《剑指 Offer》。
 
-9. 8 位二进制整型补码表示取值范围是？
+10. 8 位二进制整型补码表示取值范围是？
 
     答：-2^32 到 2^32 - 1。补码中正负 0 统一用正 0 表示，所以负数多出一个数。
 
-10. 数值的整数次方？
+11. 数值的整数次方？
 
     答：[链接](https://zhuanlan.zhihu.com/p/38715645)
 
-11. 有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？
+12. 有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？
 
     答：[链接](https://www.zhihu.com/question/310970538)
 
-12. 一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？
+13. 一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？
 
     答：中位数。
 
-13. 给定两个数，求他们无限次相加中第 k 小的数？
+14. 给定两个数，求他们无限次相加中第 k 小的数？
 
     答：[链接](https://www.zhihu.com/question/41809896)
 
-14. 了解 Hamming 距离吗？
+15. 什么是水塘抽样？
+
+    答：一种在数据量未知或数据流形式下，以等概率从 n 个元素中采样 k 个的算法，适用于内存受限的场景。
+
+16. 如何从数据流中以等概率选取一个元素（k=1）？
+
+    答：初始化：`result = None`，遍历第 i 个元素时，以 `1/i` 的概率替换 result，所有元素最终被选中的概率都是 `1/n`。
+
+17. 如何扩展到选取 k 个元素？
+
+    答：初始化：前 k 个元素入 reservoir，对第 i (>k) 个元素：以 k/i 的概率随机替换 reservoir 中的一个元素。
+
+18. 链表中如何随机返回一个节点？（单次遍历，O(1) 空间）
+
+    答：遍历链表，对第 i 个节点，以 `1/i` 的概率更新当前候选节点，最终返回的节点是等概率选中的。
+
+19. 了解 Hamming 距离吗？
 
     答：两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。
 
-15. 如何求两个数的二进制表示的 Hamming 距离？
+20. 如何求两个数的二进制表示的 Hamming 距离？
 
     答：先求两个数的异或结果 res，再依次求 res 每一位与 1 与操作的结果，不为 0，则 Hamming 距离加一；每判断完一位，res 右移一位继续判断下一位。
 
-16. 汉诺塔时间复杂度？
+21. 汉诺塔时间复杂度？
 
     答：假设移动 n 个圆盘需要 f(n) 次移动
 
@@ -341,11 +365,11 @@ keywords: 面试题
 
     根据 ①② 两式，可求出 f(n) = 2^n - 1 所以 O(n) = 2^n
 
-17. 尾递归（Tail Call）有什么危害，如何避免？
+22. 尾递归（Tail Call）有什么危害，如何避免？
 
     答：栈溢出（Stack Overflow）。尾递归事实上和循环是等价的。
 
-18. 红黑树是什么？
+23. 红黑树是什么？
 
     答：红黑树性能要好于平衡二叉树。
 
@@ -361,27 +385,27 @@ keywords: 面试题
 
     性质5. 从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点。
 
-19. 判断图存在环？
+24. 判断图存在环？
 
     答：拓扑排序（Topological Sorting），深度遍历。
 
-20. 最短路径算法及复杂度？
+25. 最短路径算法及复杂度？
 
     Dijkstra 算法，时间复杂度为 O(V^2)，如果是稀疏图，可用堆进行优化，时间复杂度为 O((V + E) lgV)；Floyd 算法，时间复杂度为 O(V^3)。
 
-21. 最小生成树算法及复杂度？
+26. 最小生成树算法及复杂度？
 
     Prim 算法，O(V^2)；Kruskal 算法，O(ElgE)。
 
-22. 农夫过河问题？
+27. 农夫过河问题？
 
     答：[链接](https://www.zhihu.com/question/29968331)
 
-23. Nim 问题?
+28. Nim 问题?
 
     答：必败态当且仅当所有堆硬币的数量都异或起来结果为 0。
 
-24. Key Algorithms
+29. Key Algorithms
 
 - 字符串
   - [KMP 算法](https://www.zhihu.com/question/21923021)
@@ -1347,7 +1371,7 @@ keywords: 面试题
 
 38. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
 
-     答：解决了梯度消失问题。
+     答：解决了梯度消失问题。Sigmoid 导数在两端趋近于 0，容易导致梯度消失；ReLU 在正区间梯度恒为 1，不会出现梯度爆炸/消失问题，支持更深网络训练。
 
 39. RNN 系列为什么要正交初始化？
 
@@ -1487,11 +1511,27 @@ keywords: 面试题
 
 #### Large Language Models
 
-1. multi-head attention 的公式是怎样的？
+1. Raw data 数据收集和质量控制
+
+     答：Minhash 模糊去重，使用小模型打 PPL，数据配比。
+
+2. Instruction data 数据收集和质量控制
+
+     答：基于 dataset，人工标注。
+
+3. 数据生成和质量控制
+
+     答：GPT-based 质量评分器。
+
+4. Transformer 的原理？
+
+     答：Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
+
+5. multi-head attention 的公式是怎样的？
 
      答：$$Attention(Q,K,V) = softmax({QK^T\over {\sqrt {d_k}}})V$$。
  
-2. multi-head attention 实现
+6. multi-head attention 实现
 
      答：
      ```
@@ -1542,13 +1582,17 @@ keywords: 面试题
 	        return output
      ```
 
-3. multi-head attention 时间复杂度
+7. multi-head attention 时间复杂度
 
      答：$$O(d * seq\_len * seq\_len)$$。
 
-4. grouped-query attention 实现
+8. Transformer 使用的时候，制约显存的最关键因素是什么？
 
-	答：grouped-query attention 中，query 使用比 key/value 更少的 heads
+     答：序列长度。
+
+9. grouped-query attention 实现
+
+	答：grouped-query attention 中，query 使用比 key/value 更多的 heads。因为在推理阶段，Q 是即时计算的，而 K/V 是缓存的。
     ```
     import torch
     import torch.nn as nn
@@ -1598,7 +1642,7 @@ keywords: 面试题
 	        return output
      ```
 
-5. multi-head attention + kv cache 实现
+10. multi-head attention + kv cache 实现
 
      答：query 必须每步重算，而 key/value 是过去的记忆，可以缓存。
      ```
@@ -1652,96 +1696,75 @@ keywords: 面试题
 	        return self.out_proj(out)
      ```
 
-6. FlashAttention
+11. FlashAttention
 
-     答：FlashAttention 基于以下几点：
-    1. 块分割(blocking)
+    答：FlashAttention 基于以下几点：
+    
+	1. 块分割 (blocking)
     将 Q,K,V 按块划分，分块计算Attention。每次只加载当前块，节省内存。
-    2. 在线计算softmax（online-softmax） 
-    传统softmax需要先计算全部 QK^T，然后减max值再求exp，最后归一化。而FlashAttention在线计算softmax，避免存储整个矩阵。
+    
+	2. 在线计算 softmax（online-softmax） 
+    传统 softmax 需要先计算全部 QK^T，然后减 max 值再求 exp，最后归一化。而 FlashAttention 在线计算 softmax，避免存储整个矩阵。
+    
     3. 单遍扫描（one-pass）计算  
-    通过巧妙算法实现只需遍历一次 Q,K,V 即可计算Attention输出，避免多次加载。
+    通过巧妙算法实现只需遍历一次 Q,K,V 即可计算 Attention 输出，避免多次加载。
 
-7. Transformer 的原理？
+12. Multi-head Latent Attention (MLA)
 
-     答：Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
+    答：MLA 把 keys 和 values 低秩联合压缩成 latents，从而把 self attention 变成 latents cross-attend inputs，时间复杂度从 $$O(d * seq\_len * seq\_len)$$ 降至 $$O(d * seq\_len * latent\_len)$$。
 
-8. Transformer 的 position encoding 为什么选三角函数？
+13. 为什么要 multi-head
 
-     答：偶数位置，使用正弦编码，在奇数位置，使用余弦编码。任意位置的 $$PE_{pos+k}$$ 都可以被 $$PE_{pos}$$ 的线性函数表示。在 bert 中，position encoding 是学习得到的。
+    答：多头注意力允许模型在不同的表示子空间中学习信息，这样可以让模型同时关注不同的信息维度。每个头学习到的信息可以独立地编码输入序列的不同方面，然后将这些信息综合起来，得到更丰富的表示。
 
-9. Transformer 使用的时候，制约显存的最关键因素是什么？
+14. Transformer 的 Q 和 K 为什么使用不同的权重矩阵生成？如果强行让 Q=K 会发生什么？
 
-     答：序列长度。
+    答：注意力将退化为自相似匹配，容易捕捉到 trivial 信息（如位置对称性）；表达能力显著下降，模型性能变差；实际论文实验证明，共用 Q/K/V 权重会损害性能
 
-10. 为什么要 multi-head
+15. Transformer 为什么是 Q * K^T，而不是 Q + K？
 
-     答：多头注意力允许模型在不同的表示子空间中学习信息，这样可以让模型同时关注不同的信息维度。每个头学习到的信息可以独立地编码输入序列的不同方面，然后将这些信息综合起来，得到更丰富的表示。
+    答：点积是最自然的相似度度量，而加法并不能提供一个明确的匹配度分数，它只是两个向量的混合，没有“匹配程度”的含义。
 
-11. Transformer 的 Q 和 K 为什么使用不同的权重矩阵生成？如果强行让 Q=K 会发生什么？
+16. 为什么要除以 $$\sqrt {d_k}$$
 
-     答：注意力将退化为自相似匹配，容易捕捉到 trivial 信息（如位置对称性）；表达能力显著下降，模型性能变差；实际论文实验证明，共用 Q/K/V 权重会损害性能
+    答：可以防止内积过大导致softmax函数梯度变得非常小，这有助于数值稳定性，使得学习过程更加稳定。此外，它还可以看作是一种缩放因子，帮助模型在不同维度上保持一致的性能。
 
-12. Transformer 为什么是 Q * K^T，而不是 Q + K？
+17. multi-head attention 的 embed 会不会有低秩的问题，怎么解决？
 
-     答：点积是最自然的相似度度量，而加法并不能提供一个明确的匹配度分数，它只是两个向量的混合，没有“匹配程度”的含义。
+    答：是的，可能因 head 冗余、聚合退化等原因呈现低秩结构，从而降低表达能力。可以通过正则化（在多头 projection 矩阵上加正交约束）、架构设计、训练策略等方法缓解，并可用奇异值分析评估问题严重程度。
 
-13. 为什么要除以 $$\sqrt {d_k}$$
+18. BPE，WordPiece 和 Unigram 的区别是？
 
-     答：可以防止内积过大导致softmax函数梯度变得非常小，这有助于数值稳定性，使得学习过程更加稳定。此外，它还可以看作是一种缩放因子，帮助模型在不同维度上保持一致的性能。
+    答：BPE 是基于贪心的频率合并。初始时将文本拆成最小单位（单字符），然后反复合并出现频率最高的连续字符对，直到达到预定词表大小。WordPiece（BERT 使用）跟 BPE 类似，不过是根据最大似然估计进行合并。Unigram 基于概率模型，先初始化大量子词候选，然后用 EM 算法估计每个子词的概率，迭代优化删除低概率子词，最终得到固定大小词表。
 
-14. GPT 的原理？
+19. 传统中文分词
 
-     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
+    答：前向匹配（Forward Maximum Matching）+ 动态规划（如 Viterbi 算法）
 
-15. bert 的原理？
+20. Position Embedding
 
-     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
+    答：绝对位置编码，分为 Sinusoidal（无需学习参数，偶数位置，使用正弦编码，在奇数位置，使用余弦编码。任意位置的 $$PE_{pos+k}$$ 都可以被 $$PE_{pos}$$ 的线性函数表示）和 Learnable Embedding。
+    相对位置编码（可针对长序列），分为 RoPE（对 Query 和 Key 的每个向量维度用旋转变换编码位置信息）和 AliBi（通过为 Attention 权重加上线性位置偏置来编码位置信息）。
 
-16. bert 的训练目标？
+21. LLM 常用的激活函数有？
 
-     答：bert 有 masked language modeling 和 next sentence prediction 两个目标
+    答：ReLU：f(x) = max(0, x)
+     
+    GeLU：f(x) ≈ x * Φ(x)，Φ是标准正态分布的累积分布函数。
+     
+    GLU：GLU(a,b)=a×σ(b)，其中，输入被分成两部分 a 和 b，σ 是 sigmoid 函数。
+     
+    SwiGLU：SwiGLU = 线性 × SwiSH 激活。Swish 函数代替了原始 GLU 中的 Sigmoid 激活。
+     
+    ReLU，GeLU 不能门控，GLU，SwiGLU 能门控。
 
-17. roberta 相比 bert 做了哪些改进？
+22. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
 
-     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
+    答：BN 是跨样本统计的，会泄漏信息，所以 LN 更适合变长序列和单样本推理，RMSNorm 参数量（d，缩放因子）为 LN （2d，缩放因子和偏移因子） 一半，更高效和稳定，并表现与 LN 相似。
+     
+    输入是形状为 `(batch_size, seq_len, hidden_dim)` 的张量，BN 通常对 batch 和 seq_len 两个维度联合计算均值和方差，也就是对每个 hidden_dim 维度独立归一化。LN/RMSNorm 对每个样本的 hidden_dim 维度做归一化，即对 `seq_len` 中的每个位置独立归一化，计算均值和方差都在 hidden_dim 上。
 
-18. bert 强于 rnn 的地方？
-
-     答：并行，对大数据比较友好。
-
-19. Qwen
-
-20. Deepseek
-
-     答：1. 采用 GRPO 算法，显著降低 RL 训练成本。
-     2. R1 中的 MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
-     3. R1 在 SFT（Supervised Fine-Tuning）阶段采用冷启动（cold start），不使用预训练模型的全部参数直接微调，其核心目的是避免训练初期的不稳定与性能退化，稳定训练过程、充分激活新结构（如 MLA）。
-     4. fp8 精度计算
-     5. Multi-Token Predition
-
-21. 数据收集，数据质量控制，数据生成
-
-22. Tokenizer
-
-     答：前向匹配（Forward Maximum Matching）+ 动态规划（如 Viterbi 算法）
-
-23. Position Embedding
-
-     答：绝对位置编码，分为 Sinusoidal（无需学习参数）和 Learnable Embedding。
-     相对位置编码（可针对长序列），分为 RoPE（对 Query 和 Key 的每个向量维度用旋转变换编码位置信息）和 AliBi（通过为 Attention 权重加上线性位置偏置来编码位置信息）。
-
-24. LLM 常用的激活函数有？
-
-     答：ReLU，GeLU，GLU，SwiGLU。ReLU，GeLU 不能门控，GLU，SwiGLU 能门控。
-     SwiGLU = 线性 × SwiSH 激活。
-     Swish 函数代替了原始 GLU 中的 Sigmoid 激活。
-
-25. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
-
-     答：BN 是跨样本统计的，会泄漏信息，所以 LN 更 make sense，RMSNorm 参数量（d，缩放因子）为 LN （2d，缩放因子和偏移因子） 一半，更高效和稳定，并表现与 LN 相似
-
-26. 实现 LayerNorm
+23. 实现 LayerNorm
 
     答：
     ```
@@ -1762,7 +1785,7 @@ keywords: 面试题
 	        return self.gamma * x_norm + self.beta
     ```
 
-27. 实现 RMSNorm
+24. 实现 RMSNorm
 
     答：RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
 	```
@@ -1782,86 +1805,167 @@ keywords: 面试题
 	        return self.scale * x_norm
 	```
 
-28. Pre Norm 和 Post Norm 有什么区别？
+25. Pre Norm 和 Post Norm 有什么区别？
 
-     答：Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
+    答：Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
 
-29. 为什么 LLM 流行 MoE？
+26. Top-k/Top-p
 
-     答：MoE 能显著提高模型容量而不成比例地增加计算成本
+    答：采样，增加生成多样性。
 
-30. SFT
+27. speculative decoding
 
-31. RLHF (PPO, DPO, GRPO)
+    答：使用一个小型辅助模型（称为“提议模型”或“draft model”）先快速生成多个候选token序列（草稿）。主模型（大型语言模型）随后只对这些候选进行验证和纠正，而不是每一步都全量生成和计算概率。这种方式能显著减少主模型的计算成本，提高生成速度。
 
-     答：PPO
+28. 为什么 LLM 流行 MoE？
+
+    答：MoE 能显著提高模型容量而不成比例地增加计算成本
+
+29. SFT
+
+30. PPO
+
+    答：
      
-     $$L^{\text{PPO}}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t,\ \text{clip}(r_t(\theta),\ 1 - \epsilon,\ 1 + \epsilon) \hat{A}_t \right) \right]$$
+    $$L^{\text{PPO}}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t,\ \text{clip}(r_t(\theta),\ 1 - \epsilon,\ 1 + \epsilon) \hat{A}_t \right) \right]$$
      
-     其中 $$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
+    其中 $$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
      
-     PPO 流程如下：
+    PPO 流程如下：
      
-	 1. 生成多个回复样本
+	1. 查询 q 是任务输入，例如一个上下文或状态；
+	
+	2. 输入到策略模型（Policy Model），生成对应的输出 o（动作或结果），即用可更新的 LLM 生成 q 的 o；
+	
+	3. 输出 o 被输入到冻结的参考模型（Reference Model），计算输出 o 与参考策略之间的 KL 散度，用于限制策略更新；
 	 
-	 2. 通过奖励模型计算 reward（通常是 sample-level 的一个标量）
+	4. 输出 o 被输入到冻结的奖励模型（Reward Model），生成奖励 r（通常是 sample-level 的一个标量），用于衡量 o 的质量；
 	 
-	 3. 用 value head 输出每个 token 的 V(s_t)
+	5. 用 value head 输出每个 token 的 V(s_t)，从 reward 回溯分配每个 token 的 TD 残差 $$\delta_t$$，用 GAE 计算每个 token 的优势 A_t；​
 	 
-	 4. 从 reward 回溯分配每个 token 的 TD 残差 $$\delta_t$$
+	6. 用以下 loss 进行优化，剪切函数限制策略更新幅度，确保数值稳定性。
 	 
-	 5. 用 GAE 计算每个 token 的优势 A_t​
-	 
-	 6. 对策略（token logits）进行加权训练
-     
-     DPO
-     
-     $$L^{\text{DPO}}(\theta) = -\log \left( \frac{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right)}{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right) + \exp\left( \beta \cdot \log \pi_\theta(y^- \mid x) \right)} \right)$$
-     
-     其中，$$y^+$$ 是人类偏好的回答，$$y^-$$ 是较差的回答，$$\beta$$ 是温度系数，控制偏好强度
-     
-     GRPO
-     
-     $$L^{\text{GRPO}}(\theta) = - \log \left( \frac{\exp\left(R_\theta(x, y^+)\right)}{\exp\left(R_\theta(x, y^+)\right) + \exp\left(R_\theta(x, y^-)\right)} \right)$$
-     
-     其中，$R_\theta$ 表示奖励形式的打分函数：
-     
-     $$R_\theta(x, y) = \beta \cdot \left( \log \pi_\theta(y \mid x) - \log \pi_{\text{ref}}(y \mid x) \right)$$
-     
-     $$\pi_{\text{ref}}$$ 是参考策略（例如预训练模型），用于提供稳定的对比基准。
-     
-     PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level
+    ```
+    def ppo_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
+	    ratio = torch.exp(log_probs - old_log_probs)  # [B]
+	    unclipped = ratio * advantages
+	    clipped = torch.clamp(ratio, 1 - clip_range, 1 + clip_range) * advantages
+	    loss = -torch.min(unclipped, clipped).mean()
+	    return loss
+	```
 
+31. PPO 怎么计算 advantages？
+
+    答：1. 直接使用 reward
+    2. response 的平均：advantages = reward - values_response.sum(dim=1) / response_mask.sum(dim=1)
+    3. GAE
+    ```
+    def compute_gae(rewards, values, gamma=1.0, lam=0.95):
+	    advantages = torch.zeros_like(rewards)
+	    last_adv = 0
+	    for t in reversed(range(rewards.size(1))):
+	        delta = rewards[:, t] + gamma * values[:, t + 1] - values[:, t]
+	        advantages[:, t] = last_adv = delta + gamma * lam * last_adv
+	    return advantages
+     ```
 
 32. PPO 有了 reward model 为什么还要 critic/value model？
 
      答：critic/value model 是内部奖励，会在 RL 过程中更新，reward model 是外部奖励，是训练好的
 
-33. GRPO 怎么去掉 critic/value model 的？
+33. DPO
+
+    答：
+     
+    $$L^{\text{DPO}}(\theta) = -\log \left( \frac{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right)}{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right) + \exp\left( \beta \cdot \log \pi_\theta(y^- \mid x) \right)} \right)$$
+     
+    其中，$$y^+$$ 是人类偏好的回答，$$y^-$$ 是较差的回答，$$\beta$$ 是温度系数，控制偏好强度
+    ```
+    def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
+	    diff = logp_chosen - logp_rejected  # [B]
+	    loss = -torch.nn.functional.logsigmoid(beta * diff).mean()
+	    return loss
+    ```
+ 
+34. GRPO
+   
+    答：
+     
+    $$L^{\text{GRPO}}(\theta) = - \log \left( \frac{\exp\left(R_\theta(x, y^+)\right)}{\exp\left(R_\theta(x, y^+)\right) + \exp\left(R_\theta(x, y^-)\right)} \right)$$
+     
+    其中，$R_\theta$ 表示奖励形式的打分函数：
+     
+    $$R_\theta(x, y) = \beta \cdot \left( \log \pi_\theta(y \mid x) - \log \pi_{\text{ref}}(y \mid x) \right)$$
+     
+    $$\pi_{\text{ref}}$$ 是参考策略（例如预训练模型），用于提供稳定的对比基准。
+    
+	GRPO 流程如下：
+     
+	1. 查询 q 是任务输入，例如一个上下文或状态；
+	
+	2. 输入到策略模型（Policy Model），生成对应的多个输出 o_1, o_2, ..., o_G（动作或结果），即用可更新的 LLM 生成 q 的 o_1, o_2, ..., o_G；
+	
+	3. 输出 o_i 被输入到冻结的参考模型（Reference Model），计算输出 o_i 与参考策略之间的 KL 散度，用于限制策略更新；
+	 
+	4. 输出 o_i 被输入到冻结的奖励模型（Reward Model），生成奖励 r_i（通常是 sample-level 的一个标量），用于衡量 o_i 的质量；
+	 
+	5. 根据 r_1, r_2, ..., r_G，计算奖励均值和奖励标准差，得到 o_i 的相对奖励；​
+	 
+	6. 用以下 loss 进行优化。
+     
+    ```
+    def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range=0.2):
+	    # 计算每个组的 ratio
+	    ratio = torch.exp(group_log_probs - group_old_log_probs)  # [G, B]
+	    
+	    # 计算组内相对优势（相对于组内其他策略优势的平均）
+	    mean_advantages = group_advantages.mean(dim=0, keepdim=True)  # [1, B]
+	    relative_advantages = group_advantages - mean_advantages     # [G, B]
+	    
+	    # 计算组内相对 ratio（相对于组内其他策略 ratio 的平均）
+	    mean_ratio = ratio.mean(dim=0, keepdim=True)  # [1, B]
+	    relative_ratio = ratio / (mean_ratio + 1e-8)  # [G, B]
+	    
+	    # Unclipped and clipped losses 基于相对比率和相对优势
+	    unclipped = relative_ratio * relative_advantages
+	    clipped = torch.clamp(relative_ratio, 1 - clip_range, 1 + clip_range) * relative_advantages
+	    
+		# 对所有组和批次求平均，取最小
+	    loss = -torch.min(unclipped, clipped).mean()
+	    return loss
+    ```
+
+35. PPO vs DPO vs GRPO
+
+    答：PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level
+
+36. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-34. LoRA 的 A 和 B 矩阵用什么初始化方法？
+37. LoRA 的 A 和 B 矩阵用什么初始化方法？
 
-     答：A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’。
+     答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。
 
-35. Base eval
+38. Base model eval
 
      答：MMLU（通用语言理解类），GSM8K（编程与数学能力）
 
-36. Chat Eval
+39. Chat model eval
 
-     答：MT-Bench，AlpacaEval，Arena
+     答：MT-Bench，AlpacaEval，Arena，Red-Teaming
 
-37. Safety / Halluciation
+40. Safety / Halluciation
 
-38. Long Context
+    答：RAG
 
-     答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
+41. Long Context
 
-39. LLM设计中的 System 1 和 System 2
+    答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
 
-     答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
+42. LLM设计中的 System 1 和 System 2
+
+    答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
      
      通过 Prompt Engineering 或架构设计激活 System 2：
     
@@ -1871,61 +1975,95 @@ keywords: 面试题
         
     - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-40. RAG; KG + LLM
+43. RAG; KG + LLM
 
-41. Reasoning
+44. 文本分块
 
-42. MCP 和 function calling 有什么区别？
+    答：文本分块需考虑平衡信息完整性和检索效率。
 
-     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
+45. Reasoning
 
-43. LangChain
+46. MCP 和 function calling 有什么区别？
 
-     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
+    答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-44. bf16，fp16，fp32区别
+47. LangChain
 
-     答：bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。
+    答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-45. LLM 常用的优化器有？
+48. bf16，fp16，fp32区别
 
-     答：AdamW，Lion
+    答：bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。
 
-46. 混合精度计算
+49. LLM 常用的优化器有？
 
-     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
+    答：AdamW，Lion
 
-47. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
+50. 混合精度计算
 
-     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2字节，fp32 精度为 4字节。
-     训练显存 ≈ 模型参数 × 3（包括权重 + 梯度 + Optimizer状态） + 激活 + buffer，主要瓶颈是激活值和优化器状态，batch_size 越大，激活越大；序列长度越长，attention buffer 越大。
-     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 **KV Cache**。 
+    答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-48. 多卡多机训练
+51. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
 
-      答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
+    答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2字节，fp32 精度为 4字节。
+    训练显存 ≈ 模型参数 × 3（包括权重 + 梯度 + Optimizer状态） + 激活 + buffer，主要瓶颈是激活值和优化器状态，batch_size 越大，激活越大；序列长度越长，attention buffer 越大。
+    推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 **KV Cache**。 
 
-49. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+52. 多卡多机训练
 
-      答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
+    答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-50. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+53. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
-     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
+    答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-51. deepspeed 的 Zero-1， Zero 2， Zero 3
+54. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
-     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存
+    答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-52. vllm
+55. deepspeed 的 Zero-1， Zero 2， Zero 3
 
-     答：把 KV 缓存当作虚拟内存；每条序列的缓存按页（page）管理，动态分配到显存中；PagedAttention = 分页机制 + 注意力机制
+    答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存
+
+56. vllm
+
+    答：把 KV 缓存当作虚拟内存；每条序列的缓存按页（page）管理，动态分配到显存中；PagedAttention = 分页机制 + 注意力机制；动态批处理
+
+57. GPT 的原理？
+
+    答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
+
+58. bert 的原理？
+
+    答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
+
+59. bert 的训练目标？
+
+    答：bert 有 masked language modeling 和 next sentence prediction 两个目标
+
+60. roberta 相比 bert 做了哪些改进？
+
+    答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
+
+61. bert 强于 rnn 的地方？
+
+    答：并行，对大数据比较友好。
+
+62. Qwen
+
+63. Deepseek
+
+    答：1. 采用 GRPO 算法，显著降低 RL 训练成本。
+    2. R1 中的 MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
+    3. R1 在 SFT（Supervised Fine-Tuning）阶段采用冷启动（cold start），不使用预训练模型的全部参数直接微调，其核心目的是避免训练初期的不稳定与性能退化，稳定训练过程、充分激活新结构（如 MLA）。
+    4. fp8 精度计算
+    5. Multi-Token Predition
 
 #### Applications
 
 1. 浏览器的联想词运用了什么理论和原理？
 
-     答：贝叶斯原理。
+    答：贝叶斯原理。
 
 ### CV and position related
 
@@ -1945,21 +2083,25 @@ keywords: 面试题
 
 1. 情感分析相对于一般文本分类有什么不同？
 
-     答：特征方面（情感词典，融合了情感的词向量）。
+    答：特征方面（情感词典，融合了情感的词向量）。
 
 2. 怎么构建情感词典？
 
-     答：可以先人工制作一个小型的情感词典，然后利用语料，根据一些启发式规则（如“and”连接的词情感一样，“but”相反）来获得新的情感词，不断迭代扩展词典大小。
+    答：可以先人工制作一个小型的情感词典，然后利用语料，根据一些启发式规则（如“and”连接的词情感一样，“but”相反）来获得新的情感词，不断迭代扩展词典大小。
 
 3. 情感词典会有哪些问题？
 
-     答：不同的领域的情感词可能不一样；表达情感的词不一定是情感词；讽刺语境。
+    答：不同的领域的情感词可能不一样；表达情感的词不一定是情感词；讽刺语境。
 
 4. 如何检测不文明词汇？
 
-     答：词典，分类问题。
+    答：词典，分类问题。
 
 #### Multilinguality
+
+1. 数据采样策略
+
+    答：参考 XLM-R，用 temperature-based sampling。
 
 ### Others
 
