@@ -18,7 +18,7 @@ keywords: 面试题
     
     X = np.random.randn(3, 3)
     
-    norms = np.linalg.norm(X, axis=1, keepdims=True)  # shape (3,1)
+    norms = np.linalg.norm(X, axis=1, keepdims=True) + 1e-8  # shape (3,1)
     
     # 归一化矩阵，使每行向量单位化
     X_normalized = X / norms
@@ -187,11 +187,55 @@ keywords: 面试题
 
     答：有些方法可用，但总体不适用。原因：计算量大，训练慢；求导复杂；深度学习不需要高精度解；稳定性差。
 
+3. 什么是 Jensen 不等式？
+
+     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003224)
+
 #### Information Theory
+
+1. 互信息是什么？
+
+     答：$$I(X; Y) = \sum_{y \in Y}\sum_{x \in X} {p(x,y)log{\frac{p(x,y)}{p(x)p(y)}}}$$。当变量相互独立时，互信息为 0。
+
+2. KL 散度和交叉熵的区别？
+
+     答：自信息（一个事件的信息量）：$$I(x)=-logP(x)$$；
+
+     信息熵（一个分布的信息量）：$$H(x)=E_{X \sim P}[I(x)]=-E_{X \sim P}[P(x)]$$；
+
+     交叉熵（在给定的真实分布下，使用非真实分布所指定的策略需要的代价）：$$-\sum_{k=1}^N{p_klog_2{q_k}}$$；
+
+     交叉熵越低，策略越好，当交叉熵 = 信息熵，表示使用了真实分布；
+
+     相对熵 / KL 散度（两个分布之间的差异）：$$KL(f(x) \| g(x))=\sum_{x \in X} {f(x) * log_2{\frac{f(x)}{g(x)}}}$$；
+
+     相对熵 = 交叉熵 - 信息熵。
+
+3. 为什么 KL 散度不对称？
+
+     答：KL 散度（Kullback–Leibler Divergence）不对称的根本原因在于其定义中的对数函数位置（分子分母位置）的非对称性。它本质上是一个“相对熵”：衡量一个分布在用另一个分布进行近似时，所造成的信息损失。
 
 #### Discrete Mathematics
 
-1. 一个村子里有很多户人家，每家都养了一条狗。现在发现村子里面出现了 n 只疯狗，村里规定，谁要是发现了自己的狗是疯狗，就要将自己的狗枪毙。但问题是，村子里面的人只能看出别人家的狗是不是疯狗，而不能看出自己的狗是不是疯的，如果看出别人家的狗是疯狗，也不能告诉别人。于是大家开始观察，第一天晚上，没有枪声，第二天晚上，没有枪声，直到第 n 天晚上，这 n 只狗才被同时枪毙，请问这是为什么？
+1. 有 1000 个一模一样的瓶子，其中有 999 瓶是普通的水，有一瓶是毒药。任何喝下毒药的生物都会在一星期之后死亡。现在，你只有 10 只小白鼠和一星期的时间，如何检验出哪个瓶子里有毒药？
+
+    答：可以用二进制编码的思维来解决。先对 1000 个瓶子以二进制数的形式进行编号，则至少需要十位的二进制数进行表示。再用这10只小白鼠分别对应二进制数的 10 个数位，让每只小白鼠喝下编号对应数位值为 1 的瓶子。最后根据小白鼠的死亡情况得到一个十位二进制数，编号与其相等的瓶子里面有毒药。
+
+2. 1000 桶水，其中一桶有毒，猪喝毒水后会在 15 分钟内死去，想用一个小时找到这桶毒水，至少需要几头猪？
+
+    答：由于一只猪总共有五种状态，所以可以用五进制的方法解决，将 1000桶水表示成五进制至少需要 5 位，所以至少需要五头猪。
+
+3. 1000 桶水中两桶有毒，猪喝毒水后会在 15 分钟内死去，想用一个小时找到毒水，至少需要几只猪？如何实现？
+
+    答：从理论上来讲，1000 桶水两桶有毒，有 499500 种状态，而一头猪有 5 种状态，求解 5^l > 499500，求得 l > 8.15，所以 9 只猪就可以找到毒水：
+    
+    a. 我们先把1000桶水分为10组，每只猪试验一组，一组空白；
+    
+    b. 如果只有一只猪死，那么说明两桶毒水都在那 100 桶水中，再把这 100 桶水分为 10 组，剩下的 9 只猪试验 9 组，另外 10 桶不实验，这样问题可一步一步缩小；
+    
+    c. 如果有两只猪死，则说明有两组 100 桶水各有一桶毒水，每组用 3 头猪即可实验。
+
+4. 一个村子里有很多户人家，每家都养了一条狗。现在发现村子里面出现了 n 只疯狗，村里规定，谁要是发现了自己的狗是疯狗，就要将自己的狗枪毙。但问题是，村子里面的人只能看出别人家的狗是不是疯狗，而不能看出自己的狗是不是疯的，如果看出别人家的狗是疯狗，也不能告诉别人。于是大家开始观察，第一天晚上，没有枪声，第二天晚上，没有枪声，直到第 n 天晚上，这 n 只狗才被同时枪毙，请问这是为什么？
 
     答：具体分析流程如下：
     
@@ -203,7 +247,7 @@ keywords: 面试题
     
     d. 同理可得，拥有疯狗的家庭由于能看到 n - 1 条狗，他需要 n 天才能判断村子里至少有 n 条疯狗，其中一条就是自己家的狗，从而在第 n 天晚上枪毙自己家的狗。
 
-2. 五个同事决定计算他们的平均工资，在大家互相不告诉薪水的情况下，如何才能做到这一点？
+5. 五个同事决定计算他们的平均工资，在大家互相不告诉薪水的情况下，如何才能做到这一点？
 
     答：这道题的方法有很多，比如有：
     
@@ -211,11 +255,11 @@ keywords: 面试题
     
     b. 找个计算器，叫第一个人输入一个巨大的不规则的数，然后把自己的收入加上去，之后依次传给其他人，每人都把自己的收入加上之前的数。最后传回第一个人。第一个人再把最后的总和减去他选中的那个不规则数，然后除以人数，即可得到大家的平均。
 
-3. 圆桌上有 1 到 1000 号，1 号右手边是 2 号，左手边是 1000 号。1 号开枪打死 2 号，把枪交给 3 号，3 号打死 4 号交给5号。。999 号打死 1000 号后把枪交给 1 号，继续循环。最后留下来的是几号？
+6. 圆桌上有 1 到 1000 号，1 号右手边是 2 号，左手边是 1000 号。1 号开枪打死 2 号，把枪交给 3 号，3 号打死 4 号交给5号。。999 号打死 1000 号后把枪交给 1 号，继续循环。最后留下来的是几号？
 
     答：约瑟夫环问题，套公式 $$f(n) = 2(n - 2^{log_2n}) + 1$$ 直接得到结果为 977。
 
-4. 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从前 n-1 层扔鸡蛋都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。已知鸡蛋在 0 层扔不会碎。提出一个策略，要保证能测出鸡蛋恰好会碎的楼层，并使此策略在最坏情况下所扔次数最少？
+7. 一幢 200 层的大楼，给你两个鸡蛋。如果在第 n 层扔下鸡蛋，鸡蛋不碎，那么从前 n-1 层扔鸡蛋都不碎。这两只鸡蛋一模一样，不碎的话可以扔无数次。已知鸡蛋在 0 层扔不会碎。提出一个策略，要保证能测出鸡蛋恰好会碎的楼层，并使此策略在最坏情况下所扔次数最少？
 
     答：这是一道非常经典的面试题，我们用两种方法来解决：
     
@@ -223,9 +267,9 @@ keywords: 面试题
     
     b. 动态规划法：这道题是很经典的动态规划问题，设楼层次数为 n，我们可以得到状态转移方程`f(n) = min(max(k-1, f(n - k))) + 1 (0 < k <= n)`，如果我们再加入鸡蛋数目变量 m，则状态转移方程为`f(n, m) = min(max(f(k - 1, m - 1), f(n - k, m))) + 1 (0 < k <= n)。
 `
-8. 16个硬币，A和B轮流拿走一些，每次拿走的个数只能是1，2，4中的一个数。谁最后拿硬币谁输。请问：A或B有无策略保证自己赢？
+8. 16 个硬币，A 和 B 轮流拿走一些，每次拿走的个数只能是 1，2，4 中的一个数。谁最后拿硬币谁输。请问：A 或 B 有无策略保证自己赢？
 
-    答：B可以保证自己赢。 如果A拿1个，则B拿2个； 如果A拿2个，则B拿1个； 如果A拿4个，则B拿2个。这样每次AB加起来都是3或者6，所以最后会剩下1个或4个。 如果是1个则A直接输了； 如果剩下4个，A全拿则输了，如果不全拿，B继续采取上面的策略，最后还是剩下1个，还是A输。
+    答：B 可以保证自己赢。 如果 A 拿 1 个，则 B 拿2个； 如果 A 拿 2 个，则 B 拿 1 个； 如果 A拿 4 个，则 B 拿 2 个。这样每次 AB 加起来都是 3 或者 6，所以最后会剩下 1 个或 4 个。 如果是 1 个则 A 直接输了； 如果剩下 4 个，A 全拿则输了，如果不全拿，B继续采取上面的策略，最后还是剩下 1 个，还是 A 输。
 
 9. 海盗博弈
 
@@ -285,129 +329,39 @@ keywords: 面试题
 
 ### Algorithm
 
-1. 有 1000 个一模一样的瓶子，其中有 999 瓶是普通的水，有一瓶是毒药。任何喝下毒药的生物都会在一星期之后死亡。现在，你只有 10 只小白鼠和一星期的时间，如何检验出哪个瓶子里有毒药？
+1. 数组
 
-    答：可以用二进制编码的思维来解决。先对 1000 个瓶子以二进制数的形式进行编号，则至少需要十位的二进制数进行表示。再用这10只小白鼠分别对应二进制数的 10 个数位，让每只小白鼠喝下编号对应数位值为 1 的瓶子。最后根据小白鼠的死亡情况得到一个十位二进制数，编号与其相等的瓶子里面有毒药。
+    答：[链表1](https://wuchong.me/blog/2014/03/25/interview-link-questions/) [链表2](https://www.jianshu.com/p/1361493e4f31)
 
-2. 1000 桶水，其中一桶有毒，猪喝毒水后会在 15 分钟内死去，想用一个小时找到这桶毒水，至少需要几头猪？
+2. 单链表
 
-    答：由于一只猪总共有五种状态，所以可以用五进制的方法解决，将 1000桶水表示成五进制至少需要 5 位，所以至少需要五头猪。
+3. 双链表
 
-3. 1000 桶水中两桶有毒，猪喝毒水后会在 15 分钟内死去，想用一个小时找到毒水，至少需要几只猪？如何实现？
+4. 判断一个链表是否有环，并说明其时间和空间复杂度。  
 
-    答：从理论上来讲，1000 桶水两桶有毒，有 499500 种状态，而一头猪有 5 种状态，求解 5^l > 499500，求得 l > 8.15，所以 9 只猪就可以找到毒水：
-    
-    a. 我们先把1000桶水分为10组，每只猪试验一组，一组空白；
-    
-    b. 如果只有一只猪死，那么说明两桶毒水都在那 100 桶水中，再把这 100 桶水分为 10 组，剩下的 9 只猪试验 9 组，另外 10 桶不实验，这样问题可一步一步缩小；
-    
-    c. 如果有两只猪死，则说明有两组 100 桶水各有一桶毒水，每组用 3 头猪即可实验。
+    答：可以使用快慢指针（Floyd判圈算法），慢指针每次走一步，快指针每次走两步，如果链表有环，两者最终会相遇。时间复杂度为 O(n)，空间复杂度为 O(1)。
 
-4. 有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？
+5. 栈
 
-    答：最简单的思路是合并数据库，然后再定位长度，时间复杂度为 O(n)，空间复杂度是 O(n)；但实际上只需要借鉴这个合并的过程，当合并到中位数的时候输出中位数即可，时间复杂度为 O(n)，空间复杂度是 O(1)。这思路十分简单，但并不是最佳算法，有序数组让我们想到的会是二分查找，因此我们可以利用二分查找来使复杂度降至 O(logn)，具体可参考：
-    
-    a. https://www.douban.com/note/177571938/
-    
-    b. https://stackoverflow.com/questions/6182488/median-of-5-sorted-arrays
+6. 单调栈
 
-5. 稳定排序？
+7. 前缀、中缀、后缀表达式
 
-    答：稳定的排序算法：冒泡排序、插入排序、归并排序和基数排序；
-    
-    不是稳定的排序算法：选择排序、快速排序、希尔排序、堆排序。
+8. 队列
 
-6. 原地排序与非原地排序？
+9. 双端队列
 
-    答：原地排序就是指在排序过程中不申请多余的存储空间，只利用原来存储待排数据的存储空间进行比较和交换的数据排序。非原地排序就是要利用额外的数组。
+10. 树
 
-7. 数组最大最小值最优算法？
+    答：前序遍历，中序遍历，后序遍历，层次遍历
 
-    答：[链接](https://www.zhihu.com/question/28892158)
+11. 二叉搜索树
 
-8. 无序整数数组中找第 k 大的数？
+12. 堆
 
-    答：方法一：最小堆：建一个大小为 k 的最小堆。遍历数组，将元素加入堆中，如果堆大小超过 k，就弹出堆顶（最小元素）。最终堆顶就是第 k 大的数。时间复杂度：O(n log k)，空间复杂度：O(k)
-    
-    方法二：快速选择（Quickselect），类似快速排序的分区思想（partition）；每次将数组划分为两个区间，选择一边递归；平均时间复杂度 O(n)，最坏 O(n²)。
-    
-    方法三：内置排序
+13. Trie
 
-9. 从一个几乎排序好的数组中找出第 k 小的元素，时间复杂度尽量低。  
-
-    答：利用“插入排序”特性，数组接近有序，插入排序接近线性。也可以用快速选择算法，平均 O(n)。
-
-10. 在 n 个数中取最大的 k 个数，时间复杂度是？
-
-    答：nlogk。堆的大小为 k，总共要调整 n 次。
-
-11. 不用库函数求一个数的立方根？
-
-    答：[链接](https://blog.csdn.net/sjpz0124/article/details/47726275)
-
-12. 二进制中 1 的个数？
-
-    答：把一个整数减去 1，再和原整数做与运算，会把该整数最右边的 1 变成 0。那么一个整数的二进制表示中有多少个 1，就可以进行多少次这样的操作。具体解题思路可参见《剑指 Offer》。
-
-13. 8 位二进制整型补码表示取值范围是？
-
-    答：-2^32 到 2^32 - 1。补码中正负 0 统一用正 0 表示，所以负数多出一个数。
-
-14. 数值的整数次方？
-
-    答：[链接](https://zhuanlan.zhihu.com/p/38715645)
-
-15. 有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？
-
-    答：[链接](https://www.zhihu.com/question/310970538)
-
-16. 一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？
-
-    答：中位数。
-
-17. 给定两个数，求他们无限次相加中第 k 小的数？
-
-    答：[链接](https://www.zhihu.com/question/41809896)
-
-18. 什么是水塘抽样？
-
-    答：一种在数据量未知或数据流形式下，以等概率从 n 个元素中采样 k 个的算法，适用于内存受限的场景。
-
-19. 如何从数据流中以等概率选取一个元素（k=1）？
-
-    答：初始化：`result = None`，遍历第 i 个元素时，以 `1/i` 的概率替换 result，所有元素最终被选中的概率都是 `1/n`。
-
-20. 如何扩展到选取 k 个元素？
-
-    答：初始化：前 k 个元素入 reservoir，对第 i (>k) 个元素：以 k/i 的概率随机替换 reservoir 中的一个元素。
-
-21. 链表中如何随机返回一个节点？（单次遍历，O(1) 空间）
-
-    答：遍历链表，对第 i 个节点，以 `1/i` 的概率更新当前候选节点，最终返回的节点是等概率选中的。
-
-22. 了解 Hamming 距离吗？
-
-    答：两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。
-
-23. 如何求两个数的二进制表示的 Hamming 距离？
-
-    答：先求两个数的异或结果 res，再依次求 res 每一位与 1 与操作的结果，不为 0，则 Hamming 距离加一；每判断完一位，res 右移一位继续判断下一位。
-
-24. 汉诺塔时间复杂度？
-
-    答：假设移动 n 个圆盘需要 f(n) 次移动
-
-    首先考虑一个圆盘，只需一步就可以了 f(1) = 1 …… ①
-
-    现在考虑 n 个圆盘，假设开始圆盘在 A 柱，可以先把 A 柱的上面 n - 1个圆盘移到 B，再将 A 剩下的一个移到 C，最后将 B 的 n - 1 个移到 C。总共需要 f(n) = 2f(n-  1) + 1 …… ②
-
-    根据 ①② 两式，可求出 f(n) = 2^n - 1 所以 O(n) = 2^n
-
-25. 尾递归（Tail Call）有什么危害，如何避免？
-
-    答：栈溢出（Stack Overflow）。尾递归事实上和循环是等价的。
-
-26. 红黑树是什么？
+14. 红黑树是什么？
 
     答：红黑树性能要好于平衡二叉树。
 
@@ -423,44 +377,165 @@ keywords: 面试题
 
     性质5. 从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点。
 
-27. 判断图存在环？
+15. 判断图存在环？
 
     答：拓扑排序（Topological Sorting），深度遍历。
 
-28. 最短路径算法及复杂度？
+16. 最短路径算法及复杂度？
 
     Dijkstra 算法，时间复杂度为 O(V^2)，如果是稀疏图，可用堆进行优化，时间复杂度为 O((V + E) lgV)；Floyd 算法，时间复杂度为 O(V^3)。
 
-29. 最小生成树算法及复杂度？
+17. 最小生成树算法及复杂度？
 
     Prim 算法，O(V^2)；Kruskal 算法，O(ElgE)。
 
-30. 农夫过河问题？
+18. 排序
+
+    答：冒泡排序：时间复杂度 O(n^2)，稳定
+    
+    插入排序：时间复杂度 O(n^2)，稳定
+    
+    选择排序：时间复杂度 O(n^2)，不稳定
+    
+    归并排序：时间复杂度 O(nlogn)，稳定
+    
+    基数排序：按位排序，从低位到高位依次进行分配和收集；稳定
+    
+    快速排序：时间复杂度 O(nlogn)，不稳定
+    
+    希尔排序：不稳定
+    
+    堆排序：时间复杂度 O(nlogn)，不稳定
+    
+    桶排序：时间复杂度 O(n)
+
+19. 原地排序与非原地排序？
+
+    答：原地排序就是指在排序过程中不申请多余的存储空间，只利用原来存储待排数据的存储空间进行比较和交换的数据排序。非原地排序就是要利用额外的数组。
+
+20. 数组最大最小值最优算法？
+
+    答：[链接](https://www.zhihu.com/question/28892158)
+
+21. 无序整数数组中找第 k 大的数？
+
+    答：方法一：最小堆：建一个大小为 k 的最小堆。遍历数组，将元素加入堆中，如果堆大小超过 k，就弹出堆顶（最小元素）。最终堆顶就是第 k 大的数。时间复杂度：O(n log k)，空间复杂度：O(k)
+    
+    方法二：快速选择（Quickselect），类似快速排序的分区思想（partition）；每次将数组划分为两个区间，选择一边递归；平均时间复杂度 O(n)，最坏 O(n²)。
+    
+    方法三：内置排序
+
+22. 从一个几乎排序好的数组中找出第 k 小的元素，时间复杂度尽量低。  
+
+    答：利用“插入排序”特性，数组接近有序，插入排序接近线性。也可以用快速选择算法，平均 O(n)。
+
+23. 在 n 个数中取最大的 k 个数，时间复杂度是？
+
+    答：nlogk。堆的大小为 k，总共要调整 n 次。
+
+24. 有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？
+
+    答：最简单的思路是合并数据库，然后再定位长度，时间复杂度为 O(n)，空间复杂度是 O(n)；但实际上只需要借鉴这个合并的过程，当合并到中位数的时候输出中位数即可，时间复杂度为 O(n)，空间复杂度是 O(1)。这思路十分简单，但并不是最佳算法，有序数组让我们想到的会是二分查找，因此我们可以利用二分查找来使复杂度降至 O(logn)，具体可参考：
+    
+    a. https://www.douban.com/note/177571938/
+    
+    b. https://stackoverflow.com/questions/6182488/median-of-5-sorted-arrays
+
+25. KSum
+
+    答：[KSum 问题](https://lpq29743.github.io/algorithm/2018/10/29/KSum/)
+
+26. KMP 算法
+
+    答：[KMP 算法](https://www.zhihu.com/question/21923021)
+    
+	1. 构建部分匹配表（next 数组）：next[i] 记录每个位置之前 pattern[0:i] 的前缀后缀最长公共长度。
+    
+    2. 主串匹配时使用 next 数组跳过重复匹配。
+    
+    时间复杂度为 O(m + n)
+
+27. Edit Distance
+
+    答：[Edit Distance](https://github.com/youngwind/blog/issues/106)
+
+28. 正则表达式
+
+29. 汉诺塔时间复杂度？
+
+    答：假设移动 n 个圆盘需要 f(n) 次移动
+
+    首先考虑一个圆盘，只需一步就可以了 f(1) = 1 …… ①
+
+    现在考虑 n 个圆盘，假设开始圆盘在 A 柱，可以先把 A 柱的上面 n - 1个圆盘移到 B，再将 A 剩下的一个移到 C，最后将 B 的 n - 1 个移到 C。总共需要 f(n) = 2f(n-  1) + 1 …… ②
+
+    根据 ①② 两式，可求出 f(n) = 2^n - 1 所以 O(n) = 2^n
+
+30. 尾递归（Tail Call）有什么危害，如何避免？
+
+    答：栈溢出（Stack Overflow）。尾递归事实上和循环是等价的。
+
+31. 农夫过河问题？
 
     答：[链接](https://www.zhihu.com/question/29968331)
 
-31. Nim 问题?
+32. Nim 问题?
 
     答：必败态当且仅当所有堆硬币的数量都异或起来结果为 0。
 
-32. Key Algorithms
+33. 海量数据处理
 
-- 字符串
-  - [KMP 算法](https://www.zhihu.com/question/21923021)
-  - [Edit Distance](https://github.com/youngwind/blog/issues/106)
-  - 正则表达式
-- 数组
-  - [链表1](https://wuchong.me/blog/2014/03/25/interview-link-questions/) [链表2](https://www.jianshu.com/p/1361493e4f31)
-  - 前缀、中缀、后缀表达式
-- 树（前序遍历，中序遍历，后序遍历，层次遍历）
-- 查找
-  - [KSum 问题](https://lpq29743.github.io/algorithm/2018/10/29/KSum/)
-- 动态规划
-- [海量数据处理](https://lpq29743.github.io/algorithm/2017/02/20/MassiveData/)
+    答：[海量数据处理](https://lpq29743.github.io/algorithm/2017/02/20/MassiveData/)
+
+34. 不用库函数求一个数的立方根？
+
+    答：[链接](https://blog.csdn.net/sjpz0124/article/details/47726275)
+
+35. 二进制中 1 的个数？
+
+    答：把一个整数减去 1，再和原整数做与运算，会把该整数最右边的 1 变成 0。那么一个整数的二进制表示中有多少个 1，就可以进行多少次这样的操作。具体解题思路可参见《剑指 Offer》。
+
+36. 数值的整数次方？
+
+    答：[链接](https://zhuanlan.zhihu.com/p/38715645)
+
+37. 有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？
+
+    答：[链接](https://www.zhihu.com/question/310970538)
+
+38. 一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？
+
+    答：中位数。
+
+39. 给定两个数，求他们无限次相加中第 k 小的数？
+
+    答：[链接](https://www.zhihu.com/question/41809896)
+
+40. 什么是水塘抽样？
+
+    答：一种在数据量未知或数据流形式下，以等概率从 n 个元素中采样 k 个的算法，适用于内存受限的场景。
+
+41. 如何从数据流中以等概率选取一个元素（k=1）？
+
+    答：初始化：`result = None`，遍历第 i 个元素时，以 `1/i` 的概率替换 result，所有元素最终被选中的概率都是 `1/n`。
+
+42. 如何扩展到选取 k 个元素？
+
+    答：初始化：前 k 个元素入 reservoir，对第 i (>k) 个元素：以 k/i 的概率随机替换 reservoir 中的一个元素。
+
+43. 链表中如何随机返回一个节点？（单次遍历，O(1) 空间）
+
+    答：遍历链表，对第 i 个节点，以 `1/i` 的概率更新当前候选节点，最终返回的节点是等概率选中的。
+
+44. 了解 Hamming 距离吗？
+
+    答：两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。
+
+45. 如何求两个数的二进制表示的 Hamming 距离？
+
+    答：先求两个数的异或结果 res，再依次求 res 每一位与 1 与操作的结果，不为 0，则 Hamming 距离加一；每判断完一位，res 右移一位继续判断下一位。
 
 ### Computer Science
-
-#### Operating Systems
 
 1. 为什么要用时间复杂度来描述算法，而不是运行时间？
 
@@ -483,21 +558,19 @@ keywords: 面试题
 
    答：[链接](https://www.cnblogs.com/chuxiuhong/p/6103928.html)
 
-#### Computer Networks
-
-1. 集线器和交换机有什么区别？
+5. 集线器和交换机有什么区别？
 
    答：集线器在物理层，所有端口是一个冲突域，交换机在数据链路层，每个端口是一个冲突域。
 
-2. 三次握手是怎样的？
+6. 三次握手是怎样的？
 
    答：第一次握手：建立连接时，客户端发送 syn 包（syn = j）到服务器，并进入 SYN_SENT 状态，等服务器确认；
 
    第二次握手：服务器收到 syn 包，必须确认客户的 SYN（ack = j + 1），同时自己也发送一个 SYN 包（syn = k），即 SYN + ACK 包，此时服务器进入 SYN_RECV 状态；
 
-   第三次握手：客户端收到服务器的 SYN + ACK 包，向服务器]发送确认包ACK (ack = k + 1），此包发送完毕，客户端和服务器进入 ESTABLISHED（TCP 连接成功）状态，完成三次握手。
+   第三次握手：客户端收到服务器的 SYN + ACK 包，向服务器发送确认包 ACK (ack = k + 1），此包发送完毕，客户端和服务器进入 ESTABLISHED（TCP 连接成功）状态，完成三次握手。
 
-3. 四次挥手是怎样的？
+7. 四次挥手是怎样的？
 
    答：TCP 客户端发送一个 FIN，用来关闭客户到服务器的数据传送。
 
@@ -506,26 +579,28 @@ keywords: 面试题
    服务器关闭客户端的连接，发送一个 FIN 给客户端。
 
    客户端发回 ACK 报文确认，并将确认序号设置为收到序号加 1。
+   
+8. 8 位二进制整型补码表示取值范围是？
 
-#### Database Systems
+    答：-2^32 到 2^32 - 1。补码中正负 0 统一用正 0 表示，所以负数多出一个数。
 
-1. count(1)、count(*) 和 count(列名) 的区别？
+9. count(1)、count(*) 和 count(列名) 的区别？
 
-   答：[链接](https://blog.csdn.net/qq_15037231/article/details/80495882)
+    答：[链接](https://blog.csdn.net/qq_15037231/article/details/80495882)
 
-2. 数据库的三级模式是什么？
+10. 数据库的三级模式是什么？
 
-   答：数据库领域公认的标准结构是三级模式结构，包括外模式、概念模式、内模式。
+    答：数据库领域公认的标准结构是三级模式结构，包括外模式、概念模式、内模式。
+    
+    用户级对应外模式。它是某个或某几个用户所看到的数据库的数据视图，是与某一应用有关的数据的逻辑表示。
+    
+    概念级对应概念模式（又称逻辑模式），反映了数据库的整体观。它是由数据库设计者综合所有用户的数据，按照统一的观点构造的全局逻辑结构，是对数据库中全部数据的逻辑结构和特征的总体描述，是所有用户的公共数据视图。
+    
+    物理级对应内模式（又称存储模式），反映了数据库的存储观。它是数据库中全体数据的内部表示或底层描述，它描述了数据在存储介质上的存储方式和物理结构，对应着实际存储在外存储介质上的数据库。
 
-   用户级对应外模式。它是某个或某几个用户所看到的数据库的数据视图，是与某一应用有关的数据的逻辑表示。
+11. 数据库三范式？
 
-   概念级对应概念模式（又称逻辑模式），反映了数据库的整体观。它是由数据库设计者综合所有用户的数据，按照统一的观点构造的全局逻辑结构，是对数据库中全部数据的逻辑结构和特征的总体描述，是所有用户的公共数据视图。
-
-   物理级对应内模式（又称存储模式），反映了数据库的存储观。它是数据库中全体数据的内部表示或底层描述，它描述了数据在存储介质上的存储方式和物理结构，对应着实际存储在外存储介质上的数据库。
-
-3. 数据库三范式？
-
-   答：[链接](https://www.zhihu.com/question/24696366)
+    答：[链接](https://www.zhihu.com/question/24696366)
 
 ### Programming
 
@@ -1044,17 +1119,17 @@ keywords: 面试题
 
 37. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
 
-   Answer: If you have worked on enough data sets, you should deduce that cancer detection results in imbalanced data. In an imbalanced data set, accuracy should not be used as a measure of performance because 96% (as given) might only be predicting majority class correctly, but our class of interest is minority class (4%) which is the people who actually got diagnosed with cancer. Hence, in order to evaluate model performance, we should use Sensitivity (True Positive Rate), Specificity (True Negative Rate), F measure to determine class wise performance of the classifier. If the minority class performance is found to to be poor, we can undertake the following steps:
-
-   a. We can use undersampling, oversampling or SMOTE to make the data balanced.
-
-   b. We can alter the prediction threshold value by doing [probability caliberation](https://www.analyticsvidhya.com/blog/2016/07/platt-scaling-isotonic-regression-minimize-logloss-error/) and finding a optimal threshold using AUC-ROC curve.
-
-   c. We can assign weight to classes such that the minority classes gets larger weight.
-
-   d. We can also use anomaly detection.
-
-   Know more: Imbalanced Classification
+    答：If you have worked on enough data sets, you should deduce that cancer detection results in imbalanced data. In an imbalanced data set, accuracy should not be used as a measure of performance because 96% (as given) might only be predicting majority class correctly, but our class of interest is minority class (4%) which is the people who actually got diagnosed with cancer. Hence, in order to evaluate model performance, we should use Sensitivity (True Positive Rate), Specificity (True Negative Rate), F measure to determine class wise performance of the classifier. If the minority class performance is found to to be poor, we can undertake the following steps:
+    
+    a. We can use undersampling, oversampling or SMOTE to make the data balanced.
+    
+    b. We can alter the prediction threshold value by doing [probability caliberation](https://www.analyticsvidhya.com/blog/2016/07/platt-scaling-isotonic-regression-minimize-logloss-error/) and finding a optimal threshold using AUC-ROC curve.
+    
+    c. We can assign weight to classes such that the minority classes gets larger weight.
+    
+    d. We can also use anomaly detection.
+    
+    Know more: Imbalanced Classification
 
 38. 多分类问题如何转二分类方法？
 
@@ -1135,6 +1210,10 @@ keywords: 面试题
 5. KMeans 和 EM 有什么关系，和 GMM 有什么关系？
 
     答：KMeans 的目标函数（整个数据集点到各自聚类中心的距离的平方和）可以用 EM 算法求解。K-Means 算法归类为 GMM 的 EM 解法的一个特例。
+
+6. IVF（Inverted File Index，倒排文件索引）
+
+    答：将整个向量空间划分为多个“簇（clusters）”，并构建倒排表（inverted list），从而**减少实际要比较的向量数量**。
 
 #### Decision Tree
 
@@ -1353,69 +1432,47 @@ keywords: 面试题
 
      答：for 循环；贝叶斯优化。
 
-27. 什么是 Jensen 不等式？
-
-     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003224)
-
-28. 互信息是什么？
-
-     答：$$I(X; Y) = \sum_{y \in Y}\sum_{x \in X} {p(x,y)log{\frac{p(x,y)}{p(x)p(y)}}}$$。当变量相互独立时，互信息为 0。
-
-29. KL 散度和交叉熵的区别？
-
-     答：自信息（一个事件的信息量）：$$I(x)=-logP(x)$$；
-
-     信息熵（一个分布的信息量）：$$H(x)=E_{X \sim P}[I(x)]=-E_{X \sim P}[P(x)]$$；
-
-     交叉熵（在给定的真实分布下，使用非真实分布所指定的策略需要的代价）：$$-\sum_{k=1}^N{p_klog_2{q_k}}$$；
-
-     交叉熵越低，策略越好，当交叉熵 = 信息熵，表示使用了真实分布；
-
-     相对熵 / KL 散度（两个分布之间的差异）：$$KL(f(x) \| g(x))=\sum_{x \in X} {f(x) * log_2{\frac{f(x)}{g(x)}}}$$；
-
-     相对熵 = 交叉熵 - 信息熵。
-
-30. 如何避免梯度消失或梯度爆炸？
+27. 如何避免梯度消失或梯度爆炸？
 
      答：权重合理初始化，梯度剪切（梯度爆炸），门机制，batch normalization。
 
-31. 权重初始化方法？
+28. 权重初始化方法？
 
      答：零初始化，常量初始化，高斯/均匀随机初始化，Xavier 初始化，He 初始化，正交初始化。
 
-32. 为什么不能零初始化或常量初始化？
+29. 为什么不能零初始化或常量初始化？
 
      答：if the neurons start with the same weights, then all the neurons will follow the same gradient, and will always end up doing the same thing as one another.
 
-33. Xavier / He 初始化的目的是什么？
+30. Xavier / He 初始化的目的是什么？
 
      答：使每一层输出方差为 1。
 
-34. 多任务如何学习？
+31. 多任务如何学习？
 
      答：[链接](https://zhuanlan.zhihu.com/p/34916654)
 
-35. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
+32. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
 
      答：输出尺寸 = (输入尺寸 - filter + 2 * padding）/ stride + 1。计算尺寸不被整除，卷积向下取整，池化向上取整。
 
-36. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
+33. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
 
      答：解决了梯度消失问题。Sigmoid 导数在两端趋近于 0，容易导致梯度消失；ReLU 在正区间梯度恒为 1，不会出现梯度爆炸/消失问题，支持更深网络训练。
 
-37. RNN 系列为什么要正交初始化？
+34. RNN 系列为什么要正交初始化？
 
      答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
 
-38. 怎么得到正交初始化？
+35. 怎么得到正交初始化？
 
      答：QR 分解或 SVD。
 
-39. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
+36. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
 
      答：ReLU 能解决梯度消失，但对 CNN 有效，对 RNN 无效。因为CNN 每一层使用独立的参数不同，原始的 RNN 在每个阶段都共享一个参数。如果直接把 RNN 的激活函数换成 ReLU 会导致非常大的输出值。
 
-40. LSTM 是什么？
+37. LSTM 是什么？
 
      答：遗忘门：$$f_t=\sigma(W_f[h_{t-1}, x_t] + b_f)$$，输出 [0, 1]，来表示信息保留程度。
 
@@ -1429,15 +1486,15 @@ keywords: 面试题
 
      得到最终输出：$$h_t=o_t*tanh(C_t)$$。
 
-41. GRU 是什么？
+38. GRU 是什么？
 
      答：LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
 
-42. LSTM 和 GRU 的联系和区别？
+39. LSTM 和 GRU 的联系和区别？
 
      答：都是通过使梯度的乘法变成加法，来解决 RNN 由于梯度消失而不能对长期依赖建模的问题。前者三个门，后者两个门，所以前者计算更耗时。
 
-43. 门机制为什么能解决梯度消失或爆炸问题？
+40. 门机制为什么能解决梯度消失或爆炸问题？
 
      答：[链接](https://zhuanlan.zhihu.com/p/27485750)
 
@@ -1755,28 +1812,32 @@ keywords: 面试题
 
     答：点积是最自然的相似度度量，而加法并不能提供一个明确的匹配度分数，它只是两个向量的混合，没有“匹配程度”的含义。
 
-16. 为什么要除以 $$\sqrt {d_k}$$
+16. Transformer 为什么是点积，而不是 cosine？
+
+    答：cosine 会归一化，损失模长信息，而且计算复杂度更高。
+
+17. 为什么要除以 $$\sqrt {d_k}$$
 
     答：可以防止内积过大导致softmax函数梯度变得非常小，这有助于数值稳定性，使得学习过程更加稳定。此外，它还可以看作是一种缩放因子，帮助模型在不同维度上保持一致的性能。
 
-17. multi-head attention 的 embed 会不会有低秩的问题，怎么解决？
+18. multi-head attention 的 embed 会不会有低秩的问题，怎么解决？
 
     答：是的，可能因 head 冗余、聚合退化等原因呈现低秩结构，从而降低表达能力。可以通过正则化（在多头 projection 矩阵上加正交约束）、架构设计、训练策略等方法缓解，并可用奇异值分析评估问题严重程度。
 
-18. BPE，WordPiece 和 Unigram 的区别是？
+19. BPE，WordPiece 和 Unigram 的区别是？
 
     答：BPE 是基于贪心的频率合并。初始时将文本拆成最小单位（单字符），然后反复合并出现频率最高的连续字符对，直到达到预定词表大小。WordPiece（BERT 使用）跟 BPE 类似，不过是根据最大似然估计进行合并。Unigram 基于概率模型，先初始化大量子词候选，然后用 EM 算法估计每个子词的概率，迭代优化删除低概率子词，最终得到固定大小词表。
 
-19. 传统中文分词
+20. 传统中文分词
 
     答：前向匹配（Forward Maximum Matching）+ 动态规划（如 Viterbi 算法）
 
-20. Position Embedding
+21. Position Embedding
 
     答：绝对位置编码，分为 Sinusoidal（无需学习参数，偶数位置，使用正弦编码，在奇数位置，使用余弦编码。任意位置的 $$PE_{pos+k}$$ 都可以被 $$PE_{pos}$$ 的线性函数表示）和 Learnable Embedding。
     相对位置编码（可针对长序列），分为 RoPE（对 Query 和 Key 的每个向量维度用旋转变换编码位置信息）和 AliBi（通过为 Attention 权重加上线性位置偏置来编码位置信息）。
 
-21. LLM 常用的激活函数有？
+22. LLM 常用的激活函数有？
 
     答：ReLU：f(x) = max(0, x)
      
@@ -1788,13 +1849,13 @@ keywords: 面试题
      
     ReLU，GeLU 不能门控，GLU，SwiGLU 能门控。
 
-22. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
+23. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
 
     答：BN 是跨样本统计的，会泄漏信息，所以 LN 更适合变长序列和单样本推理，RMSNorm 参数量（d，缩放因子）为 LN （2d，缩放因子和偏移因子） 一半，更高效和稳定，并表现与 LN 相似。
      
     输入是形状为 `(batch_size, seq_len, hidden_dim)` 的张量，BN 通常对 batch 和 seq_len 两个维度联合计算均值和方差，也就是对每个 hidden_dim 维度独立归一化。LN/RMSNorm 对每个样本的 hidden_dim 维度做归一化，即对 `seq_len` 中的每个位置独立归一化，计算均值和方差都在 hidden_dim 上。
 
-23. 实现 LayerNorm
+24. 实现 LayerNorm
 
     答：
     ```
@@ -1815,7 +1876,7 @@ keywords: 面试题
 	        return self.gamma * x_norm + self.beta
     ```
 
-24. 实现 RMSNorm
+25. 实现 RMSNorm
 
     答：RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
 	```
@@ -1835,25 +1896,25 @@ keywords: 面试题
 	        return self.scale * x_norm
 	```
 
-25. Pre Norm 和 Post Norm 有什么区别？
+26. Pre Norm 和 Post Norm 有什么区别？
 
     答：Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
 
-26. Top-k/Top-p
+27. Top-k/Top-p
 
     答：采样，增加生成多样性。
 
-27. speculative decoding
+28. speculative decoding
 
     答：使用一个小型辅助模型（称为“提议模型”或“draft model”）先快速生成多个候选token序列（草稿）。主模型（大型语言模型）随后只对这些候选进行验证和纠正，而不是每一步都全量生成和计算概率。这种方式能显著减少主模型的计算成本，提高生成速度。
 
-28. 为什么 LLM 流行 MoE？
+29. 为什么 LLM 流行 MoE？
 
     答：MoE 能显著提高模型容量而不成比例地增加计算成本
 
-29. SFT
+30. SFT
 
-30. PPO
+31. PPO
 
     答：
      
@@ -1884,7 +1945,7 @@ keywords: 面试题
 	    return loss
 	```
 
-31. PPO 怎么计算 advantages？
+32. PPO 怎么计算 advantages？
 
     答：1. 直接使用 reward
     2. response 的平均：advantages = reward - values_response.sum(dim=1) / response_mask.sum(dim=1)
@@ -1899,11 +1960,11 @@ keywords: 面试题
 	    return advantages
      ```
 
-32. PPO 有了 reward model 为什么还要 critic/value model？
+33. PPO 有了 reward model 为什么还要 critic/value model？
 
      答：critic/value model 是内部奖励，会在 RL 过程中更新，reward model 是外部奖励，是训练好的
 
-33. DPO
+34. DPO
 
     答：
      
@@ -1917,7 +1978,7 @@ keywords: 面试题
 	    return loss
     ```
  
-34. GRPO
+35. GRPO
    
     答：
      
@@ -1965,35 +2026,35 @@ keywords: 面试题
 	    return loss
     ```
 
-35. PPO vs DPO vs GRPO
+36. PPO vs DPO vs GRPO
 
     答：PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level
 
-36. GRPO 怎么去掉 critic/value model 的？
+37. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-37. LoRA 的 A 和 B 矩阵用什么初始化方法？
+38. LoRA 的 A 和 B 矩阵用什么初始化方法？
 
      答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。
 
-38. Base model eval
+39. Base model eval
 
      答：MMLU（通用语言理解类），GSM8K（编程与数学能力）
 
-39. Chat model eval
+40. Chat model eval
 
      答：MT-Bench，AlpacaEval，Arena，Red-Teaming
 
-40. Safety / Halluciation
+41. Safety / Halluciation
 
     答：RAG
 
-41. Long Context
+42. Long Context
 
     答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
 
-42. LLM设计中的 System 1 和 System 2
+43. LLM设计中的 System 1 和 System 2
 
     答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
      
@@ -2005,83 +2066,83 @@ keywords: 面试题
         
     - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-43. RAG; KG + LLM
+44. RAG; KG + LLM
 
-44. 文本分块
+45. 文本分块
 
     答：文本分块需考虑平衡信息完整性和检索效率。
 
-45. Reasoning
+46. Reasoning
 
-46. MCP 和 function calling 有什么区别？
+47. MCP 和 function calling 有什么区别？
 
     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-47. LangChain
+48. LangChain
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-48. bf16，fp16，fp32区别
+49. bf16，fp16，fp32区别
 
     答：bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。
 
-49. LLM 常用的优化器有？
+50. LLM 常用的优化器有？
 
     答：AdamW，Lion
 
-50. 混合精度计算
+51. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-51. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
+52. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
 
     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2字节，fp32 精度为 4字节。
     训练显存 ≈ 模型参数 × 3（包括权重 + 梯度 + Optimizer状态） + 激活 + buffer，主要瓶颈是激活值和优化器状态，batch_size 越大，激活越大；序列长度越长，attention buffer 越大。
     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 **KV Cache**。 
 
-52. 多卡多机训练
+53. 多卡多机训练
 
     答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-53. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+54. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-54. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+55. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-55. deepspeed 的 Zero-1， Zero 2， Zero 3
+56. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存
 
-56. vllm
+57. vllm
 
     答：把 KV 缓存当作虚拟内存；每条序列的缓存按页（page）管理，动态分配到显存中；PagedAttention = 分页机制 + 注意力机制；动态批处理
 
-57. GPT 的原理？
+58. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-58. bert 的原理？
+59. bert 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-59. bert 的训练目标？
+60. bert 的训练目标？
 
     答：bert 有 masked language modeling 和 next sentence prediction 两个目标
 
-60. roberta 相比 bert 做了哪些改进？
+61. roberta 相比 bert 做了哪些改进？
 
     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-61. bert 强于 rnn 的地方？
+62. bert 强于 rnn 的地方？
 
     答：并行，对大数据比较友好。
 
-62. Qwen
+63. Qwen
 
-63. Deepseek
+64. Deepseek
 
     答：1. 采用 GRPO 算法，显著降低 RL 训练成本。
     2. R1 中的 MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
@@ -2089,11 +2150,56 @@ keywords: 面试题
     4. fp8 精度计算
     5. Multi-Token Predition
 
-#### Applications
+#### Search/Recommendation
 
-1. 浏览器的联想词运用了什么理论和原理？
+1. 搜索/推荐 Pipeline
+
+    答：由于海量数据，所以不是端到端。
+    Recall，Rank，Rerank
+
+2. 浏览器的联想词运用了什么理论和原理？
 
     答：贝叶斯原理。
+
+3. CTR（点击率预估）
+
+    答：样本偏差包括：
+    
+	1. 选择性偏差（Selection Bias）：用户只点击曝光的部分结果，非点击不代表不感兴趣。
+	
+	2. 位置偏差（Position Bias）：排名靠前位置点击率更高，影响真实兴趣判断。
+
+4. NDCG
+
+    答：衡量推荐结果的排序质量，考虑点击或相关性得分及其在列表中的位置。结果越靠前且相关性越高，分数越大。
+
+5. 推荐系统召回策略
+
+    答：1. 热门召回：浏览/点击量统计。通用性强、无冷启动问题
+    2. 协同过滤召回：UserCF、ItemCF。利用用户-物品交互的相似性
+    3. 向量召回：Item2Vec、DSSM、双塔模型。能捕捉语义和行为的相似性
+
+6. 推荐系统多路召回
+
+    答：通过多个不同的召回策略或通道，并行生成多个初步候选 item 集合，再融合形成最终的召回候选集合，送入排序模型。
+    
+    1. 合并取 Top-N：从每路召回中取 top-K，合并去重；
+    2. 加权融合：每一路打分加权（可用模型或策略决定）；
+    3. 训练融合：用模型（如召回 ranker）对召回候选打分融合。
+
+7. 精排模型
+
+    答：DIN
+
+8. 多目标排序
+
+9. 推荐系统冷启动
+
+    答：用户冷启动和物品冷启动。元信息（如用户基本属性、物品描述、标签等），尽可能收集各种信息（问卷调查）。
+
+10. 推荐系统如何解决长尾问题？
+
+    答：提升长尾内容曝光。
 
 ### CV and position related
 
@@ -2101,9 +2207,11 @@ keywords: 面试题
 
 1. Choose one paper
 
+     答：multilingual，coding，RAG，reasoning
+
 2. Choose one LLM
 
-     答：Qwen, LLaMA, GPT, deepseek; multilingual, coding, RAG
+     答：Qwen, LLaMA, GPT, deepseek
 
 3. Choose one project
 
@@ -2129,26 +2237,37 @@ keywords: 面试题
 
 #### Multilinguality
 
-1. 数据采样策略
+1. 数据收集和采样策略
 
-    答：参考 XLM-R，用 temperature-based sampling。
+    答：1. 重点针对新语言
+    2. 考虑可信赖的数据集而非从头开始收集
+    3. 进行平衡采样，参考 XLM-R，用 temperature-based sampling，并对已覆盖语言采取最少采样
+
+2. 语言适配
+
+    答：1. 词表扩展（新 embedding 学习/推理速度/OOV）
+    2. continued pretraining（forgetting）
+    3. high-resource languages help low-resource languages
+    4. PPL，NLU and NLG（measures）
 
 ### Others
 
 1. 性格测试: [链接 1](https://www.zhihu.com/question/28728468/answer/41961812)
 
-2. 个人工作内容
+2. 自我介绍
 
-3. 部门工作内容
+3. 为什么加入我们公司？
 
-4. 工作地点：城市，具体位置
+4. 职业规划（工作方向）: [链接](https://www.zhihu.com/question/20054953)
 
-5. 转正
+5. 优势和劣势
 
-6. 薪资 & 定级: [链接 1](https://www.zhihu.com/question/19841590)，[链接 2](https://www.zhihu.com/question/34557602)
+6. 团队合作
 
-7. 工作时间：日常工作时间，单双休，年假
+7. 个人工作内容 & 部门工作内容
 
-8. 为什么加入我们公司？
+8. 工作地点：城市，具体位置，远程办公
 
-9. 职业规划（工作方向）: [链接](https://www.zhihu.com/question/20054953)
+9. 薪资 & 定级 & 绩效考核 & 晋升机制 & 转正: [链接 1](https://www.zhihu.com/question/19841590)，[链接 2](https://www.zhihu.com/question/34557602)
+
+10. 工作时间：日常工作时间，单双休，年假
