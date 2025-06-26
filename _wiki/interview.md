@@ -10,7 +10,11 @@ keywords: 面试题
 
 #### Linear Algebra
 
-1. 给一个3*3的矩阵，求 row-wise cosine similarity
+1. 计算三个稠密矩阵 A,B,C 的乘积 ABC ,假设三个矩阵的尺寸分别为 m∗n，n∗p，p∗q，且 m <n < p < q，计算顺序效率最高的是 (AB)C 还是 A(BC)？
+
+    答：在 (AB)C 中，m∗n 的矩阵 A 和 n∗p 的矩阵 B 的乘积，得到 m∗p 的矩阵 A*B ，而 A∗B 的每个元素需要 n 次乘法和 n-1 次加法，忽略加法，共需要 m∗n∗p 次乘法运算。同样情况分析 A*B 之后再乘以 C 时的情况，共需要 m∗p∗q 次乘法运算。因此， (AB)C 需要的乘法次数是 m∗n∗p+m∗p∗q 。同理分析 C 选项 A (BC) 需要的乘法次数是 n∗p∗q+m∗n∗q。
+
+2. 给一个3*3的矩阵，求 row-wise cosine similarity
 
     答：
     ```
@@ -123,7 +127,8 @@ keywords: 面试题
 
 19. 高维空间下的点有什么特点？
 
-    答：- 随着维度升高，点的分布会变得稀疏，任意两点的距离会变大。
+    答：
+    - 随着维度升高，点的分布会变得稀疏，任意两点的距离会变大。
     - 距离会变得差不多。距离的相对方差为 1/d，d 为维度，随着维度升高，方差趋于 0。
     - 集中在表面。从低维推到高维空间，体积会越来越由表面附近区域贡献。
     - 几乎正交
@@ -486,7 +491,8 @@ keywords: 面试题
 
 6. 并查集
 
-    答：- 省份数量：并查集判断连通块数。
+    答：
+    - 省份数量：并查集判断连通块数。
     - 岛屿数量：并查集合并相邻陆地格子。
     - 冗余连接：并查集找成环的边。
     - 连通网络的操作次数：统计冗余边与连通块数量。
@@ -558,7 +564,8 @@ keywords: 面试题
 
 8. 栈
 
-    答：- 有效的括号：利用栈匹配左右括号，检测括号是否成对出现且顺序正确。
+    答：
+    - 有效的括号：利用栈匹配左右括号，检测括号是否成对出现且顺序正确。
     - 最小栈：设计一个支持 push、pop、top 操作，并能在O(1)时间内检索到最小元素的栈。
     - 用栈实现队列：用两个栈模拟队列的先进先出行为。
     - 逆波兰表达式求值：使用栈计算后缀表达式的值。（前缀、中缀、后缀表达式相关）
@@ -589,7 +596,8 @@ keywords: 面试题
 
 9. 队列
 
-    答：- 用栈实现队列：用两个栈模拟队列的入队和出队操作，stact_in 负责入队，stack_out 负责出队。入队：直接压入 stact_in，出队：如果 stack_out 为空，就把 stack_in 所有元素弹出并压入 stack_out（反转顺序），然后从 stack_out 弹出或读取元素。
+    答：
+    - 用栈实现队列：用两个栈模拟队列的入队和出队操作，stact_in 负责入队，stack_out 负责出队。入队：直接压入 stact_in，出队：如果 stack_out 为空，就把 stack_in 所有元素弹出并压入 stack_out（反转顺序），然后从 stack_out 弹出或读取元素。
     - 滑动窗口最大值：用双端队列维护当前窗口的最大元素，实现高效查询。
     - 循环队列设计：实现固定大小的循环队列，支持入队、出队及满/空状态判断。
     - 最近请求次数（计数器设计）：用队列记录请求时间，统计指定时间窗口内的请求数。
@@ -623,7 +631,8 @@ keywords: 面试题
 
 10. 树
 
-    答：- 二叉树的前序、中序、后序遍历：用递归/迭代/栈实现节点访问顺序。
+    答：
+    - 二叉树的前序、中序、后序遍历：用递归/迭代/栈实现节点访问顺序。
     - 二叉树的层序遍历（BFS）：用队列实现按层访问所有节点。
     - 判断二叉树是否是平衡二叉树：递归计算子树高度并判断平衡性。
     - 找到二叉树的最近公共祖先（LCA）：递归或借助父指针寻找公共祖先。
@@ -636,18 +645,12 @@ keywords: 面试题
 
 11. 堆
 
-    答：- 前 K 个高频元素：使用小顶堆（优先队列）维护出现频率最高的 K 个元素。
-    - 合并 K 个有序链表：使用小顶堆维护每个链表的头节点，实现逐步合并。
-    - 数组中第 K 大的元素：使用大小为 K 的小顶堆，维护当前最大的 K 个元素。
-    - 数据流中的中位数：使用最大堆和最小堆分别存储数据流的左右两半，动态维护中位数。
-    - 滑动窗口最大值：可用单调队列实现，但也可用最大堆维护当前窗口最大值（需处理过期元素）。
-    - 寻找和最小的 K 对数字：在两个有序数组中，使用最小堆生成最小的 K 个数对。
-    - 接雨水 II（二维）：使用最小堆从边界向内扩展，维护当前高度边界。
-    - 区间合并类问题（如会议室问题）**：使用最小堆维护当前会议室的结束时间。
-    - 石头碰撞问题：使用最大堆模拟石头之间的碰撞过程，取出最大两块进行处理。
-    - 构建哈夫曼编码树：使用最小堆每次合并频率最小的两个节点，构建最优前缀树。
+    答：堆只保证父子节点的局部有序，不保证整个树有序。
     
-    这些问题常依赖 Python 的 `heapq` 库，默认为小顶堆；实现最大堆时可将数值取负。
+    删除节点 O(logn)：先将最后一个元素移到堆顶，再从堆顶开始，将该节点与其左右子节点中较小（大）的一个进行比较交换,直到满足最小（大）堆的性质
+    
+    用 Python 的 `heapq` 库实现，默认为小顶堆；实现最大堆时可将数值取负。
+    
     ```
     import heapq
     
@@ -659,10 +662,22 @@ keywords: 面试题
     heapq.nsmallest(k, iterable) # 获取最小的 K 个元素
     heapq.nlargest(k, iterable) # 获取最大的 K 个元素
     ```
+    
+    - 前 K 个高频元素：使用小顶堆（优先队列）维护出现频率最高的 K 个元素。
+    - 合并 K 个有序链表：使用小顶堆维护每个链表的头节点，实现逐步合并。
+    - 数组中第 K 大的元素：使用大小为 K 的小顶堆，维护当前最大的 K 个元素。
+    - 数据流中的中位数：使用最大堆和最小堆分别存储数据流的左右两半，动态维护中位数。
+    - 滑动窗口最大值：可用单调队列实现，但也可用最大堆维护当前窗口最大值（需处理过期元素）。
+    - 寻找和最小的 K 对数字：在两个有序数组中，使用最小堆生成最小的 K 个数对。
+    - 接雨水 II（二维）：使用最小堆从边界向内扩展，维护当前高度边界。
+    - 区间合并类问题（如会议室问题）**：使用最小堆维护当前会议室的结束时间。
+    - 石头碰撞问题：使用最大堆模拟石头之间的碰撞过程，取出最大两块进行处理。
+    - 构建哈夫曼编码树：使用最小堆每次合并频率最小的两个节点，构建最优前缀树。
 
 12. Trie
 
-    答：- 实现 Trie（前缀树）：使用字典或数组构建多叉树，支持 `insert`, `search`, `startsWith` 操作。
+    答：
+    - 实现 Trie（前缀树）：使用字典或数组构建多叉树，支持 `insert`, `search`, `startsWith` 操作。
     - 替换词根（Leetcode 648）：将句子中的词替换为其词根；利用 Trie 存储所有词根，遍历句子中每个词，查找最短匹配词根。
     - 单词搜索 II（Leetcode 212）：在二维字符网格中找多个单词；构建 Trie 存储单词表，然后结合 DFS 和 Trie 剪枝遍历。
     - 添加与搜索单词（Leetcode 211）：支持通配符 '.' 的词典查询；在 Trie 上做 DFS，遇到 '.' 时递归尝试所有子节点。
@@ -679,7 +694,7 @@ keywords: 面试题
 
 14. 二叉搜索树是什么？
 
-    答：每个节点的值都满足：左子树 < 根节点 < 右子树。
+    答：每个节点的值都满足：左子树 < 根节点 < 右子树。其中序遍历单调递增。
 
 15. 二叉平衡树是什么？
 
@@ -727,19 +742,24 @@ keywords: 面试题
 	- 更高的扇出（fan-out），因为内部节点更“轻”，树更矮 → 减少磁盘访问
 	- 范围查找特别高效，只需找到区间起点，后续通过链表遍历即可
 
-20. 判断图存在环？
+20. 图的表示方法
 
-    答：拓扑排序（Topological Sorting），深度遍历。
+    答：邻接表：每个节点维护一个列表，存储它所有相邻的节点。邻接矩阵：二维数组。
 
-21. 最短路径算法及复杂度？
+21. 判断图存在环？
 
-    Dijkstra 算法，时间复杂度为 O(V^2)，如果是稀疏图，可用堆进行优化，时间复杂度为 O((V + E) lgV)；Floyd 算法，时间复杂度为 O(V^3)。
+    答：无向图：深度遍历；并查集。
+    有向图：深度遍历；广度遍历/拓扑排序（Topological Sorting）
 
-22. 最小生成树算法及复杂度？
+22. 最短路径算法及复杂度？
 
-    Prim 算法，O(V^2)；Kruskal 算法，O(ElgE)。
+    答：Dijkstra 算法，时间复杂度为 O(V^2)，如果是稀疏图，可用堆进行优化，时间复杂度为 O((V + E) lgV)；Floyd 算法，时间复杂度为 O(V^3)。
 
-23. KMP 算法
+23. 最小生成树算法及复杂度？
+
+    答：Prim 算法，O(V^2)；Kruskal 算法，O(ElgE)。
+
+24. KMP 算法
 
     答：[KMP 算法](https://www.zhihu.com/question/21923021)
     
@@ -749,21 +769,29 @@ keywords: 面试题
     
     时间复杂度为 O(m + n)
 
-24. Edit Distance
+25. Edit Distance
 
     答：[Edit Distance](https://github.com/youngwind/blog/issues/106)
 
-25. 正则表达式
+26. 正则表达式
 
-26. 了解 Hamming 距离吗？
+27. 了解 Hamming 距离吗？
 
     答：两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。
 
-27. 如何求两个数的二进制表示的 Hamming 距离？
+28. 如何求两个数的二进制表示的 Hamming 距离？
 
     答：先求两个数的异或结果 res，再依次求 res 每一位与 1 与操作的结果，不为 0，则 Hamming 距离加一；每判断完一位，res 右移一位继续判断下一位。
 
-28. 排序
+29. 哈希冲突
+
+    答：开放地址法（当当前位置被占用时，寻找下一个可用位置；容易产生聚集现象，负载因子高时效率下降）：线性探测（从当前位置开始，逐个向后找）；二次探测（间隔逐步增大，避免连续冲突）；双重哈希（使用第二个哈希函数计算偏移。
+    
+    链地址法：每个哈希桶（地址）用一个链表（或其它结构）存储所有哈希到该地址的元素。需要额外的链表或结构，内存碎片。
+    
+    再哈希：当负载因子过高时，扩大哈希表，重新计算所有元素的哈希值。扩容代价较高。
+
+30. 排序
 
     答：冒泡排序：时间复杂度 O(n^2)，稳定
     
@@ -777,37 +805,37 @@ keywords: 面试题
     
     快速排序：时间复杂度 O(nlogn)，不稳定
     
-    希尔排序：不稳定
+    希尔排序：是插入排序的改进版本，通过分组逐步插入排序，减少数据移动距离。不稳定
     
     堆排序：时间复杂度 O(nlogn)，不稳定
     
     桶排序：时间复杂度 O(n)
 
-29. 原地排序与非原地排序？
+31. 原地排序与非原地排序？
 
     答：原地排序就是指在排序过程中不申请多余的存储空间，只利用原来存储待排数据的存储空间进行比较和交换的数据排序。非原地排序就是要利用额外的数组。
 
-30. 数组最大最小值最优算法？
+32. 数组最大最小值最优算法？
 
     答：[链接](https://www.zhihu.com/question/28892158)
 
-31. 无序整数数组中找第 k 大的数？
+33. 无序整数数组中找第 k 大的数？
 
-    答：方法一：最小堆：建一个大小为 k 的最小堆。遍历数组，将元素加入堆中，如果堆大小超过 k，就弹出堆顶（最小元素）。最终堆顶就是第 k 大的数。时间复杂度：O(n log k)，空间复杂度：O(k)
+    答：方法一：最小堆：建一个大小为 k 的最小堆。遍历数组，将元素加入堆中，如果堆大小超过 k，就弹出堆顶（最小元素）。最终堆顶就是第 k 大的数。时间复杂度：O(nlogk)，空间复杂度：O(k)
     
     方法二：快速选择（Quickselect），类似快速排序的分区思想（partition）；每次将数组划分为两个区间，选择一边递归；平均时间复杂度 O(n)，最坏 O(n²)。
     
     方法三：内置排序
 
-32. 从一个几乎排序好的数组中找出第 k 小的元素，时间复杂度尽量低。  
+34. 从一个几乎排序好的数组中找出第 k 小的元素，时间复杂度尽量低。  
 
     答：利用“插入排序”特性，数组接近有序，插入排序接近线性。也可以用快速选择算法，平均 O(n)。
 
-33. 在 n 个数中取最大的 k 个数，时间复杂度是？
+35. 在 n 个数中取最大的 k 个数，时间复杂度是？
 
     答：nlogk。堆的大小为 k，总共要调整 n 次。
 
-34. 有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？
+36. 有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？
 
     答：最简单的思路是合并数据库，然后再定位长度，时间复杂度为 O(n)，空间复杂度是 O(n)；但实际上只需要借鉴这个合并的过程，当合并到中位数的时候输出中位数即可，时间复杂度为 O(n)，空间复杂度是 O(1)。这思路十分简单，但并不是最佳算法，有序数组让我们想到的会是二分查找，因此我们可以利用二分查找来使复杂度降至 O(logn)，具体可参考：
     
@@ -815,11 +843,11 @@ keywords: 面试题
     
     b. https://stackoverflow.com/questions/6182488/median-of-5-sorted-arrays
 
-35. 海量数据处理
+37. 海量数据处理
 
     答：[海量数据处理](https://lpq29743.github.io/algorithm/2017/02/20/MassiveData/)
 
-36. 汉诺塔时间复杂度？
+38. 汉诺塔时间复杂度？
 
     答：假设移动 n 个圆盘需要 f(n) 次移动
 
@@ -829,51 +857,51 @@ keywords: 面试题
 
     根据 ①② 两式，可求出 f(n) = 2^n - 1 所以 O(n) = 2^n
 
-37. 尾递归（Tail Call）有什么危害，如何避免？
+39. 尾递归（Tail Call）有什么危害，如何避免？
 
     答：栈溢出（Stack Overflow）。尾递归事实上和循环是等价的。
 
-38. 农夫过河问题？
+40. 农夫过河问题？
 
     答：[链接](https://www.zhihu.com/question/29968331)
 
-39. 不用库函数求一个数的立方根？
+41. 不用库函数求一个数的立方根？
 
     答：[链接](https://blog.csdn.net/sjpz0124/article/details/47726275)
 
-40. 二进制中 1 的个数？
+42. 二进制中 1 的个数？
 
     答：把一个整数减去 1，再和原整数做与运算，会把该整数最右边的 1 变成 0。那么一个整数的二进制表示中有多少个 1，就可以进行多少次这样的操作。具体解题思路可参见《剑指 Offer》。
 
-41. 数值的整数次方？
+43. 数值的整数次方？
 
     答：[链接](https://zhuanlan.zhihu.com/p/38715645)
 
-42. 有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？
+44. 有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？
 
     答：[链接](https://www.zhihu.com/question/310970538)
 
-43. 一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？
+45. 一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？
 
     答：中位数。
 
-44. 给定两个数，求他们无限次相加中第 k 小的数？
+46. 给定两个数，求他们无限次相加中第 k 小的数？
 
     答：[链接](https://www.zhihu.com/question/41809896)
 
-45. 什么是水塘抽样？
+47. 什么是水塘抽样？
 
     答：一种在数据量未知或数据流形式下，以等概率从 n 个元素中采样 k 个的算法，适用于内存受限的场景。
 
-46. 如何从数据流中以等概率选取一个元素（k=1）？
+48. 如何从数据流中以等概率选取一个元素（k=1）？
 
     答：初始化：`result = None`，遍历第 i 个元素时，以 `1/i` 的概率替换 result，所有元素最终被选中的概率都是 `1/n`。
 
-47. 如何扩展到选取 k 个元素？
+49. 如何扩展到选取 k 个元素？
 
     答：初始化：前 k 个元素入 reservoir，对第 i (>k) 个元素：以 k/i 的概率随机替换 reservoir 中的一个元素。
 
-48. 链表中如何随机返回一个节点？（单次遍历，O(1) 空间）
+50. 链表中如何随机返回一个节点？（单次遍历，O(1) 空间）
 
     答：遍历链表，对第 i 个节点，以 `1/i` 的概率更新当前候选节点，最终返回的节点是等概率选中的。
 
@@ -1852,6 +1880,14 @@ keywords: 面试题
 
     答：PCA 和 SVD 是无监督算法，不需要类别信息，他们都可以将数据投影到低维空间，以最大程度保留原始数据的方差信息。PCA 基本思想：找到数据方差最大的方向，将高维数据投影到这些方向上以实现降维。主要步骤：中心化 → 计算协方差矩阵 → 特征值分解 → 选择前 k 个主成分 → 投影。LDA 是有监督算法，需要类别信息，他在降维的同时让类间距离尽可能大，类内距离尽可能小。
 
+3. 特征标准化有什么意义？怎么做？
+
+    答：消除不同指标量纲的影响。归一化，正态化。
+
+4. 什么是白化？
+
+    答：输入数据分布变换到 0 均值，单位方差的正态分布。但计算代价大，很少用于神经网络。
+
 #### Emsemble Learning
 
 1. ensemble method 中哪种方法降低 bias，哪种方法降低 variance
@@ -1923,6 +1959,7 @@ keywords: 面试题
 1. 权重初始化方法？
 
      答：[链接](https://lpq29743.github.io/artificialintelligence/2017/12/16/TensorFlowInitialization/)
+     
      零初始化，常量初始化，高斯/均匀随机初始化，Xavier 初始化，He 初始化，正交初始化。
 
 2. 为什么不能零初始化或常量初始化？
@@ -1932,146 +1969,96 @@ keywords: 面试题
 3. Xavier / He 初始化的目的是什么？
 
      答：使每一层输出方差为 1。
- 
-4. 什么是白化？
 
-    答：输入数据分布变换到 0 均值，单位方差的正态分布
+4. RNN 系列为什么要正交初始化？
 
-5. batch normalization
+     答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
 
-    答：BatchNorm 就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。
+5. 怎么得到正交初始化？
 
-    对于深度学习这种包含很多隐层的网络结构，在训练过程中，因为各层参数不停变化，所以每个隐层都面临 covariate shift 的问题，输入分布老是变来变去，这就是 Internal Covariate Shift，Internal 指的是深层网络隐层，发生在网络内部。BatchNorm 的基本思想是让每个隐层节点的激活输入分布固定下来，避免 Internal Covariate Shift 问题。
+     答：QR 分解或 SVD。
 
-    经过 BN 后，大部分 Activation 的值落入非线性函数的线性区内，对应导数远离导数饱和区，加速训练收敛过程。
+6. 有哪些激活函数？
 
-    BN 为了保证非线性的获得，对变换后的 x 又进行了 scale 加上 shift 操作：y = scale * x + shift。
+     答：sigmoid，softmax，tanh，ReLU，PReLU，Leakly ReLU，Maxout。
 
-6. 特征标准化有什么意义？怎么做？
+7. 激活函数如何选择？
 
-    答：消除不同指标量纲的影响。归一化，正态化。
+     答：除了 gate 之类的地方，尽量不要用 sigmoid，可以用 tanh 或者 relu 之类的激活函数。
 
-7. sgd、momentum、rmsprop、adam 区别与联系
+8. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
 
-    答：都是梯度下降，SGD 没动量，Momentum 是一阶动量，RMSProp 是二阶动量，Adam 是一阶动量 + 二阶动量。
+     答：解决了梯度消失问题。Sigmoid 导数在两端趋近于 0，容易导致梯度消失；ReLU 在正区间梯度恒为 1，不会出现梯度爆炸/消失问题，支持更深网络训练。
 
-8. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
+9. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
 
-    答：[链接](https://zhuanlan.zhihu.com/p/61590026)
+     答：ReLU 能解决梯度消失，但对 CNN 有效，对 RNN 无效。因为CNN 每一层使用独立的参数不同，原始的 RNN 在每个阶段都共享一个参数。如果直接把 RNN 的激活函数换成 ReLU 会导致非常大的输出值。
 
-9. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
+10. RELU 在 0 点的导数是多少？
 
-    答：[链接](https://zhuanlan.zhihu.com/p/61590026)
+     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003784)
 
-10. TensorFlow 怎么实现 learning rate decay？
+11. dying relu？
 
-    答：[链接](https://blog.csdn.net/u012436149/article/details/62058318)
+     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1004214)
 
-11. Pytorch 怎么实现 learning rate decay？
-
-    答：[链接](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/)
-
-12. TensorFlow 内部求导机制？
-
-    答：符号求导。先提供每一个op求导的数学实现，然后使用链式法则求出整个表达式的导数。
-
-13. TensorFlow 创建变量的方式有哪些，有什么区别？
-
-    答：`tf.Variable()`和`tf.get_variable()`。前者一律创建新的变量，遇到同名变量，会在后面加后缀 1，2；后者如果遇到同名变量，则使用之前创建的变量，但要求这个变量一定在 variable_scope 中，且有 reuse 选项。
-
-14. Pytorch 如何切换训练和测试模式？
-
-    答：`model.train()`和`model.eval()`
-
-15. Pytorch 的 view 和 reshape 有什么区别？
-
-    答：view 只能用于连续内存的张量；只改变视图，不复制数据（如果张量是连续的）；如果张量不是连续的，会报错；更快（不涉及数据复制）；在对张量做完 `.contiguous()` 后更常用。reshape 可以用于非连续张量（会自动创建副本）；自动处理非连续张量，可能复制数据；自动处理，返回新的张量；稍慢（可能需要复制内存）；更通用，适用于任何张量。
-
-16. GPU 利用率低怎么办？
-
-    答：dataset API 可以支持以 streaming 的方式读取数据。
-
-17. 矩阵计算：AB=C，y=f(C)，y 对 C 的偏导为 P，求 y 对 A 和 B的偏导。
-
-    答：$$PB^T$$ 和 $$A^TP$$。
-
-18. softmax 求导？
-
-    The derivation of the softmax function?
-
-    答：[链接](https://zhuanlan.zhihu.com/p/25723112)。$$softmax'(z)=softmax(z)(y_i-softmax(z))$$，其中$$y_i$$为标签。如果表示为 Jacobian 矩阵可为$$J_{softmax}=Diag(p)-pp^T$$，其中$$p=softmax(z)$$，而$$Diag(p)$$是以p为对角线的矩阵。
-
-19. 为什么 softmax 包含 “soft”？
+12. 为什么 softmax 包含 “soft”？
 
     答：“soft”表示 softmax 函数是连续可导的，以保证梯度下降可以用来优化损失函数。
 
     “soft” means that the softmax function is continuous and differentiable so that the gradient descent can be used to optimize the loss function.
 
-20. 怎么得到一个 soft 版本的 argmax？
+13. 怎么得到一个 soft 版本的 argmax？
 
      答：用 softmax 的结果与 index 的倒置相乘。
 
-21. argmax 不可导怎么办？
+14. Dropout
 
-     答：gumbel softmax。
+     答：以一定的概率随机地使一部分神经元节点失效。应用 Dropout 之后，前向传播生成网络结构的过程可以看做服从的分布是伯努利分布。
 
-22. 神经网络为什么会产生梯度消失现象？
+15. 矩阵计算：AB=C，y=f(C)，y 对 C 的偏导为 P，求 y 对 A 和 B的偏导。
 
-     答：两种情况下梯度消失经常出现，一是在深层网络中，二是采用了不合适的损失函数，比如 sigmoid（导数范围从 0 到 0.25）。前者是因为根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都小于 1 的话，多次链乘之后会接近为 0，如果都大于 0 的话，多次链乘之后会接近正无穷。sigmoid 中心部位和两侧的梯度差别太大，如果权重初始化得太大或太小，激活值基本都在 sigmoid 两侧，两侧梯度几乎为 0，传播几层就没有梯度了。
+    答：$$PB^T$$ 和 $$A^TP$$。
 
-23. 有哪些激活函数？
-
-     答：sigmoid，softmax，tanh，ReLU，PReLU，Leakly ReLU，Maxout。
-
-24. 挑一种激活函数推导梯度下降的过程?
+16. 挑一种激活函数推导梯度下降的过程?
 
      答：[链接](https://blog.csdn.net/jediael_lu/article/details/77852060)
 
-25. 激活函数如何选择？
+17. softmax 求导？
 
-     答：除了 gate 之类的地方，尽量不要用 sigmoid，可以用 tanh 或者 relu 之类的激活函数。
+    The derivation of the softmax function?
 
-26. RELU 在 0 点的导数是多少？
+    答：[链接](https://zhuanlan.zhihu.com/p/25723112)。$$softmax'(z)=softmax(z)(y_i-softmax(z))$$，其中$$y_i$$为标签。如果表示为 Jacobian 矩阵可为$$J_{softmax}=Diag(p)-pp^T$$，其中$$p=softmax(z)$$，而$$Diag(p)$$是以p为对角线的矩阵。
 
-     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003784)
+18. argmax 不可导怎么办？
 
-27. dying relu？
+     答：gumbel softmax。
 
-     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1004214)
+19. sgd、momentum、rmsprop、adam 区别与联系
 
-28. 如何调参？
+    答：都是梯度下降，SGD 没动量，Momentum 是一阶动量，RMSProp 是二阶动量，Adam 是一阶动量 + 二阶动量。
 
-     答：for 循环；贝叶斯优化。
+20. 神经网络为什么会产生梯度消失现象？
 
-29. 如何避免梯度消失或梯度爆炸？
+     答：两种情况下梯度消失经常出现，一是在深层网络中，二是采用了不合适的损失函数，比如 sigmoid（导数范围从 0 到 0.25）。前者是因为根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都小于 1 的话，多次链乘之后会接近为 0，如果都大于 0 的话，多次链乘之后会接近正无穷。sigmoid 中心部位和两侧的梯度差别太大，如果权重初始化得太大或太小，激活值基本都在 sigmoid 两侧，两侧梯度几乎为 0，传播几层就没有梯度了。
+
+21. 如何避免梯度消失或梯度爆炸？
 
      答：权重合理初始化，梯度剪切（梯度爆炸），门机制，batch normalization。
 
-30. 多任务如何学习？
+22. 如何调参？
+
+     答：for 循环；贝叶斯优化。
+
+23. 多任务如何学习？
 
      答：[链接](https://zhuanlan.zhihu.com/p/34916654)
 
-31. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
+24. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
 
      答：输出尺寸 = (输入尺寸 - filter + 2 * padding）/ stride + 1。计算尺寸不被整除，卷积向下取整，池化向上取整。
 
-32. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
-
-     答：解决了梯度消失问题。Sigmoid 导数在两端趋近于 0，容易导致梯度消失；ReLU 在正区间梯度恒为 1，不会出现梯度爆炸/消失问题，支持更深网络训练。
-
-33. RNN 系列为什么要正交初始化？
-
-     答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
-
-34. 怎么得到正交初始化？
-
-     答：QR 分解或 SVD。
-
-35. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
-
-     答：ReLU 能解决梯度消失，但对 CNN 有效，对 RNN 无效。因为CNN 每一层使用独立的参数不同，原始的 RNN 在每个阶段都共享一个参数。如果直接把 RNN 的激活函数换成 ReLU 会导致非常大的输出值。
-
-36. LSTM 是什么？
+25. LSTM 是什么？
 
      答：遗忘门：$$f_t=\sigma(W_f[h_{t-1}, x_t] + b_f)$$，输出 [0, 1]，来表示信息保留程度。
 
@@ -2085,17 +2072,53 @@ keywords: 面试题
 
      得到最终输出：$$h_t=o_t*tanh(C_t)$$。
 
-37. GRU 是什么？
+26. GRU 是什么？
 
      答：LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
 
-38. LSTM 和 GRU 的联系和区别？
+27. LSTM 和 GRU 的联系和区别？
 
      答：都是通过使梯度的乘法变成加法，来解决 RNN 由于梯度消失而不能对长期依赖建模的问题。前者三个门，后者两个门，所以前者计算更耗时。
 
-39. 门机制为什么能解决梯度消失或爆炸问题？
+28. 门机制为什么能解决梯度消失或爆炸问题？
 
      答：[链接](https://zhuanlan.zhihu.com/p/27485750)
+
+29. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
+
+    答：[链接](https://zhuanlan.zhihu.com/p/61590026)
+
+30. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
+
+    答：[链接](https://zhuanlan.zhihu.com/p/61590026)
+
+31. TensorFlow 怎么实现 learning rate decay？
+
+    答：[链接](https://blog.csdn.net/u012436149/article/details/62058318)
+
+32. Pytorch 怎么实现 learning rate decay？
+
+    答：[链接](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/)
+
+33. TensorFlow 内部求导机制？
+
+    答：符号求导。先提供每一个op求导的数学实现，然后使用链式法则求出整个表达式的导数。
+
+34. TensorFlow 创建变量的方式有哪些，有什么区别？
+
+    答：`tf.Variable()`和`tf.get_variable()`。前者一律创建新的变量，遇到同名变量，会在后面加后缀 1，2；后者如果遇到同名变量，则使用之前创建的变量，但要求这个变量一定在 variable_scope 中，且有 reuse 选项。
+
+35. Pytorch 如何切换训练和测试模式？
+
+    答：`model.train()`和`model.eval()`
+
+36. Pytorch 的 view 和 reshape 有什么区别？
+
+    答：view 只能用于连续内存的张量；只改变视图，不复制数据（如果张量是连续的）；如果张量不是连续的，会报错；更快（不涉及数据复制）；在对张量做完 `.contiguous()` 后更常用。reshape 可以用于非连续张量（会自动创建副本）；自动处理非连续张量，可能复制数据；自动处理，返回新的张量；稍慢（可能需要复制内存）；更通用，适用于任何张量。
+
+37. GPU 利用率低怎么办？
+
+    答：dataset API 可以支持以 streaming 的方式读取数据。
 
 ### Natural Language Processing
 
@@ -2387,7 +2410,7 @@ keywords: 面试题
     答：FlashAttention 基于以下几点：
     
 	1. 块分割 (blocking)
-    将 Q,K,V 按块划分，分块计算Attention。每次只加载当前块，节省内存。
+    将 Q, K, V 按块划分，分块计算 Attention。每次只加载当前块，节省内存。
     
 	2. 在线计算 softmax（online-softmax） 
     传统 softmax 需要先计算全部 QK^T，然后减 max 值再求 exp，最后归一化。而 FlashAttention 在线计算 softmax，避免存储整个矩阵。
@@ -2459,13 +2482,23 @@ keywords: 面试题
      
     ReLU，GeLU 不能门控，GLU，SwiGLU 能门控。
 
-25. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
+25. Batch Normalization (BN)
+
+    答：BN 就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。
+
+    对于深度学习这种包含很多隐层的网络结构，在训练过程中，因为各层参数不停变化，所以每个隐层都面临 covariate shift 的问题，输入分布老是变来变去，这就是 Internal Covariate Shift，Internal 指的是深层网络隐层，发生在网络内部。BatchNorm 的基本思想是让每个隐层节点的激活输入分布固定下来，避免 Internal Covariate Shift 问题。
+
+    经过 BN 后，大部分 Activation 的值落入非线性函数的线性区内，对应导数远离导数饱和区，加速训练收敛过程。
+
+    BN 为了保证非线性的获得，对变换后的 x 又进行了 scale 加上 shift 操作：y = scale * x + shift。
+
+26. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
 
     答：BN 是跨样本统计的，会泄漏信息，所以 LN 更适合变长序列和单样本推理，RMSNorm 参数量（d，缩放因子）为 LN （2d，缩放因子和偏移因子） 一半，更高效和稳定，并表现与 LN 相似。
      
     输入是形状为 `(batch_size, seq_len, hidden_dim)` 的张量，BN 通常对 batch 和 seq_len 两个维度联合计算均值和方差，也就是对每个 hidden_dim 维度独立归一化。LN/RMSNorm 对每个样本的 hidden_dim 维度做归一化，即对 `seq_len` 中的每个位置独立归一化，计算均值和方差都在 hidden_dim 上。
 
-26. 实现 LayerNorm
+27. 实现 LayerNorm
 
     答：
     ```
@@ -2486,7 +2519,7 @@ keywords: 面试题
 	        return self.gamma * x_norm + self.beta
     ```
 
-27. 实现 RMSNorm
+28. 实现 RMSNorm
 
     答：RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
 	```
@@ -2506,37 +2539,37 @@ keywords: 面试题
 	        return self.scale * x_norm
 	```
 
-28. Pre Norm 和 Post Norm 有什么区别？
+29. Pre Norm 和 Post Norm 有什么区别？
 
     答：Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
 
-29. Top-k/Top-p
+30. Top-k/Top-p
 
     答：采样，增加生成多样性。
 
-30. speculative decoding
+31. speculative decoding
 
     答：使用一个小型辅助模型（称为“提议模型”或“draft model”）先快速生成多个候选token序列（草稿）。主模型（大型语言模型）随后只对这些候选进行验证和纠正，而不是每一步都全量生成和计算概率。这种方式能显著减少主模型的计算成本，提高生成速度。
 
-31. 为什么 LLM 流行 MoE？
+32. 为什么 LLM 流行 MoE？
 
     答：MoE 能显著提高模型容量而不成比例地增加计算成本
 
-32. Prefix LM 和 Causal LM 区别是什么？
+33. Prefix LM 和 Causal LM 区别是什么？
 
     答：Causal LM 是单向的，只看左边上下文；Prefix LM 是半双向的，可以看整个 prefix 的信息（左侧上下文），预测后缀。
 
-33. 为什么大部分 LLM 是 decoder-only？
+34. 为什么大部分 LLM 是 decoder-only？
 
     答：生成范式的统一性；任务更难；双向 attention 的注意力矩阵容易退化成低秩状态，而 causal attention 的注意力矩阵是下三角矩阵，必然是满秩的，建模能力更强。
 
-34. SFT
+35. SFT
 
-35. 强化学习和监督学习有什么区别？
+36. 强化学习和监督学习有什么区别？
 
     答：监督学习中每一个决策（预测标签）是独立的，它对决策的优化取决于标签，强化学习每一个决策是相互影响的，它对决策的优化取决于延时标签（奖励）。
 
-36. PPO
+37. PPO
 
     答：
      
@@ -2567,9 +2600,10 @@ keywords: 面试题
 	    return loss
 	```
 
-37. PPO 怎么计算 advantages？
+38. PPO 怎么计算 advantages？
 
-    答：1. 直接使用 reward
+    答：
+    1. 直接使用 reward
     2. response 的平均：advantages = reward - values_response.sum(dim=1) / response_mask.sum(dim=1)
     3. GAE
     ```
@@ -2582,11 +2616,11 @@ keywords: 面试题
 	    return advantages
      ```
 
-38. PPO 有了 reward model 为什么还要 critic/value model？
+39. PPO 有了 reward model 为什么还要 critic/value model？
 
      答：critic/value model 是内部奖励，仅需当前上下文，会在 RL 过程中更新，reward model 是外部奖励，需要完整回答，是训练好的
 
-39. DPO
+40. DPO
 
     答：
      
@@ -2600,7 +2634,7 @@ keywords: 面试题
 	    return loss
     ```
  
-40. GRPO
+41. GRPO
    
     答：
      
@@ -2648,43 +2682,43 @@ keywords: 面试题
 	    return loss
     ```
 
-41. PPO vs DPO vs GRPO
+42. PPO vs DPO vs GRPO
 
     答：PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level
 
-42. GRPO 怎么去掉 critic/value model 的？
+43. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-43. LoRA 的 A 和 B 矩阵用什么初始化方法？
+44. LoRA 的 A 和 B 矩阵用什么初始化方法？
 
      答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。
 
-44. Adapter
+45. Adapter
 
      答：插入小型网络模块
 
-45. Prefix Tuning
+46. Prefix Tuning
 
      答：优化输入前缀
 
-46. Base model eval
+47. Base model eval
 
      答：MMLU（通用语言理解类），GSM8K（编程与数学能力）
 
-47. Chat model eval
+48. Chat model eval
 
      答：MT-Bench，AlpacaEval，Arena，Red-Teaming
 
-48. Safety / Halluciation
+49. Safety / Halluciation
 
     答：RAG
 
-49. Long Context
+50. Long Context
 
     答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
 
-50. LLM设计中的 System 1 和 System 2
+51. LLM设计中的 System 1 和 System 2
 
     答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
      
@@ -2696,91 +2730,93 @@ keywords: 面试题
         
     - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-51. RAG; KG + LLM
+52. RAG; KG + LLM
 
     答：RAG 可以解决 LLM 知识过时，幻觉问题以及无法调用私有数据等问题
     Naive RAG: Indexing + Retrieval + Generation
     Advanced RAG: Indexing + Pre-Retrieval + Retrieval + Post-Retrieval (Re-ranking, Prompt Compression) + Generation
 
-52. 文本分块
+53. 文本分块
 
     答：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。
 
-53. Reasoning
+54. Reasoning
 
-54. MCP 和 function calling 有什么区别？
+55. MCP 和 function calling 有什么区别？
 
     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-55. LangChain
+56. LangChain
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-56. bf16，fp16，fp32区别
+57. bf16，fp16，fp32区别
 
     答：bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。
 
-57. LLM 常用的优化器有？
+58. LLM 常用的优化器有？
 
     答：AdamW，Lion
 
-58. 混合精度计算
+59. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-59. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
+60. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
 
-    答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2字节，fp32 精度为 4字节。
-    训练显存 ≈ 模型参数 × 3（包括权重 + 梯度 + Optimizer状态） + 激活 + buffer，主要瓶颈是激活值和优化器状态，batch_size 越大，激活越大；序列长度越长，attention buffer 越大。
-    推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 **KV Cache**。 
+    答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2 字节，fp32 精度为 4 字节。
+    训练显存 ≈ 模型参数 × 3/4（包括权重 + 梯度 + Optimizer 状态 * 1/2） + 激活（反向传播时，需要用它来计算梯度），主要瓶颈是激活值和优化器状态，batch_size 越大，激活越大。
+    推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
-60. 多卡多机训练
+61. 多卡多机训练
 
     答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-61. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+62. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-62. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+63. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-63. deepspeed 的 Zero-1， Zero 2， Zero 3
+64. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存
 
-64. 量化
+65. 量化
 
     答：GPTQ (GPT Quantization) 的主要创新是它采用逐层、逐通道的方式优化量化参数，使用二次误差最小化方法来确定最佳量化值，并通过重建误差传播来补偿量化误差。这种方法在保持模型性能的同时实现了高压缩率。
+    
+    AWQ(Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
-65. vllm
+66. vllm
 
     答：把 KV 缓存当作虚拟内存；每条序列的缓存按页（page）管理，动态分配到显存中；PagedAttention = 分页机制 + 注意力机制；动态批处理
 
-66. GPT 的原理？
+67. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-67. bert 的原理？
+68. bert 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-68. bert 的训练目标？
+69. bert 的训练目标？
 
     答：bert 有 masked language modeling 和 next sentence prediction 两个目标
 
-69. roberta 相比 bert 做了哪些改进？
+70. roberta 相比 bert 做了哪些改进？
 
     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-70. bert 强于 rnn 的地方？
+71. bert 强于 rnn 的地方？
 
     答：并行，对大数据比较友好。
 
-71. Qwen
+72. Qwen
 
-72. Deepseek
+73. Deepseek
 
     答：1. 采用 GRPO 算法，显著降低 RL 训练成本。
     2. R1 中的 MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
