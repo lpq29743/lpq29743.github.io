@@ -569,10 +569,8 @@ keywords: 面试题
     - 最小栈：设计一个支持 push、pop、top 操作，并能在O(1)时间内检索到最小元素的栈。
     - 用栈实现队列：用两个栈模拟队列的先进先出行为。
     - 逆波兰表达式求值：使用栈计算后缀表达式的值。（前缀、中缀、后缀表达式相关）
-    - 柱状图中最大的矩形面积：用单调栈维护高度，计算最大矩形面积。
     - 接雨水：用栈记录边界，计算能接多少雨水。
     - 滑动窗口最大值：用双端队列（特殊栈）维护滑动窗口最大元素。
-    - 栈的最大面积矩形（Largest Rectangle in Histogram）：利用单调栈遍历计算。
     - 基本计算器：用栈处理带括号的表达式计算。
     - 栈排序：只用一个额外栈实现对栈元素排序。
     
@@ -593,8 +591,24 @@ keywords: 面试题
     is_empty = len(stack) == 0
     ```
 
+9. 单调栈
 
-9. 队列
+    答：栈内保持单调（递增 / 递减）；入栈前，弹出不满足单调性的元素；栈顶元素就是当前元素的最近更小（或更大）元素。应用例子：柱状图中最大的矩形面积：用单调栈维护高度，计算最大矩形面积。
+    ```
+    def monotonic_stack(nums):
+	    stack = []  # 栈里存索引
+	    res = [-1] * len(nums)  # 记录每个元素左边最近小于它的元素索引
+
+	    for i, num in enumerate(nums):
+	        while stack and nums[stack[-1]] >= num:
+	            stack.pop()
+	        if stack:
+	            res[i] = stack[-1]  # 栈顶就是左边最近更小的元素索引
+	        stack.append(i)  # 当前元素入栈
+	    return res
+    ```
+
+10. 队列
 
     答：
     - 用栈实现队列：用两个栈模拟队列的入队和出队操作，stact_in 负责入队，stack_out 负责出队。入队：直接压入 stact_in，出队：如果 stack_out 为空，就把 stack_in 所有元素弹出并压入 stack_out（反转顺序），然后从 stack_out 弹出或读取元素。
@@ -629,7 +643,7 @@ keywords: 面试题
 	用 list 实现出队`first = queue.pop(0)`时间复杂度为 O(n)，因此不推荐。
 	优先队列用 heapq 实现
 
-10. 树
+11. 树
 
     答：
     - 二叉树的前序、中序、后序遍历：用递归/迭代/栈实现节点访问顺序。
@@ -643,7 +657,7 @@ keywords: 面试题
     - 判断一棵树是否是子树：递归比较结构和节点值。
     - 树的序列化与反序列化：将树结构转为字符串及还原树形结构。
 
-11. 堆
+12. 堆
 
     答：堆只保证父子节点的局部有序，不保证整个树有序。
     
@@ -674,7 +688,7 @@ keywords: 面试题
     - 石头碰撞问题：使用最大堆模拟石头之间的碰撞过程，取出最大两块进行处理。
     - 构建哈夫曼编码树：使用最小堆每次合并频率最小的两个节点，构建最优前缀树。
 
-12. Trie
+13. Trie
 
     答：
     - 实现 Trie（前缀树）：使用字典或数组构建多叉树，支持 `insert`, `search`, `startsWith` 操作。
@@ -688,23 +702,23 @@ keywords: 面试题
     - 敏感词过滤器：构建 Trie 存储敏感词集合，配合 AC 自动机或双指针，进行文本过滤与替换。
     - DNA 序列查重（变种问题）：构建 Trie 存储基因序列（A/C/G/T），检测是否存在重复序列（如长度为 10 的重复子串）。
 
-13. 完全二叉树是什么？
+14. 完全二叉树是什么？
 
     答：除了最后一层，所有层都必须被填满，且最后一层节点必须尽量靠左排列（因此二叉平衡树不一定是完全二叉树）。
 
-14. 二叉搜索树是什么？
+15. 二叉搜索树是什么？
 
     答：每个节点的值都满足：左子树 < 根节点 < 右子树。其中序遍历单调递增。
 
-15. 二叉平衡树是什么？
+16. 二叉平衡树是什么？
 
     答：二叉平衡树（Balanced Binary Tree）是对普通二叉搜索树（BST）的优化，目的是解决 BST 在极端情况下可能退化为链表（如连续插入有序数列）的问题，从而保证查找、插入、删除等操作的时间复杂度维持在 O(log n)。二叉平衡树要求任意节点的左右子树高度差控制在一定范围内（如 AVL 树是 ≤1，红黑树是最多两倍）。
 
-16. AVL 树是什么？
+17. AVL 树是什么？
 
     答：AVL 树是一种自平衡的二叉搜索树（Binary Search Tree，BST），它在插入和删除节点时，能自动调整自身结构以保持树的“平衡”，从而保证查找、插入、删除操作的时间复杂度始终为 `O(log n)`。
 
-17. 红黑树是什么？
+18. 红黑树是什么？
 
     答：红黑树性能要好于平衡二叉树。
 
@@ -720,7 +734,7 @@ keywords: 面试题
 
     性质5. 从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点。
 
-18. B/B- 树是什么？
+19. B/B- 树是什么？
 
     答：B 树是一种自平衡的多路搜索树，是对二叉搜索树的推广，适合磁盘或大规模数据存储系统中高效读取。
     - 每个节点可以有多个键值（key）和子树指针
@@ -731,7 +745,7 @@ keywords: 面试题
     
     查找过程类似多路查找：从根节点开始，依次判断键值大小，决定走哪个子树，直到叶子或命中。
 
-19. B+ 树是什么？
+20. B+ 树是什么？
 
     答：B+ 树是在 B 树基础上演化而来的，数据库系统中应用最广泛的索引结构。
     
@@ -742,24 +756,24 @@ keywords: 面试题
 	- 更高的扇出（fan-out），因为内部节点更“轻”，树更矮 → 减少磁盘访问
 	- 范围查找特别高效，只需找到区间起点，后续通过链表遍历即可
 
-20. 图的表示方法
+21. 图的表示方法
 
     答：邻接表：每个节点维护一个列表，存储它所有相邻的节点。邻接矩阵：二维数组。
 
-21. 判断图存在环？
+22. 判断图存在环？
 
     答：无向图：深度遍历；并查集。
-    有向图：深度遍历；广度遍历/拓扑排序（Topological Sorting）
+    有向图：深度遍历；广度遍历/拓扑排序：时间复杂度为 O(n＋e)。
 
-22. 最短路径算法及复杂度？
+23. 最短路径算法及复杂度？
 
-    答：Dijkstra 算法，时间复杂度为 O(V^2)，如果是稀疏图，可用堆进行优化，时间复杂度为 O((V + E) lgV)；Floyd 算法，时间复杂度为 O(V^3)。
+    答：Dijkstra 算法，是贪心算法，时间复杂度为 O(V^2)，如果是稀疏图，可用堆进行优化，时间复杂度为 O((V + E) lgV)；Floyd 算法，时间复杂度为 O(V^3)。
 
-23. 最小生成树算法及复杂度？
+24. 无向图最小生成树算法及复杂度？
 
-    答：Prim 算法，O(V^2)；Kruskal 算法，O(ElgE)。
+    答：Prim 算法，是贪心算法，每一步从当前生成树出发，选择权值最小的边，并且这条边连接的是树内节点和树外节点，逐步扩展生成树，直到包含所有节点。时间复杂度 O(V^2)；Kruskal 算法，时间复杂度 O(ElgE)。
 
-24. KMP 算法
+25. KMP 算法
 
     答：[KMP 算法](https://www.zhihu.com/question/21923021)
     
@@ -769,21 +783,21 @@ keywords: 面试题
     
     时间复杂度为 O(m + n)
 
-25. Edit Distance
+26. Edit Distance
 
     答：[Edit Distance](https://github.com/youngwind/blog/issues/106)
 
-26. 正则表达式
+27. 正则表达式
 
-27. 了解 Hamming 距离吗？
+28. 了解 Hamming 距离吗？
 
     答：两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。
 
-28. 如何求两个数的二进制表示的 Hamming 距离？
+29. 如何求两个数的二进制表示的 Hamming 距离？
 
     答：先求两个数的异或结果 res，再依次求 res 每一位与 1 与操作的结果，不为 0，则 Hamming 距离加一；每判断完一位，res 右移一位继续判断下一位。
 
-29. 哈希冲突
+30. 哈希冲突
 
     答：开放地址法（当当前位置被占用时，寻找下一个可用位置；容易产生聚集现象，负载因子高时效率下降）：线性探测（从当前位置开始，逐个向后找）；二次探测（间隔逐步增大，避免连续冲突）；双重哈希（使用第二个哈希函数计算偏移。
     
@@ -791,7 +805,7 @@ keywords: 面试题
     
     再哈希：当负载因子过高时，扩大哈希表，重新计算所有元素的哈希值。扩容代价较高。
 
-30. 排序
+31. 排序
 
     答：冒泡排序：时间复杂度 O(n^2)，稳定
     
@@ -803,23 +817,23 @@ keywords: 面试题
     
     基数排序：按位排序，从低位到高位依次进行分配和收集；稳定
     
-    快速排序：时间复杂度 O(nlogn)，不稳定
+    快速排序：时间复杂度 O(nlogn)，空间复杂度最好情况是 O(logn)，最坏情况可能达到 O(n),但平均情况是 O(logn)，不稳定
     
-    希尔排序：是插入排序的改进版本，通过分组逐步插入排序，减少数据移动距离。不稳定
+    希尔排序：插入排序的改进版本，其核心思想是先将整个待排序序列分割成若干个子序列分别进行直接插入排序,待整个序列基本有序时,再对全体记录进行一次直接插入排序。不稳定
     
-    堆排序：时间复杂度 O(nlogn)，不稳定
+    堆排序：堆排序包含两个主要步骤：建堆和排序。建堆过程：从最后一个非叶子节点开始，自上而下进行堆化。排序过程：每次将堆顶元素与末尾元素交换，并重新对剩余元素进行堆化。需要执行 n-1 次，每次堆化的时间复杂度为 O(logn)，因此排序阶段总的时间复杂度为 O(nlogn)。空间复杂度 O(1)，可原地排序，不稳定
     
     桶排序：时间复杂度 O(n)
 
-31. 原地排序与非原地排序？
+32. 原地排序与非原地排序？
 
     答：原地排序就是指在排序过程中不申请多余的存储空间，只利用原来存储待排数据的存储空间进行比较和交换的数据排序。非原地排序就是要利用额外的数组。
 
-32. 数组最大最小值最优算法？
+33. 数组最大最小值最优算法？
 
     答：[链接](https://www.zhihu.com/question/28892158)
 
-33. 无序整数数组中找第 k 大的数？
+34. 无序整数数组中找第 k 大的数？
 
     答：方法一：最小堆：建一个大小为 k 的最小堆。遍历数组，将元素加入堆中，如果堆大小超过 k，就弹出堆顶（最小元素）。最终堆顶就是第 k 大的数。时间复杂度：O(nlogk)，空间复杂度：O(k)
     
@@ -827,15 +841,15 @@ keywords: 面试题
     
     方法三：内置排序
 
-34. 从一个几乎排序好的数组中找出第 k 小的元素，时间复杂度尽量低。  
+35. 从一个几乎排序好的数组中找出第 k 小的元素，时间复杂度尽量低。  
 
     答：利用“插入排序”特性，数组接近有序，插入排序接近线性。也可以用快速选择算法，平均 O(n)。
 
-35. 在 n 个数中取最大的 k 个数，时间复杂度是？
+36. 在 n 个数中取最大的 k 个数，时间复杂度是？
 
     答：nlogk。堆的大小为 k，总共要调整 n 次。
 
-36. 有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？
+37. 有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？
 
     答：最简单的思路是合并数据库，然后再定位长度，时间复杂度为 O(n)，空间复杂度是 O(n)；但实际上只需要借鉴这个合并的过程，当合并到中位数的时候输出中位数即可，时间复杂度为 O(n)，空间复杂度是 O(1)。这思路十分简单，但并不是最佳算法，有序数组让我们想到的会是二分查找，因此我们可以利用二分查找来使复杂度降至 O(logn)，具体可参考：
     
@@ -843,11 +857,11 @@ keywords: 面试题
     
     b. https://stackoverflow.com/questions/6182488/median-of-5-sorted-arrays
 
-37. 海量数据处理
+38. 海量数据处理
 
     答：[海量数据处理](https://lpq29743.github.io/algorithm/2017/02/20/MassiveData/)
 
-38. 汉诺塔时间复杂度？
+39. 汉诺塔时间复杂度？
 
     答：假设移动 n 个圆盘需要 f(n) 次移动
 
@@ -857,51 +871,59 @@ keywords: 面试题
 
     根据 ①② 两式，可求出 f(n) = 2^n - 1 所以 O(n) = 2^n
 
-39. 尾递归（Tail Call）有什么危害，如何避免？
+40. 尾递归（Tail Call）有什么危害，如何避免？
 
     答：栈溢出（Stack Overflow）。尾递归事实上和循环是等价的。
 
-40. 农夫过河问题？
+41. 背包问题
+
+    答：[01 背包问题](https://lpq29743.github.io/algorithm/2017/08/21/Pack1/)
+    
+    [完全背包问题](https://lpq29743.github.io/algorithm/2017/08/22/Pack2/)
+    
+    [物品冲突问题](https://lpq29743.github.io/algorithm/2017/08/25/Pack3/)
+
+42. 农夫过河问题？
 
     答：[链接](https://www.zhihu.com/question/29968331)
 
-41. 不用库函数求一个数的立方根？
+43. 不用库函数求一个数的立方根？
 
     答：[链接](https://blog.csdn.net/sjpz0124/article/details/47726275)
 
-42. 二进制中 1 的个数？
+44. 二进制中 1 的个数？
 
     答：把一个整数减去 1，再和原整数做与运算，会把该整数最右边的 1 变成 0。那么一个整数的二进制表示中有多少个 1，就可以进行多少次这样的操作。具体解题思路可参见《剑指 Offer》。
 
-43. 数值的整数次方？
+45. 数值的整数次方？
 
     答：[链接](https://zhuanlan.zhihu.com/p/38715645)
 
-44. 有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？
+46. 有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？
 
     答：[链接](https://www.zhihu.com/question/310970538)
 
-45. 一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？
+47. 一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？
 
     答：中位数。
 
-46. 给定两个数，求他们无限次相加中第 k 小的数？
+48. 给定两个数，求他们无限次相加中第 k 小的数？
 
     答：[链接](https://www.zhihu.com/question/41809896)
 
-47. 什么是水塘抽样？
+49. 什么是水塘抽样？
 
     答：一种在数据量未知或数据流形式下，以等概率从 n 个元素中采样 k 个的算法，适用于内存受限的场景。
 
-48. 如何从数据流中以等概率选取一个元素（k=1）？
+50. 如何从数据流中以等概率选取一个元素（k=1）？
 
     答：初始化：`result = None`，遍历第 i 个元素时，以 `1/i` 的概率替换 result，所有元素最终被选中的概率都是 `1/n`。
 
-49. 如何扩展到选取 k 个元素？
+51. 如何扩展到选取 k 个元素？
 
     答：初始化：前 k 个元素入 reservoir，对第 i (>k) 个元素：以 k/i 的概率随机替换 reservoir 中的一个元素。
 
-50. 链表中如何随机返回一个节点？（单次遍历，O(1) 空间）
+52. 链表中如何随机返回一个节点？（单次遍历，O(1) 空间）
 
     答：遍历链表，对第 i 个节点，以 `1/i` 的概率更新当前候选节点，最终返回的节点是等概率选中的。
 
@@ -1350,7 +1372,7 @@ keywords: 面试题
 
 3. 最小二乘法为什么可以解决线性回归问题？
 
-    答：残差满足正态分布时，用最大似然估计法可以证明最小二乘法是合理的。
+    答：残差满足均值为 0 的同方差正态分布时，用最大似然估计法可以证明最小二乘法是合理的。
 
 4. 描述一下最小二乘法的几何意义？
 
@@ -1819,29 +1841,37 @@ keywords: 面试题
 	        return np.linalg.norm(X[:, np.newaxis] - self.centroids, axis=2)
     ```
 
-2. K-Means 将 m 条 n 维数据进行聚类，一共迭代了 t 次，其中簇的数目为 K，计算时间复杂度和空间复杂度
+2. KMeans 将 m 条 n 维数据进行聚类，一共迭代了 t 次，其中簇的数目为 K，计算时间复杂度和空间复杂度
 
-    答：使用K-Means算法的时候，需要对 m 条数据每一维都与 K 个中心进行计算，一共迭代 t次，即一共是 O(mntK) 的时间复杂度，同时每个维度有 K 个聚类中心，要存 m 个 n 维向量，因此空间复杂度为 O(n(m + K))，选A。
+    答：使用 KMeans 算法的时候，需要对 m 条数据每一维都与 K 个中心进行计算，一共迭代 t次，即一共是 O(mntK) 的时间复杂度，同时每个维度有 K 个聚类中心，要存 m 个 n 维向量，因此空间复杂度为 O(n(m + K))，选A。
 
-3. KMeans 中我想聚成 100 类 结果发现只能聚成 98 类，为什么？
+3. KMeans 聚类数目选择方法
+
+    答：肘部法则（Elbow Method）：通过绘制聚类数目与目标函数（通常是簇内平方和）的关系图，寻找图像呈肘状的拐点，该拐点对应的聚类数目被认为是合适的选择。
+    
+    轮廓系数法（Silhouette Method）：通过计算每个样本的轮廓系数，绘制轮廓系数与聚类数目的关系图，选择轮廓系数最大的聚类数目。
+    
+    Gap统计量（Gap Statistic）：比较聚类结果与随机数据集的差异，选择Gap统计量最大的聚类数目。
+
+4. KMeans 中我想聚成 100 类 结果发现只能聚成 98 类，为什么？
 
     答：因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn.net/shwan_ma/article/details/80096408)。
 
-4. 为什么在高维空间中聚类效果会变差？如何应对？
+5. 为什么在高维空间中聚类效果会变差？如何应对？
 
     答：高维导致“距离集中”，影响距离度量有效性（维度灾难）。可先进行降维（如 PCA、t-SNE、UMAP）再聚类。
 
-5. 讲一下 EM 算法，E 步和 M 步的具体步骤，E 中的期望是什么？
+6. 讲一下 EM 算法，E 步和 M 步的具体步骤，E 中的期望是什么？
 
     答：初始化参数 $$\theta^{old}$$；E 步：估计 $$p(Z\|X, \theta^{old})$$，求得样本的后验期望值；M 步：根据极大似然估计求得 $$\theta^{new}$$；根据 $$\theta$$，迭代至收敛。
 
-6. KMeans 和 EM 有什么关系，和 GMM 有什么关系？
+7. KMeans 和 EM 有什么关系，和 GMM 有什么关系？
 
     答：KMeans 的目标函数（整个数据集点到各自聚类中心的距离的平方和）可以用 EM 算法求解。K-Means 算法归类为 GMM 的 EM 解法的一个特例。
 
-7. DBSCAN
+8. DBSCAN
 
-8. IVF（Inverted File Index，倒排文件索引）
+9. IVF（Inverted File Index，倒排文件索引）
 
     答：将整个向量空间划分为多个“簇（clusters）”，并构建倒排表（inverted list），从而减少实际要比较的向量数量。
 
@@ -2222,25 +2252,32 @@ keywords: 面试题
 
 1. Raw data 数据收集和质量控制
 
-     答：Minhash 模糊去重，使用小模型打 PPL，数据配比。
+     答：Minhash 模糊去重，使用小模型打 PPL，数据配比。在评估大模型数据集质量时，可以从以下几个核心维度进行分析：
+     - 覆盖度：主要关注数据是否覆盖足够的任务类型、是否具备样本多样性，以及领域分布是否均衡。典型的评估方法包括统计分析和多任务映射。
+     - 真实性：关注数据中的信息是否真实、是否符合客观事实。常用的检测方法包括与知识图谱进行对比以及基于语言模型的自动事实核查（fact-check）。
+     - 干净程度：检查数据是否存在拼写错误、乱码或无意义的文本。可以通过文本清洗技术和噪声检测方法进行处理。
+     - 毒性安全性：关注数据中是否存在有害内容或带有偏见的文本。通常使用有害内容检测模型和关键词扫描工具进行识别。
+     - 语言质量：判断文本是否通顺、流畅且语言丰富。可以通过语言模型打分、句法结构检测等方式进行评估。
+     - 任务相关性：验证样本是否与目标任务或目标领域高度相关。可采用 Embedding 相似度匹配或由领域专家进行标注确认。
+     - 知识时效性：检查数据中的信息是否已经过时，通常通过与最新的数据库或时间戳进行对齐来判断。
 
-2. Instruction data 数据收集和质量控制
+8. Instruction data 数据收集和质量控制
 
      答：基于 dataset，人工标注。
 
-3. 数据生成和质量控制
+9. 数据生成和质量控制
 
      答：GPT-based 质量评分器。
 
-4. Transformer 的原理？
+10. Transformer 的原理？
 
      答：Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
 
-5. multi-head attention 的公式是怎样的？
+11. multi-head attention 的公式是怎样的？
 
      答：$$Attention(Q,K,V) = softmax({QK^T\over {\sqrt {d_k}}})V$$。
  
-6. multi-head attention 实现
+12. multi-head attention 实现
 
      答：
      ```
@@ -2291,15 +2328,15 @@ keywords: 面试题
 	        return output
      ```
 
-7. multi-head attention 时间复杂度
+13. multi-head attention 时间复杂度
 
      答：$$O(d * seq\_len * seq\_len)$$。
 
-8. Transformer 使用的时候，制约显存的最关键因素是什么？
+14. Transformer 使用的时候，制约显存的最关键因素是什么？
 
      答：序列长度。
 
-9. grouped-query attention 实现
+15. grouped-query attention 实现
 
 	答：grouped-query attention 中，query 使用比 key/value 更多的 heads。因为在推理阶段，Q 是即时计算的，而 K/V 是缓存的。
     ```
@@ -2351,7 +2388,7 @@ keywords: 面试题
 	        return output
      ```
 
-10. multi-head attention + kv cache 实现
+16. multi-head attention + kv cache 实现
 
      答：query 必须每步重算，而 key/value 是过去的记忆，可以缓存。
      ```
@@ -2405,7 +2442,7 @@ keywords: 面试题
 	        return self.out_proj(out)
      ```
 
-11. FlashAttention
+17. FlashAttention
 
     答：FlashAttention 基于以下几点：
     
@@ -2418,59 +2455,63 @@ keywords: 面试题
     3. 单遍扫描（one-pass）计算  
     通过巧妙算法实现只需遍历一次 Q,K,V 即可计算 Attention 输出，避免多次加载。
 
-12. Multi-head Latent Attention (MLA)
+18. Multi-head Latent Attention (MLA)
 
     答：MLA 把 keys 和 values 低秩联合压缩成 latents，从而把 self attention 变成 latents cross-attend inputs，时间复杂度从 $$O(d * seq\_len * seq\_len)$$ 降至 $$O(d * seq\_len * latent\_len)$$。
 
-13. 为什么要 multi-head
+19. 为什么要 multi-head
 
     答：多头注意力允许模型在不同的表示子空间中学习信息，这样可以让模型同时关注不同的信息维度。每个头学习到的信息可以独立地编码输入序列的不同方面，然后将这些信息综合起来，得到更丰富的表示。
 
-14. Transformer 的 Q 和 K 为什么使用不同的权重矩阵生成？如果强行让 Q=K 会发生什么？
+20. Transformer 的 Q 和 K 为什么使用不同的权重矩阵生成？如果强行让 Q=K 会发生什么？
 
     答：注意力将退化为自相似匹配，容易捕捉到 trivial 信息（如位置对称性）；表达能力显著下降，模型性能变差；实际论文实验证明，共用 Q/K/V 权重会损害性能
 
-15. Transformer 为什么是 Q * K^T，而不是 Q + K？
+21. Transformer 为什么是 Q * K^T，而不是 Q + K？
 
     答：点积是最自然的相似度度量，而加法并不能提供一个明确的匹配度分数，它只是两个向量的混合，没有“匹配程度”的含义。
 
-16. Transformer 为什么是点积，而不是 cosine？
+22. Transformer 为什么是点积，而不是 cosine？
 
     答：cosine 会归一化，损失模长信息，而且计算复杂度更高。
 
-17. 为什么要除以 $$\sqrt {d_k}$$
+23. 为什么要除以 $$\sqrt {d_k}$$
 
     答：可以防止内积过大导致softmax函数梯度变得非常小，这有助于数值稳定性，使得学习过程更加稳定。此外，它还可以看作是一种缩放因子，帮助模型在不同维度上保持一致的性能。
 
-18. multi-head attention 的 embed 会不会有低秩的问题，怎么解决？
+24. multi-head attention 的 embed 会不会有低秩的问题，怎么解决？
 
     答：是的，可能因 head 冗余、聚合退化等原因呈现低秩结构，从而降低表达能力。可以通过正则化（在多头 projection 矩阵上加正交约束）、架构设计、训练策略等方法缓解，并可用奇异值分析评估问题严重程度。
 
-19. BPE，WordPiece 和 Unigram 的区别是？
+25. 为什么大模型要使用 left padding
+
+    答：left padding KV Cache 在右侧连续生长，无需移动缓存，支持高效批量并发生成，动态 KV Cache 底层优化都支持左填充。right padding KV Cache 在不同位置，难以对齐，难以批量对齐，增加显存开销，很少支持右填充。
+
+26. BPE，WordPiece 和 Unigram 的区别是？
 
     答：BPE 是基于贪心的频率合并。初始时将文本拆成最小单位（单字符），然后反复合并出现频率最高的连续字符对，直到达到预定词表大小。WordPiece（BERT 使用）跟 BPE 类似，不过是根据最大似然估计进行合并。Unigram 基于概率模型，先初始化大量子词候选，然后用 EM 算法估计每个子词的概率，迭代优化删除低概率子词，最终得到固定大小词表。
 
-20. 传统中文分词
+27. 传统中文分词
 
     答：前向匹配（Forward Maximum Matching）+ 动态规划（如 Viterbi 算法）
 
-21. Position Embedding
+28. Position Embedding
 
     答：绝对位置编码，分为 Sinusoidal（无需学习参数，偶数位置，使用正弦编码，在奇数位置，使用余弦编码。任意位置的 $$PE_{pos+k}$$ 都可以被 $$PE_{pos}$$ 的线性函数表示）和 Learnable Embedding。
     
     相对位置编码（可针对长序列），分为 RoPE（对 Query 和 Key 的每个向量维度用旋转变换编码位置信息）和 ALiBi（通过为 Attention 权重加上线性位置偏置来编码位置信息）。
 
-22. 外推性
+29. 外推性
 
     答：测试时要接收处理比训练时更长的上下文。
 
-23. 如何提升外推能力
+30. 如何提升外推能力
 
     答：位置编码外推：ALiBi
     长度泛化技术：动态调整 RoPE 的旋转角
     推理策略增强：CoT，Self- Consistency
 
-24. LLM 常用的激活函数有？
+31. LLM 常用的激活函数有？
 
     答：ReLU：f(x) = max(0, x)
      
@@ -2482,7 +2523,7 @@ keywords: 面试题
      
     ReLU，GeLU 不能门控，GLU，SwiGLU 能门控。
 
-25. Batch Normalization (BN)
+32. Batch Normalization (BN)
 
     答：BN 就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。
 
@@ -2492,13 +2533,13 @@ keywords: 面试题
 
     BN 为了保证非线性的获得，对变换后的 x 又进行了 scale 加上 shift 操作：y = scale * x + shift。
 
-26. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
+33. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
 
-    答：BN 是跨样本统计的，会泄漏信息，所以 LN 更适合变长序列和单样本推理，RMSNorm 参数量（d，缩放因子）为 LN （2d，缩放因子和偏移因子） 一半，更高效和稳定，并表现与 LN 相似。
+    答：BN 是跨样本跨 token 统计的，会泄漏信息，所以 LN 更适合变长序列和单样本推理，RMSNorm 参数量（d，缩放因子）为 LN （2d，缩放因子和偏移因子） 一半，更高效和稳定，并表现与 LN 相似。
      
-    输入是形状为 `(batch_size, seq_len, hidden_dim)` 的张量，BN 通常对 batch 和 seq_len 两个维度联合计算均值和方差，也就是对每个 hidden_dim 维度独立归一化。LN/RMSNorm 对每个样本的 hidden_dim 维度做归一化，即对 `seq_len` 中的每个位置独立归一化，计算均值和方差都在 hidden_dim 上。
+    输入是形状为 `(batch_size, seq_len, hidden_dim)` 的张量，BN 通常对 batch 和 seq_len 两个维度联合计算均值和方差，也就是对每个 hidden_dim 维度独立归一化。LN/RMSNorm 对每个样本每个 token 的 hidden_dim 维度做归一化，即对 seq_len 中的每个位置独立归一化，计算均值和方差都在 hidden_dim 上。
 
-27. 实现 LayerNorm
+34. 实现 LayerNorm
 
     答：
     ```
@@ -2519,7 +2560,7 @@ keywords: 面试题
 	        return self.gamma * x_norm + self.beta
     ```
 
-28. 实现 RMSNorm
+35. 实现 RMSNorm
 
     答：RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
 	```
@@ -2539,37 +2580,60 @@ keywords: 面试题
 	        return self.scale * x_norm
 	```
 
-29. Pre Norm 和 Post Norm 有什么区别？
+36. Pre Norm 和 Post Norm 有什么区别？
 
     答：Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
 
-30. Top-k/Top-p
+37. Top-k/Top-p
 
     答：采样，增加生成多样性。
 
-31. speculative decoding
+38. speculative decoding
 
     答：使用一个小型辅助模型（称为“提议模型”或“draft model”）先快速生成多个候选token序列（草稿）。主模型（大型语言模型）随后只对这些候选进行验证和纠正，而不是每一步都全量生成和计算概率。这种方式能显著减少主模型的计算成本，提高生成速度。
 
-32. 为什么 LLM 流行 MoE？
+39. 为什么 LLM 流行 MoE？
 
     答：MoE 能显著提高模型容量而不成比例地增加计算成本
 
-33. Prefix LM 和 Causal LM 区别是什么？
+40. 手撕 MoE
+
+    答：
+    ```
+    import torch
+	import torch.nn as nn
+	import torch.nn.functional as F
+	
+	class SimpleMoE(nn.Module):
+		def __init__(self, input_dim, output_dim, num_experts):
+			super().__init__()
+			self.num_experts = num_experts
+			self.experts = nn.ModuleList([nn.Linear(input_dim, output_dim) for _ in range(num_experts)])
+			self.gate = nn.Linear(input_dim, num_experts)
+
+	    def forward(self, x):
+	        gate_probs = F.softmax(self.gate(x), dim=1)  # [batch, num_experts]
+	        expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=1)  # [batch, num_experts, output_dim]
+	        gate_probs = gate_probs.unsqueeze(-1)  # [batch, num_experts, 1]
+	        return torch.sum(gate_probs * expert_outputs, dim=1)  # [batch, output_dim]
+    ```
+
+
+41. Prefix LM 和 Causal LM 区别是什么？
 
     答：Causal LM 是单向的，只看左边上下文；Prefix LM 是半双向的，可以看整个 prefix 的信息（左侧上下文），预测后缀。
 
-34. 为什么大部分 LLM 是 decoder-only？
+42. 为什么大部分 LLM 是 decoder-only？
 
     答：生成范式的统一性；任务更难；双向 attention 的注意力矩阵容易退化成低秩状态，而 causal attention 的注意力矩阵是下三角矩阵，必然是满秩的，建模能力更强。
 
-35. SFT
+43. SFT
 
-36. 强化学习和监督学习有什么区别？
+44. 强化学习和监督学习有什么区别？
 
     答：监督学习中每一个决策（预测标签）是独立的，它对决策的优化取决于标签，强化学习每一个决策是相互影响的，它对决策的优化取决于延时标签（奖励）。
 
-37. PPO
+45. PPO
 
     答：
      
@@ -2600,12 +2664,14 @@ keywords: 面试题
 	    return loss
 	```
 
-38. PPO 怎么计算 advantages？
+46. PPO 怎么计算 advantages？
 
     答：
-    1. 直接使用 reward
-    2. response 的平均：advantages = reward - values_response.sum(dim=1) / response_mask.sum(dim=1)
+    1. 直接使用 reward。不是 token level
+    2. response 的平均：advantages = reward - values_response.sum(dim=1) / response_mask.sum(dim=1)。容易产生很大的方差，导致训练不稳定。
     3. GAE
+    gamma 是时间折扣因子，控制未来奖励的重要性，越大代表未来奖励越重要。lambda 是 GAE 平衡因子，控制 bias-variance 权衡，λ 越大 → 方差大，偏差小；λ 越小 → 方差小，偏差大。
+    
     ```
     def compute_gae(rewards, values, gamma=1.0, lam=0.95):
 	    advantages = torch.zeros_like(rewards)
@@ -2616,11 +2682,11 @@ keywords: 面试题
 	    return advantages
      ```
 
-39. PPO 有了 reward model 为什么还要 critic/value model？
+47. PPO 有了 reward model 为什么还要 critic/value model？
 
      答：critic/value model 是内部奖励，仅需当前上下文，会在 RL 过程中更新，reward model 是外部奖励，需要完整回答，是训练好的
 
-40. DPO
+48. DPO
 
     答：
      
@@ -2634,7 +2700,7 @@ keywords: 面试题
 	    return loss
     ```
  
-41. GRPO
+49. GRPO
    
     答：
      
@@ -2682,43 +2748,68 @@ keywords: 面试题
 	    return loss
     ```
 
-42. PPO vs DPO vs GRPO
+50. PPO vs DPO vs GRPO
 
     答：PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level
 
-43. GRPO 怎么去掉 critic/value model 的？
+51. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-44. LoRA 的 A 和 B 矩阵用什么初始化方法？
+52. LoRA
 
-     答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。
+     答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。target_modules 一般为`q_proj`、`v_proj`，有时也会注入到 `k_proj` 或 `o_proj`。modules_to_save 表示指定哪些原模型模块需要一起训练 & 保存，如果扩展了词表可能要加 `embed_tokens`、`lm_head`。
 
-45. Adapter
+53. 手撕 LoRA
+
+     答：
+     ```
+    import torch
+    import torch.nn as nn
+    import torch.nn.functional as F
+
+	class LoRALinear(nn.Module):
+	    def __init__(self, in_features, out_features, r=4, alpha=1):
+	        super().__init__()
+	        self.r = r
+	        self.scale = alpha / r
+	        self.weight = nn.Parameter(torch.randn(out_features, in_features))
+	        self.weight.requires_grad = False
+	        self.A = nn.Parameter(torch.randn(r, in_features) * 0.01)
+	        self.B = nn.Parameter(torch.randn(out_features, r) * 0.01)
+	        self.bias = nn.Parameter(torch.zeros(out_features))
+
+	    def forward(self, x):
+	        base = F.linear(x, self.weight, self.bias)
+	        lora = F.linear(x, self.B @ self.A) * self.scale
+	        return base + lora
+    ```
+
+54. Adapter
 
      答：插入小型网络模块
 
-46. Prefix Tuning
+55. Prefix Tuning
 
      答：优化输入前缀
 
-47. Base model eval
+56. Base model eval
 
      答：MMLU（通用语言理解类），GSM8K（编程与数学能力）
 
-48. Chat model eval
+57. Chat model eval
 
      答：MT-Bench，AlpacaEval，Arena，Red-Teaming
 
-49. Safety / Halluciation
+58. Safety / Halluciation
 
     答：RAG
 
-50. Long Context
+59. Long Context
 
     答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
 
-51. LLM设计中的 System 1 和 System 2
+60. LLM设计中的 System 1 和 System 2
 
     答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
      
@@ -2730,93 +2821,95 @@ keywords: 面试题
         
     - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-52. RAG; KG + LLM
+61. RAG; KG + LLM
 
     答：RAG 可以解决 LLM 知识过时，幻觉问题以及无法调用私有数据等问题
     Naive RAG: Indexing + Retrieval + Generation
     Advanced RAG: Indexing + Pre-Retrieval + Retrieval + Post-Retrieval (Re-ranking, Prompt Compression) + Generation
 
-53. 文本分块
+62. 文本分块
 
     答：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。
 
-54. Reasoning
+63. Reasoning
 
-55. MCP 和 function calling 有什么区别？
+64. MCP 和 function calling 有什么区别？
 
     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-56. LangChain
+65. LangChain
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-57. bf16，fp16，fp32区别
+66. bf16，fp16，fp32区别
 
     答：bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。
 
-58. LLM 常用的优化器有？
+67. LLM 常用的优化器有？
 
     答：AdamW，Lion
 
-59. 混合精度计算
+68. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-60. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
+69. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
 
     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2 字节，fp32 精度为 4 字节。
     训练显存 ≈ 模型参数 × 3/4（包括权重 + 梯度 + Optimizer 状态 * 1/2） + 激活（反向传播时，需要用它来计算梯度），主要瓶颈是激活值和优化器状态，batch_size 越大，激活越大。
     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
-61. 多卡多机训练
+70. 多卡多机训练
 
     答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-62. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+71. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-63. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+72. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-64. deepspeed 的 Zero-1， Zero 2， Zero 3
+73. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存
 
-65. 量化
+74. 量化
 
-    答：GPTQ (GPT Quantization) 的主要创新是它采用逐层、逐通道的方式优化量化参数，使用二次误差最小化方法来确定最佳量化值，并通过重建误差传播来补偿量化误差。这种方法在保持模型性能的同时实现了高压缩率。
+    答：PTQ（训练后量化）和 QAT（训练时量化）
+    
+    GPTQ (GPT Quantization) 的主要创新是它采用逐层、逐通道的方式优化量化参数，使用二次误差最小化方法来确定最佳量化值，并通过重建误差传播来补偿量化误差。这种方法在保持模型性能的同时实现了高压缩率。
     
     AWQ(Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
-66. vllm
+75. vllm
 
     答：把 KV 缓存当作虚拟内存；每条序列的缓存按页（page）管理，动态分配到显存中；PagedAttention = 分页机制 + 注意力机制；动态批处理
 
-67. GPT 的原理？
+76. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-68. bert 的原理？
+77. bert 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-69. bert 的训练目标？
+78. bert 的训练目标？
 
     答：bert 有 masked language modeling 和 next sentence prediction 两个目标
 
-70. roberta 相比 bert 做了哪些改进？
+79. roberta 相比 bert 做了哪些改进？
 
     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-71. bert 强于 rnn 的地方？
+80. bert 强于 rnn 的地方？
 
     答：并行，对大数据比较友好。
 
-72. Qwen
+81. Qwen
 
-73. Deepseek
+82. Deepseek
 
     答：1. 采用 GRPO 算法，显著降低 RL 训练成本。
     2. R1 中的 MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
@@ -2824,6 +2917,7 @@ keywords: 面试题
     4. fp8 精度计算
     5. Multi-Token Predition
     6. 细粒度专家划分，共享专家隔离
+    7. 为解决 language mixing 的问题，在 RL 阶段增加奖励项，计算目标语言词汇占比
 
 #### Search/Recommendation
 
@@ -2931,18 +3025,26 @@ keywords: 面试题
 
 2. 自我介绍
 
-3. 为什么加入我们公司？
+3. 请用三个词形容自己
 
-4. 职业规划（工作方向）: [链接](https://www.zhihu.com/question/20054953)
+4. 每天的生活怎么安排
 
-5. 优势和劣势
+5. 生活和工作上遇到的问题
 
-6. 团队合作
+6. 优势和劣势
 
-7. 个人工作内容 & 部门工作内容（业务，技术栈）
+7. 团队合作
 
-8. 工作地点：城市，具体位置，远程办公
+8. 为什么加入我们公司
 
-9. 薪资 & 定级 & 绩效考核 & 晋升机制 & 转正: [链接 1](https://www.zhihu.com/question/19841590)，[链接 2](https://www.zhihu.com/question/34557602)
+9. 有其他 offer 时怎么选择
 
-10. 工作时间：日常工作时间，单双休，年假
+10. 职业规划（工作方向）: [链接](https://www.zhihu.com/question/20054953)
+
+11. 个人工作内容 & 部门工作内容（业务，技术栈）
+
+12. 工作地点：城市，具体位置，远程办公
+
+13. 薪资（期望薪资，最低接收工资） & 定级 & 绩效考核 & 晋升机制 & 转正: [链接 1](https://www.zhihu.com/question/19841590)，[链接 2](https://www.zhihu.com/question/34557602)
+
+14. 工作时间：日常工作时间，单双休，年假
