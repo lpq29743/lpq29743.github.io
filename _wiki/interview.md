@@ -408,7 +408,7 @@ keywords: 面试题
     二、滑动窗口类
     
     - 长度为 K 的最大平均值子数组：固定长度滑动窗口，维护当前窗口总和。
-    - 不超过 K 的最大子数组和：前缀和 + 有序集合（如 TreeSet）维护前缀和，查找满足条件的最小前缀和。
+    - 不超过 K 的最大子数组和：通过维护一个有序前缀和集合，利用二分查找快速定位满足不超过 K 限制的最优子数组前缀差，进而求出最大和。
     - 最多包含 K 个不同元素的最长子数组：变长滑动窗口 + 哈希表统计窗口内字符种类。
     - 最多有两个不同字符的最长子字符串：滑动窗口 + 哈希表记录字符频次。
     
@@ -462,7 +462,9 @@ keywords: 面试题
 
 5. 前缀和
 
-    答：一维前缀和
+    答：得到前缀和之后可以知道任何区间的和，所以很适合求解要求区间和为某个数的问题。
+    
+    一维前缀和
     
 	- 区间和快速查询（如 Leetcode 303）：构建前缀和数组 `prefix[i+1] = sum(nums[0..i])`，任意区间和为 `prefix[r+1] - prefix[l]`。
 	- 固定大小窗口的最小/最大和：用前缀和快速计算任意长度为 k 的区间和，再遍历或滑动窗口取最小/最大。
@@ -512,7 +514,18 @@ keywords: 面试题
     - 由斜杠划分区域：每格四块并查集合并内部与相邻块。
     - 最小时间传递信息：Kruskal 过程判断连通。
 
-7. 链表
+7. 原地旋转数组（即右移 m 个元素）
+
+    答：- step 1：因为mm可能大于nn，因此需要对nn取余，因为每次长度为nn的旋转数组相当于没有变化。
+    - step 2：第一次将整个数组翻转，得到数组的逆序，它已经满足了右移的整体出现在了左边。
+    - step 3：第二次就将左边的mm个元素单独翻转，因为它虽然移到了左边，但是逆序了。
+    - step 4：第三次就将右边的n−mn−m个元素单独翻转，因此这部分也逆序了。
+
+8. 顺时针旋转矩阵（90 度）
+
+    答：先进行对角线的交换，再翻转。
+
+9. 链表
 
     答：一、基础操作类
     
@@ -566,13 +579,13 @@ keywords: 面试题
 	- 将二叉搜索树转为排序双向链表：中序遍历 + 链接节点。
 	- 设计单链表/双链表数据结构（LeetCode 707）：实现基本的 add/delete/get 接口，注意边界处理。
 
-8. 栈
+10. 栈
 
     答：
     - 有效的括号：利用栈匹配左右括号，检测括号是否成对出现且顺序正确。
     - 最小栈：设计一个支持 push、pop、top 操作，并能在O(1)时间内检索到最小元素的栈。
     - 用栈实现队列：用两个栈模拟队列的先进先出行为。
-    - 逆波兰表达式求值：使用栈计算后缀表达式的值。（前缀、中缀、后缀表达式相关）
+    - 逆波兰表达式求值：使用栈计算后缀表达式的值。前缀表达式：运算符在前，从右向左处理，无需括号，如 + 3 * 4 5；中缀表达式：运算符在操作数中间，如 3 + 4 * 5；后缀表达式：运算符在后，从左向右用栈处理，无需括号，如 3 4 5 * +。
     - 接雨水：用栈记录边界，计算能接多少雨水。
     - 滑动窗口最大值：用双端队列（特殊栈）维护滑动窗口最大元素。
     - 基本计算器：用栈处理带括号的表达式计算。
@@ -595,7 +608,7 @@ keywords: 面试题
     is_empty = len(stack) == 0
     ```
 
-9. 单调栈
+11. 单调栈
 
     答：栈内保持单调（递增 / 递减）；入栈前，弹出不满足单调性的元素；栈顶元素就是当前元素的最近更小（或更大）元素。应用例子：柱状图中最大的矩形面积：用单调栈维护高度，计算最大矩形面积。
     ```
@@ -612,7 +625,7 @@ keywords: 面试题
 	    return res
     ```
 
-10. 队列
+12. 队列
 
     答：
     - 用栈实现队列：用两个栈模拟队列的入队和出队操作，stact_in 负责入队，stack_out 负责出队。入队：直接压入 stact_in，出队：如果 stack_out 为空，就把 stack_in 所有元素弹出并压入 stack_out（反转顺序），然后从 stack_out 弹出或读取元素。
@@ -647,10 +660,14 @@ keywords: 面试题
 	用 list 实现出队`first = queue.pop(0)`时间复杂度为 O(n)，因此不推荐。
 	优先队列用 heapq 实现
 
-11. 树
+13. 单调队列
+
+    答：队列内保持单调（递增 / 递减）；入队列前，弹出队尾不满足单调性的元素。应用例子：固定区间/滑动窗口的最值，串口 DP，0-1 BFS。
+
+14. 树
 
     答：
-    - 二叉树的前序、中序、后序遍历：用递归/迭代/栈实现节点访问顺序。
+    - 二叉树的前序、中序、后序遍历：用递归/非递归+栈实现节点访问顺序。对于非递归+栈，在先序中，压入顺序为根节点，右节点，左节点，出栈顺序对应为（根、左、右）。在中序中，进入循环的条件为栈是否为空或根节点是否为NULL，首先将左节点入栈，重复该过程，直到左节点不存在，然后依次出栈，出栈的同时判断当前节点的右节点是否存在，若存在则再次进入循环。在后序遍历中，可以借助前序遍历，前序遍历为根左右，后序遍历为左右根，只需将前序遍历顺序调整为根右左，将最终结果reverse就可以得到后序遍历。
     - 二叉树的层序遍历（BFS）：用队列实现按层访问所有节点。
     - 判断二叉树是否是平衡二叉树：递归计算子树高度并判断平衡性。
     - 找到二叉树的最近公共祖先（LCA）：递归或借助父指针寻找公共祖先。
@@ -661,7 +678,7 @@ keywords: 面试题
     - 判断一棵树是否是子树：递归比较结构和节点值。
     - 树的序列化与反序列化：将树结构转为字符串及还原树形结构。
 
-12. 堆
+15. 堆
 
     答：堆只保证父子节点的局部有序，不保证整个树有序。
     
@@ -692,7 +709,7 @@ keywords: 面试题
     - 石头碰撞问题：使用最大堆模拟石头之间的碰撞过程，取出最大两块进行处理。
     - 构建哈夫曼编码树：使用最小堆每次合并频率最小的两个节点，构建最优前缀树。
 
-13. Trie
+16. Trie
 
     答：
     - 实现 Trie（前缀树）：使用字典或数组构建多叉树，支持 `insert`, `search`, `startsWith` 操作。
@@ -706,23 +723,23 @@ keywords: 面试题
     - 敏感词过滤器：构建 Trie 存储敏感词集合，配合 AC 自动机或双指针，进行文本过滤与替换。
     - DNA 序列查重（变种问题）：构建 Trie 存储基因序列（A/C/G/T），检测是否存在重复序列（如长度为 10 的重复子串）。
 
-14. 完全二叉树是什么？
+17. 完全二叉树是什么？
 
     答：除了最后一层，所有层都必须被填满，且最后一层节点必须尽量靠左排列（因此二叉平衡树不一定是完全二叉树）。
 
-15. 二叉搜索树是什么？
+18. 二叉搜索树是什么？
 
     答：每个节点的值都满足：左子树 < 根节点 < 右子树。其中序遍历单调递增。
 
-16. 二叉平衡树是什么？
+19. 二叉平衡树是什么？
 
     答：二叉平衡树（Balanced Binary Tree）是对普通二叉搜索树（BST）的优化，目的是解决 BST 在极端情况下可能退化为链表（如连续插入有序数列）的问题，从而保证查找、插入、删除等操作的时间复杂度维持在 O(log n)。二叉平衡树要求任意节点的左右子树高度差控制在一定范围内（如 AVL 树是 ≤1，红黑树是最多两倍）。
 
-17. AVL 树是什么？
+20. AVL 树是什么？
 
     答：AVL 树是一种自平衡的二叉搜索树（Binary Search Tree，BST），它在插入和删除节点时，能自动调整自身结构以保持树的“平衡”，从而保证查找、插入、删除操作的时间复杂度始终为 `O(log n)`。
 
-18. 红黑树是什么？
+21. 红黑树是什么？
 
     答：红黑树性能要好于平衡二叉树。
 
@@ -738,7 +755,7 @@ keywords: 面试题
 
     性质5. 从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点。
 
-19. B/B- 树是什么？
+22. B/B- 树是什么？
 
     答：B 树是一种自平衡的多路搜索树，是对二叉搜索树的推广，适合磁盘或大规模数据存储系统中高效读取。
     - 每个节点可以有多个键值（key）和子树指针
@@ -749,7 +766,7 @@ keywords: 面试题
     
     查找过程类似多路查找：从根节点开始，依次判断键值大小，决定走哪个子树，直到叶子或命中。
 
-20. B+ 树是什么？
+23. B+ 树是什么？
 
     答：B+ 树是在 B 树基础上演化而来的，数据库系统中应用最广泛的索引结构。
     
@@ -760,24 +777,28 @@ keywords: 面试题
 	- 更高的扇出（fan-out），因为内部节点更“轻”，树更矮 → 减少磁盘访问
 	- 范围查找特别高效，只需找到区间起点，后续通过链表遍历即可
 
-21. 图的表示方法
+24. 图的表示方法
 
     答：邻接表：每个节点维护一个列表，存储它所有相邻的节点。邻接矩阵：二维数组。
 
-22. 判断图存在环？
+25. 判断图存在环？
 
     答：无向图：深度遍历；并查集。
     有向图：深度遍历；广度遍历/拓扑排序：时间复杂度为 O(n＋e)。
 
-23. 最短路径算法及复杂度？
+26. 最短路径算法及复杂度？
 
     答：Dijkstra 算法，是贪心算法，时间复杂度为 O(V^2)，如果是稀疏图，可用堆进行优化，时间复杂度为 O((V + E) lgV)；Floyd 算法，时间复杂度为 O(V^3)。
 
-24. 无向图最小生成树算法及复杂度？
+27. 无向图最小生成树算法及复杂度？
 
     答：Prim 算法，是贪心算法，每一步从当前生成树出发，选择权值最小的边，并且这条边连接的是树内节点和树外节点，逐步扩展生成树，直到包含所有节点。时间复杂度 O(V^2)；Kruskal 算法，时间复杂度 O(ElgE)。
 
-25. KMP 算法
+28. 农夫过河问题？
+
+    答：[链接](https://www.zhihu.com/question/29968331)
+
+29. KMP 算法
 
     答：[KMP 算法](https://www.zhihu.com/question/21923021)
     
@@ -787,21 +808,21 @@ keywords: 面试题
     
     时间复杂度为 O(m + n)
 
-26. Edit Distance
+30. Edit Distance
 
     答：[Edit Distance](https://github.com/youngwind/blog/issues/106)
 
-27. 正则表达式
+31. 正则表达式
 
-28. 了解 Hamming 距离吗？
+32. 了解 Hamming 距离吗？
 
     答：两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。
 
-29. 如何求两个数的二进制表示的 Hamming 距离？
+33. 如何求两个数的二进制表示的 Hamming 距离？
 
     答：先求两个数的异或结果 res，再依次求 res 每一位与 1 与操作的结果，不为 0，则 Hamming 距离加一；每判断完一位，res 右移一位继续判断下一位。
 
-30. 哈希冲突
+34. 哈希冲突
 
     答：开放地址法（当当前位置被占用时，寻找下一个可用位置；容易产生聚集现象，负载因子高时效率下降）：线性探测（从当前位置开始，逐个向后找）；二次探测（间隔逐步增大，避免连续冲突）；双重哈希（使用第二个哈希函数计算偏移。
     
@@ -809,7 +830,7 @@ keywords: 面试题
     
     再哈希：当负载因子过高时，扩大哈希表，重新计算所有元素的哈希值。扩容代价较高。
 
-31. 排序
+35. 排序
 
     答：冒泡排序：时间复杂度 O(n^2)，稳定
     
@@ -817,7 +838,7 @@ keywords: 面试题
     
     选择排序：时间复杂度 O(n^2)，不稳定
     
-    归并排序：时间复杂度 O(nlogn)，稳定
+    归并排序：时间复杂度 O(nlogn)，稳定。可用来解决计算逆序对数目的问题。
     
     基数排序：按位排序，从低位到高位依次进行分配和收集；稳定
     
@@ -827,17 +848,21 @@ keywords: 面试题
     
     堆排序：堆排序包含两个主要步骤：建堆和排序。建堆过程：从最后一个非叶子节点开始，自上而下进行堆化。排序过程：每次将堆顶元素与末尾元素交换，并重新对剩余元素进行堆化。需要执行 n-1 次，每次堆化的时间复杂度为 O(logn)，因此排序阶段总的时间复杂度为 O(nlogn)。空间复杂度 O(1)，可原地排序，不稳定
     
-    桶排序：时间复杂度 O(n)
+    桶排序：将元素分布到若干桶中分别排序，最后再合并。时间复杂度 O(n)。可用来计算一个未排序数组中排序后相邻元素的最大差值。
 
-32. 原地排序与非原地排序？
+36. 原地排序与非原地排序？
 
     答：原地排序就是指在排序过程中不申请多余的存储空间，只利用原来存储待排数据的存储空间进行比较和交换的数据排序。非原地排序就是要利用额外的数组。
 
-33. 数组最大最小值最优算法？
+37. BFS vs DFS
+
+    答：BFS（广度优先搜索）适用于求最短路径、层级遍历和状态步数问题，因为它逐层扩展，能保证最早到达目标；而 DFS（深度优先搜索）更适合遍历所有路径、回溯剪枝、拓扑排序和连通块问题，因其先深入到底便于穷举和递归处理。简言之，找最短用 BFS，找所有/存在性用 DFS。
+
+38. 数组最大最小值最优算法？
 
     答：[链接](https://www.zhihu.com/question/28892158)
 
-34. 无序整数数组中找第 k 大的数？
+39. 无序整数数组中找第 k 大的数？
 
     答：方法一：最小堆：建一个大小为 k 的最小堆。遍历数组，将元素加入堆中，如果堆大小超过 k，就弹出堆顶（最小元素）。最终堆顶就是第 k 大的数。时间复杂度：O(nlogk)，空间复杂度：O(k)
     
@@ -845,15 +870,15 @@ keywords: 面试题
     
     方法三：内置排序
 
-35. 从一个几乎排序好的数组中找出第 k 小的元素，时间复杂度尽量低。  
+40. 从一个几乎排序好的数组中找出第 k 小的元素，时间复杂度尽量低。  
 
     答：利用“插入排序”特性，数组接近有序，插入排序接近线性。也可以用快速选择算法，平均 O(n)。
 
-36. 在 n 个数中取最大的 k 个数，时间复杂度是？
+41. 在 n 个数中取最大的 k 个数，时间复杂度是？
 
     答：nlogk。堆的大小为 k，总共要调整 n 次。
 
-37. 有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？
+42. 有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？
 
     答：最简单的思路是合并数据库，然后再定位长度，时间复杂度为 O(n)，空间复杂度是 O(n)；但实际上只需要借鉴这个合并的过程，当合并到中位数的时候输出中位数即可，时间复杂度为 O(n)，空间复杂度是 O(1)。这思路十分简单，但并不是最佳算法，有序数组让我们想到的会是二分查找，因此我们可以利用二分查找来使复杂度降至 O(logn)，具体可参考：
     
@@ -861,45 +886,96 @@ keywords: 面试题
     
     b. https://stackoverflow.com/questions/6182488/median-of-5-sorted-arrays
 
-38. 海量数据处理
+43. 海量数据处理
 
     答：[海量数据处理](https://lpq29743.github.io/algorithm/2017/02/20/MassiveData/)
 
-39. 汉诺塔时间复杂度？
+44. 汉诺塔
 
     答：假设移动 n 个圆盘需要 f(n) 次移动
-
+    
     首先考虑一个圆盘，只需一步就可以了 f(1) = 1 …… ①
-
+    
     现在考虑 n 个圆盘，假设开始圆盘在 A 柱，可以先把 A 柱的上面 n - 1个圆盘移到 B，再将 A 剩下的一个移到 C，最后将 B 的 n - 1 个移到 C。总共需要 f(n) = 2f(n-  1) + 1 …… ②
-
+    
+    ```
+    def hanoi(n, source, auxiliary, target):
+    """
+    打印将 n 个盘子从 source 移动到 target 的步骤。
+    source: 起始柱子
+    auxiliary: 辅助柱子
+    target: 目标柱子
+    """
+    if n == 1:
+        print(f"Move disk 1 from {source} to {target}")
+    else:
+        hanoi(n - 1, source, target, auxiliary)
+        print(f"Move disk {n} from {source} to {target}")
+        hanoi(n - 1, auxiliary, source, target)
+        
+    # 示例：移动 3 个盘子从 A 到 C，B 为辅助柱子
+    hanoi(3, 'A', 'B', 'C')
+    ```
+    
     根据 ①② 两式，可求出 f(n) = 2^n - 1 所以 O(n) = 2^n
 
-40. 尾递归（Tail Call）有什么危害，如何避免？
+45. 尾递归（Tail Call）有什么危害，如何避免？
 
     答：栈溢出（Stack Overflow）。尾递归事实上和循环是等价的。
 
-41. 背包问题
+46. 动态规划
 
-    答：[01 背包问题](https://lpq29743.github.io/algorithm/2017/08/21/Pack1/)
+    答：爬楼梯：`dp[i] = dp[i-1] + dp[i-2]`，初始值 `dp[0]=1, dp[1]=1`
     
-    [完全背包问题](https://lpq29743.github.io/algorithm/2017/08/22/Pack2/)
+    斐波那契数列：`dp[i] = dp[i-1] + dp[i-2]`
+    
+    零钱兑换：`dp[i] = min(dp[i - coin] + 1)`，遍历所有 coin
+    
+    最大子数组和（Kadane）：`dp[i] = max(dp[i-1] + nums[i], nums[i])`
+    
+    打家劫舍：`dp[i] = max(dp[i-1], dp[i-2] + nums[i])`
+    
+    [01 背包问题](https://lpq29743.github.io/algorithm/2017/08/21/Pack1/)：`dp[i][w] = max(dp[i-1][w], dp[i-1][w-weight[i]] + value[i])`
+    
+    [完全背包问题](https://lpq29743.github.io/algorithm/2017/08/22/Pack2/)：`dp[w] = max(dp[w], dp[w - weight[i]] + value[i])`（一维）
     
     [物品冲突问题](https://lpq29743.github.io/algorithm/2017/08/25/Pack3/)
+    
+    最长上升子序列：`dp[i] = max(dp[j] + 1 if nums[i] > nums[j])`
+    
+    编辑距离：`dp[i][j] = min(insert, delete, replace)`
+    
+    两个子序列的最长公共子序列（LCS）：`dp[i][j] = dp[i-1][j-1]+1 if match else max(dp[i-1][j], dp[i][j-1])`
+    
+    分割等和子集：转化为 0-1 背包求 `dp[sum/2]` 是否为 `True`
+    
+    子集和问题（subset sum）：`dp[i][s] = dp[i-1][s] or dp[i-1][s - nums[i]]`
+    
+    跳跃游戏：从后向前判断每个点能否跳到最后一个点
+    
+    买卖股票的最佳时机：状态转移 + 决策（持有/卖出）
+    
+    区间 DP（如戳气球）：枚举区间分割点 `k`，`dp[i][j] = max(dp[i][k] + dp[k][j] + ...)`
+    
+    回文子串个数：中心扩展或 `dp[i][j] = s[i]==s[j] && dp[i+1][j-1]`
+    
+    打字机（最小按键次数）：状态包含剪切板，粘贴次数等
+    
+    最长回文子序列：`dp[i][j] = dp[i+1][j-1] + 2 if s[i]==s[j] else max(dp[i+1][j], dp[i][j-1])`
+    
+    正则表达式匹配：状态表示文本和模式的位置，处理 `*` 和 `.`
+    
+    矩阵路径和最小值：`dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]`
 
-42. 农夫过河问题？
-
-    答：[链接](https://www.zhihu.com/question/29968331)
-
-43. 不用库函数求一个数的立方根？
+47. 不用库函数求一个数的立方根？
 
     答：[链接](https://blog.csdn.net/sjpz0124/article/details/47726275)
 
-44. 二进制中 1 的个数？
+48. 二进制中 1 的个数？
 
     答：把一个整数减去 1，再和原整数做与运算，会把该整数最右边的 1 变成 0。那么一个整数的二进制表示中有多少个 1，就可以进行多少次这样的操作。具体解题思路可参见《剑指 Offer》。
 
-45. 位运算加法
+49. 位运算加法
 
     答：
     ```
@@ -912,35 +988,35 @@ keywords: 面试题
 	    return a
     ```
 
-46. 数值的整数次方？
+50. 数值的整数次方？
 
     答：[链接](https://zhuanlan.zhihu.com/p/38715645)
 
-47. 有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？
+51. 有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？
 
     答：[链接](https://www.zhihu.com/question/310970538)
 
-48. 一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？
+52. 一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？
 
     答：中位数。
 
-49. 给定两个数，求他们无限次相加中第 k 小的数？
+53. 给定两个数，求他们无限次相加中第 k 小的数？
 
     答：[链接](https://www.zhihu.com/question/41809896)
 
-50. 什么是水塘抽样？
+54. 什么是水塘抽样？
 
     答：一种在数据量未知或数据流形式下，以等概率从 n 个元素中采样 k 个的算法，适用于内存受限的场景。
 
-51. 如何从数据流中以等概率选取一个元素（k=1）？
+55. 如何从数据流中以等概率选取一个元素（k=1）？
 
     答：初始化：`result = None`，遍历第 i 个元素时，以 `1/i` 的概率替换 result，所有元素最终被选中的概率都是 `1/n`。
 
-52. 如何扩展到选取 k 个元素？
+56. 如何扩展到选取 k 个元素？
 
     答：初始化：前 k 个元素入 reservoir，对第 i (>k) 个元素：以 k/i 的概率随机替换 reservoir 中的一个元素。
 
-53. 链表中如何随机返回一个节点？（单次遍历，O(1) 空间）
+57. 链表中如何随机返回一个节点？（单次遍历，O(1) 空间）
 
     答：遍历链表，对第 i 个节点，以 `1/i` 的概率更新当前候选节点，最终返回的节点是等概率选中的。
 
@@ -1746,7 +1822,7 @@ keywords: 面试题
 
     答：会，破坏了原本的独立性假设。
 
-40. 用 numpy 实现 cross entropy loss
+40. 用 numpy 实现 cross entropy loss（softmax）
 
     答：
     ```
@@ -1785,13 +1861,47 @@ keywords: 面试题
 	
 	# 计算交叉熵损失
 	loss = cross_entropy_loss(probs, labels)
-	
-	# 打印结果
-	print("Softmax probabilities:\n", probs)
-	print("\nCross-entropy loss:", loss)
     ```
 
-41. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
+41. 用 numpy 实现 cross entropy loss（log-softmax）
+
+    答：用 log-softmax 数值更稳定，减 max 是防止指数函数输出过大，用减法算 log 是防止 log(0)。
+    ```
+    import numpy as np
+    
+	def log_softmax(logits):
+	    """
+	    计算 log-softmax，数值稳定版本。
+	    logits: 形状为 (N, C)
+	    """
+	    shifted = logits - np.max(logits, axis=1, keepdims=True)
+	    log_sum_exp = np.log(np.sum(np.exp(shifted), axis=1, keepdims=True))
+	    return shifted - log_sum_exp  # log_softmax 输出
+	
+	def cross_entropy_loss_from_logits(logits, labels):
+	    """
+	    直接从 logits 计算交叉熵损失（使用 log-softmax）。
+	    logits: shape (N, C)
+	    labels: shape (N,)
+	    """
+	    N = logits.shape[0]
+	    log_probs = log_softmax(logits)
+	    log_likelihood = -log_probs[np.arange(N), labels]
+	    return np.sum(log_likelihood) / N
+	
+	# 示例数据
+	logits = np.array([
+	    [2.0, 1.0, 0.1],
+	    [0.5, 2.5, 0.3],
+	    [1.2, 0.7, 3.0]
+	])
+	labels = np.array([0, 1, 2])  # 每个样本的真实标签
+	
+	# 计算 log-softmax 并交叉熵损失
+	loss = cross_entropy_loss_from_logits(logits, labels)
+    ```
+
+42. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
 
     答：If you have worked on enough data sets, you should deduce that cancer detection results in imbalanced data. In an imbalanced data set, accuracy should not be used as a measure of performance because 96% (as given) might only be predicting majority class correctly, but our class of interest is minority class (4%) which is the people who actually got diagnosed with cancer. Hence, in order to evaluate model performance, we should use Sensitivity (True Positive Rate), Specificity (True Negative Rate), F measure to determine class wise performance of the classifier. If the minority class performance is found to to be poor, we can undertake the following steps:
     
@@ -1805,7 +1915,7 @@ keywords: 面试题
     
     Know more: Imbalanced Classification
 
-42. 多分类问题如何转二分类方法？
+43. 多分类问题如何转二分类方法？
 
     答：a. 一对多法（one-versus-rest）。把某类样本归为一类，其他归为另一类，k 个类别的样本就构造出了 k 个 SVM；
 
@@ -1813,7 +1923,7 @@ keywords: 面试题
 
     c. 层次支持向量机（H-SVMs）。先将所有类别分成两个子类，再将子类进一步划分成两个次级子类，如此循环。
 
-43. 上溢（overflow）和下溢（underflow）是什么，softmax 函数会出现哪种情况，该怎么解决？
+44. 上溢（overflow）和下溢（underflow）是什么，softmax 函数会出现哪种情况，该怎么解决？
 
     答：上溢即大量级的数被近似为正负无穷时，发生上溢。发生上溢后，这些数值会变为非数值。下溢即有些逼近零的数，如零除或者对零取对数时，得到负无穷，如果对负无穷进一步运算，则会得到非数字。softmax 函数中有指数运算，如果要运算的数过小或过大，则会下溢或上溢。解决上溢的方式是让每一个值都减去最大分量的值，由于这样做之后分母有一项为 1，所以不会出现下溢。同样对于取对数，可以让所有数都加 1。
 
@@ -2634,10 +2744,13 @@ keywords: 面试题
 
 38. temperature/Top-k/Top-p
 
-    答：temperature：控制采样随机性，温度越高越随机。
-    Top-k：限制采样时只考虑概率最高的 k 个 token。
-    Top-p：累积概率阈值，只采样总概率 ≥ p 的前几个 token。
-    在大模型训练的强化学习阶段，设置较高的 temperature 可以防止模型过度自信，扩大探索空间。
+    答：temperature：控制采样随机性，温度越高越随机。它的做法是将得到的 logits 除以温度，再作 softmax。当温度为 0 时，相当于 argmax/greedy；当温度为 1 时，相当于 softmax；当温度小于 1，分布变得尖锐，熵降低；当温度大于 1，分布变得平坦，熵升高。
+    
+    Top-k：采样时只考虑概率最高的 k 个 token，然后再归一化。k = 1 为 argmax/greedy，k = 词表数目就是纯 temperature。
+    
+    Top-p：累积概率阈值，从高到低计算累计概率值，只采样总概率 ≥ p 的前几个 token。当 p 比较小，其接近于 Top-k，当 p 接近 1，其接近纯 temperature。
+    
+    对于初始 logits 熵大的，叫做高熵 token，意味着 LLM 在此处犹豫不决；反之叫做低熵 token，意味着 LLM 在这非常自信。在推理阶段，较低的 temperature 会导致多样性降低，较高的 temperature 会导致生成质量降低，产生幻觉。
 
 39. speculative decoding
 
@@ -2805,17 +2918,21 @@ keywords: 面试题
 
 52. PPO vs DPO vs GRPO
 
-    答：PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。DPO 没有显式探索机制。
+    答：所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。DPO 没有显式探索机制。
 
 53. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-54. LoRA
+54. 熵控制在强化学习里的作用
+
+     答：在大模型训练的强化学习阶段，设置较高的 temperature 可以防止模型过度自信，鼓励模型采取高熵动作，从而扩大探索空间。另一种方式是在 group-level 用 smi/dpp/self-bleu 计算多样性，进行 reward shaping 来控制熵的变化。
+
+55. LoRA
 
      答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。target_modules 一般为`q_proj`、`v_proj`，有时也会注入到 `k_proj` 或 `o_proj`。modules_to_save 表示指定哪些原模型模块需要一起训练 & 保存，如果扩展了词表可能要加 `embed_tokens`、`lm_head`。
 
-55. 手撕 LoRA
+56. 手撕 LoRA
 
      答：
      ```
@@ -2840,32 +2957,47 @@ keywords: 面试题
 	        return base + lora
     ```
 
-56. Adapter
+57. Adapter
 
      答：插入小型网络模块
 
-57. Prefix Tuning
+58. Prefix Tuning
 
      答：Prefix Tuning 会为每层添加一组虚拟的 Key 和 Value。
 
-58. Base model eval
+59. Base model eval
 
-     答：MMLU（通用语言理解类），GSM8K（编程与数学能力）
+     答：General Tasks: MMLU (5-shot), MMLU-Pro (5-shot, CoT), MMLU-redux (5-shot), BBH (3-shot, CoT), SuperGPQA (5-shot, CoT).
+     
+     Math & STEM Tasks: GPQA (5-shot, CoT), GSM8K (4-shot, CoT), MATH (4-shot, CoT).
+    
+    Coding Tasks: EvalPlus (0-shot), MultiPL-E (0-shot), MBPP-3shot, CRUX-O of CRUXEval (1-shot)
+    
+    Multilingual Tasks: MGSM (8-shot, CoT), MMMLU (5-shot), INCLUDE (5-shot).
 
-59. Chat model eval
+60. Chat model eval
 
-     答：MT-Bench，AlpacaEval，Arena，Red-Teaming，AIME（推理）
+     答：General Tasks: MMLU-Redux, GPQADiamond, C-Eval, and LiveBench.
+     
+     Alignment Tasks: IFEval, Arena-Hard, AlignBench, Creative Writing V3, WritingBench.
+     
+     Math & Text Reasoning: MATH-500, AIME’24 and AIME’25, ZebraLogic and AutoLogi.
+     
+     Agent & Coding: BFCL v3, LiveCodeBench, and Codeforces Ratings from CodeElo
+     
+     Multilingual Tasks: instruction following - Multi-IF, knowledge - INCLUDE & MMMLU, mathematics - MT-AIME2024 & PolyMath, and logical reasoning - MlogiQA.
 
-60. Safety / Halluciation
+61. Safety / Halluciation
 
-    答：出现幻觉原因：1. 数据；2. temperature。
+    答：出现幻觉原因：1. 语料中存在过时，虚构的内容，或缺乏与下游任务相关的领域知识；2. 微调时的过拟合导致模型过于自信；3. 推理时随机采样的生成策略。
+    
     RAG
 
-61. Long Context
+62. Long Context
 
     答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
 
-62. LLM设计中的 System 1 和 System 2
+63. LLM设计中的 System 1 和 System 2
 
     答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
      
@@ -2877,65 +3009,67 @@ keywords: 面试题
         
     - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-63. RAG; KG + LLM
+64. RAG; KG + LLM
 
     答：RAG 可以解决 LLM 知识过时，幻觉问题以及无法调用私有数据等问题
     
     Naive RAG: Indexing + Retrieval + Generation
     
     Advanced RAG: Indexing + Pre-Retrieval + Retrieval + Post-Retrieval (Re-ranking, Prompt Compression) + Generation
+    
+    document 的顺序会对 RAG 的性能造成比较大的影响。
 
-64. 文本分块
+65. 文本分块
 
     答：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。
 
-65. Reasoning
+66. Reasoning
 
-66. Test-time Training
+67. Test-time Training
 
-67. MCP 和 function calling 有什么区别？
+68. MCP 和 function calling 有什么区别？
 
     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-68. LangChain
+69. LangChain
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-69. bf16，fp16，fp32区别
+70. bf16，fp16，fp32区别
 
     答：bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。
 
-70. LLM 常用的优化器有？
+71. LLM 常用的优化器有？
 
     答：AdamW，Lion
 
-71. 混合精度计算
+72. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-72. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
+73. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
 
     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2 字节，fp32 精度为 4 字节。
     训练显存 ≈ 模型参数 × 3/4（包括权重 + 梯度 + Optimizer 状态 * 1/2） + 激活（反向传播时，需要用它来计算梯度），主要瓶颈是激活值和优化器状态，batch_size 越大，激活越大。
     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
-73. 多卡多机训练
+74. 多卡多机训练
 
     答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-74. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+75. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-75. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+76. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-76. deepspeed 的 Zero-1， Zero 2， Zero 3
+77. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存。参数、梯度、优化器状态始终绑定，分配到同一张 GPU 上。
 
-77. 量化
+78. 量化
 
     答：PTQ（训练后量化）和 QAT（训练时量化）
     
@@ -2943,35 +3077,35 @@ keywords: 面试题
     
     AWQ(Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
-78. vllm
+79. vllm
 
     答：相比静态分配 KV 缓存，vllm 使用了 PagedAttention，即把 KV 缓存当作虚拟内存，每条序列的缓存按页（page）管理，动态分配到显存中。
 
-79. GPT 的原理？
+80. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-80. BERT 的原理？
+81. BERT 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-81. BERT 的训练目标？
+82. BERT 的训练目标？
 
     答：BERT 有 masked language modeling 和 next sentence prediction 两个目标
 
-82. RoBERTa 相比 BERT 做了哪些改进？
+83. RoBERTa 相比 BERT 做了哪些改进？
 
     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-83. RoBERTa 强于 RNN 的地方？
+84. RoBERTa 强于 RNN 的地方？
 
     答：并行，对大数据比较友好。
 
-84. Qwen
+85. Qwen
 
     答：QwenMoE
 
-85. Deepseek-V1 - Deepseek-V3
+86. Deepseek-V1 - Deepseek-V3
 
     答：
     - MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
@@ -2982,14 +3116,14 @@ keywords: 面试题
     - v3 将门控函数的对更小的小数位会敏感的 softmax 改成了值域更宽的 sigmoid
     - fp8 精度计算
 
-86. Deepseek-R1-Zero
+87. Deepseek-R1-Zero
 
     答：证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
     1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
     2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用 `<think>` 标签包裹推理过程，用 `<answer>` 标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
     3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
 
-87. Deepseek-R1
+88. Deepseek-R1
 
     答：成功经验
     - 在 SFT 阶段采用冷启动，只使用了少量（几千条）高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
@@ -3088,20 +3222,25 @@ keywords: 面试题
 
 #### Multilinguality
 
-1. 数据收集和采样策略
+1. Modeling
 
     答：
-    1. 重点针对新语言
-    2. 考虑可信赖的数据集而非从头开始收集
-    3. 进行平衡采样，参考 XLM-R，用 temperature-based sampling，并对已覆盖语言采取最少采样
+    - 数据
+		- 重点针对新语言
+	    - 考虑可信赖的数据集而非从头开始收集
+	    - 采样
+		    - 平衡：参考 XLM-R，用 temperature-based sampling，即 $$q = p ^ {\alpha} / sum$$。当 $$\alpha$$ 为 1 时，表示没有变化；当 $$\alpha$$ 为 0 时，表示均匀分布；当 $$\alpha$$ 大于 1 时，分布尖锐，对高资源语言有优势；当 $$\alpha$$ 小于 1 时，分布变平，对低资源语言有优势
+		    - 避免遗忘：对已覆盖语言采取最少采样
+    - 模型训练
+	    - 词表扩展（新 embedding 学习/推理速度/OOV）
+	    - continued pretraining（LoRA）
+    - 模型评估
+	    - PPL，NLU and NLG（measures）
+		- high-resource languages help low-resource languages
 
-2. 语言适配
+2. Adaptation
 
-    答：
-    1. 词表扩展（新 embedding 学习/推理速度/OOV）
-    2. continued pretraining（forgetting）
-    3. high-resource languages help low-resource languages
-    4. PPL，NLU and NLG（measures）
+    答：Cross-lingual RAG vs MT（对于高资源，可能是先翻译再做 RAG；对于低资源，训练一个 MT 系统比检索系统要难）
 
 ### Others
 
@@ -3129,6 +3268,6 @@ keywords: 面试题
 
 12. 工作地点：城市，具体位置，远程办公
 
-13. 薪资（期望薪资，最低接收工资） & 定级 & 绩效考核 & 晋升机制 & 转正: [链接 1](https://www.zhihu.com/question/19841590)，[链接 2](https://www.zhihu.com/question/34557602)
+13. 薪资（期望薪资，最低接收工资，固定几薪/绩效浮动，Base） & 定级 & 绩效考核 & 晋升机制 & 转正: [链接 1](https://www.zhihu.com/question/19841590)，[链接 2](https://www.zhihu.com/question/34557602)
 
 14. 工作时间：日常工作时间，单双休，年假
