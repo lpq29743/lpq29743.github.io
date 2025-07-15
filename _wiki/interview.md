@@ -55,27 +55,31 @@ keywords: 面试题
     
     假设期望 x 次后，得到 2H，则有 $$x = (1 − p)(1 + x) + p^2 × 2 + p(1 − p)(2 + x)$$，可解得 x = 6。
 
-3. 一枚不均匀硬币，抛了 100 次，有 70 次朝上，第 101 次朝上的概率是多少，公式是如何推导？
+3. 抛的硬币直到可以丢出正反面为止，平均要扔多少次？
+
+    答：第一次抛肯定出现一个面，期望为 1 + 1/另一个面的概率。如果概率为 0.5，期望为 3。
+
+4. 一枚不均匀硬币，抛了 100 次，有 70 次朝上，第 101 次朝上的概率是多少，公式是如何推导？
 
     答：7/10。二项分布的极大似然估计，可参考[此链接](https://www.zhihu.com/question/24124998)。
 
-4. 两个人轮流抛硬币，规定第一个抛出正面的人可以吃到苹果，请问先抛的人能吃到苹果的概率多大？
+5. 两个人轮流抛硬币，规定第一个抛出正面的人可以吃到苹果，请问先抛的人能吃到苹果的概率多大？
 
     答：先抛的人吃到苹果的概率：$$1/2 + 1/2^3 + 1/2^5 + ...$$，求得结果为 $$2/3$$。另一种解法是设先抛先吃的概率为 $$p_1$$， 后抛先吃的概率为 $$p_2$$，有：$$p_1 = 1/2 + 1/2 * p_2$$ 且 $$p_1 + p_2 = 1$$，解方程可得，$$p_1 = 2/3$$。如果题目说是只抛一次的话，则概率为 $$1/2$$。 
 
-5. 如何用一个骰子等概率地生成 1 到 7 的随机数？
+6. 如何用一个骰子等概率地生成 1 到 7 的随机数？
 
     答：将一个筛子扔两次可以得到 36 种组合（进制思维），每五种组合代表一个数字，剩下的一种表示重扔。
 
-6. 一个骰子，6 面，1 个面是 1， 2 个面是 2， 3 个面是 3， 问平均掷多少次能使 1、2、3 都至少出现一次？
+7. 一个骰子，6 面，1 个面是 1， 2 个面是 2， 3 个面是 3， 问平均掷多少次能使 1、2、3 都至少出现一次？
 
     答：[链接](https://blog.csdn.net/wongson/article/details/7974587)
 
-7. 假设有某种病毒，每个病毒每秒钟会以 1/3 的概率分裂成两个病毒，1/3 的概率不分裂（还是一个），1/3 的概率消亡（变成 0 个）。在最初时刻，玻璃罩中有一个病毒，那么最终玻璃罩内没有活着的病毒概率是多大？
+8. 假设有某种病毒，每个病毒每秒钟会以 1/3 的概率分裂成两个病毒，1/3 的概率不分裂（还是一个），1/3 的概率消亡（变成 0 个）。在最初时刻，玻璃罩中有一个病毒，那么最终玻璃罩内没有活着的病毒概率是多大？
 
     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1000666#)
 
-8. 一米长的绳子，随机剪两刀，最长的一段有多长？
+9. 一米长的绳子，随机剪两刀，最长的一段有多长？
 
     答：假设三段的长度从小到大依次为 a，a + b，a + b + c，并且满足 a + a + b + a + b + c = 3a + 2b + c = 1 以及 a > 0，b ≥ 0，c ≥ 0。
 
@@ -83,49 +87,49 @@ keywords: 面试题
 
     绳子最长的一段的期望为 k + 1.5k + 3k = 5.5k，绳子长度的期望为 3k + 3k + 3k = 9k。因为 9k = 1，所以 5.5k = 11/18 = 0.61111。
 
-9. 一根绳子切成三段，组成三角形的几率是多少？
+10. 一根绳子切成三段，组成三角形的几率是多少？
 
     答：[链接](https://www.zybang.com/question/40fd20ea21ef17c263dba7adce44a714.html)
 
-10. 假设一段公路上，1 小时内有汽车经过的概率为96%，那么，30分钟内有汽车经过的概率为？
+11. 假设一段公路上，1 小时内有汽车经过的概率为96%，那么，30分钟内有汽车经过的概率为？
 
     答：一小时有车的概率 = 1 - 一小时没车的概率 = 1 - 两个半小时都没车的概率 = 1 - (1 - 半小时有车的概率)^2。
 
-11. 4个人，52张扑克牌，红桃 A 和黑桃 A 同时被一个人拿到的概率？
+12. 4个人，52张扑克牌，红桃 A 和黑桃 A 同时被一个人拿到的概率？
 
     答：解法一：C(1,4) * C(11,50) / C(13,52)，C(1,4) = 从四个人中任选 1 人为红桃 A + 黑桃 A，C(11,50) = 从剩余 50 张牌中抽取 11 张给指定人，C(13,52) = 从 52 张牌中随机抽取 13 张；
 
     解法二：对于抓到红桃 A 的人，再抓黑桃 A 的概率就是 12/51 = 4/17。
 
-12. 假设有一副被打乱的扑克牌，52 张，其中 13 张黑桃，一个人从这副牌里随机的抽牌，每次抽一张，并且不放回，假设在第X次抽牌的时候，第一次抽到黑桃。请问 X 的数学期望是多少?
+13. 假设有一副被打乱的扑克牌，52 张，其中 13 张黑桃，一个人从这副牌里随机的抽牌，每次抽一张，并且不放回，假设在第X次抽牌的时候，第一次抽到黑桃。请问 X 的数学期望是多少?
 
     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1000445)
 
-13. 三个人告诉你深圳下雨了，每个人说谎概率是1/3，那么深圳下雨概率是多少?
+14. 三个人告诉你深圳下雨了，每个人说谎概率是1/3，那么深圳下雨概率是多少?
 
     答：8/9。
 
-14. 幼儿园 10 个小朋友排成一列，其中 3 个小朋友是女孩，求女孩排在一起的概率？
+15. 幼儿园 10 个小朋友排成一列，其中 3 个小朋友是女孩，求女孩排在一起的概率？
 
     答：所有人排列是 10!，三个小女孩看做整体排列是 8!，三个小女孩排列是 3!，最后结果就是 (8! \* 3!) / 10! = 1/15。
 
-15. 村长带着 4 对父子参加爸爸去哪儿第三季第二站某村庄的拍摄。村里为了保护小孩不被拐走有个前年的规矩，那就是吃饭的时候小孩左右只能是其他小孩或者自己的父母。那么 4 对父子在圆桌上共有几种坐法？
+16. 村长带着 4 对父子参加爸爸去哪儿第三季第二站某村庄的拍摄。村里为了保护小孩不被拐走有个前年的规矩，那就是吃饭的时候小孩左右只能是其他小孩或者自己的父母。那么 4 对父子在圆桌上共有几种坐法？
 
     答：[链接](https://www.nowcoder.com/questionTerminal/e4d89b93aca64b16b2e9cebab4c7817e)
 
-16. 一个点用偶数步从原点出发回到原点有几种走法？
+17. 一个点用偶数步从原点出发回到原点有几种走法？
 
     答：[链接](https://www.zhihu.com/question/310998719)
 
-17. 频率派概率和贝叶斯概率有什么区别？
+18. 频率派概率和贝叶斯概率有什么区别？
 
     答：频率派概率是最大似然估计，贝叶斯概率是最大后验估计。频率派从自然角度出发，直接为事件建模，即事件 A 在独立重复试验中发生的频率趋于概率 p。贝叶斯派则认为概率是不确定的，需要结合先验概率和似然概率来得到后验概率。随着数据量的增加，参数分布会向数据靠拢，先验的影响越来越小。
 
-18. 先验概率是什么？后验概率是什么？
+19. 先验概率是什么？后验概率是什么？
 
     答：$$p(\theta \| x)=\frac{p(x \| \theta)p(\theta)}{p(x)}$$。$$x$$ 为观察得到的数据（结果），$$\theta$$ 为决定数据分布的参数（原因），$$p(\theta \| x)$$ 为后验分布，$$p(\theta)$$ 为先验分布，$$p(x \| \theta)$$ 为似然。
 
-19. 高维空间下的点有什么特点？
+20. 高维空间下的点有什么特点？
 
     答：
     - 随着维度升高，点的分布会变得稀疏，任意两点的距离会变大。
@@ -133,13 +137,13 @@ keywords: 面试题
     - 集中在表面。从低维推到高维空间，体积会越来越由表面附近区域贡献。
     - 几乎正交
 
-20. 为什么样本方差（sample variance）的分母（denominator）是 $$n - 1$$？
+21. 为什么样本方差（sample variance）的分母（denominator）是 $$n - 1$$？
 
     答：如果期望已知，分母就是 $$n$$，如果未知，分母是 $$n - 1$$ 是为了保证方差的估计是无偏的（unbiased）。如果直接使用 $$n$$ 为分母作为估计，那么会倾向于低估方差（可用数学方法证明），所以为了正确的估计方差，所以可以把原先的估计值稍微放大一点，即把分母 $$n$$ 改为 $$n - 1$$。
     
     这里也可以用自由度（随机变量中可以同时自由随机变化的变量数目，Degree of Freedom）的角度进行分析。对于 $$n$$ 个样本，由于已经根据这些样本估计了样本均值，因此只剩下 $$n - 1$$ 个样本的值是可以变化的。换句话说，样本中原有的 $$n$$ 个自由度，有一个被分配给计算样本均值，剩下自由度即为 $$n - 1$$，所以用 $$n - 1$$ 作为分母来计算样本方差。
 
-21. 给定一个 0 到 1 的均匀分布，如何近似地生成一个标准正态分布。即用 numpy.random.uniform() 这个函数， 得到 numpy.random.normal()？
+22. 给定一个 0 到 1 的均匀分布，如何近似地生成一个标准正态分布。即用 numpy.random.uniform() 这个函数， 得到 numpy.random.normal()？
 
     答：本题考点为中心极限定理（Central Limit Theorems）和均匀分布。中心极限定理即一组相互独立的随机变量的均值符合正态分布。
 
@@ -154,15 +158,15 @@ keywords: 面试题
 
     具体步骤是先产生 300 个 (-1, 1) 随机变量，它们的均值的标准差是 1 / 30，要得到标准正态分布，所以要乘以 30。
 
-24. 请解释协方差矩阵的含义
+23. 请解释协方差矩阵的含义
 
     答：协方差矩阵描述多变量间的线性关系，矩阵的每个元素代表两个变量的协方差。
 
-25. 什么是点估计，什么是区间估计？
+24. 什么是点估计，什么是区间估计？
 
     答：点估计是预测参数的值，区间估计是预测参数所处的区间。
 
-26. 什么是置信区间，什么是置信水平/置信度？
+25. 什么是置信区间，什么是置信水平/置信度？
 
     答：置信区间是一个带着置信度的估计区间。若置信区间为 $$[a, b]$$，则置信水平 Y% 表示 $$P(a < \mu < b) = Y%$$。常见的置信度为 95%（$$2\sigma$$），95% 置信度表示的是 100 次区间估计，其中约有 95 次区间估计得到的区间结果包含正确的参数值。
 
@@ -170,15 +174,15 @@ keywords: 面试题
 
     求置信区间的方式是先计算抽样样本的均值和方差，然后再根据设置的置信区间查表就可以得到置信区间的上下界。
 
-27. 什么是卡方检验？
+26. 什么是卡方检验？
 
     答：卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离程度就决定卡方值的大小，如果卡方值越大，二者偏差程度越大；反之，二者偏差越小；若两个值完全相等时，卡方值就为0，表明理论值完全符合。
 
-28. 蒲丰投针问题
+27. 蒲丰投针问题
 
     答：[链接](https://baike.baidu.com/item/%E8%92%B2%E4%B8%B0%E6%8A%95%E9%92%88%E9%97%AE%E9%A2%98/10876943?fromtitle=%E5%B8%83%E4%B8%B0%E6%8A%95%E9%92%88&fromid=5919098)
 
-29. 中餐馆过程
+28. 中餐馆过程
 
     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003110)
 
@@ -516,7 +520,8 @@ keywords: 面试题
 
 7. 原地旋转数组（即右移 m 个元素）
 
-    答：- step 1：因为mm可能大于nn，因此需要对nn取余，因为每次长度为nn的旋转数组相当于没有变化。
+    答：
+    - step 1：因为mm可能大于nn，因此需要对nn取余，因为每次长度为nn的旋转数组相当于没有变化。
     - step 2：第一次将整个数组翻转，得到数组的逆序，它已经满足了右移的整体出现在了左边。
     - step 3：第二次就将左边的mm个元素单独翻转，因为它虽然移到了左边，但是逆序了。
     - step 4：第三次就将右边的n−mn−m个元素单独翻转，因此这部分也逆序了。
@@ -583,7 +588,7 @@ keywords: 面试题
 
     答：
     - 有效的括号：利用栈匹配左右括号，检测括号是否成对出现且顺序正确。
-    - 最小栈：设计一个支持 push、pop、top 操作，并能在O(1)时间内检索到最小元素的栈。
+    - 最小栈：设计一个支持 push、pop、top 操作，并能在O(1)时间内检索到最小元素的栈。可以使用两个栈实现，一个保存最小值，一个常规操作。
     - 用栈实现队列：用两个栈模拟队列的先进先出行为。
     - 逆波兰表达式求值：使用栈计算后缀表达式的值。前缀表达式：运算符在前，从右向左处理，无需括号，如 + 3 * 4 5；中缀表达式：运算符在操作数中间，如 3 + 4 * 5；后缀表达式：运算符在后，从左向右用栈处理，无需括号，如 3 4 5 * +。
     - 接雨水：用栈记录边界，计算能接多少雨水。
@@ -610,7 +615,7 @@ keywords: 面试题
 
 11. 单调栈
 
-    答：栈内保持单调（递增 / 递减）；入栈前，弹出不满足单调性的元素；栈顶元素就是当前元素的最近更小（或更大）元素。应用例子：柱状图中最大的矩形面积：用单调栈维护高度，计算最大矩形面积。
+    答：栈内保持单调（递增 / 递减）；入栈前，弹出不满足单调性的元素；栈顶元素就是当前元素的最近更小（或更大）元素。
     ```
     def monotonic_stack(nums):
 	    stack = []  # 栈里存索引
@@ -624,6 +629,8 @@ keywords: 面试题
 	        stack.append(i)  # 当前元素入栈
 	    return res
     ```
+    应用例子：
+    - 柱状图中最大的矩形面积：每次遇到比栈顶元素矮的柱子，就开始结算面积，直到栈为空或栈顶柱子高度小于当前柱子高度为止。末尾追加一个 0（哨兵）以触发所有结算。
 
 12. 队列
 
@@ -856,7 +863,69 @@ keywords: 面试题
 
 37. BFS vs DFS
 
-    答：BFS（广度优先搜索）适用于求最短路径、层级遍历和状态步数问题，因为它逐层扩展，能保证最早到达目标；而 DFS（深度优先搜索）更适合遍历所有路径、回溯剪枝、拓扑排序和连通块问题，因其先深入到底便于穷举和递归处理。简言之，找最短用 BFS，找所有/存在性用 DFS。
+    答：BFS（广度优先搜索）通常用队列解决，适用于求最短路径、层级遍历和状态步数问题，因为它逐层扩展，能保证最早到达目标；而 DFS（深度优先搜索）通常用栈或递归解决，更适合遍历所有路径、回溯剪枝、拓扑排序和连通块问题，因其先深入到底便于穷举和递归处理。简言之，找最短用 BFS，找所有/存在性用 DFS。
+    
+    BFS 模版
+	```
+	from collections import deque
+	
+	def bfs(graph, start):
+	    visited = set()
+	    queue = deque([start])
+    
+	    while queue:
+	        node = queue.popleft()
+	        if node in visited:
+	            continue
+	        visited.add(node)
+	        
+	        # 处理当前节点 node
+	        print(node)
+	        
+	        for neighbor in graph[node]:
+	            if neighbor not in visited:
+	                queue.append(neighbor)
+	```
+	
+	DFS 模版，递归版
+	```
+	def dfs_iterative(graph, start):
+	    visited = set()
+	    stack = [start]
+	    
+	    while stack:
+	        node = stack.pop()
+	        if node in visited:
+	            continue
+	        visited.add(node)
+	        
+	        # 处理当前节点 node
+	        print(node)
+	        
+	        for neighbor in reversed(graph[node]):  # reversed 保持一致遍历顺序
+	            if neighbor not in visited:
+	                stack.append(neighbor)
+	```
+	
+	DFS 模版，非递归版
+	```
+	def dfs_iterative(graph, start):
+	    visited = set()
+	    stack = [start]
+	    
+	    while stack:
+	        node = stack.pop()
+	        if node in visited:
+	            continue
+	        visited.add(node)
+	        
+	        # 处理当前节点 node
+	        print(node)
+	        
+	        for neighbor in reversed(graph[node]):  # reversed 保持一致遍历顺序
+	            if neighbor not in visited:
+	                stack.append(neighbor)
+	```
 
 38. 数组最大最小值最优算法？
 
@@ -1631,11 +1700,11 @@ keywords: 面试题
 6. 从贝叶斯的角度解释 LR
 
     答：LR 可以从贝叶斯角度理解为最大后验估计（MAP）。贝叶斯公式如下：
-    后验概率 $$P(θ|D)$$ ∝ 似然 $$P(D|θ)$$ × 先验 $$P(θ)$$。
+    后验概率 $$P(θ \mid D)$$ ∝ 似然 $$P(D \mid θ)$$ × 先验 $$P(θ)$$。
     
-    其中 $$D$$ 是观测数据；$$θ$$ 是模型参数；$$P(D|θ)$$ 表示在参数 $$θ$$ 下，数据 $$D$$ 出现的可能性，即似然函数；$$P(θ)$$ 是对参数 θ 的先验知识；$$P(θ|D)$$ 是给定数据 $$D$$ 后，参数 $$θ$$ 的后验分布。
+    其中 $$D$$ 是观测数据；$$θ$$ 是模型参数；$$P(D \mid θ)$$ 表示在参数 $$θ$$ 下，数据 $$D$$ 出现的可能性，即似然函数；$$P(θ)$$ 是对参数 θ 的先验知识；$$P(θ \mid D)$$ 是给定数据 $$D$$ 后，参数 $$θ$$ 的后验分布。
     
-    训练 Logistic Regression 的目标就是找到使后验概率 $$P(θ|D)$$ 最大的参数 $$θ$$，这就是最大后验估计（MAP）：$$θ_MAP = argmax P(D|θ) × P(θ)$$
+    训练 Logistic Regression 的目标就是找到使后验概率 $$P(θ \mid D)$$ 最大的参数 $$θ$$，这就是最大后验估计（MAP）：$$θ_{MAP} = argmax P(D \mid θ) × P(θ)$$
     
     不同情况下有不同的结果：
     
@@ -1700,10 +1769,10 @@ keywords: 面试题
     答：
     ```
 	def k_nearest_neighbors(X, y, test_sample, k):
-    distances = np.linalg.norm(X - test_sample.T, axis=1)
-    nearest_indices = np.argsort(distances)[:k]
-    nearest_labels = y[nearest_indices]
-    return int(np.round(np.mean(nearest_labels)))
+	    distances = np.linalg.norm(X - test_sample.T, axis=1)
+	    nearest_indices = np.argsort(distances)[:k]
+	    nearest_labels = y[nearest_indices]
+	    return int(np.round(np.mean(nearest_labels)))
     ```
 
 18. 常见的距离度量方法有哪些？
@@ -2156,7 +2225,7 @@ keywords: 面试题
 
 8. 为什么在 CNN 等结构中将原先的 sigmoid、tanh 换成 ReLU 可以取得比较好的效果？
 
-     答：解决了梯度消失问题。Sigmoid 导数在两端趋近于 0，容易导致梯度消失；ReLU 在正区间梯度恒为 1，不会出现梯度爆炸/消失问题，支持更深网络训练。
+     答：解决了梯度消失问题。sigmoid 导数在两端趋近于 0，容易导致梯度消失；ReLU 在正区间梯度恒为 1，不会出现梯度爆炸/消失问题，支持更深网络训练。
 
 9. RNN 中只能采用 tanh 而不是 ReLU 作为激活函数么？
 
@@ -2192,9 +2261,7 @@ keywords: 面试题
 
      答：[链接](https://blog.csdn.net/jediael_lu/article/details/77852060)
 
-17. softmax 求导？
-
-    The derivation of the softmax function?
+17. softmax 求导
 
     答：[链接](https://zhuanlan.zhihu.com/p/25723112)。$$softmax'(z)=softmax(z)(y_i-softmax(z))$$，其中$$y_i$$为标签。如果表示为 Jacobian 矩阵可为$$J_{softmax}=Diag(p)-pp^T$$，其中$$p=softmax(z)$$，而$$Diag(p)$$是以p为对角线的矩阵。
 
@@ -2222,25 +2289,49 @@ keywords: 面试题
 
 20. 神经网络为什么会产生梯度消失现象？
 
-     答：两种情况下梯度消失经常出现，一是在深层网络中，二是采用了不合适的损失函数，比如 sigmoid（导数范围从 0 到 0.25）。前者是因为根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都小于 1 的话，多次链乘之后会接近为 0，如果都大于 0 的话，多次链乘之后会接近正无穷。sigmoid 中心部位和两侧的梯度差别太大，如果权重初始化得太大或太小，激活值基本都在 sigmoid 两侧，两侧梯度几乎为 0，传播几层就没有梯度了。
+     答：根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都小于 1 的话，多次链乘之后会接近为 0。常见的触发还有：不合适的损失函数，比如 sigmoid，其导数范围为 0（输入很大或很小）到 0.25（输入为 0）；权重初始化太小；RNN 长序列传递。
 
-21. 如何避免梯度消失或梯度爆炸？
+21. 梯度消失会导致什么后果？
 
-     答：权重合理初始化，梯度剪切（梯度爆炸），门机制，batch normalization。
+     答：网络训练停滞，参数不更新；深层网络权重学不到有效信息（尤其是靠近输入层）；模型性能很差，无法收敛。
 
-22. 如何调参？
+22. 如何避免梯度消失？
+
+     答：ReLU 激活函数来避免 sigmoid/tanh 饱和问题；合理初始化，如 Xavier / Kaiming 初始化保持梯度方差平稳；残差连接（ResNet），梯度直接传递，减小消失风险；BatchNorm / LayerNorm，缓解梯度消失，保持输入稳定；更少的非线性层，或设计合理的网络结构（如 Transformer）；使用 LSTM / GRU（代替普通 RNN），其门控机制，长时间记忆通过加法传递（非乘法），以及乘法和加法混合，可解决 RNN 的长依赖梯度消失问题。
+
+23. 神经网络为什么会产生梯度爆炸现象？
+
+     答：根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都大于 1 的话，多次链乘之后会接近正无穷。常见的触发还有：网络太深；权重初始化得太大；梯度累积导致数值溢出（尤其是 ReLU 激活）；RNN 长序列传递。
+
+24. 梯度爆炸会导致什么后果？
+
+     答：Loss 变为 NaN 或 Inf；参数更新后变成无穷大，模型直接崩溃；不可逆的数值错误。
+
+25. 如何避免梯度爆炸？
+
+     答：梯度裁剪（Gradient Clipping），强制限制梯度的最大值；合理初始化（如 Kaiming），保持梯度方差平衡；正则化（如 Dropout、L2），减小过拟合导致的梯度波动；BatchNorm / LayerNorm，平稳训练过程；调整学习率，学习率太大会加剧梯度爆炸；混合精度训练时使用 GradScaler，防止数值溢出。
+
+26. Loss 出现 NaN
+
+     答：学习率过大，应减小学习率；梯度爆炸，应梯度裁剪；非法数值操作，如`log(0)`、`0/0`、`sqrt(负数)`；输入数据有 NaN，应数据检查、去除异常；使用 FP16 没有 GradScaler，应使用 `torch.cuda.amp.GradScaler()`。
+
+27. Loss 出现 Inf
+
+     答：指数操作溢出（如 `exp(大数)`），应使用数值稳定版 softmax / logsumexp；分母为 0（除零），应加小常数，如 `+1e-8`；梯度爆炸导致权重溢出，应梯度裁剪；数据异常，应检查输入数据，防止极端值。
+
+28. 如何调参？
 
      答：for 循环；贝叶斯优化。
 
-23. 多任务如何学习？
+29. 多任务如何学习？
 
      答：[链接](https://zhuanlan.zhihu.com/p/34916654)
 
-24. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
+30. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
 
      答：输出尺寸 = (输入尺寸 - filter + 2 * padding）/ stride + 1。计算尺寸不被整除，卷积向下取整，池化向上取整。
 
-25. LSTM 是什么？
+31. LSTM 是什么？
 
      答：遗忘门：$$f_t=\sigma(W_f[h_{t-1}, x_t] + b_f)$$，输出 [0, 1]，来表示信息保留程度。
 
@@ -2254,51 +2345,51 @@ keywords: 面试题
 
      得到最终输出：$$h_t=o_t*tanh(C_t)$$。
 
-26. GRU 是什么？
+32. GRU 是什么？
 
      答：LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
 
-27. LSTM 和 GRU 的联系和区别？
+33. LSTM 和 GRU 的联系和区别？
 
      答：都是通过使梯度的乘法变成加法，来解决 RNN 由于梯度消失而不能对长期依赖建模的问题。前者三个门，后者两个门，所以前者计算更耗时。
 
-28. 门机制为什么能解决梯度消失或爆炸问题？
+34. 门机制为什么能解决梯度消失或爆炸问题？
 
      答：[链接](https://zhuanlan.zhihu.com/p/27485750)
 
-29. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
+35. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
 
     答：[链接](https://zhuanlan.zhihu.com/p/61590026)
 
-30. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
+36. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
 
     答：[链接](https://zhuanlan.zhihu.com/p/61590026)
 
-31. TensorFlow 怎么实现 learning rate decay？
+37. TensorFlow 怎么实现 learning rate decay？
 
     答：[链接](https://blog.csdn.net/u012436149/article/details/62058318)
 
-32. Pytorch 怎么实现 learning rate decay？
+38. Pytorch 怎么实现 learning rate decay？
 
     答：[链接](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/)
 
-33. TensorFlow 内部求导机制？
+39. TensorFlow 内部求导机制？
 
     答：符号求导。先提供每一个op求导的数学实现，然后使用链式法则求出整个表达式的导数。
 
-34. TensorFlow 创建变量的方式有哪些，有什么区别？
+40. TensorFlow 创建变量的方式有哪些，有什么区别？
 
     答：`tf.Variable()`和`tf.get_variable()`。前者一律创建新的变量，遇到同名变量，会在后面加后缀 1，2；后者如果遇到同名变量，则使用之前创建的变量，但要求这个变量一定在 variable_scope 中，且有 reuse 选项。
 
-35. Pytorch 如何切换训练和测试模式？
+41. Pytorch 如何切换训练和测试模式？
 
     答：`model.train()`和`model.eval()`
 
-36. Pytorch 的 view 和 reshape 有什么区别？
+42. Pytorch 的 view 和 reshape 有什么区别？
 
     答：view 只能用于连续内存的张量；只改变视图，不复制数据（如果张量是连续的）；如果张量不是连续的，会报错；更快（不涉及数据复制）；在对张量做完 `.contiguous()` 后更常用。reshape 可以用于非连续张量（会自动创建副本）；自动处理非连续张量，可能复制数据；自动处理，返回新的张量；稍慢（可能需要复制内存）；更通用，适用于任何张量。
 
-37. GPU 利用率低怎么办？
+43. GPU 利用率低怎么办？
 
     答：dataset API 可以支持以 streaming 的方式读取数据。
 
@@ -2600,16 +2691,15 @@ keywords: 面试题
 
 18. FlashAttention
 
-    答：FlashAttention 基于以下几点：
+    答：GPU 存储单元主要有 HBM 和 SRAM：HBM 容量大但访问速度慢，SRAM 容量小但访问速度快。由于这一特性，传统 self-attention 受 context length 限制，无法利用 SRAM，只能对 HBM 进行多次读写操作。而 FlashAttention 通过分块和在线 softmax 的方式，从 HBM 中读取块到 SRAM 中计算之后再写到 HBM 中，减少对 HBM 的访问，从而提高了速度。时间复杂度并没有变化，而空间复杂度因为没有存储中间的 attention matrix，从 O(N^2) 降低到 O(N)。
     
-	1. 块分割 (blocking)
-    将 Q, K, V 按块划分，分块计算 Attention。每次只加载当前块，节省内存。
+    FlashAttention 基于以下几点：
     
-	2. 在线计算 softmax（online-softmax） 
-    传统 softmax 需要先计算全部 QK^T，然后减 max 值再求 exp，最后归一化。而 FlashAttention 在线计算 softmax，避免存储整个矩阵。
+	1. 分块
+    将 Q, K, V 按块划分，分块计算 Attention。每次只加载当前块，节省内存。传统 softmax 需要先计算全部 QK^T，然后减 max 值再求 exp，最后归一化。而 FlashAttention 分块之后，softmax 的计算成为了一个难点。FlashAttention 通过引入两个额外的统计量来在线计算 softmax。多个 block 的 softmax 计算可以并行，最后再合并。
     
-    3. 单遍扫描（one-pass）计算  
-    通过巧妙算法实现只需遍历一次 Q,K,V 即可计算 Attention 输出，避免多次加载。
+    2. 重计算
+    在后向梯度计算时，一般需要 attention matrix，但 FlashAttention 可以利用两个额外的统计量在 SRAM 上快速重新计算 attention。
 
 19. Multi-head Latent Attention (MLA)
 
@@ -2639,19 +2729,23 @@ keywords: 面试题
 
     答：是的，可能因 head 冗余、聚合退化等原因呈现低秩结构，从而降低表达能力。可以通过正则化（在多头 projection 矩阵上加正交约束）、架构设计、训练策略等方法缓解，并可用奇异值分析评估问题严重程度。
 
-26. 为什么大模型要使用 left padding
+26. 为什么要用 FFN？
+
+    答：引入非线性表达能力，因为 self-attention 是线性的
+
+27. 为什么大模型要使用 left padding
 
     答：left padding KV Cache 在右侧连续生长，无需移动缓存，支持高效批量并发生成，动态 KV Cache 底层优化都支持左填充。right padding KV Cache 在不同位置，难以对齐，难以批量对齐，增加显存开销，很少支持右填充。
 
-27. BPE，WordPiece 和 Unigram 的区别是？
+28. BPE，WordPiece 和 Unigram 的区别是？
 
     答：BPE 是基于贪心的频率合并。初始时将文本拆成最小单位（单字符），然后反复合并出现频率最高的连续字符对，直到达到预定词表大小。WordPiece（BERT 使用）跟 BPE 类似，不过是根据最大似然估计进行合并。Unigram 基于概率模型，先初始化大量子词候选，然后用 EM 算法估计每个子词的概率，迭代优化删除低概率子词，最终得到固定大小词表。
 
-28. 传统中文分词
+29. 传统中文分词
 
     答：前向匹配（Forward Maximum Matching）+ 动态规划（如 Viterbi 算法）
 
-29. Position Embedding
+30. Position Embedding
 
     答：绝对位置编码，分为 Sinusoidal（无需学习参数，偶数位置，使用正弦编码，在奇数位置，使用余弦编码。任意位置的 $$PE_{pos+k}$$ 都可以被 $$PE_{pos}$$ 的线性函数表示）和 Learnable Embedding。
     
@@ -2659,17 +2753,17 @@ keywords: 面试题
     
     无参数 Position Embedding 支持序列长度外推。
 
-30. 外推性
+31. 外推性
 
     答：测试时要接收处理比训练时更长的上下文。
 
-31. 如何提升外推能力
+32. 如何提升外推能力
 
     答：位置编码外推：ALiBi
     长度泛化技术：动态调整 RoPE 的旋转角
     推理策略增强：CoT，Self- Consistency
 
-32. LLM 常用的激活函数有？
+33. LLM 常用的激活函数有？
 
     答：ReLU：f(x) = max(0, x)
      
@@ -2681,7 +2775,7 @@ keywords: 面试题
      
     ReLU，GeLU 不能门控，GLU，SwiGLU 能门控。
 
-33. Batch Normalization (BN)
+34. Batch Normalization (BN)
 
     答：BN 就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。
 
@@ -2691,13 +2785,15 @@ keywords: 面试题
 
     BN 为了保证非线性的获得，对变换后的 x 又进行了 scale 加上 shift 操作：y = scale * x + shift。
 
-34. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
+35. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
 
-    答：BN 是跨样本跨 token 统计的，会泄漏信息，所以 LN 更适合变长序列和单样本推理，RMSNorm 参数量（d，缩放因子）为 LN （2d，缩放因子和偏移因子） 一半，更高效和稳定，并表现与 LN 相似。
+    答：这些都是为了防止梯度消失/爆炸，引入参数为了提高表达能力，从而提高泛化能力。
+    
+    BN 是跨样本跨 token 统计的，会泄漏信息，所以 LN 更适合变长序列和单样本推理，RMSNorm 参数量（d，缩放因子）为 LN （2d，缩放因子和偏移因子） 一半，更高效和稳定，并表现与 LN 相似。
      
     输入是形状为 `(batch_size, seq_len, hidden_dim)` 的张量，BN 通常对 batch 和 seq_len 两个维度联合计算均值和方差，也就是对每个 hidden_dim 维度独立归一化。LN/RMSNorm 对每个样本每个 token 的 hidden_dim 维度做归一化，即对 seq_len 中的每个位置独立归一化，计算均值和方差都在 hidden_dim 上。
 
-35. 实现 LayerNorm
+36. 实现 LayerNorm
 
     答：
     ```
@@ -2718,7 +2814,7 @@ keywords: 面试题
 	        return self.gamma * x_norm + self.beta
     ```
 
-36. 实现 RMSNorm
+37. 实现 RMSNorm
 
     答：RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
 	```
@@ -2738,11 +2834,11 @@ keywords: 面试题
 	        return self.scale * x_norm
 	```
 
-37. Pre Norm 和 Post Norm 有什么区别？
+38. Pre Norm 和 Post Norm 有什么区别？
 
     答：Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
 
-38. temperature/Top-k/Top-p
+39. temperature/Top-k/Top-p
 
     答：temperature：控制采样随机性，温度越高越随机。它的做法是将得到的 logits 除以温度，再作 softmax。当温度为 0 时，相当于 argmax/greedy；当温度为 1 时，相当于 softmax；当温度小于 1，分布变得尖锐，熵降低；当温度大于 1，分布变得平坦，熵升高。
     
@@ -2752,19 +2848,19 @@ keywords: 面试题
     
     对于初始 logits 熵大的，叫做高熵 token，意味着 LLM 在此处犹豫不决；反之叫做低熵 token，意味着 LLM 在这非常自信。在推理阶段，较低的 temperature 会导致多样性降低，较高的 temperature 会导致生成质量降低，产生幻觉。
 
-39. speculative decoding
+40. speculative decoding
 
     答：使用一个小型辅助模型（称为“提议模型”或“draft model”）先快速生成多个候选token序列（草稿）。主模型（大型语言模型）随后只对这些候选进行验证和纠正，而不是每一步都全量生成和计算概率。这种方式能显著减少主模型的计算成本，提高生成速度。
 
-40. MoE
+41. MoE
 
     答：MoE 分为专家网络，门控网络和选择器三部分。负载均衡的辅助损失的引入是为了解决多专家 token 分配不均的问题。
 
-41. 为什么 LLM 流行 MoE？
+42. 为什么 LLM 流行 MoE？
 
     答：MoE 能显著提高模型容量而不成比例地增加计算成本。
 
-42. 手撕 MoE
+43. 手撕 MoE
 
     答：
     ```
@@ -2787,21 +2883,21 @@ keywords: 面试题
     ```
 
 
-43. Prefix LM 和 Causal LM 区别是什么？
+44. Prefix LM 和 Causal LM 区别是什么？
 
     答：Causal LM 是单向的，只看左边上下文；Prefix LM 是半双向的，可以看整个 prefix 的信息（左侧上下文），预测后缀。
 
-44. 为什么大部分 LLM 是 decoder-only？
+45. 为什么大部分 LLM 是 decoder-only？
 
     答：生成范式的统一性；任务更难；双向 attention 的注意力矩阵容易退化成低秩状态，而 causal attention 的注意力矩阵是下三角矩阵，必然是满秩的，建模能力更强。
 
-45. SFT
+46. SFT
 
-46. 强化学习和监督学习有什么区别？
+47. 强化学习和监督学习有什么区别？
 
     答：监督学习中每一个决策（预测标签）是独立的，它对决策的优化取决于标签。强化学习每一个决策是相互影响的，它对决策的优化取决于延时标签（奖励）。过去的 AI 训练方式主要依赖监督学习，也就是让 AI 通过大量人类标注的数据来学习。换句话说，AI 只是一个“超级记忆机”，它能模仿人类的答案，但却不一定真正理解问题的本质。而强化学习的出现，让 AI 不再是单纯的模仿者，而是能够主动探索、试错、优化自己推理方式的智能体。这就像是在训练一个孩子解数学题，监督学习相当于直接告诉他答案，而强化学习则是让他自己尝试解题，并根据最终的正确率进行调整。
 
-47. PPO
+48. PPO
 
     答：
      
@@ -2832,7 +2928,7 @@ keywords: 面试题
 	    return loss
 	```
 
-48. PPO 怎么计算 advantages？
+49. PPO 怎么计算 advantages？
 
     答：
     1. 直接使用 reward。不是 token level
@@ -2850,11 +2946,11 @@ keywords: 面试题
 	    return advantages
      ```
 
-49. PPO 有了 reward model 为什么还要 critic/value model？
+50. PPO 有了 reward model 为什么还要 critic/value model？
 
      答：critic/value model 是内部奖励，仅需当前上下文，会在 RL 过程中更新，reward model 是外部奖励，需要完整回答，是训练好的
 
-50. DPO
+51. DPO
 
     答：
      
@@ -2868,7 +2964,7 @@ keywords: 面试题
 	    return loss
     ```
  
-51. GRPO
+52. GRPO
    
     答：
      
@@ -2916,23 +3012,23 @@ keywords: 面试题
 	    return loss
     ```
 
-52. PPO vs DPO vs GRPO
+53. PPO vs DPO vs GRPO
 
     答：所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。DPO 没有显式探索机制。
 
-53. GRPO 怎么去掉 critic/value model 的？
+54. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-54. 熵控制在强化学习里的作用
+55. 熵控制在强化学习里的作用
 
      答：在大模型训练的强化学习阶段，设置较高的 temperature 可以防止模型过度自信，鼓励模型采取高熵动作，从而扩大探索空间。另一种方式是在 group-level 用 smi/dpp/self-bleu 计算多样性，进行 reward shaping 来控制熵的变化。
 
-55. LoRA
+56. LoRA
 
      答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。target_modules 一般为`q_proj`、`v_proj`，有时也会注入到 `k_proj` 或 `o_proj`。modules_to_save 表示指定哪些原模型模块需要一起训练 & 保存，如果扩展了词表可能要加 `embed_tokens`、`lm_head`。
 
-56. 手撕 LoRA
+57. 手撕 LoRA
 
      答：
      ```
@@ -2957,15 +3053,15 @@ keywords: 面试题
 	        return base + lora
     ```
 
-57. Adapter
+58. Adapter
 
      答：插入小型网络模块
 
-58. Prefix Tuning
+59. Prefix Tuning
 
      答：Prefix Tuning 会为每层添加一组虚拟的 Key 和 Value。
 
-59. Base model eval
+60. Base model eval
 
      答：General Tasks: MMLU (5-shot), MMLU-Pro (5-shot, CoT), MMLU-redux (5-shot), BBH (3-shot, CoT), SuperGPQA (5-shot, CoT).
      
@@ -2975,7 +3071,7 @@ keywords: 面试题
     
     Multilingual Tasks: MGSM (8-shot, CoT), MMMLU (5-shot), INCLUDE (5-shot).
 
-60. Chat model eval
+61. Chat model eval
 
      答：General Tasks: MMLU-Redux, GPQADiamond, C-Eval, and LiveBench.
      
@@ -2987,17 +3083,17 @@ keywords: 面试题
      
      Multilingual Tasks: instruction following - Multi-IF, knowledge - INCLUDE & MMMLU, mathematics - MT-AIME2024 & PolyMath, and logical reasoning - MlogiQA.
 
-61. Safety / Halluciation
+62. Safety / Halluciation
 
     答：出现幻觉原因：1. 语料中存在过时，虚构的内容，或缺乏与下游任务相关的领域知识；2. 微调时的过拟合导致模型过于自信；3. 推理时随机采样的生成策略。
     
     RAG
 
-62. Long Context
+63. Long Context
 
     答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
 
-63. LLM设计中的 System 1 和 System 2
+64. LLM设计中的 System 1 和 System 2
 
     答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
      
@@ -3009,7 +3105,7 @@ keywords: 面试题
         
     - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-64. RAG; KG + LLM
+65. RAG; KG + LLM
 
     答：RAG 可以解决 LLM 知识过时，幻觉问题以及无法调用私有数据等问题
     
@@ -3019,57 +3115,57 @@ keywords: 面试题
     
     document 的顺序会对 RAG 的性能造成比较大的影响。
 
-65. 文本分块
+66. 文本分块
 
     答：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。
 
-66. Reasoning
+67. Reasoning
 
-67. Test-time Training
+68. Test-time Training
 
-68. MCP 和 function calling 有什么区别？
+69. MCP 和 function calling 有什么区别？
 
     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-69. LangChain
+70. LangChain
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-70. bf16，fp16，fp32区别
+71. bf16，fp16，fp32区别
 
     答：bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。
 
-71. LLM 常用的优化器有？
+72. LLM 常用的优化器有？
 
     答：AdamW，Lion
 
-72. 混合精度计算
+73. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-73. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
+74. 7B 模型在训练和推理时的显存占用如何估算，显存与参数量，批次大小，序列长度的关系是什么？
 
     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2 字节，fp32 精度为 4 字节。
     训练显存 ≈ 模型参数 × 3/4（包括权重 + 梯度 + Optimizer 状态 * 1/2） + 激活（反向传播时，需要用它来计算梯度），主要瓶颈是激活值和优化器状态，batch_size 越大，激活越大。
     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
-74. 多卡多机训练
+75. 多卡多机训练
 
     答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-75. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+76. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-76. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+77. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-77. deepspeed 的 Zero-1， Zero 2， Zero 3
+78. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存。参数、梯度、优化器状态始终绑定，分配到同一张 GPU 上。
 
-78. 量化
+79. 量化
 
     答：PTQ（训练后量化）和 QAT（训练时量化）
     
@@ -3077,35 +3173,35 @@ keywords: 面试题
     
     AWQ(Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
-79. vllm
+80. vllm
 
     答：相比静态分配 KV 缓存，vllm 使用了 PagedAttention，即把 KV 缓存当作虚拟内存，每条序列的缓存按页（page）管理，动态分配到显存中。
 
-80. GPT 的原理？
+81. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-81. BERT 的原理？
+82. BERT 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-82. BERT 的训练目标？
+83. BERT 的训练目标？
 
     答：BERT 有 masked language modeling 和 next sentence prediction 两个目标
 
-83. RoBERTa 相比 BERT 做了哪些改进？
+84. RoBERTa 相比 BERT 做了哪些改进？
 
     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-84. RoBERTa 强于 RNN 的地方？
+85. RoBERTa 强于 RNN 的地方？
 
     答：并行，对大数据比较友好。
 
-85. Qwen
+86. Qwen
 
     答：QwenMoE
 
-86. Deepseek-V1 - Deepseek-V3
+87. Deepseek-V1 - Deepseek-V3
 
     答：
     - MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
@@ -3116,14 +3212,14 @@ keywords: 面试题
     - v3 将门控函数的对更小的小数位会敏感的 softmax 改成了值域更宽的 sigmoid
     - fp8 精度计算
 
-87. Deepseek-R1-Zero
+88. Deepseek-R1-Zero
 
     答：证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
     1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
     2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用 `<think>` 标签包裹推理过程，用 `<answer>` 标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
     3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
 
-88. Deepseek-R1
+89. Deepseek-R1
 
     答：成功经验
     - 在 SFT 阶段采用冷启动，只使用了少量（几千条）高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
