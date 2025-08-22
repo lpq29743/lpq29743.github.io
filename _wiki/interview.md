@@ -469,11 +469,11 @@ keywords: 面试题
     - 区间差值或重叠个数统计：差分数组 + 前缀和 或 扫描线算法。
     - 区间最长连续可用时间段：对不可用区间排序合并，剩余为可用时间段。
 
-5. 前缀和
+5. 前缀和（Prefix Sum）
 
-    答：得到前缀和之后可以知道任何区间的和，所以很适合求解要求区间和为某个数的问题。
+    答：得到前缀和之后可以知道任何区间的和，所以很适合求解要求区间和为某个数的问题。前缀和是一种通用思想，它也可以是前缀积、前缀异或、前缀最大值。
     
-    一维前缀和
+    一维前缀和：时间复杂度为 O(n)
     
 	- 区间和快速查询（如 Leetcode 303）：构建前缀和数组 `prefix[i+1] = sum(nums[0..i])`，任意区间和为 `prefix[r+1] - prefix[l]`。
 	- 固定大小窗口的最小/最大和：用前缀和快速计算任意长度为 k 的区间和，再遍历或滑动窗口取最小/最大。
@@ -504,9 +504,9 @@ keywords: 面试题
     - 最大连续 1 的数量（允许翻转 k 个 0）：用前缀和记录 0 的累计个数，滑动窗口找到最多翻转 k 次后的最长区间。
     - 滑动窗口平均值/中位数优化：前缀和用于快速计算平均值，配合单调队列或多重集合求中位数。
 
-6. 并查集
+6. 并查集（Union Find）
 
-    答：
+    答：解决步骤为：初始化父节点为本身；寻找父节点；合并父节点；判断集合数量。
     - 省份数量：并查集判断连通块数。
     - 岛屿数量：并查集合并相邻陆地格子。
     - 冗余连接：并查集找成环的边。
@@ -539,7 +539,7 @@ keywords: 面试题
 
     答：一、基础操作类
     
-    - 反转链表（Reverse Linked List）：迭代/递归反转指针方向，常见面试题。
+    - 反转链表（Reverse Linked List）：迭代（iteration）/递归（recursion）反转指针方向，常见面试题。
     - 合并两个有序链表：双指针逐节点比较；递归也可实现。
     - 给定单向链表的头指针和一个结点指针，定义一个函数在O(1)时间删除该节点：如果待删节点不是尾节点，可以通过将待删节点的下一个节点的值和指针复制过来，然后删除下一个节点来实现 O(1) 删除。如果待删节点是尾节点，且只有头指针，不知道前驱节点，无法在 O(1) 时间内删除该节点。只能遍历找到前驱，时间是 O(n)。
     - 删除链表中的节点（如删除倒数第 n 个节点）：快慢指针找到待删节点的前一个节点。
@@ -620,7 +620,7 @@ keywords: 面试题
 
 11. 单调栈
 
-    答：栈内保持从栈底到栈顶递增（递减）；入栈前，弹出不满足单调性的元素；栈顶元素就是当前元素的最近更小（更大）元素。
+    答：单调递增（递减）栈内保持从栈底到栈顶递增（递减）；入栈前，弹出不满足单调性的元素；弹栈过程中，当前元素就是被弹元素的下一个更小（更大）元素；结束弹栈后，栈顶元素就是当前元素的上一个更小（更大）元素。
     
     ```python
     def monotonic_stack(nums):
@@ -637,7 +637,8 @@ keywords: 面试题
     ```
     
     应用例子：
-    - 柱状图中最大的矩形面积：每次遇到比栈顶元素矮的柱子，就开始结算面积，直到栈为空或栈顶柱子高度小于当前柱子高度为止。末尾追加一个 0（哨兵）以触发所有结算。
+    - 接雨水：单调递减栈
+    - 柱状图中最大的矩形面积：单调递增栈。每次遇到比栈顶元素矮的柱子，就开始结算面积（此时不会考虑当前柱子），直到栈为空或栈顶柱子高度小于当前柱子高度为止。末尾追加一个 0（哨兵）以触发所有结算。
 
 12. 队列
 
@@ -858,6 +859,31 @@ keywords: 面试题
     基数排序：按位排序，从低位到高位依次进行分配和收集；稳定
     
     快速排序：时间复杂度 O(nlogn)，空间复杂度最好情况是 O(logn)，最坏情况可能达到 O(n),但平均情况是 O(logn)，不稳定
+    ```python
+	def quick_sort(arr, low, high):
+	    if low < high:
+	        pivot_index = partition(arr, low, high)
+	        quick_sort(arr, low, pivot_index - 1)
+	        quick_sort(arr, pivot_index + 1, high)
+	
+	def partition(arr, low, high):
+	    pivot = arr[low]  # 选择第一个元素作为基准
+	    i = low + 1
+	    j = high
+	
+	    while True:
+	        while i <= j and arr[i] <= pivot:
+	            i += 1
+	        while i <= j and arr[j] >= pivot:
+	            j -= 1
+	        if i <= j:
+	            arr[i], arr[j] = arr[j], arr[i]
+	        else:
+	            break
+	
+	    arr[low], arr[j] = arr[j], arr[low]  # 把基准放到正确位置
+	    return j
+	```
     
     希尔排序：插入排序的改进版本，其核心思想是先将整个待排序序列分割成若干个子序列分别进行直接插入排序,待整个序列基本有序时,再对全体记录进行一次直接插入排序。不稳定
     
@@ -1487,11 +1513,11 @@ keywords: 面试题
 
 #### Basic
 
-1. 解释一下奥卡姆剃刀原理？
+1. 解释一下奥卡姆剃刀原理（Occam's Razor）？
 
     答：如果两个模型的预测能力差不多，就选简单的。原因有二，简单模型往往解释性更好；复杂的模型更有可能过拟合。
 
-2. 解释一下没有免费的午餐原理？
+2. 解释一下没有免费的午餐原理（No free lunch）？
 
     答：A 算法在某些数据集或任务上表现比 B 算法好，则一定存在一些数据集或任务，B 算法表现比 A 算法好。这告诉我们具体问题具体分析。
 
@@ -1503,7 +1529,7 @@ keywords: 面试题
 
     答：因为损失函数的等高线易与 L1 正则的坐标轴上的点相切。第一象限与正方形相切的圆的中心只能是在第一象限正方形边的垂直区域内，而第一象限的圆都可以与中心点的圆相切。
 
-    The question can be answered in a geometric view. L1 loss can be represented as a diamond, while L2 loss can be represented as a circle. Therefore, the loss is likely to intersect with the diamond on only one point, which is in axises.
+    The question can be answered in a geometric view. L1 loss can be represented as a diamond, while L2 loss can be represented as a circle. Therefore, the loss is likely to **intersect** with the diamond on only one point, which is in axises.
 
 5. Huber loss
 
@@ -1545,21 +1571,26 @@ keywords: 面试题
 
 1. 线性回归的基本假设是？
 
-    答：线性性；独立性；同方差性；正态性；无多重共线性。
+    答：
+    - 线性性（Linearity）：可通过可视化观察；不成立会导致欠拟合；可通过对数据做非线性转换来满足条件。
+    - 独立性（Independence of Errors）：可用 DW 检测；不满足会导致自相关性（如时间序列数据）；此种场景需要换成自回归之类的模型解决。
+    - 同方差性（Constant Variance）：可视化；异方差性；可更换因变量或使用稳健回归/加权回归。
+    - 正态性（Normality of Errors）：Q-Q图/KS 非参数检验；置信区间不稳定；可寻找遗漏的自变量，检验或剔除异常值，对自变量/因变量进行线性转换。
+    - 无多重共线性（No Multicollinearity）：可计算 Pearson score，若 score 过高，则证明相关，VIF 是可替代方法；不成立会导致多重共线性；可剔除、合并相关变量来解决。。
 
 2. 线性回归中特征不小心重复会有影响吗？
 
     答：会，导致矩阵不可逆。
 
-3. 最小二乘法为什么可以解决线性回归问题？
+3. 最小二乘法（Least Squares）为什么可以解决线性回归问题？
 
-    答：残差满足均值为 0 的同方差正态分布时，用最大似然估计法可以证明最小二乘法是合理的。
+    答：残差（residuals）满足均值为 0 的同方差正态分布时，用最大似然估计法可以证明最小二乘法是合理的。
 
 4. 描述一下最小二乘法的几何意义？
 
     答：最小二乘法中的几何意义是高维空间中的一个向量在低维子空间的投影。$$WX$$ 实际上是当前样本形成的线性组合空间 $$S$$，最小化的过程是找到一个合适的 $$W$$，使得不在 $$S$$ 上的 $$Y$$ 到 $$S$$ 的投影距离最小。
 
-5. 正规方程是什么？它有什么作用？
+5. 正规方程（normal equation）是什么？它有什么作用？
 
     答：$$(X^TX)^{-1}X^Ty$$。可以一次运算得出结果，但特征数目过多时不适用。
 
@@ -1611,9 +1642,9 @@ keywords: 面试题
 
 #### Classification
 
-1. 逻辑斯特回归（Logistic Regression，LR）为什么不能用均方误差计算损失函数？
+1. 逻辑斯特回归（Logistic Regression，LR）为什么不能用均方误差（MSE，Mean Squared Error）计算损失函数？
 
-    答：[链接](http://sofasofa.io/forum_main_post.php?postid=1001792)。
+    答：MSE 对于 Sigmoid 来说是非凸的，而且也会有梯度消失问题。但如果是 soft label 就可以考虑。
 
 2. LR 为什么用交叉熵计算损失函数（二分类）？
 
@@ -1756,35 +1787,39 @@ keywords: 面试题
 
     答：LR 后看系数。
 
-10. 单层感知机为什么不能解决异或问题？
+10. 特征选择
+
+    答：剔除方差比较小的特征，其区分度较低，信息熵很大；单变量特征选择（卡方检验）；递归式特征消除：逐步移除掉最不重要的特征；L1；决策树；依序选择：前向（从少到多）或后向（从多到少）。
+
+11. 单层感知机为什么不能解决异或问题？
 
     答：因为异或操作需要两条线来划分边界，而单层感知机可以理解为一个线性分类器，只能解决与、或、非问题。
 
-11. 如何对单层感知机进行改进，使其能够解决异或问题？
+12. 如何对单层感知机进行改进，使其能够解决异或问题？
 
     答：多层感知机，或在进入激活函数前加一个多项式模块，从而添加非线性成分。
 
-12. 怎么判断分类器是线性分类器还是非线性分类器？
+13. 怎么判断分类器是线性分类器还是非线性分类器？
 
     答：根据决策面是否是线性的。
 
-13. KNN 的训练损失是多少？
+14. KNN 的训练损失是多少？
 
     答：KNN 实际上不算训练，损失为 0。
 
-14. KNN 算法的 k 值应该如何选择？
+15. KNN 算法的 k 值应该如何选择？
 
     答：k 值太小，模型复杂度较高，容易过拟合；k 值太大，模型复杂度不够，较远的点也可能影响分类结果，分类模糊，导致分类结果不理想。当 k 取训练集大小时，分类结果都为训练集中最多的类。k 值一般选取较小的值，且要低于训练样本数的平方根，可以使用交叉验证法选取。
 
-15. KNN 怎么更快地找到最近邻点？
+16. KNN 怎么更快地找到最近邻点？
 
     答：KD 树和 ball 树，KD 树根据样本构建，但训练样例远大于特征维度时才适用。
 
-16. KNN 算法可以根据距离加权吗？
+17. KNN 算法可以根据距离加权吗？
 
     答：可以用反函数或高斯函数进行距离加权，前者为近邻样本赋予较大权重，稍远的会衰减地很快，因此对噪声数据比较敏感，后者能解决这个问题，但比较复杂。
 
-17. KNN 核心代码
+18. KNN 核心代码
 
     答：
     ```python
@@ -1795,19 +1830,19 @@ keywords: 面试题
 	    return int(np.round(np.mean(nearest_labels)))
     ```
 
-18. 常见的距离度量方法有哪些？
+19. 常见的距离度量方法有哪些？
 
     答：$$L_p$$ 距离 / Minkowski 距离 / 闵式距离是最常规的距离度量方式，其公式为 $$(\|x-y\|^p)^{1/p}$$。当 $$p = 1$$ 时为曼哈顿距离，$$p = 2$$ 时为欧式距离，$$p$$ 为无穷大时为各个坐标距离的最大值，即切比雪夫距离。
 
-19. 衡量相似度的方法？
+20. 衡量相似度的方法？
 
     答：欧式距离，Jaccard 相似度（两集合交集大小 / 并集大小），余弦相似度，皮尔逊相关系数（数值归一化后计算余弦相似度），汉明距离。
 
-20. 什么是支持向量机？
+21. 什么是支持向量机？
 
     答：支持向量机就是构造一个的超平面，使得距离超平面最近的那些点，即支持向量与超平面之间的 margin 最大，从而将两个集合分开。
 
-21. LR 和 SVM 的联系与区别？
+22. LR 和 SVM 的联系与区别？
 
     答：[链接](https://www.cnblogs.com/zhizhan/p/5038747.html)
 
@@ -1815,15 +1850,15 @@ keywords: 面试题
 
     区别：LR 是参数模型，SVM 是非参数模型；从目标函数来看，LR 采用的是 log loss，SVM 采用的是 hinge loss。
 
-22. 当数据线性可分、接近线性可分以及线性不可分时，分别使用什么 SVM？
+23. 当数据线性可分、接近线性可分以及线性不可分时，分别使用什么 SVM？
 
     答：硬间隔最大化、软间隔最大化以及核技巧。
 
-23. SVM 为什么采用间隔最大化？
+24. SVM 为什么采用间隔最大化？
 
     答：当训练数据线性可分时，存在无穷个分离超平面可以将两类数据正确分开。感知机利用误分类最小策略，求得分离超平面，不过此时的解有无穷多个。线性可分支持向量机利用间隔最大化求得最优分离超平面，这时，解是唯一的。另一方面，此时的分隔超平面所产生的分类结果是最鲁棒的，对未知实例的泛化能力最强。
 
-24. 手推 SVM
+25. 手推 SVM
 
     答：
     
@@ -1851,67 +1886,67 @@ keywords: 面试题
 
     求解问题，解出 $$\alpha$$，从而解得 $$w, b$$，$$\alpha_i > 0$$ 对应的样本即为支持向量。
 
-25. 为什么要将求解 SVM 的原始问题转换为其对偶问题？
+26. 为什么要将求解 SVM 的原始问题转换为其对偶问题？
 
     答：一是对偶问题往往更易求解。二是可以自然引入核函数，进而推广到非线性分类问题。
 
-26. 为什么 SVM 对缺失数据敏感？
+27. 为什么 SVM 对缺失数据敏感？
 
     答：缺失数据是指缺失某些特征数据，向量数据不完整。SVM 没有处理缺失值的策略。而 SVM 希望样本在特征空间中线性可分，所以特征空间的好坏对 SVM 的性能很重要。缺失特征数据将影响训练结果的好坏。
 
-27. 什么是几何间隔，什么是函数间隔？
+28. 什么是几何间隔，什么是函数间隔？
 
     答：几何间隔 $$y_i\frac{w^Tx_i+b}{\|w\|}$$，函数间隔 $$y_i(w^Tx_i+b)$$。函数间隔可以无限大，几何间隔不可以。
 
-28. 支持向量机的训练在本质上是在最优化哪个值？
+29. 支持向量机的训练在本质上是在最优化哪个值？
 
     答：w。w 得到 b 自然可以得到。
 
-29. 如何用支持向量机实现深度学习？
+30. 如何用支持向量机实现深度学习？
 
     答：可以用支持向量机作为网络的最后一层，进行分类。
 
-30. 给一组数据，问决策树、LR、NB 以及 SVM 等算法学出来是什么样子的？
+31. 给一组数据，问决策树、LR、NB 以及 SVM 等算法学出来是什么样子的？
 
     答：[链接](https://www.zhihu.com/question/26726794)
 
-31. 什么是基于核的机器学习算法？
+32. 什么是基于核的机器学习算法？
 
     答：判别式模型需要把正负样本区分开，那势必会遇到区分不开的情形，这时要用到核函数，所以可认为判别式模型都要用核函数的。
 
-32. SVM 有哪些核函数？
+33. SVM 有哪些核函数？
 
     答：线性核和高斯核，即线性核与 RBF（径向基）核。 线性核：主要用于线性可分，参数少，速度快，对于一般数据，分类效果已经很理想了。 RBF 核：主要用于线性不可分，参数多，分类结果非常依赖于参数。 如果 Feature 数量跟样本数量差不多，应选用线性核的 SVM。 如果 Feature 数量比较小，样本数量一般，选用高斯核的 SVM。其他的核函数包括幂指数核、拉普拉斯核以及 Sigmoid 核等等。
 
-33. 高斯核为什么有效？
+34. 高斯核为什么有效？
 
     答：[链接](https://stats.stackexchange.com/questions/131138/what-makes-the-gaussian-kernel-so-magical-for-pca-and-also-in-general)
 
-34. 支持向量机可以用来做回归吗？
+35. 支持向量机可以用来做回归吗？
 
     答：支持向量机分类是使两类的点在各自的支持向量外，而支持向量机回归是把所有的点都看成一类，并要求在支持向量内。
 
-35. SVM 和 softmax 的区别？
+36. SVM 和 softmax 的区别？
 
     答：SVM 具有附加稳定性，当样例满足边界条件时，该样例不会影响损失函数；而 softmax 将考虑所有的样例。
 
-36. 感知机和 SVM 有什么区别？
+37. 感知机和 SVM 有什么区别？
 
     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003714)
 
-37. One-class SVM？
+38. One-class SVM？
 
     答：用于异常检测问题：只用正常样本训练，学习出一个边界包围正常数据，边界外的点被判为异常。
 
-38. 朴素贝叶斯为何如此朴素？
+39. 朴素贝叶斯为何如此朴素？
 
     答：对条件概率分布作了条件独立性（conditional independence）的假设。
 
-39. 朴素贝叶斯中特征不小心重复会有影响吗？
+40. 朴素贝叶斯中特征不小心重复会有影响吗？
 
     答：会，破坏了原本的独立性假设。
 
-40. 用 numpy 实现 cross entropy loss（softmax）
+41. 用 numpy 实现 cross entropy loss（softmax）
 
     答：
     ```python
@@ -1952,7 +1987,7 @@ keywords: 面试题
 	loss = cross_entropy_loss(probs, labels)
     ```
 
-41. 用 numpy 实现 cross entropy loss（log-softmax）
+42. 用 numpy 实现 cross entropy loss（log-softmax）
 
     答：用 log-softmax 数值更稳定，减 max 是防止指数函数输出过大，用减法算 log 是防止 log(0)。
     ```python
@@ -1990,7 +2025,7 @@ keywords: 面试题
 	loss = cross_entropy_loss_from_logits(logits, labels)
     ```
 
-42. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
+43. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
 
     答：If you have worked on enough data sets, you should deduce that cancer detection results in imbalanced data. In an imbalanced data set, accuracy should not be used as a measure of performance because 96% (as given) might only be predicting majority class correctly, but our class of interest is minority class (4%) which is the people who actually got diagnosed with cancer. Hence, in order to evaluate model performance, we should use Sensitivity (True Positive Rate), Specificity (True Negative Rate), F measure to determine class wise performance of the classifier. If the minority class performance is found to to be poor, we can undertake the following steps:
     
@@ -2004,7 +2039,7 @@ keywords: 面试题
     
     Know more: Imbalanced Classification
 
-43. 多分类问题如何转二分类方法？
+44. 多分类问题如何转二分类方法？
 
     答：a. 一对多法（one-versus-rest）。把某类样本归为一类，其他归为另一类，k 个类别的样本就构造出了 k 个 SVM；
 
@@ -2012,7 +2047,7 @@ keywords: 面试题
 
     c. 层次支持向量机（H-SVMs）。先将所有类别分成两个子类，再将子类进一步划分成两个次级子类，如此循环。
 
-44. 上溢（overflow）和下溢（underflow）是什么，softmax 函数会出现哪种情况，该怎么解决？
+45. 上溢（overflow）和下溢（underflow）是什么，softmax 函数会出现哪种情况，该怎么解决？
 
     答：上溢即大量级的数被近似为正负无穷时，发生上溢。发生上溢后，这些数值会变为非数值。下溢即有些逼近零的数，如零除或者对零取对数时，得到负无穷，如果对负无穷进一步运算，则会得到非数字。softmax 函数中有指数运算，如果要运算的数过小或过大，则会下溢或上溢。解决上溢的方式是让每一个值都减去最大分量的值，由于这样做之后分母有一项为 1，所以不会出现下溢。同样对于取对数，可以让所有数都加 1。
 
@@ -2114,7 +2149,7 @@ keywords: 面试题
 
 3. cart 是什么？
 
-    答：利用基尼系数（从数据集 D 中随机抽取两个样本，类别标志不一样概率，小的优选）的决策二叉树，可为回归树，也可为分类树。
+    答：利用基尼系数（Gini impurity/基尼不纯度：从数据集 D 中随机抽取两个样本，类别标志不一样概率，小的优选）的决策二叉树，可为回归树，也可为分类树。
 
 4. 决策树中的特征选择方法有哪些？
 
@@ -2131,7 +2166,7 @@ keywords: 面试题
 
 1. SVD 算法是什么？
 
-    答：$$A=U \sum V^T$$。把一个矩阵分解为正交矩阵 $$U$$（经过 $$A$$ 变换后的新标准正交基），对角矩阵 $$\sum$$ （$$V$$ 中向量与 $$U$$ 中对应向量之间的比例关系，$$\sum$$ 中的每个 $$\sigma$$ 会从大到小排序，值越大代表该维度重要性越高）和正交矩阵 $$V$$（原始域的标准正交基）。
+    答：$$A=U \sum V^T$$。把一个矩阵 $$A \in \mathbb{R}^{m \times n}$$分解为正交矩阵 $$U \in \mathbb{R}^{m \times m}$$（经过 $$A$$ 变换后的新标准正交基），对角矩阵 $$\sum \in \mathbb{R}^{m \times n}$$ （$$V$$ 中向量与 $$U$$ 中对应向量之间的比例关系，$$\sum$$ 中的每个 $$\sigma$$ 会从大到小排序，值越大代表该维度重要性越高）和正交矩阵 $$V \in \mathbb{R}^{n \times n}$$（原始域的标准正交基）。正交矩阵满足矩阵与矩阵倒置相乘为单位矩阵。
 
 2. PCA，SVD 和 LDA 有什么区别？
 
@@ -2187,13 +2222,17 @@ keywords: 面试题
 
 9. Bagging 的自动校验是什么？
 
-    答：包外估计。
+    答：包外估计（out-of-bag estimation）。
 
-10. GBDT 相对于随机森林的改进是什么？
+10. AdaBoost 是什么？
+
+    答：此方法通过提高前一轮弱分类器错误分类样本权值来提高集成学习效果，它在预测时采用加权多数表决的方法，即加大分类误差率小的弱分类器的权值，减小分类误差率大的弱分类器的权值。
+
+11. GBDT（Gradient Boosted Decision Trees）相对于随机森林的改进是什么？
 
     答：随机森林中每棵决策树是独立的，而在 GBDT 中，每棵树都是以前一棵树的残差（真实值跟预测值的差值，刚好是平方损失函数的负梯度）为学习目标去拟合。基于残差的 GBDT 对异常值敏感，可以用绝对损失或 huber 损失来代替平方损失函数。
 
-11. 随机森林和 GBDT 的联系和区别？
+12. 随机森林和 GBDT 的联系和区别？
 
     答：相同点：都是由多棵树组成；最终的结果都是由多棵树一起决定
 
@@ -2205,13 +2244,13 @@ keywords: 面试题
     - 随机森林是通过减少模型的方差来提高性能，而 GBDT 是减少模型的偏差来提高性能的
     - 随机森林不需要进行数据预处理，即特征归一化，而 GBDT 则需要进行特征归一化。
 
-12. AdaBoost 是什么？
-
-    答：此方法通过提高前一轮弱分类器错误分类样本权值来提高集成学习效果，它在预测时采用加权多数表决的方法，即加大分类误差率小的弱分类器的权值，减小分类误差率大的弱分类器的权值。
-
 13. GBDT 和 XgBoost 区别？
 
-    答：GBDT 用一阶梯度（如残差），一般仅限MSE等简单损失函数，且无正则项；XgBoost 用一阶 + 二阶梯度（加快收敛，提高稳定性），支持任意可导损失函数（通过泰勒展开），支持 L1、L2 正则，防止过拟合。XgBoost 将**树模型的复杂度**（叶节点的数量和叶节点的得分越高，树就越复杂）作为正则项加在优化目标上，公式推导中用到了**二阶导数**信息，支持并行操作。
+    答：GBDT 用一阶梯度（如残差），一般仅限 MSE 等简单损失函数，且无正则项。
+    
+    XgBoost 用一阶 + 二阶梯度（加快收敛，提高稳定性），支持任意可导损失函数（通过泰勒展开），支持 L1、L2 正则，防止过拟合。
+    
+    XgBoost 将树模型的复杂度（叶节点的数量和叶节点的得分越高，树就越复杂）作为正则项加在优化目标上，公式推导中用到了二阶导数信息（second derivative），支持并行操作。
 
 14. 提升树是什么？
 
@@ -2235,7 +2274,7 @@ keywords: 面试题
 
 4. RNN 系列为什么要正交初始化？
 
-     答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
+     答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值（eigenvalue）绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
 
 5. 怎么得到正交初始化？
 
@@ -2305,11 +2344,11 @@ keywords: 面试题
     
     SGD 没动量，全局固定学习率。公式为更新参数值 = 当前参数值 - 学习率 * 梯度。
     
-    SGD + Momentum，固定学习率，Momentum 是一阶动量（梯度的滑动平均）。公式为更新参数值 = 当前参数值 - 学习率 * 一阶动量。
+    SGD + Momentum，固定学习率，Momentum 是一阶动量（梯度的滑动平均，exponentially weighted average of past gradients）。公式为更新参数值 = 当前参数值 - 学习率 * 一阶动量。
     
     AdaGrad 学习率会单调递减。
     
-    RMSProp 学习率基于二阶动量（梯度的平方滑动平均）调整。
+    RMSProp 学习率基于二阶动量（梯度的平方滑动平均，exponentially weighted average of the squares of past gradients）调整。
     
     Adam 学习率根据一阶动量（Momentum）+ 二阶动量（RMSProp）调整。
     
@@ -2317,7 +2356,7 @@ keywords: 面试题
     
     如果加上 Scheduler，可以动态调整全局学习率。Warmup 策略可以前期慢慢提供学习率，后期用 Cosine Decay（训练初期快速降学习率，防止剧烈震荡：训练刚开始时，模型参数还比较随机，快速降低学习率能避免过大步长导致训练不稳定或发散；但起始时仍保留较大学习率，帮助模型迅速从随机初始化的参数中找到“正确方向”。中期保持学习率相对平稳，助于稳定收敛：进入训练中期，学习率下降变缓，模型有足够的时间在当前的参数空间“细致探索”；平稳的学习率避免过早降低导致训练停滞，同时不给出过大步长打断已有收敛趋势。后期再次快速下降，微调模型细节：训练末期快速将学习率降低到很小，帮助模型“精细调节”参数，减少振荡，提升泛化性能；类似于在优化曲面上的“爬坡”逐渐变得非常缓慢，避免错过局部极小值。），Linear Decay 等方式进行衰减。
 
-21. 神经网络为什么会产生梯度消失现象？
+21. 神经网络为什么会产生梯度消失现象（vanishing gradient）？
 
      答：根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都小于 1 的话，多次链乘之后会接近为 0。常见的触发还有：不合适的损失函数，比如 sigmoid，其导数范围为 0（输入很大或很小）到 0.25（输入为 0）；权重初始化太小；RNN 长序列传递。
 
@@ -2329,7 +2368,7 @@ keywords: 面试题
 
      答：ReLU 激活函数来避免 sigmoid/tanh 饱和问题；合理初始化，如 Xavier / Kaiming 初始化保持梯度方差平稳；残差连接（ResNet），梯度直接传递，减小消失风险；BatchNorm / LayerNorm，缓解梯度消失，保持输入稳定；更少的非线性层，或设计合理的网络结构（如 Transformer）；使用 LSTM / GRU（代替普通 RNN），其门控机制，长时间记忆通过加法传递（非乘法），以及乘法和加法混合，可解决 RNN 的长依赖梯度消失问题。
 
-24. 神经网络为什么会产生梯度爆炸现象？
+24. 神经网络为什么会产生梯度爆炸现象（exploding gradient）？
 
      答：根据链式法则，如果每一层神经元对上一层的输出的偏导乘上权重结果都大于 1 的话，多次链乘之后会接近正无穷。常见的触发还有：网络太深；权重初始化得太大；梯度累积导致数值溢出（尤其是 ReLU 激活）；RNN 长序列传递。
 
@@ -2361,7 +2400,11 @@ keywords: 面试题
 
      答：输出尺寸 = (输入尺寸 - filter + 2 * padding）/ stride + 1。计算尺寸不被整除，卷积向下取整，池化向上取整。
 
-32. LSTM 是什么？
+32. RNN 是什么？
+
+     答：$$o_t=\sigma(W_o[h_{t-1}, x_t] + b_o)$$
+
+33. LSTM 是什么？
 
      答：遗忘门：$$f_t=\sigma(W_f[h_{t-1}, x_t] + b_f)$$，输出 [0, 1]，来表示信息保留程度。
 
@@ -2375,55 +2418,55 @@ keywords: 面试题
 
      得到最终输出：$$h_t=o_t*tanh(C_t)$$。
 
-33. GRU 是什么？
+34. GRU 是什么？
 
      答：LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
 
-34. LSTM 和 GRU 的联系和区别？
+35. LSTM 和 GRU 的联系和区别？
 
      答：都是通过使梯度的乘法变成加法，来解决 RNN 由于梯度消失而不能对长期依赖建模的问题。前者三个门，后者两个门，所以前者计算更耗时。
 
-35. 门机制为什么能解决梯度消失或爆炸问题？
+36. 门机制为什么能解决梯度消失或爆炸问题？
 
      答：[链接](https://zhuanlan.zhihu.com/p/27485750)
 
-36. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
+37. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
 
     答：[链接](https://zhuanlan.zhihu.com/p/61590026)
 
-37. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
+38. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
 
     答：[链接](https://zhuanlan.zhihu.com/p/61590026)
 
-38. TensorFlow 怎么实现 learning rate decay？
+39. TensorFlow 怎么实现 learning rate decay？
 
     答：[链接](https://blog.csdn.net/u012436149/article/details/62058318)
 
-39. Pytorch 怎么实现 learning rate decay？
+40. Pytorch 怎么实现 learning rate decay？
 
     答：[链接](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/)
 
-40. TensorFlow 内部求导机制？
+41. TensorFlow 内部求导机制？
 
     答：符号求导。先提供每一个 op 求导的数学实现，然后使用链式法则求出整个表达式的导数。
 
-41. TensorFlow 创建变量的方式有哪些，有什么区别？
+42. TensorFlow 创建变量的方式有哪些，有什么区别？
 
     答：`tf.Variable()`和`tf.get_variable()`。前者一律创建新的变量，遇到同名变量，会在后面加后缀 1，2；后者如果遇到同名变量，则使用之前创建的变量，但要求这个变量一定在 variable_scope 中，且有 reuse 选项。
 
-42. Pytorch 如何切换训练和测试模式？
+43. Pytorch 如何切换训练和测试模式？
 
     答：`model.train()`和`model.eval()`
 
-43. `torch.no_grad`和`model.eval`区别
+44. `torch.no_grad`和`model.eval`区别
 
     答：前者相比后者，BN，dropout 都在。两者结合起来，可以取消 BN，dropout 并不计算梯度。
 
-44. Pytorch 的 view 和 reshape 有什么区别？
+45. Pytorch 的 view 和 reshape 有什么区别？
 
     答：view 只能用于连续内存的张量；只改变视图，不复制数据（如果张量是连续的）；如果张量不是连续的，会报错；更快（不涉及数据复制）；在对张量做完 `.contiguous()` 后更常用。reshape 可以用于非连续张量（会自动创建副本）；自动处理非连续张量，可能复制数据；自动处理，返回新的张量；稍慢（可能需要复制内存）；更通用，适用于任何张量。
 
-45. GPU 利用率低怎么办？
+46. GPU 利用率低怎么办？
 
     答：dataset API 可以支持以 streaming 的方式读取数据。
 
@@ -2433,7 +2476,13 @@ keywords: 面试题
 
 1. TF-IDF 是什么？
 
-     答：词频（TF）为词在当前文档中出现的频率，逆向文件频率（IDF）由总文件数目除以包含该词的文件数目，再将得到的商取以 10 为底得到。
+     答：词频（TF，Term Frequency）为词在当前文档中出现的频率，逆向文件频率（IDF，Inverse Document Frequency）由总文件数目除以包含该词的文件数目，再将得到的商取以 10 为底得到。
+     
+     $$\text{tf-idf}(t, d, D) = \text{tf}(t, d) \times \text{idf}(t, D)$$
+     
+     $$\text{tf}(t, d) = \frac{f_{t,d}}{\sum_{t' \in d} f_{t',d}}$$
+     
+     $$\text{idf}(t, D) = \log \frac{|D|}{1 + |\{ d \in D : t \in d \}|}$$
 
 2. 手动加权或自主学习权重哪个好？
 
@@ -3326,7 +3375,7 @@ keywords: 面试题
     - 细粒度专家划分：在保持参数数量不变的情况下，通过分割 FFN 中间隐藏维度来将专家分割成更细的粒度。相应地，在保持计算成本不变的情况下，可激活更多细粒度的专家，以实现激活专家组合的更高灵活性。
     - 共享专家隔离：将某些专家隔离出来，作为始终激活的共享专家，旨在捕获不同上下文中的共同知识。通过将共同知识压缩到这些共享专家中，可以减轻其他路由专家之间的冗余，这可以提高参数效率，确保每个路由专家专注于不同方面而保持专业化。
     - 除了专家级负载均衡，v1 还引入了设备级负载均衡。v2 引入了更多的 loss。v3 直接把这些 loss 都去掉，用一个可动态调节的 bias 来做到负载均衡。当检测到专家是过载的状态时，就减小该专家的 bias，反之则增加。
-    - v3 将门控函数的对更小的小数位会敏感的 softmax 改成了值域更宽的 sigmoid
+    - v3 将门控函数的对更小的小数位会敏感的 softmax（multi-class classification）改成了值域更宽的 sigmoid（multi-label classification）
     - fp8 精度计算
 
 85. Deepseek-R1-Zero
