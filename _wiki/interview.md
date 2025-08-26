@@ -10,11 +10,15 @@ keywords: 面试题
 
 #### Linear Algebra
 
-1. 计算三个稠密矩阵 A,B,C 的乘积 ABC ,假设三个矩阵的尺寸分别为 m∗n，n∗p，p∗q，且 m <n < p < q，计算顺序效率最高的是 (AB)C 还是 A(BC)？
+1. 行列式（Determinant）
 
-    答：在 (AB)C 中，m∗n 的矩阵 A 和 n∗p 的矩阵 B 的乘积，得到 m∗p 的矩阵 A*B ，而 A∗B 的每个元素需要 n 次乘法和 n-1 次加法，忽略加法，共需要 m∗n∗p 次乘法运算。同样情况分析 A*B 之后再乘以 C 时的情况，共需要 m∗p∗q 次乘法运算。因此， (AB)C 需要的乘法次数是 m∗n∗p+m∗p∗q 。同理分析 C 选项 A (BC) 需要的乘法次数是 n∗p∗q+m∗n∗q。
+    答：在方块矩阵（n * n）上计算得到的标量。性质：单位矩阵（Identity matrix）行列式为 1；交换行列式两列反号；某列元素扩大 n 倍，行列式扩大 n 倍；矩阵的转置的行列式等于本身的行列式；矩阵相乘的行列式等于两者行列式相乘。矩阵的行列式的几何意义是矩阵对应的线性变换前后的面积比。
 
-2. 给一个 3*3 的矩阵，求 row-wise cosine similarity
+2. 计算三个稠密矩阵 A,B,C 的乘积 ABC ,假设三个矩阵的尺寸分别为 m ∗ n，n ∗ p，p ∗ q，且 m <n < p < q，计算顺序效率最高的是 (AB)C 还是 A(BC)？
+
+    答：在 (AB)C 中，m ∗ n 的矩阵 A 和 n ∗ p 的矩阵 B 的乘积，得到 m ∗ p 的矩阵 A * B ，而 A ∗ B 的每个元素需要 n 次乘法和 n-1 次加法，忽略加法，共需要 m ∗ n ∗ p 次乘法运算。同样情况分析 A * B 之后再乘以 C 时的情况，共需要 m ∗ p ∗ q 次乘法运算。因此， (AB)C 需要的乘法次数是 m ∗ n ∗ p + m ∗ p ∗ q 。同理分析 C 选项 A (BC) 需要的乘法次数是 n ∗ p ∗ q + m ∗ n ∗ q。
+
+3. 给一个 3 * 3 的矩阵，求 row-wise cosine similarity
 
     答：
     ```python
@@ -31,9 +35,13 @@ keywords: 面试题
     cosine_sim = X_normalized @ X_normalized.T
 	```
 
+4. 特征值（eigenvalue）和特征向量（eigenvector）
+
+    答：对于方块矩阵（n * n），如果存在数 m 和非零 n 维列向量 x，使得 $$Ax=mx$$ 成立，则称 m 是 A 的一个特征值，而 x 是特征向量。如果把矩阵看作是位移，那么特征值 = 位移的速度，特征向量 = 位移的方向。对称矩阵的秩 = 非零特征值的个数；特征值的乘积 = 矩阵的行列式。如果有特征值为 0，矩阵不可逆（singular，non-invertible）。特征向量不能为 0。
+
 #### Probability and Statistics
 
-1. 给一枚硬币，但扔出正反的概率未知，如何得到等概率的二元随机数？
+1. 给一枚硬币，但扔（flip）出正反（head and tail）的概率未知，如何得到等概率的二元随机数？
 
     答：扔两次，00、11 时无输出重扔，01 输出 0，10 输出 1。
 
@@ -121,11 +129,11 @@ keywords: 面试题
 
     答：[链接](https://www.zhihu.com/question/310998719)
 
-18. 频率派概率和贝叶斯概率有什么区别？
+18. 频率派概率（Frequentist）和贝叶斯概率（Bayesian）有什么区别？
 
     答：频率派概率是最大似然估计，贝叶斯概率是最大后验估计。频率派从自然角度出发，直接为事件建模，即事件 A 在独立重复试验中发生的频率趋于概率 p。贝叶斯派则认为概率是不确定的，需要结合先验概率和似然概率来得到后验概率。随着数据量的增加，参数分布会向数据靠拢，先验的影响越来越小。
 
-19. 先验概率是什么？后验概率是什么？
+19. 先验概率（Prior）是什么？后验概率（Posterior）是什么？
 
     答：$$p(\theta \| x)=\frac{p(x \| \theta)p(\theta)}{p(x)}$$。$$x$$ 为观察得到的数据（结果），$$\theta$$ 为决定数据分布的参数（原因），$$p(\theta \| x)$$ 为后验分布，$$p(\theta)$$ 为先验分布，$$p(x \| \theta)$$ 为似然。
 
@@ -174,13 +182,13 @@ keywords: 面试题
 
     求置信区间的方式是先计算抽样样本的均值和方差，然后再根据设置的置信区间查表就可以得到置信区间的上下界。
 
-26. 什么是卡方检验？
+26. 什么是卡方检验（Chi-squared test）？
 
     答：卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离程度就决定卡方值的大小，如果卡方值越大，二者偏差程度越大；反之，二者偏差越小；若两个值完全相等时，卡方值就为0，表明理论值完全符合。
 
 27. 如何利用计算机求 π？
 
-    答：蒙特卡洛随机法。随机生成点 (x, y)，分布在单位正方形内；统计落在单位圆内的点的比例；利用公式估算 π。
+    答：蒙特卡洛随机法（monte carlo simulation）。随机生成点 (x, y)，分布在单位正方形内；统计落在单位圆内的点的比例；利用公式估算 π。
 
 28. 蒲丰投针问题
 
@@ -210,7 +218,7 @@ keywords: 面试题
 
      答：$$I(X; Y) = \sum_{y \in Y}\sum_{x \in X} {p(x,y)log{\frac{p(x,y)}{p(x)p(y)}}}$$。当变量相互独立时，互信息为 0。
 
-2. KL 散度和交叉熵的区别？
+2. KL 散度（KL divergence）和交叉熵（cross-entropy）的区别？
 
      答：自信息（一个事件的信息量）：$$I(x)=-logP(x)$$；
 
@@ -224,15 +232,15 @@ keywords: 面试题
 
      相对熵 = 交叉熵 - 信息熵。
 
-3. 为什么 KL 散度不对称？
+3. 为什么 KL 散度不对称（non-symmetric）？
 
-     答：KL 散度（Kullback–Leibler Divergence）不对称的根本原因在于其定义中的对数函数位置（分子分母位置）的非对称性。它本质上是一个“相对熵”：衡量一个分布在用另一个分布进行近似时，所造成的信息损失。
+     答：KL 散度不对称的根本原因在于其定义中的对数函数位置（分子 numerator 和分母 denominator 位置）的非对称性。它本质上是一个“相对熵”：衡量一个分布在用另一个分布进行近似时，所造成的信息损失。
 
 #### Discrete Mathematics
 
 1. 有 1000 个一模一样的瓶子，其中有 999 瓶是普通的水，有一瓶是毒药。任何喝下毒药的生物都会在一星期之后死亡。现在，你只有 10 只小白鼠和一星期的时间，如何检验出哪个瓶子里有毒药？
 
-    答：可以用二进制编码的思维来解决。先对 1000 个瓶子以二进制数的形式进行编号，则至少需要十位的二进制数进行表示。再用这10只小白鼠分别对应二进制数的 10 个数位，让每只小白鼠喝下编号对应数位值为 1 的瓶子。最后根据小白鼠的死亡情况得到一个十位二进制数，编号与其相等的瓶子里面有毒药。
+    答：可以用二进制编码的思维来解决。先对 1000 个瓶子以二进制数的形式进行编号，则至少需要十位的二进制数（Binary number）进行表示。再用这10只小白鼠分别对应二进制数的 10 个数位，让每只小白鼠喝下编号对应数位值为 1 的瓶子。最后根据小白鼠的死亡情况得到一个十位二进制数，编号与其相等的瓶子里面有毒药。
 
 2. 1000 桶水，其中一桶有毒，猪喝毒水后会在 15 分钟内死去，想用一个小时找到这桶毒水，至少需要几头猪？
 
@@ -885,7 +893,7 @@ keywords: 面试题
 	    return j
 	```
     
-    希尔排序：插入排序的改进版本，其核心思想是先将整个待排序序列分割成若干个子序列分别进行直接插入排序,待整个序列基本有序时,再对全体记录进行一次直接插入排序。不稳定
+    希尔排序：插入排序的改进版本，其核心思想是先将整个待排序序列分割成若干个子序列分别进行直接插入排序，待整个序列基本有序时，再对全体记录进行一次直接插入排序。不稳定
     
     堆排序：堆排序包含两个主要步骤：建堆和排序。建堆过程：从最后一个非叶子节点开始，自上而下进行堆化。排序过程：每次将堆顶元素与末尾元素交换，并重新对剩余元素进行堆化。需要执行 n-1 次，每次堆化的时间复杂度为 O(logn)，因此排序阶段总的时间复杂度为 O(nlogn)。空间复杂度 O(1)，可原地排序，不稳定
     
@@ -978,7 +986,7 @@ keywords: 面试题
 
 42. 有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？
 
-    答：最简单的思路是合并数据库，然后再定位长度，时间复杂度为 O(n)，空间复杂度是 O(n)；但实际上只需要借鉴这个合并的过程，当合并到中位数的时候输出中位数即可，时间复杂度为 O(n)，空间复杂度是 O(1)。这思路十分简单，但并不是最佳算法，有序数组让我们想到的会是二分查找，因此我们可以利用二分查找来使复杂度降至 O(logn)，具体可参考：
+    答：最简单的思路是合并数据库，然后再定位长度，时间复杂度为 O(n)，空间复杂度是 O(n)；但实际上只需要借鉴这个合并的过程，当合并到中位数的时候输出中位数即可，时间复杂度为 O(n)，空间复杂度是 O(1)。这思路十分简单，但并不是最佳算法，有序数组让我们想到的会是二分查找，因此我们可以利用二分查找（binary search）来使复杂度降至 O(logn)，具体可参考：
     
     https://stackoverflow.com/questions/6182488/median-of-5-sorted-arrays
 
@@ -1094,13 +1102,13 @@ keywords: 面试题
 
 52. 一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？
 
-    答：中位数。
+    答：中位数（Median）。
 
 53. 给定两个数，求他们无限次相加中第 k 小的数？
 
     答：[链接](https://www.zhihu.com/question/41809896)
 
-54. 什么是水塘抽样？
+54. 什么是水塘抽样（Reservoir sampling）？
 
     答：一种在数据量未知或数据流形式下，以等概率从 n 个元素中采样 k 个的算法，适用于内存受限的场景。
 
@@ -1165,7 +1173,7 @@ keywords: 面试题
 
     答：-2^32 到 2^32 - 1。补码中正负 0 统一用正 0 表示，所以负数多出一个数。
 
-9. count(1)、count(*) 和 count(列名) 的区别？
+9. count(1)、count(\*) 和 count(列名) 的区别？
 
     答：[链接](https://blog.csdn.net/qq_15037231/article/details/80495882)
 
@@ -1530,6 +1538,8 @@ keywords: 面试题
     答：因为损失函数的等高线易与 L1 正则的坐标轴上的点相切。第一象限与正方形相切的圆的中心只能是在第一象限正方形边的垂直区域内，而第一象限的圆都可以与中心点的圆相切。
 
     The question can be answered in a geometric view. L1 loss can be represented as a diamond, while L2 loss can be represented as a circle. Therefore, the loss is likely to **intersect** with the diamond on only one point, which is in axises.
+    
+    根据自身函数或梯度，对于 L1，梯度要么是 1，要么是 -1（梯度的正负代表方向，数值代表更新幅度），而对于 L2，权重更大，对应的梯度更大。因此对于 L2，规范数值较大的项导致 L2 范数的减少比对数值较小项的减少要大得多，而对于 L1，规范任意大小的参数带来的收益是相同的。进一步说，当使用 L2，任何东西都不太可能被设置为零，而对于 L1，则有概率导致稀疏性。
 
 5. Huber loss
 
@@ -1537,7 +1547,7 @@ keywords: 面试题
     
     Huber loss 小误差用 L2，大误差用 L1，兼顾精度和鲁棒性。
 
-6. 结构风险和经验风险分别是什么？
+6. 结构风险（Empirical Risk）和经验风险（Structural Risk）分别是什么？
 
     答：经验风险就是使所有训练样本的损失平均值最小，结构风险其实就是加多一个正则项。
 
@@ -1567,6 +1577,12 @@ keywords: 面试题
 
      答：宏平均 F1 对每个类求 F1 之后取平均，微平均 F1 针对整体求 F1。
 
+12. ROC（Receiver Operating Characteristic）和 AUC（Area under Curve）
+
+     答：ROC 依据阈值，画出曲线，横轴为假正类率 (false positive rate，FPR)，纵轴为真正类率 （true positive rate，TPR）。
+     
+     AUC 为 ROC 曲线下的面积，介于 0.1 和 1 之间。AUC 作为数值可以直观的评价分类器的好坏，值越大越好。
+
 #### Regression
 
 1. 线性回归的基本假设是？
@@ -1574,13 +1590,13 @@ keywords: 面试题
     答：
     - 线性性（Linearity）：可通过可视化观察；不成立会导致欠拟合；可通过对数据做非线性转换来满足条件。
     - 独立性（Independence of Errors）：可用 DW 检测；不满足会导致自相关性（如时间序列数据）；此种场景需要换成自回归之类的模型解决。
-    - 同方差性（Constant Variance）：可视化；异方差性；可更换因变量或使用稳健回归/加权回归。
-    - 正态性（Normality of Errors）：Q-Q图/KS 非参数检验；置信区间不稳定；可寻找遗漏的自变量，检验或剔除异常值，对自变量/因变量进行线性转换。
+    - 同方差性（Constant Variance）：可视化；异方差性虽然不会影响参数估计，即估计量依旧是无偏的（Unbiased），但会导致标准误差（Standard Error）被低估或高估，从而 t 检验、F 检验不再可靠，置信区间（Confidence interval）不正确，显著性检验可能出现假阳性或假阴性；可更换因变量或使用稳健回归/加权回归。
+    - 正态性（Normality of Errors）：Q-Q图/KS 非参数检验；置信区间不稳定；可寻找遗漏的自变量，检验或剔除异常值，对自变量（independent variable）/因变量（dependent variable）进行线性转换。
     - 无多重共线性（No Multicollinearity）：可计算 Pearson score，若 score 过高，则证明相关，VIF 是可替代方法；不成立会导致多重共线性；可剔除、合并相关变量来解决。。
 
 2. 线性回归中特征不小心重复会有影响吗？
 
-    答：会，导致矩阵不可逆。
+    答：会，使用最小二乘法会导致矩阵不可逆，使用梯度下降法会导致训练不稳定，因为两个特征分散了一个权重，提高一个降低另一个对损失的影响是没有的。
 
 3. 最小二乘法（Least Squares）为什么可以解决线性回归问题？
 
@@ -1763,7 +1779,7 @@ keywords: 面试题
     - 如果 $$P(θ)$$ 是高斯分布（$$exp(−θ² / 2σ²)$$），那么 MAP 对应在最大似然的基础上加入 L2 正则项（Ridge Regression 形式），防止过拟合。
     - 如果 $$P(θ)$$ 是拉普拉斯分布（$$exp(−\|θ\| / b)$$），则 MAP 对应于最大似然 + L1 正则项（Lasso Regression 形式），这会导致部分参数为 0，实现特征选择的效果。
 
-7. LR 为什么要对特征进行离散化？
+7. LR 为什么要对特征进行离散化（discretization）？
 
     答：模型是使用离散特征还是连续特征，其实是一个“海量离散特征+简单模型” 同 “少量连续特征+复杂模型”的权衡。既可以离散化用线性模型，也可以用连续特征加深度学习。
     
@@ -2133,6 +2149,8 @@ keywords: 面试题
 
 8. DBSCAN
 
+    答：不需要指定 k。
+
 9. IVF（Inverted File Index，倒排文件索引）
 
     答：将整个向量空间划分为多个“簇（clusters）”，并构建倒排表（inverted list），从而减少实际要比较的向量数量。
@@ -2141,11 +2159,11 @@ keywords: 面试题
 
 1. id3 是什么？
 
-    答：利用信息增益（大的特征优选）的决策多叉树。
+    答：利用信息增益（Information Gain，大的特征优选）的决策多叉树。
 
 2. c4.5 是什么？
 
-    答：信息增益容易倾向选择取值多的属性，所以 c4.5 是利用信息增益比（大的特征优选）的决策多叉树。
+    答：信息增益容易倾向选择取值多的属性，所以 c4.5 是利用信息增益比（Gain Ratio，大的特征优选）的决策多叉树。
 
 3. cart 是什么？
 
@@ -2214,7 +2232,7 @@ keywords: 面试题
 
 7. 随机森林是什么？
 
-    答：随机森林是 Bagging 的变种，其以决策树为基学习器，并在决策树的训练过程中加入了随机属性选择。其可以处理离散特征，又可以处理连续特征。
+    答：随机森林是 Bagging 的变种，其以决策树为基学习器，并在决策树的训练过程中加入了随机属性选择。其可以处理离散特征（discrete），又可以处理连续特征（continuous）。
 
 8. 随机森林相比普通的 Bagging 的改进是什么？
 
@@ -2274,7 +2292,7 @@ keywords: 面试题
 
 4. RNN 系列为什么要正交初始化？
 
-     答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值（eigenvalue）绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
+     答：RNN 的反向传播本质是权值矩阵连乘，如果矩阵所有特征值绝对值小于 1，则梯度消失，大于 1，则梯度爆炸。
 
 5. 怎么得到正交初始化？
 
@@ -2342,7 +2360,7 @@ keywords: 面试题
 
     答：优化器输入当前参数值，学习率，梯度，输出更新参数值。
     
-    SGD 没动量，全局固定学习率。公式为更新参数值 = 当前参数值 - 学习率 * 梯度。
+    SGD 没动量，全局固定学习率。公式为更新参数值 = 当前参数值 - 学习率 * 梯度。在 SGD 中，L2 正则是加上 $$\frac{\lambda}{2} \theta^2$$，weight decay 是 $$\theta \rightarrow \theta - \lambda\theta$$，两者是等价的。
     
     SGD + Momentum，固定学习率，Momentum 是一阶动量（梯度的滑动平均，exponentially weighted average of past gradients）。公式为更新参数值 = 当前参数值 - 学习率 * 一阶动量。
     
@@ -2350,9 +2368,11 @@ keywords: 面试题
     
     RMSProp 学习率基于二阶动量（梯度的平方滑动平均，exponentially weighted average of the squares of past gradients）调整。
     
-    Adam 学习率根据一阶动量（Momentum）+ 二阶动量（RMSProp）调整。
+    Adam 学习率根据一阶动量（Momentum）+ 二阶动量（RMSProp）调整。在 Adam 中，weight decay 会被加到原始梯度里，然后进行同样的一阶动量和二阶动量调整，从而导致实际的权重衰减效果并不等价于直接对权重进行衰减。
     
-    AdamW，同 Adam，但权重衰减更合理，将 L2 正则融入公式。
+    AdamW，同 Adam，但权重衰减更合理，将 L2 正则对应的 weight decay 放到了一阶动量和二阶动量调整后的参数更新上。
+    
+    Muon。
     
     如果加上 Scheduler，可以动态调整全局学习率。Warmup 策略可以前期慢慢提供学习率，后期用 Cosine Decay（训练初期快速降学习率，防止剧烈震荡：训练刚开始时，模型参数还比较随机，快速降低学习率能避免过大步长导致训练不稳定或发散；但起始时仍保留较大学习率，帮助模型迅速从随机初始化的参数中找到“正确方向”。中期保持学习率相对平稳，助于稳定收敛：进入训练中期，学习率下降变缓，模型有足够的时间在当前的参数空间“细致探索”；平稳的学习率避免过早降低导致训练停滞，同时不给出过大步长打断已有收敛趋势。后期再次快速下降，微调模型细节：训练末期快速将学习率降低到很小，帮助模型“精细调节”参数，减少振荡，提升泛化性能；类似于在优化曲面上的“爬坡”逐渐变得非常缓慢，避免错过局部极小值。），Linear Decay 等方式进行衰减。
 
@@ -3028,7 +3048,7 @@ keywords: 面试题
      
     $$L^{\text{PPO}}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t,\ \text{clip}(r_t(\theta),\ 1 - \epsilon,\ 1 + \epsilon) \hat{A}_t \right) \right]$$
      
-    其中 $$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
+    其中 $$t$$ 为当前 token，$$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
      
     PPO 流程如下：
      
@@ -3036,13 +3056,13 @@ keywords: 面试题
 	
 	2. 输入到策略模型（Policy Model），生成对应的输出 o（动作或结果），即用可更新的 LLM 生成 q 的 o；
 	
-	3. 输出 o 被输入到冻结的参考模型（Reference Model），计算输出 o 与参考策略之间的 KL 散度，用于限制策略更新；
+	3. 输出 o 被输入到冻结的参考模型（Reference Model），计算输出 o 的概率，以及其与参考策略之间的 KL 散度（min + clip 实现），用于限制策略更新；
 	 
 	4. 输出 o 被输入到冻结的奖励模型（Reward Model），生成奖励 r（通常是 sample-level 的一个标量），用于衡量 o 的质量；
 	 
-	5. 用 value head 输出每个 token 的 V(s_t)，从 reward 回溯分配每个 token 的 TD 残差 $$\delta_t$$，用 GAE 计算每个 token 的优势 A_t；​
+	5. Critic/Value Model（同步更新）用 value head 输出每个 token 的 $$V(s_t)$$，从 reward 回溯分配每个 token 的 TD 残差 $$\delta_t$$，用 GAE 计算每个 token 的优势 $$A_t$$；​
 	 
-	6. 用以下 loss 进行优化，剪切函数限制策略更新幅度，确保数值稳定性。
+	6. 用以下 loss 进行优化，剪切函数限制策略更新幅度，确保数值稳定性。当 $$A_t > 0$$，意味着 critic model 对当前 action 做出了正反馈，因此 $$r_t(\theta)$$ 要提高，反之要降低。
 	 
     ```
     def ppo_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
@@ -3277,33 +3297,41 @@ keywords: 面试题
     
     提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
 
-65. MCP 和 function calling 有什么区别？
+65. Agent
+
+    答：Agent = LLM + Planning + Memory + Tool。
+    
+    Planning：Task decomposition（CoT，ToT），Self-Reflection（ReAct）。
+    
+    Memory：short-term（ICL），long-term。
+
+66. MCP 和 function calling 有什么区别？
 
     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-66. LangChain
+67. LangChain
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-67. bf16，fp16，fp32，int8 区别
+68. bf16，fp16，fp32，int8 区别
 
     答：指数位决定了数值范围，尾数位决定了精度。bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。int8 可用于量化，因为整数乘法比浮点乘法快，且用缩放映射保留大部分信息。合理设置 scale 和 zero-point，配合 clip 操作，可以安全地把浮点数映射到 int8，不会溢出。
 
-68. LLM 常用的优化器有？
+69. LLM 常用的优化器有？
 
-    答：AdamW，Lion
+    答：AdamW，Lion，Muon
 
-69. 混合精度计算
+70. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-70. 估算 LLM 的参数量
+71. 估算 LLM 的参数量
 
     答：embedding 层的维度为 Vh，若不与输出层的权重矩阵共享，则需加上输出层的权重矩阵 2Vh。
     
     Transformer 每一层分为 self-attention 和 MLP，self-attention 设计 Q，K，V，O 四个权重矩阵和偏置，因此是 4h^2 + 4h。MLP 一般有两层，先升维再降维，如升到 4h，那么参数量为 8h^2 + 5h。两个模块都有 layer normalization，包含两个可训练参数，形状都为 h，所以参数量总和为 4h。因此，每一层参数量为 12h^2 + 13h。
 
-71. 估算 7B 模型在训练和推理时的显存占用
+72. 估算 7B 模型在训练和推理时的显存占用
 
     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2 字节，fp32 精度为 4 字节。
     
@@ -3311,23 +3339,23 @@ keywords: 面试题
     
     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
-72. 多卡多机训练
+73. 多卡多机训练
 
     答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-73. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+74. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-74. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+75. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-75. deepspeed 的 Zero-1， Zero 2， Zero 3
+76. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存。参数、梯度、优化器状态始终绑定，分配到同一张 GPU 上。
 
-76. 量化
+77. 量化
 
     答：PTQ（训练后量化）和 QAT（训练时量化）。
     
@@ -3337,37 +3365,37 @@ keywords: 面试题
     
     AWQ (Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
-77. vllm
+78. vllm
 
     答：传统的静态分配 KV 缓存不使用虚拟内存，直接对物理内存进行操作，会导致显存碎片和过度预留，因此 vllm 使用了 PagedAttention，即把 KV 缓存当作虚拟内存，每条序列的缓存被划分成块，可动态分配到显存中，允许在不连续的内存空间中存储。
     
     另外 vllm 的 PagedAttention 使用了 memory sharing，即单个 prompt 生成多个序列时，可以共享显存。
 
-78. GPT 的原理？
+79. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-79. BERT 的原理？
+80. BERT 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-80. BERT 的训练目标？
+81. BERT 的训练目标？
 
     答：BERT 有 masked language modeling 和 next sentence prediction 两个目标
 
-81. RoBERTa 相比 BERT 做了哪些改进？
+82. RoBERTa 相比 BERT 做了哪些改进？
 
     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-82. RoBERTa 强于 RNN 的地方？
+83. RoBERTa 强于 RNN 的地方？
 
     答：并行，对大数据比较友好。
 
-83. Qwen
+84. Qwen
 
     答：QwenMoE
 
-84. Deepseek-V1 - Deepseek-V3
+85. Deepseek-V1 - Deepseek-V3
 
     答：
     - MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
@@ -3378,14 +3406,14 @@ keywords: 面试题
     - v3 将门控函数的对更小的小数位会敏感的 softmax（multi-class classification）改成了值域更宽的 sigmoid（multi-label classification）
     - fp8 精度计算
 
-85. Deepseek-R1-Zero
+86. Deepseek-R1-Zero
 
     答：证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
     1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
     2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用 `<think>` 标签包裹推理过程，用 `<answer>` 标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
     3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
 
-86. Deepseek-R1
+87. Deepseek-R1
 
     答：成功经验
     - 在 SFT 阶段采用冷启动，只使用了少量（几千条）高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
