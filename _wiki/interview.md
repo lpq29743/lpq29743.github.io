@@ -39,6 +39,48 @@ keywords: 面试题
 
     答：对于方块矩阵（n * n），如果存在数 m 和非零 n 维列向量 x，使得 $$Ax=mx$$ 成立，则称 m 是 A 的一个特征值，而 x 是特征向量。如果把矩阵看作是位移，那么特征值 = 位移的速度，特征向量 = 位移的方向。对称矩阵的秩 = 非零特征值的个数；特征值的乘积 = 矩阵的行列式。如果有特征值为 0，矩阵不可逆（singular，non-invertible）。特征向量不能为 0。
 
+5. Python 相关实现
+
+    答：
+    ```python
+	import numpy as np
+	from numpy.linalg import norm
+	from scipy import linalg as la  # 可选：更强大的分解/求解
+	
+	# 向量与矩阵
+	a = np.array([1., 2., 3.])
+	b = np.array([4., 5., 6.])
+	A = np.array([[1., 2.], [3., 4.]])
+	B = np.array([[2., 0.], [1., 2.]])
+	
+	# 基本运算
+	dot_ab = a @ b                # 点积
+	matmul = A @ B                # 矩阵乘
+	AT = A.T                      # 转置
+	fro = norm(A, 'fro')          # Frobenius 范数
+	l2 = norm(a, 2)               # 向量L2范数
+	
+	# 线性方程组 Ax = y
+	y = np.array([1., 0.])
+	x = np.linalg.solve(A, y)     # 解 x
+	
+	# 行列式 / 逆
+	detA = np.linalg.det(A)
+	Ainv = np.linalg.inv(A)
+	
+	# 特征分解（对称阵优先用 eigh）
+	w, V = np.linalg.eig(A)       # A V = V diag(w)
+	w_sym, U = np.linalg.eigh((A + A.T)/2)  # 对称阵更稳
+	
+	# SVD
+	U_svd, S, VT = np.linalg.svd(A, full_matrices=False)
+	
+	# QR / LU / Cholesky（SciPy）
+	Q, R = la.qr(A)
+	P, L, Ulu = la.lu(A)
+	C = la.cholesky(np.array([[4.,1.],[1.,3.]]))  # 正定矩阵
+	```
+
 #### Probability and Statistics
 
 1. 给一枚硬币，但扔（flip）出正反（head and tail）的概率未知，如何得到等概率的二元随机数？
@@ -198,19 +240,128 @@ keywords: 面试题
 
     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003110)
 
+30. Python 相关实现
+
+    答：
+    ```python
+	import numpy as np
+	import math
+	
+	# === Discrete ===
+	def bernoulli_pmf(x, p):
+	    return p**x * (1-p)**(1-x)
+	
+	def bernoulli_sample(p, size=1):
+	    return np.random.binomial(1, p, size)
+	
+	def binomial_pmf(k, n, p):
+	    return math.comb(n, k) * (p**k) * ((1-p)**(n-k))
+	
+	def binomial_sample(n, p, size=1):
+	    return np.random.binomial(n, p, size)
+	
+	def poisson_pmf(k, lam):
+	    return math.exp(-lam) * lam**k / math.factorial(k)
+	
+	def poisson_sample(lam, size=1):
+	    return np.random.poisson(lam, size)
+	
+	# === Continuous ===
+	def normal_pdf(x, mu=0, sigma=1):
+	    return 1/(sigma*np.sqrt(2*np.pi)) * np.exp(-0.5*((x-mu)/sigma)**2)
+	
+	def normal_sample(mu=0, sigma=1, size=1):
+	    return np.random.normal(mu, sigma, size)
+	
+	def exponential_pdf(x, lam):
+	    return lam * np.exp(-lam * x) if x >= 0 else 0
+	
+	def exponential_sample(lam, size=1):
+	    return np.random.exponential(1/lam, size)
+	
+	# === Experiments ===
+	def law_of_large_numbers(p=0.5, N=100000):
+	    samples = bernoulli_sample(p, N)
+	    return samples.mean()
+	
+	def central_limit_theorem(M=10000):
+	    sums = np.sum(np.random.rand(M, 12), axis=1) - 6  # ≈ N(0,1)
+	    return sums.mean(), sums.var()
+	
+	def monte_carlo_pi(N=1000000):
+	    xy = np.random.rand(N, 2)*2 - 1
+	    inside = (xy[:,0]**2 + xy[:,1]**2 <= 1).sum()
+	    return 4 * inside / N
+	```
+
 #### Calculus and Optimization
 
-1. 一阶优化和二阶优化对应的矩阵？
+1. 什么情况下，局部最优为全局最优？
 
-    一阶对应 Jacobian 矩阵，二阶对应 Hessian 矩阵。当矩阵正定（positive definite），梯度为 0 处为极小值。
+    答：凸优化。
 
-2. 深度学习为什么不用二阶优化？
+2. 一阶优化和二阶优化
+
+    答：一阶优化（如梯度下降）对应 Jacobian 矩阵，只能告诉你下降方向，但无法告诉你到底走多远最合适，收敛速度通常是线性的（误差大约每次乘一个常数）。二阶优化（如牛顿法）对应 Hessian 矩阵，Hessian 告诉你曲率（曲面的“陡峭程度”），更新步长自动调整，不需要手动选择学习率，迭代时误差平方级（quadratic）下降 → 二阶收敛。当矩阵正定（positive definite），梯度为 0 处为极小值。
+
+3. 深度学习为什么不用二阶优化？
 
     答：有些方法可用，但总体不适用。原因：计算量大，训练慢；求导复杂；深度学习不需要高精度解；稳定性差。
 
-3. 什么是 Jensen 不等式？
+4. 什么是 Jensen 不等式？
 
      答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003224)
+
+5. Python 实现的梯度下降和牛顿法示例
+
+     答：以 $$f(x)=x^2 - 4x + 4$$ 为例。
+     ```python
+	import numpy as np
+    
+	# === 目标函数 ===
+	def f(x):
+	    return x**2 - 4*x + 4
+	
+	# 一阶导数
+	def grad_f(x):
+	    return 2*x - 4
+	
+	# 二阶导数 (Hessian)
+	def hessian_f(x):
+	    return 2  # 对一维函数就是常数
+	
+	# === 梯度下降 ===
+	def gradient_descent(x0, lr=0.1, tol=1e-6, max_iter=100):
+	    x = x0
+	    for _ in range(max_iter):
+	        x_new = x - lr * grad_f(x)
+	        # # 参数几乎不再变化了，算法可以认为已经收敛，提前停止迭代。
+	        if abs(x_new - x) < tol:
+	            break
+	        x = x_new
+	    return x, f(x)
+	
+	# === 牛顿法 ===
+	def newton_method(x0, tol=1e-6, max_iter=100):
+	    x = x0
+	    for _ in range(max_iter):
+	        grad = grad_f(x)
+	        hess = hessian_f(x)
+	        x_new = x - grad / hess
+	        # 参数几乎不再变化了，算法可以认为已经收敛，提前停止迭代。
+	        if abs(x_new - x) < tol:
+	            break
+	        x = x_new
+	    return x, f(x)
+	
+	# === 测试 ===
+	x0 = 0.0
+	x_gd, f_gd = gradient_descent(x0)
+	x_newton, f_newton = newton_method(x0)
+	
+	print("梯度下降结果: x =", x_gd, ", f(x) =", f_gd)
+	print("牛顿法结果: x =", x_newton, ", f(x) =", f_newton)
+	```
 
 #### Information Theory
 
@@ -235,6 +386,80 @@ keywords: 面试题
 3. 为什么 KL 散度不对称（non-symmetric）？
 
      答：KL 散度不对称的根本原因在于其定义中的对数函数位置（分子 numerator 和分母 denominator 位置）的非对称性。它本质上是一个“相对熵”：衡量一个分布在用另一个分布进行近似时，所造成的信息损失。
+
+4. Python 相关实现
+
+     答：对大于 0 的判断是为了避免分母为0，log(0) 等非法操作，保证数值稳定性。
+     ```python
+    import numpy as np
+
+	# === 1. 熵 (Entropy) ===
+	def entropy(p):
+	    """
+	    p: 概率分布数组，p_i >=0 且 sum(p)=1
+	    """
+	    p = np.array(p)
+	    p = p[p > 0]  # 避免 log(0)
+	    return -np.sum(p * np.log2(p))
+	
+	# === 2. 联合熵 (Joint Entropy) ===
+	def joint_entropy(p_xy):
+	    """
+	    p_xy: 联合概率分布矩阵，sum(p_xy)=1
+	    """
+	    p_xy = np.array(p_xy)
+	    p_xy = p_xy[p_xy > 0]
+	    return -np.sum(p_xy * np.log2(p_xy))
+	
+	# === 3. 条件熵 (Conditional Entropy) H(Y|X) ===
+	def conditional_entropy(p_xy):
+	    """
+	    p_xy: 联合概率分布矩阵
+	    H(Y|X) = H(X,Y) - H(X)
+	    """
+	    p_xy = np.array(p_xy)
+	    p_x = p_xy.sum(axis=1)
+	    H_xy = joint_entropy(p_xy)
+	    H_x = entropy(p_x)
+	    return H_xy - H_x
+	
+	# === 4. 互信息 (Mutual Information) ===
+	def mutual_information(p_xy):
+	    """
+	    I(X;Y) = H(X) + H(Y) - H(X,Y)
+	    """
+	    p_xy = np.array(p_xy)
+	    p_x = p_xy.sum(axis=1)
+	    p_y = p_xy.sum(axis=0)
+	    H_x = entropy(p_x)
+	    H_y = entropy(p_y)
+	    H_xy = joint_entropy(p_xy)
+	    return H_x + H_y - H_xy
+	
+	# === 5. KL 散度 (Kullback-Leibler Divergence) ===
+	def kl_divergence(p, q):
+	    """
+	    D_KL(p || q) = sum p_i * log(p_i / q_i)
+	    """
+	    p = np.array(p)
+	    q = np.array(q)
+	    mask = (p > 0) & (q > 0)
+	    return np.sum(p[mask] * np.log2(p[mask] / q[mask]))
+	
+	# === 示例 ===
+	if __name__ == "__main__":
+	    p = [0.2, 0.5, 0.3]
+	    q = [0.1, 0.7, 0.2]
+	    print("Entropy H(p):", entropy(p))
+	    print("KL(p||q):", kl_divergence(p, q))
+	
+	    # 联合概率矩阵
+	    p_xy = np.array([[0.1, 0.2],
+	                     [0.3, 0.4]])
+	    print("Joint Entropy H(X,Y):", joint_entropy(p_xy))
+	    print("Conditional Entropy H(Y|X):", conditional_entropy(p_xy))
+	    print("Mutual Information I(X;Y):", mutual_information(p_xy))
+    ```
 
 #### Discrete Mathematics
 
@@ -351,6 +576,107 @@ keywords: 面试题
 23. 鹰鸽博弈
 
     答：[链接](https://www.bilibili.com/video/av12414632?from=search&seid=6712463178550853494)
+
+24. Python 相关实现
+
+    答：
+    ```python
+	import itertools
+	import math
+	from collections import deque
+	
+	# =======================
+	# 集合运算
+	# =======================
+	def set_intersection(A, B):
+	    return A & B
+	
+	def set_union(A, B):
+	    return A | B
+	
+	def set_difference(A, B):
+	    return A - B
+	
+	def set_symdiff(A, B):
+	    return A ^ B
+	
+	# =======================
+	# 排列与组合
+	# =======================
+	def permutations(lst):
+	    return list(itertools.permutations(lst))
+	
+	def combinations(lst, k):
+	    return list(itertools.combinations(lst, k))
+	
+	def comb(n, k):
+	    return math.comb(n, k)
+	
+	def perm(n, k):
+	    return math.perm(n, k)
+	
+	# =======================
+	# 逻辑运算与真值表
+	# =======================
+	def truth_table(n):
+	    return list(itertools.product([False, True], repeat=n))
+	
+	# =======================
+	# 模运算与数论
+	# =======================
+	def mod_add(a, b, m):
+	    return (a + b) % m
+	
+	def mod_mul(a, b, m):
+	    return (a * b) % m
+	
+	def mod_pow(a, b, m):
+	    return pow(a, b, m)
+	
+	def egcd(a, b):
+	    if a == 0:
+	        return (b, 0, 1)
+	    g, x, y = egcd(b % a, a)
+	    return (g, y - (b // a) * x, x)
+	
+	def modinv(a, m):
+	    g, x, _ = egcd(a, m)
+	    if g != 1:
+	        raise Exception("No modular inverse")
+	    return x % m
+	
+	# =======================
+	# 示例使用
+	# =======================
+	if __name__ == "__main__":
+	    A = {1, 2, 3}
+	    B = {2, 3, 4}
+	    print("交集:", set_intersection(A,B))
+	    print("并集:", set_union(A,B))
+	    print("差集 A-B:", set_difference(A,B))
+	    print("对称差:", set_symdiff(A,B))
+	
+	    lst = [1,2,3]
+	    print("排列:", permutations(lst))
+	    print("组合:", combinations(lst,2))
+	    print("C(5,2):", comb(5,2))
+	    print("P(5,2):", perm(5,2))
+	
+	    graph = [[0,1,1,0],
+	             [1,0,0,1],
+	             [1,0,0,1],
+	             [0,1,1,0]]
+	    print("BFS from 0:", bfs(graph,0))
+	    print("DFS from 0:", dfs(graph,0))
+	
+	    print("2变量真值表:", truth_table(2))
+	
+	    print("模运算: (17+13)%5 =", mod_add(17,13,5))
+	    print("模运算: (17*13)%5 =", mod_mul(17,13,5))
+	    print("模运算: 17^13 % 5 =", mod_pow(17,13,5))
+	    print("17 在模 5 下的逆元:", modinv(17,5))
+    ```
+
 
 ### Algorithm
 
@@ -2896,11 +3222,15 @@ keywords: 面试题
     
     无参数 Position Embedding 支持序列长度外推。
 
-26. 外推性
+26. 为什么 Position Embedding 可以与 Token Embedding 相加？
+
+    答：在经历线性转换后，concat 与相加是等效的；在高维空间，两者几乎正交，因此相加并不干扰；减少计算量。
+
+27. 外推性
 
     答：测试时要接收处理比训练时更长的上下文。
 
-27. 如何提升外推能力
+28. 如何提升外推能力
 
     答：位置编码外推：ALiBi；
     
@@ -2908,7 +3238,7 @@ keywords: 面试题
     
     推理策略增强：CoT，Self- Consistency。
 
-28. LLM 常用的激活函数有？
+29. LLM 常用的激活函数有？
 
     答：ReLU：f(x) = max(0, x)
      
@@ -2920,7 +3250,7 @@ keywords: 面试题
      
     ReLU，GeLU 不能门控，GLU，SwiGLU 能门控。
 
-29. Batch Normalization (BN)
+30. Batch Normalization (BN)
 
     答：BN 就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。
 
@@ -2930,7 +3260,7 @@ keywords: 面试题
 
     BN 为了保证非线性的获得，对变换后的 x 又进行了 scale 加上 shift 操作：y = scale * x + shift。
 
-30. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
+31. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
 
     答：这些都是为了防止梯度消失/爆炸，引入参数为了提高表达能力，从而提高泛化能力。
     
@@ -2938,7 +3268,7 @@ keywords: 面试题
      
     输入是形状为 `(batch_size, seq_len, hidden_dim)` 的张量，BN 通常对 batch 和 seq_len 两个维度联合计算均值和方差，也就是对每个 hidden_dim 维度独立归一化。LN/RMSNorm 对每个样本每个 token 的 hidden_dim 维度做归一化，即对 seq_len 中的每个位置独立归一化，计算均值和方差都在 hidden_dim 上。
 
-31. 实现 LayerNorm
+32. 实现 LayerNorm
 
     答：
     ```python
@@ -2959,7 +3289,7 @@ keywords: 面试题
 	        return self.gamma * x_norm + self.beta
     ```
 
-32. 实现 RMSNorm
+33. 实现 RMSNorm
 
     答：RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
 	```python
@@ -2979,11 +3309,11 @@ keywords: 面试题
 	        return self.scale * x_norm
 	```
 
-33. Pre Norm 和 Post Norm 有什么区别？
+34. Pre Norm 和 Post Norm 有什么区别？
 
     答：Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
 
-34. temperature/Top-k/Top-p
+35. temperature/Top-k/Top-p
 
     答：temperature：控制采样随机性，温度越高越随机。它的做法是将得到的 logits 除以温度，再作 softmax。当温度为 0 时，相当于 argmax/greedy；当温度为 1 时，相当于 softmax；当温度小于 1，分布变得尖锐，熵降低；当温度大于 1，分布变得平坦，熵升高。
     
@@ -2993,19 +3323,19 @@ keywords: 面试题
     
     对于初始 logits 熵大的，叫做高熵 token，意味着 LLM 在此处犹豫不决；反之叫做低熵 token，意味着 LLM 在这非常自信。在推理阶段，较低的 temperature 会导致多样性降低，较高的 temperature 会导致生成质量降低，产生幻觉。
 
-35. speculative decoding
+36. speculative decoding
 
     答：使用一个小型辅助模型（称为“提议模型”或“draft model”）先快速生成多个候选token序列（草稿）。主模型（大型语言模型）随后只对这些候选进行验证和纠正，而不是每一步都全量生成和计算概率。这种方式能显著减少主模型的计算成本，提高生成速度。
 
-36. MoE
+37. MoE
 
     答：MoE 分为专家网络，门控网络和选择器三部分。负载均衡的辅助损失的引入是为了解决多专家 token 分配不均的问题。
 
-37. 为什么 LLM 流行 MoE？
+38. 为什么 LLM 流行 MoE？
 
     答：MoE 能显著提高模型容量而不成比例地增加计算成本。
 
-38. 手撕 MoE
+39. 手撕 MoE
 
     答：
     ```python
@@ -3028,21 +3358,21 @@ keywords: 面试题
     ```
 
 
-39. Prefix LM 和 Causal LM 区别是什么？
+40. Prefix LM 和 Causal LM 区别是什么？
 
     答：Causal LM 是单向的，只看左边上下文；Prefix LM 是半双向的，可以看整个 prefix 的信息（左侧上下文），预测后缀。
 
-40. 为什么大部分 LLM 是 decoder-only？
+41. 为什么大部分 LLM 是 decoder-only？
 
     答：生成范式的统一性；任务更难；双向 attention 的注意力矩阵容易退化成低秩状态，而 causal attention 的注意力矩阵是下三角矩阵，必然是满秩的，建模能力更强。
 
-41. SFT
+42. SFT
 
-42. 强化学习和监督学习有什么区别？
+43. 强化学习和监督学习有什么区别？
 
     答：监督学习中每一个决策（预测标签）是独立的，它对决策的优化取决于标签。强化学习每一个决策是相互影响的，它对决策的优化取决于延时标签（奖励）。过去的 AI 训练方式主要依赖监督学习，也就是让 AI 通过大量人类标注的数据来学习。换句话说，AI 只是一个“超级记忆机”，它能模仿人类的答案，但却不一定真正理解问题的本质。而强化学习的出现，让 AI 不再是单纯的模仿者，而是能够主动探索、试错、优化自己推理方式的智能体。这就像是在训练一个孩子解数学题，监督学习相当于直接告诉他答案，而强化学习则是让他自己尝试解题，并根据最终的正确率进行调整。
 
-43. PPO
+44. PPO
 
     答：
      
@@ -3073,7 +3403,7 @@ keywords: 面试题
 	    return loss
 	```
 
-44. PPO 怎么计算 advantages？
+45. PPO 怎么计算 advantages？
 
     答：
     1. 直接使用 reward。不是 token level
@@ -3091,15 +3421,15 @@ keywords: 面试题
 	    return advantages
      ```
 
-45. PPO 有了 reward model 为什么还要 critic/value model？
+46. PPO 有了 reward model 为什么还要 critic/value model？
 
      答：critic/value model 是内部奖励，仅需当前上下文，会在 RL 过程中更新，reward model 是外部奖励，需要完整回答，是训练好的。
 
-46. 为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？
+47. 为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？
 
      答：需要用标注样本训练；分类模型代价低。
 
-47. DPO
+48. DPO
 
     答：
      
@@ -3113,7 +3443,7 @@ keywords: 面试题
 	    return loss
     ```
  
-48. GRPO
+49. GRPO
    
     答：
      
@@ -3161,25 +3491,25 @@ keywords: 面试题
 	    return loss
     ```
 
-49. PPO vs DPO vs GRPO
+50. PPO vs DPO vs GRPO
 
     答：所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。PPO 依赖于 reward model 和 value model；DPO 没有显式探索机制。
 
-50. GRPO 怎么去掉 critic/value model 的？
+51. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-51. 熵控制在强化学习里的作用
+52. 熵控制在强化学习里的作用
 
      答：在大模型训练的强化学习阶段，设置较高的 temperature 可以防止模型过度自信，鼓励模型采取高熵动作，从而扩大探索空间。另一种方式是在 group-level 用 smi/dpp/self-bleu 计算多样性，进行 reward shaping 来控制熵的变化。
      
      熵坍塌：随着训练的进行，entropy 逐渐降低。导致某些 group 采样出的 response 几乎相同，使得模型在早期变得更加确定，限制了模型的探索空间。
 
-52. LoRA
+53. LoRA
 
      答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。target_modules 一般为`q_proj`、`v_proj`，有时也会注入到 `k_proj` 或 `o_proj`。modules_to_save 表示指定哪些原模型模块需要一起训练 & 保存，如果扩展了词表可能要加 `embed_tokens`、`lm_head`。
 
-53. 手撕 LoRA
+54. 手撕 LoRA
 
      答：
      ```python
@@ -3204,15 +3534,15 @@ keywords: 面试题
 	        return base + lora
     ```
 
-54. Adapter
+55. Adapter
 
      答：插入小型网络模块
 
-55. Prefix Tuning
+56. Prefix Tuning
 
      答：Prefix Tuning 会为每层添加一组虚拟的 Key 和 Value，Query 保持不变。embedding 的输入不会添加。
 
-56. Base model eval
+57. Base model eval
 
      答：General Tasks: MMLU (5-shot), MMLU-Pro (5-shot, CoT), MMLU-redux (5-shot), BBH (3-shot, CoT), SuperGPQA (5-shot, CoT).
      
@@ -3222,7 +3552,7 @@ keywords: 面试题
     
     Multilingual Tasks: MGSM (8-shot, CoT), MMMLU (5-shot), INCLUDE (5-shot).
 
-57. Chat model eval
+58. Chat model eval
 
      答：General Tasks: MMLU-Redux, GPQADiamond, C-Eval, LiveBench.
      
@@ -3234,17 +3564,17 @@ keywords: 面试题
      
      Multilingual Tasks: instruction following - Multi-IF, knowledge - INCLUDE & MMMLU, mathematics - MT-AIME2024 & PolyMath, and logical reasoning - MlogiQA.
 
-58. Safety / Halluciation
+59. Safety / Halluciation
 
     答：出现幻觉原因：1. 语料中存在过时，虚构的内容，或因长尾效应缺乏与下游任务相关的领域知识；2. 语言模型的本质机制是预测下一个最可能的词，它只保证语言上看起来连贯合理，并不保证事实正确，所以它倾向即使不知道，也会编一个出来，在不确定时依然输出确定性答案，很少说我不知道；3. 推理时随机采样的生成策略。
     
     解决方案：提高训练数据质量；RAG 提供权威资料；Prompt Engineering：明确告诉模型不要编造、请回答已知事实，或让模型先思考再输出（如 Let’s think step by step）；生成之后进行事实校验，如比对知识图谱或自动校验；RLHF；多模型协作。
 
-59. Long Context
+60. Long Context
 
     答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
 
-60. LLM设计中的 System 1 和 System 2
+61. LLM设计中的 System 1 和 System 2
 
     答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
      
@@ -3256,7 +3586,7 @@ keywords: 面试题
         
     - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-61. LLM + 知识
+62. LLM + 知识
 
     答：RAG 可以解决 LLM 知识过时，幻觉问题以及无法调用私有数据等问题。
     
@@ -3271,11 +3601,11 @@ keywords: 面试题
     
     另一种方式是 search engine as a tool。
 
-62. 文本分块
+63. 文本分块
 
     答：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。
 
-63. Reasoning
+64. Reasoning
 
     答：Prompting：CoT，ToT，Self-Consistency，s1。
     
@@ -3283,7 +3613,7 @@ keywords: 面试题
     
     改进学习方式：SFT，RLHF，Critic Models：PRM 和 ORM。
 
-64. Test-time Scaling
+65. Test-time Scaling
 
     答：实现 test-time scaling，需要先激励 LLM 在 thinking 上耗费更多资源，从而生成更长的回答，或者更多的回答。
     
@@ -3297,7 +3627,7 @@ keywords: 面试题
     
     提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
 
-65. Agent
+66. Agent
 
     答：Agent = LLM + Planning + Memory + Tool。
     
@@ -3305,33 +3635,33 @@ keywords: 面试题
     
     Memory：short-term（ICL），long-term。
 
-66. MCP 和 function calling 有什么区别？
+67. MCP 和 function calling 有什么区别？
 
     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-67. LangChain
+68. LangChain
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-68. bf16，fp16，fp32，int8 区别
+69. bf16，fp16，fp32，int8 区别
 
     答：指数位决定了数值范围，尾数位决定了精度。bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。int8 可用于量化，因为整数乘法比浮点乘法快，且用缩放映射保留大部分信息。合理设置 scale 和 zero-point，配合 clip 操作，可以安全地把浮点数映射到 int8，不会溢出。
 
-69. LLM 常用的优化器有？
+70. LLM 常用的优化器有？
 
     答：AdamW，Lion，Muon
 
-70. 混合精度计算
+71. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-71. 估算 LLM 的参数量
+72. 估算 LLM 的参数量
 
     答：embedding 层的维度为 Vh，若不与输出层的权重矩阵共享，则需加上输出层的权重矩阵 2Vh。
     
     Transformer 每一层分为 self-attention 和 MLP，self-attention 设计 Q，K，V，O 四个权重矩阵和偏置，因此是 4h^2 + 4h。MLP 一般有两层，先升维再降维，如升到 4h，那么参数量为 8h^2 + 5h。两个模块都有 layer normalization，包含两个可训练参数，形状都为 h，所以参数量总和为 4h。因此，每一层参数量为 12h^2 + 13h。
 
-72. 估算 7B 模型在训练和推理时的显存占用
+73. 估算 7B 模型在训练和推理时的显存占用
 
     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2 字节，fp32 精度为 4 字节。
     
@@ -3339,23 +3669,23 @@ keywords: 面试题
     
     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
-73. 多卡多机训练
+74. 多卡多机训练
 
     答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-74. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+75. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-75. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+76. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-76. deepspeed 的 Zero-1， Zero 2， Zero 3
+77. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存。参数、梯度、优化器状态始终绑定，分配到同一张 GPU 上。
 
-77. 量化
+78. 量化
 
     答：PTQ（训练后量化）和 QAT（训练时量化）。
     
@@ -3365,37 +3695,37 @@ keywords: 面试题
     
     AWQ (Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
-78. vllm
+79. vllm
 
     答：传统的静态分配 KV 缓存不使用虚拟内存，直接对物理内存进行操作，会导致显存碎片和过度预留，因此 vllm 使用了 PagedAttention，即把 KV 缓存当作虚拟内存，每条序列的缓存被划分成块，可动态分配到显存中，允许在不连续的内存空间中存储。
     
     另外 vllm 的 PagedAttention 使用了 memory sharing，即单个 prompt 生成多个序列时，可以共享显存。
 
-79. GPT 的原理？
+80. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-80. BERT 的原理？
+81. BERT 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-81. BERT 的训练目标？
+82. BERT 的训练目标？
 
     答：BERT 有 masked language modeling 和 next sentence prediction 两个目标
 
-82. RoBERTa 相比 BERT 做了哪些改进？
+83. RoBERTa 相比 BERT 做了哪些改进？
 
     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-83. RoBERTa 强于 RNN 的地方？
+84. RoBERTa 强于 RNN 的地方？
 
     答：并行，对大数据比较友好。
 
-84. Qwen
+85. Qwen
 
     答：QwenMoE
 
-85. Deepseek-V1 - Deepseek-V3
+86. Deepseek-V1 - Deepseek-V3
 
     答：
     - MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
@@ -3406,14 +3736,14 @@ keywords: 面试题
     - v3 将门控函数的对更小的小数位会敏感的 softmax（multi-class classification）改成了值域更宽的 sigmoid（multi-label classification）
     - fp8 精度计算
 
-86. Deepseek-R1-Zero
+87. Deepseek-R1-Zero
 
     答：证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
     1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
     2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用 `<think>` 标签包裹推理过程，用 `<answer>` 标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
     3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
 
-87. Deepseek-R1
+88. Deepseek-R1
 
     答：成功经验
     - 在 SFT 阶段采用冷启动，只使用了少量（几千条）高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
