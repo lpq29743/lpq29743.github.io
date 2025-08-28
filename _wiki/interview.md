@@ -2486,14 +2486,16 @@ keywords: 面试题
 1. id3 是什么？
 
     答：利用信息增益（Information Gain，大的特征优选）的决策多叉树。
+    $$H(S) = - \sum_{c=1}^C p_c \log_2 p_c$$；$$Gain(S, A) = H(S) - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} H(S_v)$$。
 
 2. c4.5 是什么？
 
     答：信息增益容易倾向选择取值多的属性，所以 c4.5 是利用信息增益比（Gain Ratio，大的特征优选）的决策多叉树。
+    $$SplitInfo(S, A) = - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} \log_2 \frac{|S_v|}{|S|}$$；$$GainRatio(S, A) = \frac{Gain(S, A)}{SplitInfo(S, A)}$$。
 
 3. cart 是什么？
 
-    答：利用基尼系数（Gini impurity/基尼不纯度：从数据集 D 中随机抽取两个样本，类别标志不一样概率，小的优选）的决策二叉树，可为回归树，也可为分类树。
+    答：利用基尼系数（Gini impurity/基尼不纯度：从数据集 D 中随机抽取两个样本，类别标志不一样概率，小的优选）的决策二叉树，可为回归树，也可为分类树。$$Gini(S) = 1 - \sum_{c=1}^C p_c^2$$，$$GiniIndex(S, A) = \sum_{v \in Values(A)} \frac{|S_v|}{|S|} Gini(S_v)$$。
 
 4. 决策树中的特征选择方法有哪些？
 
@@ -2505,6 +2507,129 @@ keywords: 面试题
     
     缓解方法：剪枝；设置最大深度、最小叶子节点数；使用集成方法（如随机森林）
 
+6. Python 相关实现
+
+    答：
+    ```python
+    import numpy as np
+	from collections import Counter
+	from math import log2
+	
+	# ===== 公共工具函数 =====
+	def entropy(y):
+	    counter = Counter(y)
+	    probs = [c/len(y) for c in counter.values()]
+	    return -sum(p*log2(p) for p in probs if p > 0)
+	
+	def gini(y):
+	    counter = Counter(y)
+	    probs = [c/len(y) for c in counter.values()]
+	    return 1 - sum(p**2 for p in probs)
+	
+	# ===== ID3 =====
+	def id3(X, y):
+	    base_entropy = entropy(y)
+	    best_gain, best_f = -1, -1
+	    for f in range(X.shape[1]):
+	        new_entropy = 0
+	        for v in np.unique(X[:, f]):
+	            idx = (X[:, f] == v)
+	            new_entropy += len(y[idx])/len(y) * entropy(y[idx])
+	        gain = base_entropy - new_entropy
+	        if gain > best_gain:
+	            best_gain, best_f = gain, f
+	    return best_f
+	
+	# ===== C4.5 =====
+	def c45(X, y):
+	    base_entropy = entropy(y)
+	    best_ratio, best_f = -1, -1
+	    for f in range(X.shape[1]):
+	        new_entropy, split_info = 0, 0
+	        for v in np.unique(X[:, f]):
+	            idx = (X[:, f] == v)
+	            p = len(y[idx])/len(y)
+	            new_entropy += p * entropy(y[idx])
+	            if p > 0:
+	                split_info -= p * log2(p)
+	        info_gain = base_entropy - new_entropy
+	        if split_info > 0:
+	            ratio = info_gain/split_info
+	            if ratio > best_ratio:
+	                best_ratio, best_f = ratio, f
+	    return best_f
+	
+	# ===== CART =====
+	def cart(X, y):
+	    best_gini, best_f, best_v = 1e9, -1, None
+	    for f in range(X.shape[1]):
+	        for v in np.unique(X[:, f]):
+	            left = y[X[:, f] <= v]
+	            right = y[X[:, f] > v]
+	            if len(left) == 0 or len(right) == 0: continue
+	            g = (len(left)/len(y))*gini(left) + (len(right)/len(y))*gini(right)
+	            if g < best_gini:
+	                best_gini, best_f, best_v = g, f, v
+	    return best_f, best_v
+	
+	# ===== Train / Test =====
+	def train(X, y, method="id3"):
+	    # 纯叶子
+	    if len(set(y)) == 1:
+	        return y[0]
+	    # 没特征 → 多数表决
+	    if X.shape[1] == 0:
+	        return Counter(y).most_common(1)[0][0]
+	
+	    if method == "id3":
+	        f = id3(X, y)
+	        tree = {f: {}}
+	        for v in np.unique(X[:, f]):
+	            idx = (X[:, f] == v)
+	            subtree = train(np.delete(X[idx], f, axis=1), y[idx], method)
+	            tree[f][v] = subtree
+	        return tree
+	
+	    elif method == "c45":
+	        f = c45(X, y)
+	        tree = {f: {}}
+	        for v in np.unique(X[:, f]):
+	            idx = (X[:, f] == v)
+	            subtree = train(np.delete(X[idx], f, axis=1), y[idx], method)
+	            tree[f][v] = subtree
+	        return tree
+	
+	    elif method == "cart":
+	        f, v = cart(X, y)
+	        if f == -1:  # 无法继续分
+	            return Counter(y).most_common(1)[0][0]
+	        left_idx, right_idx = (X[:, f] <= v), (X[:, f] > v)
+	        return {
+	            f: {
+	                "<=": train(X[left_idx], y[left_idx], method),
+	                ">": train(X[right_idx], y[right_idx], method)
+	            },
+	            "value": v
+	        }
+	
+	def test(tree, x):
+	    if not isinstance(tree, dict):  # 叶子
+	        return tree
+	    f = list(tree.keys())[0]
+	    if "value" in tree:  # CART
+	        v = tree["value"]
+	        if x[f] <= v:
+	            return test(tree[f]["<="], x)
+	        else:
+	            return test(tree[f][">"], x)
+	    else:  # ID3/C4.5
+	        v = x[f]
+	        if v in tree[f]:
+	            sub = tree[f][v]
+	            return test(sub, np.delete(x, f))
+	        else:
+	            return None  # 未见过的取值
+	```
 
 #### Dimension Reducing
 
@@ -2627,6 +2752,37 @@ keywords: 面试题
 6. 有哪些激活函数？
 
      答：sigmoid，softmax，tanh，ReLU，PReLU，Leakly ReLU，Maxout。
+    ```python
+    import numpy as np
+     
+	# ===== 激活函数 =====
+	def sigmoid(x):
+	    return 1 / (1 + np.exp(-x))
+	
+	def sigmoid_derivative(x):
+	    s = sigmoid(x)
+	    return s * (1 - s)
+	
+	def tanh(x):
+	    return np.tanh(x)
+	
+	def tanh_derivative(x):
+	    return 1 - np.tanh(x)**2
+	
+	def relu(x):
+	    return np.maximum(0, x)
+	
+	def relu_derivative(x):
+	    return (x > 0).astype(float)
+	
+	def leaky_relu(x, alpha=0.01):
+	    return np.where(x > 0, x, alpha * x)
+	
+	def leaky_relu_derivative(x, alpha=0.01):
+	    dx = np.ones_like(x)
+	    dx[x < 0] = alpha
+	    return dx
+	```
 
 7. 激活函数如何选择？
 
@@ -2701,6 +2857,47 @@ keywords: 面试题
     Muon。
     
     如果加上 Scheduler，可以动态调整全局学习率。Warmup 策略可以前期慢慢提供学习率，后期用 Cosine Decay（训练初期快速降学习率，防止剧烈震荡：训练刚开始时，模型参数还比较随机，快速降低学习率能避免过大步长导致训练不稳定或发散；但起始时仍保留较大学习率，帮助模型迅速从随机初始化的参数中找到“正确方向”。中期保持学习率相对平稳，助于稳定收敛：进入训练中期，学习率下降变缓，模型有足够的时间在当前的参数空间“细致探索”；平稳的学习率避免过早降低导致训练停滞，同时不给出过大步长打断已有收敛趋势。后期再次快速下降，微调模型细节：训练末期快速将学习率降低到很小，帮助模型“精细调节”参数，减少振荡，提升泛化性能；类似于在优化曲面上的“爬坡”逐渐变得非常缓慢，避免错过局部极小值。），Linear Decay 等方式进行衰减。
+    ```python
+    import numpy as np
+    
+	# ===== 优化器函数 =====
+	def sgd(w, dw, lr=0.01):
+	    return w - lr * dw
+	
+	def momentum(w, dw, v, lr=0.01, beta=0.9):
+	    v = beta * v + (1 - beta) * dw
+	    w = w - lr * v
+	    return w, v
+	
+	def adagrad(w, dw, h, lr=0.01, eps=1e-8):
+	    h += dw**2
+	    w = w - lr * dw / (np.sqrt(h) + eps)
+	    return w, h
+	
+	def rmsprop(w, dw, h, lr=0.001, beta=0.9, eps=1e-8):
+	    h = beta * h + (1 - beta) * dw**2
+	    w = w - lr * dw / (np.sqrt(h) + eps)
+	    return w, h
+	
+	def adam(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, eps=1e-8):
+	    m = beta1 * m + (1 - beta1) * dw
+	    v = beta2 * v + (1 - beta2) * (dw**2)
+	    m_hat = m / (1 - beta1**t)
+	    v_hat = v / (1 - beta2**t)
+	    w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
+	    return w, m, v
+	
+	def adamw(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, weight_decay=0.01, eps=1e-8):
+	    # AdamW 在更新前加入权重衰减
+	    w = w - lr * weight_decay * w
+	    m = beta1 * m + (1 - beta1) * dw
+	    v = beta2 * v + (1 - beta2) * (dw**2)
+	    m_hat = m / (1 - beta1**t)
+	    v_hat = v / (1 - beta2**t)
+	    w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
+	    return w, m, v
+
+	```
 
 21. 神经网络为什么会产生梯度消失现象（vanishing gradient）？
 
@@ -2736,7 +2933,7 @@ keywords: 面试题
 
 29. 如何调参？
 
-     答：for 循环；贝叶斯优化。
+     答：网格搜索；随机搜索；贝叶斯优化。
 
 30. 多任务如何学习？
 
@@ -2749,6 +2946,20 @@ keywords: 面试题
 32. RNN 是什么？
 
      答：$$o_t=\sigma(W_o[h_{t-1}, x_t] + b_o)$$
+    ```python
+    def rnn_forward(X, Wx, Wh, b, h0):
+	    """
+	    X: (T, N, D)
+	    Wx: (D, H)
+	    Wh: (H, H)
+	    b: (H,)
+	    h0: (N, H)
+	    """
+	    h = h0
+	    for t in range(X.shape[0]):
+	        h = torch.tanh(X[t] @ Wx + h @ Wh + b)
+	    return h  # 返回最后一步隐藏状态
+	```
 
 33. LSTM 是什么？
 
@@ -2763,10 +2974,37 @@ keywords: 面试题
      输出门：$$o_t=\sigma(W_o[h_{t-1}, x_t] + b_o)$$，输出 [0, 1]，来表示信息输出程度。
 
      得到最终输出：$$h_t=o_t*tanh(C_t)$$。
+     
+    ```python
+    def lstm_forward(X, Wx, Wh, b, h0, c0):
+	    h, c = h0, c0
+	    H = h0.shape[1]
+	    for t in range(X.shape[0]):
+	        z = X[t] @ Wx + h @ Wh + b
+	        i = sigmoid(z[:, :H])
+	        f = sigmoid(z[:, H:2*H])
+	        o = sigmoid(z[:, 2*H:3*H])
+	        g = torch.tanh(z[:, 3*H:])
+	        c = f * c + i * g
+	        h = o * torch.tanh(c)
+	    return h, c
+	```
 
 34. GRU 是什么？
 
      答：LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
+    ```python
+    def gru_forward(X, Wx, Wh, b, h0):
+	    h = h0
+	    H = h0.shape[1]
+	    for t in range(X.shape[0]):
+	        z = X[t] @ Wx + h @ Wh + b
+	        r = sigmoid(z[:, :H])
+	        u = sigmoid(z[:, H:2*H])
+	        g = torch.tanh(z[:, 2*H:] + r * (h @ Wh[:, 2*H:]))
+	        h = (1 - u) * g + u * h
+	    return h
+	```
 
 35. LSTM 和 GRU 的联系和区别？
 
@@ -3226,11 +3464,50 @@ keywords: 面试题
 
     答：在经历线性转换后，concat 与相加是等效的；在高维空间，两者几乎正交，因此相加并不干扰；减少计算量。
 
-27. 外推性
+27. RoPE 实现
+
+    答：
+    ```python
+    import torch
+	import math
+	
+	def rope(x):
+	    """
+	    x: (seq_len, batch_size, d_model)
+	    返回加上 RoPE 的 embedding
+	    """
+	    seq_len, batch_size, d_model = x.shape
+	    assert d_model % 2 == 0, "RoPE embedding dim must be even"
+	    
+	    half_dim = d_model // 2
+	    theta = 10000 ** (torch.arange(0, half_dim, dtype=torch.float32) / half_dim)
+	    pos = torch.arange(seq_len, dtype=torch.float32).unsqueeze(1)  # (seq_len, 1)
+	    angles = pos / theta  # (seq_len, half_dim)
+	    
+	    # 计算 sin/cos
+	    sin = torch.sin(angles)  # (seq_len, half_dim)
+	    cos = torch.cos(angles)
+	    
+	    # 将 x 分成两半
+	    x1 = x[:, :, 0::2]  # even indices
+	    x2 = x[:, :, 1::2]  # odd indices
+	    
+	    # 旋转
+	    x_rotated_0 = x1 * cos - x2 * sin
+	    x_rotated_1 = x1 * sin + x2 * cos
+	    
+	    # 交替组合回原始维度
+	    x_out = torch.zeros_like(x)
+	    x_out[:, :, 0::2] = x_rotated_0
+	    x_out[:, :, 1::2] = x_rotated_1
+	    return x_out
+    ```
+
+28. 外推性
 
     答：测试时要接收处理比训练时更长的上下文。
 
-28. 如何提升外推能力
+29. 如何提升外推能力
 
     答：位置编码外推：ALiBi；
     
@@ -3238,7 +3515,7 @@ keywords: 面试题
     
     推理策略增强：CoT，Self- Consistency。
 
-29. LLM 常用的激活函数有？
+30. LLM 常用的激活函数有？
 
     答：ReLU：f(x) = max(0, x)
      
@@ -3250,7 +3527,7 @@ keywords: 面试题
      
     ReLU，GeLU 不能门控，GLU，SwiGLU 能门控。
 
-30. Batch Normalization (BN)
+31. Batch Normalization (BN)
 
     答：BN 就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。
 
@@ -3260,7 +3537,7 @@ keywords: 面试题
 
     BN 为了保证非线性的获得，对变换后的 x 又进行了 scale 加上 shift 操作：y = scale * x + shift。
 
-31. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
+32. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
 
     答：这些都是为了防止梯度消失/爆炸，引入参数为了提高表达能力，从而提高泛化能力。
     
@@ -3268,7 +3545,7 @@ keywords: 面试题
      
     输入是形状为 `(batch_size, seq_len, hidden_dim)` 的张量，BN 通常对 batch 和 seq_len 两个维度联合计算均值和方差，也就是对每个 hidden_dim 维度独立归一化。LN/RMSNorm 对每个样本每个 token 的 hidden_dim 维度做归一化，即对 seq_len 中的每个位置独立归一化，计算均值和方差都在 hidden_dim 上。
 
-32. 实现 LayerNorm
+33. 实现 LayerNorm
 
     答：
     ```python
@@ -3289,7 +3566,7 @@ keywords: 面试题
 	        return self.gamma * x_norm + self.beta
     ```
 
-33. 实现 RMSNorm
+34. 实现 RMSNorm
 
     答：RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
 	```python
@@ -3309,11 +3586,11 @@ keywords: 面试题
 	        return self.scale * x_norm
 	```
 
-34. Pre Norm 和 Post Norm 有什么区别？
+35. Pre Norm 和 Post Norm 有什么区别？
 
     答：Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
 
-35. temperature/Top-k/Top-p
+36. temperature/Top-k/Top-p
 
     答：temperature：控制采样随机性，温度越高越随机。它的做法是将得到的 logits 除以温度，再作 softmax。当温度为 0 时，相当于 argmax/greedy；当温度为 1 时，相当于 softmax；当温度小于 1，分布变得尖锐，熵降低；当温度大于 1，分布变得平坦，熵升高。
     
@@ -3323,19 +3600,51 @@ keywords: 面试题
     
     对于初始 logits 熵大的，叫做高熵 token，意味着 LLM 在此处犹豫不决；反之叫做低熵 token，意味着 LLM 在这非常自信。在推理阶段，较低的 temperature 会导致多样性降低，较高的 temperature 会导致生成质量降低，产生幻觉。
 
-36. speculative decoding
+37. speculative decoding
 
     答：使用一个小型辅助模型（称为“提议模型”或“draft model”）先快速生成多个候选token序列（草稿）。主模型（大型语言模型）随后只对这些候选进行验证和纠正，而不是每一步都全量生成和计算概率。这种方式能显著减少主模型的计算成本，提高生成速度。
 
-37. MoE
+38. Beam Search 实现
+
+    答：
+    ```python
+    import numpy as np
+
+	def beam_search(start_token, get_next_probs, beam_width=3, max_len=10):
+	    """
+	    start_token: 初始 token
+	    get_next_probs: 函数 f(seq) -> dict{token: prob} 返回下一个 token 的概率
+	    beam_width: beam 大小
+	    max_len: 最大生成长度
+	    """
+	    # 初始 beam: list of (sequence, score)
+	    beams = [( [start_token], 0.0 )]  # score 用 log 概率
+	    
+	    for _ in range(max_len):
+	        new_beams = []
+	        for seq, score in beams:
+	            next_probs = get_next_probs(seq)
+	            for token, prob in next_probs.items():
+	                new_seq = seq + [token]
+	                new_score = score + np.log(prob + 1e-12)  # 避免 log(0)
+	                new_beams.append((new_seq, new_score))
+	        
+	        # 选择 top-k
+	        new_beams.sort(key=lambda x: x[1], reverse=True)
+	        beams = new_beams[:beam_width]
+	    
+	    return beams  # 返回最终 beam 列表
+    ```
+
+39. MoE
 
     答：MoE 分为专家网络，门控网络和选择器三部分。负载均衡的辅助损失的引入是为了解决多专家 token 分配不均的问题。
 
-38. 为什么 LLM 流行 MoE？
+40. 为什么 LLM 流行 MoE？
 
     答：MoE 能显著提高模型容量而不成比例地增加计算成本。
 
-39. 手撕 MoE
+41. 手撕 MoE
 
     答：
     ```python
@@ -3358,21 +3667,21 @@ keywords: 面试题
     ```
 
 
-40. Prefix LM 和 Causal LM 区别是什么？
+42. Prefix LM 和 Causal LM 区别是什么？
 
     答：Causal LM 是单向的，只看左边上下文；Prefix LM 是半双向的，可以看整个 prefix 的信息（左侧上下文），预测后缀。
 
-41. 为什么大部分 LLM 是 decoder-only？
+43. 为什么大部分 LLM 是 decoder-only？
 
     答：生成范式的统一性；任务更难；双向 attention 的注意力矩阵容易退化成低秩状态，而 causal attention 的注意力矩阵是下三角矩阵，必然是满秩的，建模能力更强。
 
-42. SFT
+44. SFT
 
-43. 强化学习和监督学习有什么区别？
+45. 强化学习和监督学习有什么区别？
 
     答：监督学习中每一个决策（预测标签）是独立的，它对决策的优化取决于标签。强化学习每一个决策是相互影响的，它对决策的优化取决于延时标签（奖励）。过去的 AI 训练方式主要依赖监督学习，也就是让 AI 通过大量人类标注的数据来学习。换句话说，AI 只是一个“超级记忆机”，它能模仿人类的答案，但却不一定真正理解问题的本质。而强化学习的出现，让 AI 不再是单纯的模仿者，而是能够主动探索、试错、优化自己推理方式的智能体。这就像是在训练一个孩子解数学题，监督学习相当于直接告诉他答案，而强化学习则是让他自己尝试解题，并根据最终的正确率进行调整。
 
-44. PPO
+46. PPO
 
     答：
      
@@ -3394,7 +3703,7 @@ keywords: 面试题
 	 
 	6. 用以下 loss 进行优化，剪切函数限制策略更新幅度，确保数值稳定性。当 $$A_t > 0$$，意味着 critic model 对当前 action 做出了正反馈，因此 $$r_t(\theta)$$ 要提高，反之要降低。
 	 
-    ```
+    ```python
     def ppo_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
 	    ratio = torch.exp(log_probs - old_log_probs)  # [B]
 	    unclipped = ratio * advantages
@@ -3403,7 +3712,7 @@ keywords: 面试题
 	    return loss
 	```
 
-45. PPO 怎么计算 advantages？
+47. PPO 怎么计算 advantages？
 
     答：
     1. 直接使用 reward。不是 token level
@@ -3421,15 +3730,15 @@ keywords: 面试题
 	    return advantages
      ```
 
-46. PPO 有了 reward model 为什么还要 critic/value model？
+48. PPO 有了 reward model 为什么还要 critic/value model？
 
      答：critic/value model 是内部奖励，仅需当前上下文，会在 RL 过程中更新，reward model 是外部奖励，需要完整回答，是训练好的。
 
-47. 为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？
+49. 为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？
 
      答：需要用标注样本训练；分类模型代价低。
 
-48. DPO
+50. DPO
 
     答：
      
@@ -3443,7 +3752,7 @@ keywords: 面试题
 	    return loss
     ```
  
-49. GRPO
+51. GRPO
    
     答：
      
@@ -3491,25 +3800,25 @@ keywords: 面试题
 	    return loss
     ```
 
-50. PPO vs DPO vs GRPO
+52. PPO vs DPO vs GRPO
 
     答：所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。PPO 依赖于 reward model 和 value model；DPO 没有显式探索机制。
 
-51. GRPO 怎么去掉 critic/value model 的？
+53. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-52. 熵控制在强化学习里的作用
+54. 熵控制在强化学习里的作用
 
      答：在大模型训练的强化学习阶段，设置较高的 temperature 可以防止模型过度自信，鼓励模型采取高熵动作，从而扩大探索空间。另一种方式是在 group-level 用 smi/dpp/self-bleu 计算多样性，进行 reward shaping 来控制熵的变化。
      
      熵坍塌：随着训练的进行，entropy 逐渐降低。导致某些 group 采样出的 response 几乎相同，使得模型在早期变得更加确定，限制了模型的探索空间。
 
-53. LoRA
+55. LoRA
 
      答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。target_modules 一般为`q_proj`、`v_proj`，有时也会注入到 `k_proj` 或 `o_proj`。modules_to_save 表示指定哪些原模型模块需要一起训练 & 保存，如果扩展了词表可能要加 `embed_tokens`、`lm_head`。
 
-54. 手撕 LoRA
+56. 手撕 LoRA
 
      答：
      ```python
@@ -3534,15 +3843,15 @@ keywords: 面试题
 	        return base + lora
     ```
 
-55. Adapter
+57. Adapter
 
      答：插入小型网络模块
 
-56. Prefix Tuning
+58. Prefix Tuning
 
      答：Prefix Tuning 会为每层添加一组虚拟的 Key 和 Value，Query 保持不变。embedding 的输入不会添加。
 
-57. Base model eval
+59. Base model eval
 
      答：General Tasks: MMLU (5-shot), MMLU-Pro (5-shot, CoT), MMLU-redux (5-shot), BBH (3-shot, CoT), SuperGPQA (5-shot, CoT).
      
@@ -3552,7 +3861,7 @@ keywords: 面试题
     
     Multilingual Tasks: MGSM (8-shot, CoT), MMMLU (5-shot), INCLUDE (5-shot).
 
-58. Chat model eval
+60. Chat model eval
 
      答：General Tasks: MMLU-Redux, GPQADiamond, C-Eval, LiveBench.
      
@@ -3564,17 +3873,17 @@ keywords: 面试题
      
      Multilingual Tasks: instruction following - Multi-IF, knowledge - INCLUDE & MMMLU, mathematics - MT-AIME2024 & PolyMath, and logical reasoning - MlogiQA.
 
-59. Safety / Halluciation
+61. Safety / Halluciation
 
     答：出现幻觉原因：1. 语料中存在过时，虚构的内容，或因长尾效应缺乏与下游任务相关的领域知识；2. 语言模型的本质机制是预测下一个最可能的词，它只保证语言上看起来连贯合理，并不保证事实正确，所以它倾向即使不知道，也会编一个出来，在不确定时依然输出确定性答案，很少说我不知道；3. 推理时随机采样的生成策略。
     
     解决方案：提高训练数据质量；RAG 提供权威资料；Prompt Engineering：明确告诉模型不要编造、请回答已知事实，或让模型先思考再输出（如 Let’s think step by step）；生成之后进行事实校验，如比对知识图谱或自动校验；RLHF；多模型协作。
 
-60. Long Context
+62. Long Context
 
     答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
 
-61. LLM设计中的 System 1 和 System 2
+63. LLM设计中的 System 1 和 System 2
 
     答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
      
@@ -3586,7 +3895,7 @@ keywords: 面试题
         
     - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-62. LLM + 知识
+64. LLM + 知识
 
     答：RAG 可以解决 LLM 知识过时，幻觉问题以及无法调用私有数据等问题。
     
@@ -3601,11 +3910,11 @@ keywords: 面试题
     
     另一种方式是 search engine as a tool。
 
-63. 文本分块
+65. 文本分块
 
     答：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。
 
-64. Reasoning
+66. Reasoning
 
     答：Prompting：CoT，ToT，Self-Consistency，s1。
     
@@ -3613,7 +3922,7 @@ keywords: 面试题
     
     改进学习方式：SFT，RLHF，Critic Models：PRM 和 ORM。
 
-65. Test-time Scaling
+67. Test-time Scaling
 
     答：实现 test-time scaling，需要先激励 LLM 在 thinking 上耗费更多资源，从而生成更长的回答，或者更多的回答。
     
@@ -3627,7 +3936,7 @@ keywords: 面试题
     
     提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
 
-66. Agent
+68. Agent
 
     答：Agent = LLM + Planning + Memory + Tool。
     
@@ -3635,33 +3944,33 @@ keywords: 面试题
     
     Memory：short-term（ICL），long-term。
 
-67. MCP 和 function calling 有什么区别？
+69. MCP 和 function calling 有什么区别？
 
     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-68. LangChain
+70. LangChain
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-69. bf16，fp16，fp32，int8 区别
+71. bf16，fp16，fp32，int8 区别
 
     答：指数位决定了数值范围，尾数位决定了精度。bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。int8 可用于量化，因为整数乘法比浮点乘法快，且用缩放映射保留大部分信息。合理设置 scale 和 zero-point，配合 clip 操作，可以安全地把浮点数映射到 int8，不会溢出。
 
-70. LLM 常用的优化器有？
+72. LLM 常用的优化器有？
 
     答：AdamW，Lion，Muon
 
-71. 混合精度计算
+73. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-72. 估算 LLM 的参数量
+74. 估算 LLM 的参数量
 
     答：embedding 层的维度为 Vh，若不与输出层的权重矩阵共享，则需加上输出层的权重矩阵 2Vh。
     
     Transformer 每一层分为 self-attention 和 MLP，self-attention 设计 Q，K，V，O 四个权重矩阵和偏置，因此是 4h^2 + 4h。MLP 一般有两层，先升维再降维，如升到 4h，那么参数量为 8h^2 + 5h。两个模块都有 layer normalization，包含两个可训练参数，形状都为 h，所以参数量总和为 4h。因此，每一层参数量为 12h^2 + 13h。
 
-73. 估算 7B 模型在训练和推理时的显存占用
+75. 估算 7B 模型在训练和推理时的显存占用
 
     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2 字节，fp32 精度为 4 字节。
     
@@ -3669,23 +3978,23 @@ keywords: 面试题
     
     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
-74. 多卡多机训练
+76. 多卡多机训练
 
     答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-75. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+77. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-76. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+78. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-77. deepspeed 的 Zero-1， Zero 2， Zero 3
+79. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存。参数、梯度、优化器状态始终绑定，分配到同一张 GPU 上。
 
-78. 量化
+80. 量化
 
     答：PTQ（训练后量化）和 QAT（训练时量化）。
     
@@ -3695,37 +4004,37 @@ keywords: 面试题
     
     AWQ (Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
-79. vllm
+81. vllm
 
     答：传统的静态分配 KV 缓存不使用虚拟内存，直接对物理内存进行操作，会导致显存碎片和过度预留，因此 vllm 使用了 PagedAttention，即把 KV 缓存当作虚拟内存，每条序列的缓存被划分成块，可动态分配到显存中，允许在不连续的内存空间中存储。
     
     另外 vllm 的 PagedAttention 使用了 memory sharing，即单个 prompt 生成多个序列时，可以共享显存。
 
-80. GPT 的原理？
+82. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-81. BERT 的原理？
+83. BERT 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-82. BERT 的训练目标？
+84. BERT 的训练目标？
 
     答：BERT 有 masked language modeling 和 next sentence prediction 两个目标
 
-83. RoBERTa 相比 BERT 做了哪些改进？
+85. RoBERTa 相比 BERT 做了哪些改进？
 
     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-84. RoBERTa 强于 RNN 的地方？
+86. RoBERTa 强于 RNN 的地方？
 
     答：并行，对大数据比较友好。
 
-85. Qwen
+87. Qwen
 
     答：QwenMoE
 
-86. Deepseek-V1 - Deepseek-V3
+88. Deepseek-V1 - Deepseek-V3
 
     答：
     - MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
@@ -3736,14 +4045,14 @@ keywords: 面试题
     - v3 将门控函数的对更小的小数位会敏感的 softmax（multi-class classification）改成了值域更宽的 sigmoid（multi-label classification）
     - fp8 精度计算
 
-87. Deepseek-R1-Zero
+89. Deepseek-R1-Zero
 
     答：证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
     1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
     2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用 `<think>` 标签包裹推理过程，用 `<answer>` 标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
     3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
 
-88. Deepseek-R1
+90. Deepseek-R1
 
     答：成功经验
     - 在 SFT 阶段采用冷启动，只使用了少量（几千条）高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
