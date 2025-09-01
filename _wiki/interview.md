@@ -26,6 +26,7 @@ keywords: 面试题
     
     X = np.random.randn(3, 3)
     
+    # default ord=2
     norms = np.linalg.norm(X, axis=1, keepdims=True) + 1e-8  # shape (3,1)
     
     # 归一化矩阵，使每行向量单位化
@@ -117,7 +118,7 @@ keywords: 面试题
 
     答：先抛的人吃到苹果的概率：$$1/2 + 1/2^3 + 1/2^5 + ...$$，求得结果为 $$2/3$$。另一种解法是设先抛先吃的概率为 $$p_1$$， 后抛先吃的概率为 $$p_2$$，有：$$p_1 = 1/2 + 1/2 * p_2$$ 且 $$p_1 + p_2 = 1$$，解方程可得，$$p_1 = 2/3$$。如果题目说是只抛一次的话，则概率为 $$1/2$$。 
 
-6. 如何用一个骰子等概率地生成 1 到 7 的随机数？
+6. 如何用一个骰子（dice）等概率地生成 1 到 7 的随机数？
 
     答：将一个筛子扔两次可以得到 36 种组合（进制思维），每五种组合代表一个数字，剩下的一种表示重扔。
 
@@ -206,11 +207,11 @@ keywords: 面试题
     normal_rv = 30 * np.mean(2 * np.random.uniform(size=300) - 1)
     ```
 
-    具体步骤是先产生 300 个 (-1, 1) 随机变量，它们的均值的标准差是 1 / 30，要得到标准正态分布，所以要乘以 30。
+    具体步骤是先产生 300 个 (-1, 1) 随机变量，它们的均值的标准差是 (1 - (-1))^2 / 12 * 300 = 1 / 30，要得到标准正态分布，所以要乘以 30。
 
 23. 请解释协方差矩阵的含义
 
-    答：协方差矩阵描述多变量间的线性关系，矩阵的每个元素代表两个变量的协方差。
+    答：协方差矩阵描述多变量间的线性关系，矩阵的每个元素代表两个变量的协方差。协方差大于 0，两个变量正相关，反之负相关，为 0 时不相关。Pearson 系数是协方差的标准化版本。
 
 24. 什么是点估计，什么是区间估计？
 
@@ -302,7 +303,7 @@ keywords: 面试题
 
 2. 一阶优化和二阶优化
 
-    答：一阶优化（如梯度下降）对应 Jacobian 矩阵，只能告诉你下降方向，但无法告诉你到底走多远最合适，收敛速度通常是线性的（误差大约每次乘一个常数）。二阶优化（如牛顿法）对应 Hessian 矩阵，Hessian 告诉你曲率（曲面的“陡峭程度”），更新步长自动调整，不需要手动选择学习率，迭代时误差平方级（quadratic）下降 → 二阶收敛。当矩阵正定（positive definite），梯度为 0 处为极小值。
+    答：一阶优化（如梯度下降）对应 Jacobian 矩阵，只能告诉你下降方向，但无法告诉你到底走多远最合适，收敛速度通常是线性的（误差大约每次乘一个常数）。二阶优化（如牛顿法）对应 Hessian 矩阵，Hessian 告诉你曲率（曲面的“陡峭程度”），更新步长自动调整，不需要手动选择学习率，迭代时误差平方级（quadratic）下降 → 二阶收敛。当矩阵正定（positive definite，特征值全部大于 0 的实对称矩阵或复 Hermitian 矩阵），梯度为 0 处为极小值。
 
 3. 深度学习为什么不用二阶优化？
 
@@ -335,7 +336,7 @@ keywords: 面试题
 	    x = x0
 	    for _ in range(max_iter):
 	        x_new = x - lr * grad_f(x)
-	        # # 参数几乎不再变化了，算法可以认为已经收敛，提前停止迭代。
+	        # 参数几乎不再变化了，算法可以认为已经收敛，提前停止迭代。
 	        if abs(x_new - x) < tol:
 	            break
 	        x = x_new
@@ -692,7 +693,7 @@ keywords: 面试题
     
     Three Sum Smaller：排序后，固定一个数，对剩余部分用双指针统计满足和小于 target 的组合数量。
     
-    Four Sum：排序后，固定两个数，对剩余数组使用双指针。可看作 2Sum 在外面套两层循环，时间复杂度 O(n³)。
+    Four Sum：排序后，固定两个数，对剩余数组使用双指针。可看作 2Sum 在外面套两层循环，时间复杂度 O(n³)。为避免重复访问，第二个数索引应比第一个数大，左指针也应比第二个索引大。
     
     Four Sum II（给定四个整数数组，统计所有元素和为零的四元组个数）：利用哈希表预存前两数组的和，再在后两数组中查找 target - sum 是否存在，时间复杂度可降为 O(n²)。
     
@@ -1067,7 +1068,8 @@ keywords: 面试题
     ```
     
 	用 list 实现出队`first = queue.pop(0)`时间复杂度为 O(n)，因此不推荐。
-	优先队列用 heapq 实现
+	
+	优先队列是抽象概念，用 heapq（堆）实现
 
 13. 单调队列
 
@@ -1197,7 +1199,142 @@ keywords: 面试题
 
 26. 最短路径算法及复杂度？
 
-    答：Dijkstra 算法，是贪心算法，时间复杂度为 O(V^2)，如果是稀疏图，可用堆进行优化，时间复杂度为 O((V + E) lgV)；Floyd 算法，时间复杂度为 O(V^3)。
+    答：Dijkstra 算法，用于解决边权非负的单源最短路径问题（可多次调用变成多源），是贪心算法，时间复杂度为 O(V^2)。如果是稀疏图，可用堆进行优化，时间复杂度为 O((V + E) lgV)。Dijkstra 算法每次选择当前已知最短路径中最小的节点 u（初始时，源节点到自身距离为 0，到其他任意节点为无穷大），设置为已访问，添加到路径中（可用前驱数组实现）。更新它的邻居的距离（松弛操作，Relaxation），即对当前被选择节点 u 相邻的未访问节点 v，如果经过 u 到 v 的路径比当前已知到 v 的最短路更短：`dist[v] > dist[u] + w`，就更新它，如需保存路径。重复，直到所有节点处理完。
+    ```python
+    import heapq
+
+	def dijkstra(n, edges, start):
+	    """
+	    n: 节点数
+	    edges: 邻接表 {u: [(v, w), ...]}
+	    start: 起点
+	    """
+	    dist = [float('inf')] * n
+	    dist[start] = 0
+	
+	    pq = [(0, start)]  # (当前距离, 节点)
+	
+	    while pq:
+	        d, u = heapq.heappop(pq)
+	        # 避免处理过期的队列元素
+	        # 当松弛操作发现 `dist[v]` 被更新更小的距离时，会再次把 `(dist[v], v)` 入队。
+			# 队列里可能存在旧的、较大的距离值，也就是“过期元素”。
+	        if d > dist[u]:
+	            continue  # 已经有更短的路径，跳过
+	
+	        for v, w in edges[u]:
+	            if dist[u] + w < dist[v]:
+	                dist[v] = dist[u] + w
+	                heapq.heappush(pq, (dist[v], v))
+	
+	    return dist
+    ```
+    
+    0-1 BFS，用于解决边权为 0 或 1（可推广为 0 或任意正整数，不可为两个整数，因为这样子双端队列无法保证单调）的单源最短路径问题（可多次调用变成多源），用邻接矩阵表示图，时间复杂度为 O(V + E)。0-1 BFS 是 Dijkstra 算法的特例，用双端队列 (deque) 替代优先队列：如果边权 = 0，把新节点放到队首。如果边权 = 1，把新节点放到队尾。这样保证 deque 始终按最短路顺序扩展节点。
+    ```python
+    from collections import deque
+
+	def zero_one_bfs(n, edges, start):
+	    """
+	    n: 节点数
+	    edges: 邻接表形式, edges[u] = [(v, w), ...], w ∈ {0, 1}
+	    start: 起点
+	    """
+	    dist = [float('inf')] * n
+	    dist[start] = 0
+	
+	    dq = deque([start])
+	
+	    while dq:
+	        u = dq.popleft()
+	        for v, w in edges[u]:
+	            if dist[u] + w < dist[v]:
+	                dist[v] = dist[u] + w
+	                if w == 0:
+	                    dq.appendleft(v)  # 权重 0 → 优先
+	                else:
+	                    dq.append(v)      # 权重 1 → 放队尾
+	    return dist
+    ```
+    
+    Floyd 算法，用于解决有负权（无负环）的多源最短路径问题，是动态规划算法，时间复杂度为 O(V^3)。
+    ```python
+    def floyd_warshall(n, edges):
+	    INF = float('inf')
+	    # 初始化邻接矩阵
+	    dist = [[INF] * n for _ in range(n)]
+	    for i in range(n):
+	        dist[i][i] = 0
+	    for u, v, w in edges:
+	        dist[u][v] = min(dist[u][v], w)  # 处理重边
+	    
+	    # 核心 DP 三层循环
+	    for k in range(n):
+	        for i in range(n):
+	            for j in range(n):
+	                if dist[i][k] + dist[k][j] < dist[i][j]:
+	                    dist[i][j] = dist[i][k] + dist[k][j]
+	    
+	    return dist
+    ```
+    
+    Bellman-Ford 算法，用于解决有负权的单源最短路径问题（可多次调用变成多源），是动态规划算法，时间复杂度 O(VE)。
+    ```python
+    def bellman_ford(n, edges, src):
+	    INF = float('inf')
+	    dist = [INF] * n
+	    dist[src] = 0
+	    
+	    # 松弛 V-1 次
+	    for _ in range(n - 1):
+	        updated = False
+	        for u, v, w in edges:
+	            if dist[u] + w < dist[v]:
+	                dist[v] = dist[u] + w
+	                updated = True
+	        if not updated:
+	            break
+	    
+	    # 检测负环
+	    for u, v, w in edges:
+	        if dist[u] + w < dist[v]:
+	            raise ValueError("Graph contains negative weight cycle")
+	    
+	    return dist
+    ```
+    
+    SPFA 算法，用于解决有负权的单源最短路径问题（可多次调用变成多源），是 Bellman-Ford 算法的队列优化版，也是动态规划算法，平均时间复杂度 O(E)，最坏时间复杂度 O(VE)。
+    ```python
+    from collections import deque
+
+	def spfa(n, edges, src):
+	    INF = float('inf')
+	    dist = [INF] * n
+	    in_queue = [False] * n
+	    count = [0] * n   # 统计每个点入队次数（用于负环检测）
+	    
+	    dist[src] = 0
+	    q = deque([src])
+	    in_queue[src] = True
+	    
+	    graph = [[] for _ in range(n)]
+	    for u, v, w in edges:
+	        graph[u].append((v, w))
+	    
+	    while q:
+	        u = q.popleft()
+	        in_queue[u] = False
+	        for v, w in graph[u]:
+	            if dist[u] + w < dist[v]:
+	                dist[v] = dist[u] + w
+	                if not in_queue[v]:
+	                    q.append(v)
+	                    in_queue[v] = True
+	                    count[v] += 1
+	                    if count[v] > n:  # 超过 n 次 → 负环
+	                        raise ValueError("Graph contains negative weight cycle")
+	    return dist
+    ```
 
 27. 无向图最小生成树算法及复杂度？
 
@@ -1662,39 +1799,43 @@ keywords: 面试题
 
     答：\*args 表示可变参数（variadic arguments），它允许你传入 0 个或任意个无名参数，这些参数在函数调用时自动组装为一个 tuple； \*\*kwargs 表示关键字参数（keyword arguments），它允许你传入 0 个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个 dict。同时使用 \*args 和 \*\*kwargs 的时候，必须保证 \*args 在 \*\*kwargs 之前。 \*args 是变量 list，\*\*kwargs 是指针 list。
 
-2. \_\_new\_\_ 了解吗？
+2. \_\_XXX\_\_ 是什么？
+
+    答：\_\_XXX\_\_ 在 Python 中通常指双下划线开头和结尾的特殊方法或属性，也叫魔法方法/dunder method（double underscore）。常见的包括可通过内置函数调用的 \_\_str\_\_（输出用户可读），\_\_repr\_\_（输出开发者可读）和 \_\_len\_\_（长度调用），可通过运算符调用的 \_\_add\_\_，\_\_sub\_\_，\_\_getitem\_\_ 和 \_\_setitem\_\_。此类函数也可直接调用。
+
+3. \_\_new\_\_ 了解吗？
 
     答：\_\_init\_\_ 作用是类实例进行初始化，第一个参数为 self，代表对象本身，可以没有返回值。\_\_new\_\_ 则是返回一个新的类的实例，第一个参数是 cls 代表该类本身，必须有返回值。\_\_new\_\_ 先执行，然后再 \_\_init\_\_，实际上，只要 \_\_new\_\_ 返回的是类本身的实例，它会自动调用 \_\_init\_\_ 进行初始化。但是有例外，如果 \_\_new\_\_ 返回的是其他类的实例，则它不会调用当前类的 \_\_init\_\_。
 
-3. \_\_name\_\_ 的值怎么确定？
+4. \_\_name\_\_ 的值怎么确定？
 
     答：[链接](https://blog.csdn.net/iamoldpan/article/details/78077983)
 
-4. map() 返回的对象是什么？
+5. map() 返回的对象是什么？
 
     答：map() 函数返回的是一个迭代器，并对返回结果使用了 yield，所以其返回结果只能使用一次，这样做在于节省内存。
 
-5. \[\[1, 2\], \[3, 4\], \[5, 6\]\] 一行代码展开该列表，得出 \[1, 2, 3, 4, 5, 6\]
+6. \[\[1, 2\], \[3, 4\], \[5, 6\]\] 一行代码展开该列表，得出 \[1, 2, 3, 4, 5, 6\]
 
     答：`[j for i in [[1,2],[3,4],[5,6]] for j in i]`
 
-6. Python 中怎么转换 ascii 码和字符？
+7. Python 中怎么转换 ascii 码和字符？
 
     答：`chr(65)`和`ord('A')`。
 
-7. `len('中文')`和`len('中文'.encode('utf-8'))`的输出分别是多少？
+8. `len('中文')`和`len('中文'.encode('utf-8'))`的输出分别是多少？
 
     答：2 和 6，Python 默认是  Unicode 编码，转换成 UTF-8 编码，中文通常占用三个字符，英文一个。
 
-8. 一行代码将字符串 "->" 插入到 "abcdefg" 中每个字符的中间
+9. 一行代码将字符串 "->" 插入到 "abcdefg" 中每个字符的中间
 
     答：`"->".join("abcdef")`
 
-9. 如何判断一个字符串是否是另一个字符串的子串
+10. 如何判断一个字符串是否是另一个字符串的子串
 
     答：`in`；`s.find()`可以放回 index，如果返回 -1 则说明查询不到；`s.index()`，类似`s.find()`，找不到会抛出异常。
 
-10. 字符串常用函数
+11. 字符串常用函数
 
     答：大小写转换：lower(), upper(), capitalize(), title(), swapcase()
     
@@ -1706,7 +1847,7 @@ keywords: 面试题
     
     字符判断：isdigit(), isalpha(), islower(), isupper()
 
-11. list
+12. list
 
     答：
     ```python
@@ -1730,7 +1871,11 @@ keywords: 面试题
 	    print(item)
 	```
 
-12. set
+13. Python 的 list 在 append 的时候会发生什么？
+
+    答：如果当前容量没满，直接把 `x` 放到下一个空位，已用空间 `+1`，这是 O(1) 操作；如果容量满了，Python 会扩容（reallocate）一块更大的内存区域（通常为当前容量的 1.1 倍），把旧数据拷贝过去，再把 `x` 插进去，这是 O(n) 的操作（因为要复制已有元素）。因此`[None] * n`比 `append`更省时。
+
+14. set
 
     答：
     ```python
@@ -1750,7 +1895,7 @@ keywords: 面试题
 	    print(item)
 	```
 
-13. dict
+15. dict
 
     答：
     ```python
@@ -1772,7 +1917,7 @@ keywords: 面试题
 	    print(k, v)
 	```
 
-14. tuple
+16. tuple
 
     答：
     ```python
@@ -1787,7 +1932,7 @@ keywords: 面试题
 	    print(item)
 	```
 
-15. Python 的可变对象和不可变对象
+17. Python 的可变对象和不可变对象
 
     答：可变对象：可以在原地修改其内容，不改变对象的 id（地址）。不可变对象：一旦创建，内容就不能被改变。修改操作会创建新的对象。
     
@@ -1813,7 +1958,7 @@ keywords: 面试题
     
     作为字典键或集合元素，必须是不可变对象（如字符串、整数、元组）。
 
-16. 自定义排序
+18. 自定义排序
 
     答：sorted_data = sorted(data, key=lambda x: (x[0], x[1]))
     
@@ -1845,23 +1990,23 @@ keywords: 面试题
 	print(lst)
 	```
 
-17. Python 的匿名函数是什么
+19. Python 的匿名函数是什么
 
     答：就是 lambda 函数，一般用来实现简单的功能，如加法 `(lambda x, y: x + y)(3, 4)`。
 
-18. @staticmethod 和 @classmethod 的作用与区别
+20. @staticmethod 和 @classmethod 的作用与区别
 
     答：[链接](https://blog.csdn.net/qq_15037231/article/details/77943109)
 
-19. Python 的 getter 和 setter 是什么？
+21. Python 的 getter 和 setter 是什么？
 
     答：@property 和 @name.setter。
 
-20. Python 赋值、浅拷贝和深拷贝
+22. Python 赋值、浅拷贝和深拷贝
 
     答：[链接](https://www.cnblogs.com/wilber2013/p/4645353.html)
 
-21. 装饰器的意义和使用？
+23. 装饰器的意义和使用？
 
     答：用来实现代码复用，增强代码可读性。
 
@@ -1879,21 +2024,21 @@ keywords: 面试题
         myfunc("something")
     ```
 
-22. 解释一下多态？
+24. 解释一下多态？
 
     答：多态的好处就是，当我们需要传入`Dog`、`Cat`、`Tortoise`……时，我们只需要接收`Animal`类型就可以了，因为`Dog`、`Cat`、`Tortoise`都是`Animal`类型，然后，按照`Animal`类型进行操作即可。由于`Animal`类型有`run()`方法，因此，传入的任意类型，只要是`Animal`类或子类，就会自动调用实际类型的`run()`方法，这就是多态的意思：
     
     对于一个变量，我们只需要知道它是`Animal`类型，无需确切地知道它的子类型，就可以放心地调用`run()`方法，而具体调用的`run()`方法是作用在`Animal`、`Dog`、`Cat`还是`Tortoise`对象上，由运行时该对象的确切类型决定，这就是多态真正的威力：调用方只管调用，不管细节，而当我们新增一种`Animal`的子类时，只要确保`run()`方法编写正确，不用管原来的代码是如何调用的。
 
-23. 鸭子类型是什么？
+25. 鸭子类型是什么？
 
     答：对于 Python 这样的动态语言，则不一定需要传入`Animal`类型。我们只需要保证传入的对象有一个`run()`方法就可以了：这就是动态语言的“鸭子类型”，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。
 
-24. Counter 与运算和或运算
+26. Counter 与运算和或运算
 
     答：与和或操作分别返回两个 Counter 各元素的最小值和最大值。得到的 Counter 对象将删除小于 1 的元素。
 
-25. Python 多线程？
+27. Python 多线程？
 
     答：对于 CPU 密集型，由于全局解释器锁（GIL）的存在，GIL 保证在任何时刻只有一个线程执行 Python 字节码，所以线程是线性执行的；对于 I/O 密集型，由于线程在等待 I/O 操作时会释放全局解释器锁，所以这时多线程有体现作用。
 
@@ -2223,7 +2368,7 @@ keywords: 面试题
 
 16. KNN 怎么更快地找到最近邻点？
 
-    答：KD 树和 ball 树，KD 树根据样本构建，但训练样例远大于特征维度时才适用。
+    答：KD 树和 Ball 树，两者都是用树结构把点集递归划分，使得查询时可以剪枝，减少距离计算。KD 树根据样本构建，但训练样例远大于特征维度时才适用，适用于低维数据。Ball 树适用于高维数据。
 
 17. KNN 算法可以根据距离加权吗？
 
@@ -2543,7 +2688,7 @@ keywords: 面试题
 
 8. DBSCAN
 
-    答：不需要指定 k。
+    答：通过点的密度决定簇，密度足够高的区域形成一类，噪声点会被丢掉。不需要指定 k，但参数敏感。
 
 9. IVF（Inverted File Index，倒排文件索引）
 
@@ -2554,16 +2699,16 @@ keywords: 面试题
 1. id3 是什么？
 
     答：利用信息增益（Information Gain，大的特征优选）的决策多叉树。
-    $$H(S) = - \sum_{c=1}^C p_c \log_2 p_c$$；$$Gain(S, A) = H(S) - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} H(S_v)$$。
+    $$H(S) = - \sum_{c=1}^C p_c \log_2 p_c$$；$$Gain(S, A) = H(S) - \sum_{v \in Values(A)} \frac{\|S_v\|}{\|S\|} H(S_v)$$。
 
 2. c4.5 是什么？
 
     答：信息增益容易倾向选择取值多的属性，所以 c4.5 是利用信息增益比（Gain Ratio，大的特征优选）的决策多叉树。
-    $$SplitInfo(S, A) = - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} \log_2 \frac{|S_v|}{|S|}$$；$$GainRatio(S, A) = \frac{Gain(S, A)}{SplitInfo(S, A)}$$。
+    $$SplitInfo(S, A) = - \sum_{v \in Values(A)} \frac{\|S_v\|}{\|S\|} \log_2 \frac{\|S_v\|}{\|S\|}$$；$$GainRatio(S, A) = \frac{Gain(S, A)}{SplitInfo(S, A)}$$。
 
 3. cart 是什么？
 
-    答：利用基尼系数（Gini impurity/基尼不纯度：从数据集 D 中随机抽取两个样本，类别标志不一样概率，小的优选）的决策二叉树，可为回归树，也可为分类树。$$Gini(S) = 1 - \sum_{c=1}^C p_c^2$$，$$GiniIndex(S, A) = \sum_{v \in Values(A)} \frac{|S_v|}{|S|} Gini(S_v)$$。
+    答：利用基尼系数（Gini impurity/基尼不纯度：从数据集 D 中随机抽取两个样本，类别标志不一样概率，小的优选）的决策二叉树，可为回归树，也可为分类树。$$Gini(S) = 1 - \sum_{c=1}^C p_c^2$$，$$GiniIndex(S, A) = \sum_{v \in Values(A)} \frac{\|S_v\|}{\|S\|} Gini(S_v)$$。
 
 4. 决策树中的特征选择方法有哪些？
 
@@ -3007,11 +3152,21 @@ keywords: 面试题
 
      答：[链接](https://zhuanlan.zhihu.com/p/34916654)
 
-31. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
+31. CNN
+
+     答：CNN 结构组成
+     - 输入层：输入图像（比如 28×28 像素的灰度图，或 RGB 三通道彩色图像）。
+     - 卷积层：用卷积核 (filter) 在图像上滑动，提取局部特征。例如：边缘、角点、纹理。参数共享：同一个卷积核在整张图像上应用，大幅减少参数量。
+     - 激活函数：常用 ReLU (f(x)=max⁡(0,x)f(x) = \max(0, x)f(x)=max(0,x))，增加非线性。
+     - 池化层：最大池化 (Max Pooling)、平均池化 (Average Pooling)。降低特征图大小，减少计算量，增强模型的平移鲁棒性。
+     - 全连接层：把高维特征展平，输入到分类器或回归器。最后一层通常用 softmax（分类） 或 线性（回归）。
+     - 输出层：分类：输出概率分布；回归：输出数值预测。
+
+32. CNN 在卷积和池化过程中，输入特征和输出特征的关系是怎样的？
 
      答：输出尺寸 = (输入尺寸 - filter + 2 * padding）/ stride + 1。计算尺寸不被整除，卷积向下取整，池化向上取整。
 
-32. RNN 是什么？
+33. RNN 是什么？
 
      答：$$o_t=\sigma(W_o[h_{t-1}, x_t] + b_o)$$
     ```python
@@ -3029,7 +3184,7 @@ keywords: 面试题
 	    return h  # 返回最后一步隐藏状态
 	```
 
-33. LSTM 是什么？
+34. LSTM 是什么？
 
      答：遗忘门：$$f_t=\sigma(W_f[h_{t-1}, x_t] + b_f)$$，输出 [0, 1]，来表示信息保留程度。
 
@@ -3058,7 +3213,7 @@ keywords: 面试题
 	    return h, c
 	```
 
-34. GRU 是什么？
+35. GRU 是什么？
 
      答：LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
     ```python
@@ -3074,51 +3229,51 @@ keywords: 面试题
 	    return h
 	```
 
-35. LSTM 和 GRU 的联系和区别？
+36. LSTM 和 GRU 的联系和区别？
 
      答：都是通过使梯度的乘法变成加法，来解决 RNN 由于梯度消失而不能对长期依赖建模的问题。前者三个门，后者两个门，所以前者计算更耗时。
 
-36. 门机制为什么能解决梯度消失或爆炸问题？
+37. 门机制为什么能解决梯度消失或爆炸问题？
 
      答：[链接](https://zhuanlan.zhihu.com/p/27485750)
 
-37. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
+38. TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？
 
     答：[链接](https://zhuanlan.zhihu.com/p/61590026)
 
-38. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
+39. TensorFlow 和 Pytorch 如何固定参数和 fine-tune？
 
     答：[链接](https://zhuanlan.zhihu.com/p/61590026)
 
-39. TensorFlow 怎么实现 learning rate decay？
+40. TensorFlow 怎么实现 learning rate decay？
 
     答：[链接](https://blog.csdn.net/u012436149/article/details/62058318)
 
-40. Pytorch 怎么实现 learning rate decay？
+41. Pytorch 怎么实现 learning rate decay？
 
     答：[链接](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/)
 
-41. TensorFlow 内部求导机制？
+42. TensorFlow 内部求导机制？
 
     答：符号求导。先提供每一个 op 求导的数学实现，然后使用链式法则求出整个表达式的导数。
 
-42. TensorFlow 创建变量的方式有哪些，有什么区别？
+43. TensorFlow 创建变量的方式有哪些，有什么区别？
 
     答：`tf.Variable()`和`tf.get_variable()`。前者一律创建新的变量，遇到同名变量，会在后面加后缀 1，2；后者如果遇到同名变量，则使用之前创建的变量，但要求这个变量一定在 variable_scope 中，且有 reuse 选项。
 
-43. Pytorch 如何切换训练和测试模式？
+44. Pytorch 如何切换训练和测试模式？
 
     答：`model.train()`和`model.eval()`
 
-44. `torch.no_grad`和`model.eval`区别
+45. `torch.no_grad`和`model.eval`区别
 
     答：前者相比后者，BN，dropout 都在。两者结合起来，可以取消 BN，dropout 并不计算梯度。
 
-45. Pytorch 的 view 和 reshape 有什么区别？
+46. Pytorch 的 view 和 reshape 有什么区别？
 
     答：view 只能用于连续内存的张量；只改变视图，不复制数据（如果张量是连续的）；如果张量不是连续的，会报错；更快（不涉及数据复制）；在对张量做完 `.contiguous()` 后更常用。reshape 可以用于非连续张量（会自动创建副本）；自动处理非连续张量，可能复制数据；自动处理，返回新的张量；稍慢（可能需要复制内存）；更通用，适用于任何张量。
 
-46. GPU 利用率低怎么办？
+47. GPU 利用率低怎么办？
 
     答：dataset API 可以支持以 streaming 的方式读取数据。
 
@@ -4319,7 +4474,7 @@ keywords: 面试题
 
 10. 职业规划（工作方向）: [链接](https://www.zhihu.com/question/20054953)
 
-11. 个人工作内容 & 部门工作内容（业务，技术栈）
+11. 个人工作内容 & 部门工作内容（业务，技术栈）/团队规模/团队资源（GPU）
 
 12. 工作地点：城市，具体位置，远程办公
 
