@@ -1594,7 +1594,7 @@ keywords: 面试题
     区间/字符串 DP
     - 区间 DP（如戳气球）：枚举区间分割点 `k`，`dp[i][j] = max(dp[i][k] + dp[k][j] + ...)`
     - 回文子串个数：中心扩展或 `dp[i][j] = s[i]==s[j] && dp[i+1][j-1]`
-    - 编辑距离（字符串最少操作次数）：`dp[i][j] = min(insert, delete, replace)`
+    - 编辑距离（字符串最少操作次数）：`当 word1[i] == word2[j]，dp[i][j] = dp[i-1][j-1]；当 word1[i] != word2[j]，dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1`。初始化：`dp = [[0]*(n+1) for _ in range(m+1)]`及`for i in range(m+1): dp[i][0]=i; for j in range(n+1): dp[0][j]=j`，最后返回`dp[-1][-1]`
     - 正则表达式匹配：状态表示文本和模式的位置，处理 `*` 和 `.`
     - 最长回文子序列：`dp[i][j] = dp[i+1][j-1] + 2 if s[i]==s[j] else max(dp[i+1][j], dp[i][j-1])`
     - 打字机（最小按键次数）：状态包含剪切板，粘贴次数等
@@ -2118,9 +2118,9 @@ keywords: 面试题
 
 12. ROC（Receiver Operating Characteristic）和 AUC（Area under Curve）
 
-     答：ROC 依据阈值，画出曲线，横轴为假正类率 (false positive rate，FPR)，纵轴为真正类率 （true positive rate，TPR）。
+     答：ROC 依据阈值，画出曲线，横轴为假正类率 (false positive rate，FPR)，纵轴为真正类率 （true positive rate，TPR）。F1 是 ROC 在特定阈值下的一个点。
      
-     AUC 为 ROC 曲线下的面积，介于 0.1 和 1 之间。AUC 作为数值可以直观的评价分类器的好坏，值越大越好。
+     AUC 为 ROC 曲线下的面积，介于 0.1 和 1 之间。AUC 作为数值可以直观地评价分类器的好坏，即排序能力（将正样本排在负样本前面的能力），值越大越好。
 
 #### Regression
 
@@ -2194,6 +2194,10 @@ keywords: 面试题
 	    if epoch % 100 == 0:
 	        print(f"Epoch {epoch}: loss={loss:.4f}, w={w:.4f}, b={b:.4f}")
     ```
+
+8. 最小二乘法和梯度下降的区别
+
+    答：最小二乘法可以一次性得到最优解，但当 feature 和 sample 数目过多时，对内存要求过高，且当矩阵不可逆时，无法求解。
 
 #### Classification
 
@@ -2318,7 +2322,11 @@ keywords: 面试题
     - 如果 $$P(θ)$$ 是高斯分布（$$exp(−θ² / 2σ²)$$），那么 MAP 对应在最大似然的基础上加入 L2 正则项（Ridge Regression 形式），防止过拟合。
     - 如果 $$P(θ)$$ 是拉普拉斯分布（$$exp(−\|θ\| / b)$$），则 MAP 对应于最大似然 + L1 正则项（Lasso Regression 形式），这会导致部分参数为 0，实现特征选择的效果。
 
-7. LR 为什么要对特征进行离散化（discretization）？
+7. 交叉熵的理论下限
+
+    答：H(y)。对于 hard label，H(x) = 0。
+
+8. LR 为什么要对特征进行离散化（discretization）？
 
     答：模型是使用离散特征还是连续特征，其实是一个“海量离散特征+简单模型” 同 “少量连续特征+复杂模型”的权衡。既可以离散化用线性模型，也可以用连续特征加深度学习。
     
@@ -2334,47 +2342,47 @@ keywords: 面试题
     
     f. 特征离散化以后，起到了简化了逻辑回归模型的作用，降低了模型过拟合的风险。
 
-8. 给一个有 m 个样本，n 维特征的数据集，如果用 LR 算法，那么梯度是几维？
+9. 给一个有 m 个样本，n 维特征的数据集，如果用 LR 算法，那么梯度是几维？
 
     答：n 维。
 
-9. 如何用机器学习算法计算特征重要性？
+10. 如何用机器学习算法计算特征重要性？
 
     答：LR 后看系数。
 
-10. 特征选择
+11. 特征选择
 
     答：剔除方差比较小的特征，其区分度较低，信息熵很大；单变量特征选择（卡方检验）；递归式特征消除：逐步移除掉最不重要的特征；L1；决策树；依序选择：前向（从少到多）或后向（从多到少）。
 
-11. 单层感知机为什么不能解决异或问题？
+12. 单层感知机为什么不能解决异或问题？
 
     答：因为异或操作需要两条线来划分边界，而单层感知机可以理解为一个线性分类器，只能解决与、或、非问题。
 
-12. 如何对单层感知机进行改进，使其能够解决异或问题？
+13. 如何对单层感知机进行改进，使其能够解决异或问题？
 
     答：多层感知机，或在进入激活函数前加一个多项式模块，从而添加非线性成分。
 
-13. 怎么判断分类器是线性分类器还是非线性分类器？
+14. 怎么判断分类器是线性分类器还是非线性分类器？
 
     答：根据决策面是否是线性的。
 
-14. KNN 的训练损失是多少？
+15. KNN 的训练损失是多少？
 
     答：KNN 实际上不算训练，损失为 0。
 
-15. KNN 算法的 k 值应该如何选择？
+16. KNN 算法的 k 值应该如何选择？
 
     答：k 值太小，模型复杂度较高，容易过拟合；k 值太大，模型复杂度不够，较远的点也可能影响分类结果，分类模糊，导致分类结果不理想。当 k 取训练集大小时，分类结果都为训练集中最多的类。k 值一般选取较小的值，且要低于训练样本数的平方根，可以使用交叉验证法选取。
 
-16. KNN 怎么更快地找到最近邻点？
+17. KNN 怎么更快地找到最近邻点？
 
     答：KD 树和 Ball 树，两者都是用树结构把点集递归划分，使得查询时可以剪枝，减少距离计算。KD 树根据样本构建，但训练样例远大于特征维度时才适用，适用于低维数据。Ball 树适用于高维数据。
 
-17. KNN 算法可以根据距离加权吗？
+18. KNN 算法可以根据距离加权吗？
 
     答：可以用反函数或高斯函数进行距离加权，前者为近邻样本赋予较大权重，稍远的会衰减地很快，因此对噪声数据比较敏感，后者能解决这个问题，但比较复杂。
 
-18. KNN 核心代码
+19. KNN 核心代码
 
     答：
     ```python
@@ -2385,19 +2393,19 @@ keywords: 面试题
 	    return int(np.round(np.mean(nearest_labels)))
     ```
 
-19. 常见的距离度量方法有哪些？
+20. 常见的距离度量方法有哪些？
 
     答：$$L_p$$ 距离 / Minkowski 距离 / 闵式距离是最常规的距离度量方式，其公式为 $$(\|x-y\|^p)^{1/p}$$。当 $$p = 1$$ 时为曼哈顿距离，$$p = 2$$ 时为欧式距离，$$p$$ 为无穷大时为各个坐标距离的最大值，即切比雪夫距离。
 
-20. 衡量相似度的方法？
+21. 衡量相似度的方法？
 
     答：欧式距离，Jaccard 相似度（两集合交集大小 / 并集大小），余弦相似度，皮尔逊相关系数（数值归一化后计算余弦相似度），汉明距离。
 
-21. 什么是支持向量机？
+22. 什么是支持向量机？
 
     答：支持向量机就是构造一个的超平面，使得距离超平面最近的那些点，即支持向量与超平面之间的 margin 最大，从而将两个集合分开。
 
-22. LR 和 SVM 的联系与区别？
+23. LR 和 SVM 的联系与区别？
 
     答：[链接](https://www.cnblogs.com/zhizhan/p/5038747.html)
 
@@ -2405,15 +2413,15 @@ keywords: 面试题
 
     区别：LR 是参数模型，SVM 是非参数模型；从目标函数来看，LR 采用的是 log loss，SVM 采用的是 hinge loss。
 
-23. 当数据线性可分、接近线性可分以及线性不可分时，分别使用什么 SVM？
+24. 当数据线性可分、接近线性可分以及线性不可分时，分别使用什么 SVM？
 
     答：硬间隔最大化、软间隔最大化以及核技巧。
 
-24. SVM 为什么采用间隔最大化？
+25. SVM 为什么采用间隔最大化？
 
     答：当训练数据线性可分时，存在无穷个分离超平面可以将两类数据正确分开。感知机利用误分类最小策略，求得分离超平面，不过此时的解有无穷多个。线性可分支持向量机利用间隔最大化求得最优分离超平面，这时，解是唯一的。另一方面，此时的分隔超平面所产生的分类结果是最鲁棒的，对未知实例的泛化能力最强。
 
-25. 手推 SVM
+26. 手推 SVM
 
     答：
     
@@ -2441,67 +2449,67 @@ keywords: 面试题
 
     求解问题，解出 $$\alpha$$，从而解得 $$w, b$$，$$\alpha_i > 0$$ 对应的样本即为支持向量。
 
-26. 为什么要将求解 SVM 的原始问题转换为其对偶问题？
+27. 为什么要将求解 SVM 的原始问题转换为其对偶问题？
 
     答：一是对偶问题往往更易求解。二是可以自然引入核函数，进而推广到非线性分类问题。
 
-27. 为什么 SVM 对缺失数据敏感？
+28. 为什么 SVM 对缺失数据敏感？
 
     答：缺失数据是指缺失某些特征数据，向量数据不完整。SVM 没有处理缺失值的策略。而 SVM 希望样本在特征空间中线性可分，所以特征空间的好坏对 SVM 的性能很重要。缺失特征数据将影响训练结果的好坏。
 
-28. 什么是几何间隔，什么是函数间隔？
+29. 什么是几何间隔，什么是函数间隔？
 
     答：几何间隔 $$y_i\frac{w^Tx_i+b}{\|w\|}$$，函数间隔 $$y_i(w^Tx_i+b)$$。函数间隔可以无限大，几何间隔不可以。
 
-29. 支持向量机的训练在本质上是在最优化哪个值？
+30. 支持向量机的训练在本质上是在最优化哪个值？
 
     答：w。w 得到 b 自然可以得到。
 
-30. 如何用支持向量机实现深度学习？
+31. 如何用支持向量机实现深度学习？
 
     答：可以用支持向量机作为网络的最后一层，进行分类。
 
-31. 给一组数据，问决策树、LR、NB 以及 SVM 等算法学出来是什么样子的？
+32. 给一组数据，问决策树、LR、NB 以及 SVM 等算法学出来是什么样子的？
 
     答：[链接](https://www.zhihu.com/question/26726794)
 
-32. 什么是基于核的机器学习算法？
+33. 什么是基于核的机器学习算法？
 
     答：判别式模型需要把正负样本区分开，那势必会遇到区分不开的情形，这时要用到核函数，所以可认为判别式模型都要用核函数的。
 
-33. SVM 有哪些核函数？
+34. SVM 有哪些核函数？
 
     答：线性核和高斯核，即线性核与 RBF（径向基）核。 线性核：主要用于线性可分，参数少，速度快，对于一般数据，分类效果已经很理想了。 RBF 核：主要用于线性不可分，参数多，分类结果非常依赖于参数。 如果 Feature 数量跟样本数量差不多，应选用线性核的 SVM。 如果 Feature 数量比较小，样本数量一般，选用高斯核的 SVM。其他的核函数包括幂指数核、拉普拉斯核以及 Sigmoid 核等等。
 
-34. 高斯核为什么有效？
+35. 高斯核为什么有效？
 
     答：[链接](https://stats.stackexchange.com/questions/131138/what-makes-the-gaussian-kernel-so-magical-for-pca-and-also-in-general)
 
-35. 支持向量机可以用来做回归吗？
+36. 支持向量机可以用来做回归吗？
 
     答：支持向量机分类是使两类的点在各自的支持向量外，而支持向量机回归是把所有的点都看成一类，并要求在支持向量内。
 
-36. SVM 和 softmax 的区别？
+37. SVM 和 softmax 的区别？
 
     答：SVM 具有附加稳定性，当样例满足边界条件时，该样例不会影响损失函数；而 softmax 将考虑所有的样例。
 
-37. 感知机和 SVM 有什么区别？
+38. 感知机和 SVM 有什么区别？
 
     答：[链接](http://sofasofa.io/forum_main_post.php?postid=1003714)
 
-38. One-class SVM？
+39. One-class SVM？
 
     答：用于异常检测问题：只用正常样本训练，学习出一个边界包围正常数据，边界外的点被判为异常。
 
-39. 朴素贝叶斯为何如此朴素？
+40. 朴素贝叶斯为何如此朴素？
 
     答：对条件概率分布作了条件独立性（conditional independence）的假设。
 
-40. 朴素贝叶斯中特征不小心重复会有影响吗？
+41. 朴素贝叶斯中特征不小心重复会有影响吗？
 
     答：会，破坏了原本的独立性假设。
 
-41. 用 numpy 实现 cross entropy loss（softmax）
+42. 用 numpy 实现 cross entropy loss（softmax）
 
     答：
     ```python
@@ -2542,7 +2550,7 @@ keywords: 面试题
 	loss = cross_entropy_loss(probs, labels)
     ```
 
-42. 用 numpy 实现 cross entropy loss（log-softmax）
+43. 用 numpy 实现 cross entropy loss（log-softmax）
 
     答：用 log-softmax 数值更稳定，减 max 是防止指数函数输出过大，用减法算 log 是防止 log(0)。
     ```python
@@ -2580,7 +2588,7 @@ keywords: 面试题
 	loss = cross_entropy_loss_from_logits(logits, labels)
     ```
 
-43. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
+44. You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?
 
     答：If you have worked on enough data sets, you should deduce that cancer detection results in imbalanced data. In an imbalanced data set, accuracy should not be used as a measure of performance because 96% (as given) might only be predicting majority class correctly, but our class of interest is minority class (4%) which is the people who actually got diagnosed with cancer. Hence, in order to evaluate model performance, we should use Sensitivity (True Positive Rate), Specificity (True Negative Rate), F measure to determine class wise performance of the classifier. If the minority class performance is found to to be poor, we can undertake the following steps:
     
@@ -2594,7 +2602,7 @@ keywords: 面试题
     
     Know more: Imbalanced Classification
 
-44. 多分类问题如何转二分类方法？
+45. 多分类问题如何转二分类方法？
 
     答：a. 一对多法（one-versus-rest）。把某类样本归为一类，其他归为另一类，k 个类别的样本就构造出了 k 个 SVM；
 
@@ -2602,7 +2610,7 @@ keywords: 面试题
 
     c. 层次支持向量机（H-SVMs）。先将所有类别分成两个子类，再将子类进一步划分成两个次级子类，如此循环。
 
-45. 上溢（overflow）和下溢（underflow）是什么，softmax 函数会出现哪种情况，该怎么解决？
+46. 上溢（overflow）和下溢（underflow）是什么，softmax 函数会出现哪种情况，该怎么解决？
 
     答：上溢即大量级的数被近似为正负无穷时，发生上溢。发生上溢后，这些数值会变为非数值。下溢即有些逼近零的数，如零除或者对零取对数时，得到负无穷，如果对负无穷进一步运算，则会得到非数字。softmax 函数中有指数运算，如果要运算的数过小或过大，则会下溢或上溢。解决上溢的方式是让每一个值都减去最大分量的值，由于这样做之后分母有一项为 1，所以不会出现下溢。同样对于取对数，可以让所有数都加 1。
 
@@ -2696,31 +2704,41 @@ keywords: 面试题
 
 #### Decision Tree
 
-1. id3 是什么？
+1. 决策树
+
+    答：每个内部结点表示一个属性的测试；每个分支表示一个测试输出；每个叶结点代表一种类别。
+    决策树的总体流程是自根至叶的递归过程，在每个中间结点寻找一个划分属性，来降低熵。
+
+2. id3 是什么？
 
     答：利用信息增益（Information Gain，大的特征优选）的决策多叉树。
     $$H(S) = - \sum_{c=1}^C p_c \log_2 p_c$$；$$Gain(S, A) = H(S) - \sum_{v \in Values(A)} \frac{\|S_v\|}{\|S\|} H(S_v)$$。
 
-2. c4.5 是什么？
+3. c4.5 是什么？
 
     答：信息增益容易倾向选择取值多的属性，所以 c4.5 是利用信息增益比（Gain Ratio，大的特征优选）的决策多叉树。
     $$SplitInfo(S, A) = - \sum_{v \in Values(A)} \frac{\|S_v\|}{\|S\|} \log_2 \frac{\|S_v\|}{\|S\|}$$；$$GainRatio(S, A) = \frac{Gain(S, A)}{SplitInfo(S, A)}$$。
 
-3. cart 是什么？
+4. cart 是什么？
 
-    答：利用基尼系数（Gini impurity/基尼不纯度：从数据集 D 中随机抽取两个样本，类别标志不一样概率，小的优选）的决策二叉树，可为回归树，也可为分类树。$$Gini(S) = 1 - \sum_{c=1}^C p_c^2$$，$$GiniIndex(S, A) = \sum_{v \in Values(A)} \frac{\|S_v\|}{\|S\|} Gini(S_v)$$。
+    答：当为分类树，利用基尼系数（Gini index/Gini impurity/基尼不纯度）：基于某个属性，划分成多个子数据集，从子数据集中随机抽取两个样本，类别标志不一样概率，概率越低，说明越纯，即依据该属性划分更有效，因此基尼系数小的优选。$$Gini(S) = 1 - \sum_{c=1}^C p_c^2$$，$$GiniIndex(S, A) = \sum_{v \in Values(A)} \frac{\|S_v\|}{\|S\|} Gini(S_v)$$。
+    
+    当为回归树，用均方误差或平方残差和作为划分标准，最后每个叶节点输出为该节点下所有训练样本的平均值。
 
-4. 决策树中的特征选择方法有哪些？
+5. 决策树中的特征选择方法有哪些？
 
     答：分类：信息增益、信息增益比和基尼系数；回归：误差（一般取叶子结点数值的方差和）。
 
-5. 决策树容易过拟合的原因是什么？如何缓解？
+6. 决策树容易过拟合的原因是什么？如何缓解？
 
     答：训练数据中噪声或特征太多，树可以完美拟合训练集。
     
-    缓解方法：剪枝；设置最大深度、最小叶子节点数；使用集成方法（如随机森林）
+    缓解方法：
+    - 剪枝：预剪枝（在决策树生长过程中，对每个结点在划分前进行估计，若当前结点的划分不能带来决策树泛化性能的提升，则停止划分并将当前结点标记为叶结点），后剪枝（先从训练集生成一颗完整的决策树，然后自底向上地对非叶结点进行考察，若将该结点对应的子树替换为叶结点能带来决策树泛化性能的提升，则将该子树替换为叶结点）
+    - 设置最大深度、最小叶子节点数
+    - 使用集成方法（如随机森林）
 
-6. Python 相关实现
+7. Python 相关实现
 
     答：
     ```python
@@ -2852,7 +2870,7 @@ keywords: 面试题
 
 2. PCA，SVD 和 LDA 有什么区别？
 
-    答：PCA 和 SVD 是无监督算法，不需要类别信息，他们都可以将数据投影到低维空间，以最大程度保留原始数据的方差信息。PCA 基本思想：找到数据方差最大的方向，将高维数据投影到这些方向上以实现降维。主要步骤：中心化 → 计算协方差矩阵 → 特征值分解 → 选择前 k 个主成分 → 投影。LDA 是有监督算法，需要类别信息，他在降维的同时让类间距离尽可能大，类内距离尽可能小。
+    答：PCA 和 SVD 是无监督算法，不需要类别信息，他们都可以将数据投影到低维空间，以最大程度保留原始数据的方差信息。PCA 基本思想：找到数据方差最大的方向，将高维数据投影到这些方向上以实现降维。主要步骤：中心化 → 计算协方差矩阵 → 特征值分解（eigendecomposition）→ 选择前 k 个主成分 → 投影。LDA 是有监督算法，需要类别信息，他在降维的同时让类间距离尽可能大，类内距离尽可能小。
 
 3. 特征标准化有什么意义？怎么做？
 
@@ -3146,7 +3164,7 @@ keywords: 面试题
 
 29. 如何调参？
 
-     答：网格搜索；随机搜索；贝叶斯优化。
+     答：网格搜索；随机搜索；贝叶斯优化（更高效，所需实验次数更少，但需要构建代理模型）。
 
 30. 多任务如何学习？
 
@@ -3421,8 +3439,9 @@ keywords: 面试题
 	        self.dropout = nn.Dropout(dropout)
 	
 	    def forward(self, x, mask=None):
-	        # Self-attention with residual
+	        # Self-attention
 	        attn_out = self.attention(x, mask)
+	        # Residual Connection
 	        x = x + self.dropout(attn_out)
 	        x = self.norm1(x)
 	
@@ -3625,10 +3644,8 @@ keywords: 面试题
 	import torch.nn.functional as F
 	
 	def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
-	    """
-	    Q, K, V: [B, L, D]，Batch x Length x Dim
-	    block_size: 每块序列长度
-	    """
+	    # Q, K, V: [B, L, D]，Batch x Length x Dim
+	    # block_size: 每块序列长度
 	    B, L, D = Q.shape
 	    output = torch.zeros_like(Q)
 	
