@@ -4218,9 +4218,13 @@ keywords: 面试题
 
 41. 为什么 LLM 流行 MoE？
 
-    答：MoE 能显著提高模型容量而不成比例地增加计算成本。
+    答：MoE 能显著提高模型容量而不成比例地增加计算成本，且支持 expert parallelism。
 
-42. 手撕 MoE
+42. MoE 负载均衡
+
+    答：使用 MoE，模型可能会退化成只用少数几个专家，从而导致参数利用率低，训练/推理时部分 GPU 负载过高，OOM 或速度瓶颈。负载均衡常用方法：用辅助损失（Load Balancing Loss）让实际分配和概率分布尽量接近均匀分布；Capacity Factor（容量限制），即如果一个专家超出容量，多余 token 会被丢弃或 reroute 到别的专家，避免某个专家被塞爆。Token Dropping，即丢掉超额 token（只在训练时，用于正则化），或 Token Rerouting，即把超额 token 转发到第二选择的专家（常见于 top-2 gating）；Noisy Gating，在门控 logits 上加噪声（通常是 Gumbel 或 Gaussian），使 gating 更随机化，防止早期训练时过快收敛到少数专家。
+
+43. 手撕 MoE
 
     答：
     ```python
@@ -4242,24 +4246,23 @@ keywords: 面试题
 	        return torch.sum(gate_probs * expert_outputs, dim=1)  # [batch, output_dim]
     ```
 
-
-43. Prefix LM 和 Causal LM 区别是什么？
+44. Prefix LM 和 Causal LM 区别是什么？
 
     答：Causal LM 是单向的，只看左边上下文；Prefix LM 是半双向的，可以看整个 prefix 的信息（左侧上下文），预测后缀。
 
-44. 为什么大部分 LLM 是 decoder-only？
+45. 为什么大部分 LLM 是 decoder-only？
 
     答：生成范式的统一性；任务更难
     
     双向 attention 的注意力矩阵因为是 n * d 与 d * n 的矩阵相乘，理论上最大秩只能为 min(n, d)，而一般 n 远大于 d，所以 n * n 的注意力矩阵容易退化成低秩状态，而 causal attention 的注意力矩阵是下三角矩阵，其秩为对角线上非零的个数，而因为 softmax 输出为正，因此必然是满秩的，建模能力更强。
 
-45. SFT
+46. SFT
 
-46. 强化学习和监督学习有什么区别？
+47. 强化学习和监督学习有什么区别？
 
     答：监督学习中每一个决策（预测标签）是独立的，它对决策的优化取决于标签。强化学习每一个决策是相互影响的，它对决策的优化取决于延时标签（奖励）。过去的 AI 训练方式主要依赖监督学习，也就是让 AI 通过大量人类标注的数据来学习。换句话说，AI 只是一个“超级记忆机”，它能模仿人类的答案，但却不一定真正理解问题的本质。而强化学习的出现，让 AI 不再是单纯的模仿者，而是能够主动探索、试错、优化自己推理方式的智能体。这就像是在训练一个孩子解数学题，监督学习相当于直接告诉他答案，而强化学习则是让他自己尝试解题，并根据最终的正确率进行调整。
 
-47. PPO
+48. PPO
 
     答：
      
@@ -4290,7 +4293,7 @@ keywords: 面试题
 	    return loss
 	```
 
-48. PPO 怎么计算 advantages？
+49. PPO 怎么计算 advantages？
 
     答：
     1. 直接使用 reward。不是 token level
@@ -4308,15 +4311,15 @@ keywords: 面试题
 	    return advantages
      ```
 
-49. PPO 有了 reward model 为什么还要 critic/value model？
+50. PPO 有了 reward model 为什么还要 critic/value model？
 
      答：critic/value model 是内部奖励，仅需当前上下文，会在 RL 过程中更新，reward model 是外部奖励，需要完整回答，是训练好的。
 
-50. 为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？
+51. 为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？
 
      答：需要用标注样本训练；分类模型代价低。
 
-51. DPO
+52. DPO
 
     答：
      
@@ -4330,7 +4333,7 @@ keywords: 面试题
 	    return loss
     ```
  
-52. GRPO
+53. GRPO
    
     答：
      
@@ -4378,29 +4381,29 @@ keywords: 面试题
 	    return loss
     ```
 
-53. DAPO
+54. DAPO
 
     答：提高剪切上限（Clip-Higher）以避免熵过早坍缩；动态采样（Dynamic Sampling）解决准确率为 1 或 0 时的梯度消失问题；改进 Token-Level 策略梯度损失以平衡不同长度的序列贡献；对过长序列进行合理惩罚（Overlong Reward Shaping）以缓解噪声并稳定训练。
 
-54. PPO vs DPO vs GRPO
+55. PPO vs DPO vs GRPO
 
     答：所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。PPO 依赖于 reward model 和 value model；DPO 没有显式探索机制。
 
-55. GRPO 怎么去掉 critic/value model 的？
+56. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-56. 熵控制在强化学习里的作用
+57. 熵控制在强化学习里的作用
 
      答：在大模型训练的强化学习阶段，设置较高的 temperature 可以防止模型过度自信，鼓励模型采取高熵动作，从而扩大探索空间。另一种方式是在 group-level 用 smi/dpp/self-bleu 计算多样性，进行 reward shaping 来控制熵的变化。
      
      熵坍塌：随着训练的进行，entropy 逐渐降低。导致某些 group 采样出的 response 几乎相同，使得模型在早期变得更加确定，限制了模型的探索空间。
 
-57. LoRA
+58. LoRA
 
      答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。target_modules 一般为`q_proj`、`v_proj`，有时也会注入到 `k_proj` 或 `o_proj`。modules_to_save 表示指定哪些原模型模块需要一起训练 & 保存，如果扩展了词表可能要加 `embed_tokens`、`lm_head`。
 
-58. 手撕 LoRA
+59. 手撕 LoRA
 
      答：
      ```python
@@ -4425,15 +4428,15 @@ keywords: 面试题
 	        return base + lora
     ```
 
-59. Adapter
+60. Adapter
 
      答：插入小型网络模块
 
-60. Prefix Tuning
+61. Prefix Tuning
 
      答：Prefix Tuning 会为每层添加一组虚拟的 Key 和 Value，Query 保持不变。embedding 的输入不会添加。
 
-61. Base model eval
+62. Base model eval
 
      答：General Tasks: MMLU (5-shot), MMLU-Pro (5-shot, CoT), MMLU-redux (5-shot), BBH (3-shot, CoT), SuperGPQA (5-shot, CoT).
      
@@ -4443,7 +4446,7 @@ keywords: 面试题
     
     Multilingual Tasks: MGSM (8-shot, CoT), MMMLU (5-shot), INCLUDE (5-shot).
 
-62. Chat model eval
+63. Chat model eval
 
      答：General Tasks: MMLU-Redux, GPQADiamond, C-Eval, LiveBench.
      
@@ -4455,17 +4458,17 @@ keywords: 面试题
      
      Multilingual Tasks: instruction following - Multi-IF, knowledge - INCLUDE & MMMLU, mathematics - MT-AIME2024 & PolyMath, and logical reasoning - MlogiQA.
 
-63. Safety / Halluciation
+64. Safety / Halluciation
 
     答：出现幻觉原因：1. 语料中存在过时，虚构的内容，或因长尾效应缺乏与下游任务相关的领域知识；2. 语言模型的本质机制是预测下一个最可能的词，它只保证语言上看起来连贯合理，并不保证事实正确，所以它倾向即使不知道，也会编一个出来，在不确定时依然输出确定性答案，很少说我不知道；3. 推理时随机采样的生成策略。
     
     解决方案：提高训练数据质量；RAG 提供权威资料；Prompt Engineering：明确告诉模型不要编造、请回答已知事实，或让模型先思考再输出（如 Let’s think step by step）；生成之后进行事实校验，如比对知识图谱或自动校验；RLHF；多模型协作。
 
-64. Long Context
+65. Long Context
 
     答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
 
-65. LLM设计中的 System 1 和 System 2
+66. LLM设计中的 System 1 和 System 2
 
     答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
      
@@ -4477,7 +4480,7 @@ keywords: 面试题
         
     - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-66. LLM + 知识
+67. LLM + 知识
 
     答：RAG 可以解决 LLM 知识过时，幻觉问题以及无法调用私有数据等问题。
     
@@ -4492,11 +4495,11 @@ keywords: 面试题
     
     另一种方式是 search engine as a tool。
 
-67. 文本分块
+68. 文本分块
 
     答：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。
 
-68. Reasoning
+69. Reasoning
 
     答：Prompting：CoT，ToT，Self-Consistency，s1。
     
@@ -4504,7 +4507,7 @@ keywords: 面试题
     
     改进学习方式：SFT，RLHF，Critic Models：PRM 和 ORM。
 
-69. Test-time Scaling
+70. Test-time Scaling
 
     答：实现 test-time scaling，需要先激励 LLM 在 thinking 上耗费更多资源，从而生成更长的回答，或者更多的回答。
     
@@ -4518,7 +4521,7 @@ keywords: 面试题
     
     提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
 
-70. Agent
+71. Agent
 
     答：Agent = LLM + Planning + Memory + Tool。
     
@@ -4526,33 +4529,33 @@ keywords: 面试题
     
     Memory：short-term（ICL），long-term。
 
-71. MCP 和 function calling 有什么区别？
+72. MCP 和 function calling 有什么区别？
 
     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-72. LangChain
+73. LangChain
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-73. bf16，fp16，fp32，int8 区别
+74. bf16，fp16，fp32，int8 区别
 
     答：指数位决定了数值范围，尾数位决定了精度。bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。int8 可用于量化，因为整数乘法比浮点乘法快，且用缩放映射保留大部分信息。合理设置 scale 和 zero-point，配合 clip 操作，可以安全地把浮点数映射到 int8，不会溢出。
 
-74. LLM 常用的优化器有？
+75. LLM 常用的优化器有？
 
     答：AdamW，Lion，Muon
 
-75. 混合精度计算
+76. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-76. 估算 LLM 的参数量
+77. 估算 LLM 的参数量
 
     答：embedding 层的维度为 Vh，若不与输出层的权重矩阵共享，则需加上输出层的权重矩阵 2Vh。
     
     Transformer 每一层分为 self-attention 和 MLP，self-attention 设计 Q，K，V，O 四个权重矩阵和偏置，因此是 4h^2 + 4h。MLP 一般有两层，先升维再降维，如升到 4h，那么参数量为 8h^2 + 5h。两个模块都有 layer normalization，包含两个可训练参数，形状都为 h，所以参数量总和为 4h。因此，每一层参数量为 12h^2 + 13h。
 
-77. 估算 7B 模型在训练和推理时的显存占用
+78. 估算 7B 模型在训练和推理时的显存占用
 
     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2 字节，fp32 精度为 4 字节。
     
@@ -4560,23 +4563,23 @@ keywords: 面试题
     
     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
-78. 多卡多机训练
+79. 多卡多机训练
 
     答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-79. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+80. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-80. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+81. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-81. deepspeed 的 Zero-1， Zero 2， Zero 3
+82. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存。参数、梯度、优化器状态始终绑定，分配到同一张 GPU 上。
 
-82. 量化
+83. 量化
 
     答：PTQ（训练后量化）和 QAT（训练时量化）。
     
@@ -4586,37 +4589,37 @@ keywords: 面试题
     
     AWQ (Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
-83. vllm
+84. vllm
 
     答：传统的静态分配 KV 缓存不使用虚拟内存，直接对物理内存进行操作，会导致显存碎片和过度预留，因此 vllm 使用了 PagedAttention，即把 KV 缓存当作虚拟内存，每条序列的缓存被划分成块，可动态分配到显存中，允许在不连续的内存空间中存储。
     
     另外 vllm 的 PagedAttention 使用了 memory sharing，即单个 prompt 生成多个序列时，可以共享显存。
 
-84. GPT 的原理？
+85. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-85. BERT 的原理？
+86. BERT 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-86. BERT 的训练目标？
+87. BERT 的训练目标？
 
     答：BERT 有 masked language modeling 和 next sentence prediction 两个目标
 
-87. RoBERTa 相比 BERT 做了哪些改进？
+88. RoBERTa 相比 BERT 做了哪些改进？
 
     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-88. RoBERTa 强于 RNN 的地方？
+89. RoBERTa 强于 RNN 的地方？
 
     答：并行，对大数据比较友好。
 
-89. Qwen
+90. Qwen
 
     答：QwenMoE
 
-90. Deepseek-V1 - Deepseek-V3
+91. Deepseek-V1 - Deepseek-V3
 
     答：
     - MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
@@ -4627,14 +4630,14 @@ keywords: 面试题
     - v3 将门控函数的对更小的小数位会敏感的 softmax（multi-class classification）改成了值域更宽的 sigmoid（multi-label classification）
     - fp8 精度计算
 
-91. Deepseek-R1-Zero
+92. Deepseek-R1-Zero
 
     答：证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
     1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
     2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用 `<think>` 标签包裹推理过程，用 `<answer>` 标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
     3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
 
-92. Deepseek-R1
+93. Deepseek-R1
 
     答：成功经验
     - 在 SFT 阶段采用冷启动，只使用了少量（几千条）高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
