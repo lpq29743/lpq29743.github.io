@@ -811,22 +811,56 @@ keywords: 面试题
     
     - 最大子数组和（Maximum Subarray）：Kadane 算法，维护当前最大和和全局最大和：若当前和为负数，则丢弃，从当前元素重新开始；否则就累加当前元素。
     - 最小子数组和：与最大子数组类似，取 min。
-    - 最大子数组乘积（Maximum Product Subarray）：动态维护最大和最小乘积，因为负负得正。
-    - 子数组最大和（二维扩展）：压缩二维子数组为一维，使用 Kadane 算法。
+    - 最大子数组乘积（Maximum Product Subarray）：遍历数组时，同时维护当前位置结尾的最大乘积 (`max_prod`) 和最小乘积 (`min_prod`)；遇到负数时交换二者，因为负数可能把最小变最大；每一步更新全局最大值 `res`；时间复杂度为 O(n)。
+    
+    ```python
+    def maxProduct(nums):
+	    max_prod = min_prod = result = nums[0]
+	    for num in nums[1:]:
+	        # 遇到负数时，最大和最小会交换
+	        if num < 0:
+	            max_prod, min_prod = min_prod, max_prod
+	        
+	        max_prod = max(num, num * max_prod)
+	        min_prod = min(num, num * min_prod)
+	        
+	        result = max(result, max_prod)
+	    return result
+    ```
+    - 子数组最大和（二维扩展）：枚举上边界 `top` 和下边界 `bottom` 行。对每一对 `(top, bottom)`，把矩阵列压缩成一个一维数组 `sums`，其中 `sums[c]` 表示列 `c` 在 `top..bottom` 行的累加和。在 `sums` 上使用一维最大子数组和（Kadane），得到这一行段组合的最大矩阵和。遍历所有 `(top, bottom)`，更新全局最大值。时间复杂度为 O(rows^2 * cols)。
+    
+    ```python
+    def maxSumSubmatrix(matrix):
+	    if not matrix or not matrix[0]:
+	        return 0
+	    rows, cols = len(matrix), len(matrix[0])
+	    max_sum = float('-inf')
+	
+	    for top in range(rows):
+	        # 初始化列累加数组
+	        col_sums = [0] * cols
+	        for bottom in range(top, rows):
+	            # 累加当前行到 col_sums
+	            for c in range(cols):
+	                col_sums[c] += matrix[bottom][c]
+	
+	            # 在 col_sums 上运行 Kadane 算法
+	            cur_sum = col_sums[0]
+	            cur_max = col_sums[0]
+	            for i in range(1, cols):
+	                cur_sum = max(col_sums[i], cur_sum + col_sums[i])
+	                cur_max = max(cur_max, cur_sum)
+	
+	            max_sum = max(max_sum, cur_max)
+	
+	    return max_sum
+    ```
     
     滑动窗口（适用于全正数或符合单调性问题）
     
     - 长度为 K 的最大平均值子数组：固定长度滑动窗口，维护当前窗口总和。
     - 最多包含 K 个不同元素的最长子数组：变长滑动窗口 + 哈希表统计窗口内字符种类。
     - 最多有两个不同字符的最长子字符串：滑动窗口 + 哈希表记录字符频次。
-    
-    前缀和
-    
-    - 和为 K 的子数组数量（Subarray Sum Equals K）：滑动窗口只适用于所有数为正；否则使用前缀和 + 哈希表（初始值为 0: 1），在计算前缀和的时候，同时记录前缀和出现次数，当前 prefix_sum - k 在哈希表里的次数为以当前结点为结尾的和为 k 的子数组个数。
-    - 和为 K 的最长子数组：同样使用前缀和 + 哈希表，记录每个前缀和第一次出现的位置。
-    - 不超过 K 的最大子数组和：通过维护一个有序前缀和集合，利用二分查找快速定位满足不超过 K 限制的最优子数组前缀差，进而求出最大和。
-    - 不超过 K 的最大子数组长度：前缀和 + 有序集合（或单调队列变体），找到最左边的前缀使得子数组和 ≤ K，然后更新长度。
-    - 最长平衡子数组（0 和 1 个数相同）：将 0 转为 -1，问题转为和为 0 的最长子数组，使用前缀和+哈希。
     
     计数
     
@@ -882,7 +916,11 @@ keywords: 面试题
     
 	- 区间和快速查询：构建前缀和数组 `prefix[i+1] = sum(nums[0..i])`，任意区间和为 `prefix[r+1] - prefix[l]`。
 	- 固定大小窗口的最小/最大和：用前缀和快速计算任意长度为 k 的区间和，再遍历或滑动窗口取最小/最大。
-    - 子数组和为 k 的个数：前缀和 + 哈希表统计 `prefix[j] - prefix[i] == k` 的出现次数。
+    - 和为 K 的子数组数量（Subarray Sum Equals K）：滑动窗口只适用于所有数为正；否则使用前缀和 + 哈希表（初始值为 {0: 1}），在计算前缀和的时候，同时记录前缀和出现次数，当前 prefix_sum - k 在哈希表里的次数为以当前结点为结尾的和为 k 的子数组个数。
+    - 和为 K 的最长子数组：同样使用前缀和 + 哈希表，记录每个前缀和第一次出现的位置。
+    - 不超过 K 的最大子数组和：通过维护一个有序前缀和集合，利用二分查找快速定位满足不超过 K 限制的最优子数组前缀差，进而求出最大和。
+    - 不超过 K 的最大子数组长度：前缀和 + 有序集合（或单调队列变体），找到最左边的前缀使得子数组和 ≤ K，然后更新长度。
+    - 最长平衡子数组（0 和 1 个数相同）：将 0 转为 -1，问题转为和为 0 的最长子数组，使用前缀和+哈希。
     - 判断是否存在和为 k 的连续子数组：计算前缀和并对 k 取模，若同一余数出现两次，则存在满足条件的子数组。
     
     二维前缀和（矩阵）
@@ -4018,7 +4056,7 @@ keywords: 面试题
 
 20. 为什么要除以 $$\sqrt {d_k}$$
 
-    答：Q 和 K 点积可以理解成 $$d_k$$ 项的和。如果不缩放，$$d_k$$ 越大，点积值方差越大，同时点积值过大会导致 softmax 函数梯度变得非常小。缩放了可以使得方差标准化到 Q 和 K 的方差，这有助于数值稳定性，使得学习过程更加稳定。
+    答：Q 和 K 点积可以理解成 $$d_k$$ 项的和。如果不缩放，$$d_k$$ 越大，点积值方差越大，同时点积值过大会导致 softmax 函数偏向某个位置，接近 one-hot，梯度变得非常小。缩放了可以使得方差标准化到 Q 和 K 的方差，这有助于数值稳定性，使得学习过程更加稳定。
 
 21. multi-head attention 的 embed 会不会有低秩的问题，怎么解决？
 
