@@ -864,21 +864,64 @@ keywords: 面试题
     
     计数
     
-    - 和为 K 的连续子数组个数：前缀和 + 哈希表统计出现次数。
     - 等差子数组个数：枚举子数组判断是否等差，可使用 dp 优化。
-    - 子数组最大值 - 最小值 ≤ K 的个数：单调队列维护区间最大最小值，变长滑动窗口。 
+    ```python
+    def numberOfArithmeticSlices(nums):
+	    n = len(nums)
+	    if n < 3:
+	        return 0
+	
+	    dp = [0] * n
+	    total = 0
+	
+	    for i in range(2, n):
+	        if nums[i] - nums[i-1] == nums[i-1] - nums[i-2]:
+	            dp[i] = dp[i-1] + 1
+	            total += dp[i]
+	        # 否则 dp[i] 保持 0
+	
+	    return total
+    ```
+    - 子数组最大值 - 最小值 ≤ K 的个数：使用两个单调队列维护区间最大最小值，维护一个变长滑动窗口。 
     
-    其他
-    
-    - 最大升序子数组长度：一次遍历，记录连续严格递增序列长度。
-    - 最长山形子数组：从左到右和从右到左分别统计连续上升/下降序列，结合判断中心。
+    ```python
+    def count_subarrays(nums, k):
+	    n = len(nums)
+	    max_q, min_q = deque(), deque()
+	    left = 0
+	    count = 0
+	
+	    for right in range(n):
+	        # 维护单调递减队列 max_q
+	        while max_q and nums[right] > nums[max_q[-1]]:
+	            max_q.pop()
+	        max_q.append(right)
+	
+	        # 维护单调递增队列 min_q
+	        while min_q and nums[right] < nums[min_q[-1]]:
+	            min_q.pop()
+	        min_q.append(right)
+	
+	        # 当最大值 - 最小值 > k 时，移动左边界
+	        while nums[max_q[0]] - nums[min_q[0]] > k:
+	            left += 1
+	            if max_q[0] < left:
+	                max_q.popleft()
+	            if min_q[0] < left:
+	                min_q.popleft()
+	
+	        # 窗口内每个子数组都是合法的
+	        count += right - left + 1
+	
+	    return count
+    ```
 
 4. 区间问题
 
     答：一、基础区间合并与排序
     
 	- 合并区间（Merge Intervals）：将区间按起点排序，依次比较是否重叠并合并。
-	- 插入区间（Insert Interval）：按位置插入新区间，遍历合并重叠部分。
+	- 插入区间（Insert Interval）：先添加所有在新区间左边的区间，再合并所有与新区间重叠的区间，最后添加所有在新区间右边的区间。时间复杂度为 O(n)。
 	- 区间交集（Interval Intersection）：双指针遍历两个有序区间列表，找重叠区间。
 	- 最少区间合并次数 / 合并后区间个数：排序 + 贪心合并，统计合并操作或最终区间数。
 	
@@ -984,7 +1027,7 @@ keywords: 面试题
 	    def connected(self, x, y):
 	        return self.find(x) == self.find(y)
 	```
-	高阶模版（支持动态元素、路径压缩、按秩合并、打印所有集合）
+	高阶模版（支持动态元素；路径压缩，即在 find 的过程中，把节点直接连到根节点，减少树的高度；按秩合并；打印所有集合）
 	```python
 	from collections import defaultdict
 
@@ -997,6 +1040,7 @@ keywords: 面试题
 	        if x not in self.parent:
 	            self.parent[x] = x
 	            self.rank[x] = 0
+	        # 路径压缩
 	        if self.parent[x] != x:
 	            self.parent[x] = self.find(self.parent[x])
 	        return self.parent[x]
@@ -1041,13 +1085,61 @@ keywords: 面试题
     答：一、基础操作类
     
     - 创建链表
+    
     ```python
     class ListNode:
 	    def __init__(self, val=0, next=None):
 	        self.val = val
 	        self.next = next
+	        
+	def create_linked_list(arr):
+	    dummy = ListNode()  # 虚拟头节点
+	    curr = dummy
+	    for val in arr:
+	        curr.next = ListNode(val)
+	        curr = curr.next
+	    return dummy.next  # 返回真正的头节点
     ```
-    - 反转链表（Reverse Linked List）：迭代（iteration）/递归（recursion）反转指针方向
+    
+	- 反转链表（Reverse Linked List）
+    
+    迭代（iteration）
+    
+    ```python
+    def reverse_list(head):
+	    prev = None
+	    curr = head
+	    while curr:
+	        next_temp = curr.next   # 保存下一个节点
+	        curr.next = prev        # 反转指针
+	        prev = curr             # prev 前进
+	        curr = next_temp        # curr 前进
+	    return prev  # prev 是新头节点
+    ```
+    
+    递归（recursion）
+    
+    ```python
+    def reverse_list_recursive(head):
+	    if not head or not head.next:
+	        return head
+	    
+	    # 假设已经成功反转了 head.next 之后的链表
+	    # new_head 会指向反转后的新头节点
+	    new_head = reverse_list_recursive(head.next)
+	    
+	    # 关键操作：
+	    # head.next 是反转后链表的尾节点
+	    # 把它的 next 指针指回当前节点 head
+	    head.next.next = head
+	
+	    # 把当前节点的 next 断开，否则会形成环
+	    head.next = None
+	    
+	    # new_head 始终指向新的头节点（反转后的链表头）
+	    return new_head
+    ```
+    
     - 合并两个有序链表：双指针逐节点比较；递归也可实现。
     - 给定单向链表的头指针和一个结点指针，定义一个函数在O(1)时间删除该节点：如果待删节点不是尾节点，可以通过将待删节点的下一个节点的值和指针复制过来，然后删除下一个节点来实现 O(1) 删除。如果待删节点是尾节点，且只有头指针，不知道前驱节点，无法在 O(1) 时间内删除该节点。只能遍历找到前驱，时间是 O(n)。
     - 删除链表中的节点（如删除倒数第 n 个节点）：快慢指针找到待删节点的前一个节点。
@@ -1178,7 +1270,7 @@ keywords: 面试题
     empty = not queue
     ```
     
-	用 list 实现出队`first = queue.pop(0)`时间复杂度为 O(n)，因此不推荐。
+	用 list 实现出队`first = queue.pop(0)`时间复杂度为 O(n)，但用 deque实现头尾出队时间复杂度都为 O(1)。
 	
 	优先队列是抽象概念，用 heapq（堆）实现
 
@@ -1213,7 +1305,7 @@ keywords: 面试题
 	def build_binary_tree(values):
 	    if not values:
 	        return None
-	    root = TreeNode(values[0])
+	    root = TreeNode(vaues[0])
 	    queue = deque([root])
 	    i = 1
 	    while queue and i < len(values):
@@ -1292,6 +1384,41 @@ keywords: 面试题
 
     答：
     - 实现 Trie（前缀树）：使用字典或数组构建多叉树，支持 `insert`, `search`, `startsWith` 操作。
+    
+    ```python
+    class TrieNode:
+	    def __init__(self):
+	        self.children = {}      # 存储子节点
+	        self.is_end_of_word = False  # 标记单词结束
+	
+	class Trie:
+	    def __init__(self):
+	        self.root = TrieNode()
+	    
+	    def insert(self, word: str) -> None:
+	        node = self.root
+	        for char in word:
+	            if char not in node.children:
+	                node.children[char] = TrieNode()
+	            node = node.children[char]
+	        node.is_end_of_word = True
+	    
+	    def search(self, word: str) -> bool:
+	        node = self.root
+	        for char in word:
+	            if char not in node.children:
+	                return False
+	            node = node.children[char]
+	        return node.is_end_of_word
+	    
+	    def startsWith(self, prefix: str) -> bool:
+	        node = self.root
+	        for char in prefix:
+	            if char not in node.children:
+	                return False
+	            node = node.children[char]
+	        return True
+    ```
     - 替换词根：将句子中的词替换为其词根；利用 Trie 存储所有词根，遍历句子中每个词，查找最短匹配词根。
     - 单词搜索 II：在二维字符网格中找多个单词；构建 Trie 存储单词表，然后结合 DFS 和 Trie 剪枝遍历。
     - 添加与搜索单词：支持通配符 '.' 的词典查询；在 Trie 上做 DFS，遇到 '.' 时递归尝试所有子节点。
