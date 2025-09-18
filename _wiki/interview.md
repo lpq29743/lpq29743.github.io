@@ -3522,52 +3522,54 @@ keywords: 面试题
     
     SGD 没动量，全局固定学习率。公式为更新参数值 = 当前参数值 - 学习率 * 梯度。在 SGD 中，L2 正则是加上 $$\frac{\lambda}{2} \theta^2$$，weight decay 是 $$\theta \rightarrow \theta - \lambda\theta$$，两者是等价的。SGD 优化轨迹不受损失函数常数缩放影响。
     
-    SGD + Momentum，固定学习率，Momentum 是一阶动量（梯度的滑动平均，exponentially weighted average of past gradients）。公式为更新参数值 = 当前参数值 - 学习率 * 一阶动量。
-    
-    AdaGrad 学习率会单调递减。
-    
-    RMSProp 学习率基于二阶动量（梯度的平方滑动平均，exponentially weighted average of the squares of past gradients）调整。
-    
-    Adam 学习率根据一阶动量（Momentum）+ 二阶动量（RMSProp）调整。在 Adam 中，weight decay 会被加到原始梯度里，然后进行同样的一阶动量和二阶动量调整，从而导致实际的权重衰减效果并不等价于直接对权重进行衰减。
-    
-    AdamW，同 Adam，但权重衰减更合理，将 L2 正则对应的 weight decay 放到了一阶动量和二阶动量调整后的参数更新上。
-    
-    Lion。
-    
-    Muon。
-    
-    如果加上 Scheduler，可以动态调整全局学习率。Warmup 策略可以前期慢慢提供学习率，后期用 Cosine Decay（训练初期快速降学习率，防止剧烈震荡：训练刚开始时，模型参数还比较随机，快速降低学习率能避免过大步长导致训练不稳定或发散；但起始时仍保留较大学习率，帮助模型迅速从随机初始化的参数中找到“正确方向”。中期保持学习率相对平稳，助于稳定收敛：进入训练中期，学习率下降变缓，模型有足够的时间在当前的参数空间“细致探索”；平稳的学习率避免过早降低导致训练停滞，同时不给出过大步长打断已有收敛趋势。后期再次快速下降，微调模型细节：训练末期快速将学习率降低到很小，帮助模型“精细调节”参数，减少振荡，提升泛化性能；类似于在优化曲面上的“爬坡”逐渐变得非常缓慢，避免错过局部极小值。），Linear Decay 等方式进行衰减。
     ```python
-    import numpy as np
-    
-	# ===== 优化器函数 =====
-	def sgd(w, dw, lr=0.01):
+    def sgd(w, dw, lr=0.01):
 	    return w - lr * dw
-	
-	def momentum(w, dw, v, lr=0.01, beta=0.9):
+    ```
+    
+    SGD + Momentum，固定学习率，Momentum 是一阶动量，即梯度的指数加权平均（exponentially weighted average of past gradients）/梯度滑动平均（EMA，Exponential Moving Average）。越新的梯度权重越大，越久远的梯度，权重按指数衰减。公式为更新参数值 = 当前参数值 - 学习率 * 一阶动量。
+    
+    ```python
+    def momentum(w, dw, v, lr=0.01, beta=0.9):
 	    v = beta * v + (1 - beta) * dw
 	    w = w - lr * v
 	    return w, v
-	
-	def adagrad(w, dw, h, lr=0.01, eps=1e-8):
+    ```
+    
+    AdaGrad 会对学习率加权，权重为过往梯度平方和的根号，开根号是为了单位一致性，且保证过往梯度过大导致的学习旅衰减过大。频繁更新的参数，学习率自动变小；很少更新的参数，学习率保持较大。由于每次迭代都有梯度，导致梯度平方和每次都增加，因此学习率会单调递减。
+    
+    ```python
+    def adagrad(w, dw, h, lr=0.01, eps=1e-8):
 	    h += dw**2
 	    w = w - lr * dw / (np.sqrt(h) + eps)
 	    return w, h
-	
-	def rmsprop(w, dw, h, lr=0.001, beta=0.9, eps=1e-8):
+    ```
+    
+    RMSProp 是二阶动量，即梯度的平方滑动平均（exponentially weighted average of the squares of past gradients）。相比 AdaGrad，它更看中最近的梯度，而且由于老的梯度平方会指数衰减，学习率不会无限减小。
+    
+    ```python
+    def rmsprop(w, dw, h, lr=0.001, beta=0.9, eps=1e-8):
 	    h = beta * h + (1 - beta) * dw**2
 	    w = w - lr * dw / (np.sqrt(h) + eps)
 	    return w, h
-	
-	def adam(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, eps=1e-8):
+    ```
+    
+    Adam 学习率根据一阶动量（Momentum）+ 二阶动量（RMSProp）调整。Adam 会进行偏差修正：由于一阶动量和二阶动量初始值为 0，导致乘了 $$1 - beta1$$ 或 $$1 - beta2$$ 会使得均值被低估，因此需要根据当前 step $$t$$ 进行一阶动量、二阶动量的修正。在 Adam 中，weight decay（L2）会被加到原始梯度里，然后进行同样的一阶动量和二阶动量调整，从而导致实际的权重衰减效果并不等价于直接对权重进行衰减。
+    
+    ```python
+    def adam(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, eps=1e-8):
 	    m = beta1 * m + (1 - beta1) * dw
 	    v = beta2 * v + (1 - beta2) * (dw**2)
 	    m_hat = m / (1 - beta1**t)
 	    v_hat = v / (1 - beta2**t)
 	    w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
 	    return w, m, v
-	
-	def adamw(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, weight_decay=0.01, eps=1e-8):
+    ```
+    
+    AdamW，同 Adam，但权重衰减更合理，将 L2 正则对应的 weight decay 放到了一阶动量和二阶动量调整后的参数更新上。
+    
+    ```python
+    def adamw(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, weight_decay=0.01, eps=1e-8):
 	    # AdamW 在更新前加入权重衰减
 	    w = w - lr * weight_decay * w
 	    m = beta1 * m + (1 - beta1) * dw
@@ -3576,8 +3578,32 @@ keywords: 面试题
 	    v_hat = v / (1 - beta2**t)
 	    w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
 	    return w, m, v
-
 	```
+    
+    Lion，使用一阶动量，只看更新方向，不考虑更新幅度。
+    
+    ```python
+    def lion(w, dw, m, lr=1e-3, beta1=0.9, beta2=0.99, weight_decay=0.0):
+	    m = beta2 * m + (1 - beta2) * dw
+	    update = np.sign(beta1 * m + (1 - beta1) * dw)
+	    if weight_decay != 0:
+	        update += weight_decay * w
+	    w = w - lr * update
+	    return w, m
+    ```
+    
+    Muon 方向由一阶动量决定，幅度由二阶动量决定。
+    
+    ```python
+    def muon(w, dw, m, v, lr=1e-3, beta1=0.9, beta2=0.99, beta3=0.999, eps=1e-8):
+	    m = beta2 * m + (1 - beta2) * dw
+	    v = beta3 * v + (1 - beta3) * (dw**2)
+	    update = np.sign(beta1 * m + (1 - beta1) * dw)
+	    w = w - lr * update / (np.sqrt(v) + eps)
+	    return w, m, v
+    ```
+    
+    如果加上 Scheduler，可以动态调整全局学习率。Warmup 策略可以前期慢慢提供学习率，后期用 Cosine Decay（训练初期快速降学习率，防止剧烈震荡：训练刚开始时，模型参数还比较随机，快速降低学习率能避免过大步长导致训练不稳定或发散；但起始时仍保留较大学习率，帮助模型迅速从随机初始化的参数中找到“正确方向”。中期保持学习率相对平稳，助于稳定收敛：进入训练中期，学习率下降变缓，模型有足够的时间在当前的参数空间“细致探索”；平稳的学习率避免过早降低导致训练停滞，同时不给出过大步长打断已有收敛趋势。后期再次快速下降，微调模型细节：训练末期快速将学习率降低到很小，帮助模型“精细调节”参数，减少振荡，提升泛化性能；类似于在优化曲面上的“爬坡”逐渐变得非常缓慢，避免错过局部极小值。），Linear Decay 等方式进行衰减。
 
 21. 神经网络为什么会产生梯度消失现象（vanishing gradient）？
 
