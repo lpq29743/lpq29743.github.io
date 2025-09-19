@@ -4485,21 +4485,35 @@ keywords: 面试题
 
 48. PPO
 
-    答：$$L^{\text{PPO}}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t,\ \text{clip}(r_t(\theta),\ 1 - \epsilon,\ 1 + \epsilon) \hat{A}_t \right) \right]$$
+    答：$$L^{\text{PPO}}(\theta, \gamma) = L^{\text{clip}}(\theta) + w_1H(\theta) - w2KL(\theta) - w_3L(\gamma)$$
+    
+    总损失是希望在训练过程中越大越好，四个部分分别是为了训练 actor model，鼓励高熵操作，限制 actor model 与 reference model 差异过大，以及最小化 value model 的预测误差。
+    
+    $$L^{\text{clip}}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t,\ \text{clip}(r_t(\theta),\ 1 - \epsilon,\ 1 + \epsilon) \hat{A}_t \right) \right]$$
      
     其中 $$t$$ 为当前 token，$$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
      
     PPO 流程如下：
      
-	- 查询 q 是任务输入，例如一个上下文或状态；
+	- 准备 prompt；
 	
-	- 输入到策略模型（Policy Model），生成对应的输出 o（动作或结果），即用可更新的 LLM 生成 q 的 o；
+	- 将 prompt 输入到策略模型（Actor/Policy Model），即需要训练的 LLM，采样生成多个完整输出，以下只用其中一个输出 o 举例说明；
+	 
+	- 输出 o 被输入到冻结的奖励模型（Reward Model），生成该完整输出的 reward（sample-level 的一个标量），注意只有完整输出的 reward 不为 0，不完整输出的 reward 都为 0；
+	 
+	- Critic/Value Model（同步更新，可由 Actor Model 部分参数初始化，或由 Reward Model 初始化）用 value head 输出每个不完整输出的 $$V(s_t)$$，其物理意义为当前状态下所有 action 的平均预期收益；
 	
-	- 输出 o 被输入到冻结的参考模型（Reference Model），计算输出 o 的概率，以及其与参考策略之间的 KL 散度（min + clip 实现），用于限制策略更新；
-	 
-	- 输出 o 被输入到冻结的奖励模型（Reward Model），生成奖励 r（通常是 sample-level 的一个标量），用于衡量 o 的质量；
-	 
-	- Critic/Value Model（同步更新）用 value head 输出每个 token 的 $$V(s_t)$$，从 reward 回溯分配每个 token 的 TD 残差 $$\delta_t$$，用 GAE 计算每个 token 的优势 $$A_t$$；​
+	- 计算优势 advantages，其物理意义采取当前动作会比平均收益多多少，即相对收益，$$Q(s_t, a_t) - V(s_t)$$。评估这一优势主要有两种方法，每种方法都有其利弊，即：1）蒙特卡洛 (Monte-Carlo，MC)：使用完整输出的 reward。由于奖励稀疏，只在生成最后一个 token 时有奖励，这种方法的方差很大，且从 LLM 中获取足够的样本来使用 MC 进行优化成本很高，但它的偏差很低，因为我们可以准确地模拟奖励；2）时间差分 (Temporal difference，TD)：使用一步轨迹奖励（即衡量刚根据提示生成的单词的优劣），即`advantages = reward - values_response.sum(dim=1) / response_mask.sum(dim=1)`。通过这样做，我们可以在 token 级别计算奖励，这显著降低了方差，但同时偏差会增加，因为我们无法从部分生成的响应中准确预测最终奖励。这就是 GAE 的用武之地，它提出通过多步时间差分 (multi-step TD) 来平衡偏差和方差。具体是从 reward 回溯分配每个 token 的 TD 残差 $$\delta_t$$，用 GAE 计算每个 token 的优势 $$A_t$$，其中 gamma 是时间折扣因子，控制未来奖励的重要性，越大代表未来奖励越重要。lambda 是 GAE 平衡因子，控制 bias-variance 权衡，lambda 越大 → 方差大，偏差小；λ 越小 → 方差小，偏差大。
+    
+    ```python
+    def compute_gae(rewards, values, gamma=1.0, lam=0.95):
+	    advantages = torch.zeros_like(rewards)
+	    last_adv = 0
+	    for t in reversed(range(rewards.size(1))):
+	        delta = rewards[:, t] + gamma * values[:, t + 1] - values[:, t]
+	        advantages[:, t] = last_adv = delta + gamma * lam * last_adv
+	    return advantages
+     ```
 	 
 	- 用以下 loss 对 Policy Model 进行优化，剪切函数限制策略更新幅度，确保数值稳定性。当 $$A_t > 0$$，意味着 critic model 对当前 action 做出了正反馈，因此 $$r_t(\theta)$$ 要提高，反之要降低。
 	 
@@ -4512,35 +4526,19 @@ keywords: 面试题
 	    return loss
 	```
 	
+	- 输出 o 被输入到冻结的参考模型（Reference Model），计算输出 o 的概率，以及其与参考策略之间的 KL 散度，用于限制策略更新；
+	
 	- 优化 Critic/Value Model
 
-49. PPO 怎么计算 advantages？
-
-    答：
-    1. 直接使用 reward。不是 token level
-    2. response 的平均：advantages = reward - values_response.sum(dim=1) / response_mask.sum(dim=1)。容易产生很大的方差，导致训练不稳定。
-    3. GAE
-    gamma 是时间折扣因子，控制未来奖励的重要性，越大代表未来奖励越重要。lambda 是 GAE 平衡因子，控制 bias-variance 权衡，λ 越大 → 方差大，偏差小；λ 越小 → 方差小，偏差大。
-    
-    ```python
-    def compute_gae(rewards, values, gamma=1.0, lam=0.95):
-	    advantages = torch.zeros_like(rewards)
-	    last_adv = 0
-	    for t in reversed(range(rewards.size(1))):
-	        delta = rewards[:, t] + gamma * values[:, t + 1] - values[:, t]
-	        advantages[:, t] = last_adv = delta + gamma * lam * last_adv
-	    return advantages
-     ```
-
-50. PPO 有了 reward model 为什么还要 critic/value model？
+49. PPO 有了 reward model 为什么还要 critic/value model？
 
      答：critic/value model 是内部奖励，仅需当前上下文，会在 RL 过程中更新，reward model 是外部奖励，需要完整回答，是训练好的。
 
-51. 为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？
+50. 为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？
 
      答：需要用标注样本训练；分类模型代价低。
 
-52. DPO
+51. DPO
 
     答：
      
@@ -4554,7 +4552,7 @@ keywords: 面试题
 	    return loss
     ```
  
-53. GRPO
+52. GRPO
    
     答：
      
@@ -4568,17 +4566,15 @@ keywords: 面试题
     
 	GRPO 流程如下：
      
-	1. 查询 q 是任务输入，例如一个上下文或状态；
+	- 查询 q 是任务输入，例如一个上下文或状态；
 	
-	2. 输入到策略模型（Policy Model），生成对应的多个输出 o_1, o_2, ..., o_G（动作或结果），即用可更新的 LLM 生成 q 的 o_1, o_2, ..., o_G；
-	
-	3. 输出 o_i 被输入到冻结的参考模型（Reference Model），计算输出 o_i 与参考策略之间的 KL 散度，用于限制策略更新；
+	- 输入到策略模型（Policy Model），生成对应的多个输出 o_1, o_2, ..., o_G（动作或结果），即用可更新的 LLM 生成 q 的 o_1, o_2, ..., o_G；
 	 
-	4. 输出 o_i 被输入到冻结的奖励模型（Reward Model），可为训练的，也可为基于规则的，生成奖励 r_i（通常是 sample-level 的一个标量），用于衡量 o_i 的质量；
+	- 输出 o_i 被输入到冻结的奖励模型（Reward Model），可为训练的，也可为基于规则的，生成奖励 r_i（通常是 sample-level 的一个标量），用于衡量 o_i 的质量；
 	 
-	5. 根据 r_1, r_2, ..., r_G，计算奖励均值和奖励标准差，得到 o_i 的相对奖励；​
+	- 根据 r_1, r_2, ..., r_G，计算奖励均值和奖励标准差，得到 o_i 的相对奖励，即 advantages；​
 	 
-	6. 根据相对奖励，得到每一个样本的 loss，并结合 KL 散度进行优化。
+	- 根据相对奖励，得到每一个样本的 loss，进行优化；
      
     ```python
     def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range=0.2):
@@ -4601,38 +4597,40 @@ keywords: 面试题
 	    loss = -torch.min(unclipped, clipped).mean()
 	    return loss
     ```
+    
+    - 输出 o_i 被输入到冻结的参考模型（Reference Model），计算输出 o_i 与参考策略之间的 KL 散度，用于限制策略更新。
 
-54. DAPO
+53. DAPO
 
     答：提高剪切上限（Clip-Higher）以避免熵过早坍缩；动态采样（Dynamic Sampling）解决准确率为 1 或 0 时的梯度消失问题；改进 Token-Level 策略梯度损失以平衡不同长度的序列贡献；对过长序列进行合理惩罚（Overlong Reward Shaping）以缓解噪声并稳定训练。
 
-55. GSPO
+54. GSPO
 
     答：重要性采样修正不再对应 token 级别，而是对应序列级别。
 
-56. on-policy vs off-policy
+55. on-policy vs off-policy
 
-    答：数据来源于当前策略生成为 on-policy，数据来源于历史偏好数据为 off-policy。
+    答：数据来源于当前策略生成为 on-policy，其数据只能更新一次 policy，之后需要用更新的 policy 重新采样数据，因此利用效率低；数据来源于历史偏好数据为 off-policy。
 
-57. PPO vs DPO vs GRPO
+56. PPO vs DPO vs GRPO
 
     答：所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。PPO 依赖于 reward model 和 value model；DPO 没有显式探索机制。
 
-58. GRPO 怎么去掉 critic/value model 的？
+57. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-59. 熵控制在强化学习里的作用
+58. 熵控制在强化学习里的作用
 
      答：在大模型训练的强化学习阶段，设置较高的 temperature 可以防止模型过度自信，鼓励模型采取高熵动作，从而扩大探索空间。另一种方式是在 group-level 用 smi/dpp/self-bleu 计算多样性，进行 reward shaping 来控制熵的变化。
      
      熵坍塌：随着训练的进行，entropy 逐渐降低。导致某些 group 采样出的 response 几乎相同，使得模型在早期变得更加确定，限制了模型的探索空间。
 
-60. LoRA
+59. LoRA
 
      答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。target_modules 一般为`q_proj`、`v_proj`，有时也会注入到 `k_proj` 或 `o_proj`。modules_to_save 表示指定哪些原模型模块需要一起训练 & 保存，如果扩展了词表可能要加 `embed_tokens`、`lm_head`。
 
-61. 手撕 LoRA
+60. 手撕 LoRA
 
      答：
      ```python
@@ -4657,15 +4655,15 @@ keywords: 面试题
 	        return base + lora
     ```
 
-62. Adapter
+61. Adapter
 
      答：插入小型网络模块
 
-63. Prefix Tuning
+62. Prefix Tuning
 
      答：Prefix Tuning 会为每层添加一组虚拟的 Key 和 Value，Query 保持不变。embedding 的输入不会添加。
 
-64. Base model eval
+63. Base model eval
 
      答：General Tasks: MMLU (5-shot), MMLU-Pro (5-shot, CoT), MMLU-redux (5-shot), BBH (3-shot, CoT), SuperGPQA (5-shot, CoT).
      
@@ -4675,7 +4673,7 @@ keywords: 面试题
     
     Multilingual Tasks: MGSM (8-shot, CoT), MMMLU (5-shot), INCLUDE (5-shot).
 
-65. Chat model eval
+64. Chat model eval
 
      答：General Tasks: MMLU-Redux, GPQADiamond, C-Eval, LiveBench.
      
@@ -4687,17 +4685,17 @@ keywords: 面试题
      
      Multilingual Tasks: instruction following - Multi-IF, knowledge - INCLUDE & MMMLU, mathematics - MT-AIME2024 & PolyMath, and logical reasoning - MlogiQA.
 
-66. Safety / Halluciation
+65. Safety / Halluciation
 
     答：出现幻觉原因：1. 语料中存在过时，虚构的内容，或因长尾效应缺乏与下游任务相关的领域知识；2. 语言模型的本质机制是预测下一个最可能的词，它只保证语言上看起来连贯合理，并不保证事实正确，所以它倾向即使不知道，也会编一个出来，在不确定时依然输出确定性答案，很少说我不知道；3. 推理时随机采样的生成策略。
     
     解决方案：提高训练数据质量；RAG 提供权威资料；Prompt Engineering：明确告诉模型不要编造、请回答已知事实，或让模型先思考再输出（如 Let’s think step by step）；生成之后进行事实校验，如比对知识图谱或自动校验；RLHF；多模型协作。
 
-67. Long Context
+66. Long Context
 
     答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
 
-68. LLM设计中的 System 1 和 System 2
+67. LLM设计中的 System 1 和 System 2
 
     答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
      
@@ -4709,7 +4707,7 @@ keywords: 面试题
         
     - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-69. LLM + 知识
+68. LLM + 知识
 
     答：RAG 可以解决 LLM 知识过时，幻觉问题以及无法调用私有数据等问题。
     
@@ -4724,11 +4722,11 @@ keywords: 面试题
     
     另一种方式是 search engine as a tool。
 
-70. 文本分块
+69. 文本分块
 
     答：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。
 
-71. Reasoning
+70. Reasoning
 
     答：Prompting：CoT，ToT，Self-Consistency，s1。
     
@@ -4736,7 +4734,7 @@ keywords: 面试题
     
     改进学习方式：SFT，RLHF，Critic Models：PRM 和 ORM。
 
-72. Test-time Scaling
+71. Test-time Scaling
 
     答：实现 test-time scaling，需要先激励 LLM 在 thinking 上耗费更多资源，从而生成更长的回答，或者更多的回答。
     
@@ -4750,7 +4748,7 @@ keywords: 面试题
     
     提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
 
-73. Agent
+72. Agent
 
     答：Agent = LLM + Planning + Memory + Tool。
     
@@ -4758,29 +4756,29 @@ keywords: 面试题
     
     Memory：short-term（ICL），long-term。
 
-74. MCP 和 function calling 有什么区别？
+73. MCP 和 function calling 有什么区别？
 
     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-75. LangChain
+74. LangChain
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-76. bf16，fp16，fp32，int8 区别
+75. bf16，fp16，fp32，int8 区别
 
     答：指数位决定了数值范围，尾数位决定了精度。bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。int8 可用于量化，因为整数乘法比浮点乘法快，且用缩放映射保留大部分信息。合理设置 scale 和 zero-point，配合 clip 操作，可以安全地把浮点数映射到 int8，不会溢出。
 
-77. 混合精度计算
+76. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-78. 估算 LLM 的参数量
+77. 估算 LLM 的参数量
 
     答：embedding 层的维度为 Vh，若不与输出层的权重矩阵共享，则需加上输出层的权重矩阵 2Vh。
     
     Transformer 每一层分为 self-attention 和 MLP，self-attention 设计 Q，K，V，O 四个权重矩阵和偏置，因此是 4h^2 + 4h。MLP 一般有两层，先升维再降维，如升到 4h，那么参数量为 8h^2 + 5h。两个模块都有 layer normalization，包含两个可训练参数，形状都为 h，所以参数量总和为 4h。因此，每一层参数量为 12h^2 + 13h。
 
-79. 估算 7B 模型在训练和推理时的显存占用
+78. 估算 7B 模型在训练和推理时的显存占用
 
     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2 字节，fp32 精度为 4 字节。
     
@@ -4788,23 +4786,23 @@ keywords: 面试题
     
     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
-80. 多卡多机训练
+79. 多卡多机训练
 
     答：Data Parallel，Tensor Parallel，Pipeline Parallel，Expert Parallel
 
-81. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+80. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-82. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+81. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-83. deepspeed 的 Zero-1， Zero 2， Zero 3
+82. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存。参数、梯度、优化器状态始终绑定，分配到同一张 GPU 上。
 
-84. 量化
+83. 量化
 
     答：PTQ（训练后量化）和 QAT（训练时量化）。
     
@@ -4814,37 +4812,37 @@ keywords: 面试题
     
     AWQ (Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
-85. vllm
+84. vllm
 
     答：传统的静态分配 KV 缓存不使用虚拟内存，直接对物理内存进行操作，会导致显存碎片和过度预留，因此 vllm 使用了 PagedAttention，即把 KV 缓存当作虚拟内存，每条序列的缓存被划分成块，可动态分配到显存中，允许在不连续的内存空间中存储。
     
     另外 vllm 的 PagedAttention 使用了 memory sharing，即单个 prompt 生成多个序列时，可以共享显存。
 
-86. GPT 的原理？
+85. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-87. BERT 的原理？
+86. BERT 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-88. BERT 的训练目标？
+87. BERT 的训练目标？
 
     答：BERT 有 masked language modeling 和 next sentence prediction 两个目标
 
-89. RoBERTa 相比 BERT 做了哪些改进？
+88. RoBERTa 相比 BERT 做了哪些改进？
 
     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-90. RoBERTa 强于 RNN 的地方？
+89. RoBERTa 强于 RNN 的地方？
 
     答：并行，对大数据比较友好。
 
-91. Qwen
+90. Qwen
 
     答：QwenMoE
 
-92. Deepseek-V1 - Deepseek-V3
+91. Deepseek-V1 - Deepseek-V3
 
     答：
     - MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
@@ -4855,14 +4853,14 @@ keywords: 面试题
     - v3 将门控函数的对更小的小数位会敏感的 softmax（multi-class classification）改成了值域更宽的 sigmoid（multi-label classification）
     - fp8 精度计算
 
-93. Deepseek-R1-Zero
+92. Deepseek-R1-Zero
 
     答：证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
     1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
     2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用 `<think>` 标签包裹推理过程，用 `<answer>` 标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
     3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
 
-94. Deepseek-R1
+93. Deepseek-R1
 
     答：成功经验
     - 在 SFT 阶段采用冷启动，只使用了少量（几千条）高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
