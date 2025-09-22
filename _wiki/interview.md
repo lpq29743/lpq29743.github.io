@@ -4485,23 +4485,19 @@ keywords: 面试题
 
 48. PPO
 
-    答：$$L^{\text{PPO}}(\theta, \gamma) = L^{\text{clip}}(\theta) + w_1H(\theta) - w2KL(\theta) - w_3L(\gamma)$$
-    
-    总损失是希望在训练过程中越大越好，四个部分分别是为了训练 actor model，鼓励高熵操作，限制 actor model 与 reference model 差异过大，以及最小化 value model 的预测误差。
-    
-    $$L^{\text{clip}}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t,\ \text{clip}(r_t(\theta),\ 1 - \epsilon,\ 1 + \epsilon) \hat{A}_t \right) \right]$$
-     
-    其中 $$t$$ 为当前 token，$$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$ 为重要性采样比率，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
-     
-    PPO 流程如下：
+    答：PPO 每一次迭代流程如下：
      
 	- 准备 prompt；
 	
-	- 将 prompt 输入到策略模型（Actor/Policy Model），即需要训练的 LLM，采样生成多个完整输出，以下只用其中一个输出 o 举例说明；
+	- 重要性采样：将 prompt 输入到策略模型（Actor/Policy Model，参数需更新），采样生成多个完整输出（以下只用其中一个输出 o 举例说明），并计算输出 o 的概率：`old_log_probs`。
+	
+	- 输出 o 被输入到冻结的参考模型（Reference Model），得到`ref_log_probs`和 KL 散度。
 	 
-	- 输出 o 被输入到冻结的奖励模型（Reward Model），生成该完整输出的 reward（sample-level 的一个标量），注意只有完整输出的 reward 不为 0，不完整输出的 reward 都为 0；
+	- 输出 o 被输入到冻结的奖励模型（Reward Model），生成该完整输出的结果正确性 score（sample-level 的一个标量），注意只有完整输出的 score 不为 0，不完整输出的 score 都为 0。
+	
+	- 将过程合理性奖励和结果正确性奖励合并起来，得到最终奖励 reward。对于不完整输出，其 reward 为`ref_log_probs - old_log_probs`，对于完整输出，其 reward 为`ref_log_probs - old_log_probs + score`。
 	 
-	- Critic/Value Model（同步更新，可由 Actor Model 部分参数初始化，或由 Reward Model 初始化）用 value head 输出每个不完整输出的 $$V(s_t)$$，其物理意义为当前状态下所有 action 的平均预期收益；
+	- 输出 o 被输入到 Critic/Value Model（同步更新，可由 Actor Model 部分参数初始化，或由 Reward Model 初始化），其用 value head 输出每个不完整输出的 $$V(s_t)$$，其物理意义为当前状态下所有 action 的平均预期收益。
 	
 	- 计算优势 advantages，其物理意义采取当前动作会比平均收益多多少，即相对收益，$$Q(s_t, a_t) - V(s_t)$$。评估这一优势主要有两种方法，每种方法都有其利弊，即：1）蒙特卡洛 (Monte-Carlo，MC)：使用完整输出的 reward。由于奖励稀疏，只在生成最后一个 token 时有奖励，这种方法的方差很大，且从 LLM 中获取足够的样本来使用 MC 进行优化成本很高，但它的偏差很低，因为我们可以准确地模拟奖励；2）时间差分 (Temporal difference，TD)：使用一步轨迹奖励（即衡量刚根据提示生成的单词的优劣），即`advantages = reward - values_response.sum(dim=1) / response_mask.sum(dim=1)`。通过这样做，我们可以在 token 级别计算奖励，这显著降低了方差，但同时偏差会增加，因为我们无法从部分生成的响应中准确预测最终奖励。这就是 GAE 的用武之地，它提出通过多步时间差分 (multi-step TD) 来平衡偏差和方差。具体是从 reward 回溯分配每个 token 的 TD 残差 $$\delta_t$$，用 GAE 计算每个 token 的优势 $$A_t$$，其中 gamma 是时间折扣因子，控制未来奖励的重要性，越大代表未来奖励越重要。lambda 是 GAE 平衡因子，控制 bias-variance 权衡，lambda 越大 → 方差大，偏差小；λ 越小 → 方差小，偏差大。
     
@@ -4514,11 +4510,17 @@ keywords: 面试题
 	        advantages[:, t] = last_adv = delta + gamma * lam * last_adv
 	    return advantages
      ```
-	 
-	- 用以下 loss 对 Policy Model 进行优化，剪切函数限制策略更新幅度，确保数值稳定性。当 $$A_t > 0$$，意味着 critic model 对当前 action 做出了正反馈，因此 $$r_t(\theta)$$ 要提高，反之要降低。
+	 	
+	- 根据采样到的数据进行多次策略迭代更新，每次更新之后得到`log_probs`和新的`values`。
+	
+	- 用以下 loss 对 Actor/Policy Model 进行优化，剪切函数限制策略更新幅度，确保数值稳定性。当 $$A_t > 0$$，意味着 critic model 对当前 action 做出了正反馈，因此 $$r_t(\theta)$$ 要提高，反之要降低。
+	  
+	$$L^{\text{clip}}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t,\ \text{clip}(r_t(\theta),\ 1 - \epsilon,\ 1 + \epsilon) \hat{A}_t \right) \right]$$
+     
+    其中 $$t$$ 为当前 token，$$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$ 为重要性采样比率，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
 	 
     ```python
-    def ppo_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
+    def actor_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
 	    ratio = torch.exp(log_probs - old_log_probs)  # [B]
 	    unclipped = ratio * advantages
 	    clipped = torch.clamp(ratio, 1 - clip_range, 1 + clip_range) * advantages
@@ -4526,9 +4528,9 @@ keywords: 面试题
 	    return loss
 	```
 	
-	- 输出 o 被输入到冻结的参考模型（Reference Model），计算输出 o 的概率，以及其与参考策略之间的 KL 散度，用于限制策略更新；
+	- 再根据`rewards`和`values`得到`critic_loss`，优化 Critic/Value Model。
 	
-	- 优化 Critic/Value Model
+	- `actor_loss`和`critic_loss`加权求和后用来最终优化。
 
 49. PPO 有了 reward model 为什么还要 critic/value model？
 
@@ -4602,7 +4604,12 @@ keywords: 面试题
 
 53. DAPO
 
-    答：提高剪切上限（Clip-Higher）以避免熵过早坍缩；动态采样（Dynamic Sampling）解决准确率为 1 或 0 时的梯度消失问题；改进 Token-Level 策略梯度损失以平衡不同长度的序列贡献；对过长序列进行合理惩罚（Overlong Reward Shaping）以缓解噪声并稳定训练。
+    答：DAPO 主要是根据 GRPO 进行改进，主要改进点为
+    - 去掉了 KL 散度，KL 散度可以限制模型同初始模型不会显著偏离，但是在训练 long-CoT reasoning model 时，模型分布会显著偏离初始模型，所以去掉 KL 散度的约束。
+    - 提高剪切上限（Clip-Higher）以避免熵过早坍缩，导致某些组生成的结合相同，限制探索
+    - 动态采样（Dynamic Sampling）解决一组输出准确率为 1 或 0 时的梯度消失导致 Policy 没有优化，样本利用效率降低的问题
+    - GRPO 先在样本内按 Token 数平均 loss，再在样本间聚合 loss，从而导致较长样本和较短样本的损失贡献是一样的，即对于答案正确的，GRPO 偏向于选择答案长度较短的回复，而对于答案错误的，GRPO 偏向于让模型生成更长的回复。DAPO 改进为 Token-Level 策略梯度损失
+    - 在 RL 训练中，一般会设置最大长度，对过长回复进行截断，从而其 reward 会为 -1，扰乱训练。DAPO 设置了对长序列的合理惩罚（Overlong Reward Shaping），避免过长后截断导致模型无法得到奖励的情形，以缓解噪声并稳定训练。
 
 54. GSPO
 
