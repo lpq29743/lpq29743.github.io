@@ -4811,6 +4811,8 @@ keywords: 面试题
     Single-Agent: AutoGPT
     
     Multi-Agent: HuggingGPT
+    
+    Agent 最常见的应用在 Web，软件工程，Research 和对话。
 
 76. MCP 和 function calling 有什么区别？
 
@@ -4820,7 +4822,7 @@ keywords: 面试题
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-78. SE
+78. LLM for SE
 
     答：SE 的完整 Pipeline 可分为软件开发和软件维护。
     
@@ -4833,7 +4835,7 @@ keywords: 面试题
     - Debugging（Fault Localization，Repair）
     - Feature Maintenance
     
-    在软件维护方面，一个经典的 Benchmark 是 SWE-bench（verified 比较关键），将其建立为 Live Benchmark（添加新的 instances）十分关键。一个关键的 agent 框架是 agentless。
+    在软件维护方面，一个经典的 Benchmark 是 SWE-bench（verified 比较关键），将其建立为 Live Benchmark（添加新的 instances）十分关键。一个关键的 agent 框架是 Agentless。Agentless 把软件维护分为定位，修复和补丁验证三个部分。
     
     Task：including simple，self-contained and repository-level，e.g.，Code Generation；Bug Fix
     
@@ -4843,25 +4845,30 @@ keywords: 面试题
     
     RLVR
     
-    Long Context：How to support long context；How to select useful files（retrieval）
-    
-    多语言
+    软件工程对应到 LLM 的常见问题有：
+    - Long Context：How to support long context
+    - Retrieval：How to select useful files
+    - 多语言
 
-79. bf16，fp16，fp32，int8 区别
+79. Agentic RL
+
+    答：在 Rollout 的时候调用和执行工具即可。为了增强效率，一般要异步执行。
+
+80. bf16，fp16，fp32，int8 区别
 
     答：指数位决定了数值范围，尾数位决定了精度。bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。int8 可用于量化，因为整数乘法比浮点乘法快，且用缩放映射保留大部分信息。合理设置 scale 和 zero-point，配合 clip 操作，可以安全地把浮点数映射到 int8，不会溢出。
 
-80. 混合精度计算
+81. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-81. 估算 LLM 的参数量
+82. 估算 LLM 的参数量
 
     答：embedding 层的维度为 Vh，若不与输出层的权重矩阵共享，则需加上输出层的权重矩阵 2Vh。
     
     Transformer 每一层分为 self-attention 和 MLP，self-attention 设计 Q，K，V，O 四个权重矩阵和偏置，因此是 4h^2 + 4h。MLP 一般有两层，先升维再降维，如升到 4h，那么参数量为 8h^2 + 5h。两个模块都有 layer normalization，包含两个可训练参数，形状都为 h，所以参数量总和为 4h。因此，每一层参数量为 12h^2 + 13h。
 
-82. 估算 7B 模型在训练和推理时的显存占用
+83. 估算 7B 模型在训练和推理时的显存占用
 
     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2 字节，fp32 精度为 4 字节。
     
@@ -4869,7 +4876,7 @@ keywords: 面试题
     
     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
-83. 多卡多机训练
+84. 多卡多机训练
 
     答：Data Parallel：数据被切分成小批量（mini-batch），分别送到不同 GPU，但模型必须能放进单卡显存，无法解决超大模型训练。
     
@@ -4879,11 +4886,11 @@ keywords: 面试题
     
     Expert Parallel：在 MoE 模型里，每个样本只激活部分专家网络。专家被分配在不同 GPU/节点上。
 
-84. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+85. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-85. PD 分离
+86. PD 分离
 
     答：Prefill 阶段对初始提示（Prompt）进行处理，生成初始的隐藏状态（Hidden States）。这个阶段通常涉及对整个模型的一次前向传播，是并行计算，因此计算密集度较高，以矩阵乘法为主，GPU 利用率高。对于每个新的输入序列，都需要进行一次 Prefill。
     
@@ -4893,15 +4900,15 @@ keywords: 面试题
     
     PD 分离一般涉及三要素，调度器、Prefill 实例和 Decode 实例。调度器负责对外发布推理接口，P、D 负责各自推理阶段的计算。P、D 一般在不同的机器资源上运行。具体来说，Prefill 阶段被分配到专门的高算力 GPU上 执行，以充分利用其并行计算能力；而 Decode 阶段则被分配到具有大显存和高内存带宽的 GPU 上执行，以满足其内存访问需求。两个阶段之间通过高速网络（如 NVLink 或 RDMA）传输中间状态（主要是 KV 缓存）。
 
-86. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+87. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-87. deepspeed 的 Zero-1， Zero 2， Zero 3
+88. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存。参数、梯度、优化器状态始终绑定，分配到同一张 GPU 上。
 
-88. 量化
+89. 量化
 
     答：PTQ（训练后量化）和 QAT（训练时量化）。
     
@@ -4911,37 +4918,37 @@ keywords: 面试题
     
     AWQ (Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
-89. vllm
+90. vllm
 
     答：传统的静态分配 KV 缓存不使用虚拟内存，直接对物理内存进行操作，会导致显存碎片和过度预留，因此 vllm 使用了 PagedAttention，即把 KV 缓存当作虚拟内存，每条序列的缓存被划分成块，可动态分配到显存中，允许在不连续的内存空间中存储。
     
     另外 vllm 的 PagedAttention 使用了 memory sharing，即单个 prompt 生成多个序列时，可以共享显存。
 
-90. GPT 的原理？
+91. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-91. BERT 的原理？
+92. BERT 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-92. BERT 的训练目标？
+93. BERT 的训练目标？
 
     答：BERT 有 masked language modeling 和 next sentence prediction 两个目标
 
-93. RoBERTa 相比 BERT 做了哪些改进？
+94. RoBERTa 相比 BERT 做了哪些改进？
 
     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-94. RoBERTa 强于 RNN 的地方？
+95. RoBERTa 强于 RNN 的地方？
 
     答：并行，对大数据比较友好。
 
-95. Qwen
+96. Qwen
 
     答：QwenMoE
 
-96. Deepseek-V1 - Deepseek-V3
+97. Deepseek-V1 - Deepseek-V3
 
     答：
     - MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
@@ -4952,14 +4959,14 @@ keywords: 面试题
     - v3 将门控函数的对更小的小数位会敏感的 softmax（multi-class classification）改成了值域更宽的 sigmoid（multi-label classification）
     - fp8 精度计算
 
-97. Deepseek-R1-Zero
+98. Deepseek-R1-Zero
 
     答：证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
     1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
     2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用 `<think>` 标签包裹推理过程，用 `<answer>` 标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
     3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
 
-98. Deepseek-R1
+99. Deepseek-R1
 
     答：成功经验
     - 在 SFT 阶段采用冷启动，只使用了少量（几千条）高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
@@ -5025,6 +5032,14 @@ keywords: 面试题
 11. 推荐系统如何解决长尾问题？
 
     答：提升长尾内容曝光。
+
+#### CV
+
+1. Diffusion Model
+
+    答：两个步骤
+    - 一个固定的前向扩散过程：逐步向图片增加噪声知道最终得到一张纯噪声
+    - 一个学习得到的去噪声过程：训练一个网络去逐渐从一张纯噪声中消除噪声，直到得到一张真正的照片
 
 ### CV and position related
 
