@@ -227,9 +227,19 @@ keywords: 面试题
 
     答：连续型随机变量一般用概率密度函数 f（Probability Density Function，PDF）表示，其值大于等于 0，其在负无穷到正无穷之间取积分为 1。对于连续型随机变量，某点概率没有意义，或者说某点的概率为 0，一般求区间概率，即 PDF 从 a 到 b 的积分。另外一种常用的表示连续型随机变量的方式是累积分布函数 F（Cumulative Distribution Function，CDF），其每一个点的值表示从负无穷大到该点的概率，因此是非减函数，其求区间概率为 F(b) - F(a)。常见分布有均匀分布、指数分布和正态分布。
 
-20. 两个 (0, 1) 均匀分布的和是怎样子的？
+20. 两个独立分布 $$X \sim U(0, 1)$$，$$Y \sim U(0, 1)$$，求$$Z = X + Y$$ 的分布。
 
-    答：[链接](https://www.statlect.com/fundamentals-of-probability/sums-of-independent-random-variables?utm_source=chatgpt.com)
+    答：此题与傅立叶卷积相关。
+    
+    $$f_Z(z) = ∫_{-\infty}^{\infty} f_X(x) f_Y(z - x) dx$$
+    
+    当取值为 0 到 1 之间时，$$f_X(x)=f_Y(y)=1$$，其他情况为 0
+    
+    由于$$0<=x<=1$$以及$$0<=z-x<=1$$，可得到$$max(0, z-1)<=x<=min(1, z)$$。
+    
+    当$$0<=z<=1$$，$$0<=x<=z$$，$$f_Z(z) = ∫_{0}^{z} 1 * 1 dx = z - 0 = z$$
+    
+    当$$1<z<=2$$，$$z-1<=x<=1$$，$$f_Z(z) = ∫_{z-1}^{1} 1 * 1 dx = 1 - (z - 1) = 2 - z$$
 
 21. 频率派概率（Frequentist）和贝叶斯概率（Bayesian）有什么区别？
 
@@ -298,9 +308,19 @@ keywords: 面试题
 
     答：蒙特卡洛随机法（monte carlo simulation）。随机生成点 (x, y)，分布在单位正方形内；统计落在单位圆内的点的比例；利用公式估算 π。
 
-31. 蒲丰投针问题
+31. 蒲丰投针问题：在一张有平行线条的纸上（线条间距为 d），随手丢一根长度为 l<=d 的针。问针和线相交的概率是多少？
 
-    答：[链接](https://baike.baidu.com/item/%E8%92%B2%E4%B8%B0%E6%8A%95%E9%92%88%E9%97%AE%E9%A2%98/10876943?fromtitle=%E5%B8%83%E4%B8%B0%E6%8A%95%E9%92%88&fromid=5919098)
+    答：针的状态由两个随机变量决定：
+    - 针的中心到最近平行线的距离 $$x \in [0,d/2]$$（因为对称性，只需考虑一半区间）。
+    - 针与平行线的夹角 $$\theta \in [0, \pi/2]$$（同样利用对称性）。
+      
+    针会与线相交，当且仅当：$$x \leq \frac{l}{2}\sin\theta$$
+      
+    概率就是满足条件的区域面积 / 总面积：$$P = \frac{2}{\pi d} \int_0^{\pi/2} \frac{l}{2}\sin\theta \, d\theta$$
+    
+    计算积分：$$P = \frac{2}{\pi d} \cdot \frac{l}{2} \cdot \int_0^{\pi/2} \sin\theta \, d\theta = \frac{2}{\pi d} \cdot \frac{l}{2} \cdot 1 = \frac{2l}{\pi d}$$​
+    
+    此问题可与蒙特卡洛方法结合得到 π 的值。
 
 32. 中餐馆过程
 
@@ -779,7 +799,7 @@ keywords: 面试题
     - KSum
 	- Container With Most Water：双指针从两端向内收缩，面积取决于较短的那条边，移动短板。时间复杂度：O(n)
 	- Valid Palindrome：双指针从两端向中间检查字符是否匹配，跳过非字母数字字符。可扩展为“最多删一个字符”场景。
-	- 接雨水：对于每个 i，其可接雨水量为`min(leftmax[i], rightmax[i]) - height[i]`。双指针分别从两端向中间移动，维护 `left_max`、`right_max`。每次移动较低的一侧，并计算可接的水量。时间复杂度：O(n)，空间复杂度：O(1)
+	- 接雨水：对于每个 i，其可接雨水量为`min(leftmax[i], rightmax[i]) - height[i]`。双指针分别从两端向中间移动，维护 `leftmax`、`rightmax`。每次移动较低的一侧，并计算可接的水量，如移动左侧，可根据`leftmax`计算，因为如果`leftmax`>`rightmax`，就不会移动到当前左侧了。时间复杂度：O(n)，空间复杂度：O(1)
 	
 	二、滑动窗口型双指针（Same Direction）
 	
@@ -2229,7 +2249,7 @@ keywords: 面试题
 
 4. \_\_name\_\_ 的值怎么确定？
 
-    答：[链接](https://blog.csdn.net/iamoldpan/article/details/78077983)
+    答：当文件被直接运行时：`__name__ == "__main__"`。当文件被作为模块导入时：`__name__ == 模块名`。
 
 5. map() 返回的对象是什么？
 
@@ -3874,13 +3894,18 @@ keywords: 面试题
 
      答：卷积核宽度为词向量的维度（词向量交换维度并不会起影响，所以没必要在词向量维度做卷积），长度为关注窗口的大小，通道数可为所用词向量。
 
-#### Large Language Models
+### Large Language Models
+
+#### Data
 
 1. Raw data 数据收集和质量控制
 
      答：
-     - 多样性：去重（Exact Match，Minhash，Simhash。可以做 in-dump 去重，也可以做 cross-dump 去重）；多领域（包括Web，书籍，维基百科，论文，数学，代码。可以用词汇多样性来评估）；多语言。
-     - 高质量：规则法（词表匹配），分类器，使用小模型打 PPL。
+     - 多领域：包括Web，书籍，维基百科，论文，数学，代码。可以用词汇多样性来评估
+     - 多语言：Language Identification，有利于后续数据配比
+     - 去重：Exact Match，Minhash，Simhash。可以做 in-dump 去重，也可以做 cross-dump 去重
+     - 高质量：主要过滤噪音，有害数据和个人数据，使用方法有规则法（词表匹配），小模型分类器，小模型 PPL 计算。
+     - 数据增强：rephrasing，主要针对知识和数学
      - 数据配比：平衡；根据需求；根据表现
 
 2. Instruction data 数据收集和质量控制
@@ -3891,11 +3916,13 @@ keywords: 面试题
 
      答：正负例样本。
 
-4. Transformer 的原理？
+#### Transformer
+
+1. Transformer 的原理？
 
      答：Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
 
-5. TransformerBlock 实现
+2. TransformerBlock 实现
 
      答：如果是如 LLaMA 等新型 LLM，则改 Norm 和 激活函数类型，并把 PostNorm 改成 PreNorm。
      
@@ -3928,11 +3955,11 @@ keywords: 面试题
 	        return x
 	```
 
-6. multi-head attention 的公式是怎样的？
+3. multi-head attention 的公式是怎样的？
 
      答：$$Attention(Q,K,V) = softmax({QK^T\over {\sqrt {d_k}}})V$$。
  
-7. multi-head attention 实现
+4. multi-head attention 实现
 
      答：
      ```python
@@ -3985,15 +4012,15 @@ keywords: 面试题
 	        return output
      ```
 
-8. multi-head attention 时间复杂度
+5. multi-head attention 时间复杂度
 
     答：$$O(d * seq\_len * seq\_len)$$。
 
-9. Transformer 使用的时候，制约显存的最关键因素是什么？
+6. Transformer 使用的时候，制约显存的最关键因素是什么？
 
     答：序列长度。
 
-10. casual mask 怎么生成
+7. casual mask 怎么生成
 
     答：
     ```python
@@ -4003,11 +4030,11 @@ keywords: 面试题
 	    return mask
      ```
 
-11. 用 multi-head attention 做 cross-attention
+8. 用 multi-head attention 做 cross-attention
 
     答：拼接后输入。
 
-12. grouped-query attention 实现
+9. grouped-query attention 实现
 
 	答：grouped-query attention 中，query 使用比 key/value 更多的 heads。因为在推理阶段，Q 是即时计算的，而 K/V 是缓存的。
     ```python
@@ -4059,7 +4086,7 @@ keywords: 面试题
 	        return output
      ```
 
-13. multi-head attention + kv cache 实现
+10. multi-head attention + kv cache 实现
 
      答：query 不参与下一 token 的注意力过程，无需缓存，而 key/value 是过去的记忆，需要缓存。
      ```python
@@ -4113,7 +4140,7 @@ keywords: 面试题
 	        return self.out_proj(out)
      ```
 
-14. FlashAttention
+11. FlashAttention
 
     答：GPU 存储单元主要有 HBM 和 SRAM：HBM 容量大但访问速度慢，SRAM 容量小但访问速度快。由于这一特性，传统 self-attention 受 context length 限制，无法利用 SRAM，只能对 HBM 进行多次读写操作。而 FlashAttention 通过分块和在线 softmax 的方式，从 HBM 中读取块到 SRAM 中，用 SM（Streaming Multiprocessor）计算之后再写到 HBM 中，减少对 HBM 的访问，从而提高了速度。时间复杂度并没有变化，而空间复杂度因为没有存储中间的 attention matrix，从 O(N^2) 降低到 O(N)。
     
@@ -4186,11 +4213,11 @@ keywords: 面试题
 	- 优化 GEMM 和 Softmax 操作的重叠计算。
 	- 支持 FP8 低精度硬件加速，提升吞吐量并减少精度损失。
 
-15. Linear Attention
+12. Linear Attention
 
     答：如果去掉 softmax，$$QK^TV$$，可以先计算后半部分，从而将时间复杂度从 O(n^2d) 降到了 O(nd^2)。但直接去掉 softmax 会导致由于没有归一化带来的数值不稳定，因此 Linear Attention 会引入核函数。
 
-16. Multi-head Latent Attention (MLA)
+13. Multi-head Latent Attention (MLA)
 
     答：在 MHA 中，K 和 V 是对 $$h_t$$ 分别用投影矩阵进行变化得到的，而 MLA 把 KV 的变换改成使用一个共用的 down-projection matrix 将 $$h_t$$ 映射为 $$c_t$$，再用两个 up-projection matrices 将 $$c_t$$ 映射为 $$k_t$$ 和 $$v_t$$。在做 Q、K 点积时，由于 $$k_t$$ 对应的 up-projection matrix 可以被 Q 的映射矩阵（此处也是低秩映射矩阵）吸收，所以 Q、K 点积本质上是 Q 和 C 点积。同理 $$v_t$$ 也不需要计算，因此两个 up-projection matrices 不需要用到，减少了 kv cache 的负担。
     
@@ -4198,47 +4225,47 @@ keywords: 面试题
     
     由于 $$d_c$$ 远小于 $$d_h * seq_len$$，时间复杂度从 $$O(d_h * seq\_len * seq\_len)$$ 降至 $$O(d_h * seq\_len * latent\_len)$$。
 
-17. 为什么要 multi-head
+14. 为什么要 multi-head
 
     答：多头注意力允许模型在不同的表示子空间中学习信息，这样可以让模型同时关注不同的信息维度。每个头学习到的信息可以独立地编码输入序列的不同方面，然后将这些信息综合起来，得到更丰富的表示。
 
-18. Transformer 的 Q 和 K 为什么使用不同的权重矩阵生成？如果强行让 Q=K 会发生什么？
+15. Transformer 的 Q 和 K 为什么使用不同的权重矩阵生成？如果强行让 Q=K 会发生什么？
 
     答：注意力将退化为自相似匹配，容易捕捉到 trivial 信息（如位置对称性）；表达能力显著下降，模型性能变差；实际论文实验证明，共用 Q/K/V 权重会损害性能
 
-19. Transformer 为什么是 Q * K^T，而不是 Q + K？
+16. Transformer 为什么是 Q * K^T，而不是 Q + K？
 
     答：点积是最自然的相似度度量，而加法并不能提供一个明确的匹配度分数，它只是两个向量的混合，没有“匹配程度”的含义。
 
-20. Transformer 为什么是点积，而不是 cosine？
+17. Transformer 为什么是点积，而不是 cosine？
 
     答：cosine 会归一化，损失模长信息，而且计算复杂度更高。
 
-21. 为什么要除以 $$\sqrt {d_k}$$
+18. 为什么要除以 $$\sqrt {d_k}$$
 
     答：Q 和 K 点积可以理解成 $$d_k$$ 项的和。如果不缩放，$$d_k$$ 越大，点积值方差越大，同时点积值过大会导致 softmax 函数偏向某个位置，接近 one-hot，梯度变得非常小。缩放了可以使得方差标准化到 Q 和 K 的方差，这有助于数值稳定性，使得学习过程更加稳定。
 
-22. multi-head attention 的 embed 会不会有低秩的问题，怎么解决？
+19. multi-head attention 的 embed 会不会有低秩的问题，怎么解决？
 
     答：是的，可能因 head 冗余、聚合退化等原因呈现低秩结构，从而降低表达能力。可以通过正则化（在多头 projection 矩阵上加正交约束）、架构设计、训练策略等方法缓解，并可用奇异值分析评估问题严重程度。
 
-23. 为什么要用 FFN？
+20. 为什么要用 FFN？
 
     答：引入非线性表达能力，因为 self-attention 是线性的。FFN 通常是两层网络，先升维再降维。由于低维空间表达能力有限，升维可以提高表达能力。降维一方面可以保证维度一致，另一方面可以提取高维空间学习到的特征。
 
-24. 为什么大模型要使用 left padding
+21. 为什么大模型要使用 left padding
 
     答：left padding KV Cache 在右侧连续生长，无需移动缓存，支持高效批量并发生成，动态 KV Cache 底层优化都支持左填充。right padding KV Cache 在不同位置，难以对齐，难以批量对齐，增加显存开销，很少支持右填充。
 
-25. BPE，WordPiece 和 Unigram 的区别是？
+22. BPE，WordPiece 和 Unigram 的区别是？
 
     答：BPE 是基于贪心的频率合并。初始时将文本拆成最小单位（单字符），然后反复合并出现频率最高的连续字符对，直到迭代终止/达到预定词表大小/频率最高的连续字符对低于频率阈值/没有显著提升 token 压缩率。WordPiece（BERT 使用）跟 BPE 类似，不过是根据最大似然估计进行合并。Unigram 基于概率模型，先初始化大量子词候选，然后用 EM 算法估计每个子词的概率，迭代优化删除低概率子词，最终得到固定大小词表。
 
-26. 传统中文分词
+23. 传统中文分词
 
     答：前向匹配（Forward Maximum Matching）+ 动态规划（如 Viterbi 算法）
 
-27. Position Embedding
+24. Position Embedding
 
     答：绝对位置编码，即每个位置有个固定编码。包括：
     
@@ -4273,11 +4300,11 @@ keywords: 面试题
     
     线性内插会改变旋转弧度，从而导致原先距离较远的 q，k 点积之间旋转幅度变小，从而 self-attention 点积增大，导致 softmax 过于锐化。因此 YARN 引入温度 t 来调整注意力分布。
 
-28. 为什么 Position Embedding 可以与 Token Embedding 相加？
+25. 为什么 Position Embedding 可以与 Token Embedding 相加？
 
     答：在经历线性转换后，concat 与相加是等效的；在高维空间，两者几乎正交，因此相加并不干扰；减少计算量。
 
-29. RoPE 实现
+26. RoPE 实现
 
     答：
     ```python
@@ -4321,19 +4348,19 @@ keywords: 面试题
 	    return x_out
     ```
 
-30. 外推性
+27. 外推性
 
     答：测试时要接收处理比训练时更长的上下文。
 
-31. 如何提升外推能力
+28. 如何提升外推能力
 
     答：位置编码外推：ALiBi；
     
     长度泛化技术：动态调整 RoPE 的旋转角；
     
-    推理策略增强：CoT，Self- Consistency。
+    推理策略增强：CoT，Self-Consistency。
 
-32. LLM 常用的激活函数有？
+29. LLM 常用的激活函数有？
 
     答：ReLU：f(x) = max(0, x)
      
@@ -4345,7 +4372,7 @@ keywords: 面试题
      
     ReLU，GeLU 不能门控，GLU，SwiGLU 能门控。
 
-33. Batch Normalization (BN)
+30. Batch Normalization (BN)
 
     答：BN 就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。
 
@@ -4355,7 +4382,7 @@ keywords: 面试题
 
     BN 为了保证非线性的获得，对变换后的 x 又进行了 scale 加上 shift 操作：y = scale * x + shift。
 
-34. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
+31. Batch Normalization (BN) vs Layer Normalization (LN) vs RMSNorm
 
     答：这些都是为了防止梯度消失/爆炸，引入参数为了提高表达能力，从而提高泛化能力。
     
@@ -4363,7 +4390,7 @@ keywords: 面试题
      
     输入是形状为 `(batch_size, seq_len, hidden_dim)` 的张量，BN 通常对 batch 和 seq_len 两个维度联合计算均值和方差，也就是对每个 hidden_dim 维度独立归一化。LN/RMSNorm 对每个样本每个 token 的 hidden_dim 维度做归一化，即对 seq_len 中的每个位置独立归一化，计算均值和方差都在 hidden_dim 上。
 
-35. 实现 LayerNorm
+32. 实现 LayerNorm
 
     答：
     ```python
@@ -4384,7 +4411,7 @@ keywords: 面试题
 	        return self.gamma * x_norm + self.beta
     ```
 
-36. 实现 RMSNorm
+33. 实现 RMSNorm
 
     答：RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
 	```python
@@ -4404,11 +4431,11 @@ keywords: 面试题
 	        return self.scale * x_norm
 	```
 
-37. Pre Norm 和 Post Norm 有什么区别？
+34. Pre Norm 和 Post Norm 有什么区别？
 
     答：Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
 
-38. temperature/Top-k/Top-p
+35. temperature/Top-k/Top-p
 
     答：temperature：控制采样随机性，温度越高越随机。它的做法是将得到的 logits 除以温度，再作 softmax。当温度为 0 时，相当于 argmax/greedy；当温度为 1 时，相当于 softmax；当温度小于 1，分布变得尖锐，熵降低；当温度大于 1，分布变得平坦，熵升高。
     
@@ -4418,11 +4445,11 @@ keywords: 面试题
     
     对于初始 logits 熵大的，叫做高熵 token，意味着 LLM 在此处犹豫不决；反之叫做低熵 token，意味着 LLM 在这非常自信。在推理阶段，较低的 temperature 会导致多样性降低，较高的 temperature 会导致生成质量降低，产生幻觉。
 
-39. speculative decoding
+36. speculative decoding
 
     答：使用一个小型辅助模型（称为“提议模型”或“draft model”）先快速生成多个候选token序列（草稿）。主模型（大型语言模型）随后只对这些候选进行验证和纠正，而不是每一步都全量生成和计算概率。这种方式能显著减少主模型的计算成本，提高生成速度。
 
-40. Beam Search 实现
+37. Beam Search 实现
 
     答：
     ```python
@@ -4454,19 +4481,19 @@ keywords: 面试题
 	    return beams  # 返回最终 beam 列表
     ```
 
-41. MoE
+38. MoE
 
     答：MoE 模型中，输入先经过门控网络，分流到 TopK 个 MoE 层里。MoE 层代替传统 Transformer 的 FFN，其中每一个对应的专家通常是 FFN。最终 MoE 层的输出综合得到结果。
 
-42. 为什么 LLM 流行 MoE？
+39. 为什么 LLM 流行 MoE？
 
     答：MoE 能显著提高模型容量而不成比例地增加计算成本，且支持 expert parallelism。另外 MoE 提高了模型可解释性。
 
-43. MoE 负载均衡
+40. MoE 负载均衡
 
     答：使用 MoE，模型可能会由于专家 token 分配不均，退化成只用少数几个专家，从而导致参数利用率低，训练/推理时部分 GPU 负载过高，OOM 或速度瓶颈。负载均衡常用方法：用辅助损失（Load Balancing Loss）让实际分配和概率分布尽量接近均匀分布；Capacity Factor（容量限制），即如果一个专家超出容量，多余 token 会被丢弃或 reroute 到别的专家，避免某个专家被塞爆。Token Dropping，即丢掉超额 token（只在训练时，用于正则化），或 Token Rerouting，即把超额 token 转发到第二选择的专家（常见于 top-2 gating）；Noisy Gating，在门控 logits 上加噪声（通常是 Gumbel 或 Gaussian），使 gating 更随机化，防止早期训练时过快收敛到少数专家。Sinkhorn / Optimal Transport Gating（更高级），即用最优传输（OT）方法在 token 和专家之间分配，强制更均匀。比如 BASE Layers、Hash Layers 里会用到。
 
-44. 手撕 MoE
+41. 手撕 MoE
 
     答：
     ```python
@@ -4488,17 +4515,17 @@ keywords: 面试题
 	        return torch.sum(gate_probs * expert_outputs, dim=1)  # [batch, output_dim]
     ```
 
-45. Prefix LM 和 Causal LM 区别是什么？
+42. Prefix LM 和 Causal LM 区别是什么？
 
     答：Causal LM 是单向的，只看左边上下文；Prefix LM 是半双向的，可以看整个 prefix 的信息（左侧上下文），预测后缀。
 
-46. 为什么大部分 LLM 是 decoder-only？
+43. 为什么大部分 LLM 是 decoder-only？
 
     答：生成范式的统一性；任务更难
     
     双向 attention 的注意力矩阵因为是 n * d 与 d * n 的矩阵相乘，理论上最大秩只能为 min(n, d)，而一般 n 远大于 d，所以 n * n 的注意力矩阵容易退化成低秩状态，而 causal attention 的注意力矩阵是下三角矩阵，其秩为对角线上非零的个数，而因为 softmax 输出为正，因此必然是满秩的，建模能力更强。
 
-47. SFT
+44. SFT
 
     答：选择模型和模版，保证当前模版在当前模型上已有较好的表现。
     
@@ -4506,11 +4533,11 @@ keywords: 面试题
     - 单轮数据：直接 mask prompt，在 response 上计算 next token prediction loss
     - 多轮数据：简单的操作是根据轮数划分成多条数据，但效率比较低。实际上它也可以直接输入，对对应每轮的 response 做 next token prediction 即可。
 
-48. 强化学习和监督学习有什么区别？
+45. 强化学习和监督学习有什么区别？
 
     答：监督学习中每一个决策（预测标签）是独立的，它对决策的优化取决于标签。强化学习每一个决策是相互影响的，它对决策的优化取决于延时标签（奖励）。过去的 AI 训练方式主要依赖监督学习，也就是让 AI 通过大量人类标注的数据来学习。换句话说，AI 只是一个“超级记忆机”，它能模仿人类的答案，但却不一定真正理解问题的本质。而强化学习的出现，让 AI 不再是单纯的模仿者，而是能够主动探索、试错、优化自己推理方式的智能体。这就像是在训练一个孩子解数学题，监督学习相当于直接告诉他答案，而强化学习则是让他自己尝试解题，并根据最终的正确率进行调整。
 
-49. PPO
+46. PPO
 
     答：PPO 每一次迭代流程如下：
      
@@ -4559,15 +4586,15 @@ keywords: 面试题
 	
 	- `actor_loss`和`critic_loss`加权求和后用来最终优化。
 
-50. PPO 有了 reward model 为什么还要 critic/value model？
+47. PPO 有了 reward model 为什么还要 critic/value model？
 
      答：critic/value model 是内部奖励，仅需当前上下文，会在 RL 过程中更新，reward model 是外部奖励，需要完整回答，是训练好的。
 
-51. 为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？
+48. 为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？
 
      答：需要用标注样本训练；分类模型代价低。
 
-52. DPO
+49. DPO
 
     答：
      
@@ -4581,7 +4608,7 @@ keywords: 面试题
 	    return loss
     ```
  
-53. GRPO
+50. GRPO
    
     答：
      
@@ -4629,7 +4656,7 @@ keywords: 面试题
     
     - 输出 o_i 被输入到冻结的参考模型（Reference Model），计算输出 o_i 与参考策略之间的 KL 散度，用于限制策略更新。
 
-54. DAPO
+51. DAPO
 
     答：DAPO 主要是根据 GRPO 进行改进，主要改进点为
     - 去掉了 KL 散度，KL 散度可以限制模型同初始模型不会显著偏离，但是在训练 long-CoT reasoning model 时，模型分布会显著偏离初始模型，所以去掉 KL 散度的约束。
@@ -4638,23 +4665,23 @@ keywords: 面试题
     - GRPO 先在样本内按 Token 数平均 loss，再在样本间聚合 loss，从而导致较长样本和较短样本的损失贡献是一样的，即对于答案正确的，GRPO 偏向于选择答案长度较短的回复，而对于答案错误的，GRPO 偏向于让模型生成更长的回复。DAPO 改进为 Token-Level 策略梯度损失
     - 在 RL 训练中，一般会设置最大长度，对过长回复进行截断，从而其 reward 会为 -1，扰乱训练。DAPO 设置了对长序列的合理惩罚（Overlong Reward Shaping），避免过长后截断导致模型无法得到奖励的情形，以缓解噪声并稳定训练。
 
-55. GSPO
+52. GSPO
 
     答：重要性采样修正不再对应 token 级别，而是对应序列级别。
 
-56. on-policy vs off-policy
+53. on-policy vs off-policy
 
     答：数据来源于当前策略生成为 on-policy，其数据只能更新一次 policy，之后需要用更新的 policy 重新采样数据，因此利用效率低；数据来源于历史偏好数据为 off-policy。
 
-57. PPO vs DPO vs GRPO
+54. PPO vs DPO vs GRPO
 
     答：所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。PPO 依赖于 reward model 和 value model；DPO 没有显式探索机制。
 
-58. GRPO 怎么去掉 critic/value model 的？
+55. GRPO 怎么去掉 critic/value model 的？
 
      答：采样多次，用 reward model 评价的平均值来充当 critic/value model
 
-59. KL 散度的几种计算方式
+56. KL 散度的几种计算方式
 
      答：标准 KL 计算方式：$$KL(q(x) \| p(x))=\sum_{x \in X} {q(x) * log_2{\frac{q(x)}{p(x)}}}$$
      
@@ -4672,27 +4699,35 @@ keywords: 面试题
      
       $$k3=\frac{p(x)}{q(x)} - 1 - log(\frac{p(x)}{q(x)})=r - 1 - logr=r - 1 + k1$$，无偏估计，且恒大于等于 0。
 
-60. 熵控制在强化学习里的作用
+57. 熵控制在强化学习里的作用
 
      答：在大模型训练的强化学习阶段，设置较高的 temperature 可以防止模型过度自信，鼓励模型采取高熵动作，从而扩大探索空间。另一种方式是在 group-level 用 smi/dpp/self-bleu 计算多样性，进行 reward shaping 来控制熵的变化。
      
      熵坍塌：随着训练的进行，entropy 逐渐降低。导致某些 group 采样出的 response 几乎相同，使得模型在早期变得更加确定，限制了模型的探索空间。
 
-61. RLVR
+58. RLVR
 
      答：用 Verifier，通过与预设的答案或规则相比较，给出一个二元值，这种方式仅适用于有标准答案的场景，而在开放问题中则不太适用。
 
-62. 为什么 MoE + GRPO 不稳定？怎么解决？
+59. Reasoning
+
+    答：Prompting：CoT，ToT，Self-Consistency，s1。
+    
+    改进模型/系统结构：RAG，Memory，Tool Use。
+    
+    改进学习方式：SFT，RLHF，Critic Models：PRM 和 ORM。
+
+60. 为什么 MoE + GRPO 不稳定？怎么解决？
 
      答：对于MoE模型， $$\pi_\theta$$ 和 $$\pi_{old}$$ 有差别，就可能导致 route 到不同的专家，从而导致 ratio 波动很大。
      
      Routing Replay：缓存 $$\pi_{old}$$ 推理时激活的专家，在计算 $$\pi_\theta(y_{i,t}|x_i,y_{<t})$$ 推理时进行重放，也激活相同的专家。这样 ratio 的波动就不会那么大了
 
-63. LoRA
+61. LoRA
 
      答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。target_modules 一般为`q_proj`、`v_proj`，有时也会注入到 `k_proj` 或 `o_proj`。modules_to_save 表示指定哪些原模型模块需要一起训练 & 保存，如果扩展了词表可能要加 `embed_tokens`、`lm_head`。
 
-64. 手撕 LoRA
+62. 手撕 LoRA
 
      答：
      ```python
@@ -4717,15 +4752,15 @@ keywords: 面试题
 	        return base + lora
     ```
 
-65. Adapter
+63. Adapter
 
      答：插入小型网络模块
 
-66. Prefix Tuning
+64. Prefix Tuning
 
      答：Prefix Tuning 会为每层添加一组虚拟的 Key 和 Value，Query 保持不变。embedding 的输入不会添加。
 
-67. Base model eval
+65. Base model eval
 
      答：General Tasks: MMLU (5-shot), MMLU-Pro (5-shot, CoT), MMLU-redux (5-shot), BBH (3-shot, CoT), SuperGPQA (5-shot, CoT).
      
@@ -4735,7 +4770,7 @@ keywords: 面试题
     
     Multilingual Tasks: MGSM (8-shot, CoT), MMMLU (5-shot), INCLUDE (5-shot).
 
-68. Chat model eval
+66. Chat model eval
 
      答：General Tasks: MMLU-Redux, GPQADiamond, C-Eval, LiveBench.
      
@@ -4747,21 +4782,21 @@ keywords: 面试题
      
      Multilingual Tasks: instruction following - Multi-IF, knowledge - INCLUDE & MMMLU, mathematics - MT-AIME2024 & PolyMath, and logical reasoning - MlogiQA.
 
-69. Live benchmark
+67. Live benchmark
 
      答：FutureX
 
-70. Safety / Halluciation
+68. Safety / Halluciation
 
     答：出现幻觉原因：1. 语料中存在过时，虚构的内容，或因长尾效应缺乏与下游任务相关的领域知识；2. 语言模型的本质机制是预测下一个最可能的词，它只保证语言上看起来连贯合理，并不保证事实正确，所以它倾向即使不知道，也会编一个出来，在不确定时依然输出确定性答案，很少说我不知道；3. 推理时随机采样的生成策略。
     
     解决方案：提高训练数据质量；RAG 提供权威资料；Prompt Engineering：明确告诉模型不要编造、请回答已知事实，或让模型先思考再输出（如 Let’s think step by step）；生成之后进行事实校验，如比对知识图谱或自动校验；RLHF；多模型协作。
 
-71. Long Context
+69. Long Context
 
     答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
 
-72. LLM设计中的 System 1 和 System 2
+70. LLM设计中的 System 1 和 System 2
 
     答：默认模式是 System 1：标准的自回归生成，快速但单步预测。
      
@@ -4773,7 +4808,7 @@ keywords: 面试题
         
     - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-73. LLM + 知识
+71. LLM + 知识
 
     答：RAG 可以解决 LLM 知识过时，幻觉问题以及无法调用私有数据等问题。
     
@@ -4788,19 +4823,11 @@ keywords: 面试题
     
     另一种方式是 search engine as a tool。
 
-74. 文本分块
+72. 文本分块
 
     答：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。
 
-75. Reasoning
-
-    答：Prompting：CoT，ToT，Self-Consistency，s1。
-    
-    改进模型/系统结构：RAG，Memory，Tool Use。
-    
-    改进学习方式：SFT，RLHF，Critic Models：PRM 和 ORM。
-
-76. Test-time Scaling
+73. Test-time Scaling
 
     答：实现 test-time scaling，需要先激励 LLM 在 thinking 上耗费更多资源，从而生成更长的回答，或者更多的回答。
     
@@ -4814,7 +4841,7 @@ keywords: 面试题
     
     提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
 
-77. Agent
+74. Agent
 
     答：Agent = LLM + Planning + Memory + Tool。
     
@@ -4828,15 +4855,15 @@ keywords: 面试题
     
     Agent 最常见的应用在 Web，软件工程，Research 和对话。
 
-78. MCP 和 function calling 有什么区别？
+75. MCP 和 function calling 有什么区别？
 
     答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
 
-79. LangChain
+76. LangChain
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-80. LLM for SE
+77. LLM for SE
 
     答：SE 的完整 Pipeline 可分为软件开发和软件维护。
     
@@ -4864,25 +4891,25 @@ keywords: 面试题
     - Retrieval：How to select useful files
     - 多语言
 
-81. Agentic RL
+78. Agentic RL
 
     答：在 Rollout 的时候调用和执行工具即可。为了增强效率，一般要异步执行。
 
-82. bf16，fp16，fp32，int8 区别
+79. bf16，fp16，fp32，int8 区别
 
     答：指数位决定了数值范围，尾数位决定了精度。bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。int8 可用于量化，因为整数乘法比浮点乘法快，且用缩放映射保留大部分信息。合理设置 scale 和 zero-point，配合 clip 操作，可以安全地把浮点数映射到 int8，不会溢出。
 
-83. 混合精度计算
+80. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-84. 估算 LLM 的参数量
+81. 估算 LLM 的参数量
 
     答：embedding 层的维度为 Vh，若不与输出层的权重矩阵共享，则需加上输出层的权重矩阵 2Vh。
     
     Transformer 每一层分为 self-attention 和 MLP，self-attention 设计 Q，K，V，O 四个权重矩阵和偏置，因此是 4h^2 + 4h。MLP 一般有两层，先升维再降维，如升到 4h，那么参数量为 8h^2 + 5h。两个模块都有 layer normalization，包含两个可训练参数，形状都为 h，所以参数量总和为 4h。因此，每一层参数量为 12h^2 + 13h。
 
-85. 估算 7B 模型在训练和推理时的显存占用
+82. 估算 7B 模型在训练和推理时的显存占用
 
     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2 字节，fp32 精度为 4 字节。
     
@@ -4890,7 +4917,7 @@ keywords: 面试题
     
     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
-86. 多卡多机训练
+83. 多卡多机训练
 
     答：Data Parallel：数据被切分成小批量（mini-batch），分别送到不同 GPU，但模型必须能放进单卡显存，无法解决超大模型训练。
     
@@ -4900,11 +4927,11 @@ keywords: 面试题
     
     Expert Parallel：在 MoE 模型里，每个样本只激活部分专家网络。专家被分配在不同 GPU/节点上。
 
-87. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+84. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-88. PD 分离
+85. PD 分离
 
     答：Prefill 阶段对初始提示（Prompt）进行处理，生成初始的隐藏状态（Hidden States）。这个阶段通常涉及对整个模型的一次前向传播，是并行计算，因此计算密集度较高，以矩阵乘法为主，GPU 利用率高。对于每个新的输入序列，都需要进行一次 Prefill。
     
@@ -4914,15 +4941,15 @@ keywords: 面试题
     
     PD 分离一般涉及三要素，调度器、Prefill 实例和 Decode 实例。调度器负责对外发布推理接口，P、D 负责各自推理阶段的计算。P、D 一般在不同的机器资源上运行。具体来说，Prefill 阶段被分配到专门的高算力 GPU上 执行，以充分利用其并行计算能力；而 Decode 阶段则被分配到具有大显存和高内存带宽的 GPU 上执行，以满足其内存访问需求。两个阶段之间通过高速网络（如 NVLink 或 RDMA）传输中间状态（主要是 KV 缓存）。
 
-89. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+86. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-90. deepspeed 的 Zero-1， Zero 2， Zero 3
+87. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存。参数、梯度、优化器状态始终绑定，分配到同一张 GPU 上。
 
-91. 量化
+88. 量化
 
     答：PTQ（训练后量化）和 QAT（训练时量化）。
     
@@ -4932,37 +4959,39 @@ keywords: 面试题
     
     AWQ (Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
-92. vllm
+89. vllm
 
     答：传统的静态分配 KV 缓存不使用虚拟内存，直接对物理内存进行操作，会导致显存碎片和过度预留，因此 vllm 使用了 PagedAttention，即把 KV 缓存当作虚拟内存，每条序列的缓存被划分成块，可动态分配到显存中，允许在不连续的内存空间中存储。
     
     另外 vllm 的 PagedAttention 使用了 memory sharing，即单个 prompt 生成多个序列时，可以共享显存。
 
-93. GPT 的原理？
+#### Technique Report
+
+1. GPT 的原理？
 
     答：基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
 
-94. BERT 的原理？
+2. BERT 的原理？
 
     答：基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
 
-95. BERT 的训练目标？
+3. BERT 的训练目标？
 
     答：BERT 有 masked language modeling 和 next sentence prediction 两个目标
 
-96. RoBERTa 相比 BERT 做了哪些改进？
+4. RoBERTa 相比 BERT 做了哪些改进？
 
     答：更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
 
-97. RoBERTa 强于 RNN 的地方？
+5. RoBERTa 强于 RNN 的地方？
 
     答：并行，对大数据比较友好。
 
-98. Qwen
+6. Qwen
 
     答：QwenMoE
 
-99. Deepseek-V1 - Deepseek-V3
+7. Deepseek-V1 - Deepseek-V3
 
     答：
     - MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
@@ -4973,14 +5002,14 @@ keywords: 面试题
     - v3 将门控函数的对更小的小数位会敏感的 softmax（multi-class classification）改成了值域更宽的 sigmoid（multi-label classification）
     - fp8 精度计算
 
-100. Deepseek-R1-Zero
+8. Deepseek-R1-Zero
 
     答：证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
     1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
     2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用 `<think>` 标签包裹推理过程，用 `<answer>` 标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
     3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
 
-101. Deepseek-R1
+9. Deepseek-R1
 
     答：成功经验
     - 在 SFT 阶段采用冷启动，只使用了少量（几千条）高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
@@ -4992,7 +5021,7 @@ keywords: 面试题
     - 过程奖励模型：思维过程正确，行动过程正确。希望用来解决奖励黑洞，但发现只能用于简单的推理任务
     - 蒙特卡洛树搜索（MCTS）：由于推理任务的搜索空间远比围棋复杂，AI 需要在每一步做出决策，而 MCTS 无法有效地指导 AI 进行合理的搜索。
 
-#### Search/Recommendation
+### Search/Recommendation
 
 1. 搜索/推荐 Pipeline
 
@@ -5047,7 +5076,7 @@ keywords: 面试题
 
     答：提升长尾内容曝光。
 
-#### CV
+### Computer Vision
 
 1. Diffusion Model
 
