@@ -1668,9 +1668,11 @@ keywords: 面试题
 
     答：[KMP 算法](https://www.zhihu.com/question/21923021)
     
-	1. 构建部分匹配表（next 数组）：next[i] 记录每个位置之前 pattern[0:i] 的前缀后缀最长公共长度。
+    求长度为 m 的 A 串是否包含长度为 n 的 B 串。
     
-    2. 主串匹配时使用 next 数组跳过重复匹配。
+	1. 构建 B 串的部分匹配表（PMT，next 数组）：next[i] 记录每个位置之前 pattern[0:i] 的前缀后缀最长公共长度。构建 next 数组时，维护两个指针：`i` 为当前正在计算 `next[i]` 的位置（从 1 到 n-1），`j`：当前匹配的前后缀长度。如果 `B[i] == B[j]`，则 `next[i] = j + 1`，同时 `i` 和 `j` 都加 1；如果 `B[i] != B[j]`：如果 `j != 0`，令 `j = next[j-1]`，（回退到前一个可能匹配长度），如果 `j == 0`，`next[i] = 0`，`i` 前移 1。时间复杂度为 O(n)。
+    
+    2. 主串匹配时使用两个指针，i 指向 A 串，j 指向 B 串。如果匹配，两个指针同时往前移，如果不匹配，`j = next[j-1]`，如果`j = 0`，`i = i + 1`，否则`i` 不动。
     
     时间复杂度为 O(m + n)
 
@@ -1981,7 +1983,7 @@ keywords: 面试题
     答：动态规划的时间复杂度和空间复杂度不强相关（如完全背包）。
     
     线性 DP
-    - 爬楼梯/斐波那契数列（每步可以走 1 或 2 级台阶，求总方法数）：`dp[i] = dp[i-1] + dp[i-2]`，初始值 `dp[0]=1, dp[1]=1`
+    - 爬楼梯/斐波那契数列（每步可以走 1 或 2 级台阶，求总方法数）：`dp[i] = dp[i-1] + dp[i-2]`，初始值 `dp[0]=1, dp[1]=1`。可使用递归法、迭代法、矩阵快速幂（时间复杂度为 O(logn)）、调用 Binet 公式（时间复杂度为 O(1)，但 n 大时浮点数计算有误差）。n 较小（如 ≤ 30）：递归、记忆化或迭代都可以；n 较大（如 10^6）：用迭代；n 超大（如 10^9）：用矩阵快速幂；只需中小 n 且追求极致速度：用 Binet 公式
     - 零钱兑换（用最少的硬币凑出金额）：`dp[i] = min(dp[i - coin] + 1)`，遍历所有 coin。注意金额 i - coin >= 0
     - 最大子数组和（连续子数组和最大）：Kadane - `dp[i] = max(dp[i-1] + nums[i], nums[i])`
     - 打家劫舍（相邻房子不能同时偷）：`dp[i] = max(dp[i-1], dp[i-2] + nums[i])`
@@ -2434,21 +2436,13 @@ keywords: 面试题
 
     答：就是 lambda 函数，一般用来实现简单的功能，如加法 `(lambda x, y: x + y)(3, 4)`。
 
-20. @staticmethod 和 @classmethod 的作用与区别
-
-    答：[链接](https://blog.csdn.net/qq_15037231/article/details/77943109)
-
-21. Python 的 getter 和 setter 是什么？
-
-    答：@property 和 @name.setter。
-
-22. Python 赋值、浅拷贝和深拷贝
+20. Python 赋值、浅拷贝和深拷贝
 
     答：[链接](https://www.cnblogs.com/wilber2013/p/4645353.html)
 
-23. 装饰器的意义和使用？
+21. 装饰器的意义和使用？
 
-    答：用来实现代码复用，增强代码可读性。
+    答：用来实现代码复用，常用于记录日志，权限验证、计算函数执行时间。
 
     ```python
     def deco(func):
@@ -2464,21 +2458,123 @@ keywords: 面试题
         myfunc("something")
     ```
 
-24. 解释一下多态？
+22. Python 常用内置和标注库装饰器
+
+    答：`@staticmethod` —— 静态方法。不需要访问实例属性或方法时使用。没有自动传入，不可以访问类属性，不能创建实例，类和实例都能调用。
+    
+    ```python
+    class MyClass:
+	    @staticmethod
+	    def greet():
+	        print("Hello")
+	MyClass.greet()
+    ```
+    
+    `@classmethod` —— 类方法。第一个参数是类 `cls`，而不是实例 `self`，可以访问类属性，可有创建实例，类和实例都能调用。
+    
+    ```python
+    class MyClass:
+	    count = 0
+	
+	    @classmethod
+	    def inc(cls):
+	        cls.count += 1
+	
+	MyClass.inc()
+	print(MyClass.count)
+    ```
+    
+    ```python
+    class Person:
+	    def __init__(self, name, age):
+	        self.name = name
+	        self.age = age
+	
+	    @classmethod
+	    def from_string(cls, info_str):
+	        # cls 是类本身，相当于 Person
+	        name, age = info_str.split('-')
+	        # 使用 cls() 来调用构造函数，创建实例
+	        return cls(name, int(age))
+	
+	p2 = Person.from_string("Alice-20")
+	print(p2.name, p2.age)
+    ```
+    
+    `@property` —— 把方法变成属性，让方法像访问属性一样调用，设置属性可以用 `.setter` 装饰器。
+    
+    ```python
+	class Person:
+	    def __init__(self, name):
+	        self._name = name   # 用下划线保护内部属性
+	
+	    @property
+	    def name(self):
+	        return self._name
+	
+	    @name.setter
+	    def name(self, value):
+	        if not value:
+	            raise ValueError("名字不能为空")
+	        self._name = value
+	
+	p = Person("Alice")
+	print(p.name)  # Alice
+	
+	p.name = "Bob"  # 调用 setter
+	print(p.name)  # Bob
+    ```
+    
+    `@functools.lru_cache`：缓存函数结果，来自 `functools` 模块，非常适合斐波那契、递归等高频重复计算场景。
+    
+    ```python
+    from functools import lru_cache
+
+	@lru_cache(maxsize=None)
+	def fib(n):
+	    if n <= 1:
+	        return n
+	    return fib(n-1) + fib(n-2)
+	
+	print(fib(50))  # 超快！
+    ```
+    
+    `@functools.wraps` —— 保留原函数元信息，让装饰器包装后的函数保留原函数的 `__name__`、`__doc__` 等信息。
+    
+    ```python
+    from functools import wraps
+
+	def log(func):
+	    @wraps(func)
+	    def wrapper(*args, **kwargs):
+	        print(f"调用 {func.__name__}")
+	        return func(*args, **kwargs)
+	    return wrapper
+	
+	@log
+	def hello():
+	    """这是一个问候函数"""
+	    print("Hello")
+	
+	hello()
+	print(hello.__name__)  # 仍然是 'hello'
+    ```
+
+23. 解释一下多态？
 
     答：多态的好处就是，当我们需要传入`Dog`、`Cat`、`Tortoise`……时，我们只需要接收`Animal`类型就可以了，因为`Dog`、`Cat`、`Tortoise`都是`Animal`类型，然后，按照`Animal`类型进行操作即可。由于`Animal`类型有`run()`方法，因此，传入的任意类型，只要是`Animal`类或子类，就会自动调用实际类型的`run()`方法，这就是多态的意思：
     
     对于一个变量，我们只需要知道它是`Animal`类型，无需确切地知道它的子类型，就可以放心地调用`run()`方法，而具体调用的`run()`方法是作用在`Animal`、`Dog`、`Cat`还是`Tortoise`对象上，由运行时该对象的确切类型决定，这就是多态真正的威力：调用方只管调用，不管细节，而当我们新增一种`Animal`的子类时，只要确保`run()`方法编写正确，不用管原来的代码是如何调用的。
 
-25. 鸭子类型是什么？
+24. 鸭子类型是什么？
 
     答：对于 Python 这样的动态语言，则不一定需要传入`Animal`类型。我们只需要保证传入的对象有一个`run()`方法就可以了：这就是动态语言的“鸭子类型”，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。
 
-26. Counter 与运算和或运算
+25. Counter 与运算和或运算
 
     答：与和或操作分别返回两个 Counter 各元素的最小值和最大值。得到的 Counter 对象将删除小于 1 的元素。
 
-27. Python 多线程？
+26. Python 多线程？
 
     答：对于 CPU 密集型，由于全局解释器锁（GIL）的存在，GIL 保证在任何时刻只有一个线程执行 Python 字节码，所以线程是线性执行的；对于 I/O 密集型，由于线程在等待 I/O 操作时会释放全局解释器锁，所以这时多线程有体现作用。
 
@@ -3905,7 +4001,6 @@ keywords: 面试题
      - 多语言：Language Identification，有利于后续数据配比
      - 去重：Exact Match，Minhash，Simhash。可以做 in-dump 去重，也可以做 cross-dump 去重
      - 高质量：主要过滤噪音，有害数据和个人数据，使用方法有规则法（词表匹配），小模型分类器，小模型 PPL 计算。
-     - 数据增强：rephrasing，主要针对知识和数学
      - 数据配比：平衡；根据需求；根据表现
 
 2. Instruction data 数据收集和质量控制
@@ -3915,6 +4010,24 @@ keywords: 面试题
 3. Alignment 数据生成和质量控制
 
      答：正负例样本。
+
+4. 数据合成
+
+     答：数据合成需要达成可靠性和多样性两个目标。
+     
+     其可接受有标签/无标签数据、任务目标，任务条件，以及 few-shots 作为输入，然后分多步合成。
+     
+     任务条件可以增加多样性，条件可以是不同的主题、长度、风格属性以及随机的几个词等。
+     
+     相比于随机挑选 few-shots，更主流的方法是对他们进行聚类，保证在一个 context 下面的 few-shots 彼此更加相似。
+     
+     在多步合成中，它可以分为是数据集逐渐扩大，也可以是复杂样本由简单样本逐步生成。
+     
+     合成完需要进一步清洗方可使用。
+     
+     合成可以是多重迭代的（左脚踩右脚），可以是逆向的。
+     
+     预训练阶段：rephrasing，主要针对知识和数学
 
 #### Transformer
 
