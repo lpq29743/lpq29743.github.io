@@ -2044,9 +2044,9 @@ keywords: 面试题
     - 重排字符避免重复：每次选择当前出现次数最多且不冲突的字符
     - 单调栈/队列问题：如接雨水、移掉 k 位数字得到最小数、柱状图最大矩形。保持局部单调性，保证全局最优。
 
-48. 不用库函数求一个数的立方根？
+48. 不用库函数（`math.pow` 或 `** (1/3)`）求一个数 x 的立方根 y？
 
-    答：[链接](https://blog.csdn.net/sjpz0124/article/details/47726275)
+    答：二分法；牛顿法：另 $$f(y) = y^3 - x$$，$$y_{n+1} = y_n - \frac{f(y_n)}{f'(y_n)}$$
 
 49. 二进制中 1 的个数？
 
@@ -2067,7 +2067,9 @@ keywords: 面试题
 
 51. 数值的整数次方？
 
-    答：[链接](https://zhuanlan.zhihu.com/p/38715645)
+    答：快速幂，时间复杂度为 O(logn)
+    
+    当 n 是偶数，$$a^n=(a^{n/2})^2$$，当 n 为奇数，$$a^n=a * a^{n−1}$$
 
 52. 有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？
 
@@ -4336,7 +4338,7 @@ keywords: 面试题
     
     由于 MLA 没有显式计算 K，且 ROPE 不能加在 latent vector 上，因此 MLA 使用了 decoupled RoPE，即使用额外的 multi-head queries 和一个 shared key 来携带 RoPE 的位置信息，其维度为 $d_h$。新增的 q 和 k 维度使用常规的 RoPE 计算，用于携带位置信息；而原来的维度依然使用低秩分解的方式计算，最后再计算 attention 的时候两个部分拼接起来。
     
-    由于 $$d_c$$ 远小于 $$d_h * seq_len$$，时间复杂度从 $$O(d_h * seq\_len * seq\_len)$$ 降至 $$O(d_h * seq\_len * latent\_len)$$。
+    由于 $$d_c$$ 远小于 $$d_h * seq\_len$$，时间复杂度从 $$O(d_h * seq\_len * seq\_len)$$ 降至 $$O(d_h * seq\_len * latent\_len)$$。
 
 14. 为什么要 multi-head
 
@@ -4783,7 +4785,7 @@ keywords: 面试题
 
      答：对于MoE模型， $$\pi_\theta$$ 和 $$\pi_{old}$$ 有差别，就可能导致 route 到不同的专家，从而导致 ratio 波动很大。
      
-     Routing Replay：缓存 $$\pi_{old}$$ 推理时激活的专家，在计算 $$\pi_\theta(y_{i,t}|x_i,y_{<t})$$ 推理时进行重放，也激活相同的专家。这样 ratio 的波动就不会那么大了
+     Routing Replay：缓存 $$\pi_{old}$$ 推理时激活的专家，在计算 $$\pi_\theta(y_{i,t}\|x_i,y_{<t})$$ 推理时进行重放，也激活相同的专家。这样 ratio 的波动就不会那么大了
 
 53. DAPO
 
@@ -4852,7 +4854,7 @@ keywords: 面试题
 
 64. LoRA
 
-     答：LoRA 的公式为 $$W‘ = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。target_modules 一般为`q_proj`、`v_proj`，有时也会注入到 `k_proj` 或 `o_proj`。modules_to_save 表示指定哪些原模型模块需要一起训练 & 保存，如果扩展了词表可能要加 `embed_tokens`、`lm_head`。
+     答：LoRA 的公式为 $$W^{\prime} = W + \alpha * BA$$，$$A \in R^{r \times d}$$，$$B \in R^{d \times r}$$，A 用的是小的高斯随机初始化，B 用的是全 0 初始化，所以初始时 W = W’，$$\alpha$$ 是缩放因子，用于控制 LoRA 注入的权重大小。target_modules 一般为`q_proj`、`v_proj`，有时也会注入到 `k_proj` 或 `o_proj`。modules_to_save 表示指定哪些原模型模块需要一起训练 & 保存，如果扩展了词表可能要加 `embed_tokens`、`lm_head`。
 
 65. 手撕 LoRA
 
