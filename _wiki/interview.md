@@ -4923,7 +4923,7 @@ keywords: 面试题
 
 72. Long Context
 
-    答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据。
+    答：位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据；拆分 agent。
 
 73. LLM设计中的 System 1 和 System 2
 
@@ -4972,15 +4972,31 @@ keywords: 面试题
 
 77. Agent
 
-    答：Agent = LLM + Planning + Memory + Tool。
+    答：相比传统方法，Agent 会更重，速度更慢，可控性更差，但其数据依赖低，可替换一些难定义的流程。
+    
+    Agent = LLM + Planning + Memory + Tool。
     
     Planning：Task decomposition（CoT，ToT），Self-Reflection（ReAct）。
     
     Memory：short-term（ICL），long-term。
     
-    Single-Agent: AutoGPT
+    Agent 可分为静态工作流（可控，无自主性决策，更适用于可被标准化的企业级场景，如质检）和动态工作流（不可控，有自主性决策，更适用于无法标准化的消费级场景，如 Deep Research）。Agent 设计的核心矛盾即是如何在静态工作流和动态工作流之间找到平衡。
     
-    Multi-Agent: HuggingGPT
+    静态工作流常见模式有：
+    - 链式提示系统（Prompt chaining）：提示链将任务分解为一系列步骤，其中每个 LLM 调用都会处理前一个步骤的输出。
+    - 路由系统（Routing）：路由会对输入进行分类，并将其定向到专门的后续任务。
+    - 并行化系统（Parallelization）：LLM 有时可以同时处理一项任务，并以编程方式聚合其输出。
+    - 协调器编排系统（Orchestrator-workers）：中央 LLM 动态分解任务，将其委托给工作者 LLM，并综合其结果。
+    - 评估器、优化器系统（Evaluator-optimizer）：一个 LLM 调用生成响应，而另一个调用在循环中提供评估和反馈。
+    
+    动态工作流常见模式有：
+    - CoT (Reason only)
+    - Self-Consistency (Reason only)：多次 CoT 采样做结合
+    - ToT (Reason only)：把复杂问题分解成多个简单子问题，再每个子问题上多次 CoT 采样，最后使用状态评估器和广搜/深搜得到结果
+    - ReAct（Reason + Act）：每个推理轨迹为 Reason + Act + Observe，多次重复直到结束流程。
+    - Plan-Execute：ReAct 受限于其走一步算一步的局部思维，而 Plan-Execute 通过先计划再执行建立了全局视野
+    - REWOO（Reasoning, Execution, Watch, and Optimize）：在 ReAct 的基础上引入了反思和优化机制
+    - Reflexion：自我批评和自我改进
     
     Agent 最常见的应用在 Web，软件工程，Research 和对话。
 
@@ -4992,7 +5008,40 @@ keywords: 面试题
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-80. LLM for SE
+80. Context Engineering
+
+    答：提示（Prompting）是指你要求模型做某件事，而上下文工程（Context Engineering）是指在提出要求之前，准备好模型可能需要的一切。
+    
+    这些上下文可分为几大类：
+    - 指导性上下文（Guiding Context），这类上下文的核心功能是指导模型该做什么以及如何做，主要为模型行为设定框架，目标和规则。Prompt Engineering 一般旨在优化指导性上下文。它包括：System Prompt；Task Description；Few-shot Examples；Output Schema（前面三个很简单，Output Schema 一般是强制要求模型以特定格式（如 JSON、XML）输出的结构定义）
+    - 信息性上下文（Informational Context），这类上下文的核心功能是告诉模型需要知道什么知识，为模型提供解决问题所必备的事实，数据与知识。它包括：RAG（外部知识库）；Memory（Short-term Memory：当前对话历史，Long-term Memory：跨会话存储的一些重要信息和偏好）；State / Scratchpad（状态维护和草稿纸，例如 Claude Code 在开始计划先的临时 TODO 以及 Thinking 模型下的思考“草稿本”）
+    - 行动性上下文（Actionable Context），这类上下文的核心功能是告诉模型能做什么以及做了之后的结果，为模型提供与外部世界交互的能力。它包括：Tool Definition；Tool Calls & Results / Tool Traces（调用了哪些工具以及工具返回的结果，即工具调用的历史追踪）
+    
+    长上下文带来成本与协同压力，更易暴露四类上下文失效：污染、干扰、混淆、冲突。它们常彼此耦合，并直接损害推理稳定性与跨代理传递。
+    - 上下文污染（Context Poisoning），主要是幻觉进入 Context 导致异常结果。
+    - 上下文干扰（Context Distraction），当 Context 接近溢出时，模型训练中获得的知识会被“覆盖”导致模型降智。
+    - 上下文混淆（Context Confusion），冗余且不相关的 Context 让输出结果偏离期望。
+    - 上下文冲突（Context Clash），当上下文中的信息互相矛盾时，比如上下文存在过去错误的答案。
+    
+    上下文工程策略分为写入、选择、压缩和隔离四类。
+    
+    写入上下文（Write Context）：此策略旨在将信息保存于上下文窗口之外，以备未来使用。这包括两种主要形式：
+    - 草稿本（Scratchpads）：用于存储会话内部的临时信息。这可以是在一个单一的交互过程中，智能体为了完成当前任务而需要临时记录的数据。
+    - 记忆（Memories）：用于跨多个会话持久化信息。这些记忆可以是智能体自动生成或从过去的交互中综合提炼出来的，用于保留长期知识或个性化设置。
+    
+	选择上下文（Select Context）：此策略专注于将相关信息提取到当前的上下文窗口中。这涉及从以下来源进行选择：
+	- 草稿本和记忆的检索：根据当前任务或用户查询，从已存储的草稿本或各种类型的记忆（如事件记忆、程序记忆、语义记忆）中检索最相关的信息。
+	- 检索增强生成（RAG）：尤其在代码智能体中，RAG 被广泛应用于从工具描述和知识库中获取信息，确保智能体能够访问到其执行任务所需的外部知识。
+	
+	压缩上下文（Compressing Context）：此策略通过保留必要的 token 来优化上下文窗口的使用效率。它主要包含：
+	- 上下文摘要（Context Summarization）：将冗长的智能体交互或工具输出浓缩成更简洁的形式，减少不必要的细节，突出关键信息。
+	- 上下文修剪（Context Trimming）：通过过滤或剪枝技术（通常基于启发式规则），从上下文中移除不相关或冗余的 token。
+	
+	隔离上下文（Isolating Context）：此策略通过分离上下文来帮助智能体更有效地执行任务。这可以通过以下方式实现：
+	- 多智能体架构（Multi-agent Architecture）：将任务分解给多个子智能体，每个子智能体处理其特定任务并拥有独立的上下文，避免不同任务的上下文相互干扰。
+	- 环境（Environments）：使用沙箱等环境来隔离包含大量 token 的对象或状态，例如在执行复杂计算或访问敏感数据时，将这些操作限制在特定的、受控的环境中。
+
+81. LLM for SE
 
     答：SE 的完整 Pipeline 可分为软件开发和软件维护。
     
@@ -5020,25 +5069,25 @@ keywords: 面试题
     - Retrieval：How to select useful files
     - 多语言
 
-81. Agentic RL
+82. Agentic RL
 
     答：在 Rollout 的时候调用和执行工具即可。为了增强效率，一般要异步执行。
 
-82. bf16，fp16，fp32，int8 区别
+83. bf16，fp16，fp32，int8 区别
 
     答：指数位决定了数值范围，尾数位决定了精度。bf16 保留了 fp32 的指数位，只截断尾数，精度略低于 fp16，但数值范围与 fp32 一致。int8 可用于量化，因为整数乘法比浮点乘法快，且用缩放映射保留大部分信息。合理设置 scale 和 zero-point，配合 clip 操作，可以安全地把浮点数映射到 int8，不会溢出。
 
-83. 混合精度计算
+84. 混合精度计算
 
     答：fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
 
-84. 估算 LLM 的参数量
+85. 估算 LLM 的参数量
 
     答：embedding 层的维度为 Vh，若不与输出层的权重矩阵共享，则需加上输出层的权重矩阵 2Vh。
     
     Transformer 每一层分为 self-attention 和 MLP，self-attention 设计 Q，K，V，O 四个权重矩阵和偏置，因此是 4h^2 + 4h。MLP 一般有两层，先升维再降维，如升到 4h，那么参数量为 8h^2 + 5h。两个模块都有 layer normalization，包含两个可训练参数，形状都为 h，所以参数量总和为 4h。因此，每一层参数量为 12h^2 + 13h。
 
-85. 估算 7B 模型在训练和推理时的显存占用
+86. 估算 7B 模型在训练和推理时的显存占用
 
     答：模型大小（参数量） × 精度 = 参数显存占用，fp16/bf16 精度为 2 字节，fp32 精度为 4 字节。
     
@@ -5046,7 +5095,7 @@ keywords: 面试题
     
     推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
-86. 多卡多机训练
+87. 多卡多机训练
 
     答：Data Parallel：数据被切分成小批量（mini-batch），分别送到不同 GPU，但模型必须能放进单卡显存，无法解决超大模型训练。
     
@@ -5056,11 +5105,11 @@ keywords: 面试题
     
     Expert Parallel：在 MoE 模型里，每个样本只激活部分专家网络。专家被分配在不同 GPU/节点上。
 
-87. DataParallel（DP）和 DistributedDataParallel（DDP）区别
+88. DataParallel（DP）和 DistributedDataParallel（DDP）区别
 
     答：DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
 
-88. PD 分离
+89. PD 分离
 
     答：Prefill 阶段对初始提示（Prompt）进行处理，生成初始的隐藏状态（Hidden States）。这个阶段通常涉及对整个模型的一次前向传播，是并行计算，因此计算密集度较高，以矩阵乘法为主，GPU 利用率高。对于每个新的输入序列，都需要进行一次 Prefill。
     
@@ -5070,15 +5119,15 @@ keywords: 面试题
     
     PD 分离一般涉及三要素，调度器、Prefill 实例和 Decode 实例。调度器负责对外发布推理接口，P、D 负责各自推理阶段的计算。P、D 一般在不同的机器资源上运行。具体来说，Prefill 阶段被分配到专门的高算力 GPU上 执行，以充分利用其并行计算能力；而 Decode 阶段则被分配到具有大显存和高内存带宽的 GPU 上执行，以满足其内存访问需求。两个阶段之间通过高速网络（如 NVLink 或 RDMA）传输中间状态（主要是 KV 缓存）。
 
-89. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
+90. 为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism
 
     答：MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
 
-90. deepspeed 的 Zero-1， Zero 2， Zero 3
+91. deepspeed 的 Zero-1， Zero 2， Zero 3
 
     答：Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存。参数、梯度、优化器状态始终绑定，分配到同一张 GPU 上。
 
-91. 量化
+92. 量化
 
     答：PTQ（训练后量化）和 QAT（训练时量化）。
     
@@ -5088,7 +5137,7 @@ keywords: 面试题
     
     AWQ (Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
-92. vllm
+93. vllm
 
     答：传统的静态分配 KV 缓存不使用虚拟内存，直接对物理内存进行操作，会导致显存碎片和过度预留，因此 vllm 使用了 PagedAttention，即把 KV 缓存当作虚拟内存，每条序列的缓存被划分成块，可动态分配到显存中，允许在不连续的内存空间中存储。
     
