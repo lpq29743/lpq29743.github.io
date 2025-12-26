@@ -4984,7 +4984,7 @@ keywords: 面试题
     - CoT (Reason only)
     - Self-Consistency (Reason only)：多次 CoT 采样做结合
     - ToT (Reason only)：把复杂问题分解成多个简单子问题，再每个子问题上多次 CoT 采样，最后使用状态评估器和广搜/深搜得到结果
-    - ReAct（Reason + Act）：每个推理轨迹为 Reason + Act + Observe，多次重复直到结束流程。ReAct 后面提升为 Interleaved Thinking
+    - ReAct（Reason + Act）：每个推理轨迹为 Reason + Act + Observe，多次重复直到结束流程。ReAct 后面提升为 Interleaved Thinking，Interleaved Thinking 多了一个 plan 的 update。
     - Plan-Execute：ReAct 受限于其走一步算一步的局部思维，而 Plan-Execute 通过先计划再执行建立了全局视野
     - REWOO（Reasoning, Execution, Watch, and Optimize）：在 ReAct 的基础上引入了反思和优化机制
     - Reflexion：自我批评和自我改进
@@ -5024,7 +5024,31 @@ keywords: 面试题
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
 
-8. Context Engineering
+8. LangGraph 三种存储的方式
+
+    答：In-memory store: Start - Create Store - Use Dictionary - Store Data - Fast Access - End Process - Data Lost（这是最简单的存储选项，适合短期实验或演示）
+    
+    使用 from langgraph.store.memory import InMemoryStore 导入，创建一个完全在内存中运行的存储，使用标准 Python 字典。
+    
+    不写入磁盘，进程结束后所有信息都会丢失。但速度快，易用，非常适合测试工作流或尝试新的图配置。如果需要，也可以添加语义搜索能力。
+    
+    Local developement store: Start - Run Langgraph Dev - Create Local Store - Save with Pickle - Data Restored After Restart - Lightweight And Simple - End
+    
+    这个选项的行为与上面的内存版本类似，但是可以在会话之间提供了基本持久性。
+    
+    用 langgraph dev 命令运行应用时，LangGraph 会自动使用 Python 的 pickle 格式将存储保存到本地文件系统，并在重启开发环境后恢复数据。
+    
+    这个方式轻量且方便，不需要外部数据库。同样支持语义搜索功能，所以它非常适合开发阶段，但不适合生产环境。
+    
+    Production store: Start - Deploy Production Store - Use Postgresal Database - Enable Pgvector - Store And Retrieve Data - Support Semantic Search - High Reliablity - End
+    
+    大规模或生产部署，LangGraph 使用与 pgvector 集成的 PostgreSQL 数据库实现高效的向量存储和语义检索。
+    
+    这样可以提供完整的数据持久性、内置可靠性，并且能够处理更大的工作负载或多用户系统。语义搜索依靠pgvector ，默认使用余弦相似度作为相似性度量，也可以根据需求自定义。
+    
+    这种配置确保记忆数据安全存储，跨会话保持可用，即使在高流量或分布式工作负载下也能稳定运行。
+
+9. Context Engineering
 
     答：提示（Prompting）是指你要求模型做某件事，而上下文工程（Context Engineering）是指在提出要求之前，准备好模型可能需要的一切。
     
@@ -5057,13 +5081,13 @@ keywords: 面试题
 	- 多智能体架构（Multi-agent Architecture）：将任务分解给多个子智能体，每个子智能体处理其特定任务并拥有独立的上下文，避免不同任务的上下文相互干扰。
 	- 环境（Environments）：使用沙箱等环境来隔离包含大量 token 的对象或状态，例如在执行复杂计算或访问敏感数据时，将这些操作限制在特定的、受控的环境中。
 
-9. Deep Search 和 Deep Research
+10. Deep Search 和 Deep Research
 
     答：Deep Search 是搜索-阅读-推理-再搜索来实现 test-time scaling。
     
     Deep Search 只有一个 query，而 Deep Research 是会整理出来多个 query。
 
-10. LLM for SE
+11. LLM for SE
 
     答：SE 的完整 Pipeline 可分为软件开发和软件维护。
     
@@ -5091,9 +5115,15 @@ keywords: 面试题
     - Retrieval：How to select useful files
     - 多语言
 
-11. Agentic RL
+12. Agentic RL
 
     答：在 Rollout 的时候调用和执行工具即可。为了增强效率，一般要异步执行。
+    
+    Agentic RL/多轮RL受限于长文本序列处理难度、奖励信号复杂等问题，容易过度依赖于局部奖励，出现训练不稳定甚至崩溃的问题。因此，现在的 RL 框架只能集中在 10 个 step 左右能完成的任务，而现实中的任务往往需要几十个甚至上百个 step 才能完成。
+    
+    RAGEN 是一个 Agentic RL 训练的框架，基于 StarPO（State-Thinking-Action-Reward Policy Optimization）。其通过马尔可夫决策过程（MDP）形式化 Agent 与环境的交互，引入渐进式奖励归一化策略，有效解决了多轮强化学习中的不稳定性。RAGEN 还发现多轮 RL 训练中的“（Echo Trap）”不稳定模式，提出 StarPO-S 改进框架，通过 variance-based trajectory filtering、critic baselining 和decoupled clipping 等方法，提升学习的稳健性。Search- R1 也是类似的结构。
+    
+    RAGEN/Search-R1 会受限于上下文长度。与以往简单地拼接完整交互历史的方法不同，verl-agent 把每个step当作独立的decision point来处理，并使用step/turn-independent的多轮rollout范式，提供了完全可定制的memory模块、历史管理机制以及每一步的输入结构。这种设计使得 verl-agent 能够高度扩展，适用于超长序列、multi-turn的强化学习训练（例如，ALFWorld 中的任务可能需要多达 50 步才能完成）。
 
 #### Evaluation
 
@@ -5118,6 +5148,8 @@ keywords: 面试题
      Agent & Coding: BFCL v3, LiveCodeBench, Codeforces Ratings
      
      Multilingual Tasks: instruction following - Multi-IF, knowledge - INCLUDE & MMMLU, mathematics - MT-AIME2024 & PolyMath, and logical reasoning - MlogiQA.
+     
+     Tool-use: TauBench
 
 3. Live benchmark
 
