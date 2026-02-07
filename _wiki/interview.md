@@ -401,7 +401,7 @@ keywords: 面试题
 5. Python 实现的梯度下降和牛顿法示例
 
      答：以 $$f(x)=x^2 - 4x + 4$$ 为例。
-     ```python
+    ```python
 	import numpy as np
     
 	# === 目标函数 ===
@@ -476,7 +476,7 @@ keywords: 面试题
 4. Python 相关实现
 
      答：对大于 0 的判断是为了避免分母为0，log(0) 等非法操作，保证数值稳定性。
-     ```python
+    ```python
     import numpy as np
 
 	# === 1. 熵 (Entropy) ===
@@ -4650,7 +4650,7 @@ keywords: 面试题
 44. 手撕 LoRA
 
      答：
-     ```python
+    ```python
     import torch
     import torch.nn as nn
     import torch.nn.functional as F
@@ -4926,26 +4926,7 @@ keywords: 面试题
         
     - 结合检索（RAG）、记忆模块或外部计算器等工具。
 
-24. LLM + 知识
-
-    答：RAG 可以解决 LLM 知识过时，幻觉问题以及无法调用私有数据等问题。
-    
-    RAG
-    - Indexing：小 chunk 语义更纯净，对齐一个单一主体；向量表示更聚焦，易被检索模型命中；数量多，覆盖面大，召回率高，但一个问题需要多个 chunk 才能解决。大 chunk 信息更完整，但主题分散，检索难度大。
-    - Pre-Retrieval
-    - Retrieval
-    - Post-Retrieval (Re-ranking, Prompt Compression)
-    - Generation
-    
-    document 的顺序会对 RAG 的性能造成比较大的影响。
-    
-    另一种方式是 search engine as a tool。
-
-25. 文本分块
-
-    答：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。
-
-26. Test-time Scaling
+24. Test-time Scaling
 
     答：实现 test-time scaling，需要先激励 LLM 在 thinking 上耗费更多资源，从而生成更长的回答，或者更多的回答。
     
@@ -4991,38 +4972,31 @@ keywords: 面试题
     
     Agent 最常见的应用在 Web，软件工程，Research 和对话。
 
-2. LLM 怎么调用外部工具？
+2. Deep Search 和 Deep Research
 
-    答：通过在 System Prompt 中增加 tools 描述，让 LLM 知道有哪些工具可以调用。LLM 根据用户的问题自行判断是否需要调用外部工具，若需要则从问题中解析参数，然后以固定格式返回。
-
-3. Function Calling
-
-    答：通过微调或架构优化，赋予模型生成结构化指令（如 JSON）的能力。
-
-4. MCP
-
-    答：MCP 可以在一次回复中调用多个函数，function calling 每轮最多调用一个函数。
+    答：Deep Search 是搜索-阅读-推理-再搜索来实现 test-time scaling。
     
-    MCP 流程为
-    - MCP client 首先从 MCP server 获取可用的工具列表
-    - 将用户的 Prompt 连同工具描述一起发送给 LLM
-    - LLM 根据 Prompt 决定是否需要使用工具以及使用哪些工具
-    - 如果需要使用工具，MCP client 会调用 MCP server 以执行相应的工具调用
-    - 工具调用的结果再次被发送回 LLM
-    - LLM 整合所有信息生成最终回答
-    - 最后将响应展示给用户
+    Deep Search 只有一个 query，而 Deep Research 是会整理出来多个 query。
 
-5. A2A
+3. CrewAI
 
-    答：解决 Agent 间通信问题。
+    答：CrewAI是比较轻量级的，适合于有角色分配的开放型任务。只需要定义好Agent、Task，最后塞进Crew即可。任务的执行顺序和依赖性可以在Task里面设置。CrewAI分支能力有限，不支持循环，状态累积主要靠消息传递。
 
-6. AG-UI
+4. AutoGen
 
-    答：解决 AI Agent 与前端应用之间的交互标准化问题
+    答：AutoGen相比CrewAI更开放，而且对代码任务更加适配。
 
-7. LangChain
+5. OpenAI Swarm
+
+    答：OpenAI Swarm 轻量级、无状态
+
+6. LangChain
 
     答：LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
+
+7. LangGraph
+
+    答：LangGraph 以图的方式来构建 Agent/Workflow，其中 State 是数据容器，实现节点之间的数据交流，每一个key为一个channel。Node 为执行单元，每个节点都是状态转换函数: State → State。默认的合并政策为覆盖，但list为add。Edge 为流程控制，分为普通遍、出入口边和条件边，条件边以函数的形式定义，其中输入为State，输出为选择节点。LangGraph 不是静态的流程图，而是动态的执行引擎，支持路由、循环。
 
 8. LangGraph 三种存储的方式
 
@@ -5048,7 +5022,21 @@ keywords: 面试题
     
     这种配置确保记忆数据安全存储，跨会话保持可用，即使在高流量或分布式工作负载下也能稳定运行。
 
-9. Context Engineering
+9. Agentic RL
+
+    答：在 Rollout 的时候调用和执行工具即可。为了增强效率，一般要异步执行。
+    
+    Agentic RL/多轮RL受限于长文本序列处理难度、奖励信号复杂等问题，容易过度依赖于局部奖励，出现训练不稳定甚至崩溃的问题。因此，现在的 RL 框架只能集中在 10 个 step 左右能完成的任务，而现实中的任务往往需要几十个甚至上百个 step 才能完成。
+    
+    RAGEN 是一个 Agentic RL 训练的框架，基于 StarPO（State-Thinking-Action-Reward Policy Optimization）。其通过马尔可夫决策过程（MDP）形式化 Agent 与环境的交互，引入渐进式奖励归一化策略，有效解决了多轮强化学习中的不稳定性。RAGEN 还发现多轮 RL 训练中的“（Echo Trap）”不稳定模式，提出 StarPO-S 改进框架，通过 variance-based trajectory filtering、critic baselining 和decoupled clipping 等方法，提升学习的稳健性。Search- R1 也是类似的结构。
+    
+    RAGEN/Search-R1 会受限于上下文长度。与以往简单地拼接完整交互历史的方法不同，verl-agent 把每个step当作独立的decision point来处理，并使用step/turn-independent的多轮rollout范式，提供了完全可定制的memory模块、历史管理机制以及每一步的输入结构。这种设计使得 verl-agent 能够高度扩展，适用于超长序列、multi-turn的强化学习训练（例如，ALFWorld 中的任务可能需要多达 50 步才能完成）。
+
+10. Prompt Engineering
+
+    答：尽可能让模型返回多的信息，然后规则法处理；尽可能让模型分步做，然后控制中间参数传递，保证每步的输出的可靠；若知识库直接嵌入prompt，可以将其预先分类，使得模型对知识库的获取更清晰。
+
+11. Context Engineering
 
     答：提示（Prompting）是指你要求模型做某件事，而上下文工程（Context Engineering）是指在提出要求之前，准备好模型可能需要的一切。
     
@@ -5081,13 +5069,59 @@ keywords: 面试题
 	- 多智能体架构（Multi-agent Architecture）：将任务分解给多个子智能体，每个子智能体处理其特定任务并拥有独立的上下文，避免不同任务的上下文相互干扰。
 	- 环境（Environments）：使用沙箱等环境来隔离包含大量 token 的对象或状态，例如在执行复杂计算或访问敏感数据时，将这些操作限制在特定的、受控的环境中。
 
-10. Deep Search 和 Deep Research
+12. RAG
 
-    答：Deep Search 是搜索-阅读-推理-再搜索来实现 test-time scaling。
+    答：RAG 的主要应用场景为
+    - LLM 知识过时
+    - 幻觉问题
+    - 无法调用私有数据
+    - 上下文长度限制导致无法将全部知识放入上下文或放入后会导致性能变差
     
-    Deep Search 只有一个 query，而 Deep Research 是会整理出来多个 query。
+    RAG
+    - Indexing：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。小 chunk 语义更纯净，对齐一个单一主体；向量表示更聚焦，易被检索模型命中；数量多，覆盖面大，召回率高，但一个问题需要多个 chunk 才能解决。大 chunk 信息更完整，但主题分散，检索难度大。
+    - Pre-Retrieval
+    - Retrieval
+    - Post-Retrieval (Re-ranking, Prompt Compression)
+    - Generation
+    
+    document 的顺序会对 RAG 的性能造成比较大的影响。
+    
+    另一种方式是 search engine as a tool。
 
-11. LLM for SE
+13. Memory
+
+    答：Memory 呈现的方式可以是纯文本，embedding 和知识图谱。
+
+14. LLM 怎么调用外部工具？
+
+    答：通过在 System Prompt 中增加 tools 描述，让 LLM 知道有哪些工具可以调用。LLM 根据用户的问题自行判断是否需要调用外部工具，若需要则从问题中解析参数，然后以固定格式返回。
+
+15. Function Calling
+
+    答：通过微调或架构优化，赋予模型生成结构化指令（如 JSON）的能力。Function Calling 没有统一标准，需要开发者根据特定的模型和工具书写特定的适配代码。此外，Function Calling 中，函数定义与对话 Prompt 有着强耦合关系，后续升级改造工具会连带需要对 Prompt/代码进行调整。Function Calling 不负责执行和管理工具，只生成指令，执行由开发者额外处理。
+
+16. MCP
+
+    答：MCP 定义了社区的工具开放标准，实现了模型厂商和开发者各个角色之间对标准的对齐，复用性更高。
+    
+    MCP 流程为
+    - MCP client 首先从 MCP server 获取可用的工具列表
+    - 将用户的 Prompt 连同工具描述一起发送给 LLM
+    - LLM 根据 Prompt 决定是否需要使用工具以及使用哪些工具
+    - 如果需要使用工具，MCP client 会调用 MCP server 以执行相应的工具调用
+    - 工具调用的结果再次被发送回 LLM
+    - LLM 整合所有信息生成最终回答
+    - 最后将响应展示给用户
+
+17. A2A
+
+    答：解决 Agent 间通信问题。
+
+18. AG-UI
+
+    答：解决 AI Agent 与前端应用之间的交互标准化问题
+
+19. LLM for SE
 
     答：SE 的完整 Pipeline 可分为软件开发和软件维护。
     
@@ -5115,15 +5149,6 @@ keywords: 面试题
     - Retrieval：How to select useful files
     - 多语言
 
-12. Agentic RL
-
-    答：在 Rollout 的时候调用和执行工具即可。为了增强效率，一般要异步执行。
-    
-    Agentic RL/多轮RL受限于长文本序列处理难度、奖励信号复杂等问题，容易过度依赖于局部奖励，出现训练不稳定甚至崩溃的问题。因此，现在的 RL 框架只能集中在 10 个 step 左右能完成的任务，而现实中的任务往往需要几十个甚至上百个 step 才能完成。
-    
-    RAGEN 是一个 Agentic RL 训练的框架，基于 StarPO（State-Thinking-Action-Reward Policy Optimization）。其通过马尔可夫决策过程（MDP）形式化 Agent 与环境的交互，引入渐进式奖励归一化策略，有效解决了多轮强化学习中的不稳定性。RAGEN 还发现多轮 RL 训练中的“（Echo Trap）”不稳定模式，提出 StarPO-S 改进框架，通过 variance-based trajectory filtering、critic baselining 和decoupled clipping 等方法，提升学习的稳健性。Search- R1 也是类似的结构。
-    
-    RAGEN/Search-R1 会受限于上下文长度。与以往简单地拼接完整交互历史的方法不同，verl-agent 把每个step当作独立的decision point来处理，并使用step/turn-independent的多轮rollout范式，提供了完全可定制的memory模块、历史管理机制以及每一步的输入结构。这种设计使得 verl-agent 能够高度扩展，适用于超长序列、multi-turn的强化学习训练（例如，ALFWorld 中的任务可能需要多达 50 步才能完成）。
 
 #### Evaluation
 
