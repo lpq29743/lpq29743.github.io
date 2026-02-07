@@ -6,6 +6,12 @@ comments: false
 permalink: /news/
 ---
 
+- **12/2025** Join Alibaba as an Algorithm Engineer.
+- **10/2025** Defended my Ph.D. Thesis "Massively Multilingual Language Modeling and Adaptation".
+- **09/2025** One paper accepted to EMNLP 2025 Demo Track.
+- **08/2025** One paper accepted to EMNLP 2025.
+- **06/2025** One paper accepted to SIGTYP 2025.
+- **05/2025** One paper accepted to ACL 2025.
 - **01/2025** Three papers accepted to NAACL 2025.
 - **03/2024** Two papers accepted to NAACL 2024.
 - **01/2024** One paper accepted to EACL 2024.
@@ -24,7 +30,7 @@ permalink: /news/
 - **10/2021** Join CIS Group at LMU Munich as an ELLIS Ph.D. student.
 - **09/2021** One paper accepted to KBS.
 - **04/2021** Invited to serve as Program Committee of EMNLP 2021.
-- **04/2021** Join NLP Group at Hong Kong PolyU  as Research Assistant.
+- **04/2021** Join NLP Group at Hong Kong PolyU as Research Assistant.
 - **04/2021** Two papers accepted to IJCNN 2021.
 - **03/2021** Invited to serve as Program Committee of SocialNLP 2021.
 - **02/2021** Invited to serve as Program Committee of ACL 2021.
