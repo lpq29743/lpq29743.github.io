@@ -9,13 +9,17 @@ permalink: /
 
 #### About Me
 
-My name is Peiqin Lin (林佩勤) originally from [Haimen, China](https://en.wikipedia.org/wiki/Haimen,_Guangdong). Currently, I am an [ELLIS Ph.D. student](https://ellis.eu/phd-postdoc) at [the Center for Information and Language Processing (CIS), LMU Munich](https://schuetze.cis.lmu.de/) and [SARDINE Group, Instituto Superior Técnico](https://sardine-lab.github.io/), under the supervison of [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html). I work on multilingualism and cross-lingual NLP.
+My name is Peiqin Lin (林佩勤) originally from [Haimen, China](https://en.wikipedia.org/wiki/Haimen,_Guangdong). Currently, I am an Algorithm Engineering at Alibaba. Previously, I was an [ELLIS Ph.D. student](https://ellis.eu/phd-postdoc) at [the Center for Information and Language Processing (CIS), LMU Munich](https://schuetze.cis.lmu.de/) and [SARDINE Group, Instituto Superior Técnico](https://sardine-lab.github.io/), under the supervison of [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html).
 
-Note: I will be on the job market in summer 2025! If you have any interesting research opportunities available, please reach out to me via email.
+#### Empolyment
 
+- Alibaba (Dec 2025 - ): Algorithm Engineer.
+- Hong Kong Polytechnic University (Apr 2021 - Sep 2021). Research Assistant on Emotion-aware Dialogue System. Advisor: [Wenjie Li](http://www4.comp.polyu.edu.hk/~cswjli/).
+- Tencent (Jul 2019 – Aug 2019). Research Intern on Keyphrase Extraction.
+- Qibot (May 2018 – Aug 2018). Research Intern on Text Classification.
 #### Education
 
-- LMU Munich (Oct 2021 - ). Ph.D. student in Computer Science. Supervisor: [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html). 
+- LMU Munich (Oct 2021 - Oct 2025). Ph.D. student in Computer Science. Supervisor: [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html). 
 - Sun Yat-sen University (Sep 2018 – Jun 2020). M.Eng. in Software Engineering. Supervisor: [Meng Yang](https://scholar.google.com/citations?user=r2nw6DIAAAAJ&hl=en).
 - South China Normal University (Sep 2014 – Jun 2018). B.Eng. in Software Engineering.
 
@@ -30,13 +34,7 @@ Note: I will be on the job market in summer 2025! If you have any interesting re
 
 (\* denotes equal contribution)
 
-See more in [my publications](https://lpq29743.github.io/publications/).
-
-#### Empolyment
-
-- Hong Kong Polytechnic University (Apr 2021 - Sep 2021). Research Assistant on Emotion-aware Dialogue System. Advisor: [Wenjie Li](http://www4.comp.polyu.edu.hk/~cswjli/).
-- Tencent (Jul 2019 – Aug 2019). Research Intern on Keyphrase Extraction.
-- Qibot (May 2018 – Aug 2018). Research Intern on Text Classification.
+See more in [Google Scholar](https://scholar.google.com/citations?user=ZUeyIxMAAAAJ&hl=en).
 
 #### Services
 
