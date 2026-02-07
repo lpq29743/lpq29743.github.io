@@ -17,6 +17,7 @@ My name is Peiqin Lin (林佩勤) originally from [Haimen, China](https://en.wik
 - Hong Kong Polytechnic University (Apr 2021 - Sep 2021). Research Assistant on Emotion-aware Dialogue System. Advisor: [Wenjie Li](http://www4.comp.polyu.edu.hk/~cswjli/).
 - Tencent (Jul 2019 – Aug 2019). Research Intern on Keyphrase Extraction.
 - Qibot (May 2018 – Aug 2018). Research Intern on Text Classification.
+
 #### Education
 
 - LMU Munich (Oct 2021 - Oct 2025). Ph.D. student in Computer Science. Supervisor: [Hinrich Schütze](https://schuetze.cis.lmu.de/team/) and [André F. T. Martins](https://andre-martins.github.io/index.html). 
