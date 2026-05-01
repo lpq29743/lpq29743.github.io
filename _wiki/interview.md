@@ -951,20 +951,20 @@ keywords: 面试题
   - 等差子数组个数：枚举子数组判断是否等差，可使用 dp 优化。
   ```python
   def numberOfArithmeticSlices(nums):
-  n = len(nums)
-  if n < 3:
-  return 0
+      n = len(nums)
+      if n < 3:
+          return 0
 
-  dp = [0] * n
-  total = 0
+      dp = [0] * n
+      total = 0
 
-  for i in range(2, n):
-  if nums[i] - nums[i-1] == nums[i-1] - nums[i-2]:
-  dp[i] = dp[i-1] + 1
-  total += dp[i]
-  # 否则 dp[i] 保持 0
+      for i in range(2, n):
+          if nums[i] - nums[i-1] == nums[i-1] - nums[i-2]:
+              dp[i] = dp[i-1] + 1
+              total += dp[i]
+          # 否则 dp[i] 保持 0
 
-  return total
+      return total
   ```
   - 子数组最大值 - 最小值 ≤ K 的个数：使用两个单调队列维护区间最大最小值的 index，维护一个变长滑动窗口。 
 
