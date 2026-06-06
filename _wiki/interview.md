@@ -5569,8 +5569,10 @@ keywords: 面试题
 
   通过微调或架构优化，赋予模型生成结构化指令（如 JSON）的能力。Function Calling 没有统一标准，需要开发者根据特定的模型和工具书写特定的适配代码。此外，Function Calling 中，函数定义与对话 Prompt 有着强耦合关系，后续升级改造工具会连带需要对 Prompt/代码进行调整。Function Calling 不负责执行和管理工具，只生成指令，执行由开发者额外处理。
 
+  **本质**：LLM 的内置能力，让模型能生成结构化的工具调用。
 
-- **MCP**
+
+- **MCP（Model Context Protocol）**
 
   MCP 定义了社区的工具开放标准，实现了模型厂商和开发者各个角色之间对标准的对齐，复用性更高。
 
@@ -5582,6 +5584,13 @@ keywords: 面试题
   - 工具调用的结果再次被发送回 LLM
   - LLM 整合所有信息生成最终回答
   - 最后将响应展示给用户
+
+  **本质**：Anthropic 提出的通信协议，让 AI 和外部工具之间有标准化的连接方式。
+
+  **与 Function Calling 的关系**：
+  - MCP 不等于 Function Calling，它们解决的问题不同：Function Calling 解决“LLM 怎么调用工具”（调用格式），MCP 解决“AI 系统怎么连接各种工具”（连接生态）
+  - MCP 内部可以用 Function Calling：MCP 负责传输，Function Calling 负责生成调用——两者在不同的层面，可以共存
+  - Function Calling 是 LLM 的通用能力，可以在任何场景使用，不依赖 MCP
 
 
 - **A2A**
@@ -5597,6 +5606,74 @@ keywords: 面试题
 - **Skill**
 
   相对于平铺，其采用渐进式披露。
+
+
+- **Agent 工具调用失败如何处理？**
+
+  工具调用失败不能一刀切，必须先判断失败原因，再选择对应策略：
+
+  **1. 参数错误（大模型问题）**
+  - 表现：参数格式错误、必填参数缺失、参数含义理解错误
+  - 策略：带错误反馈的重试（Error Feedback Retry），将具体错误信息回注到上下文，让模型重新生成参数，设最大重试次数（如 3 次）
+
+  **2. 网络/超时问题**
+  - 策略：指数退避重试（Exponential Backoff），第1次等1s，第2次等2s，第3次等4s……设最大重试次数
+
+  **3. 限流（429）/ 服务不可用（503）**
+  - 429：严格遵守 Retry-After header，等待指定时间后重试
+  - 503：短暂等待后重试，或切换备用服务
+
+  **4. 权限问题**
+  - 401/Token 过期：触发 Token 刷新流程，刷新后重试一次
+  - 403/API Key 失效：不重试，直接上报权限不足
+
+  **5. 业务逻辑错误**
+  - 500（服务内部错误）：可重试一次，仍失败则上报
+  - 业务错误（如“数据不存在”、“余额不足”）：不重试，告知用户或走兜底逻辑
+  - 关键操作（写入、支付）：无幂等保证时不重试，宁可报错让用户确认
+
+  **6. 工具配置问题**
+  - 工具不存在、Schema 版本不匹配、MCP 连接失败：不重试，直接上报，需要开发/配置层面修复
+
+  **通用最佳实践：**
+  - 所有重试都要设上限（建议 3 次），防止无限循环
+  - 写操作谨慎重试，无幂等保证时宁可报错
+  - 错误日志要详细：调用参数、错误码、错误描述、重试次数
+  - 区分可恢复 vs 不可恢复：可恢复的重试，不可恢复的立刻上报
+  - 给用户的错误信息要友好，不要直接暴露内部错误栈
+
+
+- **什么是 Agentic World Modeling？能力层级如何划分？**
+
+  **背景**：随着 AI 系统从“生成文本”转向“通过持续交互实现目标”，环境动态建模成为核心瓶颈。现实场景（物理世界、数字世界、社会世界、科学世界）都需要预测性环境模型。
+
+  **核心框架：Levels × Laws 分类法**
+
+  **能力层级（Levels）**：
+  - **L1 Predictor（预测器）**：学习单步局部转换算子。代表工作：视觉预测器、环境模型。
+  - **L2 Simulator（模拟器）**：将算子组合成多步 action-conditioned rollouts，遵循领域定律。代表工作：Dreamer、SimM森林、Galileo。
+  - **L3 Evolver（进化器）**：当预测与新证据不符时，自主修订自身模型。代表工作：在线学习、自我修正。
+  
+  > L1 → L2 → L3 是能力递进：被动预测 → 可控模拟 → 主动进化
+
+  **支配定律机制（Laws）**：
+  - **物理定律**：物体运动、力学、因果。失败点：长程物理推理、不可逆过程。
+  - **数字定律**：软件/GUI 操作的确定性或半确定性规则。失败点：突发 UI 变化、非标准交互。
+  - **社会定律**：人类行为、偏好、博弈均衡。失败点：恶意对抗、分布外行为。
+  - **科学定律**：科学领域约束、可检验假设。失败点：假阳性发现、因果混淆。
+
+  **关键洞察**：不同 Level × Law 组合决定了世界模型的必须满足的约束、最可能失败的场景、适用的评估方法。
+
+  **与 Agent 的关系**：
+  - L2 Simulator = Agent 的“思维模拟”基础设施
+  - L3 Evolver = Agent 遇到新环境时的自我适应能力
+  - 四种 Laws = 不同垂直领域 Agent 需要遵守的约束
+
+  **评估原则**：从“预测精度”（PSNR、FVD）转向“决策质量”，评估在世界模型中做决策的最终性能。
+
+  **演进路线**：被动单步预测 (L1) → 可控多步模拟 (L2) → 自主进化修订 (L3) → 模拟并重塑环境（最终愿景）。
+
+  **参考文献**：Meng Chu et al., "Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond", arXiv:2604.22748, 2026.
 
 
 - **LLM for SE**
@@ -5701,6 +5778,33 @@ keywords: 面试题
   Expert Parallel：在 MoE 模型里，每个样本只激活部分专家网络。专家被分配在不同 GPU/节点上。
 
 
+- **常用的 LLM 训练框架有哪些？如何选择？**
+
+  | 框架 | 定位 | 核心优势 | 适合场景 |
+  |------|------|----------|----------|
+  | **veRL**（字节火山引擎）| 生产级 RL 训练 | SOTA throughput，3D-HybridEngine，张量×流水×数据并行，深度集成 Megatron-LM | 100B+ / MoE 模型，RLHF/GRPO 大规模生产训练 |
+  | **OpenRLHF** | 开源 RLHF 全家桶 | Ray + vLLM + ZeRO-3 一站式，易上手，生态活跃 | 快速跑通 RLHF，不想自己搭 |
+  | **LLaMA-Factory** | 微调工具 | LoRA/QLoRA 支持最好，WebUI 开箱即用，中文友好 | 普通人微调 7B~70B 模型 |
+  | **TRL**（HuggingFace）| 轻量 RL | HuggingFace 原生，代码简洁 | 小模型快速实验、发论文 |
+  | **Megatron-LM**（NVIDIA）| 张量并行底层库 | 100B+ 必须用它切张量并行 | 预训练/大模型分布式训练 |
+  | **DeepSpeed**（Microsoft）| 通用基础设施 | ZeRO + offload 最灵活，适配任何框架 | 一切场景的底层加速 |
+  | **SWIFT**（阿里魔搭）| 国内微调全家桶 | 中文文档，阿里模型/数据集成好 | 国内团队，魔搭生态用户 |
+
+  **架构层次**：
+  ```
+  底层基座：Megatron-LM + DeepSpeed
+      ↓
+  RLHF 上层应用：veRL / OpenRLHF
+      ↓
+  微调专用工具：LLaMA-Factory / TRL / SWIFT
+  ```
+
+  **发展趋势**：
+  - 训推一体：Hybrid Engine，同一 GPU 切换训练/推理
+  - 异步化：Rollout 异步执行提升吞吐量
+  - MoE 原生支持：成为标配
+
+
 - **DataParallel（DP）和 DistributedDataParallel（DDP）区别**
 
   DP 单进程，多 GPU（主卡调度），主卡负责 forward/backward；DDP 多进程，每个 GPU 一个进程，每卡独立计算 + 自动同步梯度。
@@ -5717,6 +5821,31 @@ keywords: 面试题
   PD 分离一般涉及三要素，调度器、Prefill 实例和 Decode 实例。调度器负责对外发布推理接口，P、D 负责各自推理阶段的计算。P、D 一般在不同的机器资源上运行。具体来说，Prefill 阶段被分配到专门的高算力 GPU上 执行，以充分利用其并行计算能力；而 Decode 阶段则被分配到具有大显存和高内存带宽的 GPU 上执行，以满足其内存访问需求。两个阶段之间通过高速网络（如 NVLink 或 RDMA）传输中间状态（主要是 KV 缓存）。
 
 
+- **什么是训推分离和异步 Rollout？**
+
+  **定义**：训练（Training）和推理（Inference/Rollout）分离部署，Rollout 异步执行以提升 GPU 利用率和吞吐量。常见于大规模 RLHF/PPO 训练框架。
+
+  **背景**：PPO 中 rollout 占运行时约 58.9%（veRL 数据），是最大瓶颈。
+
+  **同步模式（低效）**：generate → train → generate → train → ...，GPU 交替空闲，利用率低。
+
+  **训推分离（高效）**：
+  - Actor（推理/生成）和 Trainer（梯度更新）在独立资源上运行
+  - 通过 Ray 异步调度
+
+  **异步 Rollout**：
+  - Rollout worker 持续生成 experience
+  - Trainer 持续消费更新，不互相等待（近似 off-policy）
+  - **权衡**：异步引入 staleness（策略滞后），需控制 off-policy 程度（clip ratio / importance sampling）
+
+  **核心概念**：
+  - **Hybrid Engine**：同一 GPU 在训练阶段用 FSDP，在推理阶段切换 vLLM（veRL 采用）
+  - **Staleness**：异步导致的策略滞后程度
+  - **Clip Ratio / Importance Sampling**：控制 off-policy 程度的技术
+
+  **代表框架**：veRL（字节）、OpenRLHF（Ray + vLLM + ZeRO-3）、AReaL、StreamRL、AsyncFlow
+
+
 - **为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism**
 
   MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
@@ -5724,7 +5853,23 @@ keywords: 面试题
 
 - **deepspeed 的 Zero-1， Zero 2， Zero 3**
 
-  Zero-1 优化器状态拆分（例如 Adam 的动量），Zero-2 再加梯度拆分，Zero-3 参数也切分，每卡只保存部分权重。三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存。参数、梯度、优化器状态始终绑定，分配到同一张 GPU 上。
+  ZeRO = Zero Redundancy Optimizer，通过分片消除数据并行中的内存冗余。
+
+  | 阶段 | 分片内容 | 内存降低 |
+  |------|----------|----------|
+  | Stage 0 | 不分片，标准 DDP，全冗余 | 1x |
+  | Stage 1 | 优化器状态（Adam 的 first/second moment estimates） | ~4x |
+  | Stage 2 | Stage 1 + 梯度 | ~8x |
+  | Stage 3 | Stage 2 + 参数 | ~Nx（N=GPU数）|
+
+  三个模式支持自动 Offload 到 CPU / NVMe，进一步节省显存。参数、梯度、优化器状态始终绑定，分配到同一张 GPU 上。
+
+  **Offload 三层影响**：显存明显降低，但速度和吞吐下降（数据搬运开销、GPU 利用率下降）。
+
+  **常见组合**：
+  - 单卡微调大模型：ZeRO-3 + CPU offload
+  - 多卡训练（推荐）：ZeRO-2
+  - 万亿参数模型：ZeRO-3
 
 
 - **量化**
@@ -5738,11 +5883,70 @@ keywords: 面试题
   AWQ (Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
 
+- **常用的 LLM 推理/部署框架有哪些？如何选择？**
+
+  | 框架 | 核心优势 | 主要缺点 | 适合场景 |
+  |------|----------|----------|----------|
+  | **vLLM** | 生态最广，HF 兼容好，PagedAttention 显存省，部署最简单 | H100 上吞吐不如 TRT-LLM | 生产部署首选，通用场景 |
+  | **TensorRT-LLM**（NVIDIA）| H100 性能天花板，比 vLLM 快约 2x | 需编译，改模型麻烦 | 极致性能追求，H100 服务器 |
+  | **SGLang** | 结构化生成（JSON/constrained decoding），RadixAttention KV 复用，吞吐高 | 相对新，生态不如 vLLM | Agent 场景，需要结构化输出 |
+  | **Ollama** | `ollama run xxx` 即跑，零配置 | 不能改模型，只能跑已有量化版 | 个人本地 / 快速测试 |
+  | **LMDeploy**（商汤）| 国产，AWQ/W4A16 量化支持好 | 生态偏小众 | 国内部署，需要量化加速 |
+  | **Mooncake / DeepFlow**（字节）| 分布式 KV cache + RDMA，大规模集群 | 字节内部导向，门槛高 | 超大规模生产部署 |
+
+  **选型指南**：
+  - 个人/实验 → Ollama
+  - 生产追求吞吐 → vLLM
+  - 极致性能（H100）→ TensorRT-LLM
+  - 做 Agent / 结构化输出 → SGLang
+
 - **vllm**
 
   传统的静态分配 KV 缓存不使用虚拟内存，直接对物理内存进行操作，会导致显存碎片和过度预留，因此 vllm 使用了 PagedAttention，即把 KV 缓存当作虚拟内存，每条序列的缓存被划分成块，可动态分配到显存中，允许在不连续的内存空间中存储。
 
   另外 vllm 的 PagedAttention 使用了 memory sharing，即单个 prompt 生成多个序列时，可以共享显存。
+
+
+- **如何将 Dense 模型转换为 Sparse（MoE）模型？**
+
+  - **Sparse Upcycling**：将预训练好的 Dense 模型的 MLP 层复制 N 份作为专家，保持权重不变，只训练新增的 gating 网络。优点是保留原模型能力，成本低（只需约 50% 原始预训练计算量），在 100% 评估任务上优于从头训练的 sparse 模型；缺点是推理效率降低（高并发场景下 ~40% 速度减慢）。
+  - **从头训练 MoE**：直接使用 MoE 架构从头预训练，专家之间自然学习不同模式。优点是最优性能；缺点是成本高。
+  - **混合方法**：先 Sparse Upcycling 初始化，再继续预训练让专家专业化。
+  - **适用场景**：离线批处理、复杂推理任务、compute budget 有限但能接受变慢的场景。
+
+
+- **如何将 Sparse（MoE）模型转换为 Dense 模型？**
+
+  - **专家合并**：将所有专家的权重平均或加权合并为一个 Dense FFN 层，丢弃 gating 网络。适用于需要部署到资源受限场景。
+  - **知识蒸馏**：用 MoE 模型作为 teacher，蒸馏到 Dense student 模型，student 学习 teacher 的输出分布。
+  - **权重融合**：根据 gating 网络的激活频率，对专家进行加权融合，保留最常用的专家特征。
+
+
+- **如何将大模型压缩为小模型？**
+
+  - **知识蒸馏（Knowledge Distillation）**：
+    - **Off-policy KD（传统）**：用教师模型离线生成数据，学生模型做 SFT。问题：分布偏移（exposure bias）。
+    - **On-policy KD（主流方向）**：学生模型自身采样（on-policy rollout），用 reverse KL 对齐教师分布，避免 exposure bias。代表工作：MiniLLM（清华+微软，ICLR 2024）。
+    - **效果**：数学推理等任务上小模型可接近教师水平，计算成本远低于 RL。
+  - **剪枝（Pruning）**：
+    - **Sheared LLaMA**：结构化剪枝（减少层数、注意力头、FFN 维度），配合 Dynamic Batch Loading（动态调整不同领域数据比例），从 LLaMA2-7B 剪到 1.3B/2.7B 只需从头训练 3% 的计算量，性能超过同期开源小模型。
+    - **LLM-Pruner**：边剪边搜，没有固定目标结构。
+    - 区别：Sheared LLaMA 明确剪到指定目标大小，用 Layerwise Importance Score 驱动非均匀剪枝。
+  - **量化（Quantization）**：将 fp16/bf16 精度降低到 int8/int4，包括 PTQ（训练后量化）和 QAT（训练时量化）。GPTQ 采用逐层逐通道二次误差最小化；AWQ 根据激活值重要性选择性量化权重。
+  - **Weight Subcloning**：一次性将大模型权重裁剪重组为小模型初始化，无需蒸馏、无需教师网络在线。两步操作：Neuron Importance Ranking（神经元重要性排序）+ Block Removal（移除 Transformer 块）。ViT/LM 任务可实现 4x 训练加速。
+  - **参数共享**：如 ALBERT 使用跨层参数共享，减少总参数量。
+
+
+- **如何将小模型扩展为大模型？**
+
+  - **BERT2BERT / AKI 初始化**：用 Advanced Knowledge Initialization（函数保持原则）将小预训练模型扩展到大模型。宽度扩展（FFN/Attention 维度）+ 深度扩展（新增 Transformer 层），两阶段训练。BERT-base → BERT-large 可节省 45% 计算成本。
+  - **LLaMA-Pro / Block Expansion**：在原有模型层间插入新的 Transformer 块，冻结原参数，只训练新块。避免灾难性遗忘，通用能力保持不下降，新领域能力显著提升。适用于领域适配场景。
+  - **Weight Subcloning**：将小模型的权重复制到更大模型的对应位置，新增层随机初始化或从小模型插值得到，然后继续预训练。
+  - **渐进式扩展**：逐步增加模型宽度和深度，每一步都进行继续预训练，避免突然扩大导致的训练不稳定。
+  - **其他方法**：
+    - **Fitnets**：用小模型学习大模型的中间表征（hint 蒸馏），主要针对 CNN。
+    - **Knowledge Inheritance**：小模型自学习 + 大模型教师指导两路并行训练。
+    - **LiGO**：用线性算子学习最优初始化新增参数的方式，而非人工设计规则。
 
 
 #### Technique Report
@@ -5807,6 +6011,24 @@ keywords: 面试题
   失败经验
   - 过程奖励模型：思维过程正确，行动过程正确。希望用来解决奖励黑洞，但发现只能用于简单的推理任务
   - 蒙特卡洛树搜索（MCTS）：由于推理任务的搜索空间远比围棋复杂，AI 需要在每一步做出决策，而 MCTS 无法有效地指导 AI 进行合理的搜索。
+
+
+- **什么是 Reward Hacking？如何缓解？**
+
+  **定义**：LLM/RLHF 中智能体利用奖励函数漏洞达成高分而非真正目标的问题。
+
+  **核心原因**：奖励模型（RM）不完美，policy 会找到 RM 的盲点：
+  - 生成过长文本
+  - 格式堆砌
+  - 重复内容
+
+  **主流缓解方案**：
+  - **KL 惩罚项**：限制 policy 偏离 ref model 的幅度
+  - **Reward Shaping**：重新设计奖励函数
+  - **生成式奖励模型（GenRM）**：比判别式 RM 泛化更好
+  - **Causal Reward**：因果奖励（2025 arxiv）
+
+  **新方向**：Inference-Time Reward Hacking（NeurIPS 2025）— Best-of-N 采样时也会出现 hacking
 
 
 ### Search/Recommendation
