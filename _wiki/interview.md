@@ -20,7 +20,7 @@ keywords: 面试题
 
 - **给一个 3 * 3 的矩阵，求 row-wise cosine similarity**
 
-  ```python
+```python
   import numpy as np
   
   X = np.random.randn(3, 3)
@@ -33,7 +33,7 @@ keywords: 面试题
   
   # 计算行向量之间的余弦相似度（相当于点积）
   cosine_sim = X_normalized @ X_normalized.T
-  ```
+```
 
 - **特征值（eigenvalue）和特征向量（eigenvector）**
 
@@ -41,7 +41,7 @@ keywords: 面试题
 
 - **Python 相关实现**
 
-  ```python
+```python
   import numpy as np
   from numpy.linalg import norm
   from scipy import linalg as la  # 可选：更强大的分解/求解
@@ -78,7 +78,7 @@ keywords: 面试题
   Q, R = la.qr(A)
   P, L, Ulu = la.lu(A)
   C = la.cholesky(np.array([[4.,1.],[1.,3.]]))  # 正定矩阵
-  ```
+```
 
 #### Probability and Statistics
 
@@ -292,10 +292,10 @@ keywords: 面试题
 
   已知 U(a, b) 方差是 (a - b)^2 / 12，则含有 n 个样本的样本均值的方差是 (a - b)^2 / 12 / n。代码如下：
 
-  ```python
+```python
   import numpy as np
   normal_rv = 30 * np.mean(2 * np.random.uniform(size=300) - 1)
-  ```
+```
 
   具体步骤是先产生 300 个 (-1, 1) 随机变量，它们的均值的标准差是 (1 - (-1))^2 / 12 * 300 = 1 / 30，要得到标准正态分布，所以要乘以 30。
 
@@ -357,7 +357,7 @@ keywords: 面试题
 
 - **Python 相关实现**
 
-  ```python
+```python
   import numpy as np
   import math
 
@@ -406,7 +406,7 @@ keywords: 面试题
   xy = np.random.rand(N, 2)*2 - 1
   inside = (xy[:,0]**2 + xy[:,1]**2 <= 1).sum()
   return 4 * inside / N
-  ```
+```
 
 
 #### Calculus and Optimization
@@ -434,7 +434,7 @@ keywords: 面试题
 - **Python 实现的梯度下降和牛顿法示例**
 
   以 $$f(x)=x^2 - 4x + 4$$ 为例。
-  ```python
+```python
   import numpy as np
 
   # === 目标函数 ===
@@ -480,7 +480,7 @@ keywords: 面试题
 
   print("梯度下降结果: x =", x_gd, ", f(x) =", f_gd)
   print("牛顿法结果: x =", x_newton, ", f(x) =", f_newton)
-  ```
+```
 
 
 #### Information Theory
@@ -513,7 +513,7 @@ keywords: 面试题
 - **Python 相关实现**
 
   对大于 0 的判断是为了避免分母为0，log(0) 等非法操作，保证数值稳定性。
-  ```python
+```python
   import numpy as np
 
   # === 1. 熵 (Entropy) ===
@@ -582,7 +582,7 @@ keywords: 面试题
   print("Joint Entropy H(X,Y):", joint_entropy(p_xy))
   print("Conditional Entropy H(Y|X):", conditional_entropy(p_xy))
   print("Mutual Information I(X;Y):", mutual_information(p_xy))
-  ```
+```
 
 
 #### Discrete Mathematics
@@ -726,7 +726,7 @@ keywords: 面试题
 
 - **Python 相关实现**
 
-  ```python
+```python
   import itertools
   import math
   from collections import deque
@@ -821,7 +821,7 @@ keywords: 面试题
   print("模运算: (17*13)%5 =", mod_mul(17,13,5))
   print("模运算: 17^13 % 5 =", mod_pow(17,13,5))
   print("17 在模 5 下的逆元:", modinv(17,5))
-  ```
+```
 
 
 
@@ -870,7 +870,7 @@ keywords: 面试题
   - Longest Subarray with Sum ≤ K（正整数数组的子数组和）：滑动窗口维护当前和，超过 K 就移动左指针。
   - Fruit Into Baskets（最多两个不同元素的最长子数组）：滑动窗口 + 哈希表记录窗口内元素类型，超过两种时左指针前移。
 
-  ```python
+```python
   left = 0
   for right in range(len(arr)):
   # 扩大窗口（通常加入arr[right]）
@@ -879,7 +879,7 @@ keywords: 面试题
   # 缩小窗口（通常移动left）
 
   # 此时窗口满足条件，更新结果（比如最大值、最小长度等）
-  ```
+```
 
   三、快慢指针（Fast and Slow Pointers）
 
@@ -896,7 +896,7 @@ keywords: 面试题
   - 最小子数组和：与最大子数组类似，取 min。
   - 最大子数组乘积（Maximum Product Subarray）：遍历数组时，同时维护当前位置结尾的最大乘积 (`max_prod`) 和最小乘积 (`min_prod`)；遇到负数时交换二者，因为负数可能把最小变最大；每一步更新全局最大值 `res`。状态转移方程为`max_prod[i] = max(nums[i], nums[i] * max_prod[i-1], nums[i] * min_prod[i-1])`，`min_prod[i] = min(nums[i], nums[i] * max_prod[i-1], nums[i] * min_prod[i-1])`，时间复杂度为 O(n)。
 
-  ```python
+```python
   def maxProduct(nums):
   max_prod = min_prod = result = nums[0]
   for num in nums[1:]:
@@ -909,11 +909,11 @@ keywords: 面试题
 
   result = max(result, max_prod)
   return result
-  ```
+```
 
   - 子数组最大和（二维扩展）：枚举上边界 `top` 和下边界 `bottom` 行。对每一对 `(top, bottom)`，把矩阵列压缩成一个一维数组 `sums`，其中 `sums[c]` 表示列 `c` 在 `top..bottom` 行的累加和。在 `sums` 上使用一维最大子数组和（Kadane），得到这一行段组合的最大矩阵和。遍历所有 `(top, bottom)`，更新全局最大值。时间复杂度为 O(rows^2 * cols)。
 
-  ```python
+```python
   def maxSumSubmatrix(matrix):
   if not matrix or not matrix[0]:
   return 0
@@ -938,7 +938,7 @@ keywords: 面试题
   max_sum = max(max_sum, cur_max)
 
   return max_sum
-  ```
+```
 
   滑动窗口（适用于全正数或符合单调性问题）
 
@@ -949,7 +949,7 @@ keywords: 面试题
   计数
 
   - 等差子数组个数：枚举子数组判断是否等差，可使用 dp 优化。
-  ```python
+```python
   def numberOfArithmeticSlices(nums):
       n = len(nums)
       if n < 3:
@@ -965,10 +965,10 @@ keywords: 面试题
           # 否则 dp[i] 保持 0
 
       return total
-  ```
+```
   - 子数组最大值 - 最小值 ≤ K 的个数：使用两个单调队列维护区间最大最小值的 index，维护一个变长滑动窗口。 
 
-  ```python
+```python
   def count_subarrays(nums, k):
   n = len(nums)
   max_q, min_q = deque(), deque()
@@ -998,7 +998,7 @@ keywords: 面试题
   count += right - left + 1
 
   return count
-  ```
+```
 
 
 - **区间问题**
@@ -1095,7 +1095,7 @@ keywords: 面试题
   - 最小时间传递信息：Kruskal 过程判断连通。
 
   简单模版
-  ```python
+```python
   class UnionFindSimple:
   def __init__(self, n):
   self.parent = [i for i in range(n)]
@@ -1112,9 +1112,9 @@ keywords: 面试题
 
   def connected(self, x, y):
   return self.find(x) == self.find(y)
-  ```
+```
   高阶模版（支持动态元素；路径压缩，即在 find 的过程中，把节点直接连到根节点，减少树的高度；按秩合并；打印所有集合）
-  ```python
+```python
   from collections import defaultdict
 
   class UnionFind:
@@ -1152,7 +1152,7 @@ keywords: 面试题
   for x in self.parent:
   g[self.find(x)].append(x)
   return list(g.values())
-  ```
+```
 
 
 - **原地旋转数组（即右移 m 个元素）**
@@ -1174,7 +1174,7 @@ keywords: 面试题
 
   - 创建链表
 
-  ```python
+```python
   class ListNode:
   def __init__(self, val=0, next=None):
   self.val = val
@@ -1187,13 +1187,13 @@ keywords: 面试题
   curr.next = ListNode(val)
   curr = curr.next
   return dummy.next  # 返回真正的头节点
-  ```
+```
 
   - 反转链表（Reverse Linked List）
 
   迭代（iteration）
 
-  ```python
+```python
   def reverse_list(head):
   prev = None
   curr = head
@@ -1203,11 +1203,11 @@ keywords: 面试题
   prev = curr             # prev 前进
   curr = next_temp        # curr 前进
   return prev  # prev 是新头节点
-  ```
+```
 
   递归（recursion）
 
-  ```python
+```python
   def reverse_list_recursive(head):
   if not head or not head.next:
   return head
@@ -1226,7 +1226,7 @@ keywords: 面试题
 
   # new_head 始终指向新的头节点（反转后的链表头）
   return new_head
-  ```
+```
 
   - 合并两个有序链表：双指针逐节点比较；递归也可实现。
   - 给定单向链表的头指针和一个结点指针，定义一个函数在O(1)时间删除该节点：如果待删节点不是尾节点，可以通过将待删节点的下一个节点的值和指针复制过来，然后删除下一个节点来实现 O(1) 删除。如果待删节点是尾节点，且只有头指针，不知道前驱节点，无法在 O(1) 时间内删除该节点。只能遍历找到前驱，时间是 O(n)。
@@ -1287,7 +1287,7 @@ keywords: 面试题
   - 基本计算器：用栈处理带括号的表达式计算。
   - 栈排序：只用一个额外栈实现对栈元素排序。
 
-  ```python
+```python
   stack = []
 
   # 入栈
@@ -1302,14 +1302,14 @@ keywords: 面试题
 
   # 判断栈是否为空
   is_empty = len(stack) == 0
-  ```
+```
 
 
 - **单调栈**
 
   单调递增（递减）栈内保持从栈底到栈顶递增（递减）；入栈前，弹出不满足单调性的元素；弹栈过程中，当前元素就是被弹元素的下一个更小（更大）元素；结束弹栈后，栈顶元素就是当前元素的上一个更小（更大）元素。
 
-  ```python
+```python
   def monotonic_stack(nums):
   stack = []  # 栈里存索引
   res = [-1] * len(nums)  # 记录每个元素左边最近小于它的元素索引
@@ -1321,7 +1321,7 @@ keywords: 面试题
   res[i] = stack[-1]  # 栈顶就是左边最近更小的元素索引
   stack.append(i)  # 当前元素入栈
   return res
-  ```
+```
 
   应用例子：
   - 接雨水：单调递减栈。每次遇到比栈顶元素高的柱子，就开始结算面积（此时不会考虑当前柱子），直到栈为空或栈顶柱子高度大于当前柱子高度为止。
@@ -1340,7 +1340,7 @@ keywords: 面试题
   - 聊天室限流器：用队列控制单位时间内的请求频率。
   - 猫狗队列：用两个队列分别存储猫和狗，实现按顺序取出最早进入的宠物。
 
-  ```python
+```python
   from collections import deque
 
   queue = deque()
@@ -1357,7 +1357,7 @@ keywords: 面试题
 
   # 判断是否为空
   empty = not queue
-  ```
+```
 
   用 list 实现出队`first = queue.pop(0)`时间复杂度为 O(n)，但用 deque实现头尾出队时间复杂度都为 O(1)。
 
@@ -1380,17 +1380,17 @@ keywords: 面试题
 
   节点定义
 
-  ```python
+```python
   class TreeNode:
   def __init__(self, val):
   self.val = val
   self.left = None
   self.right = None
-  ```
+```
 
   从数组/列表构建二叉树（按层次顺序）：假设输入 `[1,2,3,None,4,5,6]` 表示按层次序排列的节点（`None` 表示空节点）：
 
-  ```python
+```python
   from collections import deque
 
   def build_binary_tree(values):
@@ -1410,7 +1410,7 @@ keywords: 面试题
   queue.append(node.right)
   i += 1
   return root
-  ```
+```
 
   二叉树的前序、中序、后序遍历：用递归/非递归+栈实现节点访问顺序。对于非递归+栈，在先序中，压入顺序为根节点，右节点，左节点，出栈顺序对应为（根、左、右）。在中序中，进入循环的条件为栈是否为空或根节点是否为NULL，首先将左节点入栈，重复该过程，直到左节点不存在，然后依次出栈，出栈的同时判断当前节点的右节点是否存在，若存在则再次进入循环。在后序遍历中，可以借助前序遍历，前序遍历为根左右，后序遍历为左右根，只需将前序遍历顺序调整为根右左，将最终结果reverse就可以得到后序遍历。
 
@@ -1449,7 +1449,7 @@ keywords: 面试题
 
   用 Python 的 `heapq` 库实现，默认为小顶堆；实现最大堆时可将数值取负。
 
-  ```python
+```python
   import heapq
 
   heap = []
@@ -1461,7 +1461,7 @@ keywords: 面试题
   min_item = heap[0] # O(1) 时间获取最小元素
   heapq.nsmallest(k, nums) # 获取 nums 最小的 K 个元素
   heapq.nlargest(k, nums) # 获取 nums 最大的 K 个元素
-  ```
+```
 
   - 前 K 个高频元素：使用小顶堆（优先队列）维护出现频率最高的 K 个元素。
   - 合并 K 个有序链表：使用小顶堆维护每个链表的头节点，实现逐步合并。
@@ -1477,7 +1477,7 @@ keywords: 面试题
 
   - 实现 Trie（前缀树）：使用字典或数组构建多叉树，支持 `insert`, `search`, `startsWith` 操作。
 
-  ```python
+```python
   class TrieNode:
   def __init__(self):
   self.children = {}      # 存储子节点
@@ -1510,7 +1510,7 @@ keywords: 面试题
   return False
   node = node.children[char]
   return True
-  ```
+```
   - 替换词根：将句子中的词替换为其词根；利用 Trie 存储所有词根，遍历句子中每个词，查找最短匹配词根。
   - 单词搜索 II：在二维字符网格中找多个单词；构建 Trie 存储单词表，然后结合 DFS 和 Trie 剪枝遍历。
   - 添加与搜索单词：支持通配符 '.' 的词典查询；在 Trie 上做 DFS，遇到 '.' 时递归尝试所有子节点。
@@ -1598,7 +1598,7 @@ keywords: 面试题
 
   Dijkstra 算法，用于解决边权非负的单源最短路径问题（可多次调用变成多源），是贪心算法，时间复杂度为 O(V^2)。如果是稀疏图，可用堆进行优化，时间复杂度为 O((V + E) lgV)。Dijkstra 算法每次选择当前已知最短路径中最小的节点 u（初始时，源节点到自身距离为 0，到其他任意节点为无穷大），设置为已访问，添加到路径中（可用前驱数组实现）。更新它的邻居的距离（松弛操作，Relaxation），即对当前被选择节点 u 相邻的未访问节点 v，如果经过 u 到 v 的路径比当前已知到 v 的最短路更短：`dist[v] > dist[u] + w`，就更新它，如需保存路径。重复，直到所有节点处理完。
 
-  ```python
+```python
   import heapq
 
   def dijkstra(n, edges, start):
@@ -1626,11 +1626,11 @@ keywords: 面试题
   heapq.heappush(pq, (dist[v], v))
 
   return dist
-  ```
+```
 
   0-1 BFS，用于解决边权为 0 或 1（可推广为 0 或任意正整数，不可为两个整数，因为这样子双端队列无法保证单调）的单源最短路径问题（可多次调用变成多源），用邻接矩阵表示图，时间复杂度为 O(V + E)。0-1 BFS 是 Dijkstra 算法的特例，用双端队列 (deque) 替代优先队列：如果边权 = 0，把新节点放到队首。如果边权 = 1，把新节点放到队尾。这样保证 deque 始终按最短路顺序扩展节点。
 
-  ```python
+```python
   from collections import deque
 
   def zero_one_bfs(n, edges, start):
@@ -1654,11 +1654,11 @@ keywords: 面试题
   else:
   dq.append(v)      # 权重 1 → 放队尾
   return dist
-  ```
+```
 
   Floyd 算法，用于解决有负权（无负环）的多源最短路径问题，是动态规划算法，时间复杂度为 O(V^3)。
 
-  ```python
+```python
   def floyd_warshall(n, edges):
   INF = float('inf')
   # 初始化邻接矩阵
@@ -1676,11 +1676,11 @@ keywords: 面试题
   dist[i][j] = dist[i][k] + dist[k][j]
 
   return dist
-  ```
+```
 
   Bellman-Ford 算法，用于解决有负权的单源最短路径问题（可多次调用变成多源），是动态规划算法，时间复杂度 O(VE)。
 
-  ```python
+```python
   def bellman_ford(n, edges, src):
   INF = float('inf')
   dist = [INF] * n
@@ -1702,11 +1702,11 @@ keywords: 面试题
   raise ValueError("Graph contains negative weight cycle")
 
   return dist
-  ```
+```
 
   SPFA 算法，用于解决有负权的单源最短路径问题（可多次调用变成多源），是 Bellman-Ford 算法的队列优化版，也是动态规划算法，平均时间复杂度 O(E)，最坏时间复杂度 O(VE)。
 
-  ```python
+```python
   from collections import deque
 
   def spfa(n, edges, src):
@@ -1736,7 +1736,7 @@ keywords: 面试题
   if count[v] > n:  # 超过 n 次 → 负环
   raise ValueError("Graph contains negative weight cycle")
   return dist
-  ```
+```
 
 
 - **无向图最小生成树算法及复杂度？**
@@ -1791,7 +1791,7 @@ keywords: 面试题
 
   归并排序：时间复杂度 O(nlogn)，稳定。可用来解决计算逆序对数目的问题。
 
-  ```python
+```python
   def merge_sort(arr):
   if len(arr) <= 1:
   return arr
@@ -1821,13 +1821,13 @@ keywords: 面试题
   arr = [5, 2, 9, 1, 5, 6]
   sorted_arr = merge_sort(arr)
   print(sorted_arr)
-  ```
+```
 
   基数排序：按位排序，从低位到高位依次进行分配和收集；稳定
 
   快速排序：时间复杂度 O(nlogn)，空间复杂度最好情况是 O(logn)，最坏情况可能达到 O(n),但平均情况是 O(logn)，不稳定
 
-  ```python
+```python
   def quick_sort(arr, low, high):
   if low < high:
   pivot_index = partition(arr, low, high)
@@ -1851,7 +1851,7 @@ keywords: 面试题
 
   arr[low], arr[j] = arr[j], arr[low]  # 把基准放到正确位置
   return j
-  ```
+```
 
   希尔排序：插入排序的改进版本，其核心思想是先将整个待排序序列分割成若干个子序列分别进行直接插入排序，待整个序列基本有序时，再对全体记录进行一次直接插入排序。不稳定
 
@@ -1870,7 +1870,7 @@ keywords: 面试题
   BFS（广度优先搜索）通常用队列解决，适用于求最短路径、层级遍历和状态步数问题，因为它逐层扩展，能保证最早到达目标。
 
   BFS 模版
-  ```python
+```python
   from collections import deque
 
   def bfs(graph, start):
@@ -1889,12 +1889,12 @@ keywords: 面试题
   for neighbor in graph[node]:
   if neighbor not in visited:
   queue.append(neighbor)
-  ```
+```
 
   应用场景
 
   - 最短路径（无权图）：BFS 可以找到起点到各节点的最短路径。
-  ```python
+```python
   def bfs_all_distances(graph, start):
   visited = set()
   dist = {start: 0}
@@ -1909,7 +1909,7 @@ keywords: 面试题
   dist[neighbor] = dist[node] + 1
   queue.append(neighbor)
   return dist
-  ```
+```
   - 拓扑排序（课程表问题）：用 BFS 统计入度为 0 的节点，逐步处理图中的节点，检测环。
   - 层次遍历二叉树：使用队列按层访问节点，可用于打印或计算每层节点值。
   - 连通分量/岛屿问题：用 BFS 找到所有相连节点或岛屿面积。
@@ -1923,7 +1923,7 @@ keywords: 面试题
   DFS（深度优先搜索）通常用栈或递归解决，更适合遍历所有路径、回溯剪枝、拓扑排序和连通块问题，因其先深入到底便于穷举和递归处理。简言之，找最短用 BFS，找所有/存在性用 DFS。
 
   DFS 模版，递归版
-  ```python
+```python
   def dfs_recursive(graph, node, visited=None):
   if visited is None:
   visited = set()
@@ -1935,10 +1935,10 @@ keywords: 面试题
   for neighbor in graph[node]:
   if neighbor not in visited:
   dfs_recursive(graph, neighbor, visited)
-  ```
+```
 
   DFS 模版，非递归版
-  ```python
+```python
   def dfs_iterative(graph, start):
   visited = set()
   stack = [start]
@@ -1955,7 +1955,7 @@ keywords: 面试题
   for neighbor in reversed(graph[node]):  # reversed 保持一致遍历顺序
   if neighbor not in visited:
   stack.append(neighbor)
-  ```
+```
 
   应用场景
   - 连通分量/岛屿问题：找图中所有相连节点或岛屿面积。
@@ -1998,7 +1998,7 @@ keywords: 面试题
 - **旋转数组的最小值**
 
   二分法
-  ```python
+```python
   def find_min(nums):
   left, right = 0, len(nums) - 1
   while left < right:
@@ -2010,7 +2010,7 @@ keywords: 面试题
   # 最小值在 mid 或左边
   right = mid
   return nums[left]
-  ```
+```
 
 
 - **有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？**
@@ -2022,7 +2022,7 @@ keywords: 面试题
 
 - **埃拉托色尼筛法（Sieve of Eratosthenes）**
 
-  ```python
+```python
   def sieve(n):
   """
   n: 最大整数
@@ -2035,7 +2035,7 @@ keywords: 面试题
   for j in range(i*i, n+1, i):
   is_prime[j] = False
   return is_prime
-  ```
+```
   第二层遍历 $$n/2 + n/3 + n/5 + n/7$$ 根据调和级数性质，约为 $$ln ln n$$，所以时间复杂度为 O(nloglogn)。
 
 
@@ -2052,7 +2052,7 @@ keywords: 面试题
 
   现在考虑 n 个圆盘，假设开始圆盘在 A 柱，可以先把 A 柱的上面 n - 1个圆盘移到 B，再将 A 剩下的一个移到 C，最后将 B 的 n - 1 个移到 C。总共需要 f(n) = 2f(n-  1) + 1 …… ②
 
-  ```python
+```python
   def hanoi(n, source, auxiliary, target):
   """
   打印将 n 个盘子从 source 移动到 target 的步骤。
@@ -2069,7 +2069,7 @@ keywords: 面试题
 
   # 示例：移动 3 个盘子从 A 到 C，B 为辅助柱子
   hanoi(3, 'A', 'B', 'C')
-  ```
+```
 
   根据 ①② 两式，可求出 f(n) = 2^n - 1 所以 O(n) = 2^n
 
@@ -2099,7 +2099,7 @@ keywords: 面试题
   序列类 DP
   - 最长上升子序列（LIS）：`dp[i] = max(dp[j] + 1 if nums[i] > nums[j])`，需要遍历 0-n 和 0 到 i，因此时间复杂度为 O(n^2)。另一种解法是贪心 + 二分：用一个数组记录上升子序列末尾最小值，遍历时对每个元素用二分找到合适位置替换，最终数组长度即为最长上升子序列长度，时间复杂度为 O(nlogn)。
 
-  ```python
+```python
   import bisect
 
   i = bisect.bisect_left(sub, x)
@@ -2107,7 +2107,7 @@ keywords: 面试题
   sub.append(x)
   else:
   sub[i] = x
-  ```
+```
 
   - 两个子序列的最长公共子序列（LCS）：`dp[i][j] = dp[i-1][j-1]+1 if match else max(dp[i-1][j], dp[i][j-1])`，可压缩成一维数组`dp[j] = dp[j-1]+1 if match else max(dp[j], dp[j-1])`。
   - 跳跃游戏（能否到达终点）：从后向前判断每个点能否跳到最后一个点
@@ -2159,7 +2159,7 @@ keywords: 面试题
 
 - **位运算加法**
 
-  ```python
+```python
   function add(a, b):
   while b ≠ 0:
   sum = a XOR b            # 不带进位的和
@@ -2167,7 +2167,7 @@ keywords: 面试题
   a = sum
   b = carry
   return a
-  ```
+```
 
 
 - **数值的整数次方？**
@@ -2299,7 +2299,7 @@ keywords: 面试题
   先看以下程序：
 
 
-   ```c
+```c
    struct A{
        int    a;
        char   b;
@@ -2310,7 +2310,7 @@ keywords: 面试题
        int    a;
        short  c;
    };
-   ```
+```
 
    已知 32 位机器上各数据类型的长度为：char 为 1 字节、short 为 2 字节、int 为 4 字节、long 为 4 字节、float 为 4 字节、double 为 8 字节。那么上面两个结构体大小如何呢？
 
@@ -2437,7 +2437,7 @@ keywords: 面试题
 
 - **list**
 
-  ```python
+```python
   # 增
   lst = [1, 2, 3]
   lst.append(4)        # 加到末尾
@@ -2456,7 +2456,7 @@ keywords: 面试题
   print(10 in lst)     # 是否包含
   for item in lst:     # 遍历
   print(item)
-  ```
+```
 
 
 - **Python 的 list 在 append 的时候会发生什么？**
@@ -2466,7 +2466,7 @@ keywords: 面试题
 
 - **set**
 
-  ```python
+```python
   # 增
   s = {1, 2, 3}
   s.add(4)
@@ -2481,12 +2481,12 @@ keywords: 面试题
   print(3 in s)
   for item in s:
   print(item)
-  ```
+```
 
 
 - **dict**
 
-  ```python
+```python
   # 增
   d = {'a': 1, 'b': 2}
   d['c'] = 3           # 新增键值对
@@ -2503,12 +2503,12 @@ keywords: 面试题
   print('c' in d)      # 是否包含键
   for k, v in d.items():
   print(k, v)
-  ```
+```
 
 
 - **tuple**
 
-  ```python
+```python
   # 增/删/改：都不支持
   t = (1, 2, 3)
   t = t + (4,)         # 创建新元组，实现“添加”效果
@@ -2518,7 +2518,7 @@ keywords: 面试题
   print(3 in t)        # 是否包含
   for item in t:
   print(item)
-  ```
+```
 
 
 - **Python 的可变对象和不可变对象**
@@ -2528,20 +2528,20 @@ keywords: 面试题
   可变对象有 list, dict, set；不可变对象有 str, tuple, int, float, bool。
 
   不可变对象例子：字符串
-  ```python
+```python
   s = "hello"
   print(id(s))  # 比如 123456
   s = s + " world"
   print(id(s))  # 改变了（新对象）
-  ```
+```
 
   可变对象例子：列表
-  ```python
+```python
   lst = [1, 2, 3]
   print(id(lst))  # 比如 789123
   lst.append(4)
   print(id(lst))  # 没变（原地修改）
-  ```
+```
 
   可变对象在函数中修改，会影响原对象，在函数内进行重新绑定，并不会影响外部变量；不可变对象修改，会创建新对象。
 
@@ -2557,7 +2557,7 @@ keywords: 面试题
   可以加 reverse=True 或 reverse=False
 
   或
-  ```python
+```python
   from functools import cmp_to_key
 
   def my_cmp(x, y):
@@ -2578,7 +2578,7 @@ keywords: 面试题
   lst = [(2, 3), (1, 4), (2, 1), (1, 5)]
   lst.sort(key=cmp_to_key(my_cmp))
   print(lst)
-  ```
+```
 
 
 - **Python 的匿名函数是什么**
@@ -2595,7 +2595,7 @@ keywords: 面试题
 
   用来实现代码复用，常用于记录日志，权限验证、计算函数执行时间。
 
-  ```python
+```python
   def deco(func):
   def warpper(*args, **kwargs):
   print('start')
@@ -2607,24 +2607,24 @@ keywords: 面试题
   def myfunc(parameter):
   print("run with %s" % parameter)
   myfunc("something")
-  ```
+```
 
 
 - **Python 常用内置和标注库装饰器**
 
   `@staticmethod` —— 静态方法。不需要访问实例属性或方法时使用。没有自动传入，不可以访问类属性，不能创建实例，类和实例都能调用。
 
-  ```python
+```python
   class MyClass:
   @staticmethod
   def greet():
   print("Hello")
   MyClass.greet()
-  ```
+```
 
   `@classmethod` —— 类方法。第一个参数是类 `cls`，而不是实例 `self`，可以访问类属性，可有创建实例，类和实例都能调用。
 
-  ```python
+```python
   class MyClass:
   count = 0
 
@@ -2634,9 +2634,9 @@ keywords: 面试题
 
   MyClass.inc()
   print(MyClass.count)
-  ```
+```
 
-  ```python
+```python
   class Person:
   def __init__(self, name, age):
   self.name = name
@@ -2651,11 +2651,11 @@ keywords: 面试题
 
   p2 = Person.from_string("Alice-20")
   print(p2.name, p2.age)
-  ```
+```
 
   `@property` —— 把方法变成属性，让方法像访问属性一样调用，设置属性可以用 `.setter` 装饰器。
 
-  ```python
+```python
   class Person:
   def __init__(self, name):
   self._name = name   # 用下划线保护内部属性
@@ -2675,11 +2675,11 @@ keywords: 面试题
 
   p.name = "Bob"  # 调用 setter
   print(p.name)  # Bob
-  ```
+```
 
   `@functools.lru_cache`：缓存函数结果，来自 `functools` 模块，非常适合斐波那契、递归等高频重复计算场景。
 
-  ```python
+```python
   from functools import lru_cache
 
   @lru_cache(maxsize=None)
@@ -2689,11 +2689,11 @@ keywords: 面试题
   return fib(n-1) + fib(n-2)
 
   print(fib(50))  # 超快！
-  ```
+```
 
   `@functools.wraps` —— 保留原函数元信息，让装饰器包装后的函数保留原函数的 `__name__`、`__doc__` 等信息。
 
-  ```python
+```python
   from functools import wraps
 
   def log(func):
@@ -2710,7 +2710,7 @@ keywords: 面试题
 
   hello()
   print(hello.__name__)  # 仍然是 'hello'
-  ```
+```
 
 
 - **解释一下多态？**
@@ -2834,7 +2834,7 @@ keywords: 面试题
 
   AUC 可以理解为：随机选择一个正样本和一个负样本，正样本预测分数大于负样本的概率。
 
-  ```python
+```python
   def auc_score(y_true, y_score):
   # 获取正负样本索引
   pos_scores = [s for t, s in zip(y_true, y_score) if t == 1]
@@ -2855,7 +2855,7 @@ keywords: 面试题
   count += 0.5
 
   return count / (pos_count * neg_count)
-  ```
+```
 
 
 #### Regression
@@ -2891,7 +2891,7 @@ keywords: 面试题
 
 - **用最小二乘法实现线性回归**
 
-  ```python
+```python
   import numpy as np
   # 1. 生成数据（y = 2x + 3 + noise）
   np.random.seed(42)
@@ -2906,12 +2906,12 @@ keywords: 面试题
   theta = np.linalg.inv(X_b.T @ X_b) @ X_b.T @ y
 
   print("权重和偏置（w, b）：", theta)
-  ```
+```
 
 
 - **用梯度下降实现线性回归**
 
-  ```python
+```python
   # 初始化
   w = np.random.randn()
   b = np.random.randn()
@@ -2932,7 +2932,7 @@ keywords: 面试题
 
   if epoch % 100 == 0:
   print(f"Epoch {epoch}: loss={loss:.4f}, w={w:.4f}, b={b:.4f}")
-  ```
+```
 
 
 - **最小二乘法和梯度下降的区别**
@@ -3143,13 +3143,13 @@ keywords: 面试题
 
 - **KNN 核心代码**
 
-  ```python
+```python
   def k_nearest_neighbors(X, y, test_sample, k):
   distances = np.linalg.norm(X - test_sample, axis=1)
   nearest_indices = np.argsort(distances)[:k]
   nearest_labels = y[nearest_indices]
   return int(np.round(np.mean(nearest_labels)))
-  ```
+```
 
 
 - **常见的距离度量方法有哪些？**
@@ -3291,7 +3291,7 @@ keywords: 面试题
 
 - **用 numpy 实现 cross entropy loss（softmax）**
 
-  ```python
+```python
   import numpy as np
 
   def softmax(logits):
@@ -3327,13 +3327,13 @@ keywords: 面试题
 
   # 计算交叉熵损失
   loss = cross_entropy_loss(probs, labels)
-  ```
+```
 
 
 - **用 numpy 实现 cross entropy loss（log-softmax）**
 
   用 log-softmax 数值更稳定，减 max 是防止指数函数输出过大，用减法算 log 是防止 log(0)。
-  ```python
+```python
   import numpy as np
 
   def log_softmax(logits):
@@ -3366,7 +3366,7 @@ keywords: 面试题
 
   # 计算 log-softmax 并交叉熵损失
   loss = cross_entropy_loss_from_logits(logits, labels)
-  ```
+```
 
 
 - **You are given a data set on cancer detection. You’ve build a classification model and achieved an accuracy of 96%. Why shouldn’t you be happy with your model performance? What can you do about it?**
@@ -3402,7 +3402,7 @@ keywords: 面试题
 
 - **手撕 KMeans**
 
-  ```python
+```python
   import numpy as np
 
   class KMeans:
@@ -3447,7 +3447,7 @@ keywords: 面试题
   def _compute_distances(self, X):
   # 返回 (n_samples, n_clusters) 的距离矩阵
   return np.linalg.norm(X[:, np.newaxis] - self.centroids, axis=2)
-  ```
+```
 
 
 - **KMeans 将 m 条 n 维数据进行聚类，一共迭代了 t 次，其中簇的数目为 K，计算时间复杂度和空间复杂度**
@@ -3538,7 +3538,7 @@ keywords: 面试题
 
 - **Python 相关实现**
 
-  ```python
+```python
   import numpy as np
   from collections import Counter
   from math import log2
@@ -3657,7 +3657,7 @@ keywords: 面试题
   return test(sub, np.delete(x, f))
   else:
   return None  # 未见过的取值
-  ```
+```
 
 
 #### Dimension Reducing
@@ -3804,7 +3804,7 @@ keywords: 面试题
 - **有哪些激活函数？**
 
   sigmoid，softmax，tanh，ReLU，PReLU，Leakly ReLU，Maxout。
-  ```python
+```python
   import numpy as np
 
   # ===== 激活函数 =====
@@ -3834,7 +3834,7 @@ keywords: 面试题
   dx = np.ones_like(x)
   dx[x < 0] = alpha
   return dx
-  ```
+```
 
 
 - **激活函数如何选择？**
@@ -3910,41 +3910,41 @@ keywords: 面试题
 
   SGD 没动量，全局固定学习率。公式为更新参数值 = 当前参数值 - 学习率 * 梯度。在 SGD 中，L2 正则是加上 $$\frac{\lambda}{2} \theta^2$$，weight decay 是 $$\theta \rightarrow \theta - \lambda\theta$$，两者是等价的。SGD 优化轨迹不受损失函数常数缩放影响。
 
-  ```python
+```python
   def sgd(w, dw, lr=0.01):
   return w - lr * dw
-  ```
+```
 
   SGD + Momentum，固定学习率，Momentum 是一阶动量，即梯度的指数加权平均（exponentially weighted average of past gradients）/梯度滑动平均（EMA，Exponential Moving Average）。越新的梯度权重越大，越久远的梯度，权重按指数衰减。公式为更新参数值 = 当前参数值 - 学习率 * 一阶动量。
 
-  ```python
+```python
   def momentum(w, dw, v, lr=0.01, beta=0.9):
   v = beta * v + (1 - beta) * dw
   w = w - lr * v
   return w, v
-  ```
+```
 
   AdaGrad 会对学习率加权，权重为过往梯度平方和的根号，开根号是为了单位一致性，且保证过往梯度过大导致的学习旅衰减过大。频繁更新的参数，学习率自动变小；很少更新的参数，学习率保持较大。由于每次迭代都有梯度，导致梯度平方和每次都增加，因此学习率会单调递减。
 
-  ```python
+```python
   def adagrad(w, dw, h, lr=0.01, eps=1e-8):
   h += dw**2
   w = w - lr * dw / (np.sqrt(h) + eps)
   return w, h
-  ```
+```
 
   RMSProp 是二阶动量，即梯度的平方滑动平均（exponentially weighted average of the squares of past gradients）。相比 AdaGrad，它更看中最近的梯度，而且由于老的梯度平方会指数衰减，学习率不会无限减小。
 
-  ```python
+```python
   def rmsprop(w, dw, h, lr=0.001, beta=0.9, eps=1e-8):
   h = beta * h + (1 - beta) * dw**2
   w = w - lr * dw / (np.sqrt(h) + eps)
   return w, h
-  ```
+```
 
   Adam 学习率根据一阶动量（Momentum）+ 二阶动量（RMSProp）调整。Adam 会进行偏差修正：由于一阶动量和二阶动量初始值为 0，导致乘了 $$1 - beta1$$ 或 $$1 - beta2$$ 会使得均值被低估，因此需要根据当前 step $$t$$ 进行一阶动量、二阶动量的修正。在 Adam 中，weight decay（L2）会被加到原始梯度里，然后进行同样的一阶动量和二阶动量调整，从而导致实际的权重衰减效果并不等价于直接对权重进行衰减。
 
-  ```python
+```python
   def adam(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, eps=1e-8):
   m = beta1 * m + (1 - beta1) * dw
   v = beta2 * v + (1 - beta2) * (dw**2)
@@ -3952,11 +3952,11 @@ keywords: 面试题
   v_hat = v / (1 - beta2**t)
   w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
   return w, m, v
-  ```
+```
 
   AdamW，同 Adam，但权重衰减更合理，将 L2 正则对应的 weight decay 放到了一阶动量和二阶动量调整后的参数更新上。
 
-  ```python
+```python
   def adamw(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, weight_decay=0.01, eps=1e-8):
   # AdamW 在更新前加入权重衰减
   w = w - lr * weight_decay * w
@@ -3966,11 +3966,11 @@ keywords: 面试题
   v_hat = v / (1 - beta2**t)
   w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
   return w, m, v
-  ```
+```
 
   Lion，使用一阶动量，只看更新方向，不考虑更新幅度。
 
-  ```python
+```python
   def lion(w, dw, m, lr=1e-3, beta1=0.9, beta2=0.99, weight_decay=0.0):
   m = beta2 * m + (1 - beta2) * dw
   update = np.sign(beta1 * m + (1 - beta1) * dw)
@@ -3978,18 +3978,18 @@ keywords: 面试题
   update += weight_decay * w
   w = w - lr * update
   return w, m
-  ```
+```
 
   Muon 方向由一阶动量决定，幅度由二阶动量决定。
 
-  ```python
+```python
   def muon(w, dw, m, v, lr=1e-3, beta1=0.9, beta2=0.99, beta3=0.999, eps=1e-8):
   m = beta2 * m + (1 - beta2) * dw
   v = beta3 * v + (1 - beta3) * (dw**2)
   update = np.sign(beta1 * m + (1 - beta1) * dw)
   w = w - lr * update / (np.sqrt(v) + eps)
   return w, m, v
-  ```
+```
 
   如果加上 Scheduler，可以动态调整全局学习率。Warmup 策略可以前期慢慢提供学习率，后期用 Cosine Decay（训练初期快速降学习率，防止剧烈震荡：训练刚开始时，模型参数还比较随机，快速降低学习率能避免过大步长导致训练不稳定或发散；但起始时仍保留较大学习率，帮助模型迅速从随机初始化的参数中找到“正确方向”。中期保持学习率相对平稳，助于稳定收敛：进入训练中期，学习率下降变缓，模型有足够的时间在当前的参数空间“细致探索”；平稳的学习率避免过早降低导致训练停滞，同时不给出过大步长打断已有收敛趋势。后期再次快速下降，微调模型细节：训练末期快速将学习率降低到很小，帮助模型“精细调节”参数，减少振荡，提升泛化性能；类似于在优化曲面上的“爬坡”逐渐变得非常缓慢，避免错过局部极小值。），Linear Decay 等方式进行衰减。
 
@@ -4063,7 +4063,7 @@ keywords: 面试题
 - **RNN 是什么？**
 
   $$o_t=\sigma(W_o[h_{t-1}, x_t] + b_o)$$
-  ```python
+```python
   def rnn_forward(X, Wx, Wh, b, h0):
   """
   X: (T, N, D)
@@ -4076,7 +4076,7 @@ keywords: 面试题
   for t in range(X.shape[0]):
   h = torch.tanh(X[t] @ Wx + h @ Wh + b)
   return h  # 返回最后一步隐藏状态
-  ```
+```
 
 
 - **LSTM 是什么？**
@@ -4093,7 +4093,7 @@ keywords: 面试题
 
   得到最终输出：$$h_t=o_t*tanh(C_t)$$。
 
-  ```python
+```python
   def lstm_forward(X, Wx, Wh, b, h0, c0):
   h, c = h0, c0
   H = h0.shape[1]
@@ -4106,13 +4106,13 @@ keywords: 面试题
   c = f * c + i * g
   h = o * torch.tanh(c)
   return h, c
-  ```
+```
 
 
 - **GRU 是什么？**
 
   LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
-  ```python
+```python
   def gru_forward(X, Wx, Wh, b, h0):
   h = h0
   H = h0.shape[1]
@@ -4123,7 +4123,7 @@ keywords: 面试题
   g = torch.tanh(z[:, 2*H:] + r * (h @ Wh[:, 2*H:]))
   h = (1 - u) * g + u * h
   return h
-  ```
+```
 
 
 - **LSTM 和 GRU 的联系和区别？**
@@ -4473,7 +4473,7 @@ keywords: 面试题
 
   如果是如 LLaMA 等新型 LLM，则改 Norm 和 激活函数类型，并把 PostNorm 改成 PreNorm。
 
-  ```python
+```python
   class TransformerBlock(nn.Module):
   def __init__(self, hidden_size=4096, num_heads=32, dropout=0.1):
   super().__init__()
@@ -4500,7 +4500,7 @@ keywords: 面试题
   x = self.norm2(x)
 
   return x
-  ```
+```
 
 
 - **multi-head attention 的公式是怎样的？**
@@ -4510,7 +4510,7 @@ keywords: 面试题
 
 - **multi-head attention 实现**
 
-  ```python
+```python
   import torch
   import torch.nn as nn
   import torch.nn.functional as F
@@ -4561,7 +4561,7 @@ keywords: 面试题
   # Final linear projection
   output = self.out_proj(attended)
   return output
-  ```
+```
 
 
 - **multi-head attention 时间复杂度**
@@ -4576,12 +4576,12 @@ keywords: 面试题
 
 - **casual mask 怎么生成**
 
-  ```python
+```python
   def causal_mask(seq_len):
   # 下三角矩阵 (seq_len, seq_len)
   mask = torch.tril(torch.ones(seq_len, seq_len, dtype=torch.bool))
   return mask
-  ```
+```
 
 
 - **用 multi-head attention 做 cross-attention**
@@ -4592,7 +4592,7 @@ keywords: 面试题
 - **grouped-query attention 实现**
 
   GQA 是 MQA 和 MHA 的均衡，MQA 尽管减轻了 KV Cache 负担，但也可能带来性能下降。grouped-query attention 中，query 使用比 key/value 更多的 heads。因为在推理阶段，Q 是即时计算的，而 K/V 是缓存的。
-  ```python
+```python
   import torch
   import torch.nn as nn
   import torch.nn.functional as F
@@ -4639,13 +4639,13 @@ keywords: 面试题
   output = self.out_proj(context)  # Final linear projection
 
   return output
-  ```
+```
 
 
 - **multi-head attention + kv cache 实现**
 
   query 不参与下一 token 的注意力过程，无需缓存，而 key/value 是过去的记忆，需要缓存。
-  ```python
+```python
   import torch
   import torch.nn as nn
   import torch.nn.functional as F
@@ -4694,7 +4694,7 @@ keywords: 面试题
 
   out = out.transpose(1, 2).contiguous().view(B, T, E)  # [B, 1, E]
   return self.out_proj(out)
-  ```
+```
 
 
 - **FlashAttention**
@@ -4709,7 +4709,7 @@ keywords: 面试题
   2. 重计算
   在后向梯度计算时，一般需要 attention matrix，但 FlashAttention 可以利用两个额外的统计量在 SRAM 上快速重新计算 attention。
 
-  ```python
+```python
   import torch
   import torch.nn.functional as F
 
@@ -4758,7 +4758,7 @@ keywords: 面试题
   output[:, i:i+block_size, :] = out_block
 
   return output
-  ```
+```
 
   FlashAttention v2 改进：
   - 优化计算次序，减少非矩阵计算量。
@@ -4903,7 +4903,7 @@ keywords: 面试题
 
 - **RoPE 实现**
 
-  ```python
+```python
   import torch
   import math
 
@@ -4942,7 +4942,7 @@ keywords: 面试题
   x_out[:, :, 0::2] = x_rotated_0
   x_out[:, :, 1::2] = x_rotated_1
   return x_out
-  ```
+```
 
 
 - **外推性**
@@ -4994,7 +4994,7 @@ keywords: 面试题
 
 - **实现 LayerNorm**
 
-  ```python
+```python
   import torch
   import torch.nn as nn
 
@@ -5010,13 +5010,13 @@ keywords: 面试题
   var = x.var(dim=-1, unbiased=False, keepdim=True)
   x_norm = (x - mean) / torch.sqrt(var + self.eps)
   return self.gamma * x_norm + self.beta
-  ```
+```
 
 
 - **实现 RMSNorm**
 
   RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
-  ```python
+```python
   import torch
   import torch.nn as nn
 
@@ -5031,7 +5031,7 @@ keywords: 面试题
   rms = x.pow(2).mean(dim=-1, keepdim=True).add(self.eps).sqrt()
   x_norm = x / rms
   return self.scale * x_norm
-  ```
+```
 
 
 - **Pre Norm 和 Post Norm 有什么区别？**
@@ -5057,7 +5057,7 @@ keywords: 面试题
 
 - **Beam Search 实现**
 
-  ```python
+```python
   import numpy as np
 
   def beam_search(start_token, get_next_probs, beam_width=3, max_len=10):
@@ -5084,7 +5084,7 @@ keywords: 面试题
   beams = new_beams[:beam_width]
 
   return beams  # 返回最终 beam 列表
-  ```
+```
 
 
 - **MoE**
@@ -5104,7 +5104,7 @@ keywords: 面试题
 
 - **手撕 MoE**
 
-  ```python
+```python
   import torch
   import torch.nn as nn
   import torch.nn.functional as F
@@ -5121,7 +5121,7 @@ keywords: 面试题
   expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=1)  # [batch, num_experts, output_dim]
   gate_probs = gate_probs.unsqueeze(-1)  # [batch, num_experts, 1]
   return torch.sum(gate_probs * expert_outputs, dim=1)  # [batch, output_dim]
-  ```
+```
 
 
 - **LoRA**
@@ -5131,7 +5131,7 @@ keywords: 面试题
 
 - **手撕 LoRA**
 
-  ```python
+```python
   import torch
   import torch.nn as nn
   import torch.nn.functional as F
@@ -5151,7 +5151,7 @@ keywords: 面试题
   base = F.linear(x, self.weight, self.bias)
   lora = F.linear(x, self.B @ self.A) * self.scale
   return base + lora
-  ```
+```
 
 
 - **Adapter**
@@ -5248,7 +5248,7 @@ keywords: 面试题
 
   - 计算优势 advantages，其物理意义采取当前动作会比平均收益多多少，即相对收益，$$Q(s_t, a_t) - V(s_t)$$。评估这一优势主要有两种方法，每种方法都有其利弊，即：1）蒙特卡洛 (Monte-Carlo，MC)：使用完整输出的 reward。由于奖励稀疏，只在生成最后一个 token 时有奖励，这种方法的方差很大，且从 LLM 中获取足够的样本来使用 MC 进行优化成本很高，但它的偏差很低，因为我们可以准确地模拟奖励；2）时间差分 (Temporal difference，TD)：使用一步轨迹奖励（即衡量刚根据提示生成的单词的优劣），即`advantages = reward - values_response.sum(dim=1) / response_mask.sum(dim=1)`。通过这样做，我们可以在 token 级别计算奖励，这显著降低了方差，但同时偏差会增加，因为我们无法从部分生成的响应中准确预测最终奖励。这就是 GAE 的用武之地，它提出通过多步时间差分 (multi-step TD) 来平衡偏差和方差。具体是从 reward 回溯分配每个 token 的 TD 残差 $$\delta_t$$，用 GAE 计算每个 token 的优势 $$A_t$$，其中 gamma 是时间折扣因子，控制未来奖励的重要性，越大代表未来奖励越重要。lambda 是 GAE 平衡因子，控制 bias-variance 权衡，lambda 越大 → 方差大，偏差小；λ 越小 → 方差小，偏差大。
 
-  ```python
+```python
   def compute_gae(rewards, values, gamma=1.0, lam=0.95):
   advantages = torch.zeros_like(rewards)
   last_adv = 0
@@ -5256,7 +5256,7 @@ keywords: 面试题
   delta = rewards[:, t] + gamma * values[:, t + 1] - values[:, t]
   advantages[:, t] = last_adv = delta + gamma * lam * last_adv
   return advantages
-  ```
+```
 
   - 根据采样到的数据进行多次策略迭代更新，每次更新之后得到`log_probs`和新的`values`。
 
@@ -5266,14 +5266,14 @@ keywords: 面试题
 
   其中 $$t$$ 为当前 token，$$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$ 为重要性采样比率，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
 
-  ```python
+```python
   def actor_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
   ratio = torch.exp(log_probs - old_log_probs)  # [B]
   unclipped = ratio * advantages
   clipped = torch.clamp(ratio, 1 - clip_range, 1 + clip_range) * advantages
   loss = -torch.min(unclipped, clipped).mean()
   return loss
-  ```
+```
 
   - 再根据`rewards`和`values`得到`critic_loss`，优化 Critic/Value Model。
 
@@ -5296,12 +5296,12 @@ keywords: 面试题
   $$L^{\text{DPO}}(\theta) = -\log \left( \frac{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right)}{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right) + \exp\left( \beta \cdot \log \pi_\theta(y^- \mid x) \right)} \right)$$
 
   其中，$$y^+$$ 是人类偏好的回答，$$y^-$$ 是较差的回答，$$\beta$$ 是温度系数，控制偏好强度
-  ```python
+```python
   def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   diff = logp_chosen - logp_rejected  # [B]
   loss = -torch.nn.functional.logsigmoid(beta * diff).mean()
   return loss
-  ```
+```
 
 
 - **GRPO**
@@ -5327,7 +5327,7 @@ keywords: 面试题
 
   - 根据相对奖励，得到每一个样本的 loss，进行优化；
 
-  ```python
+```python
   def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range=0.2):
   # 计算每个组的 ratio
   ratio = torch.exp(group_log_probs - group_old_log_probs)  # [G, B]
@@ -5347,7 +5347,7 @@ keywords: 面试题
   # 对所有组和批次求平均，取最小
   loss = -torch.min(unclipped, clipped).mean()
   return loss
-  ```
+```
 
   - 输出 o_i 被输入到冻结的参考模型（Reference Model），计算输出 o_i 与参考策略之间的 KL 散度，用于限制策略更新。
 
@@ -5991,10 +5991,10 @@ keywords: 面试题
 
   评测闭环是指模型从构建测试集到持续迭代的完整流程：
 
-  ```
+```
   构建 Golden Set → 离线评估 → 模型部署 → 在线监控 → Badcase闭环
           ↑___________________________________________|
-  ```
+```
 
   **Step 1: 构建 Golden Set**
 
@@ -6064,14 +6064,14 @@ keywords: 面试题
   - 有用性（Helpfulness）
 
   **每个维度的档位示例：**
-  ```
+```
   有用性：
   - 5分：完全解决问题，提供额外价值
   - 4分：解决问题，无额外价值
   - 3分：部分解决，需用户补充
   - 2分：无关或错误
   - 1分：有害或误导
-  ```
+```
 
   **Rubric 在 LLM 评测中的应用：**
   - **人工评测**：标注员按 Rubric 打分
@@ -6152,13 +6152,13 @@ keywords: 面试题
   | **SWIFT**（阿里魔搭）| 国内微调全家桶 | 中文文档，阿里模型/数据集成好 | 国内团队，魔搭生态用户 |
 
   **架构层次**：
-  ```
+```
   底层基座：Megatron-LM + DeepSpeed
       ↓
   RLHF 上层应用：veRL / OpenRLHF
       ↓
   微调专用工具：LLaMA-Factory / TRL / SWIFT
-  ```
+```
 
   **发展趋势**：
   - 训推一体：Hybrid Engine，同一 GPU 切换训练/推理
@@ -6627,7 +6627,7 @@ keywords: 面试题
   **结构**：基本信息（30s） + 技术能力（60s） + 代表经历（90s） + 求职动机（30s）
 
   **模板**：
-  ```
+```
   面试官您好，我是【姓名】。
 
   我毕业于【学校】，【学位】学历。研究方向是【研究方向】，
@@ -6641,7 +6641,7 @@ keywords: 面试题
 
   选择贵公司是因为【原因1：业务匹配】【原因2：技术栈匹配】。
   希望能在这个岗位上发挥我的专业能力，为团队创造价值。
-  ```
+```
 
   **填充要点**：
 
