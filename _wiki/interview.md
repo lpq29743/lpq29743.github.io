@@ -6288,26 +6288,25 @@ keywords: 面试题
   - **知识蒸馏（Knowledge Distillation）**：
     - **Off-policy KD（传统）**：用教师模型离线生成数据，学生模型做 SFT。问题：分布偏移（exposure bias）。
     - **On-policy KD（主流方向）**：学生模型自身采样（on-policy rollout），用 reverse KL 对齐教师分布，避免 exposure bias。代表工作：MiniLLM（清华+微软，ICLR 2024）。
-
-    **为什么 On-policy KD 用 Reverse KL 而不是 Forward KL？**
-
-    | 维度 | Forward KL: D_KL(P_teacher ‖ P_student) | Reverse KL: D_KL(P_student ‖ P_teacher) |
-    |------|----------------------------------------|----------------------------------------|
-    | **优化目标** | 教师分布覆盖的地方，学生必须覆盖 | 学生分布必须在教师分布支撑集内 |
-    | **行为特点** | Mode-covering（覆盖所有模式） | Mode-seeking（寻找主要模式） |
-    | **问题** | 学生可能生成低质量样本（教师分布外） | 学生不会生成教师分布外的样本 |
-    | **适用场景** | Off-policy（数据已固定） | On-policy（学生自己采样） |
-
-    **核心原因：**
-    - On-policy KD 中，学生模型自己采样生成训练数据
-    - 如果用 Forward KL，学生为了覆盖教师分布，可能生成教师分布外的低质量样本，导致 exposure bias
-    - Reverse KL 强制学生只在教师分布支撑集内生成，避免生成"教师不会生成但学生生成了"的样本
-
-    **直观理解：**
-    - Forward KL：学生要"学会教师的全部"（包括教师不会做的事）
-    - Reverse KL：学生"只做教师会做的事"
-
     - **效果**：数学推理等任务上小模型可接近教师水平，计算成本远低于 RL。
+
+  **为什么 On-policy KD 用 Reverse KL 而不是 Forward KL？**
+
+  | 维度 | Forward KL: D_KL(P_teacher ‖ P_student) | Reverse KL: D_KL(P_student ‖ P_teacher) |
+  |------|----------------------------------------|----------------------------------------|
+  | **优化目标** | 教师分布覆盖的地方，学生必须覆盖 | 学生分布必须在教师分布支撑集内 |
+  | **行为特点** | Mode-covering（覆盖所有模式） | Mode-seeking（寻找主要模式） |
+  | **问题** | 学生可能生成低质量样本（教师分布外） | 学生不会生成教师分布外的样本 |
+  | **适用场景** | Off-policy（数据已固定） | On-policy（学生自己采样） |
+
+  **核心原因：**
+  - On-policy KD 中，学生模型自己采样生成训练数据
+  - 如果用 Forward KL，学生为了覆盖教师分布，可能生成教师分布外的低质量样本，导致 exposure bias
+  - Reverse KL 强制学生只在教师分布支撑集内生成，避免生成"教师不会生成但学生生成了"的样本
+
+  **直观理解：**
+  - Forward KL：学生要"学会教师的全部"（包括教师不会做的事）
+  - Reverse KL：学生"只做教师会做的事"
   - **剪枝（Pruning）**：
     - **Sheared LLaMA**：结构化剪枝（减少层数、注意力头、FFN 维度），配合 Dynamic Batch Loading（动态调整不同领域数据比例），从 LLaMA2-7B 剪到 1.3B/2.7B 只需从头训练 3% 的计算量，性能超过同期开源小模型。
     - **LLM-Pruner**：边剪边搜，没有固定目标结构。
