@@ -363,49 +363,49 @@ import math
 
 # === Discrete ===
 def bernoulli_pmf(x, p):
-  return p**x * (1-p)**(1-x)
+    return p**x * (1-p)**(1-x)
 
 def bernoulli_sample(p, size=1):
-  return np.random.binomial(1, p, size)
+    return np.random.binomial(1, p, size)
 
 def binomial_pmf(k, n, p):
-  return math.comb(n, k) * (p**k) * ((1-p)**(n-k))
+    return math.comb(n, k) * (p**k) * ((1-p)**(n-k))
 
 def binomial_sample(n, p, size=1):
-  return np.random.binomial(n, p, size)
+    return np.random.binomial(n, p, size)
 
 def poisson_pmf(k, lam):
-  return math.exp(-lam) * lam**k / math.factorial(k)
+    return math.exp(-lam) * lam**k / math.factorial(k)
 
 def poisson_sample(lam, size=1):
-  return np.random.poisson(lam, size)
+    return np.random.poisson(lam, size)
 
 # === Continuous ===
 def normal_pdf(x, mu=0, sigma=1):
-  return 1/(sigma*np.sqrt(2*np.pi)) * np.exp(-0.5*((x-mu)/sigma)**2)
+    return 1/(sigma*np.sqrt(2*np.pi)) * np.exp(-0.5*((x-mu)/sigma)**2)
 
 def normal_sample(mu=0, sigma=1, size=1):
-  return np.random.normal(mu, sigma, size)
+    return np.random.normal(mu, sigma, size)
 
 def exponential_pdf(x, lam):
-  return lam * np.exp(-lam * x) if x >= 0 else 0
+    return lam * np.exp(-lam * x) if x >= 0 else 0
 
 def exponential_sample(lam, size=1):
-  return np.random.exponential(1/lam, size)
+    return np.random.exponential(1/lam, size)
 
 # === Experiments ===
 def law_of_large_numbers(p=0.5, N=100000):
-  samples = bernoulli_sample(p, N)
-  return samples.mean()
+    samples = bernoulli_sample(p, N)
+    return samples.mean()
 
 def central_limit_theorem(M=10000):
-  sums = np.sum(np.random.rand(M, 12), axis=1) - 6  # ≈ N(0,1)
-  return sums.mean(), sums.var()
+    sums = np.sum(np.random.rand(M, 12), axis=1) - 6  # ≈ N(0,1)
+    return sums.mean(), sums.var()
 
 def monte_carlo_pi(N=1000000):
-  xy = np.random.rand(N, 2)*2 - 1
-  inside = (xy[:,0]**2 + xy[:,1]**2 <= 1).sum()
-  return 4 * inside / N
+    xy = np.random.rand(N, 2)*2 - 1
+    inside = (xy[:,0]**2 + xy[:,1]**2 <= 1).sum()
+    return 4 * inside / N
 ```
 
 
@@ -439,39 +439,39 @@ import numpy as np
 
 # === 目标函数 ===
 def f(x):
-  return x**2 - 4*x + 4
+    return x**2 - 4*x + 4
 
 # 一阶导数
 def grad_f(x):
-  return 2*x - 4
+    return 2*x - 4
 
 # 二阶导数 (Hessian)
 def hessian_f(x):
-  return 2  # 对一维函数就是常数
+    return 2  # 对一维函数就是常数
 
 # === 梯度下降 ===
 def gradient_descent(x0, lr=0.1, tol=1e-6, max_iter=100):
-  x = x0
-  for _ in range(max_iter):
-      x_new = x - lr * grad_f(x)
-      # 参数几乎不再变化了，算法可以认为已经收敛，提前停止迭代。
-      if abs(x_new - x) < tol:
-          break
-      x = x_new
-  return x, f(x)
+    x = x0
+    for _ in range(max_iter):
+        x_new = x - lr * grad_f(x)
+        # 参数几乎不再变化了，算法可以认为已经收敛，提前停止迭代。
+        if abs(x_new - x) < tol:
+            break
+        x = x_new
+    return x, f(x)
 
 # === 牛顿法 ===
 def newton_method(x0, tol=1e-6, max_iter=100):
-  x = x0
-  for _ in range(max_iter):
-      grad = grad_f(x)
-      hess = hessian_f(x)
-      x_new = x - grad / hess
-      # 参数几乎不再变化了，算法可以认为已经收敛，提前停止迭代。
-      if abs(x_new - x) < tol:
-          break
-      x = x_new
-  return x, f(x)
+    x = x0
+    for _ in range(max_iter):
+        grad = grad_f(x)
+        hess = hessian_f(x)
+        x_new = x - grad / hess
+        # 参数几乎不再变化了，算法可以认为已经收敛，提前停止迭代。
+        if abs(x_new - x) < tol:
+            break
+        x = x_new
+    return x, f(x)
 
 # === 测试 ===
 x0 = 0.0
@@ -518,70 +518,70 @@ import numpy as np
 
 # === 1. 熵 (Entropy) ===
 def entropy(p):
-  """
-  p: 概率分布数组，p_i >=0 且 sum(p)=1
-  """
-  p = np.array(p)
-  p = p[p > 0]  # 避免 log(0)
-  return -np.sum(p * np.log2(p))
+    """
+    p: 概率分布数组，p_i >=0 且 sum(p)=1
+    """
+    p = np.array(p)
+    p = p[p > 0]  # 避免 log(0)
+    return -np.sum(p * np.log2(p))
 
 # === 2. 联合熵 (Joint Entropy) ===
 def joint_entropy(p_xy):
-  """
-  p_xy: 联合概率分布矩阵，sum(p_xy)=1
-  """
-  p_xy = np.array(p_xy)
-  p_xy = p_xy[p_xy > 0]
-  return -np.sum(p_xy * np.log2(p_xy))
+    """
+    p_xy: 联合概率分布矩阵，sum(p_xy)=1
+    """
+    p_xy = np.array(p_xy)
+    p_xy = p_xy[p_xy > 0]
+    return -np.sum(p_xy * np.log2(p_xy))
 
 # === 3. 条件熵 (Conditional Entropy) H(Y|X) ===
 def conditional_entropy(p_xy):
-  """
-  p_xy: 联合概率分布矩阵
-  H(Y|X) = H(X,Y) - H(X)
-  """
-  p_xy = np.array(p_xy)
-  p_x = p_xy.sum(axis=1)
-  H_xy = joint_entropy(p_xy)
-  H_x = entropy(p_x)
-  return H_xy - H_x
+    """
+    p_xy: 联合概率分布矩阵
+    H(Y|X) = H(X,Y) - H(X)
+    """
+    p_xy = np.array(p_xy)
+    p_x = p_xy.sum(axis=1)
+    H_xy = joint_entropy(p_xy)
+    H_x = entropy(p_x)
+    return H_xy - H_x
 
 # === 4. 互信息 (Mutual Information) ===
 def mutual_information(p_xy):
-  """
-  I(X;Y) = H(X) + H(Y) - H(X,Y)
-  """
-  p_xy = np.array(p_xy)
-  p_x = p_xy.sum(axis=1)
-  p_y = p_xy.sum(axis=0)
-  H_x = entropy(p_x)
-  H_y = entropy(p_y)
-  H_xy = joint_entropy(p_xy)
-  return H_x + H_y - H_xy
+    """
+    I(X;Y) = H(X) + H(Y) - H(X,Y)
+    """
+    p_xy = np.array(p_xy)
+    p_x = p_xy.sum(axis=1)
+    p_y = p_xy.sum(axis=0)
+    H_x = entropy(p_x)
+    H_y = entropy(p_y)
+    H_xy = joint_entropy(p_xy)
+    return H_x + H_y - H_xy
 
 # === 5. KL 散度 (Kullback-Leibler Divergence) ===
 def kl_divergence(p, q):
-  """
-  D_KL(p || q) = sum p_i * log(p_i / q_i)
-  """
-  p = np.array(p)
-  q = np.array(q)
-  mask = (p > 0) & (q > 0)
-  return np.sum(p[mask] * np.log2(p[mask] / q[mask]))
+    """
+    D_KL(p || q) = sum p_i * log(p_i / q_i)
+    """
+    p = np.array(p)
+    q = np.array(q)
+    mask = (p > 0) & (q > 0)
+    return np.sum(p[mask] * np.log2(p[mask] / q[mask]))
 
 # === 示例 ===
 if __name__ == "__main__":
-  p = [0.2, 0.5, 0.3]
-  q = [0.1, 0.7, 0.2]
-  print("Entropy H(p):", entropy(p))
-  print("KL(p||q):", kl_divergence(p, q))
+    p = [0.2, 0.5, 0.3]
+    q = [0.1, 0.7, 0.2]
+    print("Entropy H(p):", entropy(p))
+    print("KL(p||q):", kl_divergence(p, q))
 
-  # 联合概率矩阵
-  p_xy = np.array([[0.1, 0.2],
-                   [0.3, 0.4]])
-  print("Joint Entropy H(X,Y):", joint_entropy(p_xy))
-  print("Conditional Entropy H(Y|X):", conditional_entropy(p_xy))
-  print("Mutual Information I(X;Y):", mutual_information(p_xy))
+    # 联合概率矩阵
+    p_xy = np.array([[0.1, 0.2],
+                     [0.3, 0.4]])
+    print("Joint Entropy H(X,Y):", joint_entropy(p_xy))
+    print("Conditional Entropy H(Y|X):", conditional_entropy(p_xy))
+    print("Mutual Information I(X;Y):", mutual_information(p_xy))
 ```
 
 
@@ -735,92 +735,92 @@ from collections import deque
 # 集合运算
 # =======================
 def set_intersection(A, B):
-  return A & B
+    return A & B
 
 def set_union(A, B):
-  return A | B
+    return A | B
 
 def set_difference(A, B):
-  return A - B
+    return A - B
 
 def set_symdiff(A, B):
-  return A ^ B
+    return A ^ B
 
 # =======================
 # 排列与组合
 # =======================
 def permutations(lst):
-  return list(itertools.permutations(lst))
+    return list(itertools.permutations(lst))
 
 def combinations(lst, k):
-  return list(itertools.combinations(lst, k))
+    return list(itertools.combinations(lst, k))
 
 def comb(n, k):
-  return math.comb(n, k)
+    return math.comb(n, k)
 
 def perm(n, k):
-  return math.perm(n, k)
+    return math.perm(n, k)
 
 # =======================
 # 逻辑运算与真值表
 # =======================
 def truth_table(n):
-  return list(itertools.product([False, True], repeat=n))
+    return list(itertools.product([False, True], repeat=n))
 
 # =======================
 # 模运算与数论
 # =======================
 def mod_add(a, b, m):
-  return (a + b) % m
+    return (a + b) % m
 
 def mod_mul(a, b, m):
-  return (a * b) % m
+    return (a * b) % m
 
 def mod_pow(a, b, m):
-  return pow(a, b, m)
+    return pow(a, b, m)
 
 def egcd(a, b):
-  if a == 0:
-      return (b, 0, 1)
-  g, x, y = egcd(b % a, a)
-  return (g, y - (b // a) * x, x)
+    if a == 0:
+        return (b, 0, 1)
+    g, x, y = egcd(b % a, a)
+    return (g, y - (b // a) * x, x)
 
 def modinv(a, m):
-  g, x, _ = egcd(a, m)
-  if g != 1:
-      raise Exception("No modular inverse")
-  return x % m
+    g, x, _ = egcd(a, m)
+    if g != 1:
+        raise Exception("No modular inverse")
+    return x % m
 
 # =======================
 # 示例使用
 # =======================
 if __name__ == "__main__":
-  A = {1, 2, 3}
-  B = {2, 3, 4}
-  print("交集:", set_intersection(A,B))
-  print("并集:", set_union(A,B))
-  print("差集 A-B:", set_difference(A,B))
-  print("对称差:", set_symdiff(A,B))
+    A = {1, 2, 3}
+    B = {2, 3, 4}
+    print("交集:", set_intersection(A,B))
+    print("并集:", set_union(A,B))
+    print("差集 A-B:", set_difference(A,B))
+    print("对称差:", set_symdiff(A,B))
 
-  lst = [1,2,3]
-  print("排列:", permutations(lst))
-  print("组合:", combinations(lst,2))
-  print("C(5,2):", comb(5,2))
-  print("P(5,2):", perm(5,2))
+    lst = [1,2,3]
+    print("排列:", permutations(lst))
+    print("组合:", combinations(lst,2))
+    print("C(5,2):", comb(5,2))
+    print("P(5,2):", perm(5,2))
 
-  graph = [[0,1,1,0],
-           [1,0,0,1],
-           [1,0,0,1],
-           [0,1,1,0]]
-  print("BFS from 0:", bfs(graph,0))
-  print("DFS from 0:", dfs(graph,0))
+    graph = [[0,1,1,0],
+             [1,0,0,1],
+             [1,0,0,1],
+             [0,1,1,0]]
+    print("BFS from 0:", bfs(graph,0))
+    print("DFS from 0:", dfs(graph,0))
 
-  print("2变量真值表:", truth_table(2))
+    print("2变量真值表:", truth_table(2))
 
-  print("模运算: (17+13)%5 =", mod_add(17,13,5))
-  print("模运算: (17*13)%5 =", mod_mul(17,13,5))
-  print("模运算: 17^13 % 5 =", mod_pow(17,13,5))
-  print("17 在模 5 下的逆元:", modinv(17,5))
+    print("模运算: (17+13)%5 =", mod_add(17,13,5))
+    print("模运算: (17*13)%5 =", mod_mul(17,13,5))
+    print("模运算: 17^13 % 5 =", mod_pow(17,13,5))
+    print("17 在模 5 下的逆元:", modinv(17,5))
 ```
 
 
@@ -873,12 +873,12 @@ if __name__ == "__main__":
 ```python
 left = 0
 for right in range(len(arr)):
-  # 扩大窗口（通常加入arr[right]）
+    # 扩大窗口（通常加入arr[right]）
 
-  while 窗口不满足条件:
-      # 缩小窗口（通常移动left）
+    while 窗口不满足条件:
+        # 缩小窗口（通常移动left）
 
-  # 此时窗口满足条件，更新结果（比如最大值、最小长度等）
+    # 此时窗口满足条件，更新结果（比如最大值、最小长度等）
 ```
 
   三、快慢指针（Fast and Slow Pointers）
@@ -898,46 +898,46 @@ for right in range(len(arr)):
 
 ```python
 def maxProduct(nums):
-  max_prod = min_prod = result = nums[0]
-  for num in nums[1:]:
-      # 遇到负数时，最大和最小会交换
-      if num < 0:
-          max_prod, min_prod = min_prod, max_prod
+    max_prod = min_prod = result = nums[0]
+    for num in nums[1:]:
+        # 遇到负数时，最大和最小会交换
+        if num < 0:
+            max_prod, min_prod = min_prod, max_prod
 
-      max_prod = max(num, num * max_prod)
-      min_prod = min(num, num * min_prod)
+        max_prod = max(num, num * max_prod)
+        min_prod = min(num, num * min_prod)
 
-      result = max(result, max_prod)
-  return result
+        result = max(result, max_prod)
+    return result
 ```
 
   - 子数组最大和（二维扩展）：枚举上边界 `top` 和下边界 `bottom` 行。对每一对 `(top, bottom)`，把矩阵列压缩成一个一维数组 `sums`，其中 `sums[c]` 表示列 `c` 在 `top..bottom` 行的累加和。在 `sums` 上使用一维最大子数组和（Kadane），得到这一行段组合的最大矩阵和。遍历所有 `(top, bottom)`，更新全局最大值。时间复杂度为 O(rows^2 * cols)。
 
 ```python
 def maxSumSubmatrix(matrix):
-  if not matrix or not matrix[0]:
-      return 0
-  rows, cols = len(matrix), len(matrix[0])
-  max_sum = float('-inf')
+    if not matrix or not matrix[0]:
+        return 0
+    rows, cols = len(matrix), len(matrix[0])
+    max_sum = float('-inf')
 
-  for top in range(rows):
-      # 初始化列累加数组
-      col_sums = [0] * cols
-      for bottom in range(top, rows):
-          # 累加当前行到 col_sums
-          for c in range(cols):
-              col_sums[c] += matrix[bottom][c]
+    for top in range(rows):
+        # 初始化列累加数组
+        col_sums = [0] * cols
+        for bottom in range(top, rows):
+            # 累加当前行到 col_sums
+            for c in range(cols):
+                col_sums[c] += matrix[bottom][c]
 
-          # 在 col_sums 上运行 Kadane 算法
-          cur_sum = col_sums[0]
-          cur_max = col_sums[0]
-          for i in range(1, cols):
-              cur_sum = max(col_sums[i], cur_sum + col_sums[i])
-              cur_max = max(cur_max, cur_sum)
+            # 在 col_sums 上运行 Kadane 算法
+            cur_sum = col_sums[0]
+            cur_max = col_sums[0]
+            for i in range(1, cols):
+                cur_sum = max(col_sums[i], cur_sum + col_sums[i])
+                cur_max = max(cur_max, cur_sum)
 
-          max_sum = max(max_sum, cur_max)
+            max_sum = max(max_sum, cur_max)
 
-  return max_sum
+    return max_sum
 ```
 
   滑动窗口（适用于全正数或符合单调性问题）
@@ -951,53 +951,53 @@ def maxSumSubmatrix(matrix):
   - 等差子数组个数：枚举子数组判断是否等差，可使用 dp 优化。
 ```python
 def numberOfArithmeticSlices(nums):
-  n = len(nums)
-  if n < 3:
-      return 0
+    n = len(nums)
+    if n < 3:
+        return 0
 
-  dp = [0] * n
-  total = 0
+    dp = [0] * n
+    total = 0
 
-  for i in range(2, n):
-      if nums[i] - nums[i-1] == nums[i-1] - nums[i-2]:
-          dp[i] = dp[i-1] + 1
-          total += dp[i]
-      # 否则 dp[i] 保持 0
+    for i in range(2, n):
+        if nums[i] - nums[i-1] == nums[i-1] - nums[i-2]:
+            dp[i] = dp[i-1] + 1
+            total += dp[i]
+        # 否则 dp[i] 保持 0
 
-  return total
+    return total
 ```
   - 子数组最大值 - 最小值 ≤ K 的个数：使用两个单调队列维护区间最大最小值的 index，维护一个变长滑动窗口。 
 
 ```python
 def count_subarrays(nums, k):
-  n = len(nums)
-  max_q, min_q = deque(), deque()
-  left = 0
-  count = 0
+    n = len(nums)
+    max_q, min_q = deque(), deque()
+    left = 0
+    count = 0
 
-  for right in range(n):
-      # 维护单调递减队列 max_q
-      while max_q and nums[right] > nums[max_q[-1]]:
-          max_q.pop()
-      max_q.append(right)
+    for right in range(n):
+        # 维护单调递减队列 max_q
+        while max_q and nums[right] > nums[max_q[-1]]:
+            max_q.pop()
+        max_q.append(right)
 
-      # 维护单调递增队列 min_q
-      while min_q and nums[right] < nums[min_q[-1]]:
-          min_q.pop()
-      min_q.append(right)
+        # 维护单调递增队列 min_q
+        while min_q and nums[right] < nums[min_q[-1]]:
+            min_q.pop()
+        min_q.append(right)
 
-      # 当最大值 - 最小值 > k 时，移动左边界
-      while nums[max_q[0]] - nums[min_q[0]] > k:
-          left += 1
-          if max_q[0] < left:
-              max_q.popleft()
-          if min_q[0] < left:
-              min_q.popleft()
+        # 当最大值 - 最小值 > k 时，移动左边界
+        while nums[max_q[0]] - nums[min_q[0]] > k:
+            left += 1
+            if max_q[0] < left:
+                max_q.popleft()
+            if min_q[0] < left:
+                min_q.popleft()
 
-      # 窗口内每个子数组都是合法的
-      count += right - left + 1
+        # 窗口内每个子数组都是合法的
+        count += right - left + 1
 
-  return count
+    return count
 ```
 
 
@@ -1097,61 +1097,61 @@ def count_subarrays(nums, k):
   简单模版
 ```python
 class UnionFindSimple:
-  def __init__(self, n):
-      self.parent = [i for i in range(n)]
+    def __init__(self, n):
+        self.parent = [i for i in range(n)]
 
-  def find(self, x):
-      if self.parent[x] != x:
-          self.parent[x] = self.find(self.parent[x])  # 路径压缩
-      return self.parent[x]
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])  # 路径压缩
+        return self.parent[x]
 
-  def union(self, x, y):
-      px, py = self.find(x), self.find(y)
-      if px != py:
-          self.parent[py] = px
+    def union(self, x, y):
+        px, py = self.find(x), self.find(y)
+        if px != py:
+            self.parent[py] = px
 
-  def connected(self, x, y):
-      return self.find(x) == self.find(y)
+    def connected(self, x, y):
+        return self.find(x) == self.find(y)
 ```
   高阶模版（支持动态元素；路径压缩，即在 find 的过程中，把节点直接连到根节点，减少树的高度；按秩合并；打印所有集合）
 ```python
 from collections import defaultdict
 
 class UnionFind:
-  def __init__(self):
-      self.parent = {}
-      self.rank = {}
+    def __init__(self):
+        self.parent = {}
+        self.rank = {}
 
-  def find(self, x):
-      if x not in self.parent:
-          self.parent[x] = x
-          self.rank[x] = 0
-      # 路径压缩
-      if self.parent[x] != x:
-          self.parent[x] = self.find(self.parent[x])
-      return self.parent[x]
+    def find(self, x):
+        if x not in self.parent:
+            self.parent[x] = x
+            self.rank[x] = 0
+        # 路径压缩
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
 
-  def union(self, x, y):
-      px, py = self.find(x), self.find(y)
-      if px == py:
-          return
-      if self.rank[px] < self.rank[py]:
-          self.parent[px] = py
-      elif self.rank[px] > self.rank[py]:
-          self.parent[py] = px
-      else:
-          self.parent[py] = px
-          self.rank[px] += 1
+    def union(self, x, y):
+        px, py = self.find(x), self.find(y)
+        if px == py:
+            return
+        if self.rank[px] < self.rank[py]:
+            self.parent[px] = py
+        elif self.rank[px] > self.rank[py]:
+            self.parent[py] = px
+        else:
+            self.parent[py] = px
+            self.rank[px] += 1
 
-  def connected(self, x, y):
-      return self.find(x) == self.find(y)
+    def connected(self, x, y):
+        return self.find(x) == self.find(y)
 
-  def groups(self):
-      """返回所有集合"""
-      g = defaultdict(list)
-      for x in self.parent:
-          g[self.find(x)].append(x)
-      return list(g.values())
+    def groups(self):
+        """返回所有集合"""
+        g = defaultdict(list)
+        for x in self.parent:
+            g[self.find(x)].append(x)
+        return list(g.values())
 ```
 
 
@@ -1176,17 +1176,17 @@ class UnionFind:
 
 ```python
 class ListNode:
-  def __init__(self, val=0, next=None):
-      self.val = val
-      self.next = next
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 def create_linked_list(arr):
-  dummy = ListNode()  # 虚拟头节点
-  curr = dummy
-  for val in arr:
-      curr.next = ListNode(val)
-      curr = curr.next
-  return dummy.next  # 返回真正的头节点
+    dummy = ListNode()  # 虚拟头节点
+    curr = dummy
+    for val in arr:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return dummy.next  # 返回真正的头节点
 ```
 
   - 反转链表（Reverse Linked List）
@@ -1195,37 +1195,37 @@ def create_linked_list(arr):
 
 ```python
 def reverse_list(head):
-prev = None
-curr = head
-while curr:
-next_temp = curr.next   # 保存下一个节点
-curr.next = prev        # 反转指针
-prev = curr             # prev 前进
-curr = next_temp        # curr 前进
-return prev  # prev 是新头节点
+    prev = None
+    curr = head
+    while curr:
+        next_temp = curr.next   # 保存下一个节点
+        curr.next = prev        # 反转指针
+        prev = curr             # prev 前进
+        curr = next_temp        # curr 前进
+    return prev  # prev 是新头节点
 ```
 
   递归（recursion）
 
 ```python
 def reverse_list_recursive(head):
-if not head or not head.next:
-return head
+    if not head or not head.next:
+        return head
 
-# 假设已经成功反转了 head.next 之后的链表
-# new_head 会指向反转后的新头节点
-new_head = reverse_list_recursive(head.next)
+    # 假设已经成功反转了 head.next 之后的链表
+    # new_head 会指向反转后的新头节点
+    new_head = reverse_list_recursive(head.next)
 
-# 关键操作：
-# head.next 是反转后链表的尾节点
-# 把它的 next 指针指回当前节点 head
-head.next.next = head
+    # 关键操作：
+    # head.next 是反转后链表的尾节点
+    # 把它的 next 指针指回当前节点 head
+    head.next.next = head
 
-# 把当前节点的 next 断开，否则会形成环
-head.next = None
+    # 把当前节点的 next 断开，否则会形成环
+    head.next = None
 
-# new_head 始终指向新的头节点（反转后的链表头）
-return new_head
+    # new_head 始终指向新的头节点（反转后的链表头）
+    return new_head
 ```
 
   - 合并两个有序链表：双指针逐节点比较；递归也可实现。
@@ -1311,16 +1311,16 @@ is_empty = len(stack) == 0
 
 ```python
 def monotonic_stack(nums):
-stack = []  # 栈里存索引
-res = [-1] * len(nums)  # 记录每个元素左边最近小于它的元素索引
+    stack = []  # 栈里存索引
+    res = [-1] * len(nums)  # 记录每个元素左边最近小于它的元素索引
 
-for i, num in enumerate(nums):
-while stack and nums[stack[-1]] >= num:
-stack.pop()
-if stack:
-res[i] = stack[-1]  # 栈顶就是左边最近更小的元素索引
-stack.append(i)  # 当前元素入栈
-return res
+    for i, num in enumerate(nums):
+        while stack and nums[stack[-1]] >= num:
+            stack.pop()
+        if stack:
+            res[i] = stack[-1]  # 栈顶就是左边最近更小的元素索引
+        stack.append(i)  # 当前元素入栈
+    return res
 ```
 
   应用例子：
