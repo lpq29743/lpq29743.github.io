@@ -363,49 +363,49 @@ import math
 
 # === Discrete ===
 def bernoulli_pmf(x, p):
-    return p**x * (1-p)**(1-x)
+  return p**x * (1-p)**(1-x)
 
 def bernoulli_sample(p, size=1):
-    return np.random.binomial(1, p, size)
+  return np.random.binomial(1, p, size)
 
 def binomial_pmf(k, n, p):
-    return math.comb(n, k) * (p**k) * ((1-p)**(n-k))
+  return math.comb(n, k) * (p**k) * ((1-p)**(n-k))
 
 def binomial_sample(n, p, size=1):
-    return np.random.binomial(n, p, size)
+  return np.random.binomial(n, p, size)
 
 def poisson_pmf(k, lam):
-    return math.exp(-lam) * lam**k / math.factorial(k)
+  return math.exp(-lam) * lam**k / math.factorial(k)
 
 def poisson_sample(lam, size=1):
-    return np.random.poisson(lam, size)
+  return np.random.poisson(lam, size)
 
 # === Continuous ===
 def normal_pdf(x, mu=0, sigma=1):
-    return 1/(sigma*np.sqrt(2*np.pi)) * np.exp(-0.5*((x-mu)/sigma)**2)
+  return 1/(sigma*np.sqrt(2*np.pi)) * np.exp(-0.5*((x-mu)/sigma)**2)
 
 def normal_sample(mu=0, sigma=1, size=1):
-    return np.random.normal(mu, sigma, size)
+  return np.random.normal(mu, sigma, size)
 
 def exponential_pdf(x, lam):
-    return lam * np.exp(-lam * x) if x >= 0 else 0
+  return lam * np.exp(-lam * x) if x >= 0 else 0
 
 def exponential_sample(lam, size=1):
-    return np.random.exponential(1/lam, size)
+  return np.random.exponential(1/lam, size)
 
 # === Experiments ===
 def law_of_large_numbers(p=0.5, N=100000):
-    samples = bernoulli_sample(p, N)
-    return samples.mean()
+  samples = bernoulli_sample(p, N)
+  return samples.mean()
 
 def central_limit_theorem(M=10000):
-    sums = np.sum(np.random.rand(M, 12), axis=1) - 6  # ≈ N(0,1)
-    return sums.mean(), sums.var()
+  sums = np.sum(np.random.rand(M, 12), axis=1) - 6  # ≈ N(0,1)
+  return sums.mean(), sums.var()
 
 def monte_carlo_pi(N=1000000):
-    xy = np.random.rand(N, 2)*2 - 1
-    inside = (xy[:,0]**2 + xy[:,1]**2 <= 1).sum()
-    return 4 * inside / N
+  xy = np.random.rand(N, 2)*2 - 1
+  inside = (xy[:,0]**2 + xy[:,1]**2 <= 1).sum()
+  return 4 * inside / N
 ```
 
 
@@ -439,39 +439,39 @@ import numpy as np
 
 # === 目标函数 ===
 def f(x):
-    return x**2 - 4*x + 4
+  return x**2 - 4*x + 4
 
 # 一阶导数
 def grad_f(x):
-    return 2*x - 4
+  return 2*x - 4
 
 # 二阶导数 (Hessian)
 def hessian_f(x):
-    return 2  # 对一维函数就是常数
+  return 2  # 对一维函数就是常数
 
 # === 梯度下降 ===
 def gradient_descent(x0, lr=0.1, tol=1e-6, max_iter=100):
-    x = x0
-    for _ in range(max_iter):
-        x_new = x - lr * grad_f(x)
-        # 参数几乎不再变化了，算法可以认为已经收敛，提前停止迭代。
-        if abs(x_new - x) < tol:
-            break
-        x = x_new
-    return x, f(x)
+  x = x0
+  for _ in range(max_iter):
+      x_new = x - lr * grad_f(x)
+      # 参数几乎不再变化了，算法可以认为已经收敛，提前停止迭代。
+      if abs(x_new - x) < tol:
+          break
+      x = x_new
+  return x, f(x)
 
 # === 牛顿法 ===
 def newton_method(x0, tol=1e-6, max_iter=100):
-    x = x0
-    for _ in range(max_iter):
-        grad = grad_f(x)
-        hess = hessian_f(x)
-        x_new = x - grad / hess
-        # 参数几乎不再变化了，算法可以认为已经收敛，提前停止迭代。
-        if abs(x_new - x) < tol:
-            break
-        x = x_new
-    return x, f(x)
+  x = x0
+  for _ in range(max_iter):
+      grad = grad_f(x)
+      hess = hessian_f(x)
+      x_new = x - grad / hess
+      # 参数几乎不再变化了，算法可以认为已经收敛，提前停止迭代。
+      if abs(x_new - x) < tol:
+          break
+      x = x_new
+  return x, f(x)
 
 # === 测试 ===
 x0 = 0.0
@@ -518,70 +518,70 @@ import numpy as np
 
 # === 1. 熵 (Entropy) ===
 def entropy(p):
-    """
-    p: 概率分布数组，p_i >=0 且 sum(p)=1
-    """
-    p = np.array(p)
-    p = p[p > 0]  # 避免 log(0)
-    return -np.sum(p * np.log2(p))
+  """
+  p: 概率分布数组，p_i >=0 且 sum(p)=1
+  """
+  p = np.array(p)
+  p = p[p > 0]  # 避免 log(0)
+  return -np.sum(p * np.log2(p))
 
 # === 2. 联合熵 (Joint Entropy) ===
 def joint_entropy(p_xy):
-    """
-    p_xy: 联合概率分布矩阵，sum(p_xy)=1
-    """
-    p_xy = np.array(p_xy)
-    p_xy = p_xy[p_xy > 0]
-    return -np.sum(p_xy * np.log2(p_xy))
+  """
+  p_xy: 联合概率分布矩阵，sum(p_xy)=1
+  """
+  p_xy = np.array(p_xy)
+  p_xy = p_xy[p_xy > 0]
+  return -np.sum(p_xy * np.log2(p_xy))
 
 # === 3. 条件熵 (Conditional Entropy) H(Y|X) ===
 def conditional_entropy(p_xy):
-    """
-    p_xy: 联合概率分布矩阵
-    H(Y|X) = H(X,Y) - H(X)
-    """
-    p_xy = np.array(p_xy)
-    p_x = p_xy.sum(axis=1)
-    H_xy = joint_entropy(p_xy)
-    H_x = entropy(p_x)
-    return H_xy - H_x
+  """
+  p_xy: 联合概率分布矩阵
+  H(Y|X) = H(X,Y) - H(X)
+  """
+  p_xy = np.array(p_xy)
+  p_x = p_xy.sum(axis=1)
+  H_xy = joint_entropy(p_xy)
+  H_x = entropy(p_x)
+  return H_xy - H_x
 
 # === 4. 互信息 (Mutual Information) ===
 def mutual_information(p_xy):
-    """
-    I(X;Y) = H(X) + H(Y) - H(X,Y)
-    """
-    p_xy = np.array(p_xy)
-    p_x = p_xy.sum(axis=1)
-    p_y = p_xy.sum(axis=0)
-    H_x = entropy(p_x)
-    H_y = entropy(p_y)
-    H_xy = joint_entropy(p_xy)
-    return H_x + H_y - H_xy
+  """
+  I(X;Y) = H(X) + H(Y) - H(X,Y)
+  """
+  p_xy = np.array(p_xy)
+  p_x = p_xy.sum(axis=1)
+  p_y = p_xy.sum(axis=0)
+  H_x = entropy(p_x)
+  H_y = entropy(p_y)
+  H_xy = joint_entropy(p_xy)
+  return H_x + H_y - H_xy
 
 # === 5. KL 散度 (Kullback-Leibler Divergence) ===
 def kl_divergence(p, q):
-    """
-    D_KL(p || q) = sum p_i * log(p_i / q_i)
-    """
-    p = np.array(p)
-    q = np.array(q)
-    mask = (p > 0) & (q > 0)
-    return np.sum(p[mask] * np.log2(p[mask] / q[mask]))
+  """
+  D_KL(p || q) = sum p_i * log(p_i / q_i)
+  """
+  p = np.array(p)
+  q = np.array(q)
+  mask = (p > 0) & (q > 0)
+  return np.sum(p[mask] * np.log2(p[mask] / q[mask]))
 
 # === 示例 ===
 if __name__ == "__main__":
-    p = [0.2, 0.5, 0.3]
-    q = [0.1, 0.7, 0.2]
-    print("Entropy H(p):", entropy(p))
-    print("KL(p||q):", kl_divergence(p, q))
+  p = [0.2, 0.5, 0.3]
+  q = [0.1, 0.7, 0.2]
+  print("Entropy H(p):", entropy(p))
+  print("KL(p||q):", kl_divergence(p, q))
 
-    # 联合概率矩阵
-    p_xy = np.array([[0.1, 0.2],
-                     [0.3, 0.4]])
-    print("Joint Entropy H(X,Y):", joint_entropy(p_xy))
-    print("Conditional Entropy H(Y|X):", conditional_entropy(p_xy))
-    print("Mutual Information I(X;Y):", mutual_information(p_xy))
+  # 联合概率矩阵
+  p_xy = np.array([[0.1, 0.2],
+                   [0.3, 0.4]])
+  print("Joint Entropy H(X,Y):", joint_entropy(p_xy))
+  print("Conditional Entropy H(Y|X):", conditional_entropy(p_xy))
+  print("Mutual Information I(X;Y):", mutual_information(p_xy))
 ```
 
 
@@ -735,92 +735,92 @@ from collections import deque
 # 集合运算
 # =======================
 def set_intersection(A, B):
-    return A & B
+  return A & B
 
 def set_union(A, B):
-    return A | B
+  return A | B
 
 def set_difference(A, B):
-    return A - B
+  return A - B
 
 def set_symdiff(A, B):
-    return A ^ B
+  return A ^ B
 
 # =======================
 # 排列与组合
 # =======================
 def permutations(lst):
-    return list(itertools.permutations(lst))
+  return list(itertools.permutations(lst))
 
 def combinations(lst, k):
-    return list(itertools.combinations(lst, k))
+  return list(itertools.combinations(lst, k))
 
 def comb(n, k):
-    return math.comb(n, k)
+  return math.comb(n, k)
 
 def perm(n, k):
-    return math.perm(n, k)
+  return math.perm(n, k)
 
 # =======================
 # 逻辑运算与真值表
 # =======================
 def truth_table(n):
-    return list(itertools.product([False, True], repeat=n))
+  return list(itertools.product([False, True], repeat=n))
 
 # =======================
 # 模运算与数论
 # =======================
 def mod_add(a, b, m):
-    return (a + b) % m
+  return (a + b) % m
 
 def mod_mul(a, b, m):
-    return (a * b) % m
+  return (a * b) % m
 
 def mod_pow(a, b, m):
-    return pow(a, b, m)
+  return pow(a, b, m)
 
 def egcd(a, b):
-    if a == 0:
-        return (b, 0, 1)
-    g, x, y = egcd(b % a, a)
-    return (g, y - (b // a) * x, x)
+  if a == 0:
+      return (b, 0, 1)
+  g, x, y = egcd(b % a, a)
+  return (g, y - (b // a) * x, x)
 
 def modinv(a, m):
-    g, x, _ = egcd(a, m)
-    if g != 1:
-        raise Exception("No modular inverse")
-    return x % m
+  g, x, _ = egcd(a, m)
+  if g != 1:
+      raise Exception("No modular inverse")
+  return x % m
 
 # =======================
 # 示例使用
 # =======================
 if __name__ == "__main__":
-    A = {1, 2, 3}
-    B = {2, 3, 4}
-    print("交集:", set_intersection(A,B))
-    print("并集:", set_union(A,B))
-    print("差集 A-B:", set_difference(A,B))
-    print("对称差:", set_symdiff(A,B))
+  A = {1, 2, 3}
+  B = {2, 3, 4}
+  print("交集:", set_intersection(A,B))
+  print("并集:", set_union(A,B))
+  print("差集 A-B:", set_difference(A,B))
+  print("对称差:", set_symdiff(A,B))
 
-    lst = [1,2,3]
-    print("排列:", permutations(lst))
-    print("组合:", combinations(lst,2))
-    print("C(5,2):", comb(5,2))
-    print("P(5,2):", perm(5,2))
+  lst = [1,2,3]
+  print("排列:", permutations(lst))
+  print("组合:", combinations(lst,2))
+  print("C(5,2):", comb(5,2))
+  print("P(5,2):", perm(5,2))
 
-    graph = [[0,1,1,0],
-             [1,0,0,1],
-             [1,0,0,1],
-             [0,1,1,0]]
-    print("BFS from 0:", bfs(graph,0))
-    print("DFS from 0:", dfs(graph,0))
+  graph = [[0,1,1,0],
+           [1,0,0,1],
+           [1,0,0,1],
+           [0,1,1,0]]
+  print("BFS from 0:", bfs(graph,0))
+  print("DFS from 0:", dfs(graph,0))
 
-    print("2变量真值表:", truth_table(2))
+  print("2变量真值表:", truth_table(2))
 
-    print("模运算: (17+13)%5 =", mod_add(17,13,5))
-    print("模运算: (17*13)%5 =", mod_mul(17,13,5))
-    print("模运算: 17^13 % 5 =", mod_pow(17,13,5))
-    print("17 在模 5 下的逆元:", modinv(17,5))
+  print("模运算: (17+13)%5 =", mod_add(17,13,5))
+  print("模运算: (17*13)%5 =", mod_mul(17,13,5))
+  print("模运算: 17^13 % 5 =", mod_pow(17,13,5))
+  print("17 在模 5 下的逆元:", modinv(17,5))
 ```
 
 
@@ -873,12 +873,12 @@ if __name__ == "__main__":
 ```python
 left = 0
 for right in range(len(arr)):
-    # 扩大窗口（通常加入arr[right]）
+  # 扩大窗口（通常加入arr[right]）
 
-    while 窗口不满足条件:
-        # 缩小窗口（通常移动left）
+  while 窗口不满足条件:
+      # 缩小窗口（通常移动left）
 
-    # 此时窗口满足条件，更新结果（比如最大值、最小长度等）
+  # 此时窗口满足条件，更新结果（比如最大值、最小长度等）
 ```
 
   三、快慢指针（Fast and Slow Pointers）
@@ -898,46 +898,46 @@ for right in range(len(arr)):
 
 ```python
 def maxProduct(nums):
-    max_prod = min_prod = result = nums[0]
-    for num in nums[1:]:
-        # 遇到负数时，最大和最小会交换
-        if num < 0:
-            max_prod, min_prod = min_prod, max_prod
+  max_prod = min_prod = result = nums[0]
+  for num in nums[1:]:
+      # 遇到负数时，最大和最小会交换
+      if num < 0:
+          max_prod, min_prod = min_prod, max_prod
 
-        max_prod = max(num, num * max_prod)
-        min_prod = min(num, num * min_prod)
+      max_prod = max(num, num * max_prod)
+      min_prod = min(num, num * min_prod)
 
-        result = max(result, max_prod)
-    return result
+      result = max(result, max_prod)
+  return result
 ```
 
   - 子数组最大和（二维扩展）：枚举上边界 `top` 和下边界 `bottom` 行。对每一对 `(top, bottom)`，把矩阵列压缩成一个一维数组 `sums`，其中 `sums[c]` 表示列 `c` 在 `top..bottom` 行的累加和。在 `sums` 上使用一维最大子数组和（Kadane），得到这一行段组合的最大矩阵和。遍历所有 `(top, bottom)`，更新全局最大值。时间复杂度为 O(rows^2 * cols)。
 
 ```python
 def maxSumSubmatrix(matrix):
-    if not matrix or not matrix[0]:
-        return 0
-    rows, cols = len(matrix), len(matrix[0])
-    max_sum = float('-inf')
+  if not matrix or not matrix[0]:
+      return 0
+  rows, cols = len(matrix), len(matrix[0])
+  max_sum = float('-inf')
 
-    for top in range(rows):
-        # 初始化列累加数组
-        col_sums = [0] * cols
-        for bottom in range(top, rows):
-            # 累加当前行到 col_sums
-            for c in range(cols):
-                col_sums[c] += matrix[bottom][c]
+  for top in range(rows):
+      # 初始化列累加数组
+      col_sums = [0] * cols
+      for bottom in range(top, rows):
+          # 累加当前行到 col_sums
+          for c in range(cols):
+              col_sums[c] += matrix[bottom][c]
 
-            # 在 col_sums 上运行 Kadane 算法
-            cur_sum = col_sums[0]
-            cur_max = col_sums[0]
-            for i in range(1, cols):
-                cur_sum = max(col_sums[i], cur_sum + col_sums[i])
-                cur_max = max(cur_max, cur_sum)
+          # 在 col_sums 上运行 Kadane 算法
+          cur_sum = col_sums[0]
+          cur_max = col_sums[0]
+          for i in range(1, cols):
+              cur_sum = max(col_sums[i], cur_sum + col_sums[i])
+              cur_max = max(cur_max, cur_sum)
 
-            max_sum = max(max_sum, cur_max)
+          max_sum = max(max_sum, cur_max)
 
-    return max_sum
+  return max_sum
 ```
 
   滑动窗口（适用于全正数或符合单调性问题）
@@ -951,53 +951,53 @@ def maxSumSubmatrix(matrix):
   - 等差子数组个数：枚举子数组判断是否等差，可使用 dp 优化。
 ```python
 def numberOfArithmeticSlices(nums):
-    n = len(nums)
-    if n < 3:
-        return 0
+  n = len(nums)
+  if n < 3:
+      return 0
 
-    dp = [0] * n
-    total = 0
+  dp = [0] * n
+  total = 0
 
-    for i in range(2, n):
-        if nums[i] - nums[i-1] == nums[i-1] - nums[i-2]:
-            dp[i] = dp[i-1] + 1
-            total += dp[i]
-        # 否则 dp[i] 保持 0
+  for i in range(2, n):
+      if nums[i] - nums[i-1] == nums[i-1] - nums[i-2]:
+          dp[i] = dp[i-1] + 1
+          total += dp[i]
+      # 否则 dp[i] 保持 0
 
-    return total
+  return total
 ```
   - 子数组最大值 - 最小值 ≤ K 的个数：使用两个单调队列维护区间最大最小值的 index，维护一个变长滑动窗口。 
 
 ```python
 def count_subarrays(nums, k):
-    n = len(nums)
-    max_q, min_q = deque(), deque()
-    left = 0
-    count = 0
+  n = len(nums)
+  max_q, min_q = deque(), deque()
+  left = 0
+  count = 0
 
-    for right in range(n):
-        # 维护单调递减队列 max_q
-        while max_q and nums[right] > nums[max_q[-1]]:
-            max_q.pop()
-        max_q.append(right)
+  for right in range(n):
+      # 维护单调递减队列 max_q
+      while max_q and nums[right] > nums[max_q[-1]]:
+          max_q.pop()
+      max_q.append(right)
 
-        # 维护单调递增队列 min_q
-        while min_q and nums[right] < nums[min_q[-1]]:
-            min_q.pop()
-        min_q.append(right)
+      # 维护单调递增队列 min_q
+      while min_q and nums[right] < nums[min_q[-1]]:
+          min_q.pop()
+      min_q.append(right)
 
-        # 当最大值 - 最小值 > k 时，移动左边界
-        while nums[max_q[0]] - nums[min_q[0]] > k:
-            left += 1
-            if max_q[0] < left:
-                max_q.popleft()
-            if min_q[0] < left:
-                min_q.popleft()
+      # 当最大值 - 最小值 > k 时，移动左边界
+      while nums[max_q[0]] - nums[min_q[0]] > k:
+          left += 1
+          if max_q[0] < left:
+              max_q.popleft()
+          if min_q[0] < left:
+              min_q.popleft()
 
-        # 窗口内每个子数组都是合法的
-        count += right - left + 1
+      # 窗口内每个子数组都是合法的
+      count += right - left + 1
 
-    return count
+  return count
 ```
 
 
@@ -1097,61 +1097,61 @@ def count_subarrays(nums, k):
   简单模版
 ```python
 class UnionFindSimple:
-    def __init__(self, n):
-        self.parent = [i for i in range(n)]
+  def __init__(self, n):
+      self.parent = [i for i in range(n)]
 
-    def find(self, x):
-        if self.parent[x] != x:
-            self.parent[x] = self.find(self.parent[x])  # 路径压缩
-        return self.parent[x]
+  def find(self, x):
+      if self.parent[x] != x:
+          self.parent[x] = self.find(self.parent[x])  # 路径压缩
+      return self.parent[x]
 
-    def union(self, x, y):
-        px, py = self.find(x), self.find(y)
-        if px != py:
-            self.parent[py] = px
+  def union(self, x, y):
+      px, py = self.find(x), self.find(y)
+      if px != py:
+          self.parent[py] = px
 
-    def connected(self, x, y):
-        return self.find(x) == self.find(y)
+  def connected(self, x, y):
+      return self.find(x) == self.find(y)
 ```
   高阶模版（支持动态元素；路径压缩，即在 find 的过程中，把节点直接连到根节点，减少树的高度；按秩合并；打印所有集合）
 ```python
 from collections import defaultdict
 
 class UnionFind:
-    def __init__(self):
-        self.parent = {}
-        self.rank = {}
+  def __init__(self):
+      self.parent = {}
+      self.rank = {}
 
-    def find(self, x):
-        if x not in self.parent:
-            self.parent[x] = x
-            self.rank[x] = 0
-        # 路径压缩
-        if self.parent[x] != x:
-            self.parent[x] = self.find(self.parent[x])
-        return self.parent[x]
+  def find(self, x):
+      if x not in self.parent:
+          self.parent[x] = x
+          self.rank[x] = 0
+      # 路径压缩
+      if self.parent[x] != x:
+          self.parent[x] = self.find(self.parent[x])
+      return self.parent[x]
 
-    def union(self, x, y):
-        px, py = self.find(x), self.find(y)
-        if px == py:
-            return
-        if self.rank[px] < self.rank[py]:
-            self.parent[px] = py
-        elif self.rank[px] > self.rank[py]:
-            self.parent[py] = px
-        else:
-            self.parent[py] = px
-            self.rank[px] += 1
+  def union(self, x, y):
+      px, py = self.find(x), self.find(y)
+      if px == py:
+          return
+      if self.rank[px] < self.rank[py]:
+          self.parent[px] = py
+      elif self.rank[px] > self.rank[py]:
+          self.parent[py] = px
+      else:
+          self.parent[py] = px
+          self.rank[px] += 1
 
-    def connected(self, x, y):
-        return self.find(x) == self.find(y)
+  def connected(self, x, y):
+      return self.find(x) == self.find(y)
 
-    def groups(self):
-        """返回所有集合"""
-        g = defaultdict(list)
-        for x in self.parent:
-            g[self.find(x)].append(x)
-        return list(g.values())
+  def groups(self):
+      """返回所有集合"""
+      g = defaultdict(list)
+      for x in self.parent:
+          g[self.find(x)].append(x)
+      return list(g.values())
 ```
 
 
@@ -1176,17 +1176,17 @@ class UnionFind:
 
 ```python
 class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+  def __init__(self, val=0, next=None):
+      self.val = val
+      self.next = next
 
 def create_linked_list(arr):
-    dummy = ListNode()  # 虚拟头节点
-    curr = dummy
-    for val in arr:
-        curr.next = ListNode(val)
-        curr = curr.next
-    return dummy.next  # 返回真正的头节点
+  dummy = ListNode()  # 虚拟头节点
+  curr = dummy
+  for val in arr:
+      curr.next = ListNode(val)
+      curr = curr.next
+  return dummy.next  # 返回真正的头节点
 ```
 
   - 反转链表（Reverse Linked List）
@@ -1194,38 +1194,38 @@ def create_linked_list(arr):
   迭代（iteration）
 
 ```python
-  def reverse_list(head):
-  prev = None
-  curr = head
-  while curr:
-  next_temp = curr.next   # 保存下一个节点
-  curr.next = prev        # 反转指针
-  prev = curr             # prev 前进
-  curr = next_temp        # curr 前进
-  return prev  # prev 是新头节点
+def reverse_list(head):
+prev = None
+curr = head
+while curr:
+next_temp = curr.next   # 保存下一个节点
+curr.next = prev        # 反转指针
+prev = curr             # prev 前进
+curr = next_temp        # curr 前进
+return prev  # prev 是新头节点
 ```
 
   递归（recursion）
 
 ```python
-  def reverse_list_recursive(head):
-  if not head or not head.next:
-  return head
+def reverse_list_recursive(head):
+if not head or not head.next:
+return head
 
-  # 假设已经成功反转了 head.next 之后的链表
-  # new_head 会指向反转后的新头节点
-  new_head = reverse_list_recursive(head.next)
+# 假设已经成功反转了 head.next 之后的链表
+# new_head 会指向反转后的新头节点
+new_head = reverse_list_recursive(head.next)
 
-  # 关键操作：
-  # head.next 是反转后链表的尾节点
-  # 把它的 next 指针指回当前节点 head
-  head.next.next = head
+# 关键操作：
+# head.next 是反转后链表的尾节点
+# 把它的 next 指针指回当前节点 head
+head.next.next = head
 
-  # 把当前节点的 next 断开，否则会形成环
-  head.next = None
+# 把当前节点的 next 断开，否则会形成环
+head.next = None
 
-  # new_head 始终指向新的头节点（反转后的链表头）
-  return new_head
+# new_head 始终指向新的头节点（反转后的链表头）
+return new_head
 ```
 
   - 合并两个有序链表：双指针逐节点比较；递归也可实现。
@@ -1288,20 +1288,20 @@ def create_linked_list(arr):
   - 栈排序：只用一个额外栈实现对栈元素排序。
 
 ```python
-  stack = []
+stack = []
 
-  # 入栈
-  stack.append(1)
-  stack.append(2)
+# 入栈
+stack.append(1)
+stack.append(2)
 
-  # 出栈
-  top = stack.pop()
+# 出栈
+top = stack.pop()
 
-  # 查看栈顶元素（不弹出）
-  top_peek = stack[-1]
+# 查看栈顶元素（不弹出）
+top_peek = stack[-1]
 
-  # 判断栈是否为空
-  is_empty = len(stack) == 0
+# 判断栈是否为空
+is_empty = len(stack) == 0
 ```
 
 
@@ -1310,17 +1310,17 @@ def create_linked_list(arr):
   单调递增（递减）栈内保持从栈底到栈顶递增（递减）；入栈前，弹出不满足单调性的元素；弹栈过程中，当前元素就是被弹元素的下一个更小（更大）元素；结束弹栈后，栈顶元素就是当前元素的上一个更小（更大）元素。
 
 ```python
-  def monotonic_stack(nums):
-  stack = []  # 栈里存索引
-  res = [-1] * len(nums)  # 记录每个元素左边最近小于它的元素索引
+def monotonic_stack(nums):
+stack = []  # 栈里存索引
+res = [-1] * len(nums)  # 记录每个元素左边最近小于它的元素索引
 
-  for i, num in enumerate(nums):
-  while stack and nums[stack[-1]] >= num:
-  stack.pop()
-  if stack:
-  res[i] = stack[-1]  # 栈顶就是左边最近更小的元素索引
-  stack.append(i)  # 当前元素入栈
-  return res
+for i, num in enumerate(nums):
+while stack and nums[stack[-1]] >= num:
+stack.pop()
+if stack:
+res[i] = stack[-1]  # 栈顶就是左边最近更小的元素索引
+stack.append(i)  # 当前元素入栈
+return res
 ```
 
   应用例子：
@@ -1341,22 +1341,22 @@ def create_linked_list(arr):
   - 猫狗队列：用两个队列分别存储猫和狗，实现按顺序取出最早进入的宠物。
 
 ```python
-  from collections import deque
+from collections import deque
 
-  queue = deque()
+queue = deque()
 
-  # 入队
-  queue.append('a')
-  queue.append('b')
+# 入队
+queue.append('a')
+queue.append('b')
 
-  # 出队
-  first = queue.popleft()  # 'a'
+# 出队
+first = queue.popleft()  # 'a'
 
-  # 查看队首元素
-  peek = queue[0]
+# 查看队首元素
+peek = queue[0]
 
-  # 判断是否为空
-  empty = not queue
+# 判断是否为空
+empty = not queue
 ```
 
   用 list 实现出队`first = queue.pop(0)`时间复杂度为 O(n)，但用 deque实现头尾出队时间复杂度都为 O(1)。
@@ -1381,35 +1381,35 @@ def create_linked_list(arr):
   节点定义
 
 ```python
-  class TreeNode:
-  def __init__(self, val):
-  self.val = val
-  self.left = None
-  self.right = None
+class TreeNode:
+def __init__(self, val):
+self.val = val
+self.left = None
+self.right = None
 ```
 
   从数组/列表构建二叉树（按层次顺序）：假设输入 `[1,2,3,None,4,5,6]` 表示按层次序排列的节点（`None` 表示空节点）：
 
 ```python
-  from collections import deque
+from collections import deque
 
-  def build_binary_tree(values):
-  if not values:
-  return None
-  root = TreeNode(vaues[0])
-  queue = deque([root])
-  i = 1
-  while queue and i < len(values):
-  node = queue.popleft()
-  if values[i] is not None:
-  node.left = TreeNode(values[i])
-  queue.append(node.left)
-  i += 1
-  if i < len(values) and values[i] is not None:
-  node.right = TreeNode(values[i])
-  queue.append(node.right)
-  i += 1
-  return root
+def build_binary_tree(values):
+if not values:
+return None
+root = TreeNode(vaues[0])
+queue = deque([root])
+i = 1
+while queue and i < len(values):
+node = queue.popleft()
+if values[i] is not None:
+node.left = TreeNode(values[i])
+queue.append(node.left)
+i += 1
+if i < len(values) and values[i] is not None:
+node.right = TreeNode(values[i])
+queue.append(node.right)
+i += 1
+return root
 ```
 
   二叉树的前序、中序、后序遍历：用递归/非递归+栈实现节点访问顺序。对于非递归+栈，在先序中，压入顺序为根节点，右节点，左节点，出栈顺序对应为（根、左、右）。在中序中，进入循环的条件为栈是否为空或根节点是否为NULL，首先将左节点入栈，重复该过程，直到左节点不存在，然后依次出栈，出栈的同时判断当前节点的右节点是否存在，若存在则再次进入循环。在后序遍历中，可以借助前序遍历，前序遍历为根左右，后序遍历为左右根，只需将前序遍历顺序调整为根右左，将最终结果reverse就可以得到后序遍历。
@@ -1450,17 +1450,17 @@ def create_linked_list(arr):
   用 Python 的 `heapq` 库实现，默认为小顶堆；实现最大堆时可将数值取负。
 
 ```python
-  import heapq
+import heapq
 
-  heap = []
-  heapq.heapify(heap)  # 将列表转为堆结构（可省略，空列表即堆）
-  # 往堆中插入一个元素，item 可以是 tuple，heapq 会默认根据 tuple 元素顺序排序
-  # 时间复杂度：O(log N)
-  heapq.heappush(heap, item) 
-  min_item = heapq.heappop(heap) #弹出并返回最小元素，时间复杂度：O(log N)
-  min_item = heap[0] # O(1) 时间获取最小元素
-  heapq.nsmallest(k, nums) # 获取 nums 最小的 K 个元素
-  heapq.nlargest(k, nums) # 获取 nums 最大的 K 个元素
+heap = []
+heapq.heapify(heap)  # 将列表转为堆结构（可省略，空列表即堆）
+# 往堆中插入一个元素，item 可以是 tuple，heapq 会默认根据 tuple 元素顺序排序
+# 时间复杂度：O(log N)
+heapq.heappush(heap, item) 
+min_item = heapq.heappop(heap) #弹出并返回最小元素，时间复杂度：O(log N)
+min_item = heap[0] # O(1) 时间获取最小元素
+heapq.nsmallest(k, nums) # 获取 nums 最小的 K 个元素
+heapq.nlargest(k, nums) # 获取 nums 最大的 K 个元素
 ```
 
   - 前 K 个高频元素：使用小顶堆（优先队列）维护出现频率最高的 K 个元素。
@@ -1478,38 +1478,38 @@ def create_linked_list(arr):
   - 实现 Trie（前缀树）：使用字典或数组构建多叉树，支持 `insert`, `search`, `startsWith` 操作。
 
 ```python
-  class TrieNode:
-  def __init__(self):
-  self.children = {}      # 存储子节点
-  self.is_end_of_word = False  # 标记单词结束
+class TrieNode:
+def __init__(self):
+self.children = {}      # 存储子节点
+self.is_end_of_word = False  # 标记单词结束
 
-  class Trie:
-  def __init__(self):
-  self.root = TrieNode()
+class Trie:
+def __init__(self):
+self.root = TrieNode()
 
-  def insert(self, word: str) -> None:
-  node = self.root
-  for char in word:
-  if char not in node.children:
-  node.children[char] = TrieNode()
-  node = node.children[char]
-  node.is_end_of_word = True
+def insert(self, word: str) -> None:
+node = self.root
+for char in word:
+if char not in node.children:
+node.children[char] = TrieNode()
+node = node.children[char]
+node.is_end_of_word = True
 
-  def search(self, word: str) -> bool:
-  node = self.root
-  for char in word:
-  if char not in node.children:
-  return False
-  node = node.children[char]
-  return node.is_end_of_word
+def search(self, word: str) -> bool:
+node = self.root
+for char in word:
+if char not in node.children:
+return False
+node = node.children[char]
+return node.is_end_of_word
 
-  def startsWith(self, prefix: str) -> bool:
-  node = self.root
-  for char in prefix:
-  if char not in node.children:
-  return False
-  node = node.children[char]
-  return True
+def startsWith(self, prefix: str) -> bool:
+node = self.root
+for char in prefix:
+if char not in node.children:
+return False
+node = node.children[char]
+return True
 ```
   - 替换词根：将句子中的词替换为其词根；利用 Trie 存储所有词根，遍历句子中每个词，查找最短匹配词根。
   - 单词搜索 II：在二维字符网格中找多个单词；构建 Trie 存储单词表，然后结合 DFS 和 Trie 剪枝遍历。
@@ -1599,143 +1599,143 @@ def create_linked_list(arr):
   Dijkstra 算法，用于解决边权非负的单源最短路径问题（可多次调用变成多源），是贪心算法，时间复杂度为 O(V^2)。如果是稀疏图，可用堆进行优化，时间复杂度为 O((V + E) lgV)。Dijkstra 算法每次选择当前已知最短路径中最小的节点 u（初始时，源节点到自身距离为 0，到其他任意节点为无穷大），设置为已访问，添加到路径中（可用前驱数组实现）。更新它的邻居的距离（松弛操作，Relaxation），即对当前被选择节点 u 相邻的未访问节点 v，如果经过 u 到 v 的路径比当前已知到 v 的最短路更短：`dist[v] > dist[u] + w`，就更新它，如需保存路径。重复，直到所有节点处理完。
 
 ```python
-  import heapq
+import heapq
 
-  def dijkstra(n, edges, start):
-  """
-  n: 节点数
-  edges: 邻接表 {u: [(v, w), ...]}
-  start: 起点
-  """
-  dist = [float('inf')] * n
-  dist[start] = 0
+def dijkstra(n, edges, start):
+"""
+n: 节点数
+edges: 邻接表 {u: [(v, w), ...]}
+start: 起点
+"""
+dist = [float('inf')] * n
+dist[start] = 0
 
-  pq = [(0, start)]  # (当前距离, 节点)
+pq = [(0, start)]  # (当前距离, 节点)
 
-  while pq:
-  d, u = heapq.heappop(pq)
-  # 避免处理过期的队列元素
-  # 当松弛操作发现 `dist[v]` 被更新更小的距离时，会再次把 `(dist[v], v)` 入队。
-  # 队列里可能存在旧的、较大的距离值，也就是“过期元素”。
-  if d > dist[u]:
-  continue  # 已经有更短的路径，跳过
+while pq:
+d, u = heapq.heappop(pq)
+# 避免处理过期的队列元素
+# 当松弛操作发现 `dist[v]` 被更新更小的距离时，会再次把 `(dist[v], v)` 入队。
+# 队列里可能存在旧的、较大的距离值，也就是“过期元素”。
+if d > dist[u]:
+continue  # 已经有更短的路径，跳过
 
-  for v, w in edges[u]:
-  if dist[u] + w < dist[v]:
-  dist[v] = dist[u] + w
-  heapq.heappush(pq, (dist[v], v))
+for v, w in edges[u]:
+if dist[u] + w < dist[v]:
+dist[v] = dist[u] + w
+heapq.heappush(pq, (dist[v], v))
 
-  return dist
+return dist
 ```
 
   0-1 BFS，用于解决边权为 0 或 1（可推广为 0 或任意正整数，不可为两个整数，因为这样子双端队列无法保证单调）的单源最短路径问题（可多次调用变成多源），用邻接矩阵表示图，时间复杂度为 O(V + E)。0-1 BFS 是 Dijkstra 算法的特例，用双端队列 (deque) 替代优先队列：如果边权 = 0，把新节点放到队首。如果边权 = 1，把新节点放到队尾。这样保证 deque 始终按最短路顺序扩展节点。
 
 ```python
-  from collections import deque
+from collections import deque
 
-  def zero_one_bfs(n, edges, start):
-  """
-  n: 节点数
-  edges: 邻接表形式, edges[u] = [(v, w), ...], w ∈ {0, 1}
-  start: 起点
-  """
-  dist = [float('inf')] * n
-  dist[start] = 0
+def zero_one_bfs(n, edges, start):
+"""
+n: 节点数
+edges: 邻接表形式, edges[u] = [(v, w), ...], w ∈ {0, 1}
+start: 起点
+"""
+dist = [float('inf')] * n
+dist[start] = 0
 
-  dq = deque([start])
+dq = deque([start])
 
-  while dq:
-  u = dq.popleft()
-  for v, w in edges[u]:
-  if dist[u] + w < dist[v]:
-  dist[v] = dist[u] + w
-  if w == 0:
-  dq.appendleft(v)  # 权重 0 → 优先
-  else:
-  dq.append(v)      # 权重 1 → 放队尾
-  return dist
+while dq:
+u = dq.popleft()
+for v, w in edges[u]:
+if dist[u] + w < dist[v]:
+dist[v] = dist[u] + w
+if w == 0:
+dq.appendleft(v)  # 权重 0 → 优先
+else:
+dq.append(v)      # 权重 1 → 放队尾
+return dist
 ```
 
   Floyd 算法，用于解决有负权（无负环）的多源最短路径问题，是动态规划算法，时间复杂度为 O(V^3)。
 
 ```python
-  def floyd_warshall(n, edges):
-  INF = float('inf')
-  # 初始化邻接矩阵
-  dist = [[INF] * n for _ in range(n)]
-  for i in range(n):
-  dist[i][i] = 0
-  for u, v, w in edges:
-  dist[u][v] = min(dist[u][v], w)  # 处理重边
+def floyd_warshall(n, edges):
+INF = float('inf')
+# 初始化邻接矩阵
+dist = [[INF] * n for _ in range(n)]
+for i in range(n):
+dist[i][i] = 0
+for u, v, w in edges:
+dist[u][v] = min(dist[u][v], w)  # 处理重边
 
-  # 核心 DP 三层循环
-  for k in range(n):
-  for i in range(n):
-  for j in range(n):
-  if dist[i][k] + dist[k][j] < dist[i][j]:
-  dist[i][j] = dist[i][k] + dist[k][j]
+# 核心 DP 三层循环
+for k in range(n):
+for i in range(n):
+for j in range(n):
+if dist[i][k] + dist[k][j] < dist[i][j]:
+dist[i][j] = dist[i][k] + dist[k][j]
 
-  return dist
+return dist
 ```
 
   Bellman-Ford 算法，用于解决有负权的单源最短路径问题（可多次调用变成多源），是动态规划算法，时间复杂度 O(VE)。
 
 ```python
-  def bellman_ford(n, edges, src):
-  INF = float('inf')
-  dist = [INF] * n
-  dist[src] = 0
+def bellman_ford(n, edges, src):
+INF = float('inf')
+dist = [INF] * n
+dist[src] = 0
 
-  # 松弛 V-1 次
-  for _ in range(n - 1):
-  updated = False
-  for u, v, w in edges:
-  if dist[u] + w < dist[v]:
-  dist[v] = dist[u] + w
-  updated = True
-  if not updated:
-  break
+# 松弛 V-1 次
+for _ in range(n - 1):
+updated = False
+for u, v, w in edges:
+if dist[u] + w < dist[v]:
+dist[v] = dist[u] + w
+updated = True
+if not updated:
+break
 
-  # 检测负环
-  for u, v, w in edges:
-  if dist[u] + w < dist[v]:
-  raise ValueError("Graph contains negative weight cycle")
+# 检测负环
+for u, v, w in edges:
+if dist[u] + w < dist[v]:
+raise ValueError("Graph contains negative weight cycle")
 
-  return dist
+return dist
 ```
 
   SPFA 算法，用于解决有负权的单源最短路径问题（可多次调用变成多源），是 Bellman-Ford 算法的队列优化版，也是动态规划算法，平均时间复杂度 O(E)，最坏时间复杂度 O(VE)。
 
 ```python
-  from collections import deque
+from collections import deque
 
-  def spfa(n, edges, src):
-  INF = float('inf')
-  dist = [INF] * n
-  in_queue = [False] * n
-  count = [0] * n   # 统计每个点入队次数（用于负环检测）
+def spfa(n, edges, src):
+INF = float('inf')
+dist = [INF] * n
+in_queue = [False] * n
+count = [0] * n   # 统计每个点入队次数（用于负环检测）
 
-  dist[src] = 0
-  q = deque([src])
-  in_queue[src] = True
+dist[src] = 0
+q = deque([src])
+in_queue[src] = True
 
-  graph = [[] for _ in range(n)]
-  for u, v, w in edges:
-  graph[u].append((v, w))
+graph = [[] for _ in range(n)]
+for u, v, w in edges:
+graph[u].append((v, w))
 
-  while q:
-  u = q.popleft()
-  in_queue[u] = False
-  for v, w in graph[u]:
-  if dist[u] + w < dist[v]:
-  dist[v] = dist[u] + w
-  if not in_queue[v]:
-  q.append(v)
-  in_queue[v] = True
-  count[v] += 1
-  if count[v] > n:  # 超过 n 次 → 负环
-  raise ValueError("Graph contains negative weight cycle")
-  return dist
+while q:
+u = q.popleft()
+in_queue[u] = False
+for v, w in graph[u]:
+if dist[u] + w < dist[v]:
+dist[v] = dist[u] + w
+if not in_queue[v]:
+q.append(v)
+in_queue[v] = True
+count[v] += 1
+if count[v] > n:  # 超过 n 次 → 负环
+raise ValueError("Graph contains negative weight cycle")
+return dist
 ```
 
 
@@ -1792,35 +1792,35 @@ def create_linked_list(arr):
   归并排序：时间复杂度 O(nlogn)，稳定。可用来解决计算逆序对数目的问题。
 
 ```python
-  def merge_sort(arr):
-  if len(arr) <= 1:
-  return arr
+def merge_sort(arr):
+if len(arr) <= 1:
+return arr
 
-  mid = len(arr) // 2
-  left = merge_sort(arr[:mid])
-  right = merge_sort(arr[mid:])
+mid = len(arr) // 2
+left = merge_sort(arr[:mid])
+right = merge_sort(arr[mid:])
 
-  return merge(left, right)
+return merge(left, right)
 
-  def merge(left, right):
-  result = []
-  i = j = 0
-  while i < len(left) and j < len(right):
-  if left[i] <= right[j]:
-  result.append(left[i])
-  i += 1
-  else:
-  result.append(right[j])
-  j += 1
-  # 添加剩余元素
-  result.extend(left[i:])
-  result.extend(right[j:])
-  return result
+def merge(left, right):
+result = []
+i = j = 0
+while i < len(left) and j < len(right):
+if left[i] <= right[j]:
+result.append(left[i])
+i += 1
+else:
+result.append(right[j])
+j += 1
+# 添加剩余元素
+result.extend(left[i:])
+result.extend(right[j:])
+return result
 
-  # 示例
-  arr = [5, 2, 9, 1, 5, 6]
-  sorted_arr = merge_sort(arr)
-  print(sorted_arr)
+# 示例
+arr = [5, 2, 9, 1, 5, 6]
+sorted_arr = merge_sort(arr)
+print(sorted_arr)
 ```
 
   基数排序：按位排序，从低位到高位依次进行分配和收集；稳定
@@ -1828,29 +1828,29 @@ def create_linked_list(arr):
   快速排序：时间复杂度 O(nlogn)，空间复杂度最好情况是 O(logn)，最坏情况可能达到 O(n),但平均情况是 O(logn)，不稳定
 
 ```python
-  def quick_sort(arr, low, high):
-  if low < high:
-  pivot_index = partition(arr, low, high)
-  quick_sort(arr, low, pivot_index - 1)
-  quick_sort(arr, pivot_index + 1, high)
+def quick_sort(arr, low, high):
+if low < high:
+pivot_index = partition(arr, low, high)
+quick_sort(arr, low, pivot_index - 1)
+quick_sort(arr, pivot_index + 1, high)
 
-  def partition(arr, low, high):
-  pivot = arr[low]  # 选择第一个元素作为基准
-  i = low + 1
-  j = high
+def partition(arr, low, high):
+pivot = arr[low]  # 选择第一个元素作为基准
+i = low + 1
+j = high
 
-  while True:
-  while i <= j and arr[i] <= pivot:
-  i += 1
-  while i <= j and arr[j] >= pivot:
-  j -= 1
-  if i <= j:
-  arr[i], arr[j] = arr[j], arr[i]
-  else:
-  break
+while True:
+while i <= j and arr[i] <= pivot:
+i += 1
+while i <= j and arr[j] >= pivot:
+j -= 1
+if i <= j:
+arr[i], arr[j] = arr[j], arr[i]
+else:
+break
 
-  arr[low], arr[j] = arr[j], arr[low]  # 把基准放到正确位置
-  return j
+arr[low], arr[j] = arr[j], arr[low]  # 把基准放到正确位置
+return j
 ```
 
   希尔排序：插入排序的改进版本，其核心思想是先将整个待排序序列分割成若干个子序列分别进行直接插入排序，待整个序列基本有序时，再对全体记录进行一次直接插入排序。不稳定
@@ -1871,44 +1871,44 @@ def create_linked_list(arr):
 
   BFS 模版
 ```python
-  from collections import deque
+from collections import deque
 
-  def bfs(graph, start):
-  visited = set()
-  queue = deque([start])
+def bfs(graph, start):
+visited = set()
+queue = deque([start])
 
-  while queue:
-  node = queue.popleft()
-  if node in visited:
-  continue
-  visited.add(node)
+while queue:
+node = queue.popleft()
+if node in visited:
+continue
+visited.add(node)
 
-  # 处理当前节点 node
-  print(node)
+# 处理当前节点 node
+print(node)
 
-  for neighbor in graph[node]:
-  if neighbor not in visited:
-  queue.append(neighbor)
+for neighbor in graph[node]:
+if neighbor not in visited:
+queue.append(neighbor)
 ```
 
   应用场景
 
   - 最短路径（无权图）：BFS 可以找到起点到各节点的最短路径。
 ```python
-  def bfs_all_distances(graph, start):
-  visited = set()
-  dist = {start: 0}
-  queue = deque([start])
-  visited.add(start)
+def bfs_all_distances(graph, start):
+visited = set()
+dist = {start: 0}
+queue = deque([start])
+visited.add(start)
 
-  while queue:
-  node = queue.popleft()
-  for neighbor in graph.get(node, []):
-  if neighbor not in visited:
-  visited.add(neighbor)
-  dist[neighbor] = dist[node] + 1
-  queue.append(neighbor)
-  return dist
+while queue:
+node = queue.popleft()
+for neighbor in graph.get(node, []):
+if neighbor not in visited:
+visited.add(neighbor)
+dist[neighbor] = dist[node] + 1
+queue.append(neighbor)
+return dist
 ```
   - 拓扑排序（课程表问题）：用 BFS 统计入度为 0 的节点，逐步处理图中的节点，检测环。
   - 层次遍历二叉树：使用队列按层访问节点，可用于打印或计算每层节点值。
@@ -1924,37 +1924,37 @@ def create_linked_list(arr):
 
   DFS 模版，递归版
 ```python
-  def dfs_recursive(graph, node, visited=None):
-  if visited is None:
-  visited = set()
+def dfs_recursive(graph, node, visited=None):
+if visited is None:
+visited = set()
 
-  visited.add(node)
-  # 处理当前节点 node
-  print(node)
+visited.add(node)
+# 处理当前节点 node
+print(node)
 
-  for neighbor in graph[node]:
-  if neighbor not in visited:
-  dfs_recursive(graph, neighbor, visited)
+for neighbor in graph[node]:
+if neighbor not in visited:
+dfs_recursive(graph, neighbor, visited)
 ```
 
   DFS 模版，非递归版
 ```python
-  def dfs_iterative(graph, start):
-  visited = set()
-  stack = [start]
+def dfs_iterative(graph, start):
+visited = set()
+stack = [start]
 
-  while stack:
-  node = stack.pop()
-  if node in visited:
-  continue
-  visited.add(node)
+while stack:
+node = stack.pop()
+if node in visited:
+continue
+visited.add(node)
 
-  # 处理当前节点 node
-  print(node)
+# 处理当前节点 node
+print(node)
 
-  for neighbor in reversed(graph[node]):  # reversed 保持一致遍历顺序
-  if neighbor not in visited:
-  stack.append(neighbor)
+for neighbor in reversed(graph[node]):  # reversed 保持一致遍历顺序
+if neighbor not in visited:
+stack.append(neighbor)
 ```
 
   应用场景
@@ -1999,17 +1999,17 @@ def create_linked_list(arr):
 
   二分法
 ```python
-  def find_min(nums):
-  left, right = 0, len(nums) - 1
-  while left < right:
-  mid = (left + right) // 2
-  if nums[mid] > nums[right]:
-  # 最小值在 mid 右边
-  left = mid + 1
-  else:
-  # 最小值在 mid 或左边
-  right = mid
-  return nums[left]
+def find_min(nums):
+left, right = 0, len(nums) - 1
+while left < right:
+mid = (left + right) // 2
+if nums[mid] > nums[right]:
+# 最小值在 mid 右边
+left = mid + 1
+else:
+# 最小值在 mid 或左边
+right = mid
+return nums[left]
 ```
 
 
@@ -2023,18 +2023,18 @@ def create_linked_list(arr):
 - **埃拉托色尼筛法（Sieve of Eratosthenes）**
 
 ```python
-  def sieve(n):
-  """
-  n: 最大整数
-  返回: is_prime 列表, is_prime[i]=True 表示 i 是素数
-  """
-  is_prime = [True] * (n + 1)
-  is_prime[0] = is_prime[1] = False
-  for i in range(2, int(n**0.5)+1):
-  if is_prime[i]:
-  for j in range(i*i, n+1, i):
-  is_prime[j] = False
-  return is_prime
+def sieve(n):
+"""
+n: 最大整数
+返回: is_prime 列表, is_prime[i]=True 表示 i 是素数
+"""
+is_prime = [True] * (n + 1)
+is_prime[0] = is_prime[1] = False
+for i in range(2, int(n**0.5)+1):
+if is_prime[i]:
+for j in range(i*i, n+1, i):
+is_prime[j] = False
+return is_prime
 ```
   第二层遍历 $$n/2 + n/3 + n/5 + n/7$$ 根据调和级数性质，约为 $$ln ln n$$，所以时间复杂度为 O(nloglogn)。
 
@@ -2053,22 +2053,22 @@ def create_linked_list(arr):
   现在考虑 n 个圆盘，假设开始圆盘在 A 柱，可以先把 A 柱的上面 n - 1个圆盘移到 B，再将 A 剩下的一个移到 C，最后将 B 的 n - 1 个移到 C。总共需要 f(n) = 2f(n-  1) + 1 …… ②
 
 ```python
-  def hanoi(n, source, auxiliary, target):
-  """
-  打印将 n 个盘子从 source 移动到 target 的步骤。
-  source: 起始柱子
-  auxiliary: 辅助柱子
-  target: 目标柱子
-  """
-  if n == 1:
-  print(f"Move disk 1 from {source} to {target}")
-  else:
-  hanoi(n - 1, source, target, auxiliary)
-  print(f"Move disk {n} from {source} to {target}")
-  hanoi(n - 1, auxiliary, source, target)
+def hanoi(n, source, auxiliary, target):
+"""
+打印将 n 个盘子从 source 移动到 target 的步骤。
+source: 起始柱子
+auxiliary: 辅助柱子
+target: 目标柱子
+"""
+if n == 1:
+print(f"Move disk 1 from {source} to {target}")
+else:
+hanoi(n - 1, source, target, auxiliary)
+print(f"Move disk {n} from {source} to {target}")
+hanoi(n - 1, auxiliary, source, target)
 
-  # 示例：移动 3 个盘子从 A 到 C，B 为辅助柱子
-  hanoi(3, 'A', 'B', 'C')
+# 示例：移动 3 个盘子从 A 到 C，B 为辅助柱子
+hanoi(3, 'A', 'B', 'C')
 ```
 
   根据 ①② 两式，可求出 f(n) = 2^n - 1 所以 O(n) = 2^n
@@ -2100,13 +2100,13 @@ def create_linked_list(arr):
   - 最长上升子序列（LIS）：`dp[i] = max(dp[j] + 1 if nums[i] > nums[j])`，需要遍历 0-n 和 0 到 i，因此时间复杂度为 O(n^2)。另一种解法是贪心 + 二分：用一个数组记录上升子序列末尾最小值，遍历时对每个元素用二分找到合适位置替换，最终数组长度即为最长上升子序列长度，时间复杂度为 O(nlogn)。
 
 ```python
-  import bisect
+import bisect
 
-  i = bisect.bisect_left(sub, x)
-  if i == len(sub):
-  sub.append(x)
-  else:
-  sub[i] = x
+i = bisect.bisect_left(sub, x)
+if i == len(sub):
+sub.append(x)
+else:
+sub[i] = x
 ```
 
   - 两个子序列的最长公共子序列（LCS）：`dp[i][j] = dp[i-1][j-1]+1 if match else max(dp[i-1][j], dp[i][j-1])`，可压缩成一维数组`dp[j] = dp[j-1]+1 if match else max(dp[j], dp[j-1])`。
@@ -2160,13 +2160,13 @@ def create_linked_list(arr):
 - **位运算加法**
 
 ```python
-  function add(a, b):
-  while b ≠ 0:
-  sum = a XOR b            # 不带进位的和
-  carry = (a AND b) << 1   # 进位
-  a = sum
-  b = carry
-  return a
+function add(a, b):
+while b ≠ 0:
+sum = a XOR b            # 不带进位的和
+carry = (a AND b) << 1   # 进位
+a = sum
+b = carry
+return a
 ```
 
 
@@ -2438,24 +2438,24 @@ def create_linked_list(arr):
 - **list**
 
 ```python
-  # 增
-  lst = [1, 2, 3]
-  lst.append(4)        # 加到末尾
-  lst.insert(1, 10)    # 插入到索引 1 位置
-  lst.extend([5, 6])   # 扩展多个元素
-  # 删
-  lst.remove(2)        # 删除指定元素（找不到会报错）
-  del lst[0]           # 按索引删除
-  lst.pop()            # 删除并返回最后一个元素
-  lst.clear()          # 清空列表
-  # 改
-  lst[0] = 100         # 修改指定索引值
-  # 查
-  print(lst[0])        # 按索引访问
-  print(len(lst))      # 长度
-  print(10 in lst)     # 是否包含
-  for item in lst:     # 遍历
-  print(item)
+# 增
+lst = [1, 2, 3]
+lst.append(4)        # 加到末尾
+lst.insert(1, 10)    # 插入到索引 1 位置
+lst.extend([5, 6])   # 扩展多个元素
+# 删
+lst.remove(2)        # 删除指定元素（找不到会报错）
+del lst[0]           # 按索引删除
+lst.pop()            # 删除并返回最后一个元素
+lst.clear()          # 清空列表
+# 改
+lst[0] = 100         # 修改指定索引值
+# 查
+print(lst[0])        # 按索引访问
+print(len(lst))      # 长度
+print(10 in lst)     # 是否包含
+for item in lst:     # 遍历
+print(item)
 ```
 
 
@@ -2467,57 +2467,57 @@ def create_linked_list(arr):
 - **set**
 
 ```python
-  # 增
-  s = {1, 2, 3}
-  s.add(4)
-  s.update([5, 6])     # 添加多个元素
-  # 删
-  s.remove(2)          # 删除元素（不存在会报错）
-  s.discard(10)        # 安全删除（不存在不报错）
-  s.pop()              # 随机删除一个元素
-  s.clear()            # 清空集合
-  # 改：集合不能直接修改元素，但可以删除后添加新值。
-  # 查
-  print(3 in s)
-  for item in s:
-  print(item)
+# 增
+s = {1, 2, 3}
+s.add(4)
+s.update([5, 6])     # 添加多个元素
+# 删
+s.remove(2)          # 删除元素（不存在会报错）
+s.discard(10)        # 安全删除（不存在不报错）
+s.pop()              # 随机删除一个元素
+s.clear()            # 清空集合
+# 改：集合不能直接修改元素，但可以删除后添加新值。
+# 查
+print(3 in s)
+for item in s:
+print(item)
 ```
 
 
 - **dict**
 
 ```python
-  # 增
-  d = {'a': 1, 'b': 2}
-  d['c'] = 3           # 新增键值对
-  d.update({'d': 4})   # 批量添加/更新
-  # 删
-  del d['a']           # 删除键
-  d.pop('b')           # 删除键并返回值
-  d.clear()            # 清空字典
-  # 改
-  d['c'] = 10          # 修改键对应的值
-  # 查
-  print(d['c'])        # 获取值（键必须存在）
-  print(d.get('x'))    # 安全获取，不存在返回 None
-  print('c' in d)      # 是否包含键
-  for k, v in d.items():
-  print(k, v)
+# 增
+d = {'a': 1, 'b': 2}
+d['c'] = 3           # 新增键值对
+d.update({'d': 4})   # 批量添加/更新
+# 删
+del d['a']           # 删除键
+d.pop('b')           # 删除键并返回值
+d.clear()            # 清空字典
+# 改
+d['c'] = 10          # 修改键对应的值
+# 查
+print(d['c'])        # 获取值（键必须存在）
+print(d.get('x'))    # 安全获取，不存在返回 None
+print('c' in d)      # 是否包含键
+for k, v in d.items():
+print(k, v)
 ```
 
 
 - **tuple**
 
 ```python
-  # 增/删/改：都不支持
-  t = (1, 2, 3)
-  t = t + (4,)         # 创建新元组，实现“添加”效果
-  # 查
-  print(t[0])          # 访问索引
-  print(len(t))        # 长度
-  print(3 in t)        # 是否包含
-  for item in t:
-  print(item)
+# 增/删/改：都不支持
+t = (1, 2, 3)
+t = t + (4,)         # 创建新元组，实现“添加”效果
+# 查
+print(t[0])          # 访问索引
+print(len(t))        # 长度
+print(3 in t)        # 是否包含
+for item in t:
+print(item)
 ```
 
 
@@ -2529,18 +2529,18 @@ def create_linked_list(arr):
 
   不可变对象例子：字符串
 ```python
-  s = "hello"
-  print(id(s))  # 比如 123456
-  s = s + " world"
-  print(id(s))  # 改变了（新对象）
+s = "hello"
+print(id(s))  # 比如 123456
+s = s + " world"
+print(id(s))  # 改变了（新对象）
 ```
 
   可变对象例子：列表
 ```python
-  lst = [1, 2, 3]
-  print(id(lst))  # 比如 789123
-  lst.append(4)
-  print(id(lst))  # 没变（原地修改）
+lst = [1, 2, 3]
+print(id(lst))  # 比如 789123
+lst.append(4)
+print(id(lst))  # 没变（原地修改）
 ```
 
   可变对象在函数中修改，会影响原对象，在函数内进行重新绑定，并不会影响外部变量；不可变对象修改，会创建新对象。
@@ -2558,26 +2558,26 @@ def create_linked_list(arr):
 
   或
 ```python
-  from functools import cmp_to_key
+from functools import cmp_to_key
 
-  def my_cmp(x, y):
-  # 先比较a字段升序
-  if x[0] < y[0]:
-  return -1
-  elif x[0] > y[0]:
-  return 1
-  else:
-  # a相等时，b字段降序
-  if x[1] > y[1]:
-  return -1
-  elif x[1] < y[1]:
-  return 1
-  else:
-  return 0
+def my_cmp(x, y):
+# 先比较a字段升序
+if x[0] < y[0]:
+return -1
+elif x[0] > y[0]:
+return 1
+else:
+# a相等时，b字段降序
+if x[1] > y[1]:
+return -1
+elif x[1] < y[1]:
+return 1
+else:
+return 0
 
-  lst = [(2, 3), (1, 4), (2, 1), (1, 5)]
-  lst.sort(key=cmp_to_key(my_cmp))
-  print(lst)
+lst = [(2, 3), (1, 4), (2, 1), (1, 5)]
+lst.sort(key=cmp_to_key(my_cmp))
+print(lst)
 ```
 
 
@@ -2596,17 +2596,17 @@ def create_linked_list(arr):
   用来实现代码复用，常用于记录日志，权限验证、计算函数执行时间。
 
 ```python
-  def deco(func):
-  def warpper(*args, **kwargs):
-  print('start')
-  func(*args, **kwargs)
-  print('end')
-  return warpper
+def deco(func):
+def warpper(*args, **kwargs):
+print('start')
+func(*args, **kwargs)
+print('end')
+return warpper
 
-  @deco
-  def myfunc(parameter):
-  print("run with %s" % parameter)
-  myfunc("something")
+@deco
+def myfunc(parameter):
+print("run with %s" % parameter)
+myfunc("something")
 ```
 
 
@@ -2615,101 +2615,101 @@ def create_linked_list(arr):
   `@staticmethod` —— 静态方法。不需要访问实例属性或方法时使用。没有自动传入，不可以访问类属性，不能创建实例，类和实例都能调用。
 
 ```python
-  class MyClass:
-  @staticmethod
-  def greet():
-  print("Hello")
-  MyClass.greet()
+class MyClass:
+@staticmethod
+def greet():
+print("Hello")
+MyClass.greet()
 ```
 
   `@classmethod` —— 类方法。第一个参数是类 `cls`，而不是实例 `self`，可以访问类属性，可有创建实例，类和实例都能调用。
 
 ```python
-  class MyClass:
-  count = 0
+class MyClass:
+count = 0
 
-  @classmethod
-  def inc(cls):
-  cls.count += 1
+@classmethod
+def inc(cls):
+cls.count += 1
 
-  MyClass.inc()
-  print(MyClass.count)
+MyClass.inc()
+print(MyClass.count)
 ```
 
 ```python
-  class Person:
-  def __init__(self, name, age):
-  self.name = name
-  self.age = age
+class Person:
+def __init__(self, name, age):
+self.name = name
+self.age = age
 
-  @classmethod
-  def from_string(cls, info_str):
-  # cls 是类本身，相当于 Person
-  name, age = info_str.split('-')
-  # 使用 cls() 来调用构造函数，创建实例
-  return cls(name, int(age))
+@classmethod
+def from_string(cls, info_str):
+# cls 是类本身，相当于 Person
+name, age = info_str.split('-')
+# 使用 cls() 来调用构造函数，创建实例
+return cls(name, int(age))
 
-  p2 = Person.from_string("Alice-20")
-  print(p2.name, p2.age)
+p2 = Person.from_string("Alice-20")
+print(p2.name, p2.age)
 ```
 
   `@property` —— 把方法变成属性，让方法像访问属性一样调用，设置属性可以用 `.setter` 装饰器。
 
 ```python
-  class Person:
-  def __init__(self, name):
-  self._name = name   # 用下划线保护内部属性
+class Person:
+def __init__(self, name):
+self._name = name   # 用下划线保护内部属性
 
-  @property
-  def name(self):
-  return self._name
+@property
+def name(self):
+return self._name
 
-  @name.setter
-  def name(self, value):
-  if not value:
-  raise ValueError("名字不能为空")
-  self._name = value
+@name.setter
+def name(self, value):
+if not value:
+raise ValueError("名字不能为空")
+self._name = value
 
-  p = Person("Alice")
-  print(p.name)  # Alice
+p = Person("Alice")
+print(p.name)  # Alice
 
-  p.name = "Bob"  # 调用 setter
-  print(p.name)  # Bob
+p.name = "Bob"  # 调用 setter
+print(p.name)  # Bob
 ```
 
   `@functools.lru_cache`：缓存函数结果，来自 `functools` 模块，非常适合斐波那契、递归等高频重复计算场景。
 
 ```python
-  from functools import lru_cache
+from functools import lru_cache
 
-  @lru_cache(maxsize=None)
-  def fib(n):
-  if n <= 1:
-  return n
-  return fib(n-1) + fib(n-2)
+@lru_cache(maxsize=None)
+def fib(n):
+if n <= 1:
+return n
+return fib(n-1) + fib(n-2)
 
-  print(fib(50))  # 超快！
+print(fib(50))  # 超快！
 ```
 
   `@functools.wraps` —— 保留原函数元信息，让装饰器包装后的函数保留原函数的 `__name__`、`__doc__` 等信息。
 
 ```python
-  from functools import wraps
+from functools import wraps
 
-  def log(func):
-  @wraps(func)
-  def wrapper(*args, **kwargs):
-  print(f"调用 {func.__name__}")
-  return func(*args, **kwargs)
-  return wrapper
+def log(func):
+@wraps(func)
+def wrapper(*args, **kwargs):
+print(f"调用 {func.__name__}")
+return func(*args, **kwargs)
+return wrapper
 
-  @log
-  def hello():
-  """这是一个问候函数"""
-  print("Hello")
+@log
+def hello():
+"""这是一个问候函数"""
+print("Hello")
 
-  hello()
-  print(hello.__name__)  # 仍然是 'hello'
+hello()
+print(hello.__name__)  # 仍然是 'hello'
 ```
 
 
@@ -2835,26 +2835,26 @@ def create_linked_list(arr):
   AUC 可以理解为：随机选择一个正样本和一个负样本，正样本预测分数大于负样本的概率。
 
 ```python
-  def auc_score(y_true, y_score):
-  # 获取正负样本索引
-  pos_scores = [s for t, s in zip(y_true, y_score) if t == 1]
-  neg_scores = [s for t, s in zip(y_true, y_score) if t == 0]
+def auc_score(y_true, y_score):
+# 获取正负样本索引
+pos_scores = [s for t, s in zip(y_true, y_score) if t == 1]
+neg_scores = [s for t, s in zip(y_true, y_score) if t == 0]
 
-  pos_count = len(pos_scores)
-  neg_count = len(neg_scores)
+pos_count = len(pos_scores)
+neg_count = len(neg_scores)
 
-  if pos_count == 0 or neg_count == 0:
-  return 0.5  # 极端情况
+if pos_count == 0 or neg_count == 0:
+return 0.5  # 极端情况
 
-  count = 0
-  for pos in pos_scores:
-  for neg in neg_scores:
-  if pos > neg:
-  count += 1
-  elif pos == neg:
-  count += 0.5
+count = 0
+for pos in pos_scores:
+for neg in neg_scores:
+if pos > neg:
+count += 1
+elif pos == neg:
+count += 0.5
 
-  return count / (pos_count * neg_count)
+return count / (pos_count * neg_count)
 ```
 
 
@@ -2892,46 +2892,46 @@ def create_linked_list(arr):
 - **用最小二乘法实现线性回归**
 
 ```python
-  import numpy as np
-  # 1. 生成数据（y = 2x + 3 + noise）
-  np.random.seed(42)
-  X = np.random.rand(100, 1)  # 100 个样本，1 个特征
-  y = 2 * X[:, 0] + 3 + np.random.randn(100) * 0.1  # 添加噪声
+import numpy as np
+# 1. 生成数据（y = 2x + 3 + noise）
+np.random.seed(42)
+X = np.random.rand(100, 1)  # 100 个样本，1 个特征
+y = 2 * X[:, 0] + 3 + np.random.randn(100) * 0.1  # 添加噪声
 
-  # 2. 添加偏置项 x0 = 1（扩展 X 为 [x, 1]）
-  # 这是为了把截距 b 统一进矩阵运算里，便于计算、推导、编程
-  X_b = np.c_[X, np.ones((X.shape[0], 1))]  # shape: [100, 2]
+# 2. 添加偏置项 x0 = 1（扩展 X 为 [x, 1]）
+# 这是为了把截距 b 统一进矩阵运算里，便于计算、推导、编程
+X_b = np.c_[X, np.ones((X.shape[0], 1))]  # shape: [100, 2]
 
-  # 3. 正规方程解：theta = (X^T X)^(-1) X^T y
-  theta = np.linalg.inv(X_b.T @ X_b) @ X_b.T @ y
+# 3. 正规方程解：theta = (X^T X)^(-1) X^T y
+theta = np.linalg.inv(X_b.T @ X_b) @ X_b.T @ y
 
-  print("权重和偏置（w, b）：", theta)
+print("权重和偏置（w, b）：", theta)
 ```
 
 
 - **用梯度下降实现线性回归**
 
 ```python
-  # 初始化
-  w = np.random.randn()
-  b = np.random.randn()
-  lr = 0.1
+# 初始化
+w = np.random.randn()
+b = np.random.randn()
+lr = 0.1
 
-  for epoch in range(1000):
-  y_pred = w * X[:, 0] + b
-  error = y_pred - y
-  loss = (error ** 2).mean()
+for epoch in range(1000):
+y_pred = w * X[:, 0] + b
+error = y_pred - y
+loss = (error ** 2).mean()
 
-  # 手动计算梯度
-  grad_w = 2 * (error * X[:, 0]).mean()
-  grad_b = 2 * error.mean()
+# 手动计算梯度
+grad_w = 2 * (error * X[:, 0]).mean()
+grad_b = 2 * error.mean()
 
-  # 更新参数
-  w -= lr * grad_w
-  b -= lr * grad_b
+# 更新参数
+w -= lr * grad_w
+b -= lr * grad_b
 
-  if epoch % 100 == 0:
-  print(f"Epoch {epoch}: loss={loss:.4f}, w={w:.4f}, b={b:.4f}")
+if epoch % 100 == 0:
+print(f"Epoch {epoch}: loss={loss:.4f}, w={w:.4f}, b={b:.4f}")
 ```
 
 
@@ -3144,11 +3144,11 @@ def create_linked_list(arr):
 - **KNN 核心代码**
 
 ```python
-  def k_nearest_neighbors(X, y, test_sample, k):
-  distances = np.linalg.norm(X - test_sample, axis=1)
-  nearest_indices = np.argsort(distances)[:k]
-  nearest_labels = y[nearest_indices]
-  return int(np.round(np.mean(nearest_labels)))
+def k_nearest_neighbors(X, y, test_sample, k):
+distances = np.linalg.norm(X - test_sample, axis=1)
+nearest_indices = np.argsort(distances)[:k]
+nearest_labels = y[nearest_indices]
+return int(np.round(np.mean(nearest_labels)))
 ```
 
 
@@ -3292,41 +3292,41 @@ def create_linked_list(arr):
 - **用 numpy 实现 cross entropy loss（softmax）**
 
 ```python
-  import numpy as np
+import numpy as np
 
-  def softmax(logits):
-  """
-  计算 softmax 概率，确保数值稳定。
-  logits: 形状为 (N, C)，N 是样本数，C 是类别数
-  """
-  shifted = logits - np.max(logits, axis=1, keepdims=True)
-  exps = np.exp(shifted)
-  return exps / np.sum(exps, axis=1, keepdims=True)
+def softmax(logits):
+"""
+计算 softmax 概率，确保数值稳定。
+logits: 形状为 (N, C)，N 是样本数，C 是类别数
+"""
+shifted = logits - np.max(logits, axis=1, keepdims=True)
+exps = np.exp(shifted)
+return exps / np.sum(exps, axis=1, keepdims=True)
 
-  def cross_entropy_loss(probs, labels):
-  """
-  计算平均交叉熵损失。
-  probs: softmax 后的概率，形状为 (N, C)
-  labels: 每个样本的真实类别索引，形状为 (N,)
-  """
-  N = probs.shape[0]
-  # 取出每个样本对应真实类别的概率，防止 log(0) 加个小常数
-  log_likelihood = -np.log(probs[np.arange(N), labels] + 1e-15)
-  return np.sum(log_likelihood) / N
+def cross_entropy_loss(probs, labels):
+"""
+计算平均交叉熵损失。
+probs: softmax 后的概率，形状为 (N, C)
+labels: 每个样本的真实类别索引，形状为 (N,)
+"""
+N = probs.shape[0]
+# 取出每个样本对应真实类别的概率，防止 log(0) 加个小常数
+log_likelihood = -np.log(probs[np.arange(N), labels] + 1e-15)
+return np.sum(log_likelihood) / N
 
-  # 示例数据
-  logits = np.array([
-  [2.0, 1.0, 0.1],
-  [0.5, 2.5, 0.3],
-  [1.2, 0.7, 3.0]
-  ])
-  labels = np.array([0, 1, 2])  # 每个样本的真实标签
+# 示例数据
+logits = np.array([
+[2.0, 1.0, 0.1],
+[0.5, 2.5, 0.3],
+[1.2, 0.7, 3.0]
+])
+labels = np.array([0, 1, 2])  # 每个样本的真实标签
 
-  # 计算 softmax 概率
-  probs = softmax(logits)
+# 计算 softmax 概率
+probs = softmax(logits)
 
-  # 计算交叉熵损失
-  loss = cross_entropy_loss(probs, labels)
+# 计算交叉熵损失
+loss = cross_entropy_loss(probs, labels)
 ```
 
 
@@ -3334,38 +3334,38 @@ def create_linked_list(arr):
 
   用 log-softmax 数值更稳定，减 max 是防止指数函数输出过大，用减法算 log 是防止 log(0)。
 ```python
-  import numpy as np
+import numpy as np
 
-  def log_softmax(logits):
-  """
-  计算 log-softmax，数值稳定版本。
-  logits: 形状为 (N, C)
-  """
-  shifted = logits - np.max(logits, axis=1, keepdims=True)
-  log_sum_exp = np.log(np.sum(np.exp(shifted), axis=1, keepdims=True))
-  return shifted - log_sum_exp  # log_softmax 输出
+def log_softmax(logits):
+"""
+计算 log-softmax，数值稳定版本。
+logits: 形状为 (N, C)
+"""
+shifted = logits - np.max(logits, axis=1, keepdims=True)
+log_sum_exp = np.log(np.sum(np.exp(shifted), axis=1, keepdims=True))
+return shifted - log_sum_exp  # log_softmax 输出
 
-  def cross_entropy_loss_from_logits(logits, labels):
-  """
-  直接从 logits 计算交叉熵损失（使用 log-softmax）。
-  logits: shape (N, C)
-  labels: shape (N,)
-  """
-  N = logits.shape[0]
-  log_probs = log_softmax(logits)
-  log_likelihood = -log_probs[np.arange(N), labels]
-  return np.sum(log_likelihood) / N
+def cross_entropy_loss_from_logits(logits, labels):
+"""
+直接从 logits 计算交叉熵损失（使用 log-softmax）。
+logits: shape (N, C)
+labels: shape (N,)
+"""
+N = logits.shape[0]
+log_probs = log_softmax(logits)
+log_likelihood = -log_probs[np.arange(N), labels]
+return np.sum(log_likelihood) / N
 
-  # 示例数据
-  logits = np.array([
-  [2.0, 1.0, 0.1],
-  [0.5, 2.5, 0.3],
-  [1.2, 0.7, 3.0]
-  ])
-  labels = np.array([0, 1, 2])  # 每个样本的真实标签
+# 示例数据
+logits = np.array([
+[2.0, 1.0, 0.1],
+[0.5, 2.5, 0.3],
+[1.2, 0.7, 3.0]
+])
+labels = np.array([0, 1, 2])  # 每个样本的真实标签
 
-  # 计算 log-softmax 并交叉熵损失
-  loss = cross_entropy_loss_from_logits(logits, labels)
+# 计算 log-softmax 并交叉熵损失
+loss = cross_entropy_loss_from_logits(logits, labels)
 ```
 
 
@@ -3403,50 +3403,50 @@ def create_linked_list(arr):
 - **手撕 KMeans**
 
 ```python
-  import numpy as np
+import numpy as np
 
-  class KMeans:
-  def __init__(self, n_clusters=3, max_iter=100, tol=1e-4, random_state=None):
-  self.n_clusters = n_clusters
-  self.max_iter = max_iter
-  self.tol = tol
-  self.random_state = random_state
+class KMeans:
+def __init__(self, n_clusters=3, max_iter=100, tol=1e-4, random_state=None):
+self.n_clusters = n_clusters
+self.max_iter = max_iter
+self.tol = tol
+self.random_state = random_state
 
-  def fit(self, X):
-  np.random.seed(self.random_state)
-  n_samples, _ = X.shape
+def fit(self, X):
+np.random.seed(self.random_state)
+n_samples, _ = X.shape
 
-  # Step 1: 初始化质心（随机选择 K 个样本）
-  initial_idxs = np.random.choice(n_samples, self.n_clusters, replace=False)
-  self.centroids = X[initial_idxs]
+# Step 1: 初始化质心（随机选择 K 个样本）
+initial_idxs = np.random.choice(n_samples, self.n_clusters, replace=False)
+self.centroids = X[initial_idxs]
 
-  for i in range(self.max_iter):
-  # Step 2: 分配每个样本到最近的质心
-  distances = self._compute_distances(X)
-  labels = np.argmin(distances, axis=1)
+for i in range(self.max_iter):
+# Step 2: 分配每个样本到最近的质心
+distances = self._compute_distances(X)
+labels = np.argmin(distances, axis=1)
 
-  # Step 3: 更新质心
-  new_centroids = np.array([
-  X[labels == j].mean(axis=0) if np.any(labels == j) else self.centroids[j]
-  for j in range(self.n_clusters)
-  ])
+# Step 3: 更新质心
+new_centroids = np.array([
+X[labels == j].mean(axis=0) if np.any(labels == j) else self.centroids[j]
+for j in range(self.n_clusters)
+])
 
-  # Step 4: 判断收敛（质心移动小于 tol）
-  shift = np.linalg.norm(new_centroids - self.centroids)
-  self.centroids = new_centroids
-  if shift < self.tol:
-  break
+# Step 4: 判断收敛（质心移动小于 tol）
+shift = np.linalg.norm(new_centroids - self.centroids)
+self.centroids = new_centroids
+if shift < self.tol:
+break
 
-  self.labels_ = labels  # 保存训练标签
+self.labels_ = labels  # 保存训练标签
 
-  def predict(self, X):
-  # 计算每个点到所有质心的距离，返回最近质心的索引
-  distances = self._compute_distances(X)
-  return np.argmin(distances, axis=1)
+def predict(self, X):
+# 计算每个点到所有质心的距离，返回最近质心的索引
+distances = self._compute_distances(X)
+return np.argmin(distances, axis=1)
 
-  def _compute_distances(self, X):
-  # 返回 (n_samples, n_clusters) 的距离矩阵
-  return np.linalg.norm(X[:, np.newaxis] - self.centroids, axis=2)
+def _compute_distances(self, X):
+# 返回 (n_samples, n_clusters) 的距离矩阵
+return np.linalg.norm(X[:, np.newaxis] - self.centroids, axis=2)
 ```
 
 
@@ -3539,124 +3539,124 @@ def create_linked_list(arr):
 - **Python 相关实现**
 
 ```python
-  import numpy as np
-  from collections import Counter
-  from math import log2
+import numpy as np
+from collections import Counter
+from math import log2
 
-  # ===== 公共工具函数 =====
-  def entropy(y):
-  counter = Counter(y)
-  probs = [c/len(y) for c in counter.values()]
-  return -sum(p*log2(p) for p in probs if p > 0)
+# ===== 公共工具函数 =====
+def entropy(y):
+counter = Counter(y)
+probs = [c/len(y) for c in counter.values()]
+return -sum(p*log2(p) for p in probs if p > 0)
 
-  def gini(y):
-  counter = Counter(y)
-  probs = [c/len(y) for c in counter.values()]
-  return 1 - sum(p**2 for p in probs)
+def gini(y):
+counter = Counter(y)
+probs = [c/len(y) for c in counter.values()]
+return 1 - sum(p**2 for p in probs)
 
-  # ===== ID3 =====
-  def id3(X, y):
-  base_entropy = entropy(y)
-  best_gain, best_f = -1, -1
-  for f in range(X.shape[1]):
-  new_entropy = 0
-  for v in np.unique(X[:, f]):
-  idx = (X[:, f] == v)
-  new_entropy += len(y[idx])/len(y) * entropy(y[idx])
-  gain = base_entropy - new_entropy
-  if gain > best_gain:
-  best_gain, best_f = gain, f
-  return best_f
+# ===== ID3 =====
+def id3(X, y):
+base_entropy = entropy(y)
+best_gain, best_f = -1, -1
+for f in range(X.shape[1]):
+new_entropy = 0
+for v in np.unique(X[:, f]):
+idx = (X[:, f] == v)
+new_entropy += len(y[idx])/len(y) * entropy(y[idx])
+gain = base_entropy - new_entropy
+if gain > best_gain:
+best_gain, best_f = gain, f
+return best_f
 
-  # ===== C4.5 =====
-  def c45(X, y):
-  base_entropy = entropy(y)
-  best_ratio, best_f = -1, -1
-  for f in range(X.shape[1]):
-  new_entropy, split_info = 0, 0
-  for v in np.unique(X[:, f]):
-  idx = (X[:, f] == v)
-  p = len(y[idx])/len(y)
-  new_entropy += p * entropy(y[idx])
-  if p > 0:
-  split_info -= p * log2(p)
-  info_gain = base_entropy - new_entropy
-  if split_info > 0:
-  ratio = info_gain/split_info
-  if ratio > best_ratio:
-  best_ratio, best_f = ratio, f
-  return best_f
+# ===== C4.5 =====
+def c45(X, y):
+base_entropy = entropy(y)
+best_ratio, best_f = -1, -1
+for f in range(X.shape[1]):
+new_entropy, split_info = 0, 0
+for v in np.unique(X[:, f]):
+idx = (X[:, f] == v)
+p = len(y[idx])/len(y)
+new_entropy += p * entropy(y[idx])
+if p > 0:
+split_info -= p * log2(p)
+info_gain = base_entropy - new_entropy
+if split_info > 0:
+ratio = info_gain/split_info
+if ratio > best_ratio:
+best_ratio, best_f = ratio, f
+return best_f
 
-  # ===== CART =====
-  def cart(X, y):
-  best_gini, best_f, best_v = 1e9, -1, None
-  for f in range(X.shape[1]):
-  for v in np.unique(X[:, f]):
-  left = y[X[:, f] <= v]
-  right = y[X[:, f] > v]
-  if len(left) == 0 or len(right) == 0: continue
-  g = (len(left)/len(y))*gini(left) + (len(right)/len(y))*gini(right)
-  if g < best_gini:
-  best_gini, best_f, best_v = g, f, v
-  return best_f, best_v
+# ===== CART =====
+def cart(X, y):
+best_gini, best_f, best_v = 1e9, -1, None
+for f in range(X.shape[1]):
+for v in np.unique(X[:, f]):
+left = y[X[:, f] <= v]
+right = y[X[:, f] > v]
+if len(left) == 0 or len(right) == 0: continue
+g = (len(left)/len(y))*gini(left) + (len(right)/len(y))*gini(right)
+if g < best_gini:
+best_gini, best_f, best_v = g, f, v
+return best_f, best_v
 
-  # ===== Train / Test =====
-  def train(X, y, method="id3"):
-  # 纯叶子
-  if len(set(y)) == 1:
-  return y[0]
-  # 没特征 → 多数表决
-  if X.shape[1] == 0:
-  return Counter(y).most_common(1)[0][0]
+# ===== Train / Test =====
+def train(X, y, method="id3"):
+# 纯叶子
+if len(set(y)) == 1:
+return y[0]
+# 没特征 → 多数表决
+if X.shape[1] == 0:
+return Counter(y).most_common(1)[0][0]
 
-  if method == "id3":
-  f = id3(X, y)
-  tree = {f: {}}
-  for v in np.unique(X[:, f]):
-  idx = (X[:, f] == v)
-  subtree = train(np.delete(X[idx], f, axis=1), y[idx], method)
-  tree[f][v] = subtree
-  return tree
+if method == "id3":
+f = id3(X, y)
+tree = {f: {}}
+for v in np.unique(X[:, f]):
+idx = (X[:, f] == v)
+subtree = train(np.delete(X[idx], f, axis=1), y[idx], method)
+tree[f][v] = subtree
+return tree
 
-  elif method == "c45":
-  f = c45(X, y)
-  tree = {f: {}}
-  for v in np.unique(X[:, f]):
-  idx = (X[:, f] == v)
-  subtree = train(np.delete(X[idx], f, axis=1), y[idx], method)
-  tree[f][v] = subtree
-  return tree
+elif method == "c45":
+f = c45(X, y)
+tree = {f: {}}
+for v in np.unique(X[:, f]):
+idx = (X[:, f] == v)
+subtree = train(np.delete(X[idx], f, axis=1), y[idx], method)
+tree[f][v] = subtree
+return tree
 
-  elif method == "cart":
-  f, v = cart(X, y)
-  if f == -1:  # 无法继续分
-  return Counter(y).most_common(1)[0][0]
-  left_idx, right_idx = (X[:, f] <= v), (X[:, f] > v)
-  return {
-  f: {
-  "<=": train(X[left_idx], y[left_idx], method),
-  ">": train(X[right_idx], y[right_idx], method)
-  },
-  "value": v
-  }
+elif method == "cart":
+f, v = cart(X, y)
+if f == -1:  # 无法继续分
+return Counter(y).most_common(1)[0][0]
+left_idx, right_idx = (X[:, f] <= v), (X[:, f] > v)
+return {
+f: {
+"<=": train(X[left_idx], y[left_idx], method),
+">": train(X[right_idx], y[right_idx], method)
+},
+"value": v
+}
 
-  def test(tree, x):
-  if not isinstance(tree, dict):  # 叶子
-  return tree
-  f = list(tree.keys())[0]
-  if "value" in tree:  # CART
-  v = tree["value"]
-  if x[f] <= v:
-  return test(tree[f]["<="], x)
-  else:
-  return test(tree[f][">"], x)
-  else:  # ID3/C4.5
-  v = x[f]
-  if v in tree[f]:
-  sub = tree[f][v]
-  return test(sub, np.delete(x, f))
-  else:
-  return None  # 未见过的取值
+def test(tree, x):
+if not isinstance(tree, dict):  # 叶子
+return tree
+f = list(tree.keys())[0]
+if "value" in tree:  # CART
+v = tree["value"]
+if x[f] <= v:
+return test(tree[f]["<="], x)
+else:
+return test(tree[f][">"], x)
+else:  # ID3/C4.5
+v = x[f]
+if v in tree[f]:
+sub = tree[f][v]
+return test(sub, np.delete(x, f))
+else:
+return None  # 未见过的取值
 ```
 
 
@@ -3805,35 +3805,35 @@ def create_linked_list(arr):
 
   sigmoid，softmax，tanh，ReLU，PReLU，Leakly ReLU，Maxout。
 ```python
-  import numpy as np
+import numpy as np
 
-  # ===== 激活函数 =====
-  def sigmoid(x):
-  return 1 / (1 + np.exp(-x))
+# ===== 激活函数 =====
+def sigmoid(x):
+return 1 / (1 + np.exp(-x))
 
-  def sigmoid_derivative(x):
-  s = sigmoid(x)
-  return s * (1 - s)
+def sigmoid_derivative(x):
+s = sigmoid(x)
+return s * (1 - s)
 
-  def tanh(x):
-  return np.tanh(x)
+def tanh(x):
+return np.tanh(x)
 
-  def tanh_derivative(x):
-  return 1 - np.tanh(x)**2
+def tanh_derivative(x):
+return 1 - np.tanh(x)**2
 
-  def relu(x):
-  return np.maximum(0, x)
+def relu(x):
+return np.maximum(0, x)
 
-  def relu_derivative(x):
-  return (x > 0).astype(float)
+def relu_derivative(x):
+return (x > 0).astype(float)
 
-  def leaky_relu(x, alpha=0.01):
-  return np.where(x > 0, x, alpha * x)
+def leaky_relu(x, alpha=0.01):
+return np.where(x > 0, x, alpha * x)
 
-  def leaky_relu_derivative(x, alpha=0.01):
-  dx = np.ones_like(x)
-  dx[x < 0] = alpha
-  return dx
+def leaky_relu_derivative(x, alpha=0.01):
+dx = np.ones_like(x)
+dx[x < 0] = alpha
+return dx
 ```
 
 
@@ -3911,84 +3911,84 @@ def create_linked_list(arr):
   SGD 没动量，全局固定学习率。公式为更新参数值 = 当前参数值 - 学习率 * 梯度。在 SGD 中，L2 正则是加上 $$\frac{\lambda}{2} \theta^2$$，weight decay 是 $$\theta \rightarrow \theta - \lambda\theta$$，两者是等价的。SGD 优化轨迹不受损失函数常数缩放影响。
 
 ```python
-  def sgd(w, dw, lr=0.01):
-  return w - lr * dw
+def sgd(w, dw, lr=0.01):
+return w - lr * dw
 ```
 
   SGD + Momentum，固定学习率，Momentum 是一阶动量，即梯度的指数加权平均（exponentially weighted average of past gradients）/梯度滑动平均（EMA，Exponential Moving Average）。越新的梯度权重越大，越久远的梯度，权重按指数衰减。公式为更新参数值 = 当前参数值 - 学习率 * 一阶动量。
 
 ```python
-  def momentum(w, dw, v, lr=0.01, beta=0.9):
-  v = beta * v + (1 - beta) * dw
-  w = w - lr * v
-  return w, v
+def momentum(w, dw, v, lr=0.01, beta=0.9):
+v = beta * v + (1 - beta) * dw
+w = w - lr * v
+return w, v
 ```
 
   AdaGrad 会对学习率加权，权重为过往梯度平方和的根号，开根号是为了单位一致性，且保证过往梯度过大导致的学习旅衰减过大。频繁更新的参数，学习率自动变小；很少更新的参数，学习率保持较大。由于每次迭代都有梯度，导致梯度平方和每次都增加，因此学习率会单调递减。
 
 ```python
-  def adagrad(w, dw, h, lr=0.01, eps=1e-8):
-  h += dw**2
-  w = w - lr * dw / (np.sqrt(h) + eps)
-  return w, h
+def adagrad(w, dw, h, lr=0.01, eps=1e-8):
+h += dw**2
+w = w - lr * dw / (np.sqrt(h) + eps)
+return w, h
 ```
 
   RMSProp 是二阶动量，即梯度的平方滑动平均（exponentially weighted average of the squares of past gradients）。相比 AdaGrad，它更看中最近的梯度，而且由于老的梯度平方会指数衰减，学习率不会无限减小。
 
 ```python
-  def rmsprop(w, dw, h, lr=0.001, beta=0.9, eps=1e-8):
-  h = beta * h + (1 - beta) * dw**2
-  w = w - lr * dw / (np.sqrt(h) + eps)
-  return w, h
+def rmsprop(w, dw, h, lr=0.001, beta=0.9, eps=1e-8):
+h = beta * h + (1 - beta) * dw**2
+w = w - lr * dw / (np.sqrt(h) + eps)
+return w, h
 ```
 
   Adam 学习率根据一阶动量（Momentum）+ 二阶动量（RMSProp）调整。Adam 会进行偏差修正：由于一阶动量和二阶动量初始值为 0，导致乘了 $$1 - beta1$$ 或 $$1 - beta2$$ 会使得均值被低估，因此需要根据当前 step $$t$$ 进行一阶动量、二阶动量的修正。在 Adam 中，weight decay（L2）会被加到原始梯度里，然后进行同样的一阶动量和二阶动量调整，从而导致实际的权重衰减效果并不等价于直接对权重进行衰减。
 
 ```python
-  def adam(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, eps=1e-8):
-  m = beta1 * m + (1 - beta1) * dw
-  v = beta2 * v + (1 - beta2) * (dw**2)
-  m_hat = m / (1 - beta1**t)
-  v_hat = v / (1 - beta2**t)
-  w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
-  return w, m, v
+def adam(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, eps=1e-8):
+m = beta1 * m + (1 - beta1) * dw
+v = beta2 * v + (1 - beta2) * (dw**2)
+m_hat = m / (1 - beta1**t)
+v_hat = v / (1 - beta2**t)
+w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
+return w, m, v
 ```
 
   AdamW，同 Adam，但权重衰减更合理，将 L2 正则对应的 weight decay 放到了一阶动量和二阶动量调整后的参数更新上。
 
 ```python
-  def adamw(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, weight_decay=0.01, eps=1e-8):
-  # AdamW 在更新前加入权重衰减
-  w = w - lr * weight_decay * w
-  m = beta1 * m + (1 - beta1) * dw
-  v = beta2 * v + (1 - beta2) * (dw**2)
-  m_hat = m / (1 - beta1**t)
-  v_hat = v / (1 - beta2**t)
-  w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
-  return w, m, v
+def adamw(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, weight_decay=0.01, eps=1e-8):
+# AdamW 在更新前加入权重衰减
+w = w - lr * weight_decay * w
+m = beta1 * m + (1 - beta1) * dw
+v = beta2 * v + (1 - beta2) * (dw**2)
+m_hat = m / (1 - beta1**t)
+v_hat = v / (1 - beta2**t)
+w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
+return w, m, v
 ```
 
   Lion，使用一阶动量，只看更新方向，不考虑更新幅度。
 
 ```python
-  def lion(w, dw, m, lr=1e-3, beta1=0.9, beta2=0.99, weight_decay=0.0):
-  m = beta2 * m + (1 - beta2) * dw
-  update = np.sign(beta1 * m + (1 - beta1) * dw)
-  if weight_decay != 0:
-  update += weight_decay * w
-  w = w - lr * update
-  return w, m
+def lion(w, dw, m, lr=1e-3, beta1=0.9, beta2=0.99, weight_decay=0.0):
+m = beta2 * m + (1 - beta2) * dw
+update = np.sign(beta1 * m + (1 - beta1) * dw)
+if weight_decay != 0:
+update += weight_decay * w
+w = w - lr * update
+return w, m
 ```
 
   Muon 方向由一阶动量决定，幅度由二阶动量决定。
 
 ```python
-  def muon(w, dw, m, v, lr=1e-3, beta1=0.9, beta2=0.99, beta3=0.999, eps=1e-8):
-  m = beta2 * m + (1 - beta2) * dw
-  v = beta3 * v + (1 - beta3) * (dw**2)
-  update = np.sign(beta1 * m + (1 - beta1) * dw)
-  w = w - lr * update / (np.sqrt(v) + eps)
-  return w, m, v
+def muon(w, dw, m, v, lr=1e-3, beta1=0.9, beta2=0.99, beta3=0.999, eps=1e-8):
+m = beta2 * m + (1 - beta2) * dw
+v = beta3 * v + (1 - beta3) * (dw**2)
+update = np.sign(beta1 * m + (1 - beta1) * dw)
+w = w - lr * update / (np.sqrt(v) + eps)
+return w, m, v
 ```
 
   如果加上 Scheduler，可以动态调整全局学习率。Warmup 策略可以前期慢慢提供学习率，后期用 Cosine Decay（训练初期快速降学习率，防止剧烈震荡：训练刚开始时，模型参数还比较随机，快速降低学习率能避免过大步长导致训练不稳定或发散；但起始时仍保留较大学习率，帮助模型迅速从随机初始化的参数中找到“正确方向”。中期保持学习率相对平稳，助于稳定收敛：进入训练中期，学习率下降变缓，模型有足够的时间在当前的参数空间“细致探索”；平稳的学习率避免过早降低导致训练停滞，同时不给出过大步长打断已有收敛趋势。后期再次快速下降，微调模型细节：训练末期快速将学习率降低到很小，帮助模型“精细调节”参数，减少振荡，提升泛化性能；类似于在优化曲面上的“爬坡”逐渐变得非常缓慢，避免错过局部极小值。），Linear Decay 等方式进行衰减。
@@ -4064,18 +4064,18 @@ def create_linked_list(arr):
 
   $$o_t=\sigma(W_o[h_{t-1}, x_t] + b_o)$$
 ```python
-  def rnn_forward(X, Wx, Wh, b, h0):
-  """
-  X: (T, N, D)
-  Wx: (D, H)
-  Wh: (H, H)
-  b: (H,)
-  h0: (N, H)
-  """
-  h = h0
-  for t in range(X.shape[0]):
-  h = torch.tanh(X[t] @ Wx + h @ Wh + b)
-  return h  # 返回最后一步隐藏状态
+def rnn_forward(X, Wx, Wh, b, h0):
+"""
+X: (T, N, D)
+Wx: (D, H)
+Wh: (H, H)
+b: (H,)
+h0: (N, H)
+"""
+h = h0
+for t in range(X.shape[0]):
+h = torch.tanh(X[t] @ Wx + h @ Wh + b)
+return h  # 返回最后一步隐藏状态
 ```
 
 
@@ -4094,18 +4094,18 @@ def create_linked_list(arr):
   得到最终输出：$$h_t=o_t*tanh(C_t)$$。
 
 ```python
-  def lstm_forward(X, Wx, Wh, b, h0, c0):
-  h, c = h0, c0
-  H = h0.shape[1]
-  for t in range(X.shape[0]):
-  z = X[t] @ Wx + h @ Wh + b
-  i = sigmoid(z[:, :H])
-  f = sigmoid(z[:, H:2*H])
-  o = sigmoid(z[:, 2*H:3*H])
-  g = torch.tanh(z[:, 3*H:])
-  c = f * c + i * g
-  h = o * torch.tanh(c)
-  return h, c
+def lstm_forward(X, Wx, Wh, b, h0, c0):
+h, c = h0, c0
+H = h0.shape[1]
+for t in range(X.shape[0]):
+z = X[t] @ Wx + h @ Wh + b
+i = sigmoid(z[:, :H])
+f = sigmoid(z[:, H:2*H])
+o = sigmoid(z[:, 2*H:3*H])
+g = torch.tanh(z[:, 3*H:])
+c = f * c + i * g
+h = o * torch.tanh(c)
+return h, c
 ```
 
 
@@ -4113,16 +4113,16 @@ def create_linked_list(arr):
 
   LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
 ```python
-  def gru_forward(X, Wx, Wh, b, h0):
-  h = h0
-  H = h0.shape[1]
-  for t in range(X.shape[0]):
-  z = X[t] @ Wx + h @ Wh + b
-  r = sigmoid(z[:, :H])
-  u = sigmoid(z[:, H:2*H])
-  g = torch.tanh(z[:, 2*H:] + r * (h @ Wh[:, 2*H:]))
-  h = (1 - u) * g + u * h
-  return h
+def gru_forward(X, Wx, Wh, b, h0):
+h = h0
+H = h0.shape[1]
+for t in range(X.shape[0]):
+z = X[t] @ Wx + h @ Wh + b
+r = sigmoid(z[:, :H])
+u = sigmoid(z[:, H:2*H])
+g = torch.tanh(z[:, 2*H:] + r * (h @ Wh[:, 2*H:]))
+h = (1 - u) * g + u * h
+return h
 ```
 
 
@@ -4474,32 +4474,32 @@ def create_linked_list(arr):
   如果是如 LLaMA 等新型 LLM，则改 Norm 和 激活函数类型，并把 PostNorm 改成 PreNorm。
 
 ```python
-  class TransformerBlock(nn.Module):
-  def __init__(self, hidden_size=4096, num_heads=32, dropout=0.1):
-  super().__init__()
-  self.attention = MultiHeadSelfAttention(hidden_size, num_heads)
-  self.norm1 = nn.LayerNorm(hidden_size)
-  self.ff = nn.Sequential(
-  nn.Linear(hidden_size, hidden_size * 4),
-  nn.ReLU(),
-  nn.Linear(hidden_size * 4, hidden_size)
-  )
-  self.norm2 = nn.LayerNorm(hidden_size)
-  self.dropout = nn.Dropout(dropout)
+class TransformerBlock(nn.Module):
+def __init__(self, hidden_size=4096, num_heads=32, dropout=0.1):
+super().__init__()
+self.attention = MultiHeadSelfAttention(hidden_size, num_heads)
+self.norm1 = nn.LayerNorm(hidden_size)
+self.ff = nn.Sequential(
+nn.Linear(hidden_size, hidden_size * 4),
+nn.ReLU(),
+nn.Linear(hidden_size * 4, hidden_size)
+)
+self.norm2 = nn.LayerNorm(hidden_size)
+self.dropout = nn.Dropout(dropout)
 
-  def forward(self, x, mask=None):
-  # Self-attention
-  attn_out = self.attention(x, mask)
-  # Residual Connection
-  x = x + self.dropout(attn_out)
-  x = self.norm1(x)
+def forward(self, x, mask=None):
+# Self-attention
+attn_out = self.attention(x, mask)
+# Residual Connection
+x = x + self.dropout(attn_out)
+x = self.norm1(x)
 
-  # Feedforward with residual
-  ff_out = self.ff(x)
-  x = x + self.dropout(ff_out)
-  x = self.norm2(x)
+# Feedforward with residual
+ff_out = self.ff(x)
+x = x + self.dropout(ff_out)
+x = self.norm2(x)
 
-  return x
+return x
 ```
 
 
@@ -4511,56 +4511,56 @@ def create_linked_list(arr):
 - **multi-head attention 实现**
 
 ```python
-  import torch
-  import torch.nn as nn
-  import torch.nn.functional as F
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
 
-  class MultiHeadAttention(nn.Module):
-  def __init__(self, embed_dim, num_heads):
-  super(MultiHeadAttention, self).__init__()
-  assert embed_dim % num_heads == 0, "Embedding dimension must be divisible by number of heads"
+class MultiHeadAttention(nn.Module):
+def __init__(self, embed_dim, num_heads):
+super(MultiHeadAttention, self).__init__()
+assert embed_dim % num_heads == 0, "Embedding dimension must be divisible by number of heads"
 
-  self.embed_dim = embed_dim
-  self.num_heads = num_heads
-  self.head_dim = embed_dim // num_heads
+self.embed_dim = embed_dim
+self.num_heads = num_heads
+self.head_dim = embed_dim // num_heads
 
-  # Linear layers to project input to Q, K, V
-  self.q_proj = nn.Linear(embed_dim, embed_dim)
-  self.k_proj = nn.Linear(embed_dim, embed_dim)
-  self.v_proj = nn.Linear(embed_dim, embed_dim)
+# Linear layers to project input to Q, K, V
+self.q_proj = nn.Linear(embed_dim, embed_dim)
+self.k_proj = nn.Linear(embed_dim, embed_dim)
+self.v_proj = nn.Linear(embed_dim, embed_dim)
 
-  # Final output projection
-  self.out_proj = nn.Linear(embed_dim, embed_dim)
+# Final output projection
+self.out_proj = nn.Linear(embed_dim, embed_dim)
 
-  def forward(self, x, mask=None):
-  B, T, E = x.size()
+def forward(self, x, mask=None):
+B, T, E = x.size()
 
-  # Linear projections
-  Q = self.q_proj(x)  # (B, T, E)
-  K = self.k_proj(x)
-  V = self.v_proj(x)
+# Linear projections
+Q = self.q_proj(x)  # (B, T, E)
+K = self.k_proj(x)
+V = self.v_proj(x)
 
-  # Split into multiple heads: (B, num_heads, T, head_dim)
-  Q = Q.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-  K = K.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-  V = V.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+# Split into multiple heads: (B, num_heads, T, head_dim)
+Q = Q.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+K = K.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+V = V.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
 
-  # Scaled dot-product attention
-  scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.head_dim ** 0.5)  # (B, num_heads, T, T)
-  if mask is not None:
-  scores = scores.masked_fill(mask == 0, float("-inf"))
-  weights = F.softmax(scores, dim=-1)
-  attended = torch.matmul(weights, V)  # (B, num_heads, T, head_dim)
+# Scaled dot-product attention
+scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.head_dim ** 0.5)  # (B, num_heads, T, T)
+if mask is not None:
+scores = scores.masked_fill(mask == 0, float("-inf"))
+weights = F.softmax(scores, dim=-1)
+attended = torch.matmul(weights, V)  # (B, num_heads, T, head_dim)
 
-  # Concatenate heads: (B, T, E)
-  # transpose/permute → 改变维度顺序但通常返回 非连续 张量。
-  # view → 只能作用于 连续 内存。
-  # contiguous() → 如有必要，将张量复制为连续布局，保证 view 能正常工作。
-  attended = attended.transpose(1, 2).contiguous().view(B, T, E)
+# Concatenate heads: (B, T, E)
+# transpose/permute → 改变维度顺序但通常返回 非连续 张量。
+# view → 只能作用于 连续 内存。
+# contiguous() → 如有必要，将张量复制为连续布局，保证 view 能正常工作。
+attended = attended.transpose(1, 2).contiguous().view(B, T, E)
 
-  # Final linear projection
-  output = self.out_proj(attended)
-  return output
+# Final linear projection
+output = self.out_proj(attended)
+return output
 ```
 
 
@@ -4577,10 +4577,10 @@ def create_linked_list(arr):
 - **casual mask 怎么生成**
 
 ```python
-  def causal_mask(seq_len):
-  # 下三角矩阵 (seq_len, seq_len)
-  mask = torch.tril(torch.ones(seq_len, seq_len, dtype=torch.bool))
-  return mask
+def causal_mask(seq_len):
+# 下三角矩阵 (seq_len, seq_len)
+mask = torch.tril(torch.ones(seq_len, seq_len, dtype=torch.bool))
+return mask
 ```
 
 
@@ -4593,52 +4593,52 @@ def create_linked_list(arr):
 
   GQA 是 MQA 和 MHA 的均衡，MQA 尽管减轻了 KV Cache 负担，但也可能带来性能下降。grouped-query attention 中，query 使用比 key/value 更多的 heads。因为在推理阶段，Q 是即时计算的，而 K/V 是缓存的。
 ```python
-  import torch
-  import torch.nn as nn
-  import torch.nn.functional as F
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
 
-  class GroupedQueryAttention(nn.Module):
-  def __init__(self, embed_dim, num_query_heads, num_kv_heads):
-  super(GroupedQueryAttention, self).__init__()
-  assert embed_dim % num_query_heads == 0, "embed_dim must be divisible by num_query_heads"
-  assert embed_dim % num_kv_heads == 0, "embed_dim must be divisible by num_kv_heads"
+class GroupedQueryAttention(nn.Module):
+def __init__(self, embed_dim, num_query_heads, num_kv_heads):
+super(GroupedQueryAttention, self).__init__()
+assert embed_dim % num_query_heads == 0, "embed_dim must be divisible by num_query_heads"
+assert embed_dim % num_kv_heads == 0, "embed_dim must be divisible by num_kv_heads"
 
-  self.embed_dim = embed_dim
-  self.num_query_heads = num_query_heads
-  self.num_kv_heads = num_kv_heads
-  self.q_head_dim = embed_dim // num_query_heads
-  self.kv_head_dim = embed_dim // num_kv_heads
+self.embed_dim = embed_dim
+self.num_query_heads = num_query_heads
+self.num_kv_heads = num_kv_heads
+self.q_head_dim = embed_dim // num_query_heads
+self.kv_head_dim = embed_dim // num_kv_heads
 
-  # Projection layers
-  self.q_proj = nn.Linear(embed_dim, embed_dim)
-  self.k_proj = nn.Linear(embed_dim, embed_dim)
-  self.v_proj = nn.Linear(embed_dim, embed_dim)
-  self.out_proj = nn.Linear(embed_dim, embed_dim)
+# Projection layers
+self.q_proj = nn.Linear(embed_dim, embed_dim)
+self.k_proj = nn.Linear(embed_dim, embed_dim)
+self.v_proj = nn.Linear(embed_dim, embed_dim)
+self.out_proj = nn.Linear(embed_dim, embed_dim)
 
-  def forward(self, x):
-  B, T, E = x.shape
+def forward(self, x):
+B, T, E = x.shape
 
-  # Project inputs
-  Q = self.q_proj(x).view(B, T, self.num_query_heads, self.q_head_dim).transpose(1, 2)  # (B, QH, T, Dq)
-  K = self.k_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dk)
-  V = self.v_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dv)
+# Project inputs
+Q = self.q_proj(x).view(B, T, self.num_query_heads, self.q_head_dim).transpose(1, 2)  # (B, QH, T, Dq)
+K = self.k_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dk)
+V = self.v_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dv)
 
-  # Expand K/V to match query heads if needed
-  if self.num_query_heads != self.num_kv_heads:
-  repeat_factor = self.num_query_heads // self.num_kv_heads
-  K = K.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dk)
-  V = V.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dv)
+# Expand K/V to match query heads if needed
+if self.num_query_heads != self.num_kv_heads:
+repeat_factor = self.num_query_heads // self.num_kv_heads
+K = K.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dk)
+V = V.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dv)
 
-  # Scaled dot-product attention
-  scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.q_head_dim ** 0.5)  # (B, QH, T, T)
-  attn_weights = F.softmax(scores, dim=-1)
-  context = torch.matmul(attn_weights, V)  # (B, QH, T, Dv)
+# Scaled dot-product attention
+scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.q_head_dim ** 0.5)  # (B, QH, T, T)
+attn_weights = F.softmax(scores, dim=-1)
+context = torch.matmul(attn_weights, V)  # (B, QH, T, Dv)
 
-  # Combine heads
-  context = context.transpose(1, 2).contiguous().view(B, T, E)  # (B, T, E)
-  output = self.out_proj(context)  # Final linear projection
+# Combine heads
+context = context.transpose(1, 2).contiguous().view(B, T, E)  # (B, T, E)
+output = self.out_proj(context)  # Final linear projection
 
-  return output
+return output
 ```
 
 
@@ -4646,54 +4646,54 @@ def create_linked_list(arr):
 
   query 不参与下一 token 的注意力过程，无需缓存，而 key/value 是过去的记忆，需要缓存。
 ```python
-  import torch
-  import torch.nn as nn
-  import torch.nn.functional as F
-  class SelfAttentionWithKVCache(nn.Module):
-  def __init__(self, embed_dim, num_heads, max_seq_len):
-  super().__init__()
-  assert embed_dim % num_heads == 0
-  self.embed_dim = embed_dim
-  self.num_heads = num_heads
-  self.head_dim = embed_dim // num_heads
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+class SelfAttentionWithKVCache(nn.Module):
+def __init__(self, embed_dim, num_heads, max_seq_len):
+super().__init__()
+assert embed_dim % num_heads == 0
+self.embed_dim = embed_dim
+self.num_heads = num_heads
+self.head_dim = embed_dim // num_heads
 
-  self.q_proj = nn.Linear(embed_dim, embed_dim)
-  self.k_proj = nn.Linear(embed_dim, embed_dim)
-  self.v_proj = nn.Linear(embed_dim, embed_dim)
-  self.out_proj = nn.Linear(embed_dim, embed_dim)
+self.q_proj = nn.Linear(embed_dim, embed_dim)
+self.k_proj = nn.Linear(embed_dim, embed_dim)
+self.v_proj = nn.Linear(embed_dim, embed_dim)
+self.out_proj = nn.Linear(embed_dim, embed_dim)
 
-  # 初始化 KV Cache（支持最多 max_seq_len 步）
-  self.register_buffer("key_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
-  self.register_buffer("value_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
-  self.max_seq_len = max_seq_len
+# 初始化 KV Cache（支持最多 max_seq_len 步）
+self.register_buffer("key_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
+self.register_buffer("value_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
+self.max_seq_len = max_seq_len
 
-  def forward(self, x, start_pos):
-  """
-  x: [B, 1, E] - 当前一步的 token 表示
-  start_pos: int - 当前 token 在生成序列中的位置
-  """
-  B, T, E = x.shape  # T == 1 during generation
+def forward(self, x, start_pos):
+"""
+x: [B, 1, E] - 当前一步的 token 表示
+start_pos: int - 当前 token 在生成序列中的位置
+"""
+B, T, E = x.shape  # T == 1 during generation
 
-  # QKV projection
-  Q = self.q_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)  # [B, H, 1, D]
-  K = self.k_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-  V = self.v_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+# QKV projection
+Q = self.q_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)  # [B, H, 1, D]
+K = self.k_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+V = self.v_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
 
-  # 更新 KV cache
-  self.key_cache[:, :, start_pos:start_pos+1, :] = K
-  self.value_cache[:, :, start_pos:start_pos+1, :] = V
+# 更新 KV cache
+self.key_cache[:, :, start_pos:start_pos+1, :] = K
+self.value_cache[:, :, start_pos:start_pos+1, :] = V
 
-  # 从 0 到当前 step，取所有 KV
-  K_cached = self.key_cache[:, :, :start_pos+1, :]   # [B, H, T_cache, D]
-  V_cached = self.value_cache[:, :, :start_pos+1, :] # [B, H, T_cache, D]
+# 从 0 到当前 step，取所有 KV
+K_cached = self.key_cache[:, :, :start_pos+1, :]   # [B, H, T_cache, D]
+V_cached = self.value_cache[:, :, :start_pos+1, :] # [B, H, T_cache, D]
 
-  # 注意力计算
-  scores = torch.matmul(Q, K_cached.transpose(-2, -1)) / (self.head_dim ** 0.5)  # [B, H, 1, T_cache]
-  attn_weights = F.softmax(scores, dim=-1)
-  out = torch.matmul(attn_weights, V_cached)  # [B, H, 1, D]
+# 注意力计算
+scores = torch.matmul(Q, K_cached.transpose(-2, -1)) / (self.head_dim ** 0.5)  # [B, H, 1, T_cache]
+attn_weights = F.softmax(scores, dim=-1)
+out = torch.matmul(attn_weights, V_cached)  # [B, H, 1, D]
 
-  out = out.transpose(1, 2).contiguous().view(B, T, E)  # [B, 1, E]
-  return self.out_proj(out)
+out = out.transpose(1, 2).contiguous().view(B, T, E)  # [B, 1, E]
+return self.out_proj(out)
 ```
 
 
@@ -4710,54 +4710,54 @@ def create_linked_list(arr):
   在后向梯度计算时，一般需要 attention matrix，但 FlashAttention 可以利用两个额外的统计量在 SRAM 上快速重新计算 attention。
 
 ```python
-  import torch
-  import torch.nn.functional as F
+import torch
+import torch.nn.functional as F
 
-  def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
-  # Q, K, V: [B, L, D]，Batch x Length x Dim
-  # block_size: 每块序列长度
-  B, L, D = Q.shape
-  output = torch.zeros_like(Q)
+def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
+# Q, K, V: [B, L, D]，Batch x Length x Dim
+# block_size: 每块序列长度
+B, L, D = Q.shape
+output = torch.zeros_like(Q)
 
-  # 遍历查询块
-  for i in range(0, L, block_size):
-  q_block = Q[:, i:i+block_size, :]   # [B, block, D]
-  out_block = torch.zeros_like(q_block)
+# 遍历查询块
+for i in range(0, L, block_size):
+q_block = Q[:, i:i+block_size, :]   # [B, block, D]
+out_block = torch.zeros_like(q_block)
 
-  # 记录在线 softmax 的统计量
-  m_prev = None  # 当前块的最大值
-  d_prev = None  # 当前块的 exp 和
+# 记录在线 softmax 的统计量
+m_prev = None  # 当前块的最大值
+d_prev = None  # 当前块的 exp 和
 
-  # 遍历键/值块
-  for j in range(0, L, block_size):
-  k_block = K[:, j:j+block_size, :]
-  v_block = V[:, j:j+block_size, :]
+# 遍历键/值块
+for j in range(0, L, block_size):
+k_block = K[:, j:j+block_size, :]
+v_block = V[:, j:j+block_size, :]
 
-  # Attention logits
-  scores = torch.matmul(q_block, k_block.transpose(-2, -1)) / D**0.5
-  if mask is not None:
-  scores += mask[:, i:i+block_size, j:j+block_size]
+# Attention logits
+scores = torch.matmul(q_block, k_block.transpose(-2, -1)) / D**0.5
+if mask is not None:
+scores += mask[:, i:i+block_size, j:j+block_size]
 
-  # 在线 softmax
-  m_new = scores.max(dim=-1, keepdim=True).values
-  if m_prev is None:
-  d_new = torch.exp(scores - m_new).sum(dim=-1, keepdim=True)
-  y = torch.exp(scores - m_new) / d_new
-  else:
-  m_comb = torch.max(m_prev, m_new)
-  d_new = torch.exp(m_prev - m_comb) * d_prev + torch.exp(scores - m_comb).sum(dim=-1, keepdim=True)
-  y = torch.exp(scores - m_comb) / d_new
+# 在线 softmax
+m_new = scores.max(dim=-1, keepdim=True).values
+if m_prev is None:
+d_new = torch.exp(scores - m_new).sum(dim=-1, keepdim=True)
+y = torch.exp(scores - m_new) / d_new
+else:
+m_comb = torch.max(m_prev, m_new)
+d_new = torch.exp(m_prev - m_comb) * d_prev + torch.exp(scores - m_comb).sum(dim=-1, keepdim=True)
+y = torch.exp(scores - m_comb) / d_new
 
-  # 累加输出块
-  out_block += torch.matmul(y, v_block)
+# 累加输出块
+out_block += torch.matmul(y, v_block)
 
-  # 更新统计量，用于下一个键块（在线 softmax）
-  m_prev = m_new
-  d_prev = d_new
+# 更新统计量，用于下一个键块（在线 softmax）
+m_prev = m_new
+d_prev = d_new
 
-  output[:, i:i+block_size, :] = out_block
+output[:, i:i+block_size, :] = out_block
 
-  return output
+return output
 ```
 
   FlashAttention v2 改进：
@@ -4904,44 +4904,44 @@ def create_linked_list(arr):
 - **RoPE 实现**
 
 ```python
-  import torch
-  import math
+import torch
+import math
 
-  def rope(x):
-  """
-  x: (seq_len, batch_size, d_model)
-  返回加上 RoPE 的 embedding
-  """
-  seq_len, batch_size, d_model = x.shape
-  # RoPE 要求维度是偶数，因为每两个维度为一对进行二维旋转
-  assert d_model % 2 == 0, "RoPE embedding dim must be even"
+def rope(x):
+"""
+x: (seq_len, batch_size, d_model)
+返回加上 RoPE 的 embedding
+"""
+seq_len, batch_size, d_model = x.shape
+# RoPE 要求维度是偶数，因为每两个维度为一对进行二维旋转
+assert d_model % 2 == 0, "RoPE embedding dim must be even"
 
-  # 每两维组成一对
-  half_dim = d_model // 2
-  # theta 是频率向量，计算不同维度的旋转角度，低维旋转快，高维旋转慢。旋转越慢，越适合捕捉长距离关系
-  theta = 10000 ** (torch.arange(0, half_dim, dtype=torch.float32) / half_dim)
-  # 序列中每个 token 的位置索引
-  pos = torch.arange(seq_len, dtype=torch.float32).unsqueeze(1)  # (seq_len, 1)
-  # 每个 token 每一对维度的旋转角度
-  angles = pos / theta  # (seq_len, half_dim)
+# 每两维组成一对
+half_dim = d_model // 2
+# theta 是频率向量，计算不同维度的旋转角度，低维旋转快，高维旋转慢。旋转越慢，越适合捕捉长距离关系
+theta = 10000 ** (torch.arange(0, half_dim, dtype=torch.float32) / half_dim)
+# 序列中每个 token 的位置索引
+pos = torch.arange(seq_len, dtype=torch.float32).unsqueeze(1)  # (seq_len, 1)
+# 每个 token 每一对维度的旋转角度
+angles = pos / theta  # (seq_len, half_dim)
 
-  # 计算 sin/cos
-  sin = torch.sin(angles)  # (seq_len, half_dim)
-  cos = torch.cos(angles)
+# 计算 sin/cos
+sin = torch.sin(angles)  # (seq_len, half_dim)
+cos = torch.cos(angles)
 
-  # 将 x 分成两半
-  x1 = x[:, :, 0::2]  # even indices
-  x2 = x[:, :, 1::2]  # odd indices
+# 将 x 分成两半
+x1 = x[:, :, 0::2]  # even indices
+x2 = x[:, :, 1::2]  # odd indices
 
-  # 旋转
-  x_rotated_0 = x1 * cos - x2 * sin
-  x_rotated_1 = x1 * sin + x2 * cos
+# 旋转
+x_rotated_0 = x1 * cos - x2 * sin
+x_rotated_1 = x1 * sin + x2 * cos
 
-  # 交替组合回原始维度
-  x_out = torch.zeros_like(x)
-  x_out[:, :, 0::2] = x_rotated_0
-  x_out[:, :, 1::2] = x_rotated_1
-  return x_out
+# 交替组合回原始维度
+x_out = torch.zeros_like(x)
+x_out[:, :, 0::2] = x_rotated_0
+x_out[:, :, 1::2] = x_rotated_1
+return x_out
 ```
 
 
@@ -4995,21 +4995,21 @@ def create_linked_list(arr):
 - **实现 LayerNorm**
 
 ```python
-  import torch
-  import torch.nn as nn
+import torch
+import torch.nn as nn
 
-  class LayerNorm(nn.Module):
-  def __init__(self, dim, eps=1e-5):
-  super(LayerNorm, self).__init__()
-  self.eps = eps
-  self.gamma = nn.Parameter(torch.ones(dim))  # 缩放因子
-  self.beta = nn.Parameter(torch.zeros(dim))  # 偏移因子
+class LayerNorm(nn.Module):
+def __init__(self, dim, eps=1e-5):
+super(LayerNorm, self).__init__()
+self.eps = eps
+self.gamma = nn.Parameter(torch.ones(dim))  # 缩放因子
+self.beta = nn.Parameter(torch.zeros(dim))  # 偏移因子
 
-  def forward(self, x):
-  mean = x.mean(dim=-1, keepdim=True)
-  var = x.var(dim=-1, unbiased=False, keepdim=True)
-  x_norm = (x - mean) / torch.sqrt(var + self.eps)
-  return self.gamma * x_norm + self.beta
+def forward(self, x):
+mean = x.mean(dim=-1, keepdim=True)
+var = x.var(dim=-1, unbiased=False, keepdim=True)
+x_norm = (x - mean) / torch.sqrt(var + self.eps)
+return self.gamma * x_norm + self.beta
 ```
 
 
@@ -5017,20 +5017,20 @@ def create_linked_list(arr):
 
   RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
 ```python
-  import torch
-  import torch.nn as nn
+import torch
+import torch.nn as nn
 
-  class RMSNorm(nn.Module):
-  def __init__(self, dim, eps=1e-8):
-  super(RMSNorm, self).__init__()
-  self.eps = eps
-  self.scale = nn.Parameter(torch.ones(dim))  # 可学习缩放因子
+class RMSNorm(nn.Module):
+def __init__(self, dim, eps=1e-8):
+super(RMSNorm, self).__init__()
+self.eps = eps
+self.scale = nn.Parameter(torch.ones(dim))  # 可学习缩放因子
 
-  def forward(self, x):
-  # 计算 RMS
-  rms = x.pow(2).mean(dim=-1, keepdim=True).add(self.eps).sqrt()
-  x_norm = x / rms
-  return self.scale * x_norm
+def forward(self, x):
+# 计算 RMS
+rms = x.pow(2).mean(dim=-1, keepdim=True).add(self.eps).sqrt()
+x_norm = x / rms
+return self.scale * x_norm
 ```
 
 
@@ -5058,32 +5058,32 @@ def create_linked_list(arr):
 - **Beam Search 实现**
 
 ```python
-  import numpy as np
+import numpy as np
 
-  def beam_search(start_token, get_next_probs, beam_width=3, max_len=10):
-  """
-  start_token: 初始 token
-  get_next_probs: 函数 f(seq) -> dict{token: prob} 返回下一个 token 的概率
-  beam_width: beam 大小
-  max_len: 最大生成长度
-  """
-  # 初始 beam: list of (sequence, score)
-  beams = [( [start_token], 0.0 )]  # score 用 log 概率
+def beam_search(start_token, get_next_probs, beam_width=3, max_len=10):
+"""
+start_token: 初始 token
+get_next_probs: 函数 f(seq) -> dict{token: prob} 返回下一个 token 的概率
+beam_width: beam 大小
+max_len: 最大生成长度
+"""
+# 初始 beam: list of (sequence, score)
+beams = [( [start_token], 0.0 )]  # score 用 log 概率
 
-  for _ in range(max_len):
-  new_beams = []
-  for seq, score in beams:
-  next_probs = get_next_probs(seq)
-  for token, prob in next_probs.items():
-  new_seq = seq + [token]
-  new_score = score + np.log(prob + 1e-12)  # 避免 log(0)
-  new_beams.append((new_seq, new_score))
+for _ in range(max_len):
+new_beams = []
+for seq, score in beams:
+next_probs = get_next_probs(seq)
+for token, prob in next_probs.items():
+new_seq = seq + [token]
+new_score = score + np.log(prob + 1e-12)  # 避免 log(0)
+new_beams.append((new_seq, new_score))
 
-  # 选择 top-k
-  new_beams.sort(key=lambda x: x[1], reverse=True)
-  beams = new_beams[:beam_width]
+# 选择 top-k
+new_beams.sort(key=lambda x: x[1], reverse=True)
+beams = new_beams[:beam_width]
 
-  return beams  # 返回最终 beam 列表
+return beams  # 返回最终 beam 列表
 ```
 
 
@@ -5105,22 +5105,22 @@ def create_linked_list(arr):
 - **手撕 MoE**
 
 ```python
-  import torch
-  import torch.nn as nn
-  import torch.nn.functional as F
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
 
-  class SimpleMoE(nn.Module):
-  def __init__(self, input_dim, output_dim, num_experts):
-  super().__init__()
-  self.num_experts = num_experts
-  self.experts = nn.ModuleList([nn.Linear(input_dim, output_dim) for _ in range(num_experts)])
-  self.gate = nn.Linear(input_dim, num_experts)
+class SimpleMoE(nn.Module):
+def __init__(self, input_dim, output_dim, num_experts):
+super().__init__()
+self.num_experts = num_experts
+self.experts = nn.ModuleList([nn.Linear(input_dim, output_dim) for _ in range(num_experts)])
+self.gate = nn.Linear(input_dim, num_experts)
 
-  def forward(self, x):
-  gate_probs = F.softmax(self.gate(x), dim=1)  # [batch, num_experts]
-  expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=1)  # [batch, num_experts, output_dim]
-  gate_probs = gate_probs.unsqueeze(-1)  # [batch, num_experts, 1]
-  return torch.sum(gate_probs * expert_outputs, dim=1)  # [batch, output_dim]
+def forward(self, x):
+gate_probs = F.softmax(self.gate(x), dim=1)  # [batch, num_experts]
+expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=1)  # [batch, num_experts, output_dim]
+gate_probs = gate_probs.unsqueeze(-1)  # [batch, num_experts, 1]
+return torch.sum(gate_probs * expert_outputs, dim=1)  # [batch, output_dim]
 ```
 
 
@@ -5132,25 +5132,25 @@ def create_linked_list(arr):
 - **手撕 LoRA**
 
 ```python
-  import torch
-  import torch.nn as nn
-  import torch.nn.functional as F
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
 
-  class LoRALinear(nn.Module):
-  def __init__(self, in_features, out_features, r=4, alpha=1):
-  super().__init__()
-  self.r = r
-  self.scale = alpha / r
-  self.weight = nn.Parameter(torch.randn(out_features, in_features))
-  self.weight.requires_grad = False
-  self.A = nn.Parameter(torch.randn(r, in_features) * 0.01)
-  self.B = nn.Parameter(torch.randn(out_features, r) * 0.01)
-  self.bias = nn.Parameter(torch.zeros(out_features))
+class LoRALinear(nn.Module):
+def __init__(self, in_features, out_features, r=4, alpha=1):
+super().__init__()
+self.r = r
+self.scale = alpha / r
+self.weight = nn.Parameter(torch.randn(out_features, in_features))
+self.weight.requires_grad = False
+self.A = nn.Parameter(torch.randn(r, in_features) * 0.01)
+self.B = nn.Parameter(torch.randn(out_features, r) * 0.01)
+self.bias = nn.Parameter(torch.zeros(out_features))
 
-  def forward(self, x):
-  base = F.linear(x, self.weight, self.bias)
-  lora = F.linear(x, self.B @ self.A) * self.scale
-  return base + lora
+def forward(self, x):
+base = F.linear(x, self.weight, self.bias)
+lora = F.linear(x, self.B @ self.A) * self.scale
+return base + lora
 ```
 
 
@@ -5249,13 +5249,13 @@ def create_linked_list(arr):
   - 计算优势 advantages，其物理意义采取当前动作会比平均收益多多少，即相对收益，$$Q(s_t, a_t) - V(s_t)$$。评估这一优势主要有两种方法，每种方法都有其利弊，即：1）蒙特卡洛 (Monte-Carlo，MC)：使用完整输出的 reward。由于奖励稀疏，只在生成最后一个 token 时有奖励，这种方法的方差很大，且从 LLM 中获取足够的样本来使用 MC 进行优化成本很高，但它的偏差很低，因为我们可以准确地模拟奖励；2）时间差分 (Temporal difference，TD)：使用一步轨迹奖励（即衡量刚根据提示生成的单词的优劣），即`advantages = reward - values_response.sum(dim=1) / response_mask.sum(dim=1)`。通过这样做，我们可以在 token 级别计算奖励，这显著降低了方差，但同时偏差会增加，因为我们无法从部分生成的响应中准确预测最终奖励。这就是 GAE 的用武之地，它提出通过多步时间差分 (multi-step TD) 来平衡偏差和方差。具体是从 reward 回溯分配每个 token 的 TD 残差 $$\delta_t$$，用 GAE 计算每个 token 的优势 $$A_t$$，其中 gamma 是时间折扣因子，控制未来奖励的重要性，越大代表未来奖励越重要。lambda 是 GAE 平衡因子，控制 bias-variance 权衡，lambda 越大 → 方差大，偏差小；λ 越小 → 方差小，偏差大。
 
 ```python
-  def compute_gae(rewards, values, gamma=1.0, lam=0.95):
-  advantages = torch.zeros_like(rewards)
-  last_adv = 0
-  for t in reversed(range(rewards.size(1))):
-  delta = rewards[:, t] + gamma * values[:, t + 1] - values[:, t]
-  advantages[:, t] = last_adv = delta + gamma * lam * last_adv
-  return advantages
+def compute_gae(rewards, values, gamma=1.0, lam=0.95):
+advantages = torch.zeros_like(rewards)
+last_adv = 0
+for t in reversed(range(rewards.size(1))):
+delta = rewards[:, t] + gamma * values[:, t + 1] - values[:, t]
+advantages[:, t] = last_adv = delta + gamma * lam * last_adv
+return advantages
 ```
 
   - 根据采样到的数据进行多次策略迭代更新，每次更新之后得到`log_probs`和新的`values`。
@@ -5267,12 +5267,12 @@ def create_linked_list(arr):
   其中 $$t$$ 为当前 token，$$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$ 为重要性采样比率，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
 
 ```python
-  def actor_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
-  ratio = torch.exp(log_probs - old_log_probs)  # [B]
-  unclipped = ratio * advantages
-  clipped = torch.clamp(ratio, 1 - clip_range, 1 + clip_range) * advantages
-  loss = -torch.min(unclipped, clipped).mean()
-  return loss
+def actor_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
+ratio = torch.exp(log_probs - old_log_probs)  # [B]
+unclipped = ratio * advantages
+clipped = torch.clamp(ratio, 1 - clip_range, 1 + clip_range) * advantages
+loss = -torch.min(unclipped, clipped).mean()
+return loss
 ```
 
   - 再根据`rewards`和`values`得到`critic_loss`，优化 Critic/Value Model。
@@ -5297,10 +5297,10 @@ def create_linked_list(arr):
 
   其中，$$y^+$$ 是人类偏好的回答，$$y^-$$ 是较差的回答，$$\beta$$ 是温度系数，控制偏好强度
 ```python
-  def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
-  diff = logp_chosen - logp_rejected  # [B]
-  loss = -torch.nn.functional.logsigmoid(beta * diff).mean()
-  return loss
+def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
+diff = logp_chosen - logp_rejected  # [B]
+loss = -torch.nn.functional.logsigmoid(beta * diff).mean()
+return loss
 ```
 
 
@@ -5328,25 +5328,25 @@ def create_linked_list(arr):
   - 根据相对奖励，得到每一个样本的 loss，进行优化；
 
 ```python
-  def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range=0.2):
-  # 计算每个组的 ratio
-  ratio = torch.exp(group_log_probs - group_old_log_probs)  # [G, B]
+def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range=0.2):
+# 计算每个组的 ratio
+ratio = torch.exp(group_log_probs - group_old_log_probs)  # [G, B]
 
-  # 计算组内相对优势（相对于组内其他策略优势的平均）
-  mean_advantages = group_advantages.mean(dim=0, keepdim=True)  # [1, B]
-  relative_advantages = group_advantages - mean_advantages     # [G, B]
+# 计算组内相对优势（相对于组内其他策略优势的平均）
+mean_advantages = group_advantages.mean(dim=0, keepdim=True)  # [1, B]
+relative_advantages = group_advantages - mean_advantages     # [G, B]
 
-  # 计算组内相对 ratio（相对于组内其他策略 ratio 的平均）
-  mean_ratio = ratio.mean(dim=0, keepdim=True)  # [1, B]
-  relative_ratio = ratio / (mean_ratio + 1e-8)  # [G, B]
+# 计算组内相对 ratio（相对于组内其他策略 ratio 的平均）
+mean_ratio = ratio.mean(dim=0, keepdim=True)  # [1, B]
+relative_ratio = ratio / (mean_ratio + 1e-8)  # [G, B]
 
-  # Unclipped and clipped losses 基于相对比率和相对优势
-  unclipped = relative_ratio * relative_advantages
-  clipped = torch.clamp(relative_ratio, 1 - clip_range, 1 + clip_range) * relative_advantages
+# Unclipped and clipped losses 基于相对比率和相对优势
+unclipped = relative_ratio * relative_advantages
+clipped = torch.clamp(relative_ratio, 1 - clip_range, 1 + clip_range) * relative_advantages
 
-  # 对所有组和批次求平均，取最小
-  loss = -torch.min(unclipped, clipped).mean()
-  return loss
+# 对所有组和批次求平均，取最小
+loss = -torch.min(unclipped, clipped).mean()
+return loss
 ```
 
   - 输出 o_i 被输入到冻结的参考模型（Reference Model），计算输出 o_i 与参考策略之间的 KL 散度，用于限制策略更新。
