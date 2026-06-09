@@ -874,11 +874,14 @@ if __name__ == "__main__":
 left = 0
 for right in range(len(arr)):
     # 扩大窗口（通常加入arr[right]）
+    ...
 
     while 窗口不满足条件:
         # 缩小窗口（通常移动left）
+        ...
 
     # 此时窗口满足条件，更新结果（比如最大值、最小长度等）
+    ...
 ```
 
   三、快慢指针（Fast and Slow Pointers）
@@ -1382,10 +1385,10 @@ empty = not queue
 
 ```python
 class TreeNode:
-def __init__(self, val):
-self.val = val
-self.left = None
-self.right = None
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
 ```
 
   从数组/列表构建二叉树（按层次顺序）：假设输入 `[1,2,3,None,4,5,6]` 表示按层次序排列的节点（`None` 表示空节点）：
@@ -1394,22 +1397,22 @@ self.right = None
 from collections import deque
 
 def build_binary_tree(values):
-if not values:
-return None
-root = TreeNode(vaues[0])
-queue = deque([root])
-i = 1
-while queue and i < len(values):
-node = queue.popleft()
-if values[i] is not None:
-node.left = TreeNode(values[i])
-queue.append(node.left)
-i += 1
-if i < len(values) and values[i] is not None:
-node.right = TreeNode(values[i])
-queue.append(node.right)
-i += 1
-return root
+    if not values:
+        return None
+    root = TreeNode(vaues[0])
+    queue = deque([root])
+    i = 1
+    while queue and i < len(values):
+        node = queue.popleft()
+        if values[i] is not None:
+            node.left = TreeNode(values[i])
+            queue.append(node.left)
+            i += 1
+            if i < len(values) and values[i] is not None:
+                node.right = TreeNode(values[i])
+                queue.append(node.right)
+                i += 1
+                return root
 ```
 
   二叉树的前序、中序、后序遍历：用递归/非递归+栈实现节点访问顺序。对于非递归+栈，在先序中，压入顺序为根节点，右节点，左节点，出栈顺序对应为（根、左、右）。在中序中，进入循环的条件为栈是否为空或根节点是否为NULL，首先将左节点入栈，重复该过程，直到左节点不存在，然后依次出栈，出栈的同时判断当前节点的右节点是否存在，若存在则再次进入循环。在后序遍历中，可以借助前序遍历，前序遍历为根左右，后序遍历为左右根，只需将前序遍历顺序调整为根右左，将最终结果reverse就可以得到后序遍历。
@@ -1479,37 +1482,37 @@ heapq.nlargest(k, nums) # 获取 nums 最大的 K 个元素
 
 ```python
 class TrieNode:
-def __init__(self):
-self.children = {}      # 存储子节点
-self.is_end_of_word = False  # 标记单词结束
+    def __init__(self):
+        self.children = {}      # 存储子节点
+        self.is_end_of_word = False  # 标记单词结束
 
-class Trie:
-def __init__(self):
-self.root = TrieNode()
+        class Trie:
+            def __init__(self):
+                self.root = TrieNode()
 
-def insert(self, word: str) -> None:
-node = self.root
-for char in word:
-if char not in node.children:
-node.children[char] = TrieNode()
-node = node.children[char]
-node.is_end_of_word = True
+                def insert(self, word: str) -> None:
+                    node = self.root
+                    for char in word:
+                        if char not in node.children:
+                            node.children[char] = TrieNode()
+                            node = node.children[char]
+                            node.is_end_of_word = True
 
-def search(self, word: str) -> bool:
-node = self.root
-for char in word:
-if char not in node.children:
-return False
-node = node.children[char]
-return node.is_end_of_word
+                            def search(self, word: str) -> bool:
+                                node = self.root
+                                for char in word:
+                                    if char not in node.children:
+                                        return False
+                                    node = node.children[char]
+                                    return node.is_end_of_word
 
-def startsWith(self, prefix: str) -> bool:
-node = self.root
-for char in prefix:
-if char not in node.children:
-return False
-node = node.children[char]
-return True
+                                    def startsWith(self, prefix: str) -> bool:
+                                        node = self.root
+                                        for char in prefix:
+                                            if char not in node.children:
+                                                return False
+                                            node = node.children[char]
+                                            return True
 ```
   - 替换词根：将句子中的词替换为其词根；利用 Trie 存储所有词根，遍历句子中每个词，查找最短匹配词根。
   - 单词搜索 II：在二维字符网格中找多个单词；构建 Trie 存储单词表，然后结合 DFS 和 Trie 剪枝遍历。
@@ -1602,30 +1605,30 @@ return True
 import heapq
 
 def dijkstra(n, edges, start):
-"""
-n: 节点数
-edges: 邻接表 {u: [(v, w), ...]}
-start: 起点
-"""
-dist = [float('inf')] * n
-dist[start] = 0
+    """
+    n: 节点数
+    edges: 邻接表 {u: [(v, w), ...]}
+    start: 起点
+    """
+    dist = [float('inf')] * n
+    dist[start] = 0
 
-pq = [(0, start)]  # (当前距离, 节点)
+    pq = [(0, start)]  # (当前距离, 节点)
 
-while pq:
-d, u = heapq.heappop(pq)
-# 避免处理过期的队列元素
-# 当松弛操作发现 `dist[v]` 被更新更小的距离时，会再次把 `(dist[v], v)` 入队。
-# 队列里可能存在旧的、较大的距离值，也就是“过期元素”。
-if d > dist[u]:
-continue  # 已经有更短的路径，跳过
+    while pq:
+        d, u = heapq.heappop(pq)
+        # 避免处理过期的队列元素
+        # 当松弛操作发现 `dist[v]` 被更新更小的距离时，会再次把 `(dist[v], v)` 入队。
+        # 队列里可能存在旧的、较大的距离值，也就是“过期元素”。
+        if d > dist[u]:
+            continue  # 已经有更短的路径，跳过
 
-for v, w in edges[u]:
-if dist[u] + w < dist[v]:
-dist[v] = dist[u] + w
-heapq.heappush(pq, (dist[v], v))
+        for v, w in edges[u]:
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                heapq.heappush(pq, (dist[v], v))
 
-return dist
+                return dist
 ```
 
   0-1 BFS，用于解决边权为 0 或 1（可推广为 0 或任意正整数，不可为两个整数，因为这样子双端队列无法保证单调）的单源最短路径问题（可多次调用变成多源），用邻接矩阵表示图，时间复杂度为 O(V + E)。0-1 BFS 是 Dijkstra 算法的特例，用双端队列 (deque) 替代优先队列：如果边权 = 0，把新节点放到队首。如果边权 = 1，把新节点放到队尾。这样保证 deque 始终按最短路顺序扩展节点。
@@ -1634,74 +1637,74 @@ return dist
 from collections import deque
 
 def zero_one_bfs(n, edges, start):
-"""
-n: 节点数
-edges: 邻接表形式, edges[u] = [(v, w), ...], w ∈ {0, 1}
-start: 起点
-"""
-dist = [float('inf')] * n
-dist[start] = 0
+    """
+    n: 节点数
+    edges: 邻接表形式, edges[u] = [(v, w), ...], w ∈ {0, 1}
+    start: 起点
+    """
+    dist = [float('inf')] * n
+    dist[start] = 0
 
-dq = deque([start])
+    dq = deque([start])
 
-while dq:
-u = dq.popleft()
-for v, w in edges[u]:
-if dist[u] + w < dist[v]:
-dist[v] = dist[u] + w
-if w == 0:
-dq.appendleft(v)  # 权重 0 → 优先
-else:
-dq.append(v)      # 权重 1 → 放队尾
-return dist
+    while dq:
+        u = dq.popleft()
+        for v, w in edges[u]:
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                if w == 0:
+                    dq.appendleft(v)  # 权重 0 → 优先
+                else:
+                    dq.append(v)      # 权重 1 → 放队尾
+                    return dist
 ```
 
   Floyd 算法，用于解决有负权（无负环）的多源最短路径问题，是动态规划算法，时间复杂度为 O(V^3)。
 
 ```python
 def floyd_warshall(n, edges):
-INF = float('inf')
-# 初始化邻接矩阵
-dist = [[INF] * n for _ in range(n)]
-for i in range(n):
-dist[i][i] = 0
-for u, v, w in edges:
-dist[u][v] = min(dist[u][v], w)  # 处理重边
+    INF = float('inf')
+    # 初始化邻接矩阵
+    dist = [[INF] * n for _ in range(n)]
+    for i in range(n):
+        dist[i][i] = 0
+        for u, v, w in edges:
+            dist[u][v] = min(dist[u][v], w)  # 处理重边
 
-# 核心 DP 三层循环
-for k in range(n):
-for i in range(n):
-for j in range(n):
-if dist[i][k] + dist[k][j] < dist[i][j]:
-dist[i][j] = dist[i][k] + dist[k][j]
+            # 核心 DP 三层循环
+            for k in range(n):
+                for i in range(n):
+                    for j in range(n):
+                        if dist[i][k] + dist[k][j] < dist[i][j]:
+                            dist[i][j] = dist[i][k] + dist[k][j]
 
-return dist
+                            return dist
 ```
 
   Bellman-Ford 算法，用于解决有负权的单源最短路径问题（可多次调用变成多源），是动态规划算法，时间复杂度 O(VE)。
 
 ```python
 def bellman_ford(n, edges, src):
-INF = float('inf')
-dist = [INF] * n
-dist[src] = 0
+    INF = float('inf')
+    dist = [INF] * n
+    dist[src] = 0
 
-# 松弛 V-1 次
-for _ in range(n - 1):
-updated = False
-for u, v, w in edges:
-if dist[u] + w < dist[v]:
-dist[v] = dist[u] + w
-updated = True
-if not updated:
-break
+    # 松弛 V-1 次
+    for _ in range(n - 1):
+        updated = False
+        for u, v, w in edges:
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                updated = True
+                if not updated:
+                    break
 
-# 检测负环
-for u, v, w in edges:
-if dist[u] + w < dist[v]:
-raise ValueError("Graph contains negative weight cycle")
+                # 检测负环
+                for u, v, w in edges:
+                    if dist[u] + w < dist[v]:
+                        raise ValueError("Graph contains negative weight cycle")
 
-return dist
+                    return dist
 ```
 
   SPFA 算法，用于解决有负权的单源最短路径问题（可多次调用变成多源），是 Bellman-Ford 算法的队列优化版，也是动态规划算法，平均时间复杂度 O(E)，最坏时间复杂度 O(VE)。
@@ -1710,32 +1713,32 @@ return dist
 from collections import deque
 
 def spfa(n, edges, src):
-INF = float('inf')
-dist = [INF] * n
-in_queue = [False] * n
-count = [0] * n   # 统计每个点入队次数（用于负环检测）
+    INF = float('inf')
+    dist = [INF] * n
+    in_queue = [False] * n
+    count = [0] * n   # 统计每个点入队次数（用于负环检测）
 
-dist[src] = 0
-q = deque([src])
-in_queue[src] = True
+    dist[src] = 0
+    queue = deque([src])
+    in_queue[src] = True
 
-graph = [[] for _ in range(n)]
-for u, v, w in edges:
-graph[u].append((v, w))
+    graph = [[] for _ in range(n)]
+    for u, v, w in edges:
+        graph[u].append((v, w))
 
-while q:
-u = q.popleft()
-in_queue[u] = False
-for v, w in graph[u]:
-if dist[u] + w < dist[v]:
-dist[v] = dist[u] + w
-if not in_queue[v]:
-q.append(v)
-in_queue[v] = True
-count[v] += 1
-if count[v] > n:  # 超过 n 次 → 负环
-raise ValueError("Graph contains negative weight cycle")
-return dist
+    while queue:
+        u = queue.popleft()
+        in_queue[u] = False
+        for v, w in graph[u]:
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                if not in_queue[v]:
+                    queue.append(v)
+                    in_queue[v] = True
+                    count[v] += 1
+                    if count[v] > n:  # 超过 n 次 → 负环
+                        raise ValueError("Graph contains negative weight cycle")
+    return dist
 ```
 
 
@@ -1793,34 +1796,34 @@ return dist
 
 ```python
 def merge_sort(arr):
-if len(arr) <= 1:
-return arr
+    if len(arr) <= 1:
+        return arr
 
-mid = len(arr) // 2
-left = merge_sort(arr[:mid])
-right = merge_sort(arr[mid:])
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
 
-return merge(left, right)
+    return merge(left, right)
 
-def merge(left, right):
-result = []
-i = j = 0
-while i < len(left) and j < len(right):
-if left[i] <= right[j]:
-result.append(left[i])
-i += 1
-else:
-result.append(right[j])
-j += 1
-# 添加剩余元素
-result.extend(left[i:])
-result.extend(right[j:])
-return result
+    def merge(left, right):
+        result = []
+        i = j = 0
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                result.append(left[i])
+                i += 1
+            else:
+                result.append(right[j])
+                j += 1
+                # 添加剩余元素
+                result.extend(left[i:])
+                result.extend(right[j:])
+                return result
 
-# 示例
-arr = [5, 2, 9, 1, 5, 6]
-sorted_arr = merge_sort(arr)
-print(sorted_arr)
+            # 示例
+            arr = [5, 2, 9, 1, 5, 6]
+            sorted_arr = merge_sort(arr)
+            print(sorted_arr)
 ```
 
   基数排序：按位排序，从低位到高位依次进行分配和收集；稳定
@@ -1829,28 +1832,28 @@ print(sorted_arr)
 
 ```python
 def quick_sort(arr, low, high):
-if low < high:
-pivot_index = partition(arr, low, high)
-quick_sort(arr, low, pivot_index - 1)
-quick_sort(arr, pivot_index + 1, high)
+    if low < high:
+        pivot_index = partition(arr, low, high)
+        quick_sort(arr, low, pivot_index - 1)
+        quick_sort(arr, pivot_index + 1, high)
 
-def partition(arr, low, high):
-pivot = arr[low]  # 选择第一个元素作为基准
-i = low + 1
-j = high
+        def partition(arr, low, high):
+            pivot = arr[low]  # 选择第一个元素作为基准
+            i = low + 1
+            j = high
 
-while True:
-while i <= j and arr[i] <= pivot:
-i += 1
-while i <= j and arr[j] >= pivot:
-j -= 1
-if i <= j:
-arr[i], arr[j] = arr[j], arr[i]
-else:
-break
+            while True:
+                while i <= j and arr[i] <= pivot:
+                    i += 1
+                    while i <= j and arr[j] >= pivot:
+                        j -= 1
+                        if i <= j:
+                            arr[i], arr[j] = arr[j], arr[i]
+                        else:
+                            break
 
-arr[low], arr[j] = arr[j], arr[low]  # 把基准放到正确位置
-return j
+                        arr[low], arr[j] = arr[j], arr[low]  # 把基准放到正确位置
+                        return j
 ```
 
   希尔排序：插入排序的改进版本，其核心思想是先将整个待排序序列分割成若干个子序列分别进行直接插入排序，待整个序列基本有序时，再对全体记录进行一次直接插入排序。不稳定
@@ -1874,21 +1877,21 @@ return j
 from collections import deque
 
 def bfs(graph, start):
-visited = set()
-queue = deque([start])
+    visited = set()
+    queue = deque([start])
 
-while queue:
-node = queue.popleft()
-if node in visited:
-continue
-visited.add(node)
+    while queue:
+        node = queue.popleft()
+        if node in visited:
+            continue
+        visited.add(node)
 
-# 处理当前节点 node
-print(node)
+        # 处理当前节点 node
+        print(node)
 
-for neighbor in graph[node]:
-if neighbor not in visited:
-queue.append(neighbor)
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                queue.append(neighbor)
 ```
 
   应用场景
@@ -1896,19 +1899,19 @@ queue.append(neighbor)
   - 最短路径（无权图）：BFS 可以找到起点到各节点的最短路径。
 ```python
 def bfs_all_distances(graph, start):
-visited = set()
-dist = {start: 0}
-queue = deque([start])
-visited.add(start)
+    visited = set()
+    dist = {start: 0}
+    queue = deque([start])
+    visited.add(start)
 
-while queue:
-node = queue.popleft()
-for neighbor in graph.get(node, []):
-if neighbor not in visited:
-visited.add(neighbor)
-dist[neighbor] = dist[node] + 1
-queue.append(neighbor)
-return dist
+    while queue:
+        node = queue.popleft()
+        for neighbor in graph.get(node, []):
+            if neighbor not in visited:
+                visited.add(neighbor)
+                dist[neighbor] = dist[node] + 1
+                queue.append(neighbor)
+                return dist
 ```
   - 拓扑排序（课程表问题）：用 BFS 统计入度为 0 的节点，逐步处理图中的节点，检测环。
   - 层次遍历二叉树：使用队列按层访问节点，可用于打印或计算每层节点值。
@@ -1925,36 +1928,36 @@ return dist
   DFS 模版，递归版
 ```python
 def dfs_recursive(graph, node, visited=None):
-if visited is None:
-visited = set()
+    if visited is None:
+        visited = set()
 
-visited.add(node)
-# 处理当前节点 node
-print(node)
+        visited.add(node)
+        # 处理当前节点 node
+        print(node)
 
-for neighbor in graph[node]:
-if neighbor not in visited:
-dfs_recursive(graph, neighbor, visited)
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                dfs_recursive(graph, neighbor, visited)
 ```
 
   DFS 模版，非递归版
 ```python
 def dfs_iterative(graph, start):
-visited = set()
-stack = [start]
+    visited = set()
+    stack = [start]
 
-while stack:
-node = stack.pop()
-if node in visited:
-continue
-visited.add(node)
+    while stack:
+        node = stack.pop()
+        if node in visited:
+            continue
+        visited.add(node)
 
-# 处理当前节点 node
-print(node)
+        # 处理当前节点 node
+        print(node)
 
-for neighbor in reversed(graph[node]):  # reversed 保持一致遍历顺序
-if neighbor not in visited:
-stack.append(neighbor)
+        for neighbor in reversed(graph[node]):  # reversed 保持一致遍历顺序
+            if neighbor not in visited:
+                stack.append(neighbor)
 ```
 
   应用场景
@@ -2000,16 +2003,16 @@ stack.append(neighbor)
   二分法
 ```python
 def find_min(nums):
-left, right = 0, len(nums) - 1
-while left < right:
-mid = (left + right) // 2
-if nums[mid] > nums[right]:
-# 最小值在 mid 右边
-left = mid + 1
-else:
-# 最小值在 mid 或左边
-right = mid
-return nums[left]
+    left, right = 0, len(nums) - 1
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] > nums[right]:
+            # 最小值在 mid 右边
+            left = mid + 1
+        else:
+            # 最小值在 mid 或左边
+            right = mid
+            return nums[left]
 ```
 
 
@@ -2024,17 +2027,17 @@ return nums[left]
 
 ```python
 def sieve(n):
-"""
-n: 最大整数
-返回: is_prime 列表, is_prime[i]=True 表示 i 是素数
-"""
-is_prime = [True] * (n + 1)
-is_prime[0] = is_prime[1] = False
-for i in range(2, int(n**0.5)+1):
-if is_prime[i]:
-for j in range(i*i, n+1, i):
-is_prime[j] = False
-return is_prime
+    """
+    n: 最大整数
+    返回: is_prime 列表, is_prime[i]=True 表示 i 是素数
+    """
+    is_prime = [True] * (n + 1)
+    is_prime[0] = is_prime[1] = False
+    for i in range(2, int(n**0.5)+1):
+        if is_prime[i]:
+            for j in range(i*i, n+1, i):
+                is_prime[j] = False
+                return is_prime
 ```
   第二层遍历 $$n/2 + n/3 + n/5 + n/7$$ 根据调和级数性质，约为 $$ln ln n$$，所以时间复杂度为 O(nloglogn)。
 
@@ -2054,21 +2057,21 @@ return is_prime
 
 ```python
 def hanoi(n, source, auxiliary, target):
-"""
-打印将 n 个盘子从 source 移动到 target 的步骤。
-source: 起始柱子
-auxiliary: 辅助柱子
-target: 目标柱子
-"""
-if n == 1:
-print(f"Move disk 1 from {source} to {target}")
-else:
-hanoi(n - 1, source, target, auxiliary)
-print(f"Move disk {n} from {source} to {target}")
-hanoi(n - 1, auxiliary, source, target)
+    """
+    打印将 n 个盘子从 source 移动到 target 的步骤。
+    source: 起始柱子
+    auxiliary: 辅助柱子
+    target: 目标柱子
+    """
+    if n == 1:
+        print(f"Move disk 1 from {source} to {target}")
+    else:
+        hanoi(n - 1, source, target, auxiliary)
+        print(f"Move disk {n} from {source} to {target}")
+        hanoi(n - 1, auxiliary, source, target)
 
-# 示例：移动 3 个盘子从 A 到 C，B 为辅助柱子
-hanoi(3, 'A', 'B', 'C')
+        # 示例：移动 3 个盘子从 A 到 C，B 为辅助柱子
+        hanoi(3, 'A', 'B', 'C')
 ```
 
   根据 ①② 两式，可求出 f(n) = 2^n - 1 所以 O(n) = 2^n
@@ -2104,9 +2107,9 @@ import bisect
 
 i = bisect.bisect_left(sub, x)
 if i == len(sub):
-sub.append(x)
+    sub.append(x)
 else:
-sub[i] = x
+    sub[i] = x
 ```
 
   - 两个子序列的最长公共子序列（LCS）：`dp[i][j] = dp[i-1][j-1]+1 if match else max(dp[i-1][j], dp[i][j-1])`，可压缩成一维数组`dp[j] = dp[j-1]+1 if match else max(dp[j], dp[j-1])`。
@@ -2159,14 +2162,14 @@ sub[i] = x
 
 - **位运算加法**
 
-```python
+```text
 function add(a, b):
-while b ≠ 0:
-sum = a XOR b            # 不带进位的和
-carry = (a AND b) << 1   # 进位
-a = sum
-b = carry
-return a
+    while b ≠ 0:
+        sum = a XOR b            # 不带进位的和
+        carry = (a AND b) << 1   # 进位
+        a = sum
+        b = carry
+    return a
 ```
 
 
@@ -2300,16 +2303,16 @@ return a
 
 
 ```c
-   struct A{
-       int    a;
-       char   b;
-       short  c;
-   };
-   struct B{
-       char   b;
-       int    a;
-       short  c;
-   };
+struct A{
+    int    a;
+    char   b;
+    short  c;
+};
+struct B{
+    char   b;
+    int    a;
+    short  c;
+};
 ```
 
    已知 32 位机器上各数据类型的长度为：char 为 1 字节、short 为 2 字节、int 为 4 字节、long 为 4 字节、float 为 4 字节、double 为 8 字节。那么上面两个结构体大小如何呢？
@@ -2455,7 +2458,7 @@ print(lst[0])        # 按索引访问
 print(len(lst))      # 长度
 print(10 in lst)     # 是否包含
 for item in lst:     # 遍历
-print(item)
+    print(item)
 ```
 
 
@@ -2480,7 +2483,7 @@ s.clear()            # 清空集合
 # 查
 print(3 in s)
 for item in s:
-print(item)
+    print(item)
 ```
 
 
@@ -2502,7 +2505,7 @@ print(d['c'])        # 获取值（键必须存在）
 print(d.get('x'))    # 安全获取，不存在返回 None
 print('c' in d)      # 是否包含键
 for k, v in d.items():
-print(k, v)
+    print(k, v)
 ```
 
 
@@ -2517,7 +2520,7 @@ print(t[0])          # 访问索引
 print(len(t))        # 长度
 print(3 in t)        # 是否包含
 for item in t:
-print(item)
+    print(item)
 ```
 
 
@@ -2561,19 +2564,19 @@ print(id(lst))  # 没变（原地修改）
 from functools import cmp_to_key
 
 def my_cmp(x, y):
-# 先比较a字段升序
-if x[0] < y[0]:
-return -1
-elif x[0] > y[0]:
-return 1
-else:
-# a相等时，b字段降序
-if x[1] > y[1]:
-return -1
-elif x[1] < y[1]:
-return 1
-else:
-return 0
+    # 先比较a字段升序
+    if x[0] < y[0]:
+        return -1
+    elif x[0] > y[0]:
+        return 1
+    else:
+        # a相等时，b字段降序
+        if x[1] > y[1]:
+            return -1
+        elif x[1] < y[1]:
+            return 1
+        else:
+            return 0
 
 lst = [(2, 3), (1, 4), (2, 1), (1, 5)]
 lst.sort(key=cmp_to_key(my_cmp))
@@ -2597,16 +2600,16 @@ print(lst)
 
 ```python
 def deco(func):
-def warpper(*args, **kwargs):
-print('start')
-func(*args, **kwargs)
-print('end')
-return warpper
+    def warpper(*args, **kwargs):
+        print('start')
+        func(*args, **kwargs)
+        print('end')
+        return warpper
 
-@deco
-def myfunc(parameter):
-print("run with %s" % parameter)
-myfunc("something")
+    @deco
+    def myfunc(parameter):
+        print("run with %s" % parameter)
+        myfunc("something")
 ```
 
 
@@ -2616,65 +2619,65 @@ myfunc("something")
 
 ```python
 class MyClass:
-@staticmethod
-def greet():
-print("Hello")
-MyClass.greet()
+    @staticmethod
+    def greet():
+        print("Hello")
+        MyClass.greet()
 ```
 
   `@classmethod` —— 类方法。第一个参数是类 `cls`，而不是实例 `self`，可以访问类属性，可有创建实例，类和实例都能调用。
 
 ```python
 class MyClass:
-count = 0
+    count = 0
 
-@classmethod
-def inc(cls):
-cls.count += 1
+    @classmethod
+    def inc(cls):
+        cls.count += 1
 
-MyClass.inc()
-print(MyClass.count)
+        MyClass.inc()
+        print(MyClass.count)
 ```
 
 ```python
 class Person:
-def __init__(self, name, age):
-self.name = name
-self.age = age
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-@classmethod
-def from_string(cls, info_str):
-# cls 是类本身，相当于 Person
-name, age = info_str.split('-')
-# 使用 cls() 来调用构造函数，创建实例
-return cls(name, int(age))
+        @classmethod
+        def from_string(cls, info_str):
+            # cls 是类本身，相当于 Person
+            name, age = info_str.split('-')
+            # 使用 cls() 来调用构造函数，创建实例
+            return cls(name, int(age))
 
-p2 = Person.from_string("Alice-20")
-print(p2.name, p2.age)
+        p2 = Person.from_string("Alice-20")
+        print(p2.name, p2.age)
 ```
 
   `@property` —— 把方法变成属性，让方法像访问属性一样调用，设置属性可以用 `.setter` 装饰器。
 
 ```python
 class Person:
-def __init__(self, name):
-self._name = name   # 用下划线保护内部属性
+    def __init__(self, name):
+        self._name = name   # 用下划线保护内部属性
 
-@property
-def name(self):
-return self._name
+        @property
+        def name(self):
+            return self._name
 
-@name.setter
-def name(self, value):
-if not value:
-raise ValueError("名字不能为空")
-self._name = value
+        @name.setter
+        def name(self, value):
+            if not value:
+                raise ValueError("名字不能为空")
+            self._name = value
 
-p = Person("Alice")
-print(p.name)  # Alice
+            p = Person("Alice")
+            print(p.name)  # Alice
 
-p.name = "Bob"  # 调用 setter
-print(p.name)  # Bob
+            p.name = "Bob"  # 调用 setter
+            print(p.name)  # Bob
 ```
 
   `@functools.lru_cache`：缓存函数结果，来自 `functools` 模块，非常适合斐波那契、递归等高频重复计算场景。
@@ -2684,11 +2687,11 @@ from functools import lru_cache
 
 @lru_cache(maxsize=None)
 def fib(n):
-if n <= 1:
-return n
-return fib(n-1) + fib(n-2)
+    if n <= 1:
+        return n
+    return fib(n-1) + fib(n-2)
 
-print(fib(50))  # 超快！
+    print(fib(50))  # 超快！
 ```
 
   `@functools.wraps` —— 保留原函数元信息，让装饰器包装后的函数保留原函数的 `__name__`、`__doc__` 等信息。
@@ -2697,19 +2700,19 @@ print(fib(50))  # 超快！
 from functools import wraps
 
 def log(func):
-@wraps(func)
-def wrapper(*args, **kwargs):
-print(f"调用 {func.__name__}")
-return func(*args, **kwargs)
-return wrapper
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        print(f"调用 {func.__name__}")
+        return func(*args, **kwargs)
+    return wrapper
 
-@log
-def hello():
-"""这是一个问候函数"""
-print("Hello")
+    @log
+    def hello():
+        """这是一个问候函数"""
+        print("Hello")
 
-hello()
-print(hello.__name__)  # 仍然是 'hello'
+        hello()
+        print(hello.__name__)  # 仍然是 'hello'
 ```
 
 
@@ -2836,25 +2839,25 @@ print(hello.__name__)  # 仍然是 'hello'
 
 ```python
 def auc_score(y_true, y_score):
-# 获取正负样本索引
-pos_scores = [s for t, s in zip(y_true, y_score) if t == 1]
-neg_scores = [s for t, s in zip(y_true, y_score) if t == 0]
+    # 获取正负样本索引
+    pos_scores = [s for t, s in zip(y_true, y_score) if t == 1]
+    neg_scores = [s for t, s in zip(y_true, y_score) if t == 0]
 
-pos_count = len(pos_scores)
-neg_count = len(neg_scores)
+    pos_count = len(pos_scores)
+    neg_count = len(neg_scores)
 
-if pos_count == 0 or neg_count == 0:
-return 0.5  # 极端情况
+    if pos_count == 0 or neg_count == 0:
+        return 0.5  # 极端情况
 
-count = 0
-for pos in pos_scores:
-for neg in neg_scores:
-if pos > neg:
-count += 1
-elif pos == neg:
-count += 0.5
+    count = 0
+    for pos in pos_scores:
+        for neg in neg_scores:
+            if pos > neg:
+                count += 1
+            elif pos == neg:
+                count += 0.5
 
-return count / (pos_count * neg_count)
+                return count / (pos_count * neg_count)
 ```
 
 
@@ -2918,20 +2921,20 @@ b = np.random.randn()
 lr = 0.1
 
 for epoch in range(1000):
-y_pred = w * X[:, 0] + b
-error = y_pred - y
-loss = (error ** 2).mean()
+    y_pred = w * X[:, 0] + b
+    error = y_pred - y
+    loss = (error ** 2).mean()
 
-# 手动计算梯度
-grad_w = 2 * (error * X[:, 0]).mean()
-grad_b = 2 * error.mean()
+    # 手动计算梯度
+    grad_w = 2 * (error * X[:, 0]).mean()
+    grad_b = 2 * error.mean()
 
-# 更新参数
-w -= lr * grad_w
-b -= lr * grad_b
+    # 更新参数
+    w -= lr * grad_w
+    b -= lr * grad_b
 
-if epoch % 100 == 0:
-print(f"Epoch {epoch}: loss={loss:.4f}, w={w:.4f}, b={b:.4f}")
+    if epoch % 100 == 0:
+        print(f"Epoch {epoch}: loss={loss:.4f}, w={w:.4f}, b={b:.4f}")
 ```
 
 
@@ -3145,10 +3148,10 @@ print(f"Epoch {epoch}: loss={loss:.4f}, w={w:.4f}, b={b:.4f}")
 
 ```python
 def k_nearest_neighbors(X, y, test_sample, k):
-distances = np.linalg.norm(X - test_sample, axis=1)
-nearest_indices = np.argsort(distances)[:k]
-nearest_labels = y[nearest_indices]
-return int(np.round(np.mean(nearest_labels)))
+    distances = np.linalg.norm(X - test_sample, axis=1)
+    nearest_indices = np.argsort(distances)[:k]
+    nearest_labels = y[nearest_indices]
+    return int(np.round(np.mean(nearest_labels)))
 ```
 
 
@@ -3295,24 +3298,24 @@ return int(np.round(np.mean(nearest_labels)))
 import numpy as np
 
 def softmax(logits):
-"""
-计算 softmax 概率，确保数值稳定。
-logits: 形状为 (N, C)，N 是样本数，C 是类别数
-"""
-shifted = logits - np.max(logits, axis=1, keepdims=True)
-exps = np.exp(shifted)
-return exps / np.sum(exps, axis=1, keepdims=True)
+    """
+    计算 softmax 概率，确保数值稳定。
+    logits: 形状为 (N, C)，N 是样本数，C 是类别数
+    """
+    shifted = logits - np.max(logits, axis=1, keepdims=True)
+    exps = np.exp(shifted)
+    return exps / np.sum(exps, axis=1, keepdims=True)
 
 def cross_entropy_loss(probs, labels):
-"""
-计算平均交叉熵损失。
-probs: softmax 后的概率，形状为 (N, C)
-labels: 每个样本的真实类别索引，形状为 (N,)
-"""
-N = probs.shape[0]
-# 取出每个样本对应真实类别的概率，防止 log(0) 加个小常数
-log_likelihood = -np.log(probs[np.arange(N), labels] + 1e-15)
-return np.sum(log_likelihood) / N
+    """
+    计算平均交叉熵损失。
+    probs: softmax 后的概率，形状为 (N, C)
+    labels: 每个样本的真实类别索引，形状为 (N,)
+    """
+    N = probs.shape[0]
+    # 取出每个样本对应真实类别的概率，防止 log(0) 加个小常数
+    log_likelihood = -np.log(probs[np.arange(N), labels] + 1e-15)
+    return np.sum(log_likelihood) / N
 
 # 示例数据
 logits = np.array([
@@ -3337,24 +3340,24 @@ loss = cross_entropy_loss(probs, labels)
 import numpy as np
 
 def log_softmax(logits):
-"""
-计算 log-softmax，数值稳定版本。
-logits: 形状为 (N, C)
-"""
-shifted = logits - np.max(logits, axis=1, keepdims=True)
-log_sum_exp = np.log(np.sum(np.exp(shifted), axis=1, keepdims=True))
-return shifted - log_sum_exp  # log_softmax 输出
+    """
+    计算 log-softmax，数值稳定版本。
+    logits: 形状为 (N, C)
+    """
+    shifted = logits - np.max(logits, axis=1, keepdims=True)
+    log_sum_exp = np.log(np.sum(np.exp(shifted), axis=1, keepdims=True))
+    return shifted - log_sum_exp  # log_softmax 输出
 
 def cross_entropy_loss_from_logits(logits, labels):
-"""
-直接从 logits 计算交叉熵损失（使用 log-softmax）。
-logits: shape (N, C)
-labels: shape (N,)
-"""
-N = logits.shape[0]
-log_probs = log_softmax(logits)
-log_likelihood = -log_probs[np.arange(N), labels]
-return np.sum(log_likelihood) / N
+    """
+    直接从 logits 计算交叉熵损失（使用 log-softmax）。
+    logits: shape (N, C)
+    labels: shape (N,)
+    """
+    N = logits.shape[0]
+    log_probs = log_softmax(logits)
+    log_likelihood = -log_probs[np.arange(N), labels]
+    return np.sum(log_likelihood) / N
 
 # 示例数据
 logits = np.array([
@@ -3406,47 +3409,47 @@ loss = cross_entropy_loss_from_logits(logits, labels)
 import numpy as np
 
 class KMeans:
-def __init__(self, n_clusters=3, max_iter=100, tol=1e-4, random_state=None):
-self.n_clusters = n_clusters
-self.max_iter = max_iter
-self.tol = tol
-self.random_state = random_state
+    def __init__(self, n_clusters=3, max_iter=100, tol=1e-4, random_state=None):
+        self.n_clusters = n_clusters
+        self.max_iter = max_iter
+        self.tol = tol
+        self.random_state = random_state
 
-def fit(self, X):
-np.random.seed(self.random_state)
-n_samples, _ = X.shape
+        def fit(self, X):
+            np.random.seed(self.random_state)
+            n_samples, _ = X.shape
 
-# Step 1: 初始化质心（随机选择 K 个样本）
-initial_idxs = np.random.choice(n_samples, self.n_clusters, replace=False)
-self.centroids = X[initial_idxs]
+            # Step 1: 初始化质心（随机选择 K 个样本）
+            initial_idxs = np.random.choice(n_samples, self.n_clusters, replace=False)
+            self.centroids = X[initial_idxs]
 
-for i in range(self.max_iter):
-# Step 2: 分配每个样本到最近的质心
-distances = self._compute_distances(X)
-labels = np.argmin(distances, axis=1)
+            for i in range(self.max_iter):
+                # Step 2: 分配每个样本到最近的质心
+                distances = self._compute_distances(X)
+                labels = np.argmin(distances, axis=1)
 
-# Step 3: 更新质心
-new_centroids = np.array([
-X[labels == j].mean(axis=0) if np.any(labels == j) else self.centroids[j]
-for j in range(self.n_clusters)
-])
+                # Step 3: 更新质心
+                new_centroids = np.array([
+                X[labels == j].mean(axis=0) if np.any(labels == j) else self.centroids[j]
+                for j in range(self.n_clusters)
+            ])
 
-# Step 4: 判断收敛（质心移动小于 tol）
-shift = np.linalg.norm(new_centroids - self.centroids)
-self.centroids = new_centroids
-if shift < self.tol:
-break
+            # Step 4: 判断收敛（质心移动小于 tol）
+            shift = np.linalg.norm(new_centroids - self.centroids)
+            self.centroids = new_centroids
+            if shift < self.tol:
+                break
 
-self.labels_ = labels  # 保存训练标签
+            self.labels_ = labels  # 保存训练标签
 
-def predict(self, X):
-# 计算每个点到所有质心的距离，返回最近质心的索引
-distances = self._compute_distances(X)
-return np.argmin(distances, axis=1)
+            def predict(self, X):
+                # 计算每个点到所有质心的距离，返回最近质心的索引
+                distances = self._compute_distances(X)
+                return np.argmin(distances, axis=1)
 
-def _compute_distances(self, X):
-# 返回 (n_samples, n_clusters) 的距离矩阵
-return np.linalg.norm(X[:, np.newaxis] - self.centroids, axis=2)
+            def _compute_distances(self, X):
+                # 返回 (n_samples, n_clusters) 的距离矩阵
+                return np.linalg.norm(X[:, np.newaxis] - self.centroids, axis=2)
 ```
 
 
@@ -3545,118 +3548,119 @@ from math import log2
 
 # ===== 公共工具函数 =====
 def entropy(y):
-counter = Counter(y)
-probs = [c/len(y) for c in counter.values()]
-return -sum(p*log2(p) for p in probs if p > 0)
+    counter = Counter(y)
+    probs = [c / len(y) for c in counter.values()]
+    return -sum(p * log2(p) for p in probs if p > 0)
 
 def gini(y):
-counter = Counter(y)
-probs = [c/len(y) for c in counter.values()]
-return 1 - sum(p**2 for p in probs)
+    counter = Counter(y)
+    probs = [c / len(y) for c in counter.values()]
+    return 1 - sum(p**2 for p in probs)
 
 # ===== ID3 =====
 def id3(X, y):
-base_entropy = entropy(y)
-best_gain, best_f = -1, -1
-for f in range(X.shape[1]):
-new_entropy = 0
-for v in np.unique(X[:, f]):
-idx = (X[:, f] == v)
-new_entropy += len(y[idx])/len(y) * entropy(y[idx])
-gain = base_entropy - new_entropy
-if gain > best_gain:
-best_gain, best_f = gain, f
-return best_f
+    base_entropy = entropy(y)
+    best_gain, best_f = -1, -1
+    for f in range(X.shape[1]):
+        new_entropy = 0
+        for v in np.unique(X[:, f]):
+            idx = (X[:, f] == v)
+            new_entropy += len(y[idx]) / len(y) * entropy(y[idx])
+        gain = base_entropy - new_entropy
+        if gain > best_gain:
+            best_gain, best_f = gain, f
+    return best_f
 
 # ===== C4.5 =====
 def c45(X, y):
-base_entropy = entropy(y)
-best_ratio, best_f = -1, -1
-for f in range(X.shape[1]):
-new_entropy, split_info = 0, 0
-for v in np.unique(X[:, f]):
-idx = (X[:, f] == v)
-p = len(y[idx])/len(y)
-new_entropy += p * entropy(y[idx])
-if p > 0:
-split_info -= p * log2(p)
-info_gain = base_entropy - new_entropy
-if split_info > 0:
-ratio = info_gain/split_info
-if ratio > best_ratio:
-best_ratio, best_f = ratio, f
-return best_f
+    base_entropy = entropy(y)
+    best_ratio, best_f = -1, -1
+    for f in range(X.shape[1]):
+        new_entropy, split_info = 0, 0
+        for v in np.unique(X[:, f]):
+            idx = (X[:, f] == v)
+            p = len(y[idx]) / len(y)
+            new_entropy += p * entropy(y[idx])
+            if p > 0:
+                split_info -= p * log2(p)
+        info_gain = base_entropy - new_entropy
+        if split_info > 0:
+            ratio = info_gain / split_info
+            if ratio > best_ratio:
+                best_ratio, best_f = ratio, f
+    return best_f
 
 # ===== CART =====
 def cart(X, y):
-best_gini, best_f, best_v = 1e9, -1, None
-for f in range(X.shape[1]):
-for v in np.unique(X[:, f]):
-left = y[X[:, f] <= v]
-right = y[X[:, f] > v]
-if len(left) == 0 or len(right) == 0: continue
-g = (len(left)/len(y))*gini(left) + (len(right)/len(y))*gini(right)
-if g < best_gini:
-best_gini, best_f, best_v = g, f, v
-return best_f, best_v
+    best_gini, best_f, best_v = 1e9, -1, None
+    for f in range(X.shape[1]):
+        for v in np.unique(X[:, f]):
+            left = y[X[:, f] <= v]
+            right = y[X[:, f] > v]
+            if len(left) == 0 or len(right) == 0:
+                continue
+            g = (len(left) / len(y)) * gini(left) + (len(right) / len(y)) * gini(right)
+            if g < best_gini:
+                best_gini, best_f, best_v = g, f, v
+    return best_f, best_v
 
 # ===== Train / Test =====
 def train(X, y, method="id3"):
-# 纯叶子
-if len(set(y)) == 1:
-return y[0]
-# 没特征 → 多数表决
-if X.shape[1] == 0:
-return Counter(y).most_common(1)[0][0]
+    # 纯叶子
+    if len(set(y)) == 1:
+        return y[0]
+    # 没特征 → 多数表决
+    if X.shape[1] == 0:
+        return Counter(y).most_common(1)[0][0]
 
-if method == "id3":
-f = id3(X, y)
-tree = {f: {}}
-for v in np.unique(X[:, f]):
-idx = (X[:, f] == v)
-subtree = train(np.delete(X[idx], f, axis=1), y[idx], method)
-tree[f][v] = subtree
-return tree
+    if method == "id3":
+        f = id3(X, y)
+        tree = {f: {}}
+        for v in np.unique(X[:, f]):
+            idx = (X[:, f] == v)
+            subtree = train(np.delete(X[idx], f, axis=1), y[idx], method)
+            tree[f][v] = subtree
+        return tree
 
-elif method == "c45":
-f = c45(X, y)
-tree = {f: {}}
-for v in np.unique(X[:, f]):
-idx = (X[:, f] == v)
-subtree = train(np.delete(X[idx], f, axis=1), y[idx], method)
-tree[f][v] = subtree
-return tree
+    elif method == "c45":
+        f = c45(X, y)
+        tree = {f: {}}
+        for v in np.unique(X[:, f]):
+            idx = (X[:, f] == v)
+            subtree = train(np.delete(X[idx], f, axis=1), y[idx], method)
+            tree[f][v] = subtree
+        return tree
 
-elif method == "cart":
-f, v = cart(X, y)
-if f == -1:  # 无法继续分
-return Counter(y).most_common(1)[0][0]
-left_idx, right_idx = (X[:, f] <= v), (X[:, f] > v)
-return {
-f: {
-"<=": train(X[left_idx], y[left_idx], method),
-">": train(X[right_idx], y[right_idx], method)
-},
-"value": v
-}
+    elif method == "cart":
+        f, v = cart(X, y)
+        if f == -1:  # 无法继续分
+            return Counter(y).most_common(1)[0][0]
+        left_idx, right_idx = (X[:, f] <= v), (X[:, f] > v)
+        return {
+            f: {
+                "<=": train(X[left_idx], y[left_idx], method),
+                ">": train(X[right_idx], y[right_idx], method),
+            },
+            "value": v,
+        }
 
 def test(tree, x):
-if not isinstance(tree, dict):  # 叶子
-return tree
-f = list(tree.keys())[0]
-if "value" in tree:  # CART
-v = tree["value"]
-if x[f] <= v:
-return test(tree[f]["<="], x)
-else:
-return test(tree[f][">"], x)
-else:  # ID3/C4.5
-v = x[f]
-if v in tree[f]:
-sub = tree[f][v]
-return test(sub, np.delete(x, f))
-else:
-return None  # 未见过的取值
+    if not isinstance(tree, dict):  # 叶子
+        return tree
+    f = list(tree.keys())[0]
+    if "value" in tree:  # CART
+        v = tree["value"]
+        if x[f] <= v:
+            return test(tree[f]["<="], x)
+        else:
+            return test(tree[f][">"], x)
+    else:  # ID3/C4.5
+        v = x[f]
+        if v in tree[f]:
+            sub = tree[f][v]
+            return test(sub, np.delete(x, f))
+        else:
+            return None  # 未见过的取值
 ```
 
 
@@ -3809,31 +3813,31 @@ import numpy as np
 
 # ===== 激活函数 =====
 def sigmoid(x):
-return 1 / (1 + np.exp(-x))
+    return 1 / (1 + np.exp(-x))
 
 def sigmoid_derivative(x):
-s = sigmoid(x)
-return s * (1 - s)
+    s = sigmoid(x)
+    return s * (1 - s)
 
 def tanh(x):
-return np.tanh(x)
+    return np.tanh(x)
 
 def tanh_derivative(x):
-return 1 - np.tanh(x)**2
+    return 1 - np.tanh(x)**2
 
 def relu(x):
-return np.maximum(0, x)
+    return np.maximum(0, x)
 
 def relu_derivative(x):
-return (x > 0).astype(float)
+    return (x > 0).astype(float)
 
 def leaky_relu(x, alpha=0.01):
-return np.where(x > 0, x, alpha * x)
+    return np.where(x > 0, x, alpha * x)
 
 def leaky_relu_derivative(x, alpha=0.01):
-dx = np.ones_like(x)
-dx[x < 0] = alpha
-return dx
+    dx = np.ones_like(x)
+    dx[x < 0] = alpha
+    return dx
 ```
 
 
@@ -3912,83 +3916,83 @@ return dx
 
 ```python
 def sgd(w, dw, lr=0.01):
-return w - lr * dw
+    return w - lr * dw
 ```
 
   SGD + Momentum，固定学习率，Momentum 是一阶动量，即梯度的指数加权平均（exponentially weighted average of past gradients）/梯度滑动平均（EMA，Exponential Moving Average）。越新的梯度权重越大，越久远的梯度，权重按指数衰减。公式为更新参数值 = 当前参数值 - 学习率 * 一阶动量。
 
 ```python
 def momentum(w, dw, v, lr=0.01, beta=0.9):
-v = beta * v + (1 - beta) * dw
-w = w - lr * v
-return w, v
+    v = beta * v + (1 - beta) * dw
+    w = w - lr * v
+    return w, v
 ```
 
   AdaGrad 会对学习率加权，权重为过往梯度平方和的根号，开根号是为了单位一致性，且保证过往梯度过大导致的学习旅衰减过大。频繁更新的参数，学习率自动变小；很少更新的参数，学习率保持较大。由于每次迭代都有梯度，导致梯度平方和每次都增加，因此学习率会单调递减。
 
 ```python
 def adagrad(w, dw, h, lr=0.01, eps=1e-8):
-h += dw**2
-w = w - lr * dw / (np.sqrt(h) + eps)
-return w, h
+    h += dw**2
+    w = w - lr * dw / (np.sqrt(h) + eps)
+    return w, h
 ```
 
   RMSProp 是二阶动量，即梯度的平方滑动平均（exponentially weighted average of the squares of past gradients）。相比 AdaGrad，它更看中最近的梯度，而且由于老的梯度平方会指数衰减，学习率不会无限减小。
 
 ```python
 def rmsprop(w, dw, h, lr=0.001, beta=0.9, eps=1e-8):
-h = beta * h + (1 - beta) * dw**2
-w = w - lr * dw / (np.sqrt(h) + eps)
-return w, h
+    h = beta * h + (1 - beta) * dw**2
+    w = w - lr * dw / (np.sqrt(h) + eps)
+    return w, h
 ```
 
   Adam 学习率根据一阶动量（Momentum）+ 二阶动量（RMSProp）调整。Adam 会进行偏差修正：由于一阶动量和二阶动量初始值为 0，导致乘了 $$1 - beta1$$ 或 $$1 - beta2$$ 会使得均值被低估，因此需要根据当前 step $$t$$ 进行一阶动量、二阶动量的修正。在 Adam 中，weight decay（L2）会被加到原始梯度里，然后进行同样的一阶动量和二阶动量调整，从而导致实际的权重衰减效果并不等价于直接对权重进行衰减。
 
 ```python
 def adam(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, eps=1e-8):
-m = beta1 * m + (1 - beta1) * dw
-v = beta2 * v + (1 - beta2) * (dw**2)
-m_hat = m / (1 - beta1**t)
-v_hat = v / (1 - beta2**t)
-w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
-return w, m, v
+    m = beta1 * m + (1 - beta1) * dw
+    v = beta2 * v + (1 - beta2) * (dw**2)
+    m_hat = m / (1 - beta1**t)
+    v_hat = v / (1 - beta2**t)
+    w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
+    return w, m, v
 ```
 
   AdamW，同 Adam，但权重衰减更合理，将 L2 正则对应的 weight decay 放到了一阶动量和二阶动量调整后的参数更新上。
 
 ```python
 def adamw(w, dw, m, v, t, lr=0.001, beta1=0.9, beta2=0.999, weight_decay=0.01, eps=1e-8):
-# AdamW 在更新前加入权重衰减
-w = w - lr * weight_decay * w
-m = beta1 * m + (1 - beta1) * dw
-v = beta2 * v + (1 - beta2) * (dw**2)
-m_hat = m / (1 - beta1**t)
-v_hat = v / (1 - beta2**t)
-w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
-return w, m, v
+    # AdamW 在更新前加入权重衰减
+    w = w - lr * weight_decay * w
+    m = beta1 * m + (1 - beta1) * dw
+    v = beta2 * v + (1 - beta2) * (dw**2)
+    m_hat = m / (1 - beta1**t)
+    v_hat = v / (1 - beta2**t)
+    w = w - lr * m_hat / (np.sqrt(v_hat) + eps)
+    return w, m, v
 ```
 
   Lion，使用一阶动量，只看更新方向，不考虑更新幅度。
 
 ```python
 def lion(w, dw, m, lr=1e-3, beta1=0.9, beta2=0.99, weight_decay=0.0):
-m = beta2 * m + (1 - beta2) * dw
-update = np.sign(beta1 * m + (1 - beta1) * dw)
-if weight_decay != 0:
-update += weight_decay * w
-w = w - lr * update
-return w, m
+    m = beta2 * m + (1 - beta2) * dw
+    update = np.sign(beta1 * m + (1 - beta1) * dw)
+    if weight_decay != 0:
+        update += weight_decay * w
+        w = w - lr * update
+        return w, m
 ```
 
   Muon 方向由一阶动量决定，幅度由二阶动量决定。
 
 ```python
 def muon(w, dw, m, v, lr=1e-3, beta1=0.9, beta2=0.99, beta3=0.999, eps=1e-8):
-m = beta2 * m + (1 - beta2) * dw
-v = beta3 * v + (1 - beta3) * (dw**2)
-update = np.sign(beta1 * m + (1 - beta1) * dw)
-w = w - lr * update / (np.sqrt(v) + eps)
-return w, m, v
+    m = beta2 * m + (1 - beta2) * dw
+    v = beta3 * v + (1 - beta3) * (dw**2)
+    update = np.sign(beta1 * m + (1 - beta1) * dw)
+    w = w - lr * update / (np.sqrt(v) + eps)
+    return w, m, v
 ```
 
   如果加上 Scheduler，可以动态调整全局学习率。Warmup 策略可以前期慢慢提供学习率，后期用 Cosine Decay（训练初期快速降学习率，防止剧烈震荡：训练刚开始时，模型参数还比较随机，快速降低学习率能避免过大步长导致训练不稳定或发散；但起始时仍保留较大学习率，帮助模型迅速从随机初始化的参数中找到“正确方向”。中期保持学习率相对平稳，助于稳定收敛：进入训练中期，学习率下降变缓，模型有足够的时间在当前的参数空间“细致探索”；平稳的学习率避免过早降低导致训练停滞，同时不给出过大步长打断已有收敛趋势。后期再次快速下降，微调模型细节：训练末期快速将学习率降低到很小，帮助模型“精细调节”参数，减少振荡，提升泛化性能；类似于在优化曲面上的“爬坡”逐渐变得非常缓慢，避免错过局部极小值。），Linear Decay 等方式进行衰减。
@@ -4065,17 +4069,17 @@ return w, m, v
   $$o_t=\sigma(W_o[h_{t-1}, x_t] + b_o)$$
 ```python
 def rnn_forward(X, Wx, Wh, b, h0):
-"""
-X: (T, N, D)
-Wx: (D, H)
-Wh: (H, H)
-b: (H,)
-h0: (N, H)
-"""
-h = h0
-for t in range(X.shape[0]):
-h = torch.tanh(X[t] @ Wx + h @ Wh + b)
-return h  # 返回最后一步隐藏状态
+    """
+    X: (T, N, D)
+    Wx: (D, H)
+    Wh: (H, H)
+    b: (H,)
+    h0: (N, H)
+    """
+    h = h0
+    for t in range(X.shape[0]):
+        h = torch.tanh(X[t] @ Wx + h @ Wh + b)
+        return h  # 返回最后一步隐藏状态
 ```
 
 
@@ -4095,17 +4099,17 @@ return h  # 返回最后一步隐藏状态
 
 ```python
 def lstm_forward(X, Wx, Wh, b, h0, c0):
-h, c = h0, c0
-H = h0.shape[1]
-for t in range(X.shape[0]):
-z = X[t] @ Wx + h @ Wh + b
-i = sigmoid(z[:, :H])
-f = sigmoid(z[:, H:2*H])
-o = sigmoid(z[:, 2*H:3*H])
-g = torch.tanh(z[:, 3*H:])
-c = f * c + i * g
-h = o * torch.tanh(c)
-return h, c
+    h, c = h0, c0
+    H = h0.shape[1]
+    for t in range(X.shape[0]):
+        z = X[t] @ Wx + h @ Wh + b
+        i = sigmoid(z[:, :H])
+        f = sigmoid(z[:, H:2*H])
+        o = sigmoid(z[:, 2*H:3*H])
+        g = torch.tanh(z[:, 3*H:])
+        c = f * c + i * g
+        h = o * torch.tanh(c)
+        return h, c
 ```
 
 
@@ -4114,15 +4118,15 @@ return h, c
   LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
 ```python
 def gru_forward(X, Wx, Wh, b, h0):
-h = h0
-H = h0.shape[1]
-for t in range(X.shape[0]):
-z = X[t] @ Wx + h @ Wh + b
-r = sigmoid(z[:, :H])
-u = sigmoid(z[:, H:2*H])
-g = torch.tanh(z[:, 2*H:] + r * (h @ Wh[:, 2*H:]))
-h = (1 - u) * g + u * h
-return h
+    h = h0
+    H = h0.shape[1]
+    for t in range(X.shape[0]):
+        z = X[t] @ Wx + h @ Wh + b
+        r = sigmoid(z[:, :H])
+        u = sigmoid(z[:, H:2*H])
+        g = torch.tanh(z[:, 2*H:] + r * (h @ Wh[:, 2*H:]))
+        h = (1 - u) * g + u * h
+        return h
 ```
 
 
@@ -4475,31 +4479,31 @@ return h
 
 ```python
 class TransformerBlock(nn.Module):
-def __init__(self, hidden_size=4096, num_heads=32, dropout=0.1):
-super().__init__()
-self.attention = MultiHeadSelfAttention(hidden_size, num_heads)
-self.norm1 = nn.LayerNorm(hidden_size)
-self.ff = nn.Sequential(
-nn.Linear(hidden_size, hidden_size * 4),
-nn.ReLU(),
-nn.Linear(hidden_size * 4, hidden_size)
-)
-self.norm2 = nn.LayerNorm(hidden_size)
-self.dropout = nn.Dropout(dropout)
+    def __init__(self, hidden_size=4096, num_heads=32, dropout=0.1):
+        super().__init__()
+        self.attention = MultiHeadSelfAttention(hidden_size, num_heads)
+        self.norm1 = nn.LayerNorm(hidden_size)
+        self.ff = nn.Sequential(
+        nn.Linear(hidden_size, hidden_size * 4),
+        nn.ReLU(),
+        nn.Linear(hidden_size * 4, hidden_size)
+    )
+    self.norm2 = nn.LayerNorm(hidden_size)
+    self.dropout = nn.Dropout(dropout)
 
-def forward(self, x, mask=None):
-# Self-attention
-attn_out = self.attention(x, mask)
-# Residual Connection
-x = x + self.dropout(attn_out)
-x = self.norm1(x)
+    def forward(self, x, mask=None):
+        # Self-attention
+        attn_out = self.attention(x, mask)
+        # Residual Connection
+        x = x + self.dropout(attn_out)
+        x = self.norm1(x)
 
-# Feedforward with residual
-ff_out = self.ff(x)
-x = x + self.dropout(ff_out)
-x = self.norm2(x)
+        # Feedforward with residual
+        ff_out = self.ff(x)
+        x = x + self.dropout(ff_out)
+        x = self.norm2(x)
 
-return x
+        return x
 ```
 
 
@@ -4516,51 +4520,51 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class MultiHeadAttention(nn.Module):
-def __init__(self, embed_dim, num_heads):
-super(MultiHeadAttention, self).__init__()
-assert embed_dim % num_heads == 0, "Embedding dimension must be divisible by number of heads"
+    def __init__(self, embed_dim, num_heads):
+        super(MultiHeadAttention, self).__init__()
+        assert embed_dim % num_heads == 0, "Embedding dimension must be divisible by number of heads"
 
-self.embed_dim = embed_dim
-self.num_heads = num_heads
-self.head_dim = embed_dim // num_heads
+        self.embed_dim = embed_dim
+        self.num_heads = num_heads
+        self.head_dim = embed_dim // num_heads
 
-# Linear layers to project input to Q, K, V
-self.q_proj = nn.Linear(embed_dim, embed_dim)
-self.k_proj = nn.Linear(embed_dim, embed_dim)
-self.v_proj = nn.Linear(embed_dim, embed_dim)
+        # Linear layers to project input to Q, K, V
+        self.q_proj = nn.Linear(embed_dim, embed_dim)
+        self.k_proj = nn.Linear(embed_dim, embed_dim)
+        self.v_proj = nn.Linear(embed_dim, embed_dim)
 
-# Final output projection
-self.out_proj = nn.Linear(embed_dim, embed_dim)
+        # Final output projection
+        self.out_proj = nn.Linear(embed_dim, embed_dim)
 
-def forward(self, x, mask=None):
-B, T, E = x.size()
+        def forward(self, x, mask=None):
+            B, T, E = x.size()
 
-# Linear projections
-Q = self.q_proj(x)  # (B, T, E)
-K = self.k_proj(x)
-V = self.v_proj(x)
+            # Linear projections
+            Q = self.q_proj(x)  # (B, T, E)
+            K = self.k_proj(x)
+            V = self.v_proj(x)
 
-# Split into multiple heads: (B, num_heads, T, head_dim)
-Q = Q.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-K = K.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-V = V.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+            # Split into multiple heads: (B, num_heads, T, head_dim)
+            Q = Q.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+            K = K.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+            V = V.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
 
-# Scaled dot-product attention
-scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.head_dim ** 0.5)  # (B, num_heads, T, T)
-if mask is not None:
-scores = scores.masked_fill(mask == 0, float("-inf"))
-weights = F.softmax(scores, dim=-1)
-attended = torch.matmul(weights, V)  # (B, num_heads, T, head_dim)
+            # Scaled dot-product attention
+            scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.head_dim ** 0.5)  # (B, num_heads, T, T)
+            if mask is not None:
+                scores = scores.masked_fill(mask == 0, float("-inf"))
+                weights = F.softmax(scores, dim=-1)
+                attended = torch.matmul(weights, V)  # (B, num_heads, T, head_dim)
 
-# Concatenate heads: (B, T, E)
-# transpose/permute → 改变维度顺序但通常返回 非连续 张量。
-# view → 只能作用于 连续 内存。
-# contiguous() → 如有必要，将张量复制为连续布局，保证 view 能正常工作。
-attended = attended.transpose(1, 2).contiguous().view(B, T, E)
+                # Concatenate heads: (B, T, E)
+                # transpose/permute → 改变维度顺序但通常返回 非连续 张量。
+                # view → 只能作用于 连续 内存。
+                # contiguous() → 如有必要，将张量复制为连续布局，保证 view 能正常工作。
+                attended = attended.transpose(1, 2).contiguous().view(B, T, E)
 
-# Final linear projection
-output = self.out_proj(attended)
-return output
+                # Final linear projection
+                output = self.out_proj(attended)
+                return output
 ```
 
 
@@ -4578,9 +4582,9 @@ return output
 
 ```python
 def causal_mask(seq_len):
-# 下三角矩阵 (seq_len, seq_len)
-mask = torch.tril(torch.ones(seq_len, seq_len, dtype=torch.bool))
-return mask
+    # 下三角矩阵 (seq_len, seq_len)
+    mask = torch.tril(torch.ones(seq_len, seq_len, dtype=torch.bool))
+    return mask
 ```
 
 
@@ -4598,47 +4602,47 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class GroupedQueryAttention(nn.Module):
-def __init__(self, embed_dim, num_query_heads, num_kv_heads):
-super(GroupedQueryAttention, self).__init__()
-assert embed_dim % num_query_heads == 0, "embed_dim must be divisible by num_query_heads"
-assert embed_dim % num_kv_heads == 0, "embed_dim must be divisible by num_kv_heads"
+    def __init__(self, embed_dim, num_query_heads, num_kv_heads):
+        super(GroupedQueryAttention, self).__init__()
+        assert embed_dim % num_query_heads == 0, "embed_dim must be divisible by num_query_heads"
+        assert embed_dim % num_kv_heads == 0, "embed_dim must be divisible by num_kv_heads"
 
-self.embed_dim = embed_dim
-self.num_query_heads = num_query_heads
-self.num_kv_heads = num_kv_heads
-self.q_head_dim = embed_dim // num_query_heads
-self.kv_head_dim = embed_dim // num_kv_heads
+        self.embed_dim = embed_dim
+        self.num_query_heads = num_query_heads
+        self.num_kv_heads = num_kv_heads
+        self.q_head_dim = embed_dim // num_query_heads
+        self.kv_head_dim = embed_dim // num_kv_heads
 
-# Projection layers
-self.q_proj = nn.Linear(embed_dim, embed_dim)
-self.k_proj = nn.Linear(embed_dim, embed_dim)
-self.v_proj = nn.Linear(embed_dim, embed_dim)
-self.out_proj = nn.Linear(embed_dim, embed_dim)
+        # Projection layers
+        self.q_proj = nn.Linear(embed_dim, embed_dim)
+        self.k_proj = nn.Linear(embed_dim, embed_dim)
+        self.v_proj = nn.Linear(embed_dim, embed_dim)
+        self.out_proj = nn.Linear(embed_dim, embed_dim)
 
-def forward(self, x):
-B, T, E = x.shape
+        def forward(self, x):
+            B, T, E = x.shape
 
-# Project inputs
-Q = self.q_proj(x).view(B, T, self.num_query_heads, self.q_head_dim).transpose(1, 2)  # (B, QH, T, Dq)
-K = self.k_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dk)
-V = self.v_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dv)
+            # Project inputs
+            Q = self.q_proj(x).view(B, T, self.num_query_heads, self.q_head_dim).transpose(1, 2)  # (B, QH, T, Dq)
+            K = self.k_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dk)
+            V = self.v_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dv)
 
-# Expand K/V to match query heads if needed
-if self.num_query_heads != self.num_kv_heads:
-repeat_factor = self.num_query_heads // self.num_kv_heads
-K = K.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dk)
-V = V.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dv)
+            # Expand K/V to match query heads if needed
+            if self.num_query_heads != self.num_kv_heads:
+                repeat_factor = self.num_query_heads // self.num_kv_heads
+                K = K.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dk)
+                V = V.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dv)
 
-# Scaled dot-product attention
-scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.q_head_dim ** 0.5)  # (B, QH, T, T)
-attn_weights = F.softmax(scores, dim=-1)
-context = torch.matmul(attn_weights, V)  # (B, QH, T, Dv)
+                # Scaled dot-product attention
+                scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.q_head_dim ** 0.5)  # (B, QH, T, T)
+                attn_weights = F.softmax(scores, dim=-1)
+                context = torch.matmul(attn_weights, V)  # (B, QH, T, Dv)
 
-# Combine heads
-context = context.transpose(1, 2).contiguous().view(B, T, E)  # (B, T, E)
-output = self.out_proj(context)  # Final linear projection
+                # Combine heads
+                context = context.transpose(1, 2).contiguous().view(B, T, E)  # (B, T, E)
+                output = self.out_proj(context)  # Final linear projection
 
-return output
+                return output
 ```
 
 
@@ -4650,50 +4654,50 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 class SelfAttentionWithKVCache(nn.Module):
-def __init__(self, embed_dim, num_heads, max_seq_len):
-super().__init__()
-assert embed_dim % num_heads == 0
-self.embed_dim = embed_dim
-self.num_heads = num_heads
-self.head_dim = embed_dim // num_heads
+    def __init__(self, embed_dim, num_heads, max_seq_len):
+        super().__init__()
+        assert embed_dim % num_heads == 0
+        self.embed_dim = embed_dim
+        self.num_heads = num_heads
+        self.head_dim = embed_dim // num_heads
 
-self.q_proj = nn.Linear(embed_dim, embed_dim)
-self.k_proj = nn.Linear(embed_dim, embed_dim)
-self.v_proj = nn.Linear(embed_dim, embed_dim)
-self.out_proj = nn.Linear(embed_dim, embed_dim)
+        self.q_proj = nn.Linear(embed_dim, embed_dim)
+        self.k_proj = nn.Linear(embed_dim, embed_dim)
+        self.v_proj = nn.Linear(embed_dim, embed_dim)
+        self.out_proj = nn.Linear(embed_dim, embed_dim)
 
-# 初始化 KV Cache（支持最多 max_seq_len 步）
-self.register_buffer("key_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
-self.register_buffer("value_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
-self.max_seq_len = max_seq_len
+        # 初始化 KV Cache（支持最多 max_seq_len 步）
+        self.register_buffer("key_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
+        self.register_buffer("value_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
+        self.max_seq_len = max_seq_len
 
-def forward(self, x, start_pos):
-"""
-x: [B, 1, E] - 当前一步的 token 表示
-start_pos: int - 当前 token 在生成序列中的位置
-"""
-B, T, E = x.shape  # T == 1 during generation
+        def forward(self, x, start_pos):
+            """
+            x: [B, 1, E] - 当前一步的 token 表示
+            start_pos: int - 当前 token 在生成序列中的位置
+            """
+            B, T, E = x.shape  # T == 1 during generation
 
-# QKV projection
-Q = self.q_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)  # [B, H, 1, D]
-K = self.k_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-V = self.v_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+            # QKV projection
+            Q = self.q_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)  # [B, H, 1, D]
+            K = self.k_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+            V = self.v_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
 
-# 更新 KV cache
-self.key_cache[:, :, start_pos:start_pos+1, :] = K
-self.value_cache[:, :, start_pos:start_pos+1, :] = V
+            # 更新 KV cache
+            self.key_cache[:, :, start_pos:start_pos+1, :] = K
+            self.value_cache[:, :, start_pos:start_pos+1, :] = V
 
-# 从 0 到当前 step，取所有 KV
-K_cached = self.key_cache[:, :, :start_pos+1, :]   # [B, H, T_cache, D]
-V_cached = self.value_cache[:, :, :start_pos+1, :] # [B, H, T_cache, D]
+            # 从 0 到当前 step，取所有 KV
+            K_cached = self.key_cache[:, :, :start_pos+1, :]   # [B, H, T_cache, D]
+            V_cached = self.value_cache[:, :, :start_pos+1, :] # [B, H, T_cache, D]
 
-# 注意力计算
-scores = torch.matmul(Q, K_cached.transpose(-2, -1)) / (self.head_dim ** 0.5)  # [B, H, 1, T_cache]
-attn_weights = F.softmax(scores, dim=-1)
-out = torch.matmul(attn_weights, V_cached)  # [B, H, 1, D]
+            # 注意力计算
+            scores = torch.matmul(Q, K_cached.transpose(-2, -1)) / (self.head_dim ** 0.5)  # [B, H, 1, T_cache]
+            attn_weights = F.softmax(scores, dim=-1)
+            out = torch.matmul(attn_weights, V_cached)  # [B, H, 1, D]
 
-out = out.transpose(1, 2).contiguous().view(B, T, E)  # [B, 1, E]
-return self.out_proj(out)
+            out = out.transpose(1, 2).contiguous().view(B, T, E)  # [B, 1, E]
+            return self.out_proj(out)
 ```
 
 
@@ -4714,50 +4718,50 @@ import torch
 import torch.nn.functional as F
 
 def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
-# Q, K, V: [B, L, D]，Batch x Length x Dim
-# block_size: 每块序列长度
-B, L, D = Q.shape
-output = torch.zeros_like(Q)
+    # Q, K, V: [B, L, D]，Batch x Length x Dim
+    # block_size: 每块序列长度
+    B, L, D = Q.shape
+    output = torch.zeros_like(Q)
 
-# 遍历查询块
-for i in range(0, L, block_size):
-q_block = Q[:, i:i+block_size, :]   # [B, block, D]
-out_block = torch.zeros_like(q_block)
+    # 遍历查询块
+    for i in range(0, L, block_size):
+        q_block = Q[:, i:i+block_size, :]   # [B, block, D]
+        out_block = torch.zeros_like(q_block)
 
-# 记录在线 softmax 的统计量
-m_prev = None  # 当前块的最大值
-d_prev = None  # 当前块的 exp 和
+        # 记录在线 softmax 的统计量
+        m_prev = None  # 当前块的最大值
+        d_prev = None  # 当前块的 exp 和
 
-# 遍历键/值块
-for j in range(0, L, block_size):
-k_block = K[:, j:j+block_size, :]
-v_block = V[:, j:j+block_size, :]
+        # 遍历键/值块
+        for j in range(0, L, block_size):
+            k_block = K[:, j:j+block_size, :]
+            v_block = V[:, j:j+block_size, :]
 
-# Attention logits
-scores = torch.matmul(q_block, k_block.transpose(-2, -1)) / D**0.5
-if mask is not None:
-scores += mask[:, i:i+block_size, j:j+block_size]
+            # Attention logits
+            scores = torch.matmul(q_block, k_block.transpose(-2, -1)) / D**0.5
+            if mask is not None:
+                scores += mask[:, i:i+block_size, j:j+block_size]
 
-# 在线 softmax
-m_new = scores.max(dim=-1, keepdim=True).values
-if m_prev is None:
-d_new = torch.exp(scores - m_new).sum(dim=-1, keepdim=True)
-y = torch.exp(scores - m_new) / d_new
-else:
-m_comb = torch.max(m_prev, m_new)
-d_new = torch.exp(m_prev - m_comb) * d_prev + torch.exp(scores - m_comb).sum(dim=-1, keepdim=True)
-y = torch.exp(scores - m_comb) / d_new
+                # 在线 softmax
+                m_new = scores.max(dim=-1, keepdim=True).values
+                if m_prev is None:
+                    d_new = torch.exp(scores - m_new).sum(dim=-1, keepdim=True)
+                    y = torch.exp(scores - m_new) / d_new
+                else:
+                    m_comb = torch.max(m_prev, m_new)
+                    d_new = torch.exp(m_prev - m_comb) * d_prev + torch.exp(scores - m_comb).sum(dim=-1, keepdim=True)
+                    y = torch.exp(scores - m_comb) / d_new
 
-# 累加输出块
-out_block += torch.matmul(y, v_block)
+                    # 累加输出块
+                    out_block += torch.matmul(y, v_block)
 
-# 更新统计量，用于下一个键块（在线 softmax）
-m_prev = m_new
-d_prev = d_new
+                    # 更新统计量，用于下一个键块（在线 softmax）
+                    m_prev = m_new
+                    d_prev = d_new
 
-output[:, i:i+block_size, :] = out_block
+                    output[:, i:i+block_size, :] = out_block
 
-return output
+                    return output
 ```
 
   FlashAttention v2 改进：
@@ -4908,40 +4912,40 @@ import torch
 import math
 
 def rope(x):
-"""
-x: (seq_len, batch_size, d_model)
-返回加上 RoPE 的 embedding
-"""
-seq_len, batch_size, d_model = x.shape
-# RoPE 要求维度是偶数，因为每两个维度为一对进行二维旋转
-assert d_model % 2 == 0, "RoPE embedding dim must be even"
+    """
+    x: (seq_len, batch_size, d_model)
+    返回加上 RoPE 的 embedding
+    """
+    seq_len, batch_size, d_model = x.shape
+    # RoPE 要求维度是偶数，因为每两个维度为一对进行二维旋转
+    assert d_model % 2 == 0, "RoPE embedding dim must be even"
 
-# 每两维组成一对
-half_dim = d_model // 2
-# theta 是频率向量，计算不同维度的旋转角度，低维旋转快，高维旋转慢。旋转越慢，越适合捕捉长距离关系
-theta = 10000 ** (torch.arange(0, half_dim, dtype=torch.float32) / half_dim)
-# 序列中每个 token 的位置索引
-pos = torch.arange(seq_len, dtype=torch.float32).unsqueeze(1)  # (seq_len, 1)
-# 每个 token 每一对维度的旋转角度
-angles = pos / theta  # (seq_len, half_dim)
+    # 每两维组成一对
+    half_dim = d_model // 2
+    # theta 是频率向量，计算不同维度的旋转角度，低维旋转快，高维旋转慢。旋转越慢，越适合捕捉长距离关系
+    theta = 10000 ** (torch.arange(0, half_dim, dtype=torch.float32) / half_dim)
+    # 序列中每个 token 的位置索引
+    pos = torch.arange(seq_len, dtype=torch.float32).unsqueeze(1)  # (seq_len, 1)
+    # 每个 token 每一对维度的旋转角度
+    angles = pos / theta  # (seq_len, half_dim)
 
-# 计算 sin/cos
-sin = torch.sin(angles)  # (seq_len, half_dim)
-cos = torch.cos(angles)
+    # 计算 sin/cos
+    sin = torch.sin(angles)  # (seq_len, half_dim)
+    cos = torch.cos(angles)
 
-# 将 x 分成两半
-x1 = x[:, :, 0::2]  # even indices
-x2 = x[:, :, 1::2]  # odd indices
+    # 将 x 分成两半
+    x1 = x[:, :, 0::2]  # even indices
+    x2 = x[:, :, 1::2]  # odd indices
 
-# 旋转
-x_rotated_0 = x1 * cos - x2 * sin
-x_rotated_1 = x1 * sin + x2 * cos
+    # 旋转
+    x_rotated_0 = x1 * cos - x2 * sin
+    x_rotated_1 = x1 * sin + x2 * cos
 
-# 交替组合回原始维度
-x_out = torch.zeros_like(x)
-x_out[:, :, 0::2] = x_rotated_0
-x_out[:, :, 1::2] = x_rotated_1
-return x_out
+    # 交替组合回原始维度
+    x_out = torch.zeros_like(x)
+    x_out[:, :, 0::2] = x_rotated_0
+    x_out[:, :, 1::2] = x_rotated_1
+    return x_out
 ```
 
 
@@ -4999,17 +5003,17 @@ import torch
 import torch.nn as nn
 
 class LayerNorm(nn.Module):
-def __init__(self, dim, eps=1e-5):
-super(LayerNorm, self).__init__()
-self.eps = eps
-self.gamma = nn.Parameter(torch.ones(dim))  # 缩放因子
-self.beta = nn.Parameter(torch.zeros(dim))  # 偏移因子
+    def __init__(self, dim, eps=1e-5):
+        super(LayerNorm, self).__init__()
+        self.eps = eps
+        self.gamma = nn.Parameter(torch.ones(dim))  # 缩放因子
+        self.beta = nn.Parameter(torch.zeros(dim))  # 偏移因子
 
-def forward(self, x):
-mean = x.mean(dim=-1, keepdim=True)
-var = x.var(dim=-1, unbiased=False, keepdim=True)
-x_norm = (x - mean) / torch.sqrt(var + self.eps)
-return self.gamma * x_norm + self.beta
+        def forward(self, x):
+            mean = x.mean(dim=-1, keepdim=True)
+            var = x.var(dim=-1, unbiased=False, keepdim=True)
+            x_norm = (x - mean) / torch.sqrt(var + self.eps)
+            return self.gamma * x_norm + self.beta
 ```
 
 
@@ -5021,16 +5025,16 @@ import torch
 import torch.nn as nn
 
 class RMSNorm(nn.Module):
-def __init__(self, dim, eps=1e-8):
-super(RMSNorm, self).__init__()
-self.eps = eps
-self.scale = nn.Parameter(torch.ones(dim))  # 可学习缩放因子
+    def __init__(self, dim, eps=1e-8):
+        super(RMSNorm, self).__init__()
+        self.eps = eps
+        self.scale = nn.Parameter(torch.ones(dim))  # 可学习缩放因子
 
-def forward(self, x):
-# 计算 RMS
-rms = x.pow(2).mean(dim=-1, keepdim=True).add(self.eps).sqrt()
-x_norm = x / rms
-return self.scale * x_norm
+        def forward(self, x):
+            # 计算 RMS
+            rms = x.pow(2).mean(dim=-1, keepdim=True).add(self.eps).sqrt()
+            x_norm = x / rms
+            return self.scale * x_norm
 ```
 
 
@@ -5061,29 +5065,29 @@ return self.scale * x_norm
 import numpy as np
 
 def beam_search(start_token, get_next_probs, beam_width=3, max_len=10):
-"""
-start_token: 初始 token
-get_next_probs: 函数 f(seq) -> dict{token: prob} 返回下一个 token 的概率
-beam_width: beam 大小
-max_len: 最大生成长度
-"""
-# 初始 beam: list of (sequence, score)
-beams = [( [start_token], 0.0 )]  # score 用 log 概率
+    """
+    start_token: 初始 token
+    get_next_probs: 函数 f(seq) -> dict{token: prob} 返回下一个 token 的概率
+    beam_width: beam 大小
+    max_len: 最大生成长度
+    """
+    # 初始 beam: list of (sequence, score)
+    beams = [( [start_token], 0.0 )]  # score 用 log 概率
 
-for _ in range(max_len):
-new_beams = []
-for seq, score in beams:
-next_probs = get_next_probs(seq)
-for token, prob in next_probs.items():
-new_seq = seq + [token]
-new_score = score + np.log(prob + 1e-12)  # 避免 log(0)
-new_beams.append((new_seq, new_score))
+    for _ in range(max_len):
+        new_beams = []
+        for seq, score in beams:
+            next_probs = get_next_probs(seq)
+            for token, prob in next_probs.items():
+                new_seq = seq + [token]
+                new_score = score + np.log(prob + 1e-12)  # 避免 log(0)
+                new_beams.append((new_seq, new_score))
 
-# 选择 top-k
-new_beams.sort(key=lambda x: x[1], reverse=True)
-beams = new_beams[:beam_width]
+                # 选择 top-k
+                new_beams.sort(key=lambda x: x[1], reverse=True)
+                beams = new_beams[:beam_width]
 
-return beams  # 返回最终 beam 列表
+                return beams  # 返回最终 beam 列表
 ```
 
 
@@ -5110,17 +5114,17 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class SimpleMoE(nn.Module):
-def __init__(self, input_dim, output_dim, num_experts):
-super().__init__()
-self.num_experts = num_experts
-self.experts = nn.ModuleList([nn.Linear(input_dim, output_dim) for _ in range(num_experts)])
-self.gate = nn.Linear(input_dim, num_experts)
+    def __init__(self, input_dim, output_dim, num_experts):
+        super().__init__()
+        self.num_experts = num_experts
+        self.experts = nn.ModuleList([nn.Linear(input_dim, output_dim) for _ in range(num_experts)])
+        self.gate = nn.Linear(input_dim, num_experts)
 
-def forward(self, x):
-gate_probs = F.softmax(self.gate(x), dim=1)  # [batch, num_experts]
-expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=1)  # [batch, num_experts, output_dim]
-gate_probs = gate_probs.unsqueeze(-1)  # [batch, num_experts, 1]
-return torch.sum(gate_probs * expert_outputs, dim=1)  # [batch, output_dim]
+        def forward(self, x):
+            gate_probs = F.softmax(self.gate(x), dim=1)  # [batch, num_experts]
+            expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=1)  # [batch, num_experts, output_dim]
+            gate_probs = gate_probs.unsqueeze(-1)  # [batch, num_experts, 1]
+            return torch.sum(gate_probs * expert_outputs, dim=1)  # [batch, output_dim]
 ```
 
 
@@ -5137,20 +5141,20 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class LoRALinear(nn.Module):
-def __init__(self, in_features, out_features, r=4, alpha=1):
-super().__init__()
-self.r = r
-self.scale = alpha / r
-self.weight = nn.Parameter(torch.randn(out_features, in_features))
-self.weight.requires_grad = False
-self.A = nn.Parameter(torch.randn(r, in_features) * 0.01)
-self.B = nn.Parameter(torch.randn(out_features, r) * 0.01)
-self.bias = nn.Parameter(torch.zeros(out_features))
+    def __init__(self, in_features, out_features, r=4, alpha=1):
+        super().__init__()
+        self.r = r
+        self.scale = alpha / r
+        self.weight = nn.Parameter(torch.randn(out_features, in_features))
+        self.weight.requires_grad = False
+        self.A = nn.Parameter(torch.randn(r, in_features) * 0.01)
+        self.B = nn.Parameter(torch.randn(out_features, r) * 0.01)
+        self.bias = nn.Parameter(torch.zeros(out_features))
 
-def forward(self, x):
-base = F.linear(x, self.weight, self.bias)
-lora = F.linear(x, self.B @ self.A) * self.scale
-return base + lora
+        def forward(self, x):
+            base = F.linear(x, self.weight, self.bias)
+            lora = F.linear(x, self.B @ self.A) * self.scale
+            return base + lora
 ```
 
 
@@ -5250,12 +5254,12 @@ return base + lora
 
 ```python
 def compute_gae(rewards, values, gamma=1.0, lam=0.95):
-advantages = torch.zeros_like(rewards)
-last_adv = 0
-for t in reversed(range(rewards.size(1))):
-delta = rewards[:, t] + gamma * values[:, t + 1] - values[:, t]
-advantages[:, t] = last_adv = delta + gamma * lam * last_adv
-return advantages
+    advantages = torch.zeros_like(rewards)
+    last_adv = 0
+    for t in reversed(range(rewards.size(1))):
+        delta = rewards[:, t] + gamma * values[:, t + 1] - values[:, t]
+        advantages[:, t] = last_adv = delta + gamma * lam * last_adv
+        return advantages
 ```
 
   - 根据采样到的数据进行多次策略迭代更新，每次更新之后得到`log_probs`和新的`values`。
@@ -5268,11 +5272,11 @@ return advantages
 
 ```python
 def actor_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
-ratio = torch.exp(log_probs - old_log_probs)  # [B]
-unclipped = ratio * advantages
-clipped = torch.clamp(ratio, 1 - clip_range, 1 + clip_range) * advantages
-loss = -torch.min(unclipped, clipped).mean()
-return loss
+    ratio = torch.exp(log_probs - old_log_probs)  # [B]
+    unclipped = ratio * advantages
+    clipped = torch.clamp(ratio, 1 - clip_range, 1 + clip_range) * advantages
+    loss = -torch.min(unclipped, clipped).mean()
+    return loss
 ```
 
   - 再根据`rewards`和`values`得到`critic_loss`，优化 Critic/Value Model。
@@ -5298,9 +5302,9 @@ return loss
   其中，$$y^+$$ 是人类偏好的回答，$$y^-$$ 是较差的回答，$$\beta$$ 是温度系数，控制偏好强度
 ```python
 def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
-diff = logp_chosen - logp_rejected  # [B]
-loss = -torch.nn.functional.logsigmoid(beta * diff).mean()
-return loss
+    diff = logp_chosen - logp_rejected  # [B]
+    loss = -torch.nn.functional.logsigmoid(beta * diff).mean()
+    return loss
 ```
 
 
@@ -5329,24 +5333,24 @@ return loss
 
 ```python
 def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range=0.2):
-# 计算每个组的 ratio
-ratio = torch.exp(group_log_probs - group_old_log_probs)  # [G, B]
+    # 计算每个组的 ratio
+    ratio = torch.exp(group_log_probs - group_old_log_probs)  # [G, B]
 
-# 计算组内相对优势（相对于组内其他策略优势的平均）
-mean_advantages = group_advantages.mean(dim=0, keepdim=True)  # [1, B]
-relative_advantages = group_advantages - mean_advantages     # [G, B]
+    # 计算组内相对优势（相对于组内其他策略优势的平均）
+    mean_advantages = group_advantages.mean(dim=0, keepdim=True)  # [1, B]
+    relative_advantages = group_advantages - mean_advantages     # [G, B]
 
-# 计算组内相对 ratio（相对于组内其他策略 ratio 的平均）
-mean_ratio = ratio.mean(dim=0, keepdim=True)  # [1, B]
-relative_ratio = ratio / (mean_ratio + 1e-8)  # [G, B]
+    # 计算组内相对 ratio（相对于组内其他策略 ratio 的平均）
+    mean_ratio = ratio.mean(dim=0, keepdim=True)  # [1, B]
+    relative_ratio = ratio / (mean_ratio + 1e-8)  # [G, B]
 
-# Unclipped and clipped losses 基于相对比率和相对优势
-unclipped = relative_ratio * relative_advantages
-clipped = torch.clamp(relative_ratio, 1 - clip_range, 1 + clip_range) * relative_advantages
+    # Unclipped and clipped losses 基于相对比率和相对优势
+    unclipped = relative_ratio * relative_advantages
+    clipped = torch.clamp(relative_ratio, 1 - clip_range, 1 + clip_range) * relative_advantages
 
-# 对所有组和批次求平均，取最小
-loss = -torch.min(unclipped, clipped).mean()
-return loss
+    # 对所有组和批次求平均，取最小
+    loss = -torch.min(unclipped, clipped).mean()
+    return loss
 ```
 
   - 输出 o_i 被输入到冻结的参考模型（Reference Model），计算输出 o_i 与参考策略之间的 KL 散度，用于限制策略更新。
@@ -5992,8 +5996,8 @@ return loss
   评测闭环是指模型从构建测试集到持续迭代的完整流程：
 
 ```
-  构建 Golden Set → 离线评估 → 模型部署 → 在线监控 → Badcase闭环
-          ↑___________________________________________|
+构建 Golden Set → 离线评估 → 模型部署 → 在线监控 → Badcase闭环
+        ↑___________________________________________|
 ```
 
   **Step 1: 构建 Golden Set**
@@ -6065,12 +6069,12 @@ return loss
 
   **每个维度的档位示例：**
 ```
-  有用性：
-  - 5分：完全解决问题，提供额外价值
-  - 4分：解决问题，无额外价值
-  - 3分：部分解决，需用户补充
-  - 2分：无关或错误
-  - 1分：有害或误导
+有用性：
+- 5分：完全解决问题，提供额外价值
+- 4分：解决问题，无额外价值
+- 3分：部分解决，需用户补充
+- 2分：无关或错误
+- 1分：有害或误导
 ```
 
   **Rubric 在 LLM 评测中的应用：**
@@ -6153,11 +6157,11 @@ return loss
 
   **架构层次**：
 ```
-  底层基座：Megatron-LM + DeepSpeed
-      ↓
-  RLHF 上层应用：veRL / OpenRLHF
-      ↓
-  微调专用工具：LLaMA-Factory / TRL / SWIFT
+底层基座：Megatron-LM + DeepSpeed
+    ↓
+RLHF 上层应用：veRL / OpenRLHF
+    ↓
+微调专用工具：LLaMA-Factory / TRL / SWIFT
 ```
 
   **发展趋势**：
@@ -6627,19 +6631,19 @@ return loss
 
   **模板**：
 ```
-  面试官您好，我是【姓名】。
+面试官您好，我是【姓名】。
 
-  我毕业于【学校】，【学位】学历。研究方向是【研究方向】，
-  主要研究【具体课题】，发表了【论文数量】篇顶会论文。
+我毕业于【学校】，【学位】学历。研究方向是【研究方向】，
+主要研究【具体课题】，发表了【论文数量】篇顶会论文。
 
-  在【公司名称】担任【职位】期间，主要负责【业务方向】的算法研发：
-  - 【项目1】：解决了【核心问题】，采用【技术方案】，取得了【量化成果】
-  - 【项目2】：负责【核心职责】，提升了【关键指标】【X%】
+在【公司名称】担任【职位】期间，主要负责【业务方向】的算法研发：
+- 【项目1】：解决了【核心问题】，采用【技术方案】，取得了【量化成果】
+- 【项目2】：负责【核心职责】，提升了【关键指标】【X%】
 
-  我擅长【领域1】和【领域2】，熟悉【框架/工具】，有【X】年实践经验。
+我擅长【领域1】和【领域2】，熟悉【框架/工具】，有【X】年实践经验。
 
-  选择贵公司是因为【原因1：业务匹配】【原因2：技术栈匹配】。
-  希望能在这个岗位上发挥我的专业能力，为团队创造价值。
+选择贵公司是因为【原因1：业务匹配】【原因2：技术栈匹配】。
+希望能在这个岗位上发挥我的专业能力，为团队创造价值。
 ```
 
   **填充要点**：
