@@ -4488,7 +4488,9 @@ def gru_forward(X, Wx, Wh, b, h0):
 
 - **Transformer 的原理？**
 
-  Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
+  Vanilla Transformer 是 encoder-decoder 架构，由此衍生出现代三种主流变体，当前主流 LLM 多为 decoder-only。
+
+  核心数据流：输入 tokens → Token Embedding + Position Embedding 相加 → 经过 N 层 TransformerBlock，每层包括：Self-Attention（对 Value 做加权聚合，权重由 Q 和 K 的相似度决定，捕捉 token 间依赖）+ 残差连接 + Norm + FFN（引入非线性，先升维再降维）+ 残差连接 + Norm → 输出 contextual representation，用于下游任务。
 
   在 Vanilla Transformer 之后，衍生出了三种主流架构：
 
@@ -4547,9 +4549,13 @@ class TransformerBlock(nn.Module):
 
 - **为什么大部分 LLM 是 decoder-only？**
 
-  生成范式的统一性；任务更难
+  **推理效率**：Decoder-only 的 causal attention 天然支持 KV Cache，推理时每步只需计算新 token 的 Q，历史 K/V 直接复用；而 Encoder-only（如 BERT）做生成时每步需要重新跑完整的双向 attention，无法利用 KV Cache，推理速度差距显著。
 
-  双向 attention 的注意力矩阵因为是 n * d 与 d * n 的矩阵相乘，理论上最大秩只能为 min(n, d)，而一般 n 远大于 d，所以 n * n 的注意力矩阵容易退化成低秩状态，而 causal attention 的注意力矩阵是下三角矩阵，其秩为对角线上非零的个数，而因为 softmax 输出为正，因此必然是满秩的，建模能力更强。
+  **训练效率**：Causal LM 每个 token 都是预测目标，一条序列产生 n 个训练信号；Encoder-Decoder 只有 decoder 部分产生训练信号，利用率更低。
+
+  **架构简洁**：去掉 cross-attention，参数更集中，同等参数量下表达能力更强；Scaling 实验上也验证了 decoder-only 在大规模时表现更优。
+
+  **建模能力**：双向 attention 的注意力矩阵因为是 n * d 与 d * n 的矩阵相乘，理论上最大秩只能为 min(n, d)，而一般 n 远大于 d，所以 n * n 的注意力矩阵容易退化成低秩状态，而 causal attention 的注意力矩阵是下三角矩阵，其秩为对角线上非零的个数，因为 softmax 输出为正，因此必然是满秩的，建模能力更强。
 
 
 - **为什么要用 FFN？**
@@ -4895,6 +4901,76 @@ class CrossAttention(nn.Module):
 ```
 
 
+- **什么是 KV Cache？为什么只缓存 K/V 不缓存 Q？什么情况下可以使用？**
+
+  自回归生成时，第 t 步的输出依赖于第 1 到 t 步所有 token 的 K/V。如果每步都从头计算，前 t-1 步的 K/V 会被重复计算，浪费算力。KV Cache 把每层每步计算好的 K/V 存下来，下一步直接复用，只需计算当前新 token 的 K/V。
+
+  **为什么只缓存 K/V 不缓存 Q**：从 $O = AV$ 展开，第 $t$ 行为 $o_t = \sum_{i=1}^{T} A_{t,i} V_i$。causal mask 让 $i > t$ 的项经过 softmax 后为 0，因此化简为 $o_t = \sum_{i=1}^{t} A_{t,i} V_i$。其中 $A_{t,i}$ 只涉及 $Q_t$，与 $Q_1, ..., Q_{t-1}$ 无关。所以 $Q_i$ 只在计算 $o_i$ 时被用一次，用完即弃；$K_i$、$V_i$ 在计算 $o_i, o_{i+1}, ..., o_T$ 时都会被查询，值得缓存。
+
+  **为什么 K/V 可以稳定缓存（causal mask 的无后效性）**：$K_i = h_i W^K$，其值只依赖 $h_i$。在多层 Transformer 中，第 $l$ 层的 $h_i^{(l)}$ 由上一层的 $o_i^{(l-1)}$ 经 FFN 得到，而 $o_i^{(l-1)} = \sum_{j=1}^{i} A_{i,j}^{(l-1)} V_j^{(l-1)}$，层层递推，$h_i^{(l)}$ 只依赖原始输入中第 $1$ 到 $i$ 个 token。causal mask 保证了每一层每个位置的计算都只依赖左侧，因此新增第 $t+1$ 个 token 不会影响任何一层的 $h_1, ..., h_t$，$K_i$、$V_i$ 的值严格不变，可以安全复用。反观双向 attention，$h_i$ 依赖所有 token，一旦新增 token，$h_i$ 改变，$K_i$、$V_i$ 随之失效。
+
+  **什么情况下可以使用**：KV Cache 依赖 causal attention（下三角 mask），保证每步的 K/V 不依赖未来 token，计算结果可以复用。因此：
+  - **Decoder-only**：天然支持，推理时每步只输入一个新 token，命中 KV Cache
+  - **Encoder-Decoder**：encoder 部分是双向 attention，不能缓存；decoder 部分是 causal attention，可以缓存；encoder 输出固定后，cross-attention 的 K/V 也可以缓存
+  - **Encoder-only（BERT）**：双向 attention，$h_i$ 依赖所有 token，新增 token 后 $K_i$、$V_i$ 失效，无法缓存
+
+- **multi-head attention + kv cache 实现**
+
+  query 不参与下一 token 的注意力过程，无需缓存，而 key/value 是过去的记忆，需要缓存。
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class SelfAttentionWithKVCache(nn.Module):
+    def __init__(self, embed_dim, num_heads, max_seq_len):
+        super().__init__()
+        assert embed_dim % num_heads == 0
+        self.embed_dim = embed_dim
+        self.num_heads = num_heads
+        self.head_dim = embed_dim // num_heads
+
+        self.q_proj = nn.Linear(embed_dim, embed_dim)
+        self.k_proj = nn.Linear(embed_dim, embed_dim)
+        self.v_proj = nn.Linear(embed_dim, embed_dim)
+        self.out_proj = nn.Linear(embed_dim, embed_dim)
+
+        # 初始化 KV Cache（支持最多 max_seq_len 步）
+        self.register_buffer("key_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
+        self.register_buffer("value_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
+        self.max_seq_len = max_seq_len
+
+    def forward(self, x, start_pos):
+        """
+        x: [B, 1, E] - 当前一步的 token 表示
+        start_pos: int - 当前 token 在生成序列中的位置
+        """
+        B, T, E = x.shape  # T == 1 during generation
+
+        # QKV projection
+        Q = self.q_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)  # [B, H, 1, D]
+        K = self.k_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+        V = self.v_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+
+        # 更新 KV cache
+        self.key_cache[:, :, start_pos:start_pos+1, :] = K
+        self.value_cache[:, :, start_pos:start_pos+1, :] = V
+
+        # 从 0 到当前 step，取所有 KV
+        K_cached = self.key_cache[:, :, :start_pos+1, :]   # [B, H, T_cache, D]
+        V_cached = self.value_cache[:, :, :start_pos+1, :] # [B, H, T_cache, D]
+
+        # 注意力计算
+        scores = torch.matmul(Q, K_cached.transpose(-2, -1)) / (self.head_dim ** 0.5)  # [B, H, 1, T_cache]
+        attn_weights = F.softmax(scores, dim=-1)
+        out = torch.matmul(attn_weights, V_cached)  # [B, H, 1, D]
+
+        out = out.transpose(1, 2).contiguous().view(B, T, E)  # [B, 1, E]
+        return self.out_proj(out)
+```
+
+
 - **grouped-query attention 实现**
 
   GQA 是 MQA 和 MHA 的均衡，MQA 尽管减轻了 KV Cache 负担，但也可能带来性能下降。grouped-query attention 中，query 使用比 key/value 更多的 heads。因为在推理阶段，Q 是即时计算的，而 K/V 是缓存的。
@@ -4972,63 +5048,6 @@ class GroupedQueryAttention(nn.Module):
 - **Transformer 使用的时候，制约显存的最关键因素是什么？**
 
   序列长度。
-
-
-- **multi-head attention + kv cache 实现**
-
-  query 不参与下一 token 的注意力过程，无需缓存，而 key/value 是过去的记忆，需要缓存。
-
-```python
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class SelfAttentionWithKVCache(nn.Module):
-    def __init__(self, embed_dim, num_heads, max_seq_len):
-        super().__init__()
-        assert embed_dim % num_heads == 0
-        self.embed_dim = embed_dim
-        self.num_heads = num_heads
-        self.head_dim = embed_dim // num_heads
-
-        self.q_proj = nn.Linear(embed_dim, embed_dim)
-        self.k_proj = nn.Linear(embed_dim, embed_dim)
-        self.v_proj = nn.Linear(embed_dim, embed_dim)
-        self.out_proj = nn.Linear(embed_dim, embed_dim)
-
-        # 初始化 KV Cache（支持最多 max_seq_len 步）
-        self.register_buffer("key_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
-        self.register_buffer("value_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
-        self.max_seq_len = max_seq_len
-
-    def forward(self, x, start_pos):
-        """
-        x: [B, 1, E] - 当前一步的 token 表示
-        start_pos: int - 当前 token 在生成序列中的位置
-        """
-        B, T, E = x.shape  # T == 1 during generation
-
-        # QKV projection
-        Q = self.q_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)  # [B, H, 1, D]
-        K = self.k_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-        V = self.v_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-
-        # 更新 KV cache
-        self.key_cache[:, :, start_pos:start_pos+1, :] = K
-        self.value_cache[:, :, start_pos:start_pos+1, :] = V
-
-        # 从 0 到当前 step，取所有 KV
-        K_cached = self.key_cache[:, :, :start_pos+1, :]   # [B, H, T_cache, D]
-        V_cached = self.value_cache[:, :, :start_pos+1, :] # [B, H, T_cache, D]
-
-        # 注意力计算
-        scores = torch.matmul(Q, K_cached.transpose(-2, -1)) / (self.head_dim ** 0.5)  # [B, H, 1, T_cache]
-        attn_weights = F.softmax(scores, dim=-1)
-        out = torch.matmul(attn_weights, V_cached)  # [B, H, 1, D]
-
-        out = out.transpose(1, 2).contiguous().view(B, T, E)  # [B, 1, E]
-        return self.out_proj(out)
-```
 
 
 - **FlashAttention**
