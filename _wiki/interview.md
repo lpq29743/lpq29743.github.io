@@ -4490,36 +4490,51 @@ def gru_forward(X, Wx, Wh, b, h0):
 
   Transformer 的总体架构是 encoder-decoder，它的主要部分是利用 multi-head attention 去计算词与词之间的相似度。此外，为了融入位置信息，它还提出了 position embedding。
 
+  在 Vanilla Transformer 之后，衍生出了三种主流架构：
+
+  | 架构 | Attention 类型 | Mask | 代表模型 | 适用任务 |
+  |---|---|---|---|---|
+  | Encoder-only | 全双向 Self-Attention | 无（所有 token 互见）| BERT、RoBERTa | 文本分类、NER、语义匹配 |
+  | Decoder-only | 单向 Causal Self-Attention | Causal Mask（下三角）| GPT、LLaMA | 文本生成、对话、代码生成 |
+  | Encoder-Decoder | Encoder 全双向 + Decoder Causal + Cross-Attention | Encoder 无 / Decoder Causal | T5、BART | 翻译、摘要、seq2seq |
+
 
 - **TransformerBlock 实现**
 
-  如果是如 LLaMA 等新型 LLM，则改 Norm 和 激活函数类型，并把 PostNorm 改成 PreNorm。
+  以 Vanilla Transformer 为基准：Post Norm + LayerNorm + ReLU。
 
 ```python
 class TransformerBlock(nn.Module):
     def __init__(self, hidden_size=4096, num_heads=32, dropout=0.1):
         super().__init__()
         self.attention = MultiHeadSelfAttention(hidden_size, num_heads)
-        self.norm1 = nn.LayerNorm(hidden_size)
+        self.norm1 = nn.LayerNorm(hidden_size)     # LLaMA 使用 RMSNorm
         self.ff = nn.Sequential(
             nn.Linear(hidden_size, hidden_size * 4),
-            nn.ReLU(),
+            nn.ReLU(),                             # LLaMA 使用 SwiGLU
             nn.Linear(hidden_size * 4, hidden_size)
         )
-        self.norm2 = nn.LayerNorm(hidden_size)
+        self.norm2 = nn.LayerNorm(hidden_size)     # LLaMA 使用 RMSNorm
         self.dropout = nn.Dropout(dropout)
 
-    def forward(self, x, mask=None):
-        # Self-attention
+    def forward(self, x, mask=None, encoder_output=None, past_kv=None):
+        # mask=None            → encoder-only：全双向 attention，所有 token 互相可见
+        # mask=causal_mask     → decoder-only：单向 attention，每个 token 只能看到左侧
+        # encoder_output!=None → encoder-decoder 扩展点：在 self-attn 后加 cross-attn 层，
+        #                        Q=当前 x，K/V=encoder_output
+        # past_kv!=None        → KV Cache 扩展点：在 attention 内部将当前步 K/V 与
+        #                        past_kv 拼接后使用，并返回新的 past_kv 供下一步复用
+
+        # Self-attention（LLaMA 等变种改为 Pre Norm：先 norm 再 attention）
         attn_out = self.attention(x, mask)
         # Residual Connection
         x = x + self.dropout(attn_out)
-        x = self.norm1(x)
+        x = self.norm1(x)   # Post Norm
 
         # Feedforward with residual
         ff_out = self.ff(x)
         x = x + self.dropout(ff_out)
-        x = self.norm2(x)
+        x = self.norm2(x)   # Post Norm
 
         return x
 ```
@@ -4822,17 +4837,62 @@ class MultiHeadAttention(nn.Module):
 
 - **causal mask 怎么生成**
 
+  自回归生成时，每个 token 只能看到自己和左侧的 token，不能看到未来的 token，否则训练和推理行为不一致。causal mask 是一个下三角布尔矩阵，在 attention 计算中将未来位置的 score 填为 `-inf`，经过 softmax 后权重归零，从而屏蔽未来信息。
+
 ```python
 def causal_mask(seq_len):
-    # 下三角矩阵 (seq_len, seq_len)
+    # 下三角矩阵 (seq_len, seq_len)，True 表示可见，False 表示屏蔽
     mask = torch.tril(torch.ones(seq_len, seq_len, dtype=torch.bool))
     return mask
+
+# 在 attention 中使用：
+# scores = Q @ K.T / sqrt(d_k)
+# scores = scores.masked_fill(mask == False, float('-inf'))  # 屏蔽未来位置
+# weights = softmax(scores, dim=-1)                          # 被屏蔽位置权重为 0
 ```
 
 
 - **用 multi-head attention 做 cross-attention**
 
-  拼接后输入。
+  cross-attention 用于 encoder-decoder 架构中，位于 decoder 的 self-attn 之后。Q 来自 decoder 当前层的输出，K/V 来自 encoder 的最终输出，让 decoder 每一步都能关注到完整的 encoder 表示。
+
+```python
+class CrossAttention(nn.Module):
+    def __init__(self, embed_dim, num_heads):
+        super().__init__()
+        assert embed_dim % num_heads == 0
+        self.num_heads = num_heads
+        self.head_dim = embed_dim // num_heads
+
+        self.q_proj = nn.Linear(embed_dim, embed_dim)    # Q 来自 decoder
+        self.k_proj = nn.Linear(embed_dim, embed_dim)    # K 来自 encoder 输出
+        self.v_proj = nn.Linear(embed_dim, embed_dim)    # V 来自 encoder 输出
+        self.out_proj = nn.Linear(embed_dim, embed_dim)
+
+    def forward(self, decoder_x, encoder_output, encoder_mask=None):
+        """
+        decoder_x:      (B, T_dec, E) — decoder 当前层输出
+        encoder_output: (B, T_enc, E) — encoder 最终输出
+        encoder_mask:   (B, T_enc)    — 屏蔽 encoder padding 位置（可选）
+        """
+        B, T_dec, E = decoder_x.shape
+        _, T_enc, _ = encoder_output.shape
+
+        Q = self.q_proj(decoder_x).view(B, T_dec, self.num_heads, self.head_dim).transpose(1, 2)
+        K = self.k_proj(encoder_output).view(B, T_enc, self.num_heads, self.head_dim).transpose(1, 2)
+        V = self.v_proj(encoder_output).view(B, T_enc, self.num_heads, self.head_dim).transpose(1, 2)
+
+        scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.head_dim ** 0.5)  # (B, H, T_dec, T_enc)
+        if encoder_mask is not None:
+            # encoder_mask: (B, T_enc) → 扩展为 (B, 1, 1, T_enc)
+            scores = scores.masked_fill(encoder_mask.unsqueeze(1).unsqueeze(2) == 0, float('-inf'))
+
+        weights = F.softmax(scores, dim=-1)
+        context = torch.matmul(weights, V)  # (B, H, T_dec, head_dim)
+
+        context = context.transpose(1, 2).contiguous().view(B, T_dec, E)
+        return self.out_proj(context)
+```
 
 
 - **grouped-query attention 实现**
