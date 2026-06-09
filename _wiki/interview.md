@@ -4501,12 +4501,12 @@ class TransformerBlock(nn.Module):
         self.attention = MultiHeadSelfAttention(hidden_size, num_heads)
         self.norm1 = nn.LayerNorm(hidden_size)
         self.ff = nn.Sequential(
-        nn.Linear(hidden_size, hidden_size * 4),
-        nn.ReLU(),
-        nn.Linear(hidden_size * 4, hidden_size)
-    )
-    self.norm2 = nn.LayerNorm(hidden_size)
-    self.dropout = nn.Dropout(dropout)
+            nn.Linear(hidden_size, hidden_size * 4),
+            nn.ReLU(),
+            nn.Linear(hidden_size * 4, hidden_size)
+        )
+        self.norm2 = nn.LayerNorm(hidden_size)
+        self.dropout = nn.Dropout(dropout)
 
     def forward(self, x, mask=None):
         # Self-attention
@@ -4523,365 +4523,9 @@ class TransformerBlock(nn.Module):
         return x
 ```
 
-
-- **multi-head attention 的公式是怎样的？**
-
-  $$Attention(Q,K,V) = softmax({QK^T\over {\sqrt {d_k}}})V$$。
-
-
-- **multi-head attention 实现**
-
-```python
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class MultiHeadAttention(nn.Module):
-    def __init__(self, embed_dim, num_heads):
-        super(MultiHeadAttention, self).__init__()
-        assert embed_dim % num_heads == 0, "Embedding dimension must be divisible by number of heads"
-
-        self.embed_dim = embed_dim
-        self.num_heads = num_heads
-        self.head_dim = embed_dim // num_heads
-
-        # Linear layers to project input to Q, K, V
-        self.q_proj = nn.Linear(embed_dim, embed_dim)
-        self.k_proj = nn.Linear(embed_dim, embed_dim)
-        self.v_proj = nn.Linear(embed_dim, embed_dim)
-
-        # Final output projection
-        self.out_proj = nn.Linear(embed_dim, embed_dim)
-
-        def forward(self, x, mask=None):
-            B, T, E = x.size()
-
-            # Linear projections
-            Q = self.q_proj(x)  # (B, T, E)
-            K = self.k_proj(x)
-            V = self.v_proj(x)
-
-            # Split into multiple heads: (B, num_heads, T, head_dim)
-            Q = Q.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-            K = K.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-            V = V.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-
-            # Scaled dot-product attention
-            scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.head_dim ** 0.5)  # (B, num_heads, T, T)
-            if mask is not None:
-                scores = scores.masked_fill(mask == 0, float("-inf"))
-                weights = F.softmax(scores, dim=-1)
-                attended = torch.matmul(weights, V)  # (B, num_heads, T, head_dim)
-
-                # Concatenate heads: (B, T, E)
-                # transpose/permute → 改变维度顺序但通常返回 非连续 张量。
-                # view → 只能作用于 连续 内存。
-                # contiguous() → 如有必要，将张量复制为连续布局，保证 view 能正常工作。
-                attended = attended.transpose(1, 2).contiguous().view(B, T, E)
-
-                # Final linear projection
-                output = self.out_proj(attended)
-                return output
-```
-
-
-- **multi-head attention 时间复杂度**
-
-  $$O(d * seq\_len * seq\_len)$$。
-
-
-- **Transformer 使用的时候，制约显存的最关键因素是什么？**
-
-  序列长度。
-
-
-- **casual mask 怎么生成**
-
-```python
-def causal_mask(seq_len):
-    # 下三角矩阵 (seq_len, seq_len)
-    mask = torch.tril(torch.ones(seq_len, seq_len, dtype=torch.bool))
-    return mask
-```
-
-
-- **用 multi-head attention 做 cross-attention**
-
-  拼接后输入。
-
-
-- **grouped-query attention 实现**
-
-  GQA 是 MQA 和 MHA 的均衡，MQA 尽管减轻了 KV Cache 负担，但也可能带来性能下降。grouped-query attention 中，query 使用比 key/value 更多的 heads。因为在推理阶段，Q 是即时计算的，而 K/V 是缓存的。
-
-```python
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class GroupedQueryAttention(nn.Module):
-    def __init__(self, embed_dim, num_query_heads, num_kv_heads):
-        super(GroupedQueryAttention, self).__init__()
-        assert embed_dim % num_query_heads == 0, "embed_dim must be divisible by num_query_heads"
-        assert embed_dim % num_kv_heads == 0, "embed_dim must be divisible by num_kv_heads"
-
-        self.embed_dim = embed_dim
-        self.num_query_heads = num_query_heads
-        self.num_kv_heads = num_kv_heads
-        self.q_head_dim = embed_dim // num_query_heads
-        self.kv_head_dim = embed_dim // num_kv_heads
-
-        # Projection layers
-        self.q_proj = nn.Linear(embed_dim, embed_dim)
-        self.k_proj = nn.Linear(embed_dim, embed_dim)
-        self.v_proj = nn.Linear(embed_dim, embed_dim)
-        self.out_proj = nn.Linear(embed_dim, embed_dim)
-
-        def forward(self, x):
-            B, T, E = x.shape
-
-            # Project inputs
-            Q = self.q_proj(x).view(B, T, self.num_query_heads, self.q_head_dim).transpose(1, 2)  # (B, QH, T, Dq)
-            K = self.k_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dk)
-            V = self.v_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dv)
-
-            # Expand K/V to match query heads if needed
-            if self.num_query_heads != self.num_kv_heads:
-                repeat_factor = self.num_query_heads // self.num_kv_heads
-                K = K.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dk)
-                V = V.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dv)
-
-                # Scaled dot-product attention
-                scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.q_head_dim ** 0.5)  # (B, QH, T, T)
-                attn_weights = F.softmax(scores, dim=-1)
-                context = torch.matmul(attn_weights, V)  # (B, QH, T, Dv)
-
-                # Combine heads
-                context = context.transpose(1, 2).contiguous().view(B, T, E)  # (B, T, E)
-                output = self.out_proj(context)  # Final linear projection
-
-                return output
-```
-
-
-- **multi-head attention + kv cache 实现**
-
-  query 不参与下一 token 的注意力过程，无需缓存，而 key/value 是过去的记忆，需要缓存。
-
-```python
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-class SelfAttentionWithKVCache(nn.Module):
-    def __init__(self, embed_dim, num_heads, max_seq_len):
-        super().__init__()
-        assert embed_dim % num_heads == 0
-        self.embed_dim = embed_dim
-        self.num_heads = num_heads
-        self.head_dim = embed_dim // num_heads
-
-        self.q_proj = nn.Linear(embed_dim, embed_dim)
-        self.k_proj = nn.Linear(embed_dim, embed_dim)
-        self.v_proj = nn.Linear(embed_dim, embed_dim)
-        self.out_proj = nn.Linear(embed_dim, embed_dim)
-
-        # 初始化 KV Cache（支持最多 max_seq_len 步）
-        self.register_buffer("key_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
-        self.register_buffer("value_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
-        self.max_seq_len = max_seq_len
-
-        def forward(self, x, start_pos):
-            """
-            x: [B, 1, E] - 当前一步的 token 表示
-            start_pos: int - 当前 token 在生成序列中的位置
-            """
-            B, T, E = x.shape  # T == 1 during generation
-
-            # QKV projection
-            Q = self.q_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)  # [B, H, 1, D]
-            K = self.k_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-            V = self.v_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
-
-            # 更新 KV cache
-            self.key_cache[:, :, start_pos:start_pos+1, :] = K
-            self.value_cache[:, :, start_pos:start_pos+1, :] = V
-
-            # 从 0 到当前 step，取所有 KV
-            K_cached = self.key_cache[:, :, :start_pos+1, :]   # [B, H, T_cache, D]
-            V_cached = self.value_cache[:, :, :start_pos+1, :] # [B, H, T_cache, D]
-
-            # 注意力计算
-            scores = torch.matmul(Q, K_cached.transpose(-2, -1)) / (self.head_dim ** 0.5)  # [B, H, 1, T_cache]
-            attn_weights = F.softmax(scores, dim=-1)
-            out = torch.matmul(attn_weights, V_cached)  # [B, H, 1, D]
-
-            out = out.transpose(1, 2).contiguous().view(B, T, E)  # [B, 1, E]
-            return self.out_proj(out)
-```
-
-
-- **FlashAttention**
-
-  GPU 存储单元主要有 HBM 和 SRAM：HBM 容量大但访问速度慢，SRAM 容量小但访问速度快。由于这一特性，传统 self-attention 受 context length 限制，无法利用 SRAM，只能对 HBM 进行多次读写操作。而 FlashAttention 通过分块和在线 softmax 的方式，从 HBM 中读取块到 SRAM 中，用 SM（Streaming Multiprocessor）计算之后再写到 HBM 中，减少对 HBM 的访问，从而提高了速度。时间复杂度并没有变化，而空间复杂度因为没有存储中间的 attention matrix，从 O(N^2) 降低到 O(N)。
-
-  FlashAttention 基于以下几点：
-
-  1. 分块（`for i in range(0, L, block_size)`查询块，`for j in range(0, L, block_size)`键/值块）
-  将 Q, K, V 按块划分，分块计算 Attention。每次只加载当前块，节省内存。传统 softmax 需要先计算全部 QK^T，然后减 max 值再求 exp，最后归一化。而 FlashAttention 分块之后，softmax 的计算成为了一个难点。FlashAttention 通过引入两个额外的统计量（`m_prev` 和 `d_prev`）来在线计算 softmax。多个 block 的 softmax 计算可以并行，最后再合并。
-
-  2. 重计算
-  在后向梯度计算时，一般需要 attention matrix，但 FlashAttention 可以利用两个额外的统计量在 SRAM 上快速重新计算 attention。
-
-```python
-import torch
-import torch.nn.functional as F
-
-def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
-    # Q, K, V: [B, L, D]，Batch x Length x Dim
-    # block_size: 每块序列长度
-    B, L, D = Q.shape
-    output = torch.zeros_like(Q)
-
-    # 遍历查询块
-    for i in range(0, L, block_size):
-        q_block = Q[:, i:i+block_size, :]   # [B, block, D]
-        out_block = torch.zeros_like(q_block)
-
-        # 记录在线 softmax 的统计量
-        m_prev = None  # 当前块的最大值
-        d_prev = None  # 当前块的 exp 和
-
-        # 遍历键/值块
-        for j in range(0, L, block_size):
-            k_block = K[:, j:j+block_size, :]
-            v_block = V[:, j:j+block_size, :]
-
-            # Attention logits
-            scores = torch.matmul(q_block, k_block.transpose(-2, -1)) / D**0.5
-            if mask is not None:
-                scores += mask[:, i:i+block_size, j:j+block_size]
-
-                # 在线 softmax
-                m_new = scores.max(dim=-1, keepdim=True).values
-                if m_prev is None:
-                    d_new = torch.exp(scores - m_new).sum(dim=-1, keepdim=True)
-                    y = torch.exp(scores - m_new) / d_new
-                else:
-                    m_comb = torch.max(m_prev, m_new)
-                    d_new = torch.exp(m_prev - m_comb) * d_prev + torch.exp(scores - m_comb).sum(dim=-1, keepdim=True)
-                    y = torch.exp(scores - m_comb) / d_new
-
-                    # 累加输出块
-                    out_block += torch.matmul(y, v_block)
-
-                    # 更新统计量，用于下一个键块（在线 softmax）
-                    m_prev = m_new
-                    d_prev = d_new
-
-                    output[:, i:i+block_size, :] = out_block
-
-                    return output
-```
-
-  FlashAttention v2 改进：
-  - 优化计算次序，减少非矩阵计算量。
-  - 增加 seq_len 维度的并行计算，提升 SM 利用率。
-  - 优化 warp 级工作模式，减少内部通信和 shared memory 访问。
-
-  FlashAttention v3 改进：
-  - 引入生产者-消费者异步机制，提升并行度。
-  - 优化 GEMM 和 Softmax 操作的重叠计算。
-  - 支持 FP8 低精度硬件加速，提升吞吐量并减少精度损失。
-
-
-- **Linear Attention**
-
-  如果去掉 softmax，$$QK^TV$$，可以先计算后半部分，从而将时间复杂度从 O(n^2d) 降到了 O(nd^2)。但直接去掉 softmax 会失去原先 Attention 相似的分布特性，因此 Linear Attention 会对 K、V 引入核函数。
-
-
-- **Sparse Attention**
-
-  基于位置的 attention
-  - Global Attention
-  - Window Attention
-  - Strided Attention
-  - Dilated Attention
-  - Random Attention
-  - ETC: Global + Window Attention
-  - BigBird: Global + Window + Random Attention
-
-  基于内容的 attention：根据输入内容的特征来动态确定（较小代价）哪些位置之间的交互是重要的
-
-
-- **Multi-head Latent Attention (MLA)**
-
-  在 MHA 中，K 和 V 是对 $$h_t$$ 分别用投影矩阵进行变化得到的，而 MLA 把 KV 的变换改成使用一个共用的 down-projection matrix 将 $$h_t$$ 映射为 $$c_t$$，再用两个 up-projection matrices 将 $$c_t$$ 映射为 $$k_t$$ 和 $$v_t$$。在做 Q、K 点积时，由于 $$k_t$$ 对应的 up-projection matrix 可以被 Q 的映射矩阵（此处也是低秩映射矩阵）吸收，所以 Q、K 点积本质上是 Q 和 C 点积。同理 $$v_t$$ 也不需要计算，因此两个 up-projection matrices 不需要用到，减少了 kv cache 的负担。
-
-  由于 MLA 没有显式计算 K，且 ROPE 不能加在 latent vector 上，因此 MLA 使用了 decoupled RoPE，即使用额外的 multi-head queries 和一个 shared key 来携带 RoPE 的位置信息，其维度为 $d_h$。新增的 q 和 k 维度使用常规的 RoPE 计算，用于携带位置信息；而原来的维度依然使用低秩分解的方式计算，最后再计算 attention 的时候两个部分拼接起来。
-
-  由于 $$d_c$$ 远小于 $$d_h * seq\_len$$，时间复杂度从 $$O(d_h * seq\_len * seq\_len)$$ 降至 $$O(d_h * seq\_len * latent\_len)$$。
-
-
-- **Attention Sink 是什么？为什么会出现？**
-
-  LLM 在自回归生成时，会将大量注意力分配给序列第一个 token（如 `<bos>`），其他 token 获得的不成比例地少。
-
-  **成因**：Transformer 需要一个 Context-Aware Identity Layer，让某些 attention head 根据上下文不做任何变化。sink token 作为 implicit bias 来承担这个角色。
-
-  **缓解方案**：
-  - 可学习的 sink token：引入专门的可学习 token
-  - Gated Attention（主流）：Qwen 团队方案，可学习的 KV biases / K biases，NeurIPS 2025 最佳论文候选
-
-
-- **为什么要 multi-head**
-
-  多头注意力允许模型在不同的表示子空间中学习信息，这样可以让模型同时关注不同的信息维度。每个头学习到的信息可以独立地编码输入序列的不同方面，然后将这些信息综合起来，得到更丰富的表示。
-
-
-- **Transformer 的 Q 和 K 为什么使用不同的权重矩阵生成？如果强行让 Q=K 会发生什么？**
-
-  注意力将退化为自相似匹配，容易捕捉到 trivial 信息（如位置对称性）；表达能力显著下降，模型性能变差；实际论文实验证明，共用 Q/K/V 权重会损害性能
-
-
-- **Transformer 为什么是 Q * K^T，而不是 Q + K？**
-
-  点积是最自然的相似度度量，而加法并不能提供一个明确的匹配度分数，它只是两个向量的混合，没有“匹配程度”的含义。
-
-
-- **Transformer 为什么是点积，而不是 cosine？**
-
-  cosine 会归一化，损失模长信息，而且计算复杂度更高。
-
-
-- **为什么要除以 $$\sqrt {d_k}$$**
-
-  Q 和 K 点积可以理解成 $$d_k$$ 项的和。如果不缩放，$$d_k$$ 越大，点积值方差越大，同时点积值过大会导致 softmax 函数偏向某个位置，接近 one-hot，梯度变得非常小。缩放了可以使得方差标准化到 Q 和 K 的方差，这有助于数值稳定性，使得学习过程更加稳定。
-
-
-- **multi-head attention 的 embed 会不会有低秩的问题，怎么解决？**
-
-  是的，可能因 head 冗余、聚合退化等原因呈现低秩结构，从而降低表达能力。可以通过正则化（在多头 projection 矩阵上加正交约束）、架构设计、训练策略等方法缓解，并可用奇异值分析评估问题严重程度。
-
-
 - **为什么要用 FFN？**
 
   引入非线性表达能力，因为 self-attention 是线性的。FFN 通常是两层网络，先升维再降维。由于低维空间表达能力有限，升维可以提高表达能力。降维一方面可以保证维度一致，另一方面可以提取高维空间学习到的特征。
-
-
-- **为什么大模型要使用 left padding**
-
-  left padding KV Cache 在右侧连续生长，无需移动缓存，支持高效批量并发生成，动态 KV Cache 底层优化都支持左填充。right padding KV Cache 在不同位置，难以对齐，难以批量对齐，增加显存开销，很少支持右填充。
-
-
-- **BPE，WordPiece 和 Unigram 的区别是？**
-
-  BPE 是基于贪心的频率合并。初始时将文本拆成最小单位（单字符），然后反复合并出现频率最高的连续字符对，直到迭代终止/达到预定词表大小/频率最高的连续字符对低于频率阈值/没有显著提升 token 压缩率。WordPiece（BERT 使用）跟 BPE 类似，不过是根据最大似然估计进行合并。Unigram 基于概率模型，先初始化大量子词候选，然后用 EM 算法估计每个子词的概率，迭代优化删除低概率子词，最终得到固定大小词表。
-
-
-- **传统中文分词**
-
-  前向匹配（Forward Maximum Matching）+ 动态规划（如 Viterbi 算法）
-
 
 - **Position Embedding**
 
@@ -4981,7 +4625,6 @@ def rope(x):
 
   推理策略增强：CoT，Self-Consistency。
 
-
 - **LLM 常用的激活函数有？**
 
   ReLU：f(x) = max(0, x)
@@ -5028,11 +4671,11 @@ class LayerNorm(nn.Module):
         self.gamma = nn.Parameter(torch.ones(dim))  # 缩放因子
         self.beta = nn.Parameter(torch.zeros(dim))  # 偏移因子
 
-        def forward(self, x):
-            mean = x.mean(dim=-1, keepdim=True)
-            var = x.var(dim=-1, unbiased=False, keepdim=True)
-            x_norm = (x - mean) / torch.sqrt(var + self.eps)
-            return self.gamma * x_norm + self.beta
+    def forward(self, x):
+        mean = x.mean(dim=-1, keepdim=True)
+        var = x.var(dim=-1, unbiased=False, keepdim=True)
+        x_norm = (x - mean) / torch.sqrt(var + self.eps)
+        return self.gamma * x_norm + self.beta
 ```
 
 
@@ -5050,11 +4693,11 @@ class RMSNorm(nn.Module):
         self.eps = eps
         self.scale = nn.Parameter(torch.ones(dim))  # 可学习缩放因子
 
-        def forward(self, x):
-            # 计算 RMS
-            rms = x.pow(2).mean(dim=-1, keepdim=True).add(self.eps).sqrt()
-            x_norm = x / rms
-            return self.scale * x_norm
+    def forward(self, x):
+        # 计算 RMS
+        rms = x.pow(2).mean(dim=-1, keepdim=True).add(self.eps).sqrt()
+        x_norm = x / rms
+        return self.scale * x_norm
 ```
 
 
@@ -5062,6 +4705,376 @@ class RMSNorm(nn.Module):
 
   Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
 
+- **Prefix LM 和 Causal LM 区别是什么？**
+
+  Causal LM 是单向的，只看左边上下文；Prefix LM 是半双向的，可以看整个 prefix 的信息（左侧上下文），预测后缀。
+
+
+- **为什么大部分 LLM 是 decoder-only？**
+
+  生成范式的统一性；任务更难
+
+  双向 attention 的注意力矩阵因为是 n * d 与 d * n 的矩阵相乘，理论上最大秩只能为 min(n, d)，而一般 n 远大于 d，所以 n * n 的注意力矩阵容易退化成低秩状态，而 causal attention 的注意力矩阵是下三角矩阵，其秩为对角线上非零的个数，而因为 softmax 输出为正，因此必然是满秩的，建模能力更强。
+
+#### Attention Mechanisms
+
+- **multi-head attention 的公式是怎样的？**
+
+  $$Attention(Q,K,V) = softmax({QK^T\over {\sqrt {d_k}}})V$$。
+
+
+- **multi-head attention 实现**
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class MultiHeadAttention(nn.Module):
+    def __init__(self, embed_dim, num_heads):
+        super(MultiHeadAttention, self).__init__()
+        assert embed_dim % num_heads == 0, "Embedding dimension must be divisible by number of heads"
+
+        self.embed_dim = embed_dim
+        self.num_heads = num_heads
+        self.head_dim = embed_dim // num_heads
+
+        # Linear layers to project input to Q, K, V
+        self.q_proj = nn.Linear(embed_dim, embed_dim)
+        self.k_proj = nn.Linear(embed_dim, embed_dim)
+        self.v_proj = nn.Linear(embed_dim, embed_dim)
+
+        # Final output projection
+        self.out_proj = nn.Linear(embed_dim, embed_dim)
+
+    def forward(self, x, mask=None):
+        B, T, E = x.size()
+
+        # Linear projections
+        Q = self.q_proj(x)  # (B, T, E)
+        K = self.k_proj(x)
+        V = self.v_proj(x)
+
+        # Split into multiple heads: (B, num_heads, T, head_dim)
+        Q = Q.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+        K = K.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+        V = V.view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+
+        # Scaled dot-product attention
+        scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.head_dim ** 0.5)  # (B, num_heads, T, T)
+        if mask is not None:
+            scores = scores.masked_fill(mask == 0, float("-inf"))
+
+        weights = F.softmax(scores, dim=-1)
+        attended = torch.matmul(weights, V)  # (B, num_heads, T, head_dim)
+
+        # Concatenate heads: (B, T, E)
+        # transpose/permute → 改变维度顺序但通常返回 非连续 张量。
+        # view → 只能作用于 连续 内存。
+        # contiguous() → 如有必要，将张量复制为连续布局，保证 view 能正常工作。
+        attended = attended.transpose(1, 2).contiguous().view(B, T, E)
+
+        # Final linear projection
+        output = self.out_proj(attended)
+        return output
+```
+
+
+- **multi-head attention 时间复杂度**
+
+  $$O(d * seq\_len * seq\_len)$$。
+
+
+- **Transformer 使用的时候，制约显存的最关键因素是什么？**
+
+  序列长度。
+
+
+- **casual mask 怎么生成**
+
+```python
+def causal_mask(seq_len):
+    # 下三角矩阵 (seq_len, seq_len)
+    mask = torch.tril(torch.ones(seq_len, seq_len, dtype=torch.bool))
+    return mask
+```
+
+
+- **用 multi-head attention 做 cross-attention**
+
+  拼接后输入。
+
+
+- **grouped-query attention 实现**
+
+  GQA 是 MQA 和 MHA 的均衡，MQA 尽管减轻了 KV Cache 负担，但也可能带来性能下降。grouped-query attention 中，query 使用比 key/value 更多的 heads。因为在推理阶段，Q 是即时计算的，而 K/V 是缓存的。
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class GroupedQueryAttention(nn.Module):
+    def __init__(self, embed_dim, num_query_heads, num_kv_heads):
+        super(GroupedQueryAttention, self).__init__()
+        assert embed_dim % num_query_heads == 0, "embed_dim must be divisible by num_query_heads"
+        assert embed_dim % num_kv_heads == 0, "embed_dim must be divisible by num_kv_heads"
+
+        self.embed_dim = embed_dim
+        self.num_query_heads = num_query_heads
+        self.num_kv_heads = num_kv_heads
+        self.q_head_dim = embed_dim // num_query_heads
+        self.kv_head_dim = embed_dim // num_kv_heads
+
+        # Projection layers
+        self.q_proj = nn.Linear(embed_dim, embed_dim)
+        self.k_proj = nn.Linear(embed_dim, embed_dim)
+        self.v_proj = nn.Linear(embed_dim, embed_dim)
+        self.out_proj = nn.Linear(embed_dim, embed_dim)
+
+    def forward(self, x):
+        B, T, E = x.shape
+
+        # Project inputs
+        Q = self.q_proj(x).view(B, T, self.num_query_heads, self.q_head_dim).transpose(1, 2)  # (B, QH, T, Dq)
+        K = self.k_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dk)
+        V = self.v_proj(x).view(B, T, self.num_kv_heads, self.kv_head_dim).transpose(1, 2)     # (B, KVH, T, Dv)
+
+        # Expand K/V to match query heads if needed
+        if self.num_query_heads != self.num_kv_heads:
+            repeat_factor = self.num_query_heads // self.num_kv_heads
+            K = K.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dk)
+            V = V.repeat_interleave(repeat_factor, dim=1)  # (B, QH, T, Dv)
+
+        # Scaled dot-product attention
+        scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.q_head_dim ** 0.5)  # (B, QH, T, T)
+        attn_weights = F.softmax(scores, dim=-1)
+        context = torch.matmul(attn_weights, V)  # (B, QH, T, Dv)
+
+        # Combine heads
+        context = context.transpose(1, 2).contiguous().view(B, T, E)  # (B, T, E)
+        output = self.out_proj(context)  # Final linear projection
+
+        return output
+```
+
+
+- **multi-head attention + kv cache 实现**
+
+  query 不参与下一 token 的注意力过程，无需缓存，而 key/value 是过去的记忆，需要缓存。
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class SelfAttentionWithKVCache(nn.Module):
+    def __init__(self, embed_dim, num_heads, max_seq_len):
+        super().__init__()
+        assert embed_dim % num_heads == 0
+        self.embed_dim = embed_dim
+        self.num_heads = num_heads
+        self.head_dim = embed_dim // num_heads
+
+        self.q_proj = nn.Linear(embed_dim, embed_dim)
+        self.k_proj = nn.Linear(embed_dim, embed_dim)
+        self.v_proj = nn.Linear(embed_dim, embed_dim)
+        self.out_proj = nn.Linear(embed_dim, embed_dim)
+
+        # 初始化 KV Cache（支持最多 max_seq_len 步）
+        self.register_buffer("key_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
+        self.register_buffer("value_cache", torch.zeros(1, num_heads, max_seq_len, self.head_dim))
+        self.max_seq_len = max_seq_len
+
+    def forward(self, x, start_pos):
+        """
+        x: [B, 1, E] - 当前一步的 token 表示
+        start_pos: int - 当前 token 在生成序列中的位置
+        """
+        B, T, E = x.shape  # T == 1 during generation
+
+        # QKV projection
+        Q = self.q_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)  # [B, H, 1, D]
+        K = self.k_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+        V = self.v_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+
+        # 更新 KV cache
+        self.key_cache[:, :, start_pos:start_pos+1, :] = K
+        self.value_cache[:, :, start_pos:start_pos+1, :] = V
+
+        # 从 0 到当前 step，取所有 KV
+        K_cached = self.key_cache[:, :, :start_pos+1, :]   # [B, H, T_cache, D]
+        V_cached = self.value_cache[:, :, :start_pos+1, :] # [B, H, T_cache, D]
+
+        # 注意力计算
+        scores = torch.matmul(Q, K_cached.transpose(-2, -1)) / (self.head_dim ** 0.5)  # [B, H, 1, T_cache]
+        attn_weights = F.softmax(scores, dim=-1)
+        out = torch.matmul(attn_weights, V_cached)  # [B, H, 1, D]
+
+        out = out.transpose(1, 2).contiguous().view(B, T, E)  # [B, 1, E]
+        return self.out_proj(out)
+```
+
+
+- **FlashAttention**
+
+  GPU 存储单元主要有 HBM 和 SRAM：HBM 容量大但访问速度慢，SRAM 容量小但访问速度快。由于这一特性，传统 self-attention 受 context length 限制，无法利用 SRAM，只能对 HBM 进行多次读写操作。而 FlashAttention 通过分块和在线 softmax 的方式，从 HBM 中读取块到 SRAM 中，用 SM（Streaming Multiprocessor）计算之后再写到 HBM 中，减少对 HBM 的访问，从而提高了速度。时间复杂度并没有变化，而空间复杂度因为没有存储中间的 attention matrix，从 O(N^2) 降低到 O(N)。
+
+  FlashAttention 基于以下几点：
+
+  1. 分块（`for i in range(0, L, block_size)`查询块，`for j in range(0, L, block_size)`键/值块）
+  将 Q, K, V 按块划分，分块计算 Attention。每次只加载当前块，节省内存。传统 softmax 需要先计算全部 QK^T，然后减 max 值再求 exp，最后归一化。而 FlashAttention 分块之后，softmax 的计算成为了一个难点。FlashAttention 通过引入两个额外的统计量（`m_prev` 和 `d_prev`）来在线计算 softmax。多个 block 的 softmax 计算可以并行，最后再合并。
+
+  2. 重计算
+  在后向梯度计算时，一般需要 attention matrix，但 FlashAttention 可以利用两个额外的统计量在 SRAM 上快速重新计算 attention。
+
+```python
+import torch
+import torch.nn.functional as F
+
+def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
+    # Q, K, V: [B, L, D]，Batch x Length x Dim
+    # block_size: 每块序列长度
+    B, L, D = Q.shape
+    output = torch.zeros_like(Q)
+
+    # 遍历查询块
+    for i in range(0, L, block_size):
+        q_block = Q[:, i:i+block_size, :]   # [B, block, D]
+        out_block = torch.zeros_like(q_block)
+
+        # 记录在线 softmax 的统计量
+        m_prev = None  # 当前块的最大值
+        d_prev = None  # 当前块的 exp 和
+
+        # 遍历键/值块
+        for j in range(0, L, block_size):
+            k_block = K[:, j:j+block_size, :]
+            v_block = V[:, j:j+block_size, :]
+
+            # Attention logits
+            scores = torch.matmul(q_block, k_block.transpose(-2, -1)) / D**0.5
+            if mask is not None:
+                scores += mask[:, i:i+block_size, j:j+block_size]
+
+            # 在线 softmax
+            m_new = scores.max(dim=-1, keepdim=True).values
+            if m_prev is None:
+                d_new = torch.exp(scores - m_new).sum(dim=-1, keepdim=True)
+                y = torch.exp(scores - m_new) / d_new
+            else:
+                m_comb = torch.max(m_prev, m_new)
+                d_new = torch.exp(m_prev - m_comb) * d_prev + torch.exp(scores - m_comb).sum(dim=-1, keepdim=True)
+                y = torch.exp(scores - m_comb) / d_new
+
+            # 累加输出块
+            out_block += torch.matmul(y, v_block)
+
+            # 更新统计量，用于下一个键块（在线 softmax）
+            m_prev = m_new
+            d_prev = d_new
+
+        output[:, i:i+block_size, :] = out_block
+
+    return output
+```
+
+  FlashAttention v2 改进：
+  - 优化计算次序，减少非矩阵计算量。
+  - 增加 seq_len 维度的并行计算，提升 SM 利用率。
+  - 优化 warp 级工作模式，减少内部通信和 shared memory 访问。
+
+  FlashAttention v3 改进：
+  - 引入生产者-消费者异步机制，提升并行度。
+  - 优化 GEMM 和 Softmax 操作的重叠计算。
+  - 支持 FP8 低精度硬件加速，提升吞吐量并减少精度损失。
+
+
+- **Linear Attention**
+
+  如果去掉 softmax，$$QK^TV$$，可以先计算后半部分，从而将时间复杂度从 O(n^2d) 降到了 O(nd^2)。但直接去掉 softmax 会失去原先 Attention 相似的分布特性，因此 Linear Attention 会对 K、V 引入核函数。
+
+
+- **Sparse Attention**
+
+  基于位置的 attention
+  - Global Attention
+  - Window Attention
+  - Strided Attention
+  - Dilated Attention
+  - Random Attention
+  - ETC: Global + Window Attention
+  - BigBird: Global + Window + Random Attention
+
+  基于内容的 attention：根据输入内容的特征来动态确定（较小代价）哪些位置之间的交互是重要的
+
+
+- **Multi-head Latent Attention (MLA)**
+
+  在 MHA 中，K 和 V 是对 $$h_t$$ 分别用投影矩阵进行变化得到的，而 MLA 把 KV 的变换改成使用一个共用的 down-projection matrix 将 $$h_t$$ 映射为 $$c_t$$，再用两个 up-projection matrices 将 $$c_t$$ 映射为 $$k_t$$ 和 $$v_t$$。在做 Q、K 点积时，由于 $$k_t$$ 对应的 up-projection matrix 可以被 Q 的映射矩阵（此处也是低秩映射矩阵）吸收，所以 Q、K 点积本质上是 Q 和 C 点积。同理 $$v_t$$ 也不需要计算，因此两个 up-projection matrices 不需要用到，减少了 kv cache 的负担。
+
+  由于 MLA 没有显式计算 K，且 ROPE 不能加在 latent vector 上，因此 MLA 使用了 decoupled RoPE，即使用额外的 multi-head queries 和一个 shared key 来携带 RoPE 的位置信息，其维度为 $d_h$。新增的 q 和 k 维度使用常规的 RoPE 计算，用于携带位置信息；而原来的维度依然使用低秩分解的方式计算，最后再计算 attention 的时候两个部分拼接起来。
+
+  由于 $$d_c$$ 远小于 $$d_h * seq\_len$$，时间复杂度从 $$O(d_h * seq\_len * seq\_len)$$ 降至 $$O(d_h * seq\_len * latent\_len)$$。
+
+
+- **Attention Sink 是什么？为什么会出现？**
+
+  LLM 在自回归生成时，会将大量注意力分配给序列第一个 token（如 `<bos>`），其他 token 获得的不成比例地少。
+
+  **成因**：Transformer 需要一个 Context-Aware Identity Layer，让某些 attention head 根据上下文不做任何变化。sink token 作为 implicit bias 来承担这个角色。
+
+  **缓解方案**：
+  - 可学习的 sink token：引入专门的可学习 token
+  - Gated Attention（主流）：Qwen 团队方案，可学习的 KV biases / K biases，NeurIPS 2025 最佳论文候选
+
+
+- **为什么要 multi-head**
+
+  多头注意力允许模型在不同的表示子空间中学习信息，这样可以让模型同时关注不同的信息维度。每个头学习到的信息可以独立地编码输入序列的不同方面，然后将这些信息综合起来，得到更丰富的表示。
+
+
+- **Transformer 的 Q 和 K 为什么使用不同的权重矩阵生成？如果强行让 Q=K 会发生什么？**
+
+  注意力将退化为自相似匹配，容易捕捉到 trivial 信息（如位置对称性）；表达能力显著下降，模型性能变差；实际论文实验证明，共用 Q/K/V 权重会损害性能
+
+
+- **Transformer 为什么是 Q * K^T，而不是 Q + K？**
+
+  点积是最自然的相似度度量，而加法并不能提供一个明确的匹配度分数，它只是两个向量的混合，没有“匹配程度”的含义。
+
+
+- **Transformer 为什么是点积，而不是 cosine？**
+
+  cosine 会归一化，损失模长信息，而且计算复杂度更高。
+
+
+- **为什么要除以 $$\sqrt {d_k}$$**
+
+  Q 和 K 点积可以理解成 $$d_k$$ 项的和。如果不缩放，$$d_k$$ 越大，点积值方差越大，同时点积值过大会导致 softmax 函数偏向某个位置，接近 one-hot，梯度变得非常小。缩放了可以使得方差标准化到 Q 和 K 的方差，这有助于数值稳定性，使得学习过程更加稳定。
+
+
+- **multi-head attention 的 embed 会不会有低秩的问题，怎么解决？**
+
+  是的，可能因 head 冗余、聚合退化等原因呈现低秩结构，从而降低表达能力。可以通过正则化（在多头 projection 矩阵上加正交约束）、架构设计、训练策略等方法缓解，并可用奇异值分析评估问题严重程度。
+
+#### Tokenization and Padding
+
+- **为什么大模型要使用 left padding**
+
+  left padding KV Cache 在右侧连续生长，无需移动缓存，支持高效批量并发生成，动态 KV Cache 底层优化都支持左填充。right padding KV Cache 在不同位置，难以对齐，难以批量对齐，增加显存开销，很少支持右填充。
+
+
+- **BPE，WordPiece 和 Unigram 的区别是？**
+
+  BPE 是基于贪心的频率合并。初始时将文本拆成最小单位（单字符），然后反复合并出现频率最高的连续字符对，直到迭代终止/达到预定词表大小/频率最高的连续字符对低于频率阈值/没有显著提升 token 压缩率。WordPiece（BERT 使用）跟 BPE 类似，不过是根据最大似然估计进行合并。Unigram 基于概率模型，先初始化大量子词候选，然后用 EM 算法估计每个子词的概率，迭代优化删除低概率子词，最终得到固定大小词表。
+
+
+- **传统中文分词**
+
+  前向匹配（Forward Maximum Matching）+ 动态规划（如 Viterbi 算法）
+
+#### Decoding and Inference
 
 - **temperature/Top-k/Top-p**
 
@@ -5092,7 +5105,7 @@ def beam_search(start_token, get_next_probs, beam_width=3, max_len=10):
     max_len: 最大生成长度
     """
     # 初始 beam: list of (sequence, score)
-    beams = [( [start_token], 0.0 )]  # score 用 log 概率
+    beams = [([start_token], 0.0)]  # score 用 log 概率
 
     for _ in range(max_len):
         new_beams = []
@@ -5103,13 +5116,14 @@ def beam_search(start_token, get_next_probs, beam_width=3, max_len=10):
                 new_score = score + np.log(prob + 1e-12)  # 避免 log(0)
                 new_beams.append((new_seq, new_score))
 
-                # 选择 top-k
-                new_beams.sort(key=lambda x: x[1], reverse=True)
-                beams = new_beams[:beam_width]
+        # 选择 top-k
+        new_beams.sort(key=lambda x: x[1], reverse=True)
+        beams = new_beams[:beam_width]
 
-                return beams  # 返回最终 beam 列表
+    return beams  # 返回最终 beam 列表
 ```
 
+#### Mixture of Experts
 
 - **MoE**
 
@@ -5140,13 +5154,14 @@ class SimpleMoE(nn.Module):
         self.experts = nn.ModuleList([nn.Linear(input_dim, output_dim) for _ in range(num_experts)])
         self.gate = nn.Linear(input_dim, num_experts)
 
-        def forward(self, x):
-            gate_probs = F.softmax(self.gate(x), dim=1)  # [batch, num_experts]
-            expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=1)  # [batch, num_experts, output_dim]
-            gate_probs = gate_probs.unsqueeze(-1)  # [batch, num_experts, 1]
-            return torch.sum(gate_probs * expert_outputs, dim=1)  # [batch, output_dim]
+    def forward(self, x):
+        gate_probs = F.softmax(self.gate(x), dim=1)  # [batch, num_experts]
+        expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=1)  # [batch, num_experts, output_dim]
+        gate_probs = gate_probs.unsqueeze(-1)  # [batch, num_experts, 1]
+        return torch.sum(gate_probs * expert_outputs, dim=1)  # [batch, output_dim]
 ```
 
+#### Parameter-Efficient Fine-Tuning
 
 - **LoRA**
 
@@ -5171,10 +5186,10 @@ class LoRALinear(nn.Module):
         self.B = nn.Parameter(torch.randn(out_features, r) * 0.01)
         self.bias = nn.Parameter(torch.zeros(out_features))
 
-        def forward(self, x):
-            base = F.linear(x, self.weight, self.bias)
-            lora = F.linear(x, self.B @ self.A) * self.scale
-            return base + lora
+    def forward(self, x):
+        base = F.linear(x, self.weight, self.bias)
+        lora = F.linear(x, self.B @ self.A) * self.scale
+        return base + lora
 ```
 
 
@@ -5186,19 +5201,6 @@ class LoRALinear(nn.Module):
 - **Prefix Tuning**
 
   Prefix Tuning 会为每层添加一组虚拟的 Key 和 Value，Query 保持不变。embedding 的输入不会添加。
-
-
-- **Prefix LM 和 Causal LM 区别是什么？**
-
-  Causal LM 是单向的，只看左边上下文；Prefix LM 是半双向的，可以看整个 prefix 的信息（左侧上下文），预测后缀。
-
-
-- **为什么大部分 LLM 是 decoder-only？**
-
-  生成范式的统一性；任务更难
-
-  双向 attention 的注意力矩阵因为是 n * d 与 d * n 的矩阵相乘，理论上最大秩只能为 min(n, d)，而一般 n 远大于 d，所以 n * n 的注意力矩阵容易退化成低秩状态，而 causal attention 的注意力矩阵是下三角矩阵，其秩为对角线上非零的个数，而因为 softmax 输出为正，因此必然是满秩的，建模能力更强。
-
 
 #### Post Training
 
