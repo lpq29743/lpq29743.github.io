@@ -434,6 +434,7 @@ def monte_carlo_pi(N=1000000):
 - **Python 实现的梯度下降和牛顿法示例**
 
   以 $$f(x)=x^2 - 4x + 4$$ 为例。
+
 ```python
 import numpy as np
 
@@ -513,6 +514,7 @@ print("牛顿法结果: x =", x_newton, ", f(x) =", f_newton)
 - **Python 相关实现**
 
   对大于 0 的判断是为了避免分母为0，log(0) 等非法操作，保证数值稳定性。
+
 ```python
 import numpy as np
 
@@ -952,6 +954,7 @@ def maxSumSubmatrix(matrix):
   计数
 
   - 等差子数组个数：枚举子数组判断是否等差，可使用 dp 优化。
+
 ```python
 def numberOfArithmeticSlices(nums):
     n = len(nums)
@@ -1098,6 +1101,7 @@ def count_subarrays(nums, k):
   - 最小时间传递信息：Kruskal 过程判断连通。
 
   简单模版
+
 ```python
 class UnionFindSimple:
     def __init__(self, n):
@@ -1117,6 +1121,7 @@ class UnionFindSimple:
         return self.find(x) == self.find(y)
 ```
   高阶模版（支持动态元素；路径压缩，即在 find 的过程中，把节点直接连到根节点，减少树的高度；按秩合并；打印所有集合）
+
 ```python
 from collections import defaultdict
 
@@ -1873,6 +1878,7 @@ def quick_sort(arr, low, high):
   BFS（广度优先搜索）通常用队列解决，适用于求最短路径、层级遍历和状态步数问题，因为它逐层扩展，能保证最早到达目标。
 
   BFS 模版
+
 ```python
 from collections import deque
 
@@ -1897,6 +1903,7 @@ def bfs(graph, start):
   应用场景
 
   - 最短路径（无权图）：BFS 可以找到起点到各节点的最短路径。
+
 ```python
 def bfs_all_distances(graph, start):
     visited = set()
@@ -1926,6 +1933,7 @@ def bfs_all_distances(graph, start):
   DFS（深度优先搜索）通常用栈或递归解决，更适合遍历所有路径、回溯剪枝、拓扑排序和连通块问题，因其先深入到底便于穷举和递归处理。简言之，找最短用 BFS，找所有/存在性用 DFS。
 
   DFS 模版，递归版
+
 ```python
 def dfs_recursive(graph, node, visited=None):
     if visited is None:
@@ -1941,6 +1949,7 @@ def dfs_recursive(graph, node, visited=None):
 ```
 
   DFS 模版，非递归版
+
 ```python
 def dfs_iterative(graph, start):
     visited = set()
@@ -2001,6 +2010,7 @@ def dfs_iterative(graph, start):
 - **旋转数组的最小值**
 
   二分法
+
 ```python
 def find_min(nums):
     left, right = 0, len(nums) - 1
@@ -2531,6 +2541,7 @@ for item in t:
   可变对象有 list, dict, set；不可变对象有 str, tuple, int, float, bool。
 
   不可变对象例子：字符串
+
 ```python
 s = "hello"
 print(id(s))  # 比如 123456
@@ -2539,6 +2550,7 @@ print(id(s))  # 改变了（新对象）
 ```
 
   可变对象例子：列表
+
 ```python
 lst = [1, 2, 3]
 print(id(lst))  # 比如 789123
@@ -2560,6 +2572,7 @@ print(id(lst))  # 没变（原地修改）
   可以加 reverse=True 或 reverse=False
 
   或
+
 ```python
 from functools import cmp_to_key
 
@@ -3336,6 +3349,7 @@ loss = cross_entropy_loss(probs, labels)
 - **用 numpy 实现 cross entropy loss（log-softmax）**
 
   用 log-softmax 数值更稳定，减 max 是防止指数函数输出过大，用减法算 log 是防止 log(0)。
+
 ```python
 import numpy as np
 
@@ -3808,6 +3822,7 @@ def test(tree, x):
 - **有哪些激活函数？**
 
   sigmoid，softmax，tanh，ReLU，PReLU，Leakly ReLU，Maxout。
+
 ```python
 import numpy as np
 
@@ -4067,6 +4082,7 @@ def muon(w, dw, m, v, lr=1e-3, beta1=0.9, beta2=0.99, beta3=0.999, eps=1e-8):
 - **RNN 是什么？**
 
   $$o_t=\sigma(W_o[h_{t-1}, x_t] + b_o)$$
+
 ```python
 def rnn_forward(X, Wx, Wh, b, h0):
     """
@@ -4116,6 +4132,7 @@ def lstm_forward(X, Wx, Wh, b, h0, c0):
 - **GRU 是什么？**
 
   LSTM 的变种，将遗忘门和输入门合在一起，输入门 = 1 - 遗忘门。
+
 ```python
 def gru_forward(X, Wx, Wh, b, h0):
     h = h0
@@ -4596,6 +4613,7 @@ def causal_mask(seq_len):
 - **grouped-query attention 实现**
 
   GQA 是 MQA 和 MHA 的均衡，MQA 尽管减轻了 KV Cache 负担，但也可能带来性能下降。grouped-query attention 中，query 使用比 key/value 更多的 heads。因为在推理阶段，Q 是即时计算的，而 K/V 是缓存的。
+
 ```python
 import torch
 import torch.nn as nn
@@ -4649,6 +4667,7 @@ class GroupedQueryAttention(nn.Module):
 - **multi-head attention + kv cache 实现**
 
   query 不参与下一 token 的注意力过程，无需缓存，而 key/value 是过去的记忆，需要缓存。
+
 ```python
 import torch
 import torch.nn as nn
@@ -5020,6 +5039,7 @@ class LayerNorm(nn.Module):
 - **实现 RMSNorm**
 
   RMSNorm 不减去均值，只用输入的均方根（RMS）来进行归一化。它更轻量，计算更快，没有 `mean` 操作。
+
 ```python
 import torch
 import torch.nn as nn
@@ -5300,6 +5320,7 @@ def actor_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
   $$L^{\text{DPO}}(\theta) = -\log \left( \frac{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right)}{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right) + \exp\left( \beta \cdot \log \pi_\theta(y^- \mid x) \right)} \right)$$
 
   其中，$$y^+$$ 是人类偏好的回答，$$y^-$$ 是较差的回答，$$\beta$$ 是温度系数，控制偏好强度
+
 ```python
 def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
     diff = logp_chosen - logp_rejected  # [B]
@@ -6068,6 +6089,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 有用性（Helpfulness）
 
   **每个维度的档位示例：**
+
 ```
 有用性：
 - 5分：完全解决问题，提供额外价值
@@ -6156,6 +6178,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   | **SWIFT**（阿里魔搭）| 国内微调全家桶 | 中文文档，阿里模型/数据集成好 | 国内团队，魔搭生态用户 |
 
   **架构层次**：
+
 ```
 底层基座：Megatron-LM + DeepSpeed
     ↓
@@ -6630,6 +6653,7 @@ RLHF 上层应用：veRL / OpenRLHF
   **结构**：基本信息（30s） + 技术能力（60s） + 代表经历（90s） + 求职动机（30s）
 
   **模板**：
+
 ```
 面试官您好，我是【姓名】。
 
