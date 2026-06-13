@@ -4430,6 +4430,8 @@ def gru_forward(X, Wx, Wh, b, h0):
 
   合成可以是多重迭代的（左脚踩右脚），可以是逆向的。
 
+  合成可以是single LLM，single agent，和 multi-agent 的。
+
   预训练阶段：rephrasing，主要针对知识和数学
 
 
@@ -5773,6 +5775,39 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   Agent 最常见的应用在 Web，软件工程，Research 和对话。
 
 
+- **为什么 Agent 比传统方法速度慢？**
+
+  Agent 速度慢的主要原因：
+
+  1. **多次 LLM 调用**：ReAct、ToT 等模式需要多轮 Reason → Act → Observe 循环；Prompt chaining 将任务分解为多个串行步骤，每个步骤都需调用 LLM。
+
+  2. **动态规划开销**：动态工作流需要在运行时进行任务分解、状态评估、路径搜索（如 ToT 的广搜/深搜），这些计算都是额外开销。
+
+  3. **Tool 调用延迟**：与外部工具（API、数据库、搜索引擎）交互涉及网络延迟和工具执行时间。
+
+  4. **Memory 操作**：Long-term memory 需要向量检索和相似度计算；Short-term memory 需要每次构造大量上下文。
+
+  5. **自我反思机制**：Evaluator-optimizer、Reflexion 等模式需要额外的 LLM 调用进行评估和反馈。
+
+
+- **如何优化 Agent 的速度？**
+
+  1. **静态工作流优先**：对于标准化任务使用静态工作流（Prompt chaining、Routing），避免动态规划的运行时开销。
+
+  2. **并行化处理**：使用 Parallelization 模式同时处理独立子任务；Orchestrator-workers 模式将任务分发给多个工作者并行执行。
+
+  3. **减少 LLM 调用次数**：
+     - 用 Plan-Execute 替代 ReAct：先一次性生成完整计划，再执行
+     - 限制 ReAct 的最大迭代次数
+     - 减少 Self-Consistency 的采样次数
+
+  4. **轻量级框架选择**：OpenAI Swarm（轻量无状态）、CrewAI（轻量角色分配）
+
+  5. **Memory 优化**：使用 In-memory store 快速访问；缓存常用查询结果
+
+  6. **Tool 调用优化**：异步调用、批量处理、设置超时机制
+
+
 - **Workflow 和 Agent 有什么区别？如何选择？**
 
   | 维度 | Workflow | Agent |
@@ -5950,6 +5985,30 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   | **纯文本** | 实现简单，可直接注入 Prompt，人类可读，无需额外基础设施 | 占用大量 token，随条目增多检索效率低，不支持语义查询 | 记忆条目少、内容简单的场景（如用户偏好、简短事实） |
   | **Embedding（向量）** | 支持语义检索，可快速从大量记忆中召回相关内容，token 消耗可控 | 需要向量数据库，精确匹配能力弱，相似度阈值难调 | 记忆条目多、需要语义召回的场景（如长期用户历史） |
   | **知识图谱** | 能表达实体间关系，支持推理和多跳查询，结构化强 | 构建和维护成本高，需要实体抽取和关系识别，更新复杂 | 实体关系复杂的场景（如人物关系网络、领域知识库） |
+
+
+- **Agent Memory 如何管理遗忘？**
+
+  Agent Memory 需要考虑容量限制和时效性，常见遗忘策略：
+
+  **1. Short-term Memory 遗忘**
+
+  - **滑动窗口**：保留最近 N 轮对话，超出自动丢弃
+  - **Token 限制**：当上下文超过模型窗口时，按策略压缩或截断
+  - **重要性过滤**：LLM 判断每轮信息重要性，仅保留高价值内容
+
+  **2. Long-term Memory 遗忘**
+
+  - **时间衰减**：记忆条目随时间降低权重，定期清理过期记忆
+  - **容量淘汰**：达到存储上限时，使用 LRU/LFU 淘汰旧记忆
+  - **相似合并**：新记忆与已有记忆语义相似时，合并或更新而非新增
+  - **显式删除**：用户指令删除特定记忆，或 Agent 自主判断无用记忆
+
+  **3. 遗忘触发时机**
+
+  - **被动触发**：查询时发现记忆冲突或过时，触发更新
+  - **主动清理**：定期任务扫描记忆库，清理低质量/过期条目
+  - **用户反馈**：用户指出记忆错误时，及时修正或删除
 
 
 - **Agentic RAG**
