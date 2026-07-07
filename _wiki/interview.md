@@ -5744,495 +5744,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
 
 
-#### Agent
-
-- **Agent**
-
-  相比传统方法，Agent 会更重，速度更慢，可控性更差，但其数据依赖低，可替换一些难定义的流程。
-
-  Agent = LLM + Planning + Memory + Tool。
-
-  Planning：Task decomposition（CoT，ToT），Self-Reflection（ReAct）。
-
-  Memory：short-term（ICL），long-term。
-
-  Agent 可分为静态工作流（可控，无自主性决策，更适用于可被标准化的企业级场景，如质检）和动态工作流（不可控，有自主性决策，更适用于无法标准化的消费级场景，如 Deep Research）。Agent 设计的核心矛盾即是如何在静态工作流和动态工作流之间找到平衡。
-
-
-  静态工作流常见模式有：
-  - 链式提示系统（Prompt chaining）：提示链将任务分解为一系列步骤，其中每个 LLM 调用都会处理前一个步骤的输出。
-  - 路由系统（Routing）：路由会对输入进行分类，并将其定向到专门的后续任务。
-  - 并行化系统（Parallelization）：LLM 有时可以同时处理一项任务，并以编程方式聚合其输出。
-  - 协调器编排系统（Orchestrator-workers）：中央 LLM 动态分解任务，将其委托给工作者 LLM，并综合其结果。
-  - 评估器、优化器系统（Evaluator-optimizer）：一个 LLM 调用生成响应，而另一个调用在循环中提供评估和反馈。
-
-  动态工作流常见模式有：
-  - CoT (Reason only)
-  - Self-Consistency (Reason only)：多次 CoT 采样做结合
-  - ToT (Reason only)：把复杂问题分解成多个简单子问题，再每个子问题上多次 CoT 采样，最后使用状态评估器和广搜/深搜得到结果
-  - ReAct（Reason + Act）：每个推理轨迹为 Reason + Act + Observe，多次重复直到结束流程。ReAct 后面提升为 Interleaved Thinking，Interleaved Thinking 多了一个 plan 的 update。
-  - Plan-Execute：ReAct 受限于其走一步算一步的局部思维，而 Plan-Execute 通过先计划再执行建立了全局视野
-  - REWOO（Reasoning, Execution, Watch, and Optimize）：在 ReAct 的基础上引入了反思和优化机制
-  - Reflexion：自我批评和自我改进
-
-  Agent 最常见的应用在 Web，软件工程，Research 和对话。
-
-
-- **为什么 Agent 比传统方法速度慢？**
-
-  Agent 速度慢的主要原因：
-
-  1. **多次 LLM 调用**：ReAct、ToT 等模式需要多轮 Reason → Act → Observe 循环；Prompt chaining 将任务分解为多个串行步骤，每个步骤都需调用 LLM。
-
-  2. **动态规划开销**：动态工作流需要在运行时进行任务分解、状态评估、路径搜索（如 ToT 的广搜/深搜），这些计算都是额外开销。
-
-  3. **Tool 调用延迟**：与外部工具（API、数据库、搜索引擎）交互涉及网络延迟和工具执行时间。
-
-  4. **Memory 操作**：Long-term memory 需要向量检索和相似度计算；Short-term memory 需要每次构造大量上下文。
-
-  5. **自我反思机制**：Evaluator-optimizer、Reflexion 等模式需要额外的 LLM 调用进行评估和反馈。
-
-
-- **如何优化 Agent 的速度？**
-
-  1. **静态工作流优先**：对于标准化任务使用静态工作流（Prompt chaining、Routing），避免动态规划的运行时开销。
-
-  2. **并行化处理**：使用 Parallelization 模式同时处理独立子任务；Orchestrator-workers 模式将任务分发给多个工作者并行执行。
-
-  3. **减少 LLM 调用次数**：
-     - 用 Plan-Execute 替代 ReAct：先一次性生成完整计划，再执行
-     - 限制 ReAct 的最大迭代次数
-     - 减少 Self-Consistency 的采样次数
-
-  4. **轻量级框架选择**：OpenAI Swarm（轻量无状态）、CrewAI（轻量角色分配）
-
-  5. **Memory 优化**：使用 In-memory store 快速访问；缓存常用查询结果
-
-  6. **Tool 调用优化**：异步调用、批量处理、设置超时机制
-
-
-- **Workflow 和 Agent 有什么区别？如何选择？**
-
-  | 维度 | Workflow | Agent |
-  |------|----------|-------|
-  | **核心** | 预定义流程，按步骤执行 | 自主决策，动态规划 |
-  | **可控性** | 高（流程固定）| 低（行为不确定）|
-  | **灵活性** | 低（需人工调整流程）| 高（自适应环境）|
-  | **适用场景** | 标准化、可预测的任务 | 复杂、开放、需探索的任务 |
-  | **典型应用** | 质检、审批流程、数据流水线 | Deep Research、复杂问题求解 |
-  | **失败处理** | 按预设规则处理 | 自主尝试替代方案 |
-
-  **选择原则：**
-  - **用 Workflow**：任务标准化、结果可预测、需严格可控（如企业级场景）
-  - **用 Agent**：任务开放-ended、需要探索、能接受不确定性（如消费级场景）
-
-  **混合架构：**
-  - Workflow 中嵌入 Agent 节点（静态流程中的动态决策点）
-  - Agent 中调用 Workflow 工具（Agent 决定执行预定义流程）
-
-
-- **Deep Search 和 Deep Research**
-
-  Deep Search 是搜索-阅读-推理-再搜索来实现 test-time scaling。
-
-  Deep Search 只有一个 query，而 Deep Research 是会整理出来多个 query。
-
-
-- **CrewAI**
-
-  CrewAI是比较轻量级的，适合于有角色分配的开放型任务。只需要定义好Agent、Task，最后塞进Crew即可。任务的执行顺序和依赖性可以在Task里面设置。CrewAI分支能力有限，不支持循环，状态累积主要靠消息传递。
-
-
-- **AutoGen**
-
-  AutoGen相比CrewAI更开放，而且对代码任务更加适配。
-
-
-- **OpenAI Swarm**
-
-  OpenAI Swarm 轻量级、无状态
-
-
-- **LangChain**
-
-  LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
-
-
-- **LangGraph**
-
-  LangGraph 以图的方式来构建 Agent/Workflow，其中 State 是数据容器，实现节点之间的数据交流，每一个key为一个channel。Node 为执行单元，每个节点都是状态转换函数: State → State。默认的合并政策为覆盖，但list为add。Edge 为流程控制，分为普通遍、出入口边和条件边，条件边以函数的形式定义，其中输入为State，输出为选择节点。LangGraph 不是静态的流程图，而是动态的执行引擎，支持路由、循环。
-
-
-- **LangGraph 三种存储的方式**
-
-  In-memory store: Start - Create Store - Use Dictionary - Store Data - Fast Access - End Process - Data Lost（这是最简单的存储选项，适合短期实验或演示）
-
-  使用 from langgraph.store.memory import InMemoryStore 导入，创建一个完全在内存中运行的存储，使用标准 Python 字典。
-
-  不写入磁盘，进程结束后所有信息都会丢失。但速度快，易用，非常适合测试工作流或尝试新的图配置。如果需要，也可以添加语义搜索能力。
-
-  Local developement store: Start - Run Langgraph Dev - Create Local Store - Save with Pickle - Data Restored After Restart - Lightweight And Simple - End
-
-  这个选项的行为与上面的内存版本类似，但是可以在会话之间提供了基本持久性。
-
-  用 langgraph dev 命令运行应用时，LangGraph 会自动使用 Python 的 pickle 格式将存储保存到本地文件系统，并在重启开发环境后恢复数据。
-
-  这个方式轻量且方便，不需要外部数据库。同样支持语义搜索功能，所以它非常适合开发阶段，但不适合生产环境。
-
-  Production store: Start - Deploy Production Store - Use Postgresal Database - Enable Pgvector - Store And Retrieve Data - Support Semantic Search - High Reliablity - End
-
-  大规模或生产部署，LangGraph 使用与 pgvector 集成的 PostgreSQL 数据库实现高效的向量存储和语义检索。
-
-  这样可以提供完整的数据持久性、内置可靠性，并且能够处理更大的工作负载或多用户系统。语义搜索依靠pgvector ，默认使用余弦相似度作为相似性度量，也可以根据需求自定义。
-
-  这种配置确保记忆数据安全存储，跨会话保持可用，即使在高流量或分布式工作负载下也能稳定运行。
-
-
-- **Agentic RL**
-
-  在 Rollout 的时候调用和执行工具即可。为了增强效率，一般要异步执行。
-
-  Agentic RL/多轮RL受限于长文本序列处理难度、奖励信号复杂等问题，容易过度依赖于局部奖励，出现训练不稳定甚至崩溃的问题。因此，现在的 RL 框架只能集中在 10 个 step 左右能完成的任务，而现实中的任务往往需要几十个甚至上百个 step 才能完成。
-
-  RAGEN 是一个 Agentic RL 训练的框架，基于 StarPO（State-Thinking-Action-Reward Policy Optimization）。其通过马尔可夫决策过程（MDP）形式化 Agent 与环境的交互，引入渐进式奖励归一化策略，有效解决了多轮强化学习中的不稳定性。RAGEN 还发现多轮 RL 训练中的“（Echo Trap）”不稳定模式，提出 StarPO-S 改进框架，通过 variance-based trajectory filtering、critic baselining 和decoupled clipping 等方法，提升学习的稳健性。Search- R1 也是类似的结构。
-
-  RAGEN/Search-R1 会受限于上下文长度。与以往简单地拼接完整交互历史的方法不同，verl-agent 把每个step当作独立的decision point来处理，并使用step/turn-independent的多轮rollout范式，提供了完全可定制的memory模块、历史管理机制以及每一步的输入结构。这种设计使得 verl-agent 能够高度扩展，适用于超长序列、multi-turn的强化学习训练（例如，ALFWorld 中的任务可能需要多达 50 步才能完成）。
-
-
-- **Prompt Engineering**
-
-  尽可能让模型返回多的信息，然后规则法处理；尽可能让模型分步做，然后控制中间参数传递，保证每步的输出的可靠；若知识库直接嵌入prompt，可以将其预先分类，使得模型对知识库的获取更清晰。
-
-
-- **Context Engineering**
-
-  提示（Prompting）是指你要求模型做某件事，而上下文工程（Context Engineering）是指在提出要求之前，准备好模型可能需要的一切。
-
-  这些上下文可分为几大类：
-  - 指导性上下文（Guiding Context），这类上下文的核心功能是指导模型该做什么以及如何做，主要为模型行为设定框架，目标和规则。Prompt Engineering 一般旨在优化指导性上下文。它包括：System Prompt；Task Description；Few-shot Examples；Output Schema（前面三个很简单，Output Schema 一般是强制要求模型以特定格式（如 JSON、XML）输出的结构定义）
-  - 信息性上下文（Informational Context），这类上下文的核心功能是告诉模型需要知道什么知识，为模型提供解决问题所必备的事实，数据与知识。它包括：RAG（外部知识库）；Memory（Short-term Memory：当前对话历史，Long-term Memory：跨会话存储的一些重要信息和偏好）；State / Scratchpad（状态维护和草稿纸，例如 Claude Code 在开始计划先的临时 TODO 以及 Thinking 模型下的思考“草稿本”）
-  - 行动性上下文（Actionable Context），这类上下文的核心功能是告诉模型能做什么以及做了之后的结果，为模型提供与外部世界交互的能力。它包括：Tool Definition；Tool Calls & Results / Tool Traces（调用了哪些工具以及工具返回的结果，即工具调用的历史追踪）
-
-  长上下文带来成本与协同压力，更易暴露四类上下文失效：污染、干扰、混淆、冲突。它们常彼此耦合，并直接损害推理稳定性与跨代理传递。
-  - 上下文污染（Context Poisoning），主要是幻觉进入 Context 导致异常结果。
-  - 上下文干扰（Context Distraction），当 Context 接近溢出时，模型训练中获得的知识会被“覆盖”导致模型降智。
-  - 上下文混淆（Context Confusion），冗余且不相关的 Context 让输出结果偏离期望。
-  - 上下文冲突（Context Clash），当上下文中的信息互相矛盾时，比如上下文存在过去错误的答案。
-
-  上下文工程策略分为写入、选择、压缩和隔离四类。
-
-  写入上下文（Write Context）：此策略旨在将信息保存于上下文窗口之外，以备未来使用。这包括两种主要形式：
-  - 草稿本（Scratchpads）：用于存储会话内部的临时信息。这可以是在一个单一的交互过程中，智能体为了完成当前任务而需要临时记录的数据。
-  - 记忆（Memories）：用于跨多个会话持久化信息。这些记忆可以是智能体自动生成或从过去的交互中综合提炼出来的，用于保留长期知识或个性化设置。
-
-  选择上下文（Select Context）：此策略专注于将相关信息提取到当前的上下文窗口中。这涉及从以下来源进行选择：
-  - 草稿本和记忆的检索：根据当前任务或用户查询，从已存储的草稿本或各种类型的记忆（如事件记忆、程序记忆、语义记忆）中检索最相关的信息。
-  - 检索增强生成（RAG）：尤其在代码智能体中，RAG 被广泛应用于从工具描述和知识库中获取信息，确保智能体能够访问到其执行任务所需的外部知识。
-
-  压缩上下文（Compressing Context）：此策略通过保留必要的 token 来优化上下文窗口的使用效率。它主要包含：
-  - 上下文摘要（Context Summarization）：将冗长的智能体交互或工具输出浓缩成更简洁的形式，减少不必要的细节，突出关键信息。
-  - 上下文修剪（Context Trimming）：通过过滤或剪枝技术（通常基于启发式规则），从上下文中移除不相关或冗余的 token。
-
-  压缩应按内容类型差异化处理，不同内容的压缩策略和收益差异显著。工程上可用 ML 内容检测模型（如 Magika）自动识别类型并路由到对应压缩器。内容检测模型的核心思路是：只读取头部和尾部各约 1KB 的内容提取特征，然后送入一个轻量分类模型（推理约 2ms）。这样设计的原因是文件类型的判别信息高度集中在头尾——头部通常有 magic bytes、shebang 或语言关键字（如 %PDF、#!/bin/bash、package main），尾部有格式标志（如 %%EOF、闭合标签），中间的具体内容对类型判断几乎是噪声。只读头尾使 I/O 开销与文件大小无关，Google 内部用此方案处理每周数千亿文件，准确率约 99%。各类型的压缩策略如下：
-  - 工具调用结果（JSON、搜索结果、日志）：收益最高（70-95%），可激进压缩，只保留关键输出、错误信息和时间戳，去除重复模式。
-  - 代码文件：基于 AST 分析保留 import、函数签名、类型定义，去除实现细节（40-70%）。
-  - 对话历史：做摘要压缩，但需保留用户意图和关键决策，不可过度压缩。
-  - System Prompt 和工具定义：几乎不压缩，保持稳定以最大化 KV Cache 命中。
-  - 高熵 token（UUID、hash 等）：无论出现在何种内容中都应保留，因为通常是关键标识符。
-
-  此外，压缩可以是可逆的（CCR，Compress-Cache-Retrieve）：压缩后将原始内容存入本地数据库，同时向 LLM 注入一个 retrieve 工具。若 LLM 判断压缩版信息不足，可主动调用该工具取回原始内容，从而在节省 token 的同时不丢失信息。
-
-  压缩时机的选择至关重要，实际工程中通常组合使用，以步骤边界触发为主，阈值触发兜底：
-  - 步骤边界触发（写入前压缩）：在工具返回结果写入上下文之前先摘要，再 append 到历史尾部，为首选策略。
-  - 阈值触发：上下文长度超过窗口某个比例（如 80%）时触发，作为兜底策略。
-  - 轮次触发：每隔固定 N 轮压缩一次历史，适合对实时性要求不高的场景。
-  - 被动触发（溢出后截断）：最差策略，直接丢弃历史，仅作最后兜底。
-  - 与 KV Cache 的平衡：缓存是"免费复用已有计算"，压缩是"减少需要计算的量"，两者目标相同但手段冲突。由于 KV Cache 基于前缀匹配，因此要最大化缓存命中率，应尽可能将静态内容（System Prompt、工具定义、长文档等）放在上下文前面，动态内容（用户输入、工具调用结果等）放在后面，前缀越稳定，命中率越高。工程上的平衡策略一般有三层：冻结已缓存前缀（根据上一轮 API 返回的缓存信息，判断哪些前缀已被缓存，下一轮直接跳过不压缩）；设置压缩阈值（只有当压缩能省下超过一定比例（如 50%）的 token 时才值得牺牲缓存去压缩，否则保留缓存更划算）；增量压缩（已缓存的历史部分冻结不动，只对新增内容做压缩，前缀享受缓存折扣，新内容享受压缩节省，是两者的最优组合点）。
-
-  隔离上下文（Isolating Context）：此策略通过分离上下文来帮助智能体更有效地执行任务。这可以通过以下方式实现：
-  - 多智能体架构（Multi-agent Architecture）：将任务分解给多个子智能体，每个子智能体处理其特定任务并拥有独立的上下文，避免不同任务的上下文相互干扰。
-  - 环境（Environments）：使用沙箱等环境来隔离包含大量 token 的对象或状态，例如在执行复杂计算或访问敏感数据时，将这些操作限制在特定的、受控的环境中。
-
-
-- **RAG**
-
-  RAG 的主要应用场景为
-  - LLM 知识过时
-  - 幻觉问题
-  - 无法调用私有数据
-  - 上下文长度限制导致无法将全部知识放入上下文或放入后会导致性能变差
-
-  RAG 适用于快速实现和部署一个项目，但由于切片、召回等问题，其上限低于训模型。
-
-  RAG
-  - Indexing：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。小 chunk 语义更纯净，对齐一个单一主体；向量表示更聚焦，易被检索模型命中；数量多，覆盖面大，召回率高，但一个问题需要多个 chunk 才能解决，且上下文断裂。大 chunk 信息更完整，但主题分散，检索难度大。如果加 overlap，则会提高 token 成本。
-  - Pre-Retrieval + Retrieval + Post-Retrieval (Re-ranking, Prompt Compression)：一般需要用对比学习微调，需要考虑挖掘难样本，可以多次迭代
-  - Generation
-
-  document 的顺序会对 RAG 的性能造成比较大的影响。
-
-  另一种方式是 search engine as a tool。
-
-  几个难点
-  - 复杂多模态的数据，如 PPT
-  - 检索质量的评估
-  - 私有化部署
-
-
-- **Memory**
-
-  Memory 呈现的方式可以是纯文本，embedding 和知识图谱。
-
-  | 方式 | 优点 | 缺点 | 适用场景 |
-  |------|------|------|---------|
-  | **纯文本** | 实现简单，可直接注入 Prompt，人类可读，无需额外基础设施 | 占用大量 token，随条目增多检索效率低，不支持语义查询 | 记忆条目少、内容简单的场景（如用户偏好、简短事实） |
-  | **Embedding（向量）** | 支持语义检索，可快速从大量记忆中召回相关内容，token 消耗可控 | 需要向量数据库，精确匹配能力弱，相似度阈值难调 | 记忆条目多、需要语义召回的场景（如长期用户历史） |
-  | **知识图谱** | 能表达实体间关系，支持推理和多跳查询，结构化强 | 构建和维护成本高，需要实体抽取和关系识别，更新复杂 | 实体关系复杂的场景（如人物关系网络、领域知识库） |
-
-
-- **Agent Memory 如何管理遗忘？**
-
-  Agent Memory 需要考虑容量限制和时效性，常见遗忘策略：
-
-  **1. Short-term Memory 遗忘**
-
-  - **滑动窗口**：保留最近 N 轮对话，超出自动丢弃
-  - **Token 限制**：当上下文超过模型窗口时，按策略压缩或截断
-  - **重要性过滤**：LLM 判断每轮信息重要性，仅保留高价值内容
-
-  **2. Long-term Memory 遗忘**
-
-  - **时间衰减**：记忆条目随时间降低权重，定期清理过期记忆
-  - **容量淘汰**：达到存储上限时，使用 LRU/LFU 淘汰旧记忆
-  - **相似合并**：新记忆与已有记忆语义相似时，合并或更新而非新增
-  - **显式删除**：用户指令删除特定记忆，或 Agent 自主判断无用记忆
-
-  **3. 遗忘触发时机**
-
-  - **被动触发**：查询时发现记忆冲突或过时，触发更新
-  - **主动清理**：定期任务扫描记忆库，清理低质量/过期条目
-  - **用户反馈**：用户指出记忆错误时，及时修正或删除
-
-
-- **Agentic RAG**
-
-  传统的 RAG 就是建向量化、搜索、生成三板斧，而 Agentic RAG 下要考虑需不需要检索、去哪检索、判断检索的东西对不对、渐进式检索、query 改写等。
-
-
-- **RAG 和 Grep 有什么区别？Agent 中如何选择？**
-
-  | 维度 | RAG（向量检索） | Grep（关键词检索） |
-  |------|----------------|-------------------|
-  | **匹配方式** | 语义相似度（embedding 空间） | 字符串精确/正则匹配 |
-  | **理解能力** | 理解同义词、近义词、语义变体 | 无法理解语义，只匹配字面 |
-  | **速度** | 较慢（需向量计算） | 极快（基于索引或遍历） |
-  | **确定性** | 概率性，结果不确定 | 确定性，结果精确 |
-  | **适用数据** | 非结构化文本、知识库 | 代码、日志、结构化文本 |
-  | **Agent 场景** | 知识问答、概念检索 | 代码搜索、文件查找、日志分析 |
-
-  **选择原则：**
-
-  | 场景 | 推荐方案 | 原因 |
-  |------|---------|------|
-  | 需要理解语义 | **RAG** | 能处理同义词、表达方式差异 |
-  | 需要精确匹配 | **Grep** | 结果确定，无歧义 |
-  | 代码/日志检索 | **Grep** | 速度快，精确匹配变量名、函数名 |
-  | 大规模知识库 | **RAG** | 语义检索召回率高 |
-
-  **混合策略（推荐）：**
-  - **第一阶段**：Grep 快速过滤候选集（缩小范围）
-  - **第二阶段**：RAG 精排语义相关性（提升质量）
-  - 适用于代码智能体等需要兼顾速度和精度的场景
-
-
-- **GraphRAG**
-
-  通过图的方式连接知识，避免传统 RAG 切片后导致信息依赖丢失。
-
-
-- **LLM 怎么调用外部工具？**
-
-  通过在 System Prompt 中增加 tools 描述，让 LLM 知道有哪些工具可以调用。LLM 根据用户的问题自行判断是否需要调用外部工具，若需要则从问题中解析参数，然后以固定格式返回。
-
-
-- **Function Calling**
-
-  通过微调或架构优化，赋予模型生成结构化指令（如 JSON）的能力。Function Calling 没有统一标准，需要开发者根据特定的模型和工具书写特定的适配代码。此外，Function Calling 中，函数定义与对话 Prompt 有着强耦合关系，后续升级改造工具会连带需要对 Prompt/代码进行调整。Function Calling 不负责执行和管理工具，只生成指令，执行由开发者额外处理。
-
-  **本质**：LLM 的内置能力，让模型能生成结构化的工具调用。
-
-
-- **MCP（Model Context Protocol）**
-
-  MCP 定义了社区的工具开放标准，实现了模型厂商和开发者各个角色之间对标准的对齐，复用性更高。
-
-  MCP 流程为
-  - MCP client 首先从 MCP server 获取可用的工具列表
-  - 将用户的 Prompt 连同工具描述一起发送给 LLM
-  - LLM 根据 Prompt 决定是否需要使用工具以及使用哪些工具
-  - 如果需要使用工具，MCP client 会调用 MCP server 以执行相应的工具调用
-  - 工具调用的结果再次被发送回 LLM
-  - LLM 整合所有信息生成最终回答
-  - 最后将响应展示给用户
-
-  **本质**：Anthropic 提出的通信协议，让 AI 和外部工具之间有标准化的连接方式。
-
-  **与 Function Calling 的关系**：
-  - MCP 不等于 Function Calling，它们解决的问题不同：Function Calling 解决“LLM 怎么调用工具”（调用格式），MCP 解决“AI 系统怎么连接各种工具”（连接生态）
-  - MCP 内部可以用 Function Calling：MCP 负责传输，Function Calling 负责生成调用——两者在不同的层面，可以共存
-  - Function Calling 是 LLM 的通用能力，可以在任何场景使用，不依赖 MCP
-
-
-- **A2A**
-
-  解决 Agent 间通信问题。
-
-
-- **AG-UI**
-
-  解决 AI Agent 与前端应用之间的交互标准化问题。
-
-
-- **Skill**
-
-  相对于平铺，其采用渐进式披露。
-
-
-- **Agent 工具调用如何避免失败？**
-
-  **1. 工具描述设计**
-  - **互斥性**：工具功能边界清晰，避免多个工具做类似事情
-  - **明确性**：描述具体、无歧义，包含使用场景和示例
-  - **原子性**：工具粒度适中，既不过大（难描述）也不过小（调用频繁）
-
-  **2. 权限管理**
-  - **工具集隔离**：不同调用方拥有不同的工具子集
-  - **细粒度控制**：按用户/角色/场景分配工具权限
-  - **动态权限**：运行时根据上下文判断是否展示某工具
-
-  **3. 参数校验**
-  - **Schema 校验**：调用前校验参数类型、必填项、取值范围
-  - **前置过滤**：明显错误的参数在调用前拦截
-  - **默认值**：合理设置默认值，减少必填参数
-
-  **4. LLM 输出静默修复（三层）**
-
-  LLM 生成的工具调用经常有问题（尤其是开源模型），可在框架层面做三层静默修复，全程 LLM 无感知：
-  - **第 1 层 - 工具名修复**：依次尝试小写化、连字符/空格转下划线、CamelCase → snake_case、候选集迭代，最后用 difflib 模糊匹配（cutoff=0.7）兜底
-  - **第 2 层 - 参数 JSON 修复**：5 轮渐进修复（宽松解析 → 去尾随逗号 → 补未闭合括号 → 去多余括号 → 转义控制字符），全部失败则返回 `{}`
-  - **第 3 层 - 参数类型强制转换**：对照工具 JSON Schema 自动修正类型不匹配（如 `"42"` → `42`，标量 → 数组），转换失败时保留原值不抛异常
-  - **设计哲学**：永不崩溃，所有修复函数不抛异常，失败最终转为 `role: "tool"` 消息让 LLM 有机会自我纠正
-
-
-- **Agent 工具调用失败如何处理？**
-
-  工具调用失败不能一刀切，必须先判断失败原因，再选择对应策略：
-
-  **1. 参数错误（大模型问题）**
-  - 表现：参数格式错误、必填参数缺失、参数含义理解错误
-  - 策略：带错误反馈的重试（Error Feedback Retry），将具体错误信息回注到上下文，让模型重新生成参数，设最大重试次数（如 3 次）
-
-  **2. 网络/超时问题**
-  - 策略：指数退避重试（Exponential Backoff），第1次等1s，第2次等2s，第3次等4s……设最大重试次数
-
-  **3. 限流（429）/ 服务不可用（503）**
-  - 429：严格遵守 Retry-After header，等待指定时间后重试
-  - 503：短暂等待后重试，或切换备用服务
-
-  **4. 权限问题**
-  - 401/Token 过期：触发 Token 刷新流程，刷新后重试一次
-  - 403/API Key 失效：不重试，直接上报权限不足
-
-  **5. 业务逻辑错误**
-  - 500（服务内部错误）：可重试一次，仍失败则上报
-  - 业务错误（如“数据不存在”、“余额不足”）：不重试，告知用户或走兜底逻辑
-  - 关键操作（写入、支付）：无幂等保证时不重试，宁可报错让用户确认
-
-  **6. 工具配置问题**
-  - 工具不存在、Schema 版本不匹配、MCP 连接失败：不重试，直接上报，需要开发/配置层面修复
-
-  **7. 死循环检测（护栏系统）**
-  - LLM 可能陷入死循环：反复调用同一工具、传相同参数、得到相同错误
-  - 用参数签名（工具名 + 参数 SHA256）计数，同一签名失败超过阈值则打断循环
-  - 同一工具（任意参数）失败次数和幂等工具返回完全相同结果的次数也分别跟踪
-  - 检测到循环后可降级为错误提示或切换工具
-
-  **8. Budget 耗尽兜底**
-  - Agent 设置最大迭代次数（iteration budget），耗尽后不能继续调用工具
-  - 核心手段：最后一次 LLM 请求不传 `tools` 参数，协议层面保证模型只能输出纯文本
-  - 同时在上下文注入提示（"已达最大迭代次数，请总结目前结果"），引导模型给出最终回复
-
-  **通用最佳实践：**
-  - 所有重试都要设上限（建议 3 次），防止无限循环
-  - 写操作谨慎重试，无幂等保证时宁可报错
-  - 错误日志要详细：调用参数、错误码、错误描述、重试次数
-  - 区分可恢复 vs 不可恢复：可恢复的重试，不可恢复的立刻上报
-  - 给用户的错误信息要友好，不要直接暴露内部错误栈
-
-
-- **什么是 Agentic World Modeling？能力层级如何划分？**
-
-  **背景**：随着 AI 系统从“生成文本”转向“通过持续交互实现目标”，环境动态建模成为核心瓶颈。现实场景（物理世界、数字世界、社会世界、科学世界）都需要预测性环境模型。
-
-  **核心框架：Levels × Laws 分类法**
-
-  **能力层级（Levels）**：
-  - **L1 Predictor（预测器）**：学习单步局部转换算子。代表工作：视觉预测器、环境模型。
-  - **L2 Simulator（模拟器）**：将算子组合成多步 action-conditioned rollouts，遵循领域定律。代表工作：Dreamer、SimM森林、Galileo。
-  - **L3 Evolver（进化器）**：当预测与新证据不符时，自主修订自身模型。代表工作：在线学习、自我修正。
-  
-  > L1 → L2 → L3 是能力递进：被动预测 → 可控模拟 → 主动进化
-
-  **支配定律机制（Laws）**：
-  - **物理定律**：物体运动、力学、因果。失败点：长程物理推理、不可逆过程。
-  - **数字定律**：软件/GUI 操作的确定性或半确定性规则。失败点：突发 UI 变化、非标准交互。
-  - **社会定律**：人类行为、偏好、博弈均衡。失败点：恶意对抗、分布外行为。
-  - **科学定律**：科学领域约束、可检验假设。失败点：假阳性发现、因果混淆。
-
-  **关键洞察**：不同 Level × Law 组合决定了世界模型的必须满足的约束、最可能失败的场景、适用的评估方法。
-
-  **与 Agent 的关系**：
-  - L2 Simulator = Agent 的“思维模拟”基础设施
-  - L3 Evolver = Agent 遇到新环境时的自我适应能力
-  - 四种 Laws = 不同垂直领域 Agent 需要遵守的约束
-
-  **评估原则**：从“预测精度”（PSNR、FVD）转向“决策质量”，评估在世界模型中做决策的最终性能。
-
-  **演进路线**：被动单步预测 (L1) → 可控多步模拟 (L2) → 自主进化修订 (L3) → 模拟并重塑环境（最终愿景）。
-
-  **参考文献**：Meng Chu et al., "Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond", arXiv:2604.22748, 2026.
-
-
-- **LLM for SE**
-
-  SE 的完整 Pipeline 可分为软件开发和软件维护。
-
-  软件开发
-  - 需求工程/软件设计
-  - 代码生成：Planning/Iterative Refinement（Model Feedback/Tool Feedback/Human Feedback/Hybrid Feedback）
-  - 代码质量保证：验证，静态校对，测试（单元测试、系统测试）
-
-  软件维护
-  - Debugging（Fault Localization，Repair）
-  - Feature Maintenance
-
-  在软件维护方面，一个经典的 Benchmark 是 SWE-bench（verified 比较关键），将其建立为 Live Benchmark（添加新的 instances）十分关键。一个关键的 agent 框架是 Agentless。Agentless 把软件维护分为定位，修复和补丁验证三个部分。
-
-  Task：including simple，self-contained and repository-level，e.g.，Code Generation；Bug Fix
-
-  Version
-
-  Environment
-
-  RLVR
-
-  软件工程对应到 LLM 的常见问题有：
-  - Long Context：How to support long context
-  - Retrieval：How to select useful files
-  - 多语言
-
-
-
 #### Evaluation
 
 - **Base model eval**
@@ -6690,6 +6201,480 @@ RLHF 上层应用：veRL / OpenRLHF
 
   **新方向**：Inference-Time Reward Hacking（NeurIPS 2025）— Best-of-N 采样时也会出现 hacking
 
+
+### Agent
+
+#### Architecture
+
+- **Agent**
+
+  相比传统方法，Agent 会更重，速度更慢，可控性更差，但其数据依赖低，可替换一些难定义的流程。
+
+  Agent = LLM + Planning + Memory + Tool。
+
+  Planning：Task decomposition（CoT，ToT），Self-Reflection（ReAct）。
+
+  Memory：short-term（ICL），long-term。
+
+  Agent 可分为静态工作流（可控，无自主性决策，更适用于可被标准化的企业级场景，如质检）和动态工作流（不可控，有自主性决策，更适用于无法标准化的消费级场景，如 Deep Research）。Agent 设计的核心矛盾即是如何在静态工作流和动态工作流之间找到平衡。
+
+
+  静态工作流常见模式有：
+  - 链式提示系统（Prompt chaining）：提示链将任务分解为一系列步骤，其中每个 LLM 调用都会处理前一个步骤的输出。
+  - 路由系统（Routing）：路由会对输入进行分类，并将其定向到专门的后续任务。
+  - 并行化系统（Parallelization）：LLM 有时可以同时处理一项任务，并以编程方式聚合其输出。
+  - 协调器编排系统（Orchestrator-workers）：中央 LLM 动态分解任务，将其委托给工作者 LLM，并综合其结果。
+  - 评估器、优化器系统（Evaluator-optimizer）：一个 LLM 调用生成响应，而另一个调用在循环中提供评估和反馈。
+
+  动态工作流常见模式有：
+  - CoT (Reason only)
+  - Self-Consistency (Reason only)：多次 CoT 采样做结合
+  - ToT (Reason only)：把复杂问题分解成多个简单子问题，再每个子问题上多次 CoT 采样，最后使用状态评估器和广搜/深搜得到结果
+  - ReAct（Reason + Act）：每个推理轨迹为 Reason + Act + Observe，多次重复直到结束流程。ReAct 后面提升为 Interleaved Thinking，Interleaved Thinking 多了一个 plan 的 update。
+  - Plan-Execute：ReAct 受限于其走一步算一步的局部思维，而 Plan-Execute 通过先计划再执行建立了全局视野
+  - REWOO（Reasoning, Execution, Watch, and Optimize）：在 ReAct 的基础上引入了反思和优化机制
+  - Reflexion：自我批评和自我改进
+
+  Agent 最常见的应用在 Web，软件工程，Research 和对话。
+
+- **为什么 Agent 比传统方法速度慢？**
+
+  Agent 速度慢的主要原因：
+
+  1. **多次 LLM 调用**：ReAct、ToT 等模式需要多轮 Reason → Act → Observe 循环；Prompt chaining 将任务分解为多个串行步骤，每个步骤都需调用 LLM。
+
+  2. **动态规划开销**：动态工作流需要在运行时进行任务分解、状态评估、路径搜索（如 ToT 的广搜/深搜），这些计算都是额外开销。
+
+  3. **Tool 调用延迟**：与外部工具（API、数据库、搜索引擎）交互涉及网络延迟和工具执行时间。
+
+  4. **Memory 操作**：Long-term memory 需要向量检索和相似度计算；Short-term memory 需要每次构造大量上下文。
+
+  5. **自我反思机制**：Evaluator-optimizer、Reflexion 等模式需要额外的 LLM 调用进行评估和反馈。
+
+- **如何优化 Agent 的速度？**
+
+  1. **静态工作流优先**：对于标准化任务使用静态工作流（Prompt chaining、Routing），避免动态规划的运行时开销。
+
+  2. **并行化处理**：使用 Parallelization 模式同时处理独立子任务；Orchestrator-workers 模式将任务分发给多个工作者并行执行。
+
+  3. **减少 LLM 调用次数**：
+     - 用 Plan-Execute 替代 ReAct：先一次性生成完整计划，再执行
+     - 限制 ReAct 的最大迭代次数
+     - 减少 Self-Consistency 的采样次数
+
+  4. **轻量级框架选择**：OpenAI Swarm（轻量无状态）、CrewAI（轻量角色分配）
+
+  5. **Memory 优化**：使用 In-memory store 快速访问；缓存常用查询结果
+
+  6. **Tool 调用优化**：异步调用、批量处理、设置超时机制
+
+- **Workflow 和 Agent 有什么区别？如何选择？**
+
+  | 维度 | Workflow | Agent |
+  |------|----------|-------|
+  | **核心** | 预定义流程，按步骤执行 | 自主决策，动态规划 |
+  | **可控性** | 高（流程固定）| 低（行为不确定）|
+  | **灵活性** | 低（需人工调整流程）| 高（自适应环境）|
+  | **适用场景** | 标准化、可预测的任务 | 复杂、开放、需探索的任务 |
+  | **典型应用** | 质检、审批流程、数据流水线 | Deep Research、复杂问题求解 |
+  | **失败处理** | 按预设规则处理 | 自主尝试替代方案 |
+
+  **选择原则：**
+  - **用 Workflow**：任务标准化、结果可预测、需严格可控（如企业级场景）
+  - **用 Agent**：任务开放-ended、需要探索、能接受不确定性（如消费级场景）
+
+  **混合架构：**
+  - Workflow 中嵌入 Agent 节点（静态流程中的动态决策点）
+  - Agent 中调用 Workflow 工具（Agent 决定执行预定义流程）
+
+- **Deep Search 和 Deep Research**
+
+  Deep Search 是搜索-阅读-推理-再搜索来实现 test-time scaling。
+
+  Deep Search 只有一个 query，而 Deep Research 是会整理出来多个 query。
+
+#### Frameworks
+
+- **CrewAI**
+
+  CrewAI是比较轻量级的，适合于有角色分配的开放型任务。只需要定义好Agent、Task，最后塞进Crew即可。任务的执行顺序和依赖性可以在Task里面设置。CrewAI分支能力有限，不支持循环，状态累积主要靠消息传递。
+
+- **AutoGen**
+
+  AutoGen相比CrewAI更开放，而且对代码任务更加适配。
+
+- **OpenAI Swarm**
+
+  OpenAI Swarm 轻量级、无状态
+
+- **LangChain**
+
+  LangChain 让你像搭乐高一样搭建一个 LLM 应用，串起来 Prompt、模型、知识库、工具、记忆等组件，快速构建复杂应用。
+
+- **LangGraph**
+
+  LangGraph 以图的方式来构建 Agent/Workflow，其中 State 是数据容器，实现节点之间的数据交流，每一个key为一个channel。Node 为执行单元，每个节点都是状态转换函数: State → State。默认的合并政策为覆盖，但list为add。Edge 为流程控制，分为普通遍、出入口边和条件边，条件边以函数的形式定义，其中输入为State，输出为选择节点。LangGraph 不是静态的流程图，而是动态的执行引擎，支持路由、循环。
+
+- **LangGraph 三种存储的方式**
+
+  In-memory store: Start - Create Store - Use Dictionary - Store Data - Fast Access - End Process - Data Lost（这是最简单的存储选项，适合短期实验或演示）
+
+  使用 from langgraph.store.memory import InMemoryStore 导入，创建一个完全在内存中运行的存储，使用标准 Python 字典。
+
+  不写入磁盘，进程结束后所有信息都会丢失。但速度快，易用，非常适合测试工作流或尝试新的图配置。如果需要，也可以添加语义搜索能力。
+
+  Local developement store: Start - Run Langgraph Dev - Create Local Store - Save with Pickle - Data Restored After Restart - Lightweight And Simple - End
+
+  这个选项的行为与上面的内存版本类似，但是可以在会话之间提供了基本持久性。
+
+  用 langgraph dev 命令运行应用时，LangGraph 会自动使用 Python 的 pickle 格式将存储保存到本地文件系统，并在重启开发环境后恢复数据。
+
+  这个方式轻量且方便，不需要外部数据库。同样支持语义搜索功能，所以它非常适合开发阶段，但不适合生产环境。
+
+  Production store: Start - Deploy Production Store - Use Postgresal Database - Enable Pgvector - Store And Retrieve Data - Support Semantic Search - High Reliablity - End
+
+  大规模或生产部署，LangGraph 使用与 pgvector 集成的 PostgreSQL 数据库实现高效的向量存储和语义检索。
+
+  这样可以提供完整的数据持久性、内置可靠性，并且能够处理更大的工作负载或多用户系统。语义搜索依靠pgvector ，默认使用余弦相似度作为相似性度量，也可以根据需求自定义。
+
+  这种配置确保记忆数据安全存储，跨会话保持可用，即使在高流量或分布式工作负载下也能稳定运行。
+
+#### RAG & Knowledge
+
+- **RAG**
+
+  RAG 的主要应用场景为
+  - LLM 知识过时
+  - 幻觉问题
+  - 无法调用私有数据
+  - 上下文长度限制导致无法将全部知识放入上下文或放入后会导致性能变差
+
+  RAG 适用于快速实现和部署一个项目，但由于切片、召回等问题，其上限低于训模型。
+
+  RAG
+  - Indexing：文本分块需考虑平衡信息完整性和检索效率。最常见的方式是根据标点符号和长度切。小 chunk 语义更纯净，对齐一个单一主体；向量表示更聚焦，易被检索模型命中；数量多，覆盖面大，召回率高，但一个问题需要多个 chunk 才能解决，且上下文断裂。大 chunk 信息更完整，但主题分散，检索难度大。如果加 overlap，则会提高 token 成本。
+  - Pre-Retrieval + Retrieval + Post-Retrieval (Re-ranking, Prompt Compression)：一般需要用对比学习微调，需要考虑挖掘难样本，可以多次迭代
+  - Generation
+
+  document 的顺序会对 RAG 的性能造成比较大的影响。
+
+  另一种方式是 search engine as a tool。
+
+  几个难点
+  - 复杂多模态的数据，如 PPT
+  - 检索质量的评估
+  - 私有化部署
+
+- **Agentic RAG**
+
+  传统的 RAG 就是建向量化、搜索、生成三板斧，而 Agentic RAG 下要考虑需不需要检索、去哪检索、判断检索的东西对不对、渐进式检索、query 改写等。
+
+- **RAG 和 Grep 有什么区别？Agent 中如何选择？**
+
+  | 维度 | RAG（向量检索） | Grep（关键词检索） |
+  |------|----------------|-------------------|
+  | **匹配方式** | 语义相似度（embedding 空间） | 字符串精确/正则匹配 |
+  | **理解能力** | 理解同义词、近义词、语义变体 | 无法理解语义，只匹配字面 |
+  | **速度** | 较慢（需向量计算） | 极快（基于索引或遍历） |
+  | **确定性** | 概率性，结果不确定 | 确定性，结果精确 |
+  | **适用数据** | 非结构化文本、知识库 | 代码、日志、结构化文本 |
+  | **Agent 场景** | 知识问答、概念检索 | 代码搜索、文件查找、日志分析 |
+
+  **选择原则：**
+
+  | 场景 | 推荐方案 | 原因 |
+  |------|---------|------|
+  | 需要理解语义 | **RAG** | 能处理同义词、表达方式差异 |
+  | 需要精确匹配 | **Grep** | 结果确定，无歧义 |
+  | 代码/日志检索 | **Grep** | 速度快，精确匹配变量名、函数名 |
+  | 大规模知识库 | **RAG** | 语义检索召回率高 |
+
+  **混合策略（推荐）：**
+  - **第一阶段**：Grep 快速过滤候选集（缩小范围）
+  - **第二阶段**：RAG 精排语义相关性（提升质量）
+  - 适用于代码智能体等需要兼顾速度和精度的场景
+
+- **GraphRAG**
+
+  通过图的方式连接知识，避免传统 RAG 切片后导致信息依赖丢失。
+
+#### Memory
+
+- **Memory**
+
+  Memory 呈现的方式可以是纯文本，embedding 和知识图谱。
+
+  | 方式 | 优点 | 缺点 | 适用场景 |
+  |------|------|------|---------|
+  | **纯文本** | 实现简单，可直接注入 Prompt，人类可读，无需额外基础设施 | 占用大量 token，随条目增多检索效率低，不支持语义查询 | 记忆条目少、内容简单的场景（如用户偏好、简短事实） |
+  | **Embedding（向量）** | 支持语义检索，可快速从大量记忆中召回相关内容，token 消耗可控 | 需要向量数据库，精确匹配能力弱，相似度阈值难调 | 记忆条目多、需要语义召回的场景（如长期用户历史） |
+  | **知识图谱** | 能表达实体间关系，支持推理和多跳查询，结构化强 | 构建和维护成本高，需要实体抽取和关系识别，更新复杂 | 实体关系复杂的场景（如人物关系网络、领域知识库） |
+
+- **Agent Memory 如何管理遗忘？**
+
+  Agent Memory 需要考虑容量限制和时效性，常见遗忘策略：
+
+  **1. Short-term Memory 遗忘**
+
+  - **滑动窗口**：保留最近 N 轮对话，超出自动丢弃
+  - **Token 限制**：当上下文超过模型窗口时，按策略压缩或截断
+  - **重要性过滤**：LLM 判断每轮信息重要性，仅保留高价值内容
+
+  **2. Long-term Memory 遗忘**
+
+  - **时间衰减**：记忆条目随时间降低权重，定期清理过期记忆
+  - **容量淘汰**：达到存储上限时，使用 LRU/LFU 淘汰旧记忆
+  - **相似合并**：新记忆与已有记忆语义相似时，合并或更新而非新增
+  - **显式删除**：用户指令删除特定记忆，或 Agent 自主判断无用记忆
+
+  **3. 遗忘触发时机**
+
+  - **被动触发**：查询时发现记忆冲突或过时，触发更新
+  - **主动清理**：定期任务扫描记忆库，清理低质量/过期条目
+  - **用户反馈**：用户指出记忆错误时，及时修正或删除
+
+#### Tools & Protocols
+
+- **LLM 怎么调用外部工具？**
+
+  通过在 System Prompt 中增加 tools 描述，让 LLM 知道有哪些工具可以调用。LLM 根据用户的问题自行判断是否需要调用外部工具，若需要则从问题中解析参数，然后以固定格式返回。
+
+- **Function Calling**
+
+  通过微调或架构优化，赋予模型生成结构化指令（如 JSON）的能力。Function Calling 没有统一标准，需要开发者根据特定的模型和工具书写特定的适配代码。此外，Function Calling 中，函数定义与对话 Prompt 有着强耦合关系，后续升级改造工具会连带需要对 Prompt/代码进行调整。Function Calling 不负责执行和管理工具，只生成指令，执行由开发者额外处理。
+
+  **本质**：LLM 的内置能力，让模型能生成结构化的工具调用。
+
+- **MCP（Model Context Protocol）**
+
+  MCP 定义了社区的工具开放标准，实现了模型厂商和开发者各个角色之间对标准的对齐，复用性更高。
+
+  MCP 流程为
+  - MCP client 首先从 MCP server 获取可用的工具列表
+  - 将用户的 Prompt 连同工具描述一起发送给 LLM
+  - LLM 根据 Prompt 决定是否需要使用工具以及使用哪些工具
+  - 如果需要使用工具，MCP client 会调用 MCP server 以执行相应的工具调用
+  - 工具调用的结果再次被发送回 LLM
+  - LLM 整合所有信息生成最终回答
+  - 最后将响应展示给用户
+
+  **本质**：Anthropic 提出的通信协议，让 AI 和外部工具之间有标准化的连接方式。
+
+  **与 Function Calling 的关系**：
+  - MCP 不等于 Function Calling，它们解决的问题不同：Function Calling 解决“LLM 怎么调用工具”（调用格式），MCP 解决“AI 系统怎么连接各种工具”（连接生态）
+  - MCP 内部可以用 Function Calling：MCP 负责传输，Function Calling 负责生成调用——两者在不同的层面，可以共存
+  - Function Calling 是 LLM 的通用能力，可以在任何场景使用，不依赖 MCP
+
+- **A2A**
+
+  解决 Agent 间通信问题。
+
+- **AG-UI**
+
+  解决 AI Agent 与前端应用之间的交互标准化问题。
+
+- **Skill**
+
+  相对于平铺，其采用渐进式披露。
+
+- **Agent 工具调用如何避免失败？**
+
+  **1. 工具描述设计**
+  - **互斥性**：工具功能边界清晰，避免多个工具做类似事情
+  - **明确性**：描述具体、无歧义，包含使用场景和示例
+  - **原子性**：工具粒度适中，既不过大（难描述）也不过小（调用频繁）
+
+  **2. 权限管理**
+  - **工具集隔离**：不同调用方拥有不同的工具子集
+  - **细粒度控制**：按用户/角色/场景分配工具权限
+  - **动态权限**：运行时根据上下文判断是否展示某工具
+
+  **3. 参数校验**
+  - **Schema 校验**：调用前校验参数类型、必填项、取值范围
+  - **前置过滤**：明显错误的参数在调用前拦截
+  - **默认值**：合理设置默认值，减少必填参数
+
+  **4. LLM 输出静默修复（三层）**
+
+  LLM 生成的工具调用经常有问题（尤其是开源模型），可在框架层面做三层静默修复，全程 LLM 无感知：
+  - **第 1 层 - 工具名修复**：依次尝试小写化、连字符/空格转下划线、CamelCase → snake_case、候选集迭代，最后用 difflib 模糊匹配（cutoff=0.7）兜底
+  - **第 2 层 - 参数 JSON 修复**：5 轮渐进修复（宽松解析 → 去尾随逗号 → 补未闭合括号 → 去多余括号 → 转义控制字符），全部失败则返回 `{}`
+  - **第 3 层 - 参数类型强制转换**：对照工具 JSON Schema 自动修正类型不匹配（如 `"42"` → `42`，标量 → 数组），转换失败时保留原值不抛异常
+  - **设计哲学**：永不崩溃，所有修复函数不抛异常，失败最终转为 `role: "tool"` 消息让 LLM 有机会自我纠正
+
+- **Agent 工具调用失败如何处理？**
+
+  工具调用失败不能一刀切，必须先判断失败原因，再选择对应策略：
+
+  **1. 参数错误（大模型问题）**
+  - 表现：参数格式错误、必填参数缺失、参数含义理解错误
+  - 策略：带错误反馈的重试（Error Feedback Retry），将具体错误信息回注到上下文，让模型重新生成参数，设最大重试次数（如 3 次）
+
+  **2. 网络/超时问题**
+  - 策略：指数退避重试（Exponential Backoff），第1次等1s，第2次等2s，第3次等4s……设最大重试次数
+
+  **3. 限流（429）/ 服务不可用（503）**
+  - 429：严格遵守 Retry-After header，等待指定时间后重试
+  - 503：短暂等待后重试，或切换备用服务
+
+  **4. 权限问题**
+  - 401/Token 过期：触发 Token 刷新流程，刷新后重试一次
+  - 403/API Key 失效：不重试，直接上报权限不足
+
+  **5. 业务逻辑错误**
+  - 500（服务内部错误）：可重试一次，仍失败则上报
+  - 业务错误（如“数据不存在”、“余额不足”）：不重试，告知用户或走兜底逻辑
+  - 关键操作（写入、支付）：无幂等保证时不重试，宁可报错让用户确认
+
+  **6. 工具配置问题**
+  - 工具不存在、Schema 版本不匹配、MCP 连接失败：不重试，直接上报，需要开发/配置层面修复
+
+  **7. 死循环检测（护栏系统）**
+  - LLM 可能陷入死循环：反复调用同一工具、传相同参数、得到相同错误
+  - 用参数签名（工具名 + 参数 SHA256）计数，同一签名失败超过阈值则打断循环
+  - 同一工具（任意参数）失败次数和幂等工具返回完全相同结果的次数也分别跟踪
+  - 检测到循环后可降级为错误提示或切换工具
+
+  **8. Budget 耗尽兜底**
+  - Agent 设置最大迭代次数（iteration budget），耗尽后不能继续调用工具
+  - 核心手段：最后一次 LLM 请求不传 `tools` 参数，协议层面保证模型只能输出纯文本
+  - 同时在上下文注入提示（"已达最大迭代次数，请总结目前结果"），引导模型给出最终回复
+
+  **通用最佳实践：**
+  - 所有重试都要设上限（建议 3 次），防止无限循环
+  - 写操作谨慎重试，无幂等保证时宁可报错
+  - 错误日志要详细：调用参数、错误码、错误描述、重试次数
+  - 区分可恢复 vs 不可恢复：可恢复的重试，不可恢复的立刻上报
+  - 给用户的错误信息要友好，不要直接暴露内部错误栈
+
+#### Context Engineering
+
+- **Prompt Engineering**
+
+  尽可能让模型返回多的信息，然后规则法处理；尽可能让模型分步做，然后控制中间参数传递，保证每步的输出的可靠；若知识库直接嵌入prompt，可以将其预先分类，使得模型对知识库的获取更清晰。
+
+- **Context Engineering**
+
+  提示（Prompting）是指你要求模型做某件事，而上下文工程（Context Engineering）是指在提出要求之前，准备好模型可能需要的一切。
+
+  这些上下文可分为几大类：
+  - 指导性上下文（Guiding Context），这类上下文的核心功能是指导模型该做什么以及如何做，主要为模型行为设定框架，目标和规则。Prompt Engineering 一般旨在优化指导性上下文。它包括：System Prompt；Task Description；Few-shot Examples；Output Schema（前面三个很简单，Output Schema 一般是强制要求模型以特定格式（如 JSON、XML）输出的结构定义）
+  - 信息性上下文（Informational Context），这类上下文的核心功能是告诉模型需要知道什么知识，为模型提供解决问题所必备的事实，数据与知识。它包括：RAG（外部知识库）；Memory（Short-term Memory：当前对话历史，Long-term Memory：跨会话存储的一些重要信息和偏好）；State / Scratchpad（状态维护和草稿纸，例如 Claude Code 在开始计划先的临时 TODO 以及 Thinking 模型下的思考“草稿本”）
+  - 行动性上下文（Actionable Context），这类上下文的核心功能是告诉模型能做什么以及做了之后的结果，为模型提供与外部世界交互的能力。它包括：Tool Definition；Tool Calls & Results / Tool Traces（调用了哪些工具以及工具返回的结果，即工具调用的历史追踪）
+
+  长上下文带来成本与协同压力，更易暴露四类上下文失效：污染、干扰、混淆、冲突。它们常彼此耦合，并直接损害推理稳定性与跨代理传递。
+  - 上下文污染（Context Poisoning），主要是幻觉进入 Context 导致异常结果。
+  - 上下文干扰（Context Distraction），当 Context 接近溢出时，模型训练中获得的知识会被“覆盖”导致模型降智。
+  - 上下文混淆（Context Confusion），冗余且不相关的 Context 让输出结果偏离期望。
+  - 上下文冲突（Context Clash），当上下文中的信息互相矛盾时，比如上下文存在过去错误的答案。
+
+  上下文工程策略分为写入、选择、压缩和隔离四类。
+
+  写入上下文（Write Context）：此策略旨在将信息保存于上下文窗口之外，以备未来使用。这包括两种主要形式：
+  - 草稿本（Scratchpads）：用于存储会话内部的临时信息。这可以是在一个单一的交互过程中，智能体为了完成当前任务而需要临时记录的数据。
+  - 记忆（Memories）：用于跨多个会话持久化信息。这些记忆可以是智能体自动生成或从过去的交互中综合提炼出来的，用于保留长期知识或个性化设置。
+
+  选择上下文（Select Context）：此策略专注于将相关信息提取到当前的上下文窗口中。这涉及从以下来源进行选择：
+  - 草稿本和记忆的检索：根据当前任务或用户查询，从已存储的草稿本或各种类型的记忆（如事件记忆、程序记忆、语义记忆）中检索最相关的信息。
+  - 检索增强生成（RAG）：尤其在代码智能体中，RAG 被广泛应用于从工具描述和知识库中获取信息，确保智能体能够访问到其执行任务所需的外部知识。
+
+  压缩上下文（Compressing Context）：此策略通过保留必要的 token 来优化上下文窗口的使用效率。它主要包含：
+  - 上下文摘要（Context Summarization）：将冗长的智能体交互或工具输出浓缩成更简洁的形式，减少不必要的细节，突出关键信息。
+  - 上下文修剪（Context Trimming）：通过过滤或剪枝技术（通常基于启发式规则），从上下文中移除不相关或冗余的 token。
+
+  压缩应按内容类型差异化处理，不同内容的压缩策略和收益差异显著。工程上可用 ML 内容检测模型（如 Magika）自动识别类型并路由到对应压缩器。内容检测模型的核心思路是：只读取头部和尾部各约 1KB 的内容提取特征，然后送入一个轻量分类模型（推理约 2ms）。这样设计的原因是文件类型的判别信息高度集中在头尾——头部通常有 magic bytes、shebang 或语言关键字（如 %PDF、#!/bin/bash、package main），尾部有格式标志（如 %%EOF、闭合标签），中间的具体内容对类型判断几乎是噪声。只读头尾使 I/O 开销与文件大小无关，Google 内部用此方案处理每周数千亿文件，准确率约 99%。各类型的压缩策略如下：
+  - 工具调用结果（JSON、搜索结果、日志）：收益最高（70-95%），可激进压缩，只保留关键输出、错误信息和时间戳，去除重复模式。
+  - 代码文件：基于 AST 分析保留 import、函数签名、类型定义，去除实现细节（40-70%）。
+  - 对话历史：做摘要压缩，但需保留用户意图和关键决策，不可过度压缩。
+  - System Prompt 和工具定义：几乎不压缩，保持稳定以最大化 KV Cache 命中。
+  - 高熵 token（UUID、hash 等）：无论出现在何种内容中都应保留，因为通常是关键标识符。
+
+  此外，压缩可以是可逆的（CCR，Compress-Cache-Retrieve）：压缩后将原始内容存入本地数据库，同时向 LLM 注入一个 retrieve 工具。若 LLM 判断压缩版信息不足，可主动调用该工具取回原始内容，从而在节省 token 的同时不丢失信息。
+
+  压缩时机的选择至关重要，实际工程中通常组合使用，以步骤边界触发为主，阈值触发兜底：
+  - 步骤边界触发（写入前压缩）：在工具返回结果写入上下文之前先摘要，再 append 到历史尾部，为首选策略。
+  - 阈值触发：上下文长度超过窗口某个比例（如 80%）时触发，作为兜底策略。
+  - 轮次触发：每隔固定 N 轮压缩一次历史，适合对实时性要求不高的场景。
+  - 被动触发（溢出后截断）：最差策略，直接丢弃历史，仅作最后兜底。
+  - 与 KV Cache 的平衡：缓存是"免费复用已有计算"，压缩是"减少需要计算的量"，两者目标相同但手段冲突。由于 KV Cache 基于前缀匹配，因此要最大化缓存命中率，应尽可能将静态内容（System Prompt、工具定义、长文档等）放在上下文前面，动态内容（用户输入、工具调用结果等）放在后面，前缀越稳定，命中率越高。工程上的平衡策略一般有三层：冻结已缓存前缀（根据上一轮 API 返回的缓存信息，判断哪些前缀已被缓存，下一轮直接跳过不压缩）；设置压缩阈值（只有当压缩能省下超过一定比例（如 50%）的 token 时才值得牺牲缓存去压缩，否则保留缓存更划算）；增量压缩（已缓存的历史部分冻结不动，只对新增内容做压缩，前缀享受缓存折扣，新内容享受压缩节省，是两者的最优组合点）。
+
+  隔离上下文（Isolating Context）：此策略通过分离上下文来帮助智能体更有效地执行任务。这可以通过以下方式实现：
+  - 多智能体架构（Multi-agent Architecture）：将任务分解给多个子智能体，每个子智能体处理其特定任务并拥有独立的上下文，避免不同任务的上下文相互干扰。
+  - 环境（Environments）：使用沙箱等环境来隔离包含大量 token 的对象或状态，例如在执行复杂计算或访问敏感数据时，将这些操作限制在特定的、受控的环境中。
+
+#### Agent for SE
+
+- **LLM for SE**
+
+  SE 的完整 Pipeline 可分为软件开发和软件维护。
+
+  软件开发
+  - 需求工程/软件设计
+  - 代码生成：Planning/Iterative Refinement（Model Feedback/Tool Feedback/Human Feedback/Hybrid Feedback）
+  - 代码质量保证：验证，静态校对，测试（单元测试、系统测试）
+
+  软件维护
+  - Debugging（Fault Localization，Repair）
+  - Feature Maintenance
+
+  在软件维护方面，一个经典的 Benchmark 是 SWE-bench（verified 比较关键），将其建立为 Live Benchmark（添加新的 instances）十分关键。一个关键的 agent 框架是 Agentless。Agentless 把软件维护分为定位，修复和补丁验证三个部分。
+
+  Task：including simple，self-contained and repository-level，e.g.，Code Generation；Bug Fix
+
+  Version
+
+  Environment
+
+  RLVR
+
+  软件工程对应到 LLM 的常见问题有：
+  - Long Context：How to support long context
+  - Retrieval：How to select useful files
+  - 多语言
+
+#### Agentic RL & World Modeling
+
+- **Agentic RL**
+
+  在 Rollout 的时候调用和执行工具即可。为了增强效率，一般要异步执行。
+
+  Agentic RL/多轮RL受限于长文本序列处理难度、奖励信号复杂等问题，容易过度依赖于局部奖励，出现训练不稳定甚至崩溃的问题。因此，现在的 RL 框架只能集中在 10 个 step 左右能完成的任务，而现实中的任务往往需要几十个甚至上百个 step 才能完成。
+
+  RAGEN 是一个 Agentic RL 训练的框架，基于 StarPO（State-Thinking-Action-Reward Policy Optimization）。其通过马尔可夫决策过程（MDP）形式化 Agent 与环境的交互，引入渐进式奖励归一化策略，有效解决了多轮强化学习中的不稳定性。RAGEN 还发现多轮 RL 训练中的“（Echo Trap）”不稳定模式，提出 StarPO-S 改进框架，通过 variance-based trajectory filtering、critic baselining 和decoupled clipping 等方法，提升学习的稳健性。Search- R1 也是类似的结构。
+
+  RAGEN/Search-R1 会受限于上下文长度。与以往简单地拼接完整交互历史的方法不同，verl-agent 把每个step当作独立的decision point来处理，并使用step/turn-independent的多轮rollout范式，提供了完全可定制的memory模块、历史管理机制以及每一步的输入结构。这种设计使得 verl-agent 能够高度扩展，适用于超长序列、multi-turn的强化学习训练（例如，ALFWorld 中的任务可能需要多达 50 步才能完成）。
+
+- **什么是 Agentic World Modeling？能力层级如何划分？**
+
+  **背景**：随着 AI 系统从“生成文本”转向“通过持续交互实现目标”，环境动态建模成为核心瓶颈。现实场景（物理世界、数字世界、社会世界、科学世界）都需要预测性环境模型。
+
+  **核心框架：Levels × Laws 分类法**
+
+  **能力层级（Levels）**：
+  - **L1 Predictor（预测器）**：学习单步局部转换算子。代表工作：视觉预测器、环境模型。
+  - **L2 Simulator（模拟器）**：将算子组合成多步 action-conditioned rollouts，遵循领域定律。代表工作：Dreamer、SimM森林、Galileo。
+  - **L3 Evolver（进化器）**：当预测与新证据不符时，自主修订自身模型。代表工作：在线学习、自我修正。
+  
+  > L1 → L2 → L3 是能力递进：被动预测 → 可控模拟 → 主动进化
+
+  **支配定律机制（Laws）**：
+  - **物理定律**：物体运动、力学、因果。失败点：长程物理推理、不可逆过程。
+  - **数字定律**：软件/GUI 操作的确定性或半确定性规则。失败点：突发 UI 变化、非标准交互。
+  - **社会定律**：人类行为、偏好、博弈均衡。失败点：恶意对抗、分布外行为。
+  - **科学定律**：科学领域约束、可检验假设。失败点：假阳性发现、因果混淆。
+
+  **关键洞察**：不同 Level × Law 组合决定了世界模型的必须满足的约束、最可能失败的场景、适用的评估方法。
+
+  **与 Agent 的关系**：
+  - L2 Simulator = Agent 的“思维模拟”基础设施
+  - L3 Evolver = Agent 遇到新环境时的自我适应能力
+  - 四种 Laws = 不同垂直领域 Agent 需要遵守的约束
+
+  **评估原则**：从“预测精度”（PSNR、FVD）转向“决策质量”，评估在世界模型中做决策的最终性能。
+
+  **演进路线**：被动单步预测 (L1) → 可控多步模拟 (L2) → 自主进化修订 (L3) → 模拟并重塑环境（最终愿景）。
+
+  **参考文献**：Meng Chu et al., "Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond", arXiv:2604.22748, 2026.
 
 ### Search/Recommendation
 
