@@ -4366,7 +4366,6 @@ def gru_forward(X, Wx, Wh, b, h0):
   | **SFT** | 万~百万级样本 | 学习指令跟随和用户体验 | 极高 | Response 错误会被直接模仿 | 人工标注 + 多 Teacher 合成 |
   | **RLHF/DPO** | 万~十万级对比对 | 偏好对齐（helpful, harmless, honest） | 极高，一致性优先 | 标注一致性和 reward hacking | 人工偏好标注（DPO 直接优化偏好对，RLHF 需先训 reward model） |
 
-  - **Mid-training 补充**：保持 next-token prediction 目标，模型学到的是知识/能力内化（vs SFT 的行为模仿），因此需要先内化再模仿效果更好。学习率通常为 pre-training 的 1/5~1/10。
   - 贯穿逻辑：规模递减、质量要求递增、从"学知识"过渡到"学行为"。数据配比粒度也从粗到细：pre-training 按 **domain 级别**配比（如网页 60%、代码 15%、数学 10%），SFT/RLHF 按 **样本/任务级别**配比（如数学推理指令 20%、代码生成 15%、安全拒绝 10%），因为数据量越小，每条样本的影响越大，需要更精细的控制。
 
 - **Scaling Law 与数据的关系是什么？**
