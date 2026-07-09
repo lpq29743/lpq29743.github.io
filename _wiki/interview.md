@@ -4932,6 +4932,35 @@ class RMSNorm(nn.Module):
 
   Pre Norm 在子层（Self-Attn / FFN）之前，Post Norm 在子层（Self-Attn / FFN）之后。Pre Norm 更常用，因为其更稳定，更容易收敛。
 
+  结构对比：
+
+  ```
+  Post-Norm (原始 Transformer)：x_{l+1} = LayerNorm(x_l + Sublayer(x_l))
+  Pre-Norm (现代 LLM 主流)：   x_{l+1} = x_l + Sublayer(LayerNorm(x_l))
+  ```
+
+  **为什么 Pre-Norm 训练更稳定？核心在于梯度传播路径。**
+
+  Post-Norm 的反向传播：每一层梯度都要穿过 LayerNorm 的雅可比矩阵，N 层连乘：
+
+  $$\frac{\partial L}{\partial x_1} \propto \prod_{l=1}^{N} \frac{\partial LN_l}{\partial (\cdot)} \cdot (I + \frac{\partial f_l}{\partial x_l})$$
+
+  LayerNorm 的导数不是单位矩阵，会缩放和旋转梯度方向。N 个这样的矩阵连乘 → 梯度范数可能指数级增长（爆炸）或衰减（消失），层数越多越不稳定。
+
+  Pre-Norm 的反向传播：残差连接是裸连（不经过 LayerNorm），展开 N 层梯度：
+
+  $$\frac{\partial x_{l+1}}{\partial x_l} = I + \frac{\partial Sublayer}{\partial LN} \cdot \frac{\partial LN}{\partial x_l}$$
+
+  展开连乘积：$$\prod(I + A_l) = I + \sum A_l + \sum_{l<k} A_l A_k + \cdots$$
+
+  梯度中有一项恒等的 $$I$$（identity），意味着 **梯度永远有一条不衰减的直通路径** 从最后一层回到第一层。即使某些层的 Sublayer 梯度消失了，这条"高速公路"还在。
+
+  直觉：Post-Norm 的梯度要穿过 N 道"门"（LayerNorm），每道门都会改变梯度的大小和方向，门越多梯度越"走样"；Pre-Norm 有一条永远畅通的"高速公路"（残差连接），同时每条支路（Sublayer）的梯度可以叠加进来，最差情况下至少高速公路能保底。
+
+  **Pre-Norm 的代价**：表达能力略弱于 Post-Norm。因为每一层 Sublayer 的输入都经过 LayerNorm 归一化，输出又被加回残差，导致深层的 hidden state 始终被约束在一个球面上，变化空间有限。但实际经验中，Pre-Norm 能训得更充分，最终性能和 Post-Norm 持平甚至更好。
+
+  **总结**：现代 LLM（LLaMA、GPT 系列、GLM-4 等）普遍采用 Pre-Norm + RMSNorm 的组合。DeepNorm 是针对 Post-Norm 时代的特殊补丁（通过 $$\alpha = N^{1/4}$$ 放大残差 + 特殊初始化来强行稳定训练），Pre-Norm 成为主流后就不再需要了。
+
 
 - **LLM 常用的激活函数有？**
 
