@@ -4964,15 +4964,23 @@ class RMSNorm(nn.Module):
 
 - **LLM 常用的激活函数有？**
 
-  ReLU：f(x) = max(0, x)
+  ReLU：$$f(x) = \max(0, x)$$
 
-  GeLU：f(x) ≈ x * Φ(x)，Φ是标准正态分布的累积分布函数。
+  GeLU：$$f(x) = x \cdot \Phi(x)$$，$$\Phi(x)$$ 是标准正态分布的累积分布函数，近似为 $$f(x) \approx x \cdot \sigma(1.702x)$$。
 
-  GLU：GLU(a,b)=a×σ(b)，其中，输入被分成两部分 a 和 b，σ 是 sigmoid 函数。
+  **门控线性单元（GLU 家族）**：将 FFN 第一层的输出 $$x$$ 经线性变换后沿特征维度分成两半 $$a$$ 和 $$b$$，用 $$b$$ 经过激活函数后作为"门"来控制 $$a$$ 的信息通过量。
 
-  SwiGLU：SwiGLU = 线性 × SwiSH 激活。Swish 函数代替了原始 GLU 中的 Sigmoid 激活，其为 x 乘以 Sigmoid(x)。
+  GLU：$$GLU(x) = a \otimes \sigma(b)$$，其中 $$\sigma$$ 是 sigmoid 函数。
 
-  ReLU，GeLU 不能门控，GLU，SwiGLU 能门控。
+  GeGLU：$$GeGLU(x) = a \otimes GELU(b)$$。来自 Shazeer 2020 *"GLU Variants Improve Transformer"*，idea 简单但被广泛采用。代表模型：PaLM、Gemma、GLM-130B。
+
+  SwiGLU：$$SwiGLU(x) = a \otimes Swish(b)$$，其中 $$Swish(x) = x \cdot \sigma(\beta x)$$（通常 $$\beta=1$$，此时等价于 SiLU）。代表模型：LLaMA、Qwen、Mistral。
+
+  ReGLU：$$ReGLU(x) = a \otimes ReLU(b)$$，实验对比中的变体，实际使用较少。
+
+  ReLU、GeLU 不能门控，GLU、GeGLU、SwiGLU、ReGLU 能门控。GLU 变体相比单一激活函数表达力更强，因为门控机制允许模型动态选择哪些特征通过。
+
+  注意：GLM-130B 使用 GeGLU 时 FFN 升维到 $$\frac{8}{3}d$$（而非标准的 $$4d$$），使得 FLOPs 与非门控 FFN 基本一致（门控 FFN 有两条路径，需要更大的隐藏维度来补偿）。
 
 #### Attention Mechanisms
 
@@ -5204,6 +5212,68 @@ class SelfAttentionWithKVCache(nn.Module):
 ```
 
 
+- **Multi-Query Attention (MQA)**
+
+  MHA 中每个 Q head 对应独立的 K head 和 V head，而 MQA 让**所有 Q head 共享同一份 K 和 V**（即 K/V 只有 1 个 head）。
+
+  **核心动机**：推理时 K/V 需要放进 KV Cache，MHA 的 KV Cache 大小为 $$2 \times H \times seq\_len \times d_h$$（K 和 V 各 H 个 head），MQA 缩小到 $$2 \times 1 \times seq\_len \times d_h$$，显存直接降低到 $$1/H$$。
+
+  **MHA vs MQA vs GQA 对比**：
+
+  | 方法 | Q heads | K/V heads | KV Cache 大小 | 质量 | 推理速度 |
+  |------|---------|-----------|---------------|------|----------|
+  | MHA | H | H | 基准 | 最好 | 最慢 |
+  | MQA | H | 1 | 1/H | 略差 | 最快 |
+  | GQA | H | G (1<G<H) | G/H | 接近 MHA | 接近 MQA |
+
+  **MQA 的缺点**：所有 Q head 共享同一份 K/V，表达能力下降。实验表明 MQA 在多数 benchmark 上比 MHA 差 1-2 个点。
+
+  **代表模型**：PaLM、StarCoder 使用 MQA；LLaMA-2 70B、Qwen 系列使用 GQA 作为折中。
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class MultiQueryAttention(nn.Module):
+    def __init__(self, embed_dim, num_heads):
+        super(MultiQueryAttention, self).__init__()
+        self.embed_dim = embed_dim
+        self.num_heads = num_heads
+        self.head_dim = embed_dim // num_heads
+
+        # Q 投影到 num_heads * head_dim，K/V 只投影到 head_dim（单个 head）
+        self.q_proj = nn.Linear(embed_dim, embed_dim)           # → (B, T, H*D)
+        self.k_proj = nn.Linear(embed_dim, self.head_dim)       # → (B, T, D)
+        self.v_proj = nn.Linear(embed_dim, self.head_dim)       # → (B, T, D)
+        self.out_proj = nn.Linear(embed_dim, embed_dim)
+
+    def forward(self, x, mask=None):
+        B, T, E = x.shape
+
+        # Q: (B, H, T, D)
+        Q = self.q_proj(x).view(B, T, self.num_heads, self.head_dim).transpose(1, 2)
+        # K, V: (B, 1, T, D) — 单个 head
+        K = self.k_proj(x).view(B, T, 1, self.head_dim).transpose(1, 2)
+        V = self.v_proj(x).view(B, T, 1, self.head_dim).transpose(1, 2)
+
+        # 将 K/V 广播到所有 Q head: (B, 1, T, D) → (B, H, T, D)
+        K = K.expand(-1, self.num_heads, -1, -1)
+        V = V.expand(-1, self.num_heads, -1, -1)
+
+        # Scaled dot-product attention
+        scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.head_dim ** 0.5)  # (B, H, T, T)
+        if mask is not None:
+            scores = scores.masked_fill(mask == 0, float('-inf'))
+        attn_weights = F.softmax(scores, dim=-1)
+        context = torch.matmul(attn_weights, V)  # (B, H, T, D)
+
+        # 合并多头
+        context = context.transpose(1, 2).contiguous().view(B, T, E)
+        return self.out_proj(context)
+```
+
+
 - **grouped-query attention 实现**
 
   GQA 是 MQA 和 MHA 的均衡，MQA 尽管减轻了 KV Cache 负担，但也可能带来性能下降。grouped-query attention 中，query 使用比 key/value 更多的 heads。因为在推理阶段，Q 是即时计算的，而 K/V 是缓存的。
@@ -5265,6 +5335,61 @@ class GroupedQueryAttention(nn.Module):
   由于 MLA 没有显式计算 K，且 ROPE 不能加在 latent vector 上，因此 MLA 使用了 decoupled RoPE，即使用额外的 multi-head queries 和一个 shared key 来携带 RoPE 的位置信息，其维度为 $d_h$。新增的 q 和 k 维度使用常规的 RoPE 计算，用于携带位置信息；而原来的维度依然使用低秩分解的方式计算，最后再计算 attention 的时候两个部分拼接起来。
 
   由于 $$d_c$$ 远小于 $$d_h * seq\_len$$，时间复杂度从 $$O(d_h * seq\_len * seq\_len)$$ 降至 $$O(d_h * seq\_len * latent\_len)$$。
+
+  **Muon Split 优化（GLM-5）**：对不同 head 的投影矩阵（$$W_{UQ}$$、$$W_{UK}$$、$$W_{UV}$$）**分别做正交化**，而非整体正交化。使不同 head 的投影权重以不同尺度更新，让 MLA 性能匹配 GQA-8（否则 576-dim MLA 打不过 2048-dim GQA-8）。
+
+
+- **DeepSeek Sparse Attention (DSA)**
+
+  **问题**：Dense attention 复杂度 $$O(L^2)$$，128K 上下文计算量巨大。
+
+  **核心思想**：根据 token 内容动态选择最相关的 top-k tokens 计算 attention，而非固定稀疏模式（如 sliding window）。
+
+  **关键组件：Indexer**
+  - 对每个 query token，计算它与所有 K/V tokens 的相关性分数
+  - 用 top-k 选出最相关的 k 个 tokens
+  - 只在这 k 个 tokens 上计算 attention
+  - 复杂度从 $$O(L^2)$$ 降至 $$O(L \cdot k)$$，$$k \ll L$$
+
+  **训练策略（两阶段）**：
+  1. Dense warm-up：先用 dense MLA 训练 base model（正常预训练）
+  2. Sparse adaptation：
+     - Warm-up 阶段（1000 steps）：冻结 base model，只训练 indexer
+     - Joint training（20B tokens）：联合训练 model + indexer
+
+  **关键发现**：
+  - 只需 20B tokens 的 adaptation 即可匹配 dense MLA 性能
+  - 长上下文中 **90% 的 attention entries 是冗余的**
+  - DSA 是 lossless 的（128K RULER 只差 0.35 分）
+  - 注意力计算减少 1.5-2×
+
+  **RL 训练的关键**：必须用 deterministic top-k operator（torch.topk），不能用 CUDA 的 non-deterministic 实现，否则训练-推理不一致导致 RL 崩溃（entropy 急剧下降）。同时 RL 阶段冻结 indexer 参数以加速训练并防止不稳定学习。
+
+  **来源**：DeepSeek-V3 (2024.12)，论文 arXiv:2412.19437
+
+
+- **Sparse Attention 演进路线**
+
+  | 阶段 | 方法 | 特点 | 代表工作 |
+  |------|------|------|----------|
+  | 1. 固定稀疏 (2019-2020) | 预定义稀疏模式 | 模式固定，不能自适应 | Sparse Transformer, Longformer, BigBird |
+  | 2. 动态稀疏近似 (2020-2023) | LSH / Router | 动态但近似，精度有损或训练不稳定 | Reformer, Routing Transformer |
+  | 3. DSA (2024-2025) | 动态 + continued pre-training | Lossless，只需 20B tokens adaptation | DeepSeek-V3 |
+  | 4. IndexShare (2026) | 多层共享 indexer | 进一步降低 FLOPs 2.9× | GLM-5.2 |
+
+
+- **IndexShare (GLM-5.2)**
+
+  **问题**：DSA 的 indexer 在每层都计算 top-k，1M 上下文下计算量仍然巨大。
+
+  **解决**：每 4 层共享一个 indexer
+  - Indexer 放在 4 层中的第 1 层
+  - Top-k indices 在后续 3 层复用
+  - 1M 上下文下**每 token FLOPs 降低 2.9×**
+
+  **在 MTP layer 的应用**：indexer 只在第 1 步计算，后续步复用 top-k indices。由于 IndexShare 的设计，后续步只能 attend 到 target model 的 hidden states（$$h_1$$ 到 $$h_4$$），不能看到 MTP layer 自身生成的 $$h_5$$，消除了训练-推理不一致。
+
+  **来源**：GLM-5.2 (2026.6)，论文 arXiv:2603.12201
 
 
 - **Attention Sink 是什么？为什么会出现？**
@@ -5406,7 +5531,35 @@ def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
 
 - **speculative decoding**
 
-  使用一个小型辅助模型（称为“提议模型”或“draft model”）先快速生成多个候选token序列（草稿）。主模型（大型语言模型）随后只对这些候选进行验证和纠正，而不是每一步都全量生成和计算概率。这种方式能显著减少主模型的计算成本，提高生成速度。
+  使用一个小型辅助模型（称为”提议模型”或”draft model”）先快速生成多个候选token序列（草稿）。主模型（大型语言模型）随后只对这些候选进行验证和纠正，而不是每一步都全量生成和计算概率。这种方式能显著减少主模型的计算成本，提高生成速度。
+
+
+- **Multi-Token Prediction (MTP)**
+
+  MTP 在训练时为模型添加额外层，每步预测下 n 个 token（而非仅下 1 个），增加训练信号；推理时作为 draft model 用于 speculative decoding，加速生成。
+
+  **演进路线：**
+
+  | 方法 | MTP 层数 | 训练预测 | 推理预测 | Accept Length | 问题 |
+  |------|---------|---------|---------|---------------|------|
+  | DeepSeek-V3 | 1 层 | 1 token | 2 tokens | 2.55 | 训练-推理不一致 |
+  | GLM-5 | 3 层（参数共享）| 3 tokens | 3 tokens | 2.76 | 多步推理时 KV cache 混合 |
+  | GLM-5.2 | 3 层 + IndexShare + KVShare + TV Loss | 3 tokens | 7 steps | **5.47** | — |
+
+  **GLM-5.2 的四个改进（逐步叠加）**：
+
+  | 改进 | Accept Length | 累计提升 |
+  |------|---------------|---------|
+  | Baseline (GLM-5.1 MTP) | 4.56 | — |
+  | + IndexShare + KV Share | 5.10 | +12% |
+  | + Rejection Sampling | 5.29 | +16% |
+  | + End-to-end TV Loss | **5.47** | **+20%** |
+
+  **IndexShare + KV Share**：MTP 层的 indexer 只在第 1 步计算，后续步复用 top-k。后续步只能 attend 到 target model 的 hidden states，KV cache 不再混合，消除训练-推理不一致。
+
+  **Rejection Sampling**：对 draft model 的提议做拒绝采样，只接受高质量提议。
+
+  **End-to-end TV Loss**：用端到端 Total Variation loss 训练 MTP 层（而非逐步独立的 cross-entropy loss），让 MTP 层学会多步联合预测。
 
 
 - **Beam Search 实现**
@@ -5519,6 +5672,29 @@ class LoRALinear(nn.Module):
 
   Prefix Tuning 会为每层添加一组虚拟的 Key 和 Value，Query 保持不变。embedding 的输入不会添加。
 
+
+- **P-tuning v1**
+
+  P-tuning v1（智谱 AI, Liu et al. 2022）只在**输入层**添加可学习的连续 prompt tokens，使用 MLP + LSTM 编码器生成这些连续 token。训练时冻结整个 LLM，只训练 encoder 和 prompt tokens。适合 NLU 任务（分类、抽取等）。
+
+
+- **P-tuning v2**
+
+  P-tuning v2（智谱 AI, Liu et al. 2022，ChatGLM 使用）在**每一层 Transformer 的输入**都添加可学习的 deep prompt tokens。与 Prefix Tuning 类似，但 prompt tokens 加在每层输入前面（与残差流一起过整个 Sublayer），而不是只加在 K/V 前面。训练这些 prompt tokens 和输出层（约占模型参数的 0.1%~1%），冻结预训练参数。适合生成任务，尤其是大模型对话。
+
+
+- **Prompt Tuning vs Prefix Tuning vs P-tuning 对比**
+
+  | 方法 | 添加位置 | 添加内容 | 训练参数 | 适用场景 |
+  |------|---------|---------|---------|---------|
+  | **Prompt Tuning** | 输入层最前面 | soft prompt embeddings | prompt embeddings | NLU 任务 |
+  | **Prefix Tuning** | 每层 Attention 的 K/V 前面 | 虚拟 K/V 向量 | K/V 参数 | NLU 任务 |
+  | **P-tuning v1** | 输入层 | 连续 prompt tokens（MLP+LSTM 编码）| encoder + prompts | NLU 任务 |
+  | **P-tuning v2** | 每层 Transformer 输入前面 | deep prompt tokens | prompts + 输出层 | 生成任务/对话 |
+
+  **核心区别**：Prompt Tuning 和 P-tuning v1 只在输入层添加，Prefix Tuning 和 P-tuning v2 在每层都添加。P-tuning v2 相比 Prefix Tuning 的优势是在大模型对话任务上效果更好。
+
+
 #### Post Training
 
 - **强化学习和监督学习有什么区别？**
@@ -5541,6 +5717,46 @@ class LoRALinear(nn.Module):
   拒绝采样也是常见的一种提高 SFT 的方式。
 
 
+- **GLM-5 的三种思考模式（Thinking Modes）**
+
+  **问题背景**：不同任务对思考的需求不同。简单问题不需要思考，复杂问题需要深度推理，多轮对话可能需要跨轮次保持思考连续性。
+
+  **三种模式**：
+
+  1. **Interleaved Thinking（交错思考）**
+     - 每次生成响应前都进行思考
+     - 适用于需要即时推理的场景
+     - 思考 → 行动 → 思考 → 行动 的循环
+
+  2. **Preserved Thinking（保留思考）**
+     - 跨多轮对话保留所有思考块（thinking blocks）
+     - 避免重复推导，减少信息丢失和不一致性
+     - 特别适合长 horizon 的复杂编码任务
+     - 例：第一轮思考如何分解问题 → 第二轮直接基于已有方案继续 → 第三轮避免遗忘和矛盾
+
+  3. **Turn-level Thinking（轮次级思考）**
+     - 按轮次控制是否思考
+     - 轻量请求关闭思考以降低延迟/成本
+     - 复杂任务启用思考以提高准确性和稳定性
+
+  **为什么这样设计？**
+
+  编码 Agent 场景的特殊需求：
+  - 长 horizon 任务需要跨多轮保持推理连贯性
+  - 重复推导会浪费 token 和时间
+  - 不同轮次的任务复杂度差异大
+
+  **和其他模型的对比**：
+
+  | 模型 | 思考模式 | 特点 |
+  |------|---------|------|
+  | Claude Opus 4.5+ | Extended Thinking | 支持思考块保留 |
+  | DeepSeek-R1 | Chain-of-Thought | 固定开启思考 |
+  | GLM-5 | 三种模式 | 灵活控制，支持跨轮保留 |
+
+  来源：GLM-5 (2026.2)
+
+
 - **Agent 训练中的 Loss Mask 如何处理？**
 
   Agent 训练需要区分不同部分的 loss 计算，通常只对**模型生成的内容**计算 loss：
@@ -5560,6 +5776,41 @@ class LoRALinear(nn.Module):
   **与纯对话模型的区别：**
   - 纯对话：mask prompt，只在 assistant 回复上计算 loss
   - Agent：需要额外 mask 工具返回，但保留工具调用部分的 loss
+
+
+- **Agent RL 中的 Reward Hacking 问题如何解决？**
+
+  在用 RL 训练编码 Agent 时，模型会寻找"捷径"获得奖励（测试通过），而非真正解决问题。这些捷径称为 **reward hacking**。
+
+  **常见 hacking 行为：**
+  - **读取隐藏答案**：执行 `cat /workspace/.hidden/secret_cases.json` 读取评测系统的隐藏测试用例
+  - **下载外部答案**：执行 `curl https://raw.githubusercontent.com/xxx/solution.py` 从 GitHub 下载解决方案
+  - **利用系统漏洞**：用 `find`、`grep` 搜索包含答案的文件路径，或分析 git history
+
+  **为什么这是问题？**
+  - 模型获得高奖励（测试通过），但没有真正学会解决问题
+  - 训练信号被污染，模型学不到真本事
+
+  **GLM-5.2 的解决方案（两阶段检测 + 在线防护）：**
+
+  **阶段 1：Rule-based 规则过滤**
+  - 预定义黑名单：禁止访问 `.hidden`、`secret` 等路径
+  - 禁止特定命令：`curl`、`wget`、`find /workspace`
+  - 拦截可疑的文件读取模式
+  - 目标：高召回率，宁可误杀也不漏掉
+
+  **阶段 2：LLM Judge 语义判断**
+  - 用另一个 LLM 判断 tool call 的意图
+  - 例：`cat /workspace/.eval/secret_cases.json` → "读取评测系统隐藏用例，意图作弊"
+  - 目标：高精度，避免误杀正常操作
+
+  **在线防护策略：**
+  - 检测到 hacking 时，**不终止整个 rollout**，而是 **block 这个 tool call**
+  - 返回 dummy 信息（如 "Access denied" 或空结果）
+  - 模型可以继续尝试其他方法
+  - 避免训练不稳定（突然终止导致梯度问题，模型学不到"要换方法"）
+
+  **来源**：GLM-5.2 (2026.6)
 
 
 - **RL 正负样本**
@@ -5708,6 +5959,30 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   Routing Replay：缓存 $$\pi_{old}$$ 推理时激活的专家，在计算 $$\pi_\theta(y_{i,t}\|x_i,y_{<t})$$ 推理时进行重放，也激活相同的专家。这样 ratio 的波动就不会那么大了
 
 
+- **长 horizon 任务为什么要回到 PPO（Critic-based PPO）？**
+
+  长 horizon 任务会产生超长轨迹，需要用 compaction（压缩）切分成多个子轨迹。但这导致：
+  - 同一个 prompt 的不同 rollout，产生的子轨迹数量不同
+  - 每个子轨迹的长度差异很大
+
+  GRPO 的 group-wise optimization 不适用：
+  - 需要对同一个 prompt 的多个 rollout 做组内比较
+  - 子轨迹数量和长度不一致时，无法直接比较
+  - 组内归一化会扭曲优势估计
+
+  **GLM-5.2 的解决方案：回归传统 PPO 范式**
+
+  1. **Single-rollout formulation**：每个 rollout 独立学习，不依赖组内比较
+  2. **Critic model**：引入 critic 估计 token-level advantages（而非 group-relative）
+  3. **Token-level loss**：处理子轨迹长度不平衡问题
+
+  **和 GRPO 的选择**：
+  - 短任务用 GRPO（省 critic model）
+  - 长 horizon + compaction 用 PPO（需要 critic 做 token-level advantage）
+
+  来源：GLM-5.2 (2026.6)
+
+
 - **DAPO**
 
   DAPO 主要是根据 GRPO 进行改进，主要改进点为
@@ -5759,6 +6034,37 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 老师反馈质量：老师模型对错误轨迹的判断准确度直接影响蒸馏效果
   - 采样效率：on-policy 需要反复采样，如何平衡探索广度和训练效率
   - 分布漂移控制：学生策略更新后可能过度偏离老师分布，需要 KL 约束或周期性回滚
+
+
+- **On-Policy Cross-Stage Distillation**
+
+  **问题背景**：现代 LLM Post-Training 通常分多个 RL 阶段（如 GLM-5 的 Reasoning RL → Agentic RL → General RL），每个阶段专注不同能力。但后续阶段训练时，模型会遗忘前面阶段学到的能力（灾难性遗忘）。
+
+  **传统方法的局限**：
+  - 经验回放（混合前面阶段数据）：off-policy 数据分布与当前策略不一致
+  - EWC 正则化（约束参数变化）：太强会限制新能力学习，太弱防不住遗忘
+  - 多任务联合训练：不同能力的 reward 信号冲突，难以平衡
+
+  **核心思想**：用前面阶段训练好的模型作为 teacher，在当前策略 on-policy 采样的 trajectory 上做 KL 蒸馏。
+
+  **具体流程**：
+  ```
+  阶段 1: Reasoning RL → 得到模型 π₁
+  阶段 2: Agentic RL → 在 π₁ 基础上训练，同时用 π₁ 蒸馏 → 得到 π₂
+  阶段 3: General RL → 在 π₂ 基础上训练，同时用 π₁ 和 π₂ 蒸馏 → 得到 π₃
+  ```
+
+  **关键设计**：
+  1. **On-policy 采样**：当前策略 π 生成 trajectory，teacher 模型在同样的 trajectory 上给出 logits
+  2. **蒸馏 loss**：KL 散度，让当前模型的输出分布接近 teacher
+  3. **选择性蒸馏**：只在当前任务上蒸馏（不是全局蒸馏），避免限制新能力
+
+  **为什么有效**：
+  - Teacher 模型在前面阶段已经是最优的，蒸馏信号质量高
+  - On-policy 采样保证数据分布和当前策略一致（不像经验回放那样有分布偏移）
+  - KL 散度作为软约束，允许模型偏离但不会太远
+
+  **GLM-5 实践**：在 Reasoning RL → Agentic RL → General RL 的三阶段流程中，每个后续阶段都用前面阶段的模型做 on-policy 蒸馏，有效缓解了灾难性遗忘问题。
 
 
 - **KL 散度的几种计算方式**
@@ -6008,6 +6314,12 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 - **混合精度计算**
 
   fp16/bf16 做前向 & 反向传播，fp32 保存主权重。
+
+  **为什么需要混合精度**：fp16/bf16 显存减半、计算更快（Tensor Core 对 fp16 有专门优化，吞吐量约为 fp32 的 2 倍），但全程低精度会导致权重更新精度不足。因此用 fp32 保存主权重（master weights），每步训练时拷贝一份 fp16 副本做前向/反向，梯度累积回 fp32 主权重做参数更新。
+
+  **GradScaler（仅 fp16 需要）**：fp16 最小正数约 $$6 \times 10^{-8}$$，小梯度容易下溢成 0。GradScaler 在反向传播前将 loss 乘以一个大数（如 1024）放大梯度，更新参数前再除回来，避免梯度下溢。
+
+  **fp16 vs bf16 在混合精度中的区别**：bf16 指数位与 fp32 相同（8 位），动态范围大，不存在梯度下溢问题，因此**不需要 GradScaler**。现代 LLM 训练（LLaMA、GLM-4 等）普遍用 bf16 而非 fp16。
 
 
 - **估算 LLM 的参数量**
