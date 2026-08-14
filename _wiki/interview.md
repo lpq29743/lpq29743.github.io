@@ -491,7 +491,7 @@ print("牛顿法结果: x =", x_newton, ", f(x) =", f_newton)
 
 - **互信息是什么？**
 
-  大白话：知道了 X 之后，Y 的不确定性减少了多少。$$I(X; Y) = \sum_{y \in Y}\sum_{x \in X} {p(x,y)log{\frac{p(x,y)}{p(x)p(y)}}}$$。当变量相互独立时，互信息为 0（知道 X 对 Y 没有任何帮助）。等价形式：$$I(X;Y) = H(X) - H(X|Y) = H(Y) - H(Y|X)$$。
+  大白话：知道了 X 之后，Y 的不确定性减少了多少。$$I(X; Y) = \sum_{y \in Y}\sum_{x \in X} {p(x,y)log{\frac{p(x,y)}{p(x)p(y)}}}$$。当变量相互独立时，互信息为 0（知道 X 对 Y 没有任何帮助）。等价形式：$$I(X;Y) = H(X) - H(X \mid Y) = H(Y) - H(Y \mid X)$$。
 
 
 - **KL 散度（KL divergence）和交叉熵（cross-entropy）的区别？**
@@ -514,7 +514,7 @@ print("牛顿法结果: x =", x_newton, ", f(x) =", f_newton)
 
   交叉熵 H(P, Q) = -(0.5 log₂0.9 + 0.5 log₂0.1) ≈ 1.737 bit；
 
-  KL(P||Q) = 0.5 log₂(0.5/0.9) + 0.5 log₂(0.5/0.1) ≈ 0.737 bit = 交叉熵 - 信息熵。
+  KL(P\|Q) = 0.5 log₂(0.5/0.9) + 0.5 log₂(0.5/0.1) ≈ 0.737 bit = 交叉熵 - 信息熵。
 
 
 - **为什么 KL 散度不对称（non-symmetric）？**
