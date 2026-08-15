@@ -840,6 +840,8 @@ if __name__ == "__main__":
 
 ### Algorithm
 
+#### 数组类（Array）
+
 - **KSum**
 
   [KSum 问题](https://lpq29743.github.io/algorithm/2018/10/29/KSum/)
@@ -1092,88 +1094,6 @@ def count_subarrays(nums, k):
   - 滑动窗口平均值/中位数优化：前缀和用于快速计算平均值，配合单调队列或多重集合求中位数。
 
 
-- **并查集（Union Find）**
-
-  解决步骤为：初始化父节点为本身；寻找父节点；合并父节点；判断集合数量。
-  - 省份数量：并查集判断连通块数。
-  - 岛屿数量：并查集合并相邻陆地格子。
-  - 冗余连接：并查集找成环的边。
-  - 连通网络的操作次数：统计冗余边与连通块数量。
-  - 等式方程的可满足性：合并等式再判断不等式是否冲突。
-  - 除法求值：带权并查集维护比值。
-  - 账户合并：邮箱为节点并查集合并账户。
-  - 交换字符串中的元素：归并交换块后排序。
-  - 寻找图中是否存在路径：并查集判断是否连通。
-  - 字典序最小等效字符串：并查集维护字典序最小根。
-  - 最长连续序列：连续数归为同一集合。
-  - 相似字符串组：相似字符串构图归类。
-  - 冗余连接 II：有向图中判断成树条件。
-  - 由斜杠划分区域：每格四块并查集合并内部与相邻块。
-  - 最小时间传递信息：Kruskal 过程判断连通。
-
-  简单模版
-
-```python
-class UnionFindSimple:
-    def __init__(self, n):
-        self.parent = [i for i in range(n)]
-
-    def find(self, x):
-        if self.parent[x] != x:
-            self.parent[x] = self.find(self.parent[x])  # 路径压缩
-        return self.parent[x]
-
-    def union(self, x, y):
-        px, py = self.find(x), self.find(y)
-        if px != py:
-            self.parent[py] = px
-
-    def connected(self, x, y):
-        return self.find(x) == self.find(y)
-```
-  高阶模版（支持动态元素；路径压缩，即在 find 的过程中，把节点直接连到根节点，减少树的高度；按秩合并；打印所有集合）
-
-```python
-from collections import defaultdict
-
-class UnionFind:
-    def __init__(self):
-        self.parent = {}
-        self.rank = {}
-
-    def find(self, x):
-        if x not in self.parent:
-            self.parent[x] = x
-            self.rank[x] = 0
-        # 路径压缩
-        if self.parent[x] != x:
-            self.parent[x] = self.find(self.parent[x])
-        return self.parent[x]
-
-    def union(self, x, y):
-        px, py = self.find(x), self.find(y)
-        if px == py:
-            return
-        if self.rank[px] < self.rank[py]:
-            self.parent[px] = py
-        elif self.rank[px] > self.rank[py]:
-            self.parent[py] = px
-        else:
-            self.parent[py] = px
-            self.rank[px] += 1
-
-    def connected(self, x, y):
-        return self.find(x) == self.find(y)
-
-    def groups(self):
-        """返回所有集合"""
-        g = defaultdict(list)
-        for x in self.parent:
-            g[self.find(x)].append(x)
-        return list(g.values())
-```
-
-
 - **原地旋转数组（即右移 m 个元素）**
 
   - step 1：因为 m 可能大于 n，因此需要对 n 取余，因为每次长度为 n 的旋转数组相当于没有变化。
@@ -1186,6 +1106,164 @@ class UnionFind:
 
   先进行对角线的交换，再翻转。
 
+
+- **数组最大最小值最优算法？**
+
+  同时找到最大值和最小值的话，一般方法（遍历两遍）是 O(2n)，改进方法是每次读两个数，这两个数比一次，然后大的和当前最大值比，小的和当前最小值比。这样每两个数比了三次，故复杂度是 O(3/2n)，不过两种方法都是 O(n)。
+
+
+- **无序整数数组中找第 k 大的数？**
+
+  方法一：最小堆：建一个大小为 k 的最小堆。遍历数组，将元素加入堆中，如果堆大小超过 k，就弹出堆顶（最小元素）。最终堆顶就是第 k 大的数。时间复杂度：O(nlogk)，空间复杂度：O(k)
+
+  方法二：快速选择（Quickselect），类似快速排序的分区思想（partition）；每次将数组划分为两个区间，选择一边递归；平均时间复杂度 O(n)，最坏 O(n²)。
+
+  方法三：内置排序
+
+
+- **从一个几乎排序好的数组中找出第 k 小的元素，时间复杂度尽量低。  **
+
+  利用“插入排序”特性，数组接近有序，插入排序接近线性。也可以用快速选择算法，平均 O(n)。
+
+
+- **在 n 个数中取最大的 k 个数，时间复杂度是？**
+
+  nlogk。堆的大小为 k，总共要调整 n 次。
+
+
+#### 查找与二分（Search）
+
+- **旋转数组的最小值**
+
+  二分法
+
+```python
+def find_min(nums):
+    left, right = 0, len(nums) - 1
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] > nums[right]:
+            # 最小值在 mid 右边
+            left = mid + 1
+        else:
+            # 最小值在 mid 或左边
+            right = mid
+    return nums[left]
+```
+
+
+- **搜索旋转排序数组（LeetCode 33）**
+
+  升序数组在未知下标 k 处旋转（如 [4,5,6,7,0,1,2]），用二分查找目标值下标，找不到返回 -1，时间复杂度 O(logn)。关键思路：每次取 mid 后，必有一半区间是有序的（`nums[left] <= nums[mid]` 则左半有序），先判断 target 是否在有序半段内，再决定收缩方向。
+
+```python
+def search(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            return mid
+        if nums[left] <= nums[mid]:  # 左半有序
+            if nums[left] <= target < nums[mid]:
+                right = mid - 1
+            else:
+                left = mid + 1
+        else:  # 右半有序
+            if nums[mid] < target <= nums[right]:
+                left = mid + 1
+            else:
+                right = mid - 1
+    return -1
+```
+
+
+- **搜索旋转排序数组 II（LeetCode 81）**
+
+  与 33 的区别是数组中存在重复值。当 `nums[left] == nums[mid] == nums[right]` 时无法判断哪半有序，只能两端同时收缩（`left += 1, right -= 1`），因此最坏情况（元素几乎全相同）退化为 O(n)。
+
+```python
+def search(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            return True
+        if nums[left] == nums[mid] == nums[right]:  # 无法判断哪半有序
+            left += 1
+            right -= 1
+        elif nums[left] <= nums[mid]:  # 左半有序
+            if nums[left] <= target < nums[mid]:
+                right = mid - 1
+            else:
+                left = mid + 1
+        else:  # 右半有序
+            if nums[mid] < target <= nums[right]:
+                left = mid + 1
+            else:
+                right = mid - 1
+    return False
+```
+
+
+- **有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？**
+
+  最简单的思路是合并数据库，然后再定位长度，时间复杂度为 O(n)，空间复杂度是 O(n)；但实际上只需要借鉴这个合并的过程，当合并到中位数的时候输出中位数即可，时间复杂度为 O(n)，空间复杂度是 O(1)。这思路十分简单，但并不是最佳算法，有序数组让我们想到的会是二分查找，因此我们可以利用二分查找（binary search）来使复杂度降至 O(logn)，具体可参考：
+
+  https://stackoverflow.com/questions/6182488/median-of-5-sorted-arrays
+
+
+- **不用库函数（`math.pow` 或 `** (1/3)`）求一个数 x 的立方根 y？**
+
+  二分法；牛顿法：另 $$f(y) = y^3 - x$$，$$y_{n+1} = y_n - \frac{f(y_n)}{f'(y_n)}$$
+
+
+- **有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？**
+
+  [链接](https://www.zhihu.com/question/310970538)
+
+
+- **给定两个数，求他们无限次相加中第 k 小的数？**
+
+  [链接](https://www.zhihu.com/question/41809896)
+
+
+#### 哈希表（Hash）
+
+- **哈希冲突**
+
+  开放地址法（当当前位置被占用时，寻找下一个可用位置；容易产生聚集现象，负载因子高时效率下降）：线性探测（从当前位置开始，逐个向后找）；二次探测（间隔逐步增大，避免连续冲突）；双重哈希（使用第二个哈希函数计算偏移）。
+
+  链地址法：每个哈希桶（地址）用一个链表（或其它结构）存储所有哈希到该地址的元素。需要额外的链表或结构，内存碎片。
+
+  再哈希：当负载因子过高时，扩大哈希表，重新计算所有元素的哈希值。扩容代价较高。
+
+
+#### 字符串（String）
+
+- **KMP 算法**
+
+  [KMP 算法](https://www.zhihu.com/question/21923021)
+
+  求长度为 m 的 A 串是否包含长度为 n 的 B 串。
+
+  1. 构建 B 串的部分匹配表（PMT，next 数组）：next[i] 记录每个位置之前 pattern[0:i] 的前缀后缀最长公共长度。构建 next 数组时，维护两个指针：`i` 为当前正在计算 `next[i]` 的位置（从 1 到 n-1），`j`：当前匹配的前后缀长度。如果 `B[i] == B[j]`，则 `next[i] = j + 1`，同时 `i` 和 `j` 都加 1；如果 `B[i] != B[j]`：如果 `j != 0`，令 `j = next[j-1]`，（回退到前一个可能匹配长度），如果 `j == 0`，`next[i] = 0`，`i` 前移 1。时间复杂度为 O(n)。
+
+  2. 主串匹配时使用两个指针，i 指向 A 串，j 指向 B 串。如果匹配，两个指针同时往前移，如果不匹配，`j = next[j-1]`，如果`j = 0`，`i = i + 1`，否则`i` 不动。
+
+  时间复杂度为 O(m + n)
+
+
+- **了解 Hamming 距离吗？**
+
+  两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。
+
+
+- **如何求两个数的二进制表示的 Hamming 距离？**
+
+  先求两个数的异或结果 res，再依次求 res 每一位与 1 与操作的结果，不为 0，则 Hamming 距离加一；每判断完一位，res 右移一位继续判断下一位。
+
+
+#### 链表（Linked List）
 
 - **链表**
 
@@ -1297,6 +1375,8 @@ def reverse_list_recursive(head):
   - 设计单链表/双链表数据结构（LeetCode 707）：实现基本的 add/delete/get 接口，注意边界处理。
 
 
+#### 栈与队列（Stack & Queue）
+
 - **栈**
 
   - 有效的括号：利用栈匹配左右括号，检测括号是否成对出现且顺序正确。
@@ -1393,6 +1473,8 @@ empty = not queue
   - 0-1 BFS。
 
 
+#### 树（Tree）
+
 - **树**
 
   二叉树的构建
@@ -1459,6 +1541,69 @@ def build_binary_tree(values):
 
   树的序列化与反序列化：将树结构转为字符串及还原树形结构。
 
+
+- **完全二叉树是什么？**
+
+  除了最后一层，所有层都必须被填满，且最后一层节点必须尽量靠左排列（因此二叉平衡树不一定是完全二叉树）。
+
+
+- **二叉搜索树是什么？**
+
+  每个节点的值都满足：左子树 < 根节点 < 右子树。其中序遍历单调递增。
+
+
+- **二叉平衡树是什么？**
+
+  二叉平衡树（Balanced Binary Tree）是对普通二叉搜索树（BST）的优化，目的是解决 BST 在极端情况下可能退化为链表（如连续插入有序数列）的问题，从而保证查找、插入、删除等操作的时间复杂度维持在 O(log n)。二叉平衡树要求任意节点的左右子树高度差控制在一定范围内（如 AVL 树是 ≤1，红黑树是最多两倍）。
+
+
+- **AVL 树是什么？**
+
+  AVL 树是一种自平衡的二叉搜索树（Binary Search Tree，BST），它在插入和删除节点时，能自动调整自身结构以保持树的“平衡”，从而保证查找、插入、删除操作的时间复杂度始终为 `O(log n)`。
+
+
+- **红黑树是什么？**
+
+  红黑树性能要好于平衡二叉树。
+
+  红黑树是每个节点都带有颜色属性的二叉查找树，颜色或红色或黑色。在二叉查找树强制一般要求以外，对于任何有效的红黑树我们增加了如下的额外要求:
+
+  性质1. 节点是红色或黑色。
+
+  性质2. 根节点是黑色。
+
+  性质3 每个叶节点（NIL节点，空节点）是黑色的。
+
+  性质4 每个红色节点的两个子节点都是黑色。(从每个叶子到根的所有路径上不能有两个连续的红色节点)
+
+  性质5. 从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点。
+
+
+- **B/B- 树是什么？**
+
+  B 树是一种自平衡的多路搜索树，是对二叉搜索树的推广，适合磁盘或大规模数据存储系统中高效读取。
+  - 每个节点可以有多个键值（key）和子树指针
+  - 所有键值按顺序排列
+  - 每个节点的子树数在一个范围内（阶的约束）
+  - 所有叶子节点在同一层
+  - 查找路径短，I/O 次数少
+
+  查找过程类似多路查找：从根节点开始，依次判断键值大小，决定走哪个子树，直到叶子或命中。
+
+
+- **B+ 树是什么？**
+
+  B+ 树是在 B 树基础上演化而来的，数据库系统中应用最广泛的索引结构。
+
+  - 所有值只存在于叶子节点
+  - 内部节点（非叶子）只存键，不存数据
+  - 所有叶子节点之间用链表连接，天然支持范围查询
+
+  - 更高的扇出（fan-out），因为内部节点更“轻”，树更矮 → 减少磁盘访问
+  - 范围查找特别高效，只需找到区间起点，后续通过链表遍历即可
+
+
+#### 堆与 Trie（Heap & Trie）
 
 - **堆**
 
@@ -1541,65 +1686,88 @@ class TrieNode:
   - DNA 序列查重（变种问题）：构建 Trie 存储基因序列（A/C/G/T），检测是否存在重复序列（如长度为 10 的重复子串）。
 
 
-- **完全二叉树是什么？**
+#### 图与遍历（Graph & Traversal）
 
-  除了最后一层，所有层都必须被填满，且最后一层节点必须尽量靠左排列（因此二叉平衡树不一定是完全二叉树）。
+- **并查集（Union Find）**
 
+  解决步骤为：初始化父节点为本身；寻找父节点；合并父节点；判断集合数量。
+  - 省份数量：并查集判断连通块数。
+  - 岛屿数量：并查集合并相邻陆地格子。
+  - 冗余连接：并查集找成环的边。
+  - 连通网络的操作次数：统计冗余边与连通块数量。
+  - 等式方程的可满足性：合并等式再判断不等式是否冲突。
+  - 除法求值：带权并查集维护比值。
+  - 账户合并：邮箱为节点并查集合并账户。
+  - 交换字符串中的元素：归并交换块后排序。
+  - 寻找图中是否存在路径：并查集判断是否连通。
+  - 字典序最小等效字符串：并查集维护字典序最小根。
+  - 最长连续序列：连续数归为同一集合。
+  - 相似字符串组：相似字符串构图归类。
+  - 冗余连接 II：有向图中判断成树条件。
+  - 由斜杠划分区域：每格四块并查集合并内部与相邻块。
+  - 最小时间传递信息：Kruskal 过程判断连通。
 
-- **二叉搜索树是什么？**
+  简单模版
 
-  每个节点的值都满足：左子树 < 根节点 < 右子树。其中序遍历单调递增。
+```python
+class UnionFindSimple:
+    def __init__(self, n):
+        self.parent = [i for i in range(n)]
 
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])  # 路径压缩
+        return self.parent[x]
 
-- **二叉平衡树是什么？**
+    def union(self, x, y):
+        px, py = self.find(x), self.find(y)
+        if px != py:
+            self.parent[py] = px
 
-  二叉平衡树（Balanced Binary Tree）是对普通二叉搜索树（BST）的优化，目的是解决 BST 在极端情况下可能退化为链表（如连续插入有序数列）的问题，从而保证查找、插入、删除等操作的时间复杂度维持在 O(log n)。二叉平衡树要求任意节点的左右子树高度差控制在一定范围内（如 AVL 树是 ≤1，红黑树是最多两倍）。
+    def connected(self, x, y):
+        return self.find(x) == self.find(y)
+```
+  高阶模版（支持动态元素；路径压缩，即在 find 的过程中，把节点直接连到根节点，减少树的高度；按秩合并；打印所有集合）
 
+```python
+from collections import defaultdict
 
-- **AVL 树是什么？**
+class UnionFind:
+    def __init__(self):
+        self.parent = {}
+        self.rank = {}
 
-  AVL 树是一种自平衡的二叉搜索树（Binary Search Tree，BST），它在插入和删除节点时，能自动调整自身结构以保持树的“平衡”，从而保证查找、插入、删除操作的时间复杂度始终为 `O(log n)`。
+    def find(self, x):
+        if x not in self.parent:
+            self.parent[x] = x
+            self.rank[x] = 0
+        # 路径压缩
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
 
+    def union(self, x, y):
+        px, py = self.find(x), self.find(y)
+        if px == py:
+            return
+        if self.rank[px] < self.rank[py]:
+            self.parent[px] = py
+        elif self.rank[px] > self.rank[py]:
+            self.parent[py] = px
+        else:
+            self.parent[py] = px
+            self.rank[px] += 1
 
-- **红黑树是什么？**
+    def connected(self, x, y):
+        return self.find(x) == self.find(y)
 
-  红黑树性能要好于平衡二叉树。
-
-  红黑树是每个节点都带有颜色属性的二叉查找树，颜色或红色或黑色。在二叉查找树强制一般要求以外，对于任何有效的红黑树我们增加了如下的额外要求:
-
-  性质1. 节点是红色或黑色。
-
-  性质2. 根节点是黑色。
-
-  性质3 每个叶节点（NIL节点，空节点）是黑色的。
-
-  性质4 每个红色节点的两个子节点都是黑色。(从每个叶子到根的所有路径上不能有两个连续的红色节点)
-
-  性质5. 从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点。
-
-
-- **B/B- 树是什么？**
-
-  B 树是一种自平衡的多路搜索树，是对二叉搜索树的推广，适合磁盘或大规模数据存储系统中高效读取。
-  - 每个节点可以有多个键值（key）和子树指针
-  - 所有键值按顺序排列
-  - 每个节点的子树数在一个范围内（阶的约束）
-  - 所有叶子节点在同一层
-  - 查找路径短，I/O 次数少
-
-  查找过程类似多路查找：从根节点开始，依次判断键值大小，决定走哪个子树，直到叶子或命中。
-
-
-- **B+ 树是什么？**
-
-  B+ 树是在 B 树基础上演化而来的，数据库系统中应用最广泛的索引结构。
-
-  - 所有值只存在于叶子节点
-  - 内部节点（非叶子）只存键，不存数据
-  - 所有叶子节点之间用链表连接，天然支持范围查询
-
-  - 更高的扇出（fan-out），因为内部节点更“轻”，树更矮 → 减少磁盘访问
-  - 范围查找特别高效，只需找到区间起点，后续通过链表遍历即可
+    def groups(self):
+        """返回所有集合"""
+        g = defaultdict(list)
+        for x in self.parent:
+            g[self.find(x)].append(x)
+        return list(g.values())
+```
 
 
 - **图的表示方法**
@@ -1768,122 +1936,6 @@ def spfa(n, edges, src):
   [链接](https://www.zhihu.com/question/29968331)
 
 
-- **KMP 算法**
-
-  [KMP 算法](https://www.zhihu.com/question/21923021)
-
-  求长度为 m 的 A 串是否包含长度为 n 的 B 串。
-
-  1. 构建 B 串的部分匹配表（PMT，next 数组）：next[i] 记录每个位置之前 pattern[0:i] 的前缀后缀最长公共长度。构建 next 数组时，维护两个指针：`i` 为当前正在计算 `next[i]` 的位置（从 1 到 n-1），`j`：当前匹配的前后缀长度。如果 `B[i] == B[j]`，则 `next[i] = j + 1`，同时 `i` 和 `j` 都加 1；如果 `B[i] != B[j]`：如果 `j != 0`，令 `j = next[j-1]`，（回退到前一个可能匹配长度），如果 `j == 0`，`next[i] = 0`，`i` 前移 1。时间复杂度为 O(n)。
-
-  2. 主串匹配时使用两个指针，i 指向 A 串，j 指向 B 串。如果匹配，两个指针同时往前移，如果不匹配，`j = next[j-1]`，如果`j = 0`，`i = i + 1`，否则`i` 不动。
-
-  时间复杂度为 O(m + n)
-
-
-- **了解 Hamming 距离吗？**
-
-  两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。
-
-
-- **如何求两个数的二进制表示的 Hamming 距离？**
-
-  先求两个数的异或结果 res，再依次求 res 每一位与 1 与操作的结果，不为 0，则 Hamming 距离加一；每判断完一位，res 右移一位继续判断下一位。
-
-
-- **哈希冲突**
-
-  开放地址法（当当前位置被占用时，寻找下一个可用位置；容易产生聚集现象，负载因子高时效率下降）：线性探测（从当前位置开始，逐个向后找）；二次探测（间隔逐步增大，避免连续冲突）；双重哈希（使用第二个哈希函数计算偏移）。
-
-  链地址法：每个哈希桶（地址）用一个链表（或其它结构）存储所有哈希到该地址的元素。需要额外的链表或结构，内存碎片。
-
-  再哈希：当负载因子过高时，扩大哈希表，重新计算所有元素的哈希值。扩容代价较高。
-
-
-- **排序**
-
-  冒泡排序：时间复杂度 O(n^2)，稳定
-
-  插入排序：时间复杂度 O(n^2)，稳定
-
-  选择排序：时间复杂度 O(n^2)，不稳定
-
-  归并排序：时间复杂度 O(nlogn)，稳定。可用来解决计算逆序对数目的问题。
-
-```python
-def merge_sort(arr):
-    if len(arr) <= 1:
-        return arr
-
-    mid = len(arr) // 2
-    left = merge_sort(arr[:mid])
-    right = merge_sort(arr[mid:])
-
-    return merge(left, right)
-
-    def merge(left, right):
-        result = []
-        i = j = 0
-        while i < len(left) and j < len(right):
-            if left[i] <= right[j]:
-                result.append(left[i])
-                i += 1
-            else:
-                result.append(right[j])
-                j += 1
-                # 添加剩余元素
-                result.extend(left[i:])
-                result.extend(right[j:])
-                return result
-
-            # 示例
-            arr = [5, 2, 9, 1, 5, 6]
-            sorted_arr = merge_sort(arr)
-            print(sorted_arr)
-```
-
-  基数排序：按位排序，从低位到高位依次进行分配和收集；稳定
-
-  快速排序：时间复杂度 O(nlogn)，空间复杂度最好情况是 O(logn)，最坏情况可能达到 O(n),但平均情况是 O(logn)，不稳定
-
-```python
-def quick_sort(arr, low, high):
-    if low < high:
-        pivot_index = partition(arr, low, high)
-        quick_sort(arr, low, pivot_index - 1)
-        quick_sort(arr, pivot_index + 1, high)
-
-        def partition(arr, low, high):
-            pivot = arr[low]  # 选择第一个元素作为基准
-            i = low + 1
-            j = high
-
-            while True:
-                while i <= j and arr[i] <= pivot:
-                    i += 1
-                    while i <= j and arr[j] >= pivot:
-                        j -= 1
-                        if i <= j:
-                            arr[i], arr[j] = arr[j], arr[i]
-                        else:
-                            break
-
-                        arr[low], arr[j] = arr[j], arr[low]  # 把基准放到正确位置
-                        return j
-```
-
-  希尔排序：插入排序的改进版本，其核心思想是先将整个待排序序列分割成若干个子序列分别进行直接插入排序，待整个序列基本有序时，再对全体记录进行一次直接插入排序。不稳定
-
-  堆排序：堆排序包含两个主要步骤：建堆和排序。建堆过程：从最后一个非叶子节点开始，自上而下进行堆化。排序过程：每次将堆顶元素与末尾元素交换，并重新对剩余元素进行堆化。需要执行 n-1 次，每次堆化的时间复杂度为 O(logn)，因此排序阶段总的时间复杂度为 O(nlogn)。空间复杂度 O(1)，可原地排序，不稳定
-
-  桶排序：将元素分布到若干桶中分别排序，最后再合并。时间复杂度 O(n)。可用来计算一个未排序数组中排序后相邻元素的最大差值。
-
-
-- **原地排序与非原地排序？**
-
-  原地排序就是指在排序过程中不申请多余的存储空间，只利用原来存储待排数据的存储空间进行比较和交换的数据排序。非原地排序就是要利用额外的数组。
-
-
 - **BFS vs DFS**
 
   BFS（广度优先搜索）通常用队列解决，适用于求最短路径、层级遍历和状态步数问题，因为它逐层扩展，能保证最早到达目标。
@@ -1994,114 +2046,93 @@ def dfs_iterative(graph, start):
   - 如果搜索空间为树状结构，则可考虑回溯。
 
 
-- **数组最大最小值最优算法？**
+#### 排序（Sorting）
 
-  同时找到最大值和最小值的话，一般方法（遍历两遍）是 O(2n)，改进方法是每次读两个数，这两个数比一次，然后大的和当前最大值比，小的和当前最小值比。这样每两个数比了三次，故复杂度是 O(3/2n)，不过两种方法都是 O(n)。
+- **排序**
 
+  冒泡排序：时间复杂度 O(n^2)，稳定
 
-- **无序整数数组中找第 k 大的数？**
+  插入排序：时间复杂度 O(n^2)，稳定
 
-  方法一：最小堆：建一个大小为 k 的最小堆。遍历数组，将元素加入堆中，如果堆大小超过 k，就弹出堆顶（最小元素）。最终堆顶就是第 k 大的数。时间复杂度：O(nlogk)，空间复杂度：O(k)
+  选择排序：时间复杂度 O(n^2)，不稳定
 
-  方法二：快速选择（Quickselect），类似快速排序的分区思想（partition）；每次将数组划分为两个区间，选择一边递归；平均时间复杂度 O(n)，最坏 O(n²)。
-
-  方法三：内置排序
-
-
-- **从一个几乎排序好的数组中找出第 k 小的元素，时间复杂度尽量低。  **
-
-  利用“插入排序”特性，数组接近有序，插入排序接近线性。也可以用快速选择算法，平均 O(n)。
-
-
-- **在 n 个数中取最大的 k 个数，时间复杂度是？**
-
-  nlogk。堆的大小为 k，总共要调整 n 次。
-
-
-- **旋转数组的最小值**
-
-  二分法
+  归并排序：时间复杂度 O(nlogn)，稳定。可用来解决计算逆序对数目的问题。
 
 ```python
-def find_min(nums):
-    left, right = 0, len(nums) - 1
-    while left < right:
-        mid = (left + right) // 2
-        if nums[mid] > nums[right]:
-            # 最小值在 mid 右边
-            left = mid + 1
-        else:
-            # 最小值在 mid 或左边
-            right = mid
-            return nums[left]
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+
+    return merge(left, right)
+
+    def merge(left, right):
+        result = []
+        i = j = 0
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                result.append(left[i])
+                i += 1
+            else:
+                result.append(right[j])
+                j += 1
+                # 添加剩余元素
+                result.extend(left[i:])
+                result.extend(right[j:])
+                return result
+
+            # 示例
+            arr = [5, 2, 9, 1, 5, 6]
+            sorted_arr = merge_sort(arr)
+            print(sorted_arr)
 ```
 
+  基数排序：按位排序，从低位到高位依次进行分配和收集；稳定
 
-- **有 10 个排好序的数据库，那么我要找整个的中位数，怎么找？**
-
-  最简单的思路是合并数据库，然后再定位长度，时间复杂度为 O(n)，空间复杂度是 O(n)；但实际上只需要借鉴这个合并的过程，当合并到中位数的时候输出中位数即可，时间复杂度为 O(n)，空间复杂度是 O(1)。这思路十分简单，但并不是最佳算法，有序数组让我们想到的会是二分查找，因此我们可以利用二分查找（binary search）来使复杂度降至 O(logn)，具体可参考：
-
-  https://stackoverflow.com/questions/6182488/median-of-5-sorted-arrays
-
-
-- **埃拉托色尼筛法（Sieve of Eratosthenes）**
+  快速排序：时间复杂度 O(nlogn)，空间复杂度最好情况是 O(logn)，最坏情况可能达到 O(n),但平均情况是 O(logn)，不稳定
 
 ```python
-def sieve(n):
-    """
-    n: 最大整数
-    返回: is_prime 列表, is_prime[i]=True 表示 i 是素数
-    """
-    is_prime = [True] * (n + 1)
-    is_prime[0] = is_prime[1] = False
-    for i in range(2, int(n**0.5)+1):
-        if is_prime[i]:
-            for j in range(i*i, n+1, i):
-                is_prime[j] = False
-                return is_prime
-```
-  第二层遍历 $$n/2 + n/3 + n/5 + n/7$$ 根据调和级数性质，约为 $$ln ln n$$，所以时间复杂度为 O(nloglogn)。
+def quick_sort(arr, low, high):
+    if low < high:
+        pivot_index = partition(arr, low, high)
+        quick_sort(arr, low, pivot_index - 1)
+        quick_sort(arr, pivot_index + 1, high)
 
+        def partition(arr, low, high):
+            pivot = arr[low]  # 选择第一个元素作为基准
+            i = low + 1
+            j = high
 
-- **海量数据处理**
+            while True:
+                while i <= j and arr[i] <= pivot:
+                    i += 1
+                    while i <= j and arr[j] >= pivot:
+                        j -= 1
+                        if i <= j:
+                            arr[i], arr[j] = arr[j], arr[i]
+                        else:
+                            break
 
-  [海量数据处理](https://lpq29743.github.io/algorithm/2017/02/20/MassiveData/)
-
-
-- **汉诺塔**
-
-  假设移动 n 个圆盘需要 f(n) 次移动
-
-  首先考虑一个圆盘，只需一步就可以了 f(1) = 1 …… ①
-
-  现在考虑 n 个圆盘，假设开始圆盘在 A 柱，可以先把 A 柱的上面 n - 1个圆盘移到 B，再将 A 剩下的一个移到 C，最后将 B 的 n - 1 个移到 C。总共需要 f(n) = 2f(n-  1) + 1 …… ②
-
-```python
-def hanoi(n, source, auxiliary, target):
-    """
-    打印将 n 个盘子从 source 移动到 target 的步骤。
-    source: 起始柱子
-    auxiliary: 辅助柱子
-    target: 目标柱子
-    """
-    if n == 1:
-        print(f"Move disk 1 from {source} to {target}")
-    else:
-        hanoi(n - 1, source, target, auxiliary)
-        print(f"Move disk {n} from {source} to {target}")
-        hanoi(n - 1, auxiliary, source, target)
-
-        # 示例：移动 3 个盘子从 A 到 C，B 为辅助柱子
-        hanoi(3, 'A', 'B', 'C')
+                        arr[low], arr[j] = arr[j], arr[low]  # 把基准放到正确位置
+                        return j
 ```
 
-  根据 ①② 两式，可求出 f(n) = 2^n - 1 所以 O(n) = 2^n
+  希尔排序：插入排序的改进版本，其核心思想是先将整个待排序序列分割成若干个子序列分别进行直接插入排序，待整个序列基本有序时，再对全体记录进行一次直接插入排序。不稳定
+
+  堆排序：堆排序包含两个主要步骤：建堆和排序。建堆过程：从最后一个非叶子节点开始，自上而下进行堆化。排序过程：每次将堆顶元素与末尾元素交换，并重新对剩余元素进行堆化。需要执行 n-1 次，每次堆化的时间复杂度为 O(logn)，因此排序阶段总的时间复杂度为 O(nlogn)。空间复杂度 O(1)，可原地排序，不稳定
+
+  桶排序：将元素分布到若干桶中分别排序，最后再合并。时间复杂度 O(n)。可用来计算一个未排序数组中排序后相邻元素的最大差值。
 
 
-- **尾递归（Tail Call）有什么危害，如何避免？**
+- **原地排序与非原地排序？**
 
-  栈溢出（Stack Overflow）。尾递归事实上和循环是等价的。
+  原地排序就是指在排序过程中不申请多余的存储空间，只利用原来存储待排数据的存储空间进行比较和交换的数据排序。非原地排序就是要利用额外的数组。
 
+
+#### 动态规划（DP）
 
 - **动态规划**
 
@@ -2149,6 +2180,8 @@ else:
   - 矩阵路径和最小值：`dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]`
 
 
+#### 贪心（Greedy）
+
 - **贪心**
 
   贪心技巧：排序 + 遍历；优先队列 / 堆维护可选元素；单调栈 / 队列。关键判断是局部选择能否保证全局最优。
@@ -2171,9 +2204,62 @@ else:
   - 单调栈/队列问题：如接雨水、移掉 k 位数字得到最小数、柱状图最大矩形。保持局部单调性，保证全局最优。
 
 
-- **不用库函数（`math.pow` 或 `** (1/3)`）求一个数 x 的立方根 y？**
+#### 递归与回溯（Recursion）
 
-  二分法；牛顿法：另 $$f(y) = y^3 - x$$，$$y_{n+1} = y_n - \frac{f(y_n)}{f'(y_n)}$$
+- **汉诺塔**
+
+  假设移动 n 个圆盘需要 f(n) 次移动
+
+  首先考虑一个圆盘，只需一步就可以了 f(1) = 1 …… ①
+
+  现在考虑 n 个圆盘，假设开始圆盘在 A 柱，可以先把 A 柱的上面 n - 1个圆盘移到 B，再将 A 剩下的一个移到 C，最后将 B 的 n - 1 个移到 C。总共需要 f(n) = 2f(n-  1) + 1 …… ②
+
+```python
+def hanoi(n, source, auxiliary, target):
+    """
+    打印将 n 个盘子从 source 移动到 target 的步骤。
+    source: 起始柱子
+    auxiliary: 辅助柱子
+    target: 目标柱子
+    """
+    if n == 1:
+        print(f"Move disk 1 from {source} to {target}")
+    else:
+        hanoi(n - 1, source, target, auxiliary)
+        print(f"Move disk {n} from {source} to {target}")
+        hanoi(n - 1, auxiliary, source, target)
+
+        # 示例：移动 3 个盘子从 A 到 C，B 为辅助柱子
+        hanoi(3, 'A', 'B', 'C')
+```
+
+  根据 ①② 两式，可求出 f(n) = 2^n - 1 所以 O(n) = 2^n
+
+
+- **尾递归（Tail Call）有什么危害，如何避免？**
+
+  栈溢出（Stack Overflow）。尾递归事实上和循环是等价的。
+
+
+#### 位运算与数学（Bit & Math）
+
+- **埃拉托色尼筛法（Sieve of Eratosthenes）**
+
+```python
+def sieve(n):
+    """
+    n: 最大整数
+    返回: is_prime 列表, is_prime[i]=True 表示 i 是素数
+    """
+    is_prime = [True] * (n + 1)
+    is_prime[0] = is_prime[1] = False
+    for i in range(2, int(n**0.5)+1):
+        if is_prime[i]:
+            for j in range(i*i, n+1, i):
+                is_prime[j] = False
+    return is_prime
+```
+  第二层遍历 $$n/2 + n/3 + n/5 + n/7$$ 根据调和级数性质，约为 $$ln ln n$$，所以时间复杂度为 O(nloglogn)。
 
 
 - **二进制中 1 的个数？**
@@ -2201,34 +2287,29 @@ function add(a, b):
   当 n 是偶数，$$a^n=(a^{n/2})^2$$，当 n 为奇数，$$a^n=a * a^{n−1}$$
 
 
-- **有两个未知整数，你可以不断询问某个数与这两个数的大小关系（每次询问一个数），该如何查找这两个数？**
-
-  [链接](https://www.zhihu.com/question/310970538)
-
-
 - **一群木板，一开始有一条线把它们固定在一条水平线上，现在抽掉这条线，有的木板往下掉落，有的木板位置上升，问怎么移动才能使移动距离最小，让它们继续在一条水平线上？**
 
   中位数（Median）。
 
 
-- **给定两个数，求他们无限次相加中第 k 小的数？**
+#### 数据流与海量数据（Streaming & Massive Data）
 
-  [链接](https://www.zhihu.com/question/41809896)
+- **海量数据处理**
+
+  [海量数据处理](https://lpq29743.github.io/algorithm/2017/02/20/MassiveData/)
 
 
 - **什么是水塘抽样（Reservoir sampling）？**
 
   一种在数据量未知或数据流形式下，以等概率从 n 个元素中采样 k 个的算法，适用于内存受限的场景。
 
+  - **如何从数据流中以等概率选取一个元素（k=1）？**
 
-- **如何从数据流中以等概率选取一个元素（k=1）？**
+    初始化：`result = None`，遍历第 i 个元素时，以 `1/i` 的概率替换 result，所有元素最终被选中的概率都是 `1/n`。
 
-  初始化：`result = None`，遍历第 i 个元素时，以 `1/i` 的概率替换 result，所有元素最终被选中的概率都是 `1/n`。
+  - **如何扩展到选取 k 个元素？**
 
-
-- **如何扩展到选取 k 个元素？**
-
-  初始化：前 k 个元素入 reservoir，对第 i (>k) 个元素：以 k/i 的概率随机替换 reservoir 中的一个元素。
+    初始化：前 k 个元素入 reservoir，对第 i (>k) 个元素：以 k/i 的概率随机替换 reservoir 中的一个元素。
 
 
 - **链表中如何随机返回一个节点？（单次遍历，O(1) 空间）**
@@ -3440,21 +3521,21 @@ class KMeans:
         self.tol = tol
         self.random_state = random_state
 
-        def fit(self, X):
-            np.random.seed(self.random_state)
-            n_samples, _ = X.shape
+    def fit(self, X):
+        np.random.seed(self.random_state)
+        n_samples, _ = X.shape
 
-            # Step 1: 初始化质心（随机选择 K 个样本）
-            initial_idxs = np.random.choice(n_samples, self.n_clusters, replace=False)
-            self.centroids = X[initial_idxs]
+        # Step 1: 初始化质心（随机选择 K 个样本）
+        initial_idxs = np.random.choice(n_samples, self.n_clusters, replace=False)
+        self.centroids = X[initial_idxs]
 
-            for i in range(self.max_iter):
-                # Step 2: 分配每个样本到最近的质心
-                distances = self._compute_distances(X)
-                labels = np.argmin(distances, axis=1)
+        for i in range(self.max_iter):
+            # Step 2: 分配每个样本到最近的质心
+            distances = self._compute_distances(X)
+            labels = np.argmin(distances, axis=1)
 
-                # Step 3: 更新质心
-                new_centroids = np.array([
+            # Step 3: 更新质心
+            new_centroids = np.array([
                 X[labels == j].mean(axis=0) if np.any(labels == j) else self.centroids[j]
                 for j in range(self.n_clusters)
             ])
@@ -3465,16 +3546,16 @@ class KMeans:
             if shift < self.tol:
                 break
 
-            self.labels_ = labels  # 保存训练标签
+        self.labels_ = labels  # 保存训练标签
 
-            def predict(self, X):
-                # 计算每个点到所有质心的距离，返回最近质心的索引
-                distances = self._compute_distances(X)
-                return np.argmin(distances, axis=1)
+    def predict(self, X):
+        # 计算每个点到所有质心的距离，返回最近质心的索引
+        distances = self._compute_distances(X)
+        return np.argmin(distances, axis=1)
 
-            def _compute_distances(self, X):
-                # 返回 (n_samples, n_clusters) 的距离矩阵
-                return np.linalg.norm(X[:, np.newaxis] - self.centroids, axis=2)
+    def _compute_distances(self, X):
+        # 返回 (n_samples, n_clusters) 的距离矩阵
+        return np.linalg.norm(X[:, np.newaxis] - self.centroids, axis=2)
 ```
 
 
