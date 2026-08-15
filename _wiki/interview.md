@@ -840,7 +840,7 @@ if __name__ == "__main__":
 
 ### Algorithm
 
-#### 数组类（Array）
+#### Array
 
 - **KSum**
 
@@ -1131,7 +1131,7 @@ def count_subarrays(nums, k):
   nlogk。堆的大小为 k，总共要调整 n 次。
 
 
-#### 查找与二分（Search）
+#### Search
 
 - **旋转数组的最小值**
 
@@ -1227,7 +1227,7 @@ def search(nums, target):
   [链接](https://www.zhihu.com/question/41809896)
 
 
-#### 哈希表（Hash）
+#### Hash
 
 - **哈希冲突**
 
@@ -1238,7 +1238,7 @@ def search(nums, target):
   再哈希：当负载因子过高时，扩大哈希表，重新计算所有元素的哈希值。扩容代价较高。
 
 
-#### 字符串（String）
+#### String
 
 - **KMP 算法**
 
@@ -1263,7 +1263,7 @@ def search(nums, target):
   先求两个数的异或结果 res，再依次求 res 每一位与 1 与操作的结果，不为 0，则 Hamming 距离加一；每判断完一位，res 右移一位继续判断下一位。
 
 
-#### 链表（Linked List）
+#### Linked List
 
 - **链表**
 
@@ -1375,7 +1375,7 @@ def reverse_list_recursive(head):
   - 设计单链表/双链表数据结构（LeetCode 707）：实现基本的 add/delete/get 接口，注意边界处理。
 
 
-#### 栈与队列（Stack & Queue）
+#### Stack & Queue
 
 - **栈**
 
@@ -1473,7 +1473,7 @@ empty = not queue
   - 0-1 BFS。
 
 
-#### 树（Tree）
+#### Tree
 
 - **树**
 
@@ -1603,7 +1603,7 @@ def build_binary_tree(values):
   - 范围查找特别高效，只需找到区间起点，后续通过链表遍历即可
 
 
-#### 堆与 Trie（Heap & Trie）
+#### Heap & Trie
 
 - **堆**
 
@@ -1686,7 +1686,7 @@ class TrieNode:
   - DNA 序列查重（变种问题）：构建 Trie 存储基因序列（A/C/G/T），检测是否存在重复序列（如长度为 10 的重复子串）。
 
 
-#### 图与遍历（Graph & Traversal）
+#### Graph & Traversal
 
 - **并查集（Union Find）**
 
@@ -2046,7 +2046,7 @@ def dfs_iterative(graph, start):
   - 如果搜索空间为树状结构，则可考虑回溯。
 
 
-#### 排序（Sorting）
+#### Sorting
 
 - **排序**
 
@@ -2132,7 +2132,7 @@ def quick_sort(arr, low, high):
   原地排序就是指在排序过程中不申请多余的存储空间，只利用原来存储待排数据的存储空间进行比较和交换的数据排序。非原地排序就是要利用额外的数组。
 
 
-#### 动态规划（DP）
+#### DP
 
 - **动态规划**
 
@@ -2180,7 +2180,7 @@ else:
   - 矩阵路径和最小值：`dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]`
 
 
-#### 贪心（Greedy）
+#### Greedy
 
 - **贪心**
 
@@ -2204,7 +2204,7 @@ else:
   - 单调栈/队列问题：如接雨水、移掉 k 位数字得到最小数、柱状图最大矩形。保持局部单调性，保证全局最优。
 
 
-#### 递归与回溯（Recursion）
+#### Recursion
 
 - **汉诺塔**
 
@@ -2241,7 +2241,7 @@ def hanoi(n, source, auxiliary, target):
   栈溢出（Stack Overflow）。尾递归事实上和循环是等价的。
 
 
-#### 位运算与数学（Bit & Math）
+#### Bit & Math
 
 - **埃拉托色尼筛法（Sieve of Eratosthenes）**
 
@@ -2292,7 +2292,7 @@ function add(a, b):
   中位数（Median）。
 
 
-#### 数据流与海量数据（Streaming & Massive Data）
+#### Streaming & Massive Data
 
 - **海量数据处理**
 
