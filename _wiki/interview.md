@@ -5923,6 +5923,34 @@ class LoRALinear(nn.Module):
   一般来讲，优化负样本会比优化正样本带来的价值更大，优化正样本其实近似等价为 SFT，优化负样本可以让模型无法通过蒙对、幻觉等方式获得收益。
 
 
+- **REINFORCE**
+
+  REINFORCE 是最基础的策略梯度算法，用蒙特卡洛 (Monte-Carlo) 方式估计回报：直接使用整条轨迹（回合）的累积奖励作为优势估计，无需 critic/value model。
+
+  特点：
+
+  - 无偏（unbiased）：使用完整回合的真实回报，不依赖任何近似（如 value model 的估计），因此估计没有偏差；
+
+  - 方差大：单次采样的回报容易受偶然因素影响，不同轨迹的回报波动大，导致梯度估计噪声大、训练不稳定，通常需要多次采样或引入 baseline 来降低方差；
+
+  - 依赖回合的完整性：必须等回合结束（生成完整输出）才能得到回报估计，因此不能用于在线（online）/流式场景，如多轮对话中用户中途离开或回合无法终止的情形。
+
+  这些局限正是后续算法的改进动机：PPO 引入 critic/value model 和 GAE，GRPO 用组内多次采样的相对奖励替代，以降低方差并提升样本利用效率。
+
+
+- **直接拿最终 reward 当成每个 token 的 reward，会有什么问题？**
+
+  这是最朴素的策略梯度做法（即 REINFORCE 的基础形式：序列末尾的 reward 广播到每个 token 上），主要问题有三个：
+
+  1. 梯度估计方差极大：同一个最终奖励被复制给所有 token，所有 token 的梯度方向一致、幅度只取决于 log prob，整条轨迹的梯度估计噪声大，且没有 baseline（如 value model 的 $$V(s_t)$$ 或组内均值）来降低方差，导致训练不稳定；
+
+  2. 无法区分早 token 和晚 token 的贡献：早期生成的 token（如推理方向的选择、解题路线的确定）通常对最终结果影响更大，越晚的 token 越受前文约束、可改变的空间越小，但广播式奖励对所有 token 一视同仁，信用分配完全错误；
+
+  3. 无偏但低效：虽然该估计是无偏的，但需要大量采样才能收敛，样本效率很低。
+
+  解决方案即引入优势估计（advantage）：PPO 用 critic 输出 $$V(s_t)$$ 配合 GAE 做逐 token 的信用分配；GRPO 用组内多次采样的均值/标准差归一化作为 baseline，但仍共享序列级奖励，信用分配粗于 PPO。
+
+
 - **PPO**
 
   PPO 每一次迭代流程如下：
@@ -5939,7 +5967,7 @@ class LoRALinear(nn.Module):
 
   - 输出 o 被输入到 Critic/Value Model（同步更新，可由 Actor Model 部分参数初始化，或由 Reward Model 初始化），其用 value head 输出每个不完整输出的 $$V(s_t)$$，其物理意义为当前状态下所有 action 的平均预期收益。
 
-  - 计算优势 advantages，其物理意义采取当前动作会比平均收益多多少，即相对收益，$$Q(s_t, a_t) - V(s_t)$$。评估这一优势主要有两种方法，每种方法都有其利弊，即：1）蒙特卡洛 (Monte-Carlo，MC)：使用完整输出的 reward。由于奖励稀疏，只在生成最后一个 token 时有奖励，这种方法的方差很大，且从 LLM 中获取足够的样本来使用 MC 进行优化成本很高，但它的偏差很低，因为我们可以准确地模拟奖励；2）时间差分 (Temporal difference，TD)：使用一步轨迹奖励（即衡量刚根据提示生成的单词的优劣），即`advantages = reward - values_response.sum(dim=1) / response_mask.sum(dim=1)`。通过这样做，我们可以在 token 级别计算奖励，这显著降低了方差，但同时偏差会增加，因为我们无法从部分生成的响应中准确预测最终奖励。这就是 GAE 的用武之地，它提出通过多步时间差分 (multi-step TD) 来平衡偏差和方差。具体是从 reward 回溯分配每个 token 的 TD 残差 $$\delta_t$$，用 GAE 计算每个 token 的优势 $$A_t$$，其中 gamma 是时间折扣因子，控制未来奖励的重要性，越大代表未来奖励越重要。lambda 是 GAE 平衡因子，控制 bias-variance 权衡，lambda 越大 → 方差大，偏差小；λ 越小 → 方差小，偏差大。
+  - 计算优势 advantages，其物理意义采取当前动作会比平均收益多多少，即相对收益，$$Q(s_t, a_t) - V(s_t)$$。评估这一优势主要有两种方法，每种方法都有其利弊，即：1）蒙特卡洛 (Monte-Carlo，MC)：使用完整输出的 reward。由于奖励稀疏，只在生成最后一个 token 时有奖励，这种方法的方差很大，且从 LLM 中获取足够的样本来使用 MC 进行优化成本很高，但它的偏差很低，因为我们可以准确地模拟奖励；2）时间差分 (Temporal difference，TD)：比较简单，直接用上一步的价值估计与当前步的价值估计做对比来看 advantage，即 $$\delta_t = r_t + \gamma V(s_{t+1}) - V(s_t)$$（TD 残差）。因为只看一步，不用等到回合结束、不依赖整条轨迹的累积回报，所以方差小；但一步的判断不准，$$V(s_{t+1})$$ 本身是估计值，估计有误差就会引入偏差，因此偏差大（我们无法从部分生成的响应中准确预测最终奖励）。这就是 GAE 的用武之地，它提出通过多步时间差分 (multi-step TD) 来平衡偏差和方差。具体是从 reward 回溯，把所有未来步的 TD 残差按指数衰减加权求和：$$A_t = \sum_{k=0}^{T-t} (\gamma\lambda)^k \delta_{t+k}$$，即用 GAE 计算每个 token 的优势 $$A_t$$。看的越远的残差，权重 $$(\gamma\lambda)^k$$ 衰减越多：近期步的信号权重高，远期步的信号逐渐被淡化，从而既吸收了多步信息（降低偏差），又不完全依赖长程累积回报（控制方差）。其中 gamma 是时间折扣因子，控制未来奖励的重要性，越大代表未来奖励越重要。lambda 是 GAE 平衡因子，控制 bias-variance 权衡，lambda 越大 → 衰减越慢、看的越远，方差大，偏差小；λ 越小 → 衰减越快、越偏向单步 TD，方差小，偏差大（λ=0 退化为一步 TD，λ=1 退化为 MC）。
 
 ```python
 def compute_gae(rewards, values, gamma=1.0, lam=0.95):
@@ -5948,7 +5976,7 @@ def compute_gae(rewards, values, gamma=1.0, lam=0.95):
     for t in reversed(range(rewards.size(1))):
         delta = rewards[:, t] + gamma * values[:, t + 1] - values[:, t]
         advantages[:, t] = last_adv = delta + gamma * lam * last_adv
-        return advantages
+    return advantages
 ```
 
   - 根据采样到的数据进行多次策略迭代更新，每次更新之后得到`log_probs`和新的`values`。
@@ -5975,7 +6003,35 @@ def actor_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
 
 - **PPO 有了 reward model 为什么还要 critic/value model？**
 
-  critic/value model 是内部奖励，仅需当前上下文，会在 RL 过程中更新，reward model 是外部奖励，需要完整回答，是训练好的。
+  critic/value model 是内部奖励，仅需当前上下文，在线学习（随 RL 训练同步更新），反映的是当前 policy 的行为价值（即当前策略下各状态的预期收益）；而 reward model 是外部奖励，需要完整回答，是基于人类偏好数据预先训练好的静态模型。随着 policy 不断更新，其生成分布会偏离训练 RM 时的分布，冻结的 RM 评估可能失准，而在线更新的 critic 始终贴合当前策略，能提供逐 token 的价值估计。
+
+  更深层的原因在于梯度估计：critic 输出的 $$V(s_t)$$ 充当优势估计的 baseline，是方差缩减器。由于 $$V(s_t)$$ 不依赖当前 action，减去它不改变梯度的期望（保持无偏），但能显著降低方差。其效果是只有超出预期（$$Q(s_t,a_t) > V(s_t)$$，即 advantage > 0）的 action 才会被强化，低于预期的被抑制，避免了"只要回合总奖励为正，所有 token 都被无差别强化"的问题，使训练更稳定。
+
+
+- **为什么 reward model 对完整回复打分，而不是训练 token level 的奖励？**
+
+  Reward model 通常对完整回复（sample-level）输出一个标量奖励，而不训练 token level 的奖励，主要原因有两个：
+
+  1. 难以获得高质量的 token level reward 标注：人类偏好标注天然是整体性的（哪个回复更好），要让人对每个 token 的好坏逐一标注，成本极高且标注一致性差，缺乏可靠的监督信号；
+
+  2. 局部奖励可能误导全局目标：单个 token 的好坏取决于后续生成的上下文，局部看起来合理的 token 未必服务于最终目标（如推理中间某步看似正确但导致最终答案错误），直接用 token level 局部奖励优化，容易让模型追逐局部收益而偏离全局目标。
+
+  因此实践中采用"完整回复打分 + 信用分配"的组合：reward 落在序列末尾，再由 critic/GAE（PPO）或组内相对奖励（GRPO）把信号回传到 token 级别。
+
+
+- **Reward Clip（奖励裁剪）**
+
+  Reward clip 是 RL 训练中的稳定性技巧：将 reward model 或规则奖励的原始值裁剪到固定区间（如 [-1, 1] 或 [-5, 5]），即 `reward = clip(reward, -c, c)`。
+
+  作用：
+
+  1. 抑制离群奖励：RM 输出的原始奖励量纲不定、可能出现极端值（特别高或特别低），个别离群样本会主导梯度，导致训练震荡；裁剪后奖励分布被压缩，梯度更平稳；
+
+  2. 配合归一化使用：实践中常与组内均值/标准差归一化（如 GRPO）或 advantage 归一化组合，先裁剪极端值再归一化，避免极端值污染统计量；
+
+  3. 限制单次更新的信号强度：裁剪相当于给优势估计设了上界，防止某个样本的优势过大导致策略更新过猛。
+
+  注意区分：reward clip 作用于奖励值本身，而 PPO 的 clip 作用于重要性采样比率 $$r_t(\theta)$$（限制策略更新幅度），两者目的不同但都是为了稳定训练。
 
 
 - **为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？**
@@ -6201,6 +6257,8 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 约束更柔性，可调节系数 $$\beta$$ 控制偏离程度，允许模型在任务奖励和分布约束之间权衡
   - 梯度通过策略梯度/优势函数传递，而非直接对 KL 求导
   - 典型场景：RLHF 中防止模型偏离预训练分布；PPO/GRPO 中的 reference model 约束
+
+  **token 级实现细节**：任务奖励（RM 打分）只分配在最后一个 token 上，其余 token 的 reward 皆为 0，是稀疏的；除非逐 token 减去 KL 惩罚项，即每个 token 的 reward 为 $$r_t = -\beta \cdot KL_t$$（最后一个 token 再加上任务奖励），KL 越大、reward 越低，这样每个 token 都有非零奖励信号，缓解稀疏性。逐 token 的 KL 计算无需重新生成：直接把新策略已生成的文本喂给冻结的参考模型做一次前向（forward pass），取出对应的 log probs，与新策略的 log probs 相减即可，成本仅为一次推理前向。
 
   **核心区别总结**：
 
