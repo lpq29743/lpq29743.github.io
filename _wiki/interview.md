@@ -6194,9 +6194,9 @@ RLHF 上层应用：veRL / OpenRLHF
 
 ### Post Training
 
-主线导航：基础与核心概念 → SFT 与训练细节 → RL 算法主线 → 奖励设计 → 训练稳定性 → 知识蒸馏 → 推理与 Test-time → 能力专题。前三组打基础，从概念辨析到算法演进主线；中间三组围绕训练工程问题（奖励、稳定性、蒸馏）；最后两组是推理能力与垂直能力的延伸。
+主线导航：Fundamentals → SFT and Training Details → RL Algorithms → Reward Design → Training Stability → Distillation → Reasoning and Test-time Scaling → Capability Topics。前三组打基础，从概念辨析到算法演进主线；中间三组围绕训练工程问题（奖励、稳定性、蒸馏）；最后两组是推理能力与垂直能力的延伸。
 
-#### 基础与核心概念
+#### Fundamentals
 
 RL 的基本概念与训练范式辨析，回答时先给结论，再结合一个具体例子展开。
 
@@ -6290,7 +6290,7 @@ RL 的基本概念与训练范式辨析，回答时先给结论，再结合一�
   一般来讲，优化负样本会比优化正样本带来的价值更大，优化正样本其实近似等价为 SFT，优化负样本可以让模型无法通过蒙对、幻觉等方式获得收益。
 
 
-#### SFT 与训练细节
+#### SFT and Training Details
 
 监督微调及具体训练实现细节（思考模式、Loss Mask）。
 
@@ -6366,7 +6366,7 @@ RL 的基本概念与训练范式辨析，回答时先给结论，再结合一�
   - Agent：需要额外 mask 工具返回，但保留工具调用部分的 loss
 
 
-#### RL 算法主线
+#### RL Algorithms
 
 按"REINFORCE → PPO → DPO/GRPO → 衍生算法"的演进组织：先看最朴素策略梯度的缺陷（广播 reward 问题），再看 PPO 如何用 critic/GAE/clip 解决，然后是去 critic 的 DPO 和 GRPO 及其衍生改进（DAPO/GSPO），最后用算法对比收尾。
 
@@ -6587,7 +6587,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。PPO 依赖于 reward model 和 value model；DPO 没有显式探索机制。
 
 
-#### 奖励设计
+#### Reward Design
 
 从"奖励从哪来"（RM 打分粒度、RLVR、PRM/ORM），到"奖励怎么组合使用"（多目标、格式奖励），最后是奖励侧的失效模式与对策（Reward Clip、Reward Hacking）。
 
@@ -6695,7 +6695,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   **来源**：GLM-5.2 (2026.6)
 
 
-#### 训练稳定性
+#### Training Stability
 
 RL 训练中常见的不稳定来源（训推不一致、熵坍塌）与对策。
 
@@ -6716,7 +6716,7 @@ RL 训练中常见的不稳定来源（训推不一致、熵坍塌）与对策�
   熵坍塌：随着训练的进行，entropy 逐渐降低。导致某些 group 采样出的 response 几乎相同，使得模型在早期变得更加确定，限制了模型的探索空间。
 
 
-#### 知识蒸馏
+#### Distillation
 
 OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
 
@@ -6776,7 +6776,7 @@ OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
   **GLM-5 实践**：在 Reasoning RL → Agentic RL → General RL 的三阶段流程中，每个后续阶段都用前面阶段的模型做 on-policy 蒸馏，有效缓解了灾难性遗忘问题。
 
 
-#### 推理与 Test-time
+#### Reasoning and Test-time Scaling
 
 推理能力的提升手段：训练侧（Reasoning）与推理侧（MCTS、System 1/2、Test-time Scaling）。
 
@@ -6820,7 +6820,7 @@ OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
   提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
 
 
-#### 能力专题
+#### Capability Topics
 
 垂直能力话题：安全与幻觉、长上下文。
 
@@ -7650,7 +7650,7 @@ OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
   **闭环流程**：Badcase发现 → 归因分析 → 针对性修复 → 补充到Golden Set → 重新评估
 
 
-### Interview
+### Interview Scenarios
 
 #### Self Introduction
 
@@ -7687,7 +7687,7 @@ OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
 
   **按场景调整**：技术面用短版（1-2 分钟，突出项目细节和技术栈）；HR 面用完整版（3-5 分钟，突出稳定性和动机）；交叉面弱化技术术语，突出业务价值和协作方式。
 
-#### 面试流程概览
+#### Process Overview
 
 | 轮次 | 面试官 | 考察重点 | 风格 |
 |------|--------|----------|------|
@@ -7697,7 +7697,7 @@ OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
 | HR 面 | HRBP | 动机、稳定性、薪资、文化匹配 | 结构化问答 |
 | 交叉面 | 其他部门工程/产品同学 | 协作能力、沟通表达、跨团队互评 | 行为题 + 业务理解 |
 
-#### 技术一面
+#### Technical Round 1
 
 - **考察重点**：验证简历项目真实性和技术深度，考察基础知识（原理、coding），判断是否能干活。
 
@@ -7714,7 +7714,7 @@ OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
   - 我入职后具体负责什么？前三个月到半年怎么衡量做得好不好？
   - 算法和工程的日常分工与协作方式是怎样的？
 
-#### 技术二面
+#### Technical Round 2
 
 - **考察重点**：技术判断力和 ownership：能不能独立扛方向、做取舍、推动跨团队协作落地。
 
@@ -7732,7 +7732,7 @@ OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
   - 训练资源（GPU）情况如何？
   - 团队的人员结构和成长机制（导师、晋升通道）是怎样的？
 
-#### 技术三面
+#### Technical Round 3
 
 - **考察重点**：格局与稳定性：技术视野是否匹配团队方向，长期规划是否清晰，判断值不值得培养/定级。
 
@@ -7749,7 +7749,7 @@ OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
   - 未来 1-3 年的技术路线图/重点投入方向？
   - 组织架构和团队之间的关系是怎样的？
 
-#### HR 面
+#### HR Interview
 
 - **考察重点**：动机与稳定性、薪资预期、性格与文化匹配，一票否决项排查（离职原因、竞业、背景一致性）。
 
@@ -7813,7 +7813,7 @@ OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
 
   - **试用期时长和考核标准、后续面试流程和结果反馈时间**
 
-#### 交叉面（工程，产品）
+#### Cross-functional Interview (Engineering, Product)
 
 - **考察重点**：协作能力和沟通能力：算法同学是否好合作、表达是否清晰、能否站在对方视角理解业务/工程约束，同时做跨团队互评。
 
@@ -7831,7 +7831,7 @@ OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
   - 跨团队的分歧或优先级冲突一般怎么决策？
   - 业务迭代的节奏是怎样的，算法需求一般从哪来？
 
-#### 动机类问题答题要点
+#### Motivation Questions
 
 - **为什么找新机会**
 
