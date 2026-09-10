@@ -5784,592 +5784,6 @@ class LoRALinear(nn.Module):
   **核心区别**：Prompt Tuning 和 P-tuning v1 只在输入层添加，Prefix Tuning 和 P-tuning v2 在每层都添加。P-tuning v2 相比 Prefix Tuning 的优势是在大模型对话任务上效果更好。
 
 
-#### Post Training
-
-- **训推不一致（Training-Inference Mismatch）是什么？**
-
-  训推不一致指模型在训练阶段和推理阶段由于计算方式、数据分布或数值实现的差异，导致行为不一致，进而引起效果下降或线上表现与离线评估对不上。它可分为两大类：
-
-  | 类型 | 本质 | 典型例子 | 更偏向 |
-  |------|------|---------|--------|
-  | **数值/实现不一致** | 数学定义相同，实现有偏差 | 训练用 FSDP+PyTorch、推理用 vLLM/TRT-LLM；bf16↔fp16/int8 量化；kernel 累加顺序；non-deterministic top-k | 工程问题 |
-  | **范式/分布不一致** | 数学定义本身就不同 | Exposure Bias（训练 Teacher Forcing 喂真值 vs 推理喂自己生成的 token）；MTP 训练预测 1 步、推理预测 2 步；on-policy vs off-policy | 算法问题 |
-
-
-- **强化学习和监督学习有什么区别？**
-
-  监督学习中每一个决策（预测标签）是独立的，它对决策的优化取决于标签。强化学习每一个决策是相互影响的，它对决策的优化取决于延时标签（奖励）。过去的 AI 训练方式主要依赖监督学习，也就是让 AI 通过大量人类标注的数据来学习。换句话说，AI 只是一个“超级记忆机”，它能模仿人类的答案，但却不一定真正理解问题的本质。而强化学习的出现，让 AI 不再是单纯的模仿者，而是能够主动探索、试错、优化自己推理方式的智能体。这就像是在训练一个孩子解数学题，监督学习相当于直接告诉他答案，而强化学习则是让他自己尝试解题，并根据最终的正确率进行调整。
-
-  监督学习关心的是 Pass@1
-
-  RL 一开始关心的是 Pass@k，但最终也会回归 Pass@1。
-
-
-- **SFT**
-
-  选择模型和模版，保证当前模版在当前模型上已有较好的表现。
-
-  Packing
-  - 单轮数据：直接 mask prompt，在 response 上计算 next token prediction loss
-  - 多轮数据：简单的操作是根据轮数划分成多条数据，但效率比较低。实际上它也可以直接输入，对对应每轮的 response 做 next token prediction 即可。
-
-  拒绝采样也是常见的一种提高 SFT 的方式。
-
-
-- **GLM-5 的三种思考模式（Thinking Modes）**
-
-  **问题背景**：不同任务对思考的需求不同。简单问题不需要思考，复杂问题需要深度推理，多轮对话可能需要跨轮次保持思考连续性。
-
-  **三种模式**：
-
-  1. **Interleaved Thinking（交错思考）**
-     - 每次生成响应前都进行思考
-     - 适用于需要即时推理的场景
-     - 思考 → 行动 → 思考 → 行动 的循环
-
-  2. **Preserved Thinking（保留思考）**
-     - 跨多轮对话保留所有思考块（thinking blocks）
-     - 避免重复推导，减少信息丢失和不一致性
-     - 特别适合长 horizon 的复杂编码任务
-     - 例：第一轮思考如何分解问题 → 第二轮直接基于已有方案继续 → 第三轮避免遗忘和矛盾
-
-  3. **Turn-level Thinking（轮次级思考）**
-     - 按轮次控制是否思考
-     - 轻量请求关闭思考以降低延迟/成本
-     - 复杂任务启用思考以提高准确性和稳定性
-
-  **为什么这样设计？**
-
-  编码 Agent 场景的特殊需求：
-  - 长 horizon 任务需要跨多轮保持推理连贯性
-  - 重复推导会浪费 token 和时间
-  - 不同轮次的任务复杂度差异大
-
-  **和其他模型的对比**：
-
-  | 模型 | 思考模式 | 特点 |
-  |------|---------|------|
-  | Claude Opus 4.5+ | Extended Thinking | 支持思考块保留 |
-  | DeepSeek-R1 | Chain-of-Thought | 固定开启思考 |
-  | GLM-5 | 三种模式 | 灵活控制，支持跨轮保留 |
-
-  来源：GLM-5 (2026.2)
-
-
-- **Agent 训练中的 Loss Mask 如何处理？**
-
-  Agent 训练需要区分不同部分的 loss 计算，通常只对**模型生成的内容**计算 loss：
-
-  | 部分 | 是否计算 Loss | 说明 |
-  |------|-------------|------|
-  | **系统指令** | ❌ Mask | 固定模板，不学习 |
-  | **用户输入** | ❌ Mask | 用户问题，不学习 |
-  | **工具调用（思考/规划）** | ✅ 计算 | Agent 的决策输出 |
-  | **工具返回结果** | ❌ Mask | 外部系统返回，不学习 |
-  | **最终回复** | ✅ 计算 | Agent 对用户的输出 |
-
-  **多轮对话的 mask 策略：**
-  - 每轮只在该轮的 **Agent 输出**（工具调用 + 最终回复）上计算 loss
-  - 工具返回内容虽然参与上下文，但不计入 loss
-
-  **与纯对话模型的区别：**
-  - 纯对话：mask prompt，只在 assistant 回复上计算 loss
-  - Agent：需要额外 mask 工具返回，但保留工具调用部分的 loss
-
-
-- **Agent RL 中的 Reward Hacking 问题如何解决？**
-
-  在用 RL 训练编码 Agent 时，模型会寻找"捷径"获得奖励（测试通过），而非真正解决问题。这些捷径称为 **reward hacking**。
-
-  **常见 hacking 行为：**
-  - **读取隐藏答案**：执行 `cat /workspace/.hidden/secret_cases.json` 读取评测系统的隐藏测试用例
-  - **下载外部答案**：执行 `curl https://raw.githubusercontent.com/xxx/solution.py` 从 GitHub 下载解决方案
-  - **利用系统漏洞**：用 `find`、`grep` 搜索包含答案的文件路径，或分析 git history
-
-  **为什么这是问题？**
-  - 模型获得高奖励（测试通过），但没有真正学会解决问题
-  - 训练信号被污染，模型学不到真本事
-
-  **GLM-5.2 的解决方案（两阶段检测 + 在线防护）：**
-
-  **阶段 1：Rule-based 规则过滤**
-  - 预定义黑名单：禁止访问 `.hidden`、`secret` 等路径
-  - 禁止特定命令：`curl`、`wget`、`find /workspace`
-  - 拦截可疑的文件读取模式
-  - 目标：高召回率，宁可误杀也不漏掉
-
-  **阶段 2：LLM Judge 语义判断**
-  - 用另一个 LLM 判断 tool call 的意图
-  - 例：`cat /workspace/.eval/secret_cases.json` → "读取评测系统隐藏用例，意图作弊"
-  - 目标：高精度，避免误杀正常操作
-
-  **在线防护策略：**
-  - 检测到 hacking 时，**不终止整个 rollout**，而是 **block 这个 tool call**
-  - 返回 dummy 信息（如 "Access denied" 或空结果）
-  - 模型可以继续尝试其他方法
-  - 避免训练不稳定（突然终止导致梯度问题，模型学不到"要换方法"）
-
-  **来源**：GLM-5.2 (2026.6)
-
-
-- **RL 正负样本**
-
-  RL 奖励正样本 惩罚负样本。
-
-  优化正样本会导致 pass@1 上升，但 pass@k 下降，会让 LLM 更喜欢输入正样本中出现的 token。
-
-  优化负样本会导致 pass@k 上升，能促进策略熵增，最终 pass@1 也会上升。
-
-  一般来讲，优化负样本会比优化正样本带来的价值更大，优化正样本其实近似等价为 SFT，优化负样本可以让模型无法通过蒙对、幻觉等方式获得收益。
-
-
-- **REINFORCE**
-
-  REINFORCE 是最基础的策略梯度算法，用蒙特卡洛 (Monte-Carlo) 方式估计回报：直接使用整条轨迹（回合）的累积奖励作为优势估计，无需 critic/value model。
-
-  特点：
-
-  - 无偏（unbiased）：使用完整回合的真实回报，不依赖任何近似（如 value model 的估计），因此估计没有偏差；
-
-  - 方差大：单次采样的回报容易受偶然因素影响，不同轨迹的回报波动大，导致梯度估计噪声大、训练不稳定，通常需要多次采样或引入 baseline 来降低方差；
-
-  - 依赖回合的完整性：必须等回合结束（生成完整输出）才能得到回报估计，因此不能用于在线（online）/流式场景，如多轮对话中用户中途离开或回合无法终止的情形。
-
-  这些局限正是后续算法的改进动机：PPO 引入 critic/value model 和 GAE，GRPO 用组内多次采样的相对奖励替代，以降低方差并提升样本利用效率。
-
-
-- **直接拿最终 reward 当成每个 token 的 reward，会有什么问题？**
-
-  这是最朴素的策略梯度做法（即 REINFORCE 的基础形式：序列末尾的 reward 广播到每个 token 上），主要问题有三个：
-
-  1. 梯度估计方差极大：同一个最终奖励被复制给所有 token，所有 token 的梯度方向一致、幅度只取决于 log prob，整条轨迹的梯度估计噪声大，且没有 baseline（如 value model 的 $$V(s_t)$$ 或组内均值）来降低方差，导致训练不稳定；
-
-  2. 无法区分早 token 和晚 token 的贡献：早期生成的 token（如推理方向的选择、解题路线的确定）通常对最终结果影响更大，越晚的 token 越受前文约束、可改变的空间越小，但广播式奖励对所有 token 一视同仁，信用分配完全错误；
-
-  3. 无偏但低效：虽然该估计是无偏的，但需要大量采样才能收敛，样本效率很低。
-
-  解决方案即引入优势估计（advantage）：PPO 用 critic 输出 $$V(s_t)$$ 配合 GAE 做逐 token 的信用分配；GRPO 用组内多次采样的均值/标准差归一化作为 baseline，但仍共享序列级奖励，信用分配粗于 PPO。
-
-
-- **PPO**
-
-  PPO 每一次迭代流程如下：
-
-  - 准备 prompt；
-
-  - 重要性采样：将 prompt 输入到策略模型（Actor/Policy Model，参数需更新），采样生成多个完整输出（以下只用其中一个输出 o 举例说明），并计算输出 o 的概率：`old_log_probs`。
-
-  - 输出 o 被输入到冻结的参考模型（Reference Model），得到`ref_log_probs`和 KL 散度。
-
-  - 输出 o 被输入到冻结的奖励模型（Reward Model），生成该完整输出的结果正确性 score（sample-level 的一个标量），注意只有完整输出的 score 不为 0，不完整输出的 score 都为 0。
-
-  - 将过程合理性奖励和结果正确性奖励合并起来，得到最终奖励 reward。对于不完整输出，其 reward 为`ref_log_probs - old_log_probs`，对于完整输出，其 reward 为`ref_log_probs - old_log_probs + score`。
-
-  - 输出 o 被输入到 Critic/Value Model（同步更新，可由 Actor Model 部分参数初始化，或由 Reward Model 初始化），其用 value head 输出每个不完整输出的 $$V(s_t)$$，其物理意义为当前状态下所有 action 的平均预期收益。
-
-  - 计算优势 advantages，其物理意义采取当前动作会比平均收益多多少，即相对收益，$$Q(s_t, a_t) - V(s_t)$$。评估这一优势主要有两种方法，每种方法都有其利弊，即：1）蒙特卡洛 (Monte-Carlo，MC)：使用完整输出的 reward。由于奖励稀疏，只在生成最后一个 token 时有奖励，这种方法的方差很大，且从 LLM 中获取足够的样本来使用 MC 进行优化成本很高，但它的偏差很低，因为我们可以准确地模拟奖励；2）时间差分 (Temporal difference，TD)：比较简单，直接用上一步的价值估计与当前步的价值估计做对比来看 advantage，即 $$\delta_t = r_t + \gamma V(s_{t+1}) - V(s_t)$$（TD 残差）。因为只看一步，不用等到回合结束、不依赖整条轨迹的累积回报，所以方差小；但一步的判断不准，$$V(s_{t+1})$$ 本身是估计值，估计有误差就会引入偏差，因此偏差大（我们无法从部分生成的响应中准确预测最终奖励）。这就是 GAE 的用武之地，它提出通过多步时间差分 (multi-step TD) 来平衡偏差和方差。具体是从 reward 回溯，把所有未来步的 TD 残差按指数衰减加权求和：$$A_t = \sum_{k=0}^{T-t} (\gamma\lambda)^k \delta_{t+k}$$，即用 GAE 计算每个 token 的优势 $$A_t$$。看的越远的残差，权重 $$(\gamma\lambda)^k$$ 衰减越多：近期步的信号权重高，远期步的信号逐渐被淡化，从而既吸收了多步信息（降低偏差），又不完全依赖长程累积回报（控制方差）。其中 gamma 是时间折扣因子，控制未来奖励的重要性，越大代表未来奖励越重要。lambda 是 GAE 平衡因子，控制 bias-variance 权衡，lambda 越大 → 衰减越慢、看的越远，方差大，偏差小；λ 越小 → 衰减越快、越偏向单步 TD，方差小，偏差大（λ=0 退化为一步 TD，λ=1 退化为 MC）。
-
-```python
-def compute_gae(rewards, values, gamma=1.0, lam=0.95):
-    advantages = torch.zeros_like(rewards)
-    last_adv = 0
-    for t in reversed(range(rewards.size(1))):
-        delta = rewards[:, t] + gamma * values[:, t + 1] - values[:, t]
-        advantages[:, t] = last_adv = delta + gamma * lam * last_adv
-    return advantages
-```
-
-  - 根据采样到的数据进行多次策略迭代更新，每次更新之后得到`log_probs`和新的`values`。
-
-  - 用以下 loss 对 Actor/Policy Model 进行优化，剪切函数限制策略更新幅度，确保数值稳定性。当 $$A_t > 0$$，意味着 critic model 对当前 action 做出了正反馈，因此 $$r_t(\theta)$$ 要提高，反之要降低。
-
-  $$L^{\text{clip}}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t,\ \text{clip}(r_t(\theta),\ 1 - \epsilon,\ 1 + \epsilon) \hat{A}_t \right) \right]$$
-
-  其中 $$t$$ 为当前 token，$$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$ 为重要性采样比率，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
-
-```python
-def actor_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
-    ratio = torch.exp(log_probs - old_log_probs)  # [B]
-    unclipped = ratio * advantages
-    clipped = torch.clamp(ratio, 1 - clip_range, 1 + clip_range) * advantages
-    loss = -torch.min(unclipped, clipped).mean()
-    return loss
-```
-
-  - 再根据`rewards`和`values`得到`critic_loss`，优化 Critic/Value Model。
-
-  - `actor_loss`和`critic_loss`加权求和后用来最终优化。
-
-
-- **PPO 有了 reward model 为什么还要 critic/value model？**
-
-  critic/value model 是内部奖励，仅需当前上下文，在线学习（随 RL 训练同步更新），反映的是当前 policy 的行为价值（即当前策略下各状态的预期收益）；而 reward model 是外部奖励，需要完整回答，是基于人类偏好数据预先训练好的静态模型。随着 policy 不断更新，其生成分布会偏离训练 RM 时的分布，冻结的 RM 评估可能失准，而在线更新的 critic 始终贴合当前策略，能提供逐 token 的价值估计。
-
-  更深层的原因在于梯度估计：critic 输出的 $$V(s_t)$$ 充当优势估计的 baseline，是方差缩减器。由于 $$V(s_t)$$ 不依赖当前 action，减去它不改变梯度的期望（保持无偏），但能显著降低方差。其效果是只有超出预期（$$Q(s_t,a_t) > V(s_t)$$，即 advantage > 0）的 action 才会被强化，低于预期的被抑制，避免了"只要回合总奖励为正，所有 token 都被无差别强化"的问题，使训练更稳定。
-
-
-- **为什么 reward model 对完整回复打分，而不是训练 token level 的奖励？**
-
-  Reward model 通常对完整回复（sample-level）输出一个标量奖励，而不训练 token level 的奖励，主要原因有两个：
-
-  1. 难以获得高质量的 token level reward 标注：人类偏好标注天然是整体性的（哪个回复更好），要让人对每个 token 的好坏逐一标注，成本极高且标注一致性差，缺乏可靠的监督信号；
-
-  2. 局部奖励可能误导全局目标：单个 token 的好坏取决于后续生成的上下文，局部看起来合理的 token 未必服务于最终目标（如推理中间某步看似正确但导致最终答案错误），直接用 token level 局部奖励优化，容易让模型追逐局部收益而偏离全局目标。
-
-  因此实践中采用"完整回复打分 + 信用分配"的组合：reward 落在序列末尾，再由 critic/GAE（PPO）或组内相对奖励（GRPO）把信号回传到 token 级别。
-
-
-- **Reward Clip（奖励裁剪）**
-
-  Reward clip 是 RL 训练中的稳定性技巧：将 reward model 或规则奖励的原始值裁剪到固定区间（如 [-1, 1] 或 [-5, 5]），即 `reward = clip(reward, -c, c)`。
-
-  作用：
-
-  1. 抑制离群奖励：RM 输出的原始奖励量纲不定、可能出现极端值（特别高或特别低），个别离群样本会主导梯度，导致训练震荡；裁剪后奖励分布被压缩，梯度更平稳；
-
-  2. 配合归一化使用：实践中常与组内均值/标准差归一化（如 GRPO）或 advantage 归一化组合，先裁剪极端值再归一化，避免极端值污染统计量；
-
-  3. 限制单次更新的信号强度：裁剪相当于给优势估计设了上界，防止某个样本的优势过大导致策略更新过猛。
-
-  注意区分：reward clip 作用于奖励值本身，而 PPO 的 clip 作用于重要性采样比率 $$r_t(\theta)$$（限制策略更新幅度），两者目的不同但都是为了稳定训练。
-
-
-- **为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？**
-
-  需要用标注样本训练；分类模型代价低。
-
-
-- **DPO**
-
-
-  $$L^{\text{DPO}}(\theta) = -\log \left( \frac{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right)}{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right) + \exp\left( \beta \cdot \log \pi_\theta(y^- \mid x) \right)} \right)$$
-
-  其中，$$y^+$$ 是人类偏好的回答，$$y^-$$ 是较差的回答，$$\beta$$ 是温度系数，控制偏好强度
-
-```python
-def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
-    diff = logp_chosen - logp_rejected  # [B]
-    loss = -torch.nn.functional.logsigmoid(beta * diff).mean()
-    return loss
-```
-
-
-- **GRPO**
-
-
-  $$L^{\text{GRPO}}(\theta) = - \log \left( \frac{\exp\left(R_\theta(x, y^+)\right)}{\exp\left(R_\theta(x, y^+)\right) + \exp\left(R_\theta(x, y^-)\right)} \right)$$
-
-  其中，$$R_\theta$$ 表示奖励形式的打分函数：
-
-  $$R_\theta(x, y) = \beta \cdot \left( \log \pi_\theta(y \mid x) - \log \pi_{\text{ref}}(y \mid x) \right)$$
-
-  其中，$$\pi_{\text{ref}}$$ 是参考策略（例如预训练模型），用于提供稳定的对比基准。
-
-  GRPO 流程如下：
-
-  - 查询 q 是任务输入，例如一个上下文或状态；
-
-  - 输入到策略模型（Policy Model），生成对应的多个输出 $$o_1, o_2, \dots, o_G$$（动作或结果），即用可更新的 LLM 生成 q 的 $$o_1, o_2, \dots, o_G$$；
-
-  - 输出 $$o_i$$ 被输入到冻结的奖励模型（Reward Model），可为训练的，也可为基于规则的，生成奖励 $$r_i$$（通常是 sample-level 的一个标量），用于衡量 $$o_i$$ 的质量；
-
-  - 根据 $$r_1, r_2, \dots, r_G$$，计算奖励均值和奖励标准差，得到 $$o_i$$ 的相对奖励，即 advantages；​
-
-  - 根据相对奖励，得到每一个样本的 loss，进行优化；
-
-```python
-def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range=0.2):
-    # 计算每个组的 ratio
-    ratio = torch.exp(group_log_probs - group_old_log_probs)  # [G, B]
-
-    # 计算组内相对优势（相对于组内其他策略优势的平均）
-    mean_advantages = group_advantages.mean(dim=0, keepdim=True)  # [1, B]
-    relative_advantages = group_advantages - mean_advantages     # [G, B]
-
-    # 计算组内相对 ratio（相对于组内其他策略 ratio 的平均）
-    mean_ratio = ratio.mean(dim=0, keepdim=True)  # [1, B]
-    relative_ratio = ratio / (mean_ratio + 1e-8)  # [G, B]
-
-    # Unclipped and clipped losses 基于相对比率和相对优势
-    unclipped = relative_ratio * relative_advantages
-    clipped = torch.clamp(relative_ratio, 1 - clip_range, 1 + clip_range) * relative_advantages
-
-    # 对所有组和批次求平均，取最小
-    loss = -torch.min(unclipped, clipped).mean()
-    return loss
-```
-
-  - 输出 o_i 被输入到冻结的参考模型（Reference Model），计算输出 o_i 与参考策略之间的 KL 散度，用于限制策略更新。
-
-
-- **GRPO 怎么去掉 critic/value model 的？**
-
-  采样多次，用 reward model 评价的平均值来充当 critic/value model
-
-
-- **为什么 MoE + GRPO 不稳定？怎么解决？**
-
-  对于MoE模型， $$\pi_\theta$$ 和 $$\pi_{old}$$ 有差别，就可能导致 route 到不同的专家，从而导致 ratio 波动很大。
-
-  Routing Replay：缓存 $$\pi_{old}$$ 推理时激活的专家，在计算 $$\pi_\theta(y_{i,t}\|x_i,y_{<t})$$ 推理时进行重放，也激活相同的专家。这样 ratio 的波动就不会那么大了
-
-
-- **长 horizon 任务为什么要回到 PPO（Critic-based PPO）？**
-
-  长 horizon 任务会产生超长轨迹，需要用 compaction（压缩）切分成多个子轨迹。但这导致：
-  - 同一个 prompt 的不同 rollout，产生的子轨迹数量不同
-  - 每个子轨迹的长度差异很大
-
-  GRPO 的 group-wise optimization 不适用：
-  - 需要对同一个 prompt 的多个 rollout 做组内比较
-  - 子轨迹数量和长度不一致时，无法直接比较
-  - 组内归一化会扭曲优势估计
-
-  **GLM-5.2 的解决方案：回归传统 PPO 范式**
-
-  1. **Single-rollout formulation**：每个 rollout 独立学习，不依赖组内比较
-  2. **Critic model**：引入 critic 估计 token-level advantages（而非 group-relative）
-  3. **Token-level loss**：处理子轨迹长度不平衡问题
-
-  **和 GRPO 的选择**：
-  - 短任务用 GRPO（省 critic model）
-  - 长 horizon + compaction 用 PPO（需要 critic 做 token-level advantage）
-
-  来源：GLM-5.2 (2026.6)
-
-
-- **DAPO**
-
-  DAPO 主要是根据 GRPO 进行改进，主要改进点为
-  - 去掉了 KL 散度，KL 散度可以限制模型同初始模型不会显著偏离，但是在训练 long-CoT reasoning model 时，模型分布会显著偏离初始模型，所以去掉 KL 散度的约束。
-  - 提高剪切上限（Clip-Higher）以避免熵过早坍缩，导致某些组生成的结合相同，限制探索
-  - 动态采样（Dynamic Sampling）解决一组输出准确率为 1 或 0 时的梯度消失导致 Policy 没有优化，样本利用效率降低的问题
-  - GRPO 先在样本内按 Token 数平均 loss，再在样本间聚合 loss，从而导致较长样本和较短样本的损失贡献是一样的，即对于答案正确的，GRPO 偏向于选择答案长度较短的回复，而对于答案错误的，GRPO 偏向于让模型生成更长的回复。DAPO 改进为 Token-Level 策略梯度损失
-  - 在 RL 训练中，一般会设置最大长度，对过长回复进行截断，从而其 reward 会为 -1，扰乱训练。DAPO 设置了对长序列的合理惩罚（Overlong Reward Shaping），避免过长后截断导致模型无法得到奖励的情形，以缓解噪声并稳定训练。
-
-
-- **GSPO**
-
-  重要性采样修正不再对应 token 级别，而是对应序列级别。
-
-
-- **PPO vs DPO vs GRPO**
-
-  所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。PPO 依赖于 reward model 和 value model；DPO 没有显式探索机制。
-
-
-- **online vs offline**
-
-
-- **on-policy vs off-policy**
-
-  数据来源于当前策略生成为 on-policy，其数据只能更新一次 policy，之后需要用更新的 policy 重新采样数据，因此利用效率低；数据来源于历史偏好数据为 off-policy。
-
-
-- **OPD (On-Policy Distillation)**
-
-  OPD 将 on-policy 思想引入知识蒸馏，替代传统的 off-policy SFT 蒸馏范式，是当前 LLM 后训练（Post-Training）的核心技术方向之一。
-
-  **传统蒸馏（Off-Policy）**：老师模型预先对 prompt 生成完美轨迹，构成静态数据集。学生模型在这个数据集上做 SFT。主要问题：（1）分布不匹配——训练数据是老师分布，推理时学生面对自己的分布，一旦生成偏离老师轨迹，模型容易崩溃；（2）学生没有探索机制，只学会模仿答案而非推理过程。
-
-  **OPD（On-Policy）**：学生模型自己对 prompt 采样生成轨迹，老师模型对这些轨迹打分或提供反馈，学生根据反馈更新参数。核心变化：训练数据来自学生自身分布，老师从"示范者"变为"评判者"。优点包括：
-  - 分布对齐：训练和推理在同一分布下，避免 train-test mismatch
-  - 探索能力：学生可以尝试不同路径，老师反馈引导优化方向
-  - 兼顾 Pass@1 和 Pass@k：既有 RL 的探索（优化负样本 → Pass@k 上升），也有 SFT 的高效学习
-
-  **典型实践**：
-  - Think Machines Lab（2025.10）首次系统提出 OPD 范式，展示在数学推理上以 RL 1/10 算力达到相近效果
-  - Qwen3 采用两阶段蒸馏：第一阶段 off-policy SFT 打底，第二阶段 on-policy 蒸馏提升
-  - DeepSeek-R1 系列以 off-policy SFT 为主，后续 follow-up 转向 OPD
-  - Gemma 2/3 也在训练流程中引入 OPD
-
-  **与 RL 的关系**：OPD 可视作 SFT 和 RL 之间的中间地带。相比纯 RL（如 GRPO），OPD 不需要显式奖励模型或 value model，老师模型的 logits/反馈直接作为监督信号，算力需求低得多。相比纯 SFT，OPD 具备在线探索能力，能发现训练数据中不存在的推理路径。
-
-  **核心要解决的问题**：
-  - 老师反馈质量：老师模型对错误轨迹的判断准确度直接影响蒸馏效果
-  - 采样效率：on-policy 需要反复采样，如何平衡探索广度和训练效率
-  - 分布漂移控制：学生策略更新后可能过度偏离老师分布，需要 KL 约束或周期性回滚
-
-
-- **On-Policy Cross-Stage Distillation**
-
-  **问题背景**：现代 LLM Post-Training 通常分多个 RL 阶段（如 GLM-5 的 Reasoning RL → Agentic RL → General RL），每个阶段专注不同能力。但后续阶段训练时，模型会遗忘前面阶段学到的能力（灾难性遗忘）。
-
-  **传统方法的局限**：
-  - 经验回放（混合前面阶段数据）：off-policy 数据分布与当前策略不一致
-  - EWC 正则化（约束参数变化）：太强会限制新能力学习，太弱防不住遗忘
-  - 多任务联合训练：不同能力的 reward 信号冲突，难以平衡
-
-  **核心思想**：用前面阶段训练好的模型作为 teacher，在当前策略 on-policy 采样的 trajectory 上做 KL 蒸馏。
-
-  **具体流程**：
-  ```
-  阶段 1: Reasoning RL → 得到模型 π₁
-  阶段 2: Agentic RL → 在 π₁ 基础上训练，同时用 π₁ 蒸馏 → 得到 π₂
-  阶段 3: General RL → 在 π₂ 基础上训练，同时用 π₁ 和 π₂ 蒸馏 → 得到 π₃
-  ```
-
-  **关键设计**：
-  1. **On-policy 采样**：当前策略 π 生成 trajectory，teacher 模型在同样的 trajectory 上给出 logits
-  2. **蒸馏 loss**：KL 散度，让当前模型的输出分布接近 teacher
-  3. **选择性蒸馏**：只在当前任务上蒸馏（不是全局蒸馏），避免限制新能力
-
-  **为什么有效**：
-  - Teacher 模型在前面阶段已经是最优的，蒸馏信号质量高
-  - On-policy 采样保证数据分布和当前策略一致（不像经验回放那样有分布偏移）
-  - KL 散度作为软约束，允许模型偏离但不会太远
-
-  **GLM-5 实践**：在 Reasoning RL → Agentic RL → General RL 的三阶段流程中，每个后续阶段都用前面阶段的模型做 on-policy 蒸馏，有效缓解了灾难性遗忘问题。
-
-
-- **KL 散度的几种计算方式**
-
-  标准 KL 计算方式：$$KL(q(x) \| p(x))=\sum_{x \in X} {q(x) * log_2{\frac{q(x)}{p(x)}}}$$
-
-  然而，在实际计算中，直接计算 KL 散度可能非常困难，主要原因如下：
-  - 需要对所有  进行求和或积分，计算成本高。
-  - 计算过程中可能涉及大规模概率分布，导致内存消耗过大。
-
-  因此，通常使用近似方法来计算 KL 散度。
-
-  设 $$r=\frac{p(x)}{q(x)}$$
-
-  $$k1=log(\frac{q(x)}{p(x)})=-logr$$，这是无偏估计，但方差较大。
-
-  $$k2=1/2 * (log(\frac{p(x)}{q(x)}))^2=1/2 * (logr)^2$$，有偏估计，但实证中误差小，且低方差，保证值为正数。
-
-  $$k3=\frac{p(x)}{q(x)} - 1 - log(\frac{p(x)}{q(x)})=r - 1 - logr=r - 1 + k1$$，无偏估计，且恒大于等于 0。
-
-
-- **KL 散度放在 Loss 和 Reward 中的区别**
-
-  KL 散度既可以作为 Loss 的一部分，也可以作为 Reward 的一部分，两者的核心区别在于优化方式和约束机制：
-
-  **作为 Loss（如 VAE、知识蒸馏）**：
-  - 直接参与梯度计算，通过反向传播更新参数
-  - 优化目标是最小化 KL 散度本身，强制约束模型分布接近目标分布
-  - 约束强度更强、更直接，模型必须严格遵循分布约束
-  - 典型场景：VAE 中的正则化项 $$L = \mathbb{E}[\log p(x|z)] - D_{KL}(q(z|x) \| p(z))$$；知识蒸馏中的 soft target 对齐
-
-  **作为 Reward（如 PPO、GRPO）**：
-  - 作为奖励信号的组成部分，间接影响策略更新
-  - 通常形式为 $$R = R_{task} - \beta \cdot D_{KL}(\pi_\theta \| \pi_{ref})$$，通过奖励惩罚来约束策略
-  - 约束更柔性，可调节系数 $$\beta$$ 控制偏离程度，允许模型在任务奖励和分布约束之间权衡
-  - 梯度通过策略梯度/优势函数传递，而非直接对 KL 求导
-  - 典型场景：RLHF 中防止模型偏离预训练分布；PPO/GRPO 中的 reference model 约束
-
-  **token 级实现细节**：任务奖励（RM 打分）只分配在最后一个 token 上，其余 token 的 reward 皆为 0，是稀疏的；除非逐 token 减去 KL 惩罚项，即每个 token 的 reward 为 $$r_t = -\beta \cdot KL_t$$（最后一个 token 再加上任务奖励），KL 越大、reward 越低，这样每个 token 都有非零奖励信号，缓解稀疏性。逐 token 的 KL 计算无需重新生成：直接把新策略已生成的文本喂给冻结的参考模型做一次前向（forward pass），取出对应的 log probs，与新策略的 log probs 相减即可，成本仅为一次推理前向。
-
-  **核心区别总结**：
-
-  | 维度 | Loss 中的 KL | Reward 中的 KL |
-  |------|-------------|---------------|
-  | 优化目标 | 直接最小化 KL | 通过奖励间接约束 |
-  | 梯度来源 | 直接计算 KL 的梯度 | 通过策略梯度传递 |
-  | 约束强度 | 强、直接 | 柔性、可调节 |
-  | 系数作用 | 固定权重 | 可调节 $$\beta$$，可自适应 |
-  | 典型应用 | 生成模型训练 | RL 微调、对齐训练 |
-
-  **为什么需要区分**：在 RL 中如果将 KL 直接作为 Loss，会导致策略更新过于激进，破坏探索；而作为 Reward 可以在保持探索的同时，柔性约束策略不要偏离太远。反之，在 VAE 等生成模型中如果将 KL 作为 Reward，则无法直接通过梯度下降优化，训练会变得不稳定。
-
-
-- **熵控制在强化学习里的作用**
-
-  在大模型训练的强化学习阶段，设置较高的 temperature 可以防止模型过度自信，鼓励模型采取高熵动作，从而扩大探索空间。另一种方式是在 group-level 用 smi/dpp/self-bleu 计算多样性，进行 reward shaping 来控制熵的变化。
-
-  熵坍塌：随着训练的进行，entropy 逐渐降低。导致某些 group 采样出的 response 几乎相同，使得模型在早期变得更加确定，限制了模型的探索空间。
-
-
-- **多目标 RL 中为什么不能简单将多个奖励相加？**
-
-  当多个奖励信号简单相加时，会导致训练不收敛。
-
-  原因：
-  - 奖励信号坍塌：不同奖励的量级差异导致某些奖励主导优化方向
-  - 方差差异导致梯度失衡：不同奖励的方差不同，高方差奖励会压制低方差奖励的梯度贡献
-
-  解决方案：
-  - GDPO（Group Decomposed Policy Optimization）：解耦归一化方法
-  - DVAO（Dynamic Variance-adaptive Advantage Optimization）：动态方差自适应，根据奖励方差动态调整权重
-
-
-- **格式奖励设计：Gating 与 Addition Rubrics 如何选择？**
-
-  加法 Rubrics：`R = w1 × R_format + w2 × R_content`
-  - 优点：简单直接，各奖励独立优化
-  - 缺点：可能导致格式分低但总分高（模型学会"以内容弥补格式"）
-
-  乘法 Gating：`R = R_format × R_content`
-  - 优点：格式是获得奖励的必要前提，强制模型先满足格式要求
-  - 缺点：格式错误会导致奖励归零，可能过于严格
-
-  连续值 Gating 设计：可使用 `R = R_content × sigmoid(R_format)` 等平滑函数，避免硬性归零。
-
-  注意：GRPO 的 group normalize 使得 advantage 是 group 内相对排名，奖励组合方式需特别考虑。
-
-
-- **RLVR**
-
-  用 Verifier，通过与预设的答案或规则相比较，给出一个二元值，这种方式仅适用于有标准答案的场景，而在开放问题中则不太适用。
-
-
-- **PRM 和 ORM**
-
-  PRM 粒度细，但标注消耗大。最朴素的方式是 PPO 中的 critic model，人工标注的经典数据集是 PRM800K，也有些工作采用自动标注，使用方法包括 MCTS。
-
-
-- **MCTS**
-
-  MCTS 包括选择、扩展、模拟、回溯四个步骤。
-
-  相比 BoN 每条路径不管好坏都 roll 到底，PRM-guided MCTS 可以剪枝，提高 token efficiency，但也会导致探索力度不够。
-
-
-- **Reasoning**
-
-  CoT，ToT，Self-Consistency，s1。
-
-
-- **Safety / Halluciation**
-
-  出现幻觉原因：1. 语料中存在过时，虚构的内容，或因长尾效应缺乏与下游任务相关的领域知识；2. 语言模型的本质机制是预测下一个最可能的词，它只保证语言上看起来连贯合理，并不保证事实正确，所以它倾向即使不知道，也会编一个出来，在不确定时依然输出确定性答案，很少说我不知道；3. 推理时随机采样的生成策略。
-
-  解决方案：提高训练数据质量；RAG 提供权威资料；Prompt Engineering：明确告诉模型不要编造、请回答已知事实，或让模型先思考再输出（如 Let’s think step by step）；生成之后进行事实校验，如比对知识图谱或自动校验；RLHF；多模型协作。
-
-
-- **Long Context**
-
-  位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据；拆分 agent。
-
-
-- **LLM设计中的 System 1 和 System 2**
-
-  默认模式是 System 1：标准的自回归生成，快速但单步预测。
-
-  通过 Prompt Engineering 或架构设计激活 System 2：
-
-  - Chain-of-Thought（思路链）提示，引导模型一步步“推理”。
-
-  - 多阶段推理框架，如 ReAct、Self-Ask、Tool Augmentation。
-
-  - 结合检索（RAG）、记忆模块或外部计算器等工具。
-
-
-- **Test-time Scaling**
-
-  实现 test-time scaling，需要先激励 LLM 在 thinking 上耗费更多资源，从而生成更长的回答，或者更多的回答。
-
-  更长的回答可以通过如 CoT 的 prompting，如 s1 的改变解码策略。
-
-  更多的回答可以通过如 Self-Consistency 的 Parallel Scaling，如 Self-Refine 的 Sequential Scaling，如 MoA 的模型混合。
-
-  获得回答之后，需要用 PRM 或 ORM 进行验证。PRM 有助于缩小搜索空间，相比于 ORM 的奖励稀疏，它的奖励更加密集。它的实现包括训练一个独立的模型。ORM 的实现包括训练一个独立的模型，self-consistency，voting 或如 deepseek 的启发式验证。
-
-  另外一种方案是搜索，如 ToT，MCTS，Beam Search。
-
-  提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
-
-
 #### Evaluation
 
 - **Base model eval**
@@ -6776,6 +6190,650 @@ RLHF 上层应用：veRL / OpenRLHF
   - **Causal Reward**：因果奖励（2025 arxiv）
 
   **新方向**：Inference-Time Reward Hacking（NeurIPS 2025）— Best-of-N 采样时也会出现 hacking
+
+
+### Post Training
+
+主线导航：基础与核心概念 → SFT 与训练细节 → RL 算法主线 → 奖励设计 → 训练稳定性 → 知识蒸馏 → 推理与 Test-time → 能力专题。前三组打基础，从概念辨析到算法演进主线；中间三组围绕训练工程问题（奖励、稳定性、蒸馏）；最后两组是推理能力与垂直能力的延伸。
+
+#### 基础与核心概念
+
+RL 的基本概念与训练范式辨析，回答时先给结论，再结合一个具体例子展开。
+
+- **强化学习和监督学习有什么区别？**
+
+  监督学习中每一个决策（预测标签）是独立的，它对决策的优化取决于标签。强化学习每一个决策是相互影响的，它对决策的优化取决于延时标签（奖励）。过去的 AI 训练方式主要依赖监督学习，也就是让 AI 通过大量人类标注的数据来学习。换句话说，AI 只是一个“超级记忆机”，它能模仿人类的答案，但却不一定真正理解问题的本质。而强化学习的出现，让 AI 不再是单纯的模仿者，而是能够主动探索、试错、优化自己推理方式的智能体。这就像是在训练一个孩子解数学题，监督学习相当于直接告诉他答案，而强化学习则是让他自己尝试解题，并根据最终的正确率进行调整。
+
+  监督学习关心的是 Pass@1
+
+  RL 一开始关心的是 Pass@k，但最终也会回归 Pass@1。
+
+
+- **online vs offline**
+
+
+- **on-policy vs off-policy**
+
+  数据来源于当前策略生成为 on-policy，其数据只能更新一次 policy，之后需要用更新的 policy 重新采样数据，因此利用效率低；数据来源于历史偏好数据为 off-policy。
+
+
+- **什么是重要性采样（Importance Sampling）？为什么 PPO 需要它？**
+
+  重要性采样是用一个分布 $$q$$ 的样本去估计另一个分布 $$p$$ 下期望的方法，通过重要性比率修正两个分布的差异：
+
+  $$\mathbb{E}_{x \sim p}[f(x)] = \mathbb{E}_{x \sim q}\left[\frac{p(x)}{q(x)} f(x)\right]$$
+
+  在 PPO 中的意义：rollout 数据由旧策略 $$\pi_{\theta_{old}}$$ 采样生成，成本很高（每次都要完整的推理生成），而策略更新后 $$\pi_\theta$$ 已偏离旧策略。乘上重要性比率 $$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{old}}(a_t \mid s_t)}$$ 后，就可以重复利用旧策略采的数据来无偏估计新策略下的梯度，修正分布偏移带来的偏差，一批采样数据能做多轮（epoch）更新，大幅提升样本效率。这也是 PPO 相比严格 on-policy 方法的核心优势。
+
+  局限：当新旧策略差异变大时，重要性比率的方差随之增大，估计变得不稳定（个别样本 ratio 过大主导梯度）。因此 PPO 用 clip 限制 ratio 在 $$[1-\epsilon, 1+\epsilon]$$ 内，牺牲少量偏差换取稳定性；GSPO 则进一步把重要性修正的粒度从 token 级改为序列级，降低多 token 比率累乘带来的方差。
+
+
+- **KL 散度的几种计算方式**
+
+  标准 KL 计算方式：$$KL(q(x) \| p(x))=\sum_{x \in X} {q(x) * log_2{\frac{q(x)}{p(x)}}}$$
+
+  然而，在实际计算中，直接计算 KL 散度可能非常困难，主要原因如下：
+  - 需要对所有  进行求和或积分，计算成本高。
+  - 计算过程中可能涉及大规模概率分布，导致内存消耗过大。
+
+  因此，通常使用近似方法来计算 KL 散度。
+
+  设 $$r=\frac{p(x)}{q(x)}$$
+
+  $$k1=log(\frac{q(x)}{p(x)})=-logr$$，这是无偏估计，但方差较大。
+
+  $$k2=1/2 * (log(\frac{p(x)}{q(x)}))^2=1/2 * (logr)^2$$，有偏估计，但实证中误差小，且低方差，保证值为正数。
+
+  $$k3=\frac{p(x)}{q(x)} - 1 - log(\frac{p(x)}{q(x)})=r - 1 - logr=r - 1 + k1$$，无偏估计，且恒大于等于 0。
+
+
+- **KL 散度放在 Loss 和 Reward 中的区别**
+
+  KL 散度既可以作为 Loss 的一部分，也可以作为 Reward 的一部分，两者的核心区别在于优化方式和约束机制：
+
+  **作为 Loss（如 VAE、知识蒸馏）**：
+  - 直接参与梯度计算，通过反向传播更新参数
+  - 优化目标是最小化 KL 散度本身，强制约束模型分布接近目标分布
+  - 约束强度更强、更直接，模型必须严格遵循分布约束
+  - 典型场景：VAE 中的正则化项 $$L = \mathbb{E}[\log p(x|z)] - D_{KL}(q(z|x) \| p(z))$$；知识蒸馏中的 soft target 对齐
+
+  **作为 Reward（如 PPO、GRPO）**：
+  - 作为奖励信号的组成部分，间接影响策略更新
+  - 通常形式为 $$R = R_{task} - \beta \cdot D_{KL}(\pi_\theta \| \pi_{ref})$$，通过奖励惩罚来约束策略
+  - 约束更柔性，可调节系数 $$\beta$$ 控制偏离程度，允许模型在任务奖励和分布约束之间权衡
+  - 梯度通过策略梯度/优势函数传递，而非直接对 KL 求导
+  - 典型场景：RLHF 中防止模型偏离预训练分布；PPO/GRPO 中的 reference model 约束
+
+  **token 级实现细节**：任务奖励（RM 打分）只分配在最后一个 token 上，其余 token 的 reward 皆为 0，是稀疏的；除非逐 token 减去 KL 惩罚项，即每个 token 的 reward 为 $$r_t = -\beta \cdot KL_t$$（最后一个 token 再加上任务奖励），KL 越大、reward 越低，这样每个 token 都有非零奖励信号，缓解稀疏性。逐 token 的 KL 计算无需重新生成：直接把新策略已生成的文本喂给冻结的参考模型做一次前向（forward pass），取出对应的 log probs，与新策略的 log probs 相减即可，成本仅为一次推理前向。
+
+  **核心区别总结**：
+
+  | 维度 | Loss 中的 KL | Reward 中的 KL |
+  |------|-------------|---------------|
+  | 优化目标 | 直接最小化 KL | 通过奖励间接约束 |
+  | 梯度来源 | 直接计算 KL 的梯度 | 通过策略梯度传递 |
+  | 约束强度 | 强、直接 | 柔性、可调节 |
+  | 系数作用 | 固定权重 | 可调节 $$\beta$$，可自适应 |
+  | 典型应用 | 生成模型训练 | RL 微调、对齐训练 |
+
+  **为什么需要区分**：在 RL 中如果将 KL 直接作为 Loss，会导致策略更新过于激进，破坏探索；而作为 Reward 可以在保持探索的同时，柔性约束策略不要偏离太远。反之，在 VAE 等生成模型中如果将 KL 作为 Reward，则无法直接通过梯度下降优化，训练会变得不稳定。
+
+
+- **RL 正负样本**
+
+  RL 奖励正样本 惩罚负样本。
+
+  优化正样本会导致 pass@1 上升，但 pass@k 下降，会让 LLM 更喜欢输入正样本中出现的 token。
+
+  优化负样本会导致 pass@k 上升，能促进策略熵增，最终 pass@1 也会上升。
+
+  一般来讲，优化负样本会比优化正样本带来的价值更大，优化正样本其实近似等价为 SFT，优化负样本可以让模型无法通过蒙对、幻觉等方式获得收益。
+
+
+#### SFT 与训练细节
+
+监督微调及具体训练实现细节（思考模式、Loss Mask）。
+
+- **SFT**
+
+  选择模型和模版，保证当前模版在当前模型上已有较好的表现。
+
+  Packing
+  - 单轮数据：直接 mask prompt，在 response 上计算 next token prediction loss
+  - 多轮数据：简单的操作是根据轮数划分成多条数据，但效率比较低。实际上它也可以直接输入，对对应每轮的 response 做 next token prediction 即可。
+
+  拒绝采样也是常见的一种提高 SFT 的方式。
+
+
+- **GLM-5 的三种思考模式（Thinking Modes）**
+
+  **问题背景**：不同任务对思考的需求不同。简单问题不需要思考，复杂问题需要深度推理，多轮对话可能需要跨轮次保持思考连续性。
+
+  **三种模式**：
+
+  1. **Interleaved Thinking（交错思考）**
+     - 每次生成响应前都进行思考
+     - 适用于需要即时推理的场景
+     - 思考 → 行动 → 思考 → 行动 的循环
+
+  2. **Preserved Thinking（保留思考）**
+     - 跨多轮对话保留所有思考块（thinking blocks）
+     - 避免重复推导，减少信息丢失和不一致性
+     - 特别适合长 horizon 的复杂编码任务
+     - 例：第一轮思考如何分解问题 → 第二轮直接基于已有方案继续 → 第三轮避免遗忘和矛盾
+
+  3. **Turn-level Thinking（轮次级思考）**
+     - 按轮次控制是否思考
+     - 轻量请求关闭思考以降低延迟/成本
+     - 复杂任务启用思考以提高准确性和稳定性
+
+  **为什么这样设计？**
+
+  编码 Agent 场景的特殊需求：
+  - 长 horizon 任务需要跨多轮保持推理连贯性
+  - 重复推导会浪费 token 和时间
+  - 不同轮次的任务复杂度差异大
+
+  **和其他模型的对比**：
+
+  | 模型 | 思考模式 | 特点 |
+  |------|---------|------|
+  | Claude Opus 4.5+ | Extended Thinking | 支持思考块保留 |
+  | DeepSeek-R1 | Chain-of-Thought | 固定开启思考 |
+  | GLM-5 | 三种模式 | 灵活控制，支持跨轮保留 |
+
+  来源：GLM-5 (2026.2)
+
+
+- **Agent 训练中的 Loss Mask 如何处理？**
+
+  Agent 训练需要区分不同部分的 loss 计算，通常只对**模型生成的内容**计算 loss：
+
+  | 部分 | 是否计算 Loss | 说明 |
+  |------|-------------|------|
+  | **系统指令** | ❌ Mask | 固定模板，不学习 |
+  | **用户输入** | ❌ Mask | 用户问题，不学习 |
+  | **工具调用（思考/规划）** | ✅ 计算 | Agent 的决策输出 |
+  | **工具返回结果** | ❌ Mask | 外部系统返回，不学习 |
+  | **最终回复** | ✅ 计算 | Agent 对用户的输出 |
+
+  **多轮对话的 mask 策略：**
+  - 每轮只在该轮的 **Agent 输出**（工具调用 + 最终回复）上计算 loss
+  - 工具返回内容虽然参与上下文，但不计入 loss
+
+  **与纯对话模型的区别：**
+  - 纯对话：mask prompt，只在 assistant 回复上计算 loss
+  - Agent：需要额外 mask 工具返回，但保留工具调用部分的 loss
+
+
+#### RL 算法主线
+
+按"REINFORCE → PPO → DPO/GRPO → 衍生算法"的演进组织：先看最朴素策略梯度的缺陷（广播 reward 问题），再看 PPO 如何用 critic/GAE/clip 解决，然后是去 critic 的 DPO 和 GRPO 及其衍生改进（DAPO/GSPO），最后用算法对比收尾。
+
+- **REINFORCE**
+
+  REINFORCE 是最基础的策略梯度算法，用蒙特卡洛 (Monte-Carlo) 方式估计回报：直接使用整条轨迹（回合）的累积奖励作为优势估计，无需 critic/value model。
+
+  特点：
+
+  - 无偏（unbiased）：使用完整回合的真实回报，不依赖任何近似（如 value model 的估计），因此估计没有偏差；
+
+  - 方差大：单次采样的回报容易受偶然因素影响，不同轨迹的回报波动大，导致梯度估计噪声大、训练不稳定，通常需要多次采样或引入 baseline 来降低方差；
+
+  - 依赖回合的完整性：必须等回合结束（生成完整输出）才能得到回报估计，因此不能用于在线（online）/流式场景，如多轮对话中用户中途离开或回合无法终止的情形。
+
+  这些局限正是后续算法的改进动机：PPO 引入 critic/value model 和 GAE，GRPO 用组内多次采样的相对奖励替代，以降低方差并提升样本利用效率。
+
+
+- **直接拿最终 reward 当成每个 token 的 reward，会有什么问题？**
+
+  这是最朴素的策略梯度做法（即 REINFORCE 的基础形式：序列末尾的 reward 广播到每个 token 上），主要问题有三个：
+
+  1. 梯度估计方差极大：同一个最终奖励被复制给所有 token，所有 token 的梯度方向一致、幅度只取决于 log prob，整条轨迹的梯度估计噪声大，且没有 baseline（如 value model 的 $$V(s_t)$$ 或组内均值）来降低方差，导致训练不稳定；
+
+  2. 无法区分早 token 和晚 token 的贡献：早期生成的 token（如推理方向的选择、解题路线的确定）通常对最终结果影响更大，越晚的 token 越受前文约束、可改变的空间越小，但广播式奖励对所有 token 一视同仁，信用分配完全错误；
+
+  3. 无偏但低效：虽然该估计是无偏的，但需要大量采样才能收敛，样本效率很低。
+
+  解决方案即引入优势估计（advantage）：PPO 用 critic 输出 $$V(s_t)$$ 配合 GAE 做逐 token 的信用分配；GRPO 用组内多次采样的均值/标准差归一化作为 baseline，但仍共享序列级奖励，信用分配粗于 PPO。
+
+
+- **PPO**
+
+  PPO 每一次迭代流程如下：
+
+  - 准备 prompt；
+
+  - 重要性采样：将 prompt 输入到策略模型（Actor/Policy Model，参数需更新），采样生成多个完整输出（以下只用其中一个输出 o 举例说明），并计算输出 o 的概率：`old_log_probs`。
+
+  - 输出 o 被输入到冻结的参考模型（Reference Model），得到`ref_log_probs`和 KL 散度。
+
+  - 输出 o 被输入到冻结的奖励模型（Reward Model），生成该完整输出的结果正确性 score（sample-level 的一个标量），注意只有完整输出的 score 不为 0，不完整输出的 score 都为 0。
+
+  - 将过程合理性奖励和结果正确性奖励合并起来，得到最终奖励 reward。对于不完整输出，其 reward 为`ref_log_probs - old_log_probs`，对于完整输出，其 reward 为`ref_log_probs - old_log_probs + score`。
+
+  - 输出 o 被输入到 Critic/Value Model（同步更新，可由 Actor Model 部分参数初始化，或由 Reward Model 初始化），其用 value head 输出每个不完整输出的 $$V(s_t)$$，其物理意义为当前状态下所有 action 的平均预期收益。
+
+  - 计算优势 advantages，其物理意义采取当前动作会比平均收益多多少，即相对收益，$$Q(s_t, a_t) - V(s_t)$$。评估这一优势主要有两种方法，每种方法都有其利弊，即：1）蒙特卡洛 (Monte-Carlo，MC)：使用完整输出的 reward。由于奖励稀疏，只在生成最后一个 token 时有奖励，这种方法的方差很大，且从 LLM 中获取足够的样本来使用 MC 进行优化成本很高，但它的偏差很低，因为我们可以准确地模拟奖励；2）时间差分 (Temporal difference，TD)：比较简单，直接用上一步的价值估计与当前步的价值估计做对比来看 advantage，即 $$\delta_t = r_t + \gamma V(s_{t+1}) - V(s_t)$$（TD 残差）。因为只看一步，不用等到回合结束、不依赖整条轨迹的累积回报，所以方差小；但一步的判断不准，$$V(s_{t+1})$$ 本身是估计值，估计有误差就会引入偏差，因此偏差大（我们无法从部分生成的响应中准确预测最终奖励）。这就是 GAE 的用武之地，它提出通过多步时间差分 (multi-step TD) 来平衡偏差和方差。具体是从 reward 回溯，把所有未来步的 TD 残差按指数衰减加权求和：$$A_t = \sum_{k=0}^{T-t} (\gamma\lambda)^k \delta_{t+k}$$，即用 GAE 计算每个 token 的优势 $$A_t$$。看的越远的残差，权重 $$(\gamma\lambda)^k$$ 衰减越多：近期步的信号权重高，远期步的信号逐渐被淡化，从而既吸收了多步信息（降低偏差），又不完全依赖长程累积回报（控制方差）。其中 gamma 是时间折扣因子，控制未来奖励的重要性，越大代表未来奖励越重要。lambda 是 GAE 平衡因子，控制 bias-variance 权衡，lambda 越大 → 衰减越慢、看的越远，方差大，偏差小；λ 越小 → 衰减越快、越偏向单步 TD，方差小，偏差大（λ=0 退化为一步 TD，λ=1 退化为 MC）。
+
+```python
+def compute_gae(rewards, values, gamma=1.0, lam=0.95):
+    advantages = torch.zeros_like(rewards)
+    last_adv = 0
+    for t in reversed(range(rewards.size(1))):
+        delta = rewards[:, t] + gamma * values[:, t + 1] - values[:, t]
+        advantages[:, t] = last_adv = delta + gamma * lam * last_adv
+    return advantages
+```
+
+  - 根据采样到的数据进行多次策略迭代更新，每次更新之后得到`log_probs`和新的`values`。
+
+  - 用以下 loss 对 Actor/Policy Model 进行优化，剪切函数限制策略更新幅度，确保数值稳定性。当 $$A_t > 0$$，意味着 critic model 对当前 action 做出了正反馈，因此 $$r_t(\theta)$$ 要提高，反之要降低。
+
+  $$L^{\text{clip}}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t,\ \text{clip}(r_t(\theta),\ 1 - \epsilon,\ 1 + \epsilon) \hat{A}_t \right) \right]$$
+
+  其中 $$t$$ 为当前 token，$$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$ 为重要性采样比率，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
+
+```python
+def actor_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
+    ratio = torch.exp(log_probs - old_log_probs)  # [B]
+    unclipped = ratio * advantages
+    clipped = torch.clamp(ratio, 1 - clip_range, 1 + clip_range) * advantages
+    loss = -torch.min(unclipped, clipped).mean()
+    return loss
+```
+
+  - 再用`critic_loss`优化 Critic/Value Model：本质是回归问题，让 critic 预测的 $$V_\phi(s_t)$$ 逼近回报目标 $$\hat{R}_t$$。目标由 GAE 的 advantage 加上采样时旧 critic 的预测得到：$$\hat{R}_t = \hat{A}_t + V_{old}(s_t)$$，loss 为 MSE：
+
+  $$L^{critic}(\phi) = \mathbb{E}_t \left[ \left( V_\phi(s_t) - \hat{R}_t \right)^2 \right]$$
+
+  与 actor 同理，critic 也可以做 value clipping 来限制单步更新幅度：把新旧 value 的偏差裁剪在 $$\pm\epsilon$$ 内，并取未裁剪/裁剪两项的较大者（悲观估计），防止 critic 在一次更新中跳变导致后续 advantage 计算失真。
+
+```python
+def critic_loss(values, old_values, advantages, clip_range=0.2):
+    returns = advantages + old_values  # GAE 回归目标 R_t = A_t + V_old(s_t)
+    unclipped = (values - returns) ** 2
+    clipped = (torch.clamp(values, old_values - clip_range, old_values + clip_range) - returns) ** 2
+    loss = 0.5 * torch.max(unclipped, clipped).mean()  # 不做 clipping 时即普通 MSE
+    return loss
+```
+
+  - `actor_loss`和`critic_loss`加权求和后用来最终优化。
+
+
+- **PPO 有了 reward model 为什么还要 critic/value model？**
+
+  critic/value model 是内部奖励，仅需当前上下文，在线学习（随 RL 训练同步更新），反映的是当前 policy 的行为价值（即当前策略下各状态的预期收益）；而 reward model 是外部奖励，需要完整回答，是基于人类偏好数据预先训练好的静态模型。随着 policy 不断更新，其生成分布会偏离训练 RM 时的分布，冻结的 RM 评估可能失准，而在线更新的 critic 始终贴合当前策略，能提供逐 token 的价值估计。
+
+  更深层的原因在于梯度估计：critic 输出的 $$V(s_t)$$ 充当优势估计的 baseline，是方差缩减器。由于 $$V(s_t)$$ 不依赖当前 action，减去它不改变梯度的期望（保持无偏），但能显著降低方差。其效果是只有超出预期（$$Q(s_t,a_t) > V(s_t)$$，即 advantage > 0）的 action 才会被强化，低于预期的被抑制，避免了"只要回合总奖励为正，所有 token 都被无差别强化"的问题，使训练更稳定。
+
+
+- **DPO**
+
+
+  $$L^{\text{DPO}}(\theta) = -\log \left( \frac{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right)}{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right) + \exp\left( \beta \cdot \log \pi_\theta(y^- \mid x) \right)} \right)$$
+
+  其中，$$y^+$$ 是人类偏好的回答，$$y^-$$ 是较差的回答，$$\beta$$ 是温度系数，控制偏好强度
+
+```python
+def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
+    diff = logp_chosen - logp_rejected  # [B]
+    loss = -torch.nn.functional.logsigmoid(beta * diff).mean()
+    return loss
+```
+
+
+- **GRPO**
+
+
+  $$L^{\text{GRPO}}(\theta) = - \log \left( \frac{\exp\left(R_\theta(x, y^+)\right)}{\exp\left(R_\theta(x, y^+)\right) + \exp\left(R_\theta(x, y^-)\right)} \right)$$
+
+  其中，$$R_\theta$$ 表示奖励形式的打分函数：
+
+  $$R_\theta(x, y) = \beta \cdot \left( \log \pi_\theta(y \mid x) - \log \pi_{\text{ref}}(y \mid x) \right)$$
+
+  其中，$$\pi_{\text{ref}}$$ 是参考策略（例如预训练模型），用于提供稳定的对比基准。
+
+  GRPO 流程如下：
+
+  - 查询 q 是任务输入，例如一个上下文或状态；
+
+  - 输入到策略模型（Policy Model），生成对应的多个输出 $$o_1, o_2, \dots, o_G$$（动作或结果），即用可更新的 LLM 生成 q 的 $$o_1, o_2, \dots, o_G$$；
+
+  - 输出 $$o_i$$ 被输入到冻结的奖励模型（Reward Model），可为训练的，也可为基于规则的，生成奖励 $$r_i$$（通常是 sample-level 的一个标量），用于衡量 $$o_i$$ 的质量；
+
+  - 根据 $$r_1, r_2, \dots, r_G$$，计算奖励均值和奖励标准差，得到 $$o_i$$ 的相对奖励，即 advantages；​
+
+  - 根据相对奖励，得到每一个样本的 loss，进行优化；
+
+```python
+def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range=0.2):
+    # 计算每个组的 ratio
+    ratio = torch.exp(group_log_probs - group_old_log_probs)  # [G, B]
+
+    # 计算组内相对优势（相对于组内其他策略优势的平均）
+    mean_advantages = group_advantages.mean(dim=0, keepdim=True)  # [1, B]
+    relative_advantages = group_advantages - mean_advantages     # [G, B]
+
+    # 计算组内相对 ratio（相对于组内其他策略 ratio 的平均）
+    mean_ratio = ratio.mean(dim=0, keepdim=True)  # [1, B]
+    relative_ratio = ratio / (mean_ratio + 1e-8)  # [G, B]
+
+    # Unclipped and clipped losses 基于相对比率和相对优势
+    unclipped = relative_ratio * relative_advantages
+    clipped = torch.clamp(relative_ratio, 1 - clip_range, 1 + clip_range) * relative_advantages
+
+    # 对所有组和批次求平均，取最小
+    loss = -torch.min(unclipped, clipped).mean()
+    return loss
+```
+
+  - 输出 o_i 被输入到冻结的参考模型（Reference Model），计算输出 o_i 与参考策略之间的 KL 散度，用于限制策略更新。
+
+
+- **GRPO 怎么去掉 critic/value model 的？**
+
+  采样多次，用 reward model 评价的平均值来充当 critic/value model
+
+
+- **为什么 MoE + GRPO 不稳定？怎么解决？**
+
+  对于MoE模型， $$\pi_\theta$$ 和 $$\pi_{old}$$ 有差别，就可能导致 route 到不同的专家，从而导致 ratio 波动很大。
+
+  Routing Replay：缓存 $$\pi_{old}$$ 推理时激活的专家，在计算 $$\pi_\theta(y_{i,t}\|x_i,y_{<t})$$ 推理时进行重放，也激活相同的专家。这样 ratio 的波动就不会那么大了
+
+
+- **长 horizon 任务为什么要回到 PPO（Critic-based PPO）？**
+
+  长 horizon 任务会产生超长轨迹，需要用 compaction（压缩）切分成多个子轨迹。但这导致：
+  - 同一个 prompt 的不同 rollout，产生的子轨迹数量不同
+  - 每个子轨迹的长度差异很大
+
+  GRPO 的 group-wise optimization 不适用：
+  - 需要对同一个 prompt 的多个 rollout 做组内比较
+  - 子轨迹数量和长度不一致时，无法直接比较
+  - 组内归一化会扭曲优势估计
+
+  **GLM-5.2 的解决方案：回归传统 PPO 范式**
+
+  1. **Single-rollout formulation**：每个 rollout 独立学习，不依赖组内比较
+  2. **Critic model**：引入 critic 估计 token-level advantages（而非 group-relative）
+  3. **Token-level loss**：处理子轨迹长度不平衡问题
+
+  **和 GRPO 的选择**：
+  - 短任务用 GRPO（省 critic model）
+  - 长 horizon + compaction 用 PPO（需要 critic 做 token-level advantage）
+
+  来源：GLM-5.2 (2026.6)
+
+
+- **DAPO**
+
+  DAPO 主要是根据 GRPO 进行改进，主要改进点为
+  - 去掉了 KL 散度，KL 散度可以限制模型同初始模型不会显著偏离，但是在训练 long-CoT reasoning model 时，模型分布会显著偏离初始模型，所以去掉 KL 散度的约束。
+  - 提高剪切上限（Clip-Higher）以避免熵过早坍缩，导致某些组生成的结合相同，限制探索
+  - 动态采样（Dynamic Sampling）解决一组输出准确率为 1 或 0 时的梯度消失导致 Policy 没有优化，样本利用效率降低的问题
+  - GRPO 先在样本内按 Token 数平均 loss，再在样本间聚合 loss，从而导致较长样本和较短样本的损失贡献是一样的，即对于答案正确的，GRPO 偏向于选择答案长度较短的回复，而对于答案错误的，GRPO 偏向于让模型生成更长的回复。DAPO 改进为 Token-Level 策略梯度损失
+  - 在 RL 训练中，一般会设置最大长度，对过长回复进行截断，从而其 reward 会为 -1，扰乱训练。DAPO 设置了对长序列的合理惩罚（Overlong Reward Shaping），避免过长后截断导致模型无法得到奖励的情形，以缓解噪声并稳定训练。
+
+
+- **GSPO**
+
+  重要性采样修正不再对应 token 级别，而是对应序列级别。
+
+
+- **PPO vs DPO vs GRPO**
+
+  所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。PPO 依赖于 reward model 和 value model；DPO 没有显式探索机制。
+
+
+#### 奖励设计
+
+从"奖励从哪来"（RM 打分粒度、RLVR、PRM/ORM），到"奖励怎么组合使用"（多目标、格式奖励），最后是奖励侧的失效模式与对策（Reward Clip、Reward Hacking）。
+
+- **为什么 reward model 对完整回复打分，而不是训练 token level 的奖励？**
+
+  Reward model 通常对完整回复（sample-level）输出一个标量奖励，而不训练 token level 的奖励，主要原因有两个：
+
+  1. 难以获得高质量的 token level reward 标注：人类偏好标注天然是整体性的（哪个回复更好），要让人对每个 token 的好坏逐一标注，成本极高且标注一致性差，缺乏可靠的监督信号；
+
+  2. 局部奖励可能误导全局目标：单个 token 的好坏取决于后续生成的上下文，局部看起来合理的 token 未必服务于最终目标（如推理中间某步看似正确但导致最终答案错误），直接用 token level 局部奖励优化，容易让模型追逐局部收益而偏离全局目标。
+
+  因此实践中采用"完整回复打分 + 信用分配"的组合：reward 落在序列末尾，再由 critic/GAE（PPO）或组内相对奖励（GRPO）把信号回传到 token 级别。
+
+
+- **为什么 PPO 用 reward model 而不是 LLM-as-a-Judge？**
+
+  需要用标注样本训练；分类模型代价低。
+
+
+- **RLVR**
+
+  用 Verifier，通过与预设的答案或规则相比较，给出一个二元值，这种方式仅适用于有标准答案的场景，而在开放问题中则不太适用。
+
+
+- **PRM 和 ORM**
+
+  PRM 粒度细，但标注消耗大。最朴素的方式是 PPO 中的 critic model，人工标注的经典数据集是 PRM800K，也有些工作采用自动标注，使用方法包括 MCTS。
+
+
+- **多目标 RL 中为什么不能简单将多个奖励相加？**
+
+  当多个奖励信号简单相加时，会导致训练不收敛。
+
+  原因：
+  - 奖励信号坍塌：不同奖励的量级差异导致某些奖励主导优化方向
+  - 方差差异导致梯度失衡：不同奖励的方差不同，高方差奖励会压制低方差奖励的梯度贡献
+
+  解决方案：
+  - GDPO（Group Decomposed Policy Optimization）：解耦归一化方法
+  - DVAO（Dynamic Variance-adaptive Advantage Optimization）：动态方差自适应，根据奖励方差动态调整权重
+
+
+- **格式奖励设计：Gating 与 Addition Rubrics 如何选择？**
+
+  加法 Rubrics：`R = w1 × R_format + w2 × R_content`
+  - 优点：简单直接，各奖励独立优化
+  - 缺点：可能导致格式分低但总分高（模型学会"以内容弥补格式"）
+
+  乘法 Gating：`R = R_format × R_content`
+  - 优点：格式是获得奖励的必要前提，强制模型先满足格式要求
+  - 缺点：格式错误会导致奖励归零，可能过于严格
+
+  连续值 Gating 设计：可使用 `R = R_content × sigmoid(R_format)` 等平滑函数，避免硬性归零。
+
+  注意：GRPO 的 group normalize 使得 advantage 是 group 内相对排名，奖励组合方式需特别考虑。
+
+
+- **Reward Clip（奖励裁剪）**
+
+  Reward clip 是 RL 训练中的稳定性技巧：将 reward model 或规则奖励的原始值裁剪到固定区间（如 [-1, 1] 或 [-5, 5]），即 `reward = clip(reward, -c, c)`。
+
+  作用：
+
+  1. 抑制离群奖励：RM 输出的原始奖励量纲不定、可能出现极端值（特别高或特别低），个别离群样本会主导梯度，导致训练震荡；裁剪后奖励分布被压缩，梯度更平稳；
+
+  2. 配合归一化使用：实践中常与组内均值/标准差归一化（如 GRPO）或 advantage 归一化组合，先裁剪极端值再归一化，避免极端值污染统计量；
+
+  3. 限制单次更新的信号强度：裁剪相当于给优势估计设了上界，防止某个样本的优势过大导致策略更新过猛。
+
+  注意区分：reward clip 作用于奖励值本身，而 PPO 的 clip 作用于重要性采样比率 $$r_t(\theta)$$（限制策略更新幅度），两者目的不同但都是为了稳定训练。
+
+
+- **Agent RL 中的 Reward Hacking 问题如何解决？**
+
+  在用 RL 训练编码 Agent 时，模型会寻找"捷径"获得奖励（测试通过），而非真正解决问题。这些捷径称为 **reward hacking**。
+
+  **常见 hacking 行为：**
+  - **读取隐藏答案**：执行 `cat /workspace/.hidden/secret_cases.json` 读取评测系统的隐藏测试用例
+  - **下载外部答案**：执行 `curl https://raw.githubusercontent.com/xxx/solution.py` 从 GitHub 下载解决方案
+  - **利用系统漏洞**：用 `find`、`grep` 搜索包含答案的文件路径，或分析 git history
+
+  **为什么这是问题？**
+  - 模型获得高奖励（测试通过），但没有真正学会解决问题
+  - 训练信号被污染，模型学不到真本事
+
+  **GLM-5.2 的解决方案（两阶段检测 + 在线防护）：**
+
+  **阶段 1：Rule-based 规则过滤**
+  - 预定义黑名单：禁止访问 `.hidden`、`secret` 等路径
+  - 禁止特定命令：`curl`、`wget`、`find /workspace`
+  - 拦截可疑的文件读取模式
+  - 目标：高召回率，宁可误杀也不漏掉
+
+  **阶段 2：LLM Judge 语义判断**
+  - 用另一个 LLM 判断 tool call 的意图
+  - 例：`cat /workspace/.eval/secret_cases.json` → "读取评测系统隐藏用例，意图作弊"
+  - 目标：高精度，避免误杀正常操作
+
+  **在线防护策略：**
+  - 检测到 hacking 时，**不终止整个 rollout**，而是 **block 这个 tool call**
+  - 返回 dummy 信息（如 "Access denied" 或空结果）
+  - 模型可以继续尝试其他方法
+  - 避免训练不稳定（突然终止导致梯度问题，模型学不到"要换方法"）
+
+  **来源**：GLM-5.2 (2026.6)
+
+
+#### 训练稳定性
+
+RL 训练中常见的不稳定来源（训推不一致、熵坍塌）与对策。
+
+- **训推不一致（Training-Inference Mismatch）是什么？**
+
+  训推不一致指模型在训练阶段和推理阶段由于计算方式、数据分布或数值实现的差异，导致行为不一致，进而引起效果下降或线上表现与离线评估对不上。它可分为两大类：
+
+  | 类型 | 本质 | 典型例子 | 更偏向 |
+  |------|------|---------|--------|
+  | **数值/实现不一致** | 数学定义相同，实现有偏差 | 训练用 FSDP+PyTorch、推理用 vLLM/TRT-LLM；bf16↔fp16/int8 量化；kernel 累加顺序；non-deterministic top-k | 工程问题 |
+  | **范式/分布不一致** | 数学定义本身就不同 | Exposure Bias（训练 Teacher Forcing 喂真值 vs 推理喂自己生成的 token）；MTP 训练预测 1 步、推理预测 2 步；on-policy vs off-policy | 算法问题 |
+
+
+- **熵控制在强化学习里的作用**
+
+  在大模型训练的强化学习阶段，设置较高的 temperature 可以防止模型过度自信，鼓励模型采取高熵动作，从而扩大探索空间。另一种方式是在 group-level 用 smi/dpp/self-bleu 计算多样性，进行 reward shaping 来控制熵的变化。
+
+  熵坍塌：随着训练的进行，entropy 逐渐降低。导致某些 group 采样出的 response 几乎相同，使得模型在早期变得更加确定，限制了模型的探索空间。
+
+
+#### 知识蒸馏
+
+OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
+
+- **OPD (On-Policy Distillation)**
+
+  OPD 将 on-policy 思想引入知识蒸馏，替代传统的 off-policy SFT 蒸馏范式，是当前 LLM 后训练（Post-Training）的核心技术方向之一。
+
+  **传统蒸馏（Off-Policy）**：老师模型预先对 prompt 生成完美轨迹，构成静态数据集。学生模型在这个数据集上做 SFT。主要问题：（1）分布不匹配——训练数据是老师分布，推理时学生面对自己的分布，一旦生成偏离老师轨迹，模型容易崩溃；（2）学生没有探索机制，只学会模仿答案而非推理过程。
+
+  **OPD（On-Policy）**：学生模型自己对 prompt 采样生成轨迹，老师模型对这些轨迹打分或提供反馈，学生根据反馈更新参数。核心变化：训练数据来自学生自身分布，老师从"示范者"变为"评判者"。优点包括：
+  - 分布对齐：训练和推理在同一分布下，避免 train-test mismatch
+  - 探索能力：学生可以尝试不同路径，老师反馈引导优化方向
+  - 兼顾 Pass@1 和 Pass@k：既有 RL 的探索（优化负样本 → Pass@k 上升），也有 SFT 的高效学习
+
+  **典型实践**：
+  - Think Machines Lab（2025.10）首次系统提出 OPD 范式，展示在数学推理上以 RL 1/10 算力达到相近效果
+  - Qwen3 采用两阶段蒸馏：第一阶段 off-policy SFT 打底，第二阶段 on-policy 蒸馏提升
+  - DeepSeek-R1 系列以 off-policy SFT 为主，后续 follow-up 转向 OPD
+  - Gemma 2/3 也在训练流程中引入 OPD
+
+  **与 RL 的关系**：OPD 可视作 SFT 和 RL 之间的中间地带。相比纯 RL（如 GRPO），OPD 不需要显式奖励模型或 value model，老师模型的 logits/反馈直接作为监督信号，算力需求低得多。相比纯 SFT，OPD 具备在线探索能力，能发现训练数据中不存在的推理路径。
+
+  **核心要解决的问题**：
+  - 老师反馈质量：老师模型对错误轨迹的判断准确度直接影响蒸馏效果
+  - 采样效率：on-policy 需要反复采样，如何平衡探索广度和训练效率
+  - 分布漂移控制：学生策略更新后可能过度偏离老师分布，需要 KL 约束或周期性回滚
+
+
+- **On-Policy Cross-Stage Distillation**
+
+  **问题背景**：现代 LLM Post-Training 通常分多个 RL 阶段（如 GLM-5 的 Reasoning RL → Agentic RL → General RL），每个阶段专注不同能力。但后续阶段训练时，模型会遗忘前面阶段学到的能力（灾难性遗忘）。
+
+  **传统方法的局限**：
+  - 经验回放（混合前面阶段数据）：off-policy 数据分布与当前策略不一致
+  - EWC 正则化（约束参数变化）：太强会限制新能力学习，太弱防不住遗忘
+  - 多任务联合训练：不同能力的 reward 信号冲突，难以平衡
+
+  **核心思想**：用前面阶段训练好的模型作为 teacher，在当前策略 on-policy 采样的 trajectory 上做 KL 蒸馏。
+
+  **具体流程**：
+  ```
+  阶段 1: Reasoning RL → 得到模型 π₁
+  阶段 2: Agentic RL → 在 π₁ 基础上训练，同时用 π₁ 蒸馏 → 得到 π₂
+  阶段 3: General RL → 在 π₂ 基础上训练，同时用 π₁ 和 π₂ 蒸馏 → 得到 π₃
+  ```
+
+  **关键设计**：
+  1. **On-policy 采样**：当前策略 π 生成 trajectory，teacher 模型在同样的 trajectory 上给出 logits
+  2. **蒸馏 loss**：KL 散度，让当前模型的输出分布接近 teacher
+  3. **选择性蒸馏**：只在当前任务上蒸馏（不是全局蒸馏），避免限制新能力
+
+  **为什么有效**：
+  - Teacher 模型在前面阶段已经是最优的，蒸馏信号质量高
+  - On-policy 采样保证数据分布和当前策略一致（不像经验回放那样有分布偏移）
+  - KL 散度作为软约束，允许模型偏离但不会太远
+
+  **GLM-5 实践**：在 Reasoning RL → Agentic RL → General RL 的三阶段流程中，每个后续阶段都用前面阶段的模型做 on-policy 蒸馏，有效缓解了灾难性遗忘问题。
+
+
+#### 推理与 Test-time
+
+推理能力的提升手段：训练侧（Reasoning）与推理侧（MCTS、System 1/2、Test-time Scaling）。
+
+- **MCTS**
+
+  MCTS 包括选择、扩展、模拟、回溯四个步骤。
+
+  相比 BoN 每条路径不管好坏都 roll 到底，PRM-guided MCTS 可以剪枝，提高 token efficiency，但也会导致探索力度不够。
+
+
+- **Reasoning**
+
+  CoT，ToT，Self-Consistency，s1。
+
+
+- **LLM设计中的 System 1 和 System 2**
+
+  默认模式是 System 1：标准的自回归生成，快速但单步预测。
+
+  通过 Prompt Engineering 或架构设计激活 System 2：
+
+  - Chain-of-Thought（思路链）提示，引导模型一步步“推理”。
+
+  - 多阶段推理框架，如 ReAct、Self-Ask、Tool Augmentation。
+
+  - 结合检索（RAG）、记忆模块或外部计算器等工具。
+
+
+- **Test-time Scaling**
+
+  实现 test-time scaling，需要先激励 LLM 在 thinking 上耗费更多资源，从而生成更长的回答，或者更多的回答。
+
+  更长的回答可以通过如 CoT 的 prompting，如 s1 的改变解码策略。
+
+  更多的回答可以通过如 Self-Consistency 的 Parallel Scaling，如 Self-Refine 的 Sequential Scaling，如 MoA 的模型混合。
+
+  获得回答之后，需要用 PRM 或 ORM 进行验证。PRM 有助于缩小搜索空间，相比于 ORM 的奖励稀疏，它的奖励更加密集。它的实现包括训练一个独立的模型。ORM 的实现包括训练一个独立的模型，self-consistency，voting 或如 deepseek 的启发式验证。
+
+  另外一种方案是搜索，如 ToT，MCTS，Beam Search。
+
+  提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
+
+
+#### 能力专题
+
+垂直能力话题：安全与幻觉、长上下文。
+
+- **Safety / Hallucination**
+
+  出现幻觉原因：1. 语料中存在过时，虚构的内容，或因长尾效应缺乏与下游任务相关的领域知识；2. 语言模型的本质机制是预测下一个最可能的词，它只保证语言上看起来连贯合理，并不保证事实正确，所以它倾向即使不知道，也会编一个出来，在不确定时依然输出确定性答案，很少说我不知道；3. 推理时随机采样的生成策略。
+
+  解决方案：提高训练数据质量；RAG 提供权威资料；Prompt Engineering：明确告诉模型不要编造、请回答已知事实，或让模型先思考再输出（如 Let’s think step by step）；生成之后进行事实校验，如比对知识图谱或自动校验；RLHF；多模型协作。
+
+
+- **Long Context**
+
+  位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据；拆分 agent。
 
 
 ### Agent
@@ -7592,7 +7650,7 @@ RLHF 上层应用：veRL / OpenRLHF
   **闭环流程**：Badcase发现 → 归因分析 → 针对性修复 → 补充到Golden Set → 重新评估
 
 
-### HR
+### Interview
 
 #### Self Introduction
 
@@ -7627,56 +7685,172 @@ RLHF 上层应用：veRL / OpenRLHF
 | 代表经历 | 1-2个代表作（STAR法则） | 90s |
 | 求职动机 | 为什么选这家公司 | 30s |
 
-- **请用三个词形容自己**：有条理、谨慎、探索
+  **按场景调整**：技术面用短版（1-2 分钟，突出项目细节和技术栈）；HR 面用完整版（3-5 分钟，突出稳定性和动机）；交叉面弱化技术术语，突出业务价值和协作方式。
 
-  - **有条理**：做事情前喜欢规划，把复杂任务拆解成清晰步骤。示例：【项目/学习经历】
-  - **谨慎**：技术决策注重验证和测试，上线前充分评估。示例：【工作经历】
-  - **探索**：喜欢尝试新技术新方向，持续学习。示例：【研究方向变化】
+#### 面试流程概览
 
-- **优势和劣势**
+| 轮次 | 面试官 | 考察重点 | 风格 |
+|------|--------|----------|------|
+| 技术一面 | 资深工程师/组长 | 技术基础、项目真实性与深度、coding | 追问式，单点深挖到底 |
+| 技术二面 | 团队主管 | 系统设计、技术判断、攻坚与落地能力 | 项目复盘 + 方案设计 |
+| 技术三面 | 部门总监/高管 | 技术视野、格局、方向匹配、稳定性 | 宏观问题，少抠细节 |
+| HR 面 | HRBP | 动机、稳定性、薪资、文化匹配 | 结构化问答 |
+| 交叉面 | 其他部门工程/产品同学 | 协作能力、沟通表达、跨团队互评 | 行为题 + 业务理解 |
 
-  - **优势**：
-    - **研究能力**：在某领域有深入研究。示例：【论文/项目经历】
-    - **落地能力**：从研究到上线有完整经验。示例：【工作项目】
+#### 技术一面
 
-  - **劣势**：
-    - **某领域经验较少**：如【CV/推荐】方向接触不多。
-      改进：正在通过【学习/实践】补充这方面知识。
+- **考察重点**：验证简历项目真实性和技术深度，考察基础知识（原理、coding），判断是否能干活。
 
-- **每天的生活怎么安排**
+- **常见问题**：
 
-- **性格测试**
+  - 自我介绍（短版，1-2 分钟，突出与岗位匹配的技术栈）
+  - 简历项目深挖：你的角色、技术方案、为什么这么设计、有没有更好的替代方案、量化结果怎么来的
+  - 为什么找新机会（初探：给出技术成长向的理由，不吐槽现公司）
+  - 想要怎样的机会（落到具体方向，如大模型后训练/Agent 落地）
 
-  [链接 1](https://www.zhihu.com/question/28728468/answer/41961812)
+- **反问**：
 
-#### Behavioral Questions
+  - 团队的技术栈和业务方向是什么？
+  - 我入职后具体负责什么？前三个月到半年怎么衡量做得好不好？
+  - 算法和工程的日常分工与协作方式是怎样的？
 
-- **职业规划（工作方向）**
+#### 技术二面
 
-  [链接](https://www.zhihu.com/question/20054953)
+- **考察重点**：技术判断力和 ownership：能不能独立扛方向、做取舍、推动跨团队协作落地。
 
-- **工作中遇到的挑战及应对方案**
+- **常见问题**：
 
-- **团队合作**
+  - 最有挑战/最困难的项目，难在哪，怎么攻坚的
+  - 技术选型中的 trade-off：为什么选 A 不选 B
+  - 有没有推动过跨团队协作的项目，怎么推动的
+  - 怎么看我们团队/公司做的技术方向，你觉得可以怎么做
+  - 为什么找新机会（结合职业规划回答，强调方向升级而非逃避）
 
-- **生活和工作上遇到的问题**
+- **反问**：
 
-#### Motivation
+  - 团队当前的目标和考核指标（OKR/KPI）是什么？
+  - 训练资源（GPU）情况如何？
+  - 团队的人员结构和成长机制（导师、晋升通道）是怎样的？
 
-- **为什么找工作**
+#### 技术三面
+
+- **考察重点**：格局与稳定性：技术视野是否匹配团队方向，长期规划是否清晰，判断值不值得培养/定级。
+
+- **常见问题**：
+
+  - 3-5 年的职业规划
+  - 对行业和技术趋势的判断（如 LLM/Agent 的下一步）
+  - 为什么选择我们公司/这个方向（稳定性问题，答案要自洽）
+  - 你觉得自己能带来什么（差异化价值：研究背景 + 落地经验的结合）
+
+- **反问**：
+
+  - 部门的业务战略和在公司内的定位是什么？
+  - 未来 1-3 年的技术路线图/重点投入方向？
+  - 组织架构和团队之间的关系是怎样的？
+
+#### HR 面
+
+- **考察重点**：动机与稳定性、薪资预期、性格与文化匹配，一票否决项排查（离职原因、竞业、背景一致性）。
+
+- **常见问题**：
+
+  - 为什么找工作/为什么找新机会（标准版，见下方"动机类问题答题要点"）
+
+  - 为什么加入我们公司
+
+  - 有其他 offer 时怎么选择
+
+  - 期望薪资/最低接受薪资
+
+- **性格与自我认知**：
+
+  - **请用三个词形容自己**：有条理、谨慎、探索
+
+    - **有条理**：做事情前喜欢规划，把复杂任务拆解成清晰步骤。示例：【项目/学习经历】
+    - **谨慎**：技术决策注重验证和测试，上线前充分评估。示例：【工作经历】
+    - **探索**：喜欢尝试新技术新方向，持续学习。示例：【研究方向变化】
+
+  - **优势和劣势**
+
+    - **优势**：
+      - **研究能力**：在某领域有深入研究。示例：【论文/项目经历】
+      - **落地能力**：从研究到上线有完整经验。示例：【工作项目】
+
+    - **劣势**：
+      - **某领域经验较少**：如【CV/推荐】方向接触不多。
+        改进：正在通过【学习/实践】补充这方面知识。
+
+  - **性格测试**
+
+    [链接 1](https://www.zhihu.com/question/28728468/answer/41961812)
+
+- **行为问题（Behavioral Questions）**：
+
+  - **职业规划（工作方向）**
+
+    [链接](https://www.zhihu.com/question/20054953)
+
+  - **工作中遇到的挑战及应对方案**
+
+  - **团队合作**
+
+  - **生活和工作上遇到的问题**
+
+  - **每天的生活怎么安排**
+
+- **反问（Job Details）**：
+
+  - **个人工作内容 & 部门工作内容（业务，技术栈）/团队规模/团队资源（GPU）**
+
+  - **工作地点：城市，具体位置，远程办公**
+
+  - **工作时间：日常工作时间，单双休，年假**
+
+  - **薪资（期望薪资，最低接收工资，固定几薪/绩效浮动，Base） & 定级 & 绩效考核 & 晋升机制 & 转正**
+
+    [链接 1](https://www.zhihu.com/question/19841590)，[链接 2](https://www.zhihu.com/question/34557602)
+
+  - **试用期时长和考核标准、后续面试流程和结果反馈时间**
+
+#### 交叉面（工程，产品）
+
+- **考察重点**：协作能力和沟通能力：算法同学是否好合作、表达是否清晰、能否站在对方视角理解业务/工程约束，同时做跨团队互评。
+
+- **常见问题**：
+
+  - 平时和工程/产品同学是怎么协作的？举一个具体例子
+  - 需求或技术方案有分歧时怎么处理？
+  - 资源（时间/人力/GPU）不够时怎么推动项目？
+  - 用非技术语言解释你做过的一个项目（考察表达）
+  - 算法工作如何支撑业务指标？怎么向业务方证明价值？
+
+- **反问**：
+
+  - 算法和工程/产品的协作流程是怎样的（需求评审、上线流程）？
+  - 跨团队的分歧或优先级冲突一般怎么决策？
+  - 业务迭代的节奏是怎样的，算法需求一般从哪来？
+
+#### 动机类问题答题要点
+
+- **为什么找新机会**
+
+  核心原则：说"追求什么"，不说"逃避什么"，不吐槽现公司/老板/同事。
+
+  结构：肯定现状（成长与收获）→ 瓶颈（客观、非人际因素，如方向调整、业务收缩、技术天花板）→ 新机会的吸引力（方向匹配、平台更大、场景更真实）。
+
+  按场景调整侧重：技术面强调技术方向升级（如从单点模型到端到端/Agent）；HR 面强调稳定性（说明不是频繁跳槽，是深思熟虑的选择）。
+
+- **想要怎样的机会**
+
+  结构：方向（具体技术领域）→ 场景（业务落地、真实数据、规模化）→ 成长（更大的技术挑战/团队规模）→ 与对方公司的匹配（提前做功课，落到对方业务上）。
+
+  避免：空泛地说"想学习成长"；避免与岗位明显不符的诉求（如面算法岗说想做管理）。
+
+- **有其他 offer 时怎么选择**
+
+  核心：展示你的决策维度（方向匹配 > 平台/业务 > 团队 > 薪资），暗示对方在你优先级中靠前，但不编造 offer 施压。避免：透露具体薪资数字做对比筹码（HR 面早期阶段）。
+
 - **为什么加入我们公司**
 
-- **
-有其他 offer 时怎么选择**
-
-#### Job Details
-
-- **个人工作内容 & 部门工作内容（业务，技术栈）/团队规模/团队资源（GPU）**
-
-- **工作地点：城市，具体位置，远程办公**
-
-- **工作时间：日常工作时间，单双休，年假**
-
-- **薪资（期望薪资，最低接收工资，固定几薪/绩效浮动，Base） & 定级 & 绩效考核 & 晋升机制 & 转正**
-
-  [链接 1](https://www.zhihu.com/question/19841590)，[链接 2](https://www.zhihu.com/question/34557602)
+  结构：业务认同（产品/市场地位）→ 技术认同（技术栈/论文/开源）→ 岗位匹配（我的经历正好能解决什么问题）。避免：只说"大厂平台好"这类放之四海而皆准的理由。
