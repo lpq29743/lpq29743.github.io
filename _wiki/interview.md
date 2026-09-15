@@ -6196,8 +6196,6 @@ RLHF 上层应用：veRL / OpenRLHF
 
 #### Fundamentals
 
-RL 的基本概念与训练范式辨析，回答时先给结论，再结合一个具体例子展开。
-
 - **强化学习和监督学习有什么区别？**
 
   监督学习中每一个决策（预测标签）是独立的，它对决策的优化取决于标签。强化学习每一个决策是相互影响的，它对决策的优化取决于延时标签（奖励）。过去的 AI 训练方式主要依赖监督学习，也就是让 AI 通过大量人类标注的数据来学习。换句话说，AI 只是一个“超级记忆机”，它能模仿人类的答案，但却不一定真正理解问题的本质。而强化学习的出现，让 AI 不再是单纯的模仿者，而是能够主动探索、试错、优化自己推理方式的智能体。这就像是在训练一个孩子解数学题，监督学习相当于直接告诉他答案，而强化学习则是让他自己尝试解题，并根据最终的正确率进行调整。
@@ -6290,8 +6288,6 @@ RL 的基本概念与训练范式辨析，回答时先给结论，再结合一�
 
 #### SFT and Training Details
 
-监督微调及具体训练实现细节（思考模式、Loss Mask）。
-
 - **SFT**
 
   选择模型和模版，保证当前模版在当前模型上已有较好的表现。
@@ -6365,8 +6361,6 @@ RL 的基本概念与训练范式辨析，回答时先给结论，再结合一�
 
 
 #### RL Algorithms
-
-按"REINFORCE → PPO → DPO/GRPO → 衍生算法"的演进组织：先看最朴素策略梯度的缺陷（广播 reward 问题），再看 PPO 如何用 critic/GAE/clip 解决，然后是去 critic 的 DPO 和 GRPO 及其衍生改进（DAPO/GSPO），最后用算法对比收尾。
 
 - **REINFORCE**
 
@@ -6587,8 +6581,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 #### Reward Design
 
-从"奖励从哪来"（RM 打分粒度、RLVR、PRM/ORM），到"奖励怎么组合使用"（多目标、格式奖励），最后是奖励侧的失效模式与对策（Reward Clip、Reward Hacking）。
-
 - **为什么 reward model 对完整回复打分，而不是训练 token level 的奖励？**
 
   Reward model 通常对完整回复（sample-level）输出一个标量奖励，而不训练 token level 的奖励，主要原因有两个：
@@ -6695,8 +6687,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 #### Training Stability
 
-RL 训练中常见的不稳定来源（训推不一致、熵坍塌）与对策。
-
 - **训推不一致（Training-Inference Mismatch）是什么？**
 
   训推不一致指模型在训练阶段和推理阶段由于计算方式、数据分布或数值实现的差异，导致行为不一致，进而引起效果下降或线上表现与离线评估对不上。它可分为两大类：
@@ -6715,8 +6705,6 @@ RL 训练中常见的不稳定来源（训推不一致、熵坍塌）与对策�
 
 
 #### Distillation
-
-OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
 
 - **OPD (On-Policy Distillation)**
 
@@ -6776,8 +6764,6 @@ OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
 
 #### Reasoning and Test-time Scaling
 
-推理能力的提升手段：训练侧（Reasoning）与推理侧（MCTS、System 1/2、Test-time Scaling）。
-
 - **MCTS**
 
   MCTS 包括选择、扩展、模拟、回溯四个步骤。
@@ -6819,8 +6805,6 @@ OPD 及其跨阶段扩展：介于 SFT 和 RL 之间的中间形态。
 
 
 #### Capability Topics
-
-垂直能力话题：安全与幻觉、长上下文。
 
 - **Safety / Hallucination**
 
