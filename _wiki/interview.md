@@ -6207,6 +6207,14 @@ RLHF 上层应用：veRL / OpenRLHF
 
 - **online vs offline**
 
+  核心区别是训练时数据是否由当前策略动态采样：
+
+  - Online RL：训练过程中用当前 policy 实时采样（rollout）生成数据并学习，数据随策略更新而更新。可以持续探索新行为，效果上限高；但每步都要付出推理生成 + 奖励计算的开销，成本高、训练慢。代表：PPO/GRPO（在线 rollout）。
+
+  - Offline RL：只用固定的已有数据集（历史日志、预收集的偏好数据）训练，训练时不与环境/模型交互。成本低、可复现；但数据不是当前策略生成的，存在分布偏移（distribution shift）和 extrapolation error，无法探索数据之外的行为，效果受数据集质量上限约束。代表：DPO（离线偏好对）、基于日志的训练。
+
+  与 on-policy/off-policy 的关系：online 通常对应 on-policy，offline 通常对应 off-policy；PPO 的重要性采样是折中——一批采样数据做多轮更新（略微 off-policy），用 ratio clip 控制偏移。实践中 LLM 对齐常先离线（SFT/DPO）打基础，再 online RL 进一步提升。
+
 
 - **on-policy vs off-policy**
 
@@ -7426,6 +7434,14 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 
 - **多目标排序**
+
+  排序阶段同时优化多个目标（点击 pCTR、转化 pCVR、时长、点赞/收藏等），核心是两步：多任务建模 + 多目标融合。
+
+  1. 多任务建模：一个模型多个 tower 分别预估各目标，代表结构：Shared-Bottom（共享底层，任务冲突时出现跷跷板效应）→ MMoE（多个专家 + 每个任务一个 gate，软性共享）→ PLE（区分共享专家和任务专属专家，进一步缓解跷跷板）；
+
+  2. 多目标融合：把各目标分数合成最终排序分。常见做法：乘法加权（如 $$pCTR^\alpha \times pCVR^\beta$$，各目标须为正、对低分敏感）、线性加权、以及用进化搜索/Pareto 优化自动学习融合权重；
+
+  3. 进阶：重排（rerank）阶段考虑列表整体收益（上下文感知），而非单点打分。
 
 
 - **推荐系统冷启动**
