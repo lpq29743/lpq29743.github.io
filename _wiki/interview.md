@@ -3069,7 +3069,7 @@ for epoch in range(1000):
 
   极大似然估计的目标是最大化所有样本的联合概率：
 
-  $$L(w) = ∏_{i=1}^n P(y_i | x_i; w)$$
+  $$L(w) = ∏_{i=1}^n P(y_i \mid x_i; w)$$
 
   因为 $$y_i$$ 只有 0 或 1，服从伯努利分布（二分类），可以写成：
 
@@ -3096,7 +3096,7 @@ for epoch in range(1000):
 
   对所有样本的联合概率：
 
-  $$L(W) = ∏_{i=1}^n P(y_i | x_i; W) = ∏_{i=1}^n p_{i, y_i}$$
+  $$L(W) = ∏_{i=1}^n P(y_i \mid x_i; W) = ∏_{i=1}^n p_{i, y_i}$$
 
   取对数似然，并因为数据服从多项式分布（多分类）：
 
@@ -4311,7 +4311,7 @@ def gru_forward(X, Wx, Wh, b, h0):
 
   $$\text{tf}(t, d) = \frac{f_{t,d}}{\sum_{t' \in d} f_{t',d}}$$
 
-  $$\text{idf}(t, D) = \log \frac{|D|}{1 + |\{ d \in D : t \in d \}|}$$
+  $$\text{idf}(t, D) = \log \frac{\lvert D \rvert}{1 + \lvert \{ d \in D : t \in d \} \rvert}$$
 
 
 - **手动加权或自主学习权重哪个好？**
@@ -6259,7 +6259,7 @@ RLHF 上层应用：veRL / OpenRLHF
   - 直接参与梯度计算，通过反向传播更新参数
   - 优化目标是最小化 KL 散度本身，强制约束模型分布接近目标分布
   - 约束强度更强、更直接，模型必须严格遵循分布约束
-  - 典型场景：VAE 中的正则化项 $$L = \mathbb{E}[\log p(x|z)] - D_{KL}(q(z|x) \| p(z))$$；知识蒸馏中的 soft target 对齐
+  - 典型场景：VAE 中的正则化项 $$L = \mathbb{E}[\log p(x \mid z)] - D_{KL}(q(z \mid x) \| p(z))$$；知识蒸馏中的 soft target 对齐
 
   **作为 Reward（如 PPO、GRPO）**：
   - 作为奖励信号的组成部分，间接影响策略更新
