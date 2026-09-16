@@ -6237,6 +6237,8 @@ RLHF 上层应用：veRL / OpenRLHF
 
   在 PPO 中的意义：rollout 数据由旧策略 $$\pi_{\theta_{old}}$$ 采样生成，成本很高（每次都要完整的推理生成），而策略更新后 $$\pi_\theta$$ 已偏离旧策略。乘上重要性比率 $$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{old}}(a_t \mid s_t)}$$ 后，就可以重复利用旧策略采的数据来无偏估计新策略下的梯度，修正分布偏移带来的偏差，一批采样数据能做多轮（epoch）更新，大幅提升样本效率。这也是 PPO 相比严格 on-policy 方法的核心优势。
 
+  与 batch size / mini-batch size 的关系：batch size 是一轮 rollout 采样的样本量，mini-batch size 是每次梯度更新消耗的样本量，两者之比（再乘 epoch 数）决定每条样本被复用多少次，也就决定当前策略 $$\pi_\theta$$ 偏离采样策略 $$\pi_{\theta_{old}}$$ 多远。若 mini-batch = batch 且只更新一步，ratio ≈ 1，几乎 on-policy，重要性采样基本不起作用；切的 mini-batch 越小、epoch 越多，样本复用越充分、rollout 成本摊得越薄，但策略偏移越大、ratio 越偏离 1，越依赖重要性采样修正和 clip 兜底。所以 batch/mini-batch 的取舍本质是"样本复用率（省 rollout）vs off-policy 程度（偏差与方差）"，重要性采样 + clip 正是让"一批数据切多个 mini-batch 多步更新"成立的安全网。
+
   局限：当新旧策略差异变大时，重要性比率的方差随之增大，估计变得不稳定（个别样本 ratio 过大主导梯度）。因此 PPO 用 clip 限制 ratio 在 $$[1-\epsilon, 1+\epsilon]$$ 内，牺牲少量偏差换取稳定性；GSPO 则进一步把重要性修正的粒度从 token 级改为序列级，降低多 token 比率累乘带来的方差。
 
 
