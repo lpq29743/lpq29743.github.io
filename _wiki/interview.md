@@ -6817,17 +6817,15 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 - **Test-time Scaling**
 
-  实现 test-time scaling，需要先激励 LLM 在 thinking 上耗费更多资源，从而生成更长的回答，或者更多的回答。
+  实现 test-time scaling，需要先激励 LLM 在 thinking 上耗费更多资源。两种基本形态：**parallel**（生成更多的回答）与 **sequential**（让一条回答推理更长/迭代修正），二者也可以组合。
 
-  更长的回答可以通过如 CoT 的 prompting，如 s1 的改变解码策略。
+  **Parallel Scaling**：同时采样多条独立回答，再挑选或聚合。代表：Self-Consistency/多数投票、Best-of-N、拒绝采样；MoA 的模型混合也属此类。优点是 embarrassingly parallel、并发后时延约等于单次采样、投票降方差；天花板是每条样本彼此独立、无法利用其它样本的反馈，且依赖可靠的 verifier 或投票信号，算力随 N 线性增长。
 
-  更多的回答可以通过如 Self-Consistency 的 Parallel Scaling，如 Self-Refine 的 Sequential Scaling，如 MoA 的模型混合。
+  **Sequential Scaling**：单条推理链串行推进，每步以上一步的输出为条件。代表：更长的 CoT（prompting 引导，或 s1 的 budget forcing 等解码策略）、Self-Refine / critique-revise 这类迭代自我修正、agent 式多步工具调用。优点是能利用中间反馈纠错、可解单次 pass 够不着的题；代价是串行时延累加，且错误会沿链自我放大——没有外部反馈时，模型自我修正常常修不动自己的错。
 
-  获得回答之后，需要用 PRM 或 ORM 进行验证。PRM 有助于缩小搜索空间，相比于 ORM 的奖励稀疏，它的奖励更加密集。它的实现包括训练一个独立的模型。ORM 的实现包括训练一个独立的模型，self-consistency，voting 或如 deepseek 的启发式验证。
+  **两形态的组合**：搜索类方法沿深度串行展开、沿宽度并行采样多分支，如 ToT、MCTS、Beam Search；其中 PRM-guided MCTS 相比 BoN 每条路径不管好坏都 roll 到底可以剪枝、提高 token efficiency，但探索力度不够。
 
-  另外一种方案是搜索，如 ToT，MCTS，Beam Search。
-
-  提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
+  无论哪种形态，获得候选回答后都需要用 PRM 或 ORM 进行验证。PRM 有助于缩小搜索空间，相比于 ORM 的奖励稀疏，它的奖励更加密集。它的实现包括训练一个独立的模型。ORM 的实现包括训练一个独立的模型，self-consistency，voting 或如 deepseek 的启发式验证。提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
 
 
 #### Capability Topics
