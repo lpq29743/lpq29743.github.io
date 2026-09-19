@@ -7719,8 +7719,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   结构：业务认同（产品/市场地位）→ 技术认同（技术栈/论文/开源）→ 岗位匹配（我的经历正好能解决什么问题）。避免：只说"大厂平台好"这类放之四海而皆准的理由。
 
-- **反问**：每轮都有，视角差异见各角色。
-
 #### Technical Common Questions
 
 - **简历项目深挖**：你的角色、技术方案、设计动机、量化结果；项目题清单见 CV related 章节。
