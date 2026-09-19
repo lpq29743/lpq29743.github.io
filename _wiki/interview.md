@@ -7672,8 +7672,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 - **自我介绍**
 
-  **结构**：基本信息（30s） + 技术能力（60s） + 代表经历（90s） + 求职动机（30s）
-
   **模板**：
 
 ```
@@ -7732,7 +7730,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 - **角色差异化问题**：
 
-  - 自我介绍短版（1-2 分钟，突出与岗位匹配的技术栈）
   - 项目实施细节的极限追问链（数据、ablation、上线过程中的失败）
   - 手写代码/online coding（题型见前文算法章节）
 
