@@ -7507,7 +7507,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 ## Scenarios
 
-#### Universal Questions
+### Universal Questions
 
 - **自我介绍**
 
@@ -7558,7 +7558,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   结构：业务认同（产品/市场地位）→ 技术认同（技术栈/论文/开源）→ 岗位匹配（我的经历正好能解决什么问题）。避免：只说"大厂平台好"这类放之四海而皆准的理由。
 
-#### Technical Common Questions
+### Technical Common Questions
 
 - **简历项目深挖**：你的角色、技术方案、设计动机、量化结果。
 
@@ -7568,7 +7568,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 - 原理与 coding 题见前文知识与算法章节，此处不重复。
 
-#### Cross-functional Common Questions
+### Cross-functional Common Questions
 
 - **跨职能协作例子**：举一个具体的跨职能协作例子。
 
@@ -7578,7 +7578,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 - **算法工作如何支撑业务指标**：怎么向业务方证明价值。
 
-#### Process Overview
+### Process Overview
 
 | 轮次 | 面试官 | 考察重点 | 风格 |
 |------|--------|----------|------|
@@ -7592,7 +7592,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 可选环节（视公司而定）：笔试/online coding 置于面试前；加面/终审面（BU 负责人/CEO）在高职级或创业公司出现于 CTO 面之后；薪资沟通轮作为 HR 面后续单独进行。
 
-#### Technical Peer Interview
+### Technical Peer Interview
 
 - **考察重点**：验证简历项目真实性和技术深度，判断是否能干活。
 
@@ -7607,7 +7607,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 我入职后具体负责什么？前三个月到半年怎么衡量做得好不好？
   - 算法和工程的日常分工与协作方式是怎样的？
 
-#### Technical Hiring Manager Interview
+### Technical Hiring Manager Interview
 
 - **考察重点**：技术判断力和 ownership：能不能独立扛方向、做取舍、推动跨团队协作落地。
 
@@ -7624,7 +7624,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 训练资源（GPU）情况如何？
   - 团队的人员结构和成长机制（导师、晋升通道）是怎样的？
 
-#### Technical Executive Interview (CTO)
+### Technical Executive Interview (CTO)
 
 - **考察重点**：格局与稳定性：技术视野是否匹配团队方向，长期规划是否清晰，判断值不值得培养/定级。
 
@@ -7641,7 +7641,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 未来 1-3 年的技术路线图/重点投入方向？
   - 组织架构和团队之间的关系是怎样的？
 
-#### Technical Cross-team Interview
+### Technical Cross-team Interview
 
 - **考察重点**：外组视角下技术协作是否可信：方案讲得清不清楚、技术边界与依赖怎么处理、跨团队互评。
 
@@ -7657,7 +7657,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 组间的技术协作流程是怎样的（方案评审、依赖排期）？
   - 跨团队的技术争议一般怎么裁决？
 
-#### Product Cross-functional Interview
+### Product Cross-functional Interview
 
 - **考察重点**：业务理解与表达：能否站在产品视角理解需求、指标冲突怎么处理、能否用业务语言讲清技术价值。
 
@@ -7671,7 +7671,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 业务迭代的节奏是怎样的，算法需求一般从哪来？
   - 产品侧怎么度量和复盘算法带来的价值？
 
-#### Engineering Cross-functional Interview
+### Engineering Cross-functional Interview
 
 - **考察重点**：协作流程与交付质量：模型交付是否规范、线上问题怎么定界排查、沟通成本。
 
@@ -7686,7 +7686,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 算法和工程的协作流程是怎样的（需求评审、上线流程）？
   - 线上事故的定界和复盘机制是怎样的？
 
-#### HR Interview
+### HR Interview
 
 - **考察重点**：动机与稳定性、薪资预期、性格与文化匹配，一票否决项排查（离职原因、竞业、背景一致性）。
 
