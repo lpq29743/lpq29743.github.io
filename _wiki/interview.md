@@ -12,9 +12,9 @@ keywords: 面试题
 
 | 维度 | 面试当下 | 职业规划（长期） | 对应内容 |
 |------|---------|----------------|---------|
-| 技术（功底·纵深·落地·跟前沿） | 基本功过线；体系化理解 LLM/后训练/Agent，讲得清"为什么这样设计"；新范式看得懂、落得下，跨领域迁移 | 从掌握技术到技术判断力，成为 post-training/Agent RL 专家；方法论迁移，新方向冷启动 | Fundamentals · Language Models |
-| 项目（代表作·研究） | 扛得住极限追问，讲得出 insight 而不只是结果 | 从主导项目到孵化项目，沉淀可复用方法论 | Interview_QA |
-| 业务（定义问题·指标） | 讲得清算法如何支撑业务指标，能站在产品视角对话 | 从支撑业务到定义问题，用业务判断反推技术规划 | Domains |
+| 技术（功底·纵深·落地·跟前沿） | 基本功过线；体系化理解 LLM/后训练/Agent，讲得清"为什么这样设计"；新范式看得懂、落得下，跨领域迁移 | 从掌握技术到技术判断力，成为 post-training/Agent RL 专家；方法论迁移，新方向冷启动 | Technology |
+| 项目（代表作·研究） | 扛得住极限追问，讲得出 insight 而不只是结果 | 从主导项目到孵化项目，沉淀可复用方法论 | Projects |
+| 业务（定义问题·指标） | 讲得清算法如何支撑业务指标，能站在产品视角对话 | 从支撑业务到定义问题，用业务判断反推技术规划 | Business |
 | 沟通与动机（表达·协作·自洽） | 非技术语言讲清技术价值；动机故事自洽 | 从沟通到影响力：推动跨团队、带人、对外输出 | Scenarios |
 
 - **我关心的：一份工作的选择维度**
@@ -27,7 +27,7 @@ keywords: 面试题
 | 成长 | 有更大的技术挑战，能沉淀出代表作 | 长期权重最高 | 想要怎样的机会 |
 | 薪资与稳定 | 整体 package 合理、公司经营稳定 | 底线项：达标即可，不做首要筹码 | 期望薪资与谈判 |
 
-## Fundamentals
+## Technology
 
 ### Math
 
@@ -4329,9 +4329,6 @@ def gru_forward(X, Wx, Wh, b, h0):
 
   dataset API 可以支持以 streaming 的方式读取数据。
 
-
-## Language Models
-
 ### Natural Language Processing
 
 #### Traditional Methods
@@ -7423,7 +7420,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - **确认偏误**：自我验证时倾向于确认自己的输出，需要独立的验证信号
   - **安全与对齐**：自主进化可能偏离预期，需要把安全当作随时间演化的纵向属性来评估
 
-## Domains
+## Business
 
 ### Search/Recommendation
 
