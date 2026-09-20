@@ -6,6 +6,31 @@ description: 面试题
 keywords: 面试题
 ---
 
+## Career Compass
+
+- **我要达到的：优秀候选人的能力模型**
+
+| 维度 | 优秀候选人的样子 | 优先级 | 对应章节 |
+|------|----------------|--------|---------|
+| 基础功底 | 数学/算法/ML 基本功扎实，coding 干净利落，追问不慌 | 门槛项：过线即可 | Fundamentals |
+| 领域纵深 | 对 LLM/后训练/Agent 有体系化理解，能讲清"为什么这样设计"，跟得上前沿 | 核心权重：岗位区分度所在 | Language Models |
+| 项目与研究 | 有代表作，扛得住极限追问，讲得出 insight 而不只是结果 | 核心区分度：别人抄不走 | Position-Related |
+| 工程落地 | 方案能上线：时延/成本/稳定性有治理手段，在线离线不一致有排查方法论 | 重要：资深岗硬要求 | Language Models + Agent |
+| 业务理解 | 能定义问题而不只是解题，算法工作挂得到业务指标上 | 加分项：向上走的天花板 | Domains + 交叉面 |
+| 沟通与动机 | 非技术语言讲清技术价值，动机自洽、稳定性可信 | 加分项，HR 面一票否决 | Scenarios |
+
+- **我关心的：一份工作的选择维度**
+
+| 维度 | 我关心什么 | 优先级 | 对应内容 |
+|------|-----------|--------|---------|
+| 方向 | 技术方向是否在 LLM/Agent 演进主线上，是否公司核心业务 | 第一优先级 | 想要怎样的机会 / 技术面反问 |
+| 场景与平台 | 业务场景真实、数据规模大、落地闭环完整 | 次之 | 为什么加入我们公司 |
+| 团队 | 领导技术判断力、协作机制、团队氛围 | 再次 | 二面/交叉面反问 |
+| 成长 | 有更大的技术挑战，能沉淀出代表作 | 长期权重最高 | 想要怎样的机会 |
+| 薪资与稳定 | 整体 package 合理、公司经营稳定 | 底线项：达标即可，不做首要筹码 | 期望薪资与谈判 |
+
+## Fundamentals
+
 ### Math
 
 #### Linear Algebra
@@ -4307,6 +4332,8 @@ def gru_forward(X, Wx, Wh, b, h0):
   dataset API 可以支持以 streaming 的方式读取数据。
 
 
+## Language Models
+
 ### Natural Language Processing
 
 #### Traditional Methods
@@ -7398,6 +7425,8 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - **确认偏误**：自我验证时倾向于确认自己的输出，需要独立的验证信号
   - **安全与对齐**：自主进化可能偏离预期，需要把安全当作随时间演化的纵向属性来评估
 
+## Domains
+
 ### Search/Recommendation
 
 - **搜索/推荐 Pipeline**
@@ -7481,7 +7510,9 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 一个学习得到的去噪声过程：训练一个网络去逐渐从一张纯噪声中消除噪声，直到得到一张真正的照片
 
 
-### CV and Position-Related
+## Position & Scenarios
+
+### Position-Related
 
 #### Basic
 
@@ -7721,7 +7752,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 #### Technical Common Questions
 
-- **简历项目深挖**：你的角色、技术方案、设计动机、量化结果；项目题清单见 CV related 章节。
+- **简历项目深挖**：你的角色、技术方案、设计动机、量化结果；项目题清单见 Position-Related 章节。
 
 - **技术选型 trade-off**：为什么选 A 不选 B。
 
