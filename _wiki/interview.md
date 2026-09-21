@@ -6262,9 +6262,9 @@ RLHF 上层应用：veRL / OpenRLHF
   **新方向**：Inference-Time Reward Hacking（NeurIPS 2025）— Best-of-N 采样时也会出现 hacking
 
 
-#### Post Training
+### Post Training
 
-##### Fundamentals
+#### Fundamentals
 
 - **强化学习和监督学习有什么区别？**
 
@@ -6366,7 +6366,7 @@ RLHF 上层应用：veRL / OpenRLHF
   一般来讲，优化负样本会比优化正样本带来的价值更大，优化正样本其实近似等价为 SFT，优化负样本可以让模型无法通过蒙对、幻觉等方式获得收益。
 
 
-##### SFT and Training Details
+#### SFT and Training Details
 
 - **SFT**
 
@@ -6442,7 +6442,7 @@ RLHF 上层应用：veRL / OpenRLHF
   - Agent：需要额外 mask 工具返回，但保留工具调用部分的 loss
 
 
-##### RL Algorithms
+#### RL Algorithms
 
 - **REINFORCE**
 
@@ -6669,7 +6669,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。PPO 依赖于 reward model 和 value model；DPO 没有显式探索机制。
 
 
-##### Reward Design
+#### Reward Design
 
 - **为什么 reward model 对完整回复打分，而不是训练 token level 的奖励？**
 
@@ -6775,7 +6775,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   **来源**：GLM-5.2 (2026.6)
 
 
-##### Training Stability
+#### Training Stability
 
 - **训推不一致（Training-Inference Mismatch）是什么？**
 
@@ -6794,7 +6794,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   熵坍塌：随着训练的进行，entropy 逐渐降低。导致某些 group 采样出的 response 几乎相同，使得模型在早期变得更加确定，限制了模型的探索空间。
 
 
-##### Distillation
+#### Distillation
 
 - **OPD (On-Policy Distillation)**
 
@@ -6852,7 +6852,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   **GLM-5 实践**：在 Reasoning RL → Agentic RL → General RL 的三阶段流程中，每个后续阶段都用前面阶段的模型做 on-policy 蒸馏，有效缓解了灾难性遗忘问题。
 
 
-##### Reasoning and Test-time Scaling
+#### Reasoning and Test-time Scaling
 
 - **MCTS**
 
@@ -6892,7 +6892,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   无论哪种形态，获得候选回答后都需要用 PRM 或 ORM 进行验证。PRM 有助于缩小搜索空间，相比于 ORM 的奖励稀疏，它的奖励更加密集。它的实现包括训练一个独立的模型。ORM 的实现包括训练一个独立的模型，self-consistency，voting 或如 deepseek 的启发式验证。提供最终答案的方式包括 Best-of-N，self-consistency，拒绝采样。
 
 
-##### Capability Topics
+#### Capability Topics
 
 - **Safety / Hallucination**
 
@@ -6906,9 +6906,9 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   位置编码改进；模型结构优化；记忆缓存机制；检索增强（RAG）；分块/窗口机制；扩展训练数据；拆分 agent。
 
 
-#### Agent
+### Agent
 
-##### Architecture
+#### Architecture
 
 - **Agent**
 
@@ -6997,7 +6997,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   Deep Search 只有一个 query，而 Deep Research 是会整理出来多个 query。
 
-##### Frameworks
+#### Frameworks
 
 - **CrewAI**
 
@@ -7043,7 +7043,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   这种配置确保记忆数据安全存储，跨会话保持可用，即使在高流量或分布式工作负载下也能稳定运行。
 
-##### RAG & Knowledge
+#### RAG & Knowledge
 
 - **RAG**
 
@@ -7102,7 +7102,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   通过图的方式连接知识，避免传统 RAG 切片后导致信息依赖丢失。
 
-##### Memory
+#### Memory
 
 - **Memory**
 
@@ -7137,7 +7137,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - **主动清理**：定期任务扫描记忆库，清理低质量/过期条目
   - **用户反馈**：用户指出记忆错误时，及时修正或删除
 
-##### Tools & Protocols
+#### Tools & Protocols
 
 - **LLM 怎么调用外部工具？**
 
@@ -7278,7 +7278,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 实现简单，调试方便
   - 自动重连机制成熟
 
-##### Context Engineering
+#### Context Engineering
 
 - **Prompt Engineering**
 
@@ -7333,7 +7333,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 多智能体架构（Multi-agent Architecture）：将任务分解给多个子智能体，每个子智能体处理其特定任务并拥有独立的上下文，避免不同任务的上下文相互干扰。
   - 环境（Environments）：使用沙箱等环境来隔离包含大量 token 的对象或状态，例如在执行复杂计算或访问敏感数据时，将这些操作限制在特定的、受控的环境中。
 
-##### Agent for SE
+#### Agent for SE
 
 - **LLM for SE**
 
@@ -7363,7 +7363,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - Retrieval：How to select useful files
   - 多语言
 
-##### Agentic RL & World Modeling
+#### Agentic RL & World Modeling
 
 - **Agentic RL**
 
@@ -7407,7 +7407,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   **参考文献**：Meng Chu et al., "Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond", arXiv:2604.22748, 2026.
 
-##### Self-Evolving Agent
+#### Self-Evolving Agent
 
 - **什么是 Self-Evolving Agent（自进化智能体）？**
 
