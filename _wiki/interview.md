@@ -12,7 +12,7 @@ keywords: 面试题
 
 | 维度 | 面试当下 | 对应内容 |
 |------|---------|---------|
-| 技术 | 基本功过线；体系化理解 LLM/后训练/Agent，讲得清"为什么这样设计" | Technology · Transformer |
+| 技术 | 基本功过线；体系化理解 LLM/后训练/Agent，讲得清"为什么这样设计" | Technology · Transformer · Technique Report |
 | 项目 | 扛得住极限追问，讲得出 insight 而不只是结果 | Projects |
 | 业务 | 讲得清算法如何支撑业务指标，能站在产品视角对话 | Business |
 | 沟通 | 非技术语言讲清技术价值 | Scenarios |
@@ -6149,7 +6149,7 @@ RLHF 上层应用：veRL / OpenRLHF
     - **LiGO**：用线性算子学习最优初始化新增参数的方式，而非人工设计规则。
 
 
-#### Technique Report
+## Technique Report
 
 - **GPT 的原理？**
 
