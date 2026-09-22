@@ -7641,7 +7641,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 项目实施细节的极限追问链（数据、ablation、上线过程中的失败）
   - 手写代码/online coding（题型见前文算法章节）
 
-- **反问**：见 Career Compass"我关心的"，技术一面侧重方向/职责与目标。
+- **反问**：见 Career Compass"我关心的"，技术一面侧重技术/职责与目标。
 
 ### Technical Hiring Manager Interview
 
@@ -7667,7 +7667,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 为什么选择我们公司/这个方向（稳定性问题，答案要自洽）
   - 你觉得自己能带来什么（差异化价值：研究背景 + 落地经验的结合）
 
-- **反问**：见 Career Compass"我关心的"，CTO 面侧重方向/业务价值/组织架构。
+- **反问**：见 Career Compass"我关心的"，CTO 面侧重技术/业务/团队与成长。
 
 ### Technical Cross-team Interview
 
@@ -7691,7 +7691,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 举一个你妥协或顶住产品需求的例子
   - 产品指标和模型指标冲突时（如体验 vs 转化）怎么取舍？
 
-- **反问**：见 Career Compass"我关心的"，产品交叉面侧重业务价值。
+- **反问**：见 Career Compass"我关心的"，产品交叉面侧重业务。
 
 ### Engineering Cross-functional Interview
 
