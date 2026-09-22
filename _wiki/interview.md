@@ -6182,89 +6182,6 @@ RLHF 上层应用：veRL / OpenRLHF
     - **Knowledge Inheritance**：小模型自学习 + 大模型教师指导两路并行训练。
     - **LiGO**：用线性算子学习最优初始化新增参数的方式，而非人工设计规则。
 
-
-### Technique Report
-
-- **GPT 的原理？**
-
-  基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
-
-
-- **BERT 的原理？**
-
-  基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
-
-
-- **BERT 的训练目标？**
-
-  BERT 有 masked language modeling 和 next sentence prediction 两个目标
-
-
-- **RoBERTa 相比 BERT 做了哪些改进？**
-
-  更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
-
-
-- **RoBERTa 强于 RNN 的地方？**
-
-  并行，对大数据比较友好。
-
-
-- **Qwen**
-
-  QwenMoE
-
-
-- **Deepseek-V1 - Deepseek-V3**
-
-  - MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
-  - Multi-Token Prediction
-  - 细粒度专家划分：在保持参数数量不变的情况下，通过分割 FFN 中间隐藏维度来将专家分割成更细的粒度。相应地，在保持计算成本不变的情况下，可激活更多细粒度的专家，以实现激活专家组合的更高灵活性。
-  - 共享专家隔离：将某些专家隔离出来，作为始终激活的共享专家，旨在捕获不同上下文中的共同知识。通过将共同知识压缩到这些共享专家中，可以减轻其他路由专家之间的冗余，这可以提高参数效率，确保每个路由专家专注于不同方面而保持专业化。
-  - 除了专家级负载均衡，v1 还引入了设备级负载均衡。v2 引入了更多的 loss。v3 直接把这些 loss 都去掉，用一个可动态调节的 bias 来做到负载均衡。当检测到专家是过载的状态时，就减小该专家的bias，反之则增加。
-  - v3 将门控函数的对更小的小数位会敏感的 softmax（multi-class classification）改成了值域更宽的 sigmoid（multi-label classification）
-  - fp8 精度计算
-
-
-- **Deepseek-R1-Zero**
-
-  证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
-  1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
-  2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用`<think>`标签包裹推理过程，用`<answer>`标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
-  3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
-
-
-- **Deepseek-R1**
-
-  成功经验
-  - 在 SFT 阶段采用冷启动，只使用了少量（几千条）高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
-  - 在接近收敛时，通过拒绝采样生成 SFT 数据，即让 AI 生成多个答案，然后只选择最优的答案来继续 SFT 训练，最后再加入非推理类任务数据 (如写作、问答等)，进行全场景强化学习。
-  - 大模型的推理能力可以蒸馏到小模型，使其性能优于直接对小模型进行 RL 训练。
-  - 为解决 language mixing 的问题，在 RL 阶段增加一致性奖励项，计算目标语言词汇占比
-
-  失败经验
-  - 过程奖励模型：思维过程正确，行动过程正确。希望用来解决奖励黑洞，但发现只能用于简单的推理任务
-  - 蒙特卡洛树搜索（MCTS）：由于推理任务的搜索空间远比围棋复杂，AI 需要在每一步做出决策，而 MCTS 无法有效地指导 AI 进行合理的搜索。
-
-
-- **什么是 Reward Hacking？如何缓解？**
-
-  **定义**：LLM/RLHF 中智能体利用奖励函数漏洞达成高分而非真正目标的问题。
-
-  **核心原因**：奖励模型（RM）不完美，policy 会找到 RM 的盲点：
-  - 生成过长文本
-  - 格式堆砌
-  - 重复内容
-
-  **主流缓解方案**：
-  - **KL 惩罚项**：限制 policy 偏离 ref model 的幅度
-  - **Reward Shaping**：重新设计奖励函数
-  - **生成式奖励模型（GenRM）**：比判别式 RM 泛化更好
-  - **Causal Reward**：因果奖励（2025 arxiv）
-
-  **新方向**：Inference-Time Reward Hacking（NeurIPS 2025）— Best-of-N 采样时也会出现 hacking
-
-
 ### Post Training
 
 #### Fundamentals
@@ -7462,6 +7379,87 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - **经验库退化**：经验/技能库随时间膨胀、冗余、噪声累积，需要去重与动态打分
   - **确认偏误**：自我验证时倾向于确认自己的输出，需要独立的验证信号
   - **安全与对齐**：自主进化可能偏离预期，需要把安全当作随时间演化的纵向属性来评估
+
+### Technique Report
+
+- **GPT 的原理？**
+
+  基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
+
+
+- **BERT 的原理？**
+
+  基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
+
+
+- **BERT 的训练目标？**
+
+  BERT 有 masked language modeling 和 next sentence prediction 两个目标
+
+
+- **RoBERTa 相比 BERT 做了哪些改进？**
+
+  更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
+
+
+- **RoBERTa 强于 RNN 的地方？**
+
+  并行，对大数据比较友好。
+
+
+- **Qwen**
+
+  QwenMoE
+
+
+- **Deepseek-V1 - Deepseek-V3**
+
+  - MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
+  - Multi-Token Prediction
+  - 细粒度专家划分：在保持参数数量不变的情况下，通过分割 FFN 中间隐藏维度来将专家分割成更细的粒度。相应地，在保持计算成本不变的情况下，可激活更多细粒度的专家，以实现激活专家组合的更高灵活性。
+  - 共享专家隔离：将某些专家隔离出来，作为始终激活的共享专家，旨在捕获不同上下文中的共同知识。通过将共同知识压缩到这些共享专家中，可以减轻其他路由专家之间的冗余，这可以提高参数效率，确保每个路由专家专注于不同方面而保持专业化。
+  - 除了专家级负载均衡，v1 还引入了设备级负载均衡。v2 引入了更多的 loss。v3 直接把这些 loss 都去掉，用一个可动态调节的 bias 来做到负载均衡。当检测到专家是过载的状态时，就减小该专家的bias，反之则增加。
+  - v3 将门控函数的对更小的小数位会敏感的 softmax（multi-class classification）改成了值域更宽的 sigmoid（multi-label classification）
+  - fp8 精度计算
+
+
+- **Deepseek-R1-Zero**
+
+  证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
+  1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
+  2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用`<think>`标签包裹推理过程，用`<answer>`标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
+  3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
+
+
+- **Deepseek-R1**
+
+  成功经验
+  - 在 SFT 阶段采用冷启动，只使用了少量（几千条）高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
+  - 在接近收敛时，通过拒绝采样生成 SFT 数据，即让 AI 生成多个答案，然后只选择最优的答案来继续 SFT 训练，最后再加入非推理类任务数据 (如写作、问答等)，进行全场景强化学习。
+  - 大模型的推理能力可以蒸馏到小模型，使其性能优于直接对小模型进行 RL 训练。
+  - 为解决 language mixing 的问题，在 RL 阶段增加一致性奖励项，计算目标语言词汇占比
+
+  失败经验
+  - 过程奖励模型：思维过程正确，行动过程正确。希望用来解决奖励黑洞，但发现只能用于简单的推理任务
+  - 蒙特卡洛树搜索（MCTS）：由于推理任务的搜索空间远比围棋复杂，AI 需要在每一步做出决策，而 MCTS 无法有效地指导 AI 进行合理的搜索。
+
+
+- **什么是 Reward Hacking？如何缓解？**
+
+  **定义**：LLM/RLHF 中智能体利用奖励函数漏洞达成高分而非真正目标的问题。
+
+  **核心原因**：奖励模型（RM）不完美，policy 会找到 RM 的盲点：
+  - 生成过长文本
+  - 格式堆砌
+  - 重复内容
+
+  **主流缓解方案**：
+  - **KL 惩罚项**：限制 policy 偏离 ref model 的幅度
+  - **Reward Shaping**：重新设计奖励函数
+  - **生成式奖励模型（GenRM）**：比判别式 RM 泛化更好
+  - **Causal Reward**：因果奖励（2025 arxiv）
+
+  **新方向**：Inference-Time Reward Hacking（NeurIPS 2025）— Best-of-N 采样时也会出现 hacking
 
 ## Business
 
