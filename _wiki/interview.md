@@ -1098,7 +1098,7 @@ def count_subarrays(nums, k):
 
   三、区间动态操作类
 
-  - 区间更新 + 区间查询（如数值加减、最大最小值等）：线段树（将每个长度不为 1 的区间划分成左右两个区间递归求解） / 树状数组 / 差分数组。
+  - 区间更新 + 区间查询（如数值加减、最大最小值等）：线段树（将每个长度不为 1的区间划分成左右两个区间递归求解） / 树状数组 / 差分数组。
   - 区间加法，单点查询：使用前缀和或差分数组优化区间操作。
   - 区间异或 / 取反操作 + 查询：线段树支持 lazy propagation 或位运算。
 
@@ -3546,13 +3546,13 @@ loss = cross_entropy_loss_from_logits(logits, labels)
 
   a. We can use undersampling, oversampling or SMOTE to make the data balanced.
 
-  b. We can alter the prediction threshold value by doing [probability caliberation](https://www.analyticsvidhya.com/blog/2016/07/platt-scaling-isotonic-regression-minimize-logloss-error/) and finding a optimal threshold using AUC-ROC curve.
+  b. We can alter the prediction threshold value by doing[probability caliberation](https://www.analyticsvidhya.com/blog/2016/07/platt-scaling-isotonic-regression-minimize-logloss-error/)and finding a optimal threshold using AUC-ROC curve.
 
-  c. We can assign weight to classes such that the minority classes gets larger weight.
+  c. We can assign weight to classes such that the minority classes getslarger weight.
 
   d. We can also use anomaly detection.
 
-  Know more: Imbalanced Classification
+  Know more:Imbalanced Classification
 
 
 - **多分类问题如何转二分类方法？**
@@ -4054,7 +4054,7 @@ def leaky_relu_derivative(x, alpha=0.01):
 
 - **Dropout**
 
-  以一定的概率随机地使一部分神经元节点失效。应用 Dropout 之后，前向传播生成网络结构的过程可以看做服从的分布是伯努利分布。
+  以一定的概率随机地使一部分神经元节点失效。应用Dropout 之后，前向传播生成网络结构的过程可以看做服从的分布是伯努利分布。
 
 
 - **矩阵计算：AB=C，y=f(C)，y 对 C 的偏导为 P，求 y 对 A 和 B的偏导。**
@@ -4505,6 +4505,9 @@ def gru_forward(X, Wx, Wh, b, h0):
 
 ### Transformer
 
+#### Overview
+
+
 - **Transformer 的原理？**
 
   Vanilla Transformer 是 encoder-decoder 架构，由此衍生出现代三种主流变体，当前主流 LLM 多为 decoder-only。
@@ -4576,10 +4579,7 @@ class TransformerBlock(nn.Module):
 
   **建模能力**：双向 attention 的注意力矩阵因为是 n * d 与 d * n 的矩阵相乘，理论上最大秩只能为 min(n, d)，而一般 n 远大于 d，所以 n * n 的注意力矩阵容易退化成低秩状态，而 causal attention 的注意力矩阵是下三角矩阵，其秩为对角线上非零的个数，因为 softmax 输出为正，因此必然是满秩的，建模能力更强。
 
-
-- **为什么要用 FFN？**
-
-  引入非线性表达能力，因为 self-attention 是线性的。FFN 通常是两层网络，先升维再降维。由于低维空间表达能力有限，升维可以提高表达能力。降维一方面可以保证维度一致，另一方面可以提取高维空间学习到的特征。
+#### Position Encoding
 
 
 - **Position Embedding**
@@ -4679,6 +4679,8 @@ def rope(x):
 
   推理策略增强：CoT，Self-Consistency。
 
+#### Normalization
+
 
 - **Batch Normalization (BN)**
 
@@ -4775,6 +4777,13 @@ class RMSNorm(nn.Module):
   **Pre-Norm 的代价**：表达能力略弱于 Post-Norm。因为每一层 Sublayer 的输入都经过 LayerNorm 归一化，输出又被加回残差，导致深层的 hidden state 始终被约束在一个球面上，变化空间有限。但实际经验中，Pre-Norm 能训得更充分，最终性能和 Post-Norm 持平甚至更好。
 
   **总结**：现代 LLM（LLaMA、GPT 系列、GLM-4 等）普遍采用 Pre-Norm + RMSNorm 的组合。DeepNorm 是针对 Post-Norm 时代的特殊补丁（通过 $$\alpha = N^{1/4}$$ 放大残差 + 特殊初始化来强行稳定训练），Pre-Norm 成为主流后就不再需要了。
+
+#### Feed-Forward Network
+
+
+- **为什么要用 FFN？**
+
+  引入非线性表达能力，因为 self-attention 是线性的。FFN 通常是两层网络，先升维再降维。由于低维空间表达能力有限，升维可以提高表达能力。降维一方面可以保证维度一致，另一方面可以提取高维空间学习到的特征。
 
 
 - **LLM 常用的激活函数有？**
@@ -4956,6 +4965,19 @@ class CrossAttention(nn.Module):
         return self.out_proj(context)
 ```
 
+- **Attention Sink 是什么？为什么会出现？**
+
+  LLM 在自回归生成时，会将大量注意力分配给序列第一个 token（如 `<bos>`），其他 token 获得的不成比例地少。
+
+  **成因**：Transformer 需要一个 Context-Aware Identity Layer，让某些 attention head 根据上下文不做任何变化。sink token 作为 implicit bias 来承担这个角色。
+
+  **缓解方案**：
+  - 可学习的 sink token：引入专门的可学习 token
+  - Gated Attention（主流）：Qwen 团队方案，可学习的 KV biases / K biases，NeurIPS 2025 最佳论文候选
+
+
+#### KV Cache
+
 
 - **什么是 KV Cache？为什么只缓存 K/V 不缓存 Q？什么情况下可以使用？**
 
@@ -5025,6 +5047,13 @@ class SelfAttentionWithKVCache(nn.Module):
         out = out.transpose(1, 2).contiguous().view(B, T, E)  # [B, 1, E]
         return self.out_proj(out)
 ```
+
+- **Transformer 使用的时候，制约显存的最关键因素是什么？**
+
+  序列长度。
+
+
+#### Efficient Attention
 
 
 - **Multi-Query Attention (MQA)**
@@ -5145,7 +5174,7 @@ class GroupedQueryAttention(nn.Module):
 
 - **Multi-head Latent Attention (MLA)**
 
-  在 MHA 中，K 和 V 是对 $$h_t$$ 分别用投影矩阵进行变化得到的，而 MLA 把 KV 的变换改成使用一个共用的 down-projection matrix 将 $$h_t$$ 映射为 $$c_t$$，再用两个 up-projection matrices 将 $$c_t$$ 映射为 $$k_t$$ 和 $$v_t$$。在做 Q、K 点积时，由于 $$k_t$$ 对应的 up-projection matrix 可以被 Q 的映射矩阵（此处也是低秩映射矩阵）吸收，所以 Q、K 点积本质上是 Q 和 C 点积。同理 $$v_t$$ 也不需要计算，因此两个 up-projection matrices 不需要用到，减少了 kv cache 的负担。
+  在 MHA 中，K 和 V 是对$$h_t$$ 分别用投影矩阵进行变化得到的，而 MLA 把 KV 的变换改成使用一个共用的 down-projection matrix 将 $$h_t$$ 映射为 $$c_t$$，再用两个 up-projection matrices 将 $$c_t$$ 映射为 $$k_t$$ 和 $$v_t$$。在做 Q、K 点积时，由于 $$k_t$$ 对应的 up-projection matrix 可以被 Q 的映射矩阵（此处也是低秩映射矩阵）吸收，所以 Q、K 点积本质上是 Q 和 C 点积。同理 $$v_t$$ 也不需要计算，因此两个 up-projection matrices 不需要用到，减少了 kv cache 的负担。
 
   由于 MLA 没有显式计算 K，且 ROPE 不能加在 latent vector 上，因此 MLA 使用了 decoupled RoPE，即使用额外的 multi-head queries 和一个 shared key 来携带 RoPE 的位置信息，其维度为 $d_h$。新增的 q 和 k 维度使用常规的 RoPE 计算，用于携带位置信息；而原来的维度依然使用低秩分解的方式计算，最后再计算 attention 的时候两个部分拼接起来。
 
@@ -5205,22 +5234,6 @@ class GroupedQueryAttention(nn.Module):
   **在 MTP layer 的应用**：indexer 只在第 1 步计算，后续步复用 top-k indices。由于 IndexShare 的设计，后续步只能 attend 到 target model 的 hidden states（$$h_1$$ 到 $$h_4$$），不能看到 MTP layer 自身生成的 $$h_5$$，消除了训练-推理不一致。
 
   **来源**：GLM-5.2 (2026.6)，论文 arXiv:2603.12201
-
-
-- **Attention Sink 是什么？为什么会出现？**
-
-  LLM 在自回归生成时，会将大量注意力分配给序列第一个 token（如 `<bos>`），其他 token 获得的不成比例地少。
-
-  **成因**：Transformer 需要一个 Context-Aware Identity Layer，让某些 attention head 根据上下文不做任何变化。sink token 作为 implicit bias 来承担这个角色。
-
-  **缓解方案**：
-  - 可学习的 sink token：引入专门的可学习 token
-  - Gated Attention（主流）：Qwen 团队方案，可学习的 KV biases / K biases，NeurIPS 2025 最佳论文候选
-
-
-- **Transformer 使用的时候，制约显存的最关键因素是什么？**
-
-  序列长度。
 
 
 - **FlashAttention**
@@ -6081,9 +6094,9 @@ RLHF 上层应用：veRL / OpenRLHF
 
   动态量化只量化 weight，激活仍是浮点，推理过程中，根据输入数据动态计算激活量化参数。静态量化收集代表性数据集，统计激活最大/最小值，提前固定 scale/zero_point，推理时直接用事先量化好的权重和激活，无需动态计算。
 
-  GPTQ (GPT Quantization) 的主要创新是它采用逐层、逐通道的方式优化量化参数，使用二次误差最小化方法来确定最佳量化值，并通过重建误差传播来补偿量化误差。这种方法在保持模型性能的同时实现了高压缩率。
+  GPTQ (GPTQuantization) 的主要创新是它采用逐层、逐通道的方式优化量化参数，使用二次误差最小化方法来确定最佳量化值，并通过重建误差传播来补偿量化误差。这种方法在保持模型性能的同时实现了高压缩率。
 
-  AWQ (Activation-aware Weight Quantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
+  AWQ (Activation-awareWeightQuantization) 改进 GPTQ，减少激活主导的精度偏差。核心思想是根据激活值的重要性选择性地量化权重。
 
 
 - **常用的 LLM 推理/部署框架有哪些？如何选择？**
@@ -6208,7 +6221,7 @@ RLHF 上层应用：veRL / OpenRLHF
   - Multi-Token Prediction
   - 细粒度专家划分：在保持参数数量不变的情况下，通过分割 FFN 中间隐藏维度来将专家分割成更细的粒度。相应地，在保持计算成本不变的情况下，可激活更多细粒度的专家，以实现激活专家组合的更高灵活性。
   - 共享专家隔离：将某些专家隔离出来，作为始终激活的共享专家，旨在捕获不同上下文中的共同知识。通过将共同知识压缩到这些共享专家中，可以减轻其他路由专家之间的冗余，这可以提高参数效率，确保每个路由专家专注于不同方面而保持专业化。
-  - 除了专家级负载均衡，v1 还引入了设备级负载均衡。v2 引入了更多的 loss。v3 直接把这些 loss 都去掉，用一个可动态调节的 bias 来做到负载均衡。当检测到专家是过载的状态时，就减小该专家的 bias，反之则增加。
+  - 除了专家级负载均衡，v1 还引入了设备级负载均衡。v2 引入了更多的 loss。v3 直接把这些 loss 都去掉，用一个可动态调节的 bias 来做到负载均衡。当检测到专家是过载的状态时，就减小该专家的bias，反之则增加。
   - v3 将门控函数的对更小的小数位会敏感的 softmax（multi-class classification）改成了值域更宽的 sigmoid（multi-label classification）
   - fp8 精度计算
 
@@ -6217,7 +6230,7 @@ RLHF 上层应用：veRL / OpenRLHF
 
   证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
   1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
-  2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用 `<think>` 标签包裹推理过程，用 `<answer>` 标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
+  2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用`<think>`标签包裹推理过程，用`<answer>`标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
   3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
 
 
@@ -6299,7 +6312,7 @@ RLHF 上层应用：veRL / OpenRLHF
   标准 KL 计算方式：$$KL(q(x) \| p(x))=\sum_{x \in X} {q(x) * log_2{\frac{q(x)}{p(x)}}}$$
 
   然而，在实际计算中，直接计算 KL 散度可能非常困难，主要原因如下：
-  - 需要对所有  进行求和或积分，计算成本高。
+  - 需要对所有进行求和或积分，计算成本高。
   - 计算过程中可能涉及大规模概率分布，导致内存消耗过大。
 
   因此，通常使用近似方法来计算 KL 散度。
