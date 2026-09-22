@@ -5075,6 +5075,46 @@ class CrossAttention(nn.Module):
   - **Encoder-Decoder**：encoder 部分是双向 attention，不能缓存；decoder 部分是 causal attention，可以缓存；encoder 输出固定后，cross-attention 的 K/V 也可以缓存
   - **Encoder-only（BERT）**：双向 attention，$h_i$ 依赖所有 token，新增 token 后 $K_i$、$V_i$ 失效，无法缓存
 
+
+- **KV Cache 显存怎么算？有哪些优化维度？**
+
+  单个 token 的 global KV Cache 字节数：
+
+  $$\text{bytes/token} = 2_{(K,V)} \times L_{(层数)} \times H_{kv}_{(KV 头数)} \times d_{head}_{(每头维度)} \times b_{(每值字节数)}$$
+
+  总显存再乘以 $$seq\_len \times batch\_size$$。以 LLaMA-2-7B（$$L=32,\ H_{kv}=32,\ d_{head}=128$$，FP16 即 $$b=2$$）为例，单 token 约 $$2 \times 32 \times 32 \times 128 \times 2 = 512$$ KB，128K 上下文单条序列就要约 64 GB。
+
+  所有优化本质就是压这几个因子 + 存储调度，共 **6 个维度**：
+
+  | 维度 | 压什么 | 代表方法 |
+  |------|--------|----------|
+  | **头数 $$H_{kv}$$** | 减少 KV head 数 | MQA（→1 头）、GQA（→G 组）（见 Efficient Attention）|
+  | **每头维 $$d_{head}$$** | 低秩 / latent 压缩 | MLA（见 Efficient Attention）|
+  | **层数 $$L$$** | 跨层共享 KV | CLA、YOCO、CED、CSA2 |
+  | **序列 $$S$$** | 少缓存 token | SWA、StreamingLLM / Attention Sink、H2O、DSA（top-k）|
+  | **精度 $$b$$** | KV 量化 | FP8 → FP4 / INT4（QAT）|
+  | **存储调度** | 系统层管理 | PagedAttention、Prefix Cache、KV Offload、Persistent KV |
+
+
+- **KV Cache 的发展历程？**
+
+  围绕上述 6 个维度，KV Cache 压缩主线如下（以 DeepSeek per-token global KV 为例，论文口径 V1 → V4.1-Flash 降低约 **437×**）：
+
+  | 时间 | 方法 | 主要维度 | 核心贡献 |
+  |------|------|----------|----------|
+  | 2017 | MHA（Transformer）| — | causal attention 无后效性，是 KV Cache 的前提 |
+  | 2019 | MQA | 头数 | 所有 Q head 共享 1 份 KV |
+  | 2023 | GQA | 头数 | 分组共享，质量 / 速度折中（LLaMA-2、Qwen）|
+  | 2023 | PagedAttention（vLLM）| 存储调度 | 按块分页管理 KV，消除显存碎片 |
+  | 2023 | StreamingLLM / H2O | 序列 | Attention Sink + 滑窗 / 重要 token 驱逐 |
+  | 2023 | KV 量化（FP8 / INT）| 精度 | 低比特存储 KV |
+  | 2024 | MLA（DeepSeek-V2）| 每头维 | latent 低秩压缩 KV |
+  | 2024 | YOCO / CLA | 层数 | 只缓存一次 / 跨层共享 KV |
+  | 2025 | DSA（DeepSeek-V3.2）| 序列 | indexer 动态 top-k 稀疏 |
+  | 2026 | IndexShare（GLM-5.2）| 序列 / 计算 | 多层共享 indexer |
+  | 2026.9 | CED + CSA2 + FP4（DeepSeek-V4.1-Flash）| 层数 + 序列 + 精度 | 跨层复用 + 稀疏 + FP4，**890 B/token** |
+
+
 - **multi-head attention + kv cache 实现**
 
   query 不参与下一 token 的注意力过程，无需缓存，而 key/value 是过去的记忆，需要缓存。
@@ -5134,6 +5174,35 @@ class SelfAttentionWithKVCache(nn.Module):
 - **Transformer 使用的时候，制约显存的最关键因素是什么？**
 
   序列长度。
+
+
+- **KV Cache 量化（精度维度）？**
+
+  把 KV 从 FP16 / BF16 降到更低比特存储，直接线性压缩显存（$$b$$：2 → 1 → 0.5 字节）。
+
+  - **FP8 / INT8**：主流起点。K、V 分布不同（K 有离群值、V 较均匀），常分别采用不同量化粒度（如 K per-channel、V per-token）。代表：KVQuant、KIVI。
+  - **FP4 / INT4**：更激进，通常需配合 **QAT（量化感知训练）** 才能保住精度。DeepSeek-V4.1-Flash 对 main KV 用 FP4（在 RoPE 之后量化），但对 **SWA（滑窗）KV 保留 FP8**——近处 token 对量化更敏感。
+  - **难点**：低比特下离群值会放大误差，可用旋转 / 平滑（QuaRot、SmoothQuant 思路）缓解。
+
+
+- **KV Cache 的存储与调度（系统维度）？**
+
+  不改模型结构，从推理系统层管理 KV 显存：
+
+  - **PagedAttention（vLLM）**：借鉴 OS 虚拟内存分页，把 KV 切成固定大小 block 按需分配，消除连续预留造成的碎片，显存利用率接近 100%，并支持 block 级共享。
+  - **Prefix Cache / Prompt Cache**：多个请求共享相同前缀（如 system prompt）时复用其 KV，跳过重复 prefill。
+  - **KV Offload / 分级存储**：把不常用的 KV 从 HBM 下沉到 CPU 内存 / SSD（如 LMCache），需要时再换回，用带宽换显存。
+  - **Persistent KV**：跨请求持久化保存 KV。DeepSeek-V4.1-Flash 借 CSA2 + CED 把 persistent KV 也压得很低（论文口径约为前代的 1/8）。
+
+
+- **跨层共享 KV Cache（层数维度）？**
+
+  标准 Transformer 每层各存一份 KV，共 $$L$$ 份。跨层共享让多层复用同一份 KV，直接压小层数因子 $$L$$：
+
+  - **CLA（Cross-Layer Attention）**：相邻层共享 KV，质量损失很小。
+  - **YOCO（You Only Cache Once）**：decoder-decoder 结构，前半 self-decoder 只缓存一次 KV，后半 cross-decoder 复用，长上下文下 KV 大幅降低。
+  - **CED（Causal Encoder-Decoder，DeepSeek-V4.1-Flash）**：40 层切成 **20 层因果编码器 + 20 层解码器**。长 prompt 的 prefill 只过编码器（激活约 8B 参数），decoder 的全局 KV 由 encoder 输出构造；decode 时激活约 16B。非对称计算同时降低长输入的计算量与 KV。
+  - **CSA2** 在此之上进一步做跨层 KV 复用（详见 Efficient Attention）。
 
 
 #### Efficient Attention
@@ -5295,6 +5364,24 @@ class GroupedQueryAttention(nn.Module):
   **来源**：DeepSeek-V3 (2024.12)，论文 arXiv:2412.19437
 
 
+- **Compressed Sparse Attention 2 (CSA2)**
+
+  DeepSeek-V4.1-Flash 的核心，目标是"把 KV Cache 压到极限"。相比 DSA 只压**序列**维度，CSA2 **联合三个维度**：entry size（投影跨头共享）+ sequence（稀疏 top-k）+ layer（跨层共享）。
+
+  **每层静态指派三种模式**（三种模式都各自计算 main Q 与 SWA KV）：
+  - **Full**：自算 main KV + indexer K，并选出新的 Top-K
+  - **Reindex**：复用前一层的 main KV + indexer K，重新打分得到新 Top-K
+  - **Reuse**：复用前一层的 main KV + 最新 Top-K，不再打分
+
+  **Hierarchical Sparse Indexer（分层稀疏索引）**：首个 Full 层扫全量序列选出 Top-512，并建立块级候选池（如 2048 块 × 8 = 16384 候选）；后续 Reindex 层只在候选池内选，使后续 indexer 的打分量与上下文长度**解耦**。
+
+  **FP4 KV 量化**：main KV 用 FP4（QAT，RoPE 之后量化）；SWA KV 对量化敏感，保留 FP8。
+
+  **效果**：per-token global KV cache 压到约 **890 bytes**（约为前代 V4-Flash 的 1/4），persistent KV 约为 V4 的 1/8；主干 552B MoE，主打 Agent 长上下文负载的降本。
+
+  **来源**：DeepSeek-V4.1-Flash (2026.9)，论文 arXiv:2609.19969
+
+
 - **Sparse Attention 演进路线**
 
   | 阶段 | 方法 | 特点 | 代表工作 |
@@ -5303,6 +5390,7 @@ class GroupedQueryAttention(nn.Module):
   | 2. 动态稀疏近似 (2020-2023) | LSH / Router | 动态但近似，精度有损或训练不稳定 | Reformer, Routing Transformer |
   | 3. DSA (2024-2025) | 动态 + continued pre-training | Lossless，只需 20B tokens adaptation | DeepSeek-V3 |
   | 4. IndexShare (2026) | 多层共享 indexer | 进一步降低 FLOPs 2.9× | GLM-5.2 |
+  | 5. CSA2 (2026.9) | entry + 序列 + 层多维联合 | 跨层复用 + 稀疏 + FP4，890 B/token | DeepSeek-V4.1-Flash |
 
 
 - **IndexShare (GLM-5.2)**
