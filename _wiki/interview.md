@@ -7158,6 +7158,46 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   这种配置确保记忆数据安全存储，跨会话保持可用，即使在高流量或分布式工作负载下也能稳定运行。
 
+#### Harness
+
+- **什么是 Agent Harness？**
+
+  Harness（挽具 / 骨架）指 LLM 之外、把语言模型包装成能真正干活的 Agent 的整套**运行骨架（scaffolding）**：模型是"大脑"，Harness 是让大脑能感知环境、决策、执行动作并从错误中恢复的"身体 + 神经系统"。
+
+  其核心是一个 **Agent Loop**：LLM 决定做什么 → 工具执行 → 评估结果 → 继续循环，直到任务完成。Harness 就是承载这个循环的运行时系统。
+
+  为什么重要：SWE-agent 提出 **ACI（Agent-Computer Interface）**，指出同一个模型配不同 Harness，任务成功率差异巨大——工具粒度、上下文组织、错误反馈等 Harness 设计，往往比换一个更强的模型更能决定 Agent 表现。
+
+- **Harness 包含哪些核心组件？**
+
+  - **Agent Loop / 控制流**：感知-规划-行动-观察循环，以及迭代终止条件、最大步数限制。
+  - **Tool Use**：工具注册、调用、结果解析，依赖两大 primitive——Tool Calling（结构化请求 / 结果）与 Structured Output（结构化返回）。
+  - **Context Engineering**：上下文窗口管理、历史压缩（Compaction）、记忆检索、Scratchpad / TODO 草稿。
+  - **Memory / State**：短期（对话历史）与长期（跨会话持久化）。
+  - **Error Recovery**：把工具报错反馈给模型、重试、自我修正。
+  - **Runtime / Sandbox**：代码执行环境、文件系统、容器隔离（如 gVisor）。
+  - **Permission / Guardrail**：危险动作分类与拦截、权限模式（只读 / 可写 / 自动）。
+  - **进阶**：Sub-agents（子 Agent 编排）、Hooks（生命周期钩子）、Skills（可复用工作流）。
+
+- **Harness 和 Framework 有什么区别？**
+
+  | 维度 | Framework | Harness |
+  |------|-----------|---------|
+  | **形态** | 构建 Agent 的库（pip import）| 完整可运行的 Agent 系统（开箱即用）|
+  | **代表** | LangChain / LangGraph / CrewAI / AutoGen | Claude Code / Codex / Cursor / OpenHands / OpenClaw |
+  | **控制粒度** | 开发者手写每一步（链、图、工具）| 内置 Agent Loop / 工具 / 上下文 / 权限 |
+  | **定位** | 给你"零件"自己搭 | 给你"成品"直接用 |
+
+  两者不对立：可以用 Framework 搭出一个 Harness。而 **Claude Agent SDK** 把 Claude Code 的 Harness（loop + tools + context + permission）开放成可编程库，正处于两者之间。
+
+- **代表性的 Agent Harness？**
+
+  - **Coding Harness**：Claude Code（Anthropic）、Codex（OpenAI）、Cursor、Aider、OpenHands、SWE-agent——能跑 shell、读写文件、调用服务，自主完成编码任务。
+  - **通用 / 个人 Agent**：OpenClaw（开源，160K+ stars），以 Heartbeat 主动调度 + SKILL.md 技能 + 消息平台交互为特色。
+  - **Harness 内的"快决策"组件**：Jev（System One 模型），负责模型路由与危险动作分类，替代过去锁在闭源 Harness 里的分类器。
+
+  Claude Code / OpenClaw / Jev 的具体设计见 Technique Report。
+
 #### RAG & Knowledge
 
 - **RAG**
@@ -7655,6 +7695,43 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - **Causal Reward**：因果奖励（2025 arxiv）
 
   **新方向**：Inference-Time Reward Hacking（NeurIPS 2025）— Best-of-N 采样时也会出现 hacking
+
+
+- **Hermes 4（Nous Research）**
+
+  Nous Research 的开源（open-weight）**hybrid reasoning** 模型系列（Hermes 4，2025.08，arXiv:2508.18255）。
+  - **Hybrid Reasoning**：把结构化多轮推理与广泛的指令遵循结合，同一模型既能"开思考"做推理，也能关思考做通用对话 / 创作 / 工具调用。
+  - **几乎全合成数据训练**：用前沿推理模型蒸馏生成带 CoT 的数据，配合 **Rejection Sampling** 筛高质量样本、**Length Control** 抑制推理长度膨胀（避免过度思考）。
+  - **中立对齐（neutrally-aligned）**：弱审查、不说教，减少过度拒答；数学等 benchmark 号称超过同级闭源模型。
+  - 系列背景：Hermes 3（2024.08）是中立对齐的通用 instruct + tool-use 模型，强于长期上下文保持、多轮、角色扮演与 internal monologue。
+
+
+- **Claude Code（Anthropic）**
+
+  Anthropic 的 **agentic 编码工具**（终端 CLI）：能运行 shell、读写 / 编辑文件、调用外部服务，自主完成编码任务。
+  - **设计哲学**："给 Agent 一台计算机，让它像人一样工作"；把**文件系统**当作近乎无限的上下文 / 记忆。
+  - **核心** = Agent Loop + 一套内置工具 + 上下文管理；组件含 Tools、Prompts、File System、Skills、Sub-agents、Memory，并有 permission modes、hook system、多 Agent 架构。
+  - **Claude Agent SDK**（2025.09）：把 Claude Code 背后的 Harness（loop / tools / context / permission / sub-agents / hooks）开放成可编程库（Python & TypeScript），内置大规模部署经验（如 tool-use 错误处理）。
+  - 参考：arXiv《Dive into Claude Code: The Design Space of Today's and Future AI Agents》。
+
+
+- **OpenClaw**
+
+  2026 年最火的开源 AI Agent（GitHub 160K+ stars、430K+ 行代码）。它是**开箱即用的独立 Agent 应用**（git clone 运行），而非 pip 库框架。
+  - **三层架构**：Tools（25+ 原子工具，JSON Schema 定义）/ Skills（SKILL.md 打包的高层工作流，ClawHub 上 13700+，约 65% 封装 MCP server）/ Integrations（Telegram、WhatsApp、Discord 等消息平台）。
+  - **Heartbeat 主动调度**：每 30 分钟自动唤醒，检查待办、处理消息、运行定时 Skill——区别于 LangChain / CrewAI 的被动反应式。
+  - **持久化记忆**：本地文件 + 每日日志 + Compaction（压缩旧上下文控 token），跨会话 / 重启自动保持。
+  - **局限**：权限 / 攻击面大（能浏览、执行代码、管文件、发消息，尤其社区 Skill）；部署配置复杂；SKILL.md 对复杂分支 / 重试 / 状态管理表达力有限。
+
+
+- **Jev（TypeSafe AI）**
+
+  TypeSafe AI 2026.09 发布的 **"System One" 模型**（对应卡尼曼"快思考"）：**不生成文本**，而是评估一个 state、返回 typed 答案 + 概率，供软件直接做快速结构化决策。
+  - **训练**：RLCD（reinforcement learning for calibrated decisions），输出校准概率。
+  - **性能**：分类任务上比同级 LLM 快约 200x、成本低约 400x。
+  - **三种问题类型**：Choice（多选，返回各选项概率 + 置信度）、Score（有序等级打分，返回连续分 + 分布 + 置信度）、Noul（yes/no，返回命题为真的概率）；一次请求可对同一 state 并行问多个问题。
+  - **在 Harness 中的角色**：Model Routing（按难度选快 / 强模型）、Auto Mode 护栏（tool 执行前分类并拦截危险动作）——把过去锁在 Claude / Codex / Cursor 闭源 Harness 里的"危险动作分类器"开放给所有 Agent。
+  - **定位**：不替代 LLM，而是补充——LLM 管开放式推理与生成，Jev 管沿途快速决策；LangChain 通过 TypeSafeClassifier / ModelRouterMiddleware / AutoModeMiddleware 集成。
 
 ## Business
 
