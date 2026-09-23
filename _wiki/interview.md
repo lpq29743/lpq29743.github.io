@@ -4861,12 +4861,26 @@ class RMSNorm(nn.Module):
 
   **总结**：现代 LLM（LLaMA、GPT 系列、GLM-4 等）普遍采用 Pre-Norm + RMSNorm 的组合。DeepNorm 是针对 Post-Norm 时代的特殊补丁（通过 $$\alpha = N^{1/4}$$ 放大残差 + 特殊初始化来强行稳定训练），Pre-Norm 成为主流后就不再需要了。
 
-#### Feed-Forward Network
+#### Feed-Forward Network & MoE
 
 
 - **为什么要用 FFN？**
 
   引入非线性表达能力，因为 self-attention 是线性的。FFN 通常是两层网络，先升维再降维。由于低维空间表达能力有限，升维可以提高表达能力。降维一方面可以保证维度一致，另一方面可以提取高维空间学习到的特征。
+
+
+- **FFN 的发展历程？**
+
+  FFN 是 Transformer 每个 block 里 Attention 之后的逐位置（position-wise）两层 MLP，约占 Transformer 总参数的 **2/3**（每层 Attention $$4d^2$$、FFN $$8d^2$$）。演进主线：
+
+  | 时间 | 进展 | 要点 |
+  |------|------|------|
+  | 2017 | 标准 FFN（Transformer）| $$\text{FFN}(x)=W_2\,\sigma(W_1 x+b_1)+b_2$$，内维 $$d_{ff}=4d$$，$$\sigma$$ 用 ReLU |
+  | 2018-19 | 激活函数 | ReLU → **GeLU**（BERT / GPT-2）|
+  | 2020 | **GLU 家族**（Shazeer）| SwiGLU / GeGLU 门控，效果更好；升维比例改 $$\frac{8}{3}d$$ 补偿 FLOPs |
+  | 2017→2021 | **MoE 稀疏化** | sparsely-gated MoE → GShard / Switch → GLaM，把单个 FFN 换成 N 个专家 FFN + 路由 |
+  | 2021 | **FFN as key-value memory** | Geva：FFN 是键值记忆，负责存储事实知识 |
+  | 2024+ | DeepSeek 细粒度专家 | 细粒度专家划分 + 共享专家隔离 + 无辅助损失负载均衡（见下方 MoE）|
 
 
 - **LLM 常用的激活函数有？**
@@ -4888,6 +4902,54 @@ class RMSNorm(nn.Module):
   ReLU、GeLU 不能门控，GLU、GeGLU、SwiGLU、ReGLU 能门控。GLU 变体相比单一激活函数表达力更强，因为门控机制允许模型动态选择哪些特征通过。
 
   注意：GLM-130B 使用 GeGLU 时 FFN 升维到 $$\frac{8}{3}d$$（而非标准的 $$4d$$），使得 FLOPs 与非门控 FFN 基本一致（门控 FFN 有两条路径，需要更大的隐藏维度来补偿）。
+
+
+- **FFN 升维比例为什么是 4d？门控（GLU）后为什么改成 8/3 d？**
+
+  - **4d**：Transformer 原论文经验值（$$d=512,\ d_{ff}=2048$$）。先升维到更高维空间做非线性变换以提升表达力，再降回 $$d$$ 保持残差维度一致。
+  - **8/3 d**：SwiGLU / GeGLU 等门控 FFN 有**两条** $$d \to d_{ff}$$ 投影（gate 与 up），而非门控只有一条。为保持总参数量 / FLOPs 与非门控的 $$4d$$ 基本一致，把内维缩到 $$\frac{2}{3} \times 4d = \frac{8}{3}d$$。LLaMA 即取 $$d_{ff} \approx \frac{8}{3}d$$（再对齐到硬件友好的倍数）。
+
+
+- **FFN 层的可解释性（key-value memory）？**
+
+  Geva et al. 2021（*Transformer Feed-Forward Layers Are Key-Value Memories*）把 FFN 看作键值记忆：第一层权重 $$W_1$$ 的每一行是一个 **key**，对输入做模式匹配（浅层捕捉 n-gram 等表面模式，深层捕捉更语义的模式）；第二层权重 $$W_2$$ 的对应列是 **value**，决定该 key 命中后对输出词表分布的贡献。因此 FFN 被认为是 Transformer 存储事实知识的主要位置，也是知识编辑（ROME / MEMIT）的作用目标。
+
+
+- **MoE**
+
+  MoE 模型中，输入先经过门控网络，分流到 TopK 个 MoE 层里。MoE 层代替传统 Transformer 的 FFN，其中每一个对应的专家通常是 FFN。最终 MoE 层的输出综合得到结果。
+
+
+- **为什么 LLM 流行 MoE？**
+
+  MoE 能显著提高模型容量而不成比例地增加计算成本，且支持 expert parallelism。另外 MoE 提高了模型可解释性。
+
+
+- **MoE 负载均衡**
+
+  使用 MoE，模型可能会由于专家 token 分配不均，退化成只用少数几个专家，从而导致参数利用率低，训练/推理时部分 GPU 负载过高，OOM 或速度瓶颈。负载均衡常用方法：用辅助损失（Load Balancing Loss）让实际分配和概率分布尽量接近均匀分布；Capacity Factor（容量限制），即如果一个专家超出容量，多余 token 会被丢弃或 reroute 到别的专家，避免某个专家被塞爆。Token Dropping，即丢掉超额 token（只在训练时，用于正则化），或 Token Rerouting，即把超额 token 转发到第二选择的专家（常见于 top-2 gating）；Noisy Gating，在门控 logits 上加噪声（通常是 Gumbel 或 Gaussian），使 gating 更随机化，防止早期训练时过快收敛到少数专家。Sinkhorn / Optimal Transport Gating（更高级），即用最优传输（OT）方法在 token 和专家之间分配，强制更均匀。比如 BASE Layers、Hash Layers 里会用到。
+
+
+- **手撕 MoE**
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class SimpleMoE(nn.Module):
+    def __init__(self, input_dim, output_dim, num_experts):
+        super().__init__()
+        self.num_experts = num_experts
+        self.experts = nn.ModuleList([nn.Linear(input_dim, output_dim) for _ in range(num_experts)])
+        self.gate = nn.Linear(input_dim, num_experts)
+
+    def forward(self, x):
+        gate_probs = F.softmax(self.gate(x), dim=1)  # [batch, num_experts]
+        expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=1)  # [batch, num_experts, output_dim]
+        gate_probs = gate_probs.unsqueeze(-1)  # [batch, num_experts, 1]
+        return torch.sum(gate_probs * expert_outputs, dim=1)  # [batch, output_dim]
+```
 
 #### Attention Mechanisms
 
@@ -5924,44 +5986,6 @@ def beam_search(start_token, get_next_probs, beam_width=3, max_len=10):
         beams = new_beams[:beam_width]
 
     return beams  # 返回最终 beam 列表
-```
-
-#### Mixture of Experts
-
-- **MoE**
-
-  MoE 模型中，输入先经过门控网络，分流到 TopK 个 MoE 层里。MoE 层代替传统 Transformer 的 FFN，其中每一个对应的专家通常是 FFN。最终 MoE 层的输出综合得到结果。
-
-
-- **为什么 LLM 流行 MoE？**
-
-  MoE 能显著提高模型容量而不成比例地增加计算成本，且支持 expert parallelism。另外 MoE 提高了模型可解释性。
-
-
-- **MoE 负载均衡**
-
-  使用 MoE，模型可能会由于专家 token 分配不均，退化成只用少数几个专家，从而导致参数利用率低，训练/推理时部分 GPU 负载过高，OOM 或速度瓶颈。负载均衡常用方法：用辅助损失（Load Balancing Loss）让实际分配和概率分布尽量接近均匀分布；Capacity Factor（容量限制），即如果一个专家超出容量，多余 token 会被丢弃或 reroute 到别的专家，避免某个专家被塞爆。Token Dropping，即丢掉超额 token（只在训练时，用于正则化），或 Token Rerouting，即把超额 token 转发到第二选择的专家（常见于 top-2 gating）；Noisy Gating，在门控 logits 上加噪声（通常是 Gumbel 或 Gaussian），使 gating 更随机化，防止早期训练时过快收敛到少数专家。Sinkhorn / Optimal Transport Gating（更高级），即用最优传输（OT）方法在 token 和专家之间分配，强制更均匀。比如 BASE Layers、Hash Layers 里会用到。
-
-
-- **手撕 MoE**
-
-```python
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class SimpleMoE(nn.Module):
-    def __init__(self, input_dim, output_dim, num_experts):
-        super().__init__()
-        self.num_experts = num_experts
-        self.experts = nn.ModuleList([nn.Linear(input_dim, output_dim) for _ in range(num_experts)])
-        self.gate = nn.Linear(input_dim, num_experts)
-
-    def forward(self, x):
-        gate_probs = F.softmax(self.gate(x), dim=1)  # [batch, num_experts]
-        expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=1)  # [batch, num_experts, output_dim]
-        gate_probs = gate_probs.unsqueeze(-1)  # [batch, num_experts, 1]
-        return torch.sum(gate_probs * expert_outputs, dim=1)  # [batch, output_dim]
 ```
 
 #### Parameter-Efficient Fine-Tuning
