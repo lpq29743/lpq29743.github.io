@@ -6996,6 +6996,24 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   注意区分：reward clip 作用于奖励值本身，而 PPO 的 clip 作用于重要性采样比率 $$r_t(\theta)$$（限制策略更新幅度），两者目的不同但都是为了稳定训练。
 
 
+- **什么是 Reward Hacking？如何缓解？**
+
+  **定义**：LLM/RLHF 中智能体利用奖励函数漏洞达成高分而非真正目标的问题。
+
+  **核心原因**：奖励模型（RM）不完美，policy 会找到 RM 的盲点：
+  - 生成过长文本
+  - 格式堆砌
+  - 重复内容
+
+  **主流缓解方案**：
+  - **KL 惩罚项**：限制 policy 偏离 ref model 的幅度
+  - **Reward Shaping**：重新设计奖励函数
+  - **生成式奖励模型（GenRM）**：比判别式 RM 泛化更好
+  - **Causal Reward**：因果奖励（2025 arxiv）
+
+  **新方向**：Inference-Time Reward Hacking（NeurIPS 2025）— Best-of-N 采样时也会出现 hacking
+
+
 - **Agent RL 中的 Reward Hacking 问题如何解决？**
 
   在用 RL 训练编码 Agent 时，模型会寻找"捷径"获得奖励（测试通过），而非真正解决问题。这些捷径称为 **reward hacking**。
@@ -7787,26 +7805,10 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   失败经验
   - 过程奖励模型：思维过程正确，行动过程正确。希望用来解决奖励黑洞，但发现只能用于简单的推理任务
-  - 蒙特卡洛树搜索（MCTS）：由于推理任务的搜索空间远比围棋复杂，AI 需要在每一步做出决策，而 MCTS 无法有效地指导 AI 进行合理的搜索。
+  - 蒙特卡洛树搜索（MCTS）：由于推理任务的搜索空间远比围棋复杂，AI 需要在每一步做出决策，但 MCTS 无法有效地指导 AI 进行合理的搜索。
 
 
-- **什么是 Reward Hacking？如何缓解？**
-
-  **定义**：LLM/RLHF 中智能体利用奖励函数漏洞达成高分而非真正目标的问题。
-
-  **核心原因**：奖励模型（RM）不完美，policy 会找到 RM 的盲点：
-  - 生成过长文本
-  - 格式堆砌
-  - 重复内容
-
-  **主流缓解方案**：
-  - **KL 惩罚项**：限制 policy 偏离 ref model 的幅度
-  - **Reward Shaping**：重新设计奖励函数
-  - **生成式奖励模型（GenRM）**：比判别式 RM 泛化更好
-  - **Causal Reward**：因果奖励（2025 arxiv）
-
-  **新方向**：Inference-Time Reward Hacking（NeurIPS 2025）— Best-of-N 采样时也会出现 hacking
-
+#### Agent
 
 - **Hermes 4（Nous Research）**
 
