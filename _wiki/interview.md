@@ -7488,36 +7488,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 多智能体架构（Multi-agent Architecture）：将任务分解给多个子智能体，每个子智能体处理其特定任务并拥有独立的上下文，避免不同任务的上下文相互干扰。
   - 环境（Environments）：使用沙箱等环境来隔离包含大量 token 的对象或状态，例如在执行复杂计算或访问敏感数据时，将这些操作限制在特定的、受控的环境中。
 
-#### Agent for SE
-
-- **LLM for SE**
-
-  SE 的完整 Pipeline 可分为软件开发和软件维护。
-
-  软件开发
-  - 需求工程/软件设计
-  - 代码生成：Planning/Iterative Refinement（Model Feedback/Tool Feedback/Human Feedback/Hybrid Feedback）
-  - 代码质量保证：验证，静态校对，测试（单元测试、系统测试）
-
-  软件维护
-  - Debugging（Fault Localization，Repair）
-  - Feature Maintenance
-
-  在软件维护方面，一个经典的 Benchmark 是 SWE-bench（verified 比较关键），将其建立为 Live Benchmark（添加新的 instances）十分关键。一个关键的 agent 框架是 Agentless。Agentless 把软件维护分为定位，修复和补丁验证三个部分。
-
-  Task：including simple，self-contained and repository-level，e.g.，Code Generation；Bug Fix
-
-  Version
-
-  Environment
-
-  RLVR
-
-  软件工程对应到 LLM 的常见问题有：
-  - Long Context：How to support long context
-  - Retrieval：How to select useful files
-  - 多语言
-
 #### Agentic RL & World Modeling
 
 - **Agentic RL**
@@ -7736,6 +7706,34 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 ## Business
 
 ### Coding
+
+- **LLM for SE**
+
+  SE 的完整 Pipeline 可分为软件开发和软件维护。
+
+  软件开发
+  - 需求工程/软件设计
+  - 代码生成：Planning/Iterative Refinement（Model Feedback/Tool Feedback/Human Feedback/Hybrid Feedback）
+  - 代码质量保证：验证，静态校对，测试（单元测试、系统测试）
+
+  软件维护
+  - Debugging（Fault Localization，Repair）
+  - Feature Maintenance
+
+  在软件维护方面，一个经典的 Benchmark 是 SWE-bench（verified 比较关键），将其建立为 Live Benchmark（添加新的 instances）十分关键。一个关键的 agent 框架是 Agentless。Agentless 把软件维护分为定位，修复和补丁验证三个部分。
+
+  Task：including simple，self-contained and repository-level，e.g.，Code Generation；Bug Fix
+
+  Version
+
+  Environment
+
+  RLVR
+
+  软件工程对应到 LLM 的常见问题有：
+  - Long Context：How to support long context
+  - Retrieval：How to select useful files
+  - 多语言
 
 
 ### E-commerce
