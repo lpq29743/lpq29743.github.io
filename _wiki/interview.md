@@ -655,9 +655,9 @@ print("牛顿法结果: x =", x_newton, ", f(x) =", f_newton)
 
 - **perplexity（困惑度）和交叉熵是什么关系？**
 
-  PPL 就是交叉熵取指数：$$PPL = e^{H(P, Q)}$$（CE 按 nat 计；按 bit 计则 $$PPL = 2^{H(P, Q)}$$），语言模型中按 token 平均。取指数后 PPL 获得直观解释——等效分支数：PPL = 50 表示模型预测下一个 token 时的平均困惑程度，相当于在 50 个等可能候选里瞎猜（均匀分布 over 词表 V 时 CE = ln V，PPL 恰为 V）。等价视角：PPL 是 $$1/q(x_i)$$ 的几何平均。
+  PPL 就是交叉熵取指数：$$PPL = 2^{H(P, Q)}$$（指数底数和 log 底数配套，本文按 bit 计；深度学习框架的 CE loss 实际用自然对数 ln，所以实现上直接 $$e^{loss}$$，两种写法算出的 PPL 数值完全一样），语言模型中按 token 平均。取指数后 PPL 获得直观解释——等效分支数：PPL = 50 表示模型预测下一个 token 时的平均困惑程度，相当于在 50 个等可能候选里瞎猜（均匀分布 over 词表 V 时 CE = log₂V，PPL 恰为 V）。等价视角：PPL 是 $$1/q(x_i)$$ 的几何平均。
 
-  由 CE = H(P) + KL 可得 $$PPL = e^{H(P)} \cdot e^{KL} \geq e^{H(P)}$$：PPL 的下界不是 1，而是语言自身的困惑度；比较两个 LM 的 PPL 就是在比 CE（底分相同），PPL 越低说明 KL 越小、拟合越好。
+  由 CE = H(P) + KL 可得 $$PPL = 2^{H(P)} \cdot 2^{KL} \geq 2^{H(P)}$$：PPL 的下界不是 1，而是语言自身的困惑度；比较两个 LM 的 PPL 就是在比 CE（底分相同），PPL 越低说明 KL 越小、拟合越好。
 
   可比性陷阱：PPL 只在评测集和分词完全一致时才可比——BPE 词表不同则 token 数不同，"每 token"的口径就不同，跨论文的 PPL 常常不能直接比。
 
