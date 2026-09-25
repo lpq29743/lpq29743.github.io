@@ -2567,7 +2567,13 @@ function add(a, b):
 
 - **银行家算法**
 
-  [链接](https://www.cnblogs.com/chuxiuhong/p/6103928.html)
+  Dijkstra 提出的死锁避免算法：每次分配资源前，先判断“分配后系统是否仍处于安全状态”，只批准不会把系统带入不安全状态的请求，从而避免死锁。
+
+  四个核心数据结构：Available（各类资源当前可用数量向量）、Max（每个进程对各类资源的最大需求矩阵）、Allocation（每个进程已获得的资源矩阵）、Need = Max − Allocation（每个进程仍需的资源矩阵）。
+
+  安全性算法（判断系统是否安全）：令 Work = Available、Finish[i] = false；反复寻找满足 Finish[i] == false 且 Need[i] ≤ Work 的进程 i，令 Work += Allocation[i]、Finish[i] = true；若最终所有 Finish[i] 均为 true，则存在安全序列，系统处于安全状态。
+
+  资源请求处理：进程 Pi 发出请求 Request[i]，① 若 Request[i] > Need[i]，说明超过其声明的最大需求，出错；② 若 Request[i] > Available，资源不足，Pi 阻塞等待；③ 否则试探分配（Available −= Request[i]，Allocation[i] += Request[i]，Need[i] −= Request[i]），再运行安全性算法：安全则正式分配，不安全则回滚试探分配、Pi 等待。
 
 
 - **集线器和交换机有什么区别？**
@@ -2602,7 +2608,11 @@ function add(a, b):
 
 - **count(1)、count(\*) 和 count(列名) 的区别？**
 
-  [链接](https://blog.csdn.net/qq_15037231/article/details/80495882)
+  count(*) 和 count(1) 都统计结果集的总行数（包含字段值为 NULL 的行），二者在 MySQL 中语义等价、性能相同；count(列名) 只统计该列值非 NULL 的行数，会忽略 NULL。
+
+  性能（以 MySQL/InnoDB 为例）：count(*) ≈ count(1) > count(主键) > count(普通列)。count(*)、count(1) 不取具体字段值、由优化器专门优化，最快；count(列名) 需逐行取出该列并判断是否为 NULL，稍慢。
+
+  补充：count(distinct 列) 统计该列去重后的非 NULL 值个数；count 函数永远不返回 NULL，无匹配行时返回 0。
 
 
 - **数据库的三级模式是什么？**
@@ -2618,7 +2628,15 @@ function add(a, b):
 
 - **数据库三范式？**
 
-  [链接](https://www.zhihu.com/question/24696366)
+  范式（Normal Form）是关系数据库设计中衡量表结构规范程度、用以减少数据冗余和插入/删除/更新异常的标准。
+
+  第一范式（1NF）：每个字段都是原子的、不可再分（消除表中的重复列和嵌套结构）。
+
+  第二范式（2NF）：在 1NF 基础上，消除非主属性对码的部分函数依赖——非主属性必须完全依赖于整个主键，而不能只依赖复合主键的一部分。
+
+  第三范式（3NF）：在 2NF 基础上，消除非主属性对码的传递函数依赖——非主属性不能通过“主键 → A → B”间接依赖主键，必须直接依赖主键。
+
+  补充 BCNF：在 3NF 基础上进一步消除主属性对码的部分和传递依赖，要求任何函数依赖的决定因素都包含码。范式越高冗余越小，但表被拆得越碎、连接查询越多，实际设计中通常权衡到 3NF 或适度反范式。
 
 
 ### Programming
