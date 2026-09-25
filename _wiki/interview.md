@@ -2543,7 +2543,7 @@ function add(a, b):
   遍历链表，对第 i 个节点，以 `1/i` 的概率更新当前候选节点，最终返回的节点是等概率选中的。
 
 
-### Computer Science
+### Computer Fundamentals
 
 - **为什么要用时间复杂度来描述算法，而不是运行时间？**
 
