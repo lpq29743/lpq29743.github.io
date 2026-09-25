@@ -587,6 +587,11 @@ print("牛顿法结果: x =", x_newton, ", f(x) =", f_newton)
   KL 散度衡量两个分布之间的差异，即认错分布导致的账单溢价：用 P 自己的码本编码，平均每个符号只需 H(P)（底价），改用 Q 的码本后总账单变高——多付的部分就是 $$KL(P \| Q)=E_{x \sim P}[\log_2{\frac{p(x)}{q(x)}}]=\sum_{x \in X} {p(x) \log_2{\frac{p(x)}{q(x)}}}$$。它是**相对量**，基准是最优编码。KL ≥ 0（Gibbs 不等式），等号当且仅当 Q = P——Q 偏离 P 越多，值越大。
 
 
+- **forward KL 和 reverse KL 是什么？**
+
+  按方向对 KL 的两种称呼。用模型分布 Q 近似真实分布 P 时：$$KL(P \| Q)$$ 叫 forward KL——期望在 P 下取、按 P 的概率加权，回答"用 Q 近似 P 损失多少"；$$KL(Q \| P)$$ 叫 reverse KL——期望在 Q 下取、按 Q 的概率加权，回答"用 P 近似 Q 损失多少"。两者一般不相等，用哪个是建模决策。
+
+
 - **KL 散度和交叉熵的区别？**
 
   一句话结论：交叉熵是总账单，KL 是其中的溢价，两者只差真实分布的信息熵 H(P)：$$KL(P \| Q) = H(P, Q) - H(P)$$。由于 H(P) 与模型参数无关，**二者作为损失函数优化时完全等价（梯度相同）**；真正的区别在使用场景。
@@ -607,7 +612,7 @@ print("牛顿法结果: x =", x_newton, ", f(x) =", f_newton)
 
 - **forward KL 和 reverse KL 的区别？方向怎么选？**
 
-  forward KL（以真实分布 P 为基准，$$KL(P \| Q)$$）是 mode-covering——Q 必须盖住 P 的每一个峰，否则罚无穷大，结果倾向摊平；reverse KL（以模型分布 Q 为基准，$$KL(Q \| P)$$）是 mode-seeking——Q 不敢去 P 概率低的地方，但可以放弃 P 的部分峰，结果倾向收缩到单峰。
+  forward KL 按 P 加权，是 mode-covering——Q 必须盖住 P 的每一个峰，否则罚无穷大，结果倾向摊平；reverse KL 按 Q 加权，是 mode-seeking——Q 不敢去 P 概率低的地方，但可以放弃 P 的部分峰，结果倾向收缩到单峰。
 
   方向选择本身就是建模决策：蒸馏常用 forward（学生学全老师）；变分推断和 RLHF 用 reverse（集中在可靠区域，且真实分布 intractable 时只能从 Q 采样）。
 
