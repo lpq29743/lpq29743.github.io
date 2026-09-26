@@ -5743,8 +5743,6 @@ class GroupedQueryAttention(nn.Module):
 
   **在 MTP layer 的应用**：indexer 只在第 1 步计算，后续步复用 top-k indices。由于 IndexShare 的设计，后续步只能 attend 到 target model 的 hidden states（$$h_1$$ 到 $$h_4$$），不能看到 MTP layer 自身生成的 $$h_5$$，消除了训练-推理不一致。
 
-  **来源**：GLM-5.2 (2026.6)，论文 arXiv:2603.12201
-
 
 - **FlashAttention**
 
