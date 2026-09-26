@@ -5186,17 +5186,24 @@ class RMSNorm(nn.Module):
 
 - **MoE**
 
-  MoE 模型中，输入先经过门控网络，分流到 TopK 个 MoE 层里。MoE 层代替传统 Transformer 的 FFN，其中每一个对应的专家通常是 FFN。最终 MoE 层的输出综合得到结果。
+  MoE（Mixture of Experts）用一组“专家”+ 一个门控网络（router/gate）替代传统 Transformer 里的单个 FFN：门控网络为每个输入 token 计算各专家的权重，把 token 路由给专家（每个专家通常就是一个 FFN），再按门控权重对专家输出加权求和得到结果。
+
+  朴素（vanilla）版对所有专家加权求和（见下方手撕代码）；LLM 中为省算力通常只选 Top-K 个专家（稀疏激活），这正是 MoE“扩容不增算”的关键。
 
 
 - **为什么 LLM 流行 MoE？**
 
-  MoE 能显著提高模型容量而不成比例地增加计算成本，且支持 expert parallelism。另外 MoE 提高了模型可解释性。
+  核心是“扩容不增算”：稀疏激活（每个 token 只走 Top-K 个专家）让总参数量 / 模型容量大幅提升，而单 token 的计算量基本不变；同时不同专家可分布到不同设备（expert parallelism），便于训练和部署超大模型。
 
 
 - **MoE 负载均衡**
 
-  使用 MoE，模型可能会由于专家 token 分配不均，退化成只用少数几个专家，从而导致参数利用率低，训练/推理时部分 GPU 负载过高，OOM 或速度瓶颈。负载均衡常用方法：用辅助损失（Load Balancing Loss）让实际分配和概率分布尽量接近均匀分布；Capacity Factor（容量限制），即如果一个专家超出容量，多余 token 会被丢弃或 reroute 到别的专家，避免某个专家被塞爆。Token Dropping，即丢掉超额 token（只在训练时，用于正则化），或 Token Rerouting，即把超额 token 转发到第二选择的专家（常见于 top-2 gating）；Noisy Gating，在门控 logits 上加噪声（通常是 Gumbel 或 Gaussian），使 gating 更随机化，防止早期训练时过快收敛到少数专家。Sinkhorn / Optimal Transport Gating（更高级），即用最优传输（OT）方法在 token 和专家之间分配，强制更均匀。比如 BASE Layers、Hash Layers 里会用到。
+  问题：门控可能把 token 分配不均，退化成只用少数几个专家，导致参数利用率低、部分 GPU 负载过高而 OOM 或成为速度瓶颈。常用负载均衡方法：
+
+  - **辅助损失（Load Balancing Loss）**：加一项正则，让各专家的实际分配比例与门控概率分布都尽量接近均匀。
+  - **容量因子（Capacity Factor）**：给每个专家设容量上限，超额 token 被丢弃或改路由，避免某专家被塞爆。配套两种溢出处理——Token Dropping（丢掉超额 token，仅训练时、兼作正则）、Token Rerouting（把超额 token 转发给次选专家，常见于 top-2 gating）。
+  - **Noisy Gating**：在门控 logits 上加噪声（Gumbel / Gaussian），让路由更随机，防止训练早期过快收敛到少数专家。
+  - **Sinkhorn / 最优传输（OT）Gating**：用最优传输在 token 与专家之间做更均匀的分配（更高级，如 BASE Layers、Hash Layers）。
 
 
 - **手撕 MoE**
@@ -5214,6 +5221,7 @@ class SimpleMoE(nn.Module):
         self.gate = nn.Linear(input_dim, num_experts)
 
     def forward(self, x):
+        # 朴素（vanilla）dense gating：softmax 后对所有专家加权求和；稀疏 top-k 版只需保留权重最大的 k 个专家、其余权重置零
         gate_probs = F.softmax(self.gate(x), dim=1)  # [batch, num_experts]
         expert_outputs = torch.stack([expert(x) for expert in self.experts], dim=1)  # [batch, num_experts, output_dim]
         gate_probs = gate_probs.unsqueeze(-1)  # [batch, num_experts, 1]
