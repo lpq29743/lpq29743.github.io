@@ -5149,7 +5149,7 @@ class RMSNorm(nn.Module):
   | 2020 | **GLU 家族**（Shazeer）| SwiGLU / GeGLU 门控，效果更好；升维比例改 $$\frac{8}{3}d$$ 补偿 FLOPs |
   | 2017→2021 | **MoE 稀疏化** | sparsely-gated MoE → GShard / Switch → GLaM，把单个 FFN 换成 N 个专家 FFN + 路由 |
   | 2021 | **FFN as key-value memory** | Geva：FFN 是键值记忆，负责存储事实知识 |
-  | 2024+ | DeepSeek 细粒度专家 | 细粒度专家划分 + 共享专家隔离 + 无辅助损失负载均衡（见下方 MoE）|
+  | 2024+ | DeepSeek 细粒度专家 | 细粒度专家划分 + 共享专家隔离 + 无辅助损失负载均衡 |
 
 
 - **LLM 常用的激活函数有？**
