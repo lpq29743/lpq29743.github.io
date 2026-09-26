@@ -5188,7 +5188,7 @@ class RMSNorm(nn.Module):
 
   MoE（Mixture of Experts）用一组“专家”+ 一个门控网络（router/gate）替代传统 Transformer 里的单个 FFN：门控网络为每个输入 token 计算各专家的权重，把 token 路由给专家（每个专家通常就是一个 FFN），再按门控权重对专家输出加权求和得到结果。
 
-  朴素（vanilla）版对所有专家加权求和（见下方手撕代码）；LLM 中为省算力通常只选 Top-K 个专家（稀疏激活），这正是 MoE“扩容不增算”的关键。
+  朴素（vanilla）版对所有专家加权求和；LLM 中为省算力通常只选 Top-K 个专家（稀疏激活），这正是 MoE“扩容不增算”的关键。
 
 
 - **为什么 LLM 流行 MoE？**
