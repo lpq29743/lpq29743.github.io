@@ -5700,8 +5700,6 @@ class GroupedQueryAttention(nn.Module):
 
   **RL 训练的关键**：必须用 deterministic top-k operator（torch.topk），不能用 CUDA 的 non-deterministic 实现，否则训练-推理不一致导致 RL 崩溃（entropy 急剧下降）。同时 RL 阶段冻结 indexer 参数以加速训练并防止不稳定学习。
 
-  **来源**：DeepSeek-V3 (2024.12)，论文 arXiv:2412.19437
-
 
 - **Compressed Sparse Attention 2 (CSA2)**
 
@@ -5717,8 +5715,6 @@ class GroupedQueryAttention(nn.Module):
   **FP4 KV 量化**：main KV 用 FP4（QAT，RoPE 之后量化）；SWA KV 对量化敏感，保留 FP8。
 
   **效果**：per-token global KV cache 压到约 **890 bytes**（约为前代 V4-Flash 的 1/4），persistent KV 约为 V4 的 1/8；主干 552B MoE，主打 Agent 长上下文负载的降本。
-
-  **来源**：DeepSeek-V4.1-Flash (2026.9)，论文 arXiv:2609.19969
 
 
 - **Sparse Attention 演进路线**
@@ -7179,8 +7175,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 返回 dummy 信息（如 "Access denied" 或空结果）
   - 模型可以继续尝试其他方法
   - 避免训练不稳定（突然终止导致梯度问题，模型学不到"要换方法"）
-
-  **来源**：GLM-5.2 (2026.6)
 
 
 #### Training Stability
