@@ -5419,7 +5419,7 @@ class CrossAttention(nn.Module):
 
   单个 token 的 global KV Cache 字节数：
 
-  $$\text{bytes/token} = 2_{(K,V)} \times L_{(层数)} \times H_{kv}_{(KV 头数)} \times d_{head}_{(每头维度)} \times b_{(每值字节数)}$$
+  $$\text{bytes/token} = 2\,(K,V) \times L\,(\text{层数}) \times H_{kv}\,(\text{KV 头数}) \times d_{head}\,(\text{每头维度}) \times b\,(\text{每值字节数})$$
 
   总显存再乘以 $$seq\_len \times batch\_size$$。以 LLaMA-2-7B（$$L=32,\ H_{kv}=32,\ d_{head}=128$$，FP16 即 $$b=2$$）为例，单 token 约 $$2 \times 32 \times 32 \times 128 \times 2 = 512$$ KB，128K 上下文单条序列就要约 64 GB。
 
