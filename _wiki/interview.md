@@ -3422,7 +3422,11 @@ for epoch in range(1000):
 
 - **LR 为什么用 sigmoid 函数？**
 
-  [链接](http://sofasofa.io/forum_main_post.php?postid=1004244)
+  ① 值域：sigmoid 把线性输出 $$w^Tx+b$$（取值 $$(-\infty,+\infty)$$）压缩到 (0,1)，可直接解释为概率，契合二分类。
+
+  ② 来源：LR 假设对数几率（log-odds）是特征的线性函数，即 $$\ln\frac{p}{1-p} = w^Tx+b$$，反解 $$p$$ 得到的正是 sigmoid。因此 sigmoid 是“线性对数几率”假设的自然结果，而非人为挑选。
+
+  ③ 优化：sigmoid 处处可导，$$\sigma'(z)=\sigma(z)(1-\sigma(z))$$；配合交叉熵损失时对 w 的梯度化简为 $$(\hat{y}-y)x$$，形式简洁，且不会像搭配 MSE 那样在饱和区因 $$\sigma'$$ 趋零而梯度消失。
 
 
 - **从贝叶斯的角度解释 LR**
@@ -3541,8 +3545,6 @@ def k_nearest_neighbors(X, y, test_sample, k):
 
 - **LR 和 SVM 的联系与区别？**
 
-  [链接](https://www.cnblogs.com/zhizhan/p/5038747.html)
-
   联系：都可以处理分类问题（一般为线性二分类）；都可以增加不同正则化项。两种算法性能接近；两个方法都增加对分类影响较大的数据点的权重，SVM 是只考虑 support vectors，LR 是通过非线性映射，减小了离分类平面较远的点的权重。
 
   区别：LR 是参数模型，SVM 是非参数模型；从目标函数来看，LR 采用的是 log loss，SVM 采用的是 hinge loss。
@@ -3559,9 +3561,6 @@ def k_nearest_neighbors(X, y, test_sample, k):
 
 
 - **手推 SVM**
-
-
-  [SVM](https://lpq29743.github.io/artificialintelligence/2018/09/12/SVM/)
 
   超平面：$$y=w^TX+b$$；
 
@@ -3613,7 +3612,12 @@ def k_nearest_neighbors(X, y, test_sample, k):
 
 - **给一组数据，问决策树、LR、NB 以及 SVM 等算法学出来是什么样子的？**
 
-  [链接](https://www.zhihu.com/question/26726794)
+  本质是问各模型学到的决策边界形状：
+
+  - LR：线性边界。对数几率是特征的线性函数，学出一个线性超平面（多分类用 softmax / 多个超平面）。
+  - 决策树：轴对齐的矩形分段边界。用一系列“某特征 ≤ 阈值”的 if-else 把空间切成若干矩形，边界平行于坐标轴，天然表达非线性和特征交互。
+  - 朴素贝叶斯：取决于特征的条件分布假设——高斯同协方差、伯努利、多项式下为线性边界；高斯不同协方差时为二次（抛物面）边界。
+  - SVM：线性核 → 最大间隔线性超平面；RBF/高斯核 → 由支持向量决定的非线性光滑边界。
 
 
 - **什么是基于核的机器学习算法？**
@@ -3628,7 +3632,11 @@ def k_nearest_neighbors(X, y, test_sample, k):
 
 - **高斯核为什么有效？**
 
-  [链接](https://stats.stackexchange.com/questions/131138/what-makes-the-gaussian-kernel-so-magical-for-pca-and-also-in-general)
+  高斯核 $$K(x,y)=\exp(-\|x-y\|^2 / 2\sigma^2)$$ 之所以有效：
+
+  - 隐式无穷维映射：它对应的再生核希尔伯特空间（RKHS）是无穷维的，无需显式升维就能拟合任意复杂的非线性边界。
+  - 局部性与平滑性：核值随距离单调递减、处处无穷可微，远处样本贡献趋近 0，等价于在每个训练点放一个高斯基函数（类似 RBF 网络），得到的边界光滑、对噪声较鲁棒。
+  - 参数少、数值稳定：只有带宽 $$\sigma$$（配合惩罚 C）等极少超参，值域 $$(0,1]$$，不会像多项式核那样随内积放大而数值爆炸。
 
 
 - **支持向量机可以用来做回归吗？**
@@ -3643,7 +3651,12 @@ def k_nearest_neighbors(X, y, test_sample, k):
 
 - **感知机和 SVM 有什么区别？**
 
-  [链接](http://sofasofa.io/forum_main_post.php?postid=1003714)
+  两者都是线性二分类器，但优化目标不同：
+
+  - 感知机：只要能把训练样本正确分开即可，损失是所有误分类点到超平面的函数距离之和。解不唯一、依赖初始化，只保证“分对”，不追求分得好。
+  - SVM：在正确分类的基础上要求间隔（margin）最大，即让最近的支持向量也尽可能远离超平面。解唯一、泛化更强；软间隔可容忍少量误分类，核技巧可处理非线性。
+
+  一句话：SVM ≈ 间隔最大化的感知机 + 正则项 + 核技巧。
 
 
 - **One-class SVM？**
@@ -3748,7 +3761,7 @@ loss = cross_entropy_loss_from_logits(logits, labels)
 
   a. We can use undersampling, oversampling or SMOTE to make the data balanced.
 
-  b. We can alter the prediction threshold value by doing[probability caliberation](https://www.analyticsvidhya.com/blog/2016/07/platt-scaling-isotonic-regression-minimize-logloss-error/)and finding a optimal threshold using AUC-ROC curve.
+  b. We can alter the prediction threshold value by doing probability calibration and finding a optimal threshold using AUC-ROC curve.
 
   c. We can assign weight to classes such that the minority classes getslarger weight.
 
@@ -3839,7 +3852,7 @@ class KMeans:
 
 - **KMeans 中我想聚成 100 类 结果发现只能聚成 98 类，为什么？**
 
-  因为聚类过程中可能会产生空簇，可见[例子](https://blog.csdn.net/shwan_ma/article/details/80096408)。
+  因为聚类过程中可能会产生空簇：若某个质心附近没有被分配到任何样本（初始化位置偏远、簇密度不均等），该簇即为空、不占据实际类别，最终有效簇数就会少于设定的 K。可用 KMeans++ 初始化或对空簇重新播种（如把离质心最远的样本设为新质心）来缓解。
 
 
 - **为什么在高维空间中聚类效果会变差？如何应对？**
@@ -4150,8 +4163,6 @@ def test(tree, x):
 
 - **权重初始化方法？**
 
-  [链接](https://lpq29743.github.io/artificialintelligence/2017/12/16/TensorFlowInitialization/)
-
   零初始化，常量初始化，高斯/均匀随机初始化，Xavier 初始化，He 初始化，正交初始化。
 
 
@@ -4229,12 +4240,16 @@ def leaky_relu_derivative(x, alpha=0.01):
 
 - **ReLU 在 0 点的导数是多少？**
 
-  [链接](http://sofasofa.io/forum_main_post.php?postid=1003784)
+  ReLU 在 0 点严格不可导（左导数为 0、右导数为 1），数学上其次梯度（subgradient）可取 [0,1] 内任意值。工程实现里框架统一约定 ReLU'(0)=0（PyTorch、TensorFlow 均如此）；由于输入恰好等于 0 是测度为 0 的事件，取 0 还是 1 都不影响训练。
 
 
 - **dying ReLU？**
 
-  [链接](http://sofasofa.io/forum_main_post.php?postid=1004214)
+  dying ReLU 指神经元“死亡”：当某神经元的输入对所有样本都 < 0 时，ReLU 输出恒为 0、反向梯度也恒为 0，权重再也得不到更新，该神经元永久失活。
+
+  诱因：学习率过大（一次更新把权重/偏置推入恒负区）或初始化不当，导致大量神经元死亡、网络有效容量下降。
+
+  解决：改用负区间仍有梯度的 Leaky ReLU / PReLU / ELU；用 He 初始化；调小学习率。
 
 
 - **为什么 softmax 包含 “soft”？**
@@ -4266,12 +4281,20 @@ def leaky_relu_derivative(x, alpha=0.01):
 
 - **挑一种激活函数推导梯度下降的过程?**
 
-  [链接](https://blog.csdn.net/jediael_lu/article/details/77852060)
+  以 sigmoid 为例。设某层输入 $$z = w^Tx + b$$，激活输出 $$a = \sigma(z) = 1/(1+e^{-z})$$，损失为 $$L$$。
+
+  前向传播：由 $$z = w^Tx+b$$ 得 $$a = \sigma(z)$$，再算损失 $$L(a, y)$$。
+
+  反向传播（链式法则）：激活对输入的导数 $$∂a/∂z = \sigma(z)(1-\sigma(z)) = a(1-a)$$；损失对 z 的梯度记为 $$\delta = (∂L/∂a) \cdot a(1-a)$$。
+
+  参数梯度与更新（$$\eta$$ 为学习率）：$$∂L/∂w = \delta \cdot x$$，$$∂L/∂b = \delta$$；更新 $$w := w - \eta \delta x$$，$$b := b - \eta \delta$$。
+
+  若取二分类交叉熵 $$L = -[y\ln a + (1-y)\ln(1-a)]$$，可化简得 $$\delta = a - y$$，故 $$∂L/∂w = (a-y)x$$，与 LR 的梯度形式一致。
 
 
 - **softmax 求导**
 
-  [链接](https://zhuanlan.zhihu.com/p/25723112)。$$softmax'(z)=softmax(z)(y_i-softmax(z))$$，其中$$y_i$$为标签。如果表示为 Jacobian 矩阵可为$$J_{softmax}=Diag(p)-pp^T$$，其中$$p=softmax(z)$$，而$$Diag(p)$$是以p为对角线的矩阵。
+  $$softmax'(z)=softmax(z)(y_i-softmax(z))$$，其中$$y_i$$为标签。如果表示为 Jacobian 矩阵可为$$J_{softmax}=Diag(p)-pp^T$$，其中$$p=softmax(z)$$，而$$Diag(p)$$是以p为对角线的矩阵。
 
 
 - **argmax 不可导怎么办？**
@@ -4416,7 +4439,11 @@ def muon(w, dw, m, v, lr=1e-3, beta1=0.9, beta2=0.99, beta3=0.999, eps=1e-8):
 
 - **多任务如何学习？**
 
-  [链接](https://zhuanlan.zhihu.com/p/34916654)
+  多任务学习（MTL）让一个模型同时优化多个相关任务，通过共享底层表示利用任务间共性，起到正则化、数据互补、提升泛化的作用。
+
+  - 参数共享方式：硬共享（共享底层网络 + 每个任务一个独立输出头，最常用）；软共享（每个任务有独立模型，再用正则约束彼此参数接近）。
+  - 损失：总损失为各任务损失的加权和 $$L = \sum_i \lambda_i L_i$$，难点在权重 $$\lambda_i$$ 的设定。
+  - 梯度冲突 / 负迁移：任务梯度方向相互冲突时会互相拖累，可用不确定性自动加权（Kendall）、GradNorm、PCGrad（把冲突梯度投影到对方法平面）等缓解。
 
 
 - **CNN**
@@ -4510,27 +4537,63 @@ def gru_forward(X, Wx, Wh, b, h0):
 
 - **门机制为什么能解决梯度消失或爆炸问题？**
 
-  [链接](https://zhuanlan.zhihu.com/p/27485750)
+  关键在细胞状态（cell state）的更新是加法而非连乘：$$C_t = f_t * C_{t-1} + i_t * \tilde{C_t}$$。
+
+  反向传播时，梯度沿 $$C_{t-1}$$ 回传只需乘以遗忘门 $$f_t$$（一个 0~1 的可学习量），而不是像原始 RNN 那样反复乘以同一个权重矩阵 $$W$$。当 $$f_t$$ 接近 1 时梯度几乎无损通过，从而避免 $$W$$ 连乘带来的指数级衰减（梯度消失）或放大（梯度爆炸）。
+
+  直观说，门机制把 RNN 里的“矩阵连乘”变成“受控的逐元素相加/相乘”，让梯度能在长时间步上稳定流动：遗忘门学习保留多少历史信息、输入门学习写入多少新信息。
 
 
 - **TensorFlow 和 Pytorch 如何在不同层使用不同的学习率？**
 
-  [链接](https://zhuanlan.zhihu.com/p/61590026)
+  PyTorch：给优化器传入多个 param_group，每组单独指定 lr（迁移学习常对预训练层用小 lr、新加层用大 lr）：
+
+```python
+optimizer = torch.optim.SGD([
+    {'params': model.backbone.parameters(), 'lr': 1e-4},
+    {'params': model.head.parameters(),     'lr': 1e-2},
+], momentum=0.9)
+```
+
+  TensorFlow/Keras：没有直接的分组 lr 参数，常用两种做法——① 自定义训练循环中对不同层的梯度分别缩放后再 apply_gradients；② 给不同层配不同 optimizer，或用 tf.keras.optimizers.schedules 为各层定制学习率。迁移学习中通常直接冻结 backbone（trainable=False）、只训练 head。
 
 
 - **TensorFlow 和 Pytorch 如何固定参数和 fine-tune？**
 
-  [链接](https://zhuanlan.zhihu.com/p/61590026)
+  固定参数（freeze）：
+
+  - PyTorch：把不需要更新的参数设为 `param.requires_grad = False`，构造优化器时只传可训练参数：`torch.optim.SGD(filter(lambda p: p.requires_grad, model.parameters()), lr=...)`。
+  - TensorFlow/Keras：设 `layer.trainable = False`（可整网冻结后再逐层打开），修改后需重新 `model.compile(...)` 才生效。
+
+  fine-tune 流程：加载预训练权重 → 冻结 backbone、只训练新加的分类头（可用较大 lr）→ 收敛后再解冻部分高层，用很小的 lr 整体微调，避免破坏预训练特征。
 
 
 - **TensorFlow 怎么实现 learning rate decay？**
 
-  [链接](https://blog.csdn.net/u012436149/article/details/62058318)
+  用 `tf.keras.optimizers.schedules` 提供的衰减策略，把它作为 `learning_rate` 传给优化器：
+
+```python
+lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
+    initial_learning_rate=0.1, decay_steps=10000, decay_rate=0.9)
+optimizer = tf.keras.optimizers.SGD(learning_rate=lr_schedule)
+```
+
+  常用还有 `PiecewiseConstantDecay`（分段常数）、`CosineDecay`（余弦退火）、`PolynomialDecay`、`InverseTimeDecay`；旧版 API 为 `tf.train.exponential_decay`。
 
 
 - **Pytorch 怎么实现 learning rate decay？**
 
-  [链接](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/)
+  用 `torch.optim.lr_scheduler` 包装优化器，每个 epoch（或 step）调用一次 `scheduler.step()`：
+
+```python
+optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
+scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.1)
+for epoch in range(num_epochs):
+    train(...)
+    scheduler.step()
+```
+
+  常用还有 `MultiStepLR`、`ExponentialLR`、`CosineAnnealingLR`（余弦退火）、`ReduceLROnPlateau`（按验证指标自适应）、`OneCycleLR`、`LambdaLR`（自定义函数）。
 
 
 - **TensorFlow 内部求导机制？**
