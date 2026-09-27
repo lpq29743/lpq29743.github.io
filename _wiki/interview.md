@@ -6804,8 +6804,6 @@ RLHF 上层应用：veRL / OpenRLHF
   | DeepSeek-R1 | Chain-of-Thought | 固定开启思考 |
   | GLM-5 | 三种模式 | 灵活控制，支持跨轮保留 |
 
-  来源：GLM-5 (2026.2)
-
 
 - **Agent 训练中的 Loss Mask 如何处理？**
 
@@ -7031,8 +7029,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   **和 GRPO 的选择**：
   - 短任务用 GRPO（省 critic model）
   - 长 horizon + compaction 用 PPO（需要 critic 做 token-level advantage）
-
-  来源：GLM-5.2 (2026.6)
 
 
 - **DAPO**
