@@ -2478,7 +2478,7 @@ def sieve(n):
 
 - **二进制中 1 的个数？**
 
-  把一个整数减去 1，再和原整数做与运算，会把该整数最右边的 1 变成 0。那么一个整数的二进制表示中有多少个 1，就可以进行多少次这样的操作。具体解题思路可参见《剑指 Offer》。
+  把一个整数减去 1，再和原整数做与运算，会把该整数最右边的 1 变成 0。那么一个整数的二进制表示中有多少个 1，就可以进行多少次这样的操作。
 
 
 - **位运算加法**
@@ -5427,8 +5427,8 @@ class CrossAttention(nn.Module):
 
   | 维度 | 压什么 | 代表方法 |
   |------|--------|----------|
-  | **头数 $$H_{kv}$$** | 减少 KV head 数 | MQA（→1 头）、GQA（→G 组）（见 Efficient Attention）|
-  | **每头维 $$d_{head}$$** | 低秩 / latent 压缩 | MLA（见 Efficient Attention）|
+  | **头数 $$H_{kv}$$** | 减少 KV head 数 | MQA（→1 头）、GQA（→G 组）|
+  | **每头维 $$d_{head}$$** | 低秩 / latent 压缩 | MLA |
   | **层数 $$L$$** | 跨层共享 KV | CLA、YOCO、CED、CSA2 |
   | **序列 $$S$$** | 少缓存 token | SWA、StreamingLLM / Attention Sink、H2O、DSA（top-k）|
   | **精度 $$b$$** | KV 量化 | FP8 → FP4 / INT4（QAT）|
@@ -5541,7 +5541,7 @@ class SelfAttentionWithKVCache(nn.Module):
   - **CLA（Cross-Layer Attention）**：相邻层共享 KV，质量损失很小。
   - **YOCO（You Only Cache Once）**：decoder-decoder 结构，前半 self-decoder 只缓存一次 KV，后半 cross-decoder 复用，长上下文下 KV 大幅降低。
   - **CED（Causal Encoder-Decoder，DeepSeek-V4.1-Flash）**：40 层切成 **20 层因果编码器 + 20 层解码器**。长 prompt 的 prefill 只过编码器（激活约 8B 参数），decoder 的全局 KV 由 encoder 输出构造；decode 时激活约 16B。非对称计算同时降低长输入的计算量与 KV。
-  - **CSA2** 在此之上进一步做跨层 KV 复用（详见 Efficient Attention）。
+  - **CSA2** 在此之上进一步做跨层 KV 复用。
 
 
 #### Efficient Attention
@@ -7483,7 +7483,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - **通用 / 个人 Agent**：OpenClaw（开源，160K+ stars），以 Heartbeat 主动调度 + SKILL.md 技能 + 消息平台交互为特色。
   - **Harness 内的"快决策"组件**：Jev（System One 模型），负责模型路由与危险动作分类，替代过去锁在闭源 Harness 里的分类器。
 
-  Claude Code / OpenClaw / Jev 的具体设计见 Technique Report。
 
 #### RAG & Knowledge
 
@@ -8101,8 +8100,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 - **最有挑战的项目与攻坚过程**。
 
-- 原理与 coding 题见前文知识与算法章节，此处不重复。
-
 ### Cross-functional Common Questions
 
 - **跨职能协作例子**：举一个具体的跨职能协作例子。
@@ -8134,9 +8131,9 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 - **角色差异化问题**：
 
   - 项目实施细节的极限追问链（数据、ablation、上线过程中的失败）
-  - 手写代码/online coding（题型见前文算法章节）
+  - 手写代码/online coding
 
-- **反问**：见 Career Compass"我关心的"，技术一面侧重技术/业务。
+- **反问**：技术一面侧重技术/业务。
 
 ### Technical Hiring Manager Interview
 
@@ -8144,12 +8141,12 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 - **角色差异化问题**：
 
-  - 现场方案设计/系统设计（题型见前文系统设计章节）：如业务量涨 10 倍方案怎么改
+  - 现场方案设计/系统设计：如业务量涨 10 倍方案怎么改
   - 有没有推动过跨团队协作的项目，怎么推动的
   - 怎么看我们团队/公司做的技术方向，你觉得可以怎么做
   - 为什么找新机会（结合职业规划回答，强调方向升级而非逃避）
 
-- **反问**：见 Career Compass"我关心的"，二面侧重资源/团队与成长。
+- **反问**：二面侧重资源/团队与成长。
 
 ### Technical Executive Interview (CTO)
 
@@ -8162,7 +8159,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 为什么选择我们公司/这个方向（稳定性问题，答案要自洽）
   - 你觉得自己能带来什么（差异化价值：研究背景 + 落地经验的结合）
 
-- **反问**：见 Career Compass"我关心的"，CTO 面侧重技术/业务/团队与成长。
+- **反问**：CTO 面侧重技术/业务/团队与成长。
 
 ### Technical Cross-team Interview
 
@@ -8175,7 +8172,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 接口/依赖归属有争议时怎么处理？
   - 有没有接手过别人的项目或被人接手，怎么保证平稳交接？
 
-- **反问**：见 Career Compass"我关心的"，交叉面侧重团队与成长（协作流程、争议裁决）。
+- **反问**：交叉面侧重团队与成长（协作流程、争议裁决）。
 
 ### Product Cross-functional Interview
 
@@ -8186,7 +8183,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 举一个你妥协或顶住产品需求的例子
   - 产品指标和模型指标冲突时（如体验 vs 转化）怎么取舍？
 
-- **反问**：见 Career Compass"我关心的"，产品交叉面侧重业务。
+- **反问**：产品交叉面侧重业务。
 
 ### Engineering Cross-functional Interview
 
@@ -8198,7 +8195,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 线上效果和离线不一致时，怎么和工程一起定界排查？
   - 资源（时间/人力/GPU）不够时怎么推动项目？
 
-- **反问**：见 Career Compass"我关心的"，工程交叉面侧重团队与成长（协作流程、事故复盘）。
+- **反问**：工程交叉面侧重团队与成长（协作流程、事故复盘）。
 
 ### HR Interview
 
@@ -8254,4 +8251,4 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   - **每天的生活怎么安排**：体现节奏感与自我管理（深度工作时段、运动/学习），自然不刻意。
 
-- **反问（Job Details）**：见 Career Compass"我关心的"，HR 面侧重待遇与条件/资源/流程。
+- **反问（Job Details）**：HR 面侧重待遇与条件/资源/流程。
