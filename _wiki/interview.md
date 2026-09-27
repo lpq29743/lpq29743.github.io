@@ -5395,7 +5395,7 @@ class CrossAttention(nn.Module):
 
   **缓解方案**：
   - 可学习的 sink token：引入专门的可学习 token
-  - Gated Attention（主流）：Qwen 团队方案，可学习的 KV biases / K biases，NeurIPS 2025 最佳论文候选
+  - Gated Attention（主流）：可学习的 KV biases / K biases
 
 
 #### KV Cache
@@ -6608,7 +6608,7 @@ RLHF 上层应用：veRL / OpenRLHF
 
   - **知识蒸馏（Knowledge Distillation）**：
     - **Off-policy KD（传统）**：用教师模型离线生成数据，学生模型做 SFT。问题：分布偏移（exposure bias）。
-    - **On-policy KD（主流方向）**：学生模型自身采样（on-policy rollout），用 reverse KL 对齐教师分布，避免 exposure bias。代表工作：MiniLLM（清华+微软，ICLR 2024）。
+    - **On-policy KD（主流方向）**：学生模型自身采样（on-policy rollout），用 reverse KL 对齐教师分布，避免 exposure bias。代表工作：MiniLLM。
     - **效果**：数学推理等任务上小模型可接近教师水平，计算成本远低于 RL。
 
   **为什么 On-policy KD 用 Reverse KL 而不是 Forward KL？**
@@ -7139,9 +7139,9 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - **KL 惩罚项**：限制 policy 偏离 ref model 的幅度
   - **Reward Shaping**：重新设计奖励函数
   - **生成式奖励模型（GenRM）**：比判别式 RM 泛化更好
-  - **Causal Reward**：因果奖励（2025 arxiv）
+  - **Causal Reward**：因果奖励
 
-  **新方向**：Inference-Time Reward Hacking（NeurIPS 2025）— Best-of-N 采样时也会出现 hacking
+  **新方向**：Inference-Time Reward Hacking — Best-of-N 采样时也会出现 hacking
 
 
 - **Agent RL 中的 Reward Hacking 问题如何解决？**
@@ -7939,7 +7939,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 - **Hermes 4（Nous Research）**
 
-  Nous Research 的开源（open-weight）**hybrid reasoning** 模型系列（Hermes 4，2025.08，arXiv:2508.18255）。
+  Nous Research 的开源（open-weight）**hybrid reasoning** 模型系列（Hermes 4，2025.08）。
   - **Hybrid Reasoning**：把结构化多轮推理与广泛的指令遵循结合，同一模型既能"开思考"做推理，也能关思考做通用对话 / 创作 / 工具调用。
   - **几乎全合成数据训练**：用前沿推理模型蒸馏生成带 CoT 的数据，配合 **Rejection Sampling** 筛高质量样本、**Length Control** 抑制推理长度膨胀（避免过度思考）。
   - **中立对齐（neutrally-aligned）**：弱审查、不说教，减少过度拒答；数学等 benchmark 号称超过同级闭源模型。
