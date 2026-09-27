@@ -7867,6 +7867,8 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 ### Technique Report
 
+#### Model
+
 - **GPT 的原理？**
 
   基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
