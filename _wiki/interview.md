@@ -7210,7 +7210,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 兼顾 Pass@1 和 Pass@k：既有 RL 的探索（优化负样本 → Pass@k 上升），也有 SFT 的高效学习
 
   **典型实践**：
-  - Think Machines Lab（2025.10）首次系统提出 OPD 范式，展示在数学推理上以 RL 1/10 算力达到相近效果
+  - OPD 范式首次系统提出，展示在数学推理上以 RL 1/10 算力达到相近效果
   - Qwen3 采用两阶段蒸馏：第一阶段 off-policy SFT 打底，第二阶段 on-policy 蒸馏提升
   - DeepSeek-R1 系列以 off-policy SFT 为主，后续 follow-up 转向 OPD
   - Gemma 2/3 也在训练流程中引入 OPD
@@ -7816,8 +7816,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   **演进路线**：被动单步预测 (L1) → 可控多步模拟 (L2) → 自主进化修订 (L3) → 模拟并重塑环境（最终愿景）。
 
-  **参考文献**：Meng Chu et al., "Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond", arXiv:2604.22748, 2026.
-
 #### Self-Evolving Agent
 
 - **什么是 Self-Evolving Agent（自进化智能体）？**
@@ -7952,7 +7950,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - **设计哲学**："给 Agent 一台计算机，让它像人一样工作"；把**文件系统**当作近乎无限的上下文 / 记忆。
   - **核心** = Agent Loop + 一套内置工具 + 上下文管理；组件含 Tools、Prompts、File System、Skills、Sub-agents、Memory，并有 permission modes、hook system、多 Agent 架构。
   - **Claude Agent SDK**（2025.09）：把 Claude Code 背后的 Harness（loop / tools / context / permission / sub-agents / hooks）开放成可编程库（Python & TypeScript），内置大规模部署经验（如 tool-use 错误处理）。
-  - 参考：arXiv《Dive into Claude Code: The Design Space of Today's and Future AI Agents》。
 
 
 - **OpenClaw**
