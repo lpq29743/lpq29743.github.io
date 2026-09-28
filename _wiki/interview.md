@@ -6828,7 +6828,24 @@ RLHF 上层应用：veRL / OpenRLHF
 
 #### RL Algorithms
 
-- **REINFORCE**
+- **策略优化有哪两条主线？基线算法和可优化的组件分别是什么？**
+
+  后训练里的策略优化 / 对齐可以归成两条主线，每条各有一个基线算法，后续工作大多是在改基线的某个组件：
+
+  - **主线 A：在线 RL（online，有 reward、需探索）**——基线 REINFORCE → PPO → GRPO；
+  - **主线 B：离线偏好对齐（offline，有成对偏好、免显式探索）**——基线 DPO。
+
+  一个策略优化算法可拆成四个常被改进的组件：
+
+  1. **优势 / baseline 估计**：advantage 怎么算、用什么当 baseline（critic、组内均值、leave-one-out、greedy）；
+  2. **更新步长约束**：怎么限制新旧策略别差太远（TRPO 的 KL 硬约束 → PPO 的 clip → DAPO 的 Clip-Higher）；
+  3. **奖励 / KL 处理**：reward 从哪来、KL 放 loss 还是 reward、要不要 KL（DAPO 直接去 KL）；
+  4. **loss 粒度与采样**：token-level 还是 sample-level、静态还是动态采样。
+
+  下面的条目按“基线 → 逐个组件的后续优化”排列。
+
+
+- **REINFORCE 是什么？有什么特点？**
 
   REINFORCE 是最基础的策略梯度算法，用蒙特卡洛 (Monte-Carlo) 方式估计回报：直接使用整条轨迹（回合）的累积奖励作为优势估计，无需 critic/value model。
 
@@ -6856,7 +6873,17 @@ RLHF 上层应用：veRL / OpenRLHF
   解决方案即引入优势估计（advantage）：PPO 用 critic 输出 $$V(s_t)$$ 配合 GAE 做逐 token 的信用分配；GRPO 用组内多次采样的均值/标准差归一化作为 baseline，但仍共享序列级奖励，信用分配粗于 PPO。
 
 
-- **PPO**
+- **什么是 Actor-Critic？A2C/A3C 和 GAE 是什么关系？**
+
+  Actor-Critic 是一类框架：**actor**（策略网络）输出动作，**critic**（价值网络）估计状态价值 $$V(s_t)$$ 作为 baseline 来降低策略梯度的方差；A2C/A3C 是它的同步 / 异步版本。GAE（广义优势估计）是该框架下的优势估计器，用多步 TD 残差的指数加权和平衡偏差与方差。PPO 的“actor + critic + GAE”正是 Actor-Critic 思路的延续。
+
+
+- **TRPO 是什么？PPO 相比 TRPO 改进了什么？**
+
+  TRPO（Trust Region Policy Optimization）在优化目标里加一个 **KL 散度硬约束**，要求新旧策略的差异落在“信赖域”内，从而保证单调改进；但求解需要二阶优化（共轭梯度 + line search），实现复杂、计算昂贵。PPO 用一阶的 **clip 代理目标**近似这个信赖域——把重要性比率裁剪在 $$[1-\epsilon, 1+\epsilon]$$ 内，达到类似的“限制步长”效果，却只需 SGD，简单高效，因此取代 TRPO 成为主流。
+
+
+- **PPO 的流程是怎样的？**
 
   PPO 每一次迭代流程如下：
 
@@ -6926,22 +6953,18 @@ def critic_loss(values, old_values, advantages, clip_range=0.2):
   更深层的原因在于梯度估计：critic 输出的 $$V(s_t)$$ 充当优势估计的 baseline，是方差缩减器。由于 $$V(s_t)$$ 不依赖当前 action，减去它不改变梯度的期望（保持无偏），但能显著降低方差。其效果是只有超出预期（$$Q(s_t,a_t) > V(s_t)$$，即 advantage > 0）的 action 才会被强化，低于预期的被抑制，避免了"只要回合总奖励为正，所有 token 都被无差别强化"的问题，使训练更稳定。
 
 
-- **DPO**
+- **除了 GRPO 的组内均值，还有哪些“免 critic 的 baseline”？（RLOO / ReMax）**
+
+  GRPO、RLOO、ReMax 是同一思路的不同实现——都不训练 critic，而用一个廉价 baseline 给策略梯度降方差：
+
+  - **GRPO**：同一 prompt 采样 G 个输出，用**组内奖励均值**（再除标准差归一化）作 baseline；
+  - **RLOO**（REINFORCE Leave-One-Out）：对组内第 i 个样本，用**其余 G-1 个样本的平均奖励**作它的 baseline，避免把样本自己计入均值带来的偏置；
+  - **ReMax**：用**贪心解码（greedy）**那一条输出的奖励作 baseline，每个 prompt 只需多解码一条，采样成本最低。
+
+  三者都用“同 prompt 的其他采样”替代 critic，省掉价值网络的训练与显存开销，代价是 baseline 质量依赖采样数。
 
 
-  $$L^{\text{DPO}}(\theta) = -\log \left( \frac{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right)}{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right) + \exp\left( \beta \cdot \log \pi_\theta(y^- \mid x) \right)} \right)$$
-
-  其中，$$y^+$$ 是人类偏好的回答，$$y^-$$ 是较差的回答，$$\beta$$ 是温度系数，控制偏好强度
-
-```python
-def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
-    diff = logp_chosen - logp_rejected  # [B]
-    loss = -torch.nn.functional.logsigmoid(beta * diff).mean()
-    return loss
-```
-
-
-- **GRPO**
+- **GRPO 的原理和流程是怎样的？**
 
 
   $$L^{\text{GRPO}}(\theta) = - \log \left( \frac{\exp\left(R_\theta(x, y^+)\right)}{\exp\left(R_\theta(x, y^+)\right) + \exp\left(R_\theta(x, y^-)\right)} \right)$$
@@ -7031,7 +7054,17 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 长 horizon + compaction 用 PPO（需要 critic 做 token-level advantage）
 
 
-- **DAPO**
+- **Dr.GRPO 指出 GRPO 有哪些偏置？**
+
+  Dr.GRPO 指出标准 GRPO 的优势计算里有两个偏置，去掉后（“Dr.” = 去偏）效果更好：
+
+  - **难度偏置**：advantage 除以组内奖励**标准差**，会让“几乎全对”或“几乎全错”的简单 / 困难题被异常放大权重，等价于按难度给样本加权、扭曲优化方向；Dr.GRPO 去掉除标准差这一步。
+  - **长度偏置**：GRPO 按样本内 token 数做平均，使长回答里的错误 token 被“摊薄”、惩罚变轻，模型倾向生成更长回答；Dr.GRPO 改用不随长度归一化的 loss。
+
+  DAPO 的 Token-Level loss 也回应了长度偏置，但 Dr.GRPO 更明确地把“两个 bias”点破并直接移除。
+
+
+- **DAPO 相比 GRPO 做了哪些改进？**
 
   DAPO 主要是根据 GRPO 进行改进，主要改进点为
   - 去掉了 KL 散度，KL 散度可以限制模型同初始模型不会显著偏离，但是在训练 long-CoT reasoning model 时，模型分布会显著偏离初始模型，所以去掉 KL 散度的约束。
@@ -7041,17 +7074,103 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 在 RL 训练中，一般会设置最大长度，对过长回复进行截断，从而其 reward 会为 -1，扰乱训练。DAPO 设置了对长序列的合理惩罚（Overlong Reward Shaping），避免过长后截断导致模型无法得到奖励的情形，以缓解噪声并稳定训练。
 
 
-- **GSPO**
+- **GSPO 是什么？**
 
   重要性采样修正不再对应 token 级别，而是对应序列级别。
 
 
-- **PPO vs DPO vs GRPO**
+- **Agentic / 多轮 RL 时代，策略优化在算法层有哪些新变化？**
+
+  单轮 RL 的假设（一条完整回答 = 一个 episode、reward 落在末尾）在多轮 / 长程 Agent 场景失效，算法层主要有三处调整：
+
+  - **信用分配从 token 级升到 turn / step 级**：一次任务含多轮“思考 → 调用工具 → 观察”，只有 token 级 advantage 无法区分是哪一轮的决策导致成败；因此按 turn / step 聚合奖励与优势，给中间轮次也分配信用，而非只在轨迹末尾给一个稀疏 reward。
+  - **GiGPO（Group-in-Group）**：长程任务里单纯按整条轨迹分组比较信号太粗，GiGPO 做**两级分组**——外层按任务 / 轨迹分组、内层对同一状态下的不同动作分组，兼顾长程回报与单步动作的相对优势。
+  - **ARPO（Agentic Reinforced Policy Optimization）**：针对工具调用，用**熵**监控策略不确定性，在高熵（高不确定）的关键分支处做**自适应 rollout**（多采几条），把算力投在真正影响结果的决策点上，提升长程 tool-use 的训练效率。
+
+
+- **DPO 的原理是什么？它有什么局限？**
+
+  DPO（Direct Preference Optimization）绕过显式 reward model 和 RL 采样：把 RLHF 的最优解代入 Bradley-Terry 偏好模型，直接用一个分类式损失在成对偏好 $$(y^+, y^-)$$ 上优化策略——提高 chosen 相对 rejected 的对数概率差。
+
+  $$L^{\text{DPO}}(\theta) = -\log \left( \frac{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right)}{\exp\left( \beta \cdot \log \pi_\theta(y^+ \mid x) \right) + \exp\left( \beta \cdot \log \pi_\theta(y^- \mid x) \right)} \right)$$
+
+  其中，$$y^+$$ 是人类偏好的回答，$$y^-$$ 是较差的回答，$$\beta$$ 是温度系数，控制偏好强度。
+
+```python
+def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
+    diff = logp_chosen - logp_rejected  # [B]
+    loss = -torch.nn.functional.logsigmoid(beta * diff).mean()
+    return loss
+```
+
+  **局限**：① 只在离线偏好对上训练，**无在线探索**，上限受数据分布限制；② 容易**过拟合**偏好数据，把 chosen / rejected 的概率一起压低（似然位移）；③ 依赖 **reference model**（要多存一份、多算一份 logp）；④ 对**回答长度**和 $$\beta$$ 敏感。下面的变体各修其中一条。
+
+
+- **DPO 有哪些改进变体？各自解决了什么问题？**
+
+  每个变体针对 DPO 的一个局限打补丁：
+
+  - **IPO**：把 log-sigmoid 换成**平方损失**，防止对偏好对过拟合（DPO 会无限拉大 chosen / rejected 的差距）；
+  - **KTO**：只需**单条样本的好 / 坏标签（unary）**、不需成对偏好，基于前景理论（Kahneman-Tversky）构造损失，标注更易获得；
+  - **ORPO**：**去掉 reference model**，把 SFT 和偏好对齐合成一个目标（odds ratio），一次训练完成，省显存省流程；
+  - **SimPO**：也**去掉 reference model**，用**长度归一化**的平均 logp 作隐式奖励并加一个 margin，缓解长度偏置、更快；
+  - **DPOP（DPO-Positive）**：加一项惩罚防止**似然位移**，避免 chosen 的绝对概率被一起压低。
+
+
+- **有哪些“自训练 / 在线对齐”范式？（ReST / RAFT / Self-Rewarding / SPIN / Iterative DPO）**
+
+  共同套路是“**模型自己生成 → 用奖励 / 偏好筛出高质量样本 → 再训练自己**”，介于纯 SFT 和纯 RL 之间：
+
+  - **ReST / ReST-EM**：Grow 步用当前策略大量采样，Improve 步用 reward model 过滤出高分样本做 SFT，如此迭代（EM 式）；
+  - **RAFT / RFT（拒绝采样微调）**：对每个 prompt 采样多条，只保留 reward 最高的若干条做 SFT，相当于“用 Best-of-N 造 SFT 数据”；
+  - **Self-Rewarding LM**：模型**自己当裁判**（LLM-as-a-Judge）给自己的输出打偏好，再用这些自造偏好做迭代 DPO，摆脱对固定 RM 的依赖；
+  - **SPIN**：自博弈——把上一轮模型当“对手”生成负样本，当前模型学着区分自己与真实数据，迭代逼近；
+  - **Iterative / Online DPO**：DPO 的在线版——每轮用最新策略采样、就地构造偏好对再更新，缓解离线 DPO 的分布偏移。
+
+
+- **PPO、DPO、GRPO 有什么区别？**
 
   所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。PPO 依赖于 reward model 和 value model；DPO 没有显式探索机制。
 
 
+- **能否用一张表总结：各算法改进了基线的哪个组件？**
+
+  | 算法 | 基线 | 改的组件 | 关键改动 |
+  |------|------|---------|---------|
+  | Actor-Critic / A2C | REINFORCE | ①优势 / baseline | 引入 critic 降方差 |
+  | GAE | Actor-Critic | ①优势估计 | 多步 TD 平衡偏差方差 |
+  | TRPO | 策略梯度 | ②步长约束 | KL 硬约束（信赖域）|
+  | PPO | TRPO | ②步长约束 | clip 一阶近似 |
+  | RLOO / ReMax | GRPO 思路 | ①免 critic baseline | leave-one-out / greedy |
+  | GRPO | PPO | ①baseline | 组内均值替代 critic |
+  | Dr.GRPO | GRPO | ①归一化 + ④loss | 去 std 难度偏置、去长度偏置 |
+  | DAPO | GRPO | ②③④ | Clip-Higher / 去 KL / 动态采样 / token-level / 超长惩罚 |
+  | GSPO | GRPO | 重要性采样粒度 | token 级 → 序列级 |
+  | GiGPO / ARPO | GRPO | ①信用分配 / 采样 | turn 级、两级分组、熵自适应 rollout |
+  | IPO / KTO / ORPO / SimPO / DPOP | DPO | 损失 / 数据 / ref model | 各修一个 DPO 局限 |
+  | ReST / RAFT / Self-Rewarding | SFT + RM | 数据来源 | 自采样 → 筛 → 再训练 |
+
+
 #### Reward Design
+
+- **Reward Model 是怎么训练的？（Bradley-Terry）**
+
+  Reward Model（RM）通常用一个**成对偏好**数据集训练：每条样本是同一 prompt 下“更好 / 更差”的一对回答 $$(y^+, y^-)$$。基于 **Bradley-Terry** 偏好模型——“$$y^+$$ 优于 $$y^-$$”的概率为 $$\sigma\big(r(y^+) - r(y^-)\big)$$——最大化该似然，等价于最小化：
+
+  $$L^{RM} = -\log \sigma\big(r_\phi(x, y^+) - r_\phi(x, y^-)\big)$$
+
+  RM 一般由 SFT 模型去掉语言头、接一个输出标量的 value head 得到，通常只在最后一个 token 上取奖励。DPO 的本质就是把这个 Bradley-Terry RM 的最优解代回 RLHF 目标后**隐式**得到，从而省掉显式训练 RM 这一步。
+
+
+- **偏好 / 奖励数据只能靠人工标注吗？（RLAIF / Constitutional AI）**
+
+  不是，反馈来源可以从人转向 AI：
+
+  - **RLAIF（RL from AI Feedback）**：用一个强模型（而非人类）对回答做偏好标注 / 打分，生成偏好数据再训 RM 或直接对齐，大幅降低人工标注成本；
+  - **Constitutional AI**：给模型一份“宪法”（一组原则），让它**依据原则自我批评并改写**回答，用 AI 反馈迭代（SL 阶段自我修订 + RL 阶段 AI 偏好），把价值观对齐规则显式化、减少对人标的依赖。
+
+  关键权衡：AI 反馈规模大、成本低，但会继承标注模型自身的偏好与盲点，需防止“自我强化偏差”。
+
 
 - **为什么 reward model 对完整回复打分，而不是训练 token level 的奖励？**
 
@@ -7983,29 +8102,29 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   | 层次 | 任务形态 | 输入 | 输出 | 代表评测 |
   |------|---------|------|------|---------|
-  | **补全（Completion）** | 光标处续写 / 填空（FIM） | 前后文代码 | 代码片段 | 补全采纳率 |
-  | **函数级生成** | NL → 单个函数 | 自然语言描述 + 签名 | 独立函数 | HumanEval / MBPP |
+  | **补全（Completion）** | 光标处续写 / 填空（FIM，中间填充） | 前后文代码 | 代码片段 | 补全采纳率 |
+  | **函数级生成** | 自然语言（NL）→ 单个函数 | 自然语言描述 + 签名 | 独立函数 | HumanEval / MBPP |
   | **文件/多文件生成** | NL → 模块、跨文件改动 | 描述 + 少量上下文 | 多段代码 | — |
-  | **仓库级 SE** | 在真实 repo 上定位并修复 issue | 整个代码库 + issue | patch | SWE-bench |
-  | **全 SDLC** | 需求 → 设计 → 编码 → 测试 → 部署 | 业务需求 | 端到端交付 | 产品级 |
+  | **仓库级 SE（软件工程）** | 在真实 repo（代码仓库）上定位并修复 issue（问题工单） | 整个代码库 + issue | patch（补丁） | SWE-bench |
+  | **全 SDLC（软件开发生命周期）** | 需求 → 设计 → 编码 → 测试 → 部署 | 业务需求 | 端到端交付 | 产品级 |
 
   越往右，上下文越长、越依赖检索与工具（执行/测试）、越需要 Agent 化的多步决策，评测也从"比对输出字符串"变成"跑测试看是否通过"。Coding 因此不只是"生成代码"，而是覆盖补全、生成、翻译、理解、修复、测试、审查的完整领域。
 
 
-- **软件开发 vs 软件维护 Pipeline**
+- **软件开发 vs 软件维护 Pipeline（流水线）**
 
   SE 的完整 Pipeline 可分为软件开发和软件维护两条主线。
 
   软件开发
   - 需求工程 / 软件设计
-  - 代码生成：Planning + Iterative Refinement（反馈来源分 Model Feedback / Tool Feedback / Human Feedback / Hybrid Feedback）
+  - 代码生成：Planning（规划）+ Iterative Refinement（迭代精修），反馈来源分 Model Feedback（模型反馈）/ Tool Feedback（工具反馈）/ Human Feedback（人工反馈）/ Hybrid Feedback（混合反馈）
   - 代码质量保证：验证、静态校对、测试（单元测试、系统测试）
 
   软件维护
   - Debugging（Fault Localization 故障定位 + Repair 修复）
   - Feature Maintenance（特性维护）
 
-  面试主线：开发侧关注"从 0 到 1 生成的正确性与质量"，维护侧关注"在已有大型代码库上定位并安全修改"。后者对 Long Context、Retrieval、执行环境的要求更高，也是 SWE-bench / Coding Agent 的主战场。
+  面试主线：开发侧关注"从 0 到 1 生成的正确性与质量"，维护侧关注"在已有大型代码库上定位并安全修改"。后者对 Long Context（长上下文）、Retrieval（检索）、执行环境的要求更高，也是 SWE-bench / Coding Agent 的主战场。
 
 
 #### Task Taxonomy
@@ -8016,7 +8135,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - **Code Generation（生成）**：NL → code，函数级 / 文件级 / 仓库级
   - **Code Translation（翻译）**：跨编程语言迁移（如 Java→Python、COBOL→Java 的遗留系统现代化），难点是语义等价而非表面翻译
   - **Code Understanding / Reasoning（理解推理）**：代码解释、代码问答、执行结果预测（给代码推输入/输出）
-  - **Bug Fix / APR（自动程序修复）**：定位缺陷并生成修复 patch
+  - **Bug Fix / APR（Automatic Program Repair，自动程序修复）**：定位缺陷并生成修复 patch
   - **Test Generation（测试生成）**：为已有代码生成单元测试，反过来也能作为生成代码的验证信号
   - **Code Review / Quality（审查）**：静态分析、漏洞检测、风格与可维护性建议
 
@@ -8031,8 +8150,8 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 - **Version 与 Environment 维度**
 
-  - **Version（版本）**：代码库、依赖库、语言版本随时间变化，同一 issue 在不同 commit 上的解法不同；评测需锁定 repo 版本与依赖版本以保证可复现；模型训练数据有"知识截止版本"，面对新版本 API 容易过时
-  - **Environment（环境）**：repository-level 任务必须在可执行环境（Docker 容器 / 沙箱）中跑测试，环境搭建（装依赖、配数据库、初始化服务）本身就是难点；环境的隔离性与可复现性直接决定评测与 RL rollout 的可靠性
+  - **Version（版本）**：代码库、依赖库、语言版本随时间变化，同一 issue 在不同 commit（提交）上的解法不同；评测需锁定 repo 版本与依赖版本以保证可复现；模型训练数据有"知识截止版本"，面对新版本 API 容易过时
+  - **Environment（环境）**：repository-level 任务必须在可执行环境（Docker 容器 / 沙箱）中跑测试，环境搭建（装依赖、配数据库、初始化服务）本身就是难点；环境的隔离性与可复现性直接决定评测与 RL rollout（采样推演）的可靠性
 
 
 #### Benchmark and Evaluation
@@ -8055,7 +8174,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 - **防污染 / 竞赛级评测**
 
   - **LiveCodeBench**：持续采集 LeetCode/AtCoder 等新题，按时间窗口切分，天然防止训练数据污染（题目晚于模型知识截止）
-  - **Codeforces Rating**：用真实竞赛题的 Elo 评分刻画模型竞技编程水平
+  - **Codeforces Rating**：用真实竞赛题的 Elo（等级分，一种竞技排名分）评分刻画模型竞技编程水平
 
   为什么需要 Live Benchmark：静态 benchmark 易被训练集"背下来"（数据污染），只有持续更新题目才能反映真实泛化能力——这也是把 SWE-bench 做成 Live 的动机。
 
@@ -8083,18 +8202,18 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 - **Agentless（三段式，去 Agent 化）**
 
-  Agentless 的核心观点：repository-level 的软件维护不必用复杂的自主 Agent（多步 ReAct / 自由工具调用），用固定的三段式流水线反而更稳、更省、更强：
+  Agentless 的核心观点：repository-level 的软件维护不必用复杂的自主 Agent（多步 ReAct，Reasoning+Acting 推理+行动 / 自由工具调用），用固定的三段式流水线反而更稳、更省、更强：
 
   1. **Fault Localization（定位）**：分层缩小范围——先定位相关文件，再到相关类/函数，再到具体代码片段
-  2. **Patch Generation（修复）**：基于定位到的上下文，让 LLM 以 diff 形式生成补丁（常采样多个候选）
+  2. **Patch Generation（修复）**：基于定位到的上下文，让 LLM 以 diff（代码差异）形式生成补丁（常采样多个候选）
   3. **Patch Validation（验证）**：用回归测试 + 候选排序，筛掉会破坏已有功能的补丁，选出最优 patch
 
-  trade-off：牺牲自主探索的灵活性，换来可控性、可复现性和低成本；在 SWE-bench 上曾以远低于 Agent 的成本取得有竞争力的结果。
+  trade-off（权衡取舍）：牺牲自主探索的灵活性，换来可控性、可复现性和低成本；在 SWE-bench 上曾以远低于 Agent 的成本取得有竞争力的结果。
 
 
-- **SWE-agent 与 ACI（Agent-Computer Interface）**
+- **SWE-agent 与 ACI（Agent-Computer Interface，智能体-计算机接口）**
 
-  SWE-agent 的核心贡献是提出 ACI 概念：同一个模型，配不同的"机机接口"，任务成功率差异巨大。ACI 指专门为 LLM 设计的工具接口——不是把人类用的 CLI 直接丢给模型，而是重新设计更易被模型正确调用的命令（带行号的查看、精确搜索、受控编辑），并给出清晰的执行反馈。
+  SWE-agent 的核心贡献是提出 ACI 概念：同一个模型，配不同的"机机接口"，任务成功率差异巨大。ACI 指专门为 LLM 设计的工具接口——不是把人类用的 CLI（Command Line Interface，命令行界面）直接丢给模型，而是重新设计更易被模型正确调用的命令（带行号的查看、精确搜索、受控编辑），并给出清晰的执行反馈。
 
   启示：Coding Agent 的效果不只取决于模型强弱，工具粒度、上下文组织、错误反馈等"接口设计"往往更关键。
 
@@ -8110,9 +8229,9 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   代码模型的能力上限很大程度由数据决定，其来源与处理都比自然语言更讲究：
 
-  - **来源**：GitHub/GitLab 等开源代码（如 The Stack，仅保留宽松许可证）、代码配套文本（issue/PR/commit message/README/文档）、StackOverflow 问答、技术书籍与网页
-  - **语言识别与过滤**：按编程语言分类，剔除生成代码、minified 代码、自动产物
-  - **去重**：文件级 + 仓库级去重（MinHash + LSH），防止重复代码主导训练，也降低记忆化与泄漏风险
+  - **来源**：GitHub/GitLab 等开源代码（如 The Stack，仅保留宽松许可证）、代码配套文本（issue/PR/commit message/README/文档，PR 即 Pull Request 合并请求）、StackOverflow 问答、技术书籍与网页
+  - **语言识别与过滤**：按编程语言分类，剔除生成代码、minified（压缩混淆的）代码、自动产物
+  - **去重**：文件级 + 仓库级去重（MinHash + LSH，LSH 即 Locality-Sensitive Hashing 局部敏感哈希），防止重复代码主导训练，也降低记忆化与泄漏风险
   - **质量过滤**：启发式规则（代码占比、平均行长、符号/关键字比例、注释率）+ 分类器打分（如 StarCoder 的质量分类器），保留高质量代码
   - **去污染**：移除与评测 benchmark（HumanEval/SWE-bench 等）重叠的样本，避免测试集泄漏导致分数虚高
   - **许可证合规**：过滤非宽松许可证代码，规避版权风险
@@ -8124,18 +8243,18 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   高质量代码指令数据稀缺，合成是主流补充手段：
 
-  - **OSS-Instruct（Magicoder）**：以真实开源代码片段为"种子"，让强模型据此生成"问题-解答-测试"三元组。相比纯 Self-Instruct 从指令自举，OSS-Instruct 的分布更贴近真实开发、多样性更高、偏差更低
+  - **OSS-Instruct（Magicoder）**：OSS 即 Open Source Software（开源软件）；以真实开源代码片段为"种子"，让强模型据此生成"问题-解答-测试"三元组。相比纯 Self-Instruct（自指令）从指令自举，OSS-Instruct 的分布更贴近真实开发、多样性更高、偏差更低
   - **Self-Instruct / Evol-Instruct**：从少量种子指令自举扩展（Self-Instruct），或逐步加难/加约束进化指令（Evol-Instruct，WizardCoder 采用）
   - **测试用例合成**：为已有代码生成单元测试，既能扩充数据，又能作为 RLVR 的可验证奖励信号
   - **正确性把关**：合成代码必须经执行/测试验证再入库，否则会把错误代码当训练信号，污染模型
 
 
-- **代码 Tokenizer 的特殊性**
+- **代码 Tokenizer（分词器）的特殊性**
 
   代码有强结构性（缩进、括号配对、命名规范、空格敏感），通用文本 tokenizer 并不理想：
 
-  - **更大且代码友好的词表**：如 StarCoder 用 49152 词表，提升代码压缩率、减少碎 token；需合理处理空格/tab/换行（Python 缩进本身有语义）
-  - **FIM 训练格式**：Fill-in-the-Middle 通过特殊 token 把代码重排为 PSM（prefix-suffix-middle）或 SPM（suffix-prefix-middle），让模型学会"看前后文填中间"，是代码补全能力的训练基础
+  - **更大且代码友好的词表**：如 StarCoder 用 49152 词表，提升代码压缩率、减少碎 token（词元）；需合理处理空格/tab/换行（Python 缩进本身有语义）
+  - **FIM 训练格式**：Fill-in-the-Middle 通过特殊 token 把代码重排为 PSM（prefix-suffix-middle，前缀-后缀-中间）或 SPM（suffix-prefix-middle，后缀-前缀-中间），让模型学会"看前后文填中间"，是代码补全能力的训练基础
   - **仓库级特殊 token**：加入 repo 名、文件路径、issue/commit 的分隔符（如 StarCoder 的 repo-level 格式），支持跨文件上下文建模
   - **多语言兼顾**：需同时覆盖多种编程语言与自然语言（注释/文档），避免某类语言被过度切分
 
@@ -8146,32 +8265,32 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   |------|------|
   | **StarCoder / StarCoder2** | BigCode 开源，The Stack 训练，多语言 + FIM + repo-level；StarCoder2 覆盖 600+ 语言、多尺寸 |
   | **CodeLlama** | 基于 Llama 2，分 base / Python / Instruct 变体，支持长上下文与代码填充 |
-  | **DeepSeek-Coder** | 多语言、强 repo-level；V2 转向 MoE（如 Lite 版总参 16B、激活 2.4B） |
+  | **DeepSeek-Coder** | 多语言、强 repo-level；V2 转向 MoE（Mixture of Experts，混合专家；如 Lite 版总参 16B、激活 2.4B） |
   | **Qwen2.5-Coder** | 多语言、多尺寸、SWE 能力强，开源表现突出 |
   | **CodeGeeX** | 中文友好、多语言代码生成 |
   | **WizardCoder** | CodeLlama + Evol-Instruct 指令微调，早期开源指令代码模型代表 |
 
 
-- **代码 SFT 与指令微调**
+- **代码 SFT（Supervised Fine-Tuning，监督微调）与指令微调**
 
   - **数据形态**：问题 → 解法（含解释）、多轮对话式编程、工具调用/Agent 轨迹、repo-level 修复样本
   - **质量优先**：冷启动 SFT 数据"少而精"胜过"多而杂"，常用拒绝采样只保留通过测试的正确解法
-  - **与 RL 衔接**：SFT 打底建立格式与基础能力，再接 RLVR/GRPO 用测试通过奖励提升 pass@1；代码是 RL 最容易见效的领域之一
+  - **与 RL 衔接**：SFT 打底建立格式与基础能力，再接 RLVR/GRPO（Group Relative Policy Optimization，组相对策略优化）用测试通过奖励提升 pass@1；代码是 RL 最容易见效的领域之一
 
 
 #### Code RL Training
 
 - **为什么代码天然适合 RL**
 
-  代码有可执行、可验证的客观反馈——编译是否通过、单元测试是否全绿，都是程序可自动判定的信号。这让代码 RL 可以直接用 RLVR，不必依赖人类偏好标注或神经网络 reward model，奖励既精确又难被"话术"欺骗（相比开放对话）。这也是代码成为 RL 落地最成功场景之一的原因。
+  代码有可执行、可验证的客观反馈——编译是否通过、单元测试是否全绿，都是程序可自动判定的信号。这让代码 RL 可以直接用 RLVR，不必依赖人类偏好标注或神经网络 reward model（奖励模型），奖励既精确又难被"话术"欺骗（相比开放对话）。这也是代码成为 RL 落地最成功场景之一的原因。
 
 
 - **代码 RL 的 Reward 设计**
 
-  - **结果奖励（ORM 风格）**：以测试通过率为主，$$reward = \frac{\text{通过的测试数}}{\text{总测试数}}$$，或直接二元（全通过才给 1）
+  - **结果奖励（ORM，Outcome Reward Model 结果奖励模型 风格）**：以测试通过率为主，$$reward = \frac{\text{通过的测试数}}{\text{总测试数}}$$，或直接二元（全通过才给 1）
   - **部分正确性**：用"通过测试比例"作稠密奖励，缓解全对/全错的稀疏问题，给半成品 patch 正向信号
   - **格式 / 可编译约束**：无法编译、无法解析 diff → 直接 0 分或负分，作为硬门槛（gating）
-  - **过程奖励（PRM 风格）**：对多步修复的中间步骤打分，粒度更细但标注/训练成本高，目前多用于简单任务或作辅助信号
+  - **过程奖励（PRM，Process Reward Model 过程奖励模型 风格）**：对多步修复的中间步骤打分，粒度更细但标注/训练成本高，目前多用于简单任务或作辅助信号
 
 
 - **ORM vs PRM 在代码上的取舍**
@@ -8186,7 +8305,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 读取隐藏测试/答案文件（如 `cat .hidden/secret`）
   - 特判：针对测试输入写 if-else 返回预期结果，不做通用逻辑
 
-  缓解：测试用例对模型不可见且随机化、禁止修改测试文件、用 held-out 测试集验证、rule-based 黑名单 + LLM Judge 双层拦截可疑操作。
+  缓解：测试用例对模型不可见且随机化、禁止修改测试文件、用 held-out（留出）测试集验证、rule-based（基于规则）黑名单 + LLM Judge（大模型评判）双层拦截可疑操作。
 
 
 - **训练环境与数据**
@@ -8198,12 +8317,12 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 - **Long Context（仓库级长上下文）**
 
-  真实仓库动辄数十万行，远超上下文窗口。应对：检索定位相关片段而非全量塞入；分块 / 滑窗；把文件系统当作"外部记忆"按需读取；压缩历史工具输出（代码场景可做 AST 级压缩：保留 import、函数签名、类型定义，去除实现细节）。
+  真实仓库动辄数十万行，远超上下文窗口。应对：检索定位相关片段而非全量塞入；分块 / 滑窗；把文件系统当作"外部记忆"按需读取；压缩历史工具输出（代码场景可做 AST，Abstract Syntax Tree 抽象语法树 级压缩：保留 import、函数签名、类型定义，去除实现细节）。
 
 
 - **Retrieval / 文件选择**
 
-  repository-level 任务成败很大程度取决于"能否检索到真正相关的文件"。方法：基于 embedding 的语义检索 + 基于 grep/符号的精确检索混合；从 issue 描述的堆栈/文件名/关键词出发定位；沿调用图/依赖图扩展相关文件。检索不全会导致 patch 改错地方或漏改。
+  repository-level 任务成败很大程度取决于"能否检索到真正相关的文件"。方法：基于 embedding（嵌入向量）的语义检索 + 基于 grep/符号的精确检索混合；从 issue 描述的堆栈/文件名/关键词出发定位；沿调用图/依赖图扩展相关文件。检索不全会导致 patch 改错地方或漏改。
 
 
 - **多语言（编程语言 + 自然语言）**
