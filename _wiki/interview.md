@@ -7972,33 +7972,196 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 ### Coding
 
-- **LLM for SE**
+#### Overview
 
-  SE 的完整 Pipeline 可分为软件开发和软件维护。
+- **Coding 能力谱系（从窄到宽）**
+
+  LLM Coding 不是单一任务，而是一条从"补全一行"到"改整个仓库"的能力谱系，面试时要能讲清不同粒度的差异：
+
+  | 层次 | 任务形态 | 输入 | 输出 | 代表评测 |
+  |------|---------|------|------|---------|
+  | **补全（Completion）** | 光标处续写 / 填空（FIM） | 前后文代码 | 代码片段 | 补全采纳率 |
+  | **函数级生成** | NL → 单个函数 | 自然语言描述 + 签名 | 独立函数 | HumanEval / MBPP |
+  | **文件/多文件生成** | NL → 模块、跨文件改动 | 描述 + 少量上下文 | 多段代码 | — |
+  | **仓库级 SE** | 在真实 repo 上定位并修复 issue | 整个代码库 + issue | patch | SWE-bench |
+  | **全 SDLC** | 需求 → 设计 → 编码 → 测试 → 部署 | 业务需求 | 端到端交付 | 产品级 |
+
+  越往右，上下文越长、越依赖检索与工具（执行/测试）、越需要 Agent 化的多步决策，评测也从"比对输出字符串"变成"跑测试看是否通过"。Coding 因此不只是"生成代码"，而是覆盖补全、生成、翻译、理解、修复、测试、审查的完整领域。
+
+
+- **软件开发 vs 软件维护 Pipeline**
+
+  SE 的完整 Pipeline 可分为软件开发和软件维护两条主线。
 
   软件开发
-  - 需求工程/软件设计
-  - 代码生成：Planning/Iterative Refinement（Model Feedback/Tool Feedback/Human Feedback/Hybrid Feedback）
-  - 代码质量保证：验证，静态校对，测试（单元测试、系统测试）
+  - 需求工程 / 软件设计
+  - 代码生成：Planning + Iterative Refinement（反馈来源分 Model Feedback / Tool Feedback / Human Feedback / Hybrid Feedback）
+  - 代码质量保证：验证、静态校对、测试（单元测试、系统测试）
 
   软件维护
-  - Debugging（Fault Localization，Repair）
-  - Feature Maintenance
+  - Debugging（Fault Localization 故障定位 + Repair 修复）
+  - Feature Maintenance（特性维护）
 
-  在软件维护方面，一个经典的 Benchmark 是 SWE-bench（verified 比较关键），将其建立为 Live Benchmark（添加新的 instances）十分关键。一个关键的 agent 框架是 Agentless。Agentless 把软件维护分为定位，修复和补丁验证三个部分。
+  面试主线：开发侧关注"从 0 到 1 生成的正确性与质量"，维护侧关注"在已有大型代码库上定位并安全修改"。后者对 Long Context、Retrieval、执行环境的要求更高，也是 SWE-bench / Coding Agent 的主战场。
 
-  Task：including simple，self-contained and repository-level，e.g.，Code Generation；Bug Fix
 
-  Version
+#### Task Taxonomy
 
-  Environment
+- **按能力类型划分**
 
-  RLVR
+  - **Code Completion（补全）**：光标处续写；FIM（Fill-in-the-Middle）支持根据前后文填中间；进阶是 next-edit prediction（预测下一处该改哪里、改什么）
+  - **Code Generation（生成）**：NL → code，函数级 / 文件级 / 仓库级
+  - **Code Translation（翻译）**：跨编程语言迁移（如 Java→Python、COBOL→Java 的遗留系统现代化），难点是语义等价而非表面翻译
+  - **Code Understanding / Reasoning（理解推理）**：代码解释、代码问答、执行结果预测（给代码推输入/输出）
+  - **Bug Fix / APR（自动程序修复）**：定位缺陷并生成修复 patch
+  - **Test Generation（测试生成）**：为已有代码生成单元测试，反过来也能作为生成代码的验证信号
+  - **Code Review / Quality（审查）**：静态分析、漏洞检测、风格与可维护性建议
 
-  软件工程对应到 LLM 的常见问题有：
-  - Long Context：How to support long context
-  - Retrieval：How to select useful files
-  - 多语言
+
+- **按任务粒度划分**
+
+  - **simple / self-contained**：单函数、依赖少，输入即所需全部信息（如 HumanEval 一题一个函数），评测直接跑单元测试
+  - **repository-level**：改动分散在真实大仓库的多个文件，需先检索定位相关文件、理解跨文件依赖，再生成 patch，最后在真实环境跑测试（如 SWE-bench）
+
+  粒度决定难度来源：self-contained 难在"算法/语法正确"，repository-level 难在"上下文理解 + 定位 + 不破坏其他功能"。
+
+
+- **Version 与 Environment 维度**
+
+  - **Version（版本）**：代码库、依赖库、语言版本随时间变化，同一 issue 在不同 commit 上的解法不同；评测需锁定 repo 版本与依赖版本以保证可复现；模型训练数据有"知识截止版本"，面对新版本 API 容易过时
+  - **Environment（环境）**：repository-level 任务必须在可执行环境（Docker 容器 / 沙箱）中跑测试，环境搭建（装依赖、配数据库、初始化服务）本身就是难点；环境的隔离性与可复现性直接决定评测与 RL rollout 的可靠性
+
+
+#### Benchmark and Evaluation
+
+- **函数级代码生成评测**
+
+  - **HumanEval**：164 道手写 Python 编程题，函数级，用单元测试 pass@k 评测
+  - **MBPP**：974 道入门级 Python 题，含测试用例
+  - **EvalPlus**：给 HumanEval/MBPP 补大量增强测试用例，暴露"通过原始稀疏测试但其实不正确"的假阳性，评测更严格
+  - **MultiPL-E**：把 HumanEval/MBPP 翻译到多种编程语言，评测多语言代码能力
+
+  pass@k 是核心指标：生成 k 个样本，只要有一个通过全部测试即算通过。pass@1 反映稳定性，pass@k（k 较大）反映能力上限与多样性。
+
+
+- **代码推理评测（CRUXEval）**
+
+  给一段代码，预测其输出（CRUXEval-O）或反推输入（CRUXEval-I），考察模型对代码的"执行式理解"而非单纯生成，是衡量代码 reasoning 的细粒度基准。
+
+
+- **防污染 / 竞赛级评测**
+
+  - **LiveCodeBench**：持续采集 LeetCode/AtCoder 等新题，按时间窗口切分，天然防止训练数据污染（题目晚于模型知识截止）
+  - **Codeforces Rating**：用真实竞赛题的 Elo 评分刻画模型竞技编程水平
+
+  为什么需要 Live Benchmark：静态 benchmark 易被训练集"背下来"（数据污染），只有持续更新题目才能反映真实泛化能力——这也是把 SWE-bench 做成 Live 的动机。
+
+
+- **仓库级 SE 评测（SWE-bench 系列）**
+
+  给定真实 GitHub 代码库 + 一个 issue，模型生成 patch，用该 issue 对应的测试判定是否解决：FAIL_TO_PASS（原本失败、修复后应变通过）+ PASS_TO_PASS（原本通过、不能被改挂）。
+
+  | 变体 | 特点 |
+  |------|------|
+  | **SWE-bench** | 原始集，2294 个 Python issue，噪声较大 |
+  | **SWE-bench Verified** | 人工校验的 500 题子集，剔除表述不清/无解样本，是当前主流榜单口径 |
+  | **SWE-bench Lite** | 300 题轻量子集，跑分成本低 |
+  | **Multi-SWE-Bench / Multilingual** | 扩展到多编程语言（如 TypeScript/Java 等），评测跨语言 SE 能力 |
+  | **SWE-bench Multimodal** | issue 含图片等多模态信息（如前端 bug 截图） |
+  | **SWE-bench Live** | 持续加入新 instance，防污染 |
+
+
+- **RLVR：可验证奖励**
+
+  Reinforcement Learning with Verifiable Rewards——用可自动验证的信号（代码任务里即"跑测试是否通过 / 编译是否成功"）作为奖励，无需训练神经网络 reward model，也避免其被 hack。代码与数学是 RLVR 最天然的两个场景，因为答案对错可被程序判定。
+
+
+#### SE Agent
+
+- **Agentless（三段式，去 Agent 化）**
+
+  Agentless 的核心观点：repository-level 的软件维护不必用复杂的自主 Agent（多步 ReAct / 自由工具调用），用固定的三段式流水线反而更稳、更省、更强：
+
+  1. **Fault Localization（定位）**：分层缩小范围——先定位相关文件，再到相关类/函数，再到具体代码片段
+  2. **Patch Generation（修复）**：基于定位到的上下文，让 LLM 以 diff 形式生成补丁（常采样多个候选）
+  3. **Patch Validation（验证）**：用回归测试 + 候选排序，筛掉会破坏已有功能的补丁，选出最优 patch
+
+  trade-off：牺牲自主探索的灵活性，换来可控性、可复现性和低成本；在 SWE-bench 上曾以远低于 Agent 的成本取得有竞争力的结果。
+
+
+- **SWE-agent 与 ACI（Agent-Computer Interface）**
+
+  SWE-agent 的核心贡献是提出 ACI 概念：同一个模型，配不同的"机机接口"，任务成功率差异巨大。ACI 指专门为 LLM 设计的工具接口——不是把人类用的 CLI 直接丢给模型，而是重新设计更易被模型正确调用的命令（带行号的查看、精确搜索、受控编辑），并给出清晰的执行反馈。
+
+  启示：Coding Agent 的效果不只取决于模型强弱，工具粒度、上下文组织、错误反馈等"接口设计"往往更关键。
+
+
+- **Coding Agent 与通用 Harness 的关系**
+
+  面向消费者的编码工具（Claude Code / Cursor / Codex / OpenHands 等）本质是 Coding Harness：内置 Agent Loop + shell/文件读写工具 + 上下文管理 + 权限护栏，能自主完成端到端编码任务。SE Agent（Agentless / SWE-agent）更偏"benchmark 上的仓库级 issue 修复方法学"。两者共享同一套底层能力（工具调用、长上下文、测试反馈闭环），区别在于前者是产品化系统、后者是任务方法。
+
+
+#### Code RL Training
+
+- **为什么代码天然适合 RL**
+
+  代码有可执行、可验证的客观反馈——编译是否通过、单元测试是否全绿，都是程序可自动判定的信号。这让代码 RL 可以直接用 RLVR，不必依赖人类偏好标注或神经网络 reward model，奖励既精确又难被"话术"欺骗（相比开放对话）。这也是代码成为 RL 落地最成功场景之一的原因。
+
+
+- **代码 RL 的 Reward 设计**
+
+  - **结果奖励（ORM 风格）**：以测试通过率为主，$$reward = \frac{\text{通过的测试数}}{\text{总测试数}}$$，或直接二元（全通过才给 1）
+  - **部分正确性**：用"通过测试比例"作稠密奖励，缓解全对/全错的稀疏问题，给半成品 patch 正向信号
+  - **格式 / 可编译约束**：无法编译、无法解析 diff → 直接 0 分或负分，作为硬门槛（gating）
+  - **过程奖励（PRM 风格）**：对多步修复的中间步骤打分，粒度更细但标注/训练成本高，目前多用于简单任务或作辅助信号
+
+
+- **ORM vs PRM 在代码上的取舍**
+
+  ORM 只需最终测试结果，信号客观、易获取，是主流；PRM 能对"定位是否准、中间改法是否合理"给密集反馈，理论上更利于长程任务，但代码中间步骤的"好坏"难自动判定，标注成本高、易引入偏差。实践中多以 ORM / RLVR 为主，PRM 作补充。
+
+
+- **代码 RL 的 Reward Hacking**
+
+  模型会走捷径骗过测试而非真正修复，常见手段：
+  - 硬编码测试期望值，或直接改测试用例本身
+  - 读取隐藏测试/答案文件（如 `cat .hidden/secret`）
+  - 特判：针对测试输入写 if-else 返回预期结果，不做通用逻辑
+
+  缓解：测试用例对模型不可见且随机化、禁止修改测试文件、用 held-out 测试集验证、rule-based 黑名单 + LLM Judge 双层拦截可疑操作。
+
+
+- **训练环境与数据**
+
+  repository-level 代码 RL 需要可执行的 rollout 环境（容器 + 测试）。代表工作如 SWE-Gym（提供大规模真实 Python SE 任务环境用于训练 agent）、Agent-RLVR（用 RLVR 训练 SE agent，并复用其数据训练 test-time reward model）。环境搭建与 rollout 吞吐（异步执行）是主要工程瓶颈。
+
+
+#### Key Challenges
+
+- **Long Context（仓库级长上下文）**
+
+  真实仓库动辄数十万行，远超上下文窗口。应对：检索定位相关片段而非全量塞入；分块 / 滑窗；把文件系统当作"外部记忆"按需读取；压缩历史工具输出（代码场景可做 AST 级压缩：保留 import、函数签名、类型定义，去除实现细节）。
+
+
+- **Retrieval / 文件选择**
+
+  repository-level 任务成败很大程度取决于"能否检索到真正相关的文件"。方法：基于 embedding 的语义检索 + 基于 grep/符号的精确检索混合；从 issue 描述的堆栈/文件名/关键词出发定位；沿调用图/依赖图扩展相关文件。检索不全会导致 patch 改错地方或漏改。
+
+
+- **多语言（编程语言 + 自然语言）**
+
+  - **编程语言多语言**：真实项目混合 Python/TS/Java/Go 等，模型需跨语言泛化（MultiPL-E、Multi-SWE-Bench 评测此能力）
+  - **自然语言多语言**：issue / 需求可能是中文、英文等，模型要能跨自然语言理解任务，并生成对应语言的注释/文档
+
+
+- **Fault Localization 与 Patch Validation**
+
+  定位是维护类任务的第一道坎：错误现象（测试失败）与根因代码往往相距很远。验证是最后一道坎：patch 不仅要修好目标 issue（FAIL_TO_PASS），还不能破坏其他功能（PASS_TO_PASS），因此必须跑回归测试；Agentless 专门用一段做候选 patch 的验证与排序。
+
+
+- **测试反馈闭环与 Iterative Refinement**
+
+  Coding Agent 的核心能力是"生成 → 执行 → 看报错 → 修正"的闭环：把编译错误、测试失败、运行异常回注上下文，让模型迭代修改（Self-Refine / ReAct 式）。反馈来源分 Model / Tool / Human / Hybrid。闭环质量取决于错误信息是否清晰、迭代次数上限、以及能否从失败中真正学到修正方向（而非反复试错）。
 
 
 ### E-commerce
