@@ -8158,23 +8158,23 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **函数级代码生成评测**
 
-  - **HumanEval**：164 道手写 Python 编程题，函数级，用单元测试 pass@k 评测
-  - **MBPP**：974 道入门级 Python 题，含测试用例
-  - **EvalPlus**：给 HumanEval/MBPP 补大量增强测试用例，暴露"通过原始稀疏测试但其实不正确"的假阳性，评测更严格
-  - **MultiPL-E**：把 HumanEval/MBPP 翻译到多种编程语言，评测多语言代码能力
+  - **HumanEval（2021）**：164 道手写 Python 编程题，函数级，用单元测试 pass@k 评测
+  - **MBPP（2021）**：974 道入门级 Python 题，含测试用例
+  - **MultiPL-E（2022）**：把 HumanEval/MBPP 翻译到多种编程语言，评测多语言代码能力
+  - **EvalPlus（2023）**：给 HumanEval/MBPP 补大量增强测试用例，暴露"通过原始稀疏测试但其实不正确"的假阳性，评测更严格
 
   pass@k 是核心指标：生成 k 个样本，只要有一个通过全部测试即算通过。pass@1 反映稳定性，pass@k（k 较大）反映能力上限与多样性。
 
 
-- **代码推理评测（CRUXEval）**
+- **代码推理评测（CRUXEval，2024）**
 
   给一段代码，预测其输出（CRUXEval-O）或反推输入（CRUXEval-I），考察模型对代码的"执行式理解"而非单纯生成，是衡量代码 reasoning 的细粒度基准。
 
 
 - **防污染 / 竞赛级评测**
 
-  - **LiveCodeBench**：持续采集 LeetCode/AtCoder 等新题，按时间窗口切分，天然防止训练数据污染（题目晚于模型知识截止）
-  - **Codeforces Rating**：用真实竞赛题的 Elo（等级分，一种竞技排名分）评分刻画模型竞技编程水平
+  - **LiveCodeBench（2024）**：持续采集 LeetCode/AtCoder 等新题，按时间窗口切分，天然防止训练数据污染（题目晚于模型知识截止）
+  - **Codeforces Rating（竞赛平台 2010 起，约 2022+ 用于评测 LLM）**：用真实竞赛题的 Elo（等级分，一种竞技排名分）评分刻画模型竞技编程水平
 
   为什么需要 Live Benchmark：静态 benchmark 易被训练集"背下来"（数据污染），只有持续更新题目才能反映真实泛化能力——这也是把 SWE-bench 做成 Live 的动机。
 
@@ -8183,14 +8183,14 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   给定真实 GitHub 代码库 + 一个 issue，模型生成 patch，用该 issue 对应的测试判定是否解决：FAIL_TO_PASS（原本失败、修复后应变通过）+ PASS_TO_PASS（原本通过、不能被改挂）。
 
-  | 变体 | 特点 |
-  |------|------|
-  | **SWE-bench** | 原始集，2294 个 Python issue，噪声较大 |
-  | **SWE-bench Verified** | 人工校验的 500 题子集，剔除表述不清/无解样本，是当前主流榜单口径 |
-  | **SWE-bench Lite** | 300 题轻量子集，跑分成本低 |
-  | **Multi-SWE-Bench / Multilingual** | 扩展到多编程语言（如 TypeScript/Java 等），评测跨语言 SE 能力 |
-  | **SWE-bench Multimodal** | issue 含图片等多模态信息（如前端 bug 截图） |
-  | **SWE-bench Live** | 持续加入新 instance，防污染 |
+  | 变体 | 年份 | 特点 |
+  |------|------|------|
+  | **SWE-bench** | 2023.10 | 原始集，2294 个 Python issue，噪声较大 |
+  | **SWE-bench Verified** | 2024.8 | 人工校验的 500 题子集，剔除表述不清/无解样本，是当前主流榜单口径 |
+  | **SWE-bench Lite** | 2024 | 300 题轻量子集，跑分成本低 |
+  | **SWE-bench Multimodal** | 2024.10 | issue 含图片等多模态信息（如前端 bug 截图） |
+  | **Multi-SWE-Bench（多语言）** | 2025.4 | 扩展到多编程语言（如 TypeScript/Java 等），评测跨语言 SE 能力 |
+  | **SWE-bench Live** | 2025.5 | 持续加入新 instance，防污染 |
 
 
 - **RLVR：可验证奖励**
