@@ -8191,6 +8191,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | **SWE-bench Multimodal** | 2024.10 | issue 含图片等多模态信息（如前端 bug 截图） |
   | **Multi-SWE-Bench（多语言）** | 2025.4 | 扩展到多编程语言（如 TypeScript/Java 等），评测跨语言 SE 能力 |
   | **SWE-bench Live** | 2025.5 | 持续加入新 instance，防污染 |
+  | **SWE-bench Pro** | 2025.9 | Scale AI 推出，1865 个长程（long-horizon）任务、41 个企业级仓库，diff 更大、更贴近真实生产，难度远高于 Verified；含 public/private 分割防污染 |
 
 
 - **RLVR：可验证奖励**
