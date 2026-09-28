@@ -7770,7 +7770,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 多智能体架构（Multi-agent Architecture）：将任务分解给多个子智能体，每个子智能体处理其特定任务并拥有独立的上下文，避免不同任务的上下文相互干扰。
   - 环境（Environments）：使用沙箱等环境来隔离包含大量 token 的对象或状态，例如在执行复杂计算或访问敏感数据时，将这些操作限制在特定的、受控的环境中。
 
-#### Agentic RL & World Modeling
+#### Agentic RL
 
 - **Agentic RL**
 
@@ -7781,6 +7781,9 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   RAGEN 是一个 Agentic RL 训练的框架，基于 StarPO（State-Thinking-Action-Reward Policy Optimization）。其通过马尔可夫决策过程（MDP）形式化 Agent 与环境的交互，引入渐进式奖励归一化策略，有效解决了多轮强化学习中的不稳定性。RAGEN 还发现多轮 RL 训练中的“（Echo Trap）”不稳定模式，提出 StarPO-S 改进框架，通过 variance-based trajectory filtering、critic baselining 和decoupled clipping 等方法，提升学习的稳健性。Search- R1 也是类似的结构。
 
   RAGEN/Search-R1 会受限于上下文长度。与以往简单地拼接完整交互历史的方法不同，verl-agent 把每个step当作独立的decision point来处理，并使用step/turn-independent的多轮rollout范式，提供了完全可定制的memory模块、历史管理机制以及每一步的输入结构。这种设计使得 verl-agent 能够高度扩展，适用于超长序列、multi-turn的强化学习训练（例如，ALFWorld 中的任务可能需要多达 50 步才能完成）。
+
+
+#### World Modeling
 
 - **什么是 Agentic World Modeling？能力层级如何划分？**
 
