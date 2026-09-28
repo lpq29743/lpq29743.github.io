@@ -8314,11 +8314,73 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   repository-level 代码 RL 需要可执行的 rollout 环境（容器 + 测试）。代表工作如 SWE-Gym（提供大规模真实 Python SE 任务环境用于训练 agent）、Agent-RLVR（用 RLVR 训练 SE agent，并复用其数据训练 test-time reward model）。环境搭建与 rollout 吞吐（异步执行）是主要工程瓶颈。
 
 
+#### Optimization Loop
+
+- **闭环五环节（数据 → 评测 → 归因 → 优化 → 验证）**
+
+  Coding Agent 的能力提升是一个迭代飞轮，无论走哪条技术路径都绕不开这五环：
+
+  - **数据**：收集任务与运行轨迹（issue、代码、测试、执行反馈、失败案例 badcase）
+  - **评测**：用测试通过率 / pass@k / SWE-bench resolve rate 量化当前能力，并定位失败样本
+  - **归因**：分析"为什么错"——是检索漏了文件、定位错、规划错、工具用错，还是能力本身不足
+  - **优化**：针对归因结果动手改进（改上下文/技能，或改模型参数）
+  - **验证**：在 badcase 集 + 全量回归集上确认"修好了且没改坏别的"，再进入下一轮
+
+  两条路径目标一致（提升解决率与泛化），但"归因"和"优化"两环的实现方式本质不同。
+
+
+- **两条优化路径：training-free 自进化 vs training-based RL**
+
+  | 环节 | training-free 自进化（不改参数） | training-based RL（改参数） |
+  |------|------|------|
+  | **数据** | 运行轨迹 + badcase，沉淀为 skill/memory/prompt | 可执行 rollout + 可验证奖励，用于策略更新 |
+  | **评测** | 细粒度 badcase 分析（定位到具体哪一步出错） | reward 信号 + held-out benchmark |
+  | **归因** | 显式、语义级、可读（root-cause 根因分析） | 隐式、数值级（credit assignment 交给优势函数） |
+  | **优化** | 改 context/skill/workflow/工具接口 | 用 GRPO/DAPO 等更新模型权重 |
+  | **验证** | badcase 集 + 全量回归，防退化 | checkpoint 在 benchmark 提升且无 hacking/遗忘 |
+
+  两者的共同 ground truth 都是"可执行环境 + 测试"；差异集中在归因与优化。
+
+
+- **归因环节的本质差异**
+
+  - **training-free**：直接读失败轨迹做根因分析（root-cause analysis），语义级、可解释、可人工介入；归因结论能立刻转成具体动作（"检索没召回 X 文件 → 改检索策略""缺少某类改法 → 补一条 skill"）
+  - **training-based**：归因即 credit assignment（信用分配）——把最终奖励回溯分摊到中间每一步/每个 token，由优势函数（如 GAE，Generalized Advantage Estimation 广义优势估计）或 GRPO 的组内相对优势自动完成，数值级、不可读；链路越长、奖励越稀疏，credit assignment 越难
+
+  一句话：自进化是"人/模型读得懂的归因"，RL 是"藏在梯度里的归因"。
+
+
+- **优化环节的本质差异与选型**
+
+  - **training-free**：优化对象是上下文与流程——prompt、skill 库、memory、检索策略、workflow 编排、工具接口（ACI）。优点：快、省、可热更新、可解释；局限：受 base model 能力上限约束，且 skill/context 会不断膨胀
+  - **training-based**：优化对象是模型参数——用 RLVR（可验证奖励）驱动 GRPO/DAPO 更新。优点：把能力内化、突破 prompt 工程天花板、泛化更好；局限：成本高、易 reward hacking、易跨域遗忘、依赖大量可执行环境
+
+  选型：能力本身缺失、需要稳定泛化 → RL；行为纠偏、流程/知识注入、快速迭代 → 自进化。两者可叠加——自进化沉淀的高质量轨迹反哺 RL 冷启动，RL 强化后的 base 再进入自进化飞轮。
+
+
+- **共同细节、独特考虑与长链路应对**
+
+  - **共同**：都以测试为 ground truth；都靠 badcase 驱动；都要防"改好一个坏一片"（维护 badcase 集与全量回归集两个独立集合）；都受 context 庞大 + 链路长制约
+  - **独特**：自进化独有 context/skill 管理、归因可读、热更新；RL 独有 credit assignment、reward 设计、防 hacking、训练稳定性
+  - **长链路应对**：面对当前 coding agent"上下文庞大 + 链路长（long-horizon）"的核心痛点，自进化靠 context 工程（检索 / AST 压缩 / 文件系统当外部记忆）+ 链路编排（plan-execute 规划-执行、sub-agent 子智能体分解）；RL 靠长上下文训练 + 过程奖励（PRM）/ 课程学习 / 多轮 RL 来缓解长程 credit assignment
+
+
 #### Key Challenges
 
 - **Long Context（仓库级长上下文）**
 
   真实仓库动辄数十万行，远超上下文窗口。应对：检索定位相关片段而非全量塞入；分块 / 滑窗；把文件系统当作"外部记忆"按需读取；压缩历史工具输出（代码场景可做 AST，Abstract Syntax Tree 抽象语法树 级压缩：保留 import、函数签名、类型定义，去除实现细节）。
+
+
+- **Long-Horizon（链路长）**
+
+  与 Long Context（空间维度：上下文庞大）并列的是 long-horizon（时间维度：决策链路长），这也是当前 coding agent 的两大核心痛点之一。解一个 issue 常要几十步——理解 → 检索 → 定位 → 规划 → 多步编辑 → 执行 → 看报错 → 再修正，由此带来三个新问题：
+
+  - **错误累积**：前面一步错（如定位错文件），后续全部跑偏，越到后面越难挽回
+  - **归因困难**：最终成败难以归到具体哪一步，链路越长 credit assignment（信用分配）越难，RL 尤其棘手
+  - **上下文膨胀**：每步工具输出不断堆积，反过来又加剧 Long Context
+
+  应对：把长链路拆成可验证的子目标（分而治之）、每步设检查点与回滚、控制迭代上限避免无效试错、用子目标/过程信号缓解稀疏奖励。
 
 
 - **Retrieval / 文件选择**
