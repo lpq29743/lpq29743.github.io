@@ -8327,7 +8327,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **多语言（编程语言 + 自然语言）**
 
-  - **编程语言多语言**：真实项目混合 Python/TS/Java/Go 等，模型需跨语言泛化（MultiPL-E、Multi-SWE-Bench 评测此能力）
+  - **编程语言多语言**：真实项目混合 Python/TS（TypeScript）/Java/Go 等，模型需跨语言泛化（MultiPL-E、Multi-SWE-Bench 评测此能力）
   - **自然语言多语言**：issue / 需求可能是中文、英文等，模型要能跨自然语言理解任务，并生成对应语言的注释/文档
 
 
@@ -8338,7 +8338,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **测试反馈闭环与 Iterative Refinement**
 
-  Coding Agent 的核心能力是"生成 → 执行 → 看报错 → 修正"的闭环：把编译错误、测试失败、运行异常回注上下文，让模型迭代修改（Self-Refine / ReAct 式）。反馈来源分 Model / Tool / Human / Hybrid。闭环质量取决于错误信息是否清晰、迭代次数上限、以及能否从失败中真正学到修正方向（而非反复试错）。
+  Coding Agent 的核心能力是"生成 → 执行 → 看报错 → 修正"的闭环：把编译错误、测试失败、运行异常回注上下文，让模型迭代修改（Self-Refine 自我精修 / ReAct 式）。反馈来源分 Model / Tool / Human / Hybrid。闭环质量取决于错误信息是否清晰、迭代次数上限、以及能否从失败中真正学到修正方向（而非反复试错）。
 
 
 ### E-commerce
