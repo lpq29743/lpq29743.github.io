@@ -8104,6 +8104,61 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   面向消费者的编码工具（Claude Code / Cursor / Codex / OpenHands 等）本质是 Coding Harness：内置 Agent Loop + shell/文件读写工具 + 上下文管理 + 权限护栏，能自主完成端到端编码任务。SE Agent（Agentless / SWE-agent）更偏"benchmark 上的仓库级 issue 修复方法学"。两者共享同一套底层能力（工具调用、长上下文、测试反馈闭环），区别在于前者是产品化系统、后者是任务方法。
 
 
+#### Code Data and Training
+
+- **代码预训练数据来源与处理**
+
+  代码模型的能力上限很大程度由数据决定，其来源与处理都比自然语言更讲究：
+
+  - **来源**：GitHub/GitLab 等开源代码（如 The Stack，仅保留宽松许可证）、代码配套文本（issue/PR/commit message/README/文档）、StackOverflow 问答、技术书籍与网页
+  - **语言识别与过滤**：按编程语言分类，剔除生成代码、minified 代码、自动产物
+  - **去重**：文件级 + 仓库级去重（MinHash + LSH），防止重复代码主导训练，也降低记忆化与泄漏风险
+  - **质量过滤**：启发式规则（代码占比、平均行长、符号/关键字比例、注释率）+ 分类器打分（如 StarCoder 的质量分类器），保留高质量代码
+  - **去污染**：移除与评测 benchmark（HumanEval/SWE-bench 等）重叠的样本，避免测试集泄漏导致分数虚高
+  - **许可证合规**：过滤非宽松许可证代码，规避版权风险
+
+  配比要点：代码需与自然语言、数学、合成数据混合训练，纯代码会损伤通用能力与指令跟随；代码占比与来源配比直接影响生成质量与泛化。
+
+
+- **代码数据合成**
+
+  高质量代码指令数据稀缺，合成是主流补充手段：
+
+  - **OSS-Instruct（Magicoder）**：以真实开源代码片段为"种子"，让强模型据此生成"问题-解答-测试"三元组。相比纯 Self-Instruct 从指令自举，OSS-Instruct 的分布更贴近真实开发、多样性更高、偏差更低
+  - **Self-Instruct / Evol-Instruct**：从少量种子指令自举扩展（Self-Instruct），或逐步加难/加约束进化指令（Evol-Instruct，WizardCoder 采用）
+  - **测试用例合成**：为已有代码生成单元测试，既能扩充数据，又能作为 RLVR 的可验证奖励信号
+  - **正确性把关**：合成代码必须经执行/测试验证再入库，否则会把错误代码当训练信号，污染模型
+
+
+- **代码 Tokenizer 的特殊性**
+
+  代码有强结构性（缩进、括号配对、命名规范、空格敏感），通用文本 tokenizer 并不理想：
+
+  - **更大且代码友好的词表**：如 StarCoder 用 49152 词表，提升代码压缩率、减少碎 token；需合理处理空格/tab/换行（Python 缩进本身有语义）
+  - **FIM 训练格式**：Fill-in-the-Middle 通过特殊 token 把代码重排为 PSM（prefix-suffix-middle）或 SPM（suffix-prefix-middle），让模型学会"看前后文填中间"，是代码补全能力的训练基础
+  - **仓库级特殊 token**：加入 repo 名、文件路径、issue/commit 的分隔符（如 StarCoder 的 repo-level 格式），支持跨文件上下文建模
+  - **多语言兼顾**：需同时覆盖多种编程语言与自然语言（注释/文档），避免某类语言被过度切分
+
+
+- **Coder 系列代表模型**
+
+  | 模型 | 特点 |
+  |------|------|
+  | **StarCoder / StarCoder2** | BigCode 开源，The Stack 训练，多语言 + FIM + repo-level；StarCoder2 覆盖 600+ 语言、多尺寸 |
+  | **CodeLlama** | 基于 Llama 2，分 base / Python / Instruct 变体，支持长上下文与代码填充 |
+  | **DeepSeek-Coder** | 多语言、强 repo-level；V2 转向 MoE（如 Lite 版总参 16B、激活 2.4B） |
+  | **Qwen2.5-Coder** | 多语言、多尺寸、SWE 能力强，开源表现突出 |
+  | **CodeGeeX** | 中文友好、多语言代码生成 |
+  | **WizardCoder** | CodeLlama + Evol-Instruct 指令微调，早期开源指令代码模型代表 |
+
+
+- **代码 SFT 与指令微调**
+
+  - **数据形态**：问题 → 解法（含解释）、多轮对话式编程、工具调用/Agent 轨迹、repo-level 修复样本
+  - **质量优先**：冷启动 SFT 数据"少而精"胜过"多而杂"，常用拒绝采样只保留通过测试的正确解法
+  - **与 RL 衔接**：SFT 打底建立格式与基础能力，再接 RLVR/GRPO 用测试通过奖励提升 pass@1；代码是 RL 最容易见效的领域之一
+
+
 #### Code RL Training
 
 - **为什么代码天然适合 RL**
