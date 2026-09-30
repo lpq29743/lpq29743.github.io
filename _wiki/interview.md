@@ -8466,6 +8466,15 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | **SWE-bench Pro** | 2025.9 | Scale AI 推出，1865 个长程（long-horizon）任务、41 个企业级仓库，diff 更大、更贴近真实生产，难度远高于 Verified；含 public/private 分割防污染 |
 
 
+- **长程 / 演化级评测（2026：超越单 issue，考跨版本演化与代码质量）**
+
+  仓库级 SWE-bench 已趋饱和，2026 的新基准把评测推向更长时间跨度，并新增"代码是否越改越好"这一维度：
+
+  - **SWE-EVO（2026）**：不再修单个 issue，而是让 agent 跟随成熟开源库的**版本发布迁移**持续演化代码；用 **Fix Rate（修复率）**衡量长程任务里的"部分进展"（长程很少全对）
+  - **DeepSWE（2026）**：113 道**从零原创**长程任务（不挖公开已合并 PR，天然抗记忆/抗污染），跨 TS/Go/Python/JS/Rust，隔离环境 + 程序化验证，判"可观测行为"而非唯一参考 patch
+  - **SlopCodeBench（2026）**：测 agent 在**长程迭代**中是否**劣化代码质量**——人类代码保持平稳、agent 代码却逐轮退化（冗余与腐蚀上升），把"可维护性"变成可量化指标
+
+
 #### SE Agent
 
 - **Agentless（三段式，去 Agent 化）**
