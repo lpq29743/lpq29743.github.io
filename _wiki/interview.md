@@ -7029,7 +7029,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   对于MoE模型， $$\pi_\theta$$ 和 $$\pi_{old}$$ 有差别，就可能导致 route 到不同的专家，从而导致 ratio 波动很大。
 
-  Routing Replay：缓存 $$\pi_{old}$$ 推理时激活的专家，在计算 $$\pi_\theta(y_{i,t}\|x_i,y_{<t})$$ 推理时进行重放，也激活相同的专家。这样 ratio 的波动就不会那么大了
+  Routing Replay：缓存 $$\pi_{old}$$ 推理时激活的专家，在计算 $$\pi_\theta(y_{i,t}\|x_i,y_{<t})$$ 推理时进行重放，也激活相同的专家。这样 ratio 的波动就不会那么大了。MiMo 称之为 R3（Rollout Routing Replay）。
 
   Freeze Router（冻结路由）：在大规模 RL 时直接冻结 MoE Router，抑制专家负载随训练漂移，是另一条稳定训练的思路（如 MiMo-V2.6 在扩展 RL 算力时冻结 Router）。与 Routing Replay 的区别是：后者对齐 rollout 与 training 的路由，前者从源头固定路由不再更新。
 
@@ -8194,7 +8194,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - 混合注意力（Hybrid SWA）：SWA : GA = 5:1（5 个滑窗块 + 1 个全局块），滑窗 W=128，首块特殊用 GA + dense FFN 稳定早期表征；引入 attention sink bias（借鉴 gpt-oss）。消融显示 W=128 在长上下文与复杂推理上优于全 GA 基线，且 KV Cache 固定大小、易与现有训练/推理基建集成。
   - 轻量 MTP：3 层 MTP、每层仅 0.33B（用 dense FFN + SWA 保持轻量），作原生 draft model 做自推测解码，实测 2.5–3.7× 加速，同时缓解 RL rollout 的长尾 GPU 空闲。
   - 后训练范式 MOPD（Multi-Teacher On-Policy Distillation）：三阶段——① 通用 SFT；② 分领域独立 RL 训出多个专家 teacher（code/search/general agent、数学、推理、安全）；③ 学生在线采样自身分布，同时吸收两类信号：来自 teacher logits 的稠密 token 级 reverse-KL 奖励 + 可验证的结果奖励（ORM/GRPO）。解决传统后训练的能力“跷跷板”（see-saw）与学习效率问题，并支持 teacher-student 迭代共进化。
-  - RL 基建：SGLang（推理）+ Megatron-LM（训练），全 FP8；R3（Rollout Routing Replay）缓存 rollout 时激活的专家并在训练时重放，解决 MoE 因数值精度导致的专家路由不一致（对应“MoE + GRPO 不稳定”）；Data Scheduler 做细粒度序列调度 + partial rollout，Toolbox/Tool Manager 基于 Ray 做工具资源调度。
+  - RL 基建：SGLang（推理）+ Megatron-LM（训练），全 FP8；R3（Rollout Routing Replay）缓存 rollout 时激活的专家并在训练时重放，解决 MoE 因数值精度导致的专家路由不一致；Data Scheduler 做细粒度序列调度 + partial rollout，Toolbox/Tool Manager 基于 Ray 做工具资源调度。
   - 效果：SWE-Bench Verified 73.4% / Multilingual 71.7%，为开源最强软件工程模型，逼近 GPT-5-High；推理与长上下文对标 Kimi-K2-Thinking、DeepSeek-V3.2-Thinking；推理成本约为 Claude 的 2.5%、生成速度翻倍。
 
 
