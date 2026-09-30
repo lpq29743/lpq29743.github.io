@@ -8377,16 +8377,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   粒度决定难度来源：函数级（self-contained，单函数、依赖少）难在"算法/语法正确"；仓库级（repository-level，改动分散多文件、需检索定位与跨文件理解）难在"上下文理解 + 定位 + 不破坏其他功能"。
 
-- **任务类型**
-
-  - **Code Completion（补全）**：光标处续写；FIM（Fill-in-the-Middle）支持根据前后文填中间；进阶是 next-edit prediction（预测下一处该改哪里、改什么）
-  - **Code Generation（生成）**：自然语言 → code
-  - **Code Translation（翻译）**：跨编程语言迁移（如 Java→Python、COBOL→Java 的遗留系统现代化），难点是语义等价而非表面翻译
-  - **Code Understanding / Reasoning（理解推理）**：代码解释、代码问答、执行结果预测（给代码推输入/输出）
-  - **Bug Fix / APR（Automatic Program Repair，自动程序修复）**：定位缺陷并生成修复 patch
-  - **Test Generation（测试生成）**：为已有代码生成单元测试，反过来也能作为生成代码的验证信号
-  - **Code Review / Quality（审查）**：静态分析、漏洞检测、风格与可维护性建议
-
 - **当前发展阶段**
   
   补全与函数级生成已饱和；仓库级 issue 修复（SWE-bench）是已大体攻克的主战场；当前正从仓库级向长程（long-horizon）自主软件工程过渡。
