@@ -8333,14 +8333,9 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   越往后，上下文越长、越依赖检索与工具（执行/测试）、越需要 Agent 化的多步决策，评测也从"比对输出字符串"变成"跑测试看是否通过"。
 
-- **当前发展阶段**
-  
-  补全与函数级生成已饱和；仓库级 issue 修复（SWE-bench）是已大体攻克的主战场；当前正从仓库级向长程（long-horizon）自主软件工程过渡。
+  粒度决定难度来源：函数级（self-contained，单函数、依赖少）难在"算法/语法正确"；仓库级（repository-level，改动分散多文件、需检索定位与跨文件理解）难在"上下文理解 + 定位 + 不破坏其他功能"。
 
-
-#### Task Taxonomy
-
-- **按能力类型划分**
+- **任务类型（按能力划分）**
 
   - **Code Completion（补全）**：光标处续写；FIM（Fill-in-the-Middle）支持根据前后文填中间；进阶是 next-edit prediction（预测下一处该改哪里、改什么）
   - **Code Generation（生成）**：自然语言 → code
@@ -8350,16 +8345,9 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **Test Generation（测试生成）**：为已有代码生成单元测试，反过来也能作为生成代码的验证信号
   - **Code Review / Quality（审查）**：静态分析、漏洞检测、风格与可维护性建议
 
-
-- **按任务粒度划分**
-
-  粒度决定难度来源：函数级（self-contained，单函数、依赖少）难在"算法/语法正确"；仓库级（repository-level，改动分散多文件、需检索定位与跨文件理解）难在"上下文理解 + 定位 + 不破坏其他功能"。
-
-
-- **Version 与 Environment 维度**
-
-  - **Version（版本）**：代码库、依赖库、语言版本随时间变化，同一 issue 在不同 commit（提交）上的解法不同；评测需锁定 repo 版本与依赖版本以保证可复现；模型训练数据有"知识截止版本"，面对新版本 API 容易过时
-  - **Environment（环境）**：repository-level 任务必须在可执行环境（Docker 容器 / 沙箱）中跑测试，环境搭建（装依赖、配数据库、初始化服务）本身就是难点；环境的隔离性与可复现性直接决定评测与 RL rollout（采样推演）的可靠性
+- **当前发展阶段**
+  
+  补全与函数级生成已饱和；仓库级 issue 修复（SWE-bench）是已大体攻克的主战场；当前正从仓库级向长程（long-horizon）自主软件工程过渡。
 
 
 #### Benchmark and Evaluation
