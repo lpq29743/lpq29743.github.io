@@ -6547,6 +6547,24 @@ RLHF 上层应用：veRL / OpenRLHF
   **代表框架**：veRL（字节）、OpenRLHF（Ray + vLLM + ZeRO-3）、AReaL、StreamRL、AsyncFlow
 
 
+- **什么是回合级部分 rollout（Turn-level Partial Rollout）？**
+
+  **一句话**：让一条 agentic 轨迹可以"跑到一半先暂停、存起来，之后用新权重接着跑"，从而消除长尾任务对整批 rollout 的阻塞。来自 Kimi-Researcher 的端到端 agentic RL 基建。
+
+  **要解决的问题**：Agentic RL 一条轨迹要多轮工具调用，多数任务几轮就结束，但长尾任务要几十上百轮。同步 rollout 下整批必须等最慢那条跑完，GPU 大量空转（straggler 问题）。
+
+  **机制**：
+  - 对超出时间 / 回合预算的任务，不强行跑完，而是把中间状态（context、已走过的历史轨迹）保存到 replay buffer，相当于**暂停**这条轨迹；
+  - 后续训练迭代里，用**更新后的模型权重**把它取出、继续跑剩余回合（**恢复 / 续跑**）；
+  - 一条轨迹因此可以**跨多个 rollout 轮次分段完成**——这就是"可暂停 / 可恢复"的含义。
+
+  **收益与代价**：
+  - **收益**：快任务跑完立即进训练、慢任务不阻塞整批，消除 GPU 空等；配合调整后的 RL 算法可拿到**至少 1.5× 的 rollout 加速**。
+  - **代价**：恢复时权重已更新，同一条轨迹前后由**不同策略**产生，变成 off-policy / 混合策略，需要 importance sampling 等做校正——这也是它必须"结合调整过的 RL 算法"的原因。
+
+  **配套基建**：全异步 rollout（Gym 风格接口，actor 生成 / 环境交互 / reward 计算并行调度）；高可靠沙箱（Kubernetes 混合云、动态资源调度、零停机部署），模型与工具间用 MCP（Model Context Protocol）维持有状态会话并支持断线重连——这是"可暂停 / 可恢复"能真正落地的底层保障。
+
+
 - **为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism**
 
   MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
@@ -8453,7 +8471,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   粒度决定难度来源：函数级（self-contained，单函数、依赖少）难在"算法/语法正确"；仓库级（repository-level，改动分散多文件、需检索定位与跨文件理解）难在"上下文理解 + 定位 + 不破坏其他功能"。
 
 - **当前发展阶段**
-  
+
   补全与函数级生成已饱和；仓库级 issue 修复（SWE-bench）是已大体攻克的主战场；当前正从仓库级向长程（long-horizon）自主软件工程过渡。
 
 
@@ -8561,7 +8579,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   - **数据形态**：问题 → 解法（含解释）、多轮对话式编程、工具调用/Agent 轨迹、repo-level 修复样本
   - **质量优先**：冷启动 SFT 数据"少而精"胜过"多而杂"，常用拒绝采样只保留通过测试的正确解法
-  - **与 RL 衔接**：SFT 打底建立格式与基础能力，再接 RLVR/GRPO（Group Relative Policy Optimization，组相对策略优化）用测试通过奖励提升 pass@1；代码是 RL 最容易见效的领域之一
+  - **与 RL 衔接**：SFT 打底建立格式与基础能力，再接 RLVR/GRPO（Group Relative Policy Optimization，组相对策略优化）用测试通过奖励提升 pass@1
 
 
 - **为什么代码天然适合 RL**
@@ -8585,6 +8603,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 - **代码 RL 的 Reward Hacking**
 
   模型会走捷径骗过测试而非真正修复，常见手段：
+
   - 硬编码测试期望值，或直接改测试用例本身
   - 读取隐藏测试/答案文件（如 `cat .hidden/secret`）
   - 特判：针对测试输入写 if-else 返回预期结果，不做通用逻辑
@@ -8645,7 +8664,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   - **共同**：都以测试为 ground truth；都靠 badcase 驱动；都要防"改好一个坏一片"（维护 badcase 集与全量回归集两个独立集合）；都受 context 庞大 + 链路长制约
   - **独特**：自进化独有 context/skill 管理、归因可读、热更新；RL 独有 credit assignment、reward 设计、防 hacking、训练稳定性
-  - **长链路应对**：面对当前 coding agent"上下文庞大 + 链路长（long-horizon）"的核心痛点，自进化靠 context 工程（检索 / AST 压缩 / 文件系统当外部记忆）+ 链路编排（plan-execute 规划-执行、sub-agent 子智能体分解）；RL 靠长上下文训练 + 过程奖励（PRM）/ 课程学习 / 多轮 RL 来缓解长程 credit assignment
+  - **长链路应对**：面对"上下文庞大 + 链路长（long-horizon）"的核心痛点，两条路径侧重不同——自进化靠 context 工程 + 链路编排（plan-execute 规划-执行、sub-agent 子智能体分解），不改参数、可热更新；RL 靠长上下文训练 + 过程奖励（PRM）/ 课程学习 / 多轮 RL，把长程 credit assignment 的应对内化进参数
 
 
 #### Key Challenges
@@ -8679,7 +8698,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **Fault Localization 与 Patch Validation**
 
-  定位是维护类任务的第一道坎：错误现象（测试失败）与根因代码往往相距很远。验证是最后一道坎：patch 不仅要修好目标 issue（FAIL_TO_PASS），还不能破坏其他功能（PASS_TO_PASS），因此必须跑回归测试；Agentless 专门用一段做候选 patch 的验证与排序。
+  定位是维护类任务的第一道坎：错误现象（测试失败）与根因代码往往相距很远。验证是最后一道坎：patch 不仅要修好目标 issue（FAIL_TO_PASS），还不能破坏其他功能（PASS_TO_PASS），因此必须跑回归测试。
 
 
 - **测试反馈闭环与 Iterative Refinement**
