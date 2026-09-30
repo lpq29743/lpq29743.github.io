@@ -8500,31 +8500,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **SlopCodeBench（2026）**：测 agent 在**长程迭代**中是否**劣化代码质量**——人类代码保持平稳、agent 代码却逐轮退化（冗余与腐蚀上升），把"可维护性"变成可量化指标
 
 
-#### SE Agent
-
-- **Agentless（三段式，去 Agent 化）**
-
-  Agentless 的核心观点：repository-level 的软件维护不必用复杂的自主 Agent（多步 ReAct，Reasoning+Acting 推理+行动 / 自由工具调用），用固定的三段式流水线反而更稳、更省、更强：
-
-  1. **Fault Localization（定位）**：分层缩小范围——先定位相关文件，再到相关类/函数，再到具体代码片段
-  2. **Patch Generation（修复）**：基于定位到的上下文，让 LLM 以 diff（代码差异）形式生成补丁（常采样多个候选）
-  3. **Patch Validation（验证）**：用回归测试 + 候选排序，筛掉会破坏已有功能的补丁，选出最优 patch
-
-  trade-off（权衡取舍）：牺牲自主探索的灵活性，换来可控性、可复现性和低成本；在 SWE-bench 上曾以远低于 Agent 的成本取得有竞争力的结果。
-
-
-- **SWE-agent 与 ACI（Agent-Computer Interface，智能体-计算机接口）**
-
-  SWE-agent 的核心贡献是提出 ACI 概念：同一个模型，配不同的"机机接口"，任务成功率差异巨大。ACI 指专门为 LLM 设计的工具接口——不是把人类用的 CLI（Command Line Interface，命令行界面）直接丢给模型，而是重新设计更易被模型正确调用的命令（带行号的查看、精确搜索、受控编辑），并给出清晰的执行反馈。
-
-  启示：Coding Agent 的效果不只取决于模型强弱，工具粒度、上下文组织、错误反馈等"接口设计"往往更关键。
-
-
-- **Coding Agent 与通用 Harness 的关系**
-
-  面向消费者的编码工具（Claude Code / Cursor / Codex / OpenHands 等）本质是 Coding Harness：内置 Agent Loop + shell/文件读写工具 + 上下文管理 + 权限护栏，能自主完成端到端编码任务。SE Agent（Agentless / SWE-agent）更偏"benchmark 上的仓库级 issue 修复方法学"。两者共享同一套底层能力（工具调用、长上下文、测试反馈闭环），区别在于前者是产品化系统、后者是任务方法。
-
-
 #### Code Data
 
 - **代码预训练数据来源与处理**
