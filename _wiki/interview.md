@@ -8491,7 +8491,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   面向消费者的编码工具（Claude Code / Cursor / Codex / OpenHands 等）本质是 Coding Harness：内置 Agent Loop + shell/文件读写工具 + 上下文管理 + 权限护栏，能自主完成端到端编码任务。SE Agent（Agentless / SWE-agent）更偏"benchmark 上的仓库级 issue 修复方法学"。两者共享同一套底层能力（工具调用、长上下文、测试反馈闭环），区别在于前者是产品化系统、后者是任务方法。
 
 
-#### Code Data and Training
+#### Code Data
 
 - **代码预训练数据来源与处理**
 
@@ -8527,6 +8527,8 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **多语言兼顾**：需同时覆盖多种编程语言与自然语言（注释/文档），避免某类语言被过度切分
 
 
+#### Code Training
+
 - **Coder 系列代表模型**
 
   | 模型 | 特点 |
@@ -8545,8 +8547,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **质量优先**：冷启动 SFT 数据"少而精"胜过"多而杂"，常用拒绝采样只保留通过测试的正确解法
   - **与 RL 衔接**：SFT 打底建立格式与基础能力，再接 RLVR/GRPO（Group Relative Policy Optimization，组相对策略优化）用测试通过奖励提升 pass@1；代码是 RL 最容易见效的领域之一
 
-
-#### Code RL Training
 
 - **为什么代码天然适合 RL**
 
