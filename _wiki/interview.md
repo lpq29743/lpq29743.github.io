@@ -8308,6 +8308,47 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   在线防护策略：检测到 hacking 时**不终止整个 rollout，而是 block 这个 tool call**，返回 dummy 信息（如 "Access denied" 或空结果），让模型可以继续尝试其他方法。突然终止会导致训练不稳定（梯度问题），且模型学不到"要换方法"。
 
 
+- **Kimi（月之暗面 Moonshot AI）**
+
+  月之暗面（Moonshot AI）的大模型系列，以超长上下文起家，后转向大规模 MoE（Mixture of Experts，混合专家）与 agentic 能力，是国产开源万亿参数路线的代表之一。
+
+  - **超长上下文起点**：早期主打中文长文本处理，把支持的上下文从约 20 万字扩展到 200 万字级别，靠长文档问答、长资料分析建立口碑。
+  - **Kimi K1.5**：推理模型，用长思维链（long CoT）+ 强化学习（RL）提升数学与代码推理；提出 long2short 思路——把长推理压缩 / 蒸馏成短推理，在效果与推理成本之间取得平衡。
+  - **Kimi K2**：万亿参数 MoE（总参约 1T、激活约 32B），重心从"对话"转向"agent"——强化工具调用（tool use）与多步任务执行；训练引入 Muon 优化器提升大规模训练稳定性；以开源权重发布。
+  - **Kimi K2-Thinking**：在 K2 基础上增强推理（thinking）的版本，主打长 horizon 的 agentic 推理任务。
+
+  定位：从"长上下文"演进到"大规模 MoE + agent"，是国产开源里与 DeepSeek 并列的一条主线。
+
+
+- **GPT 系列（OpenAI）**
+
+  OpenAI 的生成式预训练（Generative Pre-trained Transformer）系列，是把"规模化 → 对齐 → 推理"三条主线一路推进到产品化的代表。
+
+  - **GPT-1（2018）**：确立范式——在 Transformer decoder 上做无监督语言模型预训练，再针对下游任务有监督微调。
+  - **GPT-2（2019）**：证明足够大的语言模型无需微调、仅靠 prompt 就能零样本（zero-shot）完成多任务，即"预训练即多任务"。
+  - **GPT-3（2020）**：175B 参数，展示少样本上下文学习（few-shot in-context learning）——不改参数、只在 prompt 里给几个例子就能学会新任务，印证 scaling law（规模越大能力越强）。
+  - **InstructGPT / ChatGPT（2022）**：引入 RLHF（Reinforcement Learning from Human Feedback，基于人类反馈的强化学习）三阶段——SFT（监督微调）→ 训练奖励模型（Reward Model）→ PPO 强化学习对齐，让模型听懂指令、符合人类偏好，是对齐范式的里程碑。
+  - **GPT-4（2023）/ GPT-4o（2024）**：GPT-4 支持多模态（文本 + 图像输入）；GPT-4o 做成原生全模态（omni，文本 / 图像 / 音频统一），支持实时语音交互。
+  - **o1 / o3（2024–2025）**：推理模型，用 RL 训练长思维链，把算力从"训练时"延伸到"推理时"（test-time compute）——先深度思考再作答，显著提升数学、代码等难题表现。
+  - **GPT-5（2025）**：统一推理系统，用 router（路由器）按任务难度自动在"快模型"与"强推理模型"之间切换，把是否深度推理变成系统自动决策。
+
+  主线：scaling（GPT-2/3）→ alignment（InstructGPT 的 RLHF）→ reasoning（o1 的 test-time compute）→ 系统级统一（GPT-5 的 router）。
+
+
+- **Claude 系列（Anthropic）**
+
+  Anthropic（由前 OpenAI 成员创立、主打 AI 安全）的大模型系列，技术标签是"安全对齐 + 扩展思考 + 工具生态"。
+
+  - **Constitutional AI（宪法式 AI，CAI）**：核心对齐方法。给模型一组书面原则（"宪法"），让模型依据原则自我批评、自我修订回答，再用 RLAIF（Reinforcement Learning from AI Feedback，基于 AI 反馈的强化学习，即用模型而非人来打分）完成对齐——减少对海量人工标注的依赖，且安全策略可解释、可调整。
+  - **模型分档**：Claude 3 起按能力 / 成本分三档——Haiku（轻量快）、Sonnet（均衡）、Opus（最强）；Claude 2 时期已支持 100K 长上下文。
+  - **Extended Thinking（扩展思考）**：Claude 3.7 / 4 引入的混合推理——回答前可生成显式思考块（thinking blocks），并支持跨多轮对话保留思考，避免重复推导，兼顾即时响应与深度推理。
+  - **Computer Use（计算机操作）**：Claude 3.5 Sonnet 率先支持让模型直接操作图形界面（看屏幕、移动光标、点击、输入），把 agent 能力从"调 API"扩展到"用软件"。
+  - **MCP（Model Context Protocol，模型上下文协议）**：Anthropic 提出的开放协议，标准化 AI 与外部工具 / 数据源的连接方式，让 agent 以统一接口接入各种工具，已成为 agent 生态的事实标准之一。
+  - **agentic coding**：Claude 系列在编码 agent 上处第一梯队，并衍生出终端编码工具 Claude Code。
+
+  定位：以安全对齐（Constitutional AI）立身，靠 Extended Thinking、Computer Use、MCP 在 agentic 与工具生态上引领。
+
+
 #### Agent
 
 - **Hermes 4（Nous Research）**
