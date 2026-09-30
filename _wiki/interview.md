@@ -8425,28 +8425,26 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 #### Benchmark and Evaluation
 
-- **函数级生成评测**
+- **函数级评测（self-contained，跑单元测试判对错）**
 
-  - **HumanEval（2021）**：164 道手写 Python 编程题，函数级，用单元测试 pass@k 评测
+  单函数、输入即所需全部信息；核心指标 **pass@k**——生成 k 个样本、有一个通过全部测试即算通过，pass@1 反映稳定性、pass@k（k 较大）反映能力上限与多样性。
+
+  - **HumanEval（2021）**：164 道手写 Python 编程题
   - **MBPP（2021）**：974 道入门级 Python 题，含测试用例
-  - **MultiPL-E（2022）**：把 HumanEval/MBPP 翻译到多种编程语言，评测多语言代码能力
-  - **EvalPlus（2023）**：给 HumanEval/MBPP 补大量增强测试用例，暴露"通过原始稀疏测试但其实不正确"的假阳性，评测更严格
+  - **MultiPL-E（2022）**：HumanEval/MBPP 的多语言翻译版，测跨编程语言泛化
+  - **EvalPlus（2023）**：补大量增强测试用例，暴露"过了原始稀疏测试但其实不正确"的假阳性
+  - **CRUXEval（2024）**：不考生成、考"执行式理解"——给代码预测输出（CRUXEval-O）或反推输入（CRUXEval-I）
 
 
-- **代码推理评测（CRUXEval，2024）**
-
-  给一段代码，预测其输出（CRUXEval-O）或反推输入（CRUXEval-I），考察对代码的"执行式理解"而非单纯生成。
-
-
-- **竞赛级评测**
+- **竞赛级评测（题目更难 + 天然防污染）**
 
   - **Codeforces Rating（约 2022+ 用于评测 LLM）**：用真实竞赛题的 Elo（等级分，一种竞技排名分）刻画竞技编程水平
-  - **LiveCodeBench（2024）**：持续采集 LeetCode/AtCoder 新题，按时间窗口切分，天然防污染（题目晚于模型知识截止）
+  - **LiveCodeBench（2024）**：持续采集 LeetCode/AtCoder 新题、按时间窗口切分，题目晚于模型知识截止，天然防污染
 
 
-- **仓库级 SE 评测（SWE-bench 系列）**
+- **仓库级评测（真实 SE，指标 resolve rate）**
 
-  给定真实 GitHub 代码库 + 一个 issue，模型生成 patch，用该 issue 对应的测试判定是否解决：FAIL_TO_PASS（原本失败、修复后应变通过）+ PASS_TO_PASS（原本通过、不能被改挂）。
+  给真实 GitHub 仓库 + 一个 issue，模型生成 patch，用该 issue 的测试判"解决率（resolve rate）"：FAIL_TO_PASS（原本失败、修复后应通过）+ PASS_TO_PASS（原本通过、不能被改挂）。主流榜单是 SWE-bench 系列：
 
   | 变体 | 年份 | 特点 |
   |------|------|------|
@@ -8459,10 +8457,9 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | **SWE-bench Pro** | 2025.9 | Scale AI 推出，1865 个长程（long-horizon）任务、41 个企业级仓库，diff 更大、更贴近真实生产，难度远高于 Verified；含 public/private 分割防污染 |
 
 
-- **通用评测原则**
+- **数据污染与 Live 化（评测前先问"这榜干净吗"）**
 
-  - **指标 pass@k**：生成 k 个样本，只要有一个通过全部测试即算通过；pass@1 反映稳定性，pass@k（k 较大）反映能力上限与多样性
-  - **防污染 / Live 化**：静态 benchmark 易被训练集"背下来"（数据污染），只有持续更新题目才能反映真实泛化能力——LiveCodeBench、SWE-bench Live 都由此而来
+  静态 benchmark 会被训练集"背下来"（数据污染），跑分虚高、无法反映真实泛化。对策是 Live 化——持续加入晚于模型知识截止的新题，LiveCodeBench、SWE-bench Live 都由此而来。
 
 
 #### SE Agent
