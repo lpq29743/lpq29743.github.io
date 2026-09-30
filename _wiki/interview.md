@@ -8331,7 +8331,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | **仓库级** | 在真实 repo（代码仓库）上定位并修复 issue（问题工单） | 整个代码库 + issue | patch（补丁） | SWE-bench |
   | **全软件开发生命周期** | 需求 → 设计 → 编码 → 测试 → 部署 | 业务需求 | 端到端交付 | 产品级 |
 
-  越往后，上下文越长、越依赖检索与工具（执行/测试）、越需要 Agent 化的多步决策，评测也从"比对输出字符串"变成"跑测试看是否通过"。Coding 因此不只是"生成代码"，而是覆盖补全、生成、翻译、理解、修复、测试、审查的完整领域。
+  越往后，上下文越长、越依赖检索与工具（执行/测试）、越需要 Agent 化的多步决策，评测也从"比对输出字符串"变成"跑测试看是否通过"。
 
 - **当前发展阶段**
   
@@ -8343,7 +8343,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 - **按能力类型划分**
 
   - **Code Completion（补全）**：光标处续写；FIM（Fill-in-the-Middle）支持根据前后文填中间；进阶是 next-edit prediction（预测下一处该改哪里、改什么）
-  - **Code Generation（生成）**：NL → code，函数级 / 文件级 / 仓库级
+  - **Code Generation（生成）**：自然语言 → code
   - **Code Translation（翻译）**：跨编程语言迁移（如 Java→Python、COBOL→Java 的遗留系统现代化），难点是语义等价而非表面翻译
   - **Code Understanding / Reasoning（理解推理）**：代码解释、代码问答、执行结果预测（给代码推输入/输出）
   - **Bug Fix / APR（Automatic Program Repair，自动程序修复）**：定位缺陷并生成修复 patch
@@ -8353,10 +8353,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **按任务粒度划分**
 
-  - **simple / self-contained**：单函数、依赖少，输入即所需全部信息（如 HumanEval 一题一个函数），评测直接跑单元测试
-  - **repository-level**：改动分散在真实大仓库的多个文件，需先检索定位相关文件、理解跨文件依赖，再生成 patch，最后在真实环境跑测试（如 SWE-bench）
-
-  粒度决定难度来源：self-contained 难在"算法/语法正确"，repository-level 难在"上下文理解 + 定位 + 不破坏其他功能"。
+  粒度决定难度来源：函数级（self-contained，单函数、依赖少）难在"算法/语法正确"；仓库级（repository-level，改动分散多文件、需检索定位与跨文件理解）难在"上下文理解 + 定位 + 不破坏其他功能"。
 
 
 - **Version 与 Environment 维度**
