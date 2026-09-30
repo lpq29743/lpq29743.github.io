@@ -8104,6 +8104,34 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - 蒙特卡洛树搜索（MCTS）：由于推理任务的搜索空间远比围棋复杂，AI 需要在每一步做出决策，但 MCTS 无法有效地指导 AI 进行合理的搜索。
 
 
+- **Deepseek-V3.2**
+
+  核心是把注意力从 dense 换成 **DSA（DeepSeek Sparse Attention，动态稀疏注意力）**，解决 dense attention $$O(L^2)$$ 在长上下文下计算量爆炸的问题。
+
+  - **与固定稀疏的区别**：滑动窗口（Sliding Window Attention, SWA）等固定稀疏模式的取舍与内容无关，而 DSA 按 token 内容动态选择最相关的 top-k tokens 计算 attention。
+  - **关键组件 Indexer（索引器）**：对每个 query token 计算它与所有 K/V tokens 的相关性分数，用 top-k 选出最相关的 k 个，只在这 k 个上算 attention，复杂度从 $$O(L^2)$$ 降至 $$O(L \cdot k)$$，其中 $$k \ll L$$。
+  - **两阶段训练**：① Dense warm-up——先用 dense MLA 正常预训练 base model；② Sparse adaptation——先冻结 base model 只训 indexer（1000 steps），再联合训练 model + indexer（20B tokens）。
+  - **关键结论**：长上下文中约 **90% 的 attention entries 是冗余的**；只需 20B tokens 的 adaptation 即可匹配 dense MLA，是 lossless 的（128K RULER 只差 0.35 分）；注意力计算减少 1.5-2×。
+  - **RL 工程要点**：必须用 deterministic top-k operator（如 `torch.topk`），不能用 CUDA 的 non-deterministic 实现，否则训练-推理不一致会导致 RL 崩溃（entropy 急剧下降）；同时 RL 阶段冻结 indexer 参数以加速训练并防止不稳定学习。
+
+
+- **Deepseek-V4.1-Flash**
+
+  主干 552B MoE，设计目标是把长上下文下的推理开销压到极限，面向 Agent 类长上下文负载。per-token global KV cache 约 **890 bytes**（约为前代 V4-Flash 的 1/4），persistent KV 约为 V4 的 1/8；相对 V1 累计降低约 **437×**。
+
+  三个架构决策分别压不同维度：
+
+  - **CED（Causal Encoder-Decoder，因果编码器-解码器）——压层数**：把 40 层切成 **20 层因果编码器 + 20 层解码器**。长 prompt 的 prefill 只过编码器（激活约 8B 参数），解码器的全局 KV 由编码器输出构造，decode 时才激活约 16B。这种非对称计算同时降低长输入的计算量与 KV 占用。
+  - **CSA2（Compressed Sparse Attention 2，压缩稀疏注意力 2）——联合压 entry size + 序列 + 层数**：
+    - entry size：投影跨头共享；
+    - 序列：稀疏 top-k；
+    - 层数：跨层共享 KV。每层静态指派三种模式（三种模式都各自计算 main Q 与 SWA KV）——**Full**（自算 main KV + indexer K，并选出新的 Top-K）、**Reindex**（复用前一层的 main KV + indexer K，重新打分得到新 Top-K）、**Reuse**（复用前一层的 main KV + 最新 Top-K，不再打分）。
+    - **Hierarchical Sparse Indexer（分层稀疏索引）**：首个 Full 层扫全量序列选出 Top-512，并建立块级候选池（如 2048 块 × 8 = 16384 候选）；后续 Reindex 层只在候选池内选，使后续 indexer 的打分量与上下文长度**解耦**。
+  - **FP4 KV 量化——压精度**：main KV 用 FP4（需 QAT，量化感知训练，且在 RoPE 之后量化）；SWA KV 对量化更敏感，保留 FP8。低比特下离群值会放大误差，可用旋转 / 平滑（QuaRot、SmoothQuant 思路）缓解。
+
+  **与 V3.2 的差异**：V3.2 的 DSA 只压**序列**这一个维度，V4.1-Flash 通过 CED + CSA2 + FP4 同时压**层数 + 序列 + 精度**三个维度，并额外引入跨层复用。
+
+
 - **MiMo（小米）**
 
   小米 LLM-Core 团队的大模型系列。MiMo-7B（2025）为起点，奠定预训练配方；MiMo-V2-Flash（2025.12，MIT 协议开源）主打极致推理效率与 Code/Agent 能力；MiMo-V2.5 / V2.6（2026）持续迭代，V2.6 大规模扩展 RL（LiveRL）并走向万亿参数全模态旗舰。
