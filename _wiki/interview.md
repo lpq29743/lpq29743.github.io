@@ -7294,6 +7294,27 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - 避免训练不稳定（突然终止导致梯度问题，模型学不到"要换方法"）
 
 
+- **什么是奖励盲区（Reward Blind Spot）？以工具调用复读为例**
+
+  当 reward 只关注结果正确率、不覆盖过程效率与行为退化时，模型会在“奖励看不见的地方”学出坏习惯，这就是奖励盲区。典型案例是 Agentic RL 中的**工具调用洪泛（tool-call flooding）与复读（repetition）**：模型反复发起相同或高度相似的工具调用，消耗大量时间与上下文，却迟迟不推进任务（MiMo-V2.6 上线后 Response 级复读率一度超 0.05%，是最影响体验的问题之一）。
+
+  先区分三种行为：
+  - **并行工具调用**：同时读多个文件、执行彼此独立的查询，服务不同信息需求，是正常且高效的；
+  - **洪泛（flooding）**：集中发起的调用数明显超出任务需要，或超过执行环境能有效处理的范围，带来排队与反馈堆积；
+  - **复读（repetition）**：在可用信息与环境状态无实质变化、也无合理重试/复核需求时，仍不断生成语义相同或高度相似的调用，不带来任务进展。
+
+  成因（MiMo-V2.6 复盘）：RL 中其实已对洪泛设了 penalty（单轮工具调用 > 32 次则 early stop、reward 置 0，梯度上 mask 前序轮次、仅惩罚触发规则的当前轮全部 token 含 CoT），但**阈值过松**：未达 32 次的高并发调用不受惩罚，随训练逐步被放大，最终恶化为严重 flooding——洪泛率（单轮 ≥10 次调用占比）从 step 0 的约 11% 一路升到 step 20 的约 25%。本质是 reward 只奖“做对”，没把“用更少步骤/更短路径做对”纳入信号。
+
+  两类解法对比：
+
+  | 方案 | 做法 | 问题 / 效果 |
+  |------|------|------------|
+  | 收紧 penalty 阈值 | 洪泛阈值从 32 收到 8，从 checkpoint resume 重训 | penalty 生效滞后（约 20 step），需重启完整 MixRL，代价极大；样本外泛化有限，复读率仅从 13.45% 降到 3.83% |
+  | MOPD 特化 teacher（推荐） | 用复读数据训一个单轮特化 RL teacher（复读 reward=0、无复读且无错误调用 reward=1，KL 约束不偏离原模型），再以 teacher-prefix OPD 合并回主模型 | 12 步（约 7000 样本）即把样本内外复读率降为 0；成本约为重训方案的 4%，泛化好且 benchmark 持平（不掉智） |
+
+  启示：① reward 设计要覆盖过程效率（步数 / token / 调用次数），不能只盯结果正确率；② 惩罚阈值过松会留下“盲区”，让坏行为在训练中被放大，需配合对抗性评测、异常检测、验证器交叉校验等多层防线；③ 修行为退化时，用特化 teacher + 在线蒸馏（MOPD/OPD）往往比“收紧惩罚、重训整条 RL”更省、更泛化。
+
+
 #### Training Stability
 
 - **训推不一致（Training-Inference Mismatch）是什么？**
@@ -7918,6 +7939,18 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   RAGEN 是一个 Agentic RL 训练的框架，基于 StarPO（State-Thinking-Action-Reward Policy Optimization）。其通过马尔可夫决策过程（MDP）形式化 Agent 与环境的交互，引入渐进式奖励归一化策略，有效解决了多轮强化学习中的不稳定性。RAGEN 还发现多轮 RL 训练中的“（Echo Trap）”不稳定模式，提出 StarPO-S 改进框架，通过 variance-based trajectory filtering、critic baselining 和decoupled clipping 等方法，提升学习的稳健性。Search- R1 也是类似的结构。
 
   RAGEN/Search-R1 会受限于上下文长度。与以往简单地拼接完整交互历史的方法不同，verl-agent 把每个step当作独立的decision point来处理，并使用step/turn-independent的多轮rollout范式，提供了完全可定制的memory模块、历史管理机制以及每一步的输入结构。这种设计使得 verl-agent 能够高度扩展，适用于超长序列、multi-turn的强化学习训练（例如，ALFWorld 中的任务可能需要多达 50 步才能完成）。
+
+
+- **大规模 Agentic RL 如何扩展算力？（以 MiMo-V2.6 LiveRL 为例）**
+
+  把 RL 算力规模化扩展到 long-horizon Agent 任务时，主要沿三个维度扩展：
+  - **更大 Batch 与更高吞吐**：大 batch + 全异步架构，单次更新可用上千样本（如 1568 个），支持超长上下文（1M）训练，单步 token 达数十亿（2.7～3.7B）。
+  - **更多任务与复杂环境**：构建覆盖 Code / General / Visual / Cyber 等方向的多任务体系，并**混合多个 Harness（Multi-Harness Training）**——把系统提示、工具、上下文管理解耦，让模型在不同乃至未见的框架上都能泛化。
+  - **更大 Grader 算力**：用 Group 内相对比较为 long-horizon 任务提供更精准、多样的奖励信号，形成自我改进闭环，并引导模型用**更短路径、更少 token** 完成任务。
+
+  配套的稳定性与工程手段：冻结 MoE Router 抑制专家负载漂移；统一的轨迹表示与惩罚机制细化学习信号；控制面 / 数据面解耦以支撑海量轨迹迁移；混合批次中稳定各任务的样本配比；对齐训练与推理引擎的效率与一致性（训推一致）；建立覆盖奖励设计、对抗性评测、异常检测、验证器交叉校验的 Reward Hacking 防线。
+
+  衡量 RL 是否有效的指标：**样本内**看训练任务的平均通过率相对提升（如 MiMo-V2.6 Flash / Pro 分别相对提升约 25% / 12%），**样本外**看长程评测的提升（如 DeepSWE v1.1：Flash 48.8 → 65.68、Pro 58.4 → 72.57）。二者同时上涨才说明 RL 具备样本效率与泛化能力，而非过拟合训练任务；这类“全程公开、边训边播”的 Live RL 也直观体现了 RL 的持续改进能力。
 
 
 #### World Modeling
