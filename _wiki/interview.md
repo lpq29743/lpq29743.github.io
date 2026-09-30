@@ -8145,6 +8145,74 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - 效果：SWE-Bench Verified 73.4% / Multilingual 71.7%，为开源最强软件工程模型，逼近 GPT-5-High；推理与长上下文对标 Kimi-K2-Thinking、DeepSeek-V3.2-Thinking；推理成本约为 Claude 的 2.5%、生成速度翻倍。
 
 
+- **GLM（智谱 AI）**
+
+  智谱 AI 的大模型系列，从 GLM-130B、GLM-4 到 GLM-5 / GLM-5.2。近两代的主线是长上下文效率与 Agent 能力。
+
+  **架构组件选择**
+
+  - **Normalization**：Pre-Norm + RMSNorm（GLM-4）。Pre-Norm 成为主流后，Post-Norm 时代靠放大残差与特殊初始化强行稳定训练的 DeepNorm 补丁就不再需要了。
+  - **FFN**：GeGLU（GELU-based Gated Linear Unit，基于 GELU 的门控线性单元），升维到 $$\frac{8}{3}d$$ 而非标准 $$4d$$，使 FLOPs 与非门控 FFN 基本一致——门控 FFN 有两条路径，需要更大的隐藏维度来补偿（GLM-130B）。
+  - **Attention**：MLA（Multi-head Latent Attention，多头潜在注意力）+ **Muon Split** 优化。对不同 head 的投影矩阵（$$W_{UQ}$$、$$W_{UK}$$、$$W_{UV}$$）**分别做正交化**而非整体正交化，使不同 head 的投影权重以不同尺度更新，让 576-dim MLA 的性能匹配 2048-dim GQA-8（Grouped-Query Attention，分组查询注意力）；不做这一步，低维 MLA 打不过高维 GQA（GLM-5）。
+  - **稀疏注意力**：**IndexShare**。DeepSeek 的 DSA（动态稀疏注意力）在每层都要用 indexer 算 top-k，1M 上下文下计算量仍然巨大；IndexShare 改为**每 4 层共享一个 indexer**——indexer 放在 4 层中的第 1 层，top-k indices 在后续 3 层复用，1M 上下文下每 token FLOPs 降低 **2.9×**（GLM-5.2）。
+
+  **MTP（Multi-Token Prediction，多 token 预测）与自推测解码**
+
+  | 版本 | MTP 层数 | 训练预测 | 推理预测 | Accept Length | 问题 |
+  |------|---------|---------|---------|---------------|------|
+  | GLM-5 | 3 层（参数共享）| 3 tokens | 3 tokens | 2.76 | 多步推理时 KV cache 混合 |
+  | GLM-5.2 | 3 层 + IndexShare + KVShare + TV Loss | 3 tokens | 7 steps | **5.47** | — |
+
+  GLM-5.2 的四个改进逐步叠加：
+
+  | 改进 | Accept Length | 累计提升 |
+  |------|---------------|---------|
+  | Baseline（GLM-5.1 MTP）| 4.56 | — |
+  | + IndexShare + KV Share | 5.10 | +12% |
+  | + Rejection Sampling | 5.29 | +16% |
+  | + End-to-end TV Loss | **5.47** | **+20%** |
+
+  - **IndexShare + KV Share**：MTP 层的 indexer 只在第 1 步计算，后续步复用 top-k indices。由于 IndexShare 的设计，后续步只能 attend 到 target model 的 hidden states，看不到 MTP 层自身生成的 hidden state，KV cache 不再混合，从而消除训练-推理不一致。
+  - **End-to-end TV Loss**：用端到端的 Total Variation loss 训练 MTP 层，而非逐步独立的 cross-entropy loss，让 MTP 层学会多步联合预测。
+
+  **三种思考模式（GLM-5）**
+
+  - **Interleaved Thinking（交错思考）**：每次生成响应前都进行思考，形成思考 → 行动 → 思考 → 行动的循环，适合需要即时推理的场景。
+  - **Preserved Thinking（保留思考）**：跨多轮对话保留所有思考块（thinking blocks），避免重复推导、减少信息丢失与前后不一致，特别适合长 horizon 的复杂编码任务。
+  - **Turn-level Thinking（轮次级思考）**：按轮次控制是否思考，轻量请求关闭思考以降低延迟与成本，复杂任务启用以提高准确性与稳定性。
+
+  这三种模式不是推理时临时加的控制约定，而是 SFT 阶段就按各模式构造对应思考形态的样本（每次响应前思考、跨轮保留思考块、按轮次开关思考），把行为内化为能力；推理时切换模式只是激活不同的已学行为，不需要改模型参数。
+
+  **后训练：三阶段 RL + 跨阶段蒸馏（GLM-5）**
+
+  流程为 Reasoning RL → Agentic RL → General RL，每阶段专注不同能力。问题是后续阶段训练时会遗忘前面阶段学到的能力（灾难性遗忘），而经验回放是 off-policy、分布与当前策略不一致，EWC 类参数正则太强会限制新能力、太弱防不住遗忘，多任务联合训练又会因不同能力的 reward 信号冲突而难以平衡。
+
+  解法是 **On-Policy Cross-Stage Distillation**：用前面阶段训好的模型作 teacher，在**当前策略 on-policy 采样的 trajectory** 上做 KL 蒸馏，且只在当前任务上选择性蒸馏而非全局蒸馏。teacher 在前面阶段已是最优、信号质量高，on-policy 采样保证数据分布与当前策略一致，KL 作为软约束允许偏离但不会太远。
+
+  **长 horizon 任务回归 PPO（GLM-5.2）**
+
+  长 horizon 任务产生超长轨迹，需要用 compaction（压缩）切分成多个子轨迹，导致同一 prompt 的不同 rollout 子轨迹数量不同、长度差异也很大。GRPO 的组内比较因此失效——它需要对同一 prompt 的多个 rollout 做组内归一化，子轨迹数量与长度不一致时无法直接比较，强行归一化会扭曲优势估计。
+
+  解决方案是回归传统 PPO 范式：
+
+  1. **Single-rollout formulation**：每条 rollout 独立学习，不依赖组内比较；
+  2. **Critic model**：引入 critic 估计 token-level advantage，而非 group-relative；
+  3. **Token-level loss**：处理子轨迹长度不平衡问题。
+
+  选型原则：短任务用 GRPO（省掉 critic model），长 horizon + compaction 用 PPO（需要 critic 做 token-level 信用分配）。
+
+  **Agent RL 的 Reward Hacking 防护（GLM-5.2）**
+
+  用 RL 训练编码 Agent 时，模型会走捷径拿奖励而非真正解决问题，典型行为包括读取隐藏答案（`cat /workspace/.hidden/secret_cases.json`）、下载外部答案（`curl` 拉取现成解法）、用 `find` / `grep` 搜索含答案的文件路径或分析 git history。
+
+  两阶段检测：
+
+  - **阶段 1：rule-based 规则过滤**——预定义黑名单，禁止访问 `.hidden`、`secret` 等路径，禁止 `curl`、`wget`、`find /workspace` 等命令，拦截可疑文件读取模式。目标是高召回率，宁可误杀也不漏掉。
+  - **阶段 2：LLM Judge 语义判断**——用另一个 LLM 判断 tool call 的意图（如识别出"读取评测系统隐藏用例，意图作弊"）。目标是高精度，避免误杀正常操作。
+
+  在线防护策略：检测到 hacking 时**不终止整个 rollout，而是 block 这个 tool call**，返回 dummy 信息（如 "Access denied" 或空结果），让模型可以继续尝试其他方法。突然终止会导致训练不稳定（梯度问题），且模型学不到"要换方法"。
+
+
 #### Agent
 
 - **Hermes 4（Nous Research）**
