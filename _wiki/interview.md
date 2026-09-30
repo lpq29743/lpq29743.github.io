@@ -8576,7 +8576,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 #### Code Training
 
-- **Coder 系列代表模型**
+- **代表编码模型**
 
   | 模型 | 特点 |
   |------|------|
@@ -8586,6 +8586,12 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | **Qwen2.5-Coder** | 多语言、多尺寸、SWE 能力强，开源表现突出 |
   | **CodeGeeX** | 中文友好、多语言代码生成 |
   | **WizardCoder** | CodeLlama + Evol-Instruct 指令微调，早期开源指令代码模型代表 |
+  | **Qwen3-Coder（2025）** | 阿里开源 MoE 代码专家，旗舰 480B-A35B（总参 480B / 激活 35B），SWE-bench Verified 69.6%（OpenHands），Apache 2.0，开源 coder 标杆 |
+  | **Devstral（Mistral，2025）** | 面向 code agent 的开源模型；Devstral 2（2025.12）dense（稠密）123B、256K 上下文，SWE-bench Verified 72.2%，称开源最佳（SOTA） |
+  | **Kimi-Dev-Apex（Moonshot，2025）** | 以 agentless（无 agent 框架）训练作 SWE-agent 技能先验，开源，SWE-bench Verified 60.4%（发布时开源最佳） |
+  | **GLM-4.6（智谱，2025）** | 开源 MoE、企业向，强 agent 与长上下文编码，SWE-bench Verified 68.2% |
+
+  2025–26 SWE-bench Verified 头部由闭源前沿模型（Claude、OpenAI Codex、Gemini 系列）占据、普遍 75%+，且分数高度依赖 harness（同一模型换 scaffold 常差 10–15 分）；上表聚焦开源代表。
 
 
 - **代码 SFT（Supervised Fine-Tuning，监督微调）与指令微调**
