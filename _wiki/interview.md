@@ -8281,6 +8281,9 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   越往右，上下文越长、越依赖检索与工具（执行/测试）、越需要 Agent 化的多步决策，评测也从"比对输出字符串"变成"跑测试看是否通过"。Coding 因此不只是"生成代码"，而是覆盖补全、生成、翻译、理解、修复、测试、审查的完整领域。
 
 
+- **当前发展阶段**：补全与函数级生成已饱和、成为 commodity；仓库级 issue 修复（SWE-bench）是已大体攻克的主战场；当前正从仓库级向长程（long-horizon）自主软件工程过渡，长程链路的错误累积、credit assignment 与跨会话验证是尚未解决的前沿。
+
+
 - **软件开发 vs 软件维护 Pipeline（流水线）**
 
   SE 的完整 Pipeline 可分为软件开发和软件维护两条主线。
