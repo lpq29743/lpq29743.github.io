@@ -8162,9 +8162,18 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   并行，对大数据比较友好。
 
 
-- **Qwen**
+- **Qwen（阿里通义千问）**
 
-  QwenMoE
+  阿里巴巴的大模型系列，主线是"全尺寸开源 + 多语言（尤其中英）+ MoE + 专精模型矩阵"，是国产开源生态里覆盖面最广的系列之一。
+
+  - **Qwen / Qwen1.5（2023–2024）**：初代奠定多语言基座；Qwen1.5 作为过渡版补齐多尺寸（0.5B–72B）、对齐与长上下文支持。
+  - **Qwen2（2024）**：引入 MoE（Mixture of Experts，混合专家）版本 Qwen2-57B-A14B（总参 57B、激活 14B），采用细粒度专家划分 + 全局共享专家；注意力用 GQA（Grouped-Query Attention，分组查询注意力），支持 128K 上下文。
+  - **Qwen2.5（2024）**：全尺寸开源（0.5B–72B），长上下文扩展到 1M；强化代码与数学，并拆出专精模型 Qwen2.5-Coder、Qwen2.5-Math；提升结构化输出与 agent（工具调用）能力。
+  - **QwQ（2024–2025）**：推理模型（如 QwQ-32B），用长思维链（long CoT）+ 强化学习做深度推理，对标 o1 / DeepSeek-R1 一类"先思考再作答"的模型。
+  - **Qwen3（2025）**：主打混合推理——同一模型支持 thinking（深度思考）与 non-thinking（快速响应）两种模式，并可调节思考预算（thinking budget）；提供 MoE 版本（如 Qwen3-235B-A22B、Qwen3-30B-A30B），强化 agent 与工具调用能力。
+  - **多模态与专精矩阵**：Qwen-VL（视觉语言）、Qwen-Audio（音频）等多模态分支，加上 Coder / Math 等专精模型，形成"一个基座 + 多分支"的开源矩阵。
+
+  定位：以全尺寸开源和多语言立身，靠 MoE、混合推理（Qwen3）与 Coder / Math / VL 专精矩阵覆盖从端侧到旗舰的完整场景。
 
 
 - **Deepseek-V1 - Deepseek-V3**
@@ -8439,7 +8448,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 - **竞赛级评测（题目更难 + 天然防污染）**
 
   - **Codeforces Rating（约 2022+ 用于评测 LLM）**：用真实竞赛题的 Elo（等级分，一种竞技排名分）刻画竞技编程水平
-  - **LiveCodeBench（2024）**：持续采集 LeetCode/AtCoder 新题、按时间窗口切分，题目晚于模型知识截止，天然防污染
+  - **LiveCodeBench（2024）**：持续采集 LeetCode/AtCoder 新题、按时间窗口切分——静态榜会被训练集"背下来"（数据污染）导致跑分虚高，用晚于模型知识截止的新题才测得出真实泛化
 
 
 - **仓库级评测（真实 SE，指标 resolve rate）**
@@ -8455,11 +8464,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | **Multi-SWE-Bench（多语言）** | 2025.4 | 扩展到多编程语言（如 TypeScript/Java 等），评测跨语言 SE 能力 |
   | **SWE-bench Live** | 2025.5 | 持续加入新 instance，防污染 |
   | **SWE-bench Pro** | 2025.9 | Scale AI 推出，1865 个长程（long-horizon）任务、41 个企业级仓库，diff 更大、更贴近真实生产，难度远高于 Verified；含 public/private 分割防污染 |
-
-
-- **数据污染与 Live 化（评测前先问"这榜干净吗"）**
-
-  静态 benchmark 会被训练集"背下来"（数据污染），跑分虚高、无法反映真实泛化。对策是 Live 化——持续加入晚于模型知识截止的新题，LiveCodeBench、SWE-bench Live 都由此而来。
 
 
 #### SE Agent
