@@ -8491,6 +8491,13 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | **SWE-bench Pro** | 2025.9 | Scale AI 推出，1865 个长程（long-horizon）任务、41 个企业级仓库，diff 更大、更贴近真实生产，难度远高于 Verified；含 public/private 分割防污染 |
 
 
+- **终端 / 命令行 Agent 评测（真实环境多步操作）**
+
+  与"给 issue 生成 patch"不同，这类基准让 Agent 直接在真实命令行环境里跑 shell、装依赖、改配置、调用工具完成多步任务，更贴近 Coding Agent（如 Claude Code）的真实工作场景，考察端到端的规划、工具使用与错误恢复，而非单文件函数补全。
+
+  - **Terminal-Bench（2024 起，2.0 版 89 个任务）**：在隔离的真实终端环境里执行跨工具的多步任务，核心指标是 **Resolution Rate（任务解决率）**
+
+
 - **长程 / 演化级评测（2026：超越单 issue，考跨版本演化与代码质量）**
 
   仓库级 SWE-bench 已趋饱和，2026 的新基准把评测推向更长时间跨度，并新增"代码是否越改越好"这一维度：
