@@ -6327,33 +6327,52 @@ class LoRALinear(nn.Module):
 
 - **Base model eval**
 
-  General Tasks: MMLU (5-shot), MMLU-Pro (5-shot, CoT), MMLU-redux (5-shot), BBH (3-shot, CoT), SuperGPQA (5-shot, CoT).
+  基座模型（还没做对话对齐）的评测，看的是知识、推理、代码的原始能力；通常带 few-shot（prompt 里给几个示例）并配 CoT（Chain-of-Thought，思维链）。
+
+  General Tasks: MMLU (5-shot), MMLU-Pro (5-shot, CoT), MMLU-redux (5-shot), BBH (3-shot, CoT), SuperGPQA (5-shot, CoT), Humanity's Last Exam (HLE).
 
   Math & STEM Tasks: GPQA (5-shot, CoT), GSM8K (4-shot, CoT), MATH (4-shot, CoT).
 
-  Coding Tasks: EvalPlus (0-shot), MultiPL-E (0-shot), MBPP-3shot, CRUX-O of CRUXEval (1-shot)
+  Coding Tasks: EvalPlus (0-shot), MultiPL-E (0-shot), MBPP-3shot, CRUX-O of CRUXEval (1-shot).
 
   Multilingual Tasks: MGSM (8-shot, CoT), MMMLU (5-shot), INCLUDE (5-shot).
 
 
 - **Chat model eval**
 
-  General Tasks: MMLU-Redux, GPQADiamond, C-Eval, LiveBench.
+  对话 / 指令模型的评测，在基座能力之上再加对齐、指令遵循、Agent 与工具调用、真实任务等维度。
+
+  General Tasks: MMLU-Redux, GPQA-Diamond, C-Eval, LiveBench, Humanity's Last Exam (HLE).
 
   Alignment Tasks: IFEval, Arena-Hard, AlignBench, Creative Writing V3, WritingBench.
 
   Math & Text Reasoning: MATH-500, AIME’24, AIME’25, ZebraLogic, AutoLogi.
 
-  Agent & Coding: BFCL v3, LiveCodeBench, Codeforces Ratings
+  Abstract Reasoning: ARC-AGI-2（抽象推理，任务对人类直觉容易、对模型难，且每轮换新题、天然抗污染）.
+
+  Agent & Coding: BFCL v3, SWE-bench Verified, SWE-bench Pro（长程、抗污染的真实仓库任务）, Terminal-Bench（真实命令行环境的多步操作）, LiveCodeBench, Codeforces Ratings.
+
+  Real-world Tasks: GDPval（跨 44 种职业的真实、有经济价值任务）.
 
   Multilingual Tasks: instruction following - Multi-IF, knowledge - INCLUDE & MMMLU, mathematics - MT-AIME2024 & PolyMath, and logical reasoning - MlogiQA.
 
-  Tool-use: TauBench
+  Tool-use: TauBench.
 
 
-- **Live benchmark**
+- **为什么要 Live / 动态 benchmark？**
 
-  FutureX
+  静态榜单正在失效，两大原因：① **数据污染**——题目进了预训练语料，模型是在"背答案"而非真会做（SWE-bench Verified 已被证实存在污染，前沿厂商陆续弃用它衡量最强模型）；② **榜单饱和**——分数逼近上限，强模型之间区分不出来。
+
+  解法有两条路线。一是 **Live / 动态 benchmark**：题库持续更新、只用尚未公开的新题，让"背答案"失效——
+
+  - **LiveBench**：每月更新题目，覆盖推理 / 代码 / 数学等；
+  - **LiveCodeBench**：滚动加入新的编程题（常取自近期竞赛）；
+  - **SWE-rebench**：动态抽取真实仓库的新 issue 做软件工程评测；
+  - **FutureX**：预测未来才发生的事件，答案无法被提前记住。
+
+  二是用**天生抗污染的高难 / 抽象 / 真实任务基准**：Humanity's Last Exam（HLE，2500 道专家级难题，专为应对榜单饱和设计）、ARC-AGI-2（每轮换新抽象题）、GDPval（真实职业任务）。
+
+  整体趋势：从"刷静态分"转向"抗污染 + 测真实能力"。
 
 
 - **Rubric 评测是什么？与普通评测有什么区别？**
@@ -8325,8 +8344,14 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **Kimi K1.5**：推理模型，用长思维链（long CoT）+ 强化学习（RL）提升数学与代码推理；提出 long2short 思路——把长推理压缩 / 蒸馏成短推理，在效果与推理成本之间取得平衡。
   - **Kimi K2**：万亿参数 MoE（总参约 1T、激活约 32B），重心从"对话"转向"agent"——强化工具调用（tool use）与多步任务执行；训练引入 Muon 优化器提升大规模训练稳定性；以开源权重发布。
   - **Kimi K2-Thinking**：在 K2 基础上增强推理（thinking）的版本，主打长 horizon 的 agentic 推理任务。
+  - **Kimi K3（2026.7）**：旗舰级开放权重（自定义 Kimi K3 License）原生多模态 agentic 模型，号称全球首个开源 3T 级模型。总参 **2.8T MoE**、每 token 激活约 **104B**（896 个路由专家选 16 + 2 个共享专家），原生视觉理解（MoonViT-V2 视觉编码器，401M）、**1M token 上下文**，整体 scaling 效率相比 K2 提升约 **2.5×**。核心组件：
+    - **注意力**：**KDA（Kimi Delta Attention，混合线性注意力）+ Gated MLA**，93 层中 69 层 KDA + 24 层 Gated MLA（约每 4 层一个 full attention）；KDA 让百万上下文解码最高提速 **6.3×**。
+    - **AttnRes（Attention Residuals）**：跨模型深度**选择性检索**表示而非逐层均匀累加，训练效率约 +25%、额外成本 <2%。
+    - **Stable LatentMoE 路由 + Quantile Balancing**：由 router 分数的分位数推导专家分配，去掉启发式更新与负载均衡超参（无辅助损失）。
+    - **激活函数 SiTU-GLU**（Sigmoid Tanh Unit）；**MXFP4 权重 + MXFP8 激活**，从 SFT 阶段起做 QAT（量化感知训练）。
+    - **Per-Head Muon**：在 K2 的 Muon 基础上进一步对各注意力头独立优化，提升大规模训练稳定性；未配置 MTP。
 
-  定位：从"长上下文"演进到"大规模 MoE + agent"，是国产开源里与 DeepSeek 并列的一条主线。
+  定位：从"长上下文"演进到"大规模 MoE + agent"，是国产开源里与 DeepSeek 并列的一条主线；K3 进一步走向"原生多模态 + 3T 级 MoE + 百万上下文"的旗舰形态。
 
 
 - **GPT 系列（OpenAI）**
