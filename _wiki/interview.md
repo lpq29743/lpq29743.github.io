@@ -8470,6 +8470,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   粒度决定难度来源：函数级（self-contained，单函数、依赖少）难在"算法/语法正确"；仓库级（repository-level，改动分散多文件、需检索定位与跨文件理解）难在"上下文理解 + 定位 + 不破坏其他功能"。
 
+
 - **当前发展阶段**
 
   补全与函数级生成已饱和；仓库级 issue 修复（SWE-bench）是已大体攻克的主战场；当前正从仓库级向长程（long-horizon）自主软件工程过渡。
@@ -8477,11 +8478,11 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **仓库级 / 长程的核心难点**
 
-  Agent 解一个 issue 就是反复转「检索 → 定位 → 编辑 → 执行 → 看报错 → 修正」这个环，长程任务常要转几十圈（long-horizon）；每一环都有代码特有的难点：
+  Agent 解一个 issue 就是反复转「检索 → 定位 → 编辑 → 验证」这个环，长程任务常要转几十圈（long-horizon）；每一环都有代码特有的难点：
 
   - **检索环 · 长上下文**：仓库数十万行装不下，只能检索定位相关片段（从 issue 堆栈 / 文件名出发、沿调用图扩展），文件系统当外部记忆、历史输出做 AST 压缩；圈数越多、上下文越膨胀
   - **定位环 · 归因难**：错误现象（测试失败）与根因常相距很远（Fault Localization）；圈数越多，成败越难归到具体哪一步（credit assignment，RL 尤其棘手）
-  - **编辑环 · 错误累积**：多步改动环环相扣，一步定位错、后续全跑偏
+  - **编辑环 · 错误累积 / 劣化**：多步改动环环相扣，一步定位错、后续全跑偏；长程迭代还会让代码逐轮劣化（冗余 / 腐蚀上升）
   - **验证环 · 反馈闭环**：靠"执行 → 看报错 → 修正"迭代（Self-Refine / ReAct），把编译 / 测试 / 运行错误回注上下文；patch 每步跑回归，既修好目标 issue 又不改坏其他功能
 
   应对（贯穿全环）：拆可验证子目标、设检查点 / 回滚、控迭代上限、用过程信号缓解稀疏奖励。
@@ -8623,7 +8624,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   缓解：测试用例对模型不可见且随机化、禁止修改测试文件、用 held-out（留出）测试集验证、rule-based（基于规则）黑名单 + LLM Judge（大模型评判）双层拦截可疑操作。
 
 
-- **训练环境与数据**
+- **训练环境（rollout）**
 
   repository-level 代码 RL 需要可执行的 rollout 环境（容器 + 测试）。代表工作如 SWE-Gym（提供大规模真实 Python SE 任务环境用于训练 agent）、Agent-RLVR（用 RLVR 训练 SE agent，并复用其数据训练 test-time reward model）。环境搭建与 rollout 吞吐（异步执行）是主要工程瓶颈。
 
