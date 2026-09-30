@@ -8384,27 +8384,23 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 #### Benchmark and Evaluation
 
-- **函数级代码生成评测**
+- **函数级生成评测**
 
   - **HumanEval（2021）**：164 道手写 Python 编程题，函数级，用单元测试 pass@k 评测
   - **MBPP（2021）**：974 道入门级 Python 题，含测试用例
   - **MultiPL-E（2022）**：把 HumanEval/MBPP 翻译到多种编程语言，评测多语言代码能力
   - **EvalPlus（2023）**：给 HumanEval/MBPP 补大量增强测试用例，暴露"通过原始稀疏测试但其实不正确"的假阳性，评测更严格
 
-  pass@k 是核心指标：生成 k 个样本，只要有一个通过全部测试即算通过。pass@1 反映稳定性，pass@k（k 较大）反映能力上限与多样性。
-
 
 - **代码推理评测（CRUXEval，2024）**
 
-  给一段代码，预测其输出（CRUXEval-O）或反推输入（CRUXEval-I），考察模型对代码的"执行式理解"而非单纯生成，是衡量代码 reasoning 的细粒度基准。
+  给一段代码，预测其输出（CRUXEval-O）或反推输入（CRUXEval-I），考察对代码的"执行式理解"而非单纯生成。
 
 
-- **防污染 / 竞赛级评测**
+- **竞赛级评测**
 
-  - **LiveCodeBench（2024）**：持续采集 LeetCode/AtCoder 等新题，按时间窗口切分，天然防止训练数据污染（题目晚于模型知识截止）
-  - **Codeforces Rating（竞赛平台 2010 起，约 2022+ 用于评测 LLM）**：用真实竞赛题的 Elo（等级分，一种竞技排名分）评分刻画模型竞技编程水平
-
-  为什么需要 Live Benchmark：静态 benchmark 易被训练集"背下来"（数据污染），只有持续更新题目才能反映真实泛化能力——这也是把 SWE-bench 做成 Live 的动机。
+  - **Codeforces Rating（约 2022+ 用于评测 LLM）**：用真实竞赛题的 Elo（等级分，一种竞技排名分）刻画竞技编程水平
+  - **LiveCodeBench（2024）**：持续采集 LeetCode/AtCoder 新题，按时间窗口切分，天然防污染（题目晚于模型知识截止）
 
 
 - **仓库级 SE 评测（SWE-bench 系列）**
@@ -8422,9 +8418,10 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | **SWE-bench Pro** | 2025.9 | Scale AI 推出，1865 个长程（long-horizon）任务、41 个企业级仓库，diff 更大、更贴近真实生产，难度远高于 Verified；含 public/private 分割防污染 |
 
 
-- **RLVR：可验证奖励**
+- **通用评测原则**
 
-  Reinforcement Learning with Verifiable Rewards——用可自动验证的信号（代码任务里即"跑测试是否通过 / 编译是否成功"）作为奖励，无需训练神经网络 reward model，也避免其被 hack。代码与数学是 RLVR 最天然的两个场景，因为答案对错可被程序判定。
+  - **指标 pass@k**：生成 k 个样本，只要有一个通过全部测试即算通过；pass@1 反映稳定性，pass@k（k 较大）反映能力上限与多样性
+  - **防污染 / Live 化**：静态 benchmark 易被训练集"背下来"（数据污染），只有持续更新题目才能反映真实泛化能力——LiveCodeBench、SWE-bench Live 都由此而来
 
 
 #### SE Agent
