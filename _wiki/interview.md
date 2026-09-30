@@ -7414,6 +7414,29 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - 分布漂移控制：学生策略更新后可能过度偏离老师分布，需要 KL 约束或周期性回滚
 
 
+- **MOPD（Multi-Teacher On-Policy Distillation，多教师在线策略蒸馏）**
+
+  MOPD 是 OPD 的多教师扩展：OPD 用一个老师，MOPD 用**多个分领域专家老师**同时指导一个学生，核心目标是解决单模型学多项能力时的"跷跷板"（see-saw，即学会一项、退化另一项）问题。
+
+  **动机**：一个模型要同时具备代码、搜索、通用 Agent、数学、推理、安全等多种能力，如果塞进同一条 RL 一起训，不同能力的奖励信号会互相冲突、此消彼长。MOPD 的思路是"先分头练成专家，再合并回一个学生"。
+
+  **三阶段流程**：
+
+  1. **通用 SFT**：先给学生模型打底，练好指令跟随与基础输出格式；
+  2. **分领域独立 RL 训专家 teacher**：对每个能力方向（代码 / 搜索 / 通用 Agent / 数学 / 推理 / 安全）各自独立做 RL，得到一批各有所长的专家 teacher；
+  3. **多教师在线蒸馏**：学生用**自己的分布**在线采样轨迹（on-policy），同时吸收两类信号——① 来自各领域 teacher logits 的**稠密 token 级 reverse-KL 奖励**（每个 token 都带监督信号；反向 KL 保证学生只做 teacher 会做的事、不乱跑偏），② **可验证的结果奖励**（ORM/GRPO 式的对错判定）。
+
+  **与 OPD 的区别**：
+
+  | 维度 | OPD | MOPD |
+  |------|-----|------|
+  | 老师数量 | 单个 | 多个分领域专家 |
+  | 主要解决的问题 | 分布偏移、缺探索 | 多能力"跷跷板"、学习效率 |
+  | 监督信号 | 单 teacher 的 logits/反馈 | 多 teacher logits（reverse-KL）+ 可验证结果奖励 |
+
+  **优势**：各专家 teacher 可并行独立训练、互不干扰；学生一次蒸馏同时吸收多领域能力，避免逐项 RL 的反复遗忘；且支持 teacher-student 迭代共进化（学生变强后可反哺、再训出更强的 teacher）。
+
+
 - **On-Policy Cross-Stage Distillation**
 
   **问题背景**：现代 LLM Post-Training 通常分多个 RL 阶段（如 GLM-5 的 Reasoning RL → Agentic RL → General RL），每个阶段专注不同能力。但后续阶段训练时，模型会遗忘前面阶段学到的能力（灾难性遗忘）。
@@ -8335,7 +8358,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   粒度决定难度来源：函数级（self-contained，单函数、依赖少）难在"算法/语法正确"；仓库级（repository-level，改动分散多文件、需检索定位与跨文件理解）难在"上下文理解 + 定位 + 不破坏其他功能"。
 
-- **任务类型（按能力划分）**
+- **任务类型**
 
   - **Code Completion（补全）**：光标处续写；FIM（Fill-in-the-Middle）支持根据前后文填中间；进阶是 next-edit prediction（预测下一处该改哪里、改什么）
   - **Code Generation（生成）**：自然语言 → code
