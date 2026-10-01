@@ -8713,23 +8713,33 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **2026 视频生成产品格局**
 
-  第一梯队按"每秒输出成本 + 是否原生音频 + 特色"分化；生产选型通常是按用例做多模型路由，而非绑定单一模型。（价格为 API 大致档位，随竞争快速变动）
+  第一梯队按"质量 + 是否原生音频 + 可控性 + 可获取性"分化，生产选型通常按用例做多模型路由而非绑定单一模型。排名参考 Artificial Analysis Video Arena（人类盲评 ELO）：
 
-  | 产品 | 厂商 | 定位与特色 | 原生音频 | 价格档（每秒输出） |
-  | --- | --- | --- | --- | --- |
-  | Sora 2 / Sora 2 Pro | OpenAI | 写实质量、物理因果与口型同步强，单次约 10–25 秒 | 是 | 中端（~$0.10） |
-  | Veo 3.1 Fast / Standard | Google | 原生音视频联合输出，支持 4K，Standard 近广播级 | 是 | Fast ~$0.15 / Standard ~$0.40 |
-  | Kling 3.0（可灵） | 快手 | 性价比最高，运动一致性与主体跟踪好，含 Motion Control 运镜控制 | 否 | 低（~$0.09–0.14） |
-  | Seedance 2.0 | 字节跳动 | 预算首选，适合高量短片 | 否 | 低（~$0.09） |
-  | Runway Gen-4.5 | Runway | 电影级真实感与运镜控制，企业级门控接入 | 否 | 偏高（~$0.20） |
+  | 产品 | 厂商 | 定位与特色 | 原生音频 |
+  | --- | --- | --- | --- |
+  | Seedance 2.0 | 字节跳动 | 2026 突破模型，竞技场 T2V/I2V 全球第二（i2v-with-audio 分类曾登顶）；统一多模态单次生成声画、四模态输入、多镜头叙事、角色跨镜一致性强 | 是 |
+  | Veo 3.1 Fast / Standard | Google | 写实 + 原生音频领先，支持 4K 与 Scene Extension 镜头延展，Standard 近广播级 | 是 |
+  | Kling 3.0（可灵） | 快手 | 运动质量与 4K 强，含 Motion Control 运镜控制，性价比高 | 是 |
+  | Runway Gen-4.5 | Runway | "艺术家模型"，Motion Brush + Director Mode 精细控制，电影级质感 | 是 |
+  | Sora 2（已下线） | OpenAI | 曾以物理合理性与写实领跑；app 于 2026-04、API 于 2026-09 关停，无 Sora 3 | 是 |
 
-  国内还有通义万相（Wan）、Vidu、海螺（Hailuo）、即梦（Dreamina）、PixVerse、SkyReels 等；开源侧以 Wan、HunyuanVideo（混元）为代表，适合私有化部署与二次微调。
+  第二梯队 / 场景化：Luma Ray3.14（物理与速度）、MiniMax Hailuo 2.3（速度性价比）、Grok Imagine 1.5（社交竖屏）、HeyGen / Synthesia（数字人）、Pika、SkyReels V4；国内还有通义万相（Wan）、Vidu、即梦（Dreamina，Seedance 落地入口）；开源侧以 Wan、HunyuanVideo（混元）、LTX-2 为代表，适合私有化部署与二次微调。
+
+- **为什么 Seedance 值得重点关注**
+
+  出自字节 Seed 团队（与豆包 LLM 同源），经即梦 / 火山引擎落地，是国产视频生成里最接近全球第一梯队的模型。三点差异化能力：
+
+  - **统一多模态架构**：单次 pass 同时生成画面 + 对白 + 音效 + 音乐，并支持四模态输入（文 / 图 / 视频 / 音频，最多 12 个参考文件），把"多素材融合成连贯序列"做成原生能力，而非后期拼接。
+  - **多镜头叙事与角色一致性**：单 prompt 直接产出含 2–3 个镜头转场的 10–15 秒视频，角色面部 / 比例 / 服装跨镜不漂移——这正是长视频与叙事最难、也最有商业价值的部分。
+  - **生产可靠性**：第三方测试可用输出率约 90%（行业平均约 20%），"抽卡"次数大幅下降，直接决定商业交付成本。
+
+  版本演进 1.0（2025，T2V/I2V、1080p）→ 1.5 Pro（音画同步）→ 2.0（全多模态 + 多镜头、2K/4K），Seedance 2.5 已宣布（单次 30 秒）。需注意它也是版权争议焦点（MPA，美国电影协会指其"系统性侵权"、Disney 发过停止函），合规是落地风险；2.0 暂无公开 API。
 
 - **产品选型的三个现实考量**
 
-  - **音频**：仅 Sora 2、Veo 3.1 等少数产品原生输出声画同步音频；多数模型需"先生成画面 + 单独 TTS（Text-to-Speech，文本转语音）配音对齐"两步，增加延迟与成本。
-  - **可获取性**：Runway、Veo 走企业 waitlist / 区域门控，Kling、Seedance、Sora 相对易接入；接入摩擦本身就是生产风险。
-  - **成本-质量权衡**：高量、预算敏感选 Kling / Seedance；要声画同步选 Veo 3.1 Fast 或 Sora 2；追求极致画质与运镜选 Veo 3.1 Standard 或 Runway。
+  - **音频**：第一梯队（Veo 3.1、Seedance 2.0、Kling 3.0、Runway Gen-4.5）已普遍支持单次生成声画同步；轻量 / 社交向模型（Luma、Hailuo）多数仍需单独 TTS（Text-to-Speech，文本转语音）配音对齐。
+  - **可获取性**：Seedance 2.0 暂无公开 API（走即梦 / 火山引擎），Runway、Veo 有企业 waitlist / 区域门控，Kling 相对易接入；接入摩擦本身就是生产风险。
+  - **成本-质量权衡**：要声画同步与叙事选 Seedance 2.0 / Veo 3.1；要精细运镜控制选 Runway；高量、预算敏感选 Kling / Hailuo / Seedance 1.5 Pro。
 
 
 ### Autonomous Driving
