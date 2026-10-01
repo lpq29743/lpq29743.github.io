@@ -8709,6 +8709,29 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   常用自动指标：文本-视频对齐用 CLIP score，时序稳定性用帧间光流 / warping error，整体分布距离用 FVD（Fréchet Video Distance，视频版 FID）。
 
 
+#### Reference Models
+
+- **2026 视频生成产品格局**
+
+  第一梯队按"每秒输出成本 + 是否原生音频 + 特色"分化；生产选型通常是按用例做多模型路由，而非绑定单一模型。（价格为 API 大致档位，随竞争快速变动）
+
+  | 产品 | 厂商 | 定位与特色 | 原生音频 | 价格档（每秒输出） |
+  | --- | --- | --- | --- | --- |
+  | Sora 2 / Sora 2 Pro | OpenAI | 写实质量、物理因果与口型同步强，单次约 10–25 秒 | 是 | 中端（~$0.10） |
+  | Veo 3.1 Fast / Standard | Google | 原生音视频联合输出，支持 4K，Standard 近广播级 | 是 | Fast ~$0.15 / Standard ~$0.40 |
+  | Kling 3.0（可灵） | 快手 | 性价比最高，运动一致性与主体跟踪好，含 Motion Control 运镜控制 | 否 | 低（~$0.09–0.14） |
+  | Seedance 2.0 | 字节跳动 | 预算首选，适合高量短片 | 否 | 低（~$0.09） |
+  | Runway Gen-4.5 | Runway | 电影级真实感与运镜控制，企业级门控接入 | 否 | 偏高（~$0.20） |
+
+  国内还有通义万相（Wan）、Vidu、海螺（Hailuo）、即梦（Dreamina）、PixVerse、SkyReels 等；开源侧以 Wan、HunyuanVideo（混元）为代表，适合私有化部署与二次微调。
+
+- **产品选型的三个现实考量**
+
+  - **音频**：仅 Sora 2、Veo 3.1 等少数产品原生输出声画同步音频；多数模型需"先生成画面 + 单独 TTS（Text-to-Speech，文本转语音）配音对齐"两步，增加延迟与成本。
+  - **可获取性**：Runway、Veo 走企业 waitlist / 区域门控，Kling、Seedance、Sora 相对易接入；接入摩擦本身就是生产风险。
+  - **成本-质量权衡**：高量、预算敏感选 Kling / Seedance；要声画同步选 Veo 3.1 Fast 或 Sora 2；追求极致画质与运镜选 Veo 3.1 Standard 或 Runway。
+
+
 ### Autonomous Driving
 
 #### Overview
