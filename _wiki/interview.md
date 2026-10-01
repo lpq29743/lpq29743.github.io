@@ -8641,7 +8641,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **视频生成：从素材工具到世界模型**
 
-  视频生成（Video Generation）指用大模型从文本、图像或已有视频合成新视频，是生成式 AI 中算力与建模难度最高的方向之一。技术范式已从早期 U-Net 扩散演进到 **DiT（Diffusion Transformer，扩散 Transformer）+ Flow Matching（流匹配）** 的主流架构：先用 VAE（Variational Autoencoder，变分自编码器）把视频压到时空 latent，再在 latent 上以时空 patch 做扩散去噪。2026 年的前沿趋势是**原生音视频联合生成**（Veo 3.1、Sora 2 直接输出声画同步的音频）、支撑流式/实时生成的**自回归扩散**，以及把视频模型当作可交互**世界模型（World Model）**来做的探索。
+  视频生成（Video Generation）指用大模型从文本、图像或已有视频合成新视频，是生成式 AI 中算力与建模难度最高的方向之一。技术范式已从早期 U-Net 扩散演进到 **DiT（Diffusion Transformer，扩散 Transformer）+ Flow Matching（流匹配）** 的主流架构：先用 VAE（Variational Autoencoder，变分自编码器）把视频压到时空 latent，再在 latent 上以时空 patch 做扩散去噪。2026 年的前沿趋势是**原生音视频联合生成**（Veo 3.1、Seedance 2.0 直接输出声画同步的音频）、支撑流式/实时生成的**自回归扩散**，以及把视频模型当作可交互**世界模型（World Model）**来做的探索。
 
 
 #### Core Scenarios
@@ -8663,7 +8663,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **原生音频与多模态联合**
 
-  新一代模型（Veo 3、Sora 2）不再"先生成画面再配音"，而是画面、音效、对白、口型一体化联合生成，大幅降低后期成本，同时对时序对齐提出更高要求。
+  新一代模型（Veo 3.1、Seedance 2.0）不再"先生成画面再配音"，而是画面、音效、对白、口型一体化联合生成，大幅降低后期成本，同时对时序对齐提出更高要求。
 
 
 #### Key Challenges
