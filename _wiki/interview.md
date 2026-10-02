@@ -7127,6 +7127,48 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - **ARPO（Agentic Reinforced Policy Optimization）**：针对工具调用，用**熵**监控策略不确定性，在高熵（高不确定）的关键分支处做**自适应 rollout**（多采几条），把算力投在真正影响结果的决策点上，提升长程 tool-use 的训练效率。
 
 
+- **多轮 / 长程 RL 把信用分配从 token 级升到 turn 级，有哪几种手段？**
+
+  长程 Agent 任务里，会话级奖励若只在轨迹末尾给、再按 token 平摊，会被整条轨迹平均掉，无法归因到「哪一轮的决策」导致成败。把信用分配的基本单元从 token 升到 turn（轮），有三种手段：
+
+  - **轮级 GAE 折扣**：把 GAE 的 $$\gamma / \lambda$$ 衰减按**轮次**计而非 token 计，跨轮折扣，让每一轮的决策成为信用分配的基本单元；
+  - **轮级 Value 估计**：critic 不再对每个 token 估值，而是对**每轮结束、拿到 Observation 后的会话状态**估值，与每轮的决策点对齐；
+  - **GiGPO 式组内对比**：不训 critic，靠**两级分组**做相对优势——外层轨迹级对比 + 内层同一锚点状态下的步级对比，两级归一化叠加。
+
+  取舍：前两种依赖 critic（PPO 系），显存与训练成本更高、但归因更细；GiGPO 免 critic（GRPO 系），几乎零额外开销，但依赖「同一状态跨轨迹复现」这一前提。目的都是让优势信号落到**轮的决策粒度**，方差更小、归因更准。
+
+
+- **GiGPO 的 anchor state grouping 是怎么做细粒度信用分配的？**
+
+  GiGPO（Group-in-Group Policy Optimization）要在保留 GRPO **免 critic、低显存、稳定收敛**的同时，为多轮 Agent 引入 step 级信用分配。Vanilla GRPO 把整条轨迹当一个整体、只算一个 episode 级 advantage，塌缩了 step 级区分；而对每个状态额外 rollout 动作来比较又代价过高。GiGPO 用**两级分组**破解：
+
+  **① Episode 级（宏观，沿用 GRPO）**：相同任务 + 相同初始状态下采样 $$N$$ 条完整轨迹，按总回报归一化，衡量整条轨迹的相对好坏：
+
+  $$A^{E}(\tau_i)=\frac{R(\tau_i)-\text{mean}(\{R(\tau_j)\}_{j=1}^{N})}{F_{\text{norm}}(\{R(\tau_j)\}_{j=1}^{N})}$$
+
+  **② Step 级（微观，核心创新 = anchor state grouping）**：由于所有轨迹同源，很多环境状态会**跨轨迹、甚至同一轨迹内反复出现**。把每个**唯一状态** $$\tilde{s}$$ 当作一个 **anchor（锚点）**，用 hashmap 把所有命中同一状态的 (动作, 回报) 离线聚成一个 step 级组——**不产生任何额外 rollout**：
+
+  $$G^{S}(\tilde{s})=\{(\mathbf{a}_t^{(i)},R_t^{(i)}) \mid \mathbf{s}_t^{(i)}=\tilde{s}\}$$
+
+  即时奖励太稀疏，故用**折扣回报**刻画动作的长期影响：
+
+  $$R_t^{(i)}=\sum_{k=t}^{T}\gamma^{\,k-t}\,r_k^{(i)}$$
+
+  再在同一锚点组内归一化，得到「同一状态下这个动作比同伴好多少」：
+
+  $$A^{S}(\mathbf{a}_t^{(i)})=\frac{R_t^{(i)}-\text{mean}(\{R_t^{(j)}\in G^S(\tilde{s})\})}{F_{\text{norm}}(\{R_t^{(j)}\in G^S(\tilde{s})\})}$$
+
+  **③ 合成**：$$A(\mathbf{a}_t^{(i)})=A^{E}(\tau_i)+\omega\cdot A^{S}(\mathbf{a}_t^{(i)})$$，$$\omega$$ 平衡宏微观，论文取 $$\omega=1$$ 无需调参，最终套 PPO 式 clip + KL 惩罚。
+
+  **直觉例子（WebShop）**：两条轨迹都经过同一个「搜索结果页」锚点；$$\tau_1$$ 先点错商品、返回后点对的、成功，$$\tau_2$$ 点「下一页」、失败。靠时间折扣 + 同锚点对比，得到偏好序 $$A^{S}(\text{1st Item}) > A^{S}(\text{2nd Item}) > A^{S}(\text{Next Page})$$——这是 GRPO 抓不到的细粒度区分。
+
+  **几个细节**：
+
+  - $$F_{\text{norm}}$$ 用 std（GRPO 默认）会引入 **difficulty bias**——低方差组（过易 / 过难）拿到不成比例的大梯度；GiGPO 提供 $$F_{\text{norm}}=1$$ 的无偏 Leave-One-Out 变体，在难任务上更稳、成功率更高。
+  - 状态难以完全一致时（如 Search QA）用 **similarity-based grouping**：最长匹配子序列相似度 > 0.9 即归为同一锚点。
+  - **几乎零开销**：锚点分组（hashmap）+ step advantage 计算仅占每轮训练时间 < 0.002%；ALFWorld / WebShop 上比 GRPO 分别提升 > 12% / > 9%。
+
+
 - **DPO 的原理是什么？它有什么局限？**
 
   DPO（Direct Preference Optimization）绕过显式 reward model 和 RL 采样：把 RLHF 的最优解代入 Bradley-Terry 偏好模型，直接用一个分类式损失在成对偏好 $$(y^+, y^-)$$ 上优化策略——提高 chosen 相对 rejected 的对数概率差。
