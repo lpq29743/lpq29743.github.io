@@ -612,7 +612,14 @@ print("牛顿法结果: x =", x_newton, ", f(x) =", f_newton)
 
 - **forward KL 和 reverse KL 的区别？方向怎么选？**
 
-  forward KL 按 P 加权，是 mode-covering——Q 必须盖住 P 的每一个峰，否则罚无穷大，结果倾向摊平；reverse KL 按 Q 加权，是 mode-seeking——Q 不敢去 P 概率低的地方，但可以放弃 P 的部分峰，结果倾向收缩到单峰。
+  先认准角色：两种方向里 **P 都是真实分布（目标分布，被近似的那个）、Q 都是模型分布（近似分布，用来近似的那个）**，forward / reverse 换的不是 P、Q 的身份，而是 KL 的参数顺序——即“按谁加权、期望在谁下取”。把两个方向都写成“权重 $$\cdot$$ 对数比值”再对 $$x$$ 求和，差别全在**权重是谁**：
+
+  $$KL(P \| Q)=\sum_x p(x)\log \frac{p(x)}{q(x)}, \qquad KL(Q \| P)=\sum_x q(x)\log \frac{q(x)}{p(x)}$$
+
+  - **forward（mode-covering，摊平）**：权重 $$p(x)$$ 由 P 定死，凡 P 有质量处都大于 0。最小化时，Q 只要在某峰上把 $$q(x)$$ 压向 0，$$\log\frac{p(x)}{q(x)}$$ 就趋于 $$+\infty$$，再乘正权重 $$p(x)$$，损失爆炸。所以 Q 不敢漏 P 的任何一个峰，只能处处留概率——盖全所有模式，倾向摊平。
+  - **reverse（mode-seeking，收缩）**：权重 $$q(x)$$ 由 Q 自己定。Q 若把概率放到 P 的低概率区（$$p(x)$$ 趋于 0 而 $$q(x)>0$$），$$\log\frac{q(x)}{p(x)}$$ 趋于 $$+\infty$$ 又被 $$q(x)$$ 加权——重罚，所以 Q 不敢越出 P 的高概率区；反过来，P 有峰而 Q 干脆不去（那里 $$q(x)=0$$），整项因权重为 0 消失、不受罚——Q 可以放弃部分峰，收缩到单个主峰。
+
+  一句话：forward 的权重由 P 定，**漏峰就罚**，只能覆盖；reverse 的权重由 Q 定，**越界才罚、弃峰不罚**，于是收缩。
 
   方向选择本身就是建模决策：蒸馏常用 forward（学生学全老师）；变分推断和 RLHF 用 reverse（集中在可靠区域，且真实分布 intractable 时只能从 Q 采样）。
 
