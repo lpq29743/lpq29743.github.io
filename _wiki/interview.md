@@ -8109,6 +8109,84 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - 多智能体架构（Multi-agent Architecture）：将任务分解给多个子智能体，每个子智能体处理其特定任务并拥有独立的上下文，避免不同任务的上下文相互干扰。
   - 环境（Environments）：使用沙箱等环境来隔离包含大量 token 的对象或状态，例如在执行复杂计算或访问敏感数据时，将这些操作限制在特定的、受控的环境中。
 
+#### Evaluation
+
+- **Agent 评测与 LLM 评测有何不同？（从“输出对错”到“轨迹成败”）**
+
+  LLM 评测像“测发动机”——看单轮输出的知识 / 推理 / 代码对错；Agent 评测像“测整车 + 各种路况”——看一条“感知 → 规划 → 行动 → 观察”的多轮轨迹（trajectory）能否在真实环境里达成目标。三个根本转变：
+
+  - **评测对象**：从单次 output 变为整条 trajectory，既看结果（是否达成目标状态）也看过程（规划、工具调用、错误恢复是否合理）
+  - **评测环境**：从静态数据集变为可交互、可执行的环境（web / OS / 沙盒 / 工具 API），agent 的动作会真实改变环境状态
+  - **判分方式**：从“比对输出字符串”变为“检查环境终态 + 过程指标”，且因多步串联而更看重可靠性（见 pass^k）
+
+  本节聚焦 agent 特有的评测框架与方法论；领域基准交叉引用：编码 / 软件工程见 Coding 章节 Benchmark，对话与 agent 榜单见 LLM 章节 Evaluation，视频创作 agent 编排评测见 Video 章节 Evaluation。
+
+
+- **评什么：四维评测目标（Behavior / Capability / Reliability / Safety）**
+
+  | 维度 | 评什么 | 代表指标 |
+  |------|--------|---------|
+  | **行为 Behavior**（黑盒、用户视角） | 任务是否完成、输出质量、快不快贵不贵 | Success Rate、TTFT（首 token 时延）、token / 成本 |
+  | **能力 Capability**（拆开定位短板） | 工具调用、规划推理、记忆保持、多 agent 协作 | 工具选择 / 调用准确率、参数 F1、Progress Rate、Step Success Rate |
+  | **可靠性 Reliability**（企业落地关键） | 同任务重复是否稳定、扰动 / 报错下能否恢复 | pass@k、pass^k、扰动下成功率、错误恢复率 |
+  | **安全与对齐 Safety** | 危险 / 越权动作、prompt injection、合规隐私 | 违规率、注入抵抗力、RBAC 约束下完成率 |
+
+  只看 Behavior 的“任务完成率”会掩盖短板——同样 60% 成功率，可能是“工具选不对”，也可能是“规划中途跑偏”，需下钻到 Capability 维度定位；企业场景里 Reliability 与 Safety 往往比峰值能力更决定能否上生产。
+
+
+- **pass@k vs pass^k：能力上限 vs 可靠性（为什么 agent 尤其看 pass^k）**
+
+  - **pass@k**：k 次尝试里**至少成功一次**的概率，反映能力上限与多样性
+  - **pass^k**：k 次尝试**全部成功**的概率（τ-bench 提出），反映一致性与可靠性
+
+  Agent 尤其看 pass^k，因为多步任务的成功率沿轨迹**连乘衰减**：单步成功率 p、n 步全对约 $$p^n$$——p=0.95 时 20 步就掉到约 0.36。所以“偶尔做对”（pass@k 高）远不等于“每次都做对”（pass^k 高）；当前 agent 常见 pass@1 尚可、pass^8 断崖式下跌，正是关键任务不敢上生产的原因。
+
+  补充过程指标 **Progress Rate**（AgentBoard）：长程任务的二值成败信息量太低（非 0 即 1），Progress Rate 衡量“朝目标推进了多少比例”，能区分“差一步”与“完全跑偏”，也给 RL 更稠密的信号（呼应 Agentic RL）。
+
+
+- **怎么评：交互模式 × 判分方法**
+
+  **交互模式**：
+
+  - **离线 / 静态**：固定数据集跑分，便宜、可复现，但覆盖窄、易误差传播，代表不了真实分布
+  - **在线 / 动态**：模拟器、human-in-the-loop、生产流量监控，能发现静态测试测不出的问题；进一步有 Evaluation-driven Development（EDD，把评测嵌入开发闭环）+ AgentOps（生产持续监控）
+
+  **判分方法（客观 → 主观三档）**：
+
+  - **规则 / 程序化判分**：可执行环境里跑测试、比对环境终态，最客观，coding / tool 类首选
+  - **LLM-as-a-Judge / Agent-as-a-Judge**：应对开放任务，可扩展但有偏（长度 / 位置 / 自我偏好），输入未净化时还易被 prompt injection 攻破
+  - **人工评测**：主观质量与安全的金标准，但贵、慢、难扩展
+
+  LLM-as-a-Judge 的 Rubric 多维度打分见 LLM 章节 Evaluation。
+
+
+- **代表性基准（按环境 / 能力分类）**
+
+  | 类别 | 代表基准 | 考察点 |
+  |------|---------|--------|
+  | 工具 / 函数调用 | BFCL（Berkeley Function-Calling Leaderboard）、τ-bench / τ²-bench（TauBench）、AppWorld、ToolBench | 该不该调、选对工具、参数正确、遵循策略；τ-bench 含 pass^k |
+  | Web / GUI | WebArena、VisualWebArena、Mind2Web、AssistantBench | 真实网页导航、填表、多模态交互 |
+  | OS / 计算机使用 | OSWorld、WindowsAgentArena | 完整桌面 VM 里的多步操作 |
+  | 移动端 | AndroidWorld、MobileAgentBench | 手机 GUI agent |
+  | 通用 / 多环境 | AgentBench、AgentBoard、GAIA、TheAgentCompany | 跨环境综合、长程、企业任务 |
+  | 安全 | AgentHarm、AgentDojo（prompt injection）、Agent Security Bench、R-Judge | 有害行为、注入抵抗、风险感知 |
+  | 编码 / 软件工程 | 见 Coding 章节 Benchmark（SWE-bench 系列 / Terminal-Bench / DeepSWE） | 仓库级 issue 修复、终端多步操作 |
+
+  综合榜单：BFCL、Holistic Agent Leaderboard（HAL）。
+
+
+- **核心挑战：为什么“高分 ≠ 高能力”**
+
+  Agent 评测比 LLM 评测更脆弱，几个坑：
+
+  - **Harness 敏感性**：同一模型换 harness（工具粒度 / 上下文组织 / 错误反馈），成功率可差 10–15 分（见 Coding 章节）。一个分数其实是“模型 × harness × 环境 × 判分器”四元组的结果（Harness-Aware Evaluation），脱离配置横向比较基本无意义。
+  - **基准可被“零能力”刷分（对抗鲁棒性差）**：Berkeley 2026 审计 8 大基准（SWE-bench / WebArena / OSWorld / GAIA / Terminal-Bench 等），发现**全部**能在不解任何任务的情况下刷到接近满分。七大反模式：① agent 与判分器未隔离、② 参考答案随测试下发、③ 对不可信输入 `eval()`、④ LLM judge 输入未净化、⑤ 弱字符串匹配、⑥ 判分逻辑根本不判分、⑦ 信任被测代码的输出。现实已发生：有模型 24.4% 轨迹靠 `git log` 抄答案、METR 发现 o3 / Claude 3.7 在 30%+ 评测里 reward hack、OpenAI 因 59.4% 测试有缺陷弃用 SWE-bench Verified。这与 Coding 章节的 Reward Hacking 同源，但这里强调的是“**评测本身被攻破**”。
+  - **非确定性 / 方差**：agent 随机 + 环境动态，单次跑分噪声大，需多次重复并报方差（也是 pass^k 的动机）。
+  - **数据污染**：静态榜被“背下来”，解法见 LLM 章节 Evaluation 的 Live / 动态 benchmark。
+  - **成本**：一次 agent 评测 = 大量 LLM 调用 + 环境执行，比 LLM 评测贵一个量级，制约“多跑几次看方差”。
+
+  **造可信评测的清单（Agent-Eval Checklist）**：隔离 agent 与判分器（判分在容器外只读主机跑）、不下发参考答案、绝不对不可信输入 `eval()`、净化 LLM judge 输入并用结构化输出、发布前对抗自测（null agent 应得 0 分，random / prompt-injection / state-tampering agent 都不能拿分）、答案保密 + 定期轮换 instance、崩溃任务计 0 分而非从分母剔除。
+
 #### Agentic RL
 
 - **Agentic RL**
