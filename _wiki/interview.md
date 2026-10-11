@@ -8078,6 +8078,19 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **主动清理**：定期任务扫描记忆库，清理低质量/过期条目
   - **用户反馈**：用户指出记忆错误时，及时修正或删除
 
+- **Agent 记忆怎么评测？**
+
+  难点在于成绩同时取决于记忆工具、Agent 架构和底座模型，容易“张冠李戴”。
+
+  | 基准 | 考什么 | 特点 |
+  |------|--------|------|
+  | **LongMemEval**（ICLR 2025） | 长期交互记忆五大能力：信息抽取、多会话推理、知识更新、时序推理、拒答（abstention） | 500 题，大海捞针式带时间戳历史；S（~115k token / 40 会话）、M（~500 会话）、oracle 三档 |
+  | **LongMemEval-V2**（2026） | agentic 场景下的长期记忆 | 从“聊天助手”扩展到“Agent 上下文” |
+  | **LoCoMo** | 超长对话的检索式问答 | 检索导向；Mem0 与 Letta 曾就其跑分口径公开争议 |
+  | **Letta Memory Benchmark** | 记忆管理能力（非单纯检索） | 动态即时生成记忆交互，固定框架与工具、只变模型，做 apples-to-apples 对比 |
+
+  关键提醒：纯检索基准（LoCoMo）测“能不能捞回信息”，而记忆好不好更取决于 Agent 会不会用工具管理上下文——要区分“检索 benchmark”和“agentic memory benchmark”。这与 Agent 评测里“harness 敏感性”一脉相承：脱离 Agent 架构和模型单谈记忆工具分数意义有限。长程任务基准（如 Terminal-Bench）也间接考记忆——任务状态远超上下文窗口，Agent 必须靠记忆维持进度。
+
 #### Tools & Protocols
 
 - **LLM 怎么调用外部工具？**
