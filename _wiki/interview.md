@@ -7937,6 +7937,24 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   **三者层层嵌套、常配合**：System prompt 定义主 Agent 的全局身份与规则，遇到专项流程时按需加载 Skill，遇到需隔离 / 并行的子任务时派 Sub-agent（Sub-agent 有自己的 system prompt、也能加载自己的 Skill）。一句话区分：**System prompt 管「始终是谁、守什么」，Skill 管「某类活怎么干」，Sub-agent 管「复杂活怎么拆、交给谁干」**。
 
+- **「意图路由 + 子 Agent 分发」和「单 Agent + Skills」两种架构怎么选？**
+
+  两者都是让 Agent 系统应对多种意图 / 任务，但走了不同路子：前者靠 router 把请求**分发给专门的子 Agent**（分而治之、架构编排），后者靠**一个 Agent 按需加载不同 Skill**（一体多能、能力挂载）。本质是「用 Sub-agent 做架构扩展」vs「用 Skill 做能力扩展」。
+
+  | 维度 | 意图路由 + 子 Agent 分发（多 Agent）| 单 Agent + Skills |
+  |------|-----------------------------------|-------------------|
+  | 扩展方式 | 加子 Agent（架构编排、分而治之）| 加 Skill（能力挂载、一体多能）|
+  | 上下文 | 各子 Agent 独立隔离、互不污染 | 单一上下文共享，Skill 按需加载 |
+  | 专业化 | 强，每个子 Agent 可配专属 prompt / 工具 / 权限 / 模型 | 弱，同一 Agent 换 Skill，底层能力共享 |
+  | 路由成本 | 需前置 router 分类，路由错则全盘错；跨 Agent 传状态难 | 无需显式路由，模型自主决定加载哪个 Skill |
+  | 连贯 / 一致性 | 跨子 Agent 的对话连贯与共享状态难维护 | 天然连贯，单一上下文记得住前因后果 |
+  | 并行 / 隔离 | 子 Agent 可并行、故障隔离好 | 串行、单点，Skill 多了可能互相干扰 |
+  | 复杂度 / 成本 | 高（编排 + 职责边界 + 通信 + 冷启动）| 低（改 Skill 即可、热插拔、链路短）|
+
+  **何时用哪个**：意图**边界清晰且差异大**、各意图需**不同工具 / 权限 / 模型 / 专业知识**、子任务**可并行**、要**故障隔离与独立迭代** → 用路由 + 子 Agent 分发（如客服分诊到订单 / 物流 / 售后专员、医疗分诊 / 诊断 / 药师）；意图**连续交织**、要**跨意图上下文连贯**、能力可复用同一套底层、想**低成本快速迭代** → 用单 Agent + Skills（如个人助理、通用 Coding Agent 挂不同 Skill）。
+
+  **关键取舍**：这不是二选一，而是一条**复杂度光谱**——Skill 是轻量的能力扩展、Sub-agent 是重量的架构扩展。**能用单 Agent + Skills 解决就别上多 Agent**：多 Agent 的路由错误、跨 Agent 状态传递、一致性维护、冷启动与通信成本都是实打实的代价。只有当单 Agent 上下文扛不住、或意图天然需要隔离 / 并行 / 分权时，才引入路由 + 子 Agent。两者还能**嵌套**：主 Agent 用 router 分发到子 Agent，子 Agent 内部再按需加载自己的 Skill——这正是 System prompt / Skill / Sub-agent 三种机制在架构层的组合应用。
+
 - **代表性的 Agent Harness？**
 
   - **Coding Harness**：Claude Code（Anthropic）、Codex（OpenAI）、Cursor、Aider、OpenHands、SWE-agent——能跑 shell、读写文件、调用服务，自主完成编码任务。
