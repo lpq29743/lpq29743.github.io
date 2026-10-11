@@ -1587,9 +1587,75 @@ def reverse_list_recursive(head):
 
   七、其他技巧类
 
-  - LRU 缓存机制（链表 + 哈希表）：使用双向链表 + 哈希表快速定位和移动节点。
   - 将二叉搜索树转为排序双向链表：中序遍历 + 链接节点。
   - 设计单链表/双链表数据结构（LeetCode 707）：实现基本的 add/delete/get 接口，注意边界处理。
+
+
+- **LRU 缓存（LeetCode 146）**
+
+  设计一个满足 LRU（Least Recently Used，最近最少使用）的缓存，要求 `get` 和 `put` 都是 **O(1)**。
+
+  **为什么用 "哈希表 + 双向链表"**：把两个 O(1) 需求分给两个结构——哈希表（key → 节点）负责 O(1) 定位任意 key；双向链表按访问顺序排列（头部最近使用、尾部最久未用），负责 O(1) 把节点移到头部、以及 O(1) 删除尾节点做淘汰。
+
+  **为什么链表必须双向**：删除某节点要改它前驱的 `next`，双向链表节点自带 `prev`，O(1) 就能拿到前驱；单向链表找前驱要从头扫，是 O(n)。再加一对**伪头 / 伪尾节点**（dummy），插入删除就不必判断 "是不是头 / 尾 / 空表" 这些边界。
+
+  **两个操作的 O(1) 从哪来**：
+
+  - `get(key)`：哈希表查节点（O(1)）→ 命中就摘下来移到头部（O(1)）→ 返回 value；未命中返回 -1。
+  - `put(key, value)`：key 已存在则更新 value 并移到头部；不存在则新建节点插到头部、写入哈希表，若超容量就删尾节点（最久未用）并同步删掉它的哈希映射——每步都是常数次指针操作，O(1)。
+
+```python
+class Node:
+    def __init__(self, key=0, value=0):
+        self.key = key        # 存 key：淘汰尾节点时能反查哈希表删掉对应映射
+        self.value = value
+        self.prev = None
+        self.next = None
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.cap = capacity
+        self.cache = {}                   # key -> Node，O(1) 定位
+        self.head = Node()                # 伪头
+        self.tail = Node()                # 伪尾
+        self.head.next = self.tail
+        self.tail.prev = self.head
+
+    def _remove(self, node):              # 摘下节点，O(1)（靠 prev 指针）
+        node.prev.next = node.next
+        node.next.prev = node.prev
+
+    def _add_front(self, node):           # 插到头部（最近使用），O(1)
+        node.next = self.head.next
+        node.prev = self.head
+        self.head.next.prev = node
+        self.head.next = node
+
+    def get(self, key: int) -> int:
+        if key not in self.cache:
+            return -1
+        node = self.cache[key]
+        self._remove(node)
+        self._add_front(node)
+        return node.value
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.cache:
+            node = self.cache[key]
+            node.value = value
+            self._remove(node)
+            self._add_front(node)
+            return
+        node = Node(key, value)
+        self.cache[key] = node
+        self._add_front(node)
+        if len(self.cache) > self.cap:    # 超容量，淘汰尾部（最久未用）
+            lru = self.tail.prev
+            self._remove(lru)
+            del self.cache[lru.key]
+```
+
+  复杂度：`get` / `put` 均为 **O(1)** 时间（哈希定位 + 常数次指针操作），空间 O(capacity)。
 
 
 #### Stack & Queue
