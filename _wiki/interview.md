@@ -6963,6 +6963,8 @@ def compute_gae(rewards, values, gamma=1.0, lam=0.95):
 
   其中 $$t$$ 为当前 token，$$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$ 为重要性采样比率，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
 
+  两项分工可以一句话概括——**advantage 给方向、ratio 管变化**：$$\hat{A}_t$$ 的符号决定这个动作要被强化还是抑制（往哪走），$$r_t(\theta)$$ 是新旧策略在该动作上的概率比、衡量这一步策略挪了多少（走多远）；clip 把 ratio 锁在 $$[1-\epsilon, 1+\epsilon]$$ 内，保证「方向对的前提下步子不迈太大」。
+
 ```python
 def actor_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
     ratio = torch.exp(log_probs - old_log_probs)  # [B]
