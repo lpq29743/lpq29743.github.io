@@ -6682,6 +6682,31 @@ RLHF 上层应用：veRL / OpenRLHF
   **配套基建**：全异步 rollout（Gym 风格接口，actor 生成 / 环境交互 / reward 计算并行调度）；高可靠沙箱（Kubernetes 混合云、动态资源调度、零停机部署），模型与工具间用 MCP（Model Context Protocol）维持有状态会话并支持断线重连——这是"可暂停 / 可恢复"能真正落地的底层保障。
 
 
+- **SAO 和 PPO / GRPO 有什么区别？（异步 RL 的单轨迹优化）**
+
+  SAO（Single-rollout Asynchronous Optimization，单轨迹异步优化）是清华 + 智谱团队（唐杰、董豫肖等，arXiv 2607.07508，2026）为**异步 agentic RL** 设计的策略优化算法，已用于训练开源 GLM-5.2（750B-A40B）。一句话：用 **single-rollout（每个 prompt 只采一条、生成完立即训练）替代 GRPO 的 group-wise 采样**，从算法层根治异步 RL 的 off-policy 与稳定性问题。
+
+  **要解决的问题**：异步 RL（rollout 到达即更新）比同步批量更高效，但现有系统只顾吞吐量、忽视训练稳定性。关键矛盾是——GRPO 的 group-wise 采样天然不适配异步：一个 prompt 的一组 rollout 必须等最慢那条跑完才能算组内 baseline，长尾任务导致数据陈旧（staleness）、off-policy 严重——这是异步训练固有的 rollout 滞后问题，SAO 直接从采样机制上根治它。
+
+  **三个核心设计**：
+  - **Single-rollout 采样**：每个 prompt 只用一条 rollout，生成完立即送训、不等其他样本 → 把 off-policy 程度压到最低，还提升泛化。
+  - **配套的 value model 训练**：single-rollout 没了组内相对 baseline，于是**重新引入 value model（critic）来估 advantage**——等于在异步场景下向 PPO 的 critic 路线回归。
+  - **严格的双边 token 级裁剪（double-side token-level clipping）**：对重要性比率做更严的双侧 token 级 clip，稳住异步下的优化。
+
+  | 维度 | PPO | GRPO | SAO |
+  |-----|-----|------|-----|
+  | 采样方式 | 每 prompt 采样，靠 critic 估 baseline | group-wise（每 prompt 一组） | single-rollout（每 prompt 一条） |
+  | baseline / advantage | value model（critic） | 组内相对（免 critic） | value model（critic，重新引入） |
+  | 是否需要 critic | 要 | 不要 | 要 |
+  | 同步 / 异步 | 多为同步 | 多为同步（组要等齐） | 异步原生（即产即训） |
+  | off-policy / staleness | clip 控制 | 组等最慢 → 异步下 stale 严重 | single-rollout 最小化滞后 |
+  | clip 机制 | 双边 ratio clip | 双边 ratio clip | 严格双边 token 级 clip |
+
+  **效果**：能稳定训练上千步，在 agentic coding / reasoning 基准（SWE-Bench Verified、BeyondAIME、IMOAnswerBench）上持续超过 GRPO 及其变体；在「模拟在线学习」（环境不断变化、模型要持续适应）场景尤其有效——这正是 single-rollout 低 off-policy 的优势所在。
+
+  本质：SAO 是「异步友好性 vs 是否需要 critic」的再权衡。GRPO 当初为省掉 critic 改用组内对比，但组内对比在异步下要等一批 rollout、反而放大了 off-policy；SAO 索性回到每 prompt 一条 rollout（即产即训、滞后最小），代价是重新请回 value model。在长程 agentic 异步训练里，**宁可多养一个 critic，也要 single-rollout 的低 off-policy 与稳定性**。
+
+
 - **为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism**
 
   MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
