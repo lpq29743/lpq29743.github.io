@@ -7707,11 +7707,27 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | **范式/分布不一致** | 数学定义本身就不同 | Exposure Bias（训练 Teacher Forcing 喂真值 vs 推理喂自己生成的 token）；MTP 训练预测 1 步、推理预测 2 步；on-policy vs off-policy | 算法问题 |
 
 
-- **熵控制在强化学习里的作用**
+- **什么是熵坍缩？为什么发生、怎么监控和缓解？**
 
-  在大模型训练的强化学习阶段，设置较高的 temperature 可以防止模型过度自信，鼓励模型采取高熵动作，从而扩大探索空间。另一种方式是在 group-level 用 smi/dpp/self-bleu 计算多样性，进行 reward shaping 来控制熵的变化。
+  **是什么**：熵坍缩（entropy collapse）指 RL 训练中策略熵 $$H(\pi_\theta)$$ 持续下降、输出分布不断尖锐化，同一个 prompt 下（尤其 GRPO 同组）采样出的 response 越来越趋同，模型过早变得确定、探索空间被锁死。
 
-  熵坍塌：随着训练的进行，entropy 逐渐降低。导致某些 group 采样出的 response 几乎相同，使得模型在早期变得更加确定，限制了模型的探索空间。
+  **为什么会发生（从 KL 分解看）**：RLHF / PPO / GRPO 的目标是「最大化 reward，同时用 β 倍的 KL 惩罚约束策略别偏离 reference 太远」，而这个 KL 可展开为两股力 $$KL(\pi_\theta \| \pi_{ref}) = E_{\pi_\theta}[-\log \pi_{ref}] - H(\pi_\theta)$$：前一项（交叉熵部分）管**位置**——把概率质量往高奖励 / 高密度区搬；后一项 $$-H(\pi_\theta)$$ 是**熵项**，管**形状**——逼分布保持摊开、不许坍缩。reward 天然要求分布尖锐（把质量集中到高分答案），熵项正是对抗这种尖锐化的**唯一反向力**。一旦 reward 的尖锐化压过熵项，或 clip 把低概率 token 过度抑制（探索性动作被剪掉、再也回不来），熵就单向下降直至坍缩。
+
+  **危害**：① 探索停止——同组 response 趋同，GRPO 的组内 baseline 失效、advantage 趋近 0，学不到新东西；② pass@k 上不去——多样性没了，采样多次也是同一个答案；③ reward hacking 失去制衡——熵项本是拦住 policy 被 reward 推向分布外的力，坍缩后模型更容易钻奖励漏洞。
+
+  **怎么监控**：盯 entropy 曲线的**下降形态**——**持续缓降**是真正的熵坍缩（探索在慢慢流失）；**骤降**往往不是坍缩，而是训推不一致的信号（如 top-k 用了 CUDA 的 non-deterministic 实现，训练与推理算出的分布对不上）。
+
+  **怎么缓解**：
+
+  | 手段 | 机制 | 说明 |
+  |------|------|------|
+  | Clip-Higher | 放宽剪切上界（如 0.2→0.28）| 避免低概率 token 被过度抑制，给探索性动作留上升空间（DAPO）|
+  | 提高 temperature | 采样时拉平分布 | 鼓励高熵动作、扩大探索空间，最直接但偏推理侧 |
+  | 熵正则 | 目标里加 $$+\beta H(\pi_\theta)$$ | 显式奖励高熵，β 太大易欠拟合、太小压不住坍缩 |
+  | 多样性 reward shaping | group-level 用 smi / dpp / self-bleu 算多样性并计入奖励 | 从奖励侧鼓励组内差异化 |
+  | Dynamic Sampling | 过滤全对 / 全错的零方差组 | 这些组 advantage 为 0、不贡献梯度，剔除后把预算留给有信号的样本（DAPO）|
+
+  **本质**：熵坍缩是 **exploit 压过 explore 的失衡**——reward 项一味把分布往高分区收，熵项这个唯一的反向力被盖过。所有缓解手段本质都是「给探索续命」：要么松绑 clip、要么显式加熵奖励、要么从奖励侧鼓励多样性，让 policy 在「拿高分」和「别过早收敛」之间保持张力。
 
 
 #### Distillation
