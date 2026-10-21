@@ -7749,7 +7749,15 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - DeepSeek-R1 系列以 off-policy SFT 为主，后续 follow-up 转向 OPD
   - Gemma 2/3 也在训练流程中引入 OPD
 
-  **与 RL 的关系**：OPD 可视作 SFT 和 RL 之间的中间地带。相比纯 RL（如 GRPO），OPD 不需要显式奖励模型或 value model，老师模型的 logits/反馈直接作为监督信号，算力需求低得多。相比纯 SFT，OPD 具备在线探索能力，能发现训练数据中不存在的推理路径。
+  **与 SFT、RL 的区别（从 credit assignment × exposure bias 看）**：OPD 可视作 SFT 和 RL 之间的中间地带，用两个维度能精确定位它——**credit assignment（信用分配，即监督信号的密度）**和 **exposure bias（训练与推理的分布一致性）**：
+
+  | 范式 | credit assignment（信号密度）| exposure bias（分布一致性）|
+  |------|------------------------------|---------------------------|
+  | **SFT**（off-policy 模仿）| 稠密——每个 token 都有标准答案监督，信用分配明确 | 差——训练 Teacher Forcing 喂真值、推理喂自己生成的 token，一旦偏离就崩，偏移严重 |
+  | **RL**（outcome reward）| 稀疏——整条轨迹只有一个 reward，信用分配难（要靠 advantage / GAE / PRM 回传到 token）| 好——on-policy 自采样，训练即推理分布，无偏移 |
+  | **OPD**（on-policy 蒸馏）| 稠密——老师对学生采样的每个 token 给 logits / reverse-KL 监督，信用分配明确 | 好——学生 on-policy 自采样，无偏移 |
+
+  **本质**：OPD 同时拿到 SFT 的「稠密 token 级监督」（credit assignment 好）和 RL 的「on-policy 无偏移」（无 exposure bias）——SFT 稠密但 off-policy 有偏移，RL on-policy 但奖励稀疏、难做信用分配，OPD 两者兼得。这正是它为什么能「以 RL 1/10 算力达到相近效果」：既有 RL 的探索与分布一致性，又有 SFT 的稠密监督，不必像 RL 那样从稀疏 reward 里艰难地反推每步贡献。**代价与定位**：OPD 的上限受 teacher 约束（学不出超过老师的策略），而 RL 靠可验证 reward 能突破 teacher——所以 OPD 常作 RL 之前的高效打底，或用于把大模型能力压进小模型（蒸馏），而非替代 RL 冲刺能力上限。
 
   **核心要解决的问题**：
   - 老师反馈质量：老师模型对错误轨迹的判断准确度直接影响蒸馏效果
