@@ -8135,6 +8135,19 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   **一个关键推论（决定模型尺寸）**：Harness 承载越多，Model 就能越小。当知识可以外挂到 Harness（RAG 可热更新、可溯源），Model 只需内化有限的决策策略，就不必依赖最大的通用模型——可把所需能力**蒸馏进中小模型**，让推理成本、时延、部署规模降一个量级。这是用 Harness 换 Model 尺寸的技术选型：知识放 Harness、策略压进小 Model，专项场景即可用中小模型承载。
 
+- **模型与 Harness 无法完全一致怎么办？**
+
+  模型是**静态权重快照**、Harness 是**持续演进的运行时**（工具会加、prompt 会改、上下文管理会调），两者永远有 gap——本质是 exposure bias 在 Harness 层的放大：训练时见到的 harness ≠ 部署时的 harness。这个 gap 无法根除，只能「双向管理」，目标是让模型在 harness 必然漂移的前提下依然鲁棒。
+
+  | 层面 | 手段 | 说明 |
+  |------|------|------|
+  | **训练侧**（不绑死单一 harness）| Multi-Harness Training + 环境多样性 + on-policy | 混合多个 harness（系统提示 / 工具 / 上下文管理解耦）训练，泛化到不同乃至未见框架；环境多样性与数据量一起 scaling（domain randomization，只堆同类环境会过拟合）；采样尽量 on-policy 对齐部署分布 |
+  | **Harness 侧**（接口对模型稳定）| 解耦 + 适配层 + 标准协议 + 易变外挂 | harness 对模型暴露稳定接口（MCP / AGENTS.md / structured output），内部实现随便改；易变的知识 / 流程走 RAG / Skill 热更新，别塞进权重 |
+  | **持续对齐**（让 gap 可收敛）| 数据回流飞轮（AgentOps）| 线上失败轨迹回流补进训练（增量 SFT / OPD）；harness 大改后重新对齐；EDD 评测驱动持续验证 |
+  | **监控**（让漂移可观测）| 训推同构 + 信号监控 | 对齐训练与推理引擎（减少数值 / 实现不一致）；监控 entropy 骤降等异常信号；牢记离线评测 ≠ 线上表现 |
+
+  **本质**：模型学的是「能力」、harness 提供的是「能力发挥的接口」——就像人换了台电脑照样会写代码。Multi-Harness Training 的意义就是逼模型学「换任何电脑都会写代码」，而非「只会用公司这一台的快捷键」。追求「绝对一致」是徒劳，正确目标是「harness 怎么变，模型都稳」。
+
 - **System prompt、Skill、Sub-agent 分别解决什么问题？何时用哪个？**
 
   三者都是 Harness 给 Agent 注入指令 / 能力 / 编排的机制，但处在不同层次：**System prompt 是常驻上下文的全局指令层，Skill 是按需加载的可复用流程 / 知识层，Sub-agent 是独立上下文的任务编排层**。
