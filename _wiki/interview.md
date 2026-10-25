@@ -7331,13 +7331,13 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   - 输出 o_i 被输入到冻结的参考模型（Reference Model），计算输出 o_i 与参考策略之间的 KL 散度，用于限制策略更新。
 
-  **全对/全错组（零方差组）的处理**：组内奖励全部相同（全对或全错）时标准差为 0，advantage 归一化后全为 0，这组样本不产生任何梯度，采样算力白花。常见对策有三类：
+  **全对/全错组（零方差组）的处理**：优势 = (r − mean) / std，组内奖励全部相同（全对或全错）时标准差为 0、advantage 归一化后全为 0，这组样本不产生任何梯度，采样算力白花。全对和全错同样浪费——全对说明太简单没有新信息，全错说明太难当前学不会。对策分三层：
 
-  - 调高采样温度：让输出分布更散，组内更容易同时出现对错，产生组内对比信号；
-  - 加采样数（扩大组大小 G）：组越大越容易"有对有错"，但 rollout 成本线性上涨；
-  - 动态采样（DAPO 的做法）：直接过滤掉零方差组、继续补采，直到凑够有方差的组，保证进训练的每组都有梯度信号。
+  - **数据侧（治本）——prompt 难度管理**：全对说明 prompt 对当前模型太简单、全错说明太难，都落在学习区之外。按通过率筛掉过易 / 过难的题、保留组内有方差的「能力甜区」样本；课程式动态调整——模型能力涨了就换更难的 prompt 进来。零方差往往是「题目和当前能力不匹配」的信号，而非算法问题。
+  - **采样侧**：① 调高采样温度，让输出分布更散、组内更容易同时出现对错；② 扩大组大小 G，组越大越容易「有对有错」，但 rollout 成本线性上涨；③ 动态采样（DAPO 的做法），过生成后直接过滤零方差组、继续补采，直到凑够有方差的组——本质是用算力换信号密度。
+  - **奖励侧——奖励细化**：全对 / 全错通常出现在**二值奖励**（对 / 错）上；把奖励做成多维连续（格式、动作选择、参数、内容质量分开打分），组内自然出现方差，从源头缓解零方差。
 
-  本质上看，全对说明 prompt 对当前模型太简单、全错说明太难，都落在模型的学习区之外，因此也可以从 prompt 侧做难度预筛和课程式换题，与上述采样侧手段互补。
+  **兜底认知**：零方差组本身无害（跳过即可，不会引入坏梯度），真正的代价是采样预算浪费——所以优化重点是「**提高有效组比例**」（难度管理 + 动态采样 + 奖励细化），而不是「拯救零方差组」。
 
 
 - **GRPO 怎么去掉 critic/value model 的？**
@@ -7354,26 +7354,36 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   Freeze Router（冻结路由）：在大规模 RL 时直接冻结 MoE Router，抑制专家负载随训练漂移，是另一条稳定训练的思路（如 MiMo-V2.6 在扩展 RL 算力时冻结 Router）。与 Routing Replay 的区别是：后者对齐 rollout 与 training 的路由，前者从源头固定路由不再更新。
 
 
-- **长 horizon 任务为什么要回到 PPO（Critic-based PPO）？**
+- **为什么 GLM 后来用回 PPO？GRPO 和 PPO 该怎么选？**
 
-  长 horizon 任务会产生超长轨迹，需要用 compaction（压缩）切分成多个子轨迹。但这导致：
-  - 同一个 prompt 的不同 rollout，产生的子轨迹数量不同
-  - 每个子轨迹的长度差异很大
+  GLM（GLM-4.6 阶段起）从 GRPO 切回 PPO，根子在**训练目标转向多轮 / 长程 agentic 任务**——GRPO 在这类任务上的短板被放大，三点归因：
 
-  GRPO 的 group-wise optimization 不适用：
-  - 需要对同一个 prompt 的多个 rollout 做组内比较
-  - 子轨迹数量和长度不一致时，无法直接比较
-  - 组内归一化会扭曲优势估计
+  1. **信用分配粒度不匹配**：GRPO 的优势来自组内相对比较，本质是**轨迹级**的——一条轨迹里所有 token 共享同一个相对优势信号。单轮任务无所谓，但多轮 / Agent 任务里，长轨迹中某一轮的失误会被整条轨迹的奖励平均掉，credit assignment 不精确；PPO 的 **critic + GAE** 能给出 token / 轮级更细粒度的优势估计。
+  2. **Rollout 成本**：GRPO 每个 prompt 要采 G 条样本，纯文本生成尚可；但 agentic 场景每条轨迹要和工具 / 环境反复交互，rollout 成本放大数倍到数十倍，PPO 单样本 + 价值估计在大规模下吞吐更高。
+  3. **大规模稳定性**：组内基线方差大，奖励稀疏或组内样本少时优势噪声大、大规模训练易不稳；critic 提供低方差基线，长程任务训练更稳。
 
-  **GLM-5.2 的解决方案：回归传统 PPO 范式**
+  一个具体触发点是 **compaction（长轨迹压缩切分）**：超长轨迹要切成多个子轨迹，导致同一 prompt 的不同 rollout 子轨迹**数量不同、长度差异大**，GRPO 的 group-wise 组内比较无从对齐、组内归一化会扭曲优势估计。
 
-  1. **Single-rollout formulation**：每个 rollout 独立学习，不依赖组内比较
-  2. **Critic model**：引入 critic 估计 token-level advantages（而非 group-relative）
-  3. **Token-level loss**：处理子轨迹长度不平衡问题
+  **GLM-5.2 的解决方案：回归 PPO 范式**——① Single-rollout formulation（每个 rollout 独立学习、不依赖组内比较）；② Critic model（估 token-level advantage 而非 group-relative）；③ Token-level loss（处理子轨迹长度不平衡）。
 
-  **和 GRPO 的选择**：
-  - 短任务用 GRPO（省 critic model）
-  - 长 horizon + compaction 用 PPO（需要 critic 做 token-level advantage）
+  **长程 + 异步下 PPO 还要解一组工程难题**（GLM-5.2 实践）——核心是「长轨迹 + 异步采样下，数据严重滞后时如何稳定更新」：
+  - **采样天然 off-policy**：长程轨迹生成慢、不同 rollout 快慢差异大，一条轨迹生成期间训练引擎可能已更新多版，数据回来时早不是当前策略采的，off-policy 随轨迹变长而恶化；
+  - **old policy 不再是单一版本**：干脆用 **rollout 替代 old** 作为重要性采样基准——「生成开始时那个 old 策略」在长轨迹下根本不是一个确定版本，与其假设不存在的单一 old，不如按 rollout 实际发生时的状态处理；
+  - **不对称裁剪**：clip 对策略收缩（概率下降）容忍度低、对扩张（概率上升）容忍度高——探索期允许新尝试被放大，收敛期严格约束「把错误动作概率打下去」；
+  - **保留最近 k 轮策略快照**：缓解轨迹数据与当前策略版本差距过大。
+
+  **GRPO vs PPO 怎么选**（场景依赖，不是谁更先进）：
+
+  | 维度 | GRPO | PPO（critic-based）|
+  |------|------|------|
+  | baseline | 组内相对（免 critic）| value model（critic）|
+  | 信用分配粒度 | 轨迹级 | token / 轮级（critic + GAE）|
+  | 显存 / 成本 | 省（无 critic）| 高（要养 critic）|
+  | rollout | 每 prompt 采 G 条，agentic 下成本高 | 单样本 + 价值估计，大规模吞吐高 |
+  | 稳定性 | 组内基线方差大、稀疏奖励下噪声大 | critic 低方差基线，长程更稳 |
+  | 适用 | 短程、可验证、rollout 便宜、单轮 / 动作粒度奖励 | 长 horizon + compaction、多轮 agentic、要细粒度信用分配 |
+
+  一句话：短任务、省显存、rollout 便宜 → GRPO；长程 agentic、要细粒度信用分配与稳定性 → PPO（或 SAO 这类 single-rollout + critic 的异步回归路线）。
 
 
 - **Dr.GRPO 指出 GRPO 有哪些偏置？**
@@ -7417,6 +7427,8 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - 动态采样（Dynamic Sampling）解决一组输出准确率为 1 或 0 时的梯度消失导致 Policy 没有优化，样本利用效率降低的问题
   - GRPO 先在样本内按 Token 数平均 loss，再在样本间聚合 loss，从而导致较长样本和较短样本的损失贡献是一样的，即对于答案正确的，GRPO 偏向于选择答案长度较短的回复，而对于答案错误的，GRPO 偏向于让模型生成更长的回复。DAPO 改进为 Token-Level 策略梯度损失
   - 在 RL 训练中，一般会设置最大长度，对过长回复进行截断，从而其 reward 会为 -1，扰乱训练。DAPO 设置了对长序列的合理惩罚（Overlong Reward Shaping），避免过长后截断导致模型无法得到奖励的情形，以缓解噪声并稳定训练。
+
+  **一条主线**：这几个改动都在解同一个问题——**防止策略过早坍缩、保持探索信号**：Clip-Higher 防概率坍缩、Dynamic Sampling 防采样信号枯竭、Token-Level Loss 防长轨迹信号稀释、Overlong Reward Shaping 防一刀切丢信号，去 KL 则是给 long-CoT 大幅偏离初始分布松绑。这也是它和 PPO 系「求稳」思路的差别——**DAPO 是「求探索」的**，专治长思维链 / 长轨迹下的熵坍缩与信号稀疏。
 
 
 - **GSPO 是什么？**
