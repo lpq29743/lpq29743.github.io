@@ -8318,8 +8318,8 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **代表性的 Agent Harness？**
 
-  - **Coding Harness**：Claude Code（Anthropic）、Codex（OpenAI）、Cursor、Aider、OpenHands、SWE-agent——能跑 shell、读写文件、调用服务，自主完成编码任务。
-  - **通用 / 个人 Agent**：OpenClaw（开源，160K+ stars），以 Heartbeat 主动调度 + SKILL.md 技能 + 消息平台交互为特色。
+  - **Coding Harness**：Claude Code（Anthropic）、Codex（OpenAI）、Cursor、Aider、OpenHands、SWE-agent；国产代表 **ZCode**（智谱，深度适配 GLM）——能跑 shell、读写文件、调用服务，自主完成编码任务。
+  - **通用 / 个人 Agent**：OpenClaw（开源，160K+ stars），以 Heartbeat 主动调度 + SKILL.md 技能 + 消息平台交互为特色；**DeepSeek Harness（dsh）**（DeepSeek 开源、MIT，everything-is-a-plugin + Cordis 元框架，主打「Agent = Model + Harness」）。
   - **Harness 内的"快决策"组件**：Jev（System One 模型），负责模型路由与危险动作分类，替代过去锁在闭源 Harness 里的分类器。
 
 
@@ -8353,6 +8353,23 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | 安全是结构性设计而非事后审计 | 默认断网、密钥窗口不重叠、.git / .codex 只读防「解自己的锁」|
 
   **本质（怎么答「哪里惊艳」）**：这些工具真正惊艳的不是「AI 更聪明了」，而是**用大量确定性工程把不确定的模型约束成可靠系统**——Claude Code 里 AI 决策只占约 1.6%，剩下全是让它安全、稳定、可控、长程不跑偏的工程。一句话：模型决定能力上限，Harness 决定这个上限能否稳定落到生产；当模型趋同，胜负手就从「练更强的模型」转到「造更好的 Harness」。
+
+
+- **DeepSeek Harness vs ZCode：两条不同的 Harness 路线？**
+
+  除了 Anthropic / OpenAI，国产与开源阵营也各自给出了 harness 答案，且走了两条截然不同的路线——正好用来回答「同一个模型换套 harness 会怎样」。
+
+  | 维度 | DeepSeek Harness（dsh）| ZCode（智谱）|
+  |------|------|------|
+  | 定位 | 开源（MIT）通用 agent runtime，2026.8 随 V4-Flash 发布 | GLM 官方 Coding Harness，配 GLM Coding Plan 订阅 |
+  | 路线 | **插件化 / 可组合**：everything-is-a-plugin，基于 Cordis 元框架（时空可组合编程范式），能力靠插件生态扩展 | **模型-Harness 深度协同**：围绕 GLM 做定向优化，闭源但贴合自家模型 |
+  | 代表能力 | 一切皆插件、Web / Desktop 双形态、社区插件生态（dsh-plugin）| Goal 自驱闭环（设可验收目标→自动拆解 / 改码 / 跑测→未达标续跑）、Subagents、Remote Control（手机 / 微信 / 飞书远控桌面工作区，代码仍在桌面端跑）、闲时任务（低峰执行不扣积分）|
+  | 关键数据 | 两天 ~95K stars，开源社区爆发 | 缓存命中率 >98%、有效 token +30%；Z.ai Code Bench 上 GLM+ZCode 任务整体通过率高于 GLM+Claude Code |
+  | 一句话 | 用**开放可组合**换生态广度 | 用**深度适配**换单模型上的稳定与性价比 |
+
+  **为什么值得对比**：ZCode 的 bench 结果是最直接的 ACI 证据——**同一个 GLM 模型，配 ZCode 比配 Claude Code 通过率更高**。说明 harness 不是模型的透明外壳，它与模型的协同程度（缓存复用、上下文组织、工具适配）会直接改变成功率。DeepSeek 则押注另一条路：把 harness 彻底开源、插件化，用「Agent = Model + Harness」的可组合性换生态。
+
+  **取舍**：深度协同（ZCode）在单一模型上能榨出更高命中率与性价比，但绑定自家模型、闭源；插件化开源（dsh）生态广、可自由扩展、不锁定，但一致性 / 稳定性要靠社区与工程兜底。选型看你要「贴合某模型做到极致」还是「开放可组合、不被锁定」。
 
 
 #### RAG & Knowledge
