@@ -7315,6 +7315,29 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   DAPO 的 Token-Level loss 也回应了长度偏置，但 Dr.GRPO 更明确地把“两个 bias”点破并直接移除。
 
 
+- **GRPO 把 advantage 广播到每个 token 有什么问题？（token 级熵流不平衡）**
+
+  Dr.GRPO 点破了 GRPO 在**组间**（难度偏置）和**序列长度**（长度偏置）两个粒度的局限；还有第三个粒度——**序列内 token 级**。GRPO 的 advantage 是 sequence 级（整条 response 一个值，由 outcome reward 归一化得到），却**广播到每个 token**、对所有 token 一视同仁地更新，忽略了 token 之间熵分布极不均这一事实。
+
+  **问题机制**：一条 response 里的 token 分两类——
+  - **低熵 token（约 80%）**：模型很确定的位置（语法词、常规推理步、格式符号），policy 本就尖锐、几乎没什么可学；
+  - **高熵 token（约 20%）**：模型犹豫的**决策分叉点（forking tokens）**——推理方向的选择、关键计算步、要不要调工具，才是真正决定成败、真正需要 RL 信号的地方。
+
+  统一 advantage 广播导致两个后果：① **高熵 token 的学习信号被稀释**——真正该学的 20% 决策点，梯度被 80% 低熵 token 淹没；② **低熵 token 被反复强化 → 加速熵坍缩**——低熵 token 分布本就尖锐，advantage 为正时进一步压低其熵，而它们数量占多数，整体 policy 熵被快速拉低。这正是熵坍缩在 token 级的微观机制：RLVR 前后低熵 token 的熵几乎不变、变化集中在高熵 token，说明有效学习只发生在少数 forking tokens 上。
+
+  **改进：80/20 rule（只更新高熵少数 token）**：对每条 response 按 token 熵排序，**只对 top-20% 高熵 token 施加策略梯度、mask 掉其余 80% 低熵 token**。结果：效果持平甚至优于全 token 更新，且**显著缓解熵坍缩、提升探索能力（pass@k）、防过早收敛**；比例在 20% 附近最稳，太少（信号不足）或太多（混入低熵噪声）都会下降。相关地，agentic 场景的 ARPO 用熵监控在高熵分支自适应多 rollout，是「把算力投到高熵决策点」的采样侧版本。
+
+  **三个粒度看 GRPO 的局限（一张全景）**：
+
+  | 粒度 | 局限 | 改进 |
+  |------|------|------|
+  | **组间（难度）** | advantage 除以组内 std → 低方差组（过易 / 过难）拿不成比例的大梯度 | Dr.GRPO 去 std、GiGPO 用 $$F_{norm}=1$$ 的无偏变体 |
+  | **更新步长** | clip 双边对称、是信赖域的启发式近似，$$\epsilon$$ 靠经验、无严格理论保证 | DAPO Clip-Higher 解耦上下界，给低概率 token 留探索空间 |
+  | **序列内 token** | advantage 广播到每个 token、不分熵高低 | 80/20 rule 只更新高熵 forking tokens |
+
+  **本质**：GRPO 的粗糙在于「平均主义」——把本该区别对待的东西（不同难度的 prompt、不同熵的 token、上下 clip 边界）一刀切。三个粒度的改进其实是同一件事：**把学习信号精准投到真正该学的地方**（有区分度的 prompt、高熵决策 token、需要探索的方向），而非平摊到所有样本 / token / 方向上。
+
+
 - **DAPO 相比 GRPO 做了哪些改进？**
 
   DAPO 主要是根据 GRPO 进行改进，主要改进点为
