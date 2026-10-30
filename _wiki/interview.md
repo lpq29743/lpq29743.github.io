@@ -6613,6 +6613,53 @@ class LoRALinear(nn.Module):
   推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
 
+- **FLOPs 是什么？怎么估算训练 / 推理的计算量？**
+
+  **定义与术语辨析**：
+
+  | 写法 | 含义 | 量纲 | 典型用法 |
+  |------|------|------|---------|
+  | FLOPs（小 s） | Floating Point Operations，浮点运算**总次数** | 无量纲（次） | 模型/训练的计算量 |
+  | FLOPS 或 FLOP/s（大 S） | Floating Point Operations Per **Second**，每秒浮点运算次数 | 次/秒 | 硬件算力峰值 |
+  | MACs | Multiply-Accumulate，乘加次数 | 次 | CV / 卷积模型常用 |
+
+  三者关系：**1 MAC = 2 FLOPs**（一次乘 + 一次加）；`训练总 FLOPs ÷ (卡数 × 单卡 FLOPS × MFU) = 墙钟时间`。混淆 FLOPs 与 FLOPS 是面试常见扣分点——前者是「要做多少活」，后者是「每秒能干多少活」。
+
+  **基本单元**：一个 $$(m, k) \times (k, n)$$ 的矩阵乘，输出 $$mn$$ 个元素、每个需 $$k$$ 次乘加，故 $$MACs = mnk$$，$$FLOPs = 2mnk$$。所有估算都由这一条累加而来。
+
+  **Transformer 单层每 token 的 FLOPs**（隐藏维 $$h$$，序列长 $$T$$，FFN 升到 $$4h$$，忽略 LN / bias / 激活等逐元素操作）：
+
+  | 模块 | 矩阵乘形状 | FLOPs |
+  |------|-----------|-------|
+  | Q/K/V/O 投影 | 4 个 $$(h \to h)$$ | $$8h^2$$ |
+  | $$QK^T$$ 与 score$$\times V$$ | 2 个含 $$T$$ 的乘 | $$4Th$$ |
+  | FFN（非门控，两层） | $$h \to 4h \to h$$ | $$16h^2$$（门控 GLU 为 $$24h^2$$） |
+  | 合计 | — | $$24h^2 + 4Th$$ |
+
+  注意 $$24h^2$$ 恰好是每层参数量 $$12h^2$$ 的 **2 倍**——这不是巧合，而是「每参数每 token 前向 2 FLOPs」的直接体现。
+
+  **2N / 6N 法则**（$$N$$ 为参数量，$$D$$ 为训练 token 数）：
+
+  - **前向 ≈ $$2N$$ FLOPs / token**。
+  - **训练 ≈ $$6ND$$**：前向 $$2N$$ + 反向 $$4N$$。反向为什么是 2 倍：每个 `Y = X @ W` 在反传时要算两个梯度——对输入 `dX = dY @ W.T` 和对权重 `dW = X.T @ dY`，各是一次同规模矩阵乘。
+  - **推理 ≈ $$2N$$ / token**，只走前向。
+  - 该近似**忽略了 attention 的 $$O(T^2)$$ 项**。长序列下误差变大，需加上 $$6 \times L \times 2Th \times D$$ 的修正（训练），这也是「上下文越长训练越贵」的量化来源。
+
+  **实例演算：7B 模型训 1T token 要多少卡时**（$$h = 4096, L = 32$$）
+
+  - 总 FLOPs $$= 6 \times 7 \times 10^9 \times 10^{12} = 4.2 \times 10^{22}$$
+  - A100 bf16 稠密峰值 $$= 312$$ TFLOPS，取 MFU $$= 45\%$$ → 有效 $$\approx 140$$ TFLOPS/卡
+  - 墙钟 $$= 4.2 \times 10^{22} / 1.4 \times 10^{14} = 3 \times 10^{8}$$ 秒 $$\approx 3472$$ GPU·天 $$\approx 825$$ 张 A100 跑 4 天
+
+  这套算法同样能反推 Chinchilla 的 compute-optimal：给定算力预算 $$C$$，由 $$C = 6ND$$ 与 $$N \propto D$$ 即可解出最优的 $$N$$ 与 $$D$$。
+
+  **MFU vs HFU**：MFU（Model FLOPs Utilization）= 模型**数学必需**的 FLOPs ÷ 硬件峰值；HFU（Hardware FLOPs Utilization）= **实际执行**的 FLOPs ÷ 峰值，包含 activation recomputation 重算的部分。故恒有 HFU ≥ MFU，报训练效率时应说明用哪个口径（PaLM：MFU 46.2% / HFU 57.8%）。
+
+  **为什么 MFU 上不去**：峰值 FLOPS 假设 Tensor Core 满负荷，但实际存在访存瓶颈、非 GEMM 算子（softmax / LN / 激活）、流水气泡、跨卡通信、重算与负载不均。MFU 30%–50% 即属正常水平。
+
+  **最后一个坑：FLOPs 低 ≠ 延迟低**。真实 wall-clock 还取决于算术强度、访存带宽与 kernel 实现。典型反例是 decode 阶段：单 token 只有 $$2N$$ FLOPs，却要把全部权重从 HBM 读一遍，因此是**带宽受限**而非算力受限——这也解释了为什么 int8/int4 量化能显著加速 decode（减少读取字节数），而对 prefill 收益小得多。
+
+
 - **多卡多机训练**
 
   Data Parallel：数据被切分成小批量（mini-batch），分别送到不同 GPU，但模型必须能放进单卡显存，无法解决超大模型训练。
