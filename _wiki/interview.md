@@ -5370,8 +5370,6 @@ class SimpleMoE(nn.Module):
 
   多头只是把 $$d$$ 拆成 $$H$$ 份分别算 attention：score 矩阵虽从 1 个变成 $$H$$ 个，但每份计算量降到 $$1/H$$，总量恰好抵消——所以「多头 = 多算 $$H$$ 份」是误解。唯一净增的是最后把 $$H$$ 个头 concat 后投影回 $$d$$ 的输出矩阵 $$W_O$$，显存也只多出它这一份。
 
-  但 **FLOPs 不变 ≠ 延迟不变**：矩阵乘被拆成 $$H$$ 个小 GEMM，硬件利用率下降，实际 wall-clock 往往略慢。
-
 
 - **multi-head attention 的 embed 会不会有低秩的问题，怎么解决？**
 
