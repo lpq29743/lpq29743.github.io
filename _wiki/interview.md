@@ -5242,7 +5242,7 @@ class RMSNorm(nn.Module):
 
   GLU：$$GLU(x) = a \otimes \sigma(b)$$，其中 $$\sigma$$ 是 sigmoid 函数。
 
-  GeGLU：$$GeGLU(x) = a \otimes GELU(b)$$。来自 Shazeer 2020 *"GLU Variants Improve Transformer"*，idea 简单但被广泛采用。代表模型：PaLM、Gemma、GLM-130B。
+  GeGLU：$$GeGLU(x) = a \otimes GELU(b)$$。来自 Shazeer 2020 *"GLU Variants Improve Transformer"*。代表模型：PaLM、Gemma、GLM-130B。
 
   SwiGLU：$$SwiGLU(x) = a \otimes Swish(b)$$，其中 $$Swish(x) = x \cdot \sigma(\beta x)$$（通常 $$\beta=1$$，此时等价于 SiLU）。代表模型：LLaMA、Qwen、Mistral。
 
@@ -10897,8 +10897,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | 产品交叉面 | 产品同学 | 业务理解、需求分歧处理、表达 | 行为题 + 业务理解 |
   | 工程交叉面 | 工程同学 | 协作流程、交付质量、沟通表达 | 行为题 + 工程视角 |
   | HR 面 | HRBP | 动机、稳定性、薪资、文化匹配 | 结构化问答 |
-
-  可选环节（视公司而定）：笔试/online coding 置于面试前；加面/终审面（BU 负责人/CEO）在高职级或创业公司出现于 CTO 面之后；薪资沟通轮作为 HR 面后续单独进行。
 
 ### Technical Peer Interview
 
