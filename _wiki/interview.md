@@ -5366,13 +5366,13 @@ class SimpleMoE(nn.Module):
 
 - **MHA 相比单头 Self-Attention，会增加 FLOPs 和显存吗？**
 
-  保持总维度 $$d$$ 不变（$$d_h=d/H$$）时，**FLOPs 基本不变、显存略增**。
+  保持总维度 $$d$$ 不变（$$d_h=d/H$$）时，**FLOPs 和参数量完全相同，只有 score 激活的显存变大**。
 
-  多头只是把 $$d$$ 拆成 $$H$$ 份分别算 attention：score 矩阵虽从 1 个变成 $$H$$ 个，但每份计算量降到 $$1/H$$，总量恰好抵消——所以「多头 = 多算 $$H$$ 份」是误解。唯一净增的是输出投影 $$W_O$$：
+  **$$W_O$$ 不是多头多出来的**：$$\mathrm{MultiHead}=\mathrm{Concat}(\mathrm{head}_1,\dots,\mathrm{head}_H)\,W_O$$，$$H=1$$ 时退化为单头的 $$\mathrm{head}_1 W_O$$——单头作为完整模块同样带一个 $$d\times d$$ 的 $$W_O$$（concat 只拼接、$$W_O$$ 才做跨头融合）。说「多头多一个 $$W_O$$」，是把单头误当成了不含输出投影的裸 $$\mathrm{softmax}(QK^T/\sqrt{d_k})V$$。
 
-  $$\mathrm{MultiHead}(Q,K,V)=\mathrm{Concat}(\mathrm{head}_1,\dots,\mathrm{head}_H)\,W_O$$
+  **FLOPs / 参数相同**：处处被 $$H\cdot d_h=d$$ 抵消——Q/K/V 投影合计 $$3d^2$$、$$W_O$$ 为 $$d^2$$，单头多头都是 $$4d^2$$；attention 的 score 从 1 个 $$T\times T$$ 变 $$H$$ 个，但每元素点积维度从 $$d$$ 降到 $$d_h$$，总量不变。
 
-  concat 只是把 $$H$$ 个头（各 $$d_h$$ 维）拼成 $$d$$ 维，头与头之间本无交互，必须靠一个 $$d\times d$$ 的矩阵 $$W_O$$ 再做一次跨头线性融合；单头直接输出 $$d$$ 维、没有这个矩阵，这就是「净增」的来源，显存也只多出它这一份。
+  **显存唯一真增的是 score**：单头存 $$(B,T,T)$$、MHA 存 $$(B,H,T,T)$$，是 $$H$$ 倍（FlashAttention 靠不显式落盘 score 规避）；参数、梯度、优化器部分两者相同。
 
 
 - **multi-head attention 的 embed 会不会有低秩的问题，怎么解决？**
