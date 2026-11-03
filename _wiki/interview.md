@@ -6427,9 +6427,9 @@ class LoRALinear(nn.Module):
 
 #### Evaluation
 
-- **Base model eval**
+- **常用 Benchmark**
 
-  基座模型（还没做对话对齐）的评测，看的是知识、推理、代码的原始能力；通常带 few-shot（prompt 里给几个示例）并配 CoT（Chain-of-Thought，思维链）。
+  基座模型（还没做对话对齐）的评测，看的是知识、推理、代码的原始能力。
 
   General Tasks: MMLU (5-shot), MMLU-Pro (5-shot, CoT), MMLU-redux (5-shot), BBH (3-shot, CoT), SuperGPQA (5-shot, CoT), Humanity's Last Exam (HLE).
 
