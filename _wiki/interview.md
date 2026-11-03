@@ -5366,13 +5366,10 @@ class SimpleMoE(nn.Module):
 
 - **MHA 相比单头 Self-Attention，会增加 FLOPs 和显存吗？**
 
-  保持总维度 $$d$$ 不变（$$d_h=d/H$$）时，**FLOPs 和参数量完全相同，只有 score 激活的显存变大**。
+  **FLOPs 不增加，显存增加**（总维度 $$d$$ 不变、$$d_h=d/H$$）。
 
-  **$$W_O$$ 不是多头多出来的**：$$\mathrm{MultiHead}=\mathrm{Concat}(\mathrm{head}_1,\dots,\mathrm{head}_H)\,W_O$$，$$H=1$$ 时退化为单头的 $$\mathrm{head}_1 W_O$$——单头作为完整模块同样带一个 $$d\times d$$ 的 $$W_O$$（concat 只拼接、$$W_O$$ 才做跨头融合）。说「多头多一个 $$W_O$$」，是把单头误当成了不含输出投影的裸 $$\mathrm{softmax}(QK^T/\sqrt{d_k})V$$。
-
-  **FLOPs / 参数相同**：处处被 $$H\cdot d_h=d$$ 抵消——Q/K/V 投影合计 $$3d^2$$、$$W_O$$ 为 $$d^2$$，单头多头都是 $$4d^2$$；attention 的 score 从 1 个 $$T\times T$$ 变 $$H$$ 个，但每元素点积维度从 $$d$$ 降到 $$d_h$$，总量不变。
-
-  **显存唯一真增的是 score**：单头存 $$(B,T,T)$$、MHA 存 $$(B,H,T,T)$$，是 $$H$$ 倍（FlashAttention 靠不显式落盘 score 规避）；参数、梯度、优化器部分两者相同。
+  - **FLOPs 相同**：都被 $$H\cdot d_h=d$$ 抵消——Q/K/V 投影合计 $$3d^2$$、$$W_O$$ 为 $$d^2$$（单头多头都有），共 $$4d^2$$；score 从 1 个 $$T\times T$$ 变 $$H$$ 个，但每元素点积维度从 $$d$$ 降到 $$d_h$$，总量不变。
+  - **显存增加在 score**：单头存 $$(B,T,T)$$、MHA 存 $$(B,H,T,T)$$，是 $$H$$ 倍（FlashAttention 即为规避它）；参数、梯度、优化器部分相同。
 
 
 - **multi-head attention 的 embed 会不会有低秩的问题，怎么解决？**
