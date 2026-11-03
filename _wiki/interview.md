@@ -5364,6 +5364,11 @@ class SimpleMoE(nn.Module):
   $$O(d * seq\_len * seq\_len)$$。
 
 
+- **Transformer 使用的时候，制约显存的最关键因素是什么？**
+
+  序列长度。
+
+
 - **MHA 相比单头 Self-Attention，会增加 FLOPs 和显存吗？**
 
   **FLOPs 不增加，显存增加**（总维度 $$d$$ 不变、$$d_h=d/H$$）。
@@ -5521,45 +5526,6 @@ class CrossAttention(nn.Module):
   - **Encoder-only（BERT）**：双向 attention，$h_i$ 依赖所有 token，新增 token 后 $K_i$、$V_i$ 失效，无法缓存
 
 
-- **KV Cache 显存怎么算？有哪些优化维度？**
-
-  单个 token 的 global KV Cache 字节数：
-
-  $$\text{bytes/token} = 2\,(K,V) \times L\,(\text{层数}) \times H_{kv}\,(\text{KV 头数}) \times d_{head}\,(\text{每头维度}) \times b\,(\text{每值字节数})$$
-
-  总显存再乘以 $$seq\_len \times batch\_size$$。以 LLaMA-2-7B（$$L=32,\ H_{kv}=32,\ d_{head}=128$$，FP16 即 $$b=2$$）为例，单 token 约 $$2 \times 32 \times 32 \times 128 \times 2 = 512$$ KB，128K 上下文单条序列就要约 64 GB。
-
-  所有优化本质就是压这几个因子 + 存储调度，共 **6 个维度**：
-
-  | 维度 | 压什么 | 代表方法 |
-  |------|--------|----------|
-  | **头数 $$H_{kv}$$** | 减少 KV head 数 | MQA（→1 头）、GQA（→G 组）|
-  | **每头维 $$d_{head}$$** | 低秩 / latent 压缩 | MLA |
-  | **层数 $$L$$** | 跨层共享 KV | CLA、YOCO、CED、CSA2 |
-  | **序列 $$S$$** | 少缓存 token | SWA、StreamingLLM / Attention Sink、H2O、DSA（top-k）|
-  | **精度 $$b$$** | KV 量化 | FP8 → FP4 / INT4（QAT）|
-  | **存储调度** | 系统层管理 | PagedAttention、Prefix Cache、KV Offload、Persistent KV |
-
-
-- **KV Cache 的发展历程？**
-
-  围绕上述 6 个维度，KV Cache 压缩主线如下（以 DeepSeek per-token global KV 为例，论文口径 V1 → V4.1-Flash 降低约 **437×**）：
-
-  | 时间 | 方法 | 主要维度 | 核心贡献 |
-  |------|------|----------|----------|
-  | 2017 | MHA（Transformer）| — | causal attention 无后效性，是 KV Cache 的前提 |
-  | 2019 | MQA | 头数 | 所有 Q head 共享 1 份 KV |
-  | 2023 | GQA | 头数 | 分组共享，质量 / 速度折中（LLaMA-2、Qwen）|
-  | 2023 | PagedAttention（vLLM）| 存储调度 | 按块分页管理 KV，消除显存碎片 |
-  | 2023 | StreamingLLM / H2O | 序列 | Attention Sink + 滑窗 / 重要 token 驱逐 |
-  | 2023 | KV 量化（FP8 / INT）| 精度 | 低比特存储 KV |
-  | 2024 | MLA（DeepSeek-V2）| 每头维 | latent 低秩压缩 KV |
-  | 2024 | YOCO / CLA | 层数 | 只缓存一次 / 跨层共享 KV |
-  | 2025 | DSA（DeepSeek-V3.2）| 序列 | indexer 动态 top-k 稀疏 |
-  | 2026 | IndexShare（GLM-5.2）| 序列 / 计算 | 多层共享 indexer |
-  | 2026.9 | CED + CSA2 + FP4（DeepSeek-V4.1-Flash）| 层数 + 序列 + 精度 | 跨层复用 + 稀疏 + FP4，**890 B/token** |
-
-
 - **multi-head attention + kv cache 实现**
 
   query 不参与下一 token 的注意力过程，无需缓存，而 key/value 是过去的记忆，需要缓存。
@@ -5616,9 +5582,43 @@ class SelfAttentionWithKVCache(nn.Module):
         return self.out_proj(out)
 ```
 
-- **Transformer 使用的时候，制约显存的最关键因素是什么？**
+- **KV Cache 显存怎么算？有哪些优化维度？**
 
-  序列长度。
+  单个 token 的 global KV Cache 字节数：
+
+  $$\text{bytes/token} = 2\,(K,V) \times L\,(\text{层数}) \times H_{kv}\,(\text{KV 头数}) \times d_{head}\,(\text{每头维度}) \times b\,(\text{每值字节数})$$
+
+  总显存再乘以 $$seq\_len \times batch\_size$$。以 LLaMA-2-7B（$$L=32,\ H_{kv}=32,\ d_{head}=128$$，FP16 即 $$b=2$$）为例，单 token 约 $$2 \times 32 \times 32 \times 128 \times 2 = 512$$ KB，128K 上下文单条序列就要约 64 GB。
+
+  所有优化本质就是压这几个因子 + 存储调度，共 **6 个维度**：
+
+  | 维度 | 压什么 | 代表方法 |
+  |------|--------|----------|
+  | **头数 $$H_{kv}$$** | 减少 KV head 数 | MQA（→1 头）、GQA（→G 组）|
+  | **每头维 $$d_{head}$$** | 低秩 / latent 压缩 | MLA |
+  | **层数 $$L$$** | 跨层共享 KV | CLA、YOCO、CED、CSA2 |
+  | **序列 $$S$$** | 少缓存 token | SWA、StreamingLLM / Attention Sink、H2O、DSA（top-k）|
+  | **精度 $$b$$** | KV 量化 | FP8 → FP4 / INT4（QAT）|
+  | **存储调度** | 系统层管理 | PagedAttention、Prefix Cache、KV Offload、Persistent KV |
+
+
+- **KV Cache 的发展历程？**
+
+  围绕上述 6 个维度，KV Cache 压缩主线如下（以 DeepSeek per-token global KV 为例，论文口径 V1 → V4.1-Flash 降低约 **437×**）：
+
+  | 时间 | 方法 | 主要维度 | 核心贡献 |
+  |------|------|----------|----------|
+  | 2017 | MHA（Transformer）| — | causal attention 无后效性，是 KV Cache 的前提 |
+  | 2019 | MQA | 头数 | 所有 Q head 共享 1 份 KV |
+  | 2023 | GQA | 头数 | 分组共享，质量 / 速度折中（LLaMA-2、Qwen）|
+  | 2023 | PagedAttention（vLLM）| 存储调度 | 按块分页管理 KV，消除显存碎片 |
+  | 2023 | StreamingLLM / H2O | 序列 | Attention Sink + 滑窗 / 重要 token 驱逐 |
+  | 2023 | KV 量化（FP8 / INT）| 精度 | 低比特存储 KV |
+  | 2024 | MLA（DeepSeek-V2）| 每头维 | latent 低秩压缩 KV |
+  | 2024 | YOCO / CLA | 层数 | 只缓存一次 / 跨层共享 KV |
+  | 2025 | DSA（DeepSeek-V3.2）| 序列 | indexer 动态 top-k 稀疏 |
+  | 2026 | IndexShare（GLM-5.2）| 序列 / 计算 | 多层共享 indexer |
+  | 2026.9 | CED + CSA2 + FP4（DeepSeek-V4.1-Flash）| 层数 + 序列 + 精度 | 跨层复用 + 稀疏 + FP4，**890 B/token** |
 
 
 - **KV Cache 量化（精度维度）？**
@@ -6111,10 +6111,6 @@ def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
 
   - 合成数据需要关注"信息增量"：如果合成数据的信息量不超过训练集中已有的，就是在引入噪声而非信号。
   - 合成完需要进一步清洗方可使用。
-
-  预训练阶段：rephrasing，主要针对知识和数学
-  - rephrasing：用 LLM 对同一知识点生成不同表述，增加多样性但不增加新知识
-  - 数学合成：用 LLM 生成题目 + 解题过程，用 sympy/代码验证答案正确性
 
 - **合成数据有什么风险？如何缓解？**
 
@@ -10877,7 +10873,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **需求或方案分歧怎么处理**。
 
-- **用非技术语言解释一个你做过的项目**。
+- **用非技术语言解释一个你工作的内容或做过的项目**。
 
 - **算法工作如何支撑业务指标**：怎么向业务方证明价值。
 
