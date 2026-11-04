@@ -6632,43 +6632,42 @@ RLHF 上层应用：veRL / OpenRLHF
 
 - **什么是回合级部分 rollout（Turn-level Partial Rollout）？**
 
-  **一句话**：让一条 agentic 轨迹可以"跑到一半先暂停、存起来，之后用新权重接着跑"，从而消除长尾任务对整批 rollout 的阻塞。来自 Kimi-Researcher 的端到端 agentic RL 基建。
+  让一条 agentic 轨迹可以"跑到一半先暂停、存起来，之后用新权重接着跑"，从而消除长尾任务对整批 rollout 的阻塞。
 
-  **要解决的问题**：Agentic RL 一条轨迹要多轮工具调用，多数任务几轮就结束，但长尾任务要几十上百轮。同步 rollout 下整批必须等最慢那条跑完，GPU 大量空转（straggler 问题）。
+  **要解决的问题**：Agentic RL 一条轨迹要多轮工具调用，多数任务几轮就结束，但长尾任务要几十上百轮。同步 rollout 下整批必须等最慢那条跑完，GPU 大量空转。
 
   **机制**：
-  - 对超出时间 / 回合预算的任务，不强行跑完，而是把中间状态（context、已走过的历史轨迹）保存到 replay buffer，相当于**暂停**这条轨迹；
+  - 对超出时间 / 回合预算的任务，不强行跑完，而是把中间状态保存到 replay buffer，相当于**暂停**这条轨迹；
   - 后续训练迭代里，用**更新后的模型权重**把它取出、继续跑剩余回合（**恢复 / 续跑**）；
   - 一条轨迹因此可以**跨多个 rollout 轮次分段完成**——这就是"可暂停 / 可恢复"的含义。
 
   **收益与代价**：
-  - **收益**：快任务跑完立即进训练、慢任务不阻塞整批，消除 GPU 空等；配合调整后的 RL 算法可拿到**至少 1.5× 的 rollout 加速**。
-  - **代价**：恢复时权重已更新，同一条轨迹前后由**不同策略**产生，变成 off-policy / 混合策略，需要 importance sampling 等做校正——这也是它必须"结合调整过的 RL 算法"的原因。
-
-  **配套基建**：全异步 rollout（Gym 风格接口，actor 生成 / 环境交互 / reward 计算并行调度）；高可靠沙箱（Kubernetes 混合云、动态资源调度、零停机部署），模型与工具间用 MCP（Model Context Protocol）维持有状态会话并支持断线重连——这是"可暂停 / 可恢复"能真正落地的底层保障。
+  - **收益**：快任务跑完立即进训练、慢任务不阻塞整批，消除 GPU 空等。
+  - **代价**：恢复时权重已更新，同一条轨迹前后由**不同策略**产生，变成 off-policy / 混合策略，需要 importance sampling 等做校正。
 
 
 - **SAO 和 PPO / GRPO 有什么区别？（异步 RL 的单轨迹优化）**
 
-  SAO（Single-rollout Asynchronous Optimization，单轨迹异步优化）是清华 + 智谱团队（唐杰、董豫肖等，arXiv 2607.07508，2026）为**异步 agentic RL** 设计的策略优化算法，已用于训练开源 GLM-5.2（750B-A40B）。一句话：用 **single-rollout（每个 prompt 只采一条、生成完立即训练）替代 GRPO 的 group-wise 采样**，从算法层根治异步 RL 的 off-policy 与稳定性问题。
+  SAO（Single-rollout Asynchronous Optimization，单轨迹异步优化）是为**异步 agentic RL** 设计的策略优化算法，已用于训练开源 GLM-5.2。一句话：用 **single-rollout（每个 prompt 只采一条、生成完立即训练）替代 GRPO 的 group-wise 采样**，从算法层根治异步 RL 的 off-policy 与稳定性问题。
 
   **要解决的问题**：异步 RL（rollout 到达即更新）比同步批量更高效，但现有系统只顾吞吐量、忽视训练稳定性。关键矛盾是——GRPO 的 group-wise 采样天然不适配异步：一个 prompt 的一组 rollout 必须等最慢那条跑完才能算组内 baseline，长尾任务导致数据陈旧（staleness）、off-policy 严重——这是异步训练固有的 rollout 滞后问题，SAO 直接从采样机制上根治它。
 
   **三个核心设计**：
   - **Single-rollout 采样**：每个 prompt 只用一条 rollout，生成完立即送训、不等其他样本 → 把 off-policy 程度压到最低，还提升泛化。
-  - **配套的 value model 训练**：single-rollout 没了组内相对 baseline，于是**重新引入 value model（critic）来估 advantage**——等于在异步场景下向 PPO 的 critic 路线回归。
+  - **配套的 value model 训练**：重新引入 value model（critic）来估 advantage。
   - **严格的双边 token 级裁剪（double-side token-level clipping）**：对重要性比率做更严的双侧 token 级 clip，稳住异步下的优化。
 
   | 维度 | PPO | GRPO | SAO |
   |-----|-----|------|-----|
   | 采样方式 | 每 prompt 采样，靠 critic 估 baseline | group-wise（每 prompt 一组） | single-rollout（每 prompt 一条） |
-  | baseline / advantage | value model（critic） | 组内相对（免 critic） | value model（critic，重新引入） |
   | 是否需要 critic | 要 | 不要 | 要 |
   | 同步 / 异步 | 多为同步 | 多为同步（组要等齐） | 异步原生（即产即训） |
   | off-policy / staleness | clip 控制 | 组等最慢 → 异步下 stale 严重 | single-rollout 最小化滞后 |
   | clip 机制 | 双边 ratio clip | 双边 ratio clip | 严格双边 token 级 clip |
 
-  **效果**：能稳定训练上千步，在 agentic coding / reasoning 基准（SWE-Bench Verified、BeyondAIME、IMOAnswerBench）上持续超过 GRPO 及其变体；在「模拟在线学习」（环境不断变化、模型要持续适应）场景尤其有效——这正是 single-rollout 低 off-policy 的优势所在。
+  **SAO vs PPO 一句话**：两者都用 critic，差别只在**数据流节奏**——PPO 同步「采一批、训一批」（团购，要等齐），SAO 异步「采一条、即产即训」（便利店，随到随买）。agentic 长尾下同步要干等最慢轨迹、GPU 空转，异步则不空转；代价是 staleness，靠严格 token 级 clip 稳住。
+
+  **效果**：能稳定训练上千步，这正是 single-rollout 低 off-policy 的优势所在。
 
   本质：SAO 是「异步友好性 vs 是否需要 critic」的再权衡。GRPO 当初为省掉 critic 改用组内对比，但组内对比在异步下要等一批 rollout、反而放大了 off-policy；SAO 索性回到每 prompt 一条 rollout（即产即训、滞后最小），代价是重新请回 value model。在长程 agentic 异步训练里，**宁可多养一个 critic，也要 single-rollout 的低 off-policy 与稳定性**。
 
