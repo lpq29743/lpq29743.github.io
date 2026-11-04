@@ -6483,7 +6483,7 @@ class LoRALinear(nn.Module):
   - 有用性（Helpfulness）
 
 
-#### Numerical Precision & Compute Estimation
+#### Compute & Precision
 
 - **bf16，fp16，fp32，int8 区别**
 
