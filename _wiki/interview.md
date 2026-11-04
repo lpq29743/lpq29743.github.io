@@ -6648,28 +6648,23 @@ RLHF 上层应用：veRL / OpenRLHF
 
 - **SAO 和 PPO / GRPO 有什么区别？（异步 RL 的单轨迹优化）**
 
-  SAO（Single-rollout Asynchronous Optimization，单轨迹异步优化）是为**异步 agentic RL** 设计的策略优化算法，已用于训练开源 GLM-5.2。一句话：用 **single-rollout（每个 prompt 只采一条、生成完立即训练）替代 GRPO 的 group-wise 采样**，从算法层根治异步 RL 的 off-policy 与稳定性问题。
+  SAO（Single-rollout Asynchronous Optimization）是为**异步 agentic RL** 设计的策略优化算法（已用于 GLM-5.2）。
 
-  **要解决的问题**：异步 RL（rollout 到达即更新）比同步批量更高效，但现有系统只顾吞吐量、忽视训练稳定性。关键矛盾是——GRPO 的 group-wise 采样天然不适配异步：一个 prompt 的一组 rollout 必须等最慢那条跑完才能算组内 baseline，长尾任务导致数据陈旧（staleness）、off-policy 严重——这是异步训练固有的 rollout 滞后问题，SAO 直接从采样机制上根治它。
+  **要解决的问题**：异步 RL（rollout 到达即更新）吞吐高，但 GRPO 的 group-wise 采样不适配——一组 rollout 必须等最慢那条跑完才能算组内 baseline，长尾任务下数据陈旧（staleness）、off-policy 严重。
 
   **三个核心设计**：
-  - **Single-rollout 采样**：每个 prompt 只用一条 rollout，生成完立即送训、不等其他样本 → 把 off-policy 程度压到最低，还提升泛化。
-  - **配套的 value model 训练**：重新引入 value model（critic）来估 advantage。
-  - **严格的双边 token 级裁剪（double-side token-level clipping）**：对重要性比率做更严的双侧 token 级 clip，稳住异步下的优化。
+  - **Single-rollout**：每 prompt 只采一条、生成完立即送训、不等其他 → off-policy 最小。
+  - **回归 critic**：没了组内 baseline，重新引入 value model 估 advantage。
+  - **严格双边 token 级 clip**：压制异步 staleness，稳住优化。
 
   | 维度 | PPO | GRPO | SAO |
   |-----|-----|------|-----|
-  | 采样方式 | 每 prompt 采样，靠 critic 估 baseline | group-wise（每 prompt 一组） | single-rollout（每 prompt 一条） |
+  | 采样方式 | 每 prompt 采样 | group-wise（一组） | single-rollout（一条） |
   | 是否需要 critic | 要 | 不要 | 要 |
   | 同步 / 异步 | 多为同步 | 多为同步（组要等齐） | 异步原生（即产即训） |
-  | off-policy / staleness | clip 控制 | 组等最慢 → 异步下 stale 严重 | single-rollout 最小化滞后 |
   | clip 机制 | 双边 ratio clip | 双边 ratio clip | 严格双边 token 级 clip |
 
-  **SAO vs PPO 一句话**：两者都用 critic，差别只在**数据流节奏**——PPO 同步「采一批、训一批」（团购，要等齐），SAO 异步「采一条、即产即训」（便利店，随到随买）。agentic 长尾下同步要干等最慢轨迹、GPU 空转，异步则不空转；代价是 staleness，靠严格 token 级 clip 稳住。
-
-  **效果**：能稳定训练上千步，这正是 single-rollout 低 off-policy 的优势所在。
-
-  本质：SAO 是「异步友好性 vs 是否需要 critic」的再权衡。GRPO 当初为省掉 critic 改用组内对比，但组内对比在异步下要等一批 rollout、反而放大了 off-policy；SAO 索性回到每 prompt 一条 rollout（即产即训、滞后最小），代价是重新请回 value model。在长程 agentic 异步训练里，**宁可多养一个 critic，也要 single-rollout 的低 off-policy 与稳定性**。
+  **一句话分清**：SAO vs PPO 都用 critic，差别只在**数据流节奏**——PPO 同步「采一批、训一批」（团购，要等齐），SAO 异步「采一条、即产即训」（便利店，随到随买）。本质是「异步友好性 vs 是否需要 critic」的再权衡：GRPO 为省 critic 改用组内对比，但异步下要等一组、反而放大 off-policy；SAO 宁可请回 critic，也要 single-rollout 的低滞后与稳定性。
 
 
 - **为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism**
