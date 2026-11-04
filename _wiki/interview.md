@@ -6429,36 +6429,21 @@ class LoRALinear(nn.Module):
 
 - **常用 Benchmark**
 
-  基座模型（还没做对话对齐）的评测，看的是知识、推理、代码的原始能力。
+  参考 [benchlm.ai](https://benchlm.ai/benchmarks)。
+  
+  Knowledge：Humanity's Last Exam (HLE)。MMLU, MMLU-Pro 已饱和。
+  
+  Reasoning：CritPt。GPQA-Diamond, BBH 已饱和。
 
-  General Tasks: MMLU (5-shot), MMLU-Pro (5-shot, CoT), MMLU-redux (5-shot), BBH (3-shot, CoT), SuperGPQA (5-shot, CoT), Humanity's Last Exam (HLE).
+  Coding：SciCode, FrontierSWE。SWEBench 已饱和。
 
-  Math & STEM Tasks: GPQA (5-shot, CoT), GSM8K (4-shot, CoT), MATH (4-shot, CoT).
+  Agentic：GDPval。BrowseComp, Terminal-bench 已饱和。
 
-  Coding Tasks: EvalPlus (0-shot), MultiPL-E (0-shot), MBPP-3shot, CRUX-O of CRUXEval (1-shot).
+  Vision：ZeroBench。MMMU, MMMU-Pro 已饱和。
 
-  Multilingual Tasks: MGSM (8-shot, CoT), MMMLU (5-shot), INCLUDE (5-shot).
+  Math：Apex。GSM8K, AIME, MATH 已饱和。
 
-
-- **Chat model eval**
-
-  对话 / 指令模型的评测，在基座能力之上再加对齐、指令遵循、Agent 与工具调用、真实任务等维度。
-
-  General Tasks: MMLU-Redux, GPQA-Diamond, C-Eval, LiveBench, Humanity's Last Exam (HLE).
-
-  Alignment Tasks: IFEval, Arena-Hard, AlignBench, Creative Writing V3, WritingBench.
-
-  Math & Text Reasoning: MATH-500, AIME’24, AIME’25, ZebraLogic, AutoLogi.
-
-  Abstract Reasoning: ARC-AGI-2（抽象推理，任务对人类直觉容易、对模型难，且每轮换新题、天然抗污染）.
-
-  Agent & Coding: BFCL v3, SWE-bench Verified, SWE-bench Pro（长程、抗污染的真实仓库任务）, Terminal-Bench（真实命令行环境的多步操作）, LiveCodeBench, Codeforces Ratings.
-
-  Real-world Tasks: GDPval（跨 44 种职业的真实、有经济价值任务）.
-
-  Multilingual Tasks: instruction following - Multi-IF, knowledge - INCLUDE & MMMLU, mathematics - MT-AIME2024 & PolyMath, and logical reasoning - MlogiQA.
-
-  Tool-use: TauBench.
+  Multilingual：Nova-63。INCLUDE 已饱和。
 
 
 - **为什么要 Live / 动态 benchmark？**
