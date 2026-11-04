@@ -6517,7 +6517,7 @@ class LoRALinear(nn.Module):
   推理显存 ≈ 参数显存 + batch_size × seq_len × num_layers × hidden_size × 2 × bytes，主要瓶颈是 KV Cache。 
 
 
-- **FLOPs 是什么？怎么估算训练 / 推理的计算量？**
+- **FLOPs 是什么？**
 
   **定义与术语辨析**：
 
@@ -6527,9 +6527,12 @@ class LoRALinear(nn.Module):
   | FLOPS 或 FLOP/s（大 S） | Floating Point Operations Per **Second**，每秒浮点运算次数 | 次/秒 | 硬件算力峰值 |
   | MACs | Multiply-Accumulate，乘加次数 | 次 | CV / 卷积模型常用 |
 
-  三者关系：**1 MAC = 2 FLOPs**（一次乘 + 一次加）；`训练总 FLOPs ÷ (卡数 × 单卡 FLOPS × MFU) = 墙钟时间`。混淆 FLOPs 与 FLOPS 是面试常见扣分点——前者是「要做多少活」，后者是「每秒能干多少活」。
+  三者关系：**1 MAC = 2 FLOPs**（一次乘 + 一次加）；`训练总 FLOPs ÷ (卡数 × 单卡 FLOPS × MFU) = 墙钟时间`。FLOPs 是要做多少活，FLOPS是每秒能干多少活。
 
   **基本单元**：一个 $$(m, k) \times (k, n)$$ 的矩阵乘，输出 $$mn$$ 个元素、每个需 $$k$$ 次乘加，故 $$MACs = mnk$$，$$FLOPs = 2mnk$$。所有估算都由这一条累加而来。
+
+
+- **怎么估算训练 / 推理的计算量？**
 
   **Transformer 单层每 token 的 FLOPs**（隐藏维 $$h$$，序列长 $$T$$，FFN 升到 $$4h$$，忽略 LN / bias / 激活等逐元素操作）：
 
@@ -6554,14 +6557,6 @@ class LoRALinear(nn.Module):
   - 总 FLOPs $$= 6 \times 7 \times 10^9 \times 10^{12} = 4.2 \times 10^{22}$$
   - A100 bf16 稠密峰值 $$= 312$$ TFLOPS，取 MFU $$= 45\%$$ → 有效 $$\approx 140$$ TFLOPS/卡
   - 墙钟 $$= 4.2 \times 10^{22} / 1.4 \times 10^{14} = 3 \times 10^{8}$$ 秒 $$\approx 3472$$ GPU·天 $$\approx 825$$ 张 A100 跑 4 天
-
-  这套算法同样能反推 Chinchilla 的 compute-optimal：给定算力预算 $$C$$，由 $$C = 6ND$$ 与 $$N \propto D$$ 即可解出最优的 $$N$$ 与 $$D$$。
-
-  **MFU vs HFU**：MFU（Model FLOPs Utilization）= 模型**数学必需**的 FLOPs ÷ 硬件峰值；HFU（Hardware FLOPs Utilization）= **实际执行**的 FLOPs ÷ 峰值，包含 activation recomputation 重算的部分。故恒有 HFU ≥ MFU，报训练效率时应说明用哪个口径（PaLM：MFU 46.2% / HFU 57.8%）。
-
-  **为什么 MFU 上不去**：峰值 FLOPS 假设 Tensor Core 满负荷，但实际存在访存瓶颈、非 GEMM 算子（softmax / LN / 激活）、流水气泡、跨卡通信、重算与负载不均。MFU 30%–50% 即属正常水平。
-
-  **最后一个坑：FLOPs 低 ≠ 延迟低**。真实 wall-clock 还取决于算术强度、访存带宽与 kernel 实现。典型反例是 decode 阶段：单 token 只有 $$2N$$ FLOPs，却要把全部权重从 HBM 读一遍，因此是**带宽受限**而非算力受限——这也解释了为什么 int8/int4 量化能显著加速 decode（减少读取字节数），而对 prefill 收益小得多。
 
 
 #### Distributed Training
