@@ -6664,7 +6664,7 @@ RLHF 上层应用：veRL / OpenRLHF
   | 同步 / 异步 | 多为同步 | 多为同步（组要等齐） | 异步原生（即产即训） |
   | clip 机制 | 双边 ratio clip | 双边 ratio clip | 严格双边 token 级 clip |
 
-  **一句话分清**：SAO vs PPO 都用 critic，差别只在**数据流节奏**——PPO 同步「采一批、训一批」（团购，要等齐），SAO 异步「采一条、即产即训」（便利店，随到随买）。本质是「异步友好性 vs 是否需要 critic」的再权衡：GRPO 为省 critic 改用组内对比，但异步下要等一组、反而放大 off-policy；SAO 宁可请回 critic，也要 single-rollout 的低滞后与稳定性。
+  SAO 和 PPO 都用 critic，差别在 PPO 同步「采一批、训一批」，SAO 异步「采一条、即产即训」。GRPO 为省 critic 改用组内对比，但异步下要等一组、反而放大 off-policy；SAO 宁可请回 critic，也要 single-rollout 的低滞后与稳定性。
 
 
 - **为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism**
@@ -6831,35 +6831,32 @@ RLHF 上层应用：veRL / OpenRLHF
 
 - **如何将大模型压缩为小模型？**
 
-  - **知识蒸馏（Knowledge Distillation）**：
-    - **Off-policy KD（传统）**：用教师模型离线生成数据，学生模型做 SFT。问题：分布偏移（exposure bias）。
-    - **On-policy KD（主流方向）**：学生模型自身采样（on-policy rollout），用 reverse KL 对齐教师分布，避免 exposure bias。代表工作：MiniLLM。
-    - **效果**：数学推理等任务上小模型可接近教师水平，计算成本远低于 RL。
+  - **知识蒸馏（KD）**：用教师模型指导学生训练，详见下两题。
+  - **剪枝（Pruning）**：移除不重要的结构（层 / 头 / FFN 维度）。代表：**Sheared LLaMA**（结构化剪枝，剪到指定大小，仅需 3% 计算量）、**LLM-Pruner**（边剪边搜，无固定目标）。
+  - **量化（Quantization）**：降低精度（fp16 → int8/int4），详见「量化」条目。
+  - **Weight Subcloning**：把大模型权重裁剪重组为小模型初始化，无需教师在线，可达 4x 训练加速。
+  - **参数共享**：跨层共享参数减少总量，如 ALBERT。
 
-  **为什么 On-policy KD 用 Reverse KL 而不是 Forward KL？**
+
+- **知识蒸馏：Off-policy KD 和 On-policy KD 有什么区别？**
+
+  - **Off-policy KD（传统）**：用教师模型离线生成数据，学生做 SFT。问题是分布偏移（exposure bias）——学生只在教师数据上训练，自己生成时会偏离。
+  - **On-policy KD（主流方向）**：学生自身采样（on-policy rollout），用 reverse KL 对齐教师分布，避免 exposure bias。代表工作 MiniLLM。
+  - **效果**：数学推理等任务上小模型可接近教师水平，计算成本远低于 RL。
+
+
+- **为什么 On-policy KD 用 Reverse KL 而不是 Forward KL？**
 
   | 维度 | Forward KL: D_KL(P_teacher ‖ P_student) | Reverse KL: D_KL(P_student ‖ P_teacher) |
   |------|----------------------------------------|----------------------------------------|
-  | **优化目标** | 教师分布覆盖的地方，学生必须覆盖 | 学生分布必须在教师分布支撑集内 |
+  | **优化目标** | 教师覆盖的地方学生必须覆盖 | 学生分布必须在教师支撑集内 |
   | **行为特点** | Mode-covering（覆盖所有模式） | Mode-seeking（寻找主要模式） |
-  | **问题** | 学生可能生成低质量样本（教师分布外） | 学生不会生成教师分布外的样本 |
+  | **问题** | 学生可能生成教师分布外的低质量样本 | 学生不会生成教师分布外的样本 |
   | **适用场景** | Off-policy（数据已固定） | On-policy（学生自己采样） |
 
-  **核心原因：**
-  - On-policy KD 中，学生模型自己采样生成训练数据
-  - 如果用 Forward KL，学生为了覆盖教师分布，可能生成教师分布外的低质量样本，导致 exposure bias
-  - Reverse KL 强制学生只在教师分布支撑集内生成，避免生成"教师不会生成但学生生成了"的样本
+  **核心原因**：On-policy KD 中学生自己采样，若用 Forward KL，学生为覆盖教师分布可能生成教师分布外的低质量样本、导致 exposure bias；Reverse KL 强制学生只在教师支撑集内生成。
 
-  **直观理解：**
-  - Forward KL：学生要"学会教师的全部"（包括教师不会做的事）
-  - Reverse KL：学生"只做教师会做的事"
-  - **剪枝（Pruning）**：
-    - **Sheared LLaMA**：结构化剪枝（减少层数、注意力头、FFN 维度），配合 Dynamic Batch Loading（动态调整不同领域数据比例），从 LLaMA2-7B 剪到 1.3B/2.7B 只需从头训练 3% 的计算量，性能超过同期开源小模型。
-    - **LLM-Pruner**：边剪边搜，没有固定目标结构。
-    - 区别：Sheared LLaMA 明确剪到指定目标大小，用 Layerwise Importance Score 驱动非均匀剪枝。
-  - **量化（Quantization）**：将 fp16/bf16 精度降低到 int8/int4，包括 PTQ（训练后量化）和 QAT（训练时量化）。GPTQ 采用逐层逐通道二次误差最小化；AWQ 根据激活值重要性选择性量化权重。
-  - **Weight Subcloning**：一次性将大模型权重裁剪重组为小模型初始化，无需蒸馏、无需教师网络在线。两步操作：Neuron Importance Ranking（神经元重要性排序）+ Block Removal（移除 Transformer 块）。ViT/LM 任务可实现 4x 训练加速。
-  - **参数共享**：如 ALBERT 使用跨层参数共享，减少总参数量。
+  **直观理解**：Forward KL 要学生「学会教师的全部」（含教师不会做的事），Reverse KL 让学生「只做教师会做的事」。
 
 
 - **如何将小模型扩展为大模型？**
