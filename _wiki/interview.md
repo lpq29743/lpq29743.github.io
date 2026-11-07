@@ -7147,7 +7147,7 @@ RLHF 上层应用：veRL / OpenRLHF
 
 - **策略优化有哪两条主线？基线算法和可优化的组件分别是什么？**
 
-  后训练里的策略优化 / 对齐可以归成两条主线，每条各有一个基线算法，后续工作大多是在改基线的某个组件：
+  后训练里的策略优化 / 对齐可以归成两条主线：
 
   - **主线 A：在线 RL（online，有 reward、需探索）**——基线 REINFORCE → PPO → GRPO；
   - **主线 B：离线偏好对齐（offline，有成对偏好、免显式探索）**——基线 DPO。
@@ -7158,8 +7158,6 @@ RLHF 上层应用：veRL / OpenRLHF
   2. **更新步长约束**：怎么限制新旧策略别差太远（TRPO 的 KL 硬约束 → PPO 的 clip → DAPO 的 Clip-Higher）；
   3. **奖励 / KL 处理**：reward 从哪来、KL 放 loss 还是 reward、要不要 KL（DAPO 直接去 KL）；
   4. **loss 粒度与采样**：token-level 还是 sample-level、静态还是动态采样。
-
-  下表先给出全景（各算法改了基线的哪个组件），后面条目再按“基线 → 逐个组件的后续优化”逐个展开：
 
   | 算法 | 基线 | 改的组件 | 关键改动 |
   |------|------|---------|---------|
@@ -7271,17 +7269,6 @@ def critic_loss(values, old_values, advantages, clip_range=0.2):
   更深层的原因在于梯度估计：critic 输出的 $$V(s_t)$$ 充当优势估计的 baseline，是方差缩减器。由于 $$V(s_t)$$ 不依赖当前 action，减去它不改变梯度的期望（保持无偏），但能显著降低方差。其效果是只有超出预期（$$Q(s_t,a_t) > V(s_t)$$，即 advantage > 0）的 action 才会被强化，低于预期的被抑制，避免了"只要回合总奖励为正，所有 token 都被无差别强化"的问题，使训练更稳定。
 
 
-- **除了 GRPO 的组内均值，还有哪些“免 critic 的 baseline”？（RLOO / ReMax）**
-
-  GRPO、RLOO、ReMax 是同一思路的不同实现——都不训练 critic，而用一个廉价 baseline 给策略梯度降方差：
-
-  - **GRPO**：同一 prompt 采样 G 个输出，用**组内奖励均值**（再除标准差归一化）作 baseline；
-  - **RLOO**（REINFORCE Leave-One-Out）：对组内第 i 个样本，用**其余 G-1 个样本的平均奖励**作它的 baseline，避免把样本自己计入均值带来的偏置；
-  - **ReMax**：用**贪心解码（greedy）**那一条输出的奖励作 baseline，每个 prompt 只需多解码一条，采样成本最低。
-
-  三者都用“同 prompt 的其他采样”替代 critic，省掉价值网络的训练与显存开销，代价是 baseline 质量依赖采样数。
-
-
 - **GRPO 的原理和流程是怎样的？**
 
 
@@ -7336,6 +7323,17 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - **奖励侧——奖励细化**：全对 / 全错通常出现在**二值奖励**（对 / 错）上；把奖励做成多维连续（格式、动作选择、参数、内容质量分开打分），组内自然出现方差，从源头缓解零方差。
 
   **兜底认知**：零方差组本身无害（跳过即可，不会引入坏梯度），真正的代价是采样预算浪费——所以优化重点是「**提高有效组比例**」（难度管理 + 动态采样 + 奖励细化），而不是「拯救零方差组」。
+
+
+- **除了 GRPO 的组内均值，还有哪些“免 critic 的 baseline”？（RLOO / ReMax）**
+
+  GRPO、RLOO、ReMax 是同一思路的不同实现——都不训练 critic，而用一个廉价 baseline 给策略梯度降方差：
+
+  - **GRPO**：同一 prompt 采样 G 个输出，用**组内奖励均值**（再除标准差归一化）作 baseline；
+  - **RLOO**（REINFORCE Leave-One-Out）：对组内第 i 个样本，用**其余 G-1 个样本的平均奖励**作它的 baseline，避免把样本自己计入均值带来的偏置；
+  - **ReMax**：用**贪心解码（greedy）**那一条输出的奖励作 baseline，每个 prompt 只需多解码一条，采样成本最低。
+
+  三者都用“同 prompt 的其他采样”替代 critic，省掉价值网络的训练与显存开销，代价是 baseline 质量依赖采样数。
 
 
 - **为什么 MoE + GRPO 不稳定？怎么解决？**
