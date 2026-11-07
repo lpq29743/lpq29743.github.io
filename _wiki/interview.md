@@ -7406,21 +7406,16 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - GRPO 先在样本内按 Token 数平均 loss，再在样本间聚合 loss，从而导致较长样本和较短样本的损失贡献是一样的，即对于答案正确的，GRPO 偏向于选择答案长度较短的回复，而对于答案错误的，GRPO 偏向于让模型生成更长的回复。DAPO 改进为 Token-Level 策略梯度损失
   - 在 RL 训练中，一般会设置最大长度，对过长回复进行截断，从而其 reward 会为 -1，扰乱训练。DAPO 设置了对长序列的合理惩罚（Overlong Reward Shaping），避免过长后截断导致模型无法得到奖励的情形，以缓解噪声并稳定训练。
 
-  **一条主线**：这几个改动都在解同一个问题——**防止策略过早坍缩、保持探索信号**：Clip-Higher 防概率坍缩、Dynamic Sampling 防采样信号枯竭、Token-Level Loss 防长轨迹信号稀释、Overlong Reward Shaping 防一刀切丢信号，去 KL 则是给 long-CoT 大幅偏离初始分布松绑。这也是它和 PPO 系「求稳」思路的差别——**DAPO 是「求探索」的**，专治长思维链 / 长轨迹下的熵坍缩与信号稀疏。
-
-
-- **GSPO 是什么？**
-
-  重要性采样修正不再对应 token 级别，而是对应序列级别。
+  **一条主线**：这几个改动都在解同一个问题——**防止策略过早坍缩、保持探索信号**：Clip-Higher 防概率坍缩、Dynamic Sampling 防采样信号枯竭、Token-Level Loss 防长轨迹信号稀释、Overlong Reward Shaping 防一刀切丢信号，去 KL 则是给 long-CoT 大幅偏离初始分布松绑。这也是它和 PPO 系「求稳」思路的差别——**DAPO 是「求探索」的**，专治长思维链 / 长轨迹下的熵坍缩与信号稀疏。（另一支 **GSPO** 则改重要性采样粒度：从 token 级升到序列级，见文末总结表。）
 
 
 - **Agentic / 多轮 RL 时代，策略优化在算法层有哪些新变化？**
 
   单轮 RL 的假设（一条完整回答 = 一个 episode、reward 落在末尾）在多轮 / 长程 Agent 场景失效，算法层主要有三处调整：
 
-  - **信用分配从 token 级升到 turn / step 级**：一次任务含多轮“思考 → 调用工具 → 观察”，只有 token 级 advantage 无法区分是哪一轮的决策导致成败；因此按 turn / step 聚合奖励与优势，给中间轮次也分配信用，而非只在轨迹末尾给一个稀疏 reward。
-  - **GiGPO（Group-in-Group）**：长程任务里单纯按整条轨迹分组比较信号太粗，GiGPO 做**两级分组**——外层按任务 / 轨迹分组、内层对同一状态下的不同动作分组，兼顾长程回报与单步动作的相对优势。
-  - **ARPO（Agentic Reinforced Policy Optimization）**：针对工具调用，用**熵**监控策略不确定性，在高熵（高不确定）的关键分支处做**自适应 rollout**（多采几条），把算力投在真正影响结果的决策点上，提升长程 tool-use 的训练效率。
+  - **信用分配从 token 级升到 turn / step 级**：一次任务含多轮「思考 → 调用工具 → 观察」，token 级 advantage 无法区分是哪一轮的决策导致成败，需把信用分配的基本单元升到 turn / step；
+  - **两级分组做细粒度对比（GiGPO）**：整条轨迹分组信号太粗，GiGPO 用两级分组（外层轨迹级 + 内层同状态动作级）兼顾长程回报与单步优势；
+  - **熵驱动的自适应 rollout（ARPO）**：针对工具调用，用熵监控策略不确定性，在高熵关键分支自适应多采几条，把算力投在真正影响结果的决策点上。
 
 
 - **多轮 / 长程 RL 把信用分配从 token 级升到 turn 级，有哪几种手段？**
