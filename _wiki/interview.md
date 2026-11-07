@@ -6284,7 +6284,7 @@ def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
 
   前向匹配（Forward Maximum Matching）+ 动态规划（如 Viterbi 算法）
 
-#### Decoding and Inference
+#### Decoding Strategies
 
 - **temperature/Top-k/Top-p**
 
