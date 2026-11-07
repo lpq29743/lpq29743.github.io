@@ -7327,45 +7327,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   Freeze Router（冻结路由）：在大规模 RL 时直接冻结 MoE Router，抑制专家负载随训练漂移。与 Routing Replay 的区别是：后者对齐 rollout 与 training 的路由，前者从源头固定路由不再更新。
 
 
-- **为什么 GLM 后来用回 PPO？**
-
-  GLM 从 GRPO 切回 PPO，根本原因是**训练目标转向多轮 / 长程 agentic 任务**——GRPO 在这类任务上的短板被放大，三点归因：
-
-  1. **信用分配粒度不匹配**：GRPO 的优势来自组内相对比较，本质是**轨迹级**的——一条轨迹里所有 token 共享同一个相对优势信号。单轮任务无所谓，但多轮 / Agent 任务里，长轨迹中某一轮的失误会被整条轨迹的奖励平均掉，credit assignment 不精确；PPO 的 **critic + GAE** 能给出 token / 轮级更细粒度的优势估计。
-  2. **Rollout 成本**：GRPO 每个 prompt 要采 G 条样本，纯文本生成尚可；但 agentic 场景每条轨迹要和工具 / 环境反复交互，rollout 成本放大数倍到数十倍，PPO 单样本 + 价值估计在大规模下吞吐更高。
-  3. **大规模稳定性**：组内基线方差大，奖励稀疏或组内样本少时优势噪声大、大规模训练易不稳；critic 提供低方差基线，长程任务训练更稳。
-
-  一个具体触发点是 **compaction（长轨迹压缩切分）**：超长轨迹要切成多个子轨迹，导致同一 prompt 的不同 rollout 子轨迹**数量不同、长度差异大**，GRPO 的 group-wise 组内比较无从对齐、组内归一化会扭曲优势估计。
-
-  GLM-5.2 的解法是回归 PPO 范式（single-rollout + critic + token-level loss）；其长程异步下的工程实现即 **SAO**。
-
-
-- **SAO 和 PPO / GRPO 有什么区别？（异步 RL 的单轨迹优化）**
-
-  SAO（Single-rollout Asynchronous Optimization）是为**异步 agentic RL** 设计的策略优化算法（已用于 GLM-5.2）。
-
-  **要解决的问题**：异步 RL（rollout 到达即更新）吞吐高，但 GRPO 的 group-wise 采样不适配——一组 rollout 必须等最慢那条跑完才能算组内 baseline，长尾任务下数据陈旧（staleness）、off-policy 严重。
-
-  **三个核心设计**：
-  - **Single-rollout**：每 prompt 只采一条、生成完立即送训、不等其他 → off-policy 最小。
-  - **回归 critic**：没了组内 baseline，重新引入 value model 估 advantage。
-  - **严格双边 token 级 clip**：压制异步 staleness，稳住优化。
-
-  **长程 + 异步下还要解一组工程难题**——核心问题是「长轨迹 + 异步采样下数据严重滞后（off-policy）时如何稳定更新」：长程轨迹生成慢、不同 rollout 快慢差异大，一条轨迹生成期间训练引擎可能已更新多版，数据回来时早已不是当前策略所采，off-policy 随轨迹变长而恶化；且「生成开始时那个 old 策略」在长轨迹下根本不是一个确定版本。针对这些问题，三条对策：
-  - **用 rollout 替代 old 作重要性采样基准**：与其假设不存在的单一 old 版本，不如按 rollout 实际发生时的状态处理；
-  - **不对称裁剪**：clip 对策略收缩（概率下降）容忍度低、对扩张（概率上升）容忍度高——探索期允许新尝试被放大，收敛期严格约束「把错误动作概率打下去」；
-  - **保留最近 k 轮策略快照**：缓解轨迹数据与当前策略版本差距过大。
-
-  | 维度 | PPO | GRPO | SAO |
-  |-----|-----|------|-----|
-  | 采样方式 | 每 prompt 采样 | group-wise（一组） | single-rollout（一条） |
-  | 是否需要 critic | 要 | 不要 | 要 |
-  | 同步 / 异步 | 多为同步 | 多为同步（组要等齐） | 异步原生（即产即训） |
-  | clip 机制 | 双边 ratio clip | 双边 ratio clip | 严格双边 token 级 clip |
-
-  SAO 和 PPO 都用 critic，差别在 PPO 同步「采一批、训一批」，SAO 异步「采一条、即产即训」。GRPO 为省 critic 改用组内对比，但异步下要等一组、反而放大 off-policy；SAO 宁可请回 critic，也要 single-rollout 的低滞后与稳定性。
-
-
 - **GRPO 和 PPO 该怎么选？**
 
   场景依赖，不是谁更先进：
@@ -7424,7 +7385,57 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - GRPO 先在样本内按 Token 数平均 loss，再在样本间聚合 loss，从而导致较长样本和较短样本的损失贡献是一样的，即对于答案正确的，GRPO 偏向于选择答案长度较短的回复，而对于答案错误的，GRPO 偏向于让模型生成更长的回复。DAPO 改进为 Token-Level 策略梯度损失
   - 在 RL 训练中，一般会设置最大长度，对过长回复进行截断，从而其 reward 会为 -1，扰乱训练。DAPO 设置了对长序列的合理惩罚（Overlong Reward Shaping），避免过长后截断导致模型无法得到奖励的情形，以缓解噪声并稳定训练。
 
-  **一条主线**：这几个改动都在解同一个问题——**防止策略过早坍缩、保持探索信号**：Clip-Higher 防概率坍缩、Dynamic Sampling 防采样信号枯竭、Token-Level Loss 防长轨迹信号稀释、Overlong Reward Shaping 防一刀切丢信号，去 KL 则是给 long-CoT 大幅偏离初始分布松绑。这也是它和 PPO 系「求稳」思路的差别——**DAPO 是「求探索」的**，专治长思维链 / 长轨迹下的熵坍缩与信号稀疏。（另一支 **GSPO** 则改重要性采样粒度：从 token 级升到序列级，见文末总结表。）
+  **一条主线**：这几个改动都在解同一个问题——**防止策略过早坍缩、保持探索信号**：Clip-Higher 防概率坍缩、Dynamic Sampling 防采样信号枯竭、Token-Level Loss 防长轨迹信号稀释、Overlong Reward Shaping 防一刀切丢信号，去 KL 则是给 long-CoT 大幅偏离初始分布松绑。这也是它和 PPO 系「求稳」思路的差别——**DAPO 是「求探索」的**，专治长思维链 / 长轨迹下的熵坍缩与信号稀疏。
+
+
+- **GSPO 相比 GRPO 改进了什么？**
+
+  GSPO（Group Sequence Policy Optimization）是 GRPO 的另一条改进分支，核心是把**重要性采样 / clip 的粒度从 token 级升到序列级**。
+
+  **要解决的问题**：GRPO / PPO 的重要性比率是 token 级的——每个 token 各算一个新旧概率比 $$r_t$$ 并逐个 clip。长序列（长 CoT、agentic 长轨迹）下成百上千个 token 比率累乘，方差被逐步放大，个别 token 的极端 ratio 容易主导梯度、训练不稳；MoE 场景下 token 级比率还会因专家路由抖动而剧烈波动。
+
+  **核心改动**：GSPO 不再逐个 token 修正，而是用**整条序列的似然比**（做长度归一化 / 几何平均）作为一个序列级 ratio，在**序列层面**统一 clip 与优化。
+
+  **效果**：把方差从「随序列长度累积」压回序列整体，训练更稳、对长序列与 MoE 更友好。与 DAPO 的分工——DAPO 仍在 token 级基础上改采样 / clip 上下界 / loss 以求探索，GSPO 则直接换掉重要性采样的**粒度**。
+
+
+- **为什么 GLM 后来用回 PPO？**
+
+  GLM 从 GRPO 切回 PPO，根本原因是**训练目标转向多轮 / 长程 agentic 任务**——GRPO 在这类任务上的短板被放大，三点归因：
+
+  1. **信用分配粒度不匹配**：GRPO 的优势来自组内相对比较，本质是**轨迹级**的——一条轨迹里所有 token 共享同一个相对优势信号。单轮任务无所谓，但多轮 / Agent 任务里，长轨迹中某一轮的失误会被整条轨迹的奖励平均掉，credit assignment 不精确；PPO 的 **critic + GAE** 能给出 token / 轮级更细粒度的优势估计。
+  2. **Rollout 成本**：GRPO 每个 prompt 要采 G 条样本，纯文本生成尚可；但 agentic 场景每条轨迹要和工具 / 环境反复交互，rollout 成本放大数倍到数十倍，PPO 单样本 + 价值估计在大规模下吞吐更高。
+  3. **大规模稳定性**：组内基线方差大，奖励稀疏或组内样本少时优势噪声大、大规模训练易不稳；critic 提供低方差基线，长程任务训练更稳。
+
+  一个具体触发点是 **compaction（长轨迹压缩切分）**：超长轨迹要切成多个子轨迹，导致同一 prompt 的不同 rollout 子轨迹**数量不同、长度差异大**，GRPO 的 group-wise 组内比较无从对齐、组内归一化会扭曲优势估计。
+
+  GLM-5.2 的解法是回归 PPO 范式（single-rollout + critic + token-level loss）；其长程异步下的工程实现即 **SAO**。
+
+
+- **SAO 和 PPO / GRPO 有什么区别？（异步 RL 的单轨迹优化）**
+
+  SAO（Single-rollout Asynchronous Optimization）是为**异步 agentic RL** 设计的策略优化算法（已用于 GLM-5.2）。
+
+  **要解决的问题**：异步 RL（rollout 到达即更新）吞吐高，但 GRPO 的 group-wise 采样不适配——一组 rollout 必须等最慢那条跑完才能算组内 baseline，长尾任务下数据陈旧（staleness）、off-policy 严重。
+
+  **三个核心设计**：
+  - **Single-rollout**：每 prompt 只采一条、生成完立即送训、不等其他 → off-policy 最小。
+  - **回归 critic**：没了组内 baseline，重新引入 value model 估 advantage。
+  - **严格双边 token 级 clip**：压制异步 staleness，稳住优化。
+
+  **长程 + 异步下还要解一组工程难题**——核心问题是「长轨迹 + 异步采样下数据严重滞后（off-policy）时如何稳定更新」：长程轨迹生成慢、不同 rollout 快慢差异大，一条轨迹生成期间训练引擎可能已更新多版，数据回来时早已不是当前策略所采，off-policy 随轨迹变长而恶化；且「生成开始时那个 old 策略」在长轨迹下根本不是一个确定版本。针对这些问题，三条对策：
+  - **用 rollout 替代 old 作重要性采样基准**：与其假设不存在的单一 old 版本，不如按 rollout 实际发生时的状态处理；
+  - **不对称裁剪**：clip 对策略收缩（概率下降）容忍度低、对扩张（概率上升）容忍度高——探索期允许新尝试被放大，收敛期严格约束「把错误动作概率打下去」；
+  - **保留最近 k 轮策略快照**：缓解轨迹数据与当前策略版本差距过大。
+
+  | 维度 | PPO | GRPO | SAO |
+  |-----|-----|------|-----|
+  | 采样方式 | 每 prompt 采样 | group-wise（一组） | single-rollout（一条） |
+  | 是否需要 critic | 要 | 不要 | 要 |
+  | 同步 / 异步 | 多为同步 | 多为同步（组要等齐） | 异步原生（即产即训） |
+  | clip 机制 | 双边 ratio clip | 双边 ratio clip | 严格双边 token 级 clip |
+
+  SAO 和 PPO 都用 critic，差别在 PPO 同步「采一批、训一批」，SAO 异步「采一条、即产即训」。GRPO 为省 critic 改用组内对比，但异步下要等一组、反而放大 off-policy；SAO 宁可请回 critic，也要 single-rollout 的低滞后与稳定性。
 
 
 - **Agentic / 多轮 RL 时代，策略优化在算法层有哪些新变化？**
