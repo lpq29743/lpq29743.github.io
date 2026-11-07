@@ -6691,32 +6691,6 @@ RLHF 上层应用：veRL / OpenRLHF
   - **代价**：恢复时权重已更新，同一条轨迹前后由**不同策略**产生，变成 off-policy / 混合策略，需要 importance sampling 等做校正。
 
 
-- **SAO 和 PPO / GRPO 有什么区别？（异步 RL 的单轨迹优化）**
-
-  SAO（Single-rollout Asynchronous Optimization）是为**异步 agentic RL** 设计的策略优化算法（已用于 GLM-5.2）。
-
-  **要解决的问题**：异步 RL（rollout 到达即更新）吞吐高，但 GRPO 的 group-wise 采样不适配——一组 rollout 必须等最慢那条跑完才能算组内 baseline，长尾任务下数据陈旧（staleness）、off-policy 严重。
-
-  **三个核心设计**：
-  - **Single-rollout**：每 prompt 只采一条、生成完立即送训、不等其他 → off-policy 最小。
-  - **回归 critic**：没了组内 baseline，重新引入 value model 估 advantage。
-  - **严格双边 token 级 clip**：压制异步 staleness，稳住优化。
-
-  **长程 + 异步下还要解一组工程难题**——核心问题是「长轨迹 + 异步采样下数据严重滞后（off-policy）时如何稳定更新」：长程轨迹生成慢、不同 rollout 快慢差异大，一条轨迹生成期间训练引擎可能已更新多版，数据回来时早已不是当前策略所采，off-policy 随轨迹变长而恶化；且「生成开始时那个 old 策略」在长轨迹下根本不是一个确定版本。针对这些问题，三条对策：
-  - **用 rollout 替代 old 作重要性采样基准**：与其假设不存在的单一 old 版本，不如按 rollout 实际发生时的状态处理；
-  - **不对称裁剪**：clip 对策略收缩（概率下降）容忍度低、对扩张（概率上升）容忍度高——探索期允许新尝试被放大，收敛期严格约束「把错误动作概率打下去」；
-  - **保留最近 k 轮策略快照**：缓解轨迹数据与当前策略版本差距过大。
-
-  | 维度 | PPO | GRPO | SAO |
-  |-----|-----|------|-----|
-  | 采样方式 | 每 prompt 采样 | group-wise（一组） | single-rollout（一条） |
-  | 是否需要 critic | 要 | 不要 | 要 |
-  | 同步 / 异步 | 多为同步 | 多为同步（组要等齐） | 异步原生（即产即训） |
-  | clip 机制 | 双边 ratio clip | 双边 ratio clip | 严格双边 token 级 clip |
-
-  SAO 和 PPO 都用 critic，差别在 PPO 同步「采一批、训一批」，SAO 异步「采一条、即产即训」。GRPO 为省 critic 改用组内对比，但异步下要等一组、反而放大 off-policy；SAO 宁可请回 critic，也要 single-rollout 的低滞后与稳定性。
-
-
 - **为什么 MoE 训练使用 Expert Parallelism 而不是 Tensor Parallelism**
 
   MoE 用 gating 网络在多个专家中选择最合适的几个来处理输入，因此 Expert Parallelism 不会损失 Data Parallelism 的数量，因为不同 Expert 处理不同的 Data
@@ -7363,7 +7337,33 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   一个具体触发点是 **compaction（长轨迹压缩切分）**：超长轨迹要切成多个子轨迹，导致同一 prompt 的不同 rollout 子轨迹**数量不同、长度差异大**，GRPO 的 group-wise 组内比较无从对齐、组内归一化会扭曲优势估计。
 
-  GLM-5.2 的解法是回归 PPO 范式（single-rollout + critic + token-level loss）；其长程异步下的工程实现即 **SAO**，详见 Distributed Training 子节的 SAO 题。
+  GLM-5.2 的解法是回归 PPO 范式（single-rollout + critic + token-level loss）；其长程异步下的工程实现即 **SAO**。
+
+
+- **SAO 和 PPO / GRPO 有什么区别？（异步 RL 的单轨迹优化）**
+
+  SAO（Single-rollout Asynchronous Optimization）是为**异步 agentic RL** 设计的策略优化算法（已用于 GLM-5.2）。
+
+  **要解决的问题**：异步 RL（rollout 到达即更新）吞吐高，但 GRPO 的 group-wise 采样不适配——一组 rollout 必须等最慢那条跑完才能算组内 baseline，长尾任务下数据陈旧（staleness）、off-policy 严重。
+
+  **三个核心设计**：
+  - **Single-rollout**：每 prompt 只采一条、生成完立即送训、不等其他 → off-policy 最小。
+  - **回归 critic**：没了组内 baseline，重新引入 value model 估 advantage。
+  - **严格双边 token 级 clip**：压制异步 staleness，稳住优化。
+
+  **长程 + 异步下还要解一组工程难题**——核心问题是「长轨迹 + 异步采样下数据严重滞后（off-policy）时如何稳定更新」：长程轨迹生成慢、不同 rollout 快慢差异大，一条轨迹生成期间训练引擎可能已更新多版，数据回来时早已不是当前策略所采，off-policy 随轨迹变长而恶化；且「生成开始时那个 old 策略」在长轨迹下根本不是一个确定版本。针对这些问题，三条对策：
+  - **用 rollout 替代 old 作重要性采样基准**：与其假设不存在的单一 old 版本，不如按 rollout 实际发生时的状态处理；
+  - **不对称裁剪**：clip 对策略收缩（概率下降）容忍度低、对扩张（概率上升）容忍度高——探索期允许新尝试被放大，收敛期严格约束「把错误动作概率打下去」；
+  - **保留最近 k 轮策略快照**：缓解轨迹数据与当前策略版本差距过大。
+
+  | 维度 | PPO | GRPO | SAO |
+  |-----|-----|------|-----|
+  | 采样方式 | 每 prompt 采样 | group-wise（一组） | single-rollout（一条） |
+  | 是否需要 critic | 要 | 不要 | 要 |
+  | 同步 / 异步 | 多为同步 | 多为同步（组要等齐） | 异步原生（即产即训） |
+  | clip 机制 | 双边 ratio clip | 双边 ratio clip | 严格双边 token 级 clip |
+
+  SAO 和 PPO 都用 critic，差别在 PPO 同步「采一批、训一批」，SAO 异步「采一条、即产即训」。GRPO 为省 critic 改用组内对比，但异步下要等一组、反而放大 off-policy；SAO 宁可请回 critic，也要 single-rollout 的低滞后与稳定性。
 
 
 - **GRPO 和 PPO 该怎么选？**
