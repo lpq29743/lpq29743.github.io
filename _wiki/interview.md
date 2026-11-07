@@ -6702,6 +6702,11 @@ RLHF 上层应用：veRL / OpenRLHF
   - **回归 critic**：没了组内 baseline，重新引入 value model 估 advantage。
   - **严格双边 token 级 clip**：压制异步 staleness，稳住优化。
 
+  **长程 + 异步下还要解一组工程难题**——核心问题是「长轨迹 + 异步采样下数据严重滞后（off-policy）时如何稳定更新」：长程轨迹生成慢、不同 rollout 快慢差异大，一条轨迹生成期间训练引擎可能已更新多版，数据回来时早已不是当前策略所采，off-policy 随轨迹变长而恶化；且「生成开始时那个 old 策略」在长轨迹下根本不是一个确定版本。针对这些问题，三条对策：
+  - **用 rollout 替代 old 作重要性采样基准**：与其假设不存在的单一 old 版本，不如按 rollout 实际发生时的状态处理；
+  - **不对称裁剪**：clip 对策略收缩（概率下降）容忍度低、对扩张（概率上升）容忍度高——探索期允许新尝试被放大，收敛期严格约束「把错误动作概率打下去」；
+  - **保留最近 k 轮策略快照**：缓解轨迹数据与当前策略版本差距过大。
+
   | 维度 | PPO | GRPO | SAO |
   |-----|-----|------|-----|
   | 采样方式 | 每 prompt 采样 | group-wise（一组） | single-rollout（一条） |
@@ -7233,7 +7238,7 @@ def compute_gae(rewards, values, gamma=1.0, lam=0.95):
 
   其中 $$t$$ 为当前 token，$$r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}$$ 为重要性采样比率，$$\hat{A}_t$$是优势函数的估计，$$\epsilon$$ 是控制策略变动幅度的裁剪阈值（如 0.2）。
 
-  两项分工可以一句话概括——**advantage 给方向、ratio 管变化**：$$\hat{A}_t$$ 的符号决定这个动作要被强化还是抑制（往哪走），$$r_t(\theta)$$ 是新旧策略在该动作上的概率比、衡量这一步策略挪了多少（走多远）；clip 把 ratio 锁在 $$[1-\epsilon, 1+\epsilon]$$ 内，保证「方向对的前提下步子不迈太大」。
+  **advantage 给方向、ratio 管变化**：$$\hat{A}_t$$ 的符号决定这个动作要被强化还是抑制（往哪走），$$r_t(\theta)$$ 是新旧策略在该动作上的概率比、衡量这一步策略挪了多少（走多远）；clip 把 ratio 锁在 $$[1-\epsilon, 1+\epsilon]$$ 内，保证「方向对的前提下步子不迈太大」。
 
 ```python
 def actor_loss(log_probs, old_log_probs, advantages, clip_range=0.2):
@@ -7319,13 +7324,13 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
 - **GRPO 遇到全对 / 全错组（零方差组）怎么办？**
 
-  组内奖励全部相同（全对或全错）时，优势 = (r − mean) / std 的标准差为 0、advantage 归一化后全为 0，这组样本不产生任何梯度，采样算力白花。全对和全错同样浪费——全对说明太简单没有新信息，全错说明太难当前学不会。对策分三层：
+  组内奖励全部相同（全对或全错）时，优势 = (r − mean) / std 的标准差为 0、advantage 归一化后全为 0，这组样本不产生任何梯度，采样算力白花。对策分三层：
 
-  - **数据侧（治本）——prompt 难度管理**：全对说明 prompt 对当前模型太简单、全错说明太难，都落在学习区之外。按通过率筛掉过易 / 过难的题、保留组内有方差的「能力甜区」样本；课程式动态调整——模型能力涨了就换更难的 prompt 进来。零方差往往是「题目和当前能力不匹配」的信号，而非算法问题。
+  - **数据侧——prompt 难度管理**：全对说明 prompt 对当前模型太简单、全错说明太难，都落在学习区之外。按通过率筛掉过易 / 过难的题、保留组内有方差的「能力甜区」样本；课程式动态调整——模型能力涨了就换更难的 prompt 进来。零方差往往是「题目和当前能力不匹配」的信号，而非算法问题。
   - **采样侧**：① 调高采样温度，让输出分布更散、组内更容易同时出现对错；② 扩大组大小 G，组越大越容易「有对有错」，但 rollout 成本线性上涨；③ 动态采样（DAPO 的做法），过生成后直接过滤零方差组、继续补采，直到凑够有方差的组——本质是用算力换信号密度。
   - **奖励侧——奖励细化**：全对 / 全错通常出现在**二值奖励**（对 / 错）上；把奖励做成多维连续（格式、动作选择、参数、内容质量分开打分），组内自然出现方差，从源头缓解零方差。
 
-  **兜底认知**：零方差组本身无害（跳过即可，不会引入坏梯度），真正的代价是采样预算浪费——所以优化重点是「**提高有效组比例**」（难度管理 + 动态采样 + 奖励细化），而不是「拯救零方差组」。
+  零方差组本身无害（跳过即可，不会引入坏梯度），真正的代价是采样预算浪费——所以优化重点是「**提高有效组比例**」（难度管理 + 动态采样 + 奖励细化）。
 
 
 - **除了 GRPO 的组内均值，还有哪些“免 critic 的 baseline”？（RLOO / ReMax）**
@@ -7343,14 +7348,14 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   对于MoE模型， $$\pi_\theta$$ 和 $$\pi_{old}$$ 有差别，就可能导致 route 到不同的专家，从而导致 ratio 波动很大。
 
-  Routing Replay：缓存 $$\pi_{old}$$ 推理时激活的专家，在计算 $$\pi_\theta(y_{i,t}\|x_i,y_{<t})$$ 推理时进行重放，也激活相同的专家。这样 ratio 的波动就不会那么大了。MiMo 称之为 R3（Rollout Routing Replay）。
+  Routing Replay：缓存 $$\pi_{old}$$ 推理时激活的专家，在计算 $$\pi_\theta(y_{i,t}\|x_i,y_{<t})$$ 推理时进行重放，也激活相同的专家。这样 ratio 的波动就不会那么大了。
 
-  Freeze Router（冻结路由）：在大规模 RL 时直接冻结 MoE Router，抑制专家负载随训练漂移，是另一条稳定训练的思路（如 MiMo-V2.6 在扩展 RL 算力时冻结 Router）。与 Routing Replay 的区别是：后者对齐 rollout 与 training 的路由，前者从源头固定路由不再更新。
+  Freeze Router（冻结路由）：在大规模 RL 时直接冻结 MoE Router，抑制专家负载随训练漂移。与 Routing Replay 的区别是：后者对齐 rollout 与 training 的路由，前者从源头固定路由不再更新。
 
 
-- **为什么 GLM 后来用回 PPO？GRPO 和 PPO 该怎么选？**
+- **为什么 GLM 后来用回 PPO？**
 
-  GLM（GLM-4.6 阶段起）从 GRPO 切回 PPO，根子在**训练目标转向多轮 / 长程 agentic 任务**——GRPO 在这类任务上的短板被放大，三点归因：
+  GLM 从 GRPO 切回 PPO，根本原因是**训练目标转向多轮 / 长程 agentic 任务**——GRPO 在这类任务上的短板被放大，三点归因：
 
   1. **信用分配粒度不匹配**：GRPO 的优势来自组内相对比较，本质是**轨迹级**的——一条轨迹里所有 token 共享同一个相对优势信号。单轮任务无所谓，但多轮 / Agent 任务里，长轨迹中某一轮的失误会被整条轨迹的奖励平均掉，credit assignment 不精确；PPO 的 **critic + GAE** 能给出 token / 轮级更细粒度的优势估计。
   2. **Rollout 成本**：GRPO 每个 prompt 要采 G 条样本，纯文本生成尚可；但 agentic 场景每条轨迹要和工具 / 环境反复交互，rollout 成本放大数倍到数十倍，PPO 单样本 + 价值估计在大规模下吞吐更高。
@@ -7358,15 +7363,12 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
 
   一个具体触发点是 **compaction（长轨迹压缩切分）**：超长轨迹要切成多个子轨迹，导致同一 prompt 的不同 rollout 子轨迹**数量不同、长度差异大**，GRPO 的 group-wise 组内比较无从对齐、组内归一化会扭曲优势估计。
 
-  **GLM-5.2 的解决方案：回归 PPO 范式**——① Single-rollout formulation（每个 rollout 独立学习、不依赖组内比较）；② Critic model（估 token-level advantage 而非 group-relative）；③ Token-level loss（处理子轨迹长度不平衡）。
+  GLM-5.2 的解法是回归 PPO 范式（single-rollout + critic + token-level loss）；其长程异步下的工程实现即 **SAO**，详见 Distributed Training 子节的 SAO 题。
 
-  **长程 + 异步下 PPO 还要解一组工程难题**（GLM-5.2 实践）——核心是「长轨迹 + 异步采样下，数据严重滞后时如何稳定更新」：
-  - **采样天然 off-policy**：长程轨迹生成慢、不同 rollout 快慢差异大，一条轨迹生成期间训练引擎可能已更新多版，数据回来时早不是当前策略采的，off-policy 随轨迹变长而恶化；
-  - **old policy 不再是单一版本**：干脆用 **rollout 替代 old** 作为重要性采样基准——「生成开始时那个 old 策略」在长轨迹下根本不是一个确定版本，与其假设不存在的单一 old，不如按 rollout 实际发生时的状态处理；
-  - **不对称裁剪**：clip 对策略收缩（概率下降）容忍度低、对扩张（概率上升）容忍度高——探索期允许新尝试被放大，收敛期严格约束「把错误动作概率打下去」；
-  - **保留最近 k 轮策略快照**：缓解轨迹数据与当前策略版本差距过大。
 
-  **GRPO vs PPO 怎么选**（场景依赖，不是谁更先进）：
+- **GRPO 和 PPO 该怎么选？**
+
+  场景依赖，不是谁更先进：
 
   | 维度 | GRPO | PPO（critic-based）|
   |------|------|------|
