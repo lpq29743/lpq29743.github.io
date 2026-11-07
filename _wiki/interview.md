@@ -2221,6 +2221,36 @@ def spfa(n, edges, src):
   Prim 算法，是贪心算法，每一步从当前生成树出发，选择权值最小的边，并且这条边连接的是树内节点和树外节点，逐步扩展生成树，直到包含所有节点。时间复杂度 O(V^2)；Kruskal 算法，时间复杂度 O(ElgE)。
 
 
+- **二分图最大匹配（Bipartite Matching）**
+
+  二分图：节点分成左右两拨，边只连“左↔右”，同侧之间没有边。匹配：选出一些边，使任意两条边不共享节点（每个节点最多被一条选中边碰到）。最大匹配：能选出的边数最多的匹配；完美匹配：所有节点都被匹配到。
+
+  匈牙利算法（增广路）：增广路是从一个未匹配节点出发，沿“未选边、已选边”交替走，到达另一个未匹配节点的路径；把路径上的边全部翻转（未选变已选、已选变未选），匹配数 +1。依次处理左边每个节点尝试找增广路，找不到增广路时即为最大匹配。定理：匹配是最大的 ⟺ 不存在增广路。关键点：每个左节点开始 DFS 前重置 visited，防止死循环。时间复杂度 O(VE)；要更快用 Hopcroft-Karp（O(E√V)，多路 BFS 分层同时增广）。
+
+```python
+def max_matching(n, adj):
+    # adj[u] = 左节点 u 能连到的右节点列表
+    match = {}          # match[v] = 占用右节点 v 的左节点
+
+    def dfs(u, visited):
+        for v in adj[u]:
+            if v in visited:
+                continue
+            visited.add(v)
+            # v 空闲，或占用 v 的左节点能改连别处 → 腾出 v
+            if v not in match or dfs(match[v], visited):
+                match[v] = u
+                return True
+        return False
+
+    cnt = 0
+    for u in range(n):
+        if dfs(u, set()):   # 每个左节点重置 visited，防死循环
+            cnt += 1
+    return cnt
+```
+
+
 - **农夫过河问题？**
 
   经典约束：农夫要把狼、羊、菜运到对岸，船每次除农夫外只能带一样东西；农夫不在场时，狼会吃羊、羊会吃菜。求把三样都安全运到对岸的最少渡河次数。
@@ -7134,30 +7164,14 @@ RLHF 上层应用：veRL / OpenRLHF
 
 - **REINFORCE 是什么？有什么特点？**
 
-  REINFORCE 是最基础的策略梯度算法，用蒙特卡洛 (Monte-Carlo) 方式估计回报：直接使用整条轨迹（回合）的累积奖励作为优势估计，无需 critic/value model。
+  REINFORCE 是最基础的策略梯度算法，用蒙特卡洛（Monte-Carlo）方式估计回报：直接用整条轨迹（回合）的累积奖励作优势估计，无需 critic/value model；最朴素的形式是把序列末尾的 reward 广播到每个 token 上。
 
-  特点：
+  **特点**：
+  - **无偏但方差大**：用完整回合的真实回报、不依赖近似（如 value model 估计），故无偏；但单次采样回报受偶然因素影响大、梯度噪声大、训练不稳定，需多次采样或引入 baseline 降方差。
+  - **信用分配粗糙**：广播式奖励对所有 token 一视同仁，无法区分早 token（推理方向选择、影响大）与晚 token（受前文约束、可改空间小）的贡献，且各 token 梯度方向一致、幅度只取决于 log prob。
+  - **依赖回合完整性**：必须等回合结束才拿到回报，不能用于在线 / 流式场景（如多轮对话中用户中途离开）。
 
-  - 无偏（unbiased）：使用完整回合的真实回报，不依赖任何近似（如 value model 的估计），因此估计没有偏差；
-
-  - 方差大：单次采样的回报容易受偶然因素影响，不同轨迹的回报波动大，导致梯度估计噪声大、训练不稳定，通常需要多次采样或引入 baseline 来降低方差；
-
-  - 依赖回合的完整性：必须等回合结束（生成完整输出）才能得到回报估计，因此不能用于在线（online）/流式场景，如多轮对话中用户中途离开或回合无法终止的情形。
-
-  这些局限正是后续算法的改进动机：PPO 引入 critic/value model 和 GAE，GRPO 用组内多次采样的相对奖励替代，以降低方差并提升样本利用效率。
-
-
-- **直接拿最终 reward 当成每个 token 的 reward，会有什么问题？**
-
-  这是最朴素的策略梯度做法（即 REINFORCE 的基础形式：序列末尾的 reward 广播到每个 token 上），主要问题有三个：
-
-  1. 梯度估计方差极大：同一个最终奖励被复制给所有 token，所有 token 的梯度方向一致、幅度只取决于 log prob，整条轨迹的梯度估计噪声大，且没有 baseline（如 value model 的 $$V(s_t)$$ 或组内均值）来降低方差，导致训练不稳定；
-
-  2. 无法区分早 token 和晚 token 的贡献：早期生成的 token（如推理方向的选择、解题路线的确定）通常对最终结果影响更大，越晚的 token 越受前文约束、可改变的空间越小，但广播式奖励对所有 token 一视同仁，信用分配完全错误；
-
-  3. 无偏但低效：虽然该估计是无偏的，但需要大量采样才能收敛，样本效率很低。
-
-  解决方案即引入优势估计（advantage）：PPO 用 critic 输出 $$V(s_t)$$ 配合 GAE 做逐 token 的信用分配；GRPO 用组内多次采样的均值/标准差归一化作为 baseline，但仍共享序列级奖励，信用分配粗于 PPO。
+  这些局限正是后续算法的改进动机：引入 advantage 做逐 token 信用分配——PPO 用 critic 输出 $$V(s_t)$$ 配合 GAE，GRPO 用组内均值 / 标准差归一化作 baseline（但仍共享序列级奖励，信用分配粗于 PPO）。
 
 
 - **什么是 Actor-Critic？A2C/A3C 和 GAE 是什么关系？**
@@ -7307,11 +7321,6 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - **奖励侧——奖励细化**：全对 / 全错通常出现在**二值奖励**（对 / 错）上；把奖励做成多维连续（格式、动作选择、参数、内容质量分开打分），组内自然出现方差，从源头缓解零方差。
 
   **兜底认知**：零方差组本身无害（跳过即可，不会引入坏梯度），真正的代价是采样预算浪费——所以优化重点是「**提高有效组比例**」（难度管理 + 动态采样 + 奖励细化），而不是「拯救零方差组」。
-
-
-- **GRPO 怎么去掉 critic/value model 的？**
-
-  采样多次，用 reward model 评价的平均值来充当 critic/value model
 
 
 - **为什么 MoE + GRPO 不稳定？怎么解决？**
@@ -7494,11 +7503,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **Self-Rewarding LM**：模型**自己当裁判**（LLM-as-a-Judge）给自己的输出打偏好，再用这些自造偏好做迭代 DPO，摆脱对固定 RM 的依赖；
   - **SPIN**：自博弈——把上一轮模型当“对手”生成负样本，当前模型学着区分自己与真实数据，迭代逼近；
   - **Iterative / Online DPO**：DPO 的在线版——每轮用最新策略采样、就地构造偏好对再更新，缓解离线 DPO 的分布偏移。
-
-
-- **PPO、DPO、GRPO 有什么区别？**
-
-  所有算法都需要加 KL 散度来控制模型不要过于远离原先模型。PPO 是 token-level，DPO/GRPO 是 sample-level，但 GRPO 可以回传到 token-level。PPO 依赖于 reward model 和 value model；DPO 没有显式探索机制。
 
 
 - **能否用一张表总结：各算法改进了基线的哪个组件？**
