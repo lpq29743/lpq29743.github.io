@@ -7340,7 +7340,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   | 稳定性 | 组内基线方差大、稀疏奖励下噪声大 | critic 低方差基线，长程更稳 |
   | 适用 | 短程、可验证、rollout 便宜、单轮 / 动作粒度奖励 | 长 horizon + compaction、多轮 agentic、要细粒度信用分配 |
 
-  一句话：短任务、省显存、rollout 便宜 → GRPO；长程 agentic、要细粒度信用分配与稳定性 → PPO（或 SAO 这类 single-rollout + critic 的异步回归路线）。
+  短任务、省显存、rollout 便宜 → GRPO；长程 agentic、要细粒度信用分配与稳定性 → PPO（或 SAO 这类 single-rollout + critic 的异步回归路线）。
 
 
 - **Dr.GRPO 指出 GRPO 有哪些偏置？**
@@ -7385,7 +7385,7 @@ def grpo_loss(group_log_probs, group_old_log_probs, group_advantages, clip_range
   - GRPO 先在样本内按 Token 数平均 loss，再在样本间聚合 loss，从而导致较长样本和较短样本的损失贡献是一样的，即对于答案正确的，GRPO 偏向于选择答案长度较短的回复，而对于答案错误的，GRPO 偏向于让模型生成更长的回复。DAPO 改进为 Token-Level 策略梯度损失
   - 在 RL 训练中，一般会设置最大长度，对过长回复进行截断，从而其 reward 会为 -1，扰乱训练。DAPO 设置了对长序列的合理惩罚（Overlong Reward Shaping），避免过长后截断导致模型无法得到奖励的情形，以缓解噪声并稳定训练。
 
-  **一条主线**：这几个改动都在解同一个问题——**防止策略过早坍缩、保持探索信号**：Clip-Higher 防概率坍缩、Dynamic Sampling 防采样信号枯竭、Token-Level Loss 防长轨迹信号稀释、Overlong Reward Shaping 防一刀切丢信号，去 KL 则是给 long-CoT 大幅偏离初始分布松绑。这也是它和 PPO 系「求稳」思路的差别——**DAPO 是「求探索」的**，专治长思维链 / 长轨迹下的熵坍缩与信号稀疏。
+  这几个改动都在解同一个问题——**防止策略过早坍缩、保持探索信号**：Clip-Higher 防概率坍缩、Dynamic Sampling 防采样信号枯竭、Token-Level Loss 防长轨迹信号稀释、Overlong Reward Shaping 防一刀切丢信号，去 KL 则是给 long-CoT 大幅偏离初始分布松绑。这也是它和 PPO 系「求稳」思路的差别——**DAPO 是「求探索」的**，专治长思维链 / 长轨迹下的熵坍缩与信号稀疏。
 
 
 - **GSPO 相比 GRPO 改进了什么？**
@@ -7542,7 +7542,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | 可靠度 | 高但仅限可验证任务 | 中（有盲点，会被 hack） | 中高（有位置 / 长度 / 自我偏好偏差） |
   | 覆盖度 | 窄（数学 / 代码等有标准答案的场景） | 中（训到的偏好分布内） | 宽（开放任务、主观质量也能评） |
 
-  **选型原则**：结果可验证（数学 / 代码）优先 Rule-based / RLVR——便宜、难被话术欺骗（见「RLVR」）；开放任务、主观质量（helpful / harmless）用 RM 或 LLM-Judge；追求覆盖度与可解释性用 LLM-Judge，但要控制其偏差（见「LLM-as-a-Judge 的常见偏差与缓解」）。实践中常**组合使用**：规则兜底 + RM/Judge 补充，或分层 gating（见「格式奖励设计」）。
+  **选型原则**：结果可验证（数学 / 代码）优先 Rule-based / RLVR——便宜、难被话术欺骗；开放任务、主观质量（helpful / harmless）用 RM 或 LLM-Judge；追求覆盖度与可解释性用 LLM-Judge，但要控制其偏差。实践中常**组合使用**：规则兜底 + RM/Judge 补充，或分层 gating。
 
 
 - **Reward 贯穿后训练的哪些阶段？**
@@ -7684,7 +7684,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | **Behavioral Collapse（行为 / 探索坍缩）** | 策略过早收敛到少数高 reward 模式，输出多样性丢失 | **pass@1 上升但 pass@k 下降**、同组 response 趋同、只输出「安全答案」 | 本条 |
   | **Entropy Collapse（熵坍缩）** | 策略熵 $$H(\pi_\theta)$$ 持续下降、分布尖锐化 | 探索停止、advantage 趋 0 | 「什么是熵坍缩」 |
 
-  **奖励粒度轴（ORM vs PRM）**：结果奖励稀疏、信用分配差，过程奖励稠密但贵——粒度过粗本身也会加剧坍缩（信号太稀疏，模型只能抓住少数几个能拿分的模式）。详见「PRM 和 ORM 有什么区别」。
+  **奖励粒度轴（ORM vs PRM）**：结果奖励稀疏、信用分配差，过程奖励稠密但贵——粒度过粗本身也会加剧坍缩（信号太稀疏，模型只能抓住少数几个能拿分的模式）。
 
   **Reward Hacking 的理论根源——古德哈特定律（Goodhart's Law）**：「当一个度量指标变成优化目标时，它就不再是好的度量指标。」RM / Judge 只是真实目标的**代理（proxy）**，一旦策略全力优化这个代理，代理与真目标之间的缝隙就会被撑开——这是 hacking 的**必然性来源**，不是实现 bug，而是「优化 proxy」的内在代价。
 
@@ -7709,8 +7709,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **Reward Shaping**：重新设计奖励函数
   - **生成式奖励模型（GenRM）**：比判别式 RM 泛化更好
   - **Causal Reward**：因果奖励
-
-  **新方向**：Inference-Time Reward Hacking — Best-of-N 采样时也会出现 hacking
 
 
 - **Agent RL 中的 Reward Hacking 问题如何解决？**
@@ -7748,14 +7746,14 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **什么是奖励盲区（Reward Blind Spot）？以工具调用复读为例**
 
-  当 reward 只关注结果正确率、不覆盖过程效率与行为退化时，模型会在“奖励看不见的地方”学出坏习惯，这就是奖励盲区。典型案例是 Agentic RL 中的**工具调用洪泛（tool-call flooding）与复读（repetition）**：模型反复发起相同或高度相似的工具调用，消耗大量时间与上下文，却迟迟不推进任务（MiMo-V2.6 上线后 Response 级复读率一度超 0.05%，是最影响体验的问题之一）。
+  当 reward 只关注结果正确率、不覆盖过程效率与行为退化时，模型会在“奖励看不见的地方”学出坏习惯，这就是奖励盲区。典型案例是 Agentic RL 中的**工具调用洪泛（tool-call flooding）与复读（repetition）**：模型反复发起相同或高度相似的工具调用，消耗大量时间与上下文，却迟迟不推进任务。
 
   先区分三种行为：
   - **并行工具调用**：同时读多个文件、执行彼此独立的查询，服务不同信息需求，是正常且高效的；
   - **洪泛（flooding）**：集中发起的调用数明显超出任务需要，或超过执行环境能有效处理的范围，带来排队与反馈堆积；
   - **复读（repetition）**：在可用信息与环境状态无实质变化、也无合理重试/复核需求时，仍不断生成语义相同或高度相似的调用，不带来任务进展。
 
-  成因（MiMo-V2.6 复盘）：RL 中其实已对洪泛设了 penalty（单轮工具调用 > 32 次则 early stop、reward 置 0，梯度上 mask 前序轮次、仅惩罚触发规则的当前轮全部 token 含 CoT），但**阈值过松**：未达 32 次的高并发调用不受惩罚，随训练逐步被放大，最终恶化为严重 flooding——洪泛率（单轮 ≥10 次调用占比）从 step 0 的约 11% 一路升到 step 20 的约 25%。本质是 reward 只奖“做对”，没把“用更少步骤/更短路径做对”纳入信号。
+  成因：RL 中其实已对洪泛设了 penalty（单轮工具调用 > 32 次则 early stop、reward 置 0，梯度上 mask 前序轮次、仅惩罚触发规则的当前轮全部 token 含 CoT），但**阈值过松**：未达 32 次的高并发调用不受惩罚，随训练逐步被放大，最终恶化为严重 flooding——洪泛率（单轮 ≥10 次调用占比）从 step 0 的约 11% 一路升到 step 20 的约 25%。本质是 reward 只奖“做对”，没把“用更少步骤/更短路径做对”纳入信号。
 
   两类解法对比：
 
@@ -7771,7 +7769,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **RL 训练过程中要监控哪些指标？**
 
-  按「一次 RL 迭代的数据流」分六类**递进**——**采样出题 → 奖励打分 → 优化更新 → 策略表现 → 工程托底 → 效果验收**，跟着数据流走一遍即可；每类给「盯什么 → 异常信号 → 怎么处理」。
+  按「一次 RL 迭代的数据流」分六类——**采样出题 → 奖励打分 → 优化更新 → 策略表现 → 工程托底 → 效果验收**，跟着数据流走一遍即可；每类给「盯什么 → 异常信号 → 怎么处理」。
 
   **① 采样效率（先有数据：题出得对不对、算力有没有白花）**
 
@@ -7827,8 +7825,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | 样本外 | held-out 长程评测的提升 |
   | 判断标准 | 二者同时上涨才说明 RL 具备样本效率与泛化能力；只涨样本内是过拟合训练任务 |
 
-  **看指标的顺序**：分类本身即按数据流递进——① 采样 → ② 奖励 → ③ 优化 → ④ 策略是训练循环内核，⑤ 工程托底、⑥ 效果验收。实操排查时可先看 ③ 优化确认训练没崩，再回溯 ① ②。归因异常时优先怀疑**训推不一致**——它既可能来自数值 / 实现层（训练与推理用了不同框架、精度、kernel 累加顺序或 non-deterministic 算子），也可能来自范式 / 分布层（Exposure Bias、MTP 训练与推理的预测步数不一致、on-policy vs off-policy）。
-
 
 - **训推不一致（Training-Inference Mismatch）是什么？**
 
@@ -7881,7 +7877,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 #### Distillation
 
-- **OPD (On-Policy Distillation)**
+- **OPD（On-Policy Distillation）是什么？相比传统蒸馏解决了什么问题？**
 
   OPD 将 on-policy 思想引入知识蒸馏，替代传统的 off-policy SFT 蒸馏范式，是当前 LLM 后训练（Post-Training）的核心技术方向之一。
 
@@ -7892,13 +7888,10 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - 探索能力：学生可以尝试不同路径，老师反馈引导优化方向
   - 兼顾 Pass@1 和 Pass@k：既有 RL 的探索（优化负样本 → Pass@k 上升），也有 SFT 的高效学习
 
-  **典型实践**：
-  - OPD 范式首次系统提出，展示在数学推理上以 RL 1/10 算力达到相近效果
-  - Qwen3 采用两阶段蒸馏：第一阶段 off-policy SFT 打底，第二阶段 on-policy 蒸馏提升
-  - DeepSeek-R1 系列以 off-policy SFT 为主，后续 follow-up 转向 OPD
-  - Gemma 2/3 也在训练流程中引入 OPD
 
-  **与 SFT、RL 的区别（从 credit assignment × exposure bias 看）**：OPD 可视作 SFT 和 RL 之间的中间地带，用两个维度能精确定位它——**credit assignment（信用分配，即监督信号的密度）**和 **exposure bias（训练与推理的分布一致性）**：
+- **OPD 与 SFT、RL 有什么区别？（credit assignment × exposure bias）**
+
+  OPD 可视作 SFT 和 RL 之间的中间地带，用两个维度能精确定位它——**credit assignment（信用分配，即监督信号的密度）**和 **exposure bias（训练与推理的分布一致性）**：
 
   | 范式 | credit assignment（信号密度）| exposure bias（分布一致性）|
   |------|------------------------------|---------------------------|
@@ -7908,7 +7901,9 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   **本质**：OPD 同时拿到 SFT 的「稠密 token 级监督」（credit assignment 好）和 RL 的「on-policy 无偏移」（无 exposure bias）——SFT 稠密但 off-policy 有偏移，RL on-policy 但奖励稀疏、难做信用分配，OPD 两者兼得。这正是它为什么能「以 RL 1/10 算力达到相近效果」：既有 RL 的探索与分布一致性，又有 SFT 的稠密监督，不必像 RL 那样从稀疏 reward 里艰难地反推每步贡献。**代价与定位**：OPD 的上限受 teacher 约束（学不出超过老师的策略），而 RL 靠可验证 reward 能突破 teacher——所以 OPD 常作 RL 之前的高效打底，或用于把大模型能力压进小模型（蒸馏），而非替代 RL 冲刺能力上限。
 
-  **核心要解决的问题**：
+
+- **OPD 落地有哪些核心挑战？**
+
   - 老师反馈质量：老师模型对错误轨迹的判断准确度直接影响蒸馏效果
   - 采样效率：on-policy 需要反复采样，如何平衡探索广度和训练效率
   - 分布漂移控制：学生策略更新后可能过度偏离老师分布，需要 KL 约束或周期性回滚
