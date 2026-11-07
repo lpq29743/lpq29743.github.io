@@ -7793,11 +7793,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - 分布漂移控制：学生策略更新后可能过度偏离老师分布，需要 KL 约束或周期性回滚
 
 
-- **OPD 的两个关键实现选择：Full-Vocab vs Top-k、GKD vs PG**
-
-  OPD 落地时有两组绕不开的工程 / 算法选择：
-
-  **① 监督信号的范围：Full-Vocab vs Top-k logits**
+- **OPD 的监督信号用 Full-Vocab 还是 Top-k logits？**
 
   老师给学生的监督是「每个 token 位置上的完整分布」还是「只取 Top-k」：
 
@@ -7808,7 +7804,8 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   取舍：师生分离的多机蒸馏时 Top-k 几乎必需，否则跨机传 full-vocab logits 带宽扛不住；同机 / 小规模可用 full-vocab 拿满信号。k 通常取到能覆盖老师绝大部分概率质量（如累积 99%）即可。
 
-  **② 优化形式：GKD（KL 蒸馏）vs PG（策略梯度）**
+
+- **OPD 的优化形式用 GKD（KL 蒸馏）还是 PG（策略梯度）？**
 
   同样是 on-policy 蒸馏，损失可以走两条路：
 
