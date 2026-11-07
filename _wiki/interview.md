@@ -7159,7 +7159,22 @@ RLHF 上层应用：veRL / OpenRLHF
   3. **奖励 / KL 处理**：reward 从哪来、KL 放 loss 还是 reward、要不要 KL（DAPO 直接去 KL）；
   4. **loss 粒度与采样**：token-level 还是 sample-level、静态还是动态采样。
 
-  下面的条目按“基线 → 逐个组件的后续优化”排列。
+  下表先给出全景（各算法改了基线的哪个组件），后面条目再按“基线 → 逐个组件的后续优化”逐个展开：
+
+  | 算法 | 基线 | 改的组件 | 关键改动 |
+  |------|------|---------|---------|
+  | Actor-Critic / A2C | REINFORCE | ①优势 / baseline | 引入 critic 降方差 |
+  | GAE | Actor-Critic | ①优势估计 | 多步 TD 平衡偏差方差 |
+  | TRPO | 策略梯度 | ②步长约束 | KL 硬约束（信赖域）|
+  | PPO | TRPO | ②步长约束 | clip 一阶近似 |
+  | RLOO / ReMax | GRPO 思路 | ①免 critic baseline | leave-one-out / greedy |
+  | GRPO | PPO | ①baseline | 组内均值替代 critic |
+  | Dr.GRPO | GRPO | ①归一化 + ④loss | 去 std 难度偏置、去长度偏置 |
+  | DAPO | GRPO | ②③④ | Clip-Higher / 去 KL / 动态采样 / token-level / 超长惩罚 |
+  | GSPO | GRPO | 重要性采样粒度 | token 级 → 序列级 |
+  | GiGPO / ARPO | GRPO | ①信用分配 / 采样 | turn 级、两级分组、熵自适应 rollout |
+  | IPO / KTO / ORPO / SimPO / DPOP | DPO | 损失 / 数据 / ref model | 各修一个 DPO 局限 |
+  | ReST / RAFT / Self-Rewarding | SFT + RM | 数据来源 | 自采样 → 筛 → 再训练 |
 
 
 - **REINFORCE 是什么？有什么特点？**
@@ -7498,24 +7513,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **Self-Rewarding LM**：模型**自己当裁判**（LLM-as-a-Judge）给自己的输出打偏好，再用这些自造偏好做迭代 DPO，摆脱对固定 RM 的依赖；
   - **SPIN**：自博弈——把上一轮模型当“对手”生成负样本，当前模型学着区分自己与真实数据，迭代逼近；
   - **Iterative / Online DPO**：DPO 的在线版——每轮用最新策略采样、就地构造偏好对再更新，缓解离线 DPO 的分布偏移。
-
-
-- **能否用一张表总结：各算法改进了基线的哪个组件？**
-
-  | 算法 | 基线 | 改的组件 | 关键改动 |
-  |------|------|---------|---------|
-  | Actor-Critic / A2C | REINFORCE | ①优势 / baseline | 引入 critic 降方差 |
-  | GAE | Actor-Critic | ①优势估计 | 多步 TD 平衡偏差方差 |
-  | TRPO | 策略梯度 | ②步长约束 | KL 硬约束（信赖域）|
-  | PPO | TRPO | ②步长约束 | clip 一阶近似 |
-  | RLOO / ReMax | GRPO 思路 | ①免 critic baseline | leave-one-out / greedy |
-  | GRPO | PPO | ①baseline | 组内均值替代 critic |
-  | Dr.GRPO | GRPO | ①归一化 + ④loss | 去 std 难度偏置、去长度偏置 |
-  | DAPO | GRPO | ②③④ | Clip-Higher / 去 KL / 动态采样 / token-level / 超长惩罚 |
-  | GSPO | GRPO | 重要性采样粒度 | token 级 → 序列级 |
-  | GiGPO / ARPO | GRPO | ①信用分配 / 采样 | turn 级、两级分组、熵自适应 rollout |
-  | IPO / KTO / ORPO / SimPO / DPOP | DPO | 损失 / 数据 / ref model | 各修一个 DPO 局限 |
-  | ReST / RAFT / Self-Rewarding | SFT + RM | 数据来源 | 自采样 → 筛 → 再训练 |
 
 
 #### Reward Design
