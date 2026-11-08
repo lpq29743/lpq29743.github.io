@@ -7868,8 +7868,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - On-policy 采样保证数据分布和当前策略一致（不像经验回放那样有分布偏移）
   - KL 散度作为软约束，允许模型偏离但不会太远
 
-  **GLM-5 实践**：在 Reasoning RL → Agentic RL → General RL 的三阶段流程中，每个后续阶段都用前面阶段的模型做 on-policy 蒸馏，有效缓解了灾难性遗忘问题。
-
 
 #### Training Stability
 
@@ -8075,7 +8073,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 #### Capability Topics
 
-- **Safety / Hallucination**
+- **幻觉是怎么产生的，如何缓解？**
 
   出现幻觉原因：1. 语料中存在过时，虚构的内容，或因长尾效应缺乏与下游任务相关的领域知识；2. 语言模型的本质机制是预测下一个最可能的词，它只保证语言上看起来连贯合理，并不保证事实正确，所以它倾向即使不知道，也会编一个出来，在不确定时依然输出确定性答案，很少说我不知道；3. 推理时随机采样的生成策略。
 
