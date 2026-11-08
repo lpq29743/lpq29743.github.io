@@ -8089,36 +8089,43 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 #### Architecture
 
-- **Agent**
+- **Agent 是什么？由哪些部分组成？**
 
-  相比传统方法，Agent 会更重，速度更慢，可控性更差，但其数据依赖低，可替换一些难定义的流程。
+  Agent = LLM + Planning + Memory + Tool，以大模型为决策核心，配上规划、记忆、工具三件套，自主完成「感知 → 决策 → 行动」的多步任务。
 
-  Agent = LLM + Planning + Memory + Tool。
+  - **Planning**：任务分解（Task decomposition，如 CoT / ToT）+ 自我反思（Self-Reflection，如 ReAct）；
+  - **Memory**：短期记忆（short-term，即 ICL 上下文）+ 长期记忆（long-term，外挂存储）；
+  - **Tool**：调用外部 API / 检索 / 代码执行，突破模型自身边界。
 
-  Planning：Task decomposition（CoT，ToT），Self-Reflection（ReAct）。
+  相比传统方法，Agent 更重、更慢、可控性更差，但数据依赖低、能替换一些难以显式定义的流程；最常见的应用在 Web、软件工程、Research 和对话。
 
-  Memory：short-term（ICL），long-term。
+- **Agent 的静态工作流和动态工作流有什么区别？**
 
-  Agent 可分为静态工作流（可控，无自主性决策，更适用于可被标准化的企业级场景，如质检）和动态工作流（不可控，有自主性决策，更适用于无法标准化的消费级场景，如 Deep Research）。Agent 设计的核心矛盾即是如何在静态工作流和动态工作流之间找到平衡。
+  | 维度 | 静态工作流 | 动态工作流 |
+  |------|-----------|-----------|
+  | 可控性 | 可控、无自主决策 | 不可控、有自主决策 |
+  | 流程 | 预先编排好的固定链路 | 运行时由模型自主规划 |
+  | 适用场景 | 可标准化的企业级场景（如质检）| 无法标准化的消费级场景（如 Deep Research）|
 
+  Agent 设计的核心矛盾，就是如何在静态工作流（稳、可控）和动态工作流（灵活、自主）之间找到平衡。
 
-  静态工作流常见模式有：
-  - 链式提示系统（Prompt chaining）：提示链将任务分解为一系列步骤，其中每个 LLM 调用都会处理前一个步骤的输出。
-  - 路由系统（Routing）：路由会对输入进行分类，并将其定向到专门的后续任务。
-  - 并行化系统（Parallelization）：LLM 有时可以同时处理一项任务，并以编程方式聚合其输出。
-  - 协调器编排系统（Orchestrator-workers）：中央 LLM 动态分解任务，将其委托给工作者 LLM，并综合其结果。
-  - 评估器、优化器系统（Evaluator-optimizer）：一个 LLM 调用生成响应，而另一个调用在循环中提供评估和反馈。
+- **Agent 有哪些常见的工作流模式？**
 
-  动态工作流常见模式有：
-  - CoT (Reason only)
-  - Self-Consistency (Reason only)：多次 CoT 采样做结合
-  - ToT (Reason only)：把复杂问题分解成多个简单子问题，再每个子问题上多次 CoT 采样，最后使用状态评估器和广搜/深搜得到结果
-  - ReAct（Reason + Act）：每个推理轨迹为 Reason + Act + Observe，多次重复直到结束流程。ReAct 后面提升为 Interleaved Thinking，Interleaved Thinking 多了一个 plan 的 update。
-  - Plan-Execute：ReAct 受限于其走一步算一步的局部思维，而 Plan-Execute 通过先计划再执行建立了全局视野
-  - REWOO（Reasoning, Execution, Watch, and Optimize）：在 ReAct 的基础上引入了反思和优化机制
-  - Reflexion：自我批评和自我改进
+  **静态工作流**（预先编排）常见模式：
+  - 链式提示系统（Prompt chaining）：提示链将任务分解为一系列步骤，每个 LLM 调用处理前一步的输出。
+  - 路由系统（Routing）：对输入进行分类，并定向到专门的后续任务。
+  - 并行化系统（Parallelization）：多个 LLM 同时处理一项任务，以编程方式聚合输出。
+  - 协调器编排系统（Orchestrator-workers）：中央 LLM 动态分解任务，委托给工作者 LLM 并综合结果。
+  - 评估器、优化器系统（Evaluator-optimizer）：一个 LLM 生成响应，另一个在循环中提供评估和反馈。
 
-  Agent 最常见的应用在 Web，软件工程，Research 和对话。
+  **动态工作流**（自主规划）常见模式：
+  - CoT（Reason only）：单链推理。
+  - Self-Consistency（Reason only）：多次 CoT 采样做结合。
+  - ToT（Reason only）：把复杂问题分解成多个子问题，每个子问题多次 CoT 采样，再用状态评估器和广搜 / 深搜得到结果。
+  - ReAct（Reason + Act）：推理轨迹为 Reason + Act + Observe，多次重复直到结束；后提升为 Interleaved Thinking（多一个 plan 的 update）。
+  - Plan-Execute：ReAct 走一步算一步、局限于局部思维，Plan-Execute 先计划再执行、建立全局视野。
+  - REWOO（Reasoning, Execution, Watch, and Optimize）：在 ReAct 基础上引入反思和优化机制。
+  - Reflexion：自我批评和自我改进。
 
 - **为什么 Agent 比传统方法速度慢？**
 
