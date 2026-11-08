@@ -6351,16 +6351,6 @@ def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
 
   MTP 在训练时为模型添加额外层，每步预测下 n 个 token（而非仅下 1 个），增加训练信号。推理时这些 MTP 层天然就是**内置的 draft model**——无需外挂独立小模型即可做投机解码，即**自推测解码（self-speculative decoding）**：MTP 层先草稿式猜出后续多个 token，主模型一次前向并行验证，靠拒绝采样保证输出分布无损。收益用 **Accept Length**（平均每次前向被接受的 token 数）衡量，越高加速越明显。
 
-  **跨模型演进（示例）：**
-
-  | 方法 | MTP 层数 | 训练预测 | 推理预测 | Accept Length | 问题 |
-  |------|---------|---------|---------|---------------|------|
-  | DeepSeek-V3 | 1 层 | 1 token | 2 tokens | 2.55 | 训练-推理不一致 |
-  | GLM-5 | 3 层（参数共享）| 3 tokens | 3 tokens | 2.76 | 多步推理时 KV cache 混合 |
-  | GLM-5.2 | 3 层 + IndexShare + KVShare + TV Loss | 3 tokens | 7 steps | **5.47** | — |
-
-  GLM-5.2 如何把 Accept Length 从 baseline 拉到 5.47 的具体实现（IndexShare/KV Share、Rejection Sampling、End-to-end TV Loss 四步改进）见 Technique Report 的 GLM 条目。
-
 
 - **Beam Search 实现**
 
@@ -9338,28 +9328,24 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **Attention**：MLA（Multi-head Latent Attention，多头潜在注意力）+ **Muon Split** 优化。对不同 head 的投影矩阵（$$W_{UQ}$$、$$W_{UK}$$、$$W_{UV}$$）**分别做正交化**而非整体正交化，使不同 head 的投影权重以不同尺度更新，让 576-dim MLA 的性能匹配 2048-dim GQA-8（Grouped-Query Attention，分组查询注意力）；不做这一步，低维 MLA 打不过高维 GQA（GLM-5）。
   - **稀疏注意力**：**IndexShare**。DeepSeek 的 DSA（动态稀疏注意力）在每层都要用 indexer 算 top-k，1M 上下文下计算量仍然巨大；IndexShare 改为**每 4 层共享一个 indexer**——indexer 放在 4 层中的第 1 层，top-k indices 在后续 3 层复用，1M 上下文下每 token FLOPs 降低 **2.9×**（GLM-5.2）。
 
-  **MTP 自推测解码：GLM-5.2 的四步改进**
 
-  GLM 用 3 层 MTP 作内置 draft model 做自推测解码（MTP 与自推测解码的通用概念见 Decoding Strategies 的 MTP 条目）。GLM-5.2 在 GLM-5.1 的 MTP baseline 上逐步叠加四个改进，把 Accept Length 从 4.56 提到 **5.47**：
+- **GLM-5.2 的 MTP 自推测解码（四步改进）**
 
-  | 改进 | Accept Length | 累计提升 |
-  |------|---------------|---------|
-  | Baseline (GLM-5.1 MTP) | 4.56 | — |
-  | + IndexShare + KV Share | 5.10 | +12% |
-  | + Rejection Sampling | 5.29 | +16% |
-  | + End-to-end TV Loss | **5.47** | **+20%** |
+  GLM 用 3 层 MTP 作内置 draft model 做自推测解码。GLM-5.2 在 GLM-5.1 的 MTP baseline 上逐步叠加四个改进：
 
   - **IndexShare + KV Share**：MTP 层的 indexer 只在第 1 步计算，后续步复用 top-k indices。由于 IndexShare 的设计，后续步只能 attend 到 target model 的 hidden states，看不到 MTP 层自身生成的 hidden state，KV cache 不再混合，从而消除训练-推理不一致。
   - **Rejection Sampling**：对 draft（MTP 层）的提议做拒绝采样，只接受高质量提议，进一步提升 Accept Length。
   - **End-to-end TV Loss**：用端到端的 Total Variation loss 训练 MTP 层，而非逐步独立的 cross-entropy loss，让 MTP 层学会多步联合预测。
 
-  **后训练：三阶段 RL + 跨阶段蒸馏（GLM-5）**
+
+- **GLM-5 的后训练：三阶段 RL + 跨阶段蒸馏**
 
   流程为 Reasoning RL → Agentic RL → General RL，每阶段专注不同能力。问题是后续阶段训练时会遗忘前面阶段学到的能力（灾难性遗忘），而经验回放是 off-policy、分布与当前策略不一致，EWC 类参数正则太强会限制新能力、太弱防不住遗忘，多任务联合训练又会因不同能力的 reward 信号冲突而难以平衡。
 
   解法是 **On-Policy Cross-Stage Distillation**：用前面阶段训好的模型作 teacher，在**当前策略 on-policy 采样的 trajectory** 上做 KL 蒸馏，且只在当前任务上选择性蒸馏而非全局蒸馏。teacher 在前面阶段已是最优、信号质量高，on-policy 采样保证数据分布与当前策略一致，KL 作为软约束允许偏离但不会太远。
 
-  **长 horizon 任务回归 PPO（GLM-5.2）**
+
+- **GLM-5.2 的长 horizon 任务回归 PPO**
 
   长 horizon 任务产生超长轨迹，需要用 compaction（压缩）切分成多个子轨迹，导致同一 prompt 的不同 rollout 子轨迹数量不同、长度差异也很大。GRPO 的组内比较因此失效——它需要对同一 prompt 的多个 rollout 做组内归一化，子轨迹数量与长度不一致时无法直接比较，强行归一化会扭曲优势估计。
 
@@ -9371,7 +9357,8 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   选型原则：短任务用 GRPO（省掉 critic model），长 horizon + compaction 用 PPO（需要 critic 做 token-level 信用分配）。
 
-  **Agent RL 的 Reward Hacking 防护（GLM-5.2）**
+
+- **GLM-5.2 的 Agent RL Reward Hacking 防护**
 
   用 RL 训练编码 Agent 时，模型会走捷径拿奖励而非真正解决问题，典型行为包括读取隐藏答案（`cat /workspace/.hidden/secret_cases.json`）、下载外部答案（`curl` 拉取现成解法）、用 `find` / `grep` 搜索含答案的文件路径或分析 git history。
 
