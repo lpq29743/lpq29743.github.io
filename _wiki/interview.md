@@ -8879,20 +8879,26 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   尽可能让模型返回多的信息，然后规则法处理；尽可能让模型分步做，然后控制中间参数传递，保证每步的输出的可靠；若知识库直接嵌入prompt，可以将其预先分类，使得模型对知识库的获取更清晰。
 
-- **Context Engineering**
+- **Context Engineering 是什么？和 Prompt Engineering 有什么区别？**
 
   提示（Prompting）是指你要求模型做某件事，而上下文工程（Context Engineering）是指在提出要求之前，准备好模型可能需要的一切。
+
+- **上下文分为哪几类？（指导 / 信息 / 行动）**
 
   这些上下文可分为几大类：
   - 指导性上下文（Guiding Context），这类上下文的核心功能是指导模型该做什么以及如何做，主要为模型行为设定框架，目标和规则。Prompt Engineering 一般旨在优化指导性上下文。它包括：System Prompt；Task Description；Few-shot Examples；Output Schema（前面三个很简单，Output Schema 一般是强制要求模型以特定格式（如 JSON、XML）输出的结构定义）
   - 信息性上下文（Informational Context），这类上下文的核心功能是告诉模型需要知道什么知识，为模型提供解决问题所必备的事实，数据与知识。它包括：RAG（外部知识库）；Memory（Short-term Memory：当前对话历史，Long-term Memory：跨会话存储的一些重要信息和偏好）；State / Scratchpad（状态维护和草稿纸，例如 Claude Code 在开始计划先的临时 TODO 以及 Thinking 模型下的思考“草稿本”）
   - 行动性上下文（Actionable Context），这类上下文的核心功能是告诉模型能做什么以及做了之后的结果，为模型提供与外部世界交互的能力。它包括：Tool Definition；Tool Calls & Results / Tool Traces（调用了哪些工具以及工具返回的结果，即工具调用的历史追踪）
 
+- **上下文失效有哪几种？（污染 / 干扰 / 混淆 / 冲突）**
+
   长上下文带来成本与协同压力，更易暴露四类上下文失效：污染、干扰、混淆、冲突。它们常彼此耦合，并直接损害推理稳定性与跨代理传递。
   - 上下文污染（Context Poisoning），主要是幻觉进入 Context 导致异常结果。
   - 上下文干扰（Context Distraction），当 Context 接近溢出时，模型训练中获得的知识会被“覆盖”导致模型降智。
   - 上下文混淆（Context Confusion），冗余且不相关的 Context 让输出结果偏离期望。
   - 上下文冲突（Context Clash），当上下文中的信息互相矛盾时，比如上下文存在过去错误的答案。
+
+- **上下文工程有哪些策略？（写入 / 选择 / 压缩 / 隔离）**
 
   上下文工程策略分为写入、选择、压缩和隔离四类。
 
