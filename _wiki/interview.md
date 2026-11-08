@@ -4873,6 +4873,31 @@ for epoch in range(num_epochs):
   都用了 LSTM 编码，但前者的输入单位是词，后者是字符。
 
 
+- **GPT 的原理？**
+
+  基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
+
+
+- **BERT 的原理？**
+
+  基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
+
+
+- **BERT 的训练目标？**
+
+  BERT 有 masked language modeling 和 next sentence prediction 两个目标
+
+
+- **RoBERTa 相比 BERT 做了哪些改进？**
+
+  更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
+
+
+- **RoBERTa 强于 RNN 的地方？**
+
+  并行，对大数据比较友好。
+
+
 - **CNN 在文本分类上一般怎么应用？**
 
   卷积核宽度为词向量的维度（词向量交换维度并不会起影响，所以没必要在词向量维度做卷积），长度为关注窗口的大小，通道数可为所用词向量。
@@ -8463,6 +8488,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **五层上下文压缩（逐层递增）**：把「上下文续命」做成精细流水线——预算裁剪（始终生效）→ 历史修剪 Snip → 微压缩 Microcompact → 上下文折叠 Context Collapse → 自动摘要 Auto-Compact（默认开启）。每轮模型调用前顺序评估、各层独立触发，力度从轻量裁剪到模型生成摘要逐级加重，而非粗暴截断。
   - **七层权限、Deny-First（拒绝优先）**：工具预过滤、拒绝规则、权限模式、ML 分类器（Auto-Mode）、沙箱、恢复会话不继承旧权限、Hooks 拦截，任何一层都能单独否决。但也坦承权衡——用户实际批准了约 93% 的权限弹窗（审批疲劳），所以安全不能只靠人点「同意」，系统必须自带防护。
   - **子智能体上下文隔离**：派 Sub-agent 做子任务时默认独立上下文窗口，隔离模式含进程内隔离（共享文件系统、上下文独立）与 git worktree 隔离（独立文件系统副本），完成只回传最终结果——用隔离对抗上下文膨胀与污染。
+  - **设计哲学「给 Agent 一台计算机」+ 文件系统即记忆**：核心只是 Agent Loop + 一套内置工具 + 上下文管理，把文件系统当作近乎无限的上下文 / 记忆；2025.09 开放 **Claude Agent SDK**（Python & TypeScript），把背后 Harness（loop / tools / context / permission / sub-agents / hooks）做成可编程库。
 
   **Codex（OpenAI，codex-rs）**
 
@@ -8494,6 +8520,25 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   | 代表能力 | 一切皆插件、Web / Desktop 双形态、社区插件生态（dsh-plugin）| Goal 自驱闭环（设可验收目标→自动拆解 / 改码 / 跑测→未达标续跑）、Subagents、Remote Control（手机 / 微信 / 飞书远控桌面工作区，代码仍在桌面端跑）、闲时任务（低峰执行不扣积分）|
   | 关键数据 | 两天 ~95K stars，开源社区爆发 | 缓存命中率 >98%、有效 token +30%；Z.ai Code Bench 上 GLM+ZCode 任务整体通过率高于 GLM+Claude Code |
   | 一句话 | 用**开放可组合**换生态广度 | 用**深度适配**换单模型上的稳定与性价比 |
+
+
+- **OpenClaw**
+
+  2026 年最火的开源 AI Agent（GitHub 160K+ stars、430K+ 行代码）。它是**开箱即用的独立 Agent 应用**（git clone 运行），而非 pip 库框架。
+  - **三层架构**：Tools（25+ 原子工具，JSON Schema 定义）/ Skills（SKILL.md 打包的高层工作流，ClawHub 上 13700+，约 65% 封装 MCP server）/ Integrations（Telegram、WhatsApp、Discord 等消息平台）。
+  - **Heartbeat 主动调度**：每 30 分钟自动唤醒，检查待办、处理消息、运行定时 Skill——区别于 LangChain / CrewAI 的被动反应式。
+  - **持久化记忆**：本地文件 + 每日日志 + Compaction（压缩旧上下文控 token），跨会话 / 重启自动保持。
+  - **局限**：权限 / 攻击面大（能浏览、执行代码、管文件、发消息，尤其社区 Skill）；部署配置复杂；SKILL.md 对复杂分支 / 重试 / 状态管理表达力有限。
+
+
+- **Jev（TypeSafe AI）**
+
+  TypeSafe AI 2026.09 发布的 **"System One" 模型**（对应卡尼曼"快思考"）：**不生成文本**，而是评估一个 state、返回 typed 答案 + 概率，供软件直接做快速结构化决策。
+  - **训练**：RLCD（reinforcement learning for calibrated decisions），输出校准概率。
+  - **性能**：分类任务上比同级 LLM 快约 200x、成本低约 400x。
+  - **三种问题类型**：Choice（多选，返回各选项概率 + 置信度）、Score（有序等级打分，返回连续分 + 分布 + 置信度）、Noul（yes/no，返回命题为真的概率）；一次请求可对同一 state 并行问多个问题。
+  - **在 Harness 中的角色**：Model Routing（按难度选快 / 强模型）、Auto Mode 护栏（tool 执行前分类并拦截危险动作）——把过去锁在 Claude / Codex / Cursor 闭源 Harness 里的"危险动作分类器"开放给所有 Agent。
+  - **定位**：不替代 LLM，而是补充——LLM 管开放式推理与生成，Jev 管沿途快速决策；LangChain 通过 TypeSafeClassifier / ModelRouterMiddleware / AutoModeMiddleware 集成。
 
 
 #### RAG & Knowledge
@@ -9205,31 +9250,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 #### Model
 
-- **GPT 的原理？**
-
-  基于语言模型的动态词向量。采用单向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 decoder 部分，见到的都是不完整的句子。
-
-
-- **BERT 的原理？**
-
-  基于语言模型的动态词向量。采用双向的、多层的、并行能力强的 Transformer 提取特征，利用到的是 Transformer 的 encoder 部分，采用了完整句子。
-
-
-- **BERT 的训练目标？**
-
-  BERT 有 masked language modeling 和 next sentence prediction 两个目标
-
-
-- **RoBERTa 相比 BERT 做了哪些改进？**
-
-  更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
-
-
-- **RoBERTa 强于 RNN 的地方？**
-
-  并行，对大数据比较友好。
-
-
 - **Qwen（阿里通义千问）**
 
   阿里巴巴的大模型系列，主线是"全尺寸开源 + 多语言（尤其中英）+ MoE + 专精模型矩阵"，是国产开源生态里覆盖面最广的系列之一。
@@ -9326,16 +9346,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **Normalization**：Pre-Norm + RMSNorm（GLM-4）。Pre-Norm 成为主流后，Post-Norm 时代靠放大残差与特殊初始化强行稳定训练的 DeepNorm 补丁就不再需要了。
   - **FFN**：GeGLU（GELU-based Gated Linear Unit，基于 GELU 的门控线性单元），升维到 $$\frac{8}{3}d$$ 而非标准 $$4d$$，使 FLOPs 与非门控 FFN 基本一致——门控 FFN 有两条路径，需要更大的隐藏维度来补偿（GLM-130B）。
   - **Attention**：MLA（Multi-head Latent Attention，多头潜在注意力）+ **Muon Split** 优化。对不同 head 的投影矩阵（$$W_{UQ}$$、$$W_{UK}$$、$$W_{UV}$$）**分别做正交化**而非整体正交化，使不同 head 的投影权重以不同尺度更新，让 576-dim MLA 的性能匹配 2048-dim GQA-8（Grouped-Query Attention，分组查询注意力）；不做这一步，低维 MLA 打不过高维 GQA（GLM-5）。
-  - **稀疏注意力**：**IndexShare**。DeepSeek 的 DSA（动态稀疏注意力）在每层都要用 indexer 算 top-k，1M 上下文下计算量仍然巨大；IndexShare 改为**每 4 层共享一个 indexer**——indexer 放在 4 层中的第 1 层，top-k indices 在后续 3 层复用，1M 上下文下每 token FLOPs 降低 **2.9×**（GLM-5.2）。
-
-
-- **GLM-5.2 的 MTP 自推测解码（四步改进）**
-
-  GLM 用 3 层 MTP 作内置 draft model 做自推测解码。GLM-5.2 在 GLM-5.1 的 MTP baseline 上逐步叠加四个改进：
-
-  - **IndexShare + KV Share**：MTP 层的 indexer 只在第 1 步计算，后续步复用 top-k indices。由于 IndexShare 的设计，后续步只能 attend 到 target model 的 hidden states，看不到 MTP 层自身生成的 hidden state，KV cache 不再混合，从而消除训练-推理不一致。
-  - **Rejection Sampling**：对 draft（MTP 层）的提议做拒绝采样，只接受高质量提议，进一步提升 Accept Length。
-  - **End-to-end TV Loss**：用端到端的 Total Variation loss 训练 MTP 层，而非逐步独立的 cross-entropy loss，让 MTP 层学会多步联合预测。
+  - **稀疏注意力**：**IndexShare**。DeepSeek 的 DSA（动态稀疏注意力）在每层都要用 indexer 算 top-k，1M 上下文下计算量仍然巨大；IndexShare 改为**每 4 层共享一个 indexer**——indexer 放在 4 层中的第 1 层，top-k indices 在后续 3 层复用。
 
 
 - **GLM-5 的后训练：三阶段 RL + 跨阶段蒸馏**
@@ -9343,6 +9354,15 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   流程为 Reasoning RL → Agentic RL → General RL，每阶段专注不同能力。问题是后续阶段训练时会遗忘前面阶段学到的能力（灾难性遗忘），而经验回放是 off-policy、分布与当前策略不一致，EWC 类参数正则太强会限制新能力、太弱防不住遗忘，多任务联合训练又会因不同能力的 reward 信号冲突而难以平衡。
 
   解法是 **On-Policy Cross-Stage Distillation**：用前面阶段训好的模型作 teacher，在**当前策略 on-policy 采样的 trajectory** 上做 KL 蒸馏，且只在当前任务上选择性蒸馏而非全局蒸馏。teacher 在前面阶段已是最优、信号质量高，on-policy 采样保证数据分布与当前策略一致，KL 作为软约束允许偏离但不会太远。
+
+
+- **GLM-5.2 的 MTP 自推测解码**
+
+  GLM 用 3 层 MTP 作内置 draft model 做自推测解码。GLM-5.2 在 GLM-5.1 的 MTP baseline 上逐步改进：
+
+  - **IndexShare + KV Share**：MTP 层的 indexer 只在第 1 步计算，后续步复用 top-k indices。由于 IndexShare 的设计，后续步只能 attend 到 target model 的 hidden states，看不到 MTP 层自身生成的 hidden state，KV cache 不再混合，从而消除训练-推理不一致。
+  - **Rejection Sampling**：对 draft（MTP 层）的提议做拒绝采样，只接受高质量提议，进一步提升 Accept Length。
+  - **End-to-end TV Loss**：用端到端的 Total Variation loss 训练 MTP 层，而非逐步独立的 cross-entropy loss，让 MTP 层学会多步联合预测。
 
 
 - **GLM-5.2 的长 horizon 任务回归 PPO**
@@ -9355,7 +9375,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   2. **Critic model**：引入 critic 估计 token-level advantage，而非 group-relative；
   3. **Token-level loss**：处理子轨迹长度不平衡问题。
 
-  选型原则：短任务用 GRPO（省掉 critic model），长 horizon + compaction 用 PPO（需要 critic 做 token-level 信用分配）。
+  短任务用 GRPO（省掉 critic model），长 horizon + compaction 用 PPO（需要 critic 做 token-level 信用分配）。
 
 
 - **GLM-5.2 的 Agent RL Reward Hacking 防护**
@@ -9417,8 +9437,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   定位：以安全对齐（Constitutional AI）立身，靠 Extended Thinking、Computer Use、MCP 在 agentic 与工具生态上引领。
 
 
-#### Agent
-
 - **Hermes 4（Nous Research）**
 
   Nous Research 的开源（open-weight）**hybrid reasoning** 模型系列（Hermes 4，2025.08）。
@@ -9427,32 +9445,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **中立对齐（neutrally-aligned）**：弱审查、不说教，减少过度拒答；数学等 benchmark 号称超过同级闭源模型。
   - 系列背景：Hermes 3（2024.08）是中立对齐的通用 instruct + tool-use 模型，强于长期上下文保持、多轮、角色扮演与 internal monologue。
 
-
-- **Claude Code（Anthropic）**
-
-  Anthropic 的 **agentic 编码工具**（终端 CLI）：能运行 shell、读写 / 编辑文件、调用外部服务，自主完成编码任务。
-  - **设计哲学**："给 Agent 一台计算机，让它像人一样工作"；把**文件系统**当作近乎无限的上下文 / 记忆。
-  - **核心** = Agent Loop + 一套内置工具 + 上下文管理；组件含 Tools、Prompts、File System、Skills、Sub-agents、Memory，并有 permission modes、hook system、多 Agent 架构。
-  - **Claude Agent SDK**（2025.09）：把 Claude Code 背后的 Harness（loop / tools / context / permission / sub-agents / hooks）开放成可编程库（Python & TypeScript），内置大规模部署经验（如 tool-use 错误处理）。
-
-
-- **OpenClaw**
-
-  2026 年最火的开源 AI Agent（GitHub 160K+ stars、430K+ 行代码）。它是**开箱即用的独立 Agent 应用**（git clone 运行），而非 pip 库框架。
-  - **三层架构**：Tools（25+ 原子工具，JSON Schema 定义）/ Skills（SKILL.md 打包的高层工作流，ClawHub 上 13700+，约 65% 封装 MCP server）/ Integrations（Telegram、WhatsApp、Discord 等消息平台）。
-  - **Heartbeat 主动调度**：每 30 分钟自动唤醒，检查待办、处理消息、运行定时 Skill——区别于 LangChain / CrewAI 的被动反应式。
-  - **持久化记忆**：本地文件 + 每日日志 + Compaction（压缩旧上下文控 token），跨会话 / 重启自动保持。
-  - **局限**：权限 / 攻击面大（能浏览、执行代码、管文件、发消息，尤其社区 Skill）；部署配置复杂；SKILL.md 对复杂分支 / 重试 / 状态管理表达力有限。
-
-
-- **Jev（TypeSafe AI）**
-
-  TypeSafe AI 2026.09 发布的 **"System One" 模型**（对应卡尼曼"快思考"）：**不生成文本**，而是评估一个 state、返回 typed 答案 + 概率，供软件直接做快速结构化决策。
-  - **训练**：RLCD（reinforcement learning for calibrated decisions），输出校准概率。
-  - **性能**：分类任务上比同级 LLM 快约 200x、成本低约 400x。
-  - **三种问题类型**：Choice（多选，返回各选项概率 + 置信度）、Score（有序等级打分，返回连续分 + 分布 + 置信度）、Noul（yes/no，返回命题为真的概率）；一次请求可对同一 state 并行问多个问题。
-  - **在 Harness 中的角色**：Model Routing（按难度选快 / 强模型）、Auto Mode 护栏（tool 执行前分类并拦截危险动作）——把过去锁在 Claude / Codex / Cursor 闭源 Harness 里的"危险动作分类器"开放给所有 Agent。
-  - **定位**：不替代 LLM，而是补充——LLM 管开放式推理与生成，Jev 管沿途快速决策；LangChain 通过 TypeSafeClassifier / ModelRouterMiddleware / AutoModeMiddleware 集成。
 
 ## Business
 
