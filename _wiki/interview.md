@@ -4863,6 +4863,11 @@ for epoch in range(num_epochs):
   FastText 建立在 word2vec 基础上，其用 subword 来对非词典词进行处理，用 n-gram 来考虑词序。
 
 
+- **CNN 在文本分类上一般怎么应用？**
+
+  卷积核宽度为词向量的维度（词向量交换维度并不会起影响，所以没必要在词向量维度做卷积），长度为关注窗口的大小，通道数可为所用词向量。
+
+
 - **elmo 的原理？**
 
   基于语言模型的动态词向量。采用 1 层静态向量 + 2 层 LSTM 提取特征，然后将两个方向得到的向量进行拼接。
@@ -4891,12 +4896,6 @@ for epoch in range(num_epochs):
 - **RoBERTa 相比 BERT 做了哪些改进？**
 
   更大的训练数据；移除 Next Sentence Prediction（NSP）任务，发现没有它模型更稳定、更强；更长时间的训练；更大的 batch size 和学习率调度优化；BERT 的 masking 是静态的（数据预处理阶段决定），RoBERTa 每个 epoch 随机重新 mask。
-
-
-
-- **CNN 在文本分类上一般怎么应用？**
-
-  卷积核宽度为词向量的维度（词向量交换维度并不会起影响，所以没必要在词向量维度做卷积），长度为关注窗口的大小，通道数可为所用词向量。
 
 
 ### Search/Recommendation
