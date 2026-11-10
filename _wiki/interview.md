@@ -5414,6 +5414,14 @@ class SimpleMoE(nn.Module):
   $$O(d * seq\_len * seq\_len)$$。
 
 
+- **multi-head attention 空间复杂度**
+
+  两块主要开销都随序列长度 $$seq\_len$$ 恶化：
+
+  - **注意力 score 矩阵 $$O(seq\_len^2)$$**：$$QK^T$$ 得到 $$(seq\_len, seq\_len)$$ 的注意力矩阵（多头再乘 head 数 $$H$$），是训练 / 前向的主要显存瓶颈。
+  - **KV Cache $$O(seq\_len)$$**：推理时每层缓存的 K/V 随序列线性增长，长上下文下显存被吃满。
+
+
 - **Transformer 使用的时候，制约显存的最关键因素是什么？**
 
   序列长度。
@@ -5702,27 +5710,9 @@ class SelfAttentionWithKVCache(nn.Module):
 
 #### Efficient Attention
 
-- **标准 Self-Attention 的两大瓶颈与四条解法线（总览）**
+##### Compression
 
-  标准 Self-Attention 有两个随序列长度 $$n$$ 恶化的瓶颈，所有高效注意力都在攻这两点：
-
-  - **时间瓶颈 $$O(n^2)$$**：$$QK^T$$ 与 $$\text{score}\times V$$ 都是 $$n\times n$$ 规模，序列越长计算量平方级膨胀。
-  - **空间瓶颈 KV Cache $$O(n)$$**：推理时每层缓存的 K/V 随序列线性增长，长上下文下显存被 KV Cache 吃满。
-
-  四条解法线（可叠加）：
-
-  | 解法线 | 主攻瓶颈 | 核心思路 | 代表方法 |
-  |------|---------|---------|---------|
-  | **稀疏 Sparse** | 时间 $$O(n^2)$$ | 每个 query 只与最相关的一小部分 token 算注意力 | Sliding Window、DSA、IndexShare、CSA2 |
-  | **线性 Linear** | 时间 + 空间 | 用核函数 / 递推状态替代 softmax，$$O(n^2)\to O(n)$$，状态固定大小、免 KV Cache | Linear Attention、Gated DeltaNet、KDA |
-  | **压缩 Compression** | 空间 KV Cache | 减少 KV head 数或对 KV 低秩压缩 | MQA、GQA、MLA |
-  | **混合 Hybrid** | 综合 | 按层 / 比例组合上述方法，兼顾质量与效率 | Kimi Linear（3 KDA:1 MLA）、DeepSeek-V4.1-Flash |
-
-  一句话区分：**稀疏**=只算重要的、**线性**=用状态递推替代 softmax、**压缩**=把 KV 压小、**混合**=按层组合——四条都在**用近似换效率**。此外 **FlashAttention** 不做近似、不损精度，是给精确注意力提速的正交项，可与任意一条叠加。
-
-- **① 压缩线（Compression）· 把 KV 压小，降空间**
-
-  减少 KV head 数或对 KV 做低秩压缩，直接压小 KV Cache：**MQA（共享 1 份 KV）→ GQA（分组共享，质量/速度折中）→ MLA（低秩 latent 压缩）**。
+减少 KV head 数或对 KV 做低秩压缩，直接压小 KV Cache：**MQA（共享 1 份 KV）→ GQA（分组共享，质量/速度折中）→ MLA（低秩 latent 压缩）**。
 
 - **Multi-Query Attention (MQA)**
 
@@ -5851,12 +5841,12 @@ class GroupedQueryAttention(nn.Module):
   **Muon Split 优化（GLM-5）**：对不同 head 的投影矩阵（$$W_{UQ}$$、$$W_{UK}$$、$$W_{UV}$$）**分别做正交化**，而非整体正交化。使不同 head 的投影权重以不同尺度更新，让 MLA 性能匹配 GQA-8（否则 576-dim MLA 打不过 2048-dim GQA-8）。
 
 
-- **② 稀疏线（Sparse）· 只算相关的，降时间 $$O(n^2)\to O(n\cdot k)$$**
+##### Sparse Attention
 
-  每个 query 不与全部 token 算注意力，只挑最相关的一小部分（top-k / 局部窗口），把平方复杂度降下来。两大范式：
+每个 query 不与全部 token 算注意力，只挑最相关的一小部分（top-k / 局部窗口），把平方复杂度降下来。两大范式：
 
-  - **基于位置（固定稀疏）**：按预设模式选 token——Global（少数全局可见 token）、Window（局部滑窗）、Strided / Dilated（跨步 / 膨胀）、Random，及组合（ETC = Global+Window，BigBird = Global+Window+Random）。模式固定、不能自适应内容。
-  - **基于内容（动态稀疏）**：按输入内容动态判断哪些位置交互重要，只算这些（代价小）。更灵活，是当前主线（DSA 等）。
+- **基于位置（固定稀疏）**：按预设模式选 token——Global（少数全局可见 token）、Window（局部滑窗）、Strided / Dilated（跨步 / 膨胀）、Random，及组合（ETC = Global+Window，BigBird = Global+Window+Random）。模式固定、不能自适应内容。
+- **基于内容（动态稀疏）**：按输入内容动态判断哪些位置交互重要，只算这些（代价小）。更灵活，是当前主线（DSA 等）。
 
 - **Sparse Attention 演进路线**
 
@@ -5924,9 +5914,9 @@ class GroupedQueryAttention(nn.Module):
   **效果**：per-token global KV cache 压到约 **890 bytes**（约为前代 V4-Flash 的 1/4），persistent KV 约为 V4 的 1/8；主干 552B MoE，主打 Agent 长上下文负载的降本。
 
 
-- **③ 线性线（Linear）· 用状态递推替代 softmax，降时间 + 空间**
+##### Linear Attention
 
-  去掉 softmax，把注意力改写成**可递推更新的固定大小状态**（类似 RNN）：时间 $$O(n^2)\to O(n)$$，状态与序列长度无关、推理时**不需要随长度增长的 KV Cache**（空间 $$O(1)$$）。代价是表达力弱于全注意力，因此沿"纯累加 → delta rule 精准更新 → 门控遗忘 → 逐通道细粒度门控"一路增强记忆管理：Linear Attention → Gated DeltaNet → KDA。
+去掉 softmax，把注意力改写成**可递推更新的固定大小状态**（类似 RNN）：时间 $$O(n^2)\to O(n)$$，状态与序列长度无关、推理时**不需要随长度增长的 KV Cache**（空间 $$O(1)$$）。代价是表达力弱于全注意力，因此沿"纯累加 → delta rule 精准更新 → 门控遗忘 → 逐通道细粒度门控"一路增强记忆管理：Linear Attention → Gated DeltaNet → KDA。
 
 - **Linear Attention**
 
@@ -5940,22 +5930,24 @@ class GroupedQueryAttention(nn.Module):
 
   Kimi Linear（Moonshot AI，2025）的核心模块。在 Gated DeltaNet 基础上把门控从"标量 / 头级"细化到 **channel-wise（逐通道）细粒度门控**——每个特征通道有独立遗忘率，记忆控制更精细、表达力更强。仍是线性注意力：固定大小状态、免 KV Cache，长上下文解码显存与速度优势显著（Kimi Linear 口径百万上下文解码最高提速约 **6.3×**）。实践中常与少量全注意力层混合使用。
 
-- **④ 混合线（Hybrid）· 按层组合，兼顾质量与效率**
+##### Hybrid Attention
 
-  线性 / 稀疏注意力省算力省显存但表达力弱，全注意力强但贵。**混合架构 = 多数层用高效注意力（线性 / 稀疏 / 压缩）+ 每隔几层保留一个全注意力层兜底**，用少量全注意力层保质量、多数高效层拿效率。核心是混合比例与排布；收益是大部分层的 KV Cache 固定或极小，是长上下文落地的现实选择。
+线性 / 稀疏注意力省算力省显存但表达力弱，全注意力强但贵。**混合架构 = 多数层用高效注意力（线性 / 稀疏 / 压缩）+ 每隔几层保留一个全注意力层兜底**，用少量全注意力层保质量、多数高效层拿效率。核心是混合比例与排布；收益是大部分层的 KV Cache 固定或极小，是长上下文落地的现实选择。
 
-  - **Kimi Linear（3 KDA : 1 MLA）**：每 3 层 KDA（线性）配 1 层 MLA（全注意力 + 压缩），约每 4 层一个 full attention（93 层 = 69 KDA + 24 Gated MLA）。线性层扛长上下文效率，MLA 层保精确检索。
-  - **DeepSeek-V4.1-Flash（CSA2 + CED）**：CSA2 在稀疏（top-k）之上叠加压缩（MLA latent）与 FP4 KV 量化，多维联合；CED 用因果编码器-解码器做跨层 KV 复用。属"稀疏 + 压缩 + 量化"混合。
-  - **Hybrid SWA（gpt-oss 式）**：滑窗注意力 SWA : 全局注意力 GA = 5:1（5 个局部滑窗块 + 1 个全局块），滑窗层 KV 固定大小、易与现有基建集成，全局层保长程依赖。
+- **Kimi Linear（3 KDA : 1 MLA）**：每 3 层 KDA（线性）配 1 层 MLA（全注意力 + 压缩），约每 4 层一个 full attention（93 层 = 69 KDA + 24 Gated MLA）。线性层扛长上下文效率，MLA 层保精确检索。
+- **DeepSeek-V4.1-Flash（CSA2 + CED）**：CSA2 在稀疏（top-k）之上叠加压缩（MLA latent）与 FP4 KV 量化，多维联合；CED 用因果编码器-解码器做跨层 KV 复用。属"稀疏 + 压缩 + 量化"混合。
+- **Hybrid SWA（gpt-oss 式）**：滑窗注意力 SWA : 全局注意力 GA = 5:1（5 个局部滑窗块 + 1 个全局块），滑窗层 KV 固定大小、易与现有基建集成，全局层保长程依赖。
 
-- **FlashAttention（精确注意力的 IO 加速，与四条线正交）**
+##### FlashAttention
 
-  **为什么快（瓶颈在 IO 不在算力）**：GPU 的 HBM 容量大但访问慢、SRAM 容量小但访问快。标准 attention 会把 $$N\times N$$ 的 score 矩阵在 HBM 上反复读写，长序列下**访存（而非算力）成为瓶颈**。FlashAttention 让计算尽量在 SRAM 内完成、减少对 HBM 的往返从而加速：**时间复杂度不变，但因不再落地完整的 $$N\times N$$ attention matrix，空间从 $$O(N^2)$$ 降到 $$O(N)$$**。
+与上述四条线**正交**：不做近似、不损精度，是给**精确注意力**提速的 IO 层优化，可与任意一条叠加。
 
-  **怎么做（三个关键）**：
-  - **分块（tiling）**：把 Q、K、V 按 block 切分，逐块载入 SRAM 计算，每次只处理当前块，避免一次性生成完整 score 矩阵。
-  - **在线 softmax**：分块后拿不到全局的 max / sum，改为维护两个统计量（running max $$m$$、exp 累加和 $$d$$）边算边归一化，多块可并行、最后合并，结果与全局 softmax 等价。
-  - **反向重计算**：训练反传本需要 attention matrix，FlashAttention 不存它，而是用保存的 $$m$$、$$d$$ 在 SRAM 上快速重算，用少量计算换回大量显存。
+**为什么快（瓶颈在 IO 不在算力）**：GPU 的 HBM 容量大但访问慢、SRAM 容量小但访问快。标准 attention 会把 $$N\times N$$ 的 score 矩阵在 HBM 上反复读写，长序列下**访存（而非算力）成为瓶颈**。FlashAttention 让计算尽量在 SRAM 内完成、减少对 HBM 的往返从而加速：**时间复杂度不变，但因不再落地完整的 $$N\times N$$ attention matrix，空间从 $$O(N^2)$$ 降到 $$O(N)$$**。
+
+**怎么做（三个关键）**：
+- **分块（tiling）**：把 Q、K、V 按 block 切分，逐块载入 SRAM 计算，每次只处理当前块，避免一次性生成完整 score 矩阵。
+- **在线 softmax**：分块后拿不到全局的 max / sum，改为维护两个统计量（running max $$m$$、exp 累加和 $$d$$）边算边归一化，多块可并行、最后合并，结果与全局 softmax 等价。
+- **反向重计算**：训练反传本需要 attention matrix，FlashAttention 不存它，而是用保存的 $$m$$、$$d$$ 在 SRAM 上快速重算，用少量计算换回大量显存。
 
 ```python
 import torch
@@ -6008,9 +6000,9 @@ def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
     return output
 ```
 
-  **版本演进**：
-  - **v2**：优化计算次序、减少非矩阵运算；增加 seq_len 维度的并行、提升 SM 利用率；优化 warp 级分工，减少内部通信与 shared memory 访问。
-  - **v3**：引入生产者-消费者异步机制提升并行度；让 GEMM 与 softmax 重叠计算；支持 FP8 低精度硬件加速，进一步提吞吐、控精度损失。
+**版本演进**：
+- **v2**：优化计算次序、减少非矩阵运算；增加 seq_len 维度的并行、提升 SM 利用率；优化 warp 级分工，减少内部通信与 shared memory 访问。
+- **v3**：引入生产者-消费者异步机制提升并行度；让 GEMM 与 softmax 重叠计算；支持 FP8 低精度硬件加速，进一步提吞吐、控精度损失。
 
 ### Large Language Models
 
