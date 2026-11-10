@@ -5702,6 +5702,27 @@ class SelfAttentionWithKVCache(nn.Module):
 
 #### Efficient Attention
 
+- **标准 Self-Attention 的两大瓶颈与四条解法线（总览）**
+
+  标准 Self-Attention 有两个随序列长度 $$n$$ 恶化的瓶颈，所有高效注意力都在攻这两点：
+
+  - **时间瓶颈 $$O(n^2)$$**：$$QK^T$$ 与 $$\text{score}\times V$$ 都是 $$n\times n$$ 规模，序列越长计算量平方级膨胀。
+  - **空间瓶颈 KV Cache $$O(n)$$**：推理时每层缓存的 K/V 随序列线性增长，长上下文下显存被 KV Cache 吃满。
+
+  四条解法线（可叠加）：
+
+  | 解法线 | 主攻瓶颈 | 核心思路 | 代表方法 |
+  |------|---------|---------|---------|
+  | **稀疏 Sparse** | 时间 $$O(n^2)$$ | 每个 query 只与最相关的一小部分 token 算注意力 | Sliding Window、DSA、IndexShare、CSA2 |
+  | **线性 Linear** | 时间 + 空间 | 用核函数 / 递推状态替代 softmax，$$O(n^2)\to O(n)$$，状态固定大小、免 KV Cache | Linear Attention、Gated DeltaNet、KDA |
+  | **压缩 Compression** | 空间 KV Cache | 减少 KV head 数或对 KV 低秩压缩 | MQA、GQA、MLA |
+  | **混合 Hybrid** | 综合 | 按层 / 比例组合上述方法，兼顾质量与效率 | Kimi Linear（3 KDA:1 MLA）、DeepSeek-V4.1-Flash |
+
+  一句话区分：**稀疏**=只算重要的、**线性**=用状态递推替代 softmax、**压缩**=把 KV 压小、**混合**=按层组合——四条都在**用近似换效率**。此外 **FlashAttention** 不做近似、不损精度，是给精确注意力提速的正交项，可与任意一条叠加。
+
+- **① 压缩线（Compression）· 把 KV 压小，降空间**
+
+  减少 KV head 数或对 KV 做低秩压缩，直接压小 KV Cache：**MQA（共享 1 份 KV）→ GQA（分组共享，质量/速度折中）→ MLA（低秩 latent 压缩）**。
 
 - **Multi-Query Attention (MQA)**
 
@@ -5830,6 +5851,24 @@ class GroupedQueryAttention(nn.Module):
   **Muon Split 优化（GLM-5）**：对不同 head 的投影矩阵（$$W_{UQ}$$、$$W_{UK}$$、$$W_{UV}$$）**分别做正交化**，而非整体正交化。使不同 head 的投影权重以不同尺度更新，让 MLA 性能匹配 GQA-8（否则 576-dim MLA 打不过 2048-dim GQA-8）。
 
 
+- **② 稀疏线（Sparse）· 只算相关的，降时间 $$O(n^2)\to O(n\cdot k)$$**
+
+  每个 query 不与全部 token 算注意力，只挑最相关的一小部分（top-k / 局部窗口），把平方复杂度降下来。两大范式：
+
+  - **基于位置（固定稀疏）**：按预设模式选 token——Global（少数全局可见 token）、Window（局部滑窗）、Strided / Dilated（跨步 / 膨胀）、Random，及组合（ETC = Global+Window，BigBird = Global+Window+Random）。模式固定、不能自适应内容。
+  - **基于内容（动态稀疏）**：按输入内容动态判断哪些位置交互重要，只算这些（代价小）。更灵活，是当前主线（DSA 等）。
+
+- **Sparse Attention 演进路线**
+
+  | 阶段 | 方法 | 特点 | 代表工作 |
+  |------|------|------|----------|
+  | 1. 固定稀疏 (2019-2020) | 预定义稀疏模式 | 模式固定，不能自适应 | Sparse Transformer, Longformer, BigBird |
+  | 2. 动态稀疏近似 (2020-2023) | LSH / Router | 动态但近似，精度有损或训练不稳定 | Reformer, Routing Transformer |
+  | 3. DSA (2024-2025) | 动态 + continued pre-training | Lossless，只需 20B tokens adaptation | DeepSeek-V3 |
+  | 4. IndexShare (2026) | 多层共享 indexer | 进一步降低 FLOPs 2.9× | GLM-5.2 |
+  | 5. CSA2 (2026.9) | entry + 序列 + 层多维联合 | 跨层复用 + 稀疏 + FP4，890 B/token | DeepSeek-V4.1-Flash |
+
+
 - **DeepSeek Sparse Attention (DSA)**
 
   **问题**：Dense attention 复杂度 $$O(L^2)$$，128K 上下文计算量巨大。
@@ -5857,6 +5896,18 @@ class GroupedQueryAttention(nn.Module):
   **RL 训练的关键**：必须用 deterministic top-k operator（torch.topk），不能用 CUDA 的 non-deterministic 实现，否则训练-推理不一致导致 RL 崩溃（entropy 急剧下降）。同时 RL 阶段冻结 indexer 参数以加速训练并防止不稳定学习。
 
 
+- **IndexShare (GLM-5.2)**
+
+  **问题**：DSA 的 indexer 在每层都计算 top-k，1M 上下文下计算量仍然巨大。
+
+  **解决**：每 4 层共享一个 indexer
+  - Indexer 放在 4 层中的第 1 层
+  - Top-k indices 在后续 3 层复用
+  - 1M 上下文下**每 token FLOPs 降低 2.9×**
+
+  **在 MTP layer 的应用**：indexer 只在第 1 步计算，后续步复用 top-k indices。由于 IndexShare 的设计，后续步只能 attend 到 target model 的 hidden states（$$h_1$$ 到 $$h_4$$），不能看到 MTP layer 自身生成的 $$h_5$$，消除了训练-推理不一致。
+
+
 - **Compressed Sparse Attention 2 (CSA2)**
 
   DeepSeek-V4.1-Flash 的核心，目标是"把 KV Cache 压到极限"。相比 DSA 只压**序列**维度，CSA2 **联合三个维度**：entry size（投影跨头共享）+ sequence（稀疏 top-k）+ layer（跨层共享）。
@@ -5873,40 +5924,38 @@ class GroupedQueryAttention(nn.Module):
   **效果**：per-token global KV cache 压到约 **890 bytes**（约为前代 V4-Flash 的 1/4），persistent KV 约为 V4 的 1/8；主干 552B MoE，主打 Agent 长上下文负载的降本。
 
 
-- **Sparse Attention 演进路线**
+- **③ 线性线（Linear）· 用状态递推替代 softmax，降时间 + 空间**
 
-  | 阶段 | 方法 | 特点 | 代表工作 |
-  |------|------|------|----------|
-  | 1. 固定稀疏 (2019-2020) | 预定义稀疏模式 | 模式固定，不能自适应 | Sparse Transformer, Longformer, BigBird |
-  | 2. 动态稀疏近似 (2020-2023) | LSH / Router | 动态但近似，精度有损或训练不稳定 | Reformer, Routing Transformer |
-  | 3. DSA (2024-2025) | 动态 + continued pre-training | Lossless，只需 20B tokens adaptation | DeepSeek-V3 |
-  | 4. IndexShare (2026) | 多层共享 indexer | 进一步降低 FLOPs 2.9× | GLM-5.2 |
-  | 5. CSA2 (2026.9) | entry + 序列 + 层多维联合 | 跨层复用 + 稀疏 + FP4，890 B/token | DeepSeek-V4.1-Flash |
+  去掉 softmax，把注意力改写成**可递推更新的固定大小状态**（类似 RNN）：时间 $$O(n^2)\to O(n)$$，状态与序列长度无关、推理时**不需要随长度增长的 KV Cache**（空间 $$O(1)$$）。代价是表达力弱于全注意力，因此沿"纯累加 → delta rule 精准更新 → 门控遗忘 → 逐通道细粒度门控"一路增强记忆管理：Linear Attention → Gated DeltaNet → KDA。
 
+- **Linear Attention**
 
-- **IndexShare (GLM-5.2)**
+  去掉 softmax 后 $$QK^TV$$ 可先算 $$K^TV$$（$$d\times d$$）再与 Q 相乘，时间从 $$O(n^2d)$$ 降到 $$O(nd^2)$$（$$n\gg d$$ 时显著）。直接去 softmax 会丢失注意力的分布特性，故对 K、V 引入核函数 $$\phi$$ 近似。可写成递推形式：状态 $$S_t = S_{t-1} + \phi(k_t)v_t^T$$、输出 $$o_t \propto \phi(q_t)S_t$$，即固定大小状态的累加，天然免 KV Cache。**缺点**：纯累加不遗忘，长序列下状态被旧信息"污染"、检索精度下降。
 
-  **问题**：DSA 的 indexer 在每层都计算 top-k，1M 上下文下计算量仍然巨大。
+- **Gated DeltaNet**
 
-  **解决**：每 4 层共享一个 indexer
-  - Indexer 放在 4 层中的第 1 层
-  - Top-k indices 在后续 3 层复用
-  - 1M 上下文下**每 token FLOPs 降低 2.9×**
+  针对 Linear Attention"只累加不遗忘"，融合两条思路：① **门控（Gating，源自 GLA / Mamba2）**——加遗忘门 $$\alpha_t$$ 让状态衰减旧信息（$$S_t=\alpha_t S_{t-1}+\dots$$）；② **Delta Rule（源自 DeltaNet）**——按预测误差"先擦除再写入"，用 $$\beta_t(v_t - S_{t-1}k_t)k_t^T$$ 更新，比纯累加更精准地管理记忆。二者合一（门控遗忘 + delta 精准写入），是当前较强的线性注意力基线，也是 KDA 的前身。
 
-  **在 MTP layer 的应用**：indexer 只在第 1 步计算，后续步复用 top-k indices。由于 IndexShare 的设计，后续步只能 attend 到 target model 的 hidden states（$$h_1$$ 到 $$h_4$$），不能看到 MTP layer 自身生成的 $$h_5$$，消除了训练-推理不一致。
+- **KDA（Kimi Delta Attention）**
 
+  Kimi Linear（Moonshot AI，2025）的核心模块。在 Gated DeltaNet 基础上把门控从"标量 / 头级"细化到 **channel-wise（逐通道）细粒度门控**——每个特征通道有独立遗忘率，记忆控制更精细、表达力更强。仍是线性注意力：固定大小状态、免 KV Cache，长上下文解码显存与速度优势显著（Kimi Linear 口径百万上下文解码最高提速约 **6.3×**）。实践中常与少量全注意力层混合使用。
 
-- **FlashAttention**
+- **④ 混合线（Hybrid）· 按层组合，兼顾质量与效率**
 
-  GPU 存储单元主要有 HBM 和 SRAM：HBM 容量大但访问速度慢，SRAM 容量小但访问速度快。由于这一特性，传统 self-attention 受 context length 限制，无法利用 SRAM，只能对 HBM 进行多次读写操作。而 FlashAttention 通过分块和在线 softmax 的方式，从 HBM 中读取块到 SRAM 中，用 SM（Streaming Multiprocessor）计算之后再写到 HBM 中，减少对 HBM 的访问，从而提高了速度。时间复杂度并没有变化，而空间复杂度因为没有存储中间的 attention matrix，从 O(N^2) 降低到 O(N)。
+  线性 / 稀疏注意力省算力省显存但表达力弱，全注意力强但贵。**混合架构 = 多数层用高效注意力（线性 / 稀疏 / 压缩）+ 每隔几层保留一个全注意力层兜底**，用少量全注意力层保质量、多数高效层拿效率。核心是混合比例与排布；收益是大部分层的 KV Cache 固定或极小，是长上下文落地的现实选择。
 
-  FlashAttention 基于以下几点：
+  - **Kimi Linear（3 KDA : 1 MLA）**：每 3 层 KDA（线性）配 1 层 MLA（全注意力 + 压缩），约每 4 层一个 full attention（93 层 = 69 KDA + 24 Gated MLA）。线性层扛长上下文效率，MLA 层保精确检索。
+  - **DeepSeek-V4.1-Flash（CSA2 + CED）**：CSA2 在稀疏（top-k）之上叠加压缩（MLA latent）与 FP4 KV 量化，多维联合；CED 用因果编码器-解码器做跨层 KV 复用。属"稀疏 + 压缩 + 量化"混合。
+  - **Hybrid SWA（gpt-oss 式）**：滑窗注意力 SWA : 全局注意力 GA = 5:1（5 个局部滑窗块 + 1 个全局块），滑窗层 KV 固定大小、易与现有基建集成，全局层保长程依赖。
 
-  1. 分块（`for i in range(0, L, block_size)`查询块，`for j in range(0, L, block_size)`键/值块）
-  将 Q, K, V 按块划分，分块计算 Attention。每次只加载当前块，节省内存。传统 softmax 需要先计算全部 QK^T，然后减 max 值再求 exp，最后归一化。而 FlashAttention 分块之后，softmax 的计算成为了一个难点。FlashAttention 通过引入两个额外的统计量（`m_prev` 和 `d_prev`）来在线计算 softmax。多个 block 的 softmax 计算可以并行，最后再合并。
+- **FlashAttention（精确注意力的 IO 加速，与四条线正交）**
 
-  2. 重计算
-  在后向梯度计算时，一般需要 attention matrix，但 FlashAttention 可以利用两个额外的统计量在 SRAM 上快速重新计算 attention。
+  **为什么快（瓶颈在 IO 不在算力）**：GPU 的 HBM 容量大但访问慢、SRAM 容量小但访问快。标准 attention 会把 $$N\times N$$ 的 score 矩阵在 HBM 上反复读写，长序列下**访存（而非算力）成为瓶颈**。FlashAttention 让计算尽量在 SRAM 内完成、减少对 HBM 的往返从而加速：**时间复杂度不变，但因不再落地完整的 $$N\times N$$ attention matrix，空间从 $$O(N^2)$$ 降到 $$O(N)$$**。
+
+  **怎么做（三个关键）**：
+  - **分块（tiling）**：把 Q、K、V 按 block 切分，逐块载入 SRAM 计算，每次只处理当前块，避免一次性生成完整 score 矩阵。
+  - **在线 softmax**：分块后拿不到全局的 max / sum，改为维护两个统计量（running max $$m$$、exp 累加和 $$d$$）边算边归一化，多块可并行、最后合并，结果与全局 softmax 等价。
+  - **反向重计算**：训练反传本需要 attention matrix，FlashAttention 不存它，而是用保存的 $$m$$、$$d$$ 在 SRAM 上快速重算，用少量计算换回大量显存。
 
 ```python
 import torch
@@ -5959,34 +6008,9 @@ def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
     return output
 ```
 
-  FlashAttention v2 改进：
-  - 优化计算次序，减少非矩阵计算量。
-  - 增加 seq_len 维度的并行计算，提升 SM 利用率。
-  - 优化 warp 级工作模式，减少内部通信和 shared memory 访问。
-
-  FlashAttention v3 改进：
-  - 引入生产者-消费者异步机制，提升并行度。
-  - 优化 GEMM 和 Softmax 操作的重叠计算。
-  - 支持 FP8 低精度硬件加速，提升吞吐量并减少精度损失。
-
-
-- **Linear Attention**
-
-  如果去掉 softmax，$$QK^TV$$，可以先计算后半部分，从而将时间复杂度从 O(n^2d) 降到了 O(nd^2)。但直接去掉 softmax 会失去原先 Attention 相似的分布特性，因此 Linear Attention 会对 K、V 引入核函数。
-
-
-- **Sparse Attention**
-
-  基于位置的 attention
-  - Global Attention
-  - Window Attention
-  - Strided Attention
-  - Dilated Attention
-  - Random Attention
-  - ETC: Global + Window Attention
-  - BigBird: Global + Window + Random Attention
-
-  基于内容的 attention：根据输入内容的特征来动态确定（较小代价）哪些位置之间的交互是重要的
+  **版本演进**：
+  - **v2**：优化计算次序、减少非矩阵运算；增加 seq_len 维度的并行、提升 SM 利用率；优化 warp 级分工，减少内部通信与 shared memory 访问。
+  - **v3**：引入生产者-消费者异步机制提升并行度；让 GEMM 与 softmax 重叠计算；支持 FP8 低精度硬件加速，进一步提吞吐、控精度损失。
 
 ### Large Language Models
 
@@ -6347,31 +6371,6 @@ def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
   对于初始 logits 熵大的，叫做高熵 token，意味着 LLM 在此处犹豫不决；反之叫做低熵 token，意味着 LLM 在这非常自信。在推理阶段，较低的 temperature 会导致多样性降低，较高的 temperature 会导致生成质量降低，产生幻觉。
 
 
-- **投机解码（Speculative Decoding）为什么能加速？会损失精度吗？**
-
-  Decode 阶段是 memory-bound：每生成 1 个 token 都要把整个模型权重搬一遍，算力大量闲置。投机解码的思路是**用一次前向验证多个 token**，把闲置算力利用起来。
-
-  机制 = **draft（草拟）+ verify（验证）**：
-  1. 用一个**便宜的小模型**（draft model）快速自回归地猜出接下来 k 个 token；
-  2. 把这 k 个 token 一次性喂给**大模型**并行验证（一次前向就能算出每个位置的分布）；
-  3. 用 **rejection sampling（拒绝采样）**逐个比对：接受与目标分布一致的 token，遇到第一个被拒的就截断，从那里由大模型重新采样继续。
-
-  **关键：无损。** 拒绝采样的数学设计保证了最终输出的分布**和直接用大模型解码完全一致**——加速但不改变结果，这是它和「直接用小模型」的本质区别。
-
-  | 概念 | 说明 |
-  |------|------|
-  | 接受率（acceptance rate）| draft 猜中被大模型接受的比例，越高加速越明显；draft 与 target 越对齐、任务越「可预测」接受率越高 |
-  | 加速上限 | 由接受率和 draft/target 速度比共同决定，猜错太多反而得不偿失 |
-  | draft 从哪来 | 独立小模型；或同模型浅层 / 加草稿头（Medusa 式多头）；或 EAGLE 式在特征层自回归；甚至无草稿模型的 Lookahead |
-
-  一句话：Decode 卡在访存、算力闲着，投机解码用小模型猜、大模型一次验多个，靠拒绝采样做到**加速且输出分布无损**，命中率（接受率）决定收益。
-
-
-- **Multi-Token Prediction (MTP) 是什么？为什么能做自推测解码？**
-
-  MTP 在训练时为模型添加额外层，每步预测下 n 个 token（而非仅下 1 个），增加训练信号。推理时这些 MTP 层天然就是**内置的 draft model**——无需外挂独立小模型即可做投机解码，即**自推测解码（self-speculative decoding）**：MTP 层先草稿式猜出后续多个 token，主模型一次前向并行验证，靠拒绝采样保证输出分布无损。收益用 **Accept Length**（平均每次前向被接受的 token 数）衡量，越高加速越明显。
-
-
 - **Beam Search 实现**
 
 ```python
@@ -6716,6 +6715,55 @@ RLHF 上层应用：veRL / OpenRLHF
 
 #### Inference & Serving
 
+- **推理优化的三个层次（总览）**
+
+  LLM 推理优化可从三层入手，越靠上越贴近模型、越靠下越贴近硬件：
+
+  | 层次 | 优化什么 | 代表手段 |
+  |------|---------|---------|
+  | **① 算法层** | 改解码 / 注意力 / 精度，减少计算量或访存 | 投机解码、稀疏注意力、FP4 低精度量化 |
+  | **② 系统层** | 改调度 / 并行 / 显存管理，提升吞吐与利用率 | PD 分离、Continuous Batching、大规模 EP、KV 缓存池、推理框架 |
+  | **③ 硬件层** | 用推理专用芯片从底层提算力 / 带宽 / 能效 | Groq LPU、Google TPU、AWS Inferentia、华为昇腾 |
+
+- **① 算法层 · 减少计算量 / 访存**
+
+  从模型算法本身入手：要么**少算**（投机解码一次验多个 token、稀疏注意力只算相关的），要么**算得更省**（低精度量化压缩字节数）。
+
+- **投机解码（Speculative Decoding）为什么能加速？会损失精度吗？**
+
+  Decode 阶段是 memory-bound：每生成 1 个 token 都要把整个模型权重搬一遍，算力大量闲置。投机解码的思路是**用一次前向验证多个 token**，把闲置算力利用起来。
+
+  机制 = **draft（草拟）+ verify（验证）**：
+  1. 用一个**便宜的小模型**（draft model）快速自回归地猜出接下来 k 个 token；
+  2. 把这 k 个 token 一次性喂给**大模型**并行验证（一次前向就能算出每个位置的分布）；
+  3. 用 **rejection sampling（拒绝采样）**逐个比对：接受与目标分布一致的 token，遇到第一个被拒的就截断，从那里由大模型重新采样继续。
+
+  **关键：无损。** 拒绝采样的数学设计保证了最终输出的分布**和直接用大模型解码完全一致**——加速但不改变结果，这是它和「直接用小模型」的本质区别。
+
+  | 概念 | 说明 |
+  |------|------|
+  | 接受率（acceptance rate）| draft 猜中被大模型接受的比例，越高加速越明显；draft 与 target 越对齐、任务越「可预测」接受率越高 |
+  | 加速上限 | 由接受率和 draft/target 速度比共同决定，猜错太多反而得不偿失 |
+  | draft 从哪来 | 独立小模型；或同模型浅层 / 加草稿头（Medusa 式多头）；或 EAGLE 式在特征层自回归；甚至无草稿模型的 Lookahead |
+
+  一句话：Decode 卡在访存、算力闲着，投机解码用小模型猜、大模型一次验多个，靠拒绝采样做到**加速且输出分布无损**，命中率（接受率）决定收益。
+
+- **Multi-Token Prediction (MTP) 是什么？为什么能做自推测解码？**
+
+  MTP 在训练时为模型添加额外层，每步预测下 n 个 token（而非仅下 1 个），增加训练信号。推理时这些 MTP 层天然就是**内置的 draft model**——无需外挂独立小模型即可做投机解码，即**自推测解码（self-speculative decoding）**：MTP 层先草稿式猜出后续多个 token，主模型一次前向并行验证，靠拒绝采样保证输出分布无损。收益用 **Accept Length**（平均每次前向被接受的 token 数）衡量，越高加速越明显。
+
+- **稀疏注意力为什么能给推理加速？**
+
+  从推理视角看，稀疏注意力（DSA / 滑窗 / top-k）把每个 token 的注意力从"看全部历史"降到"只看最相关的一小部分"，直接减少 Decode 阶段的计算量；同时 KV Cache 只需保留被选中的 token（或固定窗口），压小显存与访存——长上下文下收益尤其明显。它是算法层"减少计算 / 访存"的直接手段。
+
+- **FP4 / 低精度量化为什么能加速推理？**
+
+  低精度直接减少权重 / 激活 / KV 的字节数，既省显存又省访存带宽（Decode 是 memory-bound，访存才是瓶颈），且新硬件（Hopper / Blackwell）对 FP8 / FP4 有原生算力加速。精度路线：**FP16 / BF16 → FP8 → FP4**（越低越省、越难保精度）。FP4 通常需配合 **QAT（量化感知训练）** 或精细的分组 scale 才能守住精度；工程上常见 **W4A16**（权重 4bit、激活 16bit）平衡压缩与精度。浮点量化（FP8 / FP4）与整数量化 int8 / int4（GPTQ、AWQ）是并行的两条路线，浮点动态范围更好、更适配新硬件。
+
+- **② 系统层 · 提升调度 / 并行 / 显存利用率**
+
+  不改模型本身，从推理系统层做文章：分阶段部署（PD 分离）、迭代级调度（Continuous Batching）、专家并行（大规模 EP）、把 KV 当资源池管理（KV 缓存池），再到框架选型。
+
 - **PD 分离**
 
   Prefill 阶段对初始提示（Prompt）进行处理，生成初始的隐藏状态（Hidden States）。这个阶段通常涉及对整个模型的一次前向传播，是并行计算，因此计算密集度较高，以矩阵乘法为主，GPU 利用率高。对于每个新的输入序列，都需要进行一次 Prefill。
@@ -6743,23 +6791,6 @@ RLHF 上层应用：veRL / OpenRLHF
   - **PD 分离（Prefill/Decode Disaggregation）**：把两阶段拆到不同 GPU 池，各自按瓶颈选并行策略与硬件（Prefill 池堆算力、Decode 池堆显存带宽），互不抢占。
 
 
-- **FlashAttention 为什么快？它解决了什么问题？**
-
-  标准注意力慢，不在于 FLOPs，而在于**访存**。它要把 T×T 的注意力矩阵 S = QKᵀ、以及 softmax 后的 P 完整写回显存（HBM），再读回来算 O = PV。序列一长，这个 O(T²) 的中间矩阵在 HBM 上反复读写就成了瓶颈——GPU 算力在等数据。
-
-  FlashAttention 的核心是**IO 感知（IO-aware）**：不物化那个大矩阵，把访存量从 O(T²) 降到 O(T)。三个关键手段：
-
-  | 手段 | 做什么 |
-  |------|------|
-  | **Tiling（分块）** | 把 Q/K/V 切成小块，逐块在 GPU 片上高速缓存（SRAM）里算，算完即走，中间结果不落 HBM |
-  | **Online Softmax** | softmax 本要先看全行求 max 与分母；改用增量式，边扫块边维护 running max 与 running sum，重缩放累加，一遍过无需回头 |
-  | **反向重计算** | 训练反向不存 O(T²) 的注意力矩阵，只存少量统计量（max/sum），需要时从 SRAM 快速重算——用算力换显存 |
-
-  效果：注意力**又快又省显存**（显存占用从 O(T²) 降到线性 O(T)），这才让长上下文训练 / 推理变得可行。
-
-  一句话：瓶颈是 HBM 访存而非计算，FlashAttention 用分块 + online softmax 把中间矩阵留在 SRAM，避免反复读写显存。
-
-
 - **Continuous Batching（连续批处理）是什么？为什么能大幅提升吞吐？**
 
   传统**静态批处理（static batching）**把 N 个请求凑成一批一起跑，必须等这批里**最慢**的序列生成完才能返回、才能放新请求进来。问题是各请求输出长度差异大——短序列早就算完了，却被迫陪着长序列空转，GPU 利用率被拉低。
@@ -6777,6 +6808,23 @@ RLHF 上层应用：veRL / OpenRLHF
 
   它和 **PagedAttention 是绝配**：请求动态进出会让 KV Cache 频繁增删、大小不一，PagedAttention 的分块式显存管理正好能灵活分配 / 回收，两者一起撑起 vLLM 的高吞吐。
 
+
+- **大规模 EP（推理侧专家并行）为什么是 MoE 推理的关键？**
+
+  MoE 模型专家数量多（可达数百个）、单卡放不下，推理时把不同专家分布到不同 GPU / 节点上（Expert Parallelism）；每个 token 经 gating 选出 Top-K 专家后，用 **all-to-all 通信**把 token 分发到对应专家所在设备、算完再收回。
+
+  - **收益**：突破单卡显存与算力上限，支撑超大 MoE 在线服务，总吞吐随设备数扩展。
+  - **核心难点**：① **负载不均**——热门专家被打爆、冷门专家闲置，需 capacity factor 限流 + 专家冗余 / 动态路由来均衡；② **all-to-all 通信开销**——分发 / 回收在大规模下成为瓶颈，需与计算 overlap、做拓扑感知调度；③ 要与 PD 分离、批量调度协同。
+  - 与训练侧 EP 同源（都把专家分布到多卡），但推理更关注**低延迟下的动态负载均衡与通信隐藏**。
+
+- **KV 缓存池（KV Cache Pooling / 分级存储）**
+
+  把 KV Cache 当作一种**可池化、可分级、可跨请求 / 跨节点共享的资源**统一管理，而非每条请求各存各的，从而提升命中复用率与集群吞吐：
+
+  - **分级存储**：按热度把 KV 分布在 HBM（热）→ CPU 内存（温）→ 本地 SSD / 远程存储（冷），需要时再换回，用带宽换显存容量（如 LMCache）。
+  - **跨请求 / 前缀共享**：相同前缀（system prompt、few-shot、多轮历史）的 KV 只算一次、入池复用，跳过重复 prefill（Prefix / Prompt Cache、RadixAttention）。
+  - **跨节点池化**：把 KV 从单机显存解耦为集群级共享池，配合 RDMA 高速传输，让 Prefill / Decode 实例与不同请求就近取用（如 Mooncake 的分布式 KV cache）。
+  - **与调度协同**：分块式池化管理（PagedAttention）让 Continuous Batching 下请求动态进出时 KV 能灵活分配 / 回收，三者共同撑起高吞吐。
 
 - **常用的 LLM 推理/部署框架有哪些？如何选择？**
 
@@ -6800,6 +6848,21 @@ RLHF 上层应用：veRL / OpenRLHF
   传统的静态分配 KV 缓存不使用虚拟内存，直接对物理内存进行操作，会导致显存碎片和过度预留，因此 vllm 使用了 PagedAttention，即把 KV 缓存当作虚拟内存，每条序列的缓存被划分成块，可动态分配到显存中，允许在不连续的内存空间中存储。
 
   另外 vllm 的 PagedAttention 使用了 memory sharing，即单个 prompt 生成多个序列时，可以共享显存。
+
+
+- **③ 硬件层 · 推理专用芯片**
+
+  通用 GPU 是训练 / 推理通吃的架构，而推理（尤其 Decode 的 memory-bound、低延迟、高并发）有其特点，催生了一批专用芯片，从底层提算力 / 带宽 / 能效、降延迟与成本。
+
+  | 芯片 | 厂商 | 特点 | 为何适合推理 |
+  |------|------|------|-------------|
+  | **LPU** | Groq | 大片上 SRAM、确定性数据流、绕开 HBM 瓶颈 | 极低且稳定的延迟（逐 token 解码快），主打实时对话 |
+  | **WSE** | Cerebras | 晶圆级引擎、超大芯片 + 海量片上存储 | 单芯片装下大模型、超高带宽，少切分少通信 |
+  | **TPU** | Google | 脉动阵列（systolic array）、低精度算力强 | 矩阵乘吞吐高，自研生态服务 Gemini |
+  | **Inferentia / Trainium** | AWS | 推理专用 ASIC + Neuron 编译栈 | 云上推理性价比、与 AWS 生态集成 |
+  | **昇腾 Ascend** | 华为 | 达芬奇架构、国产软硬件栈（CANN / MindSpore）| 国产替代、国内云推理部署 |
+
+  **共性动机**：Decode 阶段 memory-bound，瓶颈在**访存带宽**而非峰值算力——专用芯片靠**大片上 SRAM / 高带宽 / 确定性调度**把权重与 KV 的搬运做快做稳，从而在延迟、吞吐、能效（每 token 成本）上优于通用 GPU；代价是生态、灵活性、可编程性不如 GPU，改模型 / 算子适配门槛更高。
 
 
 #### Model Compression & Conversion
