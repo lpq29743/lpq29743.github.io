@@ -903,7 +903,7 @@ if __name__ == "__main__":
 
 - **一瓶可乐两元钱，喝完后两个空瓶可以换一瓶可乐，假设你有40块，请问你最多可以喝到几瓶汽水？**
 
-  此题与上题类似，每一次换可乐之后都会损失一个瓶盖，所以 20 瓶可乐可以换到 19 瓶可乐，因此总共可以可以喝到 39 瓶可乐。如果开放借瓶盖的话，由于最后我们只剩一个瓶盖，所以最多只能借一个，而且只有当可乐数不是 2 的幂的时候借，因此，如果可以借的话总共可以喝 40 瓶可乐。
+  每一次换可乐之后都会损失一个瓶盖，所以 20 瓶可乐可以换到 19 瓶可乐，因此总共可以可以喝到 39 瓶可乐。如果开放借瓶盖的话，由于最后我们只剩一个瓶盖，所以最多只能借一个，而且只有当可乐数不是 2 的幂的时候借，因此，如果可以借的话总共可以喝 40 瓶可乐。
 
 
 - **0， 6， 24，60， 120，（）?**
@@ -5950,7 +5950,7 @@ class GroupedQueryAttention(nn.Module):
 
 - **FlashAttention 是什么？为什么能加速精确注意力？**
 
-  与上述四条线**正交**：不做近似、不损精度，是给**精确注意力**提速的 IO 层优化，可与任意一条叠加。**瓶颈在 IO 不在算力**：GPU 的 HBM 容量大但访问慢、SRAM 容量小但访问快。标准 attention 会把 $$N\times N$$ 的 score 矩阵在 HBM 上反复读写，长序列下**访存（而非算力）成为瓶颈**。FlashAttention 让计算尽量在 SRAM 内完成、减少对 HBM 的往返从而加速：**时间复杂度不变，但因不再落地完整的 $$N\times N$$ attention matrix，空间从 $$O(N^2)$$ 降到 $$O(N)$$**。
+  **瓶颈在 IO 不在算力**：GPU 的 HBM 容量大但访问慢、SRAM 容量小但访问快。标准 attention 会把 $$N\times N$$ 的 score 矩阵在 HBM 上反复读写，长序列下**访存（而非算力）成为瓶颈**。FlashAttention 让计算尽量在 SRAM 内完成、减少对 HBM 的往返从而加速：**时间复杂度不变，但因不再落地完整的 $$N\times N$$ attention matrix，空间从 $$O(N^2)$$ 降到 $$O(N)$$**。
 
 - **FlashAttention 怎么实现（分块 / 在线 softmax / 重计算）？**
 
@@ -8561,11 +8561,8 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   | 维度 | DeepSeek Harness（dsh）| ZCode（智谱）|
   |------|------|------|
-  | 定位 | 开源（MIT）通用 agent runtime，2026.8 随 V4-Flash 发布 | GLM 官方 Coding Harness，配 GLM Coding Plan 订阅 |
-  | 路线 | **插件化 / 可组合**：everything-is-a-plugin，基于 Cordis 元框架（时空可组合编程范式），能力靠插件生态扩展 | **模型-Harness 深度协同**：围绕 GLM 做定向优化，闭源但贴合自家模型 |
+  | 路线 | **插件化 / 可组合**：everything-is-a-plugin，能力靠插件生态扩展 | **模型-Harness 深度协同**：围绕 GLM 做定向优化，闭源但贴合自家模型 |
   | 代表能力 | 一切皆插件、Web / Desktop 双形态、社区插件生态（dsh-plugin）| Goal 自驱闭环（设可验收目标→自动拆解 / 改码 / 跑测→未达标续跑）、Subagents、Remote Control（手机 / 微信 / 飞书远控桌面工作区，代码仍在桌面端跑）、闲时任务（低峰执行不扣积分）|
-  | 关键数据 | 两天 ~95K stars，开源社区爆发 | 缓存命中率 >98%、有效 token +30%；Z.ai Code Bench 上 GLM+ZCode 任务整体通过率高于 GLM+Claude Code |
-  | 一句话 | 用**开放可组合**换生态广度 | 用**深度适配**换单模型上的稳定与性价比 |
 
 
 - **OpenClaw**
@@ -9351,9 +9348,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **Deepseek-V4.1-Flash**
 
-  主干 552B MoE，设计目标是把长上下文下的推理开销压到极限，面向 Agent 类长上下文负载。per-token global KV cache 约 **890 bytes**（约为前代 V4-Flash 的 1/4），persistent KV 约为 V4 的 1/8；相对 V1 累计降低约 **437×**。
-
-  三个架构决策分别压不同维度：
+  主干 552B MoE，设计目标是把长上下文下的推理开销压到极限，面向 Agent 类长上下文负载。三个架构决策分别压不同维度：
 
   - **CED（Causal Encoder-Decoder，因果编码器-解码器）——压层数**：把 40 层切成 **20 层因果编码器 + 20 层解码器**。长 prompt 的 prefill 只过编码器（激活约 8B 参数），解码器的全局 KV 由编码器输出构造，decode 时才激活约 16B。这种非对称计算同时降低长输入的计算量与 KV 占用。
   - **CSA2（Compressed Sparse Attention 2，压缩稀疏注意力 2）——联合压 entry size + 序列 + 层数**：
@@ -9368,7 +9363,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **MiMo（小米）**
 
-  小米 LLM-Core 团队的大模型系列。MiMo-7B（2025）为起点，奠定预训练配方；MiMo-V2-Flash（2025.12，MIT 协议开源）主打极致推理效率与 Code/Agent 能力；MiMo-V2.5 / V2.6（2026）持续迭代，V2.6 大规模扩展 RL（LiveRL）并走向万亿参数全模态旗舰。
+  小米 LLM-Core 团队的大模型系列。MiMo-7B（2025）为起点，奠定预训练配方；MiMo-V2-Flash 主打极致推理效率与 Code/Agent 能力；MiMo-V2.5 / V2.6（2026）持续迭代，V2.6 大规模扩展 RL（LiveRL）并走向万亿参数全模态旗舰。
 
   MiMo-V2-Flash 核心设计：
   - MoE 架构：总参 309B / 激活 15B，48 层（39 SWA + 9 GA），hidden 4096，256 专家激活 8 个、无共享专家；FP8 混合精度训练 27T tokens，上下文由 32K 扩展到 256K。
@@ -9376,7 +9371,6 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - 轻量 MTP：3 层 MTP、每层仅 0.33B（用 dense FFN + SWA 保持轻量），作原生 draft model 做自推测解码，实测 2.5–3.7× 加速，同时缓解 RL rollout 的长尾 GPU 空闲。
   - 后训练范式 MOPD（Multi-Teacher On-Policy Distillation）：三阶段——① 通用 SFT；② 分领域独立 RL 训出多个专家 teacher（code/search/general agent、数学、推理、安全）；③ 学生在线采样自身分布，同时吸收两类信号：来自 teacher logits 的稠密 token 级 reverse-KL 奖励 + 可验证的结果奖励（ORM/GRPO）。解决传统后训练的能力“跷跷板”（see-saw）与学习效率问题，并支持 teacher-student 迭代共进化。
   - RL 基建：SGLang（推理）+ Megatron-LM（训练），全 FP8；R3（Rollout Routing Replay）缓存 rollout 时激活的专家并在训练时重放，解决 MoE 因数值精度导致的专家路由不一致；Data Scheduler 做细粒度序列调度 + partial rollout，Toolbox/Tool Manager 基于 Ray 做工具资源调度。
-  - 效果：SWE-Bench Verified 73.4% / Multilingual 71.7%，为开源最强软件工程模型，逼近 GPT-5-High；推理与长上下文对标 Kimi-K2-Thinking、DeepSeek-V3.2-Thinking；推理成本约为 Claude 的 2.5%、生成速度翻倍。
 
 
 - **GLM（智谱 AI）**
