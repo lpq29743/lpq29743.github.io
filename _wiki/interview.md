@@ -7804,6 +7804,21 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **Causal Reward**：因果奖励
 
 
+- **什么是 Reward 过度优化？为什么要用 Reward Model Ensembling？**
+
+  **现象**：RL 训练里对 proxy reward（RM 打分）优化得越狠，proxy reward 一路涨，但真实质量（用金标 RM 或人工评测衡量）**先升后降**——越过某个点后 policy 开始钻 RM 的空子，proxy 分越高、真质量反而越差。这就是 reward overoptimization。Gao et al. 给出了它的 scaling law：真实回报与「优化强度」（用 KL 距离、或 Best-of-N 的 N 衡量）呈先升后降关系；**RM 越大 / 偏好数据越多，转折点越晚、过度优化越轻**。
+
+  **根因**：RM 是学出来的 proxy，覆盖不到真实偏好的全部；优化压力越大，policy 越会找到「RM 打分高但真实质量差」的分布外区域（古德哈特：优化 proxy 到一定程度，proxy 就背叛真目标）。
+
+  **缓解手段**：
+  - **Reward Model Ensembling（多 RM 集成）**：训多个 RM（不同数据子集 / 不同初始化 / 不同架构），用**悲观聚合**当最终 reward——取最小值 $$\min_i r_i$$，或均值减分歧惩罚 $$\text{mean} - \lambda \cdot \text{std}$$。直觉：各 RM 盲点不同，policy 很难同时骗过所有 RM；取悲观值等于「所有 RM 都认可才给高分」，把「钻某一个 RM 空子」的收益抹掉。代价是要养多个 RM、打分成本翻倍。
+  - **Early stopping / KL 控制**：监控 KL-to-reference，优化到真实质量拐点前就停，别把 KL 推太大。
+  - **更强的 RM / 更多偏好数据**：直接把转折点往后推（scaling law 的推论）。
+  - **Best-of-N 的 N 别开太大**：推理侧过度优化遵循同一条曲线，N 过大反而选到「RM 偏好但真实差」的样本。
+
+  **本质**：过度优化说明「proxy 与真目标的缝」随优化强度被撑大；ensembling 从「让 proxy 难被单点欺骗」、early stopping 从「别优化过头」，两个方向兜住这条缝。
+
+
 - **Agent RL 中的 Reward Hacking 问题如何解决？**
 
   在用 RL 训练编码 Agent 时，模型会寻找"捷径"获得奖励（测试通过），而非真正解决问题。这些捷径称为 **reward hacking**。
