@@ -4387,8 +4387,6 @@ def leaky_relu_derivative(x, alpha=0.01):
 
   “soft”表示 softmax 函数是连续可导的，以保证梯度下降可以用来优化损失函数。
 
-  “soft” means that the softmax function is continuous and differentiable so that the gradient descent can be used to optimize the loss function.
-
 
 - **怎么得到一个 soft 版本的 argmax？**
 
@@ -5355,6 +5353,20 @@ class RMSNorm(nn.Module):
   - **容量因子（Capacity Factor）**：给每个专家设容量上限，超额 token 被丢弃或改路由，避免某专家被塞爆。配套两种溢出处理——Token Dropping（丢掉超额 token，仅训练时、兼作正则）、Token Rerouting（把超额 token 转发给次选专家，常见于 top-2 gating）。
   - **Noisy Gating**：在门控 logits 上加噪声（Gumbel / Gaussian），让路由更随机，防止训练早期过快收敛到少数专家。
   - **Sinkhorn / 最优传输（OT）Gating**：用最优传输在 token 与专家之间做更均匀的分配（更高级，如 BASE Layers、Hash Layers）。
+
+
+- **Engram（DeepSeek 的条件记忆模块）是什么？为什么说是 MoE 之外的第二条稀疏轴？**
+
+  Engram 来自 DeepSeek 2026.01 论文 *Conditional Memory via Scalable Lookup: A New Axis of Sparsity for LLMs*，核心是把「条件记忆」（conditional memory）作为与 MoE「条件计算」（conditional computation）互补的第二条稀疏轴。
+
+  - **动机**：MoE 靠条件计算扩容（每 token 只激活 Top-K 专家），但 Transformer 没有原生的「知识查找」原语，只能用计算去低效地「模拟」检索（呼应 FFN as key-value memory：事实知识被塞进 FFN 权重、靠计算还原）。Engram 让参数「只被查找、不参与计算」，以每 token $$O(1)$$ 的成本扩容静态记忆。
+  - **实现（对经典 N-gram embedding 的现代化改造）**：
+    - **Tokenizer 压缩**：把归一化后等价的 token（大小写 / 重音 / 空白，如 「The」/「the」/「THE」）合并到同一 id，压缩词表、提高记忆密度。
+    - **多头哈希查找**：对每个 n-gram 阶用多个独立 hash head 做乘性-XOR 哈希，各 head 索引互不相交的 prime-sized bucket（避免二次碰撞），检索出的行拼成一个 memory 向量。
+    - **门控融合**：查出的行是上下文无关的先验、可能含噪（哈希碰撞 / 多义），用 sigmoid gate 基于「已聚合全局上下文的 hidden state」与 key 的归一化点积来门控，残差注入 $$hidden + gate \times value$$；若记忆与当前上下文矛盾则门趋近 0 抑制它。
+  - **稀疏分配律（Sparsity Allocation）**：论文把「在 MoE（神经计算）与 Engram（静态记忆）之间如何分配参数预算」形式化，发现一条 **U 型 scaling law**；据此把 Engram 扩到 27B，优于严格 iso-parameter、iso-FLOPs 的纯 MoE baseline。
+  - **效果反直觉**：作为记忆模块，知识检索确有提升（MMLU +3.4 / CMMLU +4.0），但**更大增益出现在通用推理**（BBH +5.0 / ARC-Challenge +3.7）与代码数学（HumanEval +3.0 / MATH +2.4）。机制解释：一是把 backbone 早层从「静态模式重构」中解放出来，等效加深网络用于复杂推理；二是把局部依赖交给查表，释放 attention 容量用于全局上下文，长上下文检索大幅提升（Multi-Query NIAH 84.2 → 97.0）。
+  - **系统效率（infra-aware）**：确定性寻址——索引仅由 token id 决定、前向之前就已知——因此巨大的 embedding 表（可达 ~200GB）可 offload 到 host memory，并在侧流上运行时预取、与前序层计算重叠，开销可忽略。落地：DeepSeek-V4.1-Flash 已用（config 字段 engram_layer_ids），Qwen4Exp 的同源机制称 PLE（ple_layer_ids）。
 
 
 - **手撕 MoE**
