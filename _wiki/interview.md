@@ -8110,6 +8110,28 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   本质：OPD 监控 = SFT 的「看分布收敛」（reverse-KL 下降、逼近 teacher）+ RL 的「看探索与漂移」（on-policy 采样通过率、KL 别跑偏）。与纯 RL 的关键差别是**有 teacher 这个稠密参照系**——不必像 RL 那样只靠稀疏 reward 摸索，但代价是**上限锁死在 teacher**，所以 pass@1 逼近 teacher 后就该考虑切 RL 冲刺上限。
 
 
+- **训练指标用什么工具记录和可视化？（TensorBoard / W&B / SwanLab / MLflow）**
+
+  上面三类监控指标（SFT / RL / OPD）落地时都要靠实验跟踪工具（experiment tracking）来记录、可视化和对比。核心能力大同小异——标量曲线、超参 config、系统指标、分布直方图、评测结果、artifact 版本管理——差异主要在部署形态与生态：
+
+  | 工具 | 定位与特点 | 适用场景 |
+  |------|-----------|---------|
+  | TensorBoard | TF 生态自带、本地轻量、零云端依赖；多 run 对比与协作偏弱 | 本地调试、单机训练、不便联网的环境 |
+  | W&B（Weights & Biases）| 云端 SaaS、生态最成熟，Sweep 超参搜索、报告协作、面板丰富 | 团队协作、需要超参搜索与实验复盘 |
+  | SwanLab | 国产、开源可自建（私有化部署），国内网络友好，API 与 W&B 接近 | 国内团队、数据不出内网、需自托管 |
+  | MLflow | 偏实验 + 模型全生命周期管理（tracking / registry / 部署），可视化较轻 | 需要模型注册、版本与上线管理的 MLOps 流水线 |
+
+  **一般记录什么**：
+
+  - 标量曲线：train / val loss、lr、grad norm、KL、策略熵、reward 各分量等，即上面三类监控指标；
+  - 超参与 config：保证每个 run 可复现、可对比；
+  - 系统指标：GPU 利用率 / 显存 / 吞吐，定位工程瓶颈；
+  - 分布直方图：权重 / 梯度 / 激活分布，诊断数值异常；
+  - 评测结果与 artifact：benchmark 分数表、checkpoint / 数据集版本管理。
+
+  **实战取舍**：分布式训练下只在 rank0（或各 rank 分文件）记录，避免多进程重复写与竞争；日志按 step 间隔采样而非每步全量，平衡曲线精度与 IO / 显存开销；长跑任务要支持断网续传与离线同步（W&B offline、SwanLab 本地模式），避免网络抖动丢日志；多 run 对比时统一 metric 命名与 step 口径，否则曲线无法对齐。
+
+
 - **训推不一致（Training-Inference Mismatch）是什么？**
 
   训推不一致指模型在训练阶段和推理阶段由于计算方式、数据分布或数值实现的差异，导致行为不一致，进而引起效果下降或线上表现与离线评估对不上。它可分为两大类：
