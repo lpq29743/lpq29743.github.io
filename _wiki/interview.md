@@ -9187,7 +9187,9 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   **实践闭环**：线上监控（采集 trace、告警异常、看板质量 / 成本 / 延迟）→ 数据回流（把线上失败 / 低质轨迹收回，补进评测集或作调优样本，驱动下一轮改进，呼应自进化飞轮的大 loop）→ **EDD（Evaluation-driven Development）**（把评测嵌入开发闭环，每次改动前后跑回归，防退化）。
 
-  **本质**：Agent 运维 = 可观测（trace 全链路）+ 可度量（轮次 / 成本 / 成功率 / 质量）+ 可回流（线上数据驱动迭代）。工具如 LangSmith、Langfuse、Phoenix 专门做 Agent trace 与评测。
+  **可视化怎么看**：与训练侧可视化标量曲线（TensorBoard / W&B / SwanLab）不同，Agent 侧可视化的是**执行轨迹**——trace 树 / 时间线（每步「输入→推理→工具调用→返回」可逐层展开）、单条 trajectory 回放、工具调用 DAG、成本 / 延迟 / 成功率看板、评测 run 对比面板，以及能定位到「哪一步的哪个决策出错」的单步 debug。常用工具：LangSmith（LangChain 生态，trace + eval + dataset 一体）、Langfuse（开源可自建、国内网络友好）、Phoenix / Arize（开源，偏评测与实验）、W&B Weave（与训练侧 W&B 打通）、AgentOps / Helicone（偏线上监控与成本）。一句话对照：训练侧看「指标曲线」、Agent 侧看「执行轨迹」，两者合起来才是端到端可观测。
+
+  **本质**：Agent 运维 = 可观测（trace 全链路）+ 可度量（轮次 / 成本 / 成功率 / 质量）+ 可回流（线上数据驱动迭代）。
 
 #### Agentic RL
 
