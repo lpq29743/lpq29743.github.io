@@ -5294,10 +5294,10 @@ class RMSNorm(nn.Module):
   | 时间 | 进展 | 要点 |
   |------|------|------|
   | 2017 | 标准 FFN（Transformer）| $$\text{FFN}(x)=W_2\,\sigma(W_1 x+b_1)+b_2$$，内维 $$d_{ff}=4d$$，$$\sigma$$ 用 ReLU |
-  | 2018-19 | 激活函数 | ReLU → **GeLU**（BERT / GPT-2）|
-  | 2020 | **GLU 家族**（Shazeer）| SwiGLU / GeGLU 门控，效果更好；升维比例改 $$\frac{8}{3}d$$ 补偿 FLOPs |
-  | 2017→2021 | **MoE 稀疏化** | sparsely-gated MoE → GShard / Switch → GLaM，把单个 FFN 换成 N 个专家 FFN + 路由 |
-  | 2021 | **FFN as key-value memory** | Geva：FFN 是键值记忆，负责存储事实知识 |
+  | 2018-19 | 激活函数 | ReLU → GeLU（BERT / GPT-2）|
+  | 2020 | GLU 家族 | SwiGLU / GeGLU 门控，效果更好；升维比例改 $$\frac{8}{3}d$$ 补偿 FLOPs |
+  | 2017→2021 | MoE 稀疏化 | sparsely-gated MoE → GShard / Switch → GLaM，把单个 FFN 换成 N 个专家 FFN + 路由 |
+  | 2021 | FFN as key-value memory | Geva：FFN 是键值记忆，负责存储事实知识 |
   | 2024+ | DeepSeek 细粒度专家 | 细粒度专家划分 + 共享专家隔离 + 无辅助损失负载均衡 |
 
 
@@ -5307,19 +5307,17 @@ class RMSNorm(nn.Module):
 
   GeLU：$$f(x) = x \cdot \Phi(x)$$，$$\Phi(x)$$ 是标准正态分布的累积分布函数，近似为 $$f(x) \approx x \cdot \sigma(1.702x)$$。
 
-  **门控线性单元（GLU 家族）**：将 FFN 第一层的输出 $$x$$ 经线性变换后沿特征维度分成两半 $$a$$ 和 $$b$$，用 $$b$$ 经过激活函数后作为"门"来控制 $$a$$ 的信息通过量。
+  门控线性单元（GLU 家族）：将 FFN 第一层的输出 $$x$$ 经线性变换后沿特征维度分成两半 $$a$$ 和 $$b$$，用 $$b$$ 经过激活函数后作为"门"来控制 $$a$$ 的信息通过量。
 
   GLU：$$GLU(x) = a \otimes \sigma(b)$$，其中 $$\sigma$$ 是 sigmoid 函数。
 
-  GeGLU：$$GeGLU(x) = a \otimes GELU(b)$$。来自 Shazeer 2020 *"GLU Variants Improve Transformer"*。代表模型：PaLM、Gemma、GLM-130B。
+  GeGLU：$$GeGLU(x) = a \otimes GELU(b)$$。代表模型：PaLM、Gemma、GLM-130B。
 
   SwiGLU：$$SwiGLU(x) = a \otimes Swish(b)$$，其中 $$Swish(x) = x \cdot \sigma(\beta x)$$（通常 $$\beta=1$$，此时等价于 SiLU）。代表模型：LLaMA、Qwen、Mistral。
 
   ReGLU：$$ReGLU(x) = a \otimes ReLU(b)$$，实验对比中的变体，实际使用较少。
 
   ReLU、GeLU 不能门控，GLU、GeGLU、SwiGLU、ReGLU 能门控。GLU 变体相比单一激活函数表达力更强，因为门控机制允许模型动态选择哪些特征通过。
-
-  注意：GLM-130B 使用 GeGLU 时 FFN 升维到 $$\frac{8}{3}d$$（而非标准的 $$4d$$），使得 FLOPs 与非门控 FFN 基本一致（门控 FFN 有两条路径，需要更大的隐藏维度来补偿）。
 
 
 - **FFN 升维比例为什么是 4d？门控（GLU）后为什么改成 8/3 d？**
