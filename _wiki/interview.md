@@ -5324,7 +5324,7 @@ class RMSNorm(nn.Module):
 
 - **FFN 层的可解释性（key-value memory）？**
 
-  Geva et al. 2021（*Transformer Feed-Forward Layers Are Key-Value Memories*）把 FFN 看作键值记忆：第一层权重 $$W_1$$ 的每一行是一个 **key**，对输入做模式匹配（浅层捕捉 n-gram 等表面模式，深层捕捉更语义的模式）；第二层权重 $$W_2$$ 的对应列是 **value**，决定该 key 命中后对输出词表分布的贡献。因此 FFN 被认为是 Transformer 存储事实知识的主要位置，也是知识编辑（ROME / MEMIT）的作用目标。
+  把 FFN 看作键值记忆：第一层权重 $$W_1$$ 的每一行是一个 **key**，对输入做模式匹配（浅层捕捉 n-gram 等表面模式，深层捕捉更语义的模式）；第二层权重 $$W_2$$ 的对应列是 **value**，决定该 key 命中后对输出词表分布的贡献。因此 FFN 被认为是 Transformer 存储事实知识的主要位置，也是知识编辑（ROME / MEMIT）的作用目标。
 
 
 - **MoE**
