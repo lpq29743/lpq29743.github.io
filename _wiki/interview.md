@@ -5319,11 +5319,11 @@ class RMSNorm(nn.Module):
 
   ReLU、GeLU 不能门控，GLU、GeGLU、SwiGLU、ReGLU 能门控。GLU 变体相比单一激活函数表达力更强，因为门控机制允许模型动态选择哪些特征通过。
 
-  **为什么标准 FFN 升维到 $$4d$$、门控（GLU）后改成 $$\frac{8}{3}d$$？** 一句话：门控比普通 FFN 多一条投影（多一个矩阵），要把内维收窄才能让总参数量 / FLOPs 保持不变。
+  门控也带来一个结构上的连带变化——**FFN 内维从标准的 $$4d$$ 收窄到 $$\frac{8}{3}d$$**。因为门控把第一层输出劈成 gate、up 两路，比普通 FFN 多一个投影矩阵，要在总参数量 / FLOPs 不变的前提下容纳它，只能压缩内维：
 
-  - **非门控 FFN（$$4d$$）**：两个矩阵——升维 $$W_1: d \to d_{ff}$$、降维 $$W_2: d_{ff} \to d$$，取 $$d_{ff}=4d$$（Transformer 原论文经验值，$$d=512,\ d_{ff}=2048$$；先升维做非线性变换提升表达力，再降回 $$d$$ 保持残差维度一致）。参数预算 $$d \times 4d + 4d \times d = 8d^2$$。
-  - **门控 FFN（$$\frac{8}{3}d$$）**：GLU 家族把第一层输出劈成 gate、up 两路，共**三个**矩阵（$$W_{gate}, W_{up}: d \to d_{ff}$$、$$W_{down}: d_{ff} \to d$$），参数量 $$3 \times d \times d_{ff}$$。令其等于非门控的预算 $$8d^2$$，解得 $$3 \cdot d \cdot d_{ff} = 8d^2 \Rightarrow d_{ff} = \frac{8d^2}{3d} = \frac{8}{3}d \approx 2.67d$$。
-  - **直觉**：矩阵从 2 个变 3 个，若内维仍用 $$4d$$，参数量涨到 $$3 \times d \times 4d = 12d^2$$，比非门控的 $$8d^2$$ 贵 50%；把内维**缩小**到 $$\frac{8}{3}d$$，参数量回到 $$3 \times d \times \frac{8}{3}d = 8d^2$$，与非门控持平，FLOPs 便基本一致。LLaMA 即取 $$d_{ff} \approx \frac{8}{3}d$$（再对齐到硬件友好的倍数）。
+  - **非门控 FFN（$$4d$$）**：两个矩阵——升维 $$W_1: d \to d_{ff}$$、降维 $$W_2: d_{ff} \to d$$，取 $$d_{ff}=4d$$（Transformer 原论文经验值，$$d=512,\ d_{ff}=2048$$；升维做非线性变换提升表达力，再降回 $$d$$ 保持残差维度一致）。参数预算 $$d \times 4d + 4d \times d = 8d^2$$。
+  - **门控 FFN（$$\frac{8}{3}d$$）**：多一个矩阵，共**三个**（$$W_{gate}, W_{up}: d \to d_{ff}$$、$$W_{down}: d_{ff} \to d$$），参数量 $$3 \times d \times d_{ff}$$。令其等于非门控预算 $$8d^2$$：$$3 \cdot d \cdot d_{ff} = 8d^2 \Rightarrow d_{ff} = \frac{8d^2}{3d} = \frac{8}{3}d \approx 2.67d$$。
+  - **直觉**：矩阵从 2 个变 3 个，若内维仍用 $$4d$$，参数量涨到 $$3 \times d \times 4d = 12d^2$$，比 $$8d^2$$ 贵 50%；把内维缩到 $$\frac{8}{3}d$$，$$3 \times d \times \frac{8}{3}d = 8d^2$$ 与非门控持平，FLOPs 便基本一致。LLaMA 即取 $$d_{ff} \approx \frac{8}{3}d$$（再对齐到硬件友好的倍数）。
 
 
 - **FFN 层的可解释性（key-value memory）？**
