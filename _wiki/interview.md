@@ -9469,7 +9469,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   **架构组件选择**
 
   - **Normalization**：Pre-Norm + RMSNorm（GLM-4）。Pre-Norm 成为主流后，Post-Norm 时代靠放大残差与特殊初始化强行稳定训练的 DeepNorm 补丁就不再需要了。
-  - **FFN**：GeGLU（GELU-based Gated Linear Unit，基于 GELU 的门控线性单元），升维到 $$\frac{8}{3}d$$ 而非标准 $$4d$$，使 FLOPs 与非门控 FFN 基本一致——门控 FFN 有两条路径，需要更大的隐藏维度来补偿（GLM-130B）。
+  - **FFN**：GeGLU（GELU-based Gated Linear Unit，基于 GELU 的门控线性单元），升维到 $$\frac{8}{3}d$$ 而非标准 $$4d$$（GLM-130B）。
   - **Attention**：MLA（Multi-head Latent Attention，多头潜在注意力）+ **Muon Split** 优化。对不同 head 的投影矩阵（$$W_{UQ}$$、$$W_{UK}$$、$$W_{UV}$$）**分别做正交化**而非整体正交化，使不同 head 的投影权重以不同尺度更新，让 576-dim MLA 的性能匹配 2048-dim GQA-8（Grouped-Query Attention，分组查询注意力）；不做这一步，低维 MLA 打不过高维 GQA（GLM-5）。
   - **稀疏注意力**：**IndexShare**。DeepSeek 的 DSA（动态稀疏注意力）在每层都要用 indexer 算 top-k，1M 上下文下计算量仍然巨大；IndexShare 改为**每 4 层共享一个 indexer**——indexer 放在 4 层中的第 1 层，top-k indices 在后续 3 层复用。
 
