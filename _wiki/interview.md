@@ -5873,7 +5873,7 @@ class GroupedQueryAttention(nn.Module):
 
   由于 $$d_c$$ 远小于 $$d_h * seq\_len$$，时间复杂度从 $$O(d_h * seq\_len * seq\_len)$$ 降至 $$O(d_h * seq\_len * latent\_len)$$。
 
-  **Muon Split 优化（GLM-5）**：对不同 head 的投影矩阵（$$W_{UQ}$$、$$W_{UK}$$、$$W_{UV}$$）**分别做正交化**，而非整体正交化。使不同 head 的投影权重以不同尺度更新，让 MLA 性能匹配 GQA-8（否则 576-dim MLA 打不过 2048-dim GQA-8）。
+  在使用 Muon 优化器的情况下，传统 MLA 做的是整体正交化，即把所有 head 的投影堆成一个大矩阵做一次 SVD。奇异向量会跨 head 混合，head 之间被耦合，单个 head 拿到什么更新由全局决定。因此 GLM 做了 Split 优化，即对不同 head 的投影矩阵（$$W_{UQ}$$、$$W_{UK}$$、$$W_{UV}$$）分别做正交化，使不同 head 的投影权重以不同尺度更新。
 
 
 ##### Sparse Attention
