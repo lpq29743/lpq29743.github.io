@@ -4507,15 +4507,27 @@ def lion(w, dw, m, lr=1e-3, beta1=0.9, beta2=0.99, weight_decay=0.0):
         return w, m
 ```
 
-  Muon 方向由一阶动量决定，幅度由二阶动量决定。
+  Muon（MomentUm Orthogonalized by Newton-Schulz）只优化隐藏层的 2D 权重矩阵：先用 SGD-momentum（默认 Nesterov）得到更新矩阵 $$G$$，再用 Newton-Schulz 迭代**近似正交化**后施加到参数。所谓正交化，是把 $$G=USV^\top$$ 的奇异值全部拉平为 1、用最近的半正交矩阵 $$UV^\top$$ 替换 $$G$$，即 $$w \leftarrow w - \eta\, UV^\top$$。**它不使用二阶动量**（区别于 Adam）：transformer 中 SGD / Adam 的更新矩阵条件数很高、近似低秩，只被少数主方向主导，正交化等于放大那些幅度小但对学习重要的「稀有方向」。由于 SVD 太慢，实际用可在 bfloat16 下稳定运行的 Newton-Schulz 五次迭代来近似（约 5 步、FLOPs 开销 <1%）；embedding、输出头及标量 / 向量参数仍交给 AdamW。
 
 ```python
-def muon(w, dw, m, v, lr=1e-3, beta1=0.9, beta2=0.99, beta3=0.999, eps=1e-8):
-    m = beta2 * m + (1 - beta2) * dw
-    v = beta3 * v + (1 - beta3) * (dw**2)
-    update = np.sign(beta1 * m + (1 - beta1) * dw)
-    w = w - lr * update / (np.sqrt(v) + eps)
-    return w, m, v
+def newtonschulz5(G, steps=5, eps=1e-7):
+    # 近似正交化：把 G=USV^T 的奇异值拉平为 1，返回 ≈ UV^T
+    a, b, c = 3.4445, -4.7750, 2.0315
+    X = G / (np.linalg.norm(G) + eps)   # 归一化，使奇异值落在 [0,1]
+    flip = X.shape[0] > X.shape[1]      # 始终在较小维度上迭代
+    if flip:
+        X = X.T
+    for _ in range(steps):
+        A = X @ X.T
+        B = b * A + c * (A @ A)
+        X = a * X + B @ X               # 五次多项式 φ(x)=ax+bx^3+cx^5
+    return X.T if flip else X
+
+def muon(w, dw, m, lr=0.02, beta=0.95):
+    # 仅用于隐藏层 2D 权重：先 momentum，再正交化，全程无二阶动量
+    m = beta * m + (1 - beta) * dw      # SGD-momentum（默认 Nesterov）
+    w = w - lr * newtonschulz5(m)       # 用正交化后的更新方向更新参数
+    return w, m
 ```
 
   如果加上 Scheduler，可以动态调整全局学习率。Warmup 策略可以前期慢慢提供学习率，后期用 Cosine Decay（训练初期快速降学习率，防止剧烈震荡：训练刚开始时，模型参数还比较随机，快速降低学习率能避免过大步长导致训练不稳定或发散；但起始时仍保留较大学习率，帮助模型迅速从随机初始化的参数中找到“正确方向”。中期保持学习率相对平稳，助于稳定收敛：进入训练中期，学习率下降变缓，模型有足够的时间在当前的参数空间“细致探索”；平稳的学习率避免过早降低导致训练停滞，同时不给出过大步长打断已有收敛趋势。后期再次快速下降，微调模型细节：训练末期快速将学习率降低到很小，帮助模型“精细调节”参数，减少振荡，提升泛化性能；类似于在优化曲面上的“爬坡”逐渐变得非常缓慢，避免错过局部极小值。），Linear Decay 等方式进行衰减。
@@ -8661,6 +8673,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **三种问题类型**：Choice（多选，返回各选项概率 + 置信度）、Score（有序等级打分，返回连续分 + 分布 + 置信度）、Noul（yes/no，返回命题为真的概率）；一次请求可对同一 state 并行问多个问题。
   - **在 Harness 中的角色**：Model Routing（按难度选快 / 强模型）、Auto Mode 护栏（tool 执行前分类并拦截危险动作）——把过去锁在 Claude / Codex / Cursor 闭源 Harness 里的"危险动作分类器"开放给所有 Agent。
   - **定位**：不替代 LLM，而是补充——LLM 管开放式推理与生成，Jev 管沿途快速决策；LangChain 通过 TypeSafeClassifier / ModelRouterMiddleware / AutoModeMiddleware 集成。
+  - **和 CoT 的区别**：正好落在卡尼曼 System 1 / System 2 的两端。CoT 属 System 2「慢思考」——让 LLM 逐步显式推理、生成文本 token 链，能解开放式多步难题，代价是串行慢、贵，且不天然产出校准置信度；Jev 属 System 1「快思考」——不生成文本，一次评估即返回 typed 答案 + 校准概率，专为路由 / 危险动作分类 / 打分 / 是非这类沿途结构化快决策而生。一句话：CoT 用「想得久」换推理深度，Jev 用「想得少」换决策速度与可校准的置信度，二者互补而非替代。
 
 
 #### RAG & Knowledge
