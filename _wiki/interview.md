@@ -5319,7 +5319,7 @@ class RMSNorm(nn.Module):
 
   ReLU、GeLU 不能门控，GLU、GeGLU、SwiGLU、ReGLU 能门控。GLU 变体相比单一激活函数表达力更强，因为门控机制允许模型动态选择哪些特征通过。
 
-  门控也带来一个结构连带变化：它把第一层输出劈成 gate、up 两路，比普通 FFN 多一个投影矩阵，为在总参数量 / FLOPs 不变下容纳它，FFN 内维要从标准的 $$4d$$ 收窄到 $$\frac{8}{3}d$$。非门控 FFN 只有升维 $$W_1: d \to d_{ff}$$、降维 $$W_2: d_{ff} \to d$$ 两个矩阵，取 $$d_{ff}=4d$$（Transformer 原论文经验值，$$d=512,\ d_{ff}=2048$$），参数预算 $$d \times 4d + 4d \times d = 8d^2$$；门控 FFN 有 $$W_{gate}, W_{up}: d \to d_{ff}$$、$$W_{down}: d_{ff} \to d$$ 三个矩阵，参数量 $$3 \times d \times d_{ff}$$，令其等于 $$8d^2$$ 解得 $$d_{ff} = \frac{8}{3}d \approx 2.67d$$（若仍用 $$4d$$ 会涨到 $$12d^2$$、比非门控贵 50%）。LLaMA 即取 $$d_{ff} \approx \frac{8}{3}d$$（再对齐到硬件友好的倍数）。
+  门控也带来一个结构连带变化：它把第一层输出劈成 gate、up 两路，比普通 FFN 多一个投影矩阵，为在总参数量 / FLOPs 不变下容纳它，FFN 内维要从标准的 $$4d$$ 收窄到 $$\frac{8}{3}d$$。非门控 FFN 只有升维 $$W_1: d \to d_{ff}$$、降维 $$W_2: d_{ff} \to d$$ 两个矩阵，取 $$d_{ff}=4d$$，参数预算 $$d \times 4d + 4d \times d = 8d^2$$；门控 FFN 有 $$W_{gate}, W_{up}: d \to d_{ff}$$、$$W_{down}: d_{ff} \to d$$ 三个矩阵，参数量 $$3 \times d \times d_{ff}$$，令其等于 $$8d^2$$ 解得 $$d_{ff} = \frac{8}{3}d$$。
 
 
 - **FFN 层的可解释性（key-value memory）？**
