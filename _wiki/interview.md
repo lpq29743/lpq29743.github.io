@@ -6187,6 +6187,24 @@ def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
   - 多阶段偏好优化：SFT → DPO round 1 → DPO round 2（每轮用更新后的模型重新采样 rejected），类似 self-play
   - 拒绝采样（rejection sampling）：对同一 query 采样 N 个 response，用 reward model 打分，保留 top-K 作为 SFT 数据
 
+- **Mid-training 和 SFT 的数据怎么生成？**
+
+  都靠合成，但目标不同、合成的「粒度」也不同：Mid-training 合成**语料级能力原料**（保持 next-token prediction，让模型内化知识 / 推理），SFT 合成**指令级行为样本**（instruction-response，让模型模仿怎么回应）。
+
+  **Mid-training**（大规模、重质量过滤，本质是精选 + 增强的预训练语料）：
+  - 按能力目标上采样高质量真实语料（数学 / 代码 / 推理 / 长上下文）。
+  - 合成教科书级讲解文本（Phi 式），信息密度高。
+  - 从真实文档逆向合成 QA，把被动语料转成主动问答。
+  - 为数学 / 代码合成长 CoT 解答，用 verifier / 代码执行过滤错误。
+
+  **SFT**（小规模、每条被直接模仿，质量 > 数量、重多样性覆盖）：
+  - Teacher 蒸馏：用强模型（多 Teacher）批量生成 instruction-response。
+  - Self-Instruct：从种子任务滚动生成新指令 + 回答，扩覆盖面。
+  - Evol-Instruct（WizardLM）：指令进化——in-depth（加约束 / 深化 / 具体化）提复杂度、in-breadth（变异到新主题）提多样性。
+  - 拒绝采样 / Best-of-N：采样多个回答、用 reward model 选最优当标注。
+  - 真实日志挖种子 + 改写（online data），贴近真实分布。
+  - 任务条件 / 用户画像驱动：控制主题 / 难度 / 风格，覆盖多样场景（含安全拒绝）。
+
 - **数据标注工程有哪些关键实践？**
 
   - **标注一致性（IAA）**：用 Cohen's Kappa 或 Krippendorff's Alpha 衡量标注者之间的一致性；Kappa < 0.6 说明标注指南有歧义，需要修订
