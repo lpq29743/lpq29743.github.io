@@ -9256,7 +9256,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **什么是 Agentic World Modeling？能力层级如何划分？**
 
-  **背景**：随着 AI 系统从“生成文本”转向“通过持续交互实现目标”，环境动态建模成为核心瓶颈。现实场景（物理世界、数字世界、社会世界、科学世界）都需要预测性环境模型。
+  随着 AI 系统从“生成文本”转向“通过持续交互实现目标”，环境动态建模成为核心瓶颈。现实场景（物理世界、数字世界、社会世界、科学世界）都需要预测性环境模型。
 
   **核心框架：Levels × Laws 分类法**
 
@@ -9265,7 +9265,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **L2 Simulator（模拟器）**：将算子组合成多步 action-conditioned rollouts，遵循领域定律。代表工作：Dreamer、SimM森林、Galileo。
   - **L3 Evolver（进化器）**：当预测与新证据不符时，自主修订自身模型。代表工作：在线学习、自我修正。
   
-  > L1 → L2 → L3 是能力递进：被动预测 → 可控模拟 → 主动进化
+  L1 → L2 → L3 是能力递进：被动预测 → 可控模拟 → 主动进化
 
   **支配定律机制（Laws）**：
   - **物理定律**：物体运动、力学、因果。失败点：长程物理推理、不可逆过程。
@@ -9273,7 +9273,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   - **社会定律**：人类行为、偏好、博弈均衡。失败点：恶意对抗、分布外行为。
   - **科学定律**：科学领域约束、可检验假设。失败点：假阳性发现、因果混淆。
 
-  **关键洞察**：不同 Level × Law 组合决定了世界模型的必须满足的约束、最可能失败的场景、适用的评估方法。
+  不同 Level × Law 组合决定了世界模型的必须满足的约束、最可能失败的场景、适用的评估方法。
 
   **与 Agent 的关系**：
   - L2 Simulator = Agent 的“思维模拟”基础设施
@@ -9288,9 +9288,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **什么是 Self-Evolving Agent（自进化智能体）？**
 
-  基础模型（Foundation Model）部署后是静态的，参数、提示、工具、流程都固定不变，无法适应动态变化的任务和环境。Self-Evolving Agent 指的是能基于自身的交互轨迹（trajectory）和反馈（feedback，可以是环境奖励，也可以是自我评估），持续修改自身内部状态、以提升未来表现的智能体。它是连接「静态基础模型」和「终身学习系统（lifelong agentic system）」之间的桥梁。
-
-  一个操作性定义：agent 基于自己的轨迹或反馈信号，自主修改其**参数、上下文状态、工具集或架构拓扑**，且明确以改进未来表现为目标。
+  模型部署后是静态的，参数、提示、工具、流程都固定不变，无法适应动态变化的任务和环境。Self-Evolving Agent 指的是能基于自身的交互轨迹（trajectory）和反馈（feedback，可以是环境奖励，也可以是自我评估），持续修改自身内部状态、以提升未来表现的智能体。它是连接「静态基础模型」和「终身学习系统」之间的桥梁。agent 基于自己的轨迹或反馈信号，自主修改其**参数、上下文状态、工具集或架构拓扑**，且明确以改进未来表现为目标。
 
 - **Self-Evolving Agent 进化的是什么（What to Evolve）？**
 
@@ -9400,19 +9398,16 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   阿里巴巴的大模型系列，主线是"全尺寸开源 + 多语言（尤其中英）+ MoE + 专精模型矩阵"，是国产开源生态里覆盖面最广的系列之一。
 
-  - **Qwen / Qwen1.5（2023–2024）**：初代奠定多语言基座；Qwen1.5 作为过渡版补齐多尺寸（0.5B–72B）、对齐与长上下文支持。
-  - **Qwen2（2024）**：引入 MoE（Mixture of Experts，混合专家）版本 Qwen2-57B-A14B（总参 57B、激活 14B），采用细粒度专家划分 + 全局共享专家；注意力用 GQA（Grouped-Query Attention，分组查询注意力），支持 128K 上下文。
-  - **Qwen2.5（2024）**：全尺寸开源（0.5B–72B），长上下文扩展到 1M；强化代码与数学，并拆出专精模型 Qwen2.5-Coder、Qwen2.5-Math；提升结构化输出与 agent（工具调用）能力。
-  - **QwQ（2024–2025）**：推理模型（如 QwQ-32B），用长思维链（long CoT）+ 强化学习做深度推理，对标 o1 / DeepSeek-R1 一类"先思考再作答"的模型。
-  - **Qwen3（2025）**：主打混合推理——同一模型支持 thinking（深度思考）与 non-thinking（快速响应）两种模式，并可调节思考预算（thinking budget）；提供 MoE 版本（如 Qwen3-235B-A22B、Qwen3-30B-A30B），强化 agent 与工具调用能力。
-  - **多模态与专精矩阵**：Qwen-VL（视觉语言）、Qwen-Audio（音频）等多模态分支，加上 Coder / Math 等专精模型，形成"一个基座 + 多分支"的开源矩阵。
-
-  定位：以全尺寸开源和多语言立身，靠 MoE、混合推理（Qwen3）与 Coder / Math / VL 专精矩阵覆盖从端侧到旗舰的完整场景。
+  - **Qwen / Qwen1.5**：初代奠定多语言基座；Qwen1.5 作为过渡版补齐多尺寸、对齐与长上下文支持。
+  - **Qwen2**：引入 MoE 版本 Qwen2-57B-A14B，采用细粒度专家划分 + 全局共享专家；注意力用 GQA，支持 128K 上下文。
+  - **Qwen2.5**：全尺寸开源（0.5B–72B），长上下文扩展到 1M；强化代码与数学，并拆出专精模型 Qwen2.5-Coder、Qwen2.5-Math；提升结构化输出与 agent（工具调用）能力。
+  - **QwQ**：推理模型，用长思维链（long CoT）+ 强化学习做深度推理，对标 o1 / DeepSeek-R1 一类"先思考再作答"的模型。
+  - **Qwen3**：主打混合推理——同一模型支持 thinking（深度思考）与 non-thinking（快速响应）两种模式，并可调节思考预算（thinking budget）；提供 MoE 版本，强化 agent 与工具调用能力。
 
 
 - **Deepseek-V1 - Deepseek-V3**
 
-  - MLA（Multi-Head Latent Attention）机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
+  - MLA 机制，通过引入一个中间稀疏表示（Latent）空间，在推理（inference）阶段有效节约了 KV-Cache 的内存使用和访问开销。
   - Multi-Token Prediction
   - 细粒度专家划分：在保持参数数量不变的情况下，通过分割 FFN 中间隐藏维度来将专家分割成更细的粒度。相应地，在保持计算成本不变的情况下，可激活更多细粒度的专家，以实现激活专家组合的更高灵活性。
   - 共享专家隔离：将某些专家隔离出来，作为始终激活的共享专家，旨在捕获不同上下文中的共同知识。通过将共同知识压缩到这些共享专家中，可以减轻其他路由专家之间的冗余，这可以提高参数效率，确保每个路由专家专注于不同方面而保持专业化。
@@ -9424,7 +9419,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 - **Deepseek-R1-Zero**
 
   证明了在没有任何人类标注数据做 SFT 的情况下，RL 也可以取得不错结果。
-  1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。与此同时，GRPO 让 AI 生成多个答案，并计算每个答案的得分，通过奖励机制来告诉 AI 哪个回答更好。
+  1. 采用 GRPO 算法，去除了 value model，显著降低 RL 训练成本，提高训练稳定性。
   2. 基于规则的奖励机制，包括准确性奖励：依据任务的正确性，如数学题的标准答案或代码编译结果进行评估；格式奖励：要求模型在回答中使用`<think>`标签包裹推理过程，用`<answer>`标签包裹最终答案。不使用神经网络奖励模型，以避免奖励欺骗（Reward Hacking）。
   3. R1-Zero 存在重复内容，可读性差，语言混杂和早期阶段难以收敛的问题。
 
@@ -9432,7 +9427,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 - **Deepseek-R1**
 
   成功经验
-  - 在 SFT 阶段采用冷启动，只使用了少量（几千条）高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
+  - 在 SFT 阶段采用冷启动，只使用了少量高质量的冷启动数据进行 SFT，然后再大规模 RL。冷启动数据主要生成方式：通过 Few-shot Prompting 生成长链式推理数据 (Long CoT)；收集并优化 DeepSeek-R1-Zero 生成的高质量输出；由人工标注者进行后期筛选与润色。
   - 在接近收敛时，通过拒绝采样生成 SFT 数据，即让 AI 生成多个答案，然后只选择最优的答案来继续 SFT 训练，最后再加入非推理类任务数据 (如写作、问答等)，进行全场景强化学习。
   - 大模型的推理能力可以蒸馏到小模型，使其性能优于直接对小模型进行 RL 训练。
   - 为解决 language mixing 的问题，在 RL 阶段增加一致性奖励项，计算目标语言词汇占比
@@ -9518,7 +9513,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
   2. **Critic model**：引入 critic 估计 token-level advantage，而非 group-relative；
   3. **Token-level loss**：处理子轨迹长度不平衡问题。
 
-  短任务用 GRPO（省掉 critic model），长 horizon + compaction 用 PPO（需要 critic 做 token-level 信用分配）。
+  短任务用 GRPO，长 horizon + compaction 用 PPO（需要 critic 做 token-level 信用分配）。
 
 
 - **GLM-5.2 的 Agent RL Reward Hacking 防护**
@@ -9707,7 +9702,7 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
   代码模型的能力上限很大程度由数据决定，其来源与处理都比自然语言更讲究：
 
-  - **来源**：GitHub/GitLab 等开源代码（如 The Stack，仅保留宽松许可证）、代码配套文本（issue/PR/commit message/README/文档，PR 即 Pull Request 合并请求）、StackOverflow 问答、技术书籍与网页
+  - **来源**：GitHub/GitLab 等开源代码、代码配套文本（issue/PR/commit message/README/文档）、StackOverflow 问答、技术书籍与网页
   - **语言识别与过滤**：按编程语言分类，剔除生成代码、minified（压缩混淆的）代码、自动产物
   - **去重**：文件级 + 仓库级去重（MinHash + LSH，LSH 即 Locality-Sensitive Hashing 局部敏感哈希），防止重复代码主导训练，也降低记忆化与泄漏风险
   - **质量过滤**：启发式规则（代码占比、平均行长、符号/关键字比例、注释率）+ 分类器打分（如 StarCoder 的质量分类器），保留高质量代码
@@ -9771,10 +9766,10 @@ def dpo_loss(logp_chosen, logp_rejected, beta=0.1):
 
 - **代码 RL 的 Reward 设计**
 
-  - **结果奖励（ORM，Outcome Reward Model 结果奖励模型 风格）**：以测试通过率为主，$$reward = \frac{\text{通过的测试数}}{\text{总测试数}}$$，或直接二元（全通过才给 1）
+  - **结果奖励（ORM，Outcome Reward Model）**：以测试通过率为主，$$reward = \frac{\text{通过的测试数}}{\text{总测试数}}$$，或直接二元（全通过才给 1）
   - **部分正确性**：用"通过测试比例"作稠密奖励，缓解全对/全错的稀疏问题，给半成品 patch 正向信号
   - **格式 / 可编译约束**：无法编译、无法解析 diff → 直接 0 分或负分，作为硬门槛（gating）
-  - **过程奖励（PRM，Process Reward Model 过程奖励模型 风格）**：对多步修复的中间步骤打分，粒度更细但标注/训练成本高，目前多用于简单任务或作辅助信号
+  - **过程奖励（PRM，Process Reward Model）**：对多步修复的中间步骤打分，粒度更细但标注/训练成本高，目前多用于简单任务或作辅助信号
 
 
 - **ORM vs PRM 在代码上的取舍**
