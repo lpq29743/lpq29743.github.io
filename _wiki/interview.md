@@ -6312,7 +6312,7 @@ def flash_attention_blocked(Q, K, V, block_size=64, mask=None):
   - **Mid-train response**：更像"能力训练材料"，关注领域知识吸收、长上下文理解、专业文档问答、代码/数学/工具使用等能力补齐。应具备：信息密度高、知识点明确、结构稳定、可验证。
   - **SFT response**：更像"最终行为示范"，关注指令跟随、用户体验。需满足：正确性、完整性、可读性、格式遵循、风格一致性、安全合规。
 
-  **2. Response 规格定义（Spec）**
+  **2. Response 规格定义**
 
   调用 teacher model 前先定义 response spec：
   - **内容边界**：只基于给定上下文回答、不引入外部事实、上下文不足时说明无法判断、不编造引用/链接/论文/法规条款、区分事实和推测
@@ -6497,12 +6497,12 @@ class LoRALinear(nn.Module):
 
 - **P-tuning v1**
 
-  P-tuning v1（智谱 AI, Liu et al. 2022）只在**输入层**添加可学习的连续 prompt tokens，使用 MLP + LSTM 编码器生成这些连续 token。训练时冻结整个 LLM，只训练 encoder 和 prompt tokens。适合 NLU 任务（分类、抽取等）。
+  P-tuning v1 只在**输入层**添加可学习的连续 prompt tokens，使用 MLP + LSTM 编码器生成这些连续 token。训练时冻结整个 LLM，只训练 encoder 和 prompt tokens。适合 NLU 任务（分类、抽取等）。
 
 
 - **P-tuning v2**
 
-  P-tuning v2（智谱 AI, Liu et al. 2022，ChatGLM 使用）在**每一层 Transformer 的输入**都添加可学习的 deep prompt tokens。与 Prefix Tuning 类似，但 prompt tokens 加在每层输入前面（与残差流一起过整个 Sublayer），而不是只加在 K/V 前面。训练这些 prompt tokens 和输出层（约占模型参数的 0.1%~1%），冻结预训练参数。适合生成任务，尤其是大模型对话。
+  P-tuning v2 在**每一层 Transformer 的输入**都添加可学习的 deep prompt tokens。与 Prefix Tuning 类似，但 prompt tokens 加在每层输入前面（与残差流一起过整个 Sublayer），而不是只加在 K/V 前面。训练这些 prompt tokens 和输出层（约占模型参数的 0.1%~1%），冻结预训练参数。适合生成任务，尤其是大模型对话。
 
 
 - **Prompt Tuning vs Prefix Tuning vs P-tuning 对比**
